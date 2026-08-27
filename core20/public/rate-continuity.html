@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Synthetic Rate Continuity | A8 Time Lab v5.4.20</title>
+<meta name="description" content="COSIGO Labs Auspicious 8 Gate 5C synthetic oscillator-divider-clock continuity plant. Bounded rate slew affects rate only while exact synthetic phase remains strictly monotonic.">
+<meta name="author" content="COSIGO Labs">
+<meta name="robots" content="index,follow">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/site-shell.css">
+<style>
+  main{max-width:1180px;margin:auto;padding:28px 20px 72px}
+  .hero,.card{border:1px solid var(--line,#2a3744);border-radius:16px;padding:20px;background:var(--panel,#111820)}
+  .hero{margin-bottom:16px}
+  .title{font-size:clamp(2.1rem,7vw,5.3rem);line-height:.96;letter-spacing:-.05em;margin:.18em 0}
+  .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+  .k{display:block;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;opacity:.68}
+  .v{display:block;font-size:1.15rem;font-weight:800;margin-top:4px;overflow-wrap:anywhere}
+  .good{color:#87d39b}.warn{color:#e0bd72}
+  pre{white-space:pre-wrap;overflow-wrap:anywhere}
+  @media(max-width:800px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav class="cosigo-global-nav" aria-label="COSIGO and A8 global navigation">
+  <a class="cosigo-global-brand" href="https://cosigo.io/" aria-label="COSIGO home">
+    <img src="/assets/cosigo_master_512.gif" alt="COSIGO">
+    <span>COSIGO<small>LABS · AUSPICIOUS 8</small></span>
+  </a>
+  <div class="cosigo-global-links">
+    <a href="/index.html">A8 LAB HOME</a>
+    <a href="/discipline.html">DISCIPLINE CANDIDATE</a>
+    <a href="/rate-slew.html">RATE SLEW</a>
+    <a href="/relationship.html">TERRA SHIP SLIP</a>
+    <a href="/moons.html">JOVIAN MOONS</a>
+    <a href="https://a8.cosigo.io/">A8 PUBLIC</a>
+  </div>
+</nav>
+
+<main>
+  <section class="hero">
+    <div class="eyebrow">AUSPICIOUS 8 · TIME LAB v5.4.20 · GATE 5C</div>
+    <h1 class="title">SYNTHETIC RATE CONTINUITY</h1>
+    <p><b>EXPERIMENT-OWNED OSCILLATOR · DIVIDER · CLOCK · REAL A8CORE DISCONNECTED</b></p>
+    <p class="muted">
+      Gate 5C gives the Gate-5B bounded rate-slew model a completely synthetic
+      oscillator/divider/clock plant. Only rate may change. Synthetic clock phase
+      is produced only by exact integration through the divider.
+    </p>
+  </section>
+
+  <section class="grid">
+    <div class="card">
+      <span class="k">PLANT</span>
+      <span class="v">100% SYNTHETIC</span>
+      <p class="muted">Owned entirely by the experiment.</p>
+    </div>
+    <div class="card">
+      <span class="k">CONTROL VARIABLE</span>
+      <span class="v">RATE SCALE ONLY</span>
+      <p class="muted">No phase control surface exists.</p>
+    </div>
+    <div class="card">
+      <span class="k">REAL A8CORE</span>
+      <span class="v good">DISCONNECTED</span>
+      <p class="muted">No core, clock, divider, or authority write.</p>
+    </div>
+  </section>
+
+  <section class="card" style="margin-top:16px">
+    <h2>Synthetic plant equation</h2>
+    <pre>each abstract experiment plant step:
+
+synthetic oscillator progress
++= current rate scale
+
+synthetic clock phase
+= oscillator progress / synthetic divider</pre>
+    <p class="good"><b>PHASE IS INTEGRATED. PHASE IS NEVER ASSIGNED.</b></p>
+  </section>
+
+  <section class="card" style="margin-top:16px">
+    <h2>No-jump definition</h2>
+    <p>
+      The synthetic phase is an exact rational quantity.
+      Every accepted plant step must increase it by a strictly positive exact amount.
+      Therefore continuity is tested mathematically, not hidden behind integer display quantization.
+    </p>
+  </section>
+
+  <section class="card" style="margin-top:16px">
+    <h2>Fast-side continuity proof</h2>
+    <pre>Gate-5A target         = 1000/1001
+Gate-5B max rate step  = 1/10000
+synthetic divider      = 8
+plant advances         = 11
+
+result:
+rate converges downward
+clock phase increases every plant step
+each phase increment = current rate / 8
+final phase = exact integral of all applied rates
+no jump · no snap · no phase correction</pre>
+  </section>
+
+  <section class="card" style="margin-top:16px">
+    <h2>Slow-side continuity proof</h2>
+    <pre>Gate-5A target         = 1000/999
+Gate-5B max rate step  = 1/10000
+synthetic divider      = 8
+plant advances         = 12
+
+result:
+rate converges upward
+clock phase still increases every plant step
+no jump · no overshoot · no phase correction</pre>
+  </section>
+
+  <section class="card" style="margin-top:16px">
+    <h2>Still prohibited</h2>
+    <p class="warn"><b>NO PHASE SETTER · NO CLOCK ALIGNMENT · NO SIMULATOR PHASE ACCEPTANCE.</b></p>
+    <p class="muted">
+      Gate 5C proves continuity on the synthetic plant only. The real v5.4.20 A8Core remains unchanged.
+    </p>
+  </section>
+</main>
+</body>
+</html>

@@ -1,0 +1,24 @@
+[Unit]
+Description=COSIGO A8 Time Lab
+After=network.target
+
+[Service]
+Type=simple
+User=greg
+Group=greg
+WorkingDirectory=/srv/apps/a8_time_lab_v5_4_18
+
+Environment=NODE_ENV=production
+Environment=HOST=127.0.0.1
+Environment=PORT=8018
+Environment=A8_DATA_DIR=/srv/apps/A8-data-public
+
+ExecStart=/opt/node-a8/bin/node /srv/apps/a8_time_lab_v5_4_18/server.js
+
+Restart=on-failure
+RestartSec=3
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

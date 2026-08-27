@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Terra Ship Slip | A8 Time Lab v5.4.20</title>
+<meta name="description" content="COSIGO Labs Auspicious 8 Gate 4D Terra Ship Slip: live read-only rotation-orbit relationship and event-triggered downstream accumulator, isolated from A8 clock authority.">
+<meta name="author" content="COSIGO Labs">
+<meta name="robots" content="index,follow">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/site-shell.css">
+<style>
+  main{max-width:1180px;margin:auto;padding:28px 20px 72px}
+  .hero,.card{border:1px solid var(--line,#2a3744);border-radius:16px;padding:20px;background:var(--panel,#111820)}
+  .hero{margin-bottom:16px}
+  .title{font-size:clamp(2.2rem,7vw,5.6rem);line-height:.95;letter-spacing:-.055em;margin:.18em 0}
+  .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+  .k{display:block;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;opacity:.68}
+  .v{display:block;font-size:1.15rem;font-weight:800;margin-top:4px;overflow-wrap:anywhere}
+  .good{color:#87d39b}.warn{color:#e0bd72}
+  pre{white-space:pre-wrap;overflow-wrap:anywhere}
+  @media(max-width:800px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<style id="a8-topside-coherence-02-style">
+#a8-topside-coherence-02{
+  display:block;
+  margin:0;
+  padding:10px 14px;
+  border-bottom:1px solid rgba(255,255,255,.14);
+  background:rgba(7,11,16,.96);
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+}
+#a8-topside-coherence-02 .a8-topline{
+  max-width:1440px;
+  margin:0 auto;
+  display:flex;
+  gap:12px;
+  align-items:center;
+  flex-wrap:wrap;
+}
+#a8-topside-coherence-02 .cosigo-global-brand{
+  display:flex;
+  gap:8px;
+  align-items:center;
+  text-decoration:none;
+}
+#a8-topside-coherence-02 .cosigo-global-brand img{
+  width:34px;height:34px;object-fit:contain;
+}
+#a8-topside-coherence-02 .cosigo-global-brand span{
+  font-weight:900;letter-spacing:.06em;
+}
+#a8-topside-coherence-02 .cosigo-global-brand small{
+  display:block;opacity:.72;font-size:.62rem;
+}
+#a8-topside-coherence-02 .a8-location{
+  margin-left:auto;
+  font-size:.76rem;
+  font-weight:900;
+  letter-spacing:.07em;
+  color:#e0bd72;
+}
+#a8-topside-coherence-02 .a8-system-links,
+#a8-topside-coherence-02 .a8-utility-links{
+  max-width:1440px;
+  margin:8px auto 0;
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+  align-items:center;
+}
+#a8-topside-coherence-02 a{text-decoration:none}
+#a8-topside-coherence-02 .a8-system-links a{
+  padding:7px 9px;
+  border:1px solid #425467;
+  border-radius:8px;
+  background:#111820;
+  color:#c8ddf5;
+  font-size:.80rem;
+  font-weight:850;
+}
+#a8-topside-coherence-02 .a8-system-links a[data-current="true"]{
+  border-color:#6d9cff;color:#fff;
+}
+#a8-topside-coherence-02 .a8-utility-links{
+  padding-top:7px;
+  border-top:1px solid rgba(255,255,255,.08);
+}
+#a8-topside-coherence-02 .a8-utility-links a{
+  color:#92a5b8;
+  font-size:.70rem;
+  font-weight:700;
+}
+#a8-topside-coherence-02 .a8-utility-label{
+  color:#617487;
+  font-size:.68rem;
+  font-weight:900;
+  letter-spacing:.05em;
+}
+@media(max-width:760px){
+  #a8-topside-coherence-02 .a8-location{
+    width:100%;margin-left:0;
+  }
+}
+</style>
+<nav id="a8-topside-coherence-02" class="cosigo-global-nav" aria-label="A8 Time Lab navigation">
+  <div class="a8-topline">
+    <a class="cosigo-global-brand" href="https://cosigo.io/" aria-label="COSIGO home">
+      <img src="/assets/cosigo_master_512.gif" alt="COSIGO">
+      <span>COSIGO<small>LABS · AUSPICIOUS 8</small></span>
+    </a>
+    <div class="a8-location">YOU ARE HERE · TERRA SHIP SLIP · ROTATION / ORBIT RELATIONSHIP</div>
+  </div>
+  <div class="a8-system-links">
+    <a href="/index.html">A8 LAB HOME</a>
+    <a href="/index.html#core20-jovian">CORE 20 · JUPITER</a>
+    <a href="/moons.html">4-MOON VIEW</a>
+    <a href="/mintaka.html">MINTAKA</a>
+    <a href="/sol.html">SOL</a>
+    <a href="/relationship.html" aria-current="page" data-current="true">TERRA SHIP SLIP</a>
+    <a href="/index.html#chief-engineer-links">CHIEF ENGINEER</a>
+  </div>
+  <div class="a8-utility-links">
+    <span class="a8-utility-label">UTILITY ·</span>
+    <a href="/map-clock-compass.html">MAP · CLOCK · COMPASS</a>
+    <a href="/navigation.html">NAVIGATION</a>
+    <a href="/celestial.html">CELESTIAL</a>
+    <a href="https://a8.cosigo.io/canonical.html">CANONICAL</a>
+    <a href="https://a8.cosigo.io/open-research.html">OPEN RESEARCH</a>
+    <a href="https://a8.cosigo.io/">A8 PUBLIC</a>
+    <a href="https://lab.a8.cosigo.io/">LIVE LAB</a>
+    <a href="https://cosigo.io/">COSIGO HOME</a>
+    <a href="https://contact.cosigo.io/">CONTACT</a>
+    <a href="https://github.com/cosigo">GITHUB</a>
+  </div>
+</nav>
+<main>
+
+<section class="hero">
+    <div class="eyebrow">AUSPICIOUS 8 · TIME LAB v5.4.20 · GATE 4D</div>
+    <h1 class="title">TERRA SHIP SLIP</h1>
+    <p><b>LIVE ROTATION ↔ ORBIT RELATIONSHIP · EVENT-TRIGGERED DOWNSTREAM ACCUMULATION</b></p>
+    <p class="muted">
+      Jupiter remains the upstream natural timekeeper.
+      Mintaka witnesses Earth axial rotation.
+      Sol witnesses orbital angular advance.
+      Accepted observer events now trigger the downstream Terra Ship Slip state machine,
+      while the clock and every upstream observer remain outside its write boundary.
+    </p>
+  </section>
+
+  <section class="grid">
+    <div class="card">
+      <span class="k">RELATIONSHIP</span>
+      <span id="relationshipStatus" class="v">CONNECTING</span>
+      <p class="muted">Gate 4B exact relationship, derived on demand.</p>
+    </div>
+    <div class="card">
+      <span class="k">ACCUMULATOR</span>
+      <span id="accumulatorStatus" class="v">CONNECTING</span>
+      <p class="muted">Updated by accepted observer events, never by GET polling.</p>
+    </div>
+    <div class="card">
+      <span class="k">UPSTREAM WRITE CAPABILITY</span>
+      <span class="v good">NONE</span>
+      <p class="muted">No clock, Mintaka, Sol, relationship, or authority write path.</p>
+    </div>
+
+    <div class="card">
+      <span class="k">CURRENT TERRA SHIP SLIP / ROTATION</span>
+      <span id="slipPerRotation" class="v">—</span>
+    </div>
+    <div class="card">
+      <span class="k">ACCUMULATED TERRA SHIP SLIP</span>
+      <span id="accumulatedSlip" class="v">—</span>
+    </div>
+    <div class="card">
+      <span class="k">ACCUMULATED ROTATIONS</span>
+      <span id="accumulatedRotations" class="v">0</span>
+    </div>
+
+    <div class="card">
+      <span class="k">TERRA SHIP SLIP PHASE</span>
+      <span id="phase512" class="v">—</span>
+      <p class="muted">Accumulated downstream angle modulo native 512 turn.</p>
+    </div>
+    <div class="card">
+      <span class="k">LAST ACCUMULATOR ACTION</span>
+      <span id="lastAction" class="v">—</span>
+    </div>
+    <div class="card">
+      <span class="k">RATE REFRESHES</span>
+      <span id="rateRefreshes" class="v">0</span>
+      <p class="muted">Same-rotation Sol updates add zero slip.</p>
+    </div>
+  </section>
+
+  <section class="card" style="margin-top:16px">
+    <h2>Event wiring</h2>
+    <pre>ACCEPTED MINTAKA OBSERVATION
+        │
+        └──► derive current relationship
+             └──► Terra Ship Slip accumulator
+
+ACCEPTED SOL OBSERVATION
+        │
+        └──► derive current relationship
+             └──► same-rotation rate refresh / baseline
+
+GET /api/terra-ship-slip
+GET /api/terra-ship-slip/accumulator
+        │
+        └──► READ ONLY · NEVER ACCUMULATE</pre>
+  </section>
+
+  <section class="card" style="margin-top:16px">
+    <h2>Integration discipline</h2>
+    <pre>first qualified relationship
+→ baseline only
+
+same Mintaka cycleCount
+→ update downstream rate only
+→ +0 Terra Ship Slip
+
+Mintaka cycleCount +1
+→ add one current qualified Terra Ship Slip increment
+
+gap >1
+→ reject
+→ never guess missing rotations</pre>
+  </section>
+
+  <section class="card" style="margin-top:16px">
+    <h2>Live state</h2>
+    <pre id="liveState">TERRA SHIP SLIP · —</pre>
+  </section>
+
+  <section class="card" style="margin-top:16px">
+    <h2>Still absent</h2>
+    <p class="muted">
+      Terra Ship Slip authority · Mean Sun · solar-day recurrence · Earth-day
+      authority/divider · calendar rule · clock discipline · legacy timestamp in the defining path.
+    </p>
+  </section>
+</main>
+
+<script>
+function rationalText(r){
+  if(!r) return '—';
+  if(r.denominator === '1') return r.numerator;
+  return `${r.numerator}/${r.denominator}`;
+}
+
+async function refresh(){
+  try{
+    const [relationshipResponse,accumulatorResponse]=await Promise.all([
+      fetch('/api/terra-ship-slip',{cache:'no-store'}),
+      fetch('/api/terra-ship-slip/accumulator',{cache:'no-store'})
+    ]);
+
+    const relationshipPayload=await relationshipResponse.json();
+    const accumulatorPayload=await accumulatorResponse.json();
+
+    if(relationshipPayload.ready && relationshipPayload.terraShipSlip){
+      const r=relationshipPayload.terraShipSlip;
+      document.getElementById('relationshipStatus').textContent='LIVE · READ ONLY';
+      document.getElementById('slipPerRotation').textContent =
+        `${rationalText(r.solAdvancePerMintakaRotation512)} A8 / rotation`;
+    }else{
+      document.getElementById('relationshipStatus').textContent='NOT READY';
+      document.getElementById('slipPerRotation').textContent='—';
+    }
+
+    const a=accumulatorPayload.accumulator || {};
+    document.getElementById('accumulatorStatus').textContent=a.status || '—';
+    document.getElementById('accumulatedSlip').textContent =
+      a.accumulatedTerraShipSlip512
+        ? `${rationalText(a.accumulatedTerraShipSlip512)} A8`
+        : '—';
+    document.getElementById('accumulatedRotations').textContent =
+      String(a.accumulatedRotations ?? '0');
+    document.getElementById('phase512').textContent =
+      a.accumulatedPhase512
+        ? `${rationalText(a.accumulatedPhase512)} A8`
+        : '—';
+    document.getElementById('lastAction').textContent=a.lastAction || '—';
+    document.getElementById('rateRefreshes').textContent =
+      String(a.rateRefreshes ?? 0);
+
+    document.getElementById('liveState').textContent =
+      `STATUS                   · ${a.status || '—'}\n` +
+      `BASELINE MINTAKA CYCLE   · ${a.baselineMintakaCycleCount ?? '—'}\n` +
+      `LAST MINTAKA CYCLE       · ${a.lastMintakaCycleCount ?? '—'}\n` +
+      `ACCUMULATED ROTATIONS    · ${a.accumulatedRotations ?? '0'}\n` +
+      `ACCUMULATED A8 SLIP      · ${a.accumulatedTerraShipSlip512 ? rationalText(a.accumulatedTerraShipSlip512) : '—'}\n` +
+      `PHASE MOD 512            · ${a.accumulatedPhase512 ? rationalText(a.accumulatedPhase512) : '—'}\n` +
+      `RATE REFRESHES           · ${a.rateRefreshes ?? 0}\n` +
+      `LAST ACTION              · ${a.lastAction || '—'}`;
+  }catch(err){
+    document.getElementById('relationshipStatus').textContent='ENDPOINT UNAVAILABLE';
+    document.getElementById('accumulatorStatus').textContent='ENDPOINT UNAVAILABLE';
+  }
+}
+
+refresh();
+setInterval(refresh,1000);
+</script>
+</body>
+</html>

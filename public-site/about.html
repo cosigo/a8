@@ -1,0 +1,623 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Auspicious 8 — Nature on One Scale | COSIGO Labs</title>
+  <meta name="description" content="A simple introduction to Auspicious 8 (A8): Nature first, ruler second. See atomic, human, navigation and larger scales on one exact binary doubling ladder, with quantum-scale comparison references below A8/0.">
+  <meta name="keywords" content="Auspicious 8, A8, COSIGO Labs, measurement, scaling, navigation, aviation, model trains, speed, Jovian moons, quartz, binary, octal, 512 angle">
+  <meta name="author" content="COSIGO Labs">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+  <meta name="theme-color" content="#0a0d10">
+
+  <link rel="canonical" href="https://a8.cosigo.io/about.html">
+  <link rel="icon" href="assets/cosigo_master_512.png">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="COSIGO Labs">
+  <meta property="og:title" content="Auspicious 8 — Nature on One Scale">
+  <meta property="og:description" content="From atomic scale through human and planetary scales: one exact A8 doubling ladder, with comparison extensions into subatomic physics.">
+  <meta property="og:url" content="https://a8.cosigo.io/about.html">
+  <meta property="og:image" content="https://a8.cosigo.io/assets/cosigo_master_512.png">
+  <meta property="og:image:alt" content="COSIGO Labs — Auspicious 8">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Auspicious 8 — Nature on One Scale">
+  <meta name="twitter:description" content="A8 scale of Nature: A8/0 at atomic scale, A8/31 at human scale, and the same exact ladder extended upward and downward.">
+  <meta name="twitter:image" content="https://a8.cosigo.io/assets/cosigo_master_512.png">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Auspicious 8 — Nature on One Scale",
+    "url": "https://a8.cosigo.io/about.html",
+    "description": "A simple introduction to Auspicious 8, an experimental COSIGO Labs measurement architecture built from observable natural recurrence, geometry and exact binary scaling.",
+    "datePublished": "2026-08-16",
+    "dateModified": "2026-08-23",
+    "inLanguage": "en",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "COSIGO Labs — Auspicious 8",
+      "url": "https://a8.cosigo.io/"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "COSIGO Labs",
+      "url": "https://cosigo.io/"
+    }
+  }
+  </script>
+
+  <style>
+    :root{
+      --bg:#0a0d10;--panel:#11171d;--panel2:#161e26;--line:#2b3742;
+      --text:#edf3f6;--muted:#9eacb7;--gold:#d8b76c;--blue:#8eb9ff;
+      --green:#8fd0a0;--cyan:#7bd3d8;--orange:#efa75f;--violet:#bd9cff;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    html{background:#0a0d10}
+    body{
+      margin:0;
+      background:transparent;
+      color:var(--text);
+      font:16px/1.58 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,sans-serif;
+      position:relative;
+      isolation:isolate;
+      min-height:100vh;
+    }
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      z-index:-2;
+      background:
+        linear-gradient(rgba(5,10,12,.42),rgba(5,10,12,.56)),
+        url("assets/a8_about_jungle_background.png") center center / cover no-repeat;
+    }
+    body::after{
+      content:"";
+      position:fixed;
+      inset:0;
+      z-index:-1;
+      pointer-events:none;
+      background:
+        radial-gradient(circle at 50% 14%,rgba(216,183,108,.10),transparent 30rem),
+        linear-gradient(90deg,rgba(4,8,10,.10),rgba(4,8,10,.02) 45%,rgba(4,8,10,.12));
+    }
+    a{color:inherit}
+    .shell{max-width:1120px;margin:auto;padding:0 22px 68px}
+    .topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 0;border-bottom:1px solid var(--line)}
+    .brand{display:flex;align-items:center;gap:11px;text-decoration:none}
+    .brand img{width:38px;height:38px;object-fit:contain}
+    .brand strong{display:block;letter-spacing:.08em}.brand small{display:block;color:var(--muted)}
+    .toplinks{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+    .toplinks a,.buttons a{border:1px solid var(--line);border-radius:8px;padding:8px 11px;text-decoration:none;background:#111820;font-weight:700;font-size:.88rem}
+    .toplinks a:hover,.buttons a:hover{border-color:#607385}
+    header{padding:68px 0 40px;text-align:center}
+    .eyebrow{font-size:.78rem;font-weight:850;letter-spacing:.19em;color:var(--gold);text-transform:uppercase}
+    h1{font-size:clamp(2.7rem,7vw,5.7rem);line-height:.98;margin:.45rem 0 .7rem;letter-spacing:-.045em}
+    .lead{max-width:850px;margin:0 auto;font-size:clamp(1.12rem,2.3vw,1.42rem);color:#dbe5ea}
+    .motto{margin:28px auto 0;display:inline-block;border-left:4px solid var(--gold);background:#111820;padding:12px 17px;text-align:left;font-size:1.2rem;font-weight:800}
+    h2{font-size:1.55rem;margin:2.45rem 0 .8rem} h3{font-size:1.08rem;margin:.1rem 0 .45rem} p{margin:.45rem 0 .9rem}
+    .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+    .card{background:rgba(17,23,29,.82);border:1px solid var(--line);border-radius:12px;padding:18px}
+    .card strong.key{display:block;font-size:1.24rem;margin-bottom:5px}
+    .when{border-top:3px solid var(--blue)}.far{border-top:3px solid var(--cyan)}.where{border-top:3px solid var(--green)}.fast{border-top:3px solid var(--gold)}
+    .plain{background:linear-gradient(135deg,#131b23,#0d1217);border:1px solid var(--line);border-radius:12px;padding:20px;margin-top:14px}.plain p:last-child{margin-bottom:0}
+    .status{border-left:3px solid var(--orange);background:#12171c;padding:13px 15px;border-radius:8px;margin:18px 0}
+    .buttons{display:flex;flex-wrap:wrap;gap:9px;margin-top:16px}.buttons .primary{border-color:var(--gold);background:#1b1912}
+
+    /* simple visual language */
+    .rulebox{margin:18px 0 10px;border:1px solid #5b5131;border-radius:14px;background:linear-gradient(135deg,#17170f,#10151a);padding:22px;text-align:center}
+    .rulebox .big{font-size:clamp(1.35rem,3vw,2.1rem);font-weight:900;letter-spacing:.01em}
+    .rulebox .sub{color:var(--muted);margin-top:7px}.gold{color:var(--gold)}.cyan{color:var(--cyan)}.green{color:var(--green)}
+
+
+    .nature-scale{
+      margin:20px 0 28px;border:1px solid #344350;border-radius:18px;overflow:hidden;
+      background:
+        radial-gradient(circle at 78% 13%,rgba(142,185,255,.10),transparent 26rem),
+        radial-gradient(circle at 18% 84%,rgba(123,211,216,.08),transparent 24rem),
+        #0b1117;
+      box-shadow:0 18px 50px rgba(0,0,0,.22);
+    }
+    .nature-scale svg{display:block;width:100%;height:auto}
+    .nature-scale-copy{padding:0 20px 18px;color:var(--muted);font-size:.9rem}
+    .nature-scale-copy strong{color:var(--text)}
+    .quantum-note{
+      margin:14px 0 26px;border:1px solid #384755;border-left:4px solid var(--cyan);
+      border-radius:12px;background:#0d151c;padding:15px 17px;color:#dce5ea;
+    }
+    .quantum-note b{color:#f5d78c}
+    .scale-source{font-size:.78rem;color:var(--muted);margin-top:9px}
+    .scale-source a{color:#a9c8ff}
+
+    .barbell{display:grid;grid-template-columns:1fr auto 1fr;gap:14px;align-items:center;margin:18px 0}
+    .weight{min-height:142px;border:1px solid var(--line);border-radius:18px;background:rgba(14,20,26,.82);padding:18px;text-align:center;display:flex;flex-direction:column;justify-content:center}
+    .a8-range{margin:8px 0 2px;color:#f1d99c;font-size:1.02rem;letter-spacing:.02em}
+    .a8-range strong{font-weight:900}
+    .a8-range-mini{font-size:.79rem;color:#c5d0d7;margin-bottom:8px;line-height:1.35}
+    .weight b{font-size:1.55rem}.weight small{color:var(--muted)}
+    .bar{min-width:190px;position:relative;height:72px;display:flex;align-items:center;justify-content:center}
+    .bar:before{content:"";position:absolute;left:0;right:0;height:5px;background:linear-gradient(90deg,var(--cyan),var(--gold),var(--green));border-radius:99px}
+    .pivot{position:relative;z-index:2;width:112px;height:68px;border:2px solid var(--gold);border-radius:16px;background:#17170f;display:flex;align-items:center;justify-content:center;text-align:center;font-weight:900;line-height:1.15}
+
+    .ladder-wrap{border:1px solid var(--line);border-radius:14px;background:rgba(13,19,24,.84);padding:18px;overflow:hidden}
+    .ladder-head{text-align:center;margin-bottom:14px}.ladder-head b{font-size:1.35rem}.ladder-head div{color:var(--muted)}
+    .ladder{display:grid;grid-template-columns:repeat(11,minmax(42px,1fr));align-items:end;gap:5px;min-width:720px;padding:10px 2px 4px}
+    .rung{position:relative;text-align:center;border-left:2px solid #394651;height:54px;padding-top:32px;color:#7e8c96;font-size:.72rem}
+    .rung:before{content:"";position:absolute;left:-1px;top:24px;width:100%;height:2px;background:#394651}
+    .rung.major{height:84px;padding-top:50px;color:var(--text);font-weight:850;border-left-color:var(--gold)}
+    .rung.major:before{top:36px;background:var(--gold)}
+    .rung .label{display:block;white-space:nowrap}.rung .value{display:block;color:var(--muted);font-size:.68rem;font-weight:600}
+    .scrollhint{text-align:center;color:var(--muted);font-size:.78rem;margin-top:6px}
+    .equation{margin:16px auto 0;max-width:760px;text-align:center;border:1px solid #485761;background:#111820;border-radius:10px;padding:13px 14px;font-weight:850;font-size:1.06rem}
+
+    .scale-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:14px}
+    .scale-card{border:1px solid var(--line);border-radius:14px;background:var(--panel);padding:15px;min-height:292px;transition:.18s transform,.18s border-color}
+    .scale-card:hover{transform:translateY(-3px);border-color:#607385}
+    .scale-card svg{width:100%;height:105px;display:block;margin:3px auto 10px}
+    .scale-card .tag{font-size:.72rem;letter-spacing:.13em;font-weight:900;color:var(--gold)}
+    .scale-card h3{font-size:1.2rem}.scale-card p{font-size:.93rem;color:#d9e1e6}.scale-card .mini{font-size:.79rem;color:var(--muted);border-top:1px solid var(--line);padding-top:9px}
+
+    .model-compare{display:grid;grid-template-columns:1fr auto 1fr;gap:18px;align-items:center;border:1px solid var(--line);border-radius:14px;background:linear-gradient(135deg,#101820,#101318);padding:18px;margin-top:14px}
+    .trainbox{text-align:center}.trainbox svg{width:100%;max-width:340px;height:110px}.trainbox b{display:block;font-size:1.15rem}.trainbox small{color:var(--muted)}
+    .scale-arrow{text-align:center;font-weight:900;color:var(--gold);font-size:1.2rem}.scale-arrow small{display:block;color:var(--muted);font-size:.72rem}
+
+    .speed-road{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px;margin-top:14px}
+    .motion{border:1px solid var(--line);border-radius:14px;background:#10161c;padding:17px}.motion svg{height:88px;width:100%;display:block}.motion h3{font-size:1.2rem}.motion .use{display:inline-block;margin:4px 0 8px;border:1px solid #4b5965;border-radius:999px;padding:4px 9px;font-size:.76rem;font-weight:850;color:#dce5ea}.motion p{font-size:.92rem}
+    .motion strong{color:var(--gold)}
+
+    .three-rule{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}.three-rule div{padding:16px;border:1px solid var(--line);border-radius:12px;background:rgba(14,20,26,.82);text-align:center;font-weight:850}.three-rule span{display:block;font-size:1.65rem;color:var(--gold);line-height:1}
+
+    .facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:14px}.fact{background:rgba(14,20,26,.82);border:1px solid var(--line);border-radius:10px;padding:15px;text-align:center}.fact b{font-size:1.42rem;display:block;color:#f7fafc}.fact span{color:var(--muted);font-size:.88rem}
+    footer{border-top:1px solid var(--line);margin-top:44px;padding-top:20px;color:var(--muted);font-size:.9rem}footer nav{display:flex;flex-wrap:wrap;gap:12px;margin-top:8px}
+
+    @media(max-width:900px){.scale-grid{grid-template-columns:repeat(2,1fr)}.speed-road{grid-template-columns:1fr}.barbell{grid-template-columns:1fr}.bar{min-width:0}.model-compare{grid-template-columns:1fr}.scale-arrow{transform:none}}
+    @media(max-width:720px){.grid,.facts,.three-rule{grid-template-columns:1fr}.scale-grid{grid-template-columns:1fr}.topbar{align-items:flex-start}.toplinks{max-width:58%}header{padding-top:48px}.ladder-wrap{overflow-x:auto}.barbell{gap:8px}}
+  </style>
+<!-- A8-ABOUT-ORIGINAL-JUNGLE-BACKGROUND-RESTORED-20260823 -->
+</head>
+<body>
+<div class="shell">
+
+  <nav class="topbar" aria-label="COSIGO Labs navigation">
+    <a class="brand" href="https://cosigo.io/" rel="noopener">
+      <img src="assets/cosigo_master_512.png" alt="COSIGO">
+      <span><strong>COSIGO LABS</strong><small>Auspicious 8 research</small></span>
+    </a>
+    <div class="toplinks">
+      <a href="https://a8.cosigo.io/">A8 Public</a>
+      <a href="https://lab.a8.cosigo.io/">Engineering Lab</a>
+      <a href="https://contact.cosigo.io/">Contact</a>
+    </div>
+  </nav>
+
+  <header>
+    <div class="eyebrow">AUSPICIOUS 8 · SIMPLE INTRODUCTION</div>
+    <h1>Nature.<br>One scale.</h1>
+    <p class="lead">Auspicious 8 (A8) is an experimental measurement architecture. It starts with observable Nature, builds rulers from reproducible relationships, and uses one exact doubling ladder to move from atomic scale through human and planetary scales without inventing unrelated units.</p>
+    <div class="motto">Nature first. Ruler second. Simple first. Proof underneath.</div>
+  </header>
+
+  <main>
+    <section class="rulebox" aria-label="A8 simple operating rule">
+      <div class="big">One ladder. <span class="gold">Pick the rung.</span> State the rung. Stay on the rung.</div>
+      <div class="sub">Changing rungs changes the size of the measuring step — not the object, trip, speed or laws of physics.</div>
+    </section>
+
+    <h2>Nature on one A8 scale</h2>
+    <p>The same exact doubling rule can be followed from atomic structure to people, landscapes and larger motion scales. The picture below uses the current working <strong>A8/31 ≈ 1.14988 legacy m</strong> stake and simply asks where familiar physical scales fall. It does not make those objects new authorities.</p>
+
+    <figure class="nature-scale" aria-labelledby="nature-scale-title">
+      <svg viewBox="0 0 1200 790" role="img" aria-labelledby="nature-scale-title nature-scale-desc">
+        <title id="nature-scale-title">Auspicious 8 scale of Nature from subatomic comparison references through atomic, human and large scales</title>
+        <desc id="nature-scale-desc">A vertical binary doubling ladder. A8/0 is about 0.535 nanometres at atomic and crystal scale. A8/31 is about 1.15 metres at human scale. Larger rungs reach kilometre and flight-scale lengths. Negative rungs show comparison positions for the Bohr radius, proton charge radius and Planck length.</desc>
+
+        <defs>
+          <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#0b1424"/>
+            <stop offset=".46" stop-color="#111c26"/>
+            <stop offset="1" stop-color="#102018"/>
+          </linearGradient>
+          <linearGradient id="ladderGlow" x1="0" y1="1" x2="0" y2="0">
+            <stop offset="0" stop-color="#7bd3d8"/>
+            <stop offset=".48" stop-color="#d8b76c"/>
+            <stop offset="1" stop-color="#8eb9ff"/>
+          </linearGradient>
+          <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+            <feGaussianBlur stdDeviation="5" result="b"/>
+            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+
+        <rect width="1200" height="790" fill="url(#sky)"/>
+
+        <!-- stars -->
+        <g fill="#dce8ff" opacity=".55">
+          <circle cx="95" cy="74" r="2"/><circle cx="173" cy="120" r="1.6"/><circle cx="1088" cy="86" r="2"/>
+          <circle cx="1032" cy="149" r="1.4"/><circle cx="907" cy="58" r="1.6"/><circle cx="308" cy="67" r="1.4"/>
+          <circle cx="726" cy="95" r="1.6"/><circle cx="455" cy="133" r="1.3"/>
+        </g>
+
+        <!-- large-scale Nature silhouettes -->
+        <path d="M0 330 L120 255 L210 305 L340 198 L470 316 L585 232 L720 315 L825 236 L950 308 L1060 248 L1200 322 L1200 520 L0 520 Z"
+              fill="#14251f" opacity=".95"/>
+        <path d="M0 388 Q120 350 245 382 T505 374 T780 384 T1020 370 T1200 388 V520 H0Z"
+              fill="#17322b" opacity=".72"/>
+
+        <!-- central ladder -->
+        <line x1="600" y1="80" x2="600" y2="705" stroke="#293845" stroke-width="16" stroke-linecap="round"/>
+        <line x1="600" y1="80" x2="600" y2="705" stroke="url(#ladderGlow)" stroke-width="5" stroke-linecap="round" filter="url(#glow)"/>
+
+        <!-- key ticks -->
+        <g stroke="#d9e3ea" stroke-width="2">
+          <line x1="574" y1="126" x2="626" y2="126"/>
+          <line x1="574" y1="190" x2="626" y2="190"/>
+          <line x1="570" y1="265" x2="630" y2="265"/>
+          <line x1="566" y1="376" x2="634" y2="376"/>
+          <line x1="570" y1="474" x2="630" y2="474"/>
+          <line x1="574" y1="558" x2="626" y2="558"/>
+          <line x1="574" y1="614" x2="626" y2="614"/>
+          <line x1="574" y1="663" x2="626" y2="663"/>
+          <line x1="574" y1="708" x2="626" y2="708"/>
+        </g>
+
+        <!-- labels right: ordinary and larger -->
+        <g font-family="system-ui,Segoe UI,sans-serif">
+          <text x="650" y="114" fill="#8eb9ff" font-size="15" font-weight="900">A8/48</text>
+          <text x="650" y="134" fill="#edf3f6" font-size="18" font-weight="800">≈ 150.7 km</text>
+          <text x="650" y="153" fill="#9eacb7" font-size="13">large-motion / near-space scale</text>
+
+          <text x="650" y="181" fill="#8eb9ff" font-size="15" font-weight="900">A8/45</text>
+          <text x="650" y="201" fill="#edf3f6" font-size="18" font-weight="800">≈ 18.84 km</text>
+          <text x="650" y="220" fill="#9eacb7" font-size="13">aircraft-scale working neighborhood</text>
+
+          <text x="650" y="256" fill="#8fd0a0" font-size="15" font-weight="900">A8/41</text>
+          <text x="650" y="276" fill="#edf3f6" font-size="18" font-weight="800">≈ 1.177 km</text>
+          <text x="650" y="295" fill="#9eacb7" font-size="13">terrain / route-scale rung</text>
+
+          <text x="650" y="366" fill="#d8b76c" font-size="16" font-weight="900">A8/31</text>
+          <text x="650" y="388" fill="#fff4cf" font-size="21" font-weight="900">≈ 1.14988 m</text>
+          <text x="650" y="408" fill="#cdbf91" font-size="13">current human-scale working stake</text>
+
+          <text x="650" y="465" fill="#7bd3d8" font-size="15" font-weight="900">A8/20</text>
+          <text x="650" y="485" fill="#edf3f6" font-size="18" font-weight="800">≈ 0.561 mm</text>
+          <text x="650" y="504" fill="#9eacb7" font-size="13">fine mechanical / grain scale</text>
+
+          <text x="650" y="549" fill="#7bd3d8" font-size="15" font-weight="900">A8/10</text>
+          <text x="650" y="569" fill="#edf3f6" font-size="18" font-weight="800">≈ 0.548 µm</text>
+          <text x="650" y="588" fill="#9eacb7" font-size="13">cellular / microscopic scale</text>
+
+          <text x="650" y="605" fill="#7bd3d8" font-size="15" font-weight="900">A8/0</text>
+          <text x="650" y="625" fill="#edf3f6" font-size="18" font-weight="800">≈ 0.535 nm</text>
+          <text x="650" y="644" fill="#9eacb7" font-size="13">atomic / crystal scale — not a quantum floor</text>
+        </g>
+
+        <!-- left-side nature icons -->
+        <g transform="translate(145 105)">
+          <!-- moon / orbital arc -->
+          <circle cx="74" cy="28" r="20" fill="none" stroke="#8eb9ff" stroke-width="3"/>
+          <path d="M22 62 Q80 20 140 62" fill="none" stroke="#526b89" stroke-width="2" stroke-dasharray="7 6"/>
+          <path d="M26 70 L44 48 L64 70 L87 34 L112 70 Z" fill="none" stroke="#8fd0a0" stroke-width="3"/>
+          <text x="0" y="98" fill="#dfe8ee" font-size="14" font-weight="800">SKY · EARTH · MOTION</text>
+        </g>
+
+        <g transform="translate(178 316)">
+          <!-- human -->
+          <circle cx="60" cy="30" r="14" fill="none" stroke="#d8b76c" stroke-width="4"/>
+          <path d="M60 45 V100 M30 67 L60 58 L92 67 M60 100 L34 145 M60 100 L88 145"
+                fill="none" stroke="#d8b76c" stroke-width="5" stroke-linecap="round"/>
+          <line x1="118" y1="18" x2="118" y2="146" stroke="#7d6d45" stroke-width="3"/>
+          <line x1="109" y1="18" x2="127" y2="18" stroke="#7d6d45" stroke-width="3"/>
+          <line x1="109" y1="146" x2="127" y2="146" stroke="#7d6d45" stroke-width="3"/>
+          <text x="0" y="176" fill="#f1d99c" font-size="14" font-weight="900">HUMAN REFERENCE</text>
+        </g>
+
+        <g transform="translate(112 548)">
+          <!-- atom / crystal -->
+          <circle cx="95" cy="56" r="7" fill="#7bd3d8"/>
+          <ellipse cx="95" cy="56" rx="62" ry="22" fill="none" stroke="#7bd3d8" stroke-width="2" transform="rotate(18 95 56)"/>
+          <ellipse cx="95" cy="56" rx="62" ry="22" fill="none" stroke="#8eb9ff" stroke-width="2" transform="rotate(-42 95 56)"/>
+          <ellipse cx="95" cy="56" rx="62" ry="22" fill="none" stroke="#d8b76c" stroke-width="2" transform="rotate(78 95 56)"/>
+          <g fill="#edf3f6">
+            <circle cx="150" cy="72" r="4"/><circle cx="56" cy="24" r="4"/><circle cx="83" cy="115" r="4"/>
+          </g>
+          <text x="12" y="150" fill="#cceef0" font-size="14" font-weight="900">ATOM · QUARTZ</text>
+        </g>
+
+        <!-- quantum/subatomic comparison extension -->
+        <g font-family="system-ui,Segoe UI,sans-serif">
+          <rect x="40" y="684" width="1115" height="80" rx="14" fill="#091017" stroke="#3c5260"/>
+          <text x="64" y="708" fill="#f5d78c" font-size="14" font-weight="900">BELOW A8/0 · COMPARISON EXTENSION</text>
+          <text x="64" y="733" fill="#dce5ea" font-size="14">
+            A8/−3 ≈ 0.0669 nm · Bohr radius 0.0529 nm
+          </text>
+          <text x="456" y="733" fill="#dce5ea" font-size="14">
+            A8/−19 ≈ 1.02 fm · proton radius 0.841 fm
+          </text>
+          <text x="834" y="733" fill="#dce5ea" font-size="14">
+            A8/−85 ≈ 1.38×10⁻³⁵ m · Planck length 1.62×10⁻³⁵ m
+          </text>
+          <text x="64" y="754" fill="#8596a3" font-size="11">
+            Scale positions are derived from the current A8/31 stake. Planck length is a theoretical reference scale, not an established minimum physical length.
+          </text>
+        </g>
+
+        <!-- arrows -->
+        <g fill="#d8b76c">
+          <path d="M600 63 l-8 14 h16z"/>
+          <path d="M600 723 l-8-14 h16z"/>
+        </g>
+        <text x="545" y="50" fill="#9eacb7" font-size="12" font-weight="800">LARGER</text>
+        <text x="540" y="780" fill="#9eacb7" font-size="12" font-weight="800">SMALLER</text>
+      </svg>
+      <figcaption class="nature-scale-copy">
+        <strong>Read it vertically:</strong> every one-rung move changes the physical length by exactly ×2 or ÷2.
+        A8/0 is derived from the current A8/31 working stake and lands at about <strong>0.535 nm</strong>, already in the atomic/crystal neighborhood.
+        Going smaller does not require a new ruler; the same ladder can continue through negative rung numbers for comparison.
+      </figcaption>
+    </figure>
+
+    <div class="quantum-note">
+      <b>What would A8 look like at “quantum scale”?</b>
+      There is no single quantum length. Atomic quantum structure, nuclear structure and the Planck scale are radically different sizes.
+      On the current A8 ladder, the Bohr radius lies near <strong>A8/−3</strong>, the proton charge radius near <strong>A8/−19</strong>,
+      and the Planck length near <strong>A8/−85</strong>. These are comparison placements, not new A8 definitions.
+      <div class="scale-source">
+        Comparison values: 2022 CODATA / NIST —
+        <a href="https://physics.nist.gov/cuu/Constants/" rel="noopener">fundamental constants</a>.
+      </div>
+    </div>
+
+    <h2>The basic idea</h2>
+    <div class="grid">
+      <section class="card when">
+        <strong class="key">WHEN · Recovered natural time</strong>
+        <p>Io, Europa and Ganymede recover the primary natural timebase. Mintaka independently witnesses Earth's stellar rotation against that timebase, while Mean-Sun recurrence supplies the working civil-day duration authority.</p>
+      </section>
+      <section class="card far">
+        <strong class="key">HOW FAR · Micro ↔ macro</strong>
+        <p>Quartz supplies a microscopic geometric witness. Earth supplies a macroscopic geometric witness. A8 brings both toward human scale on the same doubling ladder and compares where they meet.</p>
+      </section>
+      <section class="card where">
+        <strong class="key">WHERE / ANGLE · 512 around</strong>
+        <p>A full turn is represented as 512 A8 angle units. The circle, π, trigonometry and the physical world do not change; only the ruler used to label the turn changes.</p>
+      </section>
+      <section class="card fast">
+        <strong class="key">HOW FAST · Distance over time</strong>
+        <p>Once distance and time exist independently, speed follows. Ships, aircraft and rockets can all be expressed on the same ruler architecture; application-specific rung choices remain open until they are deliberately tested and selected.</p>
+      </section>
+    </div>
+
+    <h2>The length “barbell”</h2>
+    <p>You do not have to be a crystallographer or geodesist to understand the working experiment. Reduce each 3-D witness to a reproducible length comparison, bring the tiny one up and the huge one down, then see where the common human-scale ruler settles.</p>
+    <div class="barbell" aria-label="Quartz to Earth A8 length barbell">
+      <div class="weight">
+        <small>MICRO WITNESS</small>
+        <b class="cyan">QUARTZ</b>
+        <div class="a8-range"><strong>A8/0 → A8/31</strong></div>
+        <div class="a8-range-mini">≈ 0.516 nm × 2<sup>31</sup> → ≈ 1.108 m</div>
+        <div>≈ 1.108 m at the human comparison level</div>
+        <small>current symmetric quartz reduction · ≈ 0.964 A8/31</small>
+      </div>
+      <div class="bar"><div class="pivot">A8/31 = 1<br><span class="gold">≈ 1.15 m</span></div></div>
+      <div class="weight">
+        <small>MACRO WITNESS</small>
+        <b class="green">EARTH</b>
+        <div class="a8-range"><strong>A8/31 → A8/56</strong></div>
+        <div class="a8-range-mini">≈ 1.193 m × 2<sup>25</sup> → ≈ 40,041 km</div>
+        <div>≈ 1.193 m at the human comparison level</div>
+        <small>mean Earth circumference brought down the ladder · ≈ 1.038 A8/31</small>
+      </div>
+    </div>
+    <p style="text-align:center;color:var(--muted)">Legacy metre values are comparison bridges. The current working A8 statement is simply <strong style="color:var(--text)">A8/31 = 1 human A8 length</strong>.</p>
+
+    <h2>The part that makes scaling easy</h2>
+    <p>Every step on the length ladder is exactly twice the step below it. Nothing fancy happens between rungs.</p>
+    <div class="ladder-wrap" aria-label="A8 doubling ladder from rung 31 to rung 41">
+      <div class="ladder-head">
+        <b>Each rung = ×2</b>
+        <div>Ten rungs = ×2¹⁰ = ×1024</div>
+      </div>
+      <div class="ladder">
+        <div class="rung major"><span class="label">A8/31</span><span class="value">≈1.15 m</span></div>
+        <div class="rung"><span class="label">/32</span><span class="value">×2</span></div>
+        <div class="rung"><span class="label">/33</span><span class="value">×4</span></div>
+        <div class="rung"><span class="label">/34</span><span class="value">×8</span></div>
+        <div class="rung"><span class="label">/35</span><span class="value">×16</span></div>
+        <div class="rung"><span class="label">/36</span><span class="value">×32</span></div>
+        <div class="rung"><span class="label">/37</span><span class="value">×64</span></div>
+        <div class="rung"><span class="label">/38</span><span class="value">×128</span></div>
+        <div class="rung"><span class="label">/39</span><span class="value">×256</span></div>
+        <div class="rung"><span class="label">/40</span><span class="value">×512</span></div>
+        <div class="rung major"><span class="label">A8/41</span><span class="value">≈1.177 km</span></div>
+      </div>
+      <div class="scrollhint">On a small screen, slide the ladder sideways.</div>
+      <div class="equation">A8/41 = 1024 × A8/31 ≈ 1,177.47 legacy metres ≈ 1.177 km</div>
+    </div>
+
+    <div class="three-rule" aria-label="A8 rung operating rule">
+      <div><span>1</span>Pick a useful rung</div>
+      <div><span>2</span>State the rung</div>
+      <div><span>3</span>Stay on it for the instrument</div>
+    </div>
+
+    <h2>Why change rungs at all?</h2>
+    <p>For the same reason people do not normally measure a continent in millimetres. The rung selects a useful numerical scale and useful resolution. The ladder preserves the exact relationship between every scale.</p>
+
+    <div class="scale-grid">
+      <article class="scale-card">
+        <div class="tag">MODEL SCALE</div>
+        <svg viewBox="0 0 260 110" role="img" aria-label="model train">
+          <rect x="30" y="38" width="165" height="36" rx="5" fill="none" stroke="#7bd3d8" stroke-width="3"/>
+          <rect x="48" y="46" width="34" height="15" rx="2" fill="none" stroke="#7bd3d8" stroke-width="2"/>
+          <rect x="92" y="46" width="34" height="15" rx="2" fill="none" stroke="#7bd3d8" stroke-width="2"/>
+          <rect x="136" y="46" width="34" height="15" rx="2" fill="none" stroke="#7bd3d8" stroke-width="2"/>
+          <path d="M195 45h20l16 29h-36z" fill="none" stroke="#7bd3d8" stroke-width="3"/>
+          <circle cx="67" cy="80" r="9" fill="#0d1318" stroke="#d8b76c" stroke-width="3"/>
+          <circle cx="172" cy="80" r="9" fill="#0d1318" stroke="#d8b76c" stroke-width="3"/>
+          <path d="M20 91h220" stroke="#52616d" stroke-width="3"/>
+        </svg>
+        <h3>Model train · 1:64</h3>
+        <p>64 = 2⁶. A real dimension written as <strong>x A8/31</strong> becomes the same coefficient <strong>x A8/25</strong> in a 1:64 model.</p>
+        <div class="mini">Same shape. Same coefficient. Six rungs smaller.</div>
+      </article>
+
+      <article class="scale-card">
+        <div class="tag">HUMAN SCALE</div>
+        <svg viewBox="0 0 260 110" role="img" aria-label="human scale ruler">
+          <path d="M130 16v78" stroke="#d8b76c" stroke-width="5" stroke-linecap="round"/>
+          <circle cx="130" cy="18" r="10" fill="none" stroke="#d8b76c" stroke-width="3"/>
+          <path d="M105 48h50M130 48l-23 30M130 48l23 30" stroke="#d8b76c" stroke-width="3" stroke-linecap="round"/>
+          <path d="M42 96h176" stroke="#52616d" stroke-width="3"/>
+          <path d="M46 88v16M80 91v10M114 91v10M148 91v10M182 91v10M216 88v16" stroke="#8eb9ff" stroke-width="2"/>
+        </svg>
+        <h3>A8/31 · human rung</h3>
+        <p>The current working stake is <strong>1 A8/31 ≈ 1.15 legacy m</strong>. It is a convenient human-size anchor in the general length ladder.</p>
+        <div class="mini">This is the ladder reference, not a claim that every object must be one rung long.</div>
+      </article>
+
+      <article class="scale-card">
+        <div class="tag">EARTH NAVIGATION</div>
+        <svg viewBox="0 0 260 110" role="img" aria-label="ship navigation">
+          <path d="M35 67h190l-22 23H63z" fill="none" stroke="#8eb9ff" stroke-width="3"/>
+          <path d="M92 67V40h55v27M119 40V21M119 23l34 15h-34" fill="none" stroke="#8eb9ff" stroke-width="3" stroke-linejoin="round"/>
+          <path d="M22 98c22-10 42 10 64 0s42 10 64 0 42 10 88 0" fill="none" stroke="#7bd3d8" stroke-width="3"/>
+        </svg>
+        <h3>A8 NAV · ships & routes</h3>
+        <p>Navigation keeps its Earth-derived ruler: <strong>mean Earth circumference ÷ 32,768</strong>. That is ≈1.222 legacy km.</p>
+        <div class="mini">Cross-check: 1 A8 NAV ≈ 1.03779 A8/41. Almost A8/41 — not forced to equal it.</div>
+      </article>
+
+      <article class="scale-card">
+        <div class="tag">LARGER SCALE</div>
+        <svg viewBox="0 0 260 110" role="img" aria-label="aircraft and rocket scale">
+          <path d="M28 58h73l45-24 13 4-25 20h66l28-9 7 6-29 14h-72l25 20-13 4-45-24H28z" fill="none" stroke="#8fd0a0" stroke-width="3" stroke-linejoin="round"/>
+          <path d="M222 25l12 19-5 35-7 15-7-15-5-35z" fill="none" stroke="#efa75f" stroke-width="3"/>
+          <path d="M217 82l-7 17M227 82l7 17" stroke="#efa75f" stroke-width="3"/>
+        </svg>
+        <h3>Aircraft & rockets</h3>
+        <p>The same exact ladder can scale to larger distances and faster motion when needed. No aviation, rocket or Mach-test rung is assigned on this introduction page.</p>
+        <div class="mini">Application scale remains an open engineering choice. The ladder exists first; a specific working rung is selected only when the instrument is actually defined.</div>
+      </article>
+    </div>
+
+    <h2>Scale models make the idea obvious</h2>
+    <p>A8 scaling is especially easy to see with trains because common model scales are already powers of two. A 1:64 model is exactly six binary rungs smaller than the real object.</p>
+    <div class="model-compare" aria-label="real train to 1 to 64 model train">
+      <div class="trainbox">
+        <svg viewBox="0 0 360 110" role="img" aria-label="real train">
+          <rect x="24" y="31" width="245" height="48" rx="6" fill="none" stroke="#8fd0a0" stroke-width="3"/>
+          <path d="M269 42h35l31 37h-66z" fill="none" stroke="#8fd0a0" stroke-width="3"/>
+          <rect x="44" y="41" width="45" height="20" rx="2" fill="none" stroke="#8fd0a0" stroke-width="2"/>
+          <rect x="101" y="41" width="45" height="20" rx="2" fill="none" stroke="#8fd0a0" stroke-width="2"/>
+          <rect x="158" y="41" width="45" height="20" rx="2" fill="none" stroke="#8fd0a0" stroke-width="2"/>
+          <circle cx="76" cy="87" r="11" fill="#0d1318" stroke="#d8b76c" stroke-width="3"/><circle cx="242" cy="87" r="11" fill="#0d1318" stroke="#d8b76c" stroke-width="3"/>
+          <path d="M10 102h340" stroke="#52616d" stroke-width="3"/>
+        </svg>
+        <b>REAL TRAIN</b><small>dimension = x A8/31</small>
+      </div>
+      <div class="scale-arrow">÷64 →<small>six rungs down</small></div>
+      <div class="trainbox">
+        <svg viewBox="0 0 360 110" role="img" aria-label="one to sixty four model train">
+          <g transform="translate(118 52) scale(.42) translate(-118 -52)">
+            <rect x="24" y="31" width="245" height="48" rx="6" fill="none" stroke="#7bd3d8" stroke-width="5"/>
+            <path d="M269 42h35l31 37h-66z" fill="none" stroke="#7bd3d8" stroke-width="5"/>
+            <circle cx="76" cy="87" r="11" fill="#0d1318" stroke="#d8b76c" stroke-width="5"/><circle cx="242" cy="87" r="11" fill="#0d1318" stroke="#d8b76c" stroke-width="5"/>
+          </g>
+          <path d="M70 102h220" stroke="#52616d" stroke-width="3"/>
+        </svg>
+        <b>1:64 MODEL</b><small>same coefficient x A8/25</small>
+      </div>
+    </div>
+    <div class="equation">Same object proportions + same numerical coefficient + different rung = exact scale relationship</div>
+
+    <h2>Speed works the same way</h2>
+    <p>Speed is just distance over time. Once the time ruler and length ruler are established, the instrument chooses a sensible distance rung for the job. A8 does not need a completely different physics system for a ship, airplane or rocket.</p>
+    <div class="speed-road">
+      <article class="motion">
+        <svg viewBox="0 0 300 90" role="img" aria-label="ship moving across water">
+          <path d="M25 55h170l-22 22H52z" fill="none" stroke="#8eb9ff" stroke-width="3"/><path d="M83 55V31h48v24M105 31V15M105 17l31 12h-31" fill="none" stroke="#8eb9ff" stroke-width="3"/><path d="M14 83c22-8 39 8 61 0s39 8 61 0 39 8 79 0" fill="none" stroke="#7bd3d8" stroke-width="3"/><path d="M210 44h64" stroke="#d8b76c" stroke-width="3" stroke-dasharray="8 6"/><path d="M265 37l12 7-12 7" fill="none" stroke="#d8b76c" stroke-width="3"/></svg>
+        <span class="use">SHIP / EARTH ROUTE</span>
+        <h3>Use A8 NAV</h3>
+        <p>For terrestrial navigation, keep the Earth-derived route ruler and express motion as A8 NAV over a stated A8 time interval.</p>
+      </article>
+      <article class="motion">
+        <svg viewBox="0 0 300 90" role="img" aria-label="airplane in flight">
+          <path d="M24 48h86l52-29 15 4-30 25h79l35-11 8 7-38 17h-84l30 25-15 4-52-29H24z" fill="none" stroke="#8fd0a0" stroke-width="3" stroke-linejoin="round"/><path d="M232 73h48" stroke="#d8b76c" stroke-width="3" stroke-dasharray="8 6"/><path d="M272 66l12 7-12 7" fill="none" stroke="#d8b76c" stroke-width="3"/></svg>
+        <span class="use">AIRCRAFT</span>
+        <h3>Aviation already fits the ladder</h3>
+        <p>A representative Airbus ACJ319 long-range cruise of <strong>447 knots</strong> is about <strong>827.8 legacy km/h</strong>. In one A8 HOUR that aircraft covers about <strong>620.9 km</strong>, or approximately <strong>32.96 A8/45 per A8 HOUR</strong>. A8/41 remains a useful route-scale length neighborhood; no separate aviation ruler is required.</p>
+        <p class="mini">Example only · Airbus ACJ319 long-range speed 0.78 Mach / 447 kts.</p>
+      </article>
+      <article class="motion">
+        <svg viewBox="0 0 300 90" role="img" aria-label="rocket and Mach test">
+          <path d="M116 74l15-47 19-16 19 16 15 47-34-10z" fill="none" stroke="#efa75f" stroke-width="3"/><circle cx="150" cy="35" r="7" fill="none" stroke="#efa75f" stroke-width="3"/><path d="M135 68l-15 18M165 68l15 18M144 67l6 20 6-20" fill="none" stroke="#efa75f" stroke-width="3"/><path d="M205 42h68" stroke="#d8b76c" stroke-width="3" stroke-dasharray="8 6"/><path d="M265 35l12 7-12 7" fill="none" stroke="#d8b76c" stroke-width="3"/></svg>
+        <span class="use">ROCKET / MACH TEST</span>
+        <h3>Lunar-mission motion fits the ladder too</h3>
+        <p>NASA reports Apollo 17 — the last crewed lunar landing mission — at <strong>1,484,933.8 legacy miles</strong> traveled over <strong>12 days 13 hours 52 minutes</strong>. Its whole-mission average is about <strong>7,916.6 legacy km/h</strong>, equivalent to about <strong>5,937.5 km per A8 HOUR</strong> or <strong>39.39 A8/48 per A8 HOUR</strong>.</p>
+        <p><strong>Mach remains a dimensionless ratio to the local speed of sound.</strong> A8 can express the underlying distance and elapsed time without turning Mach into a new ruler.</p>
+        <p class="mini">Whole-mission average only — not launch, translunar, lunar-orbit, return-entry or peak velocity.</p>
+      </article>
+    </div>
+
+    <section class="rulebox" style="margin-top:22px">
+      <div class="big">Same ruler. Different rung. <span class="gold">Useful resolution.</span></div>
+      <div class="sub">A model train does not become a different kind of geometry. A ship does not sail farther. An aircraft does not fly faster. A rocket does not change its trajectory. Only the measuring step changes.</div>
+    </section>
+
+    <h2>A8 NAV is close to A8/41 — but they are not the same definition</h2>
+    <div class="facts">
+      <div class="fact"><b>≈1.150 m</b><span>current legacy comparison for 1 A8/31</span></div>
+      <div class="fact"><b>≈1.177 km</b><span>A8/41 = 1024 × A8/31</span></div>
+      <div class="fact"><b>≈1.222 km</b><span>1 A8 NAV from Earth circumference ÷ 32,768</span></div>
+    </div>
+    <p><strong>A8/41</strong> comes from the general exact doubling ladder. <strong>A8 NAV</strong> comes independently from dividing the mean Earth circumference by 32,768 (= 2¹⁵ = 8⁵). The present cross-check is approximately <strong>1 A8 NAV = 1.03779 A8/41</strong>. Their closeness is observed; it is not forced.</p>
+
+    <section class="plain">
+      <h2 style="margin-top:0">A8 does not claim that Nature is binary everywhere.</h2>
+      <p>Natural phenomena come first. Binary and octal are engineered ways to represent, divide and count them. A finite register or ladder is a ruler placed on Nature; it is not Nature itself.</p>
+      <p>The useful feature is exact scaling: every rung relationship is known without inventing another unrelated unit. If finer resolution is needed, move down the same ladder. If numbers become too large, move up the same ladder.</p>
+    </section>
+
+    <section class="plain">
+      <h2 style="margin-top:0">What is fixed, and what is still experimental?</h2>
+      <p><strong>Mathematically fixed:</strong> the exact doubling relationship between A8 length rungs; the 512-state angular representation; and the 32×64×64 civil-day representation.</p>
+      <p><strong>Current working stake:</strong> A8/31 = 1 native human-scale length, with a present legacy comparison of approximately 1.15 m (engineering comparison ≈1.14988 m).</p>
+      <p><strong>Application choices:</strong> aviation, rocket, machining and other instruments may later select a useful rung from the same ladder. No application-specific rung is assigned here.</p>
+      <p><strong>Experimental:</strong> physical realization, uncertainty, refinements of the quartz/Earth comparison, and independent replication. A better physical measurement may refine the legacy comparison without breaking the ladder.</p>
+    </section>
+
+    <div class="status"><strong>Research status:</strong> A8 is an experimental COSIGO Labs project. Software demonstrations test architecture and usability. Physical metrology claims require physical realization, uncertainty analysis, independent measurement and replication. No declaration is above reproduction.</div>
+
+    <h2>See it, then inspect it</h2>
+    <p>The public pages teach the ruler first. The engineering laboratory exposes the recovery, comparison and experimental machinery underneath.</p>
+    <div class="buttons">
+      <a class="primary" href="https://a8.cosigo.io/">OPEN A8 PUBLIC INSTRUMENT</a>
+      <a href="https://lab.a8.cosigo.io/navigation.html">NAVIGATION / DISTANCE</a>
+      <a href="https://lab.a8.cosigo.io/">OPEN ENGINEERING LAB</a>
+      <a href="https://lab.a8.cosigo.io/quartz.html">QUARTZ / LENGTH EXPERIMENT</a>
+      <a href="https://github.com/cosigo" rel="noopener">COSIGO GITHUB</a>
+      <a href="https://contact.cosigo.io/" rel="noopener">CONTACT</a>
+    </div>
+  </main>
+
+  <footer>
+    <strong>© 2026 COSIGO Labs · Auspicious 8 experimental research and engineering publication.</strong>
+    <div>Natural phenomena, mathematical facts and established scientific principles are not claimed as proprietary. Original software, text, diagrams, graphics and presentation remain protected works of their respective authors. Legacy/SI values used in A8 research are comparison coordinates unless explicitly identified otherwise.</div>
+    <nav>
+      <a href="https://cosigo.io/">COSIGO Home</a>
+      <a href="https://cosigo.io/status.html">System Status</a>
+      <a href="https://node.cosigo.io/">Bitcoin Verification Node</a>
+      <a href="https://a8.cosigo.io/">A8 Public</a>
+      <a href="https://lab.a8.cosigo.io/">A8 Lab</a>
+      <a href="https://contact.cosigo.io/">Contact</a>
+    </nav>
+  </footer>
+</div>
+</body>
+</html>

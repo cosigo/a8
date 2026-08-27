@@ -1,0 +1,780 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sol · Orbital Advance Observer | A8 Time Lab v5.4.20</title>
+<meta name="description" content="COSIGO Labs Auspicious 8 Gate 3C Sol celestial-frame observer. A headless simulated direction adapter can accelerate evidence delivery without controlling or accelerating the A8 clock.">
+<meta name="author" content="COSIGO Labs">
+<meta name="robots" content="index,follow">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/site-shell.css">
+<style>
+  main{max-width:1180px;margin:auto;padding:28px 20px 72px}
+  .hero,.card{border:1px solid var(--line,#2a3744);border-radius:16px;padding:20px;background:var(--panel,#111820)}
+  .hero{margin-bottom:16px}
+  .sol{font-size:clamp(2.5rem,8vw,6.7rem);line-height:.88;letter-spacing:-.06em;margin:.15em 0}
+  .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+  .k{display:block;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;opacity:.68}
+  .v{display:block;font-size:1.15rem;font-weight:800;margin-top:4px;overflow-wrap:anywhere}
+  .good{color:#87d39b}.warn{color:#e0bd72}
+  pre{white-space:pre-wrap;overflow-wrap:anywhere}
+  @media(max-width:800px){.grid{grid-template-columns:1fr}}
+</style>
+
+<style id="a8-sol-galactic-background">
+/*
+ * SOL GALACTIC BACKGROUND
+ * PRESENTATION ONLY.
+ * No Core20 / raw / Sol / year-angle authority.
+ */
+
+html,
+body {
+  min-height:100%;
+}
+
+body {
+  background-color:#02050b !important;
+
+  background-image:
+    linear-gradient(
+      180deg,
+      rgba(2,5,11,0.28) 0%,
+      rgba(2,5,11,0.40) 100%
+    ),
+    url('/assets/our_galactic_neighbourhood.png')
+    !important;
+
+  background-size:
+    cover,
+    cover
+    !important;
+
+  background-position:
+    center top,
+    center top
+    !important;
+
+  background-repeat:
+    no-repeat,
+    no-repeat
+    !important;
+
+  background-attachment:
+    fixed,
+    fixed
+    !important;
+}
+
+@media(max-width:760px) {
+  body {
+    background-position:
+      center top,
+      center top
+      !important;
+  }
+}
+
+
+/* A8-SOL-GLASS-CARDS
+ * PRESENTATION ONLY.
+ * Mirrors the proven Mintaka glass treatment.
+ */
+
+.hero {
+  background:
+    rgba(5, 10, 18, 0.58)
+    !important;
+
+  backdrop-filter:
+    blur(1px);
+
+  -webkit-backdrop-filter:
+    blur(1px);
+}
+
+.card {
+  background:
+    rgba(5, 10, 18, 0.52)
+    !important;
+
+  border:
+    1px solid rgba(160, 210, 255, 0.14)
+    !important;
+
+  backdrop-filter:
+    blur(2px);
+
+  -webkit-backdrop-filter:
+    blur(2px);
+}
+</style>
+
+</head>
+<body>
+
+<style id="a8-topside-coherence-02-style">
+#a8-topside-coherence-02{
+  display:block;
+  margin:0;
+  padding:10px 14px;
+  border-bottom:1px solid rgba(255,255,255,.14);
+  background:rgba(7,11,16,.96);
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+}
+#a8-topside-coherence-02 .a8-topline{
+  max-width:1440px;
+  margin:0 auto;
+  display:flex;
+  gap:12px;
+  align-items:center;
+  flex-wrap:wrap;
+}
+#a8-topside-coherence-02 .cosigo-global-brand{
+  display:flex;
+  gap:8px;
+  align-items:center;
+  text-decoration:none;
+}
+#a8-topside-coherence-02 .cosigo-global-brand img{
+  width:34px;height:34px;object-fit:contain;
+}
+#a8-topside-coherence-02 .cosigo-global-brand span{
+  font-weight:900;letter-spacing:.06em;
+}
+#a8-topside-coherence-02 .cosigo-global-brand small{
+  display:block;opacity:.72;font-size:.62rem;
+}
+#a8-topside-coherence-02 .a8-location{
+  margin-left:auto;
+  font-size:.76rem;
+  font-weight:900;
+  letter-spacing:.07em;
+  color:#e0bd72;
+}
+#a8-topside-coherence-02 .a8-system-links,
+#a8-topside-coherence-02 .a8-utility-links{
+  max-width:1440px;
+  margin:8px auto 0;
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+  align-items:center;
+}
+#a8-topside-coherence-02 a{text-decoration:none}
+#a8-topside-coherence-02 .a8-system-links a{
+  padding:7px 9px;
+  border:1px solid #425467;
+  border-radius:8px;
+  background:#111820;
+  color:#c8ddf5;
+  font-size:.80rem;
+  font-weight:850;
+}
+#a8-topside-coherence-02 .a8-system-links a[data-current="true"]{
+  border-color:#6d9cff;color:#fff;
+}
+#a8-topside-coherence-02 .a8-utility-links{
+  padding-top:7px;
+  border-top:1px solid rgba(255,255,255,.08);
+}
+#a8-topside-coherence-02 .a8-utility-links a{
+  color:#92a5b8;
+  font-size:.70rem;
+  font-weight:700;
+}
+#a8-topside-coherence-02 .a8-utility-label{
+  color:#617487;
+  font-size:.68rem;
+  font-weight:900;
+  letter-spacing:.05em;
+}
+@media(max-width:760px){
+  #a8-topside-coherence-02 .a8-location{
+    width:100%;margin-left:0;
+  }
+}
+</style>
+<nav id="a8-topside-coherence-02" class="cosigo-global-nav" aria-label="A8 Time Lab navigation">
+  <div class="a8-topline">
+    <a class="cosigo-global-brand" href="https://cosigo.io/" aria-label="COSIGO home">
+      <img src="/assets/cosigo_master_512.gif" alt="COSIGO">
+      <span>COSIGO<small>LABS · AUSPICIOUS 8</small></span>
+    </a>
+    <div class="a8-location">YOU ARE HERE · SOL · EARTH ORBITAL ADVANCE</div>
+  </div>
+  <div class="a8-system-links">
+    <a href="/index.html">A8 LAB HOME</a>
+    <a href="/index.html#core20-jovian">CORE 20 · JUPITER</a>
+    <a href="/moons.html">4-MOON VIEW</a>
+    <a href="/mintaka.html">MINTAKA</a>
+    <a href="/sol.html" aria-current="page" data-current="true">SOL</a>
+    <a href="/relationship.html">TERRA SHIP SLIP</a>
+    <a href="/index.html#chief-engineer-links">CHIEF ENGINEER</a>
+  </div>
+  <div class="a8-utility-links">
+    <span class="a8-utility-label">UTILITY ·</span>
+    <a href="/map-clock-compass.html">MAP · CLOCK · COMPASS</a>
+    <a href="/navigation.html">NAVIGATION</a>
+    <a href="/celestial.html">CELESTIAL</a>
+    <a href="https://a8.cosigo.io/canonical.html">CANONICAL</a>
+    <a href="https://a8.cosigo.io/open-research.html">OPEN RESEARCH</a>
+    <a href="https://a8.cosigo.io/">A8 PUBLIC</a>
+    <a href="https://lab.a8.cosigo.io/">LIVE LAB</a>
+    <a href="https://cosigo.io/">COSIGO HOME</a>
+    <a href="https://contact.cosigo.io/">CONTACT</a>
+    <a href="https://github.com/cosigo">GITHUB</a>
+  </div>
+</nav>
+<main>
+
+<section class="hero">
+    <div class="eyebrow">AUSPICIOUS 8 · TIME LAB v5.4.20 · LIVE CORE20 SOL</div>
+    <h1 class="sol">SOL</h1>
+    <p><b>EARTH ORBITAL ADVANCE · LIVE RECOVERED POSITION / GATE 3C EVIDENCE</b></p>
+    <p class="muted">
+      Jupiter / Io–Europa–Ganymede remains the elapsed-time authority.
+      Mintaka witnesses axial rotation.
+      Sol direction samples may now be generated rapidly by a headless laboratory adapter,
+      but the adapter has no A8 core read/control path and no host-time pacer.
+    </p>
+  </section>
+
+  <section class="grid">
+    <div class="card">
+      <span class="k">JOVIAN CORE</span>
+      <span id="coreVersion" class="v">CONNECTING</span>
+      <p class="muted">Presentation reads <code>/api/state</code>.</p>
+    </div>
+    <div class="card">
+      <span class="k">GATE 3C SOL OBSERVER · EVIDENCE</span>
+      <span id="observerStatus" class="v">CONNECTING</span>
+      <p class="muted">Stored qualification observations from <code>/api/sol</code>.</p>
+    </div>
+    <div class="card">
+      <span class="k">CLOCK WRITE CAPABILITY</span>
+      <span class="v good">NONE</span>
+      <p class="muted">Observation acceleration is downstream only.</p>
+    </div>
+
+    <div class="card">
+      <span class="k">GATE 3C DIRECTION SAMPLES</span>
+      <span id="sampleCount" class="v">0</span>
+    </div>
+    <div class="card">
+      <span class="k">LAST GATE 3C SOL OBSERVATION</span>
+      <span id="lastAngle" class="v">—</span>
+    </div>
+    <div class="card">
+      <span class="k">GATE 3C RECOVERED ADVANCE</span>
+      <span id="totalAdvance" class="v">—</span>
+    </div>
+
+    <div class="card">
+      <span class="k">GATE 3C RELATIVE SOL COORDINATE · RATE RECOVERY ONLY</span>
+      <span id="liveSolAngle" class="v">—</span>
+      <p class="muted">
+        Raw-advanced coordinate anchored to the synthetic 100→101 Gate 3C
+        recovery samples. Not the absolute year angle.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="k">CURRENT SELECTED RAW</span>
+      <span id="liveRaw" class="v">—</span>
+    </div>
+
+    <div class="card">
+      <span class="k">RECOVERED SOL RATE</span>
+      <span id="solRate" class="v">—</span>
+      <p class="muted">
+        Native A8 angle512 per selected raw pulse.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="k">ABSOLUTE SOL / YEAR ANGLE · 9 BIT · 000₈–777₈</span>
+      <span id="absoluteSolAngle" class="v">—</span>
+      <span
+        id="absoluteSolDecimal"
+        class="muted"
+        style="display:block;margin-top:6px"
+      >—</span>
+      <p class="muted">
+        Primary live year-wheel position.
+        JPL establishes absolute orientation once per source epoch;
+        selected raw + recovered Sol rate continue the motion.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="k">ABSOLUTE YEAR ANGLE · PHASE27 · 9 BIT | 18 BIT</span>
+      <span id="livePhase27" class="v">—</span>
+
+      <span
+        id="yearFineFraction"
+        class="muted"
+        style="display:block;margin-top:7px"
+      >—</span>
+
+      <span
+        id="yearFineDecimal"
+        class="muted"
+        style="display:block;margin-top:3px"
+      >—</span>
+    </div>
+
+    <div
+      id="a8-year-angle-reference"
+      class="card"
+      style="grid-column:1/-1"
+    >
+      <span class="k">A8 YEAR ANGLE REFERENCE · 9 BIT</span>
+
+      <div
+        style="
+          display:flex;
+          flex-wrap:wrap;
+          gap:8px 18px;
+          align-items:center;
+          margin-top:9px;
+          font-weight:800;
+          line-height:1.45;
+        "
+      >
+        <span><b>000₈</b> · VERNAL EQUINOX</span>
+        <span><b>200₈</b> · JUNE SOLSTICE</span>
+        <span><b>400₈</b> · SEPTEMBER EQUINOX</span>
+        <span><b>600₈</b> · DECEMBER SOLSTICE</span>
+        <span><b>777₈</b> · LAST STORED STATE</span>
+        <span><b>1000₈ → 000₈</b> · RECURRENCE</span>
+      </div>
+
+      <p class="muted" style="margin-bottom:0">
+        Operating register: 000₈–777₈.
+        1000₈ is the full-turn recurrence boundary, not a stored year state.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="k">LIVE CORE20 SOL STATUS</span>
+      <span id="liveSolStatus" class="v">CONNECTING</span>
+    </div>
+  </section>
+
+  <section class="card" style="margin-top:16px">
+    <h2>Historical Gate 3C · Sol-direction qualification adapter</h2>
+    <pre>tools/fake-sol-observer.js
+        │
+        │ explicit raw spacing
+        │ explicit native angle512 step
+        ▼
+POST /api/sol/observe
+        │
+        ▼
+SolCelestialObserver</pre>
+    <p>
+      Simulation truth is explicit laboratory input. The adapter contains no expected
+      solar recurrence, orbital velocity, year length, day length, legacy angle, or
+      host-time timing source.
+    </p>
+  </section>
+
+  <section class="card" style="margin-top:16px">
+    <h2>Gate 3C clock-immunity proof</h2>
+    <pre>START SOL DIRECTION  511.75 A8
+EXPLICIT STEP        3/8 A8 per observation interval
+RAW SPACING          97 raw pulses
+INTERVALS            128
+ACCUMULATED ADVANCE  48 A8
+
+A8 CORE              PAUSED
+DAY_PHASE17          MUST NOT MOVE
+DAY COUNT            MUST NOT MOVE
+CORE RAW STATE       MUST NOT MOVE</pre>
+    <p class="good"><b>OBSERVER ACCELERATION ≠ TIMEKEEPER ACCELERATION</b></p>
+  </section>
+
+  <section class="card" style="margin-top:16px">
+    <h2>Still absent</h2>
+    <p class="muted">
+      Mean Sun · civil-day authority/divider · Sol-to-clock discipline · Ship Slip.
+      This browser page itself cannot inject samples and cannot call the core control path.
+    </p>
+  </section>
+</main>
+
+<script>
+function rationalText(r){
+  if(!r) return '—';
+  if(r.denominator === '1') return r.numerator;
+  return `${r.numerator}/${r.denominator}`;
+}
+
+async function refresh(){
+  try{
+    const [coreResponse,solResponse]=await Promise.all([
+      fetch('/api/state',{cache:'no-store'}),
+      fetch('/api/sol',{cache:'no-store'})
+    ]);
+
+    const core=await coreResponse.json();
+    const solPayload=await solResponse.json();
+    const s=solPayload.observer || {};
+
+    document.getElementById('coreVersion').textContent =
+      core.version ? `A8 v${core.version}` : 'A8 CORE';
+
+    document.getElementById('observerStatus').textContent=s.status || '—';
+    document.getElementById('sampleCount').textContent=String(s.sampleCount ?? 0);
+    document.getElementById('lastAngle').textContent =
+      s.lastAngle512 ? `${rationalText(s.lastAngle512)} A8` : '—';
+    document.getElementById('totalAdvance').textContent =
+      s.accumulatedForwardAdvance512
+        ? `${rationalText(s.accumulatedForwardAdvance512)} A8`
+        : '—';
+  }catch(err){
+    document.getElementById('coreVersion').textContent='CORE UNAVAILABLE';
+    document.getElementById('observerStatus').textContent='OBSERVER UNAVAILABLE';
+  }
+}
+
+refresh();
+setInterval(refresh,1000);
+</script>
+
+<script id="a8-live-core20-sol-script">
+(() => {
+  const byId = id => document.getElementById(id);
+
+  function decimalRational(numerator, denominator, digits = 9) {
+    let n = BigInt(numerator);
+    let d = BigInt(denominator);
+
+    if (d <= 0n) return '—';
+
+    let sign = '';
+
+    if (n < 0n) {
+      sign = '-';
+      n = -n;
+    }
+
+    const whole = n / d;
+    const rem = n % d;
+
+    if (rem === 0n) {
+      return sign + whole.toString();
+    }
+
+    const scale = 10n ** BigInt(digits);
+
+    const frac = ((rem * scale) / d)
+      .toString()
+      .padStart(digits, '0')
+      .replace(/0+$/, '');
+
+    return (
+      sign +
+      whole.toString() +
+      (frac ? '.' + frac : '')
+    );
+  }
+
+
+  function liveRelativeSol(solPayload, scale) {
+
+    const observed =
+      solPayload.observer || {};
+
+    const selected =
+      solPayload.selectedSource || {};
+
+    const rate =
+      scale.solAdvancePerRawPulse512 || {};
+
+    if (
+      selected.rawPulse == null ||
+      observed.lastRawPulse == null ||
+      !observed.lastAngle512 ||
+      rate.numerator == null ||
+      rate.denominator == null
+    ) {
+      return null;
+    }
+
+    const rawNow =
+      BigInt(selected.rawPulse);
+
+    const rawAnchor =
+      BigInt(observed.lastRawPulse);
+
+    if (rawNow < rawAnchor) {
+      return null;
+    }
+
+    const anchorNum =
+      BigInt(observed.lastAngle512.numerator);
+
+    const anchorDen =
+      BigInt(observed.lastAngle512.denominator);
+
+    const rateNum =
+      BigInt(rate.numerator);
+
+    const rateDen =
+      BigInt(rate.denominator);
+
+    const deltaRaw =
+      rawNow - rawAnchor;
+
+
+    /*
+     * LIVE SOL POSITION
+     *
+     * observed Sol angle
+     * +
+     * selected raw difference
+     * ×
+     * recovered Sol angle/raw
+     *
+     * No browser elapsed-time term exists.
+     */
+
+    let numerator =
+      anchorNum * rateDen +
+      deltaRaw * rateNum * anchorDen;
+
+    const denominator =
+      anchorDen * rateDen;
+
+    const fullTurn =
+      512n * denominator;
+
+    numerator =
+      ((numerator % fullTurn) + fullTurn) %
+      fullTurn;
+
+    return {
+      numerator,
+      denominator,
+      text:
+        decimalRational(
+          numerator,
+          denominator,
+          9
+        )
+    };
+  }
+
+
+  async function refreshLiveCore20Sol() {
+
+    try {
+
+      const [
+        solResponse,
+        scaleResponse,
+        yearResponse
+      ] = await Promise.all([
+
+        fetch(
+          '/api/sol',
+          {cache:'no-store'}
+        ),
+
+        fetch(
+          '/api/hardware/sol-orbital-scale',
+          {cache:'no-store'}
+        ),
+
+        fetch(
+          '/api/core20/year-angle',
+          {cache:'no-store'}
+        )
+      ]);
+
+
+      if (!solResponse.ok) {
+        throw new Error(
+          `SOL HTTP ${solResponse.status}`
+        );
+      }
+
+      if (!scaleResponse.ok) {
+        throw new Error(
+          `SOL SCALE HTTP ${scaleResponse.status}`
+        );
+      }
+
+      if (!yearResponse.ok) {
+        throw new Error(
+          `YEAR HTTP ${yearResponse.status}`
+        );
+      }
+
+
+      const solPayload =
+        await solResponse.json();
+
+      const scalePayload =
+        await scaleResponse.json();
+
+      const yearPayload =
+        await yearResponse.json();
+
+
+      const selected =
+        solPayload.selectedSource || {};
+
+      const scale =
+        scalePayload.scale || {};
+
+      const year =
+        yearPayload.yearAngle || {};
+
+      const live =
+        liveRelativeSol(
+          solPayload,
+          scale
+        );
+
+
+      byId('liveSolAngle').textContent =
+        live
+          ? `${live.text} A8 · LIVE`
+          : '—';
+
+
+      byId('liveRaw').textContent =
+        selected.rawPulse ??
+        year.currentSelectedRawPulse ??
+        '—';
+
+
+      byId('solRate').textContent =
+        scale.solAdvancePerRawPulse512?.text
+          ? (
+              scale.solAdvancePerRawPulse512.text +
+              ' A8/raw'
+            )
+          : '—';
+
+
+      byId('absoluteSolAngle').textContent =
+        year.phase9Octal
+          ? (
+              year.phase9Octal +
+              ' · LIVE'
+            )
+          : (
+              year.status ||
+              'AWAITING ONE-SHOT YEAR ORIENTATION'
+            );
+
+
+      byId('absoluteSolDecimal').textContent =
+        year.phase27 != null
+          ? (
+              decimalRational(
+                BigInt(year.phase27),
+                1n << 18n,
+                9
+              ) +
+              ' A8 · SAME NATIVE ANGLE · DECIMAL NOTATION'
+            )
+          : '—';
+
+
+      if (year.phase27 != null) {
+
+        const phase27 =
+          BigInt(year.phase27);
+
+        const fineMask =
+          (1n << 18n) - 1n;
+
+        const fine =
+          phase27 & fineMask;
+
+        const coarse =
+          phase27 >> 18n;
+
+        const coarseOctal =
+          coarse
+            .toString(8)
+            .padStart(3,'0');
+
+        const fineOctal =
+          fine
+            .toString(8)
+            .padStart(6,'0');
+
+
+        byId('livePhase27').textContent =
+          coarseOctal +
+          ' | ' +
+          fineOctal +
+          '₈';
+
+
+        byId('yearFineFraction').textContent =
+          'FINE · ' +
+          fineOctal +
+          '₈ / 1000000₈';
+
+
+        byId('yearFineDecimal').textContent =
+          '= ' +
+          decimalRational(
+            fine,
+            1n << 18n,
+            9
+          ) +
+          ' OF CURRENT A8 YEAR-ANGLE UNIT';
+
+      } else {
+
+        byId('livePhase27').textContent =
+          'AWAITING YEAR ORIENTATION';
+
+        byId('yearFineFraction').textContent =
+          '—';
+
+        byId('yearFineDecimal').textContent =
+          '—';
+      }
+
+
+      byId('liveSolStatus').textContent =
+        year.status ||
+        scale.status ||
+        '—';
+
+
+    } catch (err) {
+
+      byId('liveSolStatus').textContent =
+        `DISCONNECTED · ${err.message}`;
+    }
+  }
+
+
+  /*
+   * Polling cadence is presentation only.
+   * Every displayed position is recalculated
+   * from server-owned raw state.
+   */
+  refreshLiveCore20Sol();
+
+  setInterval(
+    refreshLiveCore20Sol,
+    1000
+  );
+
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,422 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>A8 Walkabout — Hard Octal POC v0.2 | COSIGO Labs</title>
+<style>
+  :root{
+    --bg:#05070a;--panel:#0a0e14;--line:#1c2a38;--text:#eaf3ff;--muted:#8ca2b8;
+    --cyan:#6fe8ff;--gold:#f6c75b;--orange:#ff9a55;--blue:#9fd2ff;--green:#72e0ac;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:radial-gradient(circle at 50% 20%,#0c1420 0,#05070a 55%);color:var(--text);font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;min-height:100vh}
+  .wrap{max-width:1280px;margin:0 auto;padding:18px}
+  h1{font-size:clamp(20px,3vw,34px);letter-spacing:.08em;margin:0 0 6px}
+  .sub{color:var(--muted);font-size:13px;margin-bottom:12px}
+  .badges{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 16px}
+  .badge{border:1px solid #26394a;border-radius:999px;padding:6px 10px;color:#cde5f6;background:#091019;font-size:12px}
+  .badge b{color:var(--cyan)}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .panel{background:linear-gradient(180deg,#0b1119,#070a0f);border:1px solid #1d2a38;border-radius:16px;padding:12px;box-shadow:0 12px 30px #0008}
+  .panel h2{font-size:14px;letter-spacing:.08em;margin:0 0 8px;color:#cfe9ff}
+  canvas{display:block;width:100%;aspect-ratio:1/1;background:#030508;border:1px solid #172431;border-radius:12px}
+  .readouts{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-top:10px}
+  .read{border:1px solid #1d2b37;background:#060b10;border-radius:10px;padding:8px;min-height:56px}
+  .read .k{color:var(--muted);font-size:10px;letter-spacing:.08em}.read .v{font-size:18px;margin-top:3px;color:#f5fbff}
+  .route{margin-top:10px;border:1px solid #233341;border-radius:12px;padding:10px 12px;background:#060a0e;color:#c9d9e6;font-size:13px;line-height:1.55}
+  .route .hi{color:var(--gold)} .route .cy{color:var(--cyan)}
+
+  .controls{margin-top:14px;background:#080d13;border:1px solid #1d2a38;border-radius:14px;padding:12px}
+  .control-top{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .route-ruler{width:100%;margin-top:14px}
+  .route-ruler input[type=range]{display:block;width:100%;margin:0}
+  .route-marks{position:relative;width:100%;height:38px;margin-top:8px;font-size:11px;color:#96aec1;white-space:nowrap}
+  .route-marks span{position:absolute;top:0}
+  .route-marks .m0{left:0;text-align:left;color:#d8f0ff}
+  .route-marks .m25{left:25%;transform:translateX(-50%);text-align:center}
+  .route-marks .m50{left:50%;transform:translateX(-50%);text-align:center;color:#ffd979}
+  .route-marks .m75{left:75%;transform:translateX(-50%);text-align:center}
+  .route-marks .m100{left:100%;transform:translateX(-100%);text-align:right;color:#d8f0ff}
+  button,select{font:inherit;color:#eaf3ff;background:#0d1620;border:1px solid #304558;border-radius:9px;padding:8px 12px;cursor:pointer}
+  button:hover,select:hover{border-color:#5e829d}
+  input[type=range]{width:100%;accent-color:#6fe8ff}
+  .note{margin-top:12px;color:#91a5b7;font-size:12px;line-height:1.5}
+  @media(max-width:900px){.grid{grid-template-columns:1fr}.readouts{grid-template-columns:1fr 1fr}.route-marks{font-size:9px}}
+
+/* Embedded lab views: hide scrollbar chrome, preserve scrolling capability. */
+html, body{
+  scrollbar-width:none;
+  -ms-overflow-style:none;
+}
+html::-webkit-scrollbar,
+body::-webkit-scrollbar{
+  width:0;
+  height:0;
+  display:none;
+}
+
+</style>
+<meta name="description" content="Hard Octal A8 stopped-clock Orion walkabout geometry instrument showing observer travel, rigid sky swing, and local-horizon visibility.">
+<meta name="robots" content="noindex,follow">
+<meta name="author" content="COSIGO Labs">
+<link rel="canonical" href="https://lab.a8.cosigo.io/celestial-octal.html">
+<link rel="icon" href="https://a8.cosigo.io/assets/cosigo_master_512.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="COSIGO Labs — Auspicious 8">
+<meta property="og:title" content="A8 Walkabout — Hard Octal POC v0.2">
+<meta property="og:description" content="Hard Octal A8 stopped-clock Orion walkabout geometry instrument showing observer travel, rigid sky swing, and local-horizon visibility.">
+<meta property="og:url" content="https://lab.a8.cosigo.io/a8_walkabout_geometry_poc_octal_v0_2.html">
+<meta property="og:image" content="https://a8.cosigo.io/assets/cosigo_master_512.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="A8 Walkabout — Hard Octal POC v0.2">
+<meta name="twitter:description" content="Hard Octal A8 stopped-clock Orion walkabout geometry instrument showing observer travel, rigid sky swing, and local-horizon visibility.">
+<meta name="twitter:image" content="https://a8.cosigo.io/assets/cosigo_master_512.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "A8 Walkabout — Hard Octal POC v0.2",
+  "url": "https://lab.a8.cosigo.io/a8_walkabout_geometry_poc_octal_v0_2.html",
+  "description": "Hard Octal A8 stopped-clock Orion walkabout geometry instrument showing observer travel, rigid sky swing, and local-horizon visibility.",
+  "applicationCategory": "EducationalApplication",
+  "isPartOf": {
+    "@type": "WebPage",
+    "name": "COSIGO Labs — Auspicious 8 Celestial Laboratory",
+    "url": "https://lab.a8.cosigo.io/celestial-octal.html"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "COSIGO Labs",
+    "url": "https://cosigo.io/"
+  }
+}
+</script>
+</head>
+<body>
+<div class="wrap">
+  <h1>A8 WALKABOUT — ORION · HARD OCTAL</h1>
+  <div class="sub">Same observer geometry. Hard-octal ruler. Stopped-clock day spin remains OFF.</div>
+  <div class="badges">
+    <div class="badge"><b>DAY SPIN:</b> OFF</div>
+    <div class="badge"><b>LIGHT:</b> NIGHT ALL AROUND</div>
+    <div class="badge"><b>CYCLE TIMER:</b> A8 SECOND</div>
+    <div class="badge"><b>ROUTE:</b> LON 100₈ ↔ 500₈</div>
+    <div class="badge"><b>A8 LAT:</b> 000₈ → 200₈ → 400₈ → 200₈ → 000₈</div>
+  </div>
+
+  <div class="grid">
+    <section class="panel">
+      <h2>1 · DUMMY PERSPECTIVE — WALKING NORTH TO SOUTH POLE · OBSERVING ORION ON A STOPPED-CLOCK DAY</h2>
+      <canvas id="earth" width="700" height="700"></canvas>
+      <div class="readouts">
+        <div class="read"><div class="k">A8 LAT</div><div class="v" id="latV">000.0₈</div></div>
+        <div class="read"><div class="k">A8 LON</div><div class="v" id="lonV">—</div></div>
+        <div class="read"><div class="k">LEG</div><div class="v" id="legV">N POLE</div></div>
+        <div class="read"><div class="k">A8 EARTH ROLL</div><div class="v" id="rollV">000₈</div></div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>2 · WHOLE-SKY REFERENCE / ONE RIGID DOT FIELD</h2>
+      <canvas id="sky" width="700" height="700"></canvas>
+      <div class="readouts">
+        <div class="read"><div class="k">MINTAKA</div><div class="v">CENTER</div></div>
+        <div class="read"><div class="k">A8 SKY SWING</div><div class="v" id="skyV">000.0₈</div></div>
+        <div class="read"><div class="k">MOTION</div><div class="v" id="dirV">FORWARD</div></div>
+        <div class="read"><div class="k">DRIVER</div><div class="v">A8 LAT</div></div>
+        <div class="read"><div class="k">ANCHOR ALT</div><div class="v" id="altV">—</div></div>
+        <div class="read"><div class="k">VISIBILITY</div><div class="v" id="visV">—</div></div>
+      </div>
+    </section>
+  </div>
+
+  <div class="route">
+    <span class="cy">NORTH POLE 000₈</span> → south on <span class="hi">LON 100₈</span> → EQUATOR 200₈ → SOUTH POLE 400₈ → continue straight → north on <span class="hi">LON 500₈</span> → EQUATOR 200₈ → <span class="cy">NORTH POLE 000₈</span>.<br>
+    The globe rolls continuously about the fixed equatorial POC axis <span class="hi">300₈ ↔ 700₈</span>. The sky panel follows the native hard-octal pendulum: <span class="cy">000₈ → 200₈ → 400₈ → 200₈ → 000₈</span>.
+  </div>
+
+  <div class="controls">
+    <div class="control-top">
+      <button id="play">START SCENARIO</button>
+      <button id="restart">RESET TO START</button>
+      <select id="duration" title="Full scenario-cycle duration in A8 SECOND">
+      <option value="8">10₈ × A8 SECOND</option>
+      <option value="16">20₈ × A8 SECOND</option>
+      <option value="32" selected>40₈ × A8 SECOND</option>
+      <option value="64">100₈ × A8 SECOND</option>
+    </select>
+    </div>
+    <div class="route-ruler">
+      <input id="scrub" type="range" min="0" max="1000" value="0" aria-label="walk position" />
+      <div class="route-marks">
+        <span class="m0">N · LAT 000₈</span>
+        <span class="m25">EQ · LAT 200₈ · LON 100₈</span>
+        <span class="m50">S · LAT 400₈</span>
+        <span class="m75">EQ · LAT 200₈ · LON 500₈</span>
+        <span class="m100">N · LAT 000₈</span>
+      </div>
+    </div>
+  </div>
+  <div class="note">POC rule: same master point set and same rigid sky transform as the decimal control. Hard octal changes the ruler, not the geometry. Mintaka is only the visual center reference. UI cycle timing is presentation only and is not A8 clock authority.</div>
+<div class="note"><b>STOPPED-CLOCK VISIBILITY:</b> MINTAKA is the named visibility anchor. The original rigid constellation geometry and 256-A8 pendulum continue even when line of sight is lost. Named stars below the observer’s local horizon are shown faint grey rather than deleted.</div>
+</div>
+<script>
+(() => {
+  const earth = document.getElementById('earth'), ec = earth.getContext('2d');
+  const sky = document.getElementById('sky'), sc = sky.getContext('2d');
+  const latV = document.getElementById('latV'), lonV = document.getElementById('lonV');
+  const legV = document.getElementById('legV'), rollV = document.getElementById('rollV');
+  const skyV = document.getElementById('skyV'), dirV = document.getElementById('dirV');
+  const altV = document.getElementById('altV'), visV = document.getElementById('visV');
+  const play = document.getElementById('play'), restart = document.getElementById('restart');
+  const durationSel = document.getElementById('duration'), scrub = document.getElementById('scrub');
+
+  let running = false, durationA8 = 32, u = 0, last = 0, dragging = false, rafId = 0;
+  const TAU = Math.PI * 2;
+  const A8_SECOND_MS = 675000 / 1024; // exact implementation bridge: browser milliseconds per native A8 SECOND
+  const ANCHOR_DECL_A8 = -0.425379713580247; // MINTAKA catalog declination in native A8 angle units
+  let lastAnchorAltA8 = 0, lastVisibility = 'HORIZON', lastFieldAlpha = .35;
+  const yaw = 192 / 512 * TAU; // puts POC roll axis 192/448 onto screen horizontal
+
+  function a8LatFromU(p){ return p <= .5 ? p*512 : (1-p)*512; }
+  function anchorVisibility(p,lat,declA8=ANCHOR_DECL_A8){
+    const phi=(128-lat)*TAU/512;
+    const delta=declA8*TAU/512;
+
+    // Frozen-sky stopped-clock experiment.
+    const hourAngle=p<.5 ? 0 : Math.PI;
+
+    const sinAlt=
+      Math.sin(phi)*Math.sin(delta) +
+      Math.cos(phi)*Math.cos(delta)*Math.cos(hourAngle);
+
+    const alt=Math.asin(Math.max(-1,Math.min(1,sinAlt)));
+    const altA8=alt*512/TAU;
+    const visible=altA8>0;
+
+    return {
+      altA8,
+      alpha: visible ? 1 : .12,
+      status: Math.abs(altA8)<.35 ? 'HORIZON' : visible ? 'VISIBLE' : 'BELOW HORIZON'
+    };
+  }
+
+  function oct0(n){return Math.round(Number(n)).toString(8).padStart(3,'0')+'₈'}
+  function oct1(n){n=Number(n);const w=Math.floor(n);let d=Math.floor((n-w)*8+1e-9);if(d>7)d=7;return w.toString(8).padStart(3,'0')+'.'+d+'₈'}
+  function near(a,b,e=.8){ return Math.abs(a-b)<e; }
+  function status(p,lat){
+    if (near(lat,0)) return ['—','N POLE'];
+    if (near(lat,256)) return ['—','S POLE'];
+    if (p < .5) return ['100₈', near(lat,128)?'EQUATOR ↓':'SOUTH ↓'];
+    return ['500₈', near(lat,128)?'EQUATOR ↑':'NORTH ↑'];
+  }
+
+  function spherePoint(latA8, lonA8, theta){
+    const phi = Math.PI/2 - latA8 * Math.PI/256;
+    const lam = lonA8 * TAU/512;
+    let x = Math.cos(phi)*Math.cos(lam), y = Math.sin(phi), z = Math.cos(phi)*Math.sin(lam);
+    // yaw globe so LON 192/448 is the visible horizontal roll axis
+    let x1 = Math.cos(yaw)*x + Math.sin(yaw)*z;
+    let z1 = -Math.sin(yaw)*x + Math.cos(yaw)*z;
+    let y1 = y;
+    // north-south proof roll around the fixed equatorial x-axis
+    const ct=Math.cos(theta), st=Math.sin(theta);
+    return {x:x1, y:y1*ct-z1*st, z:y1*st+z1*ct};
+  }
+
+  function seg3(ctx,p1,p2,cx,cy,R,frontColor,backColor,frontW=1.2,backW=.7){
+    const front=(p1.z+p2.z)/2>=0;
+    ctx.strokeStyle=front?frontColor:backColor; ctx.lineWidth=front?frontW:backW;
+    ctx.beginPath(); ctx.moveTo(cx+R*p1.x,cy-R*p1.y); ctx.lineTo(cx+R*p2.x,cy-R*p2.y); ctx.stroke();
+  }
+
+  function drawEarth(p){
+    const W=earth.width,H=earth.height,cx=W/2,cy=H/2+12,R=245,theta=p*TAU;
+    ec.clearRect(0,0,W,H); ec.fillStyle='#030508'; ec.fillRect(0,0,W,H);
+    // subtle stars behind globe
+    ec.fillStyle='#233241'; for(let i=0;i<70;i++){const x=(i*137)%W,y=(i*271)%H;ec.fillRect(x,y,1,1)}
+    // sphere body
+    const g=ec.createRadialGradient(cx-85,cy-105,30,cx,cy,R);g.addColorStop(0,'#102131');g.addColorStop(1,'#05090d');
+    ec.fillStyle=g; ec.beginPath(); ec.arc(cx,cy,R,0,TAU); ec.fill();
+    ec.save(); ec.beginPath(); ec.arc(cx,cy,R,0,TAU); ec.clip();
+
+    // A8 parallels every 32, emphasize 64/128/192
+    for(let lat=32;lat<256;lat+=32){
+      const major=(lat%64===0), eq=(lat===128);
+      let prev=spherePoint(lat,0,theta);
+      for(let lon=2;lon<=512;lon+=2){
+        const cur=spherePoint(lat,lon,theta);
+        seg3(ec,prev,cur,cx,cy,R,
+          eq?'rgba(111,232,255,.8)':major?'rgba(95,136,170,.55)':'rgba(73,101,126,.32)',
+          eq?'rgba(111,232,255,.18)':major?'rgba(95,136,170,.16)':'rgba(73,101,126,.09)',
+          eq?2:major?1.25:.8,.5);
+        prev=cur;
+      }
+    }
+    // A8 meridians every 32; highlight route 64 / 320
+    for(let lon=0;lon<512;lon+=32){
+      const route=(lon===64||lon===320), major=lon%64===0;
+      let prev=spherePoint(0,lon,theta);
+      for(let lat=2;lat<=256;lat+=2){
+        const cur=spherePoint(lat,lon,theta);
+        seg3(ec,prev,cur,cx,cy,R,
+          route?'rgba(246,199,91,.95)':major?'rgba(95,136,170,.5)':'rgba(73,101,126,.28)',
+          route?'rgba(246,199,91,.22)':major?'rgba(95,136,170,.14)':'rgba(73,101,126,.08)',
+          route?2.4:major?1.1:.7,.45);
+        prev=cur;
+      }
+    }
+
+    // a few rigid surface markers make the roll unmistakable
+    const markers=[[64,64,'#ff8f66'],[128,64,'#77f0b5'],[192,64,'#b8a7ff'],[128,320,'#ffd66e']];
+    for(const [lat,lon,col] of markers){const q=spherePoint(lat,lon,theta); if(q.z>=-.08){ec.fillStyle=col;ec.beginPath();ec.arc(cx+R*q.x,cy-R*q.y,4.5,0,TAU);ec.fill();}}
+    ec.restore();
+
+    // sphere outline
+    ec.strokeStyle='#6d8ca3'; ec.lineWidth=1.4; ec.beginPath(); ec.arc(cx,cy,R,0,TAU); ec.stroke();
+    // fixed POC equatorial roll axis (NOT day axis)
+    ec.strokeStyle='#f6c75b';ec.lineWidth=2;ec.beginPath();ec.moveTo(cx-R-28,cy);ec.lineTo(cx+R+28,cy);ec.stroke();
+    ec.fillStyle='#f6c75b';ec.font='14px ui-monospace';ec.textAlign='left';ec.fillText('300₈',cx-R-4,cy-10);ec.textAlign='right';ec.fillText('700₈',cx+R+4,cy-10);
+    ec.textAlign='center';ec.fillStyle='#a98e4b';ec.font='12px ui-monospace';ec.fillText('POC ROLL AXIS · EQUATORIAL · DAY AXIS OFF',cx,cy+22);
+
+    // fixed dummy at top, gait only; feet do not move from contact point
+    const footY=cy-R-2, bx=cx, gait=Math.sin(p*TAU*16)*10;
+    ec.strokeStyle='#f5fbff';ec.fillStyle='#f5fbff';ec.lineCap='round';
+    ec.beginPath();ec.arc(bx,footY-74,12,0,TAU);ec.fill();
+    ec.lineWidth=5; ec.beginPath();ec.moveTo(bx,footY-60);ec.lineTo(bx,footY-27);ec.stroke();
+    ec.lineWidth=4; ec.beginPath();ec.moveTo(bx,footY-50);ec.lineTo(bx-18-gait*.25,footY-36);ec.moveTo(bx,footY-50);ec.lineTo(bx+18+gait*.25,footY-36);ec.stroke();
+    ec.beginPath();ec.moveTo(bx,footY-27);ec.lineTo(bx-10-gait*.45,footY);ec.moveTo(bx,footY-27);ec.lineTo(bx+10+gait*.45,footY);ec.stroke();
+    ec.fillStyle='#6fe8ff';ec.font='12px ui-monospace';ec.textAlign='center';ec.fillText('DUMMY FIXED UPRIGHT',bx,footY-100);
+
+    // north/south reference ticks attached to current Earth, not screen
+    const np=spherePoint(0,0,theta), sp=spherePoint(256,0,theta);
+    for(const [q,label,col] of [[np,'N','#6fe8ff'],[sp,'S','#ff8f66']]){ec.fillStyle=col;ec.beginPath();ec.arc(cx+R*q.x,cy-R*q.y,6,0,TAU);ec.fill();ec.font='13px ui-monospace';ec.fillText(label,cx+R*q.x,cy-R*q.y-12)}
+  }
+
+  // Exact Orion point geometry copied from the existing A8 v0.2 atlas; one template only.
+  const M={x:923.32777,y:300.99697};
+  const orion=[
+    {n:'Mintaka',x:923.32777,y:300.99697,c:'#ffffff',r:5.5},
+    {n:'Alnilam',x:919.82204,y:304.00640,c:'#d7e6ff',r:4.5},
+    {n:'Alnitak',x:916.03435,y:306.47524,c:'#d7e6ff',r:4.5},
+    {n:'Bellatrix',x:929.05746,y:278.83433,c:'#bfd8ff',r:5.0},
+    {n:'Betelgeuse',x:904.02354,y:275.30979,c:'#ff9a55',r:6.2},
+    {n:'Rigel',x:937.88511,y:327.33880,c:'#9fd2ff',r:6.2},
+    {n:'Saiph',x:910.20293,y:332.23202,c:'#d2e4ff',r:5.0}
+  ].map(s=>({...s,dx:s.x-M.x,dy:s.y-M.y}));
+
+  const ORION_DECL_A8={
+    Mintaka:-0.425379713580247,
+    Alnilam:-1.709396108641975,
+    Alnitak:-2.762771318518519,
+    Bellatrix:9.030689106172839,
+    Betelgeuse:10.534491022222223,
+    Rigel:-11.664552335802469,
+    Saiph:-13.752326997530864
+  };
+
+  // deterministic fake stars; they belong to the SAME sky group and rotate with it
+  const bg=[]; let seed=0xA8C0DE;
+  function rnd(){seed=(seed*1664525+1013904223)>>>0;return seed/4294967296}
+  for(let i=0;i<95;i++){const a=rnd()*TAU, rr=Math.sqrt(rnd())*.92;bg.push({dx:Math.cos(a)*rr,dy:Math.sin(a)*rr,r:.7+rnd()*1.5,o:.18+rnd()*.42});}
+
+  function rot(x,y,a){const c=Math.cos(a),s=Math.sin(a);return {x:x*c-y*s,y:x*s+y*c};}
+  function drawSky(p,lat){
+    const W=sky.width,H=sky.height,cx=W/2,cy=H/2,R=260;
+    // Current proof hypothesis: orientation derives ONLY from folded A8 latitude.
+    // Native hard-octal visible swing: 000₈ → 200₈ → 400₈ → 200₈ → 000₈.
+    const swingA8=lat, a=swingA8*TAU/512;
+    const horizon=anchorVisibility(p,lat);
+    lastAnchorAltA8=horizon.altA8;
+    lastVisibility=horizon.status;
+    lastFieldAlpha=horizon.alpha;
+    sc.clearRect(0,0,W,H); sc.fillStyle='#020407';sc.fillRect(0,0,W,H);
+    sc.save();sc.beginPath();sc.arc(cx,cy,R,0,TAU);sc.clip();
+    // subtle local-frame crosshair stays fixed to viewer
+    sc.strokeStyle='rgba(111,232,255,.12)';sc.lineWidth=1;
+    sc.beginPath();sc.moveTo(cx-R,cy);sc.lineTo(cx+R,cy);sc.moveTo(cx,cy-R);sc.lineTo(cx,cy+R);sc.stroke();
+    // entire fake field rotates as one sky layer
+    for(const s of bg){const q=rot(s.dx*R,s.dy*R,a);sc.globalAlpha=s.o*lastFieldAlpha;sc.fillStyle='#d9e7f5';sc.beginPath();sc.arc(cx+q.x,cy+q.y,s.r,0,TAU);sc.fill();}
+    sc.globalAlpha=1;
+    // one exact Orion point template, no lines and no redraws
+    const scale=6.5;
+    for(const s of orion){
+      const q=rot(s.dx*scale,s.dy*scale,a);
+      const starVis=anchorVisibility(p,lat,ORION_DECL_A8[s.n]);
+      sc.globalAlpha=starVis.alpha;
+      sc.shadowColor=s.c;sc.shadowBlur=10;sc.fillStyle=s.c;
+      sc.beginPath();sc.arc(cx+q.x,cy+q.y,s.r,0,TAU);sc.fill();sc.shadowBlur=0;
+    }
+    sc.globalAlpha=1;
+    // Mintaka center marker remains exact center
+    sc.strokeStyle='#ffffffaa';sc.lineWidth=1;sc.beginPath();sc.arc(cx,cy,11,0,TAU);sc.stroke();
+    sc.restore();
+    sc.strokeStyle='#58758c';sc.lineWidth=1.5;sc.beginPath();sc.arc(cx,cy,R,0,TAU);sc.stroke();
+    sc.fillStyle='#6fe8ff';sc.font='13px ui-monospace';sc.textAlign='center';sc.fillText('VIEWER VERTICAL',cx,cy-R-24);sc.fillText('↑',cx,cy-R-7);
+    sc.fillStyle='#f7fbff';sc.font='12px ui-monospace';sc.fillText('MINTAKA · FIXED CENTER',cx,cy+20);
+    sc.fillStyle='#859cad';sc.fillText('WHOLE SKY DOT FIELD · ONE RIGID TRANSFORM',cx,cy+R+30);
+    return swingA8;
+  }
+
+  function render(){
+    const lat=a8LatFromU(u), [lon,leg]=status(u,lat), swing=drawSky(u,lat);
+    drawEarth(u);
+    latV.textContent=oct1(lat); lonV.textContent=lon; legV.textContent=leg;
+    altV.textContent=(lastAnchorAltA8>=0?'ABOVE ':'BELOW ')+oct1(Math.abs(lastAnchorAltA8));
+    visV.textContent=lastVisibility;
+    rollV.textContent=oct0(u*512); skyV.textContent=oct1(swing);
+    dirV.textContent='FORWARD'; scrub.value=Math.round(u*1000);
+  }
+
+  function startScenario(){
+    if(running) return;
+    running=true;
+    play.textContent='STOP SCENARIO';
+    last=performance.now();
+    rafId=requestAnimationFrame(tick);
+  }
+
+  function stopScenario(){
+    running=false;
+    if(rafId){cancelAnimationFrame(rafId);rafId=0;}
+    play.textContent='START SCENARIO';
+  }
+
+  play.onclick=()=>running?stopScenario():startScenario();
+
+  restart.onclick=()=>{
+    stopScenario();
+    u=0;
+    render();
+  };
+
+  durationSel.onchange=()=>{durationA8=+durationSel.value};
+
+  scrub.addEventListener('pointerdown',()=>dragging=true);
+  scrub.addEventListener('pointerup',()=>{
+    dragging=false;
+    if(running) last=performance.now();
+  });
+  scrub.addEventListener('input',()=>{
+    u=+scrub.value/1000;
+    render();
+  });
+
+  function tick(now){
+    if(!running){rafId=0;return;}
+    const dtA8=(now-last)/A8_SECOND_MS;
+    last=now;
+    if(!dragging){
+      u=(u+dtA8/durationA8)%1;
+      render();
+    }
+    rafId=requestAnimationFrame(tick);
+  }
+
+  // Initial load: one static frame only. No animation loop until START SCENARIO.
+  render();
+})();
+</script>
+</body>
+</html>

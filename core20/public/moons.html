@@ -1,0 +1,448 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>A8 Jovian Recovered Motion Observer · Core18 View Rate · v5.4.20 | COSIGO Labs</title>
+<meta name="description" content="Auspicious 8 Jovian recovered-motion observer driven read-only from the v5.4.20 recovered Jovian raw ruler and Core20 clock edge stream.">
+<link rel="stylesheet" href="/site-shell.css">
+<style>
+:root{
+  color-scheme:dark;
+  --bg:#0b0f14;--panel:#111821;--panel2:#151f2b;--line:#2b3848;
+  --text:#e6edf3;--muted:#9db0c8;--accent:#6ea8ff;--good:#72d6aa;
+  --warn:#e5bb68;--bad:#ff8e8e;--front:#8fc7ff;--back:#355f9e;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;color:var(--text);font:15px/1.45 system-ui,sans-serif;
+  background:
+    linear-gradient(rgba(6,10,16,.58),rgba(6,10,16,.72)),
+    url("/assets/a8_jovian_moons_bg.png") center center/cover fixed no-repeat,
+    var(--bg);
+}
+main{max-width:1120px;margin:auto;padding:18px}
+h1{font-size:1.45rem;margin:0 0 6px} h2{font-size:1.02rem;margin:0 0 8px}
+p{margin:.45rem 0}.small{font-size:.9rem;color:var(--muted)}
+.topbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:14px}
+.topbar a{display:inline-block;padding:8px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel2);color:var(--text);text-decoration:none;font-weight:650}
+.panel{background:rgba(17,24,33,.94);border:1px solid var(--line);border-radius:16px;padding:14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}
+.status{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:2px 8px;font-size:.82rem}
+.good{color:var(--good)}.warn{color:var(--warn)}.bad{color:var(--bad)}
+.reads{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:8px;margin-top:10px}
+.read{border:1px solid var(--line);border-radius:10px;padding:8px;background:var(--panel2)}
+.read .k{font-size:.76rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+.read .v{font:600 .90rem ui-monospace,SFMono-Regular,Menlo,monospace;overflow-wrap:normal;word-break:normal}
+.read.primary{border-width:2px}.read.primary .v{font-size:1.28rem;color:var(--text)}
+.note{border-left:3px solid var(--accent);padding:10px 12px;background:var(--panel2);border-radius:8px}
+.moon-card{margin-top:12px}
+.track{position:relative;height:58px;margin-top:10px}
+.orbit-span{position:absolute;left:50%;top:0;height:58px;transform:translateX(-50%)}
+.axis{position:absolute;left:0;right:0;top:23px;height:10px;border:1px solid var(--line);border-radius:999px;background:linear-gradient(90deg,rgba(255,255,255,.02),rgba(255,255,255,.07),rgba(255,255,255,.02))}
+.center{position:absolute;left:50%;top:12px;bottom:10px;width:1px;background:var(--line)}
+.turnlabel{position:absolute;top:0;font-size:.72rem;color:var(--muted)}
+.turnlabel.w{left:0}.turnlabel.e{right:0}
+.jupiter{position:absolute;left:50%;top:9px;width:48px;height:38px;transform:translateX(-50%);border-radius:50%;z-index:2;pointer-events:none;overflow:hidden;border:1px solid rgba(255,220,160,.55);background:radial-gradient(ellipse at 67% 63%,rgba(183,78,48,.95) 0 7%,rgba(183,78,48,.25) 8% 12%,transparent 13%),linear-gradient(to bottom,#d7b78d 0 10%,#9d7156 10% 18%,#e0c29a 18% 31%,#b77d59 31% 39%,#e9cda5 39% 53%,#966249 53% 61%,#d9b68a 61% 74%,#aa7354 74% 82%,#e0bf94 82% 100%);box-shadow:0 0 0 1px rgba(255,255,255,.06),0 0 14px rgba(218,166,105,.18)}
+.jupiter::after{content:"";position:absolute;inset:0;border-radius:50%;background:radial-gradient(ellipse at 35% 32%,rgba(255,255,255,.17),transparent 38%),radial-gradient(ellipse at 50% 50%,transparent 55%,rgba(0,0,0,.22) 100%)}
+.dot{position:absolute;top:18px;width:20px;height:20px;border-radius:50%;transform:translateX(-10px);will-change:left;transition:background-color .12s ease,opacity .12s ease,box-shadow .12s ease}
+.dot.front{z-index:3;background:var(--front);opacity:1;box-shadow:0 0 0 2px rgba(143,199,255,.18),0 0 20px rgba(143,199,255,.18)}
+.dot.back{z-index:1;background:var(--back);opacity:.92;box-shadow:0 0 0 2px rgba(53,95,158,.18)}
+.dot.disabled{z-index:1;background:transparent;border:1px dashed #65788b;opacity:.5}
+.ruler{display:grid;grid-template-columns:repeat(8,1fr);gap:0;margin-top:2px;color:var(--muted);font-size:.68rem}
+.ruler span{text-align:center;border-left:1px solid var(--line)}.ruler span:last-child{border-right:1px solid var(--line)}
+.legend{display:flex;gap:12px;flex-wrap:wrap}.swatch{display:inline-flex;align-items:center;gap:6px}.swatch b{display:inline-block;width:12px;height:12px;border-radius:50%}
+.speedbar{display:grid;grid-template-columns:1fr auto auto;gap:12px;align-items:center;margin-top:12px;border:1px solid #7b5a21;background:rgba(23,19,12,.96)}
+.speed-warning{color:#ffd48a;font-weight:900;letter-spacing:.05em}.speed-warning small{display:block;color:var(--muted);font-weight:600;letter-spacing:0;margin-top:4px}.speedbar label{font-size:12px;color:var(--muted)}.speedbar select{background:#0d1117;color:var(--text);border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-weight:800}.speed-rate{text-align:right;font-family:ui-monospace,monospace;font-weight:800;color:#ffd48a}
+#a8-topside-coherence-02{display:block;margin:0;padding:10px 14px;border-bottom:1px solid rgba(255,255,255,.14);background:rgba(7,11,16,.96);font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
+#a8-topside-coherence-02 .a8-topline{max-width:1440px;margin:0 auto;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+#a8-topside-coherence-02 .cosigo-global-brand{display:flex;gap:8px;align-items:center;text-decoration:none}
+#a8-topside-coherence-02 .cosigo-global-brand img{width:34px;height:34px;object-fit:contain}
+#a8-topside-coherence-02 .cosigo-global-brand span{font-weight:900;letter-spacing:.06em}
+#a8-topside-coherence-02 .cosigo-global-brand small{display:block;opacity:.72;font-size:.62rem}
+#a8-topside-coherence-02 .a8-location{margin-left:auto;font-size:.76rem;font-weight:900;letter-spacing:.07em;color:#e0bd72}
+#a8-topside-coherence-02 .a8-system-links,#a8-topside-coherence-02 .a8-utility-links{max-width:1440px;margin:8px auto 0;display:flex;flex-wrap:wrap;gap:7px;align-items:center}
+#a8-topside-coherence-02 a{text-decoration:none}
+#a8-topside-coherence-02 .a8-system-links a{padding:7px 9px;border:1px solid #425467;border-radius:8px;background:#111820;color:#c8ddf5;font-size:.80rem;font-weight:850}
+#a8-topside-coherence-02 .a8-system-links a[data-current="true"]{border-color:#6d9cff;color:#fff}
+#a8-topside-coherence-02 .a8-utility-links{padding-top:7px;border-top:1px solid rgba(255,255,255,.08)}
+#a8-topside-coherence-02 .a8-utility-links a{color:#92a5b8;font-size:.70rem;font-weight:700}
+#a8-topside-coherence-02 .a8-utility-label{color:#617487;font-size:.68rem;font-weight:900;letter-spacing:.05em}
+@media(max-width:760px){#a8-topside-coherence-02 .a8-location{width:100%;margin-left:0}.speedbar{grid-template-columns:1fr}.speed-rate{text-align:left}}
+</style>
+</head>
+<body>
+<nav id="a8-topside-coherence-02" aria-label="A8 Time Lab navigation">
+  <div class="a8-topline">
+    <a class="cosigo-global-brand" href="https://cosigo.io/" aria-label="COSIGO home">
+      <img src="/assets/cosigo_master_512.gif" alt="COSIGO">
+      <span>COSIGO<small>LABS · AUSPICIOUS 8</small></span>
+    </a>
+    <div class="a8-location">YOU ARE HERE · JUPITER · RECOVERED MOTION</div>
+  </div>
+  <div class="a8-system-links">
+    <a href="/index.html">A8 LAB HOME</a>
+    <a href="/index.html#core20-jovian">CORE 20 · JUPITER</a>
+    <a href="/moons.html" aria-current="page" data-current="true">MOON MOTION</a>
+    <a href="/mintaka.html">MINTAKA</a>
+    <a href="/sol.html">SOL</a>
+    <a href="/relationship.html">TERRA SHIP SLIP</a>
+    <a href="/index.html#chief-engineer-links">CHIEF ENGINEER</a>
+  </div>
+  <div class="a8-utility-links">
+    <span class="a8-utility-label">UTILITY ·</span>
+    <a href="/map-clock-compass.html">MAP · CLOCK · COMPASS</a>
+    <a href="/navigation.html">NAVIGATION</a>
+    <a href="/celestial.html">CELESTIAL</a>
+    <a href="https://a8.cosigo.io/canonical.html">CANONICAL</a>
+    <a href="https://a8.cosigo.io/open-research.html">OPEN RESEARCH</a>
+    <a href="https://a8.cosigo.io/">A8 PUBLIC</a>
+    <a href="https://lab.a8.cosigo.io/">LIVE LAB</a>
+    <a href="https://cosigo.io/">COSIGO HOME</a>
+  </div>
+</nav>
+
+<main>
+  <div class="topbar">
+    <a href="/">ENGINEERING LAB</a>
+    <a href="/clock.html">A8 CLOCK</a>
+    <a href="/audio.html">AUDIO FREQUENCY BENCH</a>
+  </div>
+
+  <section class="panel">
+    <div id="pageStatus" class="status warn">CONNECTING · v5.4.20</div>
+    <h1>Galilean recovered-motion + Callisto example-orbit observer</h1>
+    <p>Io, Europa and Ganymede are drawn from the <b>recovered Jovian raw ruler</b>. Core20 remains authoritative. Callisto is restored as a <b>display-only orbital-period outlier</b> so its non-resonant rate can be seen beside the recovered 1:2:4 moons. Following the proven Core18 observer behavior, the page can accelerate <b>visible motion only</b>.</p>
+    <div class="legend small">
+      <span class="swatch"><b style="background:var(--front)"></b> front half</span>
+      <span class="swatch"><b style="background:var(--back)"></b> back half</span>
+      <span class="swatch"><span class="status good">SERVER ANCHOR</span> `/api/core20/edges`</span>
+      <span class="swatch"><span class="status warn">OUTPUT ONLY</span> `performance.now()` between anchors</span>
+    </div>
+    <div class="note small" style="margin-top:10px">
+      <b>Geometry convention:</b> the recovered common lock pulse is the WEST anchor. Ganymede advances ×1, Europa ×2 and Io ×4 from that recovered ruler. Callisto advances at <b>0.428725508× Ganymede phase rate</b>, derived only for display from the published 7.155 : 16.689 orbital-period comparison. Callisto does not qualify, discipline, retune or write the Jovian ruler. No published moon period enters the defining 1:2:4 recovery path.
+    </div>
+  </section>
+
+  <section class="panel speedbar" aria-label="Jovian observer viewing rate">
+    <div class="speed-warning">ACCELERATED JOVIAN OBSERVER · OUTPUT ONLY
+      <small>Core18 viewing behavior restored. This multiplier changes browser geometry only. It does not change Core20, raw counts, the recovered ruler, qualification, DAY_PHASE17, or the civil clock.</small>
+    </div>
+    <label>Viewing rate
+      <select id="viewMultiplier" aria-label="Display-only Jovian viewing multiplier">
+        <option value="1">1× natural</option>
+        <option value="250" selected>250×</option>
+        <option value="500">500×</option>
+        <option value="1000">1,000×</option>
+      </select>
+    </label>
+    <div class="speed-rate"><span id="viewMultiplierLabel">250×</span><br><span>DISPLAY ONLY</span></div>
+  </section>
+
+  <section class="grid" style="margin-top:12px">
+    <div class="panel">
+      <h2>Recovered Jovian ruler</h2>
+      <div class="reads">
+        <div class="read"><div class="k">Jovian status</div><div id="jStatus" class="v">—</div></div>
+        <div class="read"><div class="k">Source epoch</div><div id="sourceEpoch" class="v">—</div></div>
+        <div class="read primary"><div class="k">Raw / 512</div><div id="rulerRaw" class="v">—</div></div>
+        <div class="read"><div class="k">WEST lock raw</div><div id="lockRaw" class="v">—</div></div>
+        <div class="read"><div class="k">Qualification</div><div id="qualification" class="v">—</div></div>
+        <div class="read"><div class="k">Mode</div><div id="mode" class="v">—</div></div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>Observer cadence</h2>
+      <div class="reads">
+        <div class="read"><div class="k">Edge stream</div><div id="edgeStatus" class="v">—</div></div>
+        <div class="read"><div class="k">Edge sequence</div><div id="edgeSequence" class="v">—</div></div>
+        <div class="read"><div class="k">Authoritative raw</div><div id="edgeRaw" class="v">—</div></div>
+        <div class="read"><div class="k">Edge packet role</div><div id="edgeRole" class="v">READ ONLY</div></div>
+        <div class="read"><div class="k">Observer anchor policy</div><div id="anchorPolicy" class="v">BOOTSTRAP / VISIBILITY</div></div>
+        <div class="read"><div class="k">Exact civil substate</div><div id="civilSubstate" class="v">—</div></div>
+      </div>
+      <p class="small">Packet arrival never sets the beat and is never treated as a phase-comparison instant. Core20 edges are read-only informational evidence. The browser observer anchors from the current Core20/Jovian state at bootstrap or visibility return, then uses performance.now() only for output interpolation. The 250× / 500× / 1,000× selector accelerates only visible Jovian geometry.</p>
+    </div>
+  </section>
+
+  <section id="moonCards"></section>
+
+</main>
+
+<script>
+'use strict';
+
+const A8_STATE_MS = 675000 / 1024; // legacy-ms comparison used only for browser output interpolation
+const DAY_STATES = 131072;
+
+const CALLISTO_PHASE_RATE_VS_GANYMEDE = 7.155 / 16.689; // display-only published-period ratio
+
+const MOONS = [
+  {id:'io', name:'Io', multiplier:4, ratio:'×4', periodVsGanymede:'0.250000×', orbitPct:22.4, recovered:true},
+  {id:'eu', name:'Europa', multiplier:2, ratio:'×2', periodVsGanymede:'0.500000×', orbitPct:35.6, recovered:true},
+  {id:'ga', name:'Ganymede', multiplier:1, ratio:'×1', periodVsGanymede:'1.000000×', orbitPct:56.9, recovered:true},
+  {id:'ca', name:'Callisto', multiplier:CALLISTO_PHASE_RATE_VS_GANYMEDE, ratio:'×0.428726', periodVsGanymede:'2.332495×', orbitPct:100.0, recovered:false}
+];
+
+const $ = id => document.getElementById(id);
+const mod = (n,m) => ((n % m) + m) % m;
+const fmt = n => Number(n).toLocaleString(undefined,{maximumFractionDigits:3});
+
+let model = {
+  ready:false,
+  sourceEpoch:null,
+  rulerRawPer512:null,
+  lockRaw:null,
+  rawPerState:null,
+  rawPerMs:null,
+  anchorRaw:null,
+  anchorPerf:null,
+  lastEdgeRaw:null,
+  lastSequence:null,
+  exactSubstate:null,
+  sse:null,
+  viewMultiplier:250,
+  naturalPhaseRatePerMs:null,
+  visualAnchorPhase:null,
+  visualAnchorPerf:null
+};
+
+function parseFraction(s){
+  const [a,b='1'] = String(s).split('/');
+  return {n:Number(a),d:Number(b)};
+}
+
+function buildMoonCard(m){
+  const segs = Array.from({length:8},(_,i)=>`<span>${i}</span>`).join('');
+  const subtitle = m.recovered
+    ? `Recovered normalized relationship ${m.ratio}`
+    : `Example orbit only · non-resonant ratio ${m.ratio} of Ganymede`;
+  const stateClass = m.recovered ? 'good' : 'warn';
+  const stateText = m.recovered ? 'RUNNING' : 'EXAMPLE ORBIT · NON-RESONANT · NOT AUTHORITY';
+  const phaseLabel = m.recovered ? 'A8 PHASE9' : 'DISPLAY PHASE9';
+  return `
+  <section class="panel moon-card" id="card-${m.id}">
+    <div style="display:flex;justify-content:space-between;gap:10px;align-items:baseline;flex-wrap:wrap">
+      <div><h2 style="margin:0">${m.name}</h2><div class="small">${subtitle}</div></div>
+      <div class="status ${stateClass}" id="${m.id}-state">${stateText}</div>
+    </div>
+    <div class="track">
+      <div class="center"></div>
+      <div class="orbit-span" style="width:${m.orbitPct}%">
+        <div class="turnlabel w">WEST</div><div class="turnlabel e">EAST</div>
+        <div class="axis"></div>
+        <div class="jupiter" aria-label="Jupiter"></div>
+        <div id="${m.id}-dot" class="dot back" style="left:0%"></div>
+      </div>
+    </div>
+    <div class="ruler">${segs}</div>
+    <div class="reads">
+      <div class="read"><div class="k">Visible pass</div><div id="${m.id}-face" class="v">—</div></div>
+      <div class="read"><div class="k">Side</div><div id="${m.id}-side" class="v">—</div></div>
+      <div class="read primary"><div class="k">${phaseLabel}</div><div id="${m.id}-phase9" class="v">—</div></div>
+      <div class="read"><div class="k">PHASE9 decimal</div><div id="${m.id}-phaseDec" class="v">—</div></div>
+      <div class="read"><div class="k">Continuous phase</div><div id="${m.id}-phaseFloat" class="v">—</div></div>
+      <div class="read"><div class="k">Phase rate / Ganymede</div><div id="${m.id}-ratio" class="v">${m.ratio}</div></div>
+      <div class="read"><div class="k">Period / Ganymede</div><div class="v">${m.periodVsGanymede}</div></div>
+      <div class="read"><div class="k">Authority role</div><div class="v">${m.recovered ? 'RECOVERED 1:2:4' : 'DISPLAY ONLY'}</div></div>
+    </div>
+    ${m.recovered ? '' : '<p class="small" style="margin-top:10px"><span class="status warn">EXAMPLE ORBIT · NON-RESONANT RATIO</span> Callisto is shown only to illustrate an orbit outside the defining Io–Europa–Ganymede 1:2:4 relationship. Its displayed rate is relative-reference only and does not participate in recovery or authority.</p>'}
+  </section>`;
+}
+
+$('moonCards').innerHTML = MOONS.map(buildMoonCard).join('');
+
+
+function ganymedeTotalPhase(raw){
+  return (raw - model.lockRaw) * 512 / model.rulerRawPer512;
+}
+
+function phase9Octal(phase){
+  const whole = mod(Math.floor(phase),512);
+  return whole.toString(8).padStart(3,'0') + '₈';
+}
+
+function renderMoon(m,gTotal){
+  const phase = mod(gTotal * m.multiplier,512);
+  const theta = 2 * Math.PI * (phase / 512);
+
+  // WEST anchor geometry: phase 0 = WEST, phase 256 = EAST.
+  const x = -Math.cos(theta);           // -1 WEST ... +1 EAST
+  const depth = Math.sin(theta);        // + front half, - back half
+  const left = (x + 1) * 50;
+  const front = depth >= 0;
+
+  const dot = $(`${m.id}-dot`);
+  dot.style.left = `${left}%`;
+  dot.className = `dot ${front ? 'front' : 'back'}`;
+
+  $(`${m.id}-face`).textContent = front ? 'FRONT' : 'BACK';
+  $(`${m.id}-side`).textContent = x < 0 ? 'WEST half' : 'EAST half';
+  $(`${m.id}-phase9`).textContent = phase9Octal(phase);
+  $(`${m.id}-phaseDec`).textContent = String(mod(Math.floor(phase),512));
+  $(`${m.id}-phaseFloat`).textContent = phase.toFixed(6);
+}
+
+function visualGanymedeTotalPhase(){
+  if (!model.ready) return null;
+  return model.visualAnchorPhase +
+    (performance.now() - model.visualAnchorPerf) *
+    model.naturalPhaseRatePerMs *
+    model.viewMultiplier;
+}
+
+function setViewMultiplier(next){
+  const value = Number(next);
+  if (![1,250,500,1000].includes(value)) return;
+
+  if (model.ready){
+    // Preserve visible phase continuity while changing only the output rate.
+    model.visualAnchorPhase = visualGanymedeTotalPhase();
+    model.visualAnchorPerf = performance.now();
+  }
+
+  model.viewMultiplier = value;
+  $('viewMultiplier').value = String(value);
+  $('viewMultiplierLabel').textContent = `${value.toLocaleString()}×`;
+}
+
+$('viewMultiplier').addEventListener('change', e=>setViewMultiplier(e.target.value));
+
+function frame(){
+  if (model.ready){
+    const gTotal = visualGanymedeTotalPhase();
+    MOONS.forEach(m=>renderMoon(m,gTotal));
+  }
+  requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+
+async function fetchJSON(url){
+  const r = await fetch(url,{cache:'no-store'});
+  if (!r.ok) throw new Error(`${url} · HTTP ${r.status}`);
+  return r.json();
+}
+
+async function bootstrap(reason='INITIAL'){
+  $('pageStatus').textContent = `CONNECTING · ${reason}`;
+  $('pageStatus').className = 'status warn';
+
+  const [jPayload,cPayload] = await Promise.all([
+    fetchJSON('/api/hardware/jovian-timekeeper'),
+    fetchJSON('/api/core20/clock')
+  ]);
+
+  if (!jPayload.ok || !jPayload.timekeeper || !jPayload.jovian) throw new Error('Jovian timekeeper payload unavailable');
+  if (!cPayload.ok || !cPayload.clock) throw new Error('Core20 clock payload unavailable');
+
+  const tk = jPayload.timekeeper;
+  const jov = jPayload.jovian;
+  const clk = cPayload.clock;
+
+  if (tk.status !== 'JOVIAN_PHASE_RUNNING') throw new Error(`Jovian phase status ${tk.status}`);
+  if (jov.status !== 'JOVIAN_RULER_QUALIFIED') throw new Error(`Jovian ruler status ${jov.status}`);
+
+  const sun = parseFraction(clk.recoveredRawPerSunReturn);
+  const rawPerState = (sun.n / sun.d) / DAY_STATES;
+  const rawPerMs = rawPerState / A8_STATE_MS;
+
+  model.sourceEpoch = String(tk.sourceEpoch);
+  model.rulerRawPer512 = Number(tk.lockedRulerRawPer512);
+  model.lockRaw = Number(tk.lockRawPulse);
+  model.rawPerState = rawPerState;
+  model.rawPerMs = rawPerMs;
+  model.anchorRaw = Number(clk.currentSelectedRawPulse);
+  model.anchorPerf = performance.now();
+  model.naturalPhaseRatePerMs = rawPerMs * 512 / model.rulerRawPer512;
+  model.visualAnchorPhase = ganymedeTotalPhase(model.anchorRaw);
+  model.visualAnchorPerf = performance.now();
+  model.lastEdgeRaw = model.anchorRaw;
+  model.exactSubstate = `${clk.exactSubstate.numerator}/${clk.exactSubstate.denominator}`;
+  model.ready = true;
+
+  $('jStatus').textContent = jov.status;
+  $('sourceEpoch').textContent = model.sourceEpoch;
+  $('rulerRaw').textContent = Number(tk.lockedRulerRawPer512).toLocaleString();
+  $('lockRaw').textContent = Number(tk.lockRawPulse).toLocaleString();
+  $('qualification').textContent = jov.comparator?.reason || '—';
+  $('mode').textContent = tk.mode || jov.mode || '—';
+  $('civilSubstate').textContent = model.exactSubstate;
+  $('edgeRaw').textContent = Number(clk.currentSelectedRawPulse).toLocaleString();
+
+  setViewMultiplier(model.viewMultiplier);
+  $('pageStatus').textContent = 'RUNNING · RECOVERED 1:2:4 + CALLISTO EXAMPLE ORBIT · CORE18 VIEW RATE · v5.4.20';
+  $('pageStatus').className = 'status good';
+}
+
+function handleEdge(edge){
+  if (!model.ready) return;
+
+  const epoch = String(edge.sourceEpoch);
+  if (epoch !== model.sourceEpoch){
+    bootstrap('SOURCE EPOCH CHANGE').catch(showError);
+    return;
+  }
+
+  const edgeRaw = Number(edge.rawPulse);
+  model.lastEdgeRaw = edgeRaw;
+  model.lastSequence = edge.sequence;
+
+  // Read-only observer evidence only.
+  // Packet arrival time is NOT a phase-comparison instant and never re-anchors motion.
+  $('edgeSequence').textContent = String(edge.sequence);
+  $('edgeRaw').textContent = edgeRaw.toLocaleString();
+  $('edgeRole').textContent = 'READ ONLY';
+  $('anchorPolicy').textContent = 'BOOTSTRAP / VISIBILITY';
+}
+
+function connectEdges(){
+  if (model.sse) model.sse.close();
+  const ev = new EventSource('/api/core20/edges');
+  model.sse = ev;
+
+  ev.addEventListener('ready',e=>{
+    $('edgeStatus').textContent = 'READY';
+    $('edgeStatus').className = 'v good';
+  });
+
+  ev.addEventListener('a8-edge',e=>{
+    try{ handleEdge(JSON.parse(e.data)); }
+    catch(err){ showError(err); }
+  });
+
+  ev.onerror = ()=>{
+    $('edgeStatus').textContent = 'RECONNECTING';
+    $('edgeStatus').className = 'v warn';
+  };
+}
+
+function showError(err){
+  console.error(err);
+  $('pageStatus').textContent = 'OBSERVER ERROR · ' + (err?.message || err);
+  $('pageStatus').className = 'status bad';
+}
+
+document.addEventListener('visibilitychange',()=>{
+  if (!document.hidden){
+    bootstrap('VISIBLE RE-ANCHOR').catch(showError);
+  }
+});
+
+bootstrap().then(connectEdges).catch(showError);
+</script>
+
+<footer class="cosigo-site-footer">
+  <strong>COSIGO Labs · Auspicious 8 experimental laboratory</strong>
+  <p class="cosigo-disclaimer">Research / engineering notice: A8 pages may contain provisional models, simulations, comparison values, hypotheses and unreplicated experiment designs. Unless a page explicitly states otherwise, material shown here is not a certified metrology standard, accredited measurement result, or final Foundation definition. Legacy / SI values are comparison coordinates where identified, not native A8 authority.</p>
+  <div class="cosigo-footer-links">
+    <a href="https://cosigo.io/">COSIGO Home</a>
+    <a href="https://a8.cosigo.io/">A8 Public Instrument</a>
+    <a href="/">A8 Engineering Lab</a>
+    <a href="https://contact.cosigo.io/">Contact</a>
+    <a href="https://github.com/cosigo">COSIGO GitHub</a>
+  </div>
+  <p>© 2026 COSIGO.</p>
+</footer>
+</body>
+</html>

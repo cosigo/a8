@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Auspicious 8 — Celestial Map, Sky Geometry & Walkabout Lab · Hard Octal | COSIGO Labs</title>
+  <meta name="description" content="COSIGO Labs Hard Octal engineering-lab package for the Auspicious 8 celestial atlas, sky geometry, and stopped-clock walkabout demonstrations.">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+  <meta name="author" content="COSIGO Labs">
+  <link rel="canonical" href="https://lab.a8.cosigo.io/celestial-octal.html">
+  <meta property="og:title" content="Auspicious 8 — Celestial Map, Sky Geometry & Walkabout Lab · Hard Octal">
+  <meta property="og:description" content="Hard Octal engineering-lab package for the A8 celestial atlas, sky geometry, and stopped-clock walkabout demonstrations.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://lab.a8.cosigo.io/celestial-octal.html">
+  <meta property="og:site_name" content="COSIGO Labs — Auspicious 8">
+  <meta property="og:image" content="https://a8.cosigo.io/assets/cosigo_master_512.png">
+  <meta property="og:image:alt" content="COSIGO Labs Auspicious 8 celestial hard-octal lab">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Auspicious 8 — Celestial Lab · Hard Octal">
+  <meta name="twitter:description" content="Hard Octal A8 celestial atlas, Orion walkabout, and separate Scorpius scenario.">
+  <meta name="twitter:image" content="https://a8.cosigo.io/assets/cosigo_master_512.png">
+  <link rel="icon" href="/assets/cosigo_master_512.gif">
+  <style>
+    :root{--bg:#071019;--panel:#0b1722;--ink:#e9f2f7;--muted:#8fa8b7;--line:#1f3a4b;--accent:#d8c47a;--cyan:#6fe8ff;--soft:#122331;--good:#72e0ac;--warn:#ffbf72;}
+    *{box-sizing:border-box} html{scroll-behavior:smooth}
+    body{margin:0;background:radial-gradient(circle at 50% 0%, #0d1723 0, #071019 42%, #050b12 100%);color:var(--ink);font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;line-height:1.5}
+    a{color:#cbe7ff}.page-shell{max-width:1440px;margin:0 auto;padding:18px}
+    .site-header,.site-footer,.panel{background:rgba(10,18,28,.86);border:1px solid var(--line);border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,.22)}
+    .site-header{padding:16px 18px;margin-bottom:14px}.brand-row{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;flex-wrap:wrap}
+    .brand-lockup{display:flex;gap:14px;align-items:center}.brand-lockup img{width:52px;height:52px;border-radius:50%;background:#0d1620;border:1px solid #30495b}
+    .eyebrow{font-size:12px;letter-spacing:.12em;color:var(--accent)} h1{margin:2px 0 4px;font-size:clamp(24px,3vw,36px)}
+    .tagline,.subtle{color:var(--muted);font-size:12px}.header-actions,.escape-hatch,.button-row{display:flex;gap:8px;flex-wrap:wrap}
+    .ghost-button{display:inline-block;padding:8px 12px;border-radius:999px;border:1px solid #314a5d;background:#0d1620;color:var(--ink);text-decoration:none;font-size:12px}
+    .ghost-button:hover{border-color:#65839a}.escape-wrap{margin-top:12px;padding-top:12px;border-top:1px solid #1b2c3b}.escape-title{font-size:11px;color:var(--accent);letter-spacing:.14em;margin-bottom:8px}
+    .hero-copy{display:grid;grid-template-columns:1.2fr .8fr;gap:14px;margin-bottom:14px}.panel{padding:14px}.hero-copy .panel p{margin:.55em 0}
+    .badge-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.badge{border:1px solid #30485a;border-radius:999px;padding:6px 10px;font-size:12px;background:#0d1620;color:#dceaf4}.badge b{color:var(--cyan)}
+    .module-title{display:flex;justify-content:space-between;gap:8px;align-items:flex-start;flex-wrap:wrap}.module-title h2{margin:0;font-size:16px;letter-spacing:.04em}.module-title .mini{font-size:11px;color:var(--muted)}
+    iframe{display:block;width:100%;height:860px;border:1px solid #243949;border-radius:12px;background:#050b12}
+    #walkabout iframe{height:1260px}.notes{font-size:13px;color:#d6e3ed}.notes ul{margin:.4em 0 .2em 1.3em}
+    .placard{border-left:3px solid var(--accent);padding:10px 12px;background:#0c1520;border-radius:10px;margin-top:10px;color:#e6eef5}.placard b{color:#fff}
+    .callout{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}.site-footer{padding:14px 16px;margin-top:14px}.footer-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.footer-head{font-size:12px;letter-spacing:.12em;color:var(--accent);margin-bottom:8px}.mono{white-space:pre-wrap}
+    @media (max-width:1000px){
+      .hero-copy,.callout,.footer-grid{grid-template-columns:1fr}
+      iframe{height:720px}
+      #walkabout iframe{height:2200px}
+    }
+  /* A8 CELESTIAL ANTIQUE ATLAS BACKGROUND v1 */
+body{
+  background:
+    linear-gradient(rgba(5,9,14,.62), rgba(5,9,14,.76)),
+    url("/assets/a8_celestial_atlas_bg.png")
+      center center / cover fixed no-repeat !important;
+}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Auspicious 8 — Celestial Map, Sky Geometry & Walkabout Lab · Hard Octal",
+  "url": "https://lab.a8.cosigo.io/celestial-octal.html",
+  "description": "COSIGO Labs Hard Octal engineering-lab package for the Auspicious 8 celestial atlas, sky geometry, and stopped-clock walkabout demonstrations.",
+  "dateModified": "2026-08-18",
+  "inLanguage": "en",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "COSIGO Labs — Auspicious 8",
+    "url": "https://a8.cosigo.io/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "COSIGO Labs",
+    "url": "https://cosigo.io/"
+  },
+  "about": [
+    {
+      "@type": "Thing",
+      "name": "Celestial coordinates"
+    },
+    {
+      "@type": "Thing",
+      "name": "Observer frame geometry"
+    },
+    {
+      "@type": "Thing",
+      "name": "Hard Octal notation"
+    },
+    {
+      "@type": "Thing",
+      "name": "512-state angular ruler"
+    },
+    {
+      "@type": "Thing",
+      "name": "Stopped-clock thought experiment"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+  <div class="page-shell">
+    <header class="site-header">
+      <div class="brand-row">
+        <div class="brand-lockup">
+          <img class="cosigo-mark" src="/assets/cosigo_master_512.gif" alt="COSIGO">
+          <div>
+            <div class="eyebrow">COSIGO LABS</div>
+            <h1>AUSPICIOUS 8 — CELESTIAL MAP, SKY GEOMETRY & WALKABOUT LAB · HARD OCTAL</h1>
+            <div class="tagline">Nature first → A8 ruler second → legacy conversion last</div>
+            <div class="subtle">Same sky. Same geometry. Different ruler.</div>
+          </div>
+        </div>
+        <div class="header-actions">
+          <a class="ghost-button" href="/celestial.html">DECIMAL COMFORT LAB</a>
+          <a class="ghost-button" href="/map-clock-compass.html">MAP · CLOCK · COMPASS</a>
+          <a class="ghost-button" href="https://lab.a8.cosigo.io/" rel="noopener">ENGINEERING LAB</a>
+          <a class="ghost-button" href="https://a8.cosigo.io/about.html">ABOUT A8</a>
+        </div>
+      </div>
+      <div class="escape-wrap">
+        <div class="escape-title">ESCAPE HATCH / QUICK NAVIGATION</div>
+        <nav class="escape-hatch">
+          <a class="ghost-button" href="#purpose">PURPOSE</a>
+          <a class="ghost-button" href="#atlas">CELESTIAL ATLAS</a>
+          <a class="ghost-button" href="#walkabout">ORION WALKABOUT</a>
+          <a class="ghost-button" href="#notes">LAB NOTES</a>
+          <a class="ghost-button" href="#footer">FOOTER / STATUS</a>
+        </nav>
+      </div>
+    </header>
+
+    <section id="purpose" class="hero-copy">
+      <div class="panel">
+        <div class="module-title"><h2>LAB PURPOSE</h2><div class="mini">HARD OCTAL MIRROR PACKAGE v1.0</div></div>
+        <p>This page mirrors the Decimal Comfort celestial package with a separate Hard Octal experience: a mathematically plotted dense celestial atlas plus the stopped-clock walkabout demonstration.</p>
+        <p>The goal is not to change astronomy, spherical geometry, or the sky. The goal is to show that the <b>512-state A8 angular architecture</b> works cleanly in a full Hard Octal display for celestial coordinates and observer-perspective transformations.</p>
+        <div class="badge-row">
+          <div class="badge"><b>A8 FULL TURN:</b> 1000₈</div>
+          <div class="badge"><b>A8 LAT:</b> 000₈ → 200₈ → 400₈</div>
+          <div class="badge"><b>40₈ HOUR-SECTORS:</b> 20₈ A8 UNITS EACH</div>
+          <div class="badge"><b>SEAM:</b> CURRENT-ERA EQUINOX / PISCES</div>
+        </div>
+      </div>
+      <div class="panel notes">
+        <div class="module-title"><h2>LOCKED CONTENT</h2><div class="mini">CURRENT DEPLOYMENT SCOPE</div></div>
+        <ul>
+          <li>Separate Hard Octal experience for the atlas.</li>
+          <li>Stopped-clock Orion walkabout with day spin off.</li>
+          <li>Dummy fixed upright; Earth rolls beneath along meridian 100₈ ↔ 500₈.</li>
+          <li>A8 latitude pendulum is shown natively as <b>000₈ → 200₈ → 400₈ → 200₈ → 000₈</b>.</li>
+          <li>Whole-sky dot field transforms together; Orion is only a recognizable reference marker.</li>
+          <li>Scenario-cycle timer uses native <b>A8 SECOND</b>, not legacy seconds written in octal.</li>
+        </ul>
+        <div class="placard"><b>Scenario B:</b> Scorpius is kept as a separate sibling page to keep this parent page simple. Its view basis is corrected by a fixed half-turn: <b>400₈</b>.</div>
+      </div>
+    </section>
+
+    <section id="atlas" class="panel" style="margin-bottom:14px;">
+      <div class="module-title"><h2>1 · A8 CELESTIAL ATLAS — HARD OCTAL</h2><div class="mini">APPROVED 148-STAR DENSE FIELD</div></div>
+      <p class="subtle">Hard Octal ruler throughout. Approved denser field retained. Hover labels use A8 HOUR / A8 LON / A8 LAT in octal.</p>
+      <iframe scrolling="no" src="a8_celestial_atlas_octal_dense_v0_3.html" title="A8 Celestial Atlas — Hard Octal Dense v0.3"></iframe>
+      <div class="placard"><b>Polar Projection Warning:</b> this is a flat equirectangular projection of spherical celestial geometry. Near the poles, horizontal distortion becomes extreme. The ruler display is rectangular; the sky is not.</div>
+    </section>
+
+    <section id="walkabout" class="panel">
+      <div class="module-title">
+        <h2 id="walkaboutTitle">2 · STOPPED-CLOCK WALKABOUT — SCORPIUS / HARD OCTAL</h2>
+        <div class="mini">DUMMY PERSPECTIVE / NORTH-TO-SOUTH TRAVERSE</div>
+      </div>
+
+      <p class="subtle">
+        The ordinary east-west daily rotation is removed. Night is all around.
+        The observer walks the meridian great circle while the whole visible sky
+        changes orientation with the observer’s local vertical.
+      </p>
+
+      <div class="button-row" style="margin:10px 0 12px;">
+        <button class="ghost-button" id="showScorpius" type="button">
+          SCORPIUS
+        </button>
+
+        <button class="ghost-button" id="showOrion" type="button">
+          ORION
+        </button>
+      </div>
+
+      <iframe scrolling="no"
+        id="octalWalkabout"
+        src="a8_walkabout_scorpius_octal_v0_1.html"
+        title="A8 Walkabout — Scorpius Hard Octal">
+      </iframe>
+
+      <div class="callout">
+        <div class="placard">
+          <b>A8 latitude pendulum:</b><br>
+          North Pole 000₈ → Equator 200₈ → South Pole 400₈ →
+          Equator 200₈ → North Pole 000₈.<br><br>
+          The opposite side is carried by longitude, not by inventing
+          a second set of latitudes.
+        </div>
+
+        <div class="placard">
+          <b>Constellation reference:</b><br>
+          Scorpius is the default Hard Octal scenario.
+          Its observer-view basis carries the corrected
+          <b>400₈ half-turn</b>.
+          Orion remains available as the equatorial comparison.
+        </div>
+      </div>
+      <div class="placard"><b>WHAT YOU’RE SEEING</b><br>The stars are not being moved or removed. The observer is moving around the curved Earth in a frozen-sky experiment. As the observer’s local horizon tilts with that movement, some stars pass below the visible sky. They turn grey so you can still see the hidden geometry continuing underneath. <br><br><b>STARS: FIXED · OBSERVER: MOVING · GREY = BELOW LOCAL HORIZON</b><br><br>Scorpius lies well into the southern celestial sky, so from northern latitudes it naturally stays below the local horizon for more of this stopped-clock route. Earth’s ordinary daily spin would make stars rise and set with time, but it does not erase this north/south geometry.</div>
+    </section>
+
+    <section id="notes" class="callout">
+      <div class="panel notes">
+        <div class="module-title"><h2>LAB NOTES / FAQ</h2><div class="mini">SHORT ANSWERS UP FRONT</div></div>
+        <div class="placard"><b>Why does Orion look upside down in the Southern Hemisphere?</b><br>Because the observer moved around a spherical Earth. The constellation did not flip in space; the observer’s local “up” rotated with location.</div>
+        <div class="placard"><b>Why no +90 / 0 / −90 latitude here?</b><br>Because A8 uses a physical pole-to-pole ruler: North 000₈, Equator 200₈, South 400₈. Returning around the same meridian great circle naturally gives 200₈ and 000₈ again.</div>
+        <div class="placard"><b>Why two constellation references?</b><br>Scorpius is the primary Hard Octal scenario and demonstrates a reference field well south of the celestial equator. Orion remains available as a familiar near-equatorial comparison. The observer geometry is unchanged.</div>
+      </div>
+      <div class="panel notes">
+        <div class="module-title"><h2>DEPLOYMENT NOTES</h2><div class="mini">SEPARATE NODE / TRADE SERVER FRIENDLY</div></div>
+        <ul>
+          <li>This page is a simple parent shell that links current standalone Hard Octal lab artifacts.</li>
+          <li>Keep the child files in the same public directory as this page so the iframe and sibling scenario link resolve by relative path.</li>
+          <li>Preserve the current walkabout motion baseline and A8-second correction; skin it later, do not redesign the motion.</li>
+          <li>Decimal Comfort and Hard Octal remain two separate top-level pages.</li>
+        </ul>
+        <div class="placard"><b>Current child files expected beside this page:</b><br><span class="mono">a8_celestial_atlas_octal_dense_v0_3.html
+ a8_walkabout_geometry_poc_octal_v0_2.html
+ a8_walkabout_scorpius_octal_v0_1.html</span></div>
+      </div>
+    </section>
+
+    <footer id="footer" class="site-footer">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-head">COSIGO LABS / STATUS</div>
+          <div class="subtle">Auspicious 8 Hard Octal engineering-lab package for celestial coordinates, local-sky geometry, and observer-perspective demonstration. This package is for laboratory, educational, and metrology-exploration use.</div>
+        </div>
+        <div>
+          <div class="footer-head">GOVERNING PRINCIPLE</div>
+          <div class="subtle">Nature first. Ruler second. Legacy conversion last. Natural phenomena and mathematical facts are not claimed as proprietary. What is presented here is the A8 representation, instrument packaging, and explanatory laboratory structure.</div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+  (() => {
+    const frame = document.getElementById('octalWalkabout');
+    const title = document.getElementById('walkaboutTitle');
+    const scorpius = document.getElementById('showScorpius');
+    const orion = document.getElementById('showOrion');
+
+    scorpius.addEventListener('click', () => {
+      frame.src = 'a8_walkabout_scorpius_octal_v0_1.html';
+      frame.title = 'A8 Walkabout — Scorpius Hard Octal';
+      title.textContent =
+        '2 · STOPPED-CLOCK WALKABOUT — SCORPIUS / HARD OCTAL';
+    });
+
+    orion.addEventListener('click', () => {
+      frame.src = 'a8_walkabout_geometry_poc_octal_v0_2.html';
+      frame.title = 'A8 Walkabout — Orion Hard Octal';
+      title.textContent =
+        '2 · STOPPED-CLOCK WALKABOUT — ORION / HARD OCTAL';
+    });
+  })();
+  </script>
+
+</body>
+</html>

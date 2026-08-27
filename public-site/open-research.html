@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#090d11">
+<link rel="icon" href="a8-icon.svg" type="image/svg+xml">
+<link rel="icon" href="a8-icon-192.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<title>Auspicious 8 — Virtual Lab Open Research & Handoff v0.3</title>
+<meta name="description" content="Auspicious 8 open research and handoff laboratory: reproducible experiments across music, biology, chemistry, quartz, navigation, temperature, mass, fields and atomic measurement.">
+<meta name="author" content="COSIGO Labs">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://a8.cosigo.io/open-research.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Auspicious 8 — Virtual Lab Open Research & Handoff">
+<meta property="og:description" content="Discover, document, reproduce, challenge, refine and hand off unfinished A8 research.">
+<meta property="og:url" content="https://a8.cosigo.io/open-research.html">
+<meta property="og:site_name" content="COSIGO Labs — Auspicious 8">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://a8.cosigo.io/a8-icon-512.png">
+<meta property="og:image" content="https://a8.cosigo.io/a8-icon-512.png">
+<meta name="twitter:title" content="Auspicious 8 — Open Research & Handoff">
+<meta name="twitter:description" content="A public research shelf for reproducible A8 experiments and future investigators.">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"ResearchProject","name":"Auspicious 8 — Open Research & Handoff","url":"https://a8.cosigo.io/open-research.html","parentOrganization":{"@type":"Organization","name":"COSIGO Labs"},"dateModified":"2026-08-16"}
+</script>
+<style>
+:root{--bg:#0b0e12;--panel:#121821;--panel2:#171f29;--text:#eef3f8;--muted:#9aa8b7;--line:#293441;--gold:#d7b96e;--green:#8ed39f;--blue:#8fbaff;--orange:#f2b56e;--red:#ef9393}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.58 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,sans-serif}
+main{max-width:1220px;margin:auto;padding:34px 22px 70px}header{border-bottom:1px solid var(--line);padding-bottom:22px;margin-bottom:26px}
+.eyebrow{font-size:.78rem;letter-spacing:.17em;text-transform:uppercase;color:var(--gold);font-weight:800}
+h1{font-size:clamp(2rem,5vw,4rem);line-height:1.03;margin:.35rem 0 .7rem}h2{margin:2.2rem 0 .8rem}h3{margin:.1rem 0 .5rem}
+p{margin:.55rem 0 1rem}.lead{font-size:1.16rem;max-width:920px;color:#d9e2ea}
+.rule{font-size:1.3rem;font-weight:780;padding:17px 19px;background:linear-gradient(90deg,#171d24,#10151b);border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:10px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:14px}.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px}.card.hero{background:linear-gradient(135deg,#131a23,#0f141a)}
+.tag{display:inline-block;border:1px solid currentColor;border-radius:999px;padding:2px 8px;font-size:.7rem;font-weight:800;letter-spacing:.07em;margin-right:5px}
+.locked{color:var(--green)}.open{color:var(--red)}.explore{color:var(--orange)}.handoff{color:var(--blue)}
+.formula{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;background:#080b0f;border:1px solid var(--line);padding:12px 14px;border-radius:8px;white-space:pre-wrap}
+table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--muted);font-size:.78rem;text-transform:uppercase;letter-spacing:.06em}ul{padding-left:1.2rem}li{margin:.3rem 0}
+.note{border-left:3px solid var(--blue);background:#0d131a;padding:10px 14px;border-radius:7px}
+.navico{display:inline-grid;place-items:center;width:1.45em;height:1.45em;border:1px solid currentColor;border-radius:50%;font-size:.78em;margin-right:.28em;vertical-align:-.08em}
+.metafoot{margin-top:10px;font:700 .72rem ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:.04em;color:var(--muted)}
+nav,.footer-nav{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}nav a,.footer-nav a{color:#e6eef8;text-decoration:none;border:1px solid var(--line);padding:7px 10px;border-radius:8px;background:#111720;font-size:.82rem}nav a.escape,.footer-nav a.escape{border-color:var(--gold);color:#f4d990;font-weight:800}
+footer{margin-top:42px;border-top:1px solid var(--line);padding-top:18px;color:var(--muted)}
+</style>
+</head>
+<body><main>
+<header>
+<div class="eyebrow">COSIGO Labs · Auspicious 8</div>
+<h1>Virtual Lab — Open Research & Handoff</h1>
+<p class="lead">A research shelf for promising ideas that are not yet canonical. Each domain records the clue, locked dependencies, open question, and reproducible next experiment so another investigator can pick up the work independently.</p>
+<span class="tag explore">v0.2 · 16 AUG 2026</span>
+<nav>
+<a href="./"><span class="navico">⌂</span>A8 PUBLIC</a>
+<a href="unified.html"><span class="navico">⌖</span>MAP · CLOCK · COMPASS</a>
+<a href="canonical.html"><span class="navico">≡</span>CANONICAL</a>
+<a href="open-research.html"><span class="navico">⚗</span>OPEN RESEARCH</a>
+<a href="https://lab.a8.cosigo.io/"><span class="navico">⚙</span>ENGINEERING LAB</a>
+<a href="about.html"><span class="navico">i</span>ABOUT A8</a>
+<a class="escape" href="canonical.html#principle"><span class="navico">8</span>888 ESCAPE HATCH</a>
+</nav>
+</header>
+
+<div class="rule">If an idea is not ready to lock, preserve it as an experiment—not as a belief.</div>
+
+<h2>Lab Method</h2>
+<div class="grid">
+<section class="card"><h3>1. Observe</h3><p>Start with a reproducible phenomenon: recurrence, ratio, symmetry, lattice, phase, spectrum, growth, motion, field behavior, or another measurable structure.</p></section>
+<section class="card"><h3>2. Separate layers</h3><p>Do not confuse Nature with the register, the register with the unit, or the unit with a legacy conversion. State clearly what is physical and what is representation.</p></section>
+<section class="card"><h3>3. Reproduce</h3><p>Publish enough method that another person can independently obtain the same result—or show where it fails.</p></section>
+</div>
+
+<h2>Integrated Lab Instrument</h2>
+<div class="card hero">
+<span class="tag locked">CONNECTED LAB</span><span class="tag handoff">NAVIGATION / TIME / ANGLE / DISTANCE</span>
+<h3>Unified Map · Clock · Compass</h3>
+<p>The unified instrument is now the working real-world navigation surface for A8. It keeps map, clock, compass, coordinate notation, city sectors, route distance and elapsed travel time in one selected representation at a time.</p>
+<p><strong>Display A:</strong> Decimal 512 · <strong>Display B:</strong> hard Octal 1000₈. The entire instrument switches together; mixed representation is prohibited.</p>
+<p><a href="unified.html" style="color:#a9c9ff;font-weight:800">⌖ OPEN UNIFIED INSTRUMENT →</a></p>
+</div>
+
+<h2>Current Research Domains</h2>
+<div class="grid">
+
+<section class="card hero">
+<span class="tag locked">DEPENDENCY LOCKED</span><span class="tag explore">ACTIVE</span>
+<h3>Music, Audio & Scale</h3>
+<p><strong>Current clue:</strong> the Jovian 1:2:4 relationship already produces a natural ratio structure that can be rendered audibly.</p>
+<ul><li>Io : Europa : Ganymede carrier structure = 1:2:4.</li><li>Callisto may function as a slower envelope/check rather than primary authority.</li><li>East/west reversals can become clicks or phase markers.</li><li>Simultaneous channels can be heard as a composite resonance.</li></ul>
+<div class="note"><strong>Boundary:</strong> legacy Hz values are only an audio transducer layer for speakers and browsers. They do not define A8 time. Final tones should derive from the native A8 clock.</div>
+<p><strong>Next experiment:</strong> derive a fully native A8 pitch/interval ladder from recovered A8 phase and compare perceived consonance against ordinary equal temperament without forcing a result.</p>
+</section>
+
+<section class="card hero">
+<span class="tag explore">OPEN RESEARCH</span>
+<h3>Biology, Chemistry & Natural Scaling</h3>
+<p><strong>Current clue:</strong> living and chemical systems repeatedly exhibit doubling, halving, pairing, recursive growth, symmetry and cyclic ratios.</p>
+<ul><li>Cellular doubling and halving.</li><li>Mitosis / meiosis structure.</li><li>DNA replication and complementary pairing.</li><li>Molecular and atomic ratios.</li><li>Biochemical cycles.</li><li>2→4→8 structures, fractal/recursive growth, symmetry and scaling laws.</li></ul>
+<div class="note"><strong>Rule:</strong> observe first. Do not retrofit biological or chemical data to make it “look A8.”</div>
+<p><strong>Next experiment:</strong> select one reproducible biological doubling system and one molecular ratio system, express both in native ratio form, and test whether A8 representation simplifies or merely relabels them.</p>
+</section>
+
+<section class="card hero">
+<span class="tag explore">ACTIVE</span>
+<h3>Quartz Convergence</h3>
+<p><strong>Current clue:</strong> one naturally abundant crystalline material keeps appearing across several measurement domains.</p>
+<ul><li><strong>Space:</strong> ordered lattice recurrence.</li><li><strong>Distance:</strong> provisional α-quartz a-axis recurrence and A8/31 length candidate.</li><li><strong>Time carrier:</strong> mechanical resonance / quartz oscillators.</li><li><strong>Piezoelectric coupling:</strong> mechanical ↔ electrical response.</li><li><strong>Sensing:</strong> strain, force, pressure and frequency response.</li><li><strong>Optics:</strong> prism behavior, birefringence, optical activity and refraction.</li><li><strong>3-D structure:</strong> axial c recurrence and transverse a-plane recurrence.</li></ul>
+<p><strong>Next experiment:</strong> treat a and c as independent spatial witnesses, characterize their ratio and environmental dependence, and test optical/piezoelectric observables against the same crystal state.</p>
+</section>
+
+<section class="card">
+<span class="tag locked">CORE GRID</span><span class="tag explore">ACTIVE</span>
+<h3>Earth Grid, Navigation & Great Circles</h3>
+<div class="formula">Longitude: 0 → 512
+Latitude: North 0 → Equator 128 → South 256
+Hour-meridian spacing: 16 A8 angular units</div>
+<p><strong>Current clue:</strong> the map can remain ordinary geography while only the ruler changes. Great-circle paths and live vessel/aircraft coordinates provide excellent real-world tests.</p>
+<p><strong>Current implementation:</strong> Tokyo ↔ Los Angeles and additional city/route examples now live in the Unified Map · Clock · Compass instrument. Continue by sourcing operational route data and testing A8 time, navigation rung selection, and approach-scale transitions without changing the underlying geometry.</p>
+</section>
+
+<section class="card">
+<span class="tag explore">OPEN</span>
+<h3>Temperature & Pressure</h3>
+<p><strong>Current clue:</strong> quartz spacing, resonance and other material observables require a reproducible physical state, but current °C and pressure units are only temporary comparison coordinates.</p>
+<p><strong>Next experiment:</strong> identify naturally recoverable phase transitions, fixed points, ratios or recurrence phenomena suitable for a native A8 thermodynamic scale.</p>
+</section>
+
+<section class="card">
+<span class="tag open">UNDEFINED</span>
+<h3>Matter, Mass & Volume</h3>
+<p><strong>Current clue:</strong> mass must eventually be defined independently rather than reverse-engineered to match the kilogram.</p>
+<div class="formula">ρ = M / V
+p = mv
+F = ma
+E = ½mv²</div>
+<p><strong>Next experiment:</strong> identify a naturally reproducible matter/mass reference whose physical realization can be reconstructed without inheriting a legacy mass artifact.</p>
+</section>
+
+<section class="card">
+<span class="tag explore">OPEN</span>
+<h3>Electricity, Magnetism & Fields</h3>
+<p><strong>Current clue:</strong> A8 time/phase and angle already supply inputs needed for waveform phase, frequency, rotating fields, motors, generators and precision control.</p>
+<p><strong>Next experiment:</strong> express one simple oscillator or rotating-field system entirely in native A8 phase/time while leaving Maxwellian physics untouched.</p>
+</section>
+
+<section class="card">
+<span class="tag explore">DEFERRED</span>
+<h3>Atomic & Subatomic Measurement</h3>
+<p><strong>Current clue:</strong> once time, angle, length, temperature and mass are native, atomic phenomena can be measured without first translating through legacy units.</p>
+<div class="note"><strong>No promised answer.</strong> Do not assume atoms “must” reveal an 8-pattern. Measure them and see what the new ruler exposes.</div>
+<p><strong>Next experiment:</strong> after base-unit coherence, re-express selected spectral wavelengths, transition frequencies, atomic dimensions and dimensionless constants in A8 units and look for simplification or new ratios.</p>
+</section>
+
+</div>
+
+<h2>Research Handoff Template</h2>
+<div class="card">
+<table>
+<tr><th>Field</th><th>Required entry</th></tr>
+<tr><td>Phenomenon</td><td>What does Nature actually do?</td></tr>
+<tr><td>Observable</td><td>What can a real instrument measure?</td></tr>
+<tr><td>Native A8 representation</td><td>How is it counted or subdivided without changing the phenomenon?</td></tr>
+<tr><td>Locked dependencies</td><td>Which A8 definitions must already be accepted?</td></tr>
+<tr><td>Legacy comparison</td><td>Optional translation only; never authority.</td></tr>
+<tr><td>Uncertainty / failure modes</td><td>Temperature, pressure, geometry, observer state, defects, noise, etc.</td></tr>
+<tr><td>Next experiment</td><td>One reproducible action another researcher can perform.</td></tr>
+<tr><td>Status</td><td>OPEN · EXPERIMENTAL · PROVISIONAL · LOCKED · REJECTED</td></tr>
+</table>
+</div>
+
+<h2>Why This Page Exists</h2>
+<div class="card hero">
+<p>No one person has to finish every A8 domain. The project becomes stronger if each unfinished clue is documented well enough that a physicist, musician, biologist, chemist, geologist, engineer, programmer, navigator, or student can pick up one thread and run a real experiment.</p>
+<div class="formula">Discover → document → reproduce → challenge → refine → hand off</div>
+<p>Failure is useful. A domain that does not simplify under A8 should be recorded just as carefully as one that does.</p>
+</div>
+
+<footer>
+<div><strong>COSIGO Labs — Auspicious 8</strong> · Virtual Lab Open Research & Handoff v0.3</div>
+<div>Discover → document → reproduce → challenge → refine → hand off.</div>
+<div class="footer-nav">
+<a href="./"><span class="navico">⌂</span>A8 PUBLIC</a>
+<a href="unified.html"><span class="navico">⌖</span>MAP · CLOCK · COMPASS</a>
+<a href="canonical.html"><span class="navico">≡</span>CANONICAL</a>
+<a href="open-research.html"><span class="navico">⚗</span>OPEN RESEARCH</a>
+<a href="https://lab.a8.cosigo.io/"><span class="navico">⚙</span>ENGINEERING LAB</a>
+<a href="about.html"><span class="navico">i</span>ABOUT A8</a>
+<a class="escape" href="canonical.html#principle"><span class="navico">8</span>888 ESCAPE HATCH</a>
+</div>
+<div class="metafoot">RESEARCH SHELF · SITE INTEGRATION 01 · MODIFIED 2026-08-16 · UNFINISHED IDEAS STAY EXPERIMENTS UNTIL REPRODUCED</div>
+</footer>
+</main></body></html>

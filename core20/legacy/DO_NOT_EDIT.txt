@@ -1,0 +1,2 @@
+These are byte-for-byte v0.6.20 reference specimens used to protect the v5 migration.
+Do not edit them. Their SHA-256 hashes are recorded in SHA256SUMS.json.

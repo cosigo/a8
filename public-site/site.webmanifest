@@ -1,0 +1,20 @@
+{
+  "name": "COSIGO Labs \u2014 Auspicious 8",
+  "short_name": "A8 Labs",
+  "start_url": "labs.html",
+  "display": "standalone",
+  "background_color": "#090d11",
+  "theme_color": "#090d11",
+  "icons": [
+    {
+      "src": "a8-icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "a8-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

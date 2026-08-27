@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Auspicious 8 — Celestial Map, Sky Geometry & Walkabout Lab v1.0 | COSIGO Labs</title>
+  <meta name="description" content="COSIGO Labs engineering-lab package for the Auspicious 8 celestial atlas, sky geometry, and stopped-clock north-to-south walkabout demonstration.">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+  <meta name="author" content="COSIGO Labs">
+  <link rel="canonical" href="https://lab.a8.cosigo.io/celestial.html">
+  <meta property="og:title" content="Auspicious 8 — Celestial Map, Sky Geometry & Walkabout Lab v1.0">
+  <meta property="og:description" content="Engineering-lab package for the A8 celestial atlas, sky geometry, and stopped-clock walkabout demonstration.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://lab.a8.cosigo.io/celestial.html">
+  <meta property="og:site_name" content="COSIGO Labs — Auspicious 8">
+  <meta property="og:image" content="https://a8.cosigo.io/assets/cosigo_master_512.png">
+  <meta property="og:image:alt" content="COSIGO Labs Auspicious 8 celestial lab">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Auspicious 8 — Celestial Map, Sky Geometry & Walkabout Lab v1.0">
+  <meta name="twitter:description" content="Engineering-lab package for the A8 celestial atlas, sky geometry, and stopped-clock walkabout demonstration.">
+  <meta name="twitter:image" content="https://a8.cosigo.io/assets/cosigo_master_512.png">
+  <link rel="icon" href="https://a8.cosigo.io/assets/cosigo_master_512.png">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Auspicious 8 — Celestial Map, Sky Geometry & Walkabout Lab v1.0",
+    "url": "https://lab.a8.cosigo.io/celestial.html",
+    "description": "Engineering-lab package for the A8 celestial atlas, sky geometry, and stopped-clock walkabout demonstration.",
+    "dateModified": "2026-08-17",
+    "inLanguage": "en",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "COSIGO Labs — Auspicious 8",
+      "url": "https://a8.cosigo.io/"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "COSIGO Labs",
+      "url": "https://cosigo.io/"
+    },
+    "about": [
+      {"@type":"Thing","name":"Celestial coordinates"},
+      {"@type":"Thing","name":"Observer frame geometry"},
+      {"@type":"Thing","name":"512-state angular ruler"},
+      {"@type":"Thing","name":"Stopped-clock thought experiment"}
+    ]
+  }
+  </script>
+  <style>
+    :root{
+      --bg:#071019;--panel:#0b1722;--ink:#e9f2f7;--muted:#8fa8b7;--line:#1f3a4b;
+      --accent:#d8c47a;--cyan:#6fe8ff;--soft:#122331;--good:#72e0ac;--warn:#ffbf72;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:radial-gradient(circle at 50% 0%, #0d1723 0, #071019 42%, #050b12 100%);color:var(--ink);font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;line-height:1.5}
+    a{color:#cbe7ff}
+    .page-shell{max-width:1440px;margin:0 auto;padding:18px}
+    .site-header,.site-footer,.panel{background:rgba(10,18,28,.86);border:1px solid var(--line);border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,.22)}
+    .site-header{padding:16px 18px;margin-bottom:14px}
+    .brand-row{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;flex-wrap:wrap}
+    .brand-lockup{display:flex;gap:14px;align-items:center}
+    .brand-lockup img{width:52px;height:52px;border-radius:50%;background:#0d1620;border:1px solid #30495b}
+    .eyebrow{font-size:12px;letter-spacing:.12em;color:var(--accent)}
+    h1{margin:2px 0 4px;font-size:clamp(24px,3vw,36px)}
+    .tagline,.subtle{color:var(--muted);font-size:12px}
+    .header-actions,.escape-hatch{display:flex;gap:8px;flex-wrap:wrap}
+    .ghost-button{display:inline-block;padding:8px 12px;border-radius:999px;border:1px solid #314a5d;background:#0d1620;color:var(--ink);text-decoration:none;font-size:12px}
+    .ghost-button:hover{border-color:#65839a}
+    .escape-wrap{margin-top:12px;padding-top:12px;border-top:1px solid #1b2c3b}
+    .escape-title{font-size:11px;color:var(--accent);letter-spacing:.14em;margin-bottom:8px}
+    .hero-copy{display:grid;grid-template-columns:1.2fr .8fr;gap:14px;margin-bottom:14px}
+    .panel{padding:14px}
+    .hero-copy .panel p{margin:.55em 0}
+    .badge-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+    .badge{border:1px solid #30485a;border-radius:999px;padding:6px 10px;font-size:12px;background:#0d1620;color:#dceaf4}
+    .badge b{color:var(--cyan)}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .module-title{display:flex;justify-content:space-between;gap:8px;align-items:flex-start;flex-wrap:wrap}
+    .module-title h2{margin:0;font-size:16px;letter-spacing:.04em}
+    .module-title .mini{font-size:11px;color:var(--muted)}
+    iframe{display:block;width:100%;height:860px;border:0;border-radius:0;background:transparent;overflow:hidden}
+    .notes{font-size:13px;color:#d6e3ed}
+    .notes ul{margin:.4em 0 .2em 1.3em}
+    .placard{border-left:3px solid var(--accent);padding:10px 12px;background:#0c1520;border-radius:10px;margin-top:10px;color:#e6eef5}
+    .placard b{color:#fff}
+    .callout{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+    .site-footer{padding:14px 16px;margin-top:14px}
+    .footer-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .footer-head{font-size:12px;letter-spacing:.12em;color:var(--accent);margin-bottom:8px}
+    .mono{white-space:pre-wrap}
+    @media (max-width:1000px){
+      .grid,.hero-copy,.callout,.footer-grid{grid-template-columns:1fr}
+      iframe{width:100%}
+    }
+  
+/* A8 CELESTIAL ANTIQUE ATLAS BACKGROUND v1 */
+body{
+  background:
+    linear-gradient(rgba(5,9,14,.62), rgba(5,9,14,.76)),
+    url("/assets/a8_celestial_atlas_bg.png")
+      center center / cover fixed no-repeat !important;
+}
+
+</style>
+</head>
+<body>
+  <div class="page-shell">
+    <header class="site-header">
+      <div class="brand-row">
+        <div class="brand-lockup">
+          <img class="cosigo-mark" src="https://a8.cosigo.io/assets/cosigo_master_512.png" alt="COSIGO">
+          <div>
+            <div class="eyebrow">COSIGO LABS</div>
+            <h1>AUSPICIOUS 8 — CELESTIAL MAP, SKY GEOMETRY & WALKABOUT LAB</h1>
+            <div class="tagline">Nature first → A8 ruler second → legacy conversion last</div>
+            <div class="subtle">Same sky. Same geometry. Different ruler.</div>
+          </div>
+        </div>
+        <div class="header-actions">
+          <a class="ghost-button" href="https://a8.cosigo.io/about.html">ABOUT A8</a>
+          <a class="ghost-button" href="https://a8.cosigo.io/" rel="noopener">PUBLIC INSTRUMENT</a>
+          <a class="ghost-button" href="https://lab.a8.cosigo.io/" rel="noopener">ENGINEERING LAB</a>
+          <a class="ghost-button" href="/map-clock-compass.html">MAP · CLOCK · COMPASS</a><a class="ghost-button" href="/navigation.html">NAVIGATION</a>
+          <a class="ghost-button" href="/celestial-octal.html">HARD OCTAL LAB</a>
+        </div>
+      </div>
+      <div class="escape-wrap">
+        <div class="escape-title">ESCAPE HATCH / QUICK NAVIGATION</div>
+        <nav class="escape-hatch">
+          <a class="ghost-button" href="#purpose">PURPOSE</a>
+          <a class="ghost-button" href="#atlas">CELESTIAL ATLAS</a>
+          <a class="ghost-button" href="#walkabout">WALKABOUT POC</a>
+          <a class="ghost-button" href="/celestial-octal.html">HARD OCTAL</a>
+          <a class="ghost-button" href="#notes">LAB NOTES</a>
+          <a class="ghost-button" href="#footer">FOOTER / STATUS</a>
+        </nav>
+      </div>
+    </header>
+
+    <section id="purpose" class="hero-copy">
+      <div class="panel">
+        <div class="module-title"><h2>LAB PURPOSE</h2><div class="mini">ENGINEERING PACKAGE v1.0</div></div>
+        <p>This page packages the first A8 celestial tools into one deployment-ready lab entry: a mathematically plotted celestial atlas plus the stopped-clock walkabout demonstration.</p>
+        <p>The goal is not to change astronomy, spherical geometry, or the sky. The goal is to show that the <b>512-state A8 angular architecture</b> is workable for Earth coordinates, celestial coordinates, and observer-perspective transformations.</p>
+        <div class="badge-row">
+          <div class="badge"><b>A8 FULL TURN:</b> 512</div>
+          <div class="badge"><b>A8 LAT:</b> 0 → 128 → 256</div>
+          <div class="badge"><b>32 HOUR-SECTORS:</b> 16 A8 UNITS EACH</div>
+          <div class="badge"><b>SEAM:</b> CURRENT-ERA EQUINOX / PISCES</div>
+        </div>
+      </div>
+      <div class="panel notes">
+        <div class="module-title"><h2>LOCKED CONTENT</h2><div class="mini">CURRENT DEPLOYMENT SCOPE</div></div>
+        <ul>
+          <li>Separate Decimal Comfort experience for the atlas.</li>
+          <li>Stopped-clock walkabout thought experiment with day spin off.</li>
+          <li>Dummy fixed upright; Earth rolls beneath along meridian 64 ↔ 320.</li>
+          <li>A8 latitude pendulum is shown natively as <b>0 → 128 → 256 → 128 → 0</b>.</li>
+          <li>Whole-sky dot field transforms together; Orion is only a recognizable reference marker.</li>
+          <li>No signed latitude required for the pole-to-pole traverse.</li>
+        </ul>
+        <div class="placard"><b>Why this matters:</b> someone traveling from New York to Santiago can finally see why Orion looks “weird” without blaming the stars. The observer frame changed; the sky did not.</div>
+      </div>
+    </section>
+
+    <section id="atlas" class="panel" style="margin-bottom:14px;">
+      <div class="module-title"><h2>1 · A8 CELESTIAL ATLAS — DECIMAL COMFORT</h2><div class="mini">CLICK / HOVER VECTOR REVIEW</div></div>
+      <p class="subtle">Same internal starfield geometry as the approved review file. Outside axes moved clear of the starfield. Hover labels use A8 HOUR / A8 LON / A8 LAT.</p>
+      <iframe class="auto-frame" scrolling="no" src="a8_celestial_atlas_decimal_review_v0_2.html" title="A8 Celestial Atlas — Decimal Comfort Review v0.2"></iframe>
+      <div class="placard"><b>Polar Projection Warning:</b> this is a flat equirectangular projection of spherical celestial geometry. Near the poles, horizontal distortion becomes extreme. Polaris can look surprising on the flat sheet while still being mathematically correct.</div>
+    </section>
+
+    <section id="walkabout" class="panel">
+      <div class="module-title"><h2 id="decimalWalkaboutTitle">2 · STOPPED-CLOCK WALKABOUT — ORION / DECIMAL COMFORT</h2><div class="mini">DUMMY PERSPECTIVE / NORTH-TO-SOUTH TRAVERSE</div></div>
+      <p class="subtle">The ordinary east-west daily rotation is removed. Night is all around. The observer walks the meridian great circle while the whole visible sky changes orientation with the observer’s local vertical.</p>
+      <div class="header-actions" style="margin:10px 0 12px;">
+        <button class="ghost-button" id="showDecimalOrion" type="button">ORION</button>
+        <button class="ghost-button" id="showDecimalScorpius" type="button">SCORPIUS</button>
+      </div>
+
+      <iframe
+        id="decimalWalkabout"
+        class="auto-frame"
+        scrolling="no"
+        src="a8_walkabout_geometry_poc_v0_1b.html"
+        title="A8 Walkabout — Orion · Decimal Comfort">
+      </iframe>
+      <div class="callout">
+        <div class="placard"><b>A8 latitude pendulum:</b><br>North Pole 0 → Equator 128 → South Pole 256 → Equator 128 → North Pole 0.<br><br>The opposite side is carried by longitude, not by inventing a second set of latitudes.</div>
+        <div class="placard"><b>Observer insight:</b><br>this isolates why constellations look upside down, sideways, or unfamiliar across hemispheres. The stars are fixed. The observer’s local frame rotates as travel proceeds across the spherical Earth.</div>
+      </div>
+      <div class="placard"><b>WHAT YOU’RE SEEING</b><br>The stars are not being moved or removed. The observer is moving around the curved Earth in a frozen-sky experiment. As the observer’s local horizon tilts with that movement, some stars pass below the visible sky. They turn grey so you can still see the hidden geometry continuing underneath. <br><br><b>STARS: FIXED · OBSERVER: MOVING · GREY = BELOW LOCAL HORIZON</b><br><br>Scorpius lies well into the southern celestial sky, so from northern latitudes it naturally stays below the local horizon for more of this stopped-clock route. Earth’s ordinary daily spin would make stars rise and set with time, but it does not erase this north/south geometry.</div>
+    </section>
+
+    <section id="notes" class="callout">
+      <div class="panel notes">
+        <div class="module-title"><h2>LAB NOTES / FAQ</h2><div class="mini">SHORT ANSWERS UP FRONT</div></div>
+        <div class="placard"><b>Why is Polaris “over there” on the flat map?</b><br>Because the map is distorted near the pole. Polaris is very close to the pole, but not exactly on it, so it keeps a real coordinate while the rectangular sheet stretches the entire polar zone.</div>
+        <div class="placard"><b>Why does Orion look upside down in the Southern Hemisphere?</b><br>Because the observer moved around a spherical Earth. The constellation did not flip in space; the observer’s local “up” rotated with location.</div>
+        <div class="placard"><b>Why no +90 / 0 / −90 latitude here?</b><br>Because A8 uses a physical pole-to-pole ruler: North 0, Equator 128, South 256. Returning around the same meridian great circle naturally gives 128 and 0 again.</div>
+      </div>
+      <div class="panel notes">
+        <div class="module-title"><h2>DEPLOYMENT NOTES</h2><div class="mini">SEPARATE NODE / TRADE SERVER FRIENDLY</div></div>
+        <ul>
+          <li>This page is designed as a parent shell that links the two current standalone lab artifacts.</li>
+          <li>Keep the child files in the same directory as this package page so the two iframes resolve by relative path.</li>
+          <li>Hard Octal is the sibling notation view. Same sky. Same geometry. Different ruler.</li>
+          <li>Preserve the current walkabout POC motion baseline; skin it later, do not redesign the motion.</li>
+        </ul>
+        <div class="placard"><b>Current child files expected beside this page:</b><br><span class="mono">a8_celestial_atlas_decimal_review_v0_2.html
+ a8_walkabout_geometry_poc_v0_1b.html</span></div>
+      </div>
+    </section>
+
+    <footer id="footer" class="site-footer">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-head">COSIGO LABS / STATUS</div>
+          <div class="subtle">Auspicious 8 engineering-lab package for celestial coordinates, local-sky geometry, and observer-perspective demonstration. This package is for laboratory, educational, and metrology-exploration use.</div>
+        </div>
+        <div>
+          <div class="footer-head">GOVERNING PRINCIPLE</div>
+          <div class="subtle">Nature first. Ruler second. Legacy conversion last. Natural phenomena and mathematical facts are not claimed as proprietary. What is presented here is the A8 representation, instrument packaging, and explanatory laboratory structure.</div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+<script>
+(() => {
+  function fitFrame(frame) {
+    try {
+      const doc = frame.contentDocument;
+      if (!doc) return;
+
+      /*
+       * Important:
+       * child pages may use min-height:100vh.
+       * Inside an iframe that creates an auto-height feedback loop.
+       * Neutralize it before measuring actual document content.
+       */
+      if (doc.documentElement) {
+        doc.documentElement.style.minHeight = '0';
+        doc.documentElement.style.overflow = 'hidden';
+      }
+
+      if (doc.body) {
+        doc.body.style.minHeight = '0';
+        doc.body.style.overflow = 'hidden';
+      }
+
+      frame.style.height = '1px';
+
+      requestAnimationFrame(() => {
+        const h = Math.max(
+          doc.body ? doc.body.scrollHeight : 0,
+          doc.body ? doc.body.offsetHeight : 0,
+          doc.documentElement ? doc.documentElement.scrollHeight : 0,
+          doc.documentElement ? doc.documentElement.offsetHeight : 0
+        );
+
+        if (h > 0) {
+          frame.style.height = h + 'px';
+        }
+      });
+
+    } catch (_) {}
+  }
+
+  const frames = [...document.querySelectorAll('iframe.auto-frame')];
+
+  frames.forEach(frame => {
+    frame.addEventListener('load', () => {
+      fitFrame(frame);
+      setTimeout(() => fitFrame(frame), 150);
+    });
+  });
+
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      frames.forEach(fitFrame);
+    }, 120);
+  });
+})();
+</script>
+
+
+  <script>
+  (() => {
+    const frame = document.getElementById('decimalWalkabout');
+    const title = document.getElementById('decimalWalkaboutTitle');
+    const orion = document.getElementById('showDecimalOrion');
+    const scorpius = document.getElementById('showDecimalScorpius');
+
+    orion.addEventListener('click', () => {
+      frame.src = 'a8_walkabout_geometry_poc_v0_1b.html';
+      frame.title = 'A8 Walkabout — Orion · Decimal Comfort';
+      title.textContent =
+        '2 · STOPPED-CLOCK WALKABOUT — ORION / DECIMAL COMFORT';
+    });
+
+    scorpius.addEventListener('click', () => {
+      frame.src = 'a8_walkabout_scorpius_decimal_v0_1.html';
+      frame.title = 'A8 Walkabout — Scorpius · Decimal Comfort';
+      title.textContent =
+        '2 · STOPPED-CLOCK WALKABOUT — SCORPIUS / DECIMAL COMFORT';
+    });
+  })();
+  </script>
+
+</body>
+</html>

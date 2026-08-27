@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Repeated Jovian Holdover / Reacquisition | A8 Time Lab v5.4.20</title>
+<meta name="description" content="COSIGO Labs Auspicious 8 Gate 5G repeated synthetic Jovian observation-loss holdover and reacquisition cycles with changing correction directions and one uninterrupted exact clock history.">
+<meta name="author" content="COSIGO Labs">
+<meta name="robots" content="index,follow">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/site-shell.css">
+<style>
+  main{max-width:1180px;margin:auto;padding:28px 20px 72px}
+  .hero,.card{border:1px solid var(--line,#2a3744);border-radius:16px;padding:20px;background:var(--panel,#111820)}
+  .hero{margin-bottom:16px}
+  .title{font-size:clamp(2rem,7vw,5rem);line-height:.96;letter-spacing:-.05em;margin:.18em 0}
+  .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+  .k{display:block;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;opacity:.68}
+  .v{display:block;font-size:1.15rem;font-weight:800;margin-top:4px;overflow-wrap:anywhere}
+  .good{color:#87d39b}.warn{color:#e0bd72}
+  pre{white-space:pre-wrap;overflow-wrap:anywhere}
+  @media(max-width:800px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav class="cosigo-global-nav" aria-label="COSIGO and A8 global navigation">
+  <a class="cosigo-global-brand" href="https://cosigo.io/" aria-label="COSIGO home">
+    <img src="/assets/cosigo_master_512.gif" alt="COSIGO">
+    <span>COSIGO<small>LABS · AUSPICIOUS 8</small></span>
+  </a>
+  <div class="cosigo-global-links">
+    <a href="/index.html">A8 LAB HOME</a>
+    <a href="/discipline.html">DISCIPLINE</a>
+    <a href="/rate-slew.html">RATE SLEW</a>
+    <a href="/rate-continuity.html">RATE CONTINUITY</a>
+    <a href="/holdover-reacquisition.html">HOLDOVER</a>
+    <a href="/relationship.html">TERRA SHIP SLIP</a>
+  </div>
+</nav>
+
+<main>
+  <section class="hero">
+    <div class="eyebrow">AUSPICIOUS 8 · TIME LAB v5.4.20 · GATE 5G</div>
+    <h1 class="title">REPEATED HOLDOVER / REACQUISITION</h1>
+    <p><b>VARIABLE LOSS LENGTHS · CHANGING RATE DIRECTION · ONE CONTINUOUS CLOCK</b></p>
+    <p class="muted">
+      Gate 5G repeats the full Jovian observation-loss and reacquisition sequence
+      three times. Each loss freezes the last settled rate exactly. Each fresh
+      recovery window may reverse correction direction, but clock phase never stops,
+      reverses, resets, or jumps.
+    </p>
+  </section>
+
+  <section class="grid">
+    <div class="card">
+      <span class="k">REAL A8CORE</span>
+      <span class="v good">DISCONNECTED</span>
+    </div>
+    <div class="card">
+      <span class="k">LOSS RULE</span>
+      <span class="v">FREEZE SETTLED RATE</span>
+    </div>
+    <div class="card">
+      <span class="k">CLOCK HISTORY</span>
+      <span class="v good">ONE CONTINUOUS PHASE</span>
+    </div>
+  </section>
+
+  <section class="card" style="margin-top:16px">
+    <h2>Episode 1</h2>
+    <pre>enter rate = 500/499
+loss length = 8 abstract advances
+held rate = 500/499
+
+fresh Jovian window
+1000 → 1001 raw/cycle
+
+error = +1/1000
+target = 1000/1001
+correction direction = DOWN
+bounded recovery = 31 updates</pre>
+  </section>
+
+  <section class="card" style="margin-top:16px">
+    <h2>Episode 2</h2>
+    <pre>enter rate = 1000/1001
+loss length = 12 abstract advances
+held rate = 1000/1001
+
+fresh Jovian window
+1000 → 997 raw/cycle
+
+error = -3/1000
+target = 1000/997
+correction direction = UP
+bounded recovery = 41 updates</pre>
+  </section>
+
+  <section class="card" style="margin-top:16px">
+    <h2>Episode 3</h2>
+    <pre>enter rate = 1000/997
+loss length = 5 abstract advances
+held rate = 1000/997
+
+fresh Jovian window
+1000 → 1003 raw/cycle
+
+error = +3/1000
+target = 1000/1003
+correction direction = DOWN
+bounded recovery = 61 updates</pre>
+  </section>
+
+  <section class="card" style="margin-top:16px">
+    <h2>Repeated holdover rule</h2>
+    <pre>during every loss:
+fresh evidence = absent
+new candidate = none
+rate movement = none
+phase movement = integrated forward only
+
+on every reacquisition:
+candidate load phase movement = 0
+candidate load current-rate movement = 0
+bounded rate slew resumes
+prior slew must settle before next loss/recovery cycle</pre>
+  </section>
+
+  <section class="card" style="margin-top:16px">
+    <h2>Full sequence</h2>
+    <pre>holdover lengths
+= 8 / 12 / 5
+
+rate-error signs
+= + / - / +
+
+correction directions
+= DOWN / UP / DOWN
+
+recovery updates
+= 31 / 41 / 61
+
+total synthetic plant advances
+= 158
+
+final rate
+= 1000/1003
+
+final synthetic phase
+= 3066885869525681546437
+  / 88887644448799996800</pre>
+    <p class="good"><b>OBSERVATION LOSS REPEATS. CLOCK CONTINUITY DOES NOT BREAK.</b></p>
+  </section>
+
+  <section class="card" style="margin-top:16px">
+    <h2>Still prohibited</h2>
+    <p class="warn"><b>NO REAL ACTUATOR · NO PHASE SETTER · NO TIMED CADENCE.</b></p>
+    <p class="muted">
+      Gate 5G remains synthetic. The real A8Core is still outside the actuator path.
+    </p>
+  </section>
+</main>
+</body>
+</html>

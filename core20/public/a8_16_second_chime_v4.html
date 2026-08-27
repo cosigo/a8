@@ -1,0 +1,180 @@
+<div id="a8-chime" class="a8root">
+  <style>
+    #a8-chime{box-sizing:border-box;width:100%;padding:28px;background:light-dark(#f4f2ec,#111315);color:light-dark(#17191b,#f1f3f5);font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;border-radius:0}
+    #a8-chime *{box-sizing:border-box}
+    #a8-chime .wrap{max-width:760px;margin:0 auto}
+    #a8-chime .hero{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:24px}
+    #a8-chime .kicker{font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;opacity:.58}
+    #a8-chime h2{font-size:clamp(28px,6vw,48px);line-height:1;margin:6px 0 8px;font-weight:850;letter-spacing:-.04em}
+    #a8-chime .sub{max-width:520px;font-size:14px;line-height:1.5;opacity:.68}
+    #a8-chime .readout{text-align:right;min-width:150px}
+    #a8-chime .time{font-variant-numeric:tabular-nums;font-size:30px;font-weight:800;letter-spacing:-.03em}
+    #a8-chime .time small{font-size:12px;font-weight:700;opacity:.55;letter-spacing:.08em}
+    #a8-chime .panel{background:light-dark(#ffffff,#191c20);border:1px solid light-dark(#d9d6ce,#30343a);border-radius:20px;padding:22px}
+    #a8-chime .controls{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+    #a8-chime button{min-height:52px;padding:0 24px;border:0;border-radius:999px;font:inherit;font-weight:850;cursor:pointer;transition:transform .12s ease,opacity .12s ease}
+    #a8-chime button:active{transform:scale(.98)}
+    #a8-chime button:focus-visible{outline:3px solid currentColor;outline-offset:3px}
+    #a8-chime .start{background:light-dark(#17191b,#f1f3f5);color:light-dark(#fff,#111315)}
+    #a8-chime .status{font-size:13px;font-weight:750;opacity:.62}
+    #a8-chime .seconds{display:grid;grid-template-columns:repeat(16,minmax(0,1fr));gap:5px;margin:22px 0 14px}
+    #a8-chime .sec{height:18px;border-radius:5px;background:light-dark(#e6e3dc,#2a2e33);transition:background .08s ease,transform .08s ease}
+    #a8-chime .sec.on{background:light-dark(#34383d,#e5e8eb);transform:translateY(-2px)}
+    #a8-chime .tonebox{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+    #a8-chime .metric{padding:15px 16px;border-radius:14px;background:light-dark(#f1efe9,#22262b)}
+    #a8-chime .label{font-size:11px;text-transform:uppercase;letter-spacing:.12em;font-weight:800;opacity:.5;margin-bottom:5px}
+    #a8-chime .value{font-size:20px;font-weight:850;font-variant-numeric:tabular-nums}
+    #a8-chime .tones{display:grid;grid-template-columns:repeat(8,1fr);gap:7px;margin-top:18px}
+    #a8-chime .tone{aspect-ratio:1;border-radius:12px;display:grid;place-items:center;background:light-dark(#ebe8e1,#282c31);font-size:14px;font-weight:850;transition:transform .08s ease,background .08s ease}
+    #a8-chime .tone.live{transform:translateY(-4px) scale(1.04);background:light-dark(#25292d,#f0f2f4);color:light-dark(#fff,#111315)}
+    #a8-chime .foot{font-size:11px;line-height:1.45;opacity:.48;margin-top:15px}
+    @media(max-width:520px){#a8-chime{padding:20px 14px}#a8-chime .readout{text-align:left}.a8root .tonebox{grid-template-columns:1fr}.a8root .seconds{gap:3px}.a8root .sec{height:14px}}
+    @media(prefers-reduced-motion:reduce){#a8-chime *{transition:none!important}}
+  </style>
+
+  <div class="wrap">
+    <div class="hero">
+      <div>
+        <div class="kicker">Auspicious 8 · little public chime</div>
+        <h2>16 A8 seconds</h2>
+        <div class="sub">An original warm, storybook-style A8 ditty: eight A8 tones, exact 1/8, 1/4, 1/2 and whole-A8-second note lengths, and a full 16-A8-second phrase. The pitches may sound unfamiliar on purpose: this demo uses eight equal pitch steps across each A8 octave, anchored by the native doubling ladder 128 → 256 → 512 cycles per A8 second. A tuned presentation can later map the same A8 rhythm onto more familiar conventional pitches when desired.</div>
+      </div>
+      <div class="readout">
+        <div class="time"><span id="elapsed">0.000</span> <small>A8 s</small></div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="controls">
+        <button type="button" class="start" id="toggle">START CHIME</button>
+        <span class="status" id="status" aria-live="polite">Ready · 16 A8 seconds</span>
+      </div>
+
+      <div class="seconds" id="seconds" aria-label="16 A8 second progress"></div>
+
+      <div class="tonebox">
+        <div class="metric">
+          <div class="label">Current A8 tone</div>
+          <div class="value" id="currentTone">—</div>
+        </div>
+        <div class="metric">
+          <div class="label">Current note length</div>
+          <div class="value" id="currentDur">—</div>
+        </div>
+      </div>
+
+      <div class="tones" id="tones" aria-label="A8 tone indicators"></div>
+
+      <div class="foot">Tone numbers 1–8 are the native A8 chime voice, not conventional note names. Their slightly unusual sound is intentional so this instrument can demonstrate the equal eight-step A8 temperament between octave doublings such as 128, 256 and 512 cycles/A8 second. For public music that should sound more familiar, the tone layer can be tuned toward conventional pitches without changing the native A8 timing or rhythmic score. Browser/DAC timing is only the downstream sound translation.</div>
+    </div>
+  </div>
+
+  <script>
+  (()=>{
+    const root=document.getElementById('a8-chime');
+    if(root.dataset.ready)return; root.dataset.ready='1';
+    const toggle=root.querySelector('#toggle');
+    const status=root.querySelector('#status');
+    const elapsed=root.querySelector('#elapsed');
+    const currentTone=root.querySelector('#currentTone');
+    const currentDur=root.querySelector('#currentDur');
+    const seconds=root.querySelector('#seconds');
+    const tones=root.querySelector('#tones');
+
+    const A8_SECOND=675/1024; // downstream browser translation only
+    const TOTAL_A8=16;
+    const dur=[.25,.25,.125,.125,.25,.5,.5,1,1];
+    const bars=[
+      [1,3,5,6,5,3,4,2,1],
+      [3,4,5,7,6,5,3,2,3],
+      [5,6,8,7,6,5,4,3,5],
+      [6,5,4,3,2,3,2,1,1]
+    ];
+    const score=[];
+    let cursor=0;
+    bars.forEach(bar=>bar.forEach((tone,i)=>{score.push({tone,start:cursor,dur:dur[i]});cursor+=dur[i]}));
+
+    for(let i=0;i<16;i++){const d=document.createElement('div');d.className='sec';seconds.appendChild(d)}
+    for(let i=1;i<=8;i++){const d=document.createElement('div');d.className='tone';d.textContent=i;d.dataset.tone=String(i);tones.appendChild(d)}
+
+    let ctx=null,master=null,startAt=0,running=false,raf=0,sources=[];
+    const toneRatios=[1,1.0905,1.1892,1.2968,1.4142,1.5422,1.6818,1.8340];
+    const baseCyclesPerA8Second=256;
+
+    function clearVisual(){
+      elapsed.textContent='0.000'; currentTone.textContent='—'; currentDur.textContent='—';
+      seconds.querySelectorAll('.sec').forEach(x=>x.classList.remove('on'));
+      tones.querySelectorAll('.tone').forEach(x=>x.classList.remove('live'));
+    }
+
+    function stop(reset=true){
+      running=false; cancelAnimationFrame(raf);
+      sources.forEach(o=>{try{o.stop()}catch{}}); sources=[];
+      if(master){try{master.gain.cancelScheduledValues(ctx.currentTime);master.gain.setValueAtTime(0,ctx.currentTime)}catch{}}
+      toggle.textContent='START CHIME'; status.textContent='Ready · 16 A8 seconds';
+      if(reset) clearVisual();
+    }
+
+    function scheduleNote(ev){
+      const t=startAt+ev.start*A8_SECOND;
+      const len=ev.dur*A8_SECOND;
+      const freq=(baseCyclesPerA8Second/A8_SECOND)*toneRatios[ev.tone-1];
+      const osc=ctx.createOscillator();
+      const bell=ctx.createOscillator();
+      const gain=ctx.createGain();
+      const bellGain=ctx.createGain();
+      osc.type='sine'; osc.frequency.setValueAtTime(freq,t);
+      bell.type='sine'; bell.frequency.setValueAtTime(freq*2,t);
+      const peak=.12;
+      gain.gain.setValueAtTime(0.0001,t);
+      gain.gain.exponentialRampToValueAtTime(peak,t+Math.min(.018,len*.18));
+      gain.gain.exponentialRampToValueAtTime(0.0001,t+Math.max(.025,len*.82));
+      bellGain.gain.setValueAtTime(0.0001,t);
+      bellGain.gain.exponentialRampToValueAtTime(peak*.22,t+Math.min(.012,len*.12));
+      bellGain.gain.exponentialRampToValueAtTime(0.0001,t+Math.max(.02,len*.48));
+      osc.connect(gain); gain.connect(master);
+      bell.connect(bellGain); bellGain.connect(master);
+      osc.start(t); bell.start(t);
+      osc.stop(t+len*.86); bell.stop(t+len*.56);
+      sources.push(osc,bell);
+    }
+
+    function render(){
+      if(!running||!ctx)return;
+      const a8=Math.max(0,(ctx.currentTime-startAt)/A8_SECOND);
+      if(a8>=TOTAL_A8){
+        elapsed.textContent='16.000';
+        seconds.querySelectorAll('.sec').forEach(x=>x.classList.add('on'));
+        status.textContent='Finished · tap START to play again';
+        toggle.textContent='START CHIME'; running=false; sources=[];
+        currentTone.textContent='—'; currentDur.textContent='—';
+        tones.querySelectorAll('.tone').forEach(x=>x.classList.remove('live'));
+        return;
+      }
+      elapsed.textContent=a8.toFixed(3);
+      seconds.querySelectorAll('.sec').forEach((x,i)=>x.classList.toggle('on',i<=Math.floor(a8)));
+      const ev=score.find(e=>a8>=e.start&&a8<e.start+e.dur);
+      tones.querySelectorAll('.tone').forEach(x=>x.classList.toggle('live',!!ev&&Number(x.dataset.tone)===ev.tone));
+      if(ev){currentTone.textContent=String(ev.tone);currentDur.textContent=ev.dur===.125?'1/8 A8 s':ev.dur===.25?'1/4 A8 s':ev.dur===.5?'1/2 A8 s':'1 A8 s'}
+      raf=requestAnimationFrame(render);
+    }
+
+    async function start(){
+      if(running){stop();return}
+      const AC=window.AudioContext||window.webkitAudioContext;
+      if(!AC){status.textContent='Audio is not available in this browser.';return}
+      if(!ctx)ctx=new AC();
+      await ctx.resume();
+      if(master){try{master.disconnect()}catch{}}
+      master=ctx.createGain(); master.gain.setValueAtTime(.9,ctx.currentTime); master.connect(ctx.destination);
+      clearVisual(); sources=[]; running=true;
+      startAt=ctx.currentTime+.06;
+      score.forEach(scheduleNote);
+      toggle.textContent='STOP'; status.textContent='Playing · native A8 rhythm';
+      render();
+    }
+
+    toggle.addEventListener('click',()=>{if(running)stop();else start()});
+  })();
+  </script>
+</div>

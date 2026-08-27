@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Slow Discipline Candidate | A8 Time Lab v5.4.20</title>
+<meta name="description" content="COSIGO Labs Auspicious 8 Gate 5A Jovian slow-discipline candidate. Exact recovered Jovian recurrence comparison produces a rate-scale recommendation only; no actuator and no clock phase write.">
+<meta name="author" content="COSIGO Labs">
+<meta name="robots" content="index,follow">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/site-shell.css">
+<style>
+  main{max-width:1180px;margin:auto;padding:28px 20px 72px}
+  .hero,.card{border:1px solid var(--line,#2a3744);border-radius:16px;padding:20px;background:var(--panel,#111820)}
+  .hero{margin-bottom:16px}
+  .title{font-size:clamp(2.1rem,7vw,5.3rem);line-height:.96;letter-spacing:-.05em;margin:.18em 0}
+  .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+  .k{display:block;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;opacity:.68}
+  .v{display:block;font-size:1.15rem;font-weight:800;margin-top:4px;overflow-wrap:anywhere}
+  .good{color:#87d39b}.warn{color:#e0bd72}
+  pre{white-space:pre-wrap;overflow-wrap:anywhere}
+  @media(max-width:800px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav class="cosigo-global-nav" aria-label="COSIGO and A8 global navigation">
+  <a class="cosigo-global-brand" href="https://cosigo.io/" aria-label="COSIGO home">
+    <img src="/assets/cosigo_master_512.gif" alt="COSIGO">
+    <span>COSIGO<small>LABS · AUSPICIOUS 8</small></span>
+  </a>
+  <div class="cosigo-global-links">
+    <a href="/index.html">A8 LAB HOME</a>
+    <a href="/relationship.html">TERRA SHIP SLIP</a>
+    <a href="/mintaka.html">MINTAKA</a>
+    <a href="/sol.html">SOL</a>
+    <a href="/moons.html">JOVIAN MOONS</a>
+    <a href="https://a8.cosigo.io/">A8 PUBLIC</a>
+  </div>
+</nav>
+
+<main>
+  <section class="hero">
+    <div class="eyebrow">AUSPICIOUS 8 · TIME LAB v5.4.20 · GATE 5A</div>
+    <h1 class="title">SLOW DISCIPLINE CANDIDATE</h1>
+    <p><b>JOVIAN RATE ADVISOR · NO ACTUATOR</b></p>
+    <p class="muted">
+      Jupiter / Io–Europa–Ganymede remains the natural timekeeper.
+      Gate 5A compares a newly recovered exact Jovian recurrence against an earlier
+      recovered exact Jovian baseline and calculates a rate-correction candidate only.
+      Nothing is applied to the oscillator, divider, or displayed clock.
+    </p>
+  </section>
+
+  <section class="grid">
+    <div class="card">
+      <span class="k">SOURCE</span>
+      <span class="v">JOVIAN RECOVERY</span>
+      <p class="muted">Recovered natural recurrence only.</p>
+    </div>
+    <div class="card">
+      <span class="k">OUTPUT</span>
+      <span class="v">RATE SCALE CANDIDATE</span>
+      <p class="muted">Exact rational advisory quantity.</p>
+    </div>
+    <div class="card">
+      <span class="k">ACTUATOR</span>
+      <span class="v good">NONE</span>
+      <p class="muted">No oscillator, divider, clock, or authority write path.</p>
+    </div>
+  </section>
+
+  <section class="card" style="margin-top:16px">
+    <h2>Native exact comparison</h2>
+    <pre>BASELINE
+recovered raw pulses / Jovian natural cycle
+
+CURRENT
+recovered raw pulses / Jovian natural cycle
+
+SIGNED FRACTIONAL RATE ERROR
+= current / baseline - 1
+
+RATE-SCALE CANDIDATE
+= baseline / current</pre>
+  </section>
+
+  <section class="card" style="margin-top:16px">
+    <h2>Gate 5A proof fixture</h2>
+    <pre>baseline = 1000 raw / Jovian cycle
+current  = 1001 raw / Jovian cycle
+
+fractional error
+= 1001/1000 - 1
+= +1/1000
+
+candidate scale
+= 1000/1001
+
+APPLIED
+= NO</pre>
+    <p class="muted">
+      These numbers are arbitrary engineering fixtures, not expected Jovian constants.
+    </p>
+  </section>
+
+  <section class="card" style="margin-top:16px">
+    <h2>Architecture boundary</h2>
+    <pre>JOVIAN NATURAL RECOVERY
+        │
+        ▼
+exact recurrence samples
+        │
+        ▼
+SLOW DISCIPLINE CANDIDATE
+        │
+        └── advisory exact rate scale
+
+NO RETURN ARROW IN GATE 5A</pre>
+    <p class="warn"><b>NO PHASE CORRECTION · NO CLOCK JUMP · NO RATE ACTUATION.</b></p>
+  </section>
+
+  <section class="card" style="margin-top:16px">
+    <h2>Earth observers remain observers</h2>
+    <p class="muted">
+      Mintaka, Sol, and Terra Ship Slip are not inputs to Gate 5A.
+      Their complete observer chains remain downstream and unchanged.
+    </p>
+  </section>
+</main>
+</body>
+</html>

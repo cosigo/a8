@@ -1,0 +1,2436 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>A8 Frequency Trainer · v5.4.18 | COSIGO Labs</title>
+<style>
+  :root {
+    color-scheme: dark light;
+    --panel: color-mix(in srgb, Canvas 94%, CanvasText 6%);
+    --line: color-mix(in srgb, CanvasText 30%, transparent);
+    --muted: color-mix(in srgb, CanvasText 68%, transparent);
+    --accent: #6d9cff;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    max-width: 980px;
+    margin: 28px auto;
+    padding: 0 18px 44px;
+    line-height: 1.48;
+  }
+  h1 { margin: 0 0 .25rem; }
+  h2 { font-size: 1.05rem; margin: 0 0 8px; }
+  .sub { color: var(--muted); margin: 0 0 14px; }
+  .nav { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 18px; }
+  .nav a {
+    display:inline-block; padding:8px 11px; border:1px solid var(--line);
+    border-radius:9px; color:inherit; text-decoration:none; font-weight:650;
+  }
+  .panel {
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 16px;
+    margin: 16px 0;
+    background: var(--panel);
+  }
+  .native {
+    border-left: 4px solid var(--accent);
+  }
+  .trainer-note {
+    display:grid;
+    grid-template-columns: repeat(auto-fit,minmax(210px,1fr));
+    gap:10px;
+    margin-top:12px;
+  }
+  .trainer-note > div {
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:10px;
+  }
+  .k {
+    display:block;
+    font-size:.78rem;
+    text-transform:uppercase;
+    letter-spacing:.045em;
+    color:var(--muted);
+  }
+  .big {
+    font: 750 1.45rem ui-monospace,SFMono-Regular,Menlo,monospace;
+  }
+  .small { font-size: .9rem; color: var(--muted); }
+  .controls {
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    align-items:end;
+  }
+  label { display:grid; gap:5px; }
+  button, select, input { font: inherit; }
+  button {
+    padding: 11px 10px;
+    cursor: pointer;
+    border-radius: 9px;
+    border: 1px solid var(--line);
+  }
+  button:disabled { cursor:not-allowed; opacity:.48; }
+  .anchor { border-width: 3px; }
+  .readout {
+    margin-top:14px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+    gap:10px;
+  }
+  .readout > div {
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:10px;
+  }
+  .primary-read .v {
+    font: 800 1.6rem ui-monospace,SFMono-Regular,Menlo,monospace;
+  }
+  .reference-read {
+    opacity:.72;
+  }
+  .reference-read .v {
+    font: 600 1rem ui-monospace,SFMono-Regular,Menlo,monospace;
+  }
+  .grid {
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(145px,1fr));
+    gap:10px;
+    margin-top:12px;
+  }
+  .freq-btn {
+    display:grid;
+    gap:4px;
+    text-align:left;
+    min-height:78px;
+  }
+  .freq-btn .native-value {
+    font:800 1.3rem ui-monospace,SFMono-Regular,Menlo,monospace;
+  }
+  .freq-btn .native-unit {
+    font-size:.78rem;
+  }
+  .freq-btn .legacy-ref {
+    font-size:.78rem;
+    color:var(--muted);
+  }
+  .freq-btn .octave-ref {
+    font-size:.78rem;
+    font-weight:700;
+  }
+  .formula {
+    font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+    overflow-wrap:anywhere;
+  }
+  .warn { font-weight:700; }
+  .hidden-ref .legacy-ref,
+  .hidden-ref #legacyReadBox,
+  .hidden-ref #conversionBox {
+    display:none;
+  }
+  input[type=number] { min-width:150px; padding:8px; }
+  select { padding:8px; }
+  .mode-row { margin-top:10px; }
+
+  .scope-wrap {
+    margin-top:12px;
+    border:1px solid var(--line);
+    border-radius:10px;
+    overflow:hidden;
+    background:color-mix(in srgb, Canvas 90%, CanvasText 10%);
+  }
+  #scope {
+    display:block;
+    width:100%;
+    height:220px;
+  }
+  .scope-meta {
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px 20px;
+    padding:9px 11px;
+    border-top:1px solid var(--line);
+    font-size:.84rem;
+    color:var(--muted);
+  }
+  .scope-meta b { color:CanvasText; }
+
+/* A8 ANTIQUE AUDIO BACKGROUND v1 */
+body{
+  background:
+    linear-gradient(rgba(7,9,12,.58), rgba(7,9,12,.72)),
+    url("/assets/a8_audio_antique_bg.png")
+      center center / cover fixed no-repeat !important;
+}
+
+</style>
+<link rel="stylesheet" href="/site-shell.css">
+<meta name="description" content="COSIGO Labs Auspicious 8 audio laboratory for exploring A8 timing, tone, frequency relationships, and native measurement concepts in an engineering test environment.">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+<meta name="author" content="COSIGO Labs">
+<link rel="canonical" href="https://lab.a8.cosigo.io/audio.html">
+<link rel="icon" href="https://a8.cosigo.io/assets/cosigo_master_512.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="COSIGO Labs — Auspicious 8">
+<meta property="og:title" content="A8 Frequency Trainer · v5.4.18">
+<meta property="og:description" content="COSIGO Labs Auspicious 8 audio laboratory for exploring A8 timing, tone, frequency relationships, and native measurement concepts in an engineering test environment.">
+<meta property="og:url" content="https://lab.a8.cosigo.io/audio.html">
+<meta property="og:image" content="https://a8.cosigo.io/assets/cosigo_master_512.png">
+<meta property="og:image:alt" content="A8 Frequency Trainer · v5.4.18 — COSIGO Labs">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="A8 Frequency Trainer · v5.4.18">
+<meta name="twitter:description" content="COSIGO Labs Auspicious 8 audio laboratory for exploring A8 timing, tone, frequency relationships, and native measurement concepts in an engineering test environment.">
+<meta name="twitter:image" content="https://a8.cosigo.io/assets/cosigo_master_512.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "A8 Frequency Trainer · v5.4.18",
+  "url": "https://lab.a8.cosigo.io/audio.html",
+  "description": "COSIGO Labs Auspicious 8 audio laboratory for exploring A8 timing, tone, frequency relationships, and native measurement concepts in an engineering test environment.",
+  "dateModified": "2026-08-18",
+  "inLanguage": "en",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "COSIGO Labs — Auspicious 8",
+    "url": "https://a8.cosigo.io/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "COSIGO Labs",
+    "url": "https://cosigo.io/"
+  },
+  "about": [
+    {
+      "@type": "Thing",
+      "name": "Audio engineering"
+    },
+    {
+      "@type": "Thing",
+      "name": "Frequency"
+    },
+    {
+      "@type": "Thing",
+      "name": "Auspicious 8 time"
+    },
+    {
+      "@type": "Thing",
+      "name": "Measurement systems"
+    }
+  ]
+}
+</script>
+
+<!-- A8-CORE-AUTHENTIC-MUSIC-V1 -->
+<style>
+
+.a8-core-music {
+  margin: 18px 0;
+  padding: 16px;
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 14px;
+  background: rgba(8,12,18,.68);
+}
+
+.a8-core-music h3 {
+  margin-top: 0;
+}
+
+.a8-core-music .a8-music-authority {
+  margin: 8px 0 14px;
+  font-size: .82rem;
+  line-height: 1.45;
+  opacity: .86;
+}
+
+.a8-core-music .a8-music-status {
+  margin: 12px 0;
+  padding: 10px 12px;
+  border-radius: 9px;
+  background: rgba(0,0,0,.23);
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Consolas,
+    monospace;
+  font-size: .82rem;
+  line-height: 1.55;
+}
+
+.a8-core-music .a8-music-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.a8-core-music button {
+  cursor: pointer;
+}
+
+.a8-core-music .a8-native-readout {
+  margin-top: 10px;
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Consolas,
+    monospace;
+  font-size: .78rem;
+  opacity: .88;
+}
+
+</style>
+
+</head>
+<body>
+<nav class="cosigo-global-nav" aria-label="COSIGO and A8 global navigation">
+  <a class="cosigo-global-brand" href="https://cosigo.io/" aria-label="COSIGO home">
+    <img src="/assets/cosigo_master_512.gif" alt="COSIGO">
+    <span>COSIGO<small>LABS · AUSPICIOUS 8</small></span>
+  </a>
+  <div class="cosigo-global-links">
+    <a href="/">A8 LAB HOME</a>
+    <a href="https://a8.cosigo.io/">A8 PUBLIC</a>
+    <a class="cosigo-exit" href="https://cosigo.io/">COSIGO HOME</a>
+    <a class="cosigo-exit" href="https://contact.cosigo.io/">CONTACT</a>
+    <a href="https://github.com/cosigo">GITHUB</a>
+  </div>
+</nav>
+
+  <nav class="nav">
+    <a href="/">ENGINEERING LAB</a>
+    <a href="/moons.html">4-MOON VIEW</a>
+    <a href="/clock.html">ORIGINAL CLOCK</a>
+  </nav>
+
+  <h1>Auspicious 8 — Frequency Trainer</h1>
+  <p class="sub">
+    Learn frequency using the A8 second. The physical sound does not change; the time ruler used to count its cycles does.
+  </p>
+
+  <section class="panel native">
+    <h2>What this trainer is teaching</h2>
+    <p>
+      <b>Primary:</b> frequency is displayed as <b>cycles per A8 second</b>.
+      Conventional Hertz remains a secondary browser/reference translation because Web Audio still requires cycles per conventional second.
+    </p>
+    <div class="trainer-note">
+      <div>
+        <span class="k">A8 time ruler</span>
+        <div class="big">1 A8 second</div>
+        <div class="small">= 675/1024 conventional seconds</div>
+      </div>
+      <div>
+        <span class="k">Native A8 frequency</span>
+        <div class="big">512 cycles / A8s</div>
+        <div class="small">A clean binary frequency value in the A8 ruler</div>
+      </div>
+      <div>
+        <span class="k">Same physical tone</span>
+        <div class="big">≈ 776.723 Hz</div>
+        <div class="small">secondary legacy/browser reference only</div>
+      </div>
+    </div>
+    <p class="small formula">
+      Browser implementation: conventional Hz = A8 cycles/A8s × 1024/675.
+      Reverse reference: A8 cycles/A8s = conventional Hz × 675/1024.
+    </p>
+  </section>
+
+  <section class="panel native">
+    <h2>Why the A8 ladder is naturally octave-friendly</h2>
+    <p>
+      A musical octave is a physical <b>2:1 frequency ratio</b>. A8 does not create that acoustic relationship;
+      it represents it cleanly because binary doubling and halving are already native operations.
+    </p>
+    <div class="trainer-note">
+      <div>
+        <span class="k">One octave down</span>
+        <div class="big">256 A8</div>
+        <div class="small">exactly 1/2 of 512 A8</div>
+      </div>
+      <div>
+        <span class="k">Trainer anchor</span>
+        <div class="big">512 A8</div>
+        <div class="small">reference point for octave distance</div>
+      </div>
+      <div>
+        <span class="k">One octave up</span>
+        <div class="big">1024 A8</div>
+        <div class="small">exactly 2× 512 A8</div>
+      </div>
+    </div>
+    <p class="small">
+      The <b>2:1 octave ratio is the physical/acoustic fact</b>. The unusually clean sequence
+      256 → 512 → 1024 is the A8 representation of that fact. This is “octave-friendly by structure,”
+      not a claim that Nature itself uses a human numeral system.
+    </p>
+  </section>
+
+  <section class="panel">
+    <div class="controls">
+      <label>
+        Waveform
+        <select id="wave">
+          <option value="sine" selected>Sine</option>
+          <option value="triangle">Triangle</option>
+          <option value="square">Square</option>
+          <option value="sawtooth">Sawtooth</option>
+        </select>
+      </label>
+
+      <label>
+        Normalized amplitude
+        <input
+          id="vol"
+          type="range"
+          min="0"
+          max="1"
+          step="0.125"
+          value="0.25"
+          list="a8AmplitudeSteps"
+        >
+        <datalist id="a8AmplitudeSteps">
+          <option value="0"></option>
+          <option value="0.125"></option>
+          <option value="0.25"></option>
+          <option value="0.375"></option>
+          <option value="0.5"></option>
+          <option value="0.625"></option>
+          <option value="0.75"></option>
+          <option value="0.875"></option>
+          <option value="1"></option>
+        </datalist>
+        <span class="small">
+          Normalized amplitude:
+          <b id="ampRead">1/4</b>
+        </span>
+      </label>
+
+      <button id="stop">STOP</button>
+    </div>
+
+    <div class="mode-row">
+      <label style="display:flex;grid-template-columns:auto 1fr;align-items:center;gap:8px">
+        <input id="hideLegacy" type="checkbox">
+        Trainer mode: hide legacy-Hz references
+      </label>
+    </div>
+
+    <div class="readout">
+      <div class="primary-read">
+        <span class="k">A8 FREQUENCY · PRIMARY</span>
+        <div class="v" id="a8Read">Stopped</div>
+      </div>
+      <div class="reference-read" id="legacyReadBox">
+        <span class="k">LEGACY / BROWSER REFERENCE</span>
+        <div class="v" id="legacyRead">—</div>
+      </div>
+      <div>
+        <span class="k">RELATION</span>
+        <div class="v" id="relationRead">Choose an A8 frequency.</div>
+      </div>
+      <div>
+        <span class="k">OCTAVE DISTANCE FROM 512 A8</span>
+        <div class="v" id="octaveRead">—</div>
+      </div>
+    </div>
+
+    <p class="small">
+      Start low and use modest volume. Sine is recommended. High frequencies can be unpleasant or inaudible, and browser hardware cannot reproduce every theoretical A8 value.
+    </p>
+  </section>
+
+  <section class="panel native">
+    <h2>Simple Waveform Scope</h2>
+    <p class="small">
+      Native A8 waveform generated directly from the selected
+      <b>A8 frequency × A8 time ruler</b>.
+      This visual does not depend on browser audio samples, the DAC or the speaker.
+      Audible output remains a downstream browser / hardware demonstration and may
+      exhibit transducer artifacts at higher frequencies.
+    </p>
+    <div class="controls" style="margin-top:12px">
+      <label>
+        A8 TIME WINDOW
+        <select id="scopeTime">
+          <option value="0.25">1/4 A8 second</option>
+          <option value="0.125">1/8 A8 second</option>
+          <option value="0.0625">1/16 A8 second</option>
+          <option value="0.03125">1/32 A8 second</option>
+          <option value="0.015625" selected>1/64 A8 second</option>
+          <option value="0.0078125">1/128 A8 second</option>
+          <option value="0.00390625">1/256 A8 second</option>
+          <option value="0.001953125">1/512 A8 second</option>
+        </select>
+      </label>
+    </div>
+
+    <p class="small">
+      This selector sets the horizontal ruler in native A8 time.
+      Changing frequency does not change the selected time window;
+      it changes how many cycles fit inside that window.
+    </p>
+
+    <div class="controls" style="margin-top:10px">
+      <button id="scopeToggle">SCOPE DISPLAY · ON</button>
+      <span class="small">
+        Visual control only. Audio playback remains on its separate downstream path.
+      </span>
+    </div>
+
+    <div class="scope-wrap">
+      <canvas id="scope" aria-label="Live waveform display"></canvas>
+      <div class="scope-meta">
+        <span>A8 source: <b id="scopeFreq">Stopped</b></span>
+        <span>Waveform: <b id="scopeWave">Sine</b></span>
+        <span>Horizontal view: <b id="scopeWindow">—</b></span>
+        <span>A8 period: <b id="scopePeriod">—</b></span>
+        <span>Amplitude: <b id="scopeAmplitude">1/4</b></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>Binary A8 frequency ladder</h2>
+    <p class="small">
+      Every adjacent button is an exact ×2 or ÷2 in <b>cycles per A8 second</b>.
+      The small Hz number is deliberately secondary and generally does not look clean.
+    </p>
+    <div class="grid" id="buttons"></div>
+  </section>
+
+  <section class="panel">
+    <h2>Direct A8 frequency</h2>
+    <div class="controls">
+      <label>
+        Cycles per A8 second
+        <input id="freq" type="number" min="0.125" step="0.125" value="512">
+      </label>
+      <button id="playDirect">PLAY A8 FREQUENCY</button>
+      <button id="half">÷ 2 A8</button>
+      <button id="double">× 2 A8</button>
+    </div>
+    <p class="small">
+      Halving and doubling operate on the native A8 frequency value. The physical browser oscillator is translated afterward.
+    </p>
+  </section>
+
+  <section class="panel reference-read" id="conversionBox">
+    <h2>Reference translation — audio-output boundary</h2>
+    <p>
+      A8 frequency is counted in <b>cycles per A8 SECOND</b>. The A8 timebase is referenced to the
+      Jovian 1:2:4 recovery architecture — <b>Io ×4 · Europa ×2 · Ganymede ×1</b>.
+      The conventional value below exists only so the browser audio engine can render the selected
+      native A8 frequency. It is an implementation reference, not the A8 frequency ruler.
+    </p>
+    <div class="trainer-note">
+      <div>
+        <span class="k">Selected A8 frequency</span>
+        <div class="big" id="convA8">512</div>
+        <div class="small">cycles / A8 second</div>
+      </div>
+      <div>
+        <span class="k">Web Audio output target</span>
+        <div class="big" id="convHz">776.722963</div>
+        <div class="small">Hz · implementation reference</div>
+      </div>
+      <div>
+        <span class="k">A8 timebase reference</span>
+        <div class="big">Jovian 1:2:4 recovery</div>
+        <div class="small">Io ×4 · Europa ×2 · Ganymede ×1</div>
+      </div>
+      <div>
+        <span class="k">Output boundary</span>
+        <div class="big">A8 defines the frequency</div>
+        <div class="small">Web Audio renders it through conventional browser / audio hardware</div>
+      </div>
+    </div>
+  </section>
+
+<script>
+let ctx = null;
+let osc = null;
+let gain = null;
+let scopeEnabled = true;
+let currentA8 = null;
+
+// Exact development translation from the current A8 clock:
+// 1 A8 second = 675 / 1024 conventional seconds.
+const A8_TO_LEGACY_HZ = 1024 / 675;
+const LEGACY_HZ_TO_A8 = 675 / 1024;
+
+const ladder = [16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768];
+
+const $ = id => document.getElementById(id);
+
+function a8ToLegacyHz(a8Frequency) {
+  return a8Frequency * A8_TO_LEGACY_HZ;
+}
+
+function legacyHzToA8(hz) {
+  return hz * LEGACY_HZ_TO_A8;
+}
+
+function formatA8(v) {
+  if (Number.isInteger(v)) return String(v);
+  return Number(v.toFixed(6)).toString();
+}
+
+function formatHz(v) {
+  return Number(v).toFixed(6).replace(/0+$/,'').replace(/\.$/,'');
+}
+
+function octaveDistanceFromAnchor(a8Frequency) {
+  const ratio = a8Frequency / 512;
+  if (!(ratio > 0)) return null;
+  const oct = Math.log2(ratio);
+  const nearest = Math.round(oct);
+  return Math.abs(oct - nearest) < 1e-10 ? nearest : oct;
+}
+
+function formatOctaveDistance(a8Frequency) {
+  const oct = octaveDistanceFromAnchor(a8Frequency);
+  if (oct === null) return '—';
+  if (Number.isInteger(oct)) {
+    if (oct === 0) return 'anchor · 0 octaves';
+    return (oct > 0 ? '+' : '−') + Math.abs(oct) + (Math.abs(oct) === 1 ? ' octave' : ' octaves');
+  }
+  return (oct > 0 ? '+' : '−') + Math.abs(oct).toFixed(3) + ' octaves';
+}
+
+function ensureAudio() {
+  if (!ctx) {
+    ctx = new (window.AudioContext || window.webkitAudioContext)();
+    refreshHardwareLimits();
+  }
+
+  if (ctx.state === "suspended") ctx.resume();
+}
+
+function maxPlayableHz() {
+  return ctx ? ctx.sampleRate / 2 : 22050;
+}
+
+function nativeWaveSample(type, cyclePosition) {
+  const p = cyclePosition - Math.floor(cyclePosition);
+
+  switch (type) {
+    case "triangle":
+      return 1 - 4 * Math.abs(p - 0.5);
+
+    case "square":
+      return p < 0.5 ? 1 : -1;
+
+    case "sawtooth":
+      return 2 * p - 1;
+
+    case "sine":
+    default:
+      return Math.sin(2 * Math.PI * p);
+  }
+}
+
+function formatA8TimeValue(value) {
+  if (!(value > 0)) return "0";
+
+  const inverse = 1 / value;
+  const nearest = Math.round(inverse);
+
+  if (
+    Math.abs(inverse - nearest) < 1e-10 &&
+    nearest >= 1
+  ) {
+    return "1/" + nearest;
+  }
+
+  return formatA8(value);
+}
+
+function formatAmplitudeFraction(value) {
+  const n = Math.max(0, Math.min(8, Math.round(Number(value) * 8)));
+
+  const labels = [
+    "0",
+    "1/8",
+    "1/4",
+    "3/8",
+    "1/2",
+    "5/8",
+    "3/4",
+    "7/8",
+    "1"
+  ];
+
+  return labels[n];
+}
+
+function signedAmplitudeLabel(value) {
+  if (Math.abs(value) < 1e-12) return "0";
+
+  const sign = value > 0 ? "+" : "−";
+  return sign + formatAmplitudeFraction(Math.abs(value));
+}
+
+function drawScope() {
+  const canvas = $('scope');
+  if (!canvas) return;
+
+  const g = canvas.getContext('2d');
+  const rect = canvas.getBoundingClientRect();
+  const dpr = window.devicePixelRatio || 1;
+
+  const pixelW = Math.max(1, Math.round(rect.width * dpr));
+  const pixelH = Math.max(1, Math.round(rect.height * dpr));
+
+  if (canvas.width !== pixelW || canvas.height !== pixelH) {
+    canvas.width = pixelW;
+    canvas.height = pixelH;
+  }
+
+  g.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+  const w = rect.width;
+  const h = rect.height;
+
+  g.clearRect(0, 0, w, h);
+
+  // ----------------------------------------------------------
+  // PLOT GEOMETRY
+  //
+  // Left band: normalized amplitude labels
+  // Bottom band: native A8 time labels
+  // ----------------------------------------------------------
+
+  const leftBand = 52;
+  const rightPad = 5;
+  const topPad = 7;
+  const bottomBand = 27;
+
+  const plotX = leftBand;
+  const plotY = topPad;
+  const plotW = Math.max(1, w - leftBand - rightPad);
+  const plotH = Math.max(1, h - topPad - bottomBand);
+
+  const centerY = plotY + plotH / 2;
+
+  const scopeTime = $('scopeTime');
+  const windowA8 = Number(scopeTime.value);
+
+  const windowLabel =
+    scopeTime.options[scopeTime.selectedIndex].text;
+
+  const accent = getComputedStyle(document.documentElement)
+    .getPropertyValue('--accent')
+    .trim() || '#6d9cff';
+
+  // ----------------------------------------------------------
+  // VERTICAL RULER · NORMALIZED AMPLITUDE
+  //
+  // +1
+  // +7/8
+  // ...
+  //  0
+  // ...
+  // -7/8
+  // -1
+  //
+  // This is normalized waveform amplitude, NOT yet a physical
+  // A8 voltage / pressure / power unit.
+  // ----------------------------------------------------------
+
+  g.font =
+    '10px ui-monospace,SFMono-Regular,Menlo,monospace';
+
+  g.textBaseline = 'middle';
+  g.textAlign = 'right';
+
+  for (let i = 0; i <= 16; i++) {
+    const amplitude = 1 - i / 8;
+
+    const y =
+      plotY +
+      (i / 16) * plotH;
+
+    const major =
+      i === 0 ||
+      i === 8 ||
+      i === 16 ||
+      i % 4 === 0;
+
+    g.strokeStyle =
+      i === 8
+        ? 'rgba(170,170,170,.55)'
+        : major
+          ? 'rgba(140,140,140,.35)'
+          : 'rgba(128,128,128,.20)';
+
+    g.lineWidth =
+      i === 8 ? 1.4 : 1;
+
+    g.beginPath();
+    g.moveTo(plotX, y);
+    g.lineTo(plotX + plotW, y);
+    g.stroke();
+
+    g.fillStyle =
+      major
+        ? 'rgba(205,205,205,.90)'
+        : 'rgba(175,175,175,.72)';
+
+    g.fillText(
+      signedAmplitudeLabel(amplitude),
+      plotX - 7,
+      y
+    );
+  }
+
+  // ----------------------------------------------------------
+  // HORIZONTAL RULER · A8 TIME
+  //
+  // Eight equal divisions of the selected native time window.
+  //
+  // Example:
+  // 1/64 A8s window
+  // each major division = 1/512 A8s.
+  // ----------------------------------------------------------
+
+  const divisions = 8;
+
+  g.textBaseline = 'top';
+  g.textAlign = 'center';
+
+  for (let i = 0; i <= divisions; i++) {
+    const fraction = i / divisions;
+
+    const x =
+      plotX +
+      fraction * plotW;
+
+    const tA8 =
+      windowA8 * fraction;
+
+    g.strokeStyle =
+      'rgba(128,128,128,.28)';
+
+    g.lineWidth = 1;
+
+    g.beginPath();
+    g.moveTo(x, plotY);
+    g.lineTo(x, plotY + plotH);
+    g.stroke();
+
+    const labelEvery =
+      plotW < 600 ? 2 : 1;
+
+    if (i % labelEvery === 0) {
+      const text =
+        i === 0
+          ? "0"
+          : formatA8TimeValue(tA8);
+
+      g.fillStyle =
+        'rgba(190,190,190,.82)';
+
+      if (i === 0) {
+        g.textAlign = 'left';
+        g.fillText(text, x + 2, plotY + plotH + 5);
+      } else if (i === divisions) {
+        g.textAlign = 'right';
+        g.fillText(text, x - 2, plotY + plotH + 5);
+      } else {
+        g.textAlign = 'center';
+        g.fillText(text, x, plotY + plotH + 5);
+      }
+    }
+  }
+
+  $('scopeWindow').textContent = windowLabel;
+
+  const normalizedAmplitude =
+    Math.max(
+      0,
+      Math.min(1, Number($('vol').value))
+    );
+
+  const amplitudeLabel =
+    formatAmplitudeFraction(normalizedAmplitude);
+
+  if ($('ampRead')) {
+    $('ampRead').textContent = amplitudeLabel;
+  }
+
+  if ($('scopeAmplitude')) {
+    $('scopeAmplitude').textContent = amplitudeLabel;
+  }
+
+  if (!scopeEnabled) {
+    $('scopeWindow').textContent =
+      windowLabel + " · visual OFF";
+
+    $('scopePeriod').textContent = "—";
+    return;
+  }
+
+  if (!currentA8) {
+    $('scopePeriod').textContent = "—";
+    return;
+  }
+
+  // ----------------------------------------------------------
+  // NATIVE A8 WAVEFORM
+  //
+  // t = native A8 time
+  // f = cycles / A8 second
+  //
+  // phase = f × t
+  //
+  // amplitude is normalized 0 → 1.
+  //
+  // No browser Hz.
+  // No browser sample clock.
+  // No DAC sampling.
+  // No analyzer.
+  // ----------------------------------------------------------
+
+  const a8Frequency = currentA8;
+  const expectedCycles =
+    a8Frequency * windowA8;
+
+  const periodA8 =
+    1 / a8Frequency;
+
+  const waveform =
+    $('wave').value;
+
+  // +1 and -1 correspond exactly to the full vertical
+  // normalized-amplitude ruler.
+  const vertical =
+    (plotH / 2) * normalizedAmplitude;
+
+  // Analytic visual density independent of browser audio sampling.
+  const pointCount = Math.min(
+    50000,
+    Math.max(
+      Math.ceil(plotW * 4),
+      Math.ceil(expectedCycles * 64),
+      256
+    )
+  );
+
+  g.strokeStyle = accent;
+  g.lineWidth = 2;
+  g.beginPath();
+
+  for (let i = 0; i <= pointCount; i++) {
+    const fraction =
+      i / pointCount;
+
+    const x =
+      plotX +
+      fraction * plotW;
+
+    const tA8 =
+      fraction * windowA8;
+
+    const cyclePosition =
+      a8Frequency * tA8;
+
+    const sample =
+      nativeWaveSample(
+        waveform,
+        cyclePosition
+      );
+
+    const y =
+      centerY -
+      sample * vertical;
+
+    if (i === 0) {
+      g.moveTo(x, y);
+    } else {
+      g.lineTo(x, y);
+    }
+  }
+
+  g.stroke();
+
+  $('scopeWindow').textContent =
+    windowLabel +
+    " · " +
+    formatA8(expectedCycles) +
+    " cycles";
+
+  $('scopePeriod').textContent =
+    formatA8TimeValue(periodA8) +
+    " A8s / cycle";
+}
+
+function startScope() {
+  drawScope();
+}
+
+function canPlayA8(a8Frequency) {
+  return a8ToLegacyHz(a8Frequency) < maxPlayableHz();
+}
+
+function updateReference(a8Frequency) {
+  const hz = a8ToLegacyHz(a8Frequency);
+  $('convA8').textContent = formatA8(a8Frequency);
+  $('convHz').textContent = formatHz(hz);
+}
+
+// Audible-output boundary only.
+// A8 frequency remains authoritative in cycles per A8 SECOND.
+// Web Audio is used only to render that native frequency through
+// conventional browser/audio hardware.
+const AUDIO_ATTACK_SEC = 0.025;
+const AUDIO_RELEASE_SEC = 0.035;
+
+// Downstream browser transducer ceiling only.
+// Native scope amplitude remains normalized 0 → 1.
+const BROWSER_AUDIO_MAX_GAIN = 0.12;
+
+function stopTone(updateReadout = true) {
+  const oldOsc = osc;
+  const oldGain = gain;
+
+  osc = null;
+  gain = null;
+  currentA8 = null;
+
+  if ($('scopeFreq')) {
+    $('scopeFreq').textContent = "Stopped";
+    drawScope();
+  }
+
+  if (oldGain && ctx) {
+    const now = ctx.currentTime;
+    try {
+      oldGain.gain.cancelScheduledValues(now);
+      oldGain.gain.setValueAtTime(oldGain.gain.value, now);
+      oldGain.gain.linearRampToValueAtTime(0, now + AUDIO_RELEASE_SEC);
+    } catch(e) {}
+  }
+
+  if (oldOsc && ctx) {
+    try { oldOsc.stop(ctx.currentTime + AUDIO_RELEASE_SEC + 0.005); } catch(e) {}
+    oldOsc.onended = () => {
+      try { oldOsc.disconnect(); } catch(e) {}
+      try { oldGain && oldGain.disconnect(); } catch(e) {}
+    };
+  } else {
+    try { oldOsc && oldOsc.disconnect(); } catch(e) {}
+    try { oldGain && oldGain.disconnect(); } catch(e) {}
+  }
+
+  if (updateReadout) {
+    $('a8Read').textContent = "Stopped";
+    $('legacyRead').textContent = "—";
+    $('relationRead').textContent = "Choose an A8 frequency.";
+    $('octaveRead').textContent = "—";
+  }
+}
+
+function playA8(a8Frequency) {
+  const a8 = Number(a8Frequency);
+  if (!Number.isFinite(a8) || a8 <= 0) return;
+
+  ensureAudio();
+  const hz = a8ToLegacyHz(a8);
+  updateReference(a8);
+
+  if (hz >= maxPlayableHz()) {
+    stopTone();
+    $('a8Read').textContent = formatA8(a8) + " cycles / A8s";
+    $('legacyRead').textContent = "≈ " + formatHz(hz) + " Hz";
+    $('relationRead').textContent =
+      "A8 value is valid, but this browser's Nyquist limit is ≈ " +
+      formatHz(maxPlayableHz()) + " Hz.";
+    $('octaveRead').textContent = formatOctaveDistance(a8);
+    return;
+  }
+
+  stopTone(false);
+  currentA8 = a8;
+
+  osc = ctx.createOscillator();
+  gain = ctx.createGain();
+
+  const now = ctx.currentTime;
+  const normalizedLevel = Number($('vol').value);
+  const level = normalizedLevel * BROWSER_AUDIO_MAX_GAIN;
+
+  // Sine remains the default/reference source.
+  // Other waveform shapes are downstream synthesis /
+  // visualization experiments only.
+  // Frequency authority remains the native A8 value.
+  osc.type = $('wave').value;
+  osc.frequency.setValueAtTime(hz, now);
+
+  gain.gain.setValueAtTime(0, now);
+  gain.gain.linearRampToValueAtTime(level, now + AUDIO_ATTACK_SEC);
+
+  // Downstream audible demonstration only.
+  // Native A8 visual generation is completely independent.
+  osc.connect(gain);
+  gain.connect(ctx.destination);
+  osc.start(now);
+
+  $('a8Read').textContent = formatA8(a8) + " cycles / A8s";
+  $('legacyRead').textContent = "≈ " + formatHz(hz) + " Hz";
+  $('relationRead').textContent =
+    a8 === 512
+      ? "512 is the native A8 trainer anchor."
+      : "Native A8 frequency · browser conversion occurs only at the audio-output boundary.";
+  $('octaveRead').textContent = formatOctaveDistance(a8);
+
+  $('scopeFreq').textContent =
+    formatA8(a8) + " cycles / A8s";
+
+  $('scopeWave').textContent =
+    $('wave').options[$('wave').selectedIndex].text;
+
+  drawScope();
+}
+
+function refreshHardwareLimits() {
+  document.querySelectorAll(".freq-btn").forEach(btn => {
+    const a8 = Number(btn.dataset.a8);
+    const limited = !canPlayA8(a8);
+    btn.disabled = limited;
+    if (limited) {
+      btn.title = "Theoretical A8 value; browser/audio hardware limit prevents clean playback.";
+      btn.querySelector(".legacy-ref").textContent =
+        "≈ " + formatHz(a8ToLegacyHz(a8)) + " Hz · hardware limit";
+    }
+  });
+}
+
+const buttons = $('buttons');
+ladder.forEach(a8 => {
+  const btn = document.createElement("button");
+  btn.className = "freq-btn";
+  btn.dataset.a8 = String(a8);
+  if (a8 === 512) btn.classList.add("anchor");
+
+  const nativeValue = document.createElement("span");
+  nativeValue.className = "native-value";
+  nativeValue.textContent = formatA8(a8);
+
+  const nativeUnit = document.createElement("span");
+  nativeUnit.className = "native-unit";
+  nativeUnit.textContent = "cycles / A8 second";
+
+  const octaveRef = document.createElement("span");
+  octaveRef.className = "octave-ref";
+  octaveRef.textContent = formatOctaveDistance(a8) + " from 512";
+
+  const legacyRef = document.createElement("span");
+  legacyRef.className = "legacy-ref";
+  legacyRef.textContent = "≈ " + formatHz(a8ToLegacyHz(a8)) + " Hz ref";
+
+  btn.append(nativeValue, nativeUnit, octaveRef, legacyRef);
+  btn.addEventListener("click", () => {
+    $('freq').value = a8;
+    playA8(a8);
+  });
+  buttons.appendChild(btn);
+});
+
+$('stop').addEventListener("click", stopTone);
+
+$('playDirect').addEventListener("click", () => {
+  const a8 = Number($('freq').value);
+  if (Number.isFinite(a8) && a8 > 0) playA8(a8);
+});
+
+$('half').addEventListener("click", () => {
+  let a8 = Number($('freq').value);
+  if (!Number.isFinite(a8) || a8 <= 0) a8 = 512;
+  a8 = a8 / 2;
+  $('freq').value = formatA8(a8);
+  playA8(a8);
+});
+
+$('double').addEventListener("click", () => {
+  let a8 = Number($('freq').value);
+  if (!Number.isFinite(a8) || a8 <= 0) a8 = 512;
+  a8 = a8 * 2;
+  $('freq').value = formatA8(a8);
+  playA8(a8);
+});
+
+$('freq').addEventListener("input", () => {
+  const a8 = Number($('freq').value);
+  if (Number.isFinite(a8) && a8 > 0) updateReference(a8);
+});
+
+$('freq').addEventListener("keydown", e => {
+  if (e.key === "Enter") $('playDirect').click();
+});
+
+// Sine remains the default/reference waveform.
+// Triangle, square and sawtooth are downstream sound/scope
+// experiments; changing waveform never changes native A8 frequency.
+$('wave').value = "sine";
+$('scopeWave').textContent = "Sine";
+
+$('wave').addEventListener("change", () => {
+  const selected = $('wave').value;
+
+  $('scopeWave').textContent =
+    $('wave').options[$('wave').selectedIndex].text;
+
+  if (osc) {
+    try {
+      osc.type = selected;
+    } catch(e) {}
+  }
+
+  drawScope();
+});
+
+$('scopeToggle').addEventListener("click", () => {
+  scopeEnabled = !scopeEnabled;
+
+  $('scopeToggle').textContent =
+    scopeEnabled
+      ? "SCOPE DISPLAY · ON"
+      : "SCOPE DISPLAY · OFF";
+
+  drawScope();
+});
+
+$('scopeTime').addEventListener("change", () => {
+  drawScope();
+});
+
+$('vol').addEventListener("input", () => {
+  const normalizedLevel = Number($('vol').value);
+
+  if (gain && ctx) {
+    gain.gain.setTargetAtTime(
+      normalizedLevel * BROWSER_AUDIO_MAX_GAIN,
+      ctx.currentTime,
+      0.015
+    );
+  }
+
+  const label = formatAmplitudeFraction(normalizedLevel);
+  $('ampRead').textContent = label;
+  $('scopeAmplitude').textContent = label;
+
+  drawScope();
+});
+
+$('hideLegacy').addEventListener("change", () => {
+  document.body.classList.toggle("hidden-ref", $('hideLegacy').checked);
+});
+
+updateReference(512);
+drawScope();
+</script>
+<footer class="cosigo-site-footer">
+  <strong>COSIGO Labs · Auspicious 8 experimental laboratory</strong>
+  <p class="cosigo-disclaimer">Research / engineering notice: A8 pages may contain provisional models, simulations, comparison values, hypotheses and unreplicated experiment designs. Unless a page explicitly states otherwise, material shown here is not a certified metrology standard, accredited measurement result, or final Foundation definition. Legacy / SI values are comparison coordinates where identified, not native A8 authority.</p>
+  <p class="cosigo-disclaimer">COSIGO is primarily an educational and experimental project. Nothing in this laboratory is an investment offering, promise of financial return, or financial, investment, legal or tax advice. See the project-status notice for the current public description.</p>
+  <div class="cosigo-footer-links">
+    <a href="https://cosigo.io/">COSIGO Home</a>
+    <a href="https://a8.cosigo.io/">A8 Public Instrument</a>
+    <a href="/">A8 Engineering Lab</a>
+    <a href="https://contact.cosigo.io/">Contact</a>
+    <a href="https://docs.cosigo.io/">COSIGO Docs / WP</a>
+    <a href="https://github.com/cosigo">COSIGO GitHub</a>
+    <a href="https://github.com/cosigo/cosigo.io">Main-site source</a>
+    <a href="https://cosigo.io/project-status.html">Educational Purpose / Project Status</a>
+  </div>
+  <p>© 2026 COSIGO. COSIGO™ rights and trademark notices remain governed by the official COSIGO site.</p>
+</footer>
+
+<section class="card a8-core-music" id="a8-core-tune-panel">
+
+  <h3>A8 CORE MUSIC · THREE WITNESSES</h3>
+
+  <div class="a8-music-authority">
+    TIME AUTHORITY: A8 RECOVERY CORE<br>
+    Pitch = cycles / A8 second.<br>
+    Rhythm = ¼ · ½ · 1 · 2 native A8 seconds.
+  </div>
+
+  <div class="a8-music-controls">
+    <button type="button" id="a8-tune-start">
+      START THREE WITNESSES
+    </button>
+
+    <button type="button" id="a8-tune-stop">
+      STOP
+    </button>
+  </div>
+
+  <div class="a8-music-status" id="a8-tune-status">
+    CORE: ACQUIRING<br>
+    MUSIC: STOPPED
+  </div>
+
+  <div class="a8-native-readout" id="a8-tune-note">
+    PITCH: —<br>
+    BEAT: —
+  </div>
+
+</section>
+
+
+<script>
+(() => {
+  "use strict";
+
+  const PAGE_MODE = "audio";
+
+  const CORE_URL = "/api/state";
+
+  const DAY_STATES = 131072;     // 32 * 64 * 64
+  const A8_SECONDS_PER_HOUR = 4096; // 64 * 64
+
+  const Q = 1 / 4;
+  const H = 1 / 2;
+  const W = 1;
+  const D = 2;
+
+  // ----------------------------------------------------------
+  // NATIVE A8 PITCHES
+  //
+  // All values are cycles / A8 second.
+  // No Hz exists in the musical definition.
+  // ----------------------------------------------------------
+
+  const P = {
+    ONE:   256,
+    TWO:   288,          // 256 * 9/8
+    THREE: 320,          // 256 * 5/4
+    FOUR:  256 * 4/3,
+    FIVE:  384,          // 256 * 3/2
+    SIX:   256 * 5/3,
+    SEVEN: 480,          // 256 * 15/8
+    EIGHT: 512
+  };
+
+
+  // ----------------------------------------------------------
+  // CLOCK CHIME
+  // Distinct short descending signature.
+  // ----------------------------------------------------------
+
+  const CLOCK_CHIME = [
+    [P.EIGHT, Q],
+    [P.FIVE,  Q],
+    [P.THREE, H],
+    [P.ONE,   W]
+  ];
+
+
+  // ----------------------------------------------------------
+  // AUDIO PAGE TUNE
+  //
+  // MICRO climbs.
+  // MACRO descends.
+  // The final phrase converges.
+  // ----------------------------------------------------------
+
+  const THREE_WITNESSES = [
+
+    // MICRO — bottom up
+    [P.ONE,   Q],
+    [P.TWO,   Q],
+    [P.THREE, H],
+    [P.FIVE,  W],
+
+    [0, Q],
+
+    // MACRO — top down
+    [P.EIGHT, Q],
+    [P.SEVEN, Q],
+    [P.SIX,   H],
+    [P.FIVE,  W],
+
+    [0, Q],
+
+    // WHERE · HOW FAR · WHEN
+    [P.ONE,   Q],
+    [P.THREE, Q],
+    [P.FIVE,  H],
+
+    [P.TWO,   Q],
+    [P.FOUR,  Q],
+    [P.SIX,   H],
+
+    [P.THREE, Q],
+    [P.FIVE,  Q],
+    [P.EIGHT, W],
+
+    [0, H],
+
+    // MEET
+    [P.EIGHT, Q],
+    [P.SIX,   Q],
+    [P.FIVE,  H],
+    [P.THREE, H],
+    [P.TWO,   H],
+    [P.ONE,   D]
+  ];
+
+
+  // ----------------------------------------------------------
+  // STATE
+  // ----------------------------------------------------------
+
+  let audio = null;
+  let oscillator = null;
+  let gain = null;
+
+  let previous = null;
+
+  let ticksPerA8Second = null;
+  let audioSecondsPerTick = null;
+  let audioSecondsPerA8Second = null;
+
+  let currentCore = null;
+
+  let player = null;
+
+  let chimeArmed = false;
+  let chimeTestPending = false;
+  let previousHour = null;
+  let previousPhase = null;
+
+  let tuneStartRequested = false;
+
+  let requestBusy = false;
+  let frameCounter = 0;
+
+
+  // ----------------------------------------------------------
+  // PAGE ELEMENTS
+  // ----------------------------------------------------------
+
+  function el(id) {
+    return document.getElementById(id);
+  }
+
+
+  // ----------------------------------------------------------
+  // RECURSIVE CORE FIELD LOOKUP
+  // ----------------------------------------------------------
+
+  function findExactKey(root, wanted) {
+
+    if (!root || typeof root !== "object") {
+      return undefined;
+    }
+
+    const target = wanted.toLowerCase();
+
+    const stack = [root];
+
+    while (stack.length) {
+
+      const obj = stack.pop();
+
+      if (!obj || typeof obj !== "object") continue;
+
+      for (const [key, value] of Object.entries(obj)) {
+
+        if (key.toLowerCase() === target) {
+          return value;
+        }
+
+        if (value && typeof value === "object") {
+          stack.push(value);
+        }
+      }
+    }
+
+    return undefined;
+  }
+
+
+  function firstValue(root, names) {
+
+    for (const name of names) {
+
+      const value = findExactKey(root, name);
+
+      if (value !== undefined && value !== null) {
+        return value;
+      }
+    }
+
+    return undefined;
+  }
+
+
+  function asNumber(value) {
+
+    if (
+      typeof value === "number" &&
+      Number.isFinite(value)
+    ) {
+      return value;
+    }
+
+    if (typeof value === "string") {
+
+      const n = Number(value);
+
+      if (Number.isFinite(n)) {
+        return n;
+      }
+    }
+
+    return null;
+  }
+
+
+  function corePhase(state) {
+
+    return asNumber(
+      firstValue(state, [
+        "dayPhase17",
+        "day_phase17",
+        "DAY_PHASE17",
+        "clockPhase17",
+        "a8DayPhase17",
+        "dayPhase"
+      ])
+    );
+  }
+
+
+  function coreRawTicks(state) {
+
+    return asNumber(
+      firstValue(state, [
+        "rawTicks",
+        "raw_ticks",
+        "RAW_TICKS",
+        "rawPulseCount",
+        "raw_pulse_count",
+        "pulseCount",
+        "pulse_count",
+        "pulseCounter",
+        "edgeCount",
+        "rawEdges",
+        "oscillatorCount",
+        "tickCount",
+        "plantStep",
+        "plantSteps"
+      ])
+    );
+  }
+
+
+  function coreRunning(state) {
+
+    const stopped = firstValue(state, [
+      "stopped",
+      "clockStopped",
+      "clock_stopped",
+      "isStopped"
+    ]);
+
+    if (stopped === true) {
+      return false;
+    }
+
+    const value = firstValue(state, [
+      "running",
+      "clockRunning",
+      "clock_running",
+      "isRunning",
+      "runState",
+      "clockState"
+    ]);
+
+    if (typeof value === "boolean") {
+      return value;
+    }
+
+    if (typeof value === "number") {
+      return value !== 0;
+    }
+
+    if (typeof value === "string") {
+
+      const x = value.trim().toUpperCase();
+
+      if (
+        x.includes("STOP") ||
+        x.includes("PAUSE") ||
+        x === "OFF"
+      ) {
+        return false;
+      }
+
+      if (
+        x.includes("RUN") ||
+        x.includes("ACTIVE") ||
+        x.includes("HOLDOVER") ||
+        x.includes("LOCK") ||
+        x.includes("QUALIFIED")
+      ) {
+        return true;
+      }
+    }
+
+    // If the endpoint supplied valid native counters but no
+    // explicit run flag, treat the core state as observable.
+    return true;
+  }
+
+
+  // ----------------------------------------------------------
+  // AUDIO DEVICE
+  //
+  // This is downstream only.
+  // It does not establish A8 time.
+  // ----------------------------------------------------------
+
+  function ensureAudio() {
+
+    if (!audio) {
+
+      audio = new (
+        window.AudioContext ||
+        window.webkitAudioContext
+      )();
+    }
+
+    if (audio.state === "suspended") {
+      audio.resume();
+    }
+
+    return audio;
+  }
+
+
+  function killTone() {
+
+    if (oscillator) {
+
+      try {
+        oscillator.stop();
+      } catch {}
+
+      try {
+        oscillator.disconnect();
+      } catch {}
+    }
+
+    if (gain) {
+
+      try {
+        gain.disconnect();
+      } catch {}
+    }
+
+    oscillator = null;
+    gain = null;
+  }
+
+
+  // ----------------------------------------------------------
+  // TRANSLATE NATIVE PITCH TO PHYSICAL DAC
+  //
+  // nativeCyclesPerA8Second
+  // -----------------------
+  // observed audio-device duration of one recovered A8 second
+  //
+  // No predefined legacy-second conversion is used.
+  // ----------------------------------------------------------
+
+  function startTone(nativeCyclesPerA8Second, waveform) {
+
+    killTone();
+
+    if (!nativeCyclesPerA8Second) {
+      return;
+    }
+
+    if (
+      !audioSecondsPerA8Second ||
+      !(audioSecondsPerA8Second > 0)
+    ) {
+      return;
+    }
+
+    const ac = ensureAudio();
+
+    const physicalFrequency =
+      nativeCyclesPerA8Second /
+      audioSecondsPerA8Second;
+
+    oscillator = ac.createOscillator();
+    gain = ac.createGain();
+
+    oscillator.type = waveform;
+
+    oscillator.frequency.setValueAtTime(
+      physicalFrequency,
+      ac.currentTime
+    );
+
+    gain.gain.setValueAtTime(
+      0.045,
+      ac.currentTime
+    );
+
+    oscillator.connect(gain);
+    gain.connect(ac.destination);
+
+    oscillator.start();
+  }
+
+
+  // ----------------------------------------------------------
+  // BEAT DISPLAY
+  // ----------------------------------------------------------
+
+  function beatLabel(v) {
+
+    if (v === Q) return "¼ A8 second";
+    if (v === H) return "½ A8 second";
+    if (v === W) return "1 A8 second";
+    if (v === D) return "2 A8 seconds";
+
+    return String(v) + " A8 second";
+  }
+
+
+  function pitchLabel(v) {
+
+    if (!v) return "REST";
+
+    const rounded =
+      Math.abs(v - Math.round(v)) < 1e-9
+      ? String(Math.round(v))
+      : v.toFixed(3);
+
+    return rounded + " cycles / A8 second";
+  }
+
+
+  // ----------------------------------------------------------
+  // CORE-DERIVED PLAYER
+  //
+  // Score position is never advanced by a browser timer.
+  //
+  // elapsed A8 time =
+  //
+  //     raw core pulse delta
+  //     --------------------
+  //     recovered pulses per A8 second
+  // ----------------------------------------------------------
+
+  function totalDuration(sequence) {
+
+    return sequence.reduce(
+      (sum, item) => sum + item[1],
+      0
+    );
+  }
+
+
+  function beginSequence(sequence, mode) {
+
+    if (
+      !currentCore ||
+      !currentCore.running ||
+      ticksPerA8Second === null ||
+      audioSecondsPerA8Second === null
+    ) {
+      return false;
+    }
+
+    ensureAudio();
+
+    player = {
+      sequence,
+      mode,
+      startTick: currentCore.raw,
+      noteIndex: -1,
+      duration: totalDuration(sequence)
+    };
+
+    updatePlayer();
+
+    return true;
+  }
+
+
+  function stopSequence(reason) {
+
+    killTone();
+
+    player = null;
+    tuneStartRequested = false;
+
+    if (PAGE_MODE === "audio") {
+
+      const status = el("a8-tune-status");
+      const note = el("a8-tune-note");
+
+      if (status) {
+        status.innerHTML =
+          "CORE: " + coreStatusText() +
+          "<br>MUSIC: " + (reason || "STOPPED");
+      }
+
+      if (note) {
+        note.innerHTML =
+          "PITCH: —<br>BEAT: —";
+      }
+    }
+  }
+
+
+  function updatePlayer() {
+
+    if (!player || !currentCore) return;
+
+    if (!currentCore.running) {
+
+      stopSequence("STOPPED WITH CORE");
+      return;
+    }
+
+    if (
+      ticksPerA8Second === null ||
+      !(ticksPerA8Second > 0)
+    ) {
+      return;
+    }
+
+    const elapsedA8 =
+      (currentCore.raw - player.startTick) /
+      ticksPerA8Second;
+
+    if (elapsedA8 < 0) {
+
+      stopSequence("CORE RESET");
+      return;
+    }
+
+    if (elapsedA8 >= player.duration) {
+
+      killTone();
+
+      if (player.mode === "audio") {
+
+        const status = el("a8-tune-status");
+        const note = el("a8-tune-note");
+
+        if (status) {
+          status.innerHTML =
+            "CORE: " + coreStatusText() +
+            "<br>MUSIC: COMPLETE";
+        }
+
+        if (note) {
+          note.innerHTML =
+            "PITCH: —<br>BEAT: —";
+        }
+      }
+
+      player = null;
+      return;
+    }
+
+    let cursor = 0;
+    let index = -1;
+
+    for (let i = 0; i < player.sequence.length; i++) {
+
+      const duration = player.sequence[i][1];
+
+      if (
+        elapsedA8 >= cursor &&
+        elapsedA8 < cursor + duration
+      ) {
+        index = i;
+        break;
+      }
+
+      cursor += duration;
+    }
+
+    if (index === -1) return;
+
+    if (index !== player.noteIndex) {
+
+      player.noteIndex = index;
+
+      const [pitch, duration] =
+        player.sequence[index];
+
+      startTone(
+        pitch,
+        player.mode === "clock"
+          ? "triangle"
+          : "square"
+      );
+
+      if (player.mode === "clock") {
+
+        const note = el("a8-chime-note");
+
+        if (note) {
+          note.innerHTML =
+            "PITCH: " + pitchLabel(pitch) +
+            "<br>BEAT: " + beatLabel(duration);
+        }
+
+      } else {
+
+        const note = el("a8-tune-note");
+
+        if (note) {
+          note.innerHTML =
+            "PITCH: " + pitchLabel(pitch) +
+            "<br>BEAT: " + beatLabel(duration);
+        }
+      }
+    }
+  }
+
+
+  // ----------------------------------------------------------
+  // CALIBRATE NATIVE CORE SCALE
+  //
+  // rawTicks / DAY_PHASE17
+  //
+  // establishes pulses per A8 second.
+  //
+  // AudioContext currentTime is observed simultaneously only
+  // to make the downstream DAC reproduce native frequency.
+  // ----------------------------------------------------------
+
+  function smooth(oldValue, newValue, weight) {
+
+    if (oldValue === null) {
+      return newValue;
+    }
+
+    return (
+      oldValue * (1 - weight) +
+      newValue * weight
+    );
+  }
+
+
+  function processCoreState(state) {
+
+    const phase = corePhase(state);
+    const raw = coreRawTicks(state);
+
+    if (phase === null || raw === null) {
+
+      coreFailure(
+        "NATIVE CORE FIELDS NOT FOUND"
+      );
+
+      return;
+    }
+
+    const running = coreRunning(state);
+
+    const acNow =
+      audio ? audio.currentTime : null;
+
+    if (
+      previous &&
+      raw > previous.raw
+    ) {
+
+      const dRaw = raw - previous.raw;
+
+      // ---------------------------------------------
+      // Native scale:
+      // core raw pulses per whole A8 second
+      // ---------------------------------------------
+
+      let dPhase =
+        phase - previous.phase;
+
+      if (dPhase < 0) {
+        dPhase += DAY_STATES;
+      }
+
+      if (
+        dPhase > 0 &&
+        dPhase < 64
+      ) {
+
+        const sample =
+          dRaw / dPhase;
+
+        if (
+          Number.isFinite(sample) &&
+          sample > 0
+        ) {
+
+          ticksPerA8Second =
+            smooth(
+              ticksPerA8Second,
+              sample,
+              0.20
+            );
+        }
+      }
+
+      // ---------------------------------------------
+      // Downstream audio translation only.
+      // ---------------------------------------------
+
+      if (
+        acNow !== null &&
+        previous.audioNow !== null
+      ) {
+
+        const dAudio =
+          acNow - previous.audioNow;
+
+        if (dAudio > 0) {
+
+          const sample =
+            dAudio / dRaw;
+
+          if (
+            Number.isFinite(sample) &&
+            sample > 0
+          ) {
+
+            audioSecondsPerTick =
+              smooth(
+                audioSecondsPerTick,
+                sample,
+                0.08
+              );
+          }
+        }
+      }
+    }
+
+    if (
+      ticksPerA8Second !== null &&
+      audioSecondsPerTick !== null
+    ) {
+
+      audioSecondsPerA8Second =
+        ticksPerA8Second *
+        audioSecondsPerTick;
+    }
+
+    currentCore = {
+      state,
+      phase,
+      raw,
+      running
+    };
+
+    // A raw counter moving backwards means the core/replay
+    // has restarted. Active music is invalidated.
+    if (
+      previous &&
+      raw < previous.raw
+    ) {
+
+      killTone();
+      player = null;
+      tuneStartRequested = false;
+    }
+
+    previous = {
+      phase,
+      raw,
+      audioNow: acNow
+    };
+
+    updateUI();
+    updateClockTrigger();
+    updatePlayer();
+
+    if (
+      PAGE_MODE === "audio" &&
+      tuneStartRequested &&
+      !player &&
+      coreReady()
+    ) {
+
+      tuneStartRequested = false;
+
+      beginSequence(
+        THREE_WITNESSES,
+        "audio"
+      );
+    }
+  }
+
+
+  // ----------------------------------------------------------
+  // CORE STATUS
+  // ----------------------------------------------------------
+
+  function coreReady() {
+
+    return !!(
+      currentCore &&
+      currentCore.running &&
+      ticksPerA8Second !== null &&
+      audioSecondsPerA8Second !== null
+    );
+  }
+
+
+  function coreStatusText() {
+
+    if (!currentCore) {
+      return "ACQUIRING";
+    }
+
+    if (!currentCore.running) {
+      return "STOPPED";
+    }
+
+    if (
+      ticksPerA8Second === null ||
+      audioSecondsPerA8Second === null
+    ) {
+      return "CALIBRATING";
+    }
+
+    return "A8 RECOVERY CORE";
+  }
+
+
+  function coreFailure(message) {
+
+    killTone();
+
+    player = null;
+    tuneStartRequested = false;
+
+    currentCore = null;
+
+    if (PAGE_MODE === "clock") {
+
+      const status = el("a8-chime-status");
+      const note = el("a8-chime-note");
+
+      if (status) {
+        status.innerHTML =
+          "CORE: LOST<br>" +
+          "CHIME: SILENT";
+      }
+
+      if (note) {
+        note.innerHTML =
+          "PITCH: —<br>" +
+          "BEAT: —<br>" +
+          String(message || "");
+      }
+
+    } else {
+
+      const status = el("a8-tune-status");
+      const note = el("a8-tune-note");
+
+      if (status) {
+        status.innerHTML =
+          "CORE: LOST<br>" +
+          "MUSIC: STOPPED";
+      }
+
+      if (note) {
+        note.innerHTML =
+          "PITCH: —<br>" +
+          "BEAT: —<br>" +
+          String(message || "");
+      }
+    }
+  }
+
+
+  // ----------------------------------------------------------
+  // CLOCK TRIGGER
+  // ----------------------------------------------------------
+
+  function updateClockTrigger() {
+
+    if (
+      PAGE_MODE !== "clock" ||
+      !currentCore
+    ) {
+      return;
+    }
+
+    const phase = currentCore.phase;
+
+    const hour =
+      Math.floor(
+        phase /
+        A8_SECONDS_PER_HOUR
+      );
+
+    // Test chime begins only when the CORE advances
+    // into a new whole A8 second.
+    if (
+      chimeTestPending &&
+      previousPhase !== null &&
+      phase !== previousPhase &&
+      coreReady()
+    ) {
+
+      chimeTestPending = false;
+
+      beginSequence(
+        CLOCK_CHIME,
+        "clock"
+      );
+    }
+
+    // Armed hour chime.
+    if (
+      previousHour !== null &&
+      hour !== previousHour &&
+      chimeArmed &&
+      coreReady()
+    ) {
+
+      beginSequence(
+        CLOCK_CHIME,
+        "clock"
+      );
+    }
+
+    previousHour = hour;
+    previousPhase = phase;
+  }
+
+
+  // ----------------------------------------------------------
+  // UI
+  // ----------------------------------------------------------
+
+  function updateUI() {
+
+    if (PAGE_MODE === "clock") {
+
+      const status = el("a8-chime-status");
+
+      if (status) {
+
+        status.innerHTML =
+          "CORE: " +
+          coreStatusText() +
+          "<br>CHIME: " +
+          (
+            chimeArmed
+              ? "ARMED"
+              : "DISARMED"
+          ) +
+          (
+            chimeTestPending
+              ? "<br>TEST: NEXT A8 SECOND"
+              : ""
+          );
+      }
+
+    } else {
+
+      const status = el("a8-tune-status");
+
+      if (status && !player) {
+
+        status.innerHTML =
+          "CORE: " +
+          coreStatusText() +
+          "<br>MUSIC: " +
+          (
+            tuneStartRequested
+              ? "WAITING FOR CORE"
+              : "STOPPED"
+          );
+      }
+    }
+  }
+
+
+  // ----------------------------------------------------------
+  // CONTROLS
+  // ----------------------------------------------------------
+
+  if (PAGE_MODE === "clock") {
+
+    const arm = el("a8-chime-arm");
+    const test = el("a8-chime-test");
+
+    if (arm) {
+
+      arm.addEventListener(
+        "click",
+        () => {
+
+          ensureAudio();
+
+          chimeArmed =
+            !chimeArmed;
+
+          arm.textContent =
+            chimeArmed
+              ? "DISARM A8 HOUR CHIME"
+              : "ARM A8 HOUR CHIME";
+
+          updateUI();
+        }
+      );
+    }
+
+    if (test) {
+
+      test.addEventListener(
+        "click",
+        () => {
+
+          ensureAudio();
+
+          chimeTestPending = true;
+
+          updateUI();
+        }
+      );
+    }
+
+  } else {
+
+    const start = el("a8-tune-start");
+    const stop = el("a8-tune-stop");
+
+    if (start) {
+
+      start.addEventListener(
+        "click",
+        () => {
+
+          ensureAudio();
+
+          stopSequence("STOPPED");
+
+          if (coreReady()) {
+
+            beginSequence(
+              THREE_WITNESSES,
+              "audio"
+            );
+
+          } else {
+
+            tuneStartRequested = true;
+            updateUI();
+          }
+        }
+      );
+    }
+
+    if (stop) {
+
+      stop.addEventListener(
+        "click",
+        () => {
+
+          stopSequence("STOPPED");
+        }
+      );
+    }
+  }
+
+
+  // ----------------------------------------------------------
+  // CORE OBSERVER
+  //
+  // requestAnimationFrame controls only how often the browser
+  // asks for state.
+  //
+  // It NEVER advances note phase, beat phase or score position.
+  // ----------------------------------------------------------
+
+  async function pollCore() {
+
+    if (requestBusy) return;
+
+    requestBusy = true;
+
+    try {
+
+      const response =
+        await fetch(
+          CORE_URL,
+          { cache: "no-store" }
+        );
+
+      if (!response.ok) {
+        throw new Error(
+          "HTTP " + response.status
+        );
+      }
+
+      const state =
+        await response.json();
+
+      processCoreState(state);
+
+    } catch (err) {
+
+      coreFailure(
+        err && err.message
+          ? err.message
+          : "CORE REQUEST FAILED"
+      );
+
+    } finally {
+
+      requestBusy = false;
+    }
+  }
+
+
+  function observerLoop() {
+
+    requestAnimationFrame(
+      observerLoop
+    );
+
+    frameCounter++;
+
+    // Sampling cadence only.
+    // Score authority remains native core counters.
+    if ((frameCounter & 1) !== 0) {
+      return;
+    }
+
+    pollCore();
+  }
+
+
+  updateUI();
+  observerLoop();
+
+})();
+</script>
+
+</body>
+</html>

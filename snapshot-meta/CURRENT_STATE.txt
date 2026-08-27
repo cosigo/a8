@@ -1,0 +1,104 @@
+AUSPICIOUS 8 OFFICIAL SNAPSHOT
+UTC STAMP: 20260827-020512Z
+
+===== HOST =====
+ Static hostname: trade
+       Icon name: computer-vm
+         Chassis: vm 🖴
+      Machine ID: b51e72e0472d49768f7b453e535c3b85
+         Boot ID: e2c9d41ed89b4345b0c6976d6cbc5749
+  Virtualization: kvm
+Operating System: Ubuntu 24.04.4 LTS
+          Kernel: Linux 6.8.0-138-generic
+    Architecture: x86-64
+ Hardware Vendor: Red Hat
+  Hardware Model: KVM
+Firmware Version: 1.16.3-5.el9.alma.1
+   Firmware Date: Sun 2023-11-05
+    Firmware Age: 2y 9month 3w
+
+Linux trade 6.8.0-138-generic #138-Ubuntu SMP PREEMPT_DYNAMIC Fri Jul 31 22:41:49 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
+
+===== CORE20 =====
+● a8-core20.service - Auspicious 8 Core20 Time Laboratory
+     Loaded: loaded (/etc/systemd/system/a8-core20.service; enabled; preset: enabled)
+     Active: active (running) since Wed 2026-08-26 19:55:09 CST; 10min ago
+   Main PID: 833 (node)
+      Tasks: 10 (limit: 7012)
+     Memory: 42.8M (peak: 44.1M)
+        CPU: 49.711s
+     CGroup: /system.slice/a8-core20.service
+             └─833 /usr/bin/node /usr/local/lib/a8-core20-service.js
+
+Aug 26 19:55:10 trade node[833]: A8 v5.4.20 CORE20 · systemd service · 127.0.0.1:18020
+Aug 26 19:55:17 trade node[833]: CORE20 RUNTIME · NODE OWNS VIRTUAL PULSE GENERATOR
+Aug 26 19:55:17 trade node[833]: CORE20 CLOCK · AWAITING MOMENTARY CONNECT ALIGNMENT
+Warning: journal has been rotated since unit was started and some journal files were not opened due to insufficient permissions, output may be incomplete.
+
+# /etc/systemd/system/a8-core20.service
+[Unit]
+Description=Auspicious 8 Core20 Time Laboratory
+After=network.target
+
+[Service]
+Type=simple
+User=greg
+Group=greg
+WorkingDirectory=/srv/apps/a8_time_lab_v5_4_20_postseal_hw
+ExecStart=/usr/bin/node /usr/local/lib/a8-core20-service.js
+Restart=on-failure
+RestartSec=2
+KillSignal=SIGTERM
+TimeoutStopSec=8
+
+[Install]
+WantedBy=multi-user.target
+
+===== CORE18 RETIRED =====
+inactive
+disabled
+# /etc/systemd/system/a8-time-lab.service
+[Unit]
+Description=COSIGO A8 Time Lab
+After=network.target
+
+[Service]
+Type=simple
+User=greg
+Group=greg
+WorkingDirectory=/srv/apps/a8_time_lab_v5_4_18
+
+Environment=NODE_ENV=production
+Environment=HOST=127.0.0.1
+Environment=PORT=8018
+Environment=A8_DATA_DIR=/srv/apps/A8-data-public
+
+ExecStart=/opt/node-a8/bin/node /srv/apps/a8_time_lab_v5_4_18/server.js
+
+Restart=on-failure
+RestartSec=3
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
+
+===== LISTENERS =====
+LISTEN 0      511        127.0.0.1:18020      0.0.0.0:*    users:(("node",pid=833,fd=24))                          
+
+===== RUNTIME VERSIONS =====
+v18.19.1
+v2.11.4 h1:XKxkMTgNSizEvKG6QHue6cAsFOteU2qA61w2tKkCWi0=
+
+===== CORE20 CLOCK =====
+{"ok":true,"clock":{"schema":"A8-CORE20-SERVER-CLOCK-V1","status":"AWAITING_MOMENTARY_CONNECT_ALIGNMENT","sourceEpoch":"3","currentSelectedRawPulse":"2039860470","recoveredRawPerSunReturn":"416611827712/511","clockAuthority":"RECOVERED_JOVIAN_MINTAKA_SOL_SUN_RETURN","runtime":{"schema":"A8-CORE20-SERVER-RUNTIME-V1","status":"RUNNING","lastError":null,"intervalMs":2,"edgeObserverIntervalMs":2,"clockEdgePublisher":"NODE_SERVER_AUTHORITATIVE_DAY_PHASE17_EDGE","pulseGeneratorOwner":"NODE_SERVER","browserPulseGenerator":false,"browserVisibilityAffectsClock":false,"browserPacketTimingAffectsClock":false,"monotonicExecutionPace":"SERVER_PROCESS_HRTIME_ONLY","recoveredRawPerSunReturn":"416611827712/511","alignmentEstablished":false,"alignment":null}},"runtime":{"schema":"A8-CORE20-SERVER-RUNTIME-V1","status":"RUNNING","lastError":null,"intervalMs":2,"edgeObserverIntervalMs":2,"clockEdgePublisher":"NODE_SERVER_AUTHORITATIVE_DAY_PHASE17_EDGE","pulseGeneratorOwner":"NODE_SERVER","browserPulseGenerator":false,"browserVisibilityAffectsClock":false,"browserPacketTimingAffectsClock":false,"monotonicExecutionPace":"SERVER_PROCESS_HRTIME_ONLY","recoveredRawPerSunReturn":"416611827712/511","alignmentEstablished":false,"alignment":null}}
+
+===== IMPORTANT FILE HASHES =====
+7b92c1bf9d9ada655b74268c952d7307a74093fb36bf17533d46ef9191f8a498  /srv/apps/a8_time_lab_v5_4_20_postseal_hw/hardware/a8-postseal-hardware-lab-server.js
+9a285fba6cdf01b373c9f345b1b15ab56c66135e3cd2baa120e85fbe4675446a  /srv/apps/a8_time_lab_v5_4_20_postseal_hw/hardware/a8-core20-server-owned-runtime.js
+451cbb1841384e23bbea5ea64d222cf8488bb5fde119974a30bd3b98f7edd5e5  /srv/apps/a8_time_lab_v5_4_20_postseal_hw/observer/a8-core20-native-ditty.js
+e9014abe387de10adb66b351421245bffcdf7a8a0296be811df3bab29514d357  /srv/apps/a8_time_lab_v5_4_20_postseal_hw/observer/a8-core20-native-ditty-bridge.js
+a4a9bc71815aa3f3500aec9282b768e7ec078eed4d4f6bc966c84d63ca0ff029  /srv/apps/a8_time_lab_v5_4_20_postseal_hw/public/audio.html
+00edb7ba3df784631872c92cc930a96154cd8052f4d8ee606b1da53cb2970dbf  /srv/sites/a8.cosigo.io/public/assets/a8.js
+cd05df78dfe5de130d6be54c7e8e5dad92715c1c45128b4b5c0f8098fb1bbd64  /etc/caddy/Caddyfile
+e2a0ebfaf0698d49733ff1a78859fa03ed6a4e941822b9b8f468501d047b20c1  /usr/local/lib/a8-core20-service.js

@@ -1,0 +1,1119 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Auspicious 8 — Jovian Independent Recoverability Lab</title>
+<style>
+:root{
+  color-scheme:light dark;
+  --bg:#101216;--panel:#181c23;--fg:#eef2f7;--muted:#a4adba;
+  --line:#343c49;--accent:#6d9cff;--good:#72d6aa;--warn:#e5bb68;
+}
+@media(prefers-color-scheme:light){
+  :root{--bg:#f6f8fb;--panel:#fff;--fg:#151922;--muted:#667184;
+  --line:#d8dee8;--accent:#345fce;--good:#177c54;--warn:#996500}
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.45 system-ui,sans-serif}
+main{max-width:1060px;margin:auto;padding:20px}
+h1{font-size:1.45rem;margin:0 0 4px}
+h2{font-size:1.05rem;margin:0 0 8px}
+.small{font-size:.88rem;color:var(--muted)}
+.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin:14px 0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px}
+.controls{display:flex;flex-wrap:wrap;gap:10px;align-items:end}
+.control-groups{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:10px}
+.control-group{border:1px solid var(--line);border-radius:12px;padding:12px;min-width:0}
+.control-group h3{font-size:.78rem;letter-spacing:.06em;margin:0 0 9px;color:var(--muted)}
+.control-group.secondary{grid-column:1/-1}
+.control-actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:6px 0}
+.control-read{display:flex;flex-wrap:wrap;gap:7px;align-items:center;margin:5px 0 9px}
+.control-group label{margin-top:7px}
+.control-group select{padding:6px 8px;border-radius:8px;border:1px solid var(--line);background:var(--panel);color:var(--fg)}
+.experiment-shell{display:block}
+.experiment-main{display:grid;gap:12px;min-width:0}
+.experiment-main>.grid{margin:0}
+.experiment-main>.card{margin:0}
+.experiment-card{position:sticky;top:12px;align-self:start}
+.experiment-card ol{margin:.55rem 0 .7rem;padding-left:1.25rem}
+.experiment-card li{margin:.42rem 0}
+.experiment-result{padding:8px 10px;border:1px solid var(--line);border-radius:10px;margin:7px 0;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+.experiment-card .arrow{font-weight:700;text-align:center;color:var(--muted);padding:2px 0}
+.experiment-combined-card ol{margin:.55rem 0 .7rem;padding-left:1.25rem}
+.experiment-combined-card li{margin:.42rem 0}
+.experiment-combined-card .arrow{font-weight:700;text-align:center;color:var(--muted);padding:2px 0}
+.experiment-section-label{font-weight:800;letter-spacing:.06em;margin-bottom:4px}
+.experiment-divider{border-top:1px solid var(--border);margin:16px 0}
+.chief-card{border-style:dashed}
+.chief-head{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:8px}
+.chief-warning{font-weight:700;letter-spacing:.04em}
+.chief-controls{display:grid;grid-template-columns:minmax(180px,1fr) auto;gap:10px;align-items:end;margin-top:10px}
+@media(max-width:650px){.chief-controls{grid-template-columns:1fr}}
+label{display:grid;gap:4px;font-size:.86rem;color:var(--muted)}
+button,select,input{font:inherit}
+button{padding:8px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--fg);cursor:pointer}
+button.primary{background:var(--accent);color:white;border-color:transparent}
+.moon-select button.selected{background:var(--accent);color:white;border-color:transparent}
+.metric{font:600 1.08rem ui-monospace,SFMono-Regular,Menlo,monospace}
+.status{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:2px 8px;font-size:.8rem}
+.good{color:var(--good)} .warn{color:var(--warn)}
+.moon{padding:12px 0;border-top:1px solid var(--line)}
+.moon:first-child{border-top:0}
+.moon-head{display:flex;justify-content:space-between;gap:12px;align-items:baseline}
+.phase-track{position:relative;height:40px;margin-top:5px}
+.axis{position:absolute;left:0;right:0;top:16px;height:8px;border:1px solid var(--line);border-radius:999px}
+.center{position:absolute;left:50%;top:8px;bottom:8px;width:1px;background:var(--line)}
+.major{position:absolute;top:13px;width:1px;height:14px;background:var(--line)}
+.dot{position:absolute;top:12px;width:16px;height:16px;border-radius:50%;transform:translateX(-8px);transition:background-color .12s ease,opacity .12s ease,box-shadow .12s ease}
+.dot.front{background:#8fc7ff;opacity:1;box-shadow:0 0 0 2px color-mix(in srgb,#8fc7ff 22%,transparent)}
+.dot.back{background:#355f9e;opacity:.9}
+.turnlabel{position:absolute;top:0;font-size:.72rem;color:var(--muted)}
+.turnlabel.w{left:0}.turnlabel.e{right:0}
+.ruler{display:grid;grid-template-columns:repeat(8,1fr);gap:0;margin-top:3px;color:var(--muted);font-size:.68rem}
+.ruler span{text-align:center;border-left:1px solid var(--line)}
+.ruler span:last-child{border-right:1px solid var(--line)}
+.radial{height:10px;border:1px solid var(--line);border-radius:999px;position:relative;margin-top:6px}
+.radial-dot{position:absolute;top:1px;width:6px;height:6px;border-radius:50%;background:var(--good);transform:translateX(-3px)}
+.row{display:grid;grid-template-columns:150px 1fr;gap:12px;align-items:center}
+table{width:100%;border-collapse:collapse}
+th,td{text-align:left;padding:7px;border-bottom:1px solid var(--line)}
+th{color:var(--muted);font-weight:500}
+.note{border-left:3px solid var(--accent);padding:10px 12px;background:var(--panel);margin-top:14px}
+.audio-row{display:grid;grid-template-columns:110px 1fr 110px 90px;gap:10px;align-items:center;padding:7px 0;border-top:1px solid var(--line)}
+.audio-row:first-of-type{border-top:0}
+input[type=range]{max-width:220px}
+.checkbox{display:flex;gap:6px;align-items:center}
+@media(max-width:800px){
+  .experiment-shell{grid-template-columns:1fr}
+  .experiment-card{position:static}
+  .experiment-main{gap:12px}
+}
+@media(max-width:650px){
+  .control-groups{grid-template-columns:1fr}
+  .control-group.secondary{grid-column:auto}
+  .row{grid-template-columns:1fr}
+  .audio-row{grid-template-columns:90px 1fr}
+}
+
+.site-nav{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 14px}
+.site-nav a{display:inline-block;padding:8px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--fg);text-decoration:none;font-weight:600}
+.site-nav a:hover{border-color:var(--accent)}
+.site-nav .site-link{color:var(--muted)}
+</style>
+
+<main>
+<nav class="site-nav" aria-label="COSIGO and Jovian engine navigation">
+  <a class="site-link" href="https://cosigo.io/">COSIGO MAIN</a>
+  <a class="site-link" href="https://trade.cosigo.io/">TRADE</a>
+  <a class="site-link" href="https://stream.cosigo.io/">STREAM</a>
+  <a href="io_eng.html">IO ENGINE</a>
+  <a href="euro_eng.html">EUROPA ENGINE</a>
+</nav>
+<section class="card" style="margin-bottom:14px">
+      <div class="status good">AUSPICIOUS 8 · DEVELOPMENT LAB · v0.6.20 · GANYMEDE ANCHOR</div>
+      <h1 style="margin-top:8px">Jovian Oscillator</h1>
+      <p>
+        An experimental time-reference study built from directly observable motion in the
+        Galilean moons of Jupiter. This version demonstrates a bootstrap from an unknown local
+        pulse counter: observe recurring Jovian turns, recover a recurrence in arbitrary ticks,
+        normalize it, and only then generate an A8 phase address.
+      </p>
+      <p class="small">
+        Current status: experimental / provisional. No second, wall-clock timestamp, NTP signal,
+        ephemeris time, or programmed hertz value enters the recovery math. Conventional browser
+        timing remains only an observer/display mechanism.
+      </p>
+    </section>
+
+    <section class="grid">
+      <div class="card">
+        <div class="small">Inner resonance</div>
+        <div class="metric">1 : 2 : 4</div>
+        <p class="small">Io · Europa · Ganymede</p>
+      </div>
+      <div class="card">
+        <div class="small">Phase ruler teaser</div>
+        <div class="metric">000₈ → 777₈</div>
+        <p class="small">512 addressable phase positions</p>
+      </div>
+      <div class="card">
+        <div class="small">Observable pulse</div>
+        <div class="metric">WEST ↔ EAST</div>
+        <p class="small">turning-point reversals</p>
+      </div>
+      <div class="card">
+        <div class="small">Bootstrap input</div>
+        <div class="metric">ARBITRARY TICKS</div>
+        <p class="small">unknown oscillator; Jovian recurrence supplies calibration</p>
+      </div>
+    </section>
+
+    <section class="note">
+      <b>What to notice:</b> the A8 recovery layer is not told a rate. It receives only an arbitrary
+      monotonically increasing pulse count plus observed moon positions. This Ganymede build uses Ganymede WEST→WEST as the active calibration anchor. The same raw counter and recovery machinery remain in place; Io and Europa remain independent parallel cross-checks. The 512 ruler is applied only after Ganymede recurrence recovery.
+    </section>
+
+    <h1 style="margin-top:18px">Interactive Jovian Oscillator</h1>
+<p class="small">Independent-recoverability bootstrap: a hidden celestial plant generates the simulated observation. The recovery layer is permitted to use only raw oscillator ticks and detected turning points. Audio remains an optional downstream transducer.</p>
+
+<div class="experiment-shell">
+  <div class="experiment-main">
+<div class="card">
+  <h2>Jovian oscillator control bench</h2>
+  <p class="small">Work left to right. Running, observing, changing the local oscillator, and recalibrating are separate jobs.</p>
+
+  <div class="control-groups">
+    <section class="control-group">
+      <h3>1 · RUN / RESET</h3>
+      <div class="control-actions">
+        <button id="run" class="primary">Run observations</button>
+        <button id="step">+1 bench frame</button>
+      </div>
+      <div class="control-actions">
+        <button id="reset">Reset entire lab</button>
+      </div>
+      <label>Bench motion / frame advance
+        <input id="speed" type="range" min="1" max="64" value="8">
+      </label>
+      <div class="control-read"><span id="speedRead" class="status">8 plant steps / frame</span></div>
+      <div class="control-read"><span id="accelRead" class="status warn">≈72,000× natural Ganymede rate · nominal 60 fps</span></div>
+      <p class="small"><b>Bench acceleration only:</b> this changes how many plant steps are advanced per display frame. The Jovian observer samples internally at a fixed <b>1 plant step</b>, so bench speed cannot change turn-detection resolution.</p>
+      <p class="small">Run starts/stops the bench. Reset returns the whole bench to its known starting condition: Jupiter, counters, recovery memory, observation, oscillator 73, drift 0/512, bench motion 8, MANUAL recalibration, Callisto 0.00%, and downstream audio defaults.</p>
+    </section>
+
+    <section class="control-group">
+      <h3>2 · OBSERVATION</h3>
+      <div class="control-read">
+        <button id="obsToggle">Simulate cloud blackout</button>
+        <span id="obsRead" class="status good">JOVIAN SENSOR ACTIVE</span>
+      </div>
+      <div class="control-read"><span class="status good">OBSERVER RESOLUTION · 1 plant step</span></div>
+      <p class="small">This section controls access to Jovian observations only. Blackout hides new Jovian turns from the clock while Jupiter and the local pulse source continue.</p>
+    </section>
+
+    <section class="control-group">
+      <h3>3 · LOCAL OSCILLATOR</h3>
+      <label>Arbitrary oscillator increment
+        <input id="tickRate" type="range" min="1" max="512" value="73">
+      </label>
+      <div class="control-read"><span id="tickRateRead" class="status">73 raw ticks / plant step</span></div>
+      <label>Injected drift Δ / 512
+        <input id="drift" type="range" min="-64" max="64" value="0">
+      </label>
+      <div class="control-read"><span id="driftRead" class="status">0 / 512</span></div>
+      <p class="small">These controls change the hypothetical local pulse source only. They do not change Jupiter.</p>
+    </section>
+
+    <section class="control-group">
+      <h3>4 · RECALIBRATION</h3>
+      <label>Mode
+        <select id="calMode">
+          <option value="manual" selected>MANUAL</option>
+          <option value="auto">AUTO</option>
+        </select>
+      </label>
+      <div class="control-read"><span id="calModeRead" class="status">MANUAL · operator arms</span></div>
+      <div class="control-actions">
+        <button id="armCal">Arm manual calibration</button>
+        <span id="calStatus" class="status">IDLE</span>
+      </div>
+      <p class="small"><b>Manual:</b> press Arm; the machine waits for the next two fresh G-WEST turns. <b>Auto:</b> selecting AUTO immediately begins continuous Jovian tracking after initial lock. Each clean G-WEST→G-WEST span refreshes calibration automatically. If the local oscillator is adjusted, AUTO discards any partly completed span and waits for two fresh G-WEST landmarks before updating. A blackout only suspends AUTO until observation returns; it is not required to start it.</p>
+    </section>
+
+    <section class="control-group secondary">
+      <h3>5 · PARALLEL MOON CHANNEL TEST</h3>
+      <div class="control-actions moon-select">
+        <button id="moonTestIo" type="button">IO</button>
+        <button id="moonTestEu" type="button">EUROPA</button>
+        <button id="moonTestGa" type="button" class="selected">GANYMEDE</button>
+        <span id="moonTestStatus" class="status">GANYMEDE · READY</span>
+      </div>
+      <div class="grid" style="margin:8px 0 0">
+        <div><div class="small">Selected moon native WEST→WEST</div><div id="moonTestNative" class="metric">—</div></div>
+        <div><div class="small">Normalized to G-equivalent recurrence</div><div id="moonTestNormalized" class="metric">—</div></div>
+        <div><div class="small">Comparison with primary G calibration</div><div id="moonTestCompare" class="metric">—</div></div>
+      </div>
+      <p class="small">Press a moon button to start a fresh two-WEST measurement using the <b>same raw pulse counter</b>. This test does not change the primary Ganymede clock calibration. In this idealized 1:2:4 plant, Io is normalized ×4, Europa ×2, and Ganymede ×1. A perturbed moon is expected to disagree rather than silently redefine the primary clock.</p>
+    </section>
+
+
+    <section class="control-group secondary">
+      <h3>RECOVERY MEMORY TEST · DIFFERENT FROM BLACKOUT</h3>
+      <div class="control-actions">
+        <button id="forget">Erase recovered clock memory</button>
+        <span class="status">OBSERVATION STAYS ACTIVE</span>
+      </div>
+      <p class="small"><b>Erase memory:</b> delete the clock's recovered calibration and force it to rebuild from live Jovian observations. <b>Cloud blackout:</b> keep the recovered clock but temporarily remove new celestial observations. They test different failures.</p>
+    </section>
+
+    <section class="control-group secondary">
+      <h3>SECONDARY · CALLISTO DIAGNOSTIC</h3>
+      <label>Callisto detuning from ideal 3/7
+        <input id="detune" type="range" min="-100" max="100" value="0">
+      </label>
+      <div class="control-read"><span id="detuneRead" class="status">0.00% · ideal 3/7 · secondary</span></div>
+      <p class="small">Not used in Experiment 1 or the Ganymede recalibration test.</p>
+    </section>
+  </div>
+
+  <p class="small"><b>Ganymede-anchor build:</b> only Ganymede WEST→WEST landmarks enter the active recovery/calibration path on this page. Io and Europa remain in the simulated plant and in the independent 1:2:4 diagnostic, but they do not define the active calibration.</p>
+
+  <p class="small"><b>Pulse rule:</b> WEST / EAST reversals are detected from successive apparent-position samples. <b>Initial recovery:</b> the first complete Ganymede WEST→WEST recurrence establishes the first calibration automatically. The MANUAL/AUTO selector controls only later recalibration.</p>
+</div>
+
+<div class="grid">
+  <div class="card"><div class="small">Raw unknown-oscillator count</div><div id="count" class="metric">0 ticks</div></div>
+  <div class="card"><div class="small">Recovery status</div><div id="recoveryStatus" class="metric warn">SEEKING G-WEST</div></div>
+  <div class="card"><div class="small">Recovered Ganymede recurrence</div><div id="gSpan" class="metric">— raw ticks</div></div>
+  <div class="card"><div class="small">Recovered A8 phase · Ganymede-native</div><div id="a8phase" class="metric">---</div></div>
+</div>
+
+<div class="card">
+  <h2>Independent Recoverability bootstrap</h2>
+  <div class="grid">
+    <div><div class="small">First G-WEST landmark</div><div id="anchorA" class="metric">—</div></div>
+    <div><div class="small">Latest G-WEST landmark</div><div id="anchorB" class="metric">—</div></div>
+    <div><div class="small">Ganymede recurrences recovered</div><div id="gCycles" class="metric">0</div></div>
+    <div><div class="small">Recovered same-turn ratio G:E:I</div><div id="recoveredRatio" class="metric">—</div></div>
+  </div>
+  <p id="bootstrapNote" class="small">
+    Waiting for two independently detected Ganymede WEST turns. The first observed WEST turn becomes
+    the representation seam for this demonstration; it is not a physical zero in Jupiter.
+  </p>
+</div>
+
+<div class="card">
+  <h2>Oscillator holdover · drift · recalibration</h2>
+  <div class="grid">
+    <div><div class="small">Holdover state</div><div id="holdoverStatus" class="metric">WAITING FOR LOCK</div></div>
+    <div><div id="calibrationLabel" class="small">Frozen calibration</div><div id="lockedSpan" class="metric">—</div></div>
+    <div><div class="small">Last observed G-WEST interval</div><div id="observedSpan" class="metric">—</div></div>
+    <div><div class="small">Last G-WEST phase error</div><div id="phaseError" class="metric">—</div></div>
+  </div>
+  <p id="driftNote" class="small">
+    First recover the clock normally. Then move the drift control away from 0/512. Jupiter is unchanged;
+    only the hypothetical local pulse source changes. The A8 phase coasts on its frozen calibration until
+    another observed G-WEST exposes the accumulated error. Recalibration uses a clean pair of fresh G-WEST turns to establish
+    a new local pulse scale.
+  </p>
+</div>
+  </div>
+
+
+</div>
+<div class="grid">
+  <div class="card chief-card">
+    <div class="chief-head">
+      <div>
+        <div class="small">SIMULATED PLANT INTEGRITY</div>
+        <div style="font-weight:700">Chief Engineer’s Dial — Io perturbation</div>
+      </div>
+      <span id="plantIntegrity" class="status good">INNER SYSTEM NOMINAL</span>
+    </div>
+    <div class="small">Inner Laplace residual · cumulative bench diagnostic</div>
+    <div id="laplace" class="metric good">0.00e+0 cycles</div>
+    <div class="chief-controls">
+      <label>Io orbital-rate fault injection
+        <input id="ioPerturb" type="range" min="-100" max="100" value="0">
+      </label>
+      <span id="ioPerturbRead" class="status good">0.00% · RATE COMMAND NORMAL</span>
+    </div>
+    <p id="plantIntegrityNote" class="small"><b>Anchor check:</b> the inner Io–Europa–Ganymede relationship is nominal. This diagnostic is outside the recovery path; it checks the simulated plant rather than defining the clock.</p>
+    <p class="small"><b>Chief Engineer’s Dial:</b> leave at <b>0.00%</b> for normal operation. Moving it intentionally perturbs Io’s future rate without moving Io instantaneously. The rate fault is declared immediately; the phase residual then accumulates. Returning the dial to 0 stops adding rate error but does not erase phase displacement already created — <b>Reset entire lab</b> restores the nominal plant.</p>
+  </div>
+  <div class="card"><div class="small">Callisto envelope diagnostic</div><div id="psi" class="metric">0</div><p class="small">Secondary slow-envelope diagnostic. Separate from the Chief Engineer’s Io fault injection.</p></div>
+</div>
+
+
+<section class="card experiment-combined-card">
+  <div class="status good">EXPERIMENTS 1 + 2 · CHECK IT YOURSELF</div>
+  <h2 style="margin-top:8px">Two core tests · oscillator independence and holdover recovery</h2>
+  <p class="small">Run these as separate tests. Experiment 1 changes the local oscillator while Jupiter stays unchanged. Experiment 2 removes observation, lets the recovered clock coast with drift, then restores observation and recalibrates from fresh Ganymede WEST turns.</p>
+
+  <div class="experiment-section">
+  <div class="experiment-section-label">EXPERIMENT 1</div>
+  <h2 style="margin-top:8px">Change the oscillator. Keep Jupiter.</h2>
+  <p class="small"><b>Question:</b> If the local pulse source changes, does the recovered Jovian structure stay the same?</p>
+  <ol class="small">
+    <li>Press <b>Reset entire lab</b>.</li>
+    <li>Set <b>oscillator = 73</b>, <b>drift = 0/512</b>, <b>bench motion = 8</b>, and <b>recalibration = AUTO</b>.</li>
+    <li>Press <b>Run observations</b>. Wait for <b>RECOVERED / LOCKED</b> and an auto-tracked Ganymede calibration ≈ <b>299008 raw ticks</b>. The independent G:E:I ratio needs a longer Ganymede observation window; if it still shows —, keep running until it populates, then pause.</li>
+  </ol>
+  <div class="experiment-result"><b>RUN 1 — look for</b><br>Auto-tracked Ganymede calibration ≈ 299008 raw ticks<br>G:E:I = 1.000 : 2.000 : 4.000</div>
+  <div class="arrow">↓ change only the oscillator · do not reset the lab ↓</div>
+  <ol class="small" start="4">
+    <li>Set <b>oscillator = 146</b>. Leave drift at 0 and bench motion at 8.</li>
+    <li>Press <b>Run observations</b> again. AUTO will discard the partly completed old-rate span and wait for two fresh G-WEST landmarks. Continue until the auto-tracked Ganymede calibration reaches ≈ <b>598016 raw ticks</b> and the holdover state returns to <b>AUTO TRACKING / LOCKED</b>. The G:E:I ratio remains a separate slower cross-check.</li>
+  </ol>
+  <div class="experiment-result"><b>RUN 2 — look for</b><br>Auto-tracked Ganymede calibration ≈ 598016 raw ticks<br>G:E:I = 1.000 : 2.000 : 4.000</div>
+  <p class="small"><b>What happened?</b> The raw pulse count doubled because the local oscillator doubled. Jupiter did not change, and the recovered <b>1:2:4</b> structure did not change.</p>
+  <p class="small"><b>Why it matters:</b> the pulse generator is not the standard. The natural recurrence calibrates the pulse generator.</p>
+  <p class="small"><b>Failure condition:</b> if changing only the oscillator changes the recovered normalized Jovian structure, the isolation model is wrong.</p>
+  <div class="experiment-result"><b>PASS:</b> raw ticks change · 1:2:4 survives</div>
+  </div>
+
+  <div class="experiment-divider"></div>
+
+  <div class="experiment-section">
+  <h2>Experiment 2 — Holdover · restore · recalibrate</h2>
+  <p class="small">Use <b>MANUAL</b> first. The machine captures the G-WEST pair for you; you do not have to click at the exact turn.</p>
+  <ol class="small">
+    <li>Recover normally until <b>RECOVERED / LOCKED</b>.</li>
+    <li>Set recalibration mode to <b>MANUAL</b>.</li>
+    <li>Click <b>Simulate cloud blackout</b>.</li>
+    <li>Set <b>Injected drift</b> to <b>+16 / 512</b> and let the local clock coast.</li>
+    <li>Click <b>Restore Jovian sensor</b>. Watch the next G-WEST update the phase error.</li>
+    <li>Click <b>Arm manual calibration</b>. The machine waits for <b>two fresh G-WEST turns</b> and then recalibrates automatically from that clean WEST→WEST span.</li>
+    <li>Look for <b>CALIBRATED</b>, a changed <b>Frozen calibration</b>, and phase error returning to <b>000₈ states</b>.</li>
+  </ol>
+  <p class="small"><b>AUTO mode:</b> select AUTO at any time after initial lock. It begins tracking immediately; no blackout is required. If a blackout occurs, or if the local oscillator is adjusted, AUTO discards any incomplete span and resumes only from two fresh G-WEST landmarks.</p>
+  </div>
+</section>
+
+<div class="card">
+  <h2>Depth cue</h2>
+  <p><span class="status">LIGHT BLUE</span> front half of the Jovian pass</p>
+  <p><span class="status">DARK BLUE</span> back half of the Jovian pass</p>
+  <p class="small">This is a visual depth cue only. It does not change the phase value or pulse timing.</p>
+</div>
+
+<div class="card">
+  <h2>Visible east / west turning-point pulse channels</h2>
+  <div id="moons"></div>
+</div>
+
+<div class="grid">
+  <div class="card">
+    <h2>Observed turning-point pulse counts</h2>
+    <table>
+      <tr><th>Moon</th><th>West</th><th>East</th></tr>
+      <tr><td>Io</td><td id="ioW">0</td><td id="ioE">0</td></tr>
+      <tr><td>Europa</td><td id="euW">0</td><td id="euE">0</td></tr>
+      <tr><td>Ganymede</td><td id="gaW">0</td><td id="gaE">0</td></tr>
+      <tr><td>Callisto</td><td id="caW">0</td><td id="caE">0</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>What you are hearing</h2>
+    <p><span class="status good">CARRIER</span> Io / Europa / Ganymede orbital-rate ratios · playback referenced to Ganymede</p>
+    <p><span class="status">ENVELOPE</span> Callisto relative displacement</p>
+    <p><span class="status">PULSES</span> east/west reversals as short clicks</p>
+    <p><span class="status">MIX</span> simultaneous resonance translated into audible range</p>
+  </div>
+</div>
+
+<div class="card">
+  <h2>Jovial — optional downstream audio transducer</h2>
+  <div class="controls" style="margin-bottom:10px"><button id="audio" class="primary">Start audio</button></div>
+  <div class="controls" style="margin-bottom:10px">
+    <label>Ganymede anchor tone
+      <input id="baseTone" type="range" min="128" max="384" value="256">
+    </label>
+    <span id="baseRead" class="status">256 browser Hz</span>
+
+    <label>Waveform
+      <select id="wave">
+        <option selected>sine</option>
+        <option>triangle</option>
+        <option>square</option>
+        <option>sawtooth</option>
+      </select>
+    </label>
+
+    <label>Master volume
+      <input id="masterVol" type="range" min="0" max="100" value="28">
+    </label>
+
+    <label class="checkbox">
+      <input id="pulseClicks" type="checkbox" checked>
+      turn clicks
+    </label>
+  </div>
+
+  <div class="audio-row">
+    <b>Io</b>
+    <span class="mono" id="ioHz">1024.0 browser Hz</span>
+    <label class="checkbox"><input id="ioOn" type="checkbox" checked> tone</label>
+    <span class="status">4× Ganymede</span>
+  </div>
+  <div class="audio-row">
+    <b>Europa</b>
+    <span class="mono" id="euHz">512.0 browser Hz</span>
+    <label class="checkbox"><input id="euOn" type="checkbox" checked> tone</label>
+    <span class="status">2× Ganymede</span>
+  </div>
+  <div class="audio-row">
+    <b>Ganymede</b>
+    <span class="mono" id="gaHz">256.0 browser Hz</span>
+    <label class="checkbox"><input id="gaOn" type="checkbox" checked> tone</label>
+    <span class="status">1× Ganymede</span>
+  </div>
+  <div class="audio-row">
+    <b>Callisto</b>
+    <span class="mono" id="caHz">109.7 browser Hz</span>
+    <label class="checkbox"><input id="caOn" type="checkbox" checked> tone</label>
+    <span class="status">≈3/7× Ganymede</span>
+  </div>
+
+  <p class="small"><b>Jovial</b> is playback only. Browser hertz is required by present speakers, but no
+  hertz value participates in recovery or defines A8 time. The audio section is downstream of the clock experiment.</p>
+</div>
+
+
+
+
+<div class="note">
+<b>v0.6.20 coordinated moon-engine layout:</b> the original v0.6.16 Ganymede recovery engine is preserved; only the coordinated layout and navigation are updated.<br><br>
+<b>v0.6.19 bench layout:</b> Recalibration is section 4 beside Local Oscillator section 3. Parallel Moon Channel Test is section 5 and remains full width below them.<br><br>
+<b>v0.6.18 experiment layout:</b> Experiments 1 and 2 are preserved in one combined card immediately above the Depth cue.<br><br>
+<b>Recovery rule:</b> initial G-WEST → G-WEST establishes the active native calibration. Local oscillator drift does not alter Jupiter; later same-turn observations expose error, while MANUAL/AUTO recalibration uses fresh same-moon WEST→WEST spans.
+</div>
+
+<div class="note">
+<b>Important:</b> light/dark blue is only a front/back viewing cue. Browser hertz is isolated to the
+optional audio-output section and never enters the Jovian recovery math. The recovered clock is built from
+raw ticks, observed turns, recurrence, and dimensionless normalization.
+</div>
+
+<section class="card" style="margin-top:16px">
+  <h2>Virtual physical layer — what this lab assumes</h2>
+  <p class="small">The present browser is an observer of a hypothetical physical clock. It is not the clock authority.</p>
+  <table>
+    <tr><th>Layer</th><th>Role in this experiment</th></tr>
+    <tr><td>CPU / browser timing</td><td>Runs the simulation and display only. Excluded from A8 definition.</td></tr>
+    <tr><td>System / wall clock</td><td>Not read by the recovery engine.</td></tr>
+    <tr><td>Arbitrary pulse source</td><td>Produces monotonically increasing raw ticks at an initially meaningless rate.</td></tr>
+    <tr><td>Jovian recurrence</td><td>External natural reference used to calibrate / normalize the raw pulse count.</td></tr>
+    <tr><td>512 phase ruler</td><td>Representation applied after recurrence recovery; it is not the anchor.</td></tr>
+  </table>
+</section>
+
+<section class="note">
+  <b>Independent Recoverability:</b> erase the recovered clock without erasing the simulated Jovian motion.
+  The machine must reacquire the recurrence from raw observations and arbitrary pulse counts. Change the
+  arbitrary oscillator increment, reset, and recover again: the raw tick span changes; the normalized Jovian
+  recurrence must not.
+</section>
+
+<section class="note">
+  <b>Repeatability:</b> Experiment 1 beside the oscillator controls is intentionally simple enough for any visitor to repeat. After that test, <b>Erase recovered clock memory</b> can be used while the Jovian sensor remains active to test reacquisition from observation rather than stored calibration.
+</section>
+
+<section class="card" style="margin-top:16px">
+  <h2>What this simulation can and cannot claim</h2>
+  <p><span class="status good">CAN TEST</span> logical recovery from arbitrary pulses, turn events, recurrence, ratio checks, normalization, and 512-state representation.</p>
+  <p><span class="status">ASSUMES</span> a realizable physical oscillator, edge counter, event detector, divider / register chain, and one-way observer output.</p>
+  <p><span class="status warn">DOES NOT CLAIM</span> that the physical A8 clock has been built, that component tolerances are solved, or that current computers define A8 time.</p>
+</section>
+
+<section class="card" style="margin-top:16px">
+  <h2>Development note</h2>
+  <p>
+    Auspicious 8 is exploring a simple question:
+    <b>Can a physical standard be reconstructed from observable natural relationships rather than inherited administrative units?</b>
+  </p>
+  <p>
+    This page is one working experiment. The primary clockwork under test is the
+    Io–Europa–Ganymede three-body core. Callisto remains visible as a secondary slow-envelope
+    diagnostic while its eventual A8 role remains open.
+  </p>
+  <p class="small">
+    The displayed hertz values exist only because present-day speakers and browsers require them.
+    A finalized A8 audio system would derive tone synthesis from the native A8 clock rather than
+    define the clock from present-day hertz.
+  </p>
+</section>
+
+<section class="note">
+  <b>Teaser:</b> why 512? Because 512 = 2⁹ = 8³, giving 000₈ through 777₈ as a compact
+  three-digit phase space. Whether that becomes part of the final A8 clock remains under test.
+</section>
+
+</main>
+
+<script>
+(()=>{
+let running=false;
+let observationBlocked=false;
+let naturalStep=0;                    // hidden simulation plant only; never used by recovery math
+let ioRateFactor=1;                   // Chief Engineer fault injection; integrated forward without phase teleport
+let ioPhaseContinuity=0;              // preserves Io position when the fault dial is changed
+let rawTicks=0n;                      // unknown local oscillator count
+let rawTickRemainder=0n;              // exact /512 remainder for simulated oscillator drift
+const TICK_DEN=512n;
+const PLANT_G_STEPS=4096;             // hidden truth used only to generate simulated observations
+const oscillators={}, gains={};
+let audioCtx=null, master=null, audioStarted=false;
+
+const $=id=>document.getElementById(id);
+const wrap01=x=>{x%=1;return x<0?x+1:x};
+const sw=x=>{x=wrap01(x);return x>.5?x-1:x};
+
+const defs=[
+  {name:"Io",id:"io",plantPeriod:PLANT_G_STEPS/4,offset:0.00,ratio:4},
+  {name:"Europa",id:"eu",plantPeriod:PLANT_G_STEPS/2,offset:0.25,ratio:2},
+  {name:"Ganymede",id:"ga",plantPeriod:PLANT_G_STEPS,offset:0.00,ratio:1},
+  {name:"Callisto",id:"ca",plantPeriod:(PLANT_G_STEPS/4)*(28/3),offset:0.12,ratio:3/7}
+];
+
+const histories={}, observedCounts={}, events=[];
+let gWestTicks=[];
+let lockedSpan=null;                  // current raw ticks per G recurrence; frozen in MANUAL, continuously refreshed in AUTO
+let lockAnchorTick=null;              // current locked G-WEST seam
+let lastGWestTick=null;
+let lastObservedSpan=null;
+let lastPhaseError=null;
+let calibrationActive=false;
+let calibrationFirstTick=null;
+let calibrationSource="";
+let calibrationMessage="IDLE";
+let driftWasChangedAfterLock=false;
+let innerIntegrityState="nominal";      // nominal | deviating | fault; diagnostic only, never defines clock recovery
+let moonTestId="ga";                      // parallel proof channel only; primary clock remains Ganymede
+let moonTestActive=false;
+let moonTestFirstTick=null;
+let moonTestNativeSpan=null;
+let moonTestNormalizedSpan=null;
+let moonTestMessage="GANYMEDE · READY";
+
+for(const m of defs){
+  histories[m.id]=[];
+  observedCounts[m.id]={W:0,E:0};
+  const d=document.createElement("section");
+  d.className="moon";
+  d.innerHTML=`
+    <div class="moon-head">
+      <b>${m.name}</b>
+      <span class="mono"><span id="${m.id}dir">eastbound →</span> · recovered A8 display <span id="${m.id}phase">---</span></span>
+    </div>
+    <div class="ruler" aria-label="512-position A8 display ruler">
+      <span>000</span><span>100</span><span>200</span><span>300</span>
+      <span>400</span><span>500</span><span>600</span><span>700</span>
+    </div>
+    <div class="phase-track">
+      <span class="turnlabel w">WEST TURN</span>
+      <span class="turnlabel e">EAST TURN</span>
+      <div class="axis"></div><span class="center"></span>
+      <span class="major" style="left:25%"></span><span class="major" style="left:75%"></span>
+      <span id="${m.id}dot" class="dot"></span>
+    </div>
+    <div class="row">
+      <div class="small">Radial diagnostic<br>PERI ← → APO</div>
+      <div class="radial"><span id="${m.id}rad" class="radial-dot"></span></div>
+    </div>`;
+  $("moons").appendChild(d);
+}
+
+function phaseAddr(ph){
+  const n=Math.floor(wrap01(ph)*512)&511;
+  return n.toString(8).padStart(3,"0")+"₈";
+}
+function octFrac(x){
+  x=wrap01(x);let s="0.";
+  for(let i=0;i<4;i++){x*=8;const q=Math.floor(x);s+=q;x-=q}
+  return s+"₈";
+}
+
+function playbackHz(m){
+  const base=Number($("baseTone").value);
+  if(m.id!=="ca") return base*m.ratio;
+  const det=Number($("detune").value)*1e-4;
+  return base*((3/7)+det);
+}
+function updateDetuneRead(){
+  const d=Number($("detune").value);
+  const pct=d/100;
+  const sign=pct>0?"+":"";
+  $("detuneRead").textContent=sign+pct.toFixed(2)+"% · ideal 3/7 · secondary";
+}
+function updateIoPerturbRead(){
+  const d=Number($("ioPerturb").value);
+  const pct=d/100;
+  const sign=pct>0?"+":"";
+  $("ioPerturbRead").textContent=sign+pct.toFixed(2)+(d===0?"% · RATE COMMAND NORMAL":"% · RATE FAULT ACTIVE");
+  $("ioPerturbRead").className="status "+(d===0?"good":"warn");
+}
+function cumulativeInnerLaplaceResidual(){
+  // Unwrapped bench diagnostic. Unlike a wrapped phase angle, this cannot appear to
+  // heal merely because the residual crosses a whole-cycle seam.
+  const io=(naturalStep/defs[0].plantPeriod)*ioRateFactor+defs[0].offset+ioPhaseContinuity;
+  const eu=naturalStep/defs[1].plantPeriod+defs[1].offset;
+  const ga=naturalStep/defs[2].plantPeriod+defs[2].offset;
+  const base=defs[0].offset-3*defs[1].offset+2*defs[2].offset;
+  return io-3*eu+2*ga-base;
+}
+function updatePlantIntegrity(){
+  const lap=cumulativeInnerLaplaceResidual();
+  const absLap=Math.abs(lap);
+  const faultCommand=Number($("ioPerturb").value)!==0;
+  const oneA8State=1/512;
+  if(absLap<1e-9 && !faultCommand){
+    innerIntegrityState="nominal";
+    $("plantIntegrity").textContent="INNER SYSTEM NOMINAL";
+    $("plantIntegrity").className="status good";
+    $("plantIntegrityNote").innerHTML="<b>Anchor check:</b> the inner Io–Europa–Ganymede relationship is nominal. This diagnostic is outside the recovery path; it checks the simulated plant rather than defining the clock.";
+  }else if(absLap<oneA8State){
+    innerIntegrityState="deviating";
+    $("plantIntegrity").textContent="INNER SYSTEM DEVIATING";
+    $("plantIntegrity").className="status warn";
+    $("plantIntegrityNote").innerHTML="<b>Anchor check:</b> an Io rate/phase disturbance is present and separation is accumulating. Ganymede lock may still remain valid while the three-moon consistency check is no longer nominal.";
+  }else{
+    innerIntegrityState="fault";
+    $("plantIntegrity").textContent="⚠ INNER SYSTEM FAULT";
+    $("plantIntegrity").className="status chief-warning warn";
+    $("plantIntegrityNote").innerHTML="<b>Anchor check failed:</b> the inner relationship has departed by at least one 1/512 phase state in this idealized bench diagnostic. A valid Ganymede recurrence can remain locked, but the wider Io–Europa–Ganymede anchor is flagged as inconsistent.";
+  }
+  $("laplace").textContent=lap.toExponential(2)+" cycles";
+  $("laplace").className="metric "+(innerIntegrityState==="nominal"?"good":"warn");
+}
+function updateAudioLabels(){
+  updateDetuneRead();
+  $("baseRead").textContent=$("baseTone").value+" browser Hz";
+  for(const m of defs) $(m.id+"Hz").textContent=playbackHz(m).toFixed(1)+" browser Hz";
+}
+function ensureAudio(){
+  if(audioCtx) return;
+  audioCtx=new (window.AudioContext||window.webkitAudioContext)();
+  master=audioCtx.createGain();master.gain.value=0;master.connect(audioCtx.destination);
+  for(const m of defs){
+    const o=audioCtx.createOscillator(),g=audioCtx.createGain();
+    o.type=$("wave").value;o.frequency.value=playbackHz(m);g.gain.value=$(m.id+"On").checked?0.11:0;
+    o.connect(g).connect(master);o.start();oscillators[m.id]=o;gains[m.id]=g;
+  }
+}
+function updateAudio(){
+  updateAudioLabels();if(!audioCtx)return;const now=audioCtx.currentTime;
+  master.gain.setTargetAtTime(audioStarted?Number($("masterVol").value)/100:0,now,0.02);
+  for(const m of defs){
+    oscillators[m.id].type=$("wave").value;
+    oscillators[m.id].frequency.setTargetAtTime(playbackHz(m),now,0.03);
+    gains[m.id].gain.setTargetAtTime($(m.id+"On").checked?0.11:0,now,0.02);
+  }
+}
+function clickTone(isEast){
+  if(!audioStarted||!$("pulseClicks").checked||!audioCtx)return;
+  const o=audioCtx.createOscillator(),g=audioCtx.createGain();o.type="sine";
+  o.frequency.value=isEast?1400:900; // downstream browser output only
+  g.gain.setValueAtTime(0.0001,audioCtx.currentTime);
+  g.gain.exponentialRampToValueAtTime(0.11,audioCtx.currentTime+0.004);
+  g.gain.exponentialRampToValueAtTime(0.0001,audioCtx.currentTime+0.055);
+  o.connect(g).connect(master);o.start();o.stop(audioCtx.currentTime+0.06);
+}
+
+function plantState(m){
+  let period=m.plantPeriod;
+  let ph;
+  if(m.id==="io"){
+    // Change Io's rate from the moment the Chief Engineer's Dial is moved.
+    // ioPhaseContinuity prevents the moon from teleporting to a new phase when the rate changes.
+    ph=wrap01((naturalStep/m.plantPeriod)*ioRateFactor+m.offset+ioPhaseContinuity);
+  }else{
+    if(m.id==="ca") period=m.plantPeriod/(1+Number($("detune").value)*1e-4);
+    ph=wrap01(naturalStep/period+m.offset);
+  }
+  const x=Math.sin(2*Math.PI*ph),dx=Math.cos(2*Math.PI*ph);
+  return {ph,x,dx,dir:dx>=0?"eastbound →":"← westbound",radial:(1-Math.cos(2*Math.PI*ph))/2};
+}
+
+function applyIoPerturbation(){
+  const newFactor=1+Number($("ioPerturb").value)*1e-4;
+  const baseCycles=naturalStep/defs[0].plantPeriod;
+  // Preserve current Io phase while changing only its future rate.
+  ioPhaseContinuity+=baseCycles*(ioRateFactor-newFactor);
+  ioRateFactor=newFactor;
+  histories.io=[]; // require fresh samples after the deliberate plant-rate change
+  render();
+}
+
+function signedCycleError(x){
+  x=wrap01(x);return x>.5?x-1:x;
+}
+function signedA8Error(err){
+  if(err===null||!Number.isFinite(err))return "—";
+  const states=Math.round(err*512);
+  const sign=states<0?"−":states>0?"+":"";
+  return sign+Math.abs(states).toString(8).padStart(3,"0")+"₈ states";
+}
+function moonById(id){ return defs.find(m=>m.id===id); }
+function moonTestName(){ const m=moonById(moonTestId); return m?m.name.toUpperCase():"—"; }
+function renderMoonTest(){
+  const selected={io:"moonTestIo",eu:"moonTestEu",ga:"moonTestGa"};
+  for(const [id,btn] of Object.entries(selected)) $(btn).classList.toggle("selected",id===moonTestId);
+  $("moonTestStatus").textContent=moonTestMessage;
+  $("moonTestStatus").className="status "+(moonTestActive?"warn":moonTestNativeSpan!==null?"good":"");
+  $("moonTestNative").textContent=moonTestNativeSpan===null?"—":moonTestNativeSpan.toFixed(2)+" raw ticks";
+  $("moonTestNormalized").textContent=moonTestNormalizedSpan===null?"—":moonTestNormalizedSpan.toFixed(2)+" raw ticks";
+  if(moonTestNormalizedSpan===null||lockedSpan===null){
+    $("moonTestCompare").textContent="—";
+    $("moonTestCompare").className="metric";
+  }else{
+    const delta=moonTestNormalizedSpan-lockedSpan;
+    const rel=lockedSpan?delta/lockedSpan:0;
+    const pass=Math.abs(rel)<=1/512;
+    $("moonTestCompare").textContent=(delta>=0?"+":"")+delta.toFixed(2)+" ticks · "+(rel*100).toFixed(4)+"%";
+    $("moonTestCompare").className="metric "+(pass?"good":"warn");
+  }
+}
+function startMoonTest(id){
+  moonTestId=id;
+  moonTestActive=true;
+  moonTestFirstTick=null;
+  moonTestNativeSpan=null;
+  moonTestNormalizedSpan=null;
+  moonTestMessage=moonTestName()+" · WAITING FOR FIRST WEST";
+  renderMoonTest();
+}
+
+function beginCalibration(source){
+  if(lockedSpan===null){
+    calibrationMessage=source==="AUTO"?"AUTO · WAITING FOR INITIAL LOCK":"WAIT FOR INITIAL LOCK";
+    calibrationActive=false;calibrationFirstTick=null;calibrationSource=source==="AUTO"?"AUTO":"";
+    renderRecovery();return;
+  }
+  if(source==="AUTO" && observationBlocked){
+    calibrationActive=false;
+    calibrationFirstTick=null;
+    calibrationSource="AUTO";
+    calibrationMessage="AUTO · SENSOR BLOCKED";
+    renderRecovery();return;
+  }
+  calibrationActive=true;
+  calibrationFirstTick=null;
+  calibrationSource=source;
+  calibrationMessage=source+" · WAITING FOR FIRST G-WEST";
+  renderRecovery();
+}
+function recordTurn(m,kind,tick){
+  observedCounts[m.id][kind]++;
+  events.push({moon:m.id,kind,tick});
+  clickTone(kind==="E");
+
+  if(kind==="W" && m.id===moonTestId && moonTestActive){
+    if(moonTestFirstTick===null){
+      moonTestFirstTick=tick;
+      moonTestMessage=moonTestName()+" · 1/2 WEST CAPTURED";
+    }else{
+      const span=Number(tick-moonTestFirstTick);
+      if(span>0){
+        moonTestNativeSpan=span;
+        moonTestNormalizedSpan=span*m.ratio;
+        moonTestActive=false;
+        moonTestMessage=moonTestName()+" · CHANNEL COMPLETE";
+      }
+    }
+  }
+
+  if(m.id==="ga"&&kind==="W"){
+    gWestTicks.push(tick);
+    if(lastGWestTick!==null) lastObservedSpan=Number(tick-lastGWestTick);
+
+    if(lockedSpan===null && lastGWestTick!==null){
+      // Initial independent recovery: first complete observed G-WEST interval establishes calibration.
+      lockedSpan=Number(tick-lastGWestTick);
+      lockAnchorTick=tick;
+      lastPhaseError=0;
+      driftWasChangedAfterLock=false;
+      if($("calMode").value==="auto" && !observationBlocked){
+        // AUTO begins immediately after initial lock. The lock-completing WEST is the first
+        // landmark of the next clean span, so the following WEST can refresh calibration.
+        calibrationActive=true;
+        calibrationFirstTick=tick;
+        calibrationSource="AUTO";
+        calibrationMessage="AUTO · TRACKING · 1/2 G-WEST CAPTURED";
+      }else{
+        calibrationMessage="INITIAL LOCK COMPLETE";
+      }
+    }else if(lockedSpan!==null && lockAnchorTick!==null){
+      // At every observed G-WEST, measure where the frozen local clock predicts the natural seam.
+      lastPhaseError=signedCycleError(Number(tick-lockAnchorTick)/lockedSpan);
+    }
+
+    // Post-lock recalibration always requires TWO FRESH G-WEST turns captured after arming.
+    if(lockedSpan!==null && calibrationActive){
+      if(calibrationFirstTick===null){
+        calibrationFirstTick=tick;
+        calibrationMessage=calibrationSource+" · 1/2 G-WEST CAPTURED";
+      }else{
+        const newSpan=Number(tick-calibrationFirstTick);
+        if(newSpan>0){
+          lockedSpan=newSpan;
+          lockAnchorTick=tick;
+          lastObservedSpan=newSpan;
+          lastPhaseError=0;
+          driftWasChangedAfterLock=false;
+          if($("calMode").value==="auto" && calibrationSource==="AUTO" && !observationBlocked){
+            // Continuous AUTO discipline: this WEST closes the current clean span and
+            // simultaneously becomes the first landmark for the next one.
+            calibrationActive=true;
+            calibrationFirstTick=tick;
+            calibrationSource="AUTO";
+            calibrationMessage="AUTO · TRACKING · CALIBRATED "+newSpan.toFixed(2)+" · NEXT G-WEST ARMED";
+          }else{
+            calibrationActive=false;
+            calibrationFirstTick=null;
+            calibrationMessage="CALIBRATED · "+newSpan.toFixed(2)+" RAW TICKS";
+          }
+        }
+      }
+    }
+    lastGWestTick=tick;
+  }
+}
+function detectTurnFromObservedPositions(m,s){
+  const h=histories[m.id];
+  if(observationBlocked){ h.length=0; return; }
+  h.push({x:s.x,tick:rawTicks});if(h.length<3)return;if(h.length>3)h.shift();
+  const [a,b,c]=h,eps=1e-10;
+  if((b.x-a.x)>eps&&(b.x-c.x)>eps) recordTurn(m,"E",b.tick);
+  if((a.x-b.x)>eps&&(c.x-b.x)>eps) recordTurn(m,"W",b.tick);
+}
+
+function recoveredSpan(){
+  return lockedSpan;
+}
+function recoveredPhase(){
+  if(lockedSpan===null||lockAnchorTick===null||lockedSpan<=0)return null;
+  return wrap01((Number(rawTicks)-Number(lockAnchorTick))/lockedSpan);
+}
+function countEventsBetween(moon,kind,start,end){
+  let n=0;for(const e of events)if(e.moon===moon&&e.kind===kind&&e.tick>start&&e.tick<=end)n++;return n;
+}
+function recoveryRatio(){
+  if(gWestTicks.length<2)return null;
+  const first=gWestTicks[0],last=gWestTicks[gWestTicks.length-1],cycles=gWestTicks.length-1;
+  return {g:countEventsBetween("ga","W",first,last)/cycles,
+          e:countEventsBetween("eu","W",first,last)/cycles,
+          i:countEventsBetween("io","W",first,last)/cycles};
+}
+
+function renderRecovery(){
+  $("count").textContent=rawTicks.toString()+" ticks";
+  $("obsRead").textContent=observationBlocked?"JOVIAN SENSOR BLOCKED":"JOVIAN SENSOR ACTIVE";
+  $("obsRead").className="status "+(observationBlocked?"warn":"good");
+  $("obsToggle").textContent=observationBlocked?"Restore Jovian sensor":"Simulate cloud blackout";
+  const calMode=$("calMode").value;
+  $("calModeRead").textContent=calMode==="manual"?"MANUAL · operator arms":"AUTO · continuous Jovian tracking";
+  $("calibrationLabel").textContent=calMode==="auto"?"Auto-tracked calibration":"Frozen calibration";
+  $("armCal").disabled=calMode!=="manual";
+  $("calStatus").textContent=calibrationMessage;
+  const autoStable=calMode==="auto" && lockedSpan!==null && !observationBlocked && !driftWasChangedAfterLock;
+  $("calStatus").className="status "+(autoStable?"good":calibrationActive||driftWasChangedAfterLock?"warn":calibrationMessage.startsWith("CALIBRATED")?"good":"");
+  $("tickRateRead").textContent=$("tickRate").value+" raw ticks / plant step";
+  const benchStep=Number($("speed").value);
+  const nominalNaturalFactor=Math.round((7.155*86400*60/PLANT_G_STEPS)*benchStep);
+  $("speedRead").textContent=benchStep+" plant steps / frame";
+  $("accelRead").textContent="≈"+nominalNaturalFactor.toLocaleString()+"× natural Ganymede rate · nominal 60 fps";
+  const d=Number($("drift").value);
+  $("driftRead").textContent=(d>0?"+":"")+d+" / 512";
+
+  if(gWestTicks.length===0){
+    $("recoveryStatus").textContent="SEEKING FIRST G-WEST";$("recoveryStatus").className="metric warn";
+    $("anchorA").textContent=$("anchorB").textContent=$("gSpan").textContent=$("recoveredRatio").textContent="—";
+    $("gCycles").textContent="0";$("a8phase").textContent="---";
+  }else{
+    $("anchorA").textContent=gWestTicks[0].toString()+" ticks";
+    $("anchorB").textContent=gWestTicks[gWestTicks.length-1].toString()+" ticks";
+    if(lockedSpan===null){
+      $("recoveryStatus").textContent="SEEKING SECOND G-WEST";$("recoveryStatus").className="metric warn";
+      $("gSpan").textContent=$("recoveredRatio").textContent="—";$("gCycles").textContent="0";$("a8phase").textContent="---";
+    }else{
+      const rp=recoveredPhase(),rr=recoveryRatio();
+      if(innerIntegrityState==="fault"){
+        $("recoveryStatus").textContent="G LOCKED / ANCHOR FAULT";$("recoveryStatus").className="metric warn";
+      }else if(innerIntegrityState==="deviating"){
+        $("recoveryStatus").textContent="G LOCKED / ANCHOR DEVIATING";$("recoveryStatus").className="metric warn";
+      }else{
+        $("recoveryStatus").textContent="RECOVERED / LOCKED";$("recoveryStatus").className="metric good";
+      }
+      $("gSpan").textContent=lockedSpan.toFixed(2)+" raw ticks";
+      $("gCycles").textContent=String(Math.max(1,gWestTicks.length-1));
+      $("a8phase").textContent=phaseAddr(rp);
+      $("recoveredRatio").textContent=rr?`${rr.g.toFixed(3)} : ${rr.e.toFixed(3)} : ${rr.i.toFixed(3)}`:"—";
+      $("bootstrapNote").innerHTML="Initial recovery is frozen from observed Ganymede WEST-to-WEST. Later oscillator drift does <b>not</b> silently redefine that calibration. The locked G-WEST remains the current representation seam <b>000₈</b>.";
+    }
+  }
+
+  $("lockedSpan").textContent=lockedSpan===null?"—":lockedSpan.toFixed(2)+" raw ticks";
+  $("observedSpan").textContent=lastObservedSpan===null?"—":lastObservedSpan.toFixed(2)+" raw ticks";
+  $("phaseError").textContent=signedA8Error(lastPhaseError);
+
+  if(lockedSpan===null){
+    $("holdoverStatus").textContent="WAITING FOR LOCK";$("holdoverStatus").className="metric warn";
+  }else if(calMode==="auto" && observationBlocked){
+    $("holdoverStatus").textContent="AUTO / COASTING · SENSOR BLOCKED";$("holdoverStatus").className="metric warn";
+  }else if(calMode==="auto" && driftWasChangedAfterLock){
+    $("holdoverStatus").textContent="AUTO REACQUIRE / OLD CALIBRATION";$("holdoverStatus").className="metric warn";
+  }else if(calMode==="auto"){
+    $("holdoverStatus").textContent=innerIntegrityState==="fault"?"AUTO G-TRACKING / ANCHOR FAULT":"AUTO TRACKING / LOCKED";
+    $("holdoverStatus").className="metric "+(innerIntegrityState==="fault"?"warn":"good");
+  }else if(calibrationActive){
+    $("holdoverStatus").textContent="CALIBRATION CAPTURE";$("holdoverStatus").className="metric warn";
+  }else if(driftWasChangedAfterLock){
+    $("holdoverStatus").textContent="COASTING / DRIFTED";$("holdoverStatus").className="metric warn";
+  }else if(calibrationMessage.startsWith("CALIBRATED")){
+    $("holdoverStatus").textContent="CALIBRATED / COASTING";$("holdoverStatus").className="metric good";
+  }else{
+    $("holdoverStatus").textContent="LOCKED / COASTING";$("holdoverStatus").className="metric good";
+  }
+
+  if(calMode==="auto" && lockedSpan!==null && observationBlocked){
+    $("driftNote").innerHTML="AUTO tracking is suspended because the Jovian sensor is blocked. The clock coasts on its last valid calibration. When observation returns, AUTO starts a new clean two-turn span by itself.";
+  }else if(calMode==="auto" && lockedSpan!==null && driftWasChangedAfterLock){
+    $("driftNote").innerHTML="The local oscillator changed while AUTO was running. Any partly completed G-WEST span was discarded. The previous calibration is being held while AUTO waits for <b>two fresh G-WEST landmarks</b>; only that fully post-adjustment WEST→WEST span may replace the calibration.";
+  }else if(calMode==="auto" && lockedSpan!==null){
+    $("driftNote").innerHTML="AUTO is continuously disciplining the local pulse source from observed Ganymede WEST→WEST spans. No blackout and no operator arm command are required. Each completed clean recurrence refreshes the calibration and becomes the starting landmark for the next one.";
+  }else if(calibrationActive){
+    $("driftNote").innerHTML="Manual calibration capture is active. No hand timing is required: the machine will use two fresh observed Ganymede WEST turns and will not reuse a pre-blackout span.";
+  }else if(driftWasChangedAfterLock){
+    $("driftNote").innerHTML="The local pulse source has changed since the last calibration. Jupiter is unchanged. The clock is coasting on the older frozen calibration until observation measures the error or a clean two-turn recalibration is performed.";
+  }else if(lockedSpan!==null && calibrationMessage.startsWith("CALIBRATED") && d!==0){
+    $("driftNote").innerHTML="The oscillator is still running at the altered physical rate shown by the drift control, but the clock has now been recalibrated to that rate. The current calibration matches the observed Jovian recurrence; a nonzero drift setting does not by itself mean the clock is presently misaligned.";
+  }else{
+    $("driftNote").innerHTML="Initial recovery happens automatically. Later recalibration can be MANUAL (operator arms one clean two-turn capture) or AUTO (continuous Jovian tracking with no blackout trigger).";
+  }
+}
+
+function render(){
+  updateIoPerturbRead();
+  const states={};
+  for(const m of defs){
+    const s=plantState(m);states[m.id]=s;
+    $(m.id+"dot").style.left=((s.x+1)*50)+"%";
+    $(m.id+"dot").className="dot "+(Math.cos(2*Math.PI*s.ph)>=0?"front":"back");
+    $(m.id+"rad").style.left=(s.radial*100)+"%";$(m.id+"dir").textContent=s.dir;
+    const rp=recoveredPhase();
+    if(rp===null)$(m.id+"phase").textContent="---";
+    else{
+      const mult=m.id==="io"?4:m.id==="eu"?2:m.id==="ga"?1:(3/7);
+      $(m.id+"phase").textContent=phaseAddr(rp*mult+m.offset);
+    }
+    $(m.id+"W").textContent=observedCounts[m.id].W;$(m.id+"E").textContent=observedCounts[m.id].E;
+  }
+  updatePlantIntegrity();
+  $("psi").textContent=octFrac(sw(3*states.ga.ph-7*states.ca.ph));
+  renderRecovery();
+  renderMoonTest();
+}
+
+function advance(n){
+  n=Math.max(1,Math.floor(n));
+  const base=BigInt($("tickRate").value);
+  const drift=BigInt(Number($("drift").value));
+  const perPlantStep=base*(TICK_DEN+drift);
+
+  // Bench acceleration and observation resolution are intentionally independent.
+  // Advance the hidden plant one step at a time so WEST/EAST landmarks are sampled
+  // at fixed resolution even when the display jumps many plant steps per frame.
+  for(let i=0;i<n;i++){
+    naturalStep+=1;
+    const numerator=perPlantStep+rawTickRemainder;
+    rawTicks+=numerator/TICK_DEN;
+    rawTickRemainder=numerator%TICK_DEN;
+    for(const m of defs) detectTurnFromObservedPositions(m,plantState(m));
+  }
+  render();
+}
+function forgetRecovery(){
+  for(const m of defs){histories[m.id]=[];observedCounts[m.id]={W:0,E:0};}
+  events.length=0;gWestTicks=[];
+  lockedSpan=null;lockAnchorTick=null;lastGWestTick=null;lastObservedSpan=null;lastPhaseError=null;
+  calibrationActive=false;calibrationFirstTick=null;calibrationSource="";calibrationMessage="IDLE";driftWasChangedAfterLock=false;
+  moonTestActive=false;moonTestFirstTick=null;moonTestNativeSpan=null;moonTestNormalizedSpan=null;moonTestMessage=moonTestName()+" · READY";
+  $("bootstrapNote").textContent="Recovered clock memory erased. Jovian observation remains available; the clock must reacquire two fresh Ganymede WEST turns from live observations.";
+  render();
+}
+function resetLab(){
+  // True whole-lab reset: return every experimental control to a known baseline.
+  running=false;observationBlocked=false;naturalStep=0;ioRateFactor=1;ioPhaseContinuity=0;rawTicks=0n;rawTickRemainder=0n;
+
+  $("speed").value="8";
+  $("tickRate").value="73";
+  $("drift").value="0";
+  $("calMode").value="manual";
+  $("detune").value="0";
+  $("ioPerturb").value="0";
+  moonTestId="ga";
+
+  // Downstream observer/audio defaults are reset too; audio is never part of clock recovery.
+  $("baseTone").value="256";
+  $("wave").value="sine";
+  $("masterVol").value="28";
+  $("pulseClicks").checked=true;
+  for(const m of defs) $(m.id+"On").checked=true;
+  audioStarted=false;
+  $("audio").textContent="Start audio";
+  if(audioCtx && master) master.gain.setTargetAtTime(0,audioCtx.currentTime,0.02);
+
+  $("run").textContent="Run observations";
+  calibrationActive=false;calibrationFirstTick=null;calibrationSource="";calibrationMessage="IDLE";
+  forgetRecovery();
+  $("bootstrapNote").textContent="Whole lab reset to the known baseline. Waiting for two fresh Ganymede WEST turns to recover the initial clock.";
+  render();
+  updateAudio();
+}
+function loop(){if(running)advance(Number($("speed").value));requestAnimationFrame(loop);} // scheduler only, never read as time authority
+
+$("run").addEventListener("click",()=>{running=!running;$("run").textContent=running?"Pause observations":"Run observations";});
+$("step").addEventListener("click",()=>advance(Number($("speed").value)));
+$("obsToggle").addEventListener("click",()=>{
+  const wasBlocked=observationBlocked;
+  observationBlocked=!observationBlocked;
+  for(const m of defs) histories[m.id]=[];
+  // Never form a WEST→WEST span across an observation blackout.
+  lastGWestTick=null;
+  lastObservedSpan=null;
+  if(observationBlocked){
+    calibrationFirstTick=null;
+    if($("calMode").value==="auto"){
+      calibrationActive=false;
+      calibrationSource="AUTO";
+      calibrationMessage="AUTO · SENSOR BLOCKED";
+    }else if(calibrationActive){
+      calibrationMessage=calibrationSource+" · WAITING FOR FIRST G-WEST";
+    }
+  }
+  if(wasBlocked && !observationBlocked && lockedSpan!==null && $("calMode").value==="auto") beginCalibration("AUTO");
+  else renderRecovery();
+});
+$("forget").addEventListener("click",forgetRecovery);$("reset").addEventListener("click",resetLab);
+function localOscillatorChanged(){
+  if(lockedSpan!==null){
+    driftWasChangedAfterLock=true;
+    // Never report or calibrate from a G-WEST interval that straddles an oscillator adjustment.
+    lastGWestTick=null;
+    lastObservedSpan=null;
+    calibrationFirstTick=null;
+    if($("calMode").value==="auto"){
+      calibrationSource="AUTO";
+      calibrationActive=!observationBlocked;
+      calibrationMessage=observationBlocked?"AUTO · SENSOR BLOCKED":"AUTO · OSCILLATOR CHANGED · WAITING FOR FIRST G-WEST";
+    }else if(calibrationActive){
+      calibrationMessage="MANUAL · OSCILLATOR CHANGED · WAITING FOR FIRST G-WEST";
+    }
+  }
+  renderRecovery();
+}
+$("tickRate").addEventListener("input",localOscillatorChanged);
+$("speed").addEventListener("input",renderRecovery);
+$("drift").addEventListener("input",localOscillatorChanged);
+$("calMode").addEventListener("change",()=>{
+  calibrationActive=false;calibrationFirstTick=null;calibrationSource="";
+  if($("calMode").value==="auto"){
+    beginCalibration("AUTO");
+  }else{
+    calibrationMessage="IDLE";
+    renderRecovery();
+  }
+});
+$("armCal").addEventListener("click",()=>beginCalibration("MANUAL"));
+$("moonTestIo").addEventListener("click",()=>startMoonTest("io"));
+$("moonTestEu").addEventListener("click",()=>startMoonTest("eu"));
+$("moonTestGa").addEventListener("click",()=>startMoonTest("ga"));
+$("audio").addEventListener("click",async()=>{ensureAudio();if(audioCtx.state==="suspended")await audioCtx.resume();audioStarted=!audioStarted;master.gain.setTargetAtTime(audioStarted?Number($("masterVol").value)/100:0,audioCtx.currentTime,0.03);$("audio").textContent=audioStarted?"Mute audio":"Start audio";});
+for(const id of ["baseTone","masterVol","detune"])$(id).addEventListener("input",updateAudio);
+$("detune").addEventListener("input",render);
+$("ioPerturb").addEventListener("input",applyIoPerturbation);
+$("wave").addEventListener("change",updateAudio);for(const m of defs)$(m.id+"On").addEventListener("change",updateAudio);
+updateAudioLabels();render();requestAnimationFrame(loop);
+})();
+</script>

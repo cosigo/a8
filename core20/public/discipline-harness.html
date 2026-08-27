@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Synthetic Discipline Harness | A8 Time Lab v5.4.20</title>
+<meta name="description" content="COSIGO Labs Auspicious 8 Gate 5H synthetic discipline state-machine harness consolidating RECOVERED, LOSS and REACQUIRED transitions with bounded Jovian rate recovery and one exact continuous synthetic clock history.">
+<meta name="author" content="COSIGO Labs">
+<meta name="robots" content="index,follow">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/site-shell.css">
+<style>
+  main{max-width:1180px;margin:auto;padding:28px 20px 72px}
+  .hero,.card{border:1px solid var(--line,#2a3744);border-radius:16px;padding:20px;background:var(--panel,#111820)}
+  .hero{margin-bottom:16px}
+  .title{font-size:clamp(2rem,7vw,5rem);line-height:.96;letter-spacing:-.05em;margin:.18em 0}
+  .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+  .k{display:block;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;opacity:.68}
+  .v{display:block;font-size:1.15rem;font-weight:800;margin-top:4px;overflow-wrap:anywhere}
+  .good{color:#87d39b}.warn{color:#e0bd72}
+  pre{white-space:pre-wrap;overflow-wrap:anywhere}
+  @media(max-width:800px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav class="cosigo-global-nav" aria-label="COSIGO and A8 global navigation">
+  <a class="cosigo-global-brand" href="https://cosigo.io/" aria-label="COSIGO home">
+    <img src="/assets/cosigo_master_512.gif" alt="COSIGO">
+    <span>COSIGO<small>LABS · AUSPICIOUS 8</small></span>
+  </a>
+  <div class="cosigo-global-links">
+    <a href="/index.html">A8 LAB HOME</a>
+    <a href="/discipline.html">DISCIPLINE</a>
+    <a href="/rate-slew.html">RATE SLEW</a>
+    <a href="/rate-continuity.html">RATE CONTINUITY</a>
+    <a href="/repeated-holdover.html">REPEATED HOLDOVER</a>
+    <a href="/relationship.html">TERRA SHIP SLIP</a>
+  </div>
+</nav>
+
+<main>
+  <section class="hero">
+    <div class="eyebrow">AUSPICIOUS 8 · TIME LAB v5.4.20 · GATE 5H</div>
+    <h1 class="title">SYNTHETIC DISCIPLINE HARNESS</h1>
+    <p><b>RECOVERED · LOSS · REACQUIRED · ONE STATE MACHINE</b></p>
+    <p class="muted">
+      Gate 5H consolidates the already-proven Jovian rate advisor, bounded slew,
+      and synthetic oscillator/divider/clock plant into one scripted discipline harness.
+      No real A8Core actuator interface is added.
+    </p>
+  </section>
+
+  <section class="grid">
+    <div class="card">
+      <span class="k">SUPPORTED STATES</span>
+      <span class="v">RECOVERED · LOSS · REACQUIRED</span>
+    </div>
+    <div class="card">
+      <span class="k">REAL A8CORE</span>
+      <span class="v good">DISCONNECTED</span>
+    </div>
+    <div class="card">
+      <span class="k">PHASE CONTROL</span>
+      <span class="v good">NONE</span>
+    </div>
+  </section>
+
+  <section class="card" style="margin-top:16px">
+    <h2>State machine</h2>
+    <pre>UNINITIALIZED
+      │
+      ▼
+  RECOVERED
+      │
+      ▼
+     LOSS
+      │
+      ▼
+ REACQUIRED
+      │
+      │ bounded rate-only recovery settles
+      ▼
+  RECOVERED
+      │
+      └── repeat</pre>
+  </section>
+
+  <section class="card" style="margin-top:16px">
+    <h2>LOSS behavior</h2>
+    <pre>fresh Jovian evidence = absent
+new candidate          = none
+rate movement          = none
+held rate              = last exact settled rate
+clock                   = continues by exact integration</pre>
+    <p class="good"><b>LOSS FREEZES RATE. LOSS DOES NOT FREEZE CLOCK.</b></p>
+  </section>
+
+  <section class="card" style="margin-top:16px">
+    <h2>REACQUIRED behavior</h2>
+    <pre>fresh Jovian evidence returns
+→ Gate-5A exact rate candidate
+
+candidate load:
+phase movement = 0
+rate movement  = 0
+
+then:
+Gate-5B bounded rate slew
+→ Gate-5C exact plant integration
+→ exact target settlement
+→ RECOVERED</pre>
+  </section>
+
+  <section class="card" style="margin-top:16px">
+    <h2>Gate 5H scripted proof</h2>
+    <pre>RECOVERED
+LOSS 4
+REACQUIRED 1000→1001
+  target 1000/1001
+  DOWN
+  10 updates
+
+LOSS 6
+REACQUIRED 1000→997
+  target 1000/997
+  UP
+  41 updates
+
+LOSS 3
+REACQUIRED 1000→1003
+  target 1000/1003
+  DOWN
+  61 updates</pre>
+  </section>
+
+  <section class="card" style="margin-top:16px">
+    <h2>Complete synthetic history</h2>
+    <pre>script events
+= 7
+
+plant advances
+= 125
+
+final state
+= RECOVERED
+
+final rate
+= 1000/1003
+
+final synthetic phase
+= 250322088666899
+  / 16015855856000</pre>
+    <p class="good"><b>ONE SCRIPT · ONE RATE STATE · ONE UNINTERRUPTED CLOCK HISTORY.</b></p>
+  </section>
+
+  <section class="card" style="margin-top:16px">
+    <h2>Illegal transitions rejected</h2>
+    <pre>LOSS before RECOVERED       → REJECT
+REACQUIRED before LOSS      → REJECT
+duplicate initial RECOVERED → REJECT
+second LOSS while in LOSS   → REJECT</pre>
+  </section>
+
+  <section class="card" style="margin-top:16px">
+    <h2>Still absent</h2>
+    <p class="warn"><b>NO REAL OSCILLATOR TRIM · NO REAL DIVIDER TRIM · NO PHASE PATH · NO TIMED ACTUATOR CADENCE.</b></p>
+  </section>
+</main>
+</body>
+</html>

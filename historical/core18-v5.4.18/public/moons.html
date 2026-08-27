@@ -1,0 +1,440 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A8 Four-Moon Rotation View · v5.4.18 | COSIGO Labs</title>
+<style>
+:root{
+  color-scheme: dark;
+  --bg:#0b0f14; --panel:#111821; --panel2:#151f2b; --line:#2b3848;
+  --text:#e6edf3; --muted:#9db0c8; --accent:#6ea8ff; --good:#72d6aa;
+  --warn:#e5bb68; --bad:#ff8e8e; --front:#8fc7ff; --back:#355f9e;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:15px/1.45 system-ui,sans-serif}
+main{max-width:1120px;margin:auto;padding:18px}
+h1{font-size:1.45rem;margin:0 0 6px}
+h2{font-size:1.02rem;margin:0 0 8px}
+p{margin:.45rem 0}
+.small{font-size:.9rem;color:var(--muted)}
+.topbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:14px}
+.topbar a{display:inline-block;padding:8px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel2);color:var(--text);text-decoration:none;font-weight:650}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:14px}
+.status{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:2px 8px;font-size:.82rem}
+.good{color:var(--good)} .warn{color:var(--warn)} .bad{color:var(--bad)}
+.metric{font:600 1.05rem ui-monospace,SFMono-Regular,Menlo,monospace}
+.legend{display:flex;gap:12px;flex-wrap:wrap}
+.swatch{display:inline-flex;align-items:center;gap:6px}
+.swatch b{display:inline-block;width:12px;height:12px;border-radius:50%}
+.track{position:relative;height:48px;margin-top:10px}
+.orbit-span{
+  position:absolute;
+  left:50%;
+  top:0;
+  height:48px;
+  transform:translateX(-50%);
+}
+.axis{position:absolute;left:0;right:0;top:18px;height:10px;border:1px solid var(--line);border-radius:999px;background:linear-gradient(90deg, rgba(255,255,255,.02), rgba(255,255,255,.06), rgba(255,255,255,.02))}
+.center{position:absolute;left:50%;top:10px;bottom:10px;width:1px;background:var(--line)}
+.major{position:absolute;top:15px;width:1px;height:16px;background:var(--line)}
+.turnlabel{position:absolute;top:0;font-size:.72rem;color:var(--muted)}
+.turnlabel.w{left:0}.turnlabel.e{right:0}
+.ruler{display:grid;grid-template-columns:repeat(8,1fr);gap:0;margin-top:4px;color:var(--muted);font-size:.68rem}
+.ruler span{text-align:center;border-left:1px solid var(--line)}
+.ruler span:last-child{border-right:1px solid var(--line)}
+.dot{position:absolute;top:13px;width:20px;height:20px;border-radius:50%;transform:translateX(-10px);transition:background-color .12s ease, opacity .12s ease, box-shadow .12s ease}
+.jupiter{
+  position:absolute;
+  left:50%;
+  top:6px;
+  width:44px;
+  height:34px;
+  transform:translateX(-50%);
+  border-radius:50%;
+  z-index:2;
+  pointer-events:none;
+  overflow:hidden;
+  border:1px solid rgba(255,220,160,.55);
+  background:
+    radial-gradient(
+      ellipse at 67% 63%,
+      rgba(183,78,48,.95) 0 7%,
+      rgba(183,78,48,.25) 8% 12%,
+      transparent 13%
+    ),
+    linear-gradient(
+      to bottom,
+      #d7b78d 0 10%,
+      #9d7156 10% 18%,
+      #e0c29a 18% 31%,
+      #b77d59 31% 39%,
+      #e9cda5 39% 53%,
+      #966249 53% 61%,
+      #d9b68a 61% 74%,
+      #aa7354 74% 82%,
+      #e0bf94 82% 100%
+    );
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.06),
+    0 0 14px rgba(218,166,105,.18);
+}
+.jupiter::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:50%;
+  background:
+    radial-gradient(
+      ellipse at 35% 32%,
+      rgba(255,255,255,.17),
+      transparent 38%
+    ),
+    radial-gradient(
+      ellipse at 50% 50%,
+      transparent 55%,
+      rgba(0,0,0,.22) 100%
+    );
+}
+.dot.front{z-index:3;background:var(--front);opacity:1;box-shadow:0 0 0 2px rgba(143,199,255,.18), 0 0 20px rgba(143,199,255,.18)}
+.dot.back{z-index:1;background:var(--back);opacity:.95;box-shadow:0 0 0 2px rgba(53,95,158,.18)}
+.reads{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px;margin-top:10px}
+.read{border:1px solid var(--line);border-radius:10px;padding:8px;background:var(--panel2)}
+.read .k{font-size:.76rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+.read .v{font:600 .98rem ui-monospace,SFMono-Regular,Menlo,monospace}
+.read.primary-phase{border-width:2px}
+.read.primary-phase .k{color:var(--text);font-weight:700}
+.read.primary-phase .v{font-size:1.35rem;color:var(--text)}
+.read.secondary-ref{opacity:.70}
+.read.secondary-ref .v{font-size:.82rem;font-weight:500}
+.native-rule{border-left:3px solid var(--accent);padding:9px 11px;background:var(--panel2);border-radius:8px}
+.moon-card{margin-top:12px}
+.note{border-left:3px solid var(--accent);padding:10px 12px;background:var(--panel2);border-radius:8px}
+.footer-note{margin-top:12px}
+.speedbar{display:grid;grid-template-columns:1fr auto auto;gap:12px;align-items:center;margin-top:12px;border:1px solid #7b5a21;background:#17130c}
+.speed-warning{color:#ffd48a;font-weight:900;letter-spacing:.05em}.speed-warning small{display:block;color:var(--muted);font-weight:600;letter-spacing:0;margin-top:4px}.speedbar label{font-size:12px;color:var(--muted)}.speedbar select{background:#0d1117;color:var(--text);border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-weight:800}.speed-rate{text-align:right;font-family:ui-monospace,monospace;font-weight:800;color:#ffd48a}@media(max-width:760px){.speedbar{grid-template-columns:1fr}.speed-rate{text-align:left}}
+
+/* A8 JOVIAN MOONS BACKGROUND v1 */
+body{
+  background:
+    linear-gradient(rgba(6,10,16,.52), rgba(6,10,16,.66)),
+    url("/assets/a8_jovian_moons_bg.png") center center / cover fixed no-repeat !important;
+}
+
+</style>
+<link rel="stylesheet" href="/site-shell.css">
+<meta name="description" content="COSIGO Labs Auspicious 8 Jovian observer for Io, Europa, Ganymede and related recurrence experiments used in independent physical-time recovery research.">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+<meta name="author" content="COSIGO Labs">
+<link rel="canonical" href="https://lab.a8.cosigo.io/moons.html">
+<link rel="icon" href="https://a8.cosigo.io/assets/cosigo_master_512.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="COSIGO Labs — Auspicious 8">
+<meta property="og:title" content="A8 Four-Moon Rotation View · v5.4.18">
+<meta property="og:description" content="COSIGO Labs Auspicious 8 Jovian observer for Io, Europa, Ganymede and related recurrence experiments used in independent physical-time recovery research.">
+<meta property="og:url" content="https://lab.a8.cosigo.io/moons.html">
+<meta property="og:image" content="https://a8.cosigo.io/assets/cosigo_master_512.png">
+<meta property="og:image:alt" content="A8 Four-Moon Rotation View · v5.4.18 — COSIGO Labs">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="A8 Four-Moon Rotation View · v5.4.18">
+<meta name="twitter:description" content="COSIGO Labs Auspicious 8 Jovian observer for Io, Europa, Ganymede and related recurrence experiments used in independent physical-time recovery research.">
+<meta name="twitter:image" content="https://a8.cosigo.io/assets/cosigo_master_512.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "A8 Four-Moon Rotation View · v5.4.18",
+  "url": "https://lab.a8.cosigo.io/moons.html",
+  "description": "COSIGO Labs Auspicious 8 Jovian observer for Io, Europa, Ganymede and related recurrence experiments used in independent physical-time recovery research.",
+  "dateModified": "2026-08-18",
+  "inLanguage": "en",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "COSIGO Labs — Auspicious 8",
+    "url": "https://a8.cosigo.io/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "COSIGO Labs",
+    "url": "https://cosigo.io/"
+  },
+  "about": [
+    {
+      "@type": "Thing",
+      "name": "Io"
+    },
+    {
+      "@type": "Thing",
+      "name": "Europa"
+    },
+    {
+      "@type": "Thing",
+      "name": "Ganymede"
+    },
+    {
+      "@type": "Thing",
+      "name": "Jovian recurrence"
+    },
+    {
+      "@type": "Thing",
+      "name": "Observational astronomy"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<nav class="cosigo-global-nav" aria-label="COSIGO and A8 global navigation">
+  <a class="cosigo-global-brand" href="https://cosigo.io/" aria-label="COSIGO home">
+    <img src="/assets/cosigo_master_512.gif" alt="COSIGO">
+    <span>COSIGO<small>LABS · AUSPICIOUS 8</small></span>
+  </a>
+  <div class="cosigo-global-links">
+    <a href="/">A8 LAB HOME</a>
+    <a href="https://a8.cosigo.io/">A8 PUBLIC</a>
+    <a class="cosigo-exit" href="https://cosigo.io/">COSIGO HOME</a>
+    <a class="cosigo-exit" href="https://contact.cosigo.io/">CONTACT</a>
+    <a href="https://github.com/cosigo">GITHUB</a>
+  </div>
+</nav>
+
+<main>
+  <div class="topbar">
+    <a href="/">ENGINEERING LAB</a>
+    <a href="/clock.html">ORIGINAL CLOCK</a>
+    <a href="/audio.html">AUDIO FREQUENCY BENCH</a>
+  </div>
+
+  <section class="panel">
+    <div class="status good">AUSPICIOUS 8 · 4-MOON ROTATION VIEW · v5.4.18</div>
+    <h1>Galilean motion observer</h1>
+    <p>One page, four moons. This is only a visual observer for the existing lab plant. It restores the old front/back motion view so you can see whether the moons truly reacquire independently after a common oscillator disturbance.</p>
+    <div class="legend small">
+      <span class="swatch"><b style="background:var(--front)"></b> front pass</span>
+      <span class="swatch"><b style="background:var(--back)"></b> back pass</span>
+      <span class="swatch"><span class="status warn">RECALIBRATING</span> calibration state comes from Node, not from this page</span>
+      <span class="swatch"><span class="status good">LOCKED</span> own WEST→WEST recurrence recovered; <span class="status good">CORROBORATED</span> another moon independently agrees</span>
+    </div>
+    <p class="native-rule small"><b>Native display rule:</b> each moon’s visible recurrence is addressed first as <b>A8 PHASE9 · 000₈→777₈</b>. The normalized decimal coordinate <b>φ = 0…1</b> remains available only as a secondary simulator/reference value.</p>
+  </section>
+
+  <section class="panel speedbar" aria-label="Simulation speed">
+    <div class="speed-warning">ACCELERATED SIMULATION · NOT NATURAL SPEED
+      <small>The selector changes display advance only. Recovery still observes internally at one plant step.</small>
+    </div>
+    <label>Plant steps / pass
+      <select id="moonBenchSteps" aria-label="Plant steps per scheduler pass">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="4">4</option>
+        <option value="8">8</option>
+      </select>
+    </label>
+    <div class="speed-rate"><span id="moonBenchAdvance">—</span><br><span id="moonBenchRate">—</span></div>
+  </section>
+
+  <section class="grid" style="margin-top:12px">
+    <div class="panel">
+      <h2>Lab state</h2>
+      <div class="reads">
+        <div class="read"><div class="k">Core</div><div id="runState" class="v">CONNECTING</div></div>
+        <div class="read"><div class="k">Natural step</div><div id="naturalStep" class="v">—</div></div>
+        <div class="read"><div class="k">Raw count</div><div id="rawCount" class="v">—</div></div>
+        <div class="read"><div class="k">Oscillator epoch</div><div id="epoch" class="v">—</div></div>
+        <div class="read"><div class="k">Comparator</div><div id="verdict" class="v">—</div></div>
+        <div class="read"><div class="k">Selected authority</div><div id="authority" class="v">—</div></div>
+      </div>
+    </div>
+    <div class="panel">
+      <h2>What this page is for</h2>
+      <div class="note small">
+        After a common Δ / oscillator change, all three primary moons correctly enter <b>RECALIBRATING</b> together because the old pulse scale became stale at one instant. EARLY recovery remains independent; FULL qualification now uses an equal-duration window: <b>Io 8 · Europa 4 · Ganymede 2</b> WEST→WEST spans.
+      </div>
+      <p class="footer-note small">The underlying dot coordinate still uses the exact v0.6.20 mapping <b>(x+1)×50%</b> with no left-position smoothing. For visual context only, each moon now runs inside a Jupiter-centered orbital-distance span scaled relative to Callisto: <b>Io 0.224 · Europa 0.356 · Ganymede 0.569 · Callisto 1.000</b>. These display spans never feed recurrence, pulse timing, calibration or recovery. Front/back state continues to use the original simulator geometry. The recovery field exposes the actual first-WEST / calibrated progression so nearby events cannot look artificially simultaneous.</p>
+    </div>
+  </section>
+
+  <section id="moonCards"></section>
+</main>
+
+<script>
+const MOONS = [
+  {id:'io',   name:'Io',       ratio:'×4',        orbitPct:22.4},
+  {id:'eu',   name:'Europa',   ratio:'×2',        orbitPct:35.6},
+  {id:'ga',   name:'Ganymede', ratio:'×1',        orbitPct:56.9},
+  {id:'ca',   name:'Callisto', ratio:'secondary', orbitPct:100.0}
+];
+const $ = id => document.getElementById(id);
+
+function fmtPct(v){
+  return (v >= 0 ? '+' : '') + (v*100).toFixed(4) + '%';
+}
+function sideLabel(plant){
+  return plant.x >= 0 ? 'EAST half' : 'WEST half';
+}
+function isFront(plant){
+  return Math.cos(2*Math.PI*plant.ph) >= 0;
+}
+function faceLabel(plant){
+  return isFront(plant) ? 'FRONT' : 'BACK';
+}
+function dotClass(plant){
+  return isFront(plant) ? 'front' : 'back';
+}
+function qualityClass(q){
+  if (['SINGLE_CURRENT','HEALTHY','CORROBORATED','QUALIFIED_3'].includes(q)) return 'good';
+  if (['FAULT','CONFLICT','REJECTED'].includes(q)) return 'bad';
+  return 'warn';
+}
+function recoveryStateLabel(data, id){
+  if (id === 'ca') return 'SECONDARY';
+  if (data.recovery === 'LOCKED' && data.quality === 'SINGLE_CURRENT') {
+    return 'LOCKED · AWAITING CORROBORATION';
+  }
+  if (data.recovery === 'LOCKED' && data.quality === 'CORROBORATED') {
+    return 'CORROBORATED';
+  }
+  return data.quality || data.recovery || '—';
+}
+function buildMoonCard(m){
+  const segs = Array.from({length:7}, (_,i)=> `<span>${i}</span>`).join('') + '<span>7</span>';
+  const marks = [0,25,50,75].map(p=>`<div class="major" style="left:${p}%"></div>`).join('');
+  return `
+  <section class="panel moon-card" id="card-${m.id}">
+    <div style="display:flex;justify-content:space-between;gap:10px;align-items:baseline;flex-wrap:wrap">
+      <div>
+        <h2 style="margin:0">${m.name}</h2>
+        <div class="small">${m.ratio}</div>
+      </div>
+      <div class="status" id="${m.id}-state">—</div>
+    </div>
+    <div class="track">
+      <div class="center"></div>
+      ${marks}
+
+      <div class="orbit-span"
+           style="width:${m.orbitPct}%"
+           title="${m.name} visual orbital-distance span · ${m.orbitPct}% of Callisto · display only">
+
+        <div class="turnlabel w">WEST</div>
+        <div class="turnlabel e">EAST</div>
+        <div class="axis"></div>
+
+        <div class="jupiter"
+             title="Jupiter · fixed center reference · moon passes in front or behind according to existing simulator geometry"
+             aria-label="Jupiter"></div>
+
+        <div id="${m.id}-dot" class="dot back" style="left:50%"></div>
+      </div>
+    </div>
+    <div class="ruler">${segs}</div>
+    <div class="reads">
+      <div class="read"><div class="k">Visible pass</div><div id="${m.id}-face" class="v">—</div></div>
+      <div class="read"><div class="k">Side</div><div id="${m.id}-side" class="v">—</div></div>
+      <div class="read primary-phase"><div class="k">A8 PLANT PHASE9</div><div id="${m.id}-phase9" class="v">—</div></div>
+      <div class="read"><div class="k">PHASE9 BINARY</div><div id="${m.id}-phase9bin" class="v">—</div></div>
+      <div class="read secondary-ref"><div class="k">φ reference only</div><div id="${m.id}-ph" class="v">—</div></div>
+      <div class="read secondary-ref"><div class="k">Plant x reference</div><div id="${m.id}-x" class="v">—</div></div>
+      <div class="read"><div class="k">Quality</div><div id="${m.id}-quality" class="v">—</div></div>
+      <div class="read"><div class="k">Calibration epoch</div><div id="${m.id}-epoch" class="v">—</div></div>
+      <div class="read"><div class="k">Locked span</div><div id="${m.id}-span" class="v">—</div></div>
+      <div class="read"><div class="k">Equal baseline</div><div id="${m.id}-qual" class="v">—</div></div>
+      <div class="read"><div class="k">Recovery evidence</div><div id="${m.id}-fresh" class="v">—</div></div>
+    </div>
+  </section>`;
+}
+$('moonCards').innerHTML = MOONS.map(buildMoonCard).join('');
+
+function moonPayload(state, id){
+  if (id === 'ca') {
+    const p = state.secondary.callistoPlant;
+    return {
+      plant: p,
+      quality: 'SECONDARY',
+      calibrationEpoch: '—',
+      lockedSpan: null,
+      freshness: 'SLOW ENVELOPE ONLY'
+    };
+  }
+  return state.moons[id];
+}
+
+function renderMoon(state, id){
+  const data = moonPayload(state, id);
+  const plant = data.plant;
+  // Exact v0.6.20 mapping: x=-1 => 0%, x=+1 => 100%.
+  const left = (plant.x + 1) * 50;
+  const dot = $(`${id}-dot`);
+  dot.style.left = `${left}%`;
+  dot.className = `dot ${dotClass(plant)}`;
+
+  $(`${id}-face`).textContent = faceLabel(plant);
+  $(`${id}-side`).textContent = sideLabel(plant);
+  $(`${id}-phase9`).textContent = plant.phase9Octal;
+  $(`${id}-phase9bin`).textContent = plant.phase9Binary;
+  $(`${id}-ph`).textContent = 'φ ' + plant.ph.toFixed(6);
+  $(`${id}-x`).textContent = plant.x.toFixed(6);
+  $(`${id}-quality`).textContent = data.quality + (data.deviation != null ? ' ' + fmtPct(data.deviation) : '');
+  $(`${id}-epoch`).textContent = data.calibrationEpoch == null ? '—' : data.calibrationEpoch;
+  $(`${id}-span`).textContent = data.lockedSpan == null ? '—' : Number(data.lockedSpan).toFixed(2);
+  $(`${id}-qual`).textContent = id === 'ca'
+    ? 'SECONDARY'
+    : `${data.qualification.spanCount}/${data.qualification.targetSpans} ${data.qualification.complete ? 'FULL' : (data.calibrationEpoch === state.raw.oscillatorEpoch ? 'EARLY' : 'BUILDING')}`;
+  $(`${id}-fresh`).textContent =
+    id === 'ca'
+      ? (data.freshness || 'SLOW ENVELOPE ONLY')
+      : (data.calibrationMessage || data.freshness || '—');
+
+  const st = $(`${id}-state`);
+  const label = recoveryStateLabel(data, id);
+  st.textContent = label;
+  st.className = `status ${qualityClass(data.quality || label)}`;
+}
+
+function render(state){
+  $('runState').textContent = state.running ? 'RUNNING' : 'PAUSED';
+  $('naturalStep').textContent = state.raw.naturalStep;
+  $('rawCount').textContent = state.raw.count;
+  $('epoch').textContent = state.raw.oscillatorEpoch;
+  $('verdict').textContent = state.comparator.verdict;
+  $('authority').textContent = state.divider.authority.toUpperCase();
+  $('moonBenchSteps').value = String(state.bench.stepsPerPass);
+  $('moonBenchAdvance').textContent = `${state.bench.stepsPerPass} plant step${state.bench.stepsPerPass === 1 ? '' : 's'} / pass`;
+  $('moonBenchRate').textContent = `≈${Math.round(state.bench.approximateNaturalGanymedeRateMultiple).toLocaleString()}× natural Ganymede rate ref`;
+  MOONS.forEach(m => renderMoon(state, m.id));
+}
+
+$('moonBenchSteps').addEventListener('change', async () => {
+  const value = Number($('moonBenchSteps').value);
+  try {
+    const r = await fetch('/api/control', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({action:'benchSteps', value})});
+    if (!r.ok) throw new Error(await r.text());
+  } catch (e) {
+    alert('Could not change simulation speed: ' + e.message);
+  }
+});
+
+const ev = new EventSource('/events');
+ev.onmessage = e => render(JSON.parse(e.data));
+ev.onerror = () => { $('runState').textContent = 'RECONNECTING'; };
+fetch('/api/state').then(r => r.json()).then(render).catch(() => { $('runState').textContent = 'DISCONNECTED'; });
+</script>
+<footer class="cosigo-site-footer">
+  <strong>COSIGO Labs · Auspicious 8 experimental laboratory</strong>
+  <p class="cosigo-disclaimer">Research / engineering notice: A8 pages may contain provisional models, simulations, comparison values, hypotheses and unreplicated experiment designs. Unless a page explicitly states otherwise, material shown here is not a certified metrology standard, accredited measurement result, or final Foundation definition. Legacy / SI values are comparison coordinates where identified, not native A8 authority.</p>
+  <p class="cosigo-disclaimer">COSIGO is primarily an educational and experimental project. Nothing in this laboratory is an investment offering, promise of financial return, or financial, investment, legal or tax advice. See the project-status notice for the current public description.</p>
+  <div class="cosigo-footer-links">
+    <a href="https://cosigo.io/">COSIGO Home</a>
+    <a href="https://a8.cosigo.io/">A8 Public Instrument</a>
+    <a href="/">A8 Engineering Lab</a>
+    <a href="https://contact.cosigo.io/">Contact</a>
+    <a href="https://docs.cosigo.io/">COSIGO Docs / WP</a>
+    <a href="https://github.com/cosigo">COSIGO GitHub</a>
+    <a href="https://github.com/cosigo/cosigo.io">Main-site source</a>
+    <a href="https://cosigo.io/project-status.html">Educational Purpose / Project Status</a>
+  </div>
+  <p>© 2026 COSIGO. COSIGO™ rights and trademark notices remain governed by the official COSIGO site.</p>
+</footer>
+</body>
+</html>

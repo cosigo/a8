@@ -1,0 +1,36 @@
+A8 TIME LAB v5.4.18 — QUARTZ EXPERIMENT STATIC PATCH 01
+Date: 2026-08-16
+
+PURPOSE
+Add the speculative Quartz Prism Length & Light Experiment v0.2 alongside the accepted v5.4.18 engineering laboratory without changing Node/core authority or recovery behavior.
+
+PATCHED / ADDED FILES
+- README.txt
+- public/index.html
+- public/angle.html
+- public/quartz.html (new)
+
+UNCHANGED DEFINING/RUNTIME FILES
+- core/a8-core.js
+- server.js
+- package.json
+- tests/run-tests.js
+- public/clock.html
+- public/app.js
+- replay/telescope/data libraries and tools
+
+RUNTIME VERSION
+Remains v5.4.18. This is a static laboratory patch, not a new recovery/core version.
+
+VALIDATION
+- Existing A8 v5.4.18 test suite: 66/66 PASS
+- node --check server.js: PASS
+- node --check core/a8-core.js: PASS
+- node --check public/app.js: PASS
+- Static cross-links: PASS
+
+CORE SHA256 (unchanged from accepted v5.4.18)
+d9e9d768becf1390a4550facb23fdd966d643209520a49a7c035c9fbfb56dbfe  core/a8-core.js
+
+SERVER SHA256 (unchanged from accepted v5.4.18)
+7520609f68151d24137730882fa90efad2396f1d1cbed9a77dccfc6c9e86373e  server.js

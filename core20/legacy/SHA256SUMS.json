@@ -1,0 +1,14 @@
+{
+  "io_eng_v0.6.20.html": {
+    "sha256": "fb8320d177c2fe6d6148917dcd092b1823d5b96dc3fa623ae2de09414358353f",
+    "bytes": 61819
+  },
+  "euro_eng_v0.6.20.html": {
+    "sha256": "dee8d01cb20c1fd84d94a01c3351d2c6b8ac16205ff61dbf50681124452b56a8",
+    "bytes": 61963
+  },
+  "gany_eng_v0.6.20.html": {
+    "sha256": "40c06b8eb7d3e39eb7363cf2f6c80f1a10c4ed9395a6cd7236a31f82f7a33c13",
+    "bytes": 60605
+  }
+}

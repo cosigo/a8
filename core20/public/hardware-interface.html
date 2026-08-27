@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>External Pulse Rig | A8 Post-Seal Hardware Branch</title>
+<meta name="description" content="COSIGO Labs Auspicious 8 post-seal Gate 6A external pulse-rig read-only contract. Arduino-class hardware may present exact raw pulse counts; no time, frequency, phase, divider ratio, command, or actuator channel exists.">
+<meta name="author" content="COSIGO Labs">
+<meta name="robots" content="noindex,nofollow">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/site-shell.css">
+<style>
+  main{max-width:1180px;margin:auto;padding:28px 20px 72px}
+  .hero,.card{border:1px solid var(--line,#2a3744);border-radius:16px;padding:20px;background:var(--panel,#111820)}
+  .hero{margin-bottom:16px}
+  .title{font-size:clamp(2rem,7vw,5rem);line-height:.96;letter-spacing:-.05em;margin:.18em 0}
+  .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+  .k{display:block;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;opacity:.68}
+  .v{display:block;font-size:1.15rem;font-weight:800;margin-top:4px;overflow-wrap:anywhere}
+  .good{color:#87d39b}.warn{color:#e0bd72}
+  pre{white-space:pre-wrap;overflow-wrap:anywhere}
+  @media(max-width:800px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav class="cosigo-global-nav" aria-label="COSIGO and A8 global navigation">
+  <a class="cosigo-global-brand" href="https://cosigo.io/" aria-label="COSIGO home">
+    <img src="/assets/cosigo_master_512.gif" alt="COSIGO">
+    <span>COSIGO<small>LABS · AUSPICIOUS 8</small></span>
+  </a>
+  <div class="cosigo-global-links">
+    <a href="/">POST-SEAL LAB HOME</a>
+    <a href="https://a8.cosigo.io/">A8 PUBLIC</a>
+  </div>
+</nav>
+
+<main>
+  <section class="hero">
+    <div class="eyebrow">AUSPICIOUS 8 · POST-SEAL HARDWARE BRANCH · GATE 6A</div>
+    <h1 class="title">EXTERNAL PULSE RIG</h1>
+    <p><b>RAW COUNT OBSERVATION CONTRACT ONLY</b></p>
+    <p class="muted">
+      The sealed v5.4.20 Gate-5J tree remains the immutable parent.
+      Gate 6A defines only how an external Arduino-class pulse rig may present
+      counted edges to the laboratory.
+    </p>
+  </section>
+
+  <section class="grid">
+    <div class="card">
+      <span class="k">HARDWARE INPUT</span>
+      <span class="v">RAW PULSE COUNT</span>
+    </div>
+    <div class="card">
+      <span class="k">SOFTWARE MODE</span>
+      <span class="v good">READ ONLY</span>
+    </div>
+    <div class="card">
+      <span class="k">HARDWARE COMMANDS</span>
+      <span class="v good">NONE</span>
+    </div>
+  </section>
+
+  <section class="card" style="margin-top:16px">
+    <h2>Accepted sample</h2>
+    <pre>{
+  "schema": "A8-EXTERNAL-PULSE-RIG-SAMPLE-V1",
+  "source": "EXTERNAL_PULSE_RIG",
+  "rig": "ARDUINO_A",
+  "rawPulse": "1250"
+}</pre>
+  </section>
+
+  <section class="card" style="margin-top:16px">
+    <h2>Meaning</h2>
+    <pre>rawPulse
+= hardware edge count only
+
+NOT:
+seconds
+A8 seconds
+Hz
+clock phase
+divider ratio
+expected frequency
+host timestamp</pre>
+  </section>
+
+  <section class="card" style="margin-top:16px">
+    <h2>Gate 6A deliberately does not connect hardware yet</h2>
+    <pre>serial / USB transport  = absent
+network transport       = absent
+hardware command path   = absent
+oscillator trim         = absent
+divider trim            = absent
+clock write             = absent
+phase write             = absent
+authority write         = absent</pre>
+    <p class="good"><b>FIRST DEFINE THE EDGE-COUNT CONTRACT. TRANSPORT COMES LATER.</b></p>
+  </section>
+
+  <section class="card" style="margin-top:16px">
+    <h2>Parent boundary</h2>
+    <p class="warn">
+      <b>THE GATE-5J v5.4.20 TREE IS NOT MODIFIED BY THIS BRANCH.</b>
+    </p>
+  </section>
+</main>
+</body>
+</html>

@@ -1,0 +1,392 @@
+:80 {
+	@known_hosts host trade.cosigo.io quote.cosigo.io snakepit.cosigo.io labels.cosigo.io market.cosigo.io ipfs.cosigo.io message.cosigo.io charlie.cosigo.io
+
+	handle @known_hosts {
+		redir https://{host}{uri} 308
+	}
+
+	handle {
+		abort
+	}
+}
+
+trade.cosigo.io {
+	# COSIGO public redacted trade status JSON
+	handle /status-public.json {
+		root * /srv/sites/trade.cosigo.io/repo/public
+		file_server
+	}
+
+	log {
+		output file /var/log/caddy/trade.cosigo.io.access.log {
+			mode 0640
+			roll_size 10MiB
+			roll_keep 10
+			roll_keep_for 7d
+		}
+		format json
+	}
+
+	header {
+		Strict-Transport-Security "max-age=31536000"
+		X-Content-Type-Options "nosniff"
+		Referrer-Policy "strict-origin-when-cross-origin"
+		X-Frame-Options "SAMEORIGIN"
+		Permissions-Policy "camera=(), microphone=(), geolocation=()"
+	}
+
+	@api path /api/*
+	handle @api {
+		reverse_proxy 127.0.0.1:3012
+	}
+
+	handle {
+		root * /srv/sites/trade.cosigo.io/public
+		file_server
+	}
+}
+
+quote.cosigo.io {
+	log {
+		output file /var/log/caddy/quote.cosigo.io.access.log {
+			mode 0640
+			roll_size 10MiB
+			roll_keep 10
+			roll_keep_for 7d
+		}
+		format json
+	}
+
+	header {
+		Strict-Transport-Security "max-age=31536000"
+		X-Content-Type-Options "nosniff"
+		Referrer-Policy "strict-origin-when-cross-origin"
+		X-Frame-Options "SAMEORIGIN"
+		Permissions-Policy "camera=(), microphone=(), geolocation=()"
+	}
+
+	handle /api/* {
+		reverse_proxy 127.0.0.1:3012
+	}
+
+	handle {
+		root * /srv/sites/quote.cosigo.io/public
+		file_server
+	}
+}
+
+snakepit.cosigo.io {
+	log {
+		output file /var/log/caddy/snakepit.cosigo.io.access.log {
+			mode 0640
+			roll_size 10MiB
+			roll_keep 10
+			roll_keep_for 7d
+		}
+		format json
+	}
+
+	header {
+		Strict-Transport-Security "max-age=31536000"
+		X-Content-Type-Options "nosniff"
+		Referrer-Policy "strict-origin-when-cross-origin"
+		X-Frame-Options "SAMEORIGIN"
+		Permissions-Policy "camera=(), microphone=(), geolocation=()"
+	}
+
+	handle /api/* {
+		reverse_proxy 127.0.0.1:3012
+	}
+
+	handle {
+		root * /srv/sites/snakepit.cosigo.io/public
+		file_server
+	}
+}
+
+labels.cosigo.io {
+	log {
+		output file /var/log/caddy/labels.cosigo.io.access.log {
+			mode 0640
+			roll_size 10MiB
+			roll_keep 10
+			roll_keep_for 7d
+		}
+		format json
+	}
+
+	header {
+		Strict-Transport-Security "max-age=31536000"
+		X-Content-Type-Options "nosniff"
+		Referrer-Policy "strict-origin-when-cross-origin"
+		X-Frame-Options "SAMEORIGIN"
+		Permissions-Policy "camera=(), microphone=(), geolocation=()"
+	}
+
+	handle {
+		root * /srv/sites/labels.cosigo.io/public
+		file_server
+	}
+}
+
+market.cosigo.io {
+	log {
+		output file /var/log/caddy/market.cosigo.io.access.log {
+			mode 0640
+			roll_size 10MiB
+			roll_keep 10
+			roll_keep_for 7d
+		}
+		format json
+	}
+
+	header {
+		Strict-Transport-Security "max-age=31536000"
+		X-Content-Type-Options "nosniff"
+		Referrer-Policy "strict-origin-when-cross-origin"
+		X-Frame-Options "SAMEORIGIN"
+		Permissions-Policy "camera=(), microphone=(), geolocation=()"
+	}
+
+	handle {
+		root * /srv/sites/market.cosigo.io/public
+		file_server
+	}
+}
+
+cdn.cosigo.io {
+	root * /srv/cdn
+	file_server
+	encode zstd gzip
+	header {
+		Cache-Control "public, max-age=86400"
+		X-Content-Type-Options "nosniff"
+	}
+}
+
+ipfs.cosigo.io {
+	log {
+		output file /var/log/caddy/ipfs.cosigo.io.access.log {
+			roll_size 10MiB
+			roll_keep 10
+			roll_keep_for 720h
+		}
+		format json
+	}
+
+	encode zstd gzip
+
+	header {
+		-Server
+		X-Content-Type-Options "nosniff"
+		X-Frame-Options "DENY"
+		Referrer-Policy "no-referrer"
+		Content-Security-Policy "default-src 'none'; frame-ancestors 'none'"
+		Strict-Transport-Security "max-age=31536000; includeSubDomains"
+	}
+
+	handle /healthz {
+		header Content-Type "text/plain; charset=utf-8"
+		respond "ok" 200
+	}
+
+	@preflight {
+		method OPTIONS
+		path /ipfs/bafybeie6dxij7wyus5m3qj44ayduszjohp76jn7ayqcxd6jqbp5uhzkysi
+	}
+
+	handle @preflight {
+		header {
+			Access-Control-Allow-Origin "*"
+			Access-Control-Allow-Methods "GET, HEAD, OPTIONS"
+			Access-Control-Max-Age "86400"
+		}
+		respond "" 204
+	}
+
+	@corpus {
+		method GET HEAD
+		path /ipfs/bafybeie6dxij7wyus5m3qj44ayduszjohp76jn7ayqcxd6jqbp5uhzkysi
+	}
+
+	handle @corpus {
+		header {
+			Access-Control-Allow-Origin "*"
+			Access-Control-Allow-Methods "GET, HEAD, OPTIONS"
+			Access-Control-Expose-Headers "Content-Length, Content-Range, X-Ipfs-Path, X-Ipfs-Roots"
+			Cache-Control "public, max-age=29030400, immutable"
+		}
+
+		reverse_proxy 127.0.0.1:8081 {
+			header_up Host ipfs.cosigo.io
+		}
+	}
+
+	handle {
+		respond "Not found" 404
+	}
+}
+
+message.cosigo.io {
+	log {
+		output file /var/log/caddy/message.cosigo.io.access.log {
+			roll_size 10MiB
+			roll_keep 10
+			roll_keep_for 720h
+		}
+		format json
+	}
+
+	encode zstd gzip
+
+	header {
+		-Server
+		X-Content-Type-Options "nosniff"
+		X-Frame-Options "DENY"
+		Referrer-Policy "strict-origin-when-cross-origin"
+		Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=()"
+		Content-Security-Policy "default-src 'self'; base-uri 'none'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; connect-src 'self'"
+		Strict-Transport-Security "max-age=31536000; includeSubDomains"
+	}
+
+	handle /api/* {
+		header Cache-Control "no-store"
+		reverse_proxy 127.0.0.1:3013
+	}
+
+	handle {
+		reverse_proxy 127.0.0.1:3013
+	}
+}
+
+charlie.cosigo.io {
+	log {
+		output file /var/log/caddy/charlie.cosigo.io.access.log {
+			roll_size 10MiB
+			roll_keep 10
+			roll_keep_for 720h
+		}
+		format json
+	}
+
+	encode zstd gzip
+
+	header {
+		-Server
+		X-Content-Type-Options "nosniff"
+		X-Frame-Options "DENY"
+		Referrer-Policy "no-referrer"
+		Content-Security-Policy "default-src 'self'; img-src 'self'; style-src 'self' 'unsafe-inline'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'"
+		Strict-Transport-Security "max-age=31536000; includeSubDomains"
+	}
+
+	handle /healthz {
+		header Content-Type "text/plain; charset=utf-8"
+		respond "ok" 200
+	}
+
+	handle {
+		root * /srv/sites/charlie.cosigo.io/public
+		file_server
+	}
+}
+
+bcseek.com, www.bcseek.com {
+	root * /srv/sites/bcseek.com/public
+	encode gzip zstd
+	file_server
+}
+
+a8.cosigo.io {
+    encode zstd gzip
+
+    # A8 PUBLIC INSTRUMENT = READ-ONLY VIEW OF THE SHARED A8 CORE.
+    # Only these two GET endpoints cross from the facing site to Node.
+    # Control, replay, calibration and other write paths remain private.
+# A8 CORE20 PUBLIC OBSERVER BRIDGE
+    #
+    # Narrow transport bridge only:
+    #   GET  clock state
+    #   GET  authoritative Core20 edge stream
+    #   POST momentary CONNECT with server-enforced empty body
+    #
+    # No control/replay/raw-injection endpoint is exposed.
+
+    @a8_core20_clock {
+        method GET
+        path /api/core20/clock
+    }
+    handle @a8_core20_clock {
+        reverse_proxy 127.0.0.1:18020
+    }
+
+    @a8_core20_edges {
+        method GET
+        path /api/core20/edges
+    }
+    handle @a8_core20_edges {
+        reverse_proxy 127.0.0.1:18020
+    }
+
+    @a8_core20_connect {
+        method POST
+        path /api/core20/connect
+    }
+    handle @a8_core20_connect {
+        reverse_proxy 127.0.0.1:18020
+    }
+
+    handle {
+        root * /srv/sites/a8.cosigo.io/public
+        file_server
+    }
+}
+
+lab.a8.cosigo.io {
+    encode zstd gzip
+
+    # CORE20 OPERATING LAB
+    #
+    # Public observation remains open.
+    # CONNECT remains open.
+    #
+    # Chief Engineer operating paths require authentication.
+
+    @a8_ce_pulse {
+        path /pulse /pulse/*
+    }
+    handle @a8_ce_pulse {
+        basic_auth {
+            greg <REDACTED_BCRYPT_HASH>
+        }
+        reverse_proxy 127.0.0.1:18020
+    }
+
+    # PUBLIC CORE20 DITTY CONTROLS
+    #
+    # Narrow downstream music controls only.
+    # These do not expose runtime restart, calibration,
+    # raw injection, or other Chief Engineer writes.
+    @a8_public_ditty_write {
+        method POST
+        path /api/core20/ditty/start /api/core20/ditty/reset
+    }
+    handle @a8_public_ditty_write {
+        reverse_proxy 127.0.0.1:18020
+    }
+
+    @a8_ce_write {
+        method POST PUT PATCH DELETE
+        not path /api/core20/connect
+        not path /api/core20/ditty/start
+        not path /api/core20/ditty/reset
+    }
+    handle @a8_ce_write {
+        basic_auth {
+            greg <REDACTED_BCRYPT_HASH>
+        }
+        reverse_proxy 127.0.0.1:18020
+    }
+
+    reverse_proxy 127.0.0.1:18020
+}

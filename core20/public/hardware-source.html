@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Virtual / Real Pulse Source | A8 Post-Seal Hardware Lab</title>
+<meta name="description" content="Auspicious 8 post-seal hardware laboratory source selector. Virtual and real raw-pulse sources share one Gate-6A contract but never splice raw counter epochs.">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/site-shell.css">
+<style>
+main{max-width:1180px;margin:auto;padding:28px 20px 72px}
+.hero,.card{border:1px solid var(--line,#2a3744);border-radius:16px;padding:20px;background:var(--panel,#111820)}
+.hero{margin-bottom:16px}
+.title{font-size:clamp(2rem,7vw,5rem);line-height:.96;letter-spacing:-.05em;margin:.18em 0}
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.k{display:block;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;opacity:.68}
+.v{display:block;font-size:1.15rem;font-weight:800;margin-top:4px;overflow-wrap:anywhere}
+.good{color:#87d39b}.warn{color:#e0bd72}
+.controls{display:flex;flex-wrap:wrap;gap:10px}
+button{font:inherit;font-weight:800;padding:12px 16px;border-radius:10px;border:1px solid currentColor;cursor:pointer}
+pre{white-space:pre-wrap;overflow-wrap:anywhere}
+@media(max-width:900px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<style id="a8-topside-coherence-02-style">
+#a8-topside-coherence-02{
+  display:block;
+  margin:0;
+  padding:10px 14px;
+  border-bottom:1px solid rgba(255,255,255,.14);
+  background:rgba(7,11,16,.96);
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+}
+#a8-topside-coherence-02 .a8-topline{
+  max-width:1440px;
+  margin:0 auto;
+  display:flex;
+  gap:12px;
+  align-items:center;
+  flex-wrap:wrap;
+}
+#a8-topside-coherence-02 .cosigo-global-brand{
+  display:flex;
+  gap:8px;
+  align-items:center;
+  text-decoration:none;
+}
+#a8-topside-coherence-02 .cosigo-global-brand img{
+  width:34px;height:34px;object-fit:contain;
+}
+#a8-topside-coherence-02 .cosigo-global-brand span{
+  font-weight:900;letter-spacing:.06em;
+}
+#a8-topside-coherence-02 .cosigo-global-brand small{
+  display:block;opacity:.72;font-size:.62rem;
+}
+#a8-topside-coherence-02 .a8-location{
+  margin-left:auto;
+  font-size:.76rem;
+  font-weight:900;
+  letter-spacing:.07em;
+  color:#e0bd72;
+}
+#a8-topside-coherence-02 .a8-system-links,
+#a8-topside-coherence-02 .a8-utility-links{
+  max-width:1440px;
+  margin:8px auto 0;
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+  align-items:center;
+}
+#a8-topside-coherence-02 a{text-decoration:none}
+#a8-topside-coherence-02 .a8-system-links a{
+  padding:7px 9px;
+  border:1px solid #425467;
+  border-radius:8px;
+  background:#111820;
+  color:#c8ddf5;
+  font-size:.80rem;
+  font-weight:850;
+}
+#a8-topside-coherence-02 .a8-system-links a[data-current="true"]{
+  border-color:#6d9cff;color:#fff;
+}
+#a8-topside-coherence-02 .a8-utility-links{
+  padding-top:7px;
+  border-top:1px solid rgba(255,255,255,.08);
+}
+#a8-topside-coherence-02 .a8-utility-links a{
+  color:#92a5b8;
+  font-size:.70rem;
+  font-weight:700;
+}
+#a8-topside-coherence-02 .a8-utility-label{
+  color:#617487;
+  font-size:.68rem;
+  font-weight:900;
+  letter-spacing:.05em;
+}
+@media(max-width:760px){
+  #a8-topside-coherence-02 .a8-location{
+    width:100%;margin-left:0;
+  }
+}
+</style>
+<nav id="a8-topside-coherence-02" class="cosigo-global-nav" aria-label="A8 Time Lab navigation">
+  <div class="a8-topline">
+    <a class="cosigo-global-brand" href="https://cosigo.io/" aria-label="COSIGO home">
+      <img src="/assets/cosigo_master_512.gif" alt="COSIGO">
+      <span>COSIGO<small>LABS · AUSPICIOUS 8</small></span>
+    </a>
+    <div class="a8-location">YOU ARE HERE · CHIEF ENGINEER · VIRTUAL / REAL PULSE SOURCE</div>
+  </div>
+  <div class="a8-system-links">
+    <a href="/index.html">A8 LAB HOME</a>
+    <a href="/index.html#core20-jovian">CORE 20 · JUPITER</a>
+    <a href="/moons.html">4-MOON VIEW</a>
+    <a href="/mintaka.html">MINTAKA</a>
+    <a href="/sol.html">SOL</a>
+    <a href="/relationship.html">TERRA SHIP SLIP</a>
+    <a href="/index.html#chief-engineer-links" aria-current="page" data-current="true">CHIEF ENGINEER</a>
+  </div>
+  <div class="a8-utility-links">
+    <span class="a8-utility-label">UTILITY ·</span>
+    <a href="/map-clock-compass.html">MAP · CLOCK · COMPASS</a>
+    <a href="/navigation.html">NAVIGATION</a>
+    <a href="/celestial.html">CELESTIAL</a>
+    <a href="https://a8.cosigo.io/canonical.html">CANONICAL</a>
+    <a href="https://a8.cosigo.io/open-research.html">OPEN RESEARCH</a>
+    <a href="https://a8.cosigo.io/">A8 PUBLIC</a>
+    <a href="https://lab.a8.cosigo.io/">LIVE LAB</a>
+    <a href="https://cosigo.io/">COSIGO HOME</a>
+    <a href="https://contact.cosigo.io/">CONTACT</a>
+    <a href="https://github.com/cosigo">GITHUB</a>
+  </div>
+</nav>
+<main>
+
+<div id="a8-engineering-chain-nav" style="margin:0 0 14px;padding:10px 12px;border:1px solid #2a3744;border-radius:10px">
+        <b>CHIEF ENGINEER · HARDWARE CHAIN</b> ·
+        <a href="/hardware-interface.html">6A PULSE CONTRACT</a> ·
+        <a href="/receive-only-transport.html">6B TRANSPORT</a> ·
+        <a href="/local-device-reader.html">6C DEVICE READER</a> ·
+        <a href="/pseudo-terminal-link.html">6D PTY</a>
+      </div>
+  <section class="hero">
+    <div class="eyebrow">AUSPICIOUS 8 · POST-SEAL HARDWARE BRANCH · GATE 6E</div>
+    <h1 class="title">VIRTUAL / REAL PULSE SOURCE</h1>
+    <p><b>ONE CONTRACT · SEPARATE SOURCE EPOCHS · NO COUNTER SPLICING</b></p>
+    <p class="muted">
+      Virtual hardware can drive development now. Real hardware will later
+      replace it at the same Gate-6A boundary. Switching source starts a fresh
+      raw-count epoch; it never pretends two different oscillators share one
+      counter history.
+    </p>
+  </section>
+
+  <section class="grid">
+    <div class="card">
+      <span class="k">SOURCE</span>
+      <span id="mode" class="v">—</span>
+    </div>
+    <div class="card">
+      <span class="k">SOURCE EPOCH</span>
+      <span id="epoch" class="v">—</span>
+    </div>
+    <div class="card">
+      <span class="k">ACTIVE RIG</span>
+      <span id="rig" class="v">—</span>
+    </div>
+    <div class="card">
+      <span class="k">RAW PULSE</span>
+      <span id="raw" class="v">—</span>
+    </div>
+  </section>
+
+  <section class="card" style="margin-top:16px">
+    <h2>Source selector</h2>
+    <div class="controls">
+      <button id="virtual">VIRTUAL RIG</button>
+      <button id="real">REAL HARDWARE</button>
+    </div>
+    <p id="switchNote" class="muted"></p>
+  </section>
+
+  <section class="card" id="virtualCard" style="margin-top:16px">
+    <h2>Virtual raw-edge rig</h2>
+    <p>
+      These buttons add explicit raw edges. They do not use seconds, Hz,
+      browser timers, or wall-clock cadence.
+    </p>
+    <div class="controls">
+      <button data-advance="1">+1 RAW EDGE</button>
+      <button data-advance="8">+8 RAW EDGES</button>
+      <button data-advance="64">+64 RAW EDGES</button>
+      <button data-advance="512">+512 RAW EDGES</button>
+    </div>
+  </section>
+
+  <section class="card" id="realCard" style="margin-top:16px">
+    <h2>Real hardware</h2>
+    <p class="warn">
+      <b>WAITING FOR GATE-6C DEVICE INTEGRATION.</b>
+    </p>
+    <p>
+      There is deliberately no browser POST endpoint that can pretend to be
+      real hardware. Physical samples must later arrive through the proven
+      local read-only device chain.
+    </p>
+  </section>
+
+  <section class="grid" style="margin-top:16px">
+    <div class="card">
+      <span class="k">CORE-20 INPUT</span>
+      <span id="recoveryStatus" class="v">—</span>
+    </div>
+    <div class="card">
+      <span class="k">EPOCH BASELINE</span>
+      <span id="recoveryBaseline" class="v">—</span>
+    </div>
+    <div class="card">
+      <span class="k">EPOCH RAW ADVANCE</span>
+      <span id="recoveryAdvance" class="v">—</span>
+    </div>
+    <div class="card">
+      <span class="k">RE-ARMS</span>
+      <span id="rearmCount" class="v">—</span>
+    </div>
+  </section>
+
+  <section class="card" style="margin-top:16px">
+    <h2>Gate-6A measurement + Gate-6F recovery input</h2>
+    <pre id="snapshot">loading…</pre>
+  </section>
+
+  <section class="card" style="margin-top:16px">
+    <h2>Isolation rule</h2>
+    <pre>VIRTUAL → REAL
+or
+REAL → VIRTUAL
+
+increments SOURCE EPOCH
+clears raw-count baseline
+does NOT carry counter continuity
+does NOT manufacture phase continuity
+
+defining payload remains:
+EXTERNAL_PULSE_RIG + rig + rawPulse</pre>
+  </section>
+</main>
+
+<script>
+'use strict';
+
+async function api(path, options = {}) {
+  const response = await fetch(path, {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    ...options,
+  });
+
+  const payload = await response.json();
+
+  if (!response.ok || !payload.ok) {
+    throw new Error(payload.error || 'request failed');
+  }
+
+  return payload;
+}
+
+function text(id, value) {
+  document.getElementById(id).textContent =
+    value === null || value === undefined || value === ''
+      ? '—'
+      : String(value);
+}
+
+let lastRecoveryInput = null;
+
+function render(source, recoveryInput = lastRecoveryInput) {
+  if (recoveryInput) {
+    lastRecoveryInput = recoveryInput;
+  }
+
+  text('mode', source.mode);
+  text('epoch', source.sourceEpoch);
+  text('rig', source.activeRig);
+  text('raw', source.gate6a.lastRawPulse);
+
+  const bridge = recoveryInput || {};
+  text('recoveryStatus', bridge.status);
+  text('recoveryBaseline', bridge.baselineRawPulse);
+  text('recoveryAdvance', bridge.epochRawAdvance);
+  text('rearmCount', bridge.rearmCount);
+
+  document.getElementById('virtualCard').hidden =
+    source.mode !== 'VIRTUAL';
+
+  document.getElementById('realCard').hidden =
+    source.mode !== 'REAL';
+
+  document.getElementById('switchNote').textContent =
+    source.lastSwitch && source.lastSwitch.from
+      ? `${source.lastSwitch.from} → ${source.lastSwitch.to} · epoch ${source.sourceEpoch} · fresh baseline required`
+      : `epoch ${source.sourceEpoch} · fresh baseline`;
+
+  document.getElementById('snapshot').textContent =
+    JSON.stringify({
+      source,
+      recoveryInput: bridge,
+    }, null, 2);
+}
+
+async function refresh() {
+  const payload = await api('/api/hardware/source');
+  render(payload.source, payload.recoveryInput);
+}
+
+document.getElementById('virtual').addEventListener('click', async () => {
+  const payload = await api('/api/hardware/source/select', {
+    method: 'POST',
+    body: JSON.stringify({ mode: 'VIRTUAL' }),
+  });
+  render(payload.source, payload.recoveryInput);
+});
+
+document.getElementById('real').addEventListener('click', async () => {
+  const payload = await api('/api/hardware/source/select', {
+    method: 'POST',
+    body: JSON.stringify({ mode: 'REAL' }),
+  });
+  render(payload.source, payload.recoveryInput);
+});
+
+for (const button of document.querySelectorAll('[data-advance]')) {
+  button.addEventListener('click', async () => {
+    const payload = await api('/api/hardware/virtual/advance', {
+      method: 'POST',
+      body: JSON.stringify({
+        rawAdvance: button.dataset.advance,
+      }),
+    });
+    render(payload.source, payload.recoveryInput);
+  });
+}
+
+refresh().catch(err => {
+  document.getElementById('snapshot').textContent =
+    `FAIL · ${err.message}`;
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+{
+  "schema": "A8-SYNTHETIC-DISCIPLINE-SCRIPT-V1",
+  "divider": {
+    "numerator": "8",
+    "denominator": "1"
+  },
+  "initialSettledRateScale": {
+    "numerator": "1",
+    "denominator": "1"
+  },
+  "maxRateScaleStep": {
+    "numerator": "1",
+    "denominator": "10000"
+  },
+  "script": [
+    {
+      "state": "RECOVERED",
+      "label": "INITIAL_RECOVERED"
+    },
+    {
+      "state": "LOSS",
+      "label": "LOSS_4",
+      "advances": 4
+    },
+    {
+      "state": "REACQUIRED",
+      "label": "REACQUIRE_DOWN",
+      "baselineJovianSample": {
+        "schema": "A8-JOVIAN-RECURRENCE-SAMPLE-V1",
+        "source": "JOVIAN_RECOVERED_RECURRENCE",
+        "rawNumerator": "1000",
+        "cycleDenominator": "1"
+      },
+      "freshJovianSample": {
+        "schema": "A8-JOVIAN-RECURRENCE-SAMPLE-V1",
+        "source": "JOVIAN_RECOVERED_RECURRENCE",
+        "rawNumerator": "1001",
+        "cycleDenominator": "1"
+      }
+    },
+    {
+      "state": "LOSS",
+      "label": "LOSS_6",
+      "advances": 6
+    },
+    {
+      "state": "REACQUIRED",
+      "label": "REACQUIRE_UP",
+      "baselineJovianSample": {
+        "schema": "A8-JOVIAN-RECURRENCE-SAMPLE-V1",
+        "source": "JOVIAN_RECOVERED_RECURRENCE",
+        "rawNumerator": "1000",
+        "cycleDenominator": "1"
+      },
+      "freshJovianSample": {
+        "schema": "A8-JOVIAN-RECURRENCE-SAMPLE-V1",
+        "source": "JOVIAN_RECOVERED_RECURRENCE",
+        "rawNumerator": "997",
+        "cycleDenominator": "1"
+      }
+    },
+    {
+      "state": "LOSS",
+      "label": "LOSS_3",
+      "advances": 3
+    },
+    {
+      "state": "REACQUIRED",
+      "label": "REACQUIRE_DOWN_AGAIN",
+      "baselineJovianSample": {
+        "schema": "A8-JOVIAN-RECURRENCE-SAMPLE-V1",
+        "source": "JOVIAN_RECOVERED_RECURRENCE",
+        "rawNumerator": "1000",
+        "cycleDenominator": "1"
+      },
+      "freshJovianSample": {
+        "schema": "A8-JOVIAN-RECURRENCE-SAMPLE-V1",
+        "source": "JOVIAN_RECOVERED_RECURRENCE",
+        "rawNumerator": "1003",
+        "cycleDenominator": "1"
+      }
+    }
+  ]
+}

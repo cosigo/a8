@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Synthetic Disturbance Recovery | A8 Time Lab v5.4.20</title>
+<meta name="description" content="COSIGO Labs Auspicious 8 Gate 5D synthetic rate disturbance and fresh Jovian recovery experiment. Bounded rate recovery preserves exact clock continuity and never resets accumulated phase.">
+<meta name="author" content="COSIGO Labs">
+<meta name="robots" content="index,follow">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/site-shell.css">
+<style>
+  main{max-width:1180px;margin:auto;padding:28px 20px 72px}
+  .hero,.card{border:1px solid var(--line,#2a3744);border-radius:16px;padding:20px;background:var(--panel,#111820)}
+  .hero{margin-bottom:16px}
+  .title{font-size:clamp(2.1rem,7vw,5.3rem);line-height:.96;letter-spacing:-.05em;margin:.18em 0}
+  .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+  .k{display:block;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;opacity:.68}
+  .v{display:block;font-size:1.15rem;font-weight:800;margin-top:4px;overflow-wrap:anywhere}
+  .good{color:#87d39b}.warn{color:#e0bd72}
+  pre{white-space:pre-wrap;overflow-wrap:anywhere}
+  @media(max-width:800px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav class="cosigo-global-nav" aria-label="COSIGO and A8 global navigation">
+  <a class="cosigo-global-brand" href="https://cosigo.io/" aria-label="COSIGO home">
+    <img src="/assets/cosigo_master_512.gif" alt="COSIGO">
+    <span>COSIGO<small>LABS · AUSPICIOUS 8</small></span>
+  </a>
+  <div class="cosigo-global-links">
+    <a href="/index.html">A8 LAB HOME</a>
+    <a href="/discipline.html">DISCIPLINE CANDIDATE</a>
+    <a href="/rate-slew.html">RATE SLEW</a>
+    <a href="/rate-continuity.html">RATE CONTINUITY</a>
+    <a href="/relationship.html">TERRA SHIP SLIP</a>
+    <a href="/moons.html">JOVIAN MOONS</a>
+  </div>
+</nav>
+
+<main>
+  <section class="hero">
+    <div class="eyebrow">AUSPICIOUS 8 · TIME LAB v5.4.20 · GATE 5D</div>
+    <h1 class="title">DISTURBANCE → RECOVERY</h1>
+    <p><b>SYNTHETIC RATE ERROR · FRESH JOVIAN EVIDENCE · CONTINUOUS CLOCK</b></p>
+    <p class="muted">
+      Gate 5D deliberately holds the synthetic plant at a rate later shown by
+      fresh Jovian recovery evidence to need correction. The correction is then
+      approached by bounded rate slew only. Accumulated synthetic phase history
+      is never erased or snapped.
+    </p>
+  </section>
+
+  <section class="grid">
+    <div class="card">
+      <span class="k">REAL A8CORE</span>
+      <span class="v good">DISCONNECTED</span>
+    </div>
+    <div class="card">
+      <span class="k">CORRECTION TYPE</span>
+      <span class="v">RATE ONLY</span>
+    </div>
+    <div class="card">
+      <span class="k">PHASE RESET</span>
+      <span class="v good">PROHIBITED</span>
+    </div>
+  </section>
+
+  <section class="card" style="margin-top:16px">
+    <h2>Exact disturbance</h2>
+    <pre>synthetic divider      = 8
+pre-recovery rate      = 1
+disturbance advances   = 8 abstract plant quanta
+
+phase after disturbance
+= 8 × (1 / 8)
+= 1 exactly</pre>
+  </section>
+
+  <section class="card" style="margin-top:16px">
+    <h2>Fresh Jovian recovery</h2>
+    <pre>earlier recovered recurrence = 1000 raw / Jovian cycle
+fresh recovered recurrence   = 1001 raw / Jovian cycle
+
+fractional rate error
+= +1/1000
+
+Gate-5A candidate scale
+= 1000/1001</pre>
+  </section>
+
+  <section class="card" style="margin-top:16px">
+    <h2>Bounded recovery</h2>
+    <pre>maximum rate-scale change / abstract update
+= 1/10000
+
+recovery updates
+= 10
+
+first corrected rate
+= 9999/10000
+
+final corrected rate
+= 1000/1001</pre>
+    <p class="good"><b>RATE CHANGES GRADUALLY. PHASE NEVER JUMPS.</b></p>
+  </section>
+
+  <section class="card" style="margin-top:16px">
+    <h2>Continuous phase history</h2>
+    <pre>phase when fresh evidence arrives
+= 1
+
+phase added during bounded recovery
+= 20008991 / 16016000
+
+final synthetic phase
+= 36024991 / 16016000
+
+total plant advances
+= 18</pre>
+    <p>
+      The phase accumulated while the rate was wrong remains part of the clock's
+      history. Rate recovery does not retroactively rewrite elapsed phase.
+    </p>
+  </section>
+
+  <section class="card" style="margin-top:16px">
+    <h2>Experiment cadence</h2>
+    <p class="muted">
+      The eight disturbance advances and ten recovery updates are abstract experiment
+      iterations only. No conventional second, A8 second, browser timer, scheduler
+      cadence, or real oscillator edge defines them.
+    </p>
+  </section>
+
+  <section class="card" style="margin-top:16px">
+    <h2>Still prohibited</h2>
+    <p class="warn"><b>NO REAL OSCILLATOR TRIM · NO REAL DIVIDER TRIM · NO PHASE ALIGNMENT.</b></p>
+    <p class="muted">
+      Gate 5D remains a synthetic continuity proof. Real A8Core actuation is still absent.
+    </p>
+  </section>
+</main>
+</body>
+</html>

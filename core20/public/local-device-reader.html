@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Local Read-Only Device Reader | A8 Post-Seal Hardware Branch</title>
+<meta name="description" content="COSIGO Labs Auspicious 8 post-seal Gate 6C local OS read-only device-path reader. OS/UART/USB delivery may move bytes, but only Gate-6A rig identity and exact raw pulse counts enter measurement.">
+<meta name="author" content="COSIGO Labs">
+<meta name="robots" content="noindex,nofollow">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/site-shell.css">
+<style>
+  main{max-width:1180px;margin:auto;padding:28px 20px 72px}
+  .hero,.card{border:1px solid var(--line,#2a3744);border-radius:16px;padding:20px;background:var(--panel,#111820)}
+  .hero{margin-bottom:16px}
+  .title{font-size:clamp(2rem,7vw,5rem);line-height:.96;letter-spacing:-.05em;margin:.18em 0}
+  .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+  .k{display:block;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;opacity:.68}
+  .v{display:block;font-size:1.15rem;font-weight:800;margin-top:4px;overflow-wrap:anywhere}
+  .good{color:#87d39b}.warn{color:#e0bd72}
+  pre{white-space:pre-wrap;overflow-wrap:anywhere}
+  @media(max-width:800px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav class="cosigo-global-nav" aria-label="COSIGO and A8 global navigation">
+  <a class="cosigo-global-brand" href="https://cosigo.io/" aria-label="COSIGO home">
+    <img src="/assets/cosigo_master_512.gif" alt="COSIGO">
+    <span>COSIGO<small>LABS · AUSPICIOUS 8</small></span>
+  </a>
+  <div class="cosigo-global-links">
+    <a href="/">POST-SEAL LAB HOME</a>
+    <a href="/hardware-interface.html">GATE 6A</a>
+    <a href="/receive-only-transport.html">GATE 6B</a>
+  </div>
+</nav>
+
+<main>
+  <section class="hero">
+    <div class="eyebrow">AUSPICIOUS 8 · POST-SEAL HARDWARE BRANCH · GATE 6C</div>
+    <h1 class="title">LOCAL READ-ONLY DEVICE READER</h1>
+    <p><b>OS PATH OPENED READ-ONLY · BYTES IN · NOTHING OUT</b></p>
+    <p class="muted">
+      Gate 6C adds the local OS layer that can later point at a UART/USB serial
+      device. The device path is opened read-only and every received byte is
+      handed to the unchanged Gate-6B transport adapter.
+    </p>
+  </section>
+
+  <section class="grid">
+    <div class="card">
+      <span class="k">DEVICE OPEN MODE</span>
+      <span class="v good">READ ONLY</span>
+    </div>
+    <div class="card">
+      <span class="k">OUTBOUND HANDLE</span>
+      <span class="v good">NONE</span>
+    </div>
+    <div class="card">
+      <span class="k">PHYSICAL ARDUINO</span>
+      <span class="v">NOT YET ATTACHED</span>
+    </div>
+  </section>
+
+  <section class="card" style="margin-top:16px">
+    <h2>Future device path</h2>
+    <pre>/dev/ttyUSB0
+or
+/dev/ttyACM0
+
+open semantics:
+READ ONLY</pre>
+  </section>
+
+  <section class="card" style="margin-top:16px">
+    <h2>Isolation test</h2>
+    <pre>same local byte fixture read with:
+
+1-byte OS buffer
+7-byte OS buffer
+4096-byte OS buffer
+
+OS chunk counts differ.
+Gate-6A raw-pulse result is identical.</pre>
+    <p class="good">
+      <b>OS/UART/USB DELIVERY CHANGES. A8 MEASUREMENT DOES NOT.</b>
+    </p>
+  </section>
+
+  <section class="card" style="margin-top:16px">
+    <h2>Chain</h2>
+    <pre>local OS read-only path
+        │
+        ▼
+Gate 6C reader
+        │ bytes only
+        ▼
+Gate 6B receive-only parser
+        │
+        ▼
+Gate 6A
+rig + rawPulse only</pre>
+  </section>
+
+  <section class="card" style="margin-top:16px">
+    <h2>Still absent</h2>
+    <pre>serial configuration command
+outbound bytes
+hardware commands
+timestamp
+seconds / A8 seconds
+Hz as measurement
+baud as time authority
+oscillator trim
+divider trim
+clock/phase/authority write</pre>
+    <p class="warn">
+      <b>THE DEVICE CLOCK MAY TRANSPORT BYTES. IT STILL CANNOT DEFINE A8 TIME.</b>
+    </p>
+  </section>
+</main>
+</body>
+</html>

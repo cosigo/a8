@@ -1,0 +1,628 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#090d11">
+<link rel="icon" href="a8-icon.svg" type="image/svg+xml">
+<link rel="icon" href="a8-icon-192.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<meta name="description" content="Canonical bottom-up Auspicious 8 reference for angle, recovered time, Earth coordinates, spatial length, navigation distance, scaling and derived mechanics.">
+<meta name="author" content="COSIGO Labs">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://a8.cosigo.io/canonical.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Auspicious 8 — Canonical Bottom-Up Reference">
+<meta property="og:description" content="Nature first → A8 ruler second → legacy conversion last.">
+<meta property="og:url" content="https://a8.cosigo.io/canonical.html">
+<meta property="og:site_name" content="COSIGO Labs — Auspicious 8">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://a8.cosigo.io/a8-icon-512.png">
+<meta property="og:image" content="https://a8.cosigo.io/a8-icon-512.png">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"TechArticle","headline":"Auspicious 8 — Canonical Bottom-Up Reference","author":{"@type":"Organization","name":"COSIGO Labs"},"url":"https://a8.cosigo.io/canonical.html","dateModified":"2026-08-23"}
+</script>
+<title>Auspicious 8 — Canonical Bottom-Up Reference v0.9</title>
+<style>
+:root{
+  --bg:#0a0d10; --panel:#11161c; --panel2:#171d24; --text:#eef3f7; --muted:#9daab7;
+  --line:#29323c; --gold:#d7b86f; --green:#91d3a1; --blue:#8fb8ff; --orange:#f1b670;
+  --red:#ee9292; --cyan:#83d5d9; --violet:#c3a8ff;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.57 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,sans-serif}
+main{max-width:1200px;margin:auto;padding:34px 22px 72px}
+header{border-bottom:1px solid var(--line);padding-bottom:24px;margin-bottom:26px}
+.eyebrow{font-size:.78rem;letter-spacing:.17em;text-transform:uppercase;color:var(--gold);font-weight:800}
+h1{font-size:clamp(2rem,5vw,4rem);line-height:1.02;margin:.35rem 0 .65rem}
+h2{margin:2.3rem 0 .78rem;font-size:1.5rem}
+h3{margin:0 0 .55rem;font-size:1.06rem}
+p{margin:.55rem 0 1rem}
+ul{margin:.45rem 0 .9rem;padding-left:1.25rem}
+li{margin:.32rem 0}
+.lead{font-size:1.18rem;max-width:930px;color:#dbe3ea}
+.rule{font-size:1.34rem;font-weight:780;padding:18px 20px;background:linear-gradient(90deg,#171c22,#101419);border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:11px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:14px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:14px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px}
+.card.hero{background:linear-gradient(135deg,#131922,#0f141a);border-color:#3a4654}
+.status{display:inline-block;border:1px solid currentColor;border-radius:999px;padding:2px 8px;font-size:.72rem;font-weight:800;letter-spacing:.07em;vertical-align:middle}
+.locked{color:var(--green)} .provisional{color:var(--orange)} .open{color:var(--red)} .comparison{color:var(--blue)}
+.formula{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;background:#080b0e;border:1px solid var(--line);padding:12px 14px;border-radius:8px;overflow:auto;color:#f8fafc;white-space:pre-wrap}
+.chain{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:16px 0}
+.node{background:var(--panel2);border:1px solid var(--line);border-radius:9px;padding:10px 12px;font-weight:670}
+.arrow{color:var(--gold);font-weight:900}
+table{width:100%;border-collapse:collapse;margin:10px 0 4px}
+th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:.79rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+small,.muted{color:var(--muted)}
+.kicker{color:var(--blue);font-weight:760}
+.big{font-size:1.5rem;font-weight:820;line-height:1.25}
+.pair{display:grid;grid-template-columns:1fr auto 1fr;gap:14px;align-items:center}
+.pair .side{padding:20px;border:1px solid var(--line);background:var(--panel2);border-radius:12px;text-align:center}
+.pair .middle{font-size:2rem;color:var(--gold);font-weight:900}
+.accent-q{color:var(--cyan)} .accent-j{color:var(--violet)}
+.note{border-left:3px solid var(--blue);padding:10px 14px;background:#0d1218;border-radius:6px}
+.warning{border-left-color:var(--orange)}
+.good{border-left-color:var(--green)}
+nav{display:flex;flex-wrap:wrap;gap:8px;margin-top:15px}
+nav a{color:#dce8ff;text-decoration:none;border:1px solid var(--line);background:#111720;padding:6px 9px;border-radius:7px;font-size:.82rem}
+nav a:hover{border-color:#586b80}
+a{color:#a9c8ff}
+.navico{display:inline-grid;place-items:center;width:1.45em;height:1.45em;border:1px solid currentColor;border-radius:50%;font-size:.78em;margin-right:.28em;vertical-align:-.08em}
+.metafoot{margin-top:10px;font:700 .72rem ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:.04em;color:var(--muted)}
+footer{margin-top:42px;padding-top:18px;border-top:1px solid var(--line);color:var(--muted);font-size:.9rem}
+.footer-nav{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.footer-nav a{color:#dce8ff;text-decoration:none;border:1px solid var(--line);background:#111720;padding:6px 9px;border-radius:7px}
+.footer-nav a.escape{border-color:var(--gold);color:#f4d990;font-weight:800}
+.triad{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:10px;align-items:center;margin:16px 0}
+.triad .node{text-align:center}
+.center{text-align:center}
+@media (max-width:760px){
+  .pair{grid-template-columns:1fr}.pair .middle{transform:rotate(90deg)}
+  .triad{grid-template-columns:1fr}.triad .arrow{text-align:center}
+}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <div class="eyebrow">COSIGO Labs · Auspicious 8</div>
+  <h1>Canonical Bottom-Up Reference</h1>
+  <p class="lead">What A8 changes, what it does not change, and how native measurement is built upward from reproducible phenomena. This page is the compact reference spine for angle, map, recovered time, spatial length, navigation distance, scaling and the derived mechanics that follow.</p>
+  <div><span class="status provisional">v0.9 · FOUNDATION WORKING REFERENCE · 23 AUG 2026</span></div>
+  <nav>
+    <a href="labs.html"><span class="navico">⌂</span>LABS</a>
+    <a href="unified.html"><span class="navico">⌖</span>UNIFIED</a>
+    <a href="canonical.html"><span class="navico">≡</span>CANONICAL</a>
+    <a href="open-research.html"><span class="navico">⚗</span>OPEN RESEARCH</a>
+    <a href="https://lab.a8.cosigo.io/"><span class="navico">⚙</span>ENGINEERING LAB</a>
+    <a href="https://a8.cosigo.io/about.html"><span class="navico">i</span>ABOUT A8</a>
+    <a class="escape" href="canonical.html#principle"><span class="navico">8</span>888 ESCAPE HATCH</a>
+  </nav>
+</header>
+
+<div class="rule">Nature first → A8 ruler second → legacy conversion last.</div>
+
+<div class="note good" style="margin-top:16px">
+  <strong>A8 Bottom-Up Principle:</strong> Don’t begin by inventing an explanation. Measure enough of the relationship that the explanation emerges from it.
+</div>
+
+<h2 id="principle">1. Governing Principle</h2>
+<div class="grid">
+  <section class="card">
+    <h3>What A8 changes</h3>
+    <p>Rulers, unit definitions, coordinate labels, subdivisions, register representations and the numerical values attached to measured quantities.</p>
+  </section>
+  <section class="card">
+    <h3>What A8 does not change</h3>
+    <p>Earth's rotation, geometry, π, trigonometry, mechanics, orbital phenomena, conservation laws or the physical objects and processes being measured.</p>
+  </section>
+  <section class="card">
+    <h3>Representation boundary</h3>
+    <p>Binary does not mean Nature is binary everywhere. A8 uses binary/eightfold subdivision as an engineered representation of observable recurrence, ratio, geometry and phase.</p>
+  </section>
+</div>
+
+<h2>2. Three Primary Questions — Recover Separately, Observe Together</h2>
+<div class="grid">
+  <section class="card"><h3>WHERE?</h3><p><strong>512 × 256 angular grid.</strong><br>Position, orientation and geometry establish where something is and how it sits in space.</p></section>
+  <section class="card"><h3>HOW FAR?</h3><p><strong>Spatial scale and path.</strong><br>Microscopic quartz geometry and macroscopic Earth geometry are independent spatial witnesses used in the current length work.</p></section>
+  <section class="card"><h3>WHEN?</h3><p><strong>32 × 64 × 64 daily phase.</strong><br>Jovian recurrence recovers the primary timebase; Earth recurrence is then observed against it.</p></section>
+  <section class="card"><h3>HOW?</h3><p><strong>Recovered quantities interacting.</strong><br>Propagation, oscillation, rotation and speed are derived tests, not additional foundational rulers.</p></section>
+</div>
+
+<div class="card hero" style="margin-top:14px">
+  <div class="triad">
+    <div class="node"><strong>WHERE</strong><br><span class="muted">position · orientation · geometry</span></div>
+    <div class="arrow">+</div>
+    <div class="node"><strong>HOW FAR</strong><br><span class="muted">scale · separation · path</span></div>
+    <div class="arrow">+</div>
+    <div class="node"><strong>WHEN</strong><br><span class="muted">recurrence · phase · duration</span></div>
+  </div>
+  <div class="formula center">WHERE + HOW FAR + WHEN → HOW</div>
+</div>
+
+<h2>3. Bottom-Up Derivation</h2>
+<div class="chain">
+  <div class="node">Observable Nature</div><div class="arrow">→</div>
+  <div class="node">Recurrence / geometry</div><div class="arrow">→</div>
+  <div class="node">Ratio / fraction</div><div class="arrow">→</div>
+  <div class="node">Binary / eightfold representation</div><div class="arrow">→</div>
+  <div class="node">Native A8 ruler</div><div class="arrow">→</div>
+  <div class="node">Derived quantities</div><div class="arrow">→</div>
+  <div class="node">Legacy translation</div>
+</div>
+
+<div class="pair">
+  <div class="side">
+    <div class="eyebrow accent-j">JUPITER · TIME</div>
+    <div class="big">Recurrence through time</div>
+    <p>Io · Europa · Ganymede recover and discipline the primary natural timebase.</p>
+  </div>
+  <div class="middle">↔</div>
+  <div class="side">
+    <div class="eyebrow accent-q">QUARTZ + EARTH · SPACE</div>
+    <div class="big">Geometry through scale</div>
+    <p>Quartz supplies microscopic spatial geometry; Earth supplies an independent macroscopic spatial geometry.</p>
+  </div>
+</div>
+
+<h2 id="angle">4. Geometry & Angle <span class="status locked">LOCKED CORE</span></h2>
+<div class="grid">
+  <section class="card">
+    <h3>Native turn</h3>
+    <div class="formula">1 full turn = 512 A8 angle units = 2^9 units</div>
+    <p>Eighth-turn = 64. Quarter-turn = 128. Half-turn = 256.</p>
+  </section>
+  <section class="card">
+    <h3>Recursive angular precision</h3>
+    <div class="formula">1 A8 angle unit = 64 A8 angular minutes
+1 A8 angular minute = 64 A8 angular seconds
+
+1 full turn
+= 512 × 64 × 64
+= 2,097,152
+= 2^21 A8 angular seconds</div>
+  </section>
+  <section class="card">
+    <h3>Proof bridge</h3>
+    <div class="formula">θ_rad = (2π / 512) A = (π / 256) A
+
+C = 2πr
+s = r θ_rad
+sin_A8(A) = sin(πA / 256)</div>
+    <p>π, trigonometry and geometry remain unchanged. Only the angular ruler is rescaled.</p>
+  </section>
+</div>
+
+<h2 id="earth">5. Earth Grid <span class="status provisional">WORKING</span></h2>
+<div class="grid">
+  <section class="card">
+    <h3>Latitude — unsigned pole-to-pole ruler</h3>
+    <table>
+      <tr><th>Physical position</th><th>A8 latitude</th></tr>
+      <tr><td>North Pole</td><td><strong>0</strong></td></tr>
+      <tr><td>Legacy 45° N position</td><td>64</td></tr>
+      <tr><td>Equator</td><td><strong>128</strong></td></tr>
+      <tr><td>Legacy 45° S position</td><td>192</td></tr>
+      <tr><td>South Pole</td><td><strong>256</strong></td></tr>
+    </table>
+    <p>No +/− sign and no N/S suffix are required to distinguish hemisphere.</p>
+  </section>
+  <section class="card">
+    <h3>Longitude</h3>
+    <div class="formula">Greenwich / London = 0 / 512
+Opposite Pacific meridian = 256
+Full longitude turn = 512</div>
+    <p>Greenwich is retained as the terrestrial zero. The map changes its ruler, not Earth's geography or rotation.</p>
+  </section>
+  <section class="card">
+    <h3>Clock / longitude correspondence</h3>
+    <div class="formula">512 / 32 = 16
+
+1 A8 hour-sector
+= 16 A8 angle units</div>
+    <p>The angular grid is independent of Earth's irregular physical shape. Linear surface distance is measured separately.</p>
+  </section>
+</div>
+
+<h2 id="recursive-grid">6. Recursive Earth Addressing <span class="status provisional">WORKING</span></h2>
+<div class="grid2">
+  <section class="card hero">
+    <h3>Exact angular address space</h3>
+    <div class="formula">Longitude span = 512 = 2^9
+Pole-to-pole latitude span = 256 = 2^8
+
+Base angular address lattice:
+512 × 256 = 131,072 = 2^17 cells</div>
+    <p>This is an <strong>angular map lattice</strong>. It is not defined by quartz, Earth circumference or any linear unit.</p>
+  </section>
+  <section class="card hero">
+    <h3>Recursive refinement</h3>
+    <div class="formula">At each refinement:
+Δlongitude → Δlongitude / 2
+Δlatitude  → Δlatitude  / 2
+
+Each cell → 4 child cells
+Level n cell count = 2^(17 + 2n)</div>
+    <p>The mathematical grid can be refined by halving as far as required. A physical instrument stops at its finite measurement capability.</p>
+  </section>
+</div>
+<div class="note good" style="margin-top:14px"><strong>Structural alignment:</strong> the base Earth angular lattice contains 2^17 cells, while the A8 daily clock contains 32×64×64 = 2^17 phase states. This is recorded as a structural alignment, not a claim of physical causation.</div>
+
+<h2 id="time">7. Time <span class="status locked">CLOCK STRUCTURE LOCKED</span> <span class="status provisional">RECOVERY ARCHITECTURE WORKING</span></h2>
+<div class="grid">
+  <section class="card">
+    <h3>Native daily phase</h3>
+    <div class="formula">32 × 64 × 64
+= 131,072
+= 2^17 daily states</div>
+    <table>
+      <tr><th>Native unit</th><th>Fraction</th></tr>
+      <tr><td>A8 HOUR</td><td>1 / 32 day</td></tr>
+      <tr><td>A8 MINUTE</td><td>1 / 64 A8 HOUR</td></tr>
+      <tr><td>A8 SECOND</td><td>1 / 64 A8 MINUTE</td></tr>
+    </table>
+  </section>
+  <section class="card">
+    <h3>Primary natural timebase — Jupiter</h3>
+    <p>Io, Europa and Ganymede provide the primary natural recurrence used to recover and discipline the oscillator/timebase.</p>
+    <div class="formula">Io ×4
+Europa ×2
+Ganymede ×1
+→ common 1:2:4 recurrence comparison</div>
+    <p>The defining recovery path does not require UTC, GPS, NTP or a legacy second.</p>
+  </section>
+  <section class="card">
+    <h3>Earth rotation witness — Mintaka</h3>
+    <p>Mintaka supplies an independent distant stellar direction against which Earth's axial rotation can be observed using the recovered Jovian timebase.</p>
+    <p class="muted">Stellar evidence remains separate from solar evidence; they are not averaged together.</p>
+  </section>
+  <section class="card">
+    <h3>Civil-day authority — Mean Sun</h3>
+    <p>The recovered Mean-Sun / solar recurrence supplies the terrestrial civil-day duration authority. It is measured against the recovered Jovian timebase.</p>
+    <div class="formula">Jovian recovered timebase
+        ↓
+Earth stellar witness — Mintaka
+Earth solar recurrence — Mean Sun
+        ↓
+civil day → 2^17 DAY_PHASE17</div>
+  </section>
+</div>
+
+<h2 id="sol-luna">8. Sol / Luna Celestial Angular Reference <span class="status provisional">FIRST-PASS WORKING</span></h2>
+<div class="grid2">
+  <section class="card">
+    <h3>Native observable</h3>
+    <p>Sol and Luna present similar apparent disk diameters from Earth's surface. A8 can measure that edge-to-edge span directly with the 512×64×64 angular ruler.</p>
+    <div class="formula">D_L = recovered Luna apparent diameter
+D_S = recovered Sol apparent diameter
+
+D_LS = (D_L + D_S) / 2</div>
+    <p>The final canonical value must come from a specified native observation/recovery protocol rather than being forced to a neat number.</p>
+  </section>
+  <section class="card">
+    <h3>Current converted first-pass values</h3>
+    <table>
+      <tr><th>Quantity</th><th>Working A8 value</th></tr>
+      <tr><td>Sol apparent diameter</td><td>≈ 3105.76 A8 angular sec</td></tr>
+      <tr><td>Luna apparent diameter</td><td>≈ 3017.13 A8 angular sec</td></tr>
+      <tr><td><strong>Mean apparent diameter</strong></td><td><strong>≈ 3061.44 A8 angular sec</strong></td></tr>
+      <tr><td>Mean in A8 angular minutes</td><td><strong>≈ 47.8350</strong></td></tr>
+    </table>
+    <p class="muted">These remain comparison-stage conversions from representative present astronomical values.</p>
+  </section>
+</div>
+
+<h2 id="length">9. Spatial Length — Quartz ↔ Earth <span class="status provisional">CURRENT WORKING STAKE</span></h2>
+<div class="grid2">
+  <section class="card hero">
+    <h3>Microscopic witness — α-quartz</h3>
+    <p>Quartz is three-dimensional and anisotropic. The present symmetric working reduction uses both principal lattice dimensions rather than treating one axis as the whole ruler.</p>
+    <div class="formula">a ≈ 0.4913 legacy nm
+c ≈ 0.5405 legacy nm
+
+q_mean = (a + c) / 2
+
+Q↑ = 2^31 q_mean
+≈ 1.108009221 legacy m</div>
+    <p class="muted">The precise quartz reduction remains experimental; arithmetic, geometric and RMS symmetric reductions have all been examined. The rule must be stated before judging the result.</p>
+  </section>
+  <section class="card hero">
+    <h3>Macroscopic witness — mean Earth geometry</h3>
+    <p>The current global scalar uses a representative mean circumference from the orthogonal meridional and equatorial circumferences.</p>
+    <div class="formula">C_E,mean ≈ 40,041.439801 legacy km
+
+E↓ = C_E,mean / 2^25
+≈ 1.193327898 legacy m</div>
+    <p>Earth is not forced into a perfect sphere. The mean circumference is a declared scalar construction for this comparison.</p>
+  </section>
+</div>
+
+<div class="card hero" style="margin-top:14px">
+  <h3>Current human-scale stake</h3>
+  <div class="formula">U = √(Q↑ × E↓)
+
+1 A8/31 := 1 native A8 human length
+working legacy comparison:
+≈ 1.149877521 legacy m</div>
+  <p><strong>A8/31 is the current working human-scale stake.</strong> It is not arithmetic “8 divided by 31,” and it is not defined by the legacy metre. The legacy value is a comparison coordinate.</p>
+  <div class="note warning"><strong>Boundary:</strong> the present quartz reduction and Earth scalar are still experimental inputs. The A8/31 stake is current working architecture, not a claim that all spatial research is finished.</div>
+</div>
+
+<h2 id="ladder">10. Binary Length Ladder <span class="status locked">EXACT SCALE RELATION</span></h2>
+<div class="grid2">
+  <section class="card">
+    <h3>One ladder</h3>
+    <div class="formula">L_n = 2^(n−31) L_31
+
+L_31 = 1 A8/31
+
+Every next rung doubles:
+A8/(n+1) = 2 × A8/n</div>
+    <p>Changing rung changes the representation scale, not the physical object or journey.</p>
+  </section>
+  <section class="card">
+    <h3>Useful reference</h3>
+    <div class="formula">A8/41
+= 2^10 × A8/31
+= 1024 × A8/31
+≈ 1.177474582 legacy km</div>
+    <p><strong>Ten binary rungs = ×1024.</strong> The ladder states scale only; application choices remain separate work.</p>
+  </section>
+</div>
+<div class="rule" style="margin-top:14px">One ladder. Pick the rung. State the rung. Stay on the rung.</div>
+
+
+<h2 id="scale-examples">10A. Useful Scale Neighborhoods <span class="status comparison">REFERENCE EXAMPLES</span></h2>
+<div class="grid2">
+  <section class="card hero">
+    <h3>Aircraft cruise — comfortably near A8/45</h3>
+    <p>
+      Airbus publishes a long-range speed of <strong>447 knots</strong> for the ACJ319 example used here.
+      That is a conventional comparison input, not an A8 authority.
+    </p>
+    <div class="formula">447 legacy knots
+≈ 827.844 legacy km/h
+
+distance traveled in 1 A8 HOUR
+= 827.844 × 0.75
+≈ 620.883 legacy km
+
+A8/45
+= 2^14 × A8/31
+≈ 18.839593 legacy km
+
+620.883 / 18.839593
+≈ 32.96
+
+aircraft cruise example:
+≈ 32.96 A8/45 per A8 HOUR</div>
+    <p>
+      This shows that an ordinary fast-aircraft cruise can be represented comfortably on the
+      <strong>A8/45 scale neighborhood</strong>. It does <strong>not</strong> declare A8/45 to be
+      “the aviation rung.”
+    </p>
+    <p class="muted">
+      Reference: Airbus ACJ319 performance example — long-range speed 0.78 Mach / 447 knots.
+      <a href="https://www.acj.airbus.com/en/iflyacj/acj319-9h-tbn">Airbus source</a>.
+    </p>
+  </section>
+
+  <section class="card hero">
+    <h3>Last Apollo lunar mission — comfortably near A8/48</h3>
+    <p>
+      NASA reports Apollo 17 — the last crewed lunar landing mission — with a mission duration of
+      <strong>12 days 13 hours 52 minutes</strong> and a traveled distance of
+      <strong>1,484,933.8 legacy miles</strong>.
+    </p>
+    <div class="formula">whole-mission average
+= reported distance / reported duration
+≈ 7,916.64 legacy km/h
+
+distance represented in 1 A8 HOUR
+≈ 5,937.48 legacy km
+
+A8/48
+= 2^17 × A8/31
+≈ 150.716746 legacy km
+
+5,937.48 / 150.716746
+≈ 39.39
+
+Apollo 17 whole-mission average example:
+≈ 39.39 A8/48 per A8 HOUR</div>
+    <p>
+      This is deliberately a <strong>whole-mission average</strong>, not an instantaneous launch,
+      translunar, lunar-orbit, entry or maximum spacecraft speed. It shows that a crewed lunar
+      mission falls comfortably into an <strong>A8/48 scale neighborhood</strong>.
+    </p>
+    <p class="muted">
+      Reference: NASA Apollo 17 Mission Details.
+      <a href="https://www.nasa.gov/missions/apollo/apollo-17-mission-details/">NASA source</a>.
+    </p>
+  </section>
+</div>
+
+<div class="note good" style="margin-top:14px">
+  <strong>Scale observation:</strong> A8/48 is exactly three binary rungs above A8/45, so its
+  length scale is ×8. The two examples also differ in physical speed by roughly one order of
+  magnitude. Similar-sized A8 coefficients appear because the rung changed to keep the
+  representation useful — not because an application-specific rung was declared in advance.
+</div>
+
+<h2 id="nav-distance">11. Earth Navigation Distance <span class="status provisional">DEFINED WORKING RULER</span></h2>
+<div class="grid2">
+  <section class="card hero">
+    <h3>A8 NAV comes from Earth</h3>
+    <div class="formula">1 A8 NAV
+:= C_E,mean / 32,768
+= C_E,mean / 2^15
+
+≈ 1,221.967767 legacy m
+≈ 1.221967767 legacy km</div>
+    <p>The navigation unit is derived from mean Earth circumference. It is <strong>not</strong> derived from kilometres and is <strong>not</strong> defined as A8/41.</p>
+  </section>
+  <section class="card hero">
+    <h3>Relation to the general length ladder</h3>
+    <div class="formula">A8/41 ≈ 1.177474582 legacy km
+
+1 A8 NAV
+≈ 1.037786961 A8/41</div>
+    <p><strong>A8 NAV and A8/41 are separate constructions.</strong> Their current numerical relationship is shown only as a cross-check.</p>
+  </section>
+</div>
+<div class="note good" style="margin-top:14px"><strong>Structural navigation relation:</strong> 32,768 = 32 × 1024, so the defined mean Earth circumference contains exactly 1024 A8 NAV units per one of the 32 longitudinal/hour sectors.</div>
+
+<h2 id="crosscheck">12. Dimensionless Sky Cross-check <span class="status comparison">VALIDATION / COMPARISON</span></h2>
+<div class="grid2">
+  <section class="card">
+    <h3>Full turn / mean Sol-Luna disk</h3>
+    <div class="formula">Full A8 turn
+= 2,097,152 A8 angular sec
+
+Mean Sol/Luna disk
+≈ 3,061.4428 A8 angular sec
+
+2,097,152 / 3,061.4428
+≈ 685.0208</div>
+    <p>A complete angular circuit contains approximately <strong>685.02</strong> current first-pass mean apparent Sol/Luna disk diameters.</p>
+  </section>
+  <section class="card">
+    <h3>Why the ratio matters</h3>
+    <p>The ratio is dimensionless. Changing from A8 angle to legacy degrees does not change it.</p>
+    <div class="formula">Working mean disk
+≈ 0.5255315 legacy degree
+
+360 / 0.5255315
+≈ 685.0208</div>
+    <p><strong>Same sky. Same geometry. Different ruler.</strong></p>
+  </section>
+</div>
+
+<h2 id="mechanics">13. Derived Mechanics — Same Proofs, New Native Units</h2>
+<div class="grid">
+  <section class="card hero">
+    <h3>Speed — same motion, different numerical display</h3>
+    <div class="formula">v = ΔL / ΔT
+
+Working comparison:
+1 A8/31 ≈ 1.149877521 legacy m
+1 A8 SECOND ≈ 0.6591796875 legacy s
+
+1 A8/31 per A8 SECOND
+≈ 1.744406787 legacy m/s
+
+1 legacy m/s
+≈ 0.573260783 A8/31 per A8 SECOND</div>
+    <p>Nothing physically moves faster or slower because the ruler changed. Only the numerical representation changes.</p>
+  </section>
+  <section class="card">
+    <h3>Motion</h3>
+    <div class="formula">v = dL/dT
+a = dv/dT = d²L/dT²</div>
+    <p>The kinematic structure is unchanged; coherent A8 rulers are carried by L and T.</p>
+  </section>
+  <section class="card">
+    <h3>Mass</h3>
+    <div class="formula">[M] = independent base dimension</div>
+    <p><span class="status open">OPEN</span> A8 mass authority remains undefined and must not be reverse-engineered merely to resemble the legacy kilogram.</p>
+  </section>
+  <section class="card">
+    <h3>Momentum</h3>
+    <div class="formula">p = mv
+[p] = M L T^-1</div>
+  </section>
+  <section class="card">
+    <h3>Force</h3>
+    <div class="formula">F = ma
+[F] = M L T^-2</div>
+  </section>
+  <section class="card">
+    <h3>Energy</h3>
+    <div class="formula">E_k = ½mv²
+[E] = M L² T^-2</div>
+  </section>
+</div>
+
+<h2>14. General Invariance Rule</h2>
+<div class="card">
+  <div class="formula">speed        [v] = L T^-1
+acceleration   [a] = L T^-2
+momentum       [p] = M L T^-1
+force          [F] = M L T^-2
+energy         [E] = M L² T^-2</div>
+  <p>Changing coherent rulers changes numerical magnitudes; it does not rewrite the physical relationships. Dimensionless ratios remain invariant.</p>
+</div>
+
+<h2>15. Legacy Conversion Rule</h2>
+<div class="rule">Never distort a native A8 definition to simplify a legacy conversion.</div>
+<div class="card" style="margin-top:14px">
+  <p>Legacy degrees, hours, seconds, metres, kilometres, nautical miles, knots, kilograms, °C and pressure units belong in secondary translation tables until their respective native A8 replacements exist.</p>
+  <div class="formula">Examples — translation only:
+
+1 A8 angle unit
+= 360 / 512 legacy degrees
+= 45 / 64 legacy degree
+
+1 A8/31
+≈ 1.149877521 legacy m
+
+1 legacy m
+≈ 0.869657839 A8/31
+
+1 A8 SECOND
+≈ 0.6591796875 legacy s
+
+1 A8 NAV
+≈ 1.221967767 legacy km</div>
+</div>
+
+<h2>16. Status & Next Frontiers</h2>
+<div class="grid">
+  <section class="card">
+    <h3>Locked / established structure</h3>
+    <p>512-turn angle; 64×64 angular subdivision; 32×64×64 daily phase representation; Jovian 1:2:4 recovery architecture; Earth angular grid; exact binary length-ladder relation.</p>
+  </section>
+  <section class="card">
+    <h3>Current working architecture</h3>
+    <p>Jovian recovered timebase; Mintaka as independent stellar Earth-rotation witness; Mean Sun as civil-day duration authority; A8/31 ≈ 1.149877521 legacy m working human-scale stake; A8 NAV = mean Earth circumference / 32,768.</p>
+  </section>
+  <section class="card">
+    <h3>Open research</h3>
+    <p>Final three-dimensional quartz reduction and physical apparatus; native thermodynamic state; mass; expanded propagation/optical tests; then coherent native acceleration, momentum, force, energy and further scale applications.</p>
+  </section>
+</div>
+
+<h2>17. Source Anchors for Present-Day Comparison</h2>
+<div class="card">
+  <p>These sources are comparison and laboratory anchors. They do not become A8 authority merely because they are institutional references.</p>
+  <ul>
+    <li><a href="https://tsapps.nist.gov/srmext/certificates/1878B.pdf">NIST SRM 1878b — α-quartz certified lattice parameters</a></li>
+    <li><a href="https://science.nasa.gov/mission/hubble/multimedia/hubble-glossary/">NASA Hubble Glossary — apparent angular size reference</a></li>
+    <li><a href="https://www.ngs.noaa.gov/CORS/Articles/gpsPDF.pdf">NOAA / National Geodetic Survey — WGS-84 comparison parameters</a></li>
+    <li><a href="https://www.acj.airbus.com/en/iflyacj/acj319-9h-tbn">Airbus ACJ319 performance example — 447-knot long-range speed</a></li>
+    <li><a href="https://www.nasa.gov/missions/apollo/apollo-17-mission-details/">NASA Apollo 17 Mission Details — mission duration and reported distance traveled</a></li>
+  </ul>
+</div>
+
+<footer>
+  <div><strong>COSIGO Labs — Auspicious 8</strong> · Canonical Bottom-Up Reference v0.9</div>
+  <div>Nature first, A8 ruler second, legacy conversion last.</div>
+  <div class="footer-nav">
+    <a href="labs.html"><span class="navico">⌂</span>LABS</a>
+    <a href="unified.html"><span class="navico">⌖</span>UNIFIED</a>
+    <a href="canonical.html"><span class="navico">≡</span>CANONICAL</a>
+    <a href="open-research.html"><span class="navico">⚗</span>OPEN RESEARCH</a>
+    <a href="https://lab.a8.cosigo.io/"><span class="navico">⚙</span>ENGINEERING LAB</a>
+    <a href="https://a8.cosigo.io/about.html"><span class="navico">i</span>ABOUT A8</a>
+    <a class="escape" href="canonical.html#principle"><span class="navico">8</span>888 ESCAPE HATCH</a>
+  </div>
+  <div class="metafoot">CANONICAL REFERENCE · v0.9 · SYNCHRONIZED 2026-08-23 · LOCKED / WORKING / OPEN DISTINCTIONS GOVERN</div>
+</footer>
+</main>
+</body>
+</html>

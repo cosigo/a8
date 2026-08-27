@@ -1,0 +1,16 @@
+node_modules/
+_backups/
+*.log
+*.pid
+*.swp
+*.tmp
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.pfx
+id_rsa
+id_ed25519
+secrets/
+credentials/

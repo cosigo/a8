@@ -1,0 +1,474 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Auspicious 8 — Quartz Prism Length & Light Experiment v0.2 | COSIGO Labs</title>
+<style>
+:root{
+  --bg:#090d11;--panel:#111820;--panel2:#17212b;--panel3:#0d131a;--line:#2a3744;
+  --text:#eef5f8;--muted:#9eafbc;--gold:#e0bd72;--green:#87d39b;--blue:#84b9ff;
+  --cyan:#71d5dc;--violet:#c5a5ff;--orange:#f0ae64;--red:#ef8d8d;--white:#fff;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(circle at 20% 0,#111a24 0,#090d11 34rem);color:var(--text);font:16px/1.58 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,sans-serif}
+main{max-width:1240px;margin:auto;padding:34px 22px 80px}
+header{padding-bottom:24px;border-bottom:1px solid var(--line)}
+h1{font-size:clamp(2.15rem,5vw,4.4rem);line-height:1.02;margin:.35rem 0 .65rem;letter-spacing:-.035em}
+h2{font-size:1.6rem;margin:2.6rem 0 .85rem} h3{font-size:1.08rem;margin:.05rem 0 .55rem}
+p{margin:.55rem 0 1rem}.lead{font-size:1.17rem;max-width:980px;color:#d9e4ea}
+.eyebrow{font-size:.77rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:850}
+.rule{font-size:1.33rem;font-weight:800;padding:18px 20px;background:linear-gradient(90deg,#171f28,#0e141a);border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:12px;margin:20px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:14px}.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:14px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px}.hero{background:linear-gradient(135deg,#141d27,#0d131a)}
+.status{display:inline-block;border:1px solid currentColor;border-radius:999px;padding:2px 8px;font-size:.69rem;font-weight:900;letter-spacing:.07em;vertical-align:middle;margin-left:.25rem}.locked{color:var(--green)}.provisional{color:var(--orange)}.open{color:var(--red)}.research{color:var(--blue)}.comparison{color:var(--cyan)}
+.formula{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;background:#060a0e;border:1px solid var(--line);padding:12px 14px;border-radius:8px;overflow:auto;color:#f8fbfc;white-space:pre-wrap}
+.note{border-left:3px solid var(--blue);padding:11px 14px;background:#0c1218;border-radius:6px}.warning{border-left-color:var(--orange)}.good{border-left-color:var(--green)}.danger{border-left-color:var(--red)}
+.chain{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:14px 0}.node{padding:10px 12px;border:1px solid var(--line);background:var(--panel2);border-radius:9px;font-weight:750}.arrow{color:var(--gold);font-weight:900}
+table{width:100%;border-collapse:collapse;margin:9px 0 4px}th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}th{font-size:.76rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+ul,ol{padding-left:1.35rem}li{margin:.38rem 0}.small,.muted{color:var(--muted);font-size:.92rem}
+nav{display:flex;flex-wrap:wrap;gap:7px;margin:16px 0 0}nav a{color:#dcecff;text-decoration:none;background:#101821;border:1px solid var(--line);border-radius:8px;padding:6px 9px;font-size:.85rem}
+.diagram{background:#070b0f;border:1px solid var(--line);border-radius:14px;padding:12px;overflow:hidden}.diagram svg{display:block;width:100%;height:auto}
+.phase{counter-increment:phase}.phase h3:before{content:"PHASE " counter(phase) " · ";color:var(--gold)}.phases{counter-reset:phase}
+.comparator{border-top:3px solid var(--cyan)}.comparator:nth-child(2){border-top-color:var(--violet)}.comparator:nth-child(3){border-top-color:var(--gold)}
+.big{font-size:1.46rem;font-weight:850;line-height:1.2}.mono{font-family:ui-monospace,SFMono-Regular,Consolas,monospace}
+.callout{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start}.num{width:2.1rem;height:2.1rem;border-radius:50%;display:grid;place-items:center;background:#182534;border:1px solid var(--line);font-weight:900;color:var(--gold)}
+input[type=number]{width:100%;background:#080d12;color:var(--text);border:1px solid var(--line);border-radius:7px;padding:9px;font:inherit}.calc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}.result{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;color:#d7f6dc}
+footer{border-top:1px solid var(--line);margin-top:38px;padding-top:20px;color:var(--muted)}
+@media(max-width:620px){main{padding:24px 14px 60px}.grid2{grid-template-columns:1fr}.formula{font-size:.87rem}}
+
+/* A8 QUARTZ FARM BACKGROUND v1 */
+body{
+  background:
+    linear-gradient(rgba(10,12,14,.56), rgba(10,12,14,.70)),
+    url("/assets/a8_quartz_farm_bg.png")
+      center center / cover fixed no-repeat !important;
+}
+
+</style>
+<link rel="stylesheet" href="/site-shell.css">
+<meta name="description" content="COSIGO Labs Auspicious 8 quartz and length experiment exploring recurrent crystal structure as a provisional natural spatial reference for engineering metrology.">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+<meta name="author" content="COSIGO Labs">
+<link rel="canonical" href="https://lab.a8.cosigo.io/quartz.html">
+<link rel="icon" href="https://a8.cosigo.io/assets/cosigo_master_512.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="COSIGO Labs — Auspicious 8">
+<meta property="og:title" content="Auspicious 8 — Quartz Prism Length & Light Experiment v0.2">
+<meta property="og:description" content="COSIGO Labs Auspicious 8 quartz and length experiment exploring recurrent crystal structure as a provisional natural spatial reference for engineering metrology.">
+<meta property="og:url" content="https://lab.a8.cosigo.io/quartz.html">
+<meta property="og:image" content="https://a8.cosigo.io/assets/cosigo_master_512.png">
+<meta property="og:image:alt" content="Auspicious 8 — Quartz Prism Length & Light Experiment v0.2 — COSIGO Labs">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Auspicious 8 — Quartz Prism Length & Light Experiment v0.2">
+<meta name="twitter:description" content="COSIGO Labs Auspicious 8 quartz and length experiment exploring recurrent crystal structure as a provisional natural spatial reference for engineering metrology.">
+<meta name="twitter:image" content="https://a8.cosigo.io/assets/cosigo_master_512.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Auspicious 8 — Quartz Prism Length & Light Experiment v0.2",
+  "url": "https://lab.a8.cosigo.io/quartz.html",
+  "description": "COSIGO Labs Auspicious 8 quartz and length experiment exploring recurrent crystal structure as a provisional natural spatial reference for engineering metrology.",
+  "dateModified": "2026-08-18",
+  "inLanguage": "en",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "COSIGO Labs — Auspicious 8",
+    "url": "https://a8.cosigo.io/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "COSIGO Labs",
+    "url": "https://cosigo.io/"
+  },
+  "about": [
+    {
+      "@type": "Thing",
+      "name": "Alpha quartz"
+    },
+    {
+      "@type": "Thing",
+      "name": "Length metrology"
+    },
+    {
+      "@type": "Thing",
+      "name": "Crystal recurrence"
+    },
+    {
+      "@type": "Thing",
+      "name": "Natural measurement reference"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<nav class="cosigo-global-nav" aria-label="COSIGO and A8 global navigation">
+  <a class="cosigo-global-brand" href="https://cosigo.io/" aria-label="COSIGO home">
+    <img src="/assets/cosigo_master_512.gif" alt="COSIGO">
+    <span>COSIGO<small>LABS · AUSPICIOUS 8</small></span>
+  </a>
+  <div class="cosigo-global-links">
+    <a href="/">A8 LAB HOME</a>
+    <a href="https://a8.cosigo.io/">A8 PUBLIC</a>
+    <a class="cosigo-exit" href="https://cosigo.io/">COSIGO HOME</a>
+    <a class="cosigo-exit" href="https://contact.cosigo.io/">CONTACT</a>
+    <a href="https://github.com/cosigo">GITHUB</a>
+  </div>
+</nav>
+
+<main>
+<header>
+  <div class="eyebrow">COSIGO LABS · AUSPICIOUS 8 · MATERIAL / OPTICS EXPERIMENT · LAB STATIC PATCH 01</div>
+  <h1>Quartz Prism Length &amp; Light Experiment</h1>
+  <p class="lead">A standalone speculative engineering program for recovering a native spatial ruler from α-quartz lattice recurrence, qualifying a macroscopic prism with multiple physical witnesses, mapping light spectra in native A8 geometry, and finally deriving light speed from independently recovered <strong>HOW FAR</strong> and <strong>WHEN</strong>.</p>
+  <div class="rule">Nature first → recurrence second → comparator qualification third → A8 ruler fourth → derived speed last.</div>
+  <div class="note warning"><strong>Status:</strong> this page is an experimental design, not an A8 definition. The α-quartz a-axis and A8/31 = 2<sup>31</sup>q<sub>a</sub> remain provisional candidates. No result on this page should be promoted to Foundation until independent physical replication exists.</div>
+<div class="note"><strong>v0.2 review correction:</strong> vacuum λ×f is explicitly separated from propagation inside quartz; optical comparators B/C are treated as correlated corroborating witnesses rather than independent votes; the future 888/666 Rosetta quartz artifact is recorded as a deferred fabrication/reconstruction experiment.</div>
+  <nav>
+    <a href="/">ENGINEERING LAB</a><a href="/angle.html">A8 ANGLE TRANSLATOR</a>
+    <a href="#foundation">Foundation</a><a href="#prism">Prism</a><a href="#ladder">Length ladder</a><a href="#comparators">3 comparators</a><a href="#procedure">Procedure</a><a href="#spectrum">Spectrum</a><a href="#speed">Light speed</a><a href="#qualification">Qualification</a><a href="#worksheet">Worksheet</a><a href="#sources">Sources</a>
+  </nav>
+</header>
+
+<h2 id="foundation">1. What this experiment is trying to establish</h2>
+<div class="grid">
+  <section class="card hero"><div class="eyebrow" style="color:var(--violet)">WHEN</div><div class="big">Jovian recurrence</div><p>Io, Europa and Ganymede independently recover a physical time scale. The browser, UTC, NTP and legacy seconds do not define the proof path.</p><div class="formula">Io ×4 · Europa ×2 · Ganymede ×1
+→ common recurrence comparison scale</div></section>
+  <section class="card hero"><div class="eyebrow" style="color:var(--cyan)">HOW FAR</div><div class="big">Quartz recurrence</div><p>A specified translational period in α-quartz is treated as a microscopic spatial recurrence that can be recovered, compared and scaled by exact powers of two.</p><div class="formula">qₐ = one selected α-quartz a-axis recurrence</div></section>
+  <section class="card hero"><div class="eyebrow" style="color:var(--gold)">HOW FAST</div><div class="big">Derived, never upstream</div><p>Only after time and length have independent qualification do we ask how fast light moves under those rulers.</p><div class="formula">speed = qualified HOW FAR / qualified WHEN</div></section>
+</div>
+<p>The canonical A8 reference already separates the four questions: WHERE = angular grid, WHEN = Jovian-recovered daily phase, HOW FAR = quartz lattice recurrence, and HOW FAST = distance ÷ time. The present quartz candidate is explicitly provisional; legacy units are comparison labels only.</p>
+<div class="chain"><div class="node">Observable material recurrence</div><div class="arrow">→</div><div class="node">recover qₐ</div><div class="arrow">→</div><div class="node">scale by 2ⁿ</div><div class="arrow">→</div><div class="node">qualify artifact</div><div class="arrow">→</div><div class="node">native A8 length</div><div class="arrow">→</div><div class="node">measure light</div></div>
+
+<h2 id="prism">2. Conceptual A8 quartz prism <span class="status research">NOT YET FABRICATED</span></h2>
+<div class="diagram">
+<svg viewBox="0 0 1160 560" role="img" aria-label="Conceptual labeled A8 quartz prism experiment">
+<defs>
+  <linearGradient id="glass" x1="0" x2="1"><stop offset="0" stop-color="#6fd3dc" stop-opacity=".16"/><stop offset="1" stop-color="#b99cff" stop-opacity=".28"/></linearGradient>
+  <linearGradient id="rainbow" x1="0" x2="1"><stop offset="0" stop-color="#ff6868"/><stop offset=".22" stop-color="#ffd56a"/><stop offset=".43" stop-color="#72e07d"/><stop offset=".64" stop-color="#6bcff6"/><stop offset=".82" stop-color="#7e8cff"/><stop offset="1" stop-color="#d68cff"/></linearGradient>
+  <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#e0bd72"/></marker>
+</defs>
+<rect x="0" y="0" width="1160" height="560" rx="16" fill="#070b0f"/>
+<text x="28" y="38" fill="#e0bd72" font-size="18" font-weight="800">CONCEPTUAL A8 QUARTZ PRISM · single-crystal α-quartz</text>
+<text x="28" y="62" fill="#9eafbc" font-size="14">Geometry shown for experiment planning; final cut, crystal orientation and target exponent remain open.</text>
+
+<!-- prism -->
+<polygon points="420,425 650,100 875,425" fill="url(#glass)" stroke="#9cdce1" stroke-width="3"/>
+<line x1="650" y1="100" x2="650" y2="445" stroke="#c5a5ff" stroke-width="3" stroke-dasharray="9 8"/>
+<text x="662" y="154" fill="#c5a5ff" font-size="15" font-weight="700">c-axis / optic-axis reference</text>
+<line x1="455" y1="450" x2="840" y2="450" stroke="#71d5dc" stroke-width="3" marker-end="url(#arrow)"/>
+<text x="500" y="478" fill="#71d5dc" font-size="15" font-weight="700">a-axis recurrence direction · qₐ → qₐ → qₐ → …</text>
+<line x1="475" y1="400" x2="820" y2="400" stroke="#e0bd72" stroke-width="2" stroke-dasharray="5 5"/>
+<text x="505" y="390" fill="#e0bd72" font-size="15" font-weight="800">example native target span: 2²⁷ qₐ</text>
+<text x="510" y="414" fill="#9eafbc" font-size="13">engineering specimen example only — not the A8/31 definition</text>
+
+<!-- incident light -->
+<line x1="95" y1="255" x2="470" y2="255" stroke="#fff" stroke-width="5" marker-end="url(#arrow)"/>
+<text x="95" y="230" fill="#fff" font-size="16" font-weight="800">broadband / pulsed light</text>
+<text x="95" y="279" fill="#9eafbc" font-size="13">polarization state recorded</text>
+
+<!-- internal paths -->
+<line x1="470" y1="255" x2="735" y2="310" stroke="#8fb8ff" stroke-width="4"/>
+<line x1="470" y1="255" x2="735" y2="285" stroke="#c5a5ff" stroke-width="4" stroke-dasharray="7 5"/>
+<text x="570" y="282" fill="#c5a5ff" font-size="13">extraordinary / polarization-sensitive path</text>
+<text x="580" y="331" fill="#8fb8ff" font-size="13">ordinary path</text>
+
+<!-- outgoing spectrum -->
+<path d="M735 310 L1080 222" stroke="url(#rainbow)" stroke-width="12" fill="none"/>
+<path d="M735 285 L1080 330" stroke="#c5a5ff" stroke-width="4" fill="none" stroke-dasharray="8 5"/>
+<line x1="1080" y1="175" x2="1080" y2="385" stroke="#8796a4" stroke-width="3"/>
+<text x="930" y="150" fill="#eef5f8" font-size="16" font-weight="800">detector / spectrometer plane</text>
+<text x="904" y="410" fill="#9eafbc" font-size="13">record A8 deviation angle, intensity, polarization, arrival/phase</text>
+
+<!-- comparator labels -->
+<rect x="25" y="355" width="340" height="145" rx="12" fill="#0d131a" stroke="#2a3744"/>
+<text x="45" y="384" fill="#71d5dc" font-size="14" font-weight="900">COMPARATOR A · LATTICE</text>
+<text x="45" y="409" fill="#dbe5eb" font-size="13">X-ray diffraction / crystallography</text>
+<text x="45" y="431" fill="#dbe5eb" font-size="13">qₐ, orientation, strain, uniformity</text>
+<text x="45" y="468" fill="#c5a5ff" font-size="14" font-weight="900">COMPARATOR B · PHASE / DELAY</text>
+<text x="45" y="491" fill="#dbe5eb" font-size="13">polarized interference / birefringent delay</text>
+
+<rect x="900" y="435" width="235" height="82" rx="12" fill="#0d131a" stroke="#2a3744"/>
+<text x="920" y="463" fill="#e0bd72" font-size="14" font-weight="900">COMPARATOR C · PRISM</text>
+<text x="920" y="486" fill="#dbe5eb" font-size="13">A8 angular dispersion</text>
+<text x="920" y="507" fill="#dbe5eb" font-size="13">ordinary / extraordinary response</text>
+</svg>
+</div>
+<div class="note"><strong>Why a prism?</strong> One single-crystal object can expose microscopic lattice recurrence, macroscopic face geometry, optical-axis orientation, ordinary/extraordinary propagation, spectral dispersion and pulse delay. That makes it a useful convergence artifact — not because any one response proves the length, but because several physical responses can challenge the same realized object.</div>
+
+<h2>3. What “space and time in the same crystal” can legitimately mean</h2>
+<div class="grid2">
+<section class="card"><h3>Space is physically present as recurrence</h3><p>The crystal lattice gives repeated translational structure. A8 does not begin by asking how many nanometers separate the recurrences; it begins by identifying a repeatable spatial period and counting/scaling it.</p><div class="formula">Lₙ = 2ⁿ qₐ</div></section>
+<section class="card"><h3>Time appears as dynamic response</h3><p>The same crystal produces propagation delay, phase accumulation, birefringent splitting, dispersion and electromechanical resonance. Those are time-dependent responses of the same material geometry.</p><p><strong>However:</strong> the prism must not become circular authority for A8 time. Primary WHEN remains independently recovered from the Jovian system; quartz dynamics are secondary witnesses and measured phenomena.</p></section>
+</div>
+
+<h2 id="ladder">4. Native quartz length ladder <span class="status provisional">CURRENT CANDIDATE</span></h2>
+<p>The present A8 candidate takes one α-quartz a-axis translational recurrence q<sub>a</sub> as the primitive spatial period and scales it by powers of two. Every third binary step is an exact power of eight.</p>
+<div class="formula">qₐ = primitive recurrence
+Lₙ = 2ⁿ qₐ
+2^(3k) = 8^k
+
+1 A8/31 := 2³¹ qₐ
+           = 2,147,483,648 qₐ</div>
+<table>
+<tr><th>Native ladder</th><th>Recurrence count</th><th>Present legacy comparison only</th><th>Possible experiment role</th></tr>
+<tr><td>2²¹ qₐ = 8⁷ qₐ</td><td>2,097,152</td><td>≈ 1.030494 mm</td><td>thin coupon / interferometry specimen</td></tr>
+<tr><td>2²⁴ qₐ = 8⁸ qₐ</td><td>16,777,216</td><td>≈ 8.243955 mm</td><td>small crystal plate</td></tr>
+<tr><td><strong>2²⁷ qₐ = 8⁹ qₐ</strong></td><td><strong>134,217,728</strong></td><td><strong>≈ 65.95164 mm</strong></td><td><strong>practical prism-scale example</strong></td></tr>
+<tr><td>2³⁰ qₐ = 8¹⁰ qₐ</td><td>1,073,741,824</td><td>≈ 0.527613 m</td><td>large baseline / transfer artifact</td></tr>
+<tr><td><strong>A8/31 = 2³¹ qₐ</strong></td><td><strong>2,147,483,648</strong></td><td><strong>≈ 1.055226220 m</strong></td><td><strong>current human-scale ruler candidate</strong></td></tr>
+</table>
+<p class="small">The comparison column uses the present NIST α-quartz lattice parameter a ≈ 0.491378 nm under its declared laboratory reference condition. That number is not native A8 authority; it is only a bridge for understanding present scale.</p>
+<div class="note warning"><strong>Do not demand a literal atom-count certificate.</strong> A finished prism will never be proven by visually counting exactly 2<sup>27</sup> or 2<sup>31</sup> planes from polished face to polished face. The engineering problem is to realize a macroscopic length tied to the microscopic recurrence and then qualify that realization through several independent or partially independent physical witnesses.</div>
+
+<h2 id="comparators">5. Three-comparator qualification — borrowed architecture, not borrowed tolerance</h2>
+<div class="grid">
+<section class="card comparator"><h3>A · Lattice comparator</h3><p><strong>Question:</strong> what spatial recurrence and crystallographic orientation does this specimen actually have?</p><ul><li>X-ray diffraction / crystallographic determination of a and c.</li><li>Map orientation of the a-axis and c-axis.</li><li>Look for strain, defects, domains, nonuniformity and surface effects.</li><li>Recover q<sub>a</sub> at the declared physical state.</li></ul><div class="formula">OUTPUT A = qₐ + orientation + strain map</div></section>
+<section class="card comparator"><h3>B · Optical phase / delay comparator</h3><p><strong>Question:</strong> does integrated propagation through the body agree with the material state and realized thickness?</p><ul><li>Polarized interferometry / retardance.</li><li>Ordinary versus extraordinary pulse delay.</li><li>Optical rotation where appropriate.</li><li>Repeat versus temperature, pressure and mounting stress.</li></ul><div class="formula">OUTPUT B = optical path / phase / differential delay</div></section>
+<section class="card comparator"><h3>C · Prism geometry / spectrum comparator</h3><p><strong>Question:</strong> does the completed prism produce the angular and spectral response predicted by its geometry, crystal orientation and optical constants?</p><ul><li>A8 apex and deviation angles.</li><li>Minimum-deviation mapping.</li><li>Ordinary / extraordinary spectral branches.</li><li>Cross-wavelength dispersion fingerprint.</li></ul><div class="formula">OUTPUT C = A8 angle spectrum + polarization fingerprint</div></section>
+</div>
+<div class="note good"><strong>Jovian lesson carried over:</strong> do not silently average disagreement away. Preserve each comparator as evidence. A previous qualified baseline may identify which channel changed; an unexplained 2-v-1 split is not automatically “truth by majority.”</div>
+<div class="note"><strong>Comparator independence boundary:</strong> A, B and C are different physical views of the same artifact, but they are not equally independent. Comparator A is primarily crystallographic. Comparators B and C are correlated optical witnesses because both depend on quartz optical properties, orientation and realized geometry. Agreement among B and C therefore strengthens corroboration but must not be counted as two independent votes against A.</div>
+<div class="note warning"><strong>Important:</strong> the Jovian comparator tolerance A8_TOL = 1/512 does <em>not</em> automatically become the quartz-length tolerance. Length qualification needs its own uncertainty model derived from the instrument, specimen state and repeatability.</div>
+
+<h2 id="procedure">6. Full experimental program — beginning to end</h2>
+<div class="phases">
+<section class="card phase"><h3>Glass-surrogate bench</h3><p>Begin with an ordinary optical glass prism. Relabel it visually as the <strong>A8 Quartz Prism surrogate</strong> only for layout and software training.</p><ul><li>Align source → prism → detector.</li><li>Verify A8 angular readout on prism apex and beam deviation.</li><li>Capture a broadband spectrum and monochromatic reference lines.</li><li>Exercise polarization optics, cameras, photodiodes and timestamp/data acquisition.</li><li>Prove that the experiment can be repeated without touching the future quartz definition.</li></ul><div class="note danger"><strong>Glass can never qualify HOW FAR.</strong> It has no long-range crystalline recurrence serving the proposed A8 spatial authority. It is only a bench surrogate.</div></section>
+
+<section class="card phase"><h3>Select a real α-quartz specimen</h3><ul><li>Use documented single-crystal α-quartz, preferably high-quality synthetic/electronic/optical grade for repeatability.</li><li>Assign specimen ID and retain provenance.</li><li>Determine right-/left-handed setting where relevant to optical activity.</li><li>Record impurities, inclusions, visible defects and prior processing.</li><li>Do not assume two pieces labeled “quartz” are metrologically identical.</li></ul></section>
+
+<section class="card phase"><h3>Recover the microscopic spatial recurrence</h3><ul><li>Perform X-ray diffraction or equivalent crystallographic measurement.</li><li>Recover a-axis and c-axis lattice parameters rather than importing them as immutable constants.</li><li>Determine crystal orientation and map local lattice variation if possible.</li><li>Record the environmental state during measurement.</li></ul><div class="formula">Measured specimen state → qₐ(specimen,state)
+NOT
+“quartz always equals one magic number”</div></section>
+
+<section class="card phase"><h3>Choose the native target geometry</h3><p>Pick a practical binary ladder level for the first physical prism. <strong>2²⁷qₐ</strong> is a useful example because the present comparison is about 66 mm, while A8/31 itself remains 2³¹qₐ.</p><ul><li>Specify one or more face separations as 2ⁿqₐ targets.</li><li>Specify prism apex angle in the 512-state A8 angular ruler. An example could use 64 A8 angle units = one eighth-turn; the final angle is an optical design decision, not a Foundation constant.</li><li>Specify how the a-axis and c-axis lie relative to the prism faces and incoming beam.</li><li>Record all geometry natively first; legacy dimensions appear only on shop drawings if unavoidable.</li></ul></section>
+
+<section class="card phase"><h3>Manufacture without pretending perfection</h3><p>The shop may initially need conventional interferometers, polishers and coordinate tools. That does not automatically invalidate the research, provided those instruments are treated as <strong>realization tools</strong>, not as the native authority.</p><ul><li>Cut, lap and polish toward the native recurrence target.</li><li>Protect against mounting stress and thermal gradients.</li><li>Do not claim the polished surface terminates on exact plane N.</li><li>After fabrication, return to the physical comparators; the finished object must earn qualification again.</li></ul></section>
+
+<section class="card phase"><h3>Establish the three-comparator baseline</h3><ol><li><strong>Lattice:</strong> remeasure qₐ/orientation/strain after machining.</li><li><strong>Phase-delay:</strong> measure polarization-dependent optical path and delay through known beam paths.</li><li><strong>Prism-spectrum:</strong> measure deviation/dispersion versus wavelength and polarization using A8 angular coordinates.</li></ol><p>Freeze the first mutually consistent state as <strong>QUALIFIED BASELINE A</strong>. Do not modify coefficients afterward merely to force later agreement.</p></section>
+
+<section class="card phase"><h3>Deliberate fault / environment experiments</h3><p>Borrow the Chief Engineer philosophy from the Jovian lab: deliberately perturb the artifact and verify that comparators expose the disturbance.</p><ul><li>Controlled temperature shift.</li><li>Controlled mounting stress.</li><li>Small orientation error.</li><li>Known surface modification on a sacrificial specimen.</li><li>Polarization swap.</li></ul><p>The goal is not to make all channels agree under every disturbance. The goal is to learn which physical disturbances each channel can detect and how independently they respond.</p></section>
+
+<section class="card phase"><h3>Native spectrum mapping</h3><p>Once the quartz geometry is qualified, use the prism as a material/optical instrument rather than merely a length artifact.</p><ul><li>Record input source and polarization.</li><li>Measure outgoing spectral deviation in A8 angle units.</li><li>Resolve ordinary and extraordinary branches where geometry permits.</li><li>Build a spectrum fingerprint indexed by A8 angle, polarization and intensity.</li><li>At first, conventional wavelength labels may remain as comparison metadata; the final native goal is wavelength expressed as a ratio to qₐ.</li></ul></section>
+
+<section class="card phase"><h3>Couple to independently recovered A8 time</h3><p>Feed the experiment from the same architectural discipline used by the A8 Time Lab: the optical bench receives A8 time/state as an observer input; it must not use the PC wall clock to define the experiment.</p><ul><li>Record A8 time authority state and Jovian qualification status.</li><li>Count raw local timing pulses where higher resolution is needed.</li><li>Keep UTC timestamps only as laboratory convenience metadata.</li><li>Do not let browser/SSE scheduling become measured propagation jitter — the v5.4.18 lesson applies here too.</li></ul></section>
+
+<section class="card phase"><h3>Derive the ruler, then speed</h3><p>Only after repeated specimens and comparator baselines converge should the project consider promoting the length relation.</p><div class="formula">Candidate ruler:
+1 A8/31 := 2³¹ qₐ
+
+Native light relation:
+c_A8 = qualified spatial recurrence / qualified A8 time
+
+or, spectrally:
+c_A8 = λ_A8 × f_A8</div><p>The measured result is allowed to be ugly. No attempt should be made to choose a lattice exponent or timing division merely to make light speed numerically neat.</p></section>
+
+<section class="card phase"><h3>Independent replication</h3><ul><li>Repeat with at least three separately sourced quartz specimens.</li><li>Repeat after independent remounting/reorientation.</li><li>Ultimately repeat in an independent laboratory.</li><li>Compare each comparator channel, not just final derived length.</li><li>Promote to Foundation only if the recurrence and realization protocol are reproducible without hidden dependence on a legacy length standard.</li></ul></section>
+</div>
+
+<h2 id="spectrum">7. Light spectrum program</h2>
+<div class="grid2">
+<section class="card"><h3>Level 1 · A8 angular spectrum</h3><p>Use white light or a line source and record where colors/lines emerge on the detector. Convert the deviation directly to the 512-turn A8 angle ruler.</p><div class="formula">full turn = 512 A8 angle units
+1 A8 angle unit = 1/512 turn</div><p>This can be done immediately with a glass surrogate, then repeated with quartz.</p></section>
+<section class="card"><h3>Level 2 · Polarization-resolved quartz fingerprint</h3><p>Quartz is optically uniaxial; its crystallographic c-axis is the optic axis. Off-axis propagation can separate ordinary and extraordinary responses. Record both rather than collapsing them into one “color angle.”</p></section>
+<section class="card"><h3>Level 3 · Lattice-referenced wavelength</h3><p>The native spatial question for a wavelength is not “how many nanometers?” but:</p><div class="formula">λ_q = λ / qₐ
+= quartz a-axis recurrences per optical wavelength</div><p>A separate interferometric/diffraction method would be needed to recover this ratio accurately; the prism dispersion curve alone should not be allowed to define its own wavelength scale.</p></section>
+<section class="card"><h3>Level 4 · Native spectral identity</h3><p>A spectral line can eventually be represented by several simultaneous observables:</p><div class="formula">{ λ/qₐ,
+  cycles/A8-time,
+  A8 prism deviation,
+  polarization branch,
+  relative intensity }</div><p>That is much richer than identifying a line by one legacy wavelength number.</p></section>
+</div>
+
+<h2 id="speed">8. Three ways to approach a new light-speed measurement</h2>
+<div class="grid">
+<section class="card"><h3>A · Vacuum time-of-flight</h3><p><strong>Conceptually cleanest for vacuum c.</strong> Establish a vacuum baseline whose endpoints are transferred from a qualified lattice-defined length, send a pulse across it, and measure the flight interval with independently recovered A8 time.</p><p class="small">Practical obstacle: a roughly one-A8/31 baseline has a light flight time of only a few nanoseconds in legacy comparison. The current 17-bit daily clock display is far too coarse by itself. A native sub-A8-second timing method or a long/multipass optical path is required.</p></section>
+<section class="card"><h3>B · λ × f route</h3><p><strong>Potentially the cleanest native bridge.</strong> For a measurement of <em>vacuum</em> light speed, recover the <strong>vacuum wavelength</strong> against a lattice-defined spatial reference and recover optical frequency against independent A8 time, then multiply them.</p><div class="formula">λ_q(vac) = vacuum wavelength / qₐ
+f_A8     = optical cycles / A8 time
+
+c_vac,A8 = λ_q(vac) × f_A8
+→ qₐ per A8 time</div><p>This does not require defining length from c; c emerges from two independently established rulers. If λ is instead measured <em>inside quartz</em>, λ × f yields the corresponding material phase velocity, not vacuum c.</p></section>
+<section class="card"><h3>C · Through-quartz propagation</h3><p>Send ultrashort or modulated light through the crystal and measure ordinary/extraordinary group delay or phase accumulation. This is <strong>not vacuum c</strong>; it measures propagation in quartz and therefore includes refractive-index, dispersion and polarization effects.</p><p>Its value is as an internal material comparator: measured delays can be compared against lattice state, prism thickness and optical model.</p></section>
+</div>
+<div class="note good"><strong>Useful published precedent:</strong> crystalline-quartz experiments have directly observed splitting of ultrashort pulses into polarized components and measured delay changing with sample thickness. That means the “same crystal gives a spatial body plus a measurable time-domain optical response” idea is physically grounded even though the A8 metrological use remains speculative.</div>
+
+<h2>9. Environmental state is part of the specimen</h2>
+<p>Quartz does not provide one context-free numerical spacing. Published crystallography shows lattice parameters vary with temperature, and optical properties vary with pressure, temperature, strain and orientation. Therefore an A8 realization must bind every q<sub>a</sub> measurement to a declared specimen state.</p>
+<div class="formula">A8 quartz state record =
+{ specimen ID,
+  α-quartz phase,
+  handedness / setting,
+  a-axis / c-axis orientation,
+  temperature state,
+  pressure state,
+  mounting stress,
+  defect / strain map,
+  surface history }</div>
+<div class="note warning"><strong>Future dependency:</strong> present °C, Pa and nm labels can be used during research as comparison coordinates. A final native A8 length standard should eventually consume a native A8 thermodynamic state definition rather than silently making SI temperature or pressure part of the definition.</div>
+
+<h2 id="qualification">10. Qualification logic</h2>
+<table>
+<tr><th>State</th><th>Meaning</th><th>Action</th></tr>
+<tr><td><strong>UNCHARACTERIZED</strong></td><td>No specimen-specific lattice/orientation baseline.</td><td>No A8 length claim.</td></tr>
+<tr><td><strong>LOCAL LOCK</strong></td><td>One comparator has a stable result.</td><td>Useful evidence, not cross-qualified.</td></tr>
+<tr><td><strong>CORROBORATED</strong></td><td>Two or more comparator families agree with an established model/baseline.</td><td>Proceed to stress/environment tests.</td></tr>
+<tr><td><strong>QUALIFIED ARTIFACT</strong></td><td>All required comparators pass repeatability and disturbance tests.</td><td>Artifact may realize provisional A8 length.</td></tr>
+<tr><td><strong>FAULT / SPLIT</strong></td><td>Comparator disagreement exceeds experiment-specific tolerance.</td><td>Expose disagreement; do not average it away.</td></tr>
+<tr><td><strong>REPLICATED RULER</strong></td><td>Independent specimens/labs recover compatible qₐ and macroscopic realization.</td><td>Candidate may return to Foundation for review.</td></tr>
+</table>
+
+<h2>11. What would falsify or weaken the quartz-ruler proposal?</h2>
+<div class="grid2">
+<section class="card"><h3>Failure modes that matter</h3><ul><li>Specimen-to-specimen qₐ differences cannot be bounded by a practical state protocol.</li><li>Surface preparation or strain produces macroscopic ambiguity too large for useful realization.</li><li>The three physical witnesses cannot distinguish geometry error from optical-property error.</li><li>Independent laboratories require an SI-calibrated length in the defining loop to recover the A8 value.</li><li>Environmental sensitivity makes the ruler less recoverable than alternative spatial recurrences.</li></ul></section>
+<section class="card"><h3>What is <em>not</em> a failure</h3><ul><li>The legacy conversion is ugly.</li><li>A8/31 is not exactly one legacy meter.</li><li>Light speed is not a round A8 number.</li><li>A manufactured prism is imperfect.</li><li>One comparator occasionally fails — provided the architecture detects and exposes the fault.</li></ul></section>
+</div>
+
+<h2 id="worksheet">12. Experiment worksheet / native calculator</h2>
+<div class="card hero">
+<div class="calc-grid">
+<label>Binary exponent n<br><input id="expN" type="number" min="0" max="63" step="1" value="27"></label>
+<label>Reference qₐ comparison (nm)<br><input id="qaNm" type="number" step="0.000001" value="0.491378"></label>
+<label>Optical wavelength in qₐ recurrences<br><input id="lambdaQ" type="number" step="any" value="1000"></label>
+<label>Optical cycles per A8 second<br><input id="freqA8" type="number" step="any" value="1000000"></label>
+</div>
+<p class="result" id="calcOut"></p>
+<p class="small">Calculator purpose: explore the native algebra. qₐ in nanometers is explicitly a legacy comparison input here; a real A8 experiment would replace it with the specimen's recovered lattice recurrence and uncertainty/state record.</p>
+</div>
+<script>
+function calc(){
+  const n=Number(document.getElementById('expN').value||0);
+  const qaNm=Number(document.getElementById('qaNm').value||0);
+  const lq=Number(document.getElementById('lambdaQ').value||0);
+  const f=Number(document.getElementById('freqA8').value||0);
+  const N=Math.pow(2,n);
+  const legacyM=N*qaNm*1e-9;
+  const speedQa=lq*f;
+  const speedA831=speedQa/Math.pow(2,31);
+  document.getElementById('calcOut').textContent =
+    `2^${n} = ${N.toLocaleString('en-US',{maximumFractionDigits:0})} qₐ`+
+    `  |  comparison length ≈ ${legacyM.toPrecision(10)} legacy m`+
+    `  |  λ×f = ${speedQa.toExponential(8)} qₐ / A8 second`+
+    `  |  ${speedA831.toExponential(8)} A8/31 / A8 second`;
+}
+for(const id of ['expN','qaNm','lambdaQ','freqA8']) document.getElementById(id).addEventListener('input',calc);
+calc();
+</script>
+
+<h2>13. Minimum data record for every run</h2>
+<div class="formula">RUN_ID
+SPECIMEN_ID
+SOURCE / PROVENANCE
+CRYSTAL_PHASE = alpha-quartz
+HANDEDNESS / CRYSTAL_SETTING
+A_AXIS_ORIENTATION
+C_AXIS / OPTIC_AXIS_ORIENTATION
+TARGET_BINARY_EXPONENT n
+TARGET_SPAN = 2^n q_a
+APEX_ANGLE_A8
+ENVIRONMENT_STATE
+MOUNTING_STATE
+
+COMPARATOR_A_LATTICE
+  q_a recovered value
+  c parameter
+  strain / uniformity evidence
+
+COMPARATOR_B_PHASE_DELAY
+  polarization
+  optical path / phase / differential delay
+
+COMPARATOR_C_PRISM
+  incident spectrum
+  A8 deviation angle(s)
+  ordinary / extraordinary branch
+  detector geometry
+
+A8_TIME_AUTHORITY_STATE
+RAW_TIMING_COUNTERS
+LEGACY_METADATA_ONLY (optional)
+QUALIFICATION_STATE
+FAULTS / NOTES</div>
+
+<h2>14. Example end result — what success would look like</h2>
+<div class="card hero">
+<p>A successful first-generation result would <strong>not</strong> say “we counted every atom and proved exactly 2<sup>31</sup> planes.” It would say something closer to:</p>
+<div class="formula">1. Independent crystallography repeatedly recovers the selected α-quartz a-axis recurrence qₐ
+   for a declared material/environmental state.
+
+2. A macroscopic artifact targeted at Lₙ = 2ⁿqₐ is manufactured.
+
+3. Lattice, optical-phase/delay and prism-spectrum comparators remain mutually consistent
+   with that realization inside an experimentally justified uncertainty envelope, while
+   preserving their different sensitivities and known correlations.
+
+4. Separate specimens reproduce the same recurrence-to-macroscopic relationship.
+
+5. The binary ladder is therefore usable as a recoverable A8 spatial ruler.
+
+6. The human-scale candidate remains:
+      1 A8/31 := 2³¹qₐ
+
+7. Independently recovered A8 time is then combined with the qualified ruler to measure,
+   rather than define, light propagation.</div>
+</div>
+
+<h2>15. Present comparison numbers — prediction, not result</h2>
+<div class="grid2">
+<section class="card"><h3>Quartz comparison</h3><p>NIST SRM 1878b currently certifies α-quartz lattice parameters near:</p><div class="formula">a ≈ 0.491378 legacy nm
+c ≈ 0.540536 legacy nm</div><p>Using the current A8 candidate:</p><div class="formula">2³¹ × a ≈ 1.055226220 legacy m</div></section>
+<section class="card"><h3>Light-speed comparison</h3><p>If one merely converts today's exact SI value of c using the current A8/31 comparison and current laboratory A8-second comparison, the expected numerical neighborhood is:</p><div class="formula">≈ 1.87274629 × 10^8 A8/31 per A8 second
+≈ 4.02169203 × 10^17 qₐ per A8 second</div><p class="small"><strong>This is not an A8 measurement.</strong> It is a sanity-check prediction imported through SI. A native experiment must be allowed to produce its own result.</p></section>
+</div>
+
+<h2>16. Future extension — A8 888 / 666 “Rosetta” quartz artifact <span class="status research">DEFERRED</span></h2>
+<div class="grid2">
+<section class="card hero"><h3>Purpose</h3><p>A future quartz artifact could carry the reconstruction instructions for A8 in the same class of material used to investigate the HOW FAR recurrence. The artifact would not become authority merely because information is written into it; the underlying lattice, orientation and physical state must remain independently characterizable.</p><div class="formula">human-visible layer
++ machine-readable binary/octal layer
++ crystallographic orientation marks
++ optical verification structures
+→ reconstruction artifact, not definition by inscription</div></section>
+<section class="card"><h3>Laser-writing boundary</h3><p>Laser inscription and femtosecond writing in durable silica-based media are established engineering ideas, but that prior art must not be confused with proof that a particular inscription process preserves a qualified single-crystal α-quartz lattice. Any future A8 Rosetta artifact would require before/after lattice, strain and optical qualification around the written region.</p><div class="note warning"><strong>Do not let the inscription corrupt the ruler.</strong> Writing technology is a fabrication layer. The native spatial recurrence remains the physical quantity under test.</div></section>
+</div>
+<p class="small">The working “888 / 666 Rosetta” name is a project label for a future physical reference/reconstruction artifact. Its encoding, symbolism, geometry and archival scheme remain open and are intentionally outside the first quartz-prism qualification experiment.</p>
+
+<h2 id="sources">17. Research anchors</h2>
+<div class="card">
+<ol>
+<li><strong>A8 Canonical Bottom-Up Reference v0.4</strong> — internal project reference. Establishes the provisional α-quartz a-axis recurrence, binary ladder and A8/31 = 2<sup>31</sup>q<sub>a</sub> candidate.</li>
+<li><a href="https://tsapps.nist.gov/srmext/certificates/1878B.pdf">NIST SRM 1878b — Respirable Alpha Quartz</a>. Certified α-quartz lattice parameters; the certificate reports a ≈ 0.491378 nm and c ≈ 0.540536 nm and describes temperature control/adjustment and uncertainty.</li>
+<li><a href="https://journals.iucr.org/j/issues/2022/04/00/te5094/">J. P. Sutter, IUCr Journal of Applied Crystallography (2022), temperature-dependent α-quartz structure factors</a>. Summarizes a = 4.9137 Å and c = 5.4047 Å at 298 K and the measured temperature dependence of α-quartz structure.</li>
+<li><a href="https://ieee-uffc.org/frequency-control/educational-resources/review-papers/constants-alpha-quartz">IEEE UFFC — The Constants of Alpha Quartz</a>. Emphasizes that usable quartz constants are “best” values obtained under controlled conditions, not context-free perfect constants.</li>
+<li><a href="https://opg.optica.org/josab/abstract.cfm?uri=josab-6-10-1899">Hirlimann, Morhange &amp; May, “Pulsed optics in crystal quartz,” JOSA B 6 (1989)</a>. Experimental time- and frequency-domain pulse propagation in crystalline quartz; ordinary/extraordinary splitting and measured group-delay differences versus sample thickness.</li>
+<li><a href="https://opg.optica.org/ao/abstract.cfm?uri=ao-34-4-709">Simon &amp; Larocca, “Minimum deviation for uniaxial prisms,” Applied Optics 34 (1995)</a>. Prism deviation treatment for uniaxial materials and optical-axis orientation.</li>
+<li><a href="https://opg.optica.org/abstract.cfm?uri=josa-56-12-1741">Myers &amp; Vedam, “Effect of Pressure on the Optical Rotatory Power and Dispersion of α-Quartz,” JOSA 56 (1966)</a>. Demonstrates optical response varies with pressure and wavelength.</li>
+<li><a href="https://opg.optica.org/josab/fulltext.cfm?uri=josab-14-12-3299">Medenbach et al., “Refractive indices and optical dispersion of 103 synthetic quartz crystals,” JOSA B 14 (1997)</a>. Experimental quartz-prism dispersion/refractive-index study across many synthetic crystals.</li>
+<li><a href="https://www.nature.com/articles/s41586-025-10042-w">“Laser writing in glass for dense, fast and efficient archival data storage,” Nature (2026)</a>. Prior art for femtosecond laser archival writing in glass; included only as a fabrication precedent, not as evidence that laser writing preserves a qualified single-crystal α-quartz lattice.</li>
+</ol>
+</div>
+
+<footer>
+<strong>Auspicious 8 — Quartz Prism Length &amp; Light Experiment v0.2</strong><br>
+Speculative engineering page · 2026 · “Chronos / Quartz”: recurrence through time, recurrence through space.<br>
+The laboratory implements definitions; it does not invent them. This page is intended to generate evidence that may later justify, modify or reject the provisional A8 quartz ruler.
+</footer>
+</main>
+<footer class="cosigo-site-footer">
+  <strong>COSIGO Labs · Auspicious 8 experimental laboratory</strong>
+  <p class="cosigo-disclaimer">Research / engineering notice: A8 pages may contain provisional models, simulations, comparison values, hypotheses and unreplicated experiment designs. Unless a page explicitly states otherwise, material shown here is not a certified metrology standard, accredited measurement result, or final Foundation definition. Legacy / SI values are comparison coordinates where identified, not native A8 authority.</p>
+  <p class="cosigo-disclaimer">COSIGO is primarily an educational and experimental project. Nothing in this laboratory is an investment offering, promise of financial return, or financial, investment, legal or tax advice. See the project-status notice for the current public description.</p>
+  <div class="cosigo-footer-links">
+    <a href="https://cosigo.io/">COSIGO Home</a>
+    <a href="https://a8.cosigo.io/">A8 Public Instrument</a>
+    <a href="/">A8 Engineering Lab</a>
+    <a href="https://contact.cosigo.io/">Contact</a>
+    <a href="https://docs.cosigo.io/">COSIGO Docs / WP</a>
+    <a href="https://github.com/cosigo">COSIGO GitHub</a>
+    <a href="https://github.com/cosigo/cosigo.io">Main-site source</a>
+    <a href="https://cosigo.io/project-status.html">Educational Purpose / Project Status</a>
+  </div>
+  <p>© 2026 COSIGO. COSIGO™ rights and trademark notices remain governed by the official COSIGO site.</p>
+</footer>
+</body>
+</html>

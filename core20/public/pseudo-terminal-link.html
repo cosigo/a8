@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pseudo-Terminal One-Way Link | A8 Post-Seal Hardware Branch</title>
+<meta name="description" content="COSIGO Labs Auspicious 8 Gate 6D: kernel pseudo-terminal one-way receive proof. External transmitter may use conventional pacing; A8 reads only Gate-6A raw pulse frames through an unchanged read-only chain.">
+<meta name="author" content="COSIGO Labs">
+<meta name="robots" content="noindex,nofollow">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/site-shell.css">
+<style>
+main{max-width:1180px;margin:auto;padding:28px 20px 72px}
+.hero,.card{border:1px solid var(--line,#2a3744);border-radius:16px;padding:20px;background:var(--panel,#111820)}
+.hero{margin-bottom:16px}
+.title{font-size:clamp(2rem,7vw,5rem);line-height:.96;letter-spacing:-.05em;margin:.18em 0}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.k{display:block;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;opacity:.68}
+.v{display:block;font-size:1.15rem;font-weight:800;margin-top:4px;overflow-wrap:anywhere}
+.good{color:#87d39b}.warn{color:#e0bd72}
+pre{white-space:pre-wrap;overflow-wrap:anywhere}
+@media(max-width:800px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav class="cosigo-global-nav" aria-label="COSIGO and A8 global navigation">
+  <a class="cosigo-global-brand" href="https://cosigo.io/" aria-label="COSIGO home">
+    <img src="/assets/cosigo_master_512.gif" alt="COSIGO">
+    <span>COSIGO<small>LABS · AUSPICIOUS 8</small></span>
+  </a>
+  <div class="cosigo-global-links">
+    <a href="/">POST-SEAL LAB HOME</a>
+    <a href="/hardware-interface.html">GATE 6A</a>
+    <a href="/receive-only-transport.html">GATE 6B</a>
+    <a href="/local-device-reader.html">GATE 6C</a>
+  </div>
+</nav>
+
+<main>
+  <section class="hero">
+    <div class="eyebrow">AUSPICIOUS 8 · POST-SEAL HARDWARE BRANCH · GATE 6D</div>
+    <h1 class="title">PSEUDO-TERMINAL ONE-WAY LINK</h1>
+    <p><b>REAL KERNEL TTY PATH · A8 SIDE READ ONLY</b></p>
+    <p class="muted">
+      Gate 6D replaces the ordinary file fixture with a Linux pseudo-terminal.
+      The external side transmits. The A8 side opens only the PTY slave through
+      the unchanged Gate-6C → Gate-6B → Gate-6A chain.
+    </p>
+  </section>
+
+  <section class="grid">
+    <div class="card">
+      <span class="k">KERNEL DEVICE</span>
+      <span class="v good">PTY</span>
+    </div>
+    <div class="card">
+      <span class="k">A8 OPEN MODE</span>
+      <span class="v good">READ ONLY</span>
+    </div>
+    <div class="card">
+      <span class="k">RETURN CHANNEL</span>
+      <span class="v good">NONE</span>
+    </div>
+  </section>
+
+  <section class="card" style="margin-top:16px">
+    <h2>One-way test chain</h2>
+    <pre>external PTY master fixture
+        │
+        │ ASCII frames only
+        ▼
+Linux /dev/pts/*
+        │
+        ▼
+Gate 6C · read-only OS reader
+        │
+        ▼
+Gate 6B · receive-only parser
+        │
+        ▼
+Gate 6A · rig + rawPulse</pre>
+  </section>
+
+  <section class="card" style="margin-top:16px">
+    <h2>Transport variation</h2>
+    <pre>bulk transmission
+7-byte paced transmission
+1-byte paced transmission
+
+Kernel read behavior differs.
+
+A8 measurement result:
+identical</pre>
+    <p class="good">
+      <b>TRANSPORT PACING CHANGES. RAW-PULSE MEASUREMENT DOES NOT.</b>
+    </p>
+  </section>
+
+  <section class="card" style="margin-top:16px">
+    <h2>External fixture only</h2>
+    <pre>The PTY master writes because it represents
+the future Arduino transmitter side.
+
+The A8 reader:
+does not write
+does not command
+does not configure
+does not return acknowledgements</pre>
+  </section>
+
+  <section class="card" style="margin-top:16px">
+    <h2>Still absent</h2>
+    <pre>physical Arduino
+physical oscillator
+physical pulse counter
+USB/UART configuration
+outbound A8 bytes
+hardware commands
+oscillator trim
+divider trim
+clock/phase/authority write</pre>
+    <p class="warn">
+      <b>NEXT HARDWARE STEP MAY REPLACE THE PTY MASTER WITH A PHYSICAL TRANSMITTER WITHOUT CHANGING THE A8 RECEIVE CONTRACT.</b>
+    </p>
+  </section>
+</main>
+</body>
+</html>

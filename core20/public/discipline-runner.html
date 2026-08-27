@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Discipline Lab Runner | A8 Time Lab v5.4.20</title>
+<meta name="description" content="COSIGO Labs Auspicious 8 Gate 5I read-only local synthetic discipline laboratory runner. Explicit JSON script in; proof report stdout out; no real A8Core actuator or server API.">
+<meta name="author" content="COSIGO Labs">
+<meta name="robots" content="index,follow">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/site-shell.css">
+<style>
+  main{max-width:1180px;margin:auto;padding:28px 20px 72px}
+  .hero,.card{border:1px solid var(--line,#2a3744);border-radius:16px;padding:20px;background:var(--panel,#111820)}
+  .hero{margin-bottom:16px}
+  .title{font-size:clamp(2rem,7vw,5rem);line-height:.96;letter-spacing:-.05em;margin:.18em 0}
+  .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+  .k{display:block;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;opacity:.68}
+  .v{display:block;font-size:1.15rem;font-weight:800;margin-top:4px;overflow-wrap:anywhere}
+  .good{color:#87d39b}.warn{color:#e0bd72}
+  pre{white-space:pre-wrap;overflow-wrap:anywhere}
+  @media(max-width:800px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav class="cosigo-global-nav" aria-label="COSIGO and A8 global navigation">
+  <a class="cosigo-global-brand" href="https://cosigo.io/" aria-label="COSIGO home">
+    <img src="/assets/cosigo_master_512.gif" alt="COSIGO">
+    <span>COSIGO<small>LABS · AUSPICIOUS 8</small></span>
+  </a>
+  <div class="cosigo-global-links">
+    <a href="/index.html">A8 LAB HOME</a>
+    <a href="/discipline-harness.html">DISCIPLINE HARNESS</a>
+    <a href="/repeated-holdover.html">REPEATED HOLDOVER</a>
+    <a href="/relationship.html">TERRA SHIP SLIP</a>
+  </div>
+</nav>
+
+<main>
+  <section class="hero">
+    <div class="eyebrow">AUSPICIOUS 8 · TIME LAB v5.4.20 · GATE 5I</div>
+    <h1 class="title">READ-ONLY DISCIPLINE LAB RUNNER</h1>
+    <p><b>EXPLICIT LOCAL SCRIPT IN · PROOF REPORT TO STDOUT · NO ACTUATOR</b></p>
+    <p class="muted">
+      Gate 5I does not add a new discipline rule. It exposes the proven Gate-5H
+      synthetic state machine through a local command-line laboratory runner.
+      The runner reads one JSON experiment file and prints a proof report.
+    </p>
+  </section>
+
+  <section class="grid">
+    <div class="card">
+      <span class="k">INPUT</span>
+      <span class="v">LOCAL JSON SCRIPT</span>
+    </div>
+    <div class="card">
+      <span class="k">OUTPUT</span>
+      <span class="v">STDOUT PROOF REPORT</span>
+    </div>
+    <div class="card">
+      <span class="k">REAL A8CORE</span>
+      <span class="v good">DISCONNECTED</span>
+    </div>
+  </section>
+
+  <section class="card" style="margin-top:16px">
+    <h2>Runner</h2>
+    <pre>node tools/a8-discipline-runner.js \
+  --script experiments/gate5i-example-discipline-script.json
+
+JSON report:
+node tools/a8-discipline-runner.js \
+  --script experiments/gate5i-example-discipline-script.json \
+  --json</pre>
+  </section>
+
+  <section class="card" style="margin-top:16px">
+    <h2>Deliberately read-only</h2>
+    <pre>runner may:
+READ local JSON
+RUN synthetic Gate-5H harness
+PRINT stdout
+
+runner may NOT:
+write report files
+mutate script files
+use network
+use server API
+use host time
+use timers
+write oscillator/divider/clock
+write phase
+write authority</pre>
+    <p class="good"><b>NO --OUTPUT OPTION EXISTS.</b></p>
+  </section>
+
+  <section class="card" style="margin-top:16px">
+    <h2>Script contract</h2>
+    <pre>{
+  "schema": "A8-SYNTHETIC-DISCIPLINE-SCRIPT-V1",
+  "divider": {"numerator":"8","denominator":"1"},
+  "initialSettledRateScale": {"numerator":"1","denominator":"1"},
+  "maxRateScaleStep": {"numerator":"1","denominator":"10000"},
+  "script": [
+    {"state":"RECOVERED"},
+    {"state":"LOSS","advances":4},
+    {"state":"REACQUIRED", "...":"explicit Jovian samples"}
+  ]
+}</pre>
+  </section>
+
+  <section class="card" style="margin-top:16px">
+    <h2>Gate 5I example result</h2>
+    <pre>script events   = 7
+plant advances  = 125
+final state     = RECOVERED
+final rate      = 1000/1003
+
+final phase
+= 250322088666899
+  / 16015855856000
+
+loss lengths
+= 4 / 6 / 3
+
+recovery directions
+= DOWN / UP / DOWN
+
+recovery updates
+= 10 / 41 / 61</pre>
+  </section>
+
+  <section class="card" style="margin-top:16px">
+    <h2>Boundary</h2>
+    <p class="warn"><b>LOCAL LAB RUNNER ONLY · NO LIVE ENDPOINT · NO REAL ACTUATOR INTERFACE.</b></p>
+  </section>
+</main>
+</body>
+</html>

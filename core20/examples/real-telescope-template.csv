@@ -1,0 +1,4 @@
+frameId,rawPulse,moon,jupiterX,moonX,visible,uncertaintyX
+F00001,1000000,io,1024.50,1418.20,true,0.50
+F00001,1000000,eu,1024.50,610.10,true,0.50
+F00001,1000000,ga,1024.50,1675.30,true,0.50

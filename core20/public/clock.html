@@ -1,0 +1,1649 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>A8 Clock Console v3.7 Face · Node Observer | COSIGO Labs</title>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "A8 Clock Console v3.7 Face · Node Observer",
+  "url": "https://lab.a8.cosigo.io/clock.html",
+  "description": "COSIGO Labs Auspicious 8 clock instrument using the native 32 × 64 × 64 daily structure and A8 time representation for engineering and metrology exploration.",
+  "dateModified": "2026-08-18",
+  "inLanguage": "en",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "COSIGO Labs — Auspicious 8",
+    "url": "https://a8.cosigo.io/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "COSIGO Labs",
+    "url": "https://cosigo.io/"
+  },
+  "about": [
+    {
+      "@type": "Thing",
+      "name": "Auspicious 8 clock"
+    },
+    {
+      "@type": "Thing",
+      "name": "32 × 64 × 64 time"
+    },
+    {
+      "@type": "Thing",
+      "name": "Time metrology"
+    },
+    {
+      "@type": "Thing",
+      "name": "Native A8 representation"
+    }
+  ]
+}
+</script>
+<meta name="twitter:image" content="https://a8.cosigo.io/assets/cosigo_master_512.png">
+<meta name="twitter:description" content="COSIGO Labs Auspicious 8 clock instrument using the native 32 × 64 × 64 daily structure and A8 time representation for engineering and metrology exploration.">
+<meta name="twitter:title" content="A8 Clock Console v3.7 Face · Node Observer">
+<meta name="twitter:card" content="summary">
+<meta property="og:image:alt" content="A8 Clock Console v3.7 Face · Node Observer — COSIGO Labs">
+<meta property="og:image" content="https://a8.cosigo.io/assets/cosigo_master_512.png">
+<meta property="og:url" content="https://lab.a8.cosigo.io/clock.html">
+<meta property="og:description" content="COSIGO Labs Auspicious 8 clock instrument using the native 32 × 64 × 64 daily structure and A8 time representation for engineering and metrology exploration.">
+<meta property="og:title" content="A8 Clock Console v3.7 Face · Node Observer">
+<meta property="og:site_name" content="COSIGO Labs — Auspicious 8">
+<meta property="og:type" content="website">
+<link rel="icon" href="https://a8.cosigo.io/assets/cosigo_master_512.png">
+<link rel="canonical" href="https://lab.a8.cosigo.io/clock.html">
+<meta name="author" content="COSIGO Labs">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+<meta name="description" content="COSIGO Labs Auspicious 8 clock instrument using the native 32 × 64 × 64 daily structure and A8 time representation for engineering and metrology exploration.">
+<link rel="stylesheet" href="/site-shell.css">
+<style>
+:root{
+  --bg:#0d1117;--panel:#161b22;--panel2:#0f141a;--text:#e6edf3;--muted:#8b949e;
+  --line:#30363d;--accent:#e6edf3;--warn:#f0cf91;--good:#9fe3c4
+}
+*{box-sizing:border-box}
+body{
+  background:
+    linear-gradient(rgba(13,17,23,.68),rgba(13,17,23,.78)),
+    url("/assets/a8_clock_pocket_watch_heap_bg.jpg") center center / cover fixed no-repeat;
+  color:var(--text);
+  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  margin:0
+}
+main{max-width:1140px;margin:auto;padding:20px}
+h1,h2{margin:0} h1{font-size:23px} h2{font-size:16px;margin-bottom:12px}
+.sub{color:var(--muted);font-size:13px;margin-top:5px;line-height:1.45}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+section,.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;margin:12px 0}
+.card{background:var(--panel2);margin:0}
+.row{display:flex;gap:8px;flex-wrap:wrap}
+.fields{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.fields4{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+input,select,button{background:#0d1117;color:var(--text);border:1px solid var(--line);border-radius:8px;padding:9px;font:inherit}
+button{cursor:pointer}
+button.primary{background:var(--text);color:var(--bg);border-color:var(--text)}
+button.active{outline:2px solid #7d8590}
+.big{font:700 clamp(44px,7vw,74px) ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;text-align:center;letter-spacing:.02em}
+.small{color:var(--muted);text-align:center;font:15px ui-monospace,monospace}
+.stat{font:17px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;line-height:1.55}
+label{font-size:12px;color:var(--muted);display:grid;gap:4px}
+svg{width:100%;max-width:440px;display:block;margin:auto}
+.note{font-size:13px;color:var(--muted);line-height:1.5}
+.good{color:var(--good)} .warn{color:var(--warn)}
+.resultGrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.result{border:1px solid var(--line);border-radius:10px;padding:10px;background:#0d1117}
+.result .k{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.07em}
+.result .v{font:18px ui-monospace,monospace;margin-top:3px;word-break:break-word}
+.alarmFlash{animation:flash .4s ease-in-out 5}
+@keyframes flash{50%{outline:3px solid var(--warn)}}
+footer{font-size:12px;color:var(--muted);text-align:center;margin:16px 0}
+.zeroStrip{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:center;margin-top:14px}
+.zeroState{background:#0d1117;border:1px solid var(--line);border-radius:12px;padding:12px;text-align:center}
+.zeroState .title{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.zeroState .main{font:700 22px ui-monospace,monospace;margin-top:5px}
+.zeroState .subline{font:13px ui-monospace,monospace;color:var(--muted);margin-top:4px}
+.carryArrow{font:700 24px ui-monospace,monospace;color:var(--muted);text-align:center}
+@media(max-width:620px){.zeroStrip{grid-template-columns:1fr}.carryArrow{transform:rotate(90deg)}}
+@media(max-width:820px){.grid{grid-template-columns:1fr}.fields,.fields4{grid-template-columns:1fr}.resultGrid{grid-template-columns:1fr}}
+#set,#minus,#plus,#loadConverted,#resetTime,#resetDay,#resetAll{display:none!important}
+#core20LiveBinary{color:#6fe8ff}
+</style>
+
+<nav class="cosigo-global-nav" aria-label="COSIGO and A8 global navigation">
+  <a class="cosigo-global-brand" href="https://cosigo.io/" aria-label="COSIGO home">
+    <img src="/assets/cosigo_master_512.gif" alt="COSIGO">
+    <span>COSIGO<small>LABS · AUSPICIOUS 8</small></span>
+  </a>
+  <div class="cosigo-global-links">
+    <a href="/index.html">A8 LAB HOME</a>
+    <a href="https://a8.cosigo.io/">A8 PUBLIC</a>
+    <a class="cosigo-exit" href="https://cosigo.io/">COSIGO HOME</a>
+    <a class="cosigo-exit" href="https://contact.cosigo.io/">CONTACT</a>
+    <a href="https://github.com/cosigo">GITHUB</a>
+  </div>
+</nav>
+<main>
+  <div id="a8ClockIntroCard" class="card" style="padding:18px;margin:0 0 16px">
+<h1>Auspicious 8 · Jovian Moon Clock</h1>
+  <div class="sub">
+    <strong>Experimental A8 time recovery based on the recurrent motions of Jupiter's moons · Io · Europa · Ganymede.</strong>
+    The running A8 Node core owns DAY_PHASE17; this browser observes that one shared clock state.
+    Your PC is not the clock source. Local computer timezone is used only for the downstream YOUR LOCAL A8 CLOCK display.
+  </div>
+</div>
+
+  <section>
+    <h2>NODE CORE STATUS</h2>
+    <div class="resultGrid">
+      <div class="result"><div class="k">Connection</div><div id="nodeConn" class="v">CONNECTING</div></div>
+      <div class="result"><div class="k">Civil clock</div><div id="nodeCal" class="v">—</div></div>
+      <div class="result">
+        <div class="k">Authority</div>
+        <div id="nodeAuth" class="v">—</div>
+        <div class="note" style="margin-top:6px">
+          <a href="/moons.html"
+             title="Io · Europa · Ganymede · Callisto · Jovian recovery architecture"
+             style="color:#8b949e;text-decoration:none;font-weight:700;letter-spacing:.05em">
+            JOVIAN M O O O O N S →
+          </a>
+        </div>
+      </div>
+      <div class="result"><div class="k">Source epoch</div><div id="nodeEpoch" class="v">—</div></div>
+    </div>
+  </section>
+
+  <div class="grid">
+    <section>
+      <h2 id="zeroMeridianClockLabel"
+          style="text-align:center;letter-spacing:.06em;margin-bottom:10px">
+        A8 CLOCK · DECIMAL COMFORT · 0 MERIDIAN
+      </h2>
+
+      <svg viewBox="0 0 500 500" aria-label="A8 32-A8-hour analog clock">
+        <circle cx="250" cy="250" r="220" fill="none" stroke="#30363d" stroke-width="2"/>
+        <g id="ticks"></g>
+
+        <!-- Large quadrant hour labels -->
+        <text id="t0" x="250" y="58" fill="#e6edf3" text-anchor="middle" font-size="34" font-weight="700">0</text>
+        <text id="t1" x="442" y="255" fill="#e6edf3" text-anchor="middle" font-size="34" font-weight="700">8</text>
+        <text id="t2" x="250" y="446" fill="#e6edf3" text-anchor="middle" font-size="34" font-weight="700">16</text>
+        <text id="t3" x="58" y="255" fill="#e6edf3" text-anchor="middle" font-size="34" font-weight="700">24</text>
+
+        <!-- Smaller minute/second reference labels -->
+        <g id="refLabels" fill="#8b949e" font-family="ui-monospace,monospace" text-anchor="middle" dominant-baseline="middle" font-size="12">
+          <text id="r0" x="250" y="104">00</text>
+          <text id="r1" x="355" y="145">08</text>
+          <text id="r2" x="396" y="250">16</text>
+          <text id="r3" x="355" y="355">24</text>
+          <text id="r4" x="250" y="396">32</text>
+          <text id="r5" x="145" y="355">40</text>
+          <text id="r6" x="104" y="250">48</text>
+          <text id="r7" x="145" y="145">56</text>
+        </g>
+
+        <line id="hh" x1="250" y1="250" x2="250" y2="130" stroke="#e6edf3" stroke-width="7" stroke-linecap="round"/>
+        <line id="mm" x1="250" y1="250" x2="250" y2="92" stroke="#9da7b3" stroke-width="4" stroke-linecap="round"/>
+        <line id="ss" x1="250" y1="266" x2="250" y2="72" stroke="#66717e" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="250" cy="250" r="8" fill="#e6edf3"/>
+      </svg>
+
+      <div id="pub" class="big">00:00:00</div>
+      <div id="eng" class="small">native 00:00:00₈</div>
+      <div id="core20LiveBinary"
+           class="small"
+           style="margin-top:7px;font-family:ui-monospace,monospace;font-weight:800;letter-spacing:.08em">
+        DAY_PHASE17 · 00000 000000 000000
+      </div>
+
+      <div class="zeroStrip" aria-label="A8 midnight rollover pattern">
+        <div class="zeroState">
+          <div class="title">Final state of day</div>
+          <div class="main">31:63:63</div>
+          <div class="subline">37:77:77₈</div>
+          <div class="subline">11111 111111 111111</div>
+        </div>
+        <div class="carryArrow">+1 pulse →</div>
+        <div class="zeroState">
+          <div class="title">Midnight / new day</div>
+          <div class="main">00:00:00</div>
+          <div class="subline">00:00:00₈</div>
+          <div class="subline">00000 000000 000000</div>
+          <div class="subline">DAY_PHASE17 = 0 · DAY COUNT +1</div>
+        </div>
+      </div>
+
+      <div class="row" style="justify-content:center;margin-top:12px">
+        <button id="decMode" class="active">DECIMAL FACE</button>
+        <button id="octMode">OCTAL FACE</button>
+      </div>
+      <div id="faceUnits" class="small" style="margin-top:8px">A8 HOUR = 1/32 DAY · A8 MINUTE = 1/64 A8 HOUR · A8 SECOND = 1/64 A8 MINUTE</div>
+
+
+      <div id="a8HourHelper" style="text-align:center;margin-top:10px;padding:12px;border:1px solid #30363d;border-radius:12px;background:#0d1117">
+        <div class="small" style="font-weight:800;letter-spacing:.08em">A8 CLOCK HELPER</div>
+        <div style="font-size:20px;font-weight:800;margin-top:5px">1 A8 HOUR = 45 legacy minutes</div>
+        <div class="small" style="margin-top:3px">45 legacy minutes = 1 A8 HOUR</div>
+        <div class="small" style="margin-top:8px">
+          <strong>888 ESCAPE HATCH</strong> · Breaking free of
+          <span style="white-space:nowrap"><strong style="display:inline-block;transform:scaleX(-1);transform-origin:center;">6</strong>evious,</span>
+          <span style="white-space:nowrap"><strong style="display:inline-block;transform:scaleX(-1);transform-origin:center;">6</strong>astardly,</span>
+          <span style="white-space:nowrap"><strong style="display:inline-block;transform:scaleX(-1);transform-origin:center;">6</strong>raconian</span> dogma.
+        </div>
+      </div>
+
+      <div class="row" style="justify-content:center;margin-top:10px">
+        <a href="/" style="display:inline-block;background:#0d1117;color:#e6edf3;border:1px solid #30363d;border-radius:8px;padding:9px;text-decoration:none">OPEN ENGINEERING LAB</a>
+        <a href="/audio.html" style="display:inline-block;background:#0d1117;color:#e6edf3;border:1px solid #30363d;border-radius:8px;padding:9px;text-decoration:none">AUDIO FREQUENCY BENCH</a>
+      </div>
+      <div id="runStatus" class="small" style="margin-top:10px">CLOCK STATIC · CONNECT TO CORE20</div>
+      <div class="small" style="margin-top:5px"><b>OBSERVER PACER</b> · NODE-ANCHORED LOCAL MONOTONIC INTERPOLATION · OUTPUT ONLY</div>
+      <div class="small" style="margin-top:7px"><b>CONNECT TO CORE</b> performs one momentary 0-meridian laboratory alignment <b>inside Node/Core20</b>. The browser supplies no time, timestamp, phase or pace. After connection, recovered Jovian → Mintaka → Sol → Sun-return time advances independently of the browser.</div>
+      <div class="result" style="margin-top:12px">
+        <div class="k">A8 CORE CLOCK</div>
+        <div class="v">0 MERIDIAN · SHARED</div>
+        <div class="note">
+          One authoritative Node-core phase · same reference for every observer.
+        </div>
+      </div>
+
+    </section>
+
+    <div>
+      <section id="localClockPanel">
+        <h2 style="text-align:center;letter-spacing:.06em;margin-bottom:10px">
+          YOUR LOCAL A8 CLOCK
+        </h2>
+
+                <div style="display:flex;justify-content:center">
+          <svg id="localA8Face"
+               viewBox="0 0 500 500"
+               aria-label="Your Local A8 32-A8-hour analog clock"
+               style="width:100%;max-width:440px;display:block;margin:auto">
+
+            <circle cx="250" cy="250" r="220"
+                    fill="none"
+                    stroke="#30363d"
+                    stroke-width="2"/>
+
+            <g id="localTicks">
+            <line x1="250" y1="30"
+                  x2="250" y2="50"
+                  stroke="#8b949e"
+                  stroke-width="3"
+                  transform="rotate(0 250 250)"/>
+            <line x1="250" y1="30"
+                  x2="250" y2="43"
+                  stroke="#66717e"
+                  stroke-width="1.5"
+                  transform="rotate(11.25 250 250)"/>
+            <line x1="250" y1="30"
+                  x2="250" y2="43"
+                  stroke="#66717e"
+                  stroke-width="1.5"
+                  transform="rotate(22.5 250 250)"/>
+            <line x1="250" y1="30"
+                  x2="250" y2="43"
+                  stroke="#66717e"
+                  stroke-width="1.5"
+                  transform="rotate(33.75 250 250)"/>
+            <line x1="250" y1="30"
+                  x2="250" y2="43"
+                  stroke="#66717e"
+                  stroke-width="1.5"
+                  transform="rotate(45 250 250)"/>
+            <line x1="250" y1="30"
+                  x2="250" y2="43"
+                  stroke="#66717e"
+                  stroke-width="1.5"
+                  transform="rotate(56.25 250 250)"/>
+            <line x1="250" y1="30"
+                  x2="250" y2="43"
+                  stroke="#66717e"
+                  stroke-width="1.5"
+                  transform="rotate(67.5 250 250)"/>
+            <line x1="250" y1="30"
+                  x2="250" y2="43"
+                  stroke="#66717e"
+                  stroke-width="1.5"
+                  transform="rotate(78.75 250 250)"/>
+            <line x1="250" y1="30"
+                  x2="250" y2="50"
+                  stroke="#8b949e"
+                  stroke-width="3"
+                  transform="rotate(90 250 250)"/>
+            <line x1="250" y1="30"
+                  x2="250" y2="43"
+                  stroke="#66717e"
+                  stroke-width="1.5"
+                  transform="rotate(101.25 250 250)"/>
+            <line x1="250" y1="30"
+                  x2="250" y2="43"
+                  stroke="#66717e"
+                  stroke-width="1.5"
+                  transform="rotate(112.5 250 250)"/>
+            <line x1="250" y1="30"
+                  x2="250" y2="43"
+                  stroke="#66717e"
+                  stroke-width="1.5"
+                  transform="rotate(123.75 250 250)"/>
+            <line x1="250" y1="30"
+                  x2="250" y2="43"
+                  stroke="#66717e"
+                  stroke-width="1.5"
+                  transform="rotate(135 250 250)"/>
+            <line x1="250" y1="30"
+                  x2="250" y2="43"
+                  stroke="#66717e"
+                  stroke-width="1.5"
+                  transform="rotate(146.25 250 250)"/>
+            <line x1="250" y1="30"
+                  x2="250" y2="43"
+                  stroke="#66717e"
+                  stroke-width="1.5"
+                  transform="rotate(157.5 250 250)"/>
+            <line x1="250" y1="30"
+                  x2="250" y2="43"
+                  stroke="#66717e"
+                  stroke-width="1.5"
+                  transform="rotate(168.75 250 250)"/>
+            <line x1="250" y1="30"
+                  x2="250" y2="50"
+                  stroke="#8b949e"
+                  stroke-width="3"
+                  transform="rotate(180 250 250)"/>
+            <line x1="250" y1="30"
+                  x2="250" y2="43"
+                  stroke="#66717e"
+                  stroke-width="1.5"
+                  transform="rotate(191.25 250 250)"/>
+            <line x1="250" y1="30"
+                  x2="250" y2="43"
+                  stroke="#66717e"
+                  stroke-width="1.5"
+                  transform="rotate(202.5 250 250)"/>
+            <line x1="250" y1="30"
+                  x2="250" y2="43"
+                  stroke="#66717e"
+                  stroke-width="1.5"
+                  transform="rotate(213.75 250 250)"/>
+            <line x1="250" y1="30"
+                  x2="250" y2="43"
+                  stroke="#66717e"
+                  stroke-width="1.5"
+                  transform="rotate(225 250 250)"/>
+            <line x1="250" y1="30"
+                  x2="250" y2="43"
+                  stroke="#66717e"
+                  stroke-width="1.5"
+                  transform="rotate(236.25 250 250)"/>
+            <line x1="250" y1="30"
+                  x2="250" y2="43"
+                  stroke="#66717e"
+                  stroke-width="1.5"
+                  transform="rotate(247.5 250 250)"/>
+            <line x1="250" y1="30"
+                  x2="250" y2="43"
+                  stroke="#66717e"
+                  stroke-width="1.5"
+                  transform="rotate(258.75 250 250)"/>
+            <line x1="250" y1="30"
+                  x2="250" y2="50"
+                  stroke="#8b949e"
+                  stroke-width="3"
+                  transform="rotate(270 250 250)"/>
+            <line x1="250" y1="30"
+                  x2="250" y2="43"
+                  stroke="#66717e"
+                  stroke-width="1.5"
+                  transform="rotate(281.25 250 250)"/>
+            <line x1="250" y1="30"
+                  x2="250" y2="43"
+                  stroke="#66717e"
+                  stroke-width="1.5"
+                  transform="rotate(292.5 250 250)"/>
+            <line x1="250" y1="30"
+                  x2="250" y2="43"
+                  stroke="#66717e"
+                  stroke-width="1.5"
+                  transform="rotate(303.75 250 250)"/>
+            <line x1="250" y1="30"
+                  x2="250" y2="43"
+                  stroke="#66717e"
+                  stroke-width="1.5"
+                  transform="rotate(315 250 250)"/>
+            <line x1="250" y1="30"
+                  x2="250" y2="43"
+                  stroke="#66717e"
+                  stroke-width="1.5"
+                  transform="rotate(326.25 250 250)"/>
+            <line x1="250" y1="30"
+                  x2="250" y2="43"
+                  stroke="#66717e"
+                  stroke-width="1.5"
+                  transform="rotate(337.5 250 250)"/>
+            <line x1="250" y1="30"
+                  x2="250" y2="43"
+                  stroke="#66717e"
+                  stroke-width="1.5"
+                  transform="rotate(348.75 250 250)"/>
+            </g>
+
+            <!-- A8 HOUR quarter-day references -->
+            <text id="localT0"
+                  x="250" y="58"
+                  fill="#e6edf3"
+                  text-anchor="middle"
+                  font-size="34"
+                  font-weight="700">0</text>
+
+            <text id="localT1"
+                  x="442" y="255"
+                  fill="#e6edf3"
+                  text-anchor="middle"
+                  font-size="34"
+                  font-weight="700">8</text>
+
+            <text id="localT2"
+                  x="250" y="446"
+                  fill="#e6edf3"
+                  text-anchor="middle"
+                  font-size="34"
+                  font-weight="700">16</text>
+
+            <text id="localT3"
+                  x="58" y="255"
+                  fill="#e6edf3"
+                  text-anchor="middle"
+                  font-size="34"
+                  font-weight="700">24</text>
+
+            <!-- A8 MINUTE / A8 SECOND reference ring -->
+            <g id="localRefLabels"
+               fill="#8b949e"
+               font-family="ui-monospace,monospace"
+               text-anchor="middle"
+               dominant-baseline="middle"
+               font-size="12">
+
+              <text id="localR0" x="250" y="104">00</text>
+              <text id="localR1" x="355" y="145">08</text>
+              <text id="localR2" x="396" y="250">16</text>
+              <text id="localR3" x="355" y="355">24</text>
+              <text id="localR4" x="250" y="396">32</text>
+              <text id="localR5" x="145" y="355">40</text>
+              <text id="localR6" x="104" y="250">48</text>
+              <text id="localR7" x="145" y="145">56</text>
+            </g>
+
+            <!-- Exact same hand geometry as 0-meridian face -->
+            <line id="localHourHand"
+                  x1="250" y1="250"
+                  x2="250" y2="130"
+                  stroke="#e6edf3"
+                  stroke-width="7"
+                  stroke-linecap="round"
+                  style="transform-origin:250px 250px;
+                         transform-box:view-box;
+                         transform:rotate(0deg)"/>
+
+            <line id="localMinuteHand"
+                  x1="250" y1="250"
+                  x2="250" y2="92"
+                  stroke="#9da7b3"
+                  stroke-width="4"
+                  stroke-linecap="round"
+                  style="transform-origin:250px 250px;
+                         transform-box:view-box;
+                         transform:rotate(0deg)"/>
+
+            <line id="localSecondHand"
+                  x1="250" y1="266"
+                  x2="250" y2="72"
+                  stroke="#66717e"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  style="transform-origin:250px 250px;
+                         transform-box:view-box;
+                         transform:rotate(0deg)"/>
+
+            <circle cx="250" cy="250" r="8" fill="#e6edf3"/>
+          </svg>
+        </div>
+
+<div id="localA8Time" class="big" style="margin-top:8px">—</div>
+
+        <div id="localA8Bridge" class="small">
+          CONNECT TO LIVE CORE
+        </div>
+
+        <div id="localA8Day" class="small" style="margin-top:5px"></div>
+
+        <div id="localFaceTraining" class="note"
+             style="margin-top:9px;text-align:center">
+          ONE DAY · ONE SWEEP · 8 QUARTER · 16 HALF ·
+          24 THREE-QUARTER · 32/00 NEXT DAY
+        </div>
+
+        <div class="note" style="margin-top:8px;text-align:center">
+          Same A8 Node-core clock · local civil offset applied for display only.
+          45 conventional minutes = 1 A8 HOUR = 64 A8 MINUTES.
+        </div>
+
+        <div class="row" style="justify-content:center;margin-top:12px">
+          <label style="display:flex;align-items:center;gap:6px;
+                        color:#8b949e;font-size:13px">
+            <input id="tickSound" type="checkbox"> A8 SECOND PULSE
+          </label>
+
+          <label style="display:flex;align-items:center;gap:6px;
+                        color:#8b949e;font-size:13px">
+            <input id="alarmSound" type="checkbox" checked> ALARM CHIME
+          </label>
+
+          <label style="display:flex;align-items:center;gap:6px;
+                        color:#8b949e;font-size:13px">
+            <input id="hourGong" type="checkbox"> A8 HOUR CHIME
+          </label>
+        </div>
+      </section>
+
+      <section>
+        <h2>A8 CLOCK FIELD TRAINER · CORE20 READ ONLY</h2>
+        <label>Input notation
+          <select id="notation">
+            <option value="dec">Decimal comfort · A8 units: H 0–31, M/S 0–63</option>
+            <option value="oct">Native octal · A8 units: H 00–37₈, M/S 00–77₈</option>
+          </select>
+        </label>
+        <div class="fields" style="margin-top:10px">
+          <label><span id="setterHourLabel">A8 HOUR · 1/32 DAY</span><input id="ih" value="10"></label>
+          <label><span id="setterMinuteLabel">A8 MINUTE · 1/64 A8 HOUR</span><input id="im" value="30"></label>
+          <label><span id="setterSecondLabel">A8 SECOND · 1/64 A8 MINUTE</span><input id="is" value="10"></label>
+        </div>
+        <div class="row" style="margin-top:10px">
+          <button id="set">SET TIME</button>
+          <button id="minus">−1 A8 HOUR</button>
+          <button id="plus">+1 A8 HOUR</button>
+        </div>
+        <p id="msg" class="note">Decimal notation changes the display only; the 17-bit register remains unchanged.</p>
+      </section>
+      <div style="text-align:center;margin-top:18px;padding:16px;border:1px solid #30363d;border-radius:14px;background:#0d1117">
+        <div id="loadClockTitle" style="font-weight:800;font-size:16px;letter-spacing:.06em">A8 CLOCK NOT LOADED</div>
+        <div id="loadClockNote" class="small" style="margin:6px 0 12px">Page load is not an A8 timing event · start the observer when you are ready.</div>
+        <button id="loadClock" class="primary" style="font-size:18px;font-weight:800;padding:14px 24px">CONNECT TO LIVE A8 CORE</button>
+        <div id="loadClockMsg" class="small" style="margin-top:9px">RUN AND HAVE FUN</div>
+      </div>
+
+      <section id="alarmBox">
+        <h2>A8 alarm</h2>
+        <label>Alarm notation
+          <select id="an">
+            <option value="dec">Decimal comfort · A8 units</option>
+            <option value="oct">Native octal · A8 units</option>
+          </select>
+        </label>
+        <div class="fields" style="margin-top:10px">
+          <label><span id="alarmHourLabel">A8 HOUR · 1/32 DAY</span><input id="ah" value="10"></label>
+          <label><span id="alarmMinuteLabel">A8 MINUTE · 1/64 A8 HOUR</span><input id="am" value="30"></label>
+          <label><span id="alarmSecondLabel">A8 SECOND · 1/64 A8 MINUTE</span><input id="as" value="0"></label>
+        </div>
+        <div class="row" style="margin-top:10px">
+          <button id="arm">ARM</button>
+          <button id="off">DISABLE</button>
+        </div>
+        <p id="alarmMsg" class="note">Alarm off.</p>
+      </section>
+    </div>
+  </div>
+
+  <section>
+    <h2>CONVERTER ONLY — READ-ONLY REPRESENTATION BRIDGE</h2>
+    <div class="grid">
+      <div class="card">
+        <label>Input system
+          <select id="convSystem">
+            <option value="a8dec">A8 decimal HH:MM:SS</option>
+            <option value="a8oct">A8 octal HH:MM:SS</option>
+            <option value="legacy">Legacy 24-hour HH:MM:SS</option>
+          </select>
+        </label>
+        <label style="margin-top:10px">Time
+          <input id="convInput" value="10:30:10" placeholder="10:30:10">
+        </label>
+        <div class="row" style="margin-top:10px">
+          <button id="convert">CONVERT</button>
+          <button id="loadConverted">LOAD INTO CLOCK</button>
+          <button id="useCurrent">USE CURRENT A8 TIME</button>
+        </div>
+        <p id="convMsg" class="note">A8 decimal fields are still base-2-sized fields: 32 / 64 / 64.</p>
+      </div>
+
+      <div class="card">
+        <div class="resultGrid">
+          <div class="result"><div class="k">A8 decimal</div><div id="rDec" class="v">10:30:10</div></div>
+          <div class="result"><div class="k">A8 octal</div><div id="rOct" class="v">12:36:12₈</div></div>
+          <div class="result"><div class="k">Legacy bridge</div><div id="rLegacy" class="v">07:51:12.216</div></div>
+          <div class="result"><div class="k">17-bit register</div><div id="rBits" class="v">01010 011110 001010</div></div>
+          <div class="result"><div class="k">DAY_PHASE17</div><div id="rPhase" class="v">43018</div></div>
+          <div class="result"><div class="k">Day fraction</div><div id="rFrac" class="v">0.3282013</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>LIVE NATIVE REGISTER · CORE20 READ ONLY</h2>
+    <div class="row">
+      <button id="resetTime">RESET TIME</button>
+      <button id="resetDay">RESET DAY COUNT</button>
+      <button id="resetAll">RESET ALL</button>
+    </div>
+    <p class="stat">Decimal: <span id="dstat">00:00:00</span> &nbsp; | &nbsp; Octal: <span id="ostat">00:00:00₈</span></p>
+    <p class="stat">17-bit 5|6|6: <span id="bits">00000 000000 000000</span></p>
+    <p class="stat">17-bit 8|9: <span id="bits89">00000000 000000000</span></p>
+    <p class="stat">DAY_PHASE17: <span id="phase">0</span> &nbsp; DAY COUNT: <span id="day">0</span></p>
+  </section>
+
+  <footer>One Core20-owned clock state, multiple representations. Decimal comfort is primary; octal and binary remain native representations. This page directly observes server DAY_PHASE17.</footer>
+</main>
+<footer class="cosigo-site-footer">
+  <strong>COSIGO Labs · Auspicious 8 experimental laboratory</strong>
+  <p class="cosigo-disclaimer">Research / engineering notice: A8 pages may contain provisional models, simulations, comparison values, hypotheses and unreplicated experiment designs. Unless a page explicitly states otherwise, material shown here is not a certified metrology standard, accredited measurement result, or final Foundation definition. Legacy / SI values are comparison coordinates where identified, not native A8 authority.</p>
+  <p class="cosigo-disclaimer">COSIGO is primarily an educational and experimental project. Nothing in this laboratory is an investment offering, promise of financial return, or financial, investment, legal or tax advice. See the project-status notice for the current public description.</p>
+  <div class="cosigo-footer-links">
+    <a href="https://cosigo.io/">COSIGO Home</a>
+    <a href="https://a8.cosigo.io/">A8 Public Instrument</a>
+    <a href="/">A8 Engineering Lab</a>
+    <a href="https://contact.cosigo.io/">Contact</a>
+    <a href="https://docs.cosigo.io/">COSIGO Docs / WP</a>
+    <a href="https://github.com/cosigo">COSIGO GitHub</a>
+    <a href="https://github.com/cosigo/cosigo.io">Main-site source</a>
+    <a href="https://cosigo.io/project-status.html">Educational Purpose / Project Status</a>
+  </div>
+  <p>© 2026 COSIGO. COSIGO™ rights and trademark notices remain governed by the official COSIGO site.</p>
+</footer>
+
+<script>
+'use strict';
+
+const DAY = 131072;
+
+/*
+ * v5.4.18 observer behavior restored.
+ * This conventional-duration value is DISPLAY PACING ONLY.
+ * It cannot write Core20, raw pulses, recovered scales, or alignment.
+ */
+const A8_STATE_MS = (86400 * 1000) / DAY;
+let phase = 0;
+let nodePhase = 0;
+let day = 0;
+let face = 'dec';
+let clockLoaded = false;
+let pollBusy = false;
+let pollTimer = null;
+let alarmOn = false;
+let alarmPhase = 0;
+let previousPhase = null;
+let audioCtx = null;
+
+/*
+ * STRICT A8 AUDIO EDGE STREAM
+ *
+ * Audio is allowed to fire only from server-pushed authoritative
+ * Core20 DAY_PHASE17 edges. Polling and visual interpolation cannot sound.
+ */
+let coreEdgeStream = null;
+let coreAudioLastEdgeSeq = null;
+let coreAudioSourceEpoch = null;
+
+let observerReady = false;
+let observerRunning = false;
+let observerAnchorTotal = 0;
+let observerAnchorPerf = performance.now();
+let observerFrameStarted = false;
+
+const $ = id => document.getElementById(id);
+const oct = (n, w = 2) => Number(n).toString(8).padStart(w, '0');
+const dec2 = n => String(n).padStart(2, '0');
+const bin = (n, w) => Number(n).toString(2).padStart(w, '0');
+
+for (let i = 0; i < 64; i += 1) {
+  const a = i / 64 * Math.PI * 2 - Math.PI / 2;
+  const half = i % 2 === 0;
+  const quarter = i % 16 === 0;
+  const r = quarter ? 196 : half ? 204 : 212;
+  const l = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+  l.setAttribute('x1', 250 + Math.cos(a) * r);
+  l.setAttribute('y1', 250 + Math.sin(a) * r);
+  l.setAttribute('x2', 250 + Math.cos(a) * 220);
+  l.setAttribute('y2', 250 + Math.sin(a) * 220);
+  l.setAttribute('stroke', quarter ? '#e6edf3' : half ? '#7d8590' : '#30363d');
+  l.setAttribute('stroke-width', quarter ? 3 : half ? 2 : 1);
+  if ($('ticks')) $('ticks').appendChild(l);
+}
+
+const fieldsFromPhase = p => ({
+  s: p & 63,
+  m: (p >> 6) & 63,
+  h: (p >> 12) & 31,
+});
+const compose = (h, m, s) => (h << 12) | (m << 6) | s;
+
+function hand(id, degrees) {
+  const el = $(id);
+  if (el) el.setAttribute('transform', `rotate(${degrees} 250 250)`);
+}
+
+function serverContinuousTotal(st) {
+  const sub = st.exactSubstate || {};
+  const n = Number(sub.numerator || 0);
+  const d = Number(sub.denominator || 1);
+
+  const frac =
+    Number.isFinite(n) &&
+    Number.isFinite(d) &&
+    d > 0
+      ? n / d
+      : 0;
+
+  return (
+    Number(st.dayCount || 0) * DAY +
+    Number(st.dayPhase17) +
+    frac
+  );
+}
+
+function observerContinuousTotal(nowPerf = performance.now()) {
+  if (!observerReady) {
+    return day * DAY + nodePhase;
+  }
+
+  const elapsedStates =
+    observerRunning
+      ? (nowPerf - observerAnchorPerf) / A8_STATE_MS
+      : 0;
+
+  return observerAnchorTotal + elapsedStates;
+}
+
+function reanchorObserver(st, force = false) {
+  const now = performance.now();
+  const serverTotal = serverContinuousTotal(st);
+  const nextRunning = true;
+
+  if (
+    !observerReady ||
+    force ||
+    nextRunning !== observerRunning
+  ) {
+    observerAnchorTotal = serverTotal;
+    observerAnchorPerf = now;
+    observerReady = true;
+    observerRunning = nextRunning;
+    return;
+  }
+
+  /*
+   * v5.4.18 rule:
+   * ordinary packet arrival is NOT the beat source.
+   * Only a material divergence causes a hard display re-anchor.
+   */
+  const predicted = observerContinuousTotal(now);
+  const err = serverTotal - predicted;
+
+  if (Math.abs(err) > 2) {
+    observerAnchorTotal = serverTotal;
+    observerAnchorPerf = now;
+  }
+
+  observerRunning = nextRunning;
+}
+
+function localA8CivilState(basePhase = phase) {
+  /*
+   * Compatibility/display bridge only.
+   * Civil timezone affects this browser's presentation and NEVER Core20.
+   */
+  const offsetMinutes =
+    -new Date().getTimezoneOffset();
+
+  const shiftStates =
+    offsetMinutes * DAY / 1440;
+
+  const raw =
+    Number(basePhase) + shiftStates;
+
+  const localPhase =
+    ((Math.floor(raw) % DAY) + DAY) % DAY;
+
+  return {
+    offsetMinutes,
+    a8OffsetHours: offsetMinutes / 45,
+    shiftStates,
+    raw,
+    localPhase,
+  };
+}
+
+function renderLocalAnalog(localPhase) {
+  const f =
+    fieldsFromPhase(localPhase);
+
+  /*
+   * Local face hands are HTML divs, not SVG lines.
+   * Use CSS transforms; the main shared clock continues to use SVG transforms.
+   */
+  const localHand = (id, degrees) => {
+    const el = $(id);
+
+    if (el) {
+      el.style.transform =
+        `rotate(${degrees}deg)`;
+    }
+  };
+
+  localHand(
+    'localSecondHand',
+    f.s / 64 * 360
+  );
+
+  localHand(
+    'localMinuteHand',
+    (f.m + f.s / 64) / 64 * 360
+  );
+
+  localHand(
+    'localHourHand',
+    (f.h + f.m / 64 + f.s / 4096) / 32 * 360
+  );
+
+  const quarterLabels =
+    face === 'dec'
+      ? ['0', '8', '16', '24']
+      : ['00', '10', '20', '30'];
+
+  ['localT0','localT1','localT2','localT3']
+    .forEach((id, i) => {
+      if ($(id)) $(id).textContent = quarterLabels[i];
+    });
+
+  const refLabels =
+    face === 'dec'
+      ? ['00','08','16','24','32','40','48','56']
+      : ['00','10','20','30','40','50','60','70'];
+
+  ['localR0','localR1','localR2','localR3',
+   'localR4','localR5','localR6','localR7']
+    .forEach((id, i) => {
+      if ($(id)) $(id).textContent = refLabels[i];
+    });
+}
+
+function renderLocal() {
+  if (!$('localA8Time')) return;
+
+  if (!clockLoaded) {
+    $('localA8Time').textContent = '—';
+
+    if ($('localA8Bridge')) {
+      $('localA8Bridge').textContent =
+        'CONNECT TO LIVE CORE';
+    }
+
+    if ($('localA8Day')) {
+      $('localA8Day').textContent = '';
+    }
+
+    renderLocalAnalog(0);
+    return;
+  }
+
+  const local =
+    localA8CivilState(phase);
+
+  const f =
+    fieldsFromPhase(local.localPhase);
+
+  $('localA8Time').textContent =
+    `${dec2(f.h)}:${dec2(f.m)}:${dec2(f.s)} · ` +
+    `${oct(f.h)}:${oct(f.m)}:${oct(f.s)}₈`;
+
+  if ($('localA8Bridge')) {
+    const h =
+      local.a8OffsetHours;
+
+    $('localA8Bridge').textContent =
+      `LOCAL CIVIL ZONE · ${h >= 0 ? '+' : ''}${h} A8 HOUR · DISPLAY ONLY`;
+  }
+
+  if ($('localA8Day')) {
+    $('localA8Day').textContent =
+      local.raw < 0
+        ? 'LOCAL DAY PHASE · PREVIOUS'
+        : local.raw >= DAY
+          ? 'LOCAL DAY PHASE · NEXT'
+          : 'LOCAL DAY PHASE · SAME';
+  }
+
+  renderLocalAnalog(local.localPhase);
+}
+
+function renderClock() {
+  const { h, m, s } = fieldsFromPhase(phase);
+  const decimal = `${dec2(h)}:${dec2(m)}:${dec2(s)}`;
+  const octal = `${oct(h)}:${oct(m)}:${oct(s)}₈`;
+  const bits = bin(phase, 17);
+
+  if ($('pub')) $('pub').textContent = face === 'dec' ? decimal : octal;
+  if ($('eng')) $('eng').textContent = face === 'dec' ? `native ${octal}` : `decimal ${decimal}`;
+  if ($('core20LiveBinary')) {
+    $('core20LiveBinary').textContent =
+      `DAY_PHASE17 · ${bits.slice(0,5)} ${bits.slice(5,11)} ${bits.slice(11)}`;
+  }
+  if ($('dstat')) $('dstat').textContent = decimal;
+  if ($('ostat')) $('ostat').textContent = octal;
+  if ($('bits')) $('bits').textContent = `${bits.slice(0,5)} ${bits.slice(5,11)} ${bits.slice(11)}`;
+  if ($('bits89')) $('bits89').textContent = `${bits.slice(0,8)} ${bits.slice(8)}`;
+  if ($('phase')) $('phase').textContent = phase;
+  if ($('day')) $('day').textContent = day;
+
+  hand('ss', s / 64 * 360);
+  hand('mm', (m + s / 64) / 64 * 360);
+  hand('hh', (h + m / 64 + s / 4096) / 32 * 360);
+
+  const labels = face === 'dec' ? ['0', '8', '16', '24'] : ['00', '10', '20', '30'];
+  ['t0','t1','t2','t3'].forEach((id, i) => { if ($(id)) $(id).textContent = labels[i]; });
+
+  renderLocal();
+}
+
+function parseField(value, mode, max) {
+  const v = String(value || '').trim();
+  if (mode === 'oct') {
+    if (!/^[0-7]+$/.test(v)) return null;
+    const n = parseInt(v, 8);
+    return n <= max ? n : null;
+  }
+  if (!/^\d+$/.test(v)) return null;
+  const n = parseInt(v, 10);
+  return n <= max ? n : null;
+}
+
+function parseTriple(text, mode) {
+  const p = String(text || '').trim().split(':');
+  if (p.length !== 3) return null;
+
+  if (mode === 'legacy') {
+    const h = Number(p[0]), m = Number(p[1]), s = Number(p[2]);
+    if (!Number.isFinite(h) || !Number.isFinite(m) || !Number.isFinite(s)) return null;
+    if (h < 0 || h > 23 || m < 0 || m > 59 || s < 0 || s >= 60) return null;
+    return Math.min(DAY - 1, Math.floor((h * 3600 + m * 60 + s) / 86400 * DAY));
+  }
+
+  const base = mode === 'a8oct' ? 'oct' : 'dec';
+  const h = parseField(p[0], base, 31);
+  const m = parseField(p[1], base, 63);
+  const s = parseField(p[2], base, 63);
+  if (h === null || m === null || s === null) return null;
+  return compose(h, m, s);
+}
+
+function updateConverter(p) {
+  if (!$('rDec')) return;
+  const { h, m, s } = fieldsFromPhase(p);
+  const bits = bin(p, 17);
+  $('rDec').textContent = `${dec2(h)}:${dec2(m)}:${dec2(s)}`;
+  $('rOct').textContent = `${oct(h)}:${oct(m)}:${oct(s)}₈`;
+  $('rLegacy').textContent = `${(p * 86400 / DAY).toFixed(3)} conventional seconds since 0-meridian midnight`;
+  $('rBits').textContent = `${bits.slice(0,5)} ${bits.slice(5,11)} ${bits.slice(11)}`;
+  $('rPhase').textContent = p;
+  $('rFrac').textContent = (p / DAY).toFixed(7);
+}
+
+function doConvert() {
+  if (!$('convInput') || !$('convSystem')) return;
+  const p = parseTriple($('convInput').value, $('convSystem').value);
+  if (p === null) {
+    if ($('convMsg')) $('convMsg').textContent = 'Invalid time for selected input system.';
+    return;
+  }
+  updateConverter(p);
+  if ($('convMsg')) $('convMsg').textContent = 'Converted successfully. Representation bridge only.';
+}
+
+function ensureAudio() {
+  try {
+    if (!audioCtx) {
+      audioCtx =
+        new (
+          window.AudioContext ||
+          window.webkitAudioContext
+        )();
+    }
+
+    if (audioCtx.state === 'suspended') {
+      audioCtx.resume();
+    }
+  } catch (e) {}
+}
+
+function toneAt(freq, dur, vol, t) {
+  try {
+    ensureAudio();
+
+    if (!audioCtx) {
+      return;
+    }
+
+    const oscillator =
+      audioCtx.createOscillator();
+
+    const gain =
+      audioCtx.createGain();
+
+    oscillator.type =
+      'sine';
+
+    oscillator.frequency
+      .setValueAtTime(
+        freq,
+        t
+      );
+
+    gain.gain
+      .setValueAtTime(
+        0.0001,
+        t
+      );
+
+    gain.gain
+      .linearRampToValueAtTime(
+        vol,
+        t + 0.004
+      );
+
+    gain.gain
+      .exponentialRampToValueAtTime(
+        0.001,
+        t + dur
+      );
+
+    oscillator.connect(
+      gain
+    );
+
+    gain.connect(
+      audioCtx.destination
+    );
+
+    oscillator.start(
+      t
+    );
+
+    oscillator.stop(
+      t + dur + 0.03
+    );
+  } catch (e) {}
+}
+
+function tone(
+  freq = 880,
+  dur = 0.06,
+  vol = 0.055,
+  delay = 0
+) {
+  try {
+    ensureAudio();
+
+    if (!audioCtx) {
+      return;
+    }
+
+    toneAt(
+      freq,
+      dur,
+      vol,
+      audioCtx.currentTime + delay
+    );
+  } catch (e) {}
+}
+
+function tickTone() {
+  /*
+   * 980 Hz is speaker/DAC rendering only.
+   * It does not define or pace A8 time.
+   */
+  tone(
+    980,
+    0.035,
+    0.04,
+    0
+  );
+}
+
+function resetCoreAudioEdge() {
+  coreAudioLastEdgeSeq =
+    null;
+
+  coreAudioSourceEpoch =
+    null;
+}
+
+function processAuthoritativeCoreEdge(edge) {
+  if (
+    !edge ||
+    edge.schema !==
+      'A8-CORE20-CLOCK-EDGE-V1'
+  ) {
+    return;
+  }
+
+  const epoch =
+    String(edge.sourceEpoch);
+
+  const sequence =
+    Number(edge.sequence);
+
+  const delta =
+    Number(edge.deltaStates);
+
+  const currentPhase =
+    Number(edge.dayPhase17);
+
+  if (
+    !Number.isSafeInteger(sequence) ||
+    !Number.isSafeInteger(delta) ||
+    !Number.isInteger(currentPhase) ||
+    currentPhase < 0 ||
+    currentPhase >= DAY
+  ) {
+    return;
+  }
+
+  if (
+    coreAudioSourceEpoch !==
+      epoch
+  ) {
+    coreAudioSourceEpoch =
+      epoch;
+
+    coreAudioLastEdgeSeq =
+      null;
+  }
+
+  /*
+   * SSE reconnects never replay historical ticks.
+   * Duplicate/out-of-order edge events are ignored.
+   */
+  if (
+    coreAudioLastEdgeSeq !==
+      null &&
+    sequence <=
+      coreAudioLastEdgeSeq
+  ) {
+    return;
+  }
+
+  coreAudioLastEdgeSeq =
+    sequence;
+
+  /*
+   * Exactly one completed Core20 A8 state edge may make one sound.
+   * A missed multi-state jump rebases silently: no catch-up burst.
+   */
+  if (delta !== 1) {
+    return;
+  }
+
+  if (
+    $('tickSound') &&
+    $('tickSound').checked
+  ) {
+    tickTone();
+  }
+
+  const previousPhase =
+    (
+      currentPhase -
+      1 +
+      DAY
+    ) %
+    DAY;
+
+  const previousLocal =
+    localA8CivilState(
+      previousPhase
+    ).localPhase;
+
+  const currentLocal =
+    localA8CivilState(
+      currentPhase
+    ).localPhase;
+
+  if (
+    alarmOn &&
+    currentLocal ===
+      alarmPhase &&
+    currentLocal !==
+      previousLocal &&
+    $('alarmMsg')
+  ) {
+    $('alarmMsg').textContent =
+      'A8 ALARM';
+
+    alarmTone();
+  }
+
+  if (
+    (currentLocal & 4095) ===
+      0 &&
+    (previousLocal & 4095) !==
+      0 &&
+    $('hourGong') &&
+    $('hourGong').checked
+  ) {
+    gongTone();
+  }
+}
+
+function startCoreEdgeStream() {
+  if (coreEdgeStream) {
+    coreEdgeStream.close();
+  }
+
+  resetCoreAudioEdge();
+
+  coreEdgeStream =
+    new EventSource(
+      '/api/core20/edges'
+    );
+
+  coreEdgeStream.addEventListener(
+    'a8-edge',
+    event => {
+      try {
+        processAuthoritativeCoreEdge(
+          JSON.parse(event.data)
+        );
+      } catch (_) {
+        // Bad observer payload cannot affect Core20.
+      }
+    }
+  );
+}
+
+
+function alarmTone() {
+  if (
+    !$('alarmSound') ||
+    !$('alarmSound').checked
+  ) {
+    return;
+  }
+
+  tone(
+    660,
+    0.16,
+    0.07,
+    0
+  );
+
+  tone(
+    880,
+    0.16,
+    0.07,
+    0.20
+  );
+
+  tone(
+    1040,
+    0.22,
+    0.07,
+    0.40
+  );
+}
+
+function gongTone() {
+  tone(
+    392,
+    0.50,
+    0.08,
+    0
+  );
+
+  tone(
+    523.25,
+    0.65,
+    0.055,
+    0.05
+  );
+}
+
+function applyClockPayload(payload, forceObserverSync = false) {
+  if (!payload || payload.ok !== true || !payload.clock) {
+    throw new Error('invalid Core20 clock payload');
+  }
+
+  const st = payload.clock;
+
+  if (st.status !== 'CORE20_CLOCK_RUNNING') {
+    throw new Error(`Core20 clock not ready: ${st.status}`);
+  }
+
+  const nextPhase =
+    Number(st.dayPhase17);
+
+  if (
+    !Number.isInteger(nextPhase) ||
+    nextPhase < 0 ||
+    nextPhase >= DAY
+  ) {
+    throw new Error(
+      `invalid Core20 DAY_PHASE17: ${st.dayPhase17}`
+    );
+  }
+
+  nodePhase = nextPhase;
+
+  reanchorObserver(
+    st,
+    forceObserverSync
+  );
+
+  if (!observerReady) {
+    phase = nextPhase;
+    day = Number(st.dayCount || 0);
+  }
+
+  if ($('nodeConn')) {
+    $('nodeConn').textContent =
+      'CORE20 CONNECTED';
+  }
+
+  if ($('nodeCal')) {
+    $('nodeCal').textContent =
+      'MOMENTARY ALIGN COMPLETE';
+  }
+
+  if ($('nodeAuth')) {
+    $('nodeAuth').textContent =
+      'JOVIAN → MINTAKA → SOL → SUN RETURN';
+  }
+
+  if ($('nodeEpoch')) {
+    $('nodeEpoch').textContent =
+      st.sourceEpoch;
+  }
+
+  if ($('runStatus')) {
+    $('runStatus').textContent =
+      'CORE20 · SERVER OWNED · NODE-ANCHORED OBSERVER';
+  }
+}
+
+function observerFrame() {
+  if (clockLoaded && observerReady) {
+    const total =
+      Math.floor(
+        observerContinuousTotal()
+      );
+
+    const nextDay =
+      Math.floor(total / DAY);
+
+    const nextPhase =
+      ((total % DAY) + DAY) % DAY;
+
+    if (
+      nextPhase !== phase ||
+      nextDay !== day
+    ) {
+      previousPhase =
+        phase;
+
+      phase =
+        nextPhase;
+
+      day =
+        nextDay;
+
+      /*
+       * Visual interpolation only.
+       * No audible event may originate from observerFrame().
+       */
+      renderClock();
+    }
+  }
+
+  requestAnimationFrame(
+    observerFrame
+  );
+}
+
+async function requestJson(path, options = {}) {
+  const response = await fetch(path, {
+    cache: 'no-store',
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    },
+    ...options,
+  });
+  const payload = await response.json();
+  if (!response.ok || payload.ok === false) {
+    throw new Error(payload.error || `${path} failed`);
+  }
+  return payload;
+}
+
+async function pollClock() {
+  if (!clockLoaded || pollBusy) return;
+  pollBusy = true;
+
+  try {
+    applyClockPayload(await requestJson('/api/core20/clock'));
+  } catch (err) {
+    observerRunning = false;
+
+    if ($('nodeConn')) $('nodeConn').textContent = 'CORE20 DISCONNECTED';
+    if ($('runStatus')) $('runStatus').textContent = `OBSERVER ERROR · ${err.message}`;
+  } finally {
+    pollBusy = false;
+  }
+}
+
+function pollLoop() {
+  if (!clockLoaded) return;
+  pollClock();
+  pollTimer = setTimeout(pollLoop, document.hidden ? 1000 : 100);
+}
+
+async function connectToCore() {
+  if (clockLoaded) return;
+
+  if ($('loadClock')) {
+    $('loadClock').disabled = true;
+    $('loadClock').textContent = 'CONNECTING TO CORE';
+  }
+
+  if ($('loadClockMsg')) {
+    $('loadClockMsg').textContent = 'MOMENTARY 0-MERIDIAN ALIGNMENT OCCURS INSIDE NODE';
+  }
+
+  try {
+    const payload = await requestJson('/api/core20/connect', {
+      method: 'POST',
+      body: '{}',
+    });
+
+    clockLoaded = true;
+    face = 'dec';
+
+    if ($('decMode')) $('decMode').classList.add('active');
+    if ($('octMode')) $('octMode').classList.remove('active');
+    if ($('loadClockTitle')) $('loadClockTitle').textContent = 'A8 CLOCK · CORE20 CONNECTED';
+    if ($('loadClockNote')) {
+      $('loadClockNote').textContent =
+        'Node owns clock state and authoritative A8 audio edges. Browser interpolation is visual output only.';
+    }
+    if ($('loadClock')) $('loadClock').textContent = 'LIVE CORE20 CONNECTED';
+    if ($('loadClockMsg')) {
+      $('loadClockMsg').textContent =
+        payload.alignmentApplied
+          ? 'MOMENTARY ALIGN COMPLETE · UTC RELEASED'
+          : 'EXISTING CORE ALIGNMENT REUSED · UTC NOT RE-SAMPLED';
+    }
+
+    applyClockPayload(
+      { ok: true, clock: payload.clock },
+      true
+    );
+
+    const initialTotal =
+      Math.floor(
+        observerContinuousTotal()
+      );
+
+    day =
+      Math.floor(
+        initialTotal / DAY
+      );
+
+    phase =
+      ((initialTotal % DAY) + DAY) % DAY;
+
+    renderClock();
+
+    if (!observerFrameStarted) {
+      observerFrameStarted = true;
+      requestAnimationFrame(
+        observerFrame
+      );
+    }
+
+    startCoreEdgeStream();
+    pollLoop();
+  } catch (err) {
+    if ($('loadClock')) {
+      $('loadClock').disabled = false;
+      $('loadClock').textContent = 'CONNECT TO LIVE A8 CORE';
+    }
+    if ($('loadClockMsg')) $('loadClockMsg').textContent = `CONNECT FAILED · ${err.message}`;
+  }
+}
+
+if ($('tickSound')) {
+  $('tickSound')
+    .addEventListener(
+      'change',
+      () => {
+        /*
+         * User gesture unlocks speaker rendering only.
+         * Timing remains wholly Core20-edge driven.
+         */
+        if (
+          $('tickSound')
+            .checked
+        ) {
+          ensureAudio();
+        }
+      }
+    );
+}
+
+if ($('decMode')) {
+  $('decMode').onclick = () => {
+    face = 'dec';
+    $('decMode').classList.add('active');
+    if ($('octMode')) $('octMode').classList.remove('active');
+    renderClock();
+  };
+}
+
+if ($('octMode')) {
+  $('octMode').onclick = () => {
+    face = 'oct';
+    $('octMode').classList.add('active');
+    if ($('decMode')) $('decMode').classList.remove('active');
+    renderClock();
+  };
+}
+
+if ($('convert')) $('convert').onclick = doConvert;
+if ($('convInput')) {
+  $('convInput').addEventListener('keydown', e => {
+    if (e.key === 'Enter') doConvert();
+  });
+}
+if ($('useCurrent')) {
+  $('useCurrent').onclick = () => {
+    const f = fieldsFromPhase(nodePhase);
+    if ($('convSystem')) $('convSystem').value = 'a8dec';
+    if ($('convInput')) $('convInput').value = `${dec2(f.h)}:${dec2(f.m)}:${dec2(f.s)}`;
+    updateConverter(nodePhase);
+  };
+}
+
+if ($('arm')) {
+  $('arm').onclick = () => {
+    ensureAudio();
+
+    const mode = $('an') ? $('an').value : 'dec';
+    const h = parseField($('ah').value, mode, 31);
+    const m = parseField($('am').value, mode, 63);
+    const s = parseField($('as').value, mode, 63);
+    if (h === null || m === null || s === null) {
+      if ($('alarmMsg')) $('alarmMsg').textContent = 'Invalid alarm.';
+      return;
+    }
+    alarmPhase = compose(h, m, s);
+    alarmOn = true;
+    if ($('alarmMsg')) {
+      $('alarmMsg').textContent = `A8 ALARM armed for ${dec2(h)}:${dec2(m)}:${dec2(s)}`;
+    }
+  };
+}
+
+if ($('off')) {
+  $('off').onclick = () => {
+    alarmOn = false;
+    if ($('alarmMsg')) $('alarmMsg').textContent = 'Alarm off.';
+  };
+}
+
+if ($('loadClock')) $('loadClock').onclick = connectToCore;
+
+document.addEventListener(
+  'visibilitychange',
+  () => {
+    if (
+      clockLoaded &&
+      !document.hidden
+    ) {
+      pollClock();
+    }
+  }
+);
+
+window.addEventListener('pagehide', () => {
+  if (pollTimer !== null) {
+    clearTimeout(
+      pollTimer
+    );
+  }
+
+  pollTimer =
+    null;
+
+  if (coreEdgeStream) {
+    coreEdgeStream.close();
+    coreEdgeStream = null;
+  }
+
+  resetCoreAudioEdge();
+});
+
+doConvert();
+renderClock();
+</script>

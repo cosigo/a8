@@ -1,0 +1,940 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>A8 Frequency Trainer · v5.4.18 | COSIGO Labs</title>
+<style>
+  :root {
+    color-scheme: dark light;
+    --panel: color-mix(in srgb, Canvas 94%, CanvasText 6%);
+    --line: color-mix(in srgb, CanvasText 30%, transparent);
+    --muted: color-mix(in srgb, CanvasText 68%, transparent);
+    --accent: #6d9cff;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    max-width: 980px;
+    margin: 28px auto;
+    padding: 0 18px 44px;
+    line-height: 1.48;
+  }
+  h1 { margin: 0 0 .25rem; }
+  h2 { font-size: 1.05rem; margin: 0 0 8px; }
+  .sub { color: var(--muted); margin: 0 0 14px; }
+  .nav { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 18px; }
+  .nav a {
+    display:inline-block; padding:8px 11px; border:1px solid var(--line);
+    border-radius:9px; color:inherit; text-decoration:none; font-weight:650;
+  }
+  .panel {
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 16px;
+    margin: 16px 0;
+    background: var(--panel);
+  }
+  .native {
+    border-left: 4px solid var(--accent);
+  }
+  .trainer-note {
+    display:grid;
+    grid-template-columns: repeat(auto-fit,minmax(210px,1fr));
+    gap:10px;
+    margin-top:12px;
+  }
+  .trainer-note > div {
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:10px;
+  }
+  .k {
+    display:block;
+    font-size:.78rem;
+    text-transform:uppercase;
+    letter-spacing:.045em;
+    color:var(--muted);
+  }
+  .big {
+    font: 750 1.45rem ui-monospace,SFMono-Regular,Menlo,monospace;
+  }
+  .small { font-size: .9rem; color: var(--muted); }
+  .controls {
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    align-items:end;
+  }
+  label { display:grid; gap:5px; }
+  button, select, input { font: inherit; }
+  button {
+    padding: 11px 10px;
+    cursor: pointer;
+    border-radius: 9px;
+    border: 1px solid var(--line);
+  }
+  button:disabled { cursor:not-allowed; opacity:.48; }
+  .anchor { border-width: 3px; }
+  .readout {
+    margin-top:14px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+    gap:10px;
+  }
+  .readout > div {
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:10px;
+  }
+  .primary-read .v {
+    font: 800 1.6rem ui-monospace,SFMono-Regular,Menlo,monospace;
+  }
+  .reference-read {
+    opacity:.72;
+  }
+  .reference-read .v {
+    font: 600 1rem ui-monospace,SFMono-Regular,Menlo,monospace;
+  }
+  .grid {
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(145px,1fr));
+    gap:10px;
+    margin-top:12px;
+  }
+  .freq-btn {
+    display:grid;
+    gap:4px;
+    text-align:left;
+    min-height:78px;
+  }
+  .freq-btn .native-value {
+    font:800 1.3rem ui-monospace,SFMono-Regular,Menlo,monospace;
+  }
+  .freq-btn .native-unit {
+    font-size:.78rem;
+  }
+  .freq-btn .legacy-ref {
+    font-size:.78rem;
+    color:var(--muted);
+  }
+  .freq-btn .octave-ref {
+    font-size:.78rem;
+    font-weight:700;
+  }
+  .formula {
+    font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+    overflow-wrap:anywhere;
+  }
+  .warn { font-weight:700; }
+  .hidden-ref .legacy-ref,
+  .hidden-ref #legacyReadBox,
+  .hidden-ref #conversionBox {
+    display:none;
+  }
+  input[type=number] { min-width:150px; padding:8px; }
+  select { padding:8px; }
+  .mode-row { margin-top:10px; }
+
+  .scope-wrap {
+    margin-top:12px;
+    border:1px solid var(--line);
+    border-radius:10px;
+    overflow:hidden;
+    background:color-mix(in srgb, Canvas 90%, CanvasText 10%);
+  }
+  #scope {
+    display:block;
+    width:100%;
+    height:220px;
+  }
+  .scope-meta {
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px 20px;
+    padding:9px 11px;
+    border-top:1px solid var(--line);
+    font-size:.84rem;
+    color:var(--muted);
+  }
+  .scope-meta b { color:CanvasText; }
+
+/* A8 ANTIQUE AUDIO BACKGROUND v1 */
+body{
+  background:
+    linear-gradient(rgba(7,9,12,.58), rgba(7,9,12,.72)),
+    url("/assets/a8_audio_antique_bg.png")
+      center center / cover fixed no-repeat !important;
+}
+
+</style>
+<link rel="stylesheet" href="/site-shell.css">
+<meta name="description" content="COSIGO Labs Auspicious 8 audio laboratory for exploring A8 timing, tone, frequency relationships, and native measurement concepts in an engineering test environment.">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+<meta name="author" content="COSIGO Labs">
+<link rel="canonical" href="https://lab.a8.cosigo.io/audio.html">
+<link rel="icon" href="https://a8.cosigo.io/assets/cosigo_master_512.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="COSIGO Labs — Auspicious 8">
+<meta property="og:title" content="A8 Frequency Trainer · v5.4.18">
+<meta property="og:description" content="COSIGO Labs Auspicious 8 audio laboratory for exploring A8 timing, tone, frequency relationships, and native measurement concepts in an engineering test environment.">
+<meta property="og:url" content="https://lab.a8.cosigo.io/audio.html">
+<meta property="og:image" content="https://a8.cosigo.io/assets/cosigo_master_512.png">
+<meta property="og:image:alt" content="A8 Frequency Trainer · v5.4.18 — COSIGO Labs">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="A8 Frequency Trainer · v5.4.18">
+<meta name="twitter:description" content="COSIGO Labs Auspicious 8 audio laboratory for exploring A8 timing, tone, frequency relationships, and native measurement concepts in an engineering test environment.">
+<meta name="twitter:image" content="https://a8.cosigo.io/assets/cosigo_master_512.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "A8 Frequency Trainer · v5.4.18",
+  "url": "https://lab.a8.cosigo.io/audio.html",
+  "description": "COSIGO Labs Auspicious 8 audio laboratory for exploring A8 timing, tone, frequency relationships, and native measurement concepts in an engineering test environment.",
+  "dateModified": "2026-08-18",
+  "inLanguage": "en",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "COSIGO Labs — Auspicious 8",
+    "url": "https://a8.cosigo.io/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "COSIGO Labs",
+    "url": "https://cosigo.io/"
+  },
+  "about": [
+    {
+      "@type": "Thing",
+      "name": "Audio engineering"
+    },
+    {
+      "@type": "Thing",
+      "name": "Frequency"
+    },
+    {
+      "@type": "Thing",
+      "name": "Auspicious 8 time"
+    },
+    {
+      "@type": "Thing",
+      "name": "Measurement systems"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<nav class="cosigo-global-nav" aria-label="COSIGO and A8 global navigation">
+  <a class="cosigo-global-brand" href="https://cosigo.io/" aria-label="COSIGO home">
+    <img src="/assets/cosigo_master_512.gif" alt="COSIGO">
+    <span>COSIGO<small>LABS · AUSPICIOUS 8</small></span>
+  </a>
+  <div class="cosigo-global-links">
+    <a href="/">A8 LAB HOME</a>
+    <a href="https://a8.cosigo.io/">A8 PUBLIC</a>
+    <a class="cosigo-exit" href="https://cosigo.io/">COSIGO HOME</a>
+    <a class="cosigo-exit" href="https://contact.cosigo.io/">CONTACT</a>
+    <a href="https://github.com/cosigo">GITHUB</a>
+  </div>
+</nav>
+
+  <nav class="nav">
+    <a href="/">ENGINEERING LAB</a>
+    <a href="/moons.html">4-MOON VIEW</a>
+    <a href="/clock.html">ORIGINAL CLOCK</a>
+  </nav>
+
+  <h1>Auspicious 8 — Frequency Trainer</h1>
+  <p class="sub">
+    Learn frequency using the A8 second. The physical sound does not change; the time ruler used to count its cycles does.
+  </p>
+
+  <section class="panel native">
+    <h2>What this trainer is teaching</h2>
+    <p>
+      <b>Primary:</b> frequency is displayed as <b>cycles per A8 second</b>.
+      Conventional Hertz remains a secondary browser/reference translation because Web Audio still requires cycles per conventional second.
+    </p>
+    <div class="trainer-note">
+      <div>
+        <span class="k">A8 time ruler</span>
+        <div class="big">1 A8 second</div>
+        <div class="small">= 675/1024 conventional seconds</div>
+      </div>
+      <div>
+        <span class="k">Native A8 frequency</span>
+        <div class="big">512 cycles / A8s</div>
+        <div class="small">A clean binary frequency value in the A8 ruler</div>
+      </div>
+      <div>
+        <span class="k">Same physical tone</span>
+        <div class="big">≈ 776.723 Hz</div>
+        <div class="small">secondary legacy/browser reference only</div>
+      </div>
+    </div>
+    <p class="small formula">
+      Browser implementation: conventional Hz = A8 cycles/A8s × 1024/675.
+      Reverse reference: A8 cycles/A8s = conventional Hz × 675/1024.
+    </p>
+  </section>
+
+  <section class="panel native">
+    <h2>Why the A8 ladder is naturally octave-friendly</h2>
+    <p>
+      A musical octave is a physical <b>2:1 frequency ratio</b>. A8 does not create that acoustic relationship;
+      it represents it cleanly because binary doubling and halving are already native operations.
+    </p>
+    <div class="trainer-note">
+      <div>
+        <span class="k">One octave down</span>
+        <div class="big">256 A8</div>
+        <div class="small">exactly 1/2 of 512 A8</div>
+      </div>
+      <div>
+        <span class="k">Trainer anchor</span>
+        <div class="big">512 A8</div>
+        <div class="small">reference point for octave distance</div>
+      </div>
+      <div>
+        <span class="k">One octave up</span>
+        <div class="big">1024 A8</div>
+        <div class="small">exactly 2× 512 A8</div>
+      </div>
+    </div>
+    <p class="small">
+      The <b>2:1 octave ratio is the physical/acoustic fact</b>. The unusually clean sequence
+      256 → 512 → 1024 is the A8 representation of that fact. This is “octave-friendly by structure,”
+      not a claim that Nature itself uses a human numeral system.
+    </p>
+  </section>
+
+  <section class="panel">
+    <div class="controls">
+      <label>
+        Waveform
+        <select id="wave">
+          <option value="sine" selected>Sine</option>
+          <option value="triangle">Triangle</option>
+          <option value="square">Square</option>
+          <option value="sawtooth">Sawtooth</option>
+        </select>
+      </label>
+
+      <label>
+        Volume
+        <input id="vol" type="range" min="0" max="0.12" step="0.002" value="0.025">
+      </label>
+
+      <button id="stop">STOP</button>
+    </div>
+
+    <div class="mode-row">
+      <label style="display:flex;grid-template-columns:auto 1fr;align-items:center;gap:8px">
+        <input id="hideLegacy" type="checkbox">
+        Trainer mode: hide legacy-Hz references
+      </label>
+    </div>
+
+    <div class="readout">
+      <div class="primary-read">
+        <span class="k">A8 FREQUENCY · PRIMARY</span>
+        <div class="v" id="a8Read">Stopped</div>
+      </div>
+      <div class="reference-read" id="legacyReadBox">
+        <span class="k">LEGACY / BROWSER REFERENCE</span>
+        <div class="v" id="legacyRead">—</div>
+      </div>
+      <div>
+        <span class="k">RELATION</span>
+        <div class="v" id="relationRead">Choose an A8 frequency.</div>
+      </div>
+      <div>
+        <span class="k">OCTAVE DISTANCE FROM 512 A8</span>
+        <div class="v" id="octaveRead">—</div>
+      </div>
+    </div>
+
+    <p class="small">
+      Start low and use modest volume. Sine is recommended. High frequencies can be unpleasant or inaudible, and browser hardware cannot reproduce every theoretical A8 value.
+    </p>
+  </section>
+
+  <section class="panel native">
+    <h2>Simple Waveform Scope</h2>
+    <p class="small">
+      Live view of the same Web Audio signal being sent toward the speaker.
+      The scope is a downstream visualization only: A8 frequency remains defined in
+      <b>cycles per A8 second</b>. Vertical amplitude is auto-scaled for shape visibility.
+    </p>
+    <div class="controls" style="margin-top:12px">
+      <label>
+        A8 TIME WINDOW
+        <select id="scopeTime">
+          <option value="0.25">1/4 A8 second</option>
+          <option value="0.125">1/8 A8 second</option>
+          <option value="0.0625">1/16 A8 second</option>
+          <option value="0.03125">1/32 A8 second</option>
+          <option value="0.015625" selected>1/64 A8 second</option>
+          <option value="0.0078125">1/128 A8 second</option>
+          <option value="0.00390625">1/256 A8 second</option>
+          <option value="0.001953125">1/512 A8 second</option>
+        </select>
+      </label>
+    </div>
+
+    <p class="small">
+      This selector sets the horizontal ruler in native A8 time.
+      Changing frequency does not change the selected time window;
+      it changes how many cycles fit inside that window.
+    </p>
+
+    <div class="scope-wrap">
+      <canvas id="scope" aria-label="Live waveform display"></canvas>
+      <div class="scope-meta">
+        <span>A8 source: <b id="scopeFreq">Stopped</b></span>
+        <span>Waveform: <b id="scopeWave">Sine</b></span>
+        <span>Horizontal view: <b id="scopeWindow">—</b></span>
+        <span>Browser analyzer: <b>display instrument only</b></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>Binary A8 frequency ladder</h2>
+    <p class="small">
+      Every adjacent button is an exact ×2 or ÷2 in <b>cycles per A8 second</b>.
+      The small Hz number is deliberately secondary and generally does not look clean.
+    </p>
+    <div class="grid" id="buttons"></div>
+  </section>
+
+  <section class="panel">
+    <h2>Direct A8 frequency</h2>
+    <div class="controls">
+      <label>
+        Cycles per A8 second
+        <input id="freq" type="number" min="0.125" step="0.125" value="512">
+      </label>
+      <button id="playDirect">PLAY A8 FREQUENCY</button>
+      <button id="half">÷ 2 A8</button>
+      <button id="double">× 2 A8</button>
+    </div>
+    <p class="small">
+      Halving and doubling operate on the native A8 frequency value. The physical browser oscillator is translated afterward.
+    </p>
+  </section>
+
+  <section class="panel reference-read" id="conversionBox">
+    <h2>Reference translation — audio-output boundary</h2>
+    <p>
+      A8 frequency is counted in <b>cycles per A8 SECOND</b>. The A8 timebase is referenced to the
+      Jovian 1:2:4 recovery architecture — <b>Io ×4 · Europa ×2 · Ganymede ×1</b>.
+      The conventional value below exists only so the browser audio engine can render the selected
+      native A8 frequency. It is an implementation reference, not the A8 frequency ruler.
+    </p>
+    <div class="trainer-note">
+      <div>
+        <span class="k">Selected A8 frequency</span>
+        <div class="big" id="convA8">512</div>
+        <div class="small">cycles / A8 second</div>
+      </div>
+      <div>
+        <span class="k">Web Audio output target</span>
+        <div class="big" id="convHz">776.722963</div>
+        <div class="small">Hz · implementation reference</div>
+      </div>
+      <div>
+        <span class="k">A8 timebase reference</span>
+        <div class="big">Jovian 1:2:4 recovery</div>
+        <div class="small">Io ×4 · Europa ×2 · Ganymede ×1</div>
+      </div>
+      <div>
+        <span class="k">Output boundary</span>
+        <div class="big">A8 defines the frequency</div>
+        <div class="small">Web Audio renders it through conventional browser / audio hardware</div>
+      </div>
+    </div>
+  </section>
+
+<script>
+let ctx = null;
+let osc = null;
+let gain = null;
+let analyser = null;
+let scopeData = null;
+let scopeFrame = null;
+let currentA8 = null;
+
+// Exact development translation from the current A8 clock:
+// 1 A8 second = 675 / 1024 conventional seconds.
+const A8_TO_LEGACY_HZ = 1024 / 675;
+const LEGACY_HZ_TO_A8 = 675 / 1024;
+
+const ladder = [16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768];
+
+const $ = id => document.getElementById(id);
+
+function a8ToLegacyHz(a8Frequency) {
+  return a8Frequency * A8_TO_LEGACY_HZ;
+}
+
+function legacyHzToA8(hz) {
+  return hz * LEGACY_HZ_TO_A8;
+}
+
+function formatA8(v) {
+  if (Number.isInteger(v)) return String(v);
+  return Number(v.toFixed(6)).toString();
+}
+
+function formatHz(v) {
+  return Number(v).toFixed(6).replace(/0+$/,'').replace(/\.$/,'');
+}
+
+function octaveDistanceFromAnchor(a8Frequency) {
+  const ratio = a8Frequency / 512;
+  if (!(ratio > 0)) return null;
+  const oct = Math.log2(ratio);
+  const nearest = Math.round(oct);
+  return Math.abs(oct - nearest) < 1e-10 ? nearest : oct;
+}
+
+function formatOctaveDistance(a8Frequency) {
+  const oct = octaveDistanceFromAnchor(a8Frequency);
+  if (oct === null) return '—';
+  if (Number.isInteger(oct)) {
+    if (oct === 0) return 'anchor · 0 octaves';
+    return (oct > 0 ? '+' : '−') + Math.abs(oct) + (Math.abs(oct) === 1 ? ' octave' : ' octaves');
+  }
+  return (oct > 0 ? '+' : '−') + Math.abs(oct).toFixed(3) + ' octaves';
+}
+
+function ensureAudio() {
+  if (!ctx) {
+    ctx = new (window.AudioContext || window.webkitAudioContext)();
+
+    // Passive downstream measurement node.
+    // It uses the browser sample clock only to visualize the rendered signal;
+    // it has no authority over native A8 frequency.
+    analyser = ctx.createAnalyser();
+    analyser.fftSize = 32768;
+    analyser.smoothingTimeConstant = 0;
+    scopeData = new Float32Array(analyser.fftSize);
+    analyser.connect(ctx.destination);
+
+    refreshHardwareLimits();
+    startScope();
+  }
+  if (ctx.state === "suspended") ctx.resume();
+}
+
+function maxPlayableHz() {
+  return ctx ? ctx.sampleRate / 2 : 22050;
+}
+
+function drawScope() {
+  const canvas = $('scope');
+  if (!canvas) return;
+
+  const g = canvas.getContext('2d');
+  const rect = canvas.getBoundingClientRect();
+  const dpr = window.devicePixelRatio || 1;
+  const pixelW = Math.max(1, Math.round(rect.width * dpr));
+  const pixelH = Math.max(1, Math.round(rect.height * dpr));
+
+  if (canvas.width !== pixelW || canvas.height !== pixelH) {
+    canvas.width = pixelW;
+    canvas.height = pixelH;
+  }
+
+  g.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+  const w = rect.width;
+  const h = rect.height;
+
+  g.clearRect(0, 0, w, h);
+
+  // Neutral scope guides.
+  g.lineWidth = 1;
+  g.strokeStyle = 'rgba(128,128,128,.28)';
+  g.beginPath();
+
+  g.moveTo(0, h / 2);
+  g.lineTo(w, h / 2);
+
+  g.moveTo(w / 4, 0);
+  g.lineTo(w / 4, h);
+
+  g.moveTo(w / 2, 0);
+  g.lineTo(w / 2, h);
+
+  g.moveTo(3 * w / 4, 0);
+  g.lineTo(3 * w / 4, h);
+
+  g.stroke();
+
+  if (!analyser || !scopeData || !ctx || !currentA8) {
+    $('scopeWindow').textContent = '—';
+    return;
+  }
+
+  analyser.getFloatTimeDomainData(scopeData);
+
+  // Horizontal authority is now the investigator-selected A8 time window.
+  // Frequency does NOT determine the displayed window length.
+  const windowA8 = Number($('scopeTime').value);
+
+  // Browser-only translation needed to determine how many sampled
+  // points correspond to the selected native A8 interval.
+  const windowLegacySeconds = windowA8 * (675 / 1024);
+  const wanted = Math.round(ctx.sampleRate * windowLegacySeconds);
+
+  const visible = Math.max(
+    32,
+    Math.min(scopeData.length, wanted)
+  );
+
+  // Number of cycles that physically belong inside the selected
+  // A8 time interval.
+  const expectedCycles = currentA8 * windowA8;
+
+  // Sub-sample rising-edge trigger.
+  //
+  // A whole-sample trigger produces increasing visible phase jitter
+  // as frequency rises. Interpolate between the two samples around
+  // the zero crossing so the display trigger is fractional rather
+  // than quantized to the browser sample interval.
+  let triggerPos = 0;
+  const latestTrigger = scopeData.length - visible - 2;
+
+  if (latestTrigger > 1) {
+    for (let i = 1; i <= latestTrigger; i++) {
+      const y0 = scopeData[i - 1];
+      const y1 = scopeData[i];
+
+      if (y0 <= 0 && y1 > 0) {
+        const dy = y1 - y0;
+        const fraction = dy !== 0 ? (-y0 / dy) : 0;
+
+        triggerPos = (i - 1) + fraction;
+        break;
+      }
+    }
+  }
+
+  function scopeSampleAt(position) {
+    const i0 = Math.floor(position);
+    const f = position - i0;
+
+    const a = scopeData[i0] ?? 0;
+    const b =
+      scopeData[Math.min(i0 + 1, scopeData.length - 1)] ?? a;
+
+    return a + (b - a) * f;
+  }
+
+  let peak = 0;
+
+  for (let i = 0; i < visible; i++) {
+    const a = Math.abs(scopeSampleAt(triggerPos + i));
+    if (a > peak) peak = a;
+  }
+
+  if (peak < 1e-7) {
+    $('scopeWindow').textContent = 'signal at zero';
+    return;
+  }
+
+  // Auto-scale vertically so waveform SHAPE remains visible
+  // independently of listening volume.
+  const vertical = (h * 0.40) / peak;
+
+  const accent = getComputedStyle(document.documentElement)
+    .getPropertyValue('--accent').trim() || '#6d9cff';
+
+  g.lineWidth = 2;
+  g.strokeStyle = accent;
+  g.beginPath();
+
+  for (let i = 0; i < visible; i++) {
+    const x =
+      visible <= 1
+        ? 0
+        : (i / (visible - 1)) * w;
+
+    const y =
+      h / 2 -
+      scopeSampleAt(triggerPos + i) * vertical;
+
+    if (i === 0) g.moveTo(x, y);
+    else g.lineTo(x, y);
+  }
+
+  g.stroke();
+
+  const windowLabel =
+    $('scopeTime').options[$('scopeTime').selectedIndex].text;
+
+  $('scopeWindow').textContent =
+    wanted <= scopeData.length
+      ? windowLabel + ' · ' + formatA8(expectedCycles) + ' cycles'
+      : windowLabel + ' · analyzer buffer limit';
+}
+
+function startScope() {
+  if (scopeFrame !== null) return;
+
+  const tick = () => {
+    drawScope();
+    scopeFrame = requestAnimationFrame(tick);
+  };
+
+  tick();
+}
+
+function canPlayA8(a8Frequency) {
+  return a8ToLegacyHz(a8Frequency) < maxPlayableHz();
+}
+
+function updateReference(a8Frequency) {
+  const hz = a8ToLegacyHz(a8Frequency);
+  $('convA8').textContent = formatA8(a8Frequency);
+  $('convHz').textContent = formatHz(hz);
+}
+
+// Audible-output boundary only.
+// A8 frequency remains authoritative in cycles per A8 SECOND.
+// Web Audio is used only to render that native frequency through
+// conventional browser/audio hardware.
+const AUDIO_ATTACK_SEC = 0.025;
+const AUDIO_RELEASE_SEC = 0.035;
+
+function stopTone(updateReadout = true) {
+  const oldOsc = osc;
+  const oldGain = gain;
+
+  osc = null;
+  gain = null;
+  currentA8 = null;
+
+  if ($('scopeFreq')) {
+    $('scopeFreq').textContent = "Stopped";
+  }
+
+  if (oldGain && ctx) {
+    const now = ctx.currentTime;
+    try {
+      oldGain.gain.cancelScheduledValues(now);
+      oldGain.gain.setValueAtTime(oldGain.gain.value, now);
+      oldGain.gain.linearRampToValueAtTime(0, now + AUDIO_RELEASE_SEC);
+    } catch(e) {}
+  }
+
+  if (oldOsc && ctx) {
+    try { oldOsc.stop(ctx.currentTime + AUDIO_RELEASE_SEC + 0.005); } catch(e) {}
+    oldOsc.onended = () => {
+      try { oldOsc.disconnect(); } catch(e) {}
+      try { oldGain && oldGain.disconnect(); } catch(e) {}
+    };
+  } else {
+    try { oldOsc && oldOsc.disconnect(); } catch(e) {}
+    try { oldGain && oldGain.disconnect(); } catch(e) {}
+  }
+
+  if (updateReadout) {
+    $('a8Read').textContent = "Stopped";
+    $('legacyRead').textContent = "—";
+    $('relationRead').textContent = "Choose an A8 frequency.";
+    $('octaveRead').textContent = "—";
+  }
+}
+
+function playA8(a8Frequency) {
+  const a8 = Number(a8Frequency);
+  if (!Number.isFinite(a8) || a8 <= 0) return;
+
+  ensureAudio();
+  const hz = a8ToLegacyHz(a8);
+  updateReference(a8);
+
+  if (hz >= maxPlayableHz()) {
+    stopTone();
+    $('a8Read').textContent = formatA8(a8) + " cycles / A8s";
+    $('legacyRead').textContent = "≈ " + formatHz(hz) + " Hz";
+    $('relationRead').textContent =
+      "A8 value is valid, but this browser's Nyquist limit is ≈ " +
+      formatHz(maxPlayableHz()) + " Hz.";
+    $('octaveRead').textContent = formatOctaveDistance(a8);
+    return;
+  }
+
+  stopTone(false);
+  currentA8 = a8;
+
+  osc = ctx.createOscillator();
+  gain = ctx.createGain();
+
+  const now = ctx.currentTime;
+  const level = Number($('vol').value);
+
+  // Sine remains the default/reference source.
+  // Other waveform shapes are downstream synthesis /
+  // visualization experiments only.
+  // Frequency authority remains the native A8 value.
+  osc.type = $('wave').value;
+  osc.frequency.setValueAtTime(hz, now);
+
+  gain.gain.setValueAtTime(0, now);
+  gain.gain.linearRampToValueAtTime(level, now + AUDIO_ATTACK_SEC);
+
+  osc.connect(gain);
+  gain.connect(analyser);
+  osc.start(now);
+
+  $('a8Read').textContent = formatA8(a8) + " cycles / A8s";
+  $('legacyRead').textContent = "≈ " + formatHz(hz) + " Hz";
+  $('relationRead').textContent =
+    a8 === 512
+      ? "512 is the native A8 trainer anchor."
+      : "Native A8 frequency · browser conversion occurs only at the audio-output boundary.";
+  $('octaveRead').textContent = formatOctaveDistance(a8);
+
+  $('scopeFreq').textContent =
+    formatA8(a8) + " cycles / A8s";
+
+  $('scopeWave').textContent =
+    $('wave').options[$('wave').selectedIndex].text;
+}
+
+function refreshHardwareLimits() {
+  document.querySelectorAll(".freq-btn").forEach(btn => {
+    const a8 = Number(btn.dataset.a8);
+    const limited = !canPlayA8(a8);
+    btn.disabled = limited;
+    if (limited) {
+      btn.title = "Theoretical A8 value; browser/audio hardware limit prevents clean playback.";
+      btn.querySelector(".legacy-ref").textContent =
+        "≈ " + formatHz(a8ToLegacyHz(a8)) + " Hz · hardware limit";
+    }
+  });
+}
+
+const buttons = $('buttons');
+ladder.forEach(a8 => {
+  const btn = document.createElement("button");
+  btn.className = "freq-btn";
+  btn.dataset.a8 = String(a8);
+  if (a8 === 512) btn.classList.add("anchor");
+
+  const nativeValue = document.createElement("span");
+  nativeValue.className = "native-value";
+  nativeValue.textContent = formatA8(a8);
+
+  const nativeUnit = document.createElement("span");
+  nativeUnit.className = "native-unit";
+  nativeUnit.textContent = "cycles / A8 second";
+
+  const octaveRef = document.createElement("span");
+  octaveRef.className = "octave-ref";
+  octaveRef.textContent = formatOctaveDistance(a8) + " from 512";
+
+  const legacyRef = document.createElement("span");
+  legacyRef.className = "legacy-ref";
+  legacyRef.textContent = "≈ " + formatHz(a8ToLegacyHz(a8)) + " Hz ref";
+
+  btn.append(nativeValue, nativeUnit, octaveRef, legacyRef);
+  btn.addEventListener("click", () => {
+    $('freq').value = a8;
+    playA8(a8);
+  });
+  buttons.appendChild(btn);
+});
+
+$('stop').addEventListener("click", stopTone);
+
+$('playDirect').addEventListener("click", () => {
+  const a8 = Number($('freq').value);
+  if (Number.isFinite(a8) && a8 > 0) playA8(a8);
+});
+
+$('half').addEventListener("click", () => {
+  let a8 = Number($('freq').value);
+  if (!Number.isFinite(a8) || a8 <= 0) a8 = 512;
+  a8 = a8 / 2;
+  $('freq').value = formatA8(a8);
+  playA8(a8);
+});
+
+$('double').addEventListener("click", () => {
+  let a8 = Number($('freq').value);
+  if (!Number.isFinite(a8) || a8 <= 0) a8 = 512;
+  a8 = a8 * 2;
+  $('freq').value = formatA8(a8);
+  playA8(a8);
+});
+
+$('freq').addEventListener("input", () => {
+  const a8 = Number($('freq').value);
+  if (Number.isFinite(a8) && a8 > 0) updateReference(a8);
+});
+
+$('freq').addEventListener("keydown", e => {
+  if (e.key === "Enter") $('playDirect').click();
+});
+
+// Sine remains the default/reference waveform.
+// Triangle, square and sawtooth are downstream sound/scope
+// experiments; changing waveform never changes native A8 frequency.
+$('wave').value = "sine";
+$('scopeWave').textContent = "Sine";
+
+$('wave').addEventListener("change", () => {
+  const selected = $('wave').value;
+
+  $('scopeWave').textContent =
+    $('wave').options[$('wave').selectedIndex].text;
+
+  if (osc) {
+    try {
+      osc.type = selected;
+    } catch(e) {}
+  }
+});
+
+$('vol').addEventListener("input", () => {
+  if (gain && ctx) {
+    gain.gain.setTargetAtTime(
+      Number($('vol').value),
+      ctx.currentTime,
+      0.015
+    );
+  }
+});
+
+$('hideLegacy').addEventListener("change", () => {
+  document.body.classList.toggle("hidden-ref", $('hideLegacy').checked);
+});
+
+updateReference(512);
+drawScope();
+</script>
+<footer class="cosigo-site-footer">
+  <strong>COSIGO Labs · Auspicious 8 experimental laboratory</strong>
+  <p class="cosigo-disclaimer">Research / engineering notice: A8 pages may contain provisional models, simulations, comparison values, hypotheses and unreplicated experiment designs. Unless a page explicitly states otherwise, material shown here is not a certified metrology standard, accredited measurement result, or final Foundation definition. Legacy / SI values are comparison coordinates where identified, not native A8 authority.</p>
+  <p class="cosigo-disclaimer">COSIGO is primarily an educational and experimental project. Nothing in this laboratory is an investment offering, promise of financial return, or financial, investment, legal or tax advice. See the project-status notice for the current public description.</p>
+  <div class="cosigo-footer-links">
+    <a href="https://cosigo.io/">COSIGO Home</a>
+    <a href="https://a8.cosigo.io/">A8 Public Instrument</a>
+    <a href="/">A8 Engineering Lab</a>
+    <a href="https://contact.cosigo.io/">Contact</a>
+    <a href="https://docs.cosigo.io/">COSIGO Docs / WP</a>
+    <a href="https://github.com/cosigo">COSIGO GitHub</a>
+    <a href="https://github.com/cosigo/cosigo.io">Main-site source</a>
+    <a href="https://cosigo.io/project-status.html">Educational Purpose / Project Status</a>
+  </div>
+  <p>© 2026 COSIGO. COSIGO™ rights and trademark notices remain governed by the official COSIGO site.</p>
+</footer>
+</body>
+</html>
