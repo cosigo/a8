@@ -85,6 +85,14 @@ class Core20ServerOwnedRuntime {
     this.rawPerDayDenominator = null;
     this.alignment = null;
     this.alignmentSeq = 0;
+
+    /*
+     * Diagnostic state only.
+     * True after HOLD / RESUME preserved an old civil alignment
+     * while intentionally discarding held elapsed time.
+     */
+    this.civilRealignRecommended = false;
+
     this.startPromise = null;
 
     /*
@@ -140,6 +148,7 @@ class Core20ServerOwnedRuntime {
     this.status = 'QUALIFYING';
     this.lastError = null;
     this.alignment = null;
+    this.civilRealignRecommended = false;
 
     try {
       await this.prepareVirtual({
@@ -242,6 +251,14 @@ class Core20ServerOwnedRuntime {
     this.lastError = null;
     this.status = 'RUNNING';
 
+    /*
+     * Held elapsed time remains lost.
+     * If an alignment exists, Chief Engineer may explicitly
+     * restore current civil within-day phase afterward.
+     */
+    this.civilRealignRecommended =
+      !!this.alignment;
+
     this.timer =
       this.setIntervalFn(
         () => {
@@ -309,7 +326,19 @@ class Core20ServerOwnedRuntime {
       exactNumerator /
       this.rawPerDayNumerator;
 
+    const alignmentDayCount =
+      this.alignment.targetDayCount !==
+        undefined &&
+      this.alignment.targetDayCount !==
+        null
+        ? BigInt(
+            this.alignment.targetDayCount
+          )
+        : 0n;
+
     const total =
+      alignmentDayCount *
+        DAY_STATES +
       BigInt(
         this.alignment.targetDayPhase17
       ) +
@@ -434,10 +463,140 @@ class Core20ServerOwnedRuntime {
       ongoingUtcFeed: false,
     };
 
+    this.civilRealignRecommended =
+      false;
+
     return {
       applied: true,
       alignment: { ...this.alignment },
       clock: this.clockSnapshot(),
+    };
+  }
+
+  /*
+   * CHIEF ENGINEER · MOMENTARY CIVIL RE-ALIGN
+   *
+   * After diagnostic HOLD / RESUME:
+   * - preserve native integer dayCount
+   * - sample UTC once for DAY_PHASE17
+   * - no outage inference
+   * - no ongoing UTC feed
+   * - UTC cannot advance YEAR DAY
+   */
+  realignCivilPhase() {
+    if (this.status !== 'RUNNING') {
+      throw new Error(
+        `civil re-align requires RUNNING Core20; current=${this.status}`
+      );
+    }
+
+    if (!this.civilRealignRecommended) {
+      throw new Error(
+        'civil re-align is available only after diagnostic resume'
+      );
+    }
+
+    const epoch =
+      String(
+        this.getSourceEpoch()
+      );
+
+    if (
+      !this.alignment ||
+      this.alignment.sourceEpoch !== epoch
+    ) {
+      throw new Error(
+        'civil re-align requires existing same-epoch alignment'
+      );
+    }
+
+    const before =
+      this._clockCoordinate();
+
+    if (!before) {
+      throw new Error(
+        'civil re-align could not obtain current Core20 coordinate'
+      );
+    }
+
+    const preservedDayCount =
+      before.dayCount;
+
+    const utcMs =
+      utcMillisecondsSinceMidnight(
+        this.utcNow()
+      );
+
+    const targetPhase =
+      (utcMs * DAY_STATES) /
+      HOST_DAY_MS;
+
+    const raw =
+      BigInt(
+        this.getRaw()
+      );
+
+    this.alignmentSeq += 1;
+
+    this.alignment = {
+      source:
+        'SERVER UTC BRIDGE · EXTERNAL CONVENTIONAL REFERENCE · NON-DEFINING',
+
+      role:
+        'MOMENTARY_CIVIL_REALIGN_AFTER_DIAGNOSTIC_HOLD',
+
+      sourceEpoch:
+        epoch,
+
+      serverStampedRawPulse:
+        raw.toString(),
+
+      targetDayCount:
+        preservedDayCount.toString(),
+
+      targetDayPhase17:
+        targetPhase.toString(),
+
+      utcMillisecondsSinceMidnight:
+        utcMs.toString(),
+
+      sequence:
+        this.alignmentSeq,
+
+      definingPathTouched:
+        false,
+
+      ongoingUtcFeed:
+        false,
+
+      preservesNativeDayCount:
+        true,
+
+      lostElapsedTimeRecovered:
+        false,
+
+      outageDayInference:
+        false,
+
+      utcMayAdvanceCalendarDay:
+        false,
+    };
+
+    this.civilRealignRecommended =
+      false;
+
+    return {
+      applied:
+        true,
+
+      preservedDayCount:
+        preservedDayCount.toString(),
+
+      alignment:
+        { ...this.alignment },
+
+      clock:
+        this.clockSnapshot(),
     };
   }
 
@@ -477,8 +636,23 @@ class Core20ServerOwnedRuntime {
     const completedStates = exactNumerator / exactDenominator;
     const substateNumerator = exactNumerator % exactDenominator;
 
+    const alignmentDayCount =
+      this.alignment.targetDayCount !==
+        undefined &&
+      this.alignment.targetDayCount !==
+        null
+        ? BigInt(
+            this.alignment.targetDayCount
+          )
+        : 0n;
+
     const total =
-      BigInt(this.alignment.targetDayPhase17) + completedStates;
+      alignmentDayCount *
+        DAY_STATES +
+      BigInt(
+        this.alignment.targetDayPhase17
+      ) +
+      completedStates;
     const dayCount = total / DAY_STATES;
     const phase = total % DAY_STATES;
     const fields = clockFields(phase);
@@ -539,8 +713,16 @@ class Core20ServerOwnedRuntime {
         this.rawPerDayNumerator === null
           ? null
           : `${this.rawPerDayNumerator}/${this.rawPerDayDenominator}`,
-      alignmentEstablished: !!this.alignment,
-      alignment: this.alignment ? { ...this.alignment } : null,
+      alignmentEstablished:
+        !!this.alignment,
+
+      civilRealignRecommended:
+        this.civilRealignRecommended,
+
+      alignment:
+        this.alignment
+          ? { ...this.alignment }
+          : null,
     };
   }
 }

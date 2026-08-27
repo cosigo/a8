@@ -80,6 +80,14 @@ const {
   A8YearAngleJplBridge,
 } = require('../observer/a8-year-angle-jpl-bridge');
 
+const {
+  A8Core20CalendarAnchor,
+} = require('../observer/a8-core20-calendar-anchor');
+
+const {
+  A8Core20FlightRecorder,
+} = require('../observer/a8-core20-flight-recorder');
+
 const DEFAULT_HOST =
   process.env.HOST || '127.0.0.1';
 
@@ -789,6 +797,46 @@ function createHardwareLabServer({
           currentSolOrbitalScale(),
     });
 
+  /*
+   * SERVER-OWNED NATIVE A8 CALENDAR
+   *
+   * Absolute year angle remains read-only orientation.
+   * Native YEAR DAY is anchored separately once per source epoch.
+   * Only Core20 integer dayCount advances the running calendar.
+   */
+  const calendarAnchor =
+    new A8Core20CalendarAnchor({
+      getClock:
+        () =>
+          core20Runtime.clockSnapshot(),
+
+      getYearAngle:
+        () =>
+          yearAngleBridge.snapshot(),
+    });
+
+  /*
+   * CORE20 NATIVE FLIGHT RECORDER
+   *
+   * Chief Engineer diagnostic observer only.
+   * No time authority. No plant writes.
+   * No UTC / host / browser timing.
+   */
+  const flightRecorder =
+    new A8Core20FlightRecorder({
+      maxEvents: 512,
+    });
+
+  flightRecorder.record(
+    'RECORDER',
+    'CORE20 FLIGHT RECORDER ARMED',
+    null,
+    {
+      diagnosticOnly: true,
+      authority: 'NONE',
+    }
+  );
+
   nativeDittyBridge =
     new A8Core20NativeDittyBridge({
       getRaw:
@@ -876,6 +924,149 @@ function createHardwareLabServer({
       publishCore20Edge
     );
 
+  /*
+   * Calendar restart persistence is downstream of the authoritative
+   * Core20 clock-edge stream. It observes sourceEpoch + integer dayCount
+   * and writes only when the integer day changes (plus one restart rebase).
+   *
+   * Persistence failure must never stop or alter Core20.
+   */
+  const removeCalendarPersistenceEdgeListener =
+    core20Runtime.onClockEdge(
+      edge => {
+        try {
+          calendarAnchor.observeClockEdge(
+            edge
+          );
+        } catch (err) {
+          console.error(
+            'A8 CALENDAR PERSISTENCE OBSERVER ·',
+            err && err.message
+              ? err.message
+              : String(err)
+          );
+        }
+      }
+    );
+
+  /*
+   * Flight recorder observes the authoritative Core20 edge stream.
+   *
+   * It deliberately does NOT record every A8-second edge.
+   * Only sourceEpoch and integer civil-day transitions are retained.
+   *
+   * Recorder failure must never stop or alter Core20.
+   */
+  let recorderLastSourceEpoch = null;
+  let recorderLastDayCount = null;
+
+  const removeFlightRecorderEdgeListener =
+    core20Runtime.onClockEdge(
+      edge => {
+        try {
+          const sourceEpoch =
+            edge &&
+            edge.sourceEpoch !== undefined &&
+            edge.sourceEpoch !== null
+              ? String(edge.sourceEpoch)
+              : null;
+
+          const dayCount =
+            edge &&
+            edge.dayCount !== undefined &&
+            edge.dayCount !== null
+              ? String(edge.dayCount)
+              : null;
+
+          const recorderState = {
+            sourceEpoch,
+
+            rawPulse:
+              edge &&
+              (
+                edge.rawPulse ??
+                edge.rawCount
+              ),
+
+            dayPhase17:
+              edge &&
+              (
+                edge.dayPhase17 ??
+                edge.DAY_PHASE17
+              ),
+
+            dayCount,
+
+            calendar:
+              calendarAnchor.snapshot(),
+          };
+
+          if (
+            sourceEpoch !== null &&
+            sourceEpoch !==
+              recorderLastSourceEpoch
+          ) {
+            flightRecorder.record(
+              recorderLastSourceEpoch === null
+                ? 'SOURCE_EPOCH_BASELINE'
+                : 'SOURCE_EPOCH_CHANGE',
+
+              recorderLastSourceEpoch === null
+                ? 'SOURCE EPOCH OBSERVED'
+                : 'SOURCE EPOCH CHANGED',
+
+              recorderState,
+
+              {
+                previous:
+                  recorderLastSourceEpoch,
+                current:
+                  sourceEpoch,
+              }
+            );
+
+            recorderLastSourceEpoch =
+              sourceEpoch;
+          }
+
+          if (
+            dayCount !== null &&
+            dayCount !==
+              recorderLastDayCount
+          ) {
+            flightRecorder.record(
+              recorderLastDayCount === null
+                ? 'CLOCK_DAY_BASELINE'
+                : 'CALENDAR_DAY_CHANGE',
+
+              recorderLastDayCount === null
+                ? 'CORE20 INTEGER DAY OBSERVED'
+                : 'CORE20 INTEGER DAY CHANGED',
+
+              recorderState,
+
+              {
+                previous:
+                  recorderLastDayCount,
+                current:
+                  dayCount,
+              }
+            );
+
+            recorderLastDayCount =
+              dayCount;
+          }
+        } catch (err) {
+          console.error(
+            'A8 FLIGHT RECORDER OBSERVER ·',
+            err && err.message
+              ? err.message
+              : String(err)
+          );
+        }
+      }
+    );
+
   const ensureCore20RuntimeRunning = async () => {
     if (core20Runtime.status !== 'RUNNING') await core20Runtime.start();
     return core20Runtime.snapshot();
@@ -889,6 +1080,69 @@ function createHardwareLabServer({
             req.url,
             `http://${req.headers.host || '127.0.0.1'}`
           );
+
+        /*
+         * CHIEF ENGINEER · CORE20 FLIGHT RECORDER
+         *
+         * Caddy protects this GET/POST surface.
+         * Recorder state is diagnostic only.
+         */
+        if (
+          req.method === 'GET' &&
+          url.pathname ===
+            '/api/core20/flight-recorder'
+        ) {
+          return sendJson(
+            res,
+            200,
+            {
+              ok: true,
+              recorder:
+                flightRecorder.snapshot(80),
+            }
+          );
+        }
+
+        if (
+          req.method === 'POST' &&
+          url.pathname ===
+            '/api/core20/flight-recorder/clear'
+        ) {
+          try {
+            const body =
+              await readJsonBody(req);
+
+            if (
+              Object.keys(body).length !== 0
+            ) {
+              throw new Error(
+                'FLIGHT RECORDER CLEAR accepts no fields'
+              );
+            }
+
+            return sendJson(
+              res,
+              200,
+              {
+                ok: true,
+                recorder:
+                  flightRecorder.clear(),
+              }
+            );
+          } catch (err) {
+            return sendJson(
+              res,
+              400,
+              {
+                ok: false,
+                error:
+                  err && err.message
+                    ? err.message
+                    : String(err),
+              }
+            );
+          }
+        }
 
         if (
           req.method === 'GET' &&
@@ -1011,6 +1265,79 @@ function createHardwareLabServer({
                 yearAngleBridge.snapshot(),
             }
           );
+        }
+
+        if (
+          req.method === 'GET' &&
+          url.pathname ===
+            '/api/core20/calendar'
+        ) {
+          return sendJson(
+            res,
+            200,
+            {
+              ok: true,
+              calendar:
+                calendarAnchor.snapshot(),
+            }
+          );
+        }
+
+        if (
+          req.method === 'POST' &&
+          url.pathname ===
+            '/api/core20/calendar/anchor'
+        ) {
+          try {
+            const body =
+              await readJsonBody(req);
+
+            const allowed =
+              new Set(['yearDay']);
+
+            for (const key of Object.keys(body)) {
+              if (!allowed.has(key)) {
+                throw new Error(
+                  `unsupported native calendar anchor field: ${key}`
+                );
+              }
+            }
+
+            if (
+              Object.keys(body).length !== 1 ||
+              !Object.prototype.hasOwnProperty.call(body, 'yearDay')
+            ) {
+              throw new Error(
+                'NATIVE CALENDAR ANCHOR accepts exactly one field: yearDay'
+              );
+            }
+
+            const result =
+              calendarAnchor.establish(body.yearDay);
+
+            return sendJson(
+              res,
+              200,
+              {
+                ok: true,
+                anchorApplied:
+                  result.applied,
+                result,
+              }
+            );
+          } catch (err) {
+            return sendJson(
+              res,
+              400,
+              {
+                ok: false,
+                error:
+                  err && err.message
+                    ? err.message
+                    : String(err),
+              }
+            );
+          }
         }
 
         if (
@@ -1232,6 +1559,78 @@ function createHardwareLabServer({
               400,
               {
                 ok: false,
+                error:
+                  err && err.message
+                    ? err.message
+                    : String(err),
+              }
+            );
+          }
+        }
+
+        /*
+         * CHIEF ENGINEER · MOMENTARY CIVIL RE-ALIGN
+         */
+        if (
+          req.method === 'POST' &&
+          url.pathname ===
+            '/api/core20/civil-realign'
+        ) {
+          try {
+            const body =
+              await readJsonBody(req);
+
+            if (
+              Object.keys(body).length !== 0
+            ) {
+              throw new Error(
+                'CIVIL RE-ALIGN accepts no fields'
+              );
+            }
+
+            const result =
+              core20Runtime.realignCivilPhase();
+
+            return sendJson(
+              res,
+              200,
+              {
+                ok:
+                  true,
+
+                mode:
+                  'MOMENTARY_CIVIL_REALIGN_AFTER_DIAGNOSTIC_HOLD',
+
+                preservedNativeDayCount:
+                  result.preservedDayCount,
+
+                lostElapsedTimeRecovered:
+                  false,
+
+                outageDayInference:
+                  false,
+
+                utcMayAdvanceCalendarDay:
+                  false,
+
+                alignment:
+                  result.alignment,
+
+                clock:
+                  result.clock,
+
+                runtime:
+                  core20Runtime.snapshot(),
+              }
+            );
+          } catch (err) {
+            return sendJson(
+              res,
+              400,
+              {
+                ok:
+                  false,
+
                 error:
                   err && err.message
                     ? err.message
@@ -2131,6 +2530,8 @@ function createHardwareLabServer({
     nativeDittyClients.clear();
     nativeDittyBridge.reset();
 
+    removeFlightRecorderEdgeListener();
+
     removeCore20EdgeListener();
 
     for (
@@ -2156,6 +2557,7 @@ function createHardwareLabServer({
     earthObservationBridge,
     core20Runtime,
     nativeDittyBridge,
+    flightRecorder,
   };
 }
 

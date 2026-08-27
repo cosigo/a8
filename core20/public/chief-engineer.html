@@ -1,0 +1,1452 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chief Engineer · Core20 | Auspicious 8</title>
+
+<style>
+:root{
+  color-scheme:dark;
+  --bg:#080d12;
+  --panel:#101820;
+  --panel2:#0c131a;
+  --line:#293844;
+  --text:#e9f1f7;
+  --muted:#8fa4b5;
+  --good:#7fdaa0;
+  --warn:#e0bd72;
+  --bad:#ff8a80;
+  --blue:#79b7ff;
+  --cyan:#70e5f3;
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+}
+
+header{
+  border-bottom:1px solid var(--line);
+  background:#070b0f;
+  padding:18px 22px;
+}
+
+.header-inner,
+main{
+  max-width:1500px;
+  margin:auto;
+}
+
+.topline{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  flex-wrap:wrap;
+}
+
+h1{
+  margin:0;
+  font-size:clamp(1.6rem,4vw,2.8rem);
+}
+
+.kicker{
+  color:var(--warn);
+  font-weight:900;
+  letter-spacing:.10em;
+  font-size:.72rem;
+}
+
+.subtitle{
+  margin:8px 0 0;
+  color:var(--muted);
+  line-height:1.5;
+}
+
+nav{
+  margin-left:auto;
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
+
+a.button,
+button{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:40px;
+  padding:9px 13px;
+  border-radius:9px;
+  border:1px solid #496174;
+  background:#111c25;
+  color:var(--text);
+  font:inherit;
+  font-weight:850;
+  text-decoration:none;
+  cursor:pointer;
+}
+
+button:hover,
+a.button:hover{
+  border-color:#7aa5c5;
+}
+
+button:disabled{
+  opacity:.38;
+  cursor:not-allowed;
+}
+
+button.primary{
+  border-color:#558ed4;
+  background:#10233a;
+}
+
+button.warn{
+  border-color:#b68a38;
+  background:#2b2110;
+}
+
+button.danger{
+  border-color:#a54e48;
+  background:#301614;
+}
+
+main{
+  padding:20px 18px 72px;
+}
+
+.panel{
+  border:1px solid var(--line);
+  border-radius:14px;
+  background:var(--panel);
+  padding:16px;
+  margin-bottom:16px;
+}
+
+.panel h2{
+  margin:0 0 12px;
+  font-size:1.08rem;
+}
+
+.note{
+  color:var(--muted);
+  line-height:1.55;
+  font-size:.82rem;
+}
+
+.good{color:var(--good)}
+.warn-text{color:var(--warn)}
+.bad{color:var(--bad)}
+.blue{color:var(--blue)}
+.cyan{color:var(--cyan)}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:10px;
+}
+
+.stat{
+  min-width:0;
+  padding:11px;
+  border:1px solid var(--line);
+  border-radius:10px;
+  background:var(--panel2);
+}
+
+.stat .k{
+  display:block;
+  color:var(--muted);
+  font-size:.66rem;
+  letter-spacing:.08em;
+}
+
+.stat .v{
+  display:block;
+  margin-top:5px;
+  font-weight:900;
+  overflow-wrap:anywhere;
+}
+
+.controls{
+  display:flex;
+  flex-wrap:wrap;
+  gap:9px;
+  align-items:center;
+}
+
+input,
+select{
+  min-height:40px;
+  padding:8px 10px;
+  border:1px solid #496174;
+  border-radius:8px;
+  background:#091017;
+  color:var(--text);
+  font:inherit;
+}
+
+.workflow{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:8px;
+}
+
+.step{
+  padding:12px;
+  border:1px solid var(--line);
+  border-radius:10px;
+  background:#0d151c;
+}
+
+.step b{
+  display:block;
+  margin-bottom:6px;
+  color:var(--cyan);
+}
+
+details{
+  border:1px solid var(--line);
+  border-radius:10px;
+  margin-top:12px;
+  overflow:hidden;
+}
+
+summary{
+  cursor:pointer;
+  padding:11px 13px;
+  font-weight:900;
+}
+
+details > .inside{
+  padding:0 13px 13px;
+}
+
+pre{
+  white-space:pre-wrap;
+  overflow-wrap:anywhere;
+  overflow:auto;
+  margin:0;
+  padding:12px;
+  border:1px solid #263640;
+  border-radius:8px;
+  background:#060b0f;
+  line-height:1.45;
+  font-size:.76rem;
+  max-height:540px;
+}
+
+#recorderLog{
+  min-height:280px;
+}
+
+.recorder-toolbar{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-bottom:10px;
+}
+
+.filter.active{
+  border-color:var(--cyan);
+  color:var(--cyan);
+}
+
+.danger-zone{
+  border-color:#7e3a35;
+  background:#1b0e0d;
+}
+
+.danger-zone h2{
+  color:#ff9c92;
+}
+
+.statusline{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:12px;
+}
+
+.pill{
+  padding:6px 9px;
+  border:1px solid var(--line);
+  border-radius:999px;
+  font-size:.72rem;
+  font-weight:900;
+}
+
+@media(max-width:1050px){
+  .grid,.workflow{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+
+@media(max-width:620px){
+  .grid,.workflow{grid-template-columns:1fr}
+  nav{margin-left:0;width:100%}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="topline">
+      <div>
+        <div class="kicker">AUSPICIOUS 8 · CORE20</div>
+        <h1>CHIEF ENGINEER</h1>
+      </div>
+
+      <nav>
+        <a class="button" href="/">PUBLIC LAB</a>
+        <a class="button" href="/pulse">PULSE SOURCE</a>
+        <a class="button" href="/hardware-source.html">SOURCE SELECTOR</a>
+      </nav>
+    </div>
+
+    <p class="subtitle">
+      Authenticated machine room · operate, diagnose, record and recover.
+      Public visitors do not enter this surface.
+    </p>
+  </div>
+</header>
+
+<main>
+
+<section class="panel">
+  <h2>NORMAL AFTER SERVER REBOOT</h2>
+
+  <div class="workflow">
+    <div class="step">
+      <b>1 · AUTO START</b>
+      a8-core20.service starts Core20. No manual START is normally required.
+    </div>
+
+    <div class="step">
+      <b>2 · CONNECT</b>
+      If the civil clock awaits alignment, perform the empty-body momentary CONNECT.
+    </div>
+
+    <div class="step">
+      <b>3 · CALENDAR</b>
+      Same-source native YEAR DAY restores from its checkpoint. UTC/JPL do not supply the date.
+    </div>
+
+    <div class="step">
+      <b>4 · YEAR ORIENTATION</b>
+      If required, one JPL shot places the year wheel; recovered Sol advances it afterward.
+    </div>
+  </div>
+
+  <div class="statusline">
+    <span id="overallStatus" class="pill">LOADING</span>
+    <span id="refreshState" class="pill">LIVE REFRESH</span>
+  </div>
+</section>
+
+<section class="panel">
+  <h2>CORE20 OPERATING STATE</h2>
+
+  <div class="grid">
+    <div class="stat">
+      <span class="k">RUNTIME</span>
+      <span id="runtimeStatus" class="v">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">CLOCK STATUS</span>
+      <span id="clockStatus" class="v">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">SOURCE EPOCH</span>
+      <span id="sourceEpoch" class="v">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">SELECTED RAW PULSE</span>
+      <span id="rawPulse" class="v">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">DAY_PHASE17</span>
+      <span id="dayPhase17" class="v cyan">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">A8 CLOCK</span>
+      <span id="a8Clock" class="v cyan">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">CLOCK AUTHORITY</span>
+      <span id="clockAuthority" class="v">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">JOVIAN / SOURCE</span>
+      <span id="jovianStatus" class="v">—</span>
+    </div>
+  </div>
+
+  <div class="controls" style="margin-top:12px">
+    <button id="connect" class="primary">
+      ONE-SHOT CIVIL TIME ALIGN · UTC
+    </button>
+
+    <button id="realignCivil" class="warn">
+      CIVIL RE-ALIGN · NOT REQUIRED
+    </button>
+
+    <button id="refresh">REFRESH NOW</button>
+  </div>
+
+  <p class="note">
+    CONNECT performs the existing empty-body momentary alignment only.
+    It does not start the Core20 plant and does not provide ongoing timing.
+  </p>
+</section>
+
+<section class="panel">
+  <h2>NATIVE CALENDAR / PERSISTENCE</h2>
+
+  <div class="grid">
+    <div class="stat">
+      <span class="k">CALENDAR STATUS</span>
+      <span id="calendarStatus" class="v">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">YEAR DAY</span>
+      <span id="yearDay" class="v cyan">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">YEAR DAY · OCTAL</span>
+      <span id="yearDayOctal" class="v cyan">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">CORE DAY COUNT</span>
+      <span id="coreDayCount" class="v">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">CHECKPOINT</span>
+      <span id="checkpointStatus" class="v">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">RESTORATION</span>
+      <span id="restorationStatus" class="v">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">CHECKPOINT EPOCH</span>
+      <span id="checkpointEpoch" class="v">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">ADVANCE AUTHORITY</span>
+      <span id="calendarAuthority" class="v">—</span>
+    </div>
+  </div>
+
+  <p class="note">
+    Native YEAR DAY advances only from Core20 integer civil dayCount.
+    Outage elapsed time is not inferred.
+  </p>
+</section>
+
+<section class="panel">
+  <h2>YEAR ORIENTATION</h2>
+
+  <div class="grid">
+    <div class="stat">
+      <span class="k">STATUS</span>
+      <span id="yearStatus" class="v">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">PHASE9</span>
+      <span id="yearPhase9" class="v cyan">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">PHASE27</span>
+      <span id="yearPhase27" class="v">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">ONGOING AUTHORITY</span>
+      <span id="yearAuthority" class="v">—</span>
+    </div>
+  </div>
+
+  <div class="controls" style="margin-top:12px">
+    <button id="alignJpl" class="primary">
+      ONE-SHOT VERIFY YEAR ORIENTATION · JPL
+    </button>
+  </div>
+
+  <p class="note">
+    JPL places absolute year orientation once. It does not advance YEAR DAY
+    and does not provide the ongoing orbital rate.
+  </p>
+</section>
+
+<section class="panel">
+  <h2>FLIGHT RECORDER</h2>
+
+  <div class="recorder-toolbar">
+    <button id="pauseRecorder">PAUSE DISPLAY</button>
+    <button id="copyRecorder">COPY</button>
+    <button id="copyForensic" class="primary">COPY FORENSIC SNAPSHOT</button>
+    <button id="clearRecorder" class="danger">CLEAR RECORDER</button>
+  </div>
+
+  <div class="recorder-toolbar" id="filters">
+    <button class="filter active" data-filter="ALL">ALL</button>
+    <button class="filter" data-filter="CORE">CORE</button>
+    <button class="filter" data-filter="CLOCK">CLOCK</button>
+    <button class="filter" data-filter="CALENDAR">CALENDAR</button>
+    <button class="filter" data-filter="SOURCE">SOURCE</button>
+    <button class="filter" data-filter="JOVIAN">JOVIAN</button>
+    <button class="filter" data-filter="AUDIO">AUDIO</button>
+    <button class="filter" data-filter="CE">CE</button>
+  </div>
+
+  <div class="grid" style="margin-bottom:10px">
+    <div class="stat">
+      <span class="k">RECORDER STATUS</span>
+      <span id="recorderStatus" class="v">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">SEQUENCE</span>
+      <span id="recorderSequence" class="v">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">EVENT COUNT</span>
+      <span id="recorderCount" class="v">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">AUTHORITY</span>
+      <span id="recorderAuthority" class="v">—</span>
+    </div>
+  </div>
+
+  <pre id="recorderLog">Loading recorder…</pre>
+
+  <p class="note">
+    PAUSE DISPLAY freezes only this browser view. The server-side recorder
+    continues observing Core20.
+  </p>
+</section>
+
+<section class="panel">
+  <h2>SOURCE / HARDWARE</h2>
+
+  <div class="controls">
+    <a class="button" href="/pulse">CHIEF ENGINEER · PULSE SOURCE</a>
+    <a class="button" href="/hardware-source.html">VIRTUAL / REAL SOURCE · GATE 6E</a>
+    <a class="button" href="/hardware-interface.html">EXTERNAL PULSE RIG · GATE 6A</a>
+    <a class="button" href="/receive-only-transport.html">RECEIVE-ONLY TRANSPORT · GATE 6B</a>
+    <a class="button" href="/local-device-reader.html">LOCAL DEVICE READER · GATE 6C</a>
+  </div>
+
+  <details>
+    <summary>LIVE SOURCE JSON</summary>
+    <div class="inside">
+      <pre id="sourceJson">—</pre>
+    </div>
+  </details>
+</section>
+
+<section class="panel">
+  <h2>RAW DIAGNOSTIC SNAPSHOTS</h2>
+
+  <details>
+    <summary>RUNTIME / CLOCK</summary>
+    <div class="inside"><pre id="clockJson">—</pre></div>
+  </details>
+
+  <details>
+    <summary>CALENDAR</summary>
+    <div class="inside"><pre id="calendarJson">—</pre></div>
+  </details>
+
+  <details>
+    <summary>YEAR ANGLE</summary>
+    <div class="inside"><pre id="yearJson">—</pre></div>
+  </details>
+</section>
+
+<section class="panel">
+  <h2>PROOF / REGRESSION · NOT NORMAL OPERATION</h2>
+
+  <details>
+    <summary>OPEN PROVEN BENCHES</summary>
+    <div class="inside">
+      <div class="controls">
+        <a class="button" href="/pseudo-terminal-link.html">GATE 6D · ONE-WAY PTY</a>
+        <a class="button" href="/discipline.html">SLOW DISCIPLINE</a>
+        <a class="button" href="/rate-slew.html">RATE SLEW</a>
+        <a class="button" href="/rate-continuity.html">RATE CONTINUITY</a>
+        <a class="button" href="/disturbance-recovery.html">DISTURBANCE / RECOVERY</a>
+        <a class="button" href="/multi-window-recovery.html">MULTI-WINDOW RECOVERY</a>
+        <a class="button" href="/holdover-reacquisition.html">HOLDOVER / REACQUISITION</a>
+        <a class="button" href="/repeated-holdover.html">REPEATED HOLDOVER</a>
+        <a class="button" href="/discipline-harness.html">DISCIPLINE HARNESS</a>
+        <a class="button" href="/discipline-runner.html">DISCIPLINE RUNNER</a>
+        <a class="button" href="/pre-actuator-seal.html">PRE-ACTUATOR SEAL</a>
+      </div>
+    </div>
+  </details>
+</section>
+
+<section class="panel danger-zone">
+  <h2>DANGER ZONE · PLANT-CHANGING ACTIONS</h2>
+
+  <p class="note">
+    These controls are not part of ordinary reboot operation.
+  </p>
+
+  <div class="controls">
+    <button id="requalify" class="danger">
+      REQUALIFY · NEW SOURCE EPOCH
+    </button>
+
+    <button id="hold" class="danger">
+      DIAGNOSTIC HOLD
+    </button>
+
+    <button id="resume" class="warn">
+      DIAGNOSTIC RESUME · LOST ELAPSED TIME REMAINS LOST
+    </button>
+  </div>
+
+  <div style="margin-top:16px">
+    <div class="kicker">NATIVE CALENDAR ANCHOR</div>
+
+    <div class="controls" style="margin-top:8px">
+      <input
+        id="anchorYearDay"
+        inputmode="numeric"
+        placeholder="YEAR DAY integer"
+        aria-label="YEAR DAY integer"
+      >
+      <button id="anchorCalendar" class="danger">
+        ESTABLISH NATIVE YEAR DAY ANCHOR
+      </button>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<script>
+(() => {
+  'use strict';
+
+  const $ = id => document.getElementById(id);
+
+  let latest = {
+    runtime: null,
+    clock: null,
+    calendar: null,
+    year: null,
+    source: null,
+    recorder: null,
+  };
+
+  let recorderPaused = false;
+  let recorderFilter = 'ALL';
+  let refreshBusy = false;
+
+  function text(id, value) {
+    const el = $(id);
+    if (!el) return;
+
+    el.textContent =
+      value === undefined ||
+      value === null ||
+      value === ''
+        ? '—'
+        : String(value);
+  }
+
+  function pretty(obj) {
+    return JSON.stringify(obj, null, 2);
+  }
+
+  async function api(path, options = {}) {
+    const res =
+      await fetch(
+        path,
+        {
+          cache: 'no-store',
+          credentials: 'same-origin',
+          ...options,
+          headers: {
+            'Content-Type': 'application/json',
+            ...(options.headers || {}),
+          },
+        }
+      );
+
+    const raw = await res.text();
+
+    let body = null;
+
+    try {
+      body = raw ? JSON.parse(raw) : {};
+    } catch (_) {
+      body = { raw };
+    }
+
+    if (!res.ok) {
+      throw new Error(
+        body && body.error
+          ? body.error
+          : `HTTP ${res.status}`
+      );
+    }
+
+    return body;
+  }
+
+  function post(path, body = {}) {
+    return api(
+      path,
+      {
+        method: 'POST',
+        body: JSON.stringify(body),
+      }
+    );
+  }
+
+  function sourceSummary(payload) {
+    const source =
+      payload && payload.source
+        ? payload.source
+        : {};
+
+    const bridge =
+      payload && payload.recoveryInput
+        ? payload.recoveryInput
+        : {};
+
+    const jovian =
+      payload && payload.jovian
+        ? payload.jovian
+        : {};
+
+    return (
+      source.mode ||
+      source.status ||
+      bridge.status ||
+      jovian.status ||
+      'AVAILABLE'
+    );
+  }
+
+  function recorderMatches(event) {
+    if (recorderFilter === 'ALL') return true;
+
+    const haystack =
+      [
+        event.type,
+        event.message,
+        event.calendarStatus,
+        event.clockStatus,
+      ]
+        .filter(Boolean)
+        .join(' ')
+        .toUpperCase();
+
+    if (
+      recorderFilter === 'CORE' &&
+      (
+        haystack.includes('CORE') ||
+        haystack.includes('RECORDER')
+      )
+    ) {
+      return true;
+    }
+
+    return haystack.includes(
+      recorderFilter
+    );
+  }
+
+  function formatRecorder(recorder) {
+    const events =
+      Array.isArray(recorder.events)
+        ? recorder.events.filter(recorderMatches)
+        : [];
+
+    if (!events.length) {
+      return 'No matching recorder events.';
+    }
+
+    return events.map(event => {
+      const bits = [
+        `#${event.sequence}`,
+        event.type,
+        `epoch=${event.sourceEpoch ?? '—'}`,
+        `raw=${event.rawPulse ?? '—'}`,
+        `phase17=${event.dayPhase17 ?? '—'}`,
+        `dayCount=${event.dayCount ?? '—'}`,
+        `yearDay=${event.yearDay ?? '—'}`,
+        `:: ${event.message || ''}`,
+      ];
+
+      if (event.details) {
+        bits.push(
+          `details=${JSON.stringify(event.details)}`
+        );
+      }
+
+      return bits.join(' ');
+    }).join('\n');
+  }
+
+  function renderRecorder(recorder) {
+    if (!recorder || recorderPaused) return;
+
+    text('recorderStatus', recorder.status);
+    text('recorderSequence', recorder.latestSequence);
+    text('recorderCount', `${recorder.count} / ${recorder.maxEvents}`);
+    text('recorderAuthority', recorder.authority);
+
+    $('recorderLog').textContent =
+      formatRecorder(recorder);
+  }
+
+  function render() {
+    const runtime =
+      latest.runtime &&
+      latest.runtime.runtime
+        ? latest.runtime.runtime
+        : {};
+
+    const clock =
+      latest.clock &&
+      latest.clock.clock
+        ? latest.clock.clock
+        : {};
+
+    const calendar =
+      latest.calendar &&
+      latest.calendar.calendar
+        ? latest.calendar.calendar
+        : {};
+
+    const persistence =
+      calendar.persistence || {};
+
+    const year =
+      latest.year &&
+      latest.year.yearAngle
+        ? latest.year.yearAngle
+        : {};
+
+    text('runtimeStatus', runtime.status);
+    text('clockStatus', clock.status);
+
+    text(
+      'sourceEpoch',
+      clock.sourceEpoch ??
+      calendar.sourceEpoch ??
+      year.sourceEpoch
+    );
+
+    text(
+      'rawPulse',
+      clock.currentSelectedRawPulse
+    );
+
+    text('dayPhase17', clock.dayPhase17);
+
+    text(
+      'a8Clock',
+      clock.clock
+        ? (
+            clock.clock.octal ||
+            clock.clock.decimal
+          )
+        : null
+    );
+
+    text(
+      'clockAuthority',
+      clock.clockAuthority
+    );
+
+    text(
+      'jovianStatus',
+      sourceSummary(latest.source)
+    );
+
+    text('calendarStatus', calendar.status);
+    text('yearDay', calendar.yearDay);
+    text('yearDayOctal', calendar.yearDayOctal);
+    text('coreDayCount', calendar.coreDayCount);
+
+    text(
+      'checkpointStatus',
+      persistence.checkpointLoaded === true
+        ? 'LOADED'
+        : persistence.checkpointLoaded === false
+          ? 'NOT LOADED'
+          : '—'
+    );
+
+    text(
+      'restorationStatus',
+      persistence.restorationStatus
+    );
+
+    text(
+      'checkpointEpoch',
+      persistence.checkpointSourceEpoch
+    );
+
+    text(
+      'calendarAuthority',
+      calendar.runningAdvance
+    );
+
+    text('yearStatus', year.status);
+    text(
+      'yearPhase9',
+      year.phase9Octal || year.phase9
+    );
+    text(
+      'yearPhase27',
+      year.phase27Octal || year.phase27
+    );
+    text(
+      'yearAuthority',
+      year.ongoingAuthority
+    );
+
+    $('clockJson').textContent =
+      pretty(latest.clock);
+
+    $('calendarJson').textContent =
+      pretty(latest.calendar);
+
+    $('yearJson').textContent =
+      pretty(latest.year);
+
+    $('sourceJson').textContent =
+      pretty(latest.source);
+
+    renderRecorder(
+      latest.recorder &&
+      latest.recorder.recorder
+        ? latest.recorder.recorder
+        : null
+    );
+
+    const running =
+      runtime.status === 'RUNNING';
+
+    const clockRunning =
+      clock.status === 'CORE20_CLOCK_RUNNING';
+
+    $('connect').disabled =
+      !running || clockRunning;
+
+    $('connect').textContent =
+      clockRunning
+        ? 'CIVIL TIME ALIGNED · UTC BRIDGE INACTIVE'
+        : 'ONE-SHOT CIVIL TIME ALIGN · UTC';
+
+    const realignRecommended =
+      runtime.civilRealignRecommended ===
+        true;
+
+    $('realignCivil').disabled =
+      !running ||
+      !clockRunning ||
+      !realignRecommended;
+
+    $('realignCivil').textContent =
+      realignRecommended
+        ? 'RE-ALIGN CIVIL TIME AFTER HOLD · UTC'
+        : 'CIVIL RE-ALIGN · NOT REQUIRED';
+
+    $('hold').disabled =
+      !running;
+
+    $('resume').disabled =
+      runtime.status !== 'STOPPED';
+
+    $('requalify').disabled =
+      runtime.status === 'QUALIFYING';
+
+    $('alignJpl').disabled =
+      !running ||
+      year.status ===
+        'YEAR_ANGLE_RUNNING_FROM_RECOVERED_SOL';
+
+    text(
+      'overallStatus',
+      running
+        ? (
+            clockRunning
+              ? 'CORE20 RUNNING · CLOCK ALIGNED'
+              : 'CORE20 RUNNING · CLOCK AWAITS CONNECT'
+          )
+        : `CORE20 ${runtime.status || 'UNKNOWN'}`
+    );
+  }
+
+  async function refreshAll() {
+    if (refreshBusy) return;
+    refreshBusy = true;
+
+    try {
+      const [
+        runtime,
+        clock,
+        calendar,
+        year,
+        source,
+        recorder,
+      ] =
+        await Promise.all([
+          api('/api/core20/runtime'),
+          api('/api/core20/clock'),
+          api('/api/core20/calendar'),
+          api('/api/core20/year-angle'),
+          api('/api/hardware/source'),
+          api('/api/core20/flight-recorder'),
+        ]);
+
+      latest = {
+        runtime,
+        clock,
+        calendar,
+        year,
+        source,
+        recorder,
+      };
+
+      render();
+      $('refreshState').textContent = 'LIVE REFRESH';
+    } catch (err) {
+      $('refreshState').textContent =
+        `REFRESH FAIL · ${err.message}`;
+    } finally {
+      refreshBusy = false;
+    }
+  }
+
+  async function copyText(value) {
+    try {
+      await navigator.clipboard.writeText(value);
+      return;
+    } catch (_) {}
+
+    const area =
+      document.createElement('textarea');
+
+    area.value = value;
+    area.style.position = 'fixed';
+    area.style.opacity = '0';
+
+    document.body.appendChild(area);
+    area.select();
+    document.execCommand('copy');
+    area.remove();
+  }
+
+  $('refresh').addEventListener(
+    'click',
+    refreshAll
+  );
+
+  $('connect').addEventListener(
+    'click',
+    async () => {
+      try {
+        await post(
+          '/api/core20/connect',
+          {}
+        );
+
+        await refreshAll();
+      } catch (err) {
+        alert(`CONNECT FAIL · ${err.message}`);
+      }
+    }
+  );
+
+  $('realignCivil').addEventListener(
+    'click',
+    async () => {
+      if (
+        !confirm(
+          'RE-ALIGN CIVIL TIME AFTER DIAGNOSTIC HOLD?\n\n' +
+          'UTC is sampled once for within-day DAY_PHASE17 only.\n' +
+          'Current native integer dayCount is preserved.\n' +
+          'YEAR DAY is not selected or incremented by UTC.'
+        )
+      ) {
+        return;
+      }
+
+      try {
+        await post(
+          '/api/core20/civil-realign',
+          {}
+        );
+
+        await refreshAll();
+      } catch (err) {
+        alert(
+          `CIVIL RE-ALIGN FAIL · ${err.message}`
+        );
+      }
+    }
+  );
+
+  $('alignJpl').addEventListener(
+    'click',
+    async () => {
+      try {
+        await post(
+          '/api/core20/year-angle/align-jpl',
+          {}
+        );
+
+        await refreshAll();
+      } catch (err) {
+        alert(
+          `YEAR ALIGN FAIL · ${err.message}`
+        );
+      }
+    }
+  );
+
+  $('requalify').addEventListener(
+    'click',
+    async () => {
+      if (
+        !confirm(
+          'REQUALIFY CORE20 AND CREATE A FRESH SOURCE EPOCH?\n\n' +
+          'This is NOT normal reboot operation.'
+        )
+      ) {
+        return;
+      }
+
+      try {
+        await post(
+          '/api/core20/runtime/start',
+          { restart: true }
+        );
+
+        await post(
+          '/api/core20/connect',
+          {}
+        );
+
+        await refreshAll();
+      } catch (err) {
+        alert(
+          `REQUALIFY FAIL · ${err.message}`
+        );
+      }
+    }
+  );
+
+  $('hold').addEventListener(
+    'click',
+    async () => {
+      if (
+        !confirm(
+          'PLACE CORE20 IN DIAGNOSTIC HOLD?\n\n' +
+          'Elapsed time during the hold will not be recovered.'
+        )
+      ) {
+        return;
+      }
+
+      try {
+        await post(
+          '/api/core20/runtime/stop',
+          {}
+        );
+
+        await refreshAll();
+      } catch (err) {
+        alert(`HOLD FAIL · ${err.message}`);
+      }
+    }
+  );
+
+  $('resume').addEventListener(
+    'click',
+    async () => {
+      if (
+        !confirm(
+          'DIAGNOSTIC RESUME?\n\n' +
+          'Held elapsed time remains lost. No CONNECT or UTC resampling occurs.'
+        )
+      ) {
+        return;
+      }
+
+      try {
+        await post(
+          '/api/core20/runtime/resume-diagnostic',
+          {}
+        );
+
+        await refreshAll();
+      } catch (err) {
+        alert(
+          `RESUME FAIL · ${err.message}`
+        );
+      }
+    }
+  );
+
+  $('anchorCalendar').addEventListener(
+    'click',
+    async () => {
+      const raw =
+        $('anchorYearDay').value.trim();
+
+      if (!/^-?\d+$/.test(raw)) {
+        alert('YEAR DAY must be an integer.');
+        return;
+      }
+
+      const yearDay = Number(raw);
+
+      if (
+        !confirm(
+          `ESTABLISH NATIVE YEAR DAY ${yearDay}?\n\n` +
+          'This writes the calendar anchor.'
+        )
+      ) {
+        return;
+      }
+
+      try {
+        await post(
+          '/api/core20/calendar/anchor',
+          { yearDay }
+        );
+
+        $('anchorYearDay').value = '';
+        await refreshAll();
+      } catch (err) {
+        alert(
+          `CALENDAR ANCHOR FAIL · ${err.message}`
+        );
+      }
+    }
+  );
+
+  $('pauseRecorder').addEventListener(
+    'click',
+    () => {
+      recorderPaused =
+        !recorderPaused;
+
+      $('pauseRecorder').textContent =
+        recorderPaused
+          ? 'RESUME DISPLAY'
+          : 'PAUSE DISPLAY';
+
+      $('refreshState').textContent =
+        recorderPaused
+          ? 'RECORDER DISPLAY PAUSED · SERVER STILL RECORDING'
+          : 'LIVE REFRESH';
+
+      if (!recorderPaused) {
+        renderRecorder(
+          latest.recorder &&
+          latest.recorder.recorder
+            ? latest.recorder.recorder
+            : null
+        );
+      }
+    }
+  );
+
+  $('copyRecorder').addEventListener(
+    'click',
+    async () => {
+      const recorder =
+        latest.recorder &&
+        latest.recorder.recorder
+          ? latest.recorder.recorder
+          : null;
+
+      if (!recorder) return;
+
+      await copyText(
+        formatRecorder(recorder)
+      );
+
+      $('copyRecorder').textContent =
+        'COPIED';
+
+      setTimeout(
+        () => {
+          $('copyRecorder').textContent =
+            'COPY';
+        },
+        1200
+      );
+    }
+  );
+
+  $('copyForensic').addEventListener(
+    'click',
+    async () => {
+      try {
+        await refreshAll();
+
+        const recorder =
+          latest.recorder &&
+          latest.recorder.recorder
+            ? latest.recorder.recorder
+            : {};
+
+        const snapshot = {
+          schema:
+            'A8-CORE20-CE-FORENSIC-SNAPSHOT-V1',
+
+          conventionalTimestamp:
+            null,
+
+          orderingAuthority:
+            'FLIGHT_RECORDER_SEQUENCE_AND_CORE20_RAW_ONLY',
+
+          recorderLatestSequence:
+            recorder.latestSequence || null,
+
+          runtime:
+            latest.runtime,
+
+          clock:
+            latest.clock,
+
+          calendar:
+            latest.calendar,
+
+          yearAngle:
+            latest.year,
+
+          source:
+            latest.source,
+
+          flightRecorder:
+            latest.recorder,
+        };
+
+        await copyText(
+          pretty(snapshot)
+        );
+
+        $('copyForensic').textContent =
+          'FORENSIC SNAPSHOT COPIED';
+
+        setTimeout(
+          () => {
+            $('copyForensic').textContent =
+              'COPY FORENSIC SNAPSHOT';
+          },
+          1600
+        );
+      } catch (err) {
+        alert(
+          `FORENSIC COPY FAIL · ${err.message}`
+        );
+      }
+    }
+  );
+
+  $('clearRecorder').addEventListener(
+    'click',
+    async () => {
+      if (
+        !confirm(
+          'CLEAR THE CURRENT FLIGHT RECORDER BUFFER?'
+        )
+      ) {
+        return;
+      }
+
+      try {
+        await post(
+          '/api/core20/flight-recorder/clear',
+          {}
+        );
+
+        await refreshAll();
+      } catch (err) {
+        alert(
+          `RECORDER CLEAR FAIL · ${err.message}`
+        );
+      }
+    }
+  );
+
+  document
+    .querySelectorAll('.filter')
+    .forEach(button => {
+      button.addEventListener(
+        'click',
+        () => {
+          recorderFilter =
+            button.dataset.filter || 'ALL';
+
+          document
+            .querySelectorAll('.filter')
+            .forEach(b =>
+              b.classList.toggle(
+                'active',
+                b === button
+              )
+            );
+
+          if (!recorderPaused) {
+            renderRecorder(
+              latest.recorder &&
+              latest.recorder.recorder
+                ? latest.recorder.recorder
+                : null
+            );
+          }
+        }
+      );
+    });
+
+  refreshAll();
+
+  setInterval(
+    refreshAll,
+    1000
+  );
+})();
+</script>
+
+</body>
+</html>
