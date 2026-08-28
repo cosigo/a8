@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>A8 Frequency Trainer · v5.4.18 | COSIGO Labs</title>
+<title>A8 Frequency Trainer · Core20 | COSIGO Labs</title>
 <style>
   :root {
     color-scheme: dark light;
@@ -167,31 +167,105 @@ body{
       center center / cover fixed no-repeat !important;
 }
 
+
+/* A8 AUDIO CORE CONNECT · SILVER BEACON V1 */
+#a8AudioCoreConnect{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:56px;
+  padding:.9rem 1.25rem;
+  border:1px solid #c7d0da;
+  border-radius:12px;
+  background:linear-gradient(180deg,#eef3f8 0%,#cfd8e2 48%,#aeb9c6 100%);
+  color:#12202c;
+  font-weight:900;
+  font-size:1rem;
+  letter-spacing:.045em;
+  text-transform:uppercase;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.18) inset,
+    0 0 18px rgba(214,224,235,.42),
+    0 0 34px rgba(180,196,214,.24),
+    0 8px 22px rgba(0,0,0,.28);
+  transition:
+    transform .14s ease,
+    box-shadow .14s ease,
+    filter .14s ease;
+  animation:a8AudioSilverBeacon 2.2s ease-in-out infinite;
+}
+
+#a8AudioCoreConnect:hover,
+#a8AudioCoreConnect:focus-visible{
+  transform:translateY(-1px) scale(1.02);
+  filter:brightness(1.03);
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.24) inset,
+    0 0 22px rgba(225,233,242,.58),
+    0 0 42px rgba(190,205,220,.34),
+    0 10px 26px rgba(0,0,0,.34);
+  outline:none;
+}
+
+#a8AudioCoreConnect:active{
+  transform:translateY(0) scale(.995);
+}
+
+@keyframes a8AudioSilverBeacon{
+  0%,100%{
+    box-shadow:
+      0 0 0 1px rgba(255,255,255,.18) inset,
+      0 0 16px rgba(214,224,235,.36),
+      0 0 30px rgba(180,196,214,.20),
+      0 8px 22px rgba(0,0,0,.28);
+  }
+  50%{
+    box-shadow:
+      0 0 0 1px rgba(255,255,255,.22) inset,
+      0 0 24px rgba(232,238,245,.62),
+      0 0 48px rgba(194,209,224,.36),
+      0 10px 28px rgba(0,0,0,.34);
+  }
+}
+
+#a8AudioCoreStatus{
+  font-weight:800;
+}
+
+@media (max-width:640px){
+  #a8AudioCoreConnect{
+    width:100%;
+    min-height:60px;
+    font-size:1.02rem;
+    padding:1rem 1.1rem;
+  }
+}
+
 </style>
 <link rel="stylesheet" href="/site-shell.css">
-<meta name="description" content="COSIGO Labs Auspicious 8 audio laboratory for exploring A8 timing, tone, frequency relationships, and native measurement concepts in an engineering test environment.">
+<meta name="description" content="COSIGO Labs Auspicious 8 audio laboratory for exploring A8 timing, tone, frequency relationships, and native measurement methods in an engineering test environment.">
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
 <meta name="author" content="COSIGO Labs">
 <link rel="canonical" href="https://lab.a8.cosigo.io/audio.html">
 <link rel="icon" href="https://a8.cosigo.io/assets/cosigo_master_512.png">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="COSIGO Labs — Auspicious 8">
-<meta property="og:title" content="A8 Frequency Trainer · v5.4.18">
-<meta property="og:description" content="COSIGO Labs Auspicious 8 audio laboratory for exploring A8 timing, tone, frequency relationships, and native measurement concepts in an engineering test environment.">
+<meta property="og:title" content="A8 Frequency Trainer · Core20">
+<meta property="og:description" content="COSIGO Labs Auspicious 8 audio laboratory for exploring A8 timing, tone, frequency relationships, and native measurement methods in an engineering test environment.">
 <meta property="og:url" content="https://lab.a8.cosigo.io/audio.html">
 <meta property="og:image" content="https://a8.cosigo.io/assets/cosigo_master_512.png">
-<meta property="og:image:alt" content="A8 Frequency Trainer · v5.4.18 — COSIGO Labs">
+<meta property="og:image:alt" content="A8 Frequency Trainer · Core20 — COSIGO Labs">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="A8 Frequency Trainer · v5.4.18">
-<meta name="twitter:description" content="COSIGO Labs Auspicious 8 audio laboratory for exploring A8 timing, tone, frequency relationships, and native measurement concepts in an engineering test environment.">
+<meta name="twitter:title" content="A8 Frequency Trainer · Core20">
+<meta name="twitter:description" content="COSIGO Labs Auspicious 8 audio laboratory for exploring A8 timing, tone, frequency relationships, and native measurement methods in an engineering test environment.">
 <meta name="twitter:image" content="https://a8.cosigo.io/assets/cosigo_master_512.png">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "WebPage",
-  "name": "A8 Frequency Trainer · v5.4.18",
+  "name": "A8 Frequency Trainer · Core20",
   "url": "https://lab.a8.cosigo.io/audio.html",
-  "description": "COSIGO Labs Auspicious 8 audio laboratory for exploring A8 timing, tone, frequency relationships, and native measurement concepts in an engineering test environment.",
+  "description": "COSIGO Labs Auspicious 8 audio laboratory for exploring A8 timing, tone, frequency relationships, and native measurement methods in an engineering test environment.",
   "dateModified": "2026-08-18",
   "inLanguage": "en",
   "isPartOf": {
@@ -296,6 +370,8 @@ body{
   <div class="cosigo-global-links">
     <a href="/index.html">A8 LAB HOME</a>
     <a href="/calendar.html">CALENDAR</a>
+    <a href="/moons.html">4-MOON VIEW</a>
+    <a href="/clock.html">A8 CLOCK</a>
     <a href="https://a8.cosigo.io/">A8 PUBLIC</a>
     <a class="cosigo-exit" href="https://cosigo.io/">COSIGO HOME</a>
     <a class="cosigo-exit" href="https://contact.cosigo.io/">CONTACT</a>
@@ -303,16 +379,12 @@ body{
   </div>
 </nav>
 
-  <nav class="nav">
-    <a href="/">ENGINEERING LAB</a>
-    <a href="/moons.html">4-MOON VIEW</a>
-    <a href="/clock.html">ORIGINAL CLOCK</a>
-  </nav>
-
-  <h1>Auspicious 8 — Frequency Trainer</h1>
-  <p class="sub">
-    Learn frequency using the A8 second. The physical sound does not change; the time ruler used to count its cycles does.
-  </p>
+  <section class="panel">
+    <h1>Auspicious 8 — Frequency Trainer</h1>
+    <p class="sub">
+      Learn frequency using the A8 second. The physical sound does not change; the time ruler used to count its cycles does.
+    </p>
+  </section>
 
   <section class="panel native" id="a8-audio-core-purity-link">
     <h2>Audio time authority · explicit Core connection</h2>
@@ -350,78 +422,113 @@ body{
     </div>
   </section>
 
-  <section class="panel native">
-    <h2>What this trainer is teaching</h2>
-    <p>
-      <b>Primary:</b> frequency is displayed as <b>cycles per A8 second</b>.
-      Conventional Hertz remains a secondary browser/reference translation because Web Audio still requires cycles per conventional second.
-    </p>
-    <div class="trainer-note">
-      <div>
-        <span class="k">A8 time ruler</span>
-        <div class="big">1 A8 second</div>
-        <div class="small">recovered live from A8 Core · no browser time authority</div>
+<div id="a8-chime" class="a8root">
+  <style>
+    #a8-chime{box-sizing:border-box;width:100%;padding:0;background:transparent;color:light-dark(#17191b,#f1f3f5);font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;border-radius:8px}
+    #a8-chime *{box-sizing:border-box}
+    #a8-chime .wrap{width:100%;max-width:none;margin:0}
+    #a8-chime .hero{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:24px}
+    #a8-chime .kicker{font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;opacity:.58}
+    #a8-chime h2{font-size:clamp(28px,6vw,48px);line-height:1;margin:6px 0 8px;font-weight:850;letter-spacing:-.04em}
+    #a8-chime .sub{max-width:520px;font-size:14px;line-height:1.5;opacity:.68}
+    #a8-chime .readout{text-align:right;min-width:150px}
+    #a8-chime .time{font-variant-numeric:tabular-nums;font-size:30px;font-weight:800;letter-spacing:-.03em}
+    #a8-chime .time small{font-size:12px;font-weight:700;opacity:.55;letter-spacing:.08em}
+    #a8-chime .panel{background:light-dark(rgba(255,255,255,.30),rgba(25,28,32,.30));border:1px solid light-dark(#d9d6ce,#30343a);border-radius:8px;padding:22px;backdrop-filter:blur(3px)}
+    #a8-chime .controls{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+    #a8-chime button{min-height:52px;padding:0 24px;border:0;border-radius:8px;font:inherit;font-weight:850;cursor:pointer;transition:transform .12s ease,opacity .12s ease}
+    #a8-chime button:active{transform:scale(.98)}
+    #a8-chime button:focus-visible{outline:3px solid currentColor;outline-offset:3px}
+    #a8-chime .start{background:light-dark(#17191b,#f1f3f5);color:light-dark(#fff,#111315)}
+    #a8-chime .status{font-size:13px;font-weight:750;opacity:.62}
+    #a8-chime .seconds{display:grid;grid-template-columns:repeat(16,minmax(0,1fr));gap:5px;margin:22px 0 14px}
+    #a8-chime .sec{height:18px;border-radius:5px;background:light-dark(#e6e3dc,#2a2e33);transition:background .08s ease,transform .08s ease}
+    #a8-chime .sec.on{background:light-dark(#34383d,#e5e8eb);transform:translateY(-2px)}
+    #a8-chime .tonebox{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+    #a8-chime .metric{padding:15px 16px;border-radius:8px;background:light-dark(rgba(241,239,233,.30),rgba(34,38,43,.30))}
+    #a8-chime .label{font-size:11px;text-transform:uppercase;letter-spacing:.12em;font-weight:800;opacity:.5;margin-bottom:5px}
+    #a8-chime .value{font-size:20px;font-weight:850;font-variant-numeric:tabular-nums}
+    #a8-chime .tones{display:grid;grid-template-columns:repeat(8,1fr);gap:7px;margin-top:18px}
+    #a8-chime .tone{aspect-ratio:1;border-radius:8px;display:grid;place-items:center;background:light-dark(rgba(235,232,225,.30),rgba(40,44,49,.30));font-size:14px;font-weight:850;transition:transform .08s ease,background .08s ease}
+    #a8-chime .tone.live{transform:translateY(-4px) scale(1.04);background:light-dark(#25292d,#f0f2f4);color:light-dark(#fff,#111315)}
+    #a8-chime .foot{font-size:11px;line-height:1.45;opacity:.48;margin-top:15px}
+    @media(max-width:520px){#a8-chime{padding:0}#a8-chime .readout{text-align:left}.a8root .tonebox{grid-template-columns:1fr}.a8root .seconds{gap:3px}.a8root .sec{height:14px}}
+    @media(prefers-reduced-motion:reduce){#a8-chime *{transition:none!important}}
+  </style>
+
+  <div class="wrap">
+    <div class="panel ditty-combined">
+      <div class="hero">
+        <div>
+          <div class="kicker">Auspicious 8 · Core20 native ditty</div>
+          <h2>8-bar Core20 native ditty</h2>
+          <div class="sub">Eight bars driven directly by the live Core20 native divider. Core20 determines every note boundary from selected raw evidence and the recovered Sun-return ruler. The browser is only the final speaker transducer: it receives native note events and sounds them.</div>
+        </div>
+        <div class="readout">
+          <div class="time">BAR <span id="elapsed">—</span> <small>/ 8</small></div>
+        </div>
       </div>
-      <div>
-        <span class="k">Native A8 frequency</span>
-        <div class="big">512 cycles / A8s</div>
-        <div class="small">A clean binary frequency value in the A8 ruler</div>
+
+      <div class="controls">
+        <button type="button" class="start" id="toggle">START DITTY</button>
+        <span class="status" id="status" aria-live="polite">Connect Core20 · then start ditty</span>
       </div>
-      <div>
-        <span class="k">Same physical tone</span>
-        <div class="big">CORE-DERIVED AFTER CONNECTION</div>
-        <div class="small">secondary legacy/browser reference only</div>
+
+      <div class="seconds" id="seconds" aria-label="8 bar Core20 ditty progress"></div>
+
+      <div class="tonebox">
+        <div class="metric">
+          <div class="label">Current native note</div>
+          <div class="value" id="currentTone">—</div>
+        </div>
+        <div class="metric">
+          <div class="label">Current note length</div>
+          <div class="value" id="currentDur">—</div>
+        </div>
       </div>
+
+      <div class="tones" id="tones" aria-label="A8 tone indicators"></div>
+
+      <div class="foot">Native pitch is expressed as cycles per A8 second. The 8-bar score, note order and 1 · 1/2 · 1/4 · 1/8 · 1/16 A8-second boundaries come from Core20. WebAudio is used only after each native note event reaches the final speaker-output boundary.</div>
     </div>
-    <p class="small formula">
-      Browser / DAC implementation: the physical output target is measured only
-      after explicit connection to live recovered DAY_PHASE17. No fixed
-      conventional-second constant drives playback.
-    </p>
-  </section>
+  </div>
+</div>
 
   <section class="panel native">
-    <h2>Why the A8 ladder is naturally octave-friendly</h2>
-    <p>
-      A musical octave is a physical <b>2:1 frequency ratio</b>. A8 does not create that acoustic relationship;
-      it represents it cleanly because binary doubling and halving are already native operations.
-    </p>
-    <div class="trainer-note">
-      <div>
-        <span class="k">One octave down</span>
-        <div class="big">256 A8</div>
-        <div class="small">exactly 1/2 of 512 A8</div>
-      </div>
-      <div>
-        <span class="k">Trainer anchor</span>
-        <div class="big">512 A8</div>
-        <div class="small">reference point for octave distance</div>
-      </div>
-      <div>
-        <span class="k">One octave up</span>
-        <div class="big">1024 A8</div>
-        <div class="small">exactly 2× 512 A8</div>
+    <h2>Simple Waveform Scope</h2>
+
+    <div class="controls" style="margin-top:10px">
+      <button id="scopeToggle">SCOPE DISPLAY · ON</button>
+      <span class="small">
+        Visual control only. Audio playback remains on its separate downstream path.
+      </span>
+    </div>
+
+    <div class="scope-wrap">
+      <canvas id="scope" aria-label="Live waveform display"></canvas>
+      <div class="scope-meta">
+        <span>A8 source: <b id="scopeFreq">Stopped</b></span>
+        <span>Waveform: <b id="scopeWave">Sine</b></span>
+        <span>Horizontal view: <b id="scopeWindow">—</b></span>
+        <span>A8 period: <b id="scopePeriod">—</b></span>
+        <span>Amplitude: <b id="scopeAmplitude">1/4</b></span>
       </div>
     </div>
-    <p class="small">
-      The <b>2:1 octave ratio is the physical/acoustic fact</b>. The unusually clean sequence
-      256 → 512 → 1024 is the A8 representation of that fact. This is “octave-friendly by structure,”
-      not a claim that Nature itself uses a human numeral system.
-    </p>
-  </section>
 
-  <section class="panel">
-    <div class="controls">
+    <div class="controls scope-capability-controls" style="margin-top:16px;align-items:start;padding-top:14px;border-top:1px solid var(--line)">
       <label>
-        Waveform
-        <select id="wave">
-          <option value="sine" selected>Sine</option>
-          <option value="triangle">Triangle</option>
-          <option value="square">Square</option>
-          <option value="sawtooth">Sawtooth</option>
+        A8 TIME WINDOW
+        <select id="scopeTime">
+          <option value="0.25">1/4 A8 second</option>
+          <option value="0.125">1/8 A8 second</option>
+          <option value="0.0625">1/16 A8 second</option>
+          <option value="0.03125">1/32 A8 second</option>
+          <option value="0.015625" selected>1/64 A8 second</option>
+          <option value="0.0078125">1/128 A8 second</option>
+          <option value="0.00390625">1/256 A8 second</option>
+          <option value="0.001953125">1/512 A8 second</option>
         </select>
       </label>
-
       <label>
         Normalized amplitude
         <input
@@ -449,6 +556,19 @@ body{
           <b id="ampRead">1/4</b>
         </span>
       </label>
+    </div>
+
+    <div class="controls">
+      <label>
+        Waveform
+        <select id="wave">
+          <option value="sine" selected>Sine</option>
+          <option value="triangle">Triangle</option>
+          <option value="square">Square</option>
+          <option value="sawtooth">Sawtooth</option>
+        </select>
+      </label>
+
 
       <button id="stop">STOP</button>
     </div>
@@ -482,10 +602,6 @@ body{
     <p class="small">
       Start low and use modest volume. Sine is recommended. High frequencies can be unpleasant or inaudible, and browser hardware cannot reproduce every theoretical A8 value.
     </p>
-  </section>
-
-  <section class="panel native">
-    <h2>Simple Waveform Scope</h2>
     <p class="small">
       Native A8 waveform generated directly from the selected
       <b>A8 frequency × A8 time ruler</b>.
@@ -493,45 +609,11 @@ body{
       Audible output remains a downstream browser / hardware demonstration and may
       exhibit transducer artifacts at higher frequencies.
     </p>
-    <div class="controls" style="margin-top:12px">
-      <label>
-        A8 TIME WINDOW
-        <select id="scopeTime">
-          <option value="0.25">1/4 A8 second</option>
-          <option value="0.125">1/8 A8 second</option>
-          <option value="0.0625">1/16 A8 second</option>
-          <option value="0.03125">1/32 A8 second</option>
-          <option value="0.015625" selected>1/64 A8 second</option>
-          <option value="0.0078125">1/128 A8 second</option>
-          <option value="0.00390625">1/256 A8 second</option>
-          <option value="0.001953125">1/512 A8 second</option>
-        </select>
-      </label>
-    </div>
-
     <p class="small">
       This selector sets the horizontal ruler in native A8 time.
       Changing frequency does not change the selected time window;
       it changes how many cycles fit inside that window.
     </p>
-
-    <div class="controls" style="margin-top:10px">
-      <button id="scopeToggle">SCOPE DISPLAY · ON</button>
-      <span class="small">
-        Visual control only. Audio playback remains on its separate downstream path.
-      </span>
-    </div>
-
-    <div class="scope-wrap">
-      <canvas id="scope" aria-label="Live waveform display"></canvas>
-      <div class="scope-meta">
-        <span>A8 source: <b id="scopeFreq">Stopped</b></span>
-        <span>Waveform: <b id="scopeWave">Sine</b></span>
-        <span>Horizontal view: <b id="scopeWindow">—</b></span>
-        <span>A8 period: <b id="scopePeriod">—</b></span>
-        <span>Amplitude: <b id="scopeAmplitude">1/4</b></span>
-      </div>
-    </div>
   </section>
 
   <section class="panel">
@@ -541,23 +623,26 @@ body{
       The small Hz number is deliberately secondary and generally does not look clean.
     </p>
     <div class="grid" id="buttons"></div>
+    <div class="direct-frequency-integrated" style="margin-top:18px;padding-top:16px;border-top:1px solid var(--line)">
+      <h3 style="margin:0 0 10px">Direct A8 frequency</h3>
+      <div class="controls">
+        <label>
+          Cycles per A8 second
+          <input id="freq" type="number" min="0.125" step="0.125" value="512">
+        </label>
+        <button id="playDirect">PLAY A8 FREQUENCY</button>
+        <button id="half">÷ 2 A8</button>
+        <button id="double">× 2 A8</button>
+      </div>
+      <p class="small">
+        Halving and doubling operate on the native A8 frequency value. The physical browser oscillator is translated afterward.
+      </p>
+    </div>
   </section>
 
-  <section class="panel">
-    <h2>Direct A8 frequency</h2>
-    <div class="controls">
-      <label>
-        Cycles per A8 second
-        <input id="freq" type="number" min="0.125" step="0.125" value="512">
-      </label>
-      <button id="playDirect">PLAY A8 FREQUENCY</button>
-      <button id="half">÷ 2 A8</button>
-      <button id="double">× 2 A8</button>
-    </div>
-    <p class="small">
-      Halving and doubling operate on the native A8 frequency value. The physical browser oscillator is translated afterward.
-    </p>
-  </section>
+
+
+
 
   <section class="panel reference-read" id="conversionBox">
     <h2>Reference translation — audio-output boundary</h2>
@@ -1928,76 +2013,6 @@ drawScope();
 </script>
 
 <!-- A8-16-SECOND-CHIME-V1 -->
-<div id="a8-chime" class="a8root">
-  <style>
-    #a8-chime{box-sizing:border-box;width:100%;padding:28px;background:transparent;color:light-dark(#17191b,#f1f3f5);font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;border-radius:8px}
-    #a8-chime *{box-sizing:border-box}
-    #a8-chime .wrap{max-width:760px;margin:0 auto}
-    #a8-chime .hero{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:24px}
-    #a8-chime .kicker{font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;opacity:.58}
-    #a8-chime h2{font-size:clamp(28px,6vw,48px);line-height:1;margin:6px 0 8px;font-weight:850;letter-spacing:-.04em}
-    #a8-chime .sub{max-width:520px;font-size:14px;line-height:1.5;opacity:.68}
-    #a8-chime .readout{text-align:right;min-width:150px}
-    #a8-chime .time{font-variant-numeric:tabular-nums;font-size:30px;font-weight:800;letter-spacing:-.03em}
-    #a8-chime .time small{font-size:12px;font-weight:700;opacity:.55;letter-spacing:.08em}
-    #a8-chime .panel{background:light-dark(rgba(255,255,255,.30),rgba(25,28,32,.30));border:1px solid light-dark(#d9d6ce,#30343a);border-radius:8px;padding:22px;backdrop-filter:blur(3px)}
-    #a8-chime .controls{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
-    #a8-chime button{min-height:52px;padding:0 24px;border:0;border-radius:8px;font:inherit;font-weight:850;cursor:pointer;transition:transform .12s ease,opacity .12s ease}
-    #a8-chime button:active{transform:scale(.98)}
-    #a8-chime button:focus-visible{outline:3px solid currentColor;outline-offset:3px}
-    #a8-chime .start{background:light-dark(#17191b,#f1f3f5);color:light-dark(#fff,#111315)}
-    #a8-chime .status{font-size:13px;font-weight:750;opacity:.62}
-    #a8-chime .seconds{display:grid;grid-template-columns:repeat(16,minmax(0,1fr));gap:5px;margin:22px 0 14px}
-    #a8-chime .sec{height:18px;border-radius:5px;background:light-dark(#e6e3dc,#2a2e33);transition:background .08s ease,transform .08s ease}
-    #a8-chime .sec.on{background:light-dark(#34383d,#e5e8eb);transform:translateY(-2px)}
-    #a8-chime .tonebox{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
-    #a8-chime .metric{padding:15px 16px;border-radius:8px;background:light-dark(rgba(241,239,233,.30),rgba(34,38,43,.30))}
-    #a8-chime .label{font-size:11px;text-transform:uppercase;letter-spacing:.12em;font-weight:800;opacity:.5;margin-bottom:5px}
-    #a8-chime .value{font-size:20px;font-weight:850;font-variant-numeric:tabular-nums}
-    #a8-chime .tones{display:grid;grid-template-columns:repeat(8,1fr);gap:7px;margin-top:18px}
-    #a8-chime .tone{aspect-ratio:1;border-radius:8px;display:grid;place-items:center;background:light-dark(rgba(235,232,225,.30),rgba(40,44,49,.30));font-size:14px;font-weight:850;transition:transform .08s ease,background .08s ease}
-    #a8-chime .tone.live{transform:translateY(-4px) scale(1.04);background:light-dark(#25292d,#f0f2f4);color:light-dark(#fff,#111315)}
-    #a8-chime .foot{font-size:11px;line-height:1.45;opacity:.48;margin-top:15px}
-    @media(max-width:520px){#a8-chime{padding:20px 14px}#a8-chime .readout{text-align:left}.a8root .tonebox{grid-template-columns:1fr}.a8root .seconds{gap:3px}.a8root .sec{height:14px}}
-    @media(prefers-reduced-motion:reduce){#a8-chime *{transition:none!important}}
-  </style>
-
-  <div class="wrap">
-    <div class="hero">
-      <div>
-        <div class="kicker">Auspicious 8 · Core20 native ditty</div>
-        <h2>8-bar Core20 native ditty</h2>
-        <div class="sub">Eight bars driven directly by the live Core20 native divider. Core20 determines every note boundary from selected raw evidence and the recovered Sun-return ruler. The browser is only the final speaker transducer: it receives native note events and sounds them.</div>
-      </div>
-      <div class="readout">
-        <div class="time">BAR <span id="elapsed">—</span> <small>/ 8</small></div>
-      </div>
-    </div>
-
-    <div class="panel">
-      <div class="controls">
-        <button type="button" class="start" id="toggle">START DITTY</button>
-        <span class="status" id="status" aria-live="polite">Connect Core20 · then start ditty</span>
-      </div>
-
-      <div class="seconds" id="seconds" aria-label="8 bar Core20 ditty progress"></div>
-
-      <div class="tonebox">
-        <div class="metric">
-          <div class="label">Current native note</div>
-          <div class="value" id="currentTone">—</div>
-        </div>
-        <div class="metric">
-          <div class="label">Current note length</div>
-          <div class="value" id="currentDur">—</div>
-        </div>
-      </div>
-
-      <div class="tones" id="tones" aria-label="A8 tone indicators"></div>
-
-      <div class="foot">Native pitch is expressed as cycles per A8 second. The 8-bar score, note order and 1 · 1/2 · 1/4 · 1/8 · 1/16 A8-second boundaries come from Core20. WebAudio is used only after each native note event reaches the final speaker-output boundary.</div>
-    </div>
-  </div>
 
   <script>
   (()=>{
@@ -2463,7 +2478,65 @@ drawScope();
         : 'Connect to A8 Core · audio locked';
   })();
   </script>
-</div>
+
+  <section class="panel native">
+    <h2>What this trainer is teaching</h2>
+    <p>
+      <b>Primary:</b> frequency is displayed as <b>cycles per A8 second</b>.
+      Conventional Hertz remains a secondary browser/reference translation because Web Audio still requires cycles per conventional second.
+    </p>
+    <div class="trainer-note">
+      <div>
+        <span class="k">A8 time ruler</span>
+        <div class="big">1 A8 second</div>
+        <div class="small">recovered live from A8 Core · no browser time authority</div>
+      </div>
+      <div>
+        <span class="k">Native A8 frequency</span>
+        <div class="big">512 cycles / A8s</div>
+        <div class="small">A clean binary frequency value in the A8 ruler</div>
+      </div>
+      <div>
+        <span class="k">Same physical tone</span>
+        <div class="big">CORE-DERIVED AFTER CONNECTION</div>
+        <div class="small">secondary legacy/browser reference only</div>
+      </div>
+    </div>
+    <p class="small formula">
+      Browser / DAC implementation: the physical output target is measured only
+      after explicit connection to live recovered DAY_PHASE17. No fixed
+      conventional-second constant drives playback.
+    </p>
+    <div class="reading-subsection" style="margin-top:20px;padding-top:18px;border-top:1px solid var(--line)">
+      <h3 style="margin:0 0 8px">Why the A8 ladder is naturally octave-friendly</h3>
+      <p>
+        A musical octave is a physical <b>2:1 frequency ratio</b>. A8 does not create that acoustic relationship;
+        it represents it cleanly because binary doubling and halving are already native operations.
+      </p>
+      <div class="trainer-note">
+        <div>
+          <span class="k">One octave down</span>
+          <div class="big">256 A8</div>
+          <div class="small">exactly 1/2 of 512 A8</div>
+        </div>
+        <div>
+          <span class="k">Trainer anchor</span>
+          <div class="big">512 A8</div>
+          <div class="small">reference point for octave distance</div>
+        </div>
+        <div>
+          <span class="k">One octave up</span>
+          <div class="big">1024 A8</div>
+          <div class="small">exactly 2× 512 A8</div>
+        </div>
+      </div>
+      <p class="small">
+        The <b>2:1 octave ratio is the physical/acoustic fact</b>. The unusually clean sequence
+        256 → 512 → 1024 is the A8 representation of that fact. This is “octave-friendly by structure,”
+        not a claim that Nature itself uses an engineered numeral system.
+      </p>
+    </div>
+  </section>
 
 <footer class="cosigo-site-footer">
   <strong>COSIGO Labs · Auspicious 8 experimental laboratory</strong>
@@ -3141,7 +3214,7 @@ drawScope();
     }
 
     /*
-     * Explicit human action occurred.
+     * Explicit user action occurred.
      *
      * WebAudio may now be created/resumed, but no oscillator sounds
      * until Core20 is verified and the user selects a native A8 tone.
@@ -3957,7 +4030,7 @@ drawScope();
     try {
       /*
        * Reuse the already-installed audio context
-       * under this explicit human gesture.
+       * under this explicit user gesture.
        */
       if (
         typeof ensureAudio ===

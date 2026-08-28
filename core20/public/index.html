@@ -21,7 +21,6 @@
 <meta name="twitter:description" content="Auspicious 8 engineering laboratory. Nature first; ruler second.">
 <meta name="twitter:image" content="https://a8.cosigo.io/assets/cosigo_master_512.png">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"A8 Time Laboratory v5.4.20","url":"https://lab.a8.cosigo.io/","dateModified":"2026-08-16","isPartOf":{"@type":"WebSite","name":"COSIGO Labs — Auspicious 8","url":"https://a8.cosigo.io/"}}</script>
-<link id="a8-lab-background-preload-01" rel="preload" as="image" href="/assets/a8_lab_front_bg.png" type="image/png" fetchpriority="high">
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="/site-shell.css">
 
@@ -31,7 +30,7 @@ body{
   background:
     linear-gradient(rgba(7,10,14,.64), rgba(7,10,14,.76)),
     url("/assets/a8_lab_front_bg.png")
-      center center / cover fixed no-repeat !important;
+      center center / cover scroll no-repeat !important;
 }
 </style>
 
@@ -105,6 +104,46 @@ body{
   }
 </style>
 
+
+<style id="a8-downstream-feng-shui-01">
+#core20-downstream-operator .c20v-downstream-layout{
+  display:grid;
+  grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);
+  gap:12px;
+  align-items:stretch;
+}
+
+#core20-downstream-operator .c20v-downstream-left,
+#core20-downstream-operator .c20v-downstream-right{
+  display:grid;
+  gap:12px;
+  min-width:0;
+}
+
+#core20-downstream-operator .c20v-downstream-left{
+  height:100%;
+}
+
+#core20-downstream-operator .c20v-downstream-left > .c20v-stat{
+  height:100%;
+  box-sizing:border-box;
+}
+
+#core20-downstream-operator .c20v-downstream-right > .c20v-stat{
+  min-width:0;
+}
+
+@media(max-width:760px){
+  #core20-downstream-operator .c20v-downstream-layout{
+    grid-template-columns:1fr;
+  }
+
+  #core20-downstream-operator .c20v-downstream-left > .c20v-stat{
+    height:auto;
+  }
+}
+</style>
+
 </head>
 <body>
 
@@ -139,54 +178,72 @@ body{
 }
 #a8-topside-coherence-02 .cosigo-global-brand small{
   display:block;opacity:.72;font-size:.62rem;
-}
-#a8-topside-coherence-02 .a8-location{
+}#a8-topside-coherence-02 a{text-decoration:none}
+
+#a8-topside-coherence-02 .a8-menu{
+  position:relative;
   margin-left:auto;
-  font-size:.76rem;
-  font-weight:900;
-  letter-spacing:.07em;
-  color:#e0bd72;
 }
-#a8-topside-coherence-02 .a8-system-links,
-#a8-topside-coherence-02 .a8-utility-links{
-  max-width:1440px;
-  margin:8px auto 0;
-  display:flex;
-  flex-wrap:wrap;
-  gap:7px;
-  align-items:center;
-}
-#a8-topside-coherence-02 a{text-decoration:none}
-#a8-topside-coherence-02 .a8-system-links a{
-  padding:7px 9px;
+
+#a8-topside-coherence-02 .a8-menu summary{
+  list-style:none;
+  cursor:pointer;
+  padding:8px 11px;
   border:1px solid #425467;
   border-radius:8px;
   background:#111820;
-  color:#c8ddf5;
-  font-size:.80rem;
-  font-weight:850;
-}
-#a8-topside-coherence-02 .a8-system-links a[data-current="true"]{
-  border-color:#6d9cff;color:#fff;
-}
-#a8-topside-coherence-02 .a8-utility-links{
-  padding-top:7px;
-  border-top:1px solid rgba(255,255,255,.08);
-}
-#a8-topside-coherence-02 .a8-utility-links a{
-  color:#92a5b8;
-  font-size:.70rem;
-  font-weight:700;
-}
-#a8-topside-coherence-02 .a8-utility-label{
-  color:#617487;
-  font-size:.68rem;
+  color:#e0bd72;
+  font-size:.76rem;
   font-weight:900;
-  letter-spacing:.05em;
+  letter-spacing:.07em;
+  user-select:none;
 }
+
+#a8-topside-coherence-02 .a8-menu summary::-webkit-details-marker{
+  display:none;
+}
+
+#a8-topside-coherence-02 .a8-menu summary::after{
+  content:" ▾";
+  color:#92a5b8;
+}
+
+#a8-topside-coherence-02 .a8-menu[open] summary::after{
+  content:" ▴";
+}
+
+#a8-topside-coherence-02 .a8-menu-panel{
+  position:absolute;
+  z-index:1000;
+  right:0;
+  top:calc(100% + 7px);
+  min-width:180px;
+  padding:7px;
+  border:1px solid #425467;
+  border-radius:9px;
+  background:#0d141b;
+  box-shadow:0 12px 28px rgba(0,0,0,.38);
+}
+
+#a8-topside-coherence-02 .a8-menu-panel a{
+  display:block;
+  padding:9px 10px;
+  border-radius:6px;
+  color:#c8ddf5;
+  font-size:.78rem;
+  font-weight:800;
+  white-space:nowrap;
+}
+
+#a8-topside-coherence-02 .a8-menu-panel a:hover,
+#a8-topside-coherence-02 .a8-menu-panel a:focus{
+  background:#182431;
+  color:#fff;
+}
+
 @media(max-width:760px){
-  #a8-topside-coherence-02 .a8-location{
-    width:100%;margin-left:0;
+  #a8-topside-coherence-02 .a8-menu-panel{
+    min-width:170px;
   }
 }
 </style>
@@ -199,23 +256,18 @@ body{
       <img src="/assets/cosigo_master_512.gif" alt="COSIGO">
       <span>COSIGO<small>LABS · AUSPICIOUS 8</small></span>
     </a>
-    <div class="a8-location">YOU ARE HERE · MAIN LAB</div>
+    <details class="a8-menu">
+      <summary>MENU</summary>
+      <div class="a8-menu-panel">
+        <a href="https://cosigo.io/">MAIN SITE</a>
+        <a href="https://stream.cosigo.io/">STREAM</a>
+        <a href="https://trade.cosigo.io/">TRADE</a>
+        <a href="https://bcnode.io/">BCNODE</a>
+        <a href="https://github.com/cosigo">GITHUB</a>
+      </div>
+    </details>
   </div>
-  
-  <div class="a8-utility-links">
-    <span class="a8-utility-label">UTILITY ·</span>
-    <a href="/map-clock-compass.html">MAP · CLOCK · COMPASS</a>
-    <a href="/navigation.html">NAVIGATION</a>
-    <a href="/celestial.html">CELESTIAL</a>
-    <a href="https://a8.cosigo.io/canonical.html">CANONICAL</a>
-    <a href="https://a8.cosigo.io/open-research.html">OPEN RESEARCH</a>
-    <a href="https://a8.cosigo.io/">A8 PUBLIC</a>
-    <a href="https://lab.a8.cosigo.io/">LIVE LAB</a>
-    <a href="https://cosigo.io/">COSIGO HOME</a>
-    <a href="https://contact.cosigo.io/">CONTACT</a>
-    <a href="https://github.com/cosigo">GITHUB</a>
-  </div>
-</nav>
+  </nav>
 <main>
 
 <header>
@@ -238,7 +290,7 @@ body{
   </div>
 
   <div class="launcher-grid">
-    <a class="button-link" href="/clock.html">ORIGINAL CLOCK</a>
+    <a class="button-link" href="/clock.html">A8 CLOCK</a>
             <a class="button-link" href="/calendar.html">CALENDAR · A8 CIVIL CALENDAR</a>
     <a class="button-link core20-primary" href="/moons.html">4-MOON VIEW</a>
     <a class="button-link" href="/mintaka.html">MINTAKA · EARTH ROTATION WITNESS</a>
@@ -247,7 +299,7 @@ body{
     <a class="button-link" href="/celestial.html">CELESTIAL MAP · SKY WALKABOUT</a>
     <a class="button-link" href="/map-clock-compass.html">MAP · CLOCK · COMPASS</a>
     <a class="button-link" href="/navigation.html">NAVIGATION · POSITION & TRAVEL</a>
-    <a class="button-link" href="/data.html">OBSERVATION DATA BRIDGE</a>
+    <a class="button-link" href="/data.html">OBSERVATION ARCHIVE</a>
     <a class="button-link" href="/telescope.html">TELESCOPE EMULATOR</a>
     <a class="button-link" href="/audio.html">AUDIO FREQUENCY BENCH</a>
     <a class="button-link" href="/angle.html">A8 ANGLE TRANSLATOR</a>
@@ -322,87 +374,91 @@ body{
       </div>
     </div>
 
-    <div class="c20v-grid">
-      <div class="c20v-stat">
-        <span class="c20v-k">MINTAKA · EARTH AXIAL ROTATION</span>
-        <span id="c20vMintaka" class="c20v-v">—</span>
-        <span class="c20v-k" style="margin-top:8px">LIVE ROTATION REGISTER · 18 BIT</span>
-        <span id="c20vMintakaRegisterBin" class="c20v-v" style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace">—</span>
-        <span id="c20vMintakaRegisterOct" class="c20v-v" style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace">—</span>
+    <div class="c20v-downstream-layout">
+      <div class="c20v-downstream-left">
+        <div class="c20v-stat">
+          <span class="c20v-k">SOL · ORBITAL ADVANCE</span>
+          <span id="c20vSol" class="c20v-v">—</span>
+
+          <span class="c20v-k" style="margin-top:8px">
+            LIVE ORBIT REGISTER · 27 BIT
+          </span>
+          <span id="c20vSolRegisterBin"
+            class="c20v-v"
+            style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace">—</span>
+          <span id="c20vSolRegisterOct"
+            class="c20v-v"
+            style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace">—</span>
+
+          <span class="c20v-k" style="margin-top:10px">
+            ABSOLUTE YEAR PHASE9 · 000₈–777₈
+          </span>
+          <span id="c20vYearPhase9"
+            class="c20v-v"
+            style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace">
+            AWAITING ONE-SHOT ALIGN
+          </span>
+
+          <span class="c20v-k" style="margin-top:8px">
+            ABSOLUTE YEAR PHASE27
+          </span>
+          <span id="c20vYearPhase27"
+            class="c20v-v"
+            style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace">—</span>
+
+          <span class="c20v-k" style="margin-top:8px">
+            LAST ONE-SHOT JPL VERIFICATION
+          </span>
+          <span id="c20vYearJpl"
+            class="c20v-v">—</span>
+
+          <span
+            id="c20vYearAlignStatus"
+            class="c20v-k"
+            style="margin-top:8px"
+          >
+            YEAR ANGLE AWAITS VERIFICATION
+          </span>
+
+          <span
+            class="muted"
+            style="display:block;margin-top:8px;font-size:.78rem;line-height:1.45"
+          >
+            READ ONLY · JPL verifies absolute year-wheel orientation once.
+            It never drives the running orbital rate.
+          </span>
+        </div>
       </div>
 
-      <div class="c20v-stat">
-        <span class="c20v-k">SOL · ORBITAL ADVANCE</span>
-        <span id="c20vSol" class="c20v-v">—</span>
+      <div class="c20v-downstream-right">
+        <div class="c20v-stat">
+          <span class="c20v-k">MINTAKA · EARTH AXIAL ROTATION</span>
+          <span id="c20vMintaka" class="c20v-v">—</span>
+          <span class="c20v-k" style="margin-top:8px">LIVE ROTATION REGISTER · 18 BIT</span>
+          <span id="c20vMintakaRegisterBin" class="c20v-v" style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace">—</span>
+          <span id="c20vMintakaRegisterOct" class="c20v-v" style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace">—</span>
+        </div>
 
-        <span class="c20v-k" style="margin-top:8px">
-          LIVE ORBIT REGISTER · 27 BIT
-        </span>
-        <span id="c20vSolRegisterBin"
-          class="c20v-v"
-          style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace">—</span>
-        <span id="c20vSolRegisterOct"
-          class="c20v-v"
-          style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace">—</span>
+        <div class="c20v-stat">
+          <span class="c20v-k">RECOVERED SUN RETURN · RAW</span>
+          <span id="c20vSun" class="c20v-v">—</span>
+        </div>
 
-        <span class="c20v-k" style="margin-top:10px">
-          ABSOLUTE YEAR PHASE9 · 000₈–777₈
-        </span>
-        <span id="c20vYearPhase9"
-          class="c20v-v"
-          style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace">
-          AWAITING ONE-SHOT ALIGN
-        </span>
+        <div class="c20v-stat">
+          <span class="c20v-k">CIVIL CLOCK STATUS</span>
+          <span id="c20vCivilStatus" class="c20v-v">—</span>
+        </div>
 
-        <span class="c20v-k" style="margin-top:8px">
-          ABSOLUTE YEAR PHASE27
-        </span>
-        <span id="c20vYearPhase27"
-          class="c20v-v"
-          style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace">—</span>
+        <div class="c20v-stat">
+          <span class="c20v-k">DAY_PHASE17</span>
+          <span id="c20vPhase" class="c20v-v">—</span>
+        </div>
 
-        <span class="c20v-k" style="margin-top:8px">
-          LAST ONE-SHOT JPL VERIFICATION
-        </span>
-        <span id="c20vYearJpl"
-          class="c20v-v">—</span>
-
-        <span
-          id="c20vYearAlignStatus"
-          class="c20v-k"
-          style="margin-top:8px"
-        >
-          YEAR ANGLE AWAITS VERIFICATION
-        </span>
-
-        <span
-          class="muted"
-          style="display:block;margin-top:8px;font-size:.78rem;line-height:1.45"
-        >
-          READ ONLY · JPL verifies absolute year-wheel orientation once.
-          It never drives the running orbital rate.
-        </span>
-      </div>
-
-      <div class="c20v-stat">
-        <span class="c20v-k">RECOVERED SUN RETURN · RAW</span>
-        <span id="c20vSun" class="c20v-v">—</span>
-      </div>
-
-      <div class="c20v-stat">
-        <span class="c20v-k">CIVIL CLOCK STATUS</span>
-        <span id="c20vCivilStatus" class="c20v-v">—</span>
-      </div>
-
-      <div class="c20v-stat">
-        <span class="c20v-k">DAY_PHASE17</span>
-        <span id="c20vPhase" class="c20v-v">—</span>
-      </div>
-
-      <div class="c20v-stat">
-        <span class="c20v-k">A8 CLOCK · 32 × 64 × 64</span>
-        <span id="c20vClock" class="c20v-v c20v-clock">—</span>
-        <span class="c20v-k" style="margin-top:8px">REFERENCE MERIDIAN · 000₈ · LONDON</span>
+        <div class="c20v-stat">
+          <span class="c20v-k">A8 CLOCK · 32 × 64 × 64</span>
+          <span id="c20vClock" class="c20v-v c20v-clock">—</span>
+          <span class="c20v-k" style="margin-top:8px">REFERENCE MERIDIAN · 000₈ · LONDON</span>
+        </div>
       </div>
     </div>
 
@@ -536,7 +592,7 @@ body{
         <span>NO UTC / NTP / GPS / NETWORK TIMING AUTHORITY</span>
 
         <span>→</span>
-        <span>PHYSICAL RAW SOURCE LATER REPLACES SIMULATOR</span>
+        <span>OBSERVATORY-CONFIRMED JOVIAN RECURRENCE · PHYSICAL RAW INPUT NEXT</span>
       </div>
     </div>
   </section>

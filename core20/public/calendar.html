@@ -13,6 +13,12 @@
   <meta name="keywords" content="Auspicious 8, A8 calendar, COSIGO Labs, compass months, planetary weeks, element days, octal calendar, binary calendar, Wilson's Week, protected days, experimental calendar">
   <meta name="author" content="Wendall Wilson · COSIGO Labs">
   <meta name="copyright" content="© 2026 COSIGO Labs. All rights reserved.">
+  <meta name="application-name" content="Auspicious 8 Calendar">
+  <meta name="creator" content="Wendall Wilson · COSIGO Labs">
+  <meta name="publisher" content="COSIGO Labs">
+  <meta name="subject" content="Experimental Auspicious 8 calendar architecture and live Core20 calendar reference">
+  <meta name="classification" content="Research · Calendar · Timekeeping · Experimental">
+  <meta name="format-detection" content="telephone=no">
   <link rel="canonical" href="https://lab.a8.cosigo.io/calendar.html">
 
   <meta property="og:type" content="website">
@@ -21,6 +27,9 @@
   <meta property="og:description" content="8 compass months · 9 planetary weeks · 5 element days · protected time · Wilson's Week.">
   <meta property="og:url" content="https://lab.a8.cosigo.io/calendar.html">
   <meta property="og:image" content="https://lab.a8.cosigo.io/assets/ausp8_total.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1122">
+  <meta property="og:image:height" content="1402">
   <meta property="og:image:alt" content="Auspicious 8 year calendar artwork showing eight compass months and the year-end celebration interval.">
   <meta property="og:locale" content="en_US">
 
@@ -28,8 +37,10 @@
   <meta name="twitter:title" content="Auspicious 8 Calendar · COSIGO Labs">
   <meta name="twitter:description" content="Eight compass months, nine planetary weeks, five element days, live Core20 year-wheel position, protected time and Wilson's Week.">
   <meta name="twitter:image" content="https://lab.a8.cosigo.io/assets/ausp8_total.png">
+  <meta name="twitter:image:alt" content="Auspicious 8 year calendar with eight compass months and Wilson's Week.">
 
-  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/assets/cosigo_master_512.gif" type="image/gif">
+  <link rel="shortcut icon" href="/assets/cosigo_master_512.gif" type="image/gif">
 
   <script type="application/ld+json">
   {
@@ -105,8 +116,31 @@
     nav a:hover,nav a:focus-visible{border-color:rgba(214,170,78,.38);background:#102b38;color:#fff;outline:none}
     nav a.active{background:linear-gradient(180deg,#3a2d16,#211b10);border-color:#8e6f34;color:#f8d881}
 
+    /* A8 MOBILE DROPDOWN NAV V1 */
+    .nav-toggle{
+      display:none;
+      margin-left:auto;
+      padding:.55rem .75rem;
+      border:1px solid #8e6f34;
+      border-radius:9px;
+      background:linear-gradient(180deg,#3a2d16,#211b10);
+      color:#f8d881;
+      font-weight:900;
+      font-size:.78rem;
+      letter-spacing:.08em;
+      cursor:pointer;
+    }
+
+    .nav-toggle:hover,
+    .nav-toggle:focus-visible{
+      border-color:#d6aa4e;
+      color:#fff1b1;
+      outline:none;
+      box-shadow:0 0 16px rgba(214,170,78,.25);
+    }
+
     .hero{position:relative;overflow:hidden;border-bottom:1px solid rgba(214,170,78,.28)}
-    .hero::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,16,24,.96) 0%,rgba(5,16,24,.82) 42%,rgba(5,16,24,.28) 75%,rgba(5,16,24,.9) 100%),url('/assets/ausp8_total.png') center 24%/cover no-repeat;filter:saturate(.85)}
+    .hero::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,16,24,.96) 0%,rgba(5,16,24,.82) 42%,rgba(5,16,24,.28) 75%,rgba(5,16,24,.9) 100%),url('/assets/thumbs/ausp8_total.png') center 24%/cover no-repeat;filter:saturate(.85)}
     .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,#06131d 100%)}
     .hero-inner{position:relative;z-index:1;max-width:var(--max);margin:auto;padding:5.2rem 1.25rem 6rem;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(260px,.55fr);gap:2rem;align-items:center}
     .eyebrow{color:var(--gold2);text-transform:uppercase;letter-spacing:.22em;font-size:.72rem;font-weight:800}
@@ -122,11 +156,67 @@
     .button{display:inline-flex;align-items:center;gap:.5rem;text-decoration:none;padding:.72rem .95rem;border:1px solid #7c6534;border-radius:10px;background:linear-gradient(180deg,#3b3019,#221c11);color:#f2d981;font-weight:750;font-size:.82rem;letter-spacing:.035em;box-shadow:0 8px 20px rgba(0,0,0,.18)}
     .button.secondary{background:#0d2936;border-color:#315867;color:#e8e0cf}
     .button:hover{transform:translateY(-1px);filter:brightness(1.08)}
-    .hero-art{justify-self:end;max-width:340px;background:#081722;padding:.5rem;border-radius:12px;border:1px solid #8b6e37;box-shadow:var(--shadow);transform:rotate(1.3deg);overflow:hidden}
-    .hero-art img{width:100%;height:180px;object-fit:cover;object-position:center 22%;border-radius:7px}
-    .hero-art figcaption{font-size:.68rem;color:var(--muted);padding:.4rem .25rem .05rem;text-align:center}
 
-    main{max-width:var(--max);margin:auto;padding:0 1rem 4rem}
+    /* CORE20 PUBLIC CONNECT BEACON V1 */
+    #connectCoreButton{
+      position:relative;
+      border:2px solid #f2cf69 !important;
+      background:
+        linear-gradient(180deg,#8a681c 0%,#594010 58%,#30230b 100%) !important;
+      color:#fff3bd !important;
+      font-weight:900 !important;
+      letter-spacing:.075em;
+      text-shadow:0 1px 2px #000;
+      box-shadow:
+        0 0 0 2px rgba(255,221,115,.30),
+        0 0 18px rgba(242,196,72,.72),
+        0 0 38px rgba(242,196,72,.32),
+        inset 0 1px 0 rgba(255,245,196,.28);
+      animation:a8-connect-gold-pulse 1.9s ease-in-out infinite;
+    }
+
+    #connectCoreButton:hover,
+    #connectCoreButton:focus-visible{
+      border-color:#fff0a8 !important;
+      color:#fffce8 !important;
+      filter:brightness(1.18);
+      box-shadow:
+        0 0 0 3px rgba(255,232,145,.38),
+        0 0 26px rgba(255,215,86,.92),
+        0 0 52px rgba(255,196,43,.46),
+        inset 0 1px 0 rgba(255,255,230,.38);
+    }
+
+    @keyframes a8-connect-gold-pulse{
+      0%,100%{
+        box-shadow:
+          0 0 0 2px rgba(255,221,115,.28),
+          0 0 14px rgba(242,196,72,.58),
+          0 0 28px rgba(242,196,72,.24),
+          inset 0 1px 0 rgba(255,245,196,.24);
+      }
+      50%{
+        box-shadow:
+          0 0 0 3px rgba(255,226,125,.42),
+          0 0 28px rgba(255,207,70,.88),
+          0 0 52px rgba(242,196,72,.40),
+          inset 0 1px 0 rgba(255,250,210,.34);
+      }
+    }
+
+    @media (prefers-reduced-motion:reduce){
+      #connectCoreButton{animation:none}
+    }
+    .hero-title-row{display:flex;align-items:center;gap:.75rem;margin-bottom:.2rem}
+    .hero-title-row h1{margin:0}
+    .hero-title-mark{width:48px;height:48px;object-fit:contain;flex:0 0 auto;border-radius:8px}
+    @media (max-width:520px){.hero-title-mark{width:38px;height:38px}.hero-title-row{gap:.55rem}}
+
+    .hero-art{justify-self:end;width:100%;max-width:250px;background:#081722;padding:.45rem;border-radius:12px;border:1px solid #8b6e37;box-shadow:var(--shadow);transform:rotate(.7deg);overflow:hidden}
+    .hero-art img{width:100%;height:150px;object-fit:contain;object-position:center;border-radius:7px;background:#06131b}
+    .hero-art figcaption{font-size:.65rem;color:var(--muted);padding:.35rem .2rem .02rem;text-align:center}
+
+    main{max-width:var(--max);margin:auto;padding:0 1rem 1.25rem}
     section{scroll-margin-top:72px}
     .section-head{display:flex;gap:1rem;align-items:end;justify-content:space-between;margin:3.6rem 0 1.25rem}
     .section-head h2{font-size:clamp(1.9rem,4vw,3.2rem)}
@@ -148,7 +238,27 @@
     .month-chip small{display:block;font-size:.69rem;letter-spacing:.08em;text-transform:uppercase}
 
     .explorer{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(280px,.7fr);gap:1rem;margin-top:1rem}
-    .calendar-wrap{padding:1rem;overflow:auto}
+    .calendar-wrap{padding:1rem;overflow:visible;min-width:0}
+    .calendar-pan-cue{
+      display:none;
+      margin:.1rem 0 .55rem;
+      color:#665530;
+      font:800 .68rem/1.2 Inter,sans-serif;
+      letter-spacing:.08em;
+      text-align:right;
+      text-transform:uppercase;
+    }
+    .calendar-scroll{
+      max-width:100%;
+      min-width:0;
+      overflow-x:auto;
+      overflow-y:hidden;
+      -webkit-overflow-scrolling:touch;
+      overscroll-behavior-x:contain;
+      touch-action:pan-x pan-y;
+      scrollbar-width:thin;
+      box-shadow:inset -20px 0 16px -18px rgba(44,37,25,.9);
+    }
     .cal-title{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin:0 0 .75rem}
     .cal-title h3{color:#2c2519;font-size:1.45rem}
     .cal-title .badge{border:1px solid #836e43;padding:.3rem .55rem;border-radius:999px;font-size:.72rem;background:rgba(255,255,255,.22)}
@@ -189,23 +299,23 @@
     .rhythm span{font-size:.75rem;color:var(--muted)}
     .notice{margin-top:1rem;padding:.85rem 1rem;border:1px solid rgba(214,170,78,.3);border-radius:12px;background:#251f12;color:#ead9b3;font-size:.86rem}
 
-    .art-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
-    .art-card{overflow:hidden;text-decoration:none;transition:.18s}
-    .art-card:hover{transform:translateY(-3px)}
+    .art-grid{display:grid;grid-template-columns:repeat(4,minmax(0,200px));gap:.8rem;justify-content:center;align-items:start}
+    .art-card{width:100%;max-width:200px;justify-self:center;overflow:hidden;text-decoration:none;transition:.18s}
+    .art-card:hover{transform:translateY(-2px)}
     .art-card figure{margin:0}
-    .art-card img{aspect-ratio:1122/1402;object-fit:cover;width:100%;background:#07131a}
-    .art-card figcaption{padding:.8rem .85rem 1rem}
-    .art-card strong{font-family:Georgia,serif;font-size:1rem;color:#f3dfb5}
-    .art-card span{display:block;color:var(--muted);font-size:.72rem;margin-top:.16rem}
+    .art-card img{width:100%;height:225px;object-fit:contain;padding:.35rem;background:#07131a}
+    .art-card figcaption{padding:.55rem .6rem .7rem}
+    .art-card strong{font-family:Georgia,serif;font-size:.88rem;color:#f3dfb5}
+    .art-card span{display:block;color:var(--muted);font-size:.65rem;line-height:1.35;margin-top:.14rem}
 
-    .feature-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:1rem}
+    .feature-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(220px,280px);gap:1rem;align-items:start}
     .feature-copy{padding:1.3rem}
     .feature-copy h3{font-size:1.7rem}
     .feature-copy p{color:#d2c5af}
     .feature-copy ul{padding-left:1.1rem;color:#d4c8b5}
     .feature-copy li{margin:.36rem 0}
-    .feature-image{overflow:hidden}
-    .feature-image img{width:100%;height:100%;object-fit:cover;max-height:760px}
+    .feature-image{width:100%;max-width:280px;justify-self:center;overflow:hidden}
+    .feature-image img{width:100%;height:320px;object-fit:contain;padding:.45rem;background:#07131a}
 
     .yearmath{display:grid;grid-template-columns:repeat(5,1fr);gap:.7rem}
     .yearmath div{padding:1rem;text-align:center}
@@ -215,7 +325,18 @@
     .research-note{padding:1.15rem 1.25rem;margin-top:1rem;border-left:4px solid #5f899b;background:#0a2633}
     .research-note strong{color:#e8d9bb}
 
-    footer{border-top:1px solid rgba(214,170,78,.28);background:#041018;margin-top:4rem}
+    /* CALENDAR BOTTOM COMPACTION V1 */
+    main > section:nth-last-of-type(2) .section-head,
+    main > section:last-of-type .section-head{
+      margin-top:2rem;
+      margin-bottom:.85rem;
+    }
+
+    main > section:last-of-type{
+      margin-bottom:0;
+    }
+
+    footer{border-top:1px solid rgba(214,170,78,.28);background:#041018;margin-top:1.25rem}
     .footer-inner{max-width:var(--max);margin:auto;padding:2rem 1rem 1rem;display:grid;grid-template-columns:1.25fr repeat(3,1fr);gap:1.4rem}
     .footer-brand{display:flex;gap:.8rem;align-items:flex-start}
     .footer-brand svg{width:48px;color:var(--gold2);flex:0 0 auto}
@@ -293,13 +414,365 @@
     @media (max-width:900px){.today-grid{grid-template-columns:1fr}.today-dial-wrap{min-height:290px}.today-panel::after{display:none}.core-status-strip{grid-template-columns:1fr}}
     @media print{.topbar,.actions,.today-actions,.lightbox,.external-proof button{display:none!important}.today-shell{margin:0}.today-panel{box-shadow:none;border:2px solid #80652f}.today-printout{box-shadow:none}.today-dial{box-shadow:none}body{background:#fff;color:#111}.today-panel{background:#10232d;-webkit-print-color-adjust:exact;print-color-adjust:exact}}
     @media (max-width:1100px){
-      .hero-inner{grid-template-columns:1fr}.hero-art{justify-self:start;max-width:310px}.hero-art img{height:160px}.month-register{grid-template-columns:repeat(4,1fr)}.art-grid{grid-template-columns:repeat(2,1fr)}.footer-inner{grid-template-columns:1fr 1fr}.spine{grid-template-columns:1fr 1fr}.yearmath{grid-template-columns:repeat(3,1fr)}
+      .hero-inner{grid-template-columns:1fr}.hero-art{justify-self:start;max-width:230px}.hero-art img{height:140px}.month-register{grid-template-columns:repeat(4,1fr)}.art-grid{grid-template-columns:repeat(3,minmax(0,190px))}.footer-inner{grid-template-columns:1fr 1fr}.spine{grid-template-columns:1fr 1fr}.yearmath{grid-template-columns:repeat(3,1fr)}
     }
     @media (max-width:780px){
-      .navwrap{display:block}.brand{margin-bottom:.45rem}nav{margin:0}.hero-inner{padding-top:3.2rem}.hero-stats{grid-template-columns:1fr 1fr}.explorer,.rule-grid,.feature-grid{grid-template-columns:1fr}.month-register{grid-template-columns:repeat(2,1fr)}.element-row{grid-template-columns:repeat(5,minmax(90px,1fr));overflow:auto}.art-grid{grid-template-columns:1fr 1fr}.yearmath{grid-template-columns:1fr 1fr}.footer-inner{grid-template-columns:1fr}.section-head{display:block}.section-head p{margin-top:.5rem}
+      .calendar-pan-cue{
+        display:block;
+      }
+
+      .navwrap{
+        display:grid;
+        grid-template-columns:1fr auto;
+        gap:.55rem .75rem;
+        align-items:center;
+      }
+
+      .brand{
+        margin:0;
+      }
+
+      .nav-toggle{
+        display:inline-flex;
+        align-items:center;
+        justify-content:center;
+      }
+
+      #a8PrimaryNav{
+        display:none;
+        grid-column:1 / -1;
+        width:100%;
+        margin:0;
+        padding:.35rem;
+        overflow:visible;
+        flex-direction:column;
+        gap:.22rem;
+        border:1px solid rgba(214,170,78,.26);
+        border-radius:11px;
+        background:rgba(4,15,22,.98);
+        box-shadow:0 14px 30px rgba(0,0,0,.34);
+      }
+
+      #a8PrimaryNav.open{
+        display:flex;
+      }
+
+      #a8PrimaryNav a{
+        display:block;
+        width:100%;
+        padding:.68rem .75rem;
+        border-radius:8px;
+        font-size:.78rem;
+      }
+
+      .hero-inner{padding-top:3.2rem}
+      .hero-stats{grid-template-columns:1fr 1fr}
+      .explorer,.rule-grid,.feature-grid{grid-template-columns:1fr}
+
+      /* A8 MOBILE RHYTHM WIDTH NORMALIZATION V1 */
+      .rule-grid,
+      .rule-card{
+        min-width:0;
+        width:100%;
+        max-width:100%;
+        box-sizing:border-box;
+      }
+
+      .month-register{grid-template-columns:repeat(2,1fr)}
+
+      .element-row{
+        grid-template-columns:repeat(5,minmax(90px,1fr));
+        width:100%;
+        max-width:100%;
+        min-width:0;
+        overflow-x:auto;
+        overflow-y:hidden;
+      }
+
+      .rhythm{
+        grid-template-columns:1fr;
+        width:100%;
+        max-width:100%;
+        min-width:0;
+      }
+
+      .rhythm > div{
+        min-width:0;
+      }
+      .art-grid{grid-template-columns:repeat(2,minmax(0,180px));gap:.65rem}
+      .art-card{max-width:180px}
+      .art-card img{height:200px}
+      .feature-image{max-width:230px}
+      .feature-image img{height:260px}
+      .yearmath{grid-template-columns:1fr 1fr}
+      .footer-inner{grid-template-columns:1fr}
+      .section-head{display:block}
+      .section-head p{margin-top:.5rem}
     }
-    @media (max-width:520px){.spine{grid-template-columns:1fr}.art-grid{grid-template-columns:1fr}.hero-art{display:none}.yearmath{grid-template-columns:1fr 1fr}.hero-stats{grid-template-columns:1fr 1fr}}
+    @media (max-width:520px){
+      .spine{grid-template-columns:1fr}
+      .art-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:.55rem}
+      .art-card{max-width:160px}
+      .art-card img{height:170px;padding:.25rem}
+      .art-card figcaption{padding:.45rem}
+      .art-card strong{font-size:.78rem}
+      .art-card span{font-size:.6rem}
+      .hero-art{display:block;max-width:190px}
+      .hero-art img{height:115px}
+      .feature-image{max-width:200px}
+      .feature-image img{height:225px}
+      .yearmath{grid-template-columns:1fr 1fr}
+      .hero-stats{grid-template-columns:1fr 1fr}
+
+      .navwrap{
+        padding:.52rem .7rem;
+        gap:.45rem;
+      }
+
+      .brand{
+        min-width:0;
+        white-space:normal;
+        gap:.45rem;
+      }
+
+      .brandmark{
+        width:32px;
+        height:32px;
+        flex:0 0 32px;
+      }
+
+      .brandtext{
+        min-width:0;
+      }
+
+      .brandtext strong{
+        font-size:.88rem;
+        letter-spacing:.055em;
+        white-space:nowrap;
+      }
+
+      .brandtext small{
+        display:none;
+      }
+
+      .nav-toggle{
+        padding:.5rem .62rem;
+        font-size:.74rem;
+        white-space:nowrap;
+      }
+    }
   </style>
+
+<style id="a8-date-shorthand-card-style">
+.date-shorthand-card{
+  margin-top:1rem;
+  padding:1.15rem;
+  border-color:rgba(214,170,78,.48);
+  background:
+    radial-gradient(circle at 88% 12%,rgba(214,170,78,.14),transparent 34%),
+    linear-gradient(180deg,rgba(15,44,56,.98),rgba(7,25,34,.98));
+}
+
+.date-shorthand-kicker{
+  color:var(--gold2);
+  font-size:.67rem;
+  font-weight:900;
+  letter-spacing:.16em;
+  margin-bottom:.35rem;
+}
+
+.date-shorthand-card h3{
+  font-size:1.35rem;
+  margin-bottom:.35rem;
+}
+
+.date-shorthand-lede,
+.date-shorthand-card p{
+  color:#cfc5b1;
+  line-height:1.55;
+}
+
+.date-example-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:.65rem;
+  margin:1rem 0;
+}
+
+.date-example-grid div{
+  padding:.8rem;
+  border:1px solid rgba(214,170,78,.28);
+  border-radius:10px;
+  background:rgba(5,20,28,.72);
+}
+
+.date-example-grid span{
+  display:block;
+  color:#899da3;
+  font-size:.6rem;
+  font-weight:800;
+  letter-spacing:.12em;
+  margin-bottom:.3rem;
+}
+
+.date-example-grid strong{
+  color:#f4dc97;
+  font:700 1.05rem/1.25 Georgia,"Times New Roman",serif;
+}
+
+.date-rhythm{
+  display:grid;
+  grid-template-columns:repeat(9,minmax(0,1fr));
+  gap:.35rem;
+  margin:.9rem 0;
+}
+
+.date-rhythm span{
+  display:grid;
+  place-items:center;
+  min-height:38px;
+  border:1px solid #9d7b2e;
+  border-radius:8px;
+  background:linear-gradient(180deg,#624915,#32270e);
+  color:#ffe594;
+  font-weight:900;
+}
+
+@media(max-width:780px){
+  .date-example-grid{
+    grid-template-columns:1fr;
+  }
+
+  .date-rhythm{
+    grid-template-columns:repeat(5,1fr);
+  }
+}
+</style>
+
+
+<style id="a8-year-consolidation-style">
+.year-compact-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:1rem;
+}
+
+.year-compact-card{
+  padding:1.2rem;
+}
+
+.year-compact-number{
+  font:700 2.8rem/1 Georgia,"Times New Roman",serif;
+  color:var(--gold2);
+  margin-bottom:.35rem;
+}
+
+.year-compact-card h3{
+  font-size:1.35rem;
+  margin-bottom:.55rem;
+}
+
+.year-compact-card p{
+  margin:.38rem 0 0;
+  color:#cfc5b1;
+}
+
+.wilson-compact{
+  border-color:rgba(214,170,78,.5);
+  background:
+    radial-gradient(circle at 90% 12%,rgba(214,170,78,.13),transparent 36%),
+    linear-gradient(180deg,rgba(34,38,32,.96),rgba(13,29,34,.98));
+}
+
+.year-details{
+  margin-top:1rem;
+  overflow:hidden;
+}
+
+.year-details > summary{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1rem;
+  padding:1rem 1.15rem;
+  cursor:pointer;
+  list-style:none;
+  color:#f1d984;
+  background:linear-gradient(180deg,#112e3b,#091d27);
+}
+
+.year-details > summary::-webkit-details-marker{
+  display:none;
+}
+
+.year-details > summary strong{
+  display:block;
+  font-size:.82rem;
+  letter-spacing:.09em;
+}
+
+.year-details > summary small{
+  display:block;
+  margin-top:.24rem;
+  color:#9eacae;
+  font-size:.7rem;
+  letter-spacing:.025em;
+}
+
+.year-details-arrow{
+  font-size:1.45rem;
+  line-height:1;
+  transition:transform .18s ease;
+}
+
+.year-details[open] .year-details-arrow{
+  transform:rotate(180deg);
+}
+
+.year-details-body{
+  padding:0 1.1rem 1.2rem;
+}
+
+.year-detail-block{
+  padding-top:1.35rem;
+  margin-top:1.2rem;
+  border-top:1px solid rgba(214,170,78,.18);
+}
+
+.year-detail-block:first-child{
+  margin-top:0;
+}
+
+.year-detail-block h3{
+  font-size:clamp(1.35rem,3vw,2rem);
+  margin:.2rem 0 .7rem;
+}
+
+.year-detail-block > p{
+  color:#cfc5b1;
+}
+
+.year-print-action{
+  margin-top:1.35rem;
+  padding-top:1rem;
+  border-top:1px solid rgba(214,170,78,.18);
+}
+
+@media(max-width:780px){
+  .year-compact-grid{
+    grid-template-columns:1fr;
+  }
+
+  .year-details > summary{
+    align-items:flex-start;
+  }
+
+  .year-details-body{
+    padding:0 .75rem 1rem;
+  }
+}
+</style>
+
 </head>
 <body>
 <a class="skip" href="#main">Skip to calendar</a>
@@ -307,25 +780,27 @@
 <header class="topbar">
   <div class="navwrap">
     <a class="brand" href="https://a8.cosigo.io/" aria-label="COSIGO Labs Auspicious 8 public home">
-      <svg class="brandmark" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="27" fill="none" stroke="currentColor" stroke-width="2"/><path d="M32 3l5 24 24 5-24 5-5 24-5-24-24-5 24-5z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="32" cy="32" r="9" fill="none" stroke="currentColor" stroke-width="2"/><text x="32" y="37" text-anchor="middle" font-size="16" fill="currentColor" font-family="Georgia">8</text></svg>
+      <img class="brandmark" src="/assets/cosigo_master_512.gif" alt="COSIGO">
       <span class="brandtext"><strong>COSIGO LABS</strong><small>AUSPICIOUS 8</small></span>
     </a>
-    <nav aria-label="Auspicious 8 navigation">
-      <a href="/">LAB HOME</a>
-      <a href="/jovian-operations.html">CORE20</a>
-      <a class="active" href="/calendar.html">CALENDAR</a>
+
+    <button
+      class="nav-toggle"
+      id="a8NavToggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="a8PrimaryNav"
+    >☰ MENU</button>
+
+    <nav id="a8PrimaryNav" aria-label="Auspicious 8 navigation">
       <a href="/clock.html">CLOCK</a>
       <a href="/moons.html">MOONS</a>
       <a href="/mintaka.html">MINTAKA</a>
       <a href="/sol.html">SOL</a>
-      <a href="/relationship.html">RELATIONSHIP</a>
       <a href="/map-clock-compass.html">MAP · CLOCK · COMPASS</a>
       <a href="/navigation.html">NAVIGATION</a>
       <a href="/celestial.html">CELESTIAL</a>
       <a href="/audio.html">AUDIO</a>
-      <a href="/data.html">DATA</a>
-      <a href="/telescope.html">TELESCOPE</a>
-      <a href="/angle.html">ANGLE</a>
       <a href="/quartz.html">QUARTZ</a>
       <a href="https://a8.cosigo.io/">A8 PUBLIC</a>
       <a href="https://cosigo.io/">COSIGO HOME</a>
@@ -338,24 +813,12 @@
   <div class="hero-inner">
     <div>
       <div class="eyebrow">COSIGO Labs · Calendar Architecture · Working Public Research</div>
-      <h1>Auspicious 8 <span>Calendar</span></h1>
+      <div class="hero-title-row">
+        <svg class="hero-title-mark" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="27" fill="none" stroke="currentColor" stroke-width="2"/><path d="M32 3l5 24 24 5-24 5-5 24-5-24-24-5 24-5z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="32" cy="32" r="9" fill="none" stroke="currentColor" stroke-width="2"/><text x="32" y="37" text-anchor="middle" font-size="16" fill="currentColor" font-family="Georgia">8</text></svg>
+        <h1>Auspicious 8 <span>Calendar</span></h1>
+      </div>
       <p class="lede">A year designed as a memorable operating rhythm: <strong>8 compass months</strong>, <strong>9 planetary weeks per month</strong>, <strong>5 elemental days per week</strong>, protected time built into the cycle, and a gold year-end interval called <strong>Wilson&rsquo;s Week</strong>.</p>
-      <div class="hero-stats" aria-label="calendar summary">
-        <div><strong>8</strong><small>Compass months</small></div>
-        <div><strong>45</strong><small>Days / month</small></div>
-        <div><strong>72</strong><small>Weeks / year body</small></div>
-        <div><strong>360</strong><small>Structured days</small></div>
-      </div>
-      <div class="actions">
-        <a class="button" href="#explore">EXPLORE THE MONTHS</a>
-        <a class="button secondary" href="#protected">PROTECTED DAYS</a>
-        <a class="button secondary" href="/assets/ausp8_total.png" target="_blank" rel="noopener">OPEN YEAR ARTWORK</a>
-      </div>
     </div>
-    <figure class="hero-art">
-      <a href="/assets/ausp8_total.png" data-lightbox><img src="/assets/ausp8_total.png" width="1122" height="1402" alt="Auspicious 8 one-year calendar artwork with eight compass months and Wilson's Week" fetchpriority="high"></a>
-      <figcaption>One-year artwork · click to enlarge</figcaption>
-    </figure>
   </div>
 </div>
 
@@ -365,6 +828,26 @@
       <div class="today-copy">
         <div class="today-kicker"><span class="live-dot" id="todayLiveDot"></span><span>CORE20 · LIVE A8 CALENDAR REGISTER</span><span id="todayHealth">READY · CONNECT</span></div>
 
+        <div
+          class="meridian-day-notice"
+          role="note"
+          style="
+            margin:.7rem 0 .2rem;
+            padding:.6rem .75rem;
+            border:1px solid rgba(214,170,78,.34);
+            border-radius:9px;
+            background:rgba(37,31,18,.72);
+            color:#d9c69b;
+            font:700 .67rem/1.45 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+            letter-spacing:.045em;
+          "
+        >
+          NEW A8 CALENDAR DAY · MERIDIAN 0 · 000₈ · LONDON REFERENCE
+          <span style="display:block;color:#9faeb2;font-weight:600">
+            This is the A8 reference date at Meridian 0. Your local civil date may be ahead or behind depending on your location. Compare accordingly.
+          </span>
+        </div>
+
         <div class="core-status-strip" aria-label="Core20 calendar connection state">
           <div class="core-status" id="coreFeedStatus">CORE20 FEED<strong>NOT CONNECTED</strong></div>
           <div class="core-status" id="solOrbitStatus">ABSOLUTE YEAR PHASE27<strong>WAITING</strong></div>
@@ -373,8 +856,9 @@
 
         <div class="today-actions">
           <button class="button" type="button" id="connectCoreButton">CONNECT TO LIVE CORE20 · READ ONLY</button>
+        <a class="button" href="#explore">EXPLORE THE MONTHS</a>
+        <a class="button secondary" href="#protected">PROTECTED DAYS</a>
           <button class="button secondary" type="button" id="showTodayButton" disabled>SHOW TODAY IN MONTH GRID</button>
-          <button class="button secondary" type="button" onclick="window.print()">PRINT A8 TODAY</button>
         </div>
 
         <div class="today-register" id="todayRegister">— · — · —</div>
@@ -432,23 +916,10 @@
 </section>
 
 <main id="main">
-  <section aria-labelledby="structure-title">
-    <div class="section-head">
-      <div><div class="eyebrow">The whole machine</div><h2 id="structure-title">Calendar architecture at a glance</h2></div>
-      <p>The year has an exact 360-day structured body. The week rhythm alternates continuously across month boundaries; it does not restart merely because a month changes.</p>
-    </div>
-    <div class="spine">
-      <article class="spine-card"><span class="num">8</span><h3>Compass months</h3><p>Three-bit month register: <code>000</code> through <code>111</code>, paired with N, NE, E, SE, S, SW, W and NW.</p></article>
-      <article class="spine-card"><span class="num">9</span><h3>Planetary weeks</h3><p>Mercury, Venus, Terra, Mars, Jupiter, Saturn, Uranus, Neptune and Pluto form the nine named week rows.</p></article>
-      <article class="spine-card"><span class="num">5</span><h3>Element days</h3><p>Fire → Water → Earth → Air → Aether. Human day numbering stays the intuitive decimal sequence 1 through 45.</p></article>
-      <article class="spine-card"><span class="num">5 / 6</span><h3>Wilson&rsquo;s Week</h3><p>Year-end celebration outside the eight-month register: five protected gold element days, plus a sixth gold leap-extension day when required.</p></article>
-    </div>
-  </section>
-
   <section id="explore" aria-labelledby="explore-title">
     <div class="section-head">
       <div><div class="eyebrow">3-bit month register</div><h2 id="explore-title">Eight compass months</h2></div>
-      <p>Binary identifies the machine state, the octal digit is the compact A8 human abbreviation, and the compass name makes the month memorable.</p>
+      <p>Binary identifies the machine state, the octal digit is the compact A8 readable abbreviation, and the compass name makes the month memorable.</p>
     </div>
 
     <div class="month-register" id="monthRegister" role="tablist" aria-label="Choose an A8 compass month"></div>
@@ -456,11 +927,14 @@
     <div class="explorer">
       <div class="panel parchment calendar-wrap">
         <div class="cal-title"><h3 id="monthTitle">000 · 0₈ · N · North</h3><span class="badge" id="monthType">MONTH A · 32 / 13</span></div>
+        <div class="calendar-pan-cue" aria-hidden="true">DRAG / SWIPE LEFT · MORE CALENDAR →</div>
+        <div class="calendar-scroll" tabindex="0" role="region" aria-label="Scrollable A8 month calendar">
         <table class="calendar" aria-describedby="calendarCaption">
           <caption id="calendarCaption" style="position:absolute;left:-9999px">Selected A8 month showing nine planetary weeks and five elemental day columns.</caption>
           <thead><tr><th scope="col">Planetary week</th><th scope="col">🔥 Fire<span>Day 1</span></th><th scope="col">🌊 Water<span>Day 2</span></th><th scope="col">⛰ Earth<span>Day 3</span></th><th scope="col">☁ Air<span>Day 4</span></th><th scope="col">✦ Aether<span>Day 5</span></th></tr></thead>
           <tbody id="calendarBody"></tbody>
         </table>
+        </div>
       </div>
 
       <aside class="panel month-side" aria-live="polite">
@@ -472,9 +946,22 @@
         <div class="metric"><span>Business days</span><strong id="businessCount">32</strong></div>
         <div class="metric"><span>Protected days</span><strong id="protectedCount">13</strong></div>
         <div class="metric"><span>Opening week form</span><strong id="openingForm">A · 4/1</strong></div>
-        <a class="button" id="monthArtwork" href="/assets/ausp8_north.png" target="_blank" rel="noopener">OPEN MONTH ARTWORK</a>
+        <a class="button" id="monthArtwork" href="/image-viewer.html#/assets/ausp8_north.png">OPEN MONTH ARTWORK</a>
         <div class="mini-note"><strong>Important:</strong> month boundaries do not reset the 4/1 → 3/2 alternation. Because each month contains nine weeks, the next month begins with the opposite week form.</div>
       </aside>
+    </div>
+  </section>
+
+  <section aria-labelledby="structure-title">
+    <div class="section-head">
+      <div><div class="eyebrow">The whole machine</div><h2 id="structure-title">Calendar architecture at a glance</h2></div>
+      <p>The year has an exact 360-day structured body. The week rhythm alternates continuously across month boundaries; it does not restart merely because a month changes.</p>
+    </div>
+    <div class="spine">
+      <article class="spine-card"><span class="num">8</span><h3>Compass months</h3><p>Three-bit month register: <code>000</code> through <code>111</code>, paired with N, NE, E, SE, S, SW, W and NW.</p></article>
+      <article class="spine-card"><span class="num">9</span><h3>Planetary weeks</h3><p>Mercury, Venus, Terra, Mars, Jupiter, Saturn, Uranus, Neptune and Pluto form the nine named week rows.</p></article>
+      <article class="spine-card"><span class="num">5</span><h3>Element days</h3><p>Fire → Water → Earth → Air → Aether. Day numbering stays with the intuitive decimal sequence 1 through 45.</p></article>
+      <article class="spine-card"><span class="num">5 / 6</span><h3>Wilson&rsquo;s Week</h3><p>Year-end celebration outside the eight-month register: five protected gold element days, plus a sixth gold leap-extension day when required.</p></article>
     </div>
   </section>
 
@@ -516,50 +1003,120 @@
     </div>
   </section>
 
-  <section aria-labelledby="yearmath-title">
-    <div class="section-head"><div><div class="eyebrow">Why the alternation closes cleanly</div><h2 id="yearmath-title">The 360-day body balances exactly</h2></div><p>There are 72 five-day weeks in eight months. Because 72 is even, exactly half are Week A and half are Week B, and the annual alternation returns to its starting orientation after the structured body.</p></div>
-    <div class="yearmath">
-      <div class="panel"><strong>72</strong><span>Five-day weeks</span></div>
-      <div class="panel"><strong>36 + 36</strong><span>Week A + Week B</span></div>
-      <div class="panel"><strong>252</strong><span>Business days</span></div>
-      <div class="panel"><strong>108</strong><span>Protected structured days</span></div>
-      <div class="panel"><strong>360</strong><span>Structured year body</span></div>
+  <section class="year-consolidated" aria-labelledby="wilson-title">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">Year structure · year-end</div>
+        <h2 id="wilson-title">360 structured days · then Wilson&rsquo;s Week</h2>
+      </div>
+      <p>The ordinary eight-month register closes cleanly at 360 days. A separate protected gold interval then closes the year.</p>
     </div>
-    <div class="research-note"><strong>Month rhythm:</strong> four months contain 32 business / 13 protected days and four contain 31 business / 14 protected days. The month types alternate because nine weeks is odd. The eight-month body therefore closes at 252 business + 108 protected = 360 days.</div>
-  </section>
 
-  <section aria-labelledby="art-title">
-    <div class="section-head"><div><div class="eyebrow">Calendar atlas</div><h2 id="art-title">The eight month pages</h2></div><p>Each artwork carries the same calendar machinery while the compass identity changes. Open any page at full resolution.</p></div>
-    <div class="art-grid" id="artGrid"></div>
-  </section>
-
-  <section aria-labelledby="wilson-title">
-    <div class="section-head"><div><div class="eyebrow">Outside the month register</div><h2 id="wilson-title">Wilson&rsquo;s Week · year-end celebration</h2></div><p>No planetary week name. No compass-month identity. Only the five element days, all protected gold, set apart at the end of the year.</p></div>
-    <div class="feature-grid">
-      <article class="panel feature-copy">
-        <h3>Five gold element days</h3>
-        <p>After month <code>111 · 7₈ · NW</code> closes, the month register has completed every possible three-bit state. Wilson&rsquo;s Week follows the 360-day body as a separate year-end interval:</p>
-        <ul>
-          <li><strong>Fire · Water · Earth · Air · Aether</strong> — all protected Gold Days.</li>
-          <li>Reserved for year-end celebration, holidays, festivals, family, gratitude, civic and religious observance.</li>
-          <li>Five days in a normal year: 360 + 5 = <strong>365</strong>.</li>
-          <li>A leap correction may add one additional protected Gold Day: 360 + 6 = <strong>366</strong>.</li>
-          <li>The optional sixth day is a leap-extension day; it does not invent a sixth element or a ninth month.</li>
-        </ul>
-        <div class="notice">The phrase <strong>open-ended</strong> means the celebration sits outside the ordinary month/week register. The ordinary form is five Gold Days, with the sixth used only when leap correction requires it.</div>
-        <a class="button" href="/assets/ausp8_year_end.png" target="_blank" rel="noopener">OPEN WILSON&rsquo;S WEEK ARTWORK</a>
+    <div class="year-compact-grid">
+      <article class="panel year-compact-card">
+        <div class="year-compact-number">360</div>
+        <h3>Structured year body</h3>
+        <p><strong>72</strong> five-day weeks · <strong>36 + 36</strong> alternating week forms.</p>
+        <p><strong>252 business days + 108 protected days</strong>.</p>
       </article>
-      <a class="panel feature-image" href="/assets/ausp8_year_end.png" data-lightbox aria-label="Open Wilson's Week artwork"><img src="/assets/ausp8_year_end.png" width="1122" height="1402" loading="lazy" alt="Wilson's Week year-end celebration artwork with Fire, Water, Earth, Air and Aether gold days"></a>
-    </div>
-  </section>
 
-  <section aria-labelledby="explain-title">
-    <div class="section-head"><div><div class="eyebrow">Show, then explain</div><h2 id="explain-title">Examples and explanation plates</h2></div><p>The artwork is playful; the rules underneath it are explicit. These plates explain protected days, year structure and the operating rhythm.</p></div>
-    <div class="art-grid" style="grid-template-columns:repeat(3,1fr)">
-      <a class="panel art-card" href="/assets/ausp8_example.png" data-lightbox><figure><img src="/assets/ausp8_example.png" width="1055" height="1491" loading="lazy" alt="A8 protected days example with Aether highlighted gold and alternating Air highlighted silver"><figcaption><strong>Protected Days Example</strong><span>Gold Aether · Silver alternating Air · business-day rhythm.</span></figcaption></figure></a>
-      <a class="panel art-card" href="/assets/aus8_explain.png" data-lightbox><figure><img src="/assets/aus8_explain.png" width="1055" height="1491" loading="lazy" alt="Auspicious 8 calendar explanatory artwork"><figcaption><strong>Calendar Explanation</strong><span>Eight months · nine weeks · five element days · year structure.</span></figcaption></figure></a>
-      <a class="panel art-card" href="/assets/ausp8_total.png" data-lightbox><figure><img src="/assets/ausp8_total.png" width="1122" height="1402" loading="lazy" alt="Auspicious 8 complete year calendar overview"><figcaption><strong>One-Year Overview</strong><span>All eight compass months and the year-end interval together.</span></figcaption></figure></a>
+      <article class="panel year-compact-card wilson-compact">
+        <div class="year-compact-number">5</div>
+        <h3>Wilson&rsquo;s Week</h3>
+        <p><strong>Fire · Water · Earth · Air · Aether</strong> — all protected Gold Days outside the ordinary month register.</p>
+        <p>Normal year: <strong>365</strong>. Leap extension when required: <strong>366</strong>.</p>
+      </article>
     </div>
+
+    <details class="panel year-details" id="yearDetails">
+      <summary>
+        <span>
+          <strong>YEAR DETAILS &amp; ARTWORK</strong>
+          <small>Arithmetic · eight month pages · Wilson&rsquo;s Week · explanation plates · print</small>
+        </span>
+        <span class="year-details-arrow" aria-hidden="true">⌄</span>
+      </summary>
+
+      <div class="year-details-body">
+        <div class="year-detail-block">
+          <div class="eyebrow">Why the alternation closes cleanly</div>
+          <h3 id="yearmath-title">The 360-day body balances exactly</h3>
+          <p>There are 72 five-day weeks in eight months. Because 72 is even, exactly half are Week A and half are Week B, and the annual alternation returns to its starting orientation after the structured body.</p>
+          <div class="research-note"><strong>Month rhythm:</strong> four months contain 32 business / 13 protected days and four contain 31 business / 14 protected days. The month types alternate because nine weeks is odd. The eight-month body therefore closes at 252 business + 108 protected = 360 days.</div>
+        </div>
+
+        <div class="year-detail-block">
+          <div class="eyebrow">Calendar atlas</div>
+          <h3 id="art-title">The eight month pages</h3>
+          <p>Each artwork carries the same calendar machinery while the compass identity changes. Open any page at full resolution.</p>
+
+          <div class="art-grid" id="artGrid"></div>
+        </div>
+
+        <div class="year-detail-block">
+          <div class="eyebrow">Outside the month register</div>
+          <h3>Wilson&rsquo;s Week · full year-end notes</h3>
+
+          <div class="feature-grid">
+            <article class="panel feature-copy">
+              <h3>Five gold element days</h3>
+
+              <p>After month <code>111 · 7₈ · NW</code> closes, the month register has completed every possible three-bit state. Wilson&rsquo;s Week follows the 360-day body as a separate year-end interval:</p>
+
+              <ul>
+                <li><strong>Fire · Water · Earth · Air · Aether</strong> — all protected Gold Days.</li>
+                <li>Reserved for year-end celebration, holidays, festivals, family, gratitude, civic and religious observance.</li>
+                <li>Five days in a normal year: 360 + 5 = <strong>365</strong>.</li>
+                <li>A leap correction may add one additional protected Gold Day: 360 + 6 = <strong>366</strong>.</li>
+                <li>The optional sixth day is a leap-extension day; it does not invent a sixth element or a ninth month.</li>
+              </ul>
+
+              <div class="notice">The phrase <strong>open-ended</strong> means the celebration sits outside the ordinary month/week register. The ordinary form is five Gold Days, with the sixth used only when leap correction requires it.</div>
+
+              <div class="notice"><strong>Possible continuous year-end break:</strong> depending on how the ordinary work rhythm meets the year-end boundary, Wilson&rsquo;s Week may join directly to one or two adjacent non-work days. This can produce a continuous year-end break of <strong>6, 7, or 8 days</strong>: five Gold Days plus one or two adjacent non-work days, with the leap-extension Gold Day adding one further day when required. The exact continuous break therefore depends on calendar alignment and leap-year status; Wilson&rsquo;s Week itself remains the defined five-day interval, or six days when the leap correction is present.</div>
+
+              <a class="button" href="/image-viewer.html#/assets/ausp8_year_end.png">OPEN WILSON&rsquo;S WEEK ARTWORK</a>
+            </article>
+
+            <a class="panel feature-image" href="/image-viewer.html#/assets/ausp8_year_end.png" data-lightbox aria-label="Open Wilson's Week artwork">
+              <img src="/assets/thumbs/ausp8_year_end.png" width="360" height="450" loading="lazy" decoding="async" alt="Wilson's Week year-end celebration artwork with Fire, Water, Earth, Air and Aether gold days">
+            </a>
+          </div>
+        </div>
+
+        <div class="year-detail-block">
+          <div class="eyebrow">Show, then explain</div>
+          <h3 id="explain-title">Examples and explanation plates</h3>
+          <p>The artwork is playful; the rules underneath it are explicit. These plates explain protected days, year structure and the operating rhythm.</p>
+
+          <div class="art-grid">
+            <a class="panel art-card" href="/image-viewer.html#/assets/ausp8_example.png" data-lightbox>
+              <figure>
+                <img src="/assets/thumbs/ausp8_example.png" width="360" height="509" loading="lazy" decoding="async" alt="A8 protected days example with Aether highlighted gold and alternating Air highlighted silver">
+                <figcaption>
+                  <strong>Protected Days Example</strong>
+                  <span>Gold Aether · Silver alternating Air · business-day rhythm.</span>
+                </figcaption>
+              </figure>
+            </a>
+
+            <a class="panel art-card" href="/image-viewer.html#/assets/ausp8_total.png" data-lightbox>
+              <figure>
+                <img src="/assets/thumbs/ausp8_total.png" width="360" height="450" loading="lazy" decoding="async" alt="Auspicious 8 complete year calendar overview">
+                <figcaption>
+                  <strong>One-Year Overview</strong>
+                  <span>All eight compass months and the year-end interval together.</span>
+                </figcaption>
+              </figure>
+            </a>
+          </div>
+        </div>
+
+        <div class="actions year-print-action">
+          <button class="button secondary" type="button" onclick="window.print()">PRINT A8 TODAY</button>
+        </div>
+      </div>
+    </details>
   </section>
 
   <section aria-labelledby="language-title">
@@ -568,7 +1125,7 @@
       <article class="panel rule-card">
         <h3>Month language</h3>
         <p><code>000 · 0₈ · N · North</code> through <code>111 · 7₈ · NW · Northwest</code>.</p>
-        <p>The 3-bit state is exact; the octal digit is compact; the compass name is human.</p>
+        <p>The 3-bit state is exact; the octal digit is compact; the compass name is mnemonic.</p>
       </article>
       <article class="panel rule-card">
         <h3>Week and day language</h3>
@@ -576,15 +1133,68 @@
         <p>The planetary names are calendar labels following the familiar historical nine-world sequence. Retaining Pluto as the ninth week name is nomenclature for this calendar, not a claim about modern astronomical classification.</p>
       </article>
     </div>
+
+    <aside class="panel date-shorthand-card" id="a8DateShorthandCard">
+      <div class="date-shorthand-kicker">DATE SHORTHAND · ONE-HAND RHYTHM</div>
+      <h3>Write it the way that is useful</h3>
+
+      <p class="date-shorthand-lede">
+        The written form can change without changing the underlying calendar position.
+      </p>
+
+      <div class="date-example-grid" aria-label="Equivalent A8 date notation">
+        <div>
+          <span>QUICK</span>
+          <strong>(5) 26 · 2026</strong>
+        </div>
+        <div>
+          <span>COMPASS</span>
+          <strong>SW 26 · 2026</strong>
+        </div>
+        <div>
+          <span>NAMED</span>
+          <strong>SW · Saturn · Fire · 2026</strong>
+        </div>
+      </div>
+
+      <p>
+        A conventional year may be appended as a familiar reference.
+        The A8 month, week and element position remain unchanged.
+      </p>
+
+      <div class="date-rhythm" aria-label="Protected Aether days">
+        <span>5</span>
+        <span>10</span>
+        <span>15</span>
+        <span>20</span>
+        <span>25</span>
+        <span>30</span>
+        <span>35</span>
+        <span>40</span>
+        <span>45</span>
+      </div>
+
+      <p>
+        Every fifth day is <strong>Aether</strong> and protected:
+        5, 10, 15, 20, 25, 30, 35, 40 and 45.
+        The five-day elemental rhythm can therefore be counted naturally on one hand.
+      </p>
+
+      <p>
+        Planetary week and element names repeat in every compass month.
+        <strong>Saturn · Fire is always Day 26</strong>, so it occurs once in every month.
+        Include a month number, compass direction or month name whenever the
+        full-year date must be unambiguous.
+      </p>
+    </aside>
   </section>
 
   <section aria-labelledby="status-title">
     <div class="section-head"><div><div class="eyebrow">Research status</div><h2 id="status-title">What this page is — and is not</h2></div></div>
     <div class="panel rule-card">
       <p>This is a <strong>COSIGO Labs experimental calendar architecture</strong>: a proposal for organizing the civil year around an eight-month register, a five-day elemental rhythm and pre-allocated protected time. The images are illustrative presentation artwork; the exact calendar rules are the text and generated tables on this page.</p>
-      <p>It does not claim that compass directions, planet names or classical elements cause the astronomical year. They are memorable human labels placed on an engineered calendar. The underlying A8 project continues to separate Nature, observation, physical rulers and human representation.</p>
+      <p>It does not claim that compass directions, planet names or classical elements cause the astronomical year. They are memorable descriptive labels placed on an engineered calendar. The underlying A8 project continues to separate Nature, observation, physical rulers and engineered representation.</p>
       <p>The live calendar panel reads Core20's qualified absolute year phase directly and derives the named A8 date from that native year position. The one-shot external orientation record remains upstream and isolated; it never supplies the page's running rate, day number, month, week or element. The formal leap-correction rule remains an open research item.</p>
-      <div class="actions"><a class="button secondary" href="/jovian-operations.html">CORE20 FRONT PAGE</a><a class="button secondary" href="/relationship.html">MINTAKA · SOL RELATIONSHIP</a><a class="button secondary" href="https://cosigo.io/">COSIGO</a></div>
     </div>
   </section>
 </main>
@@ -595,8 +1205,8 @@
       <svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="27" fill="none" stroke="currentColor" stroke-width="2"/><path d="M32 3l5 24 24 5-24 5-5 24-5-24-24-5 24-5z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="32" cy="32" r="9" fill="none" stroke="currentColor" stroke-width="2"/><text x="32" y="37" text-anchor="middle" font-size="16" fill="currentColor" font-family="Georgia">8</text></svg>
       <div><h3>COSIGO Labs · Auspicious 8</h3><p>Experimental ground-up measurement and representation research. Nature first; ruler second; legacy conversion last.</p></div>
     </div>
-    <div><h3>Explore A8</h3><a href="https://a8.cosigo.io/">A8 Public Instrument</a><a href="/">Engineering Lab</a><a href="/calendar.html">Calendar</a><a href="/clock.html">Clock</a><a href="/moons.html">Four-Moon Observer</a><a href="/map-clock-compass.html">Map · Clock · Compass</a></div>
-    <div><h3>Research</h3><a href="https://a8.cosigo.io/">A8 Public</a><a href="/jovian-operations.html">Core20 Front Page</a><a href="/relationship.html">Mintaka · Sol Relationship</a><a href="/data.html">Observation Data</a><a href="/telescope.html">Telescope Emulator</a><a href="/angle.html">Angle Translator</a></div>
+    <div><h3>Explore A8</h3><a href="https://a8.cosigo.io/">A8 Public Instrument</a><a href="/">A8 Engineering Lab</a><a href="/calendar.html">Calendar</a><a href="/clock.html">Clock</a><a href="/moons.html">Four-Moon Observer</a><a href="/map-clock-compass.html">Map · Clock · Compass</a></div>
+    <div><h3>Research</h3><a href="https://a8.cosigo.io/">A8 Public</a><a href="/jovian-operations.html">Core20 Front Page</a><a href="/relationship.html">Mintaka · Sol Relationship</a><a href="/data.html">Observation Archive</a><a href="/telescope.html">Telescope Emulator</a><a href="/angle.html">Angle Translator</a></div>
     <div><h3>COSIGO</h3><a href="https://cosigo.io/">COSIGO Home</a><a href="https://cosigo.io/">COSIGO Home</a><a href="https://github.com/cosigo/a8">GitHub · A8</a><p>COSIGO™ · CIGO™ · Auspicious 8™</p></div>
   </div>
   <div class="legal">
@@ -623,6 +1233,9 @@
     {bits:'110', oct:'6₈', dir:'W',  name:'West',      anchor:'600₈', anchorDec:384, art:'/assets/ausp8_west.png'},
     {bits:'111', oct:'7₈', dir:'NW', name:'Northwest', anchor:'700₈', anchorDec:448, art:'/assets/ausp8_nw.png'}
   ];
+
+  const artworkViewerUrl = art =>
+    '/image-viewer.html#' + encodeURIComponent(art);
   const planets = ['Mercury','Venus','Terra','Mars','Jupiter','Saturn','Uranus','Neptune','Pluto'];
   const planetGlyph = ['☿','♀','⊕','♂','♃','♄','♅','♆','♇'];
   const elements = ['Fire','Water','Earth','Air','Aether'];
@@ -937,7 +1550,7 @@
     document.getElementById('businessCount').textContent=c.business;
     document.getElementById('protectedCount').textContent=c.protectedDays;
     document.getElementById('openingForm').textContent=index%2===0?'A · 4/1':'B · 3/2';
-    document.getElementById('monthArtwork').href=m.art;
+    document.getElementById('monthArtwork').href=artworkViewerUrl(m.art);
     body.innerHTML='';
     for(let w=0;w<9;w++) {
       const tr=document.createElement('tr');
@@ -967,8 +1580,8 @@
     register.appendChild(b);
 
     const a=document.createElement('a');
-    a.className='panel art-card'; a.href=m.art; a.dataset.lightbox='';
-    a.innerHTML=`<figure><img src="${m.art}" width="1122" height="1402" loading="lazy" alt="Auspicious 8 ${m.name} compass month calendar artwork"><figcaption><strong>${m.bits} · ${m.oct} · ${m.dir} · ${m.name}</strong><span>${m.anchor} compass anchor · 45 days · 9 planetary weeks</span></figcaption></figure>`;
+    a.className='panel art-card'; a.href=artworkViewerUrl(m.art); a.dataset.lightbox='';
+    a.innerHTML=`<figure><img src="${m.art.replace('/assets/','/assets/thumbs/')}" width="360" height="450" loading="lazy" decoding="async" alt="Auspicious 8 ${m.name} compass month calendar artwork"><figcaption><strong>${m.bits} · ${m.oct} · ${m.dir} · ${m.name}</strong><span>${m.anchor} compass anchor · 45 days · 9 planetary weeks</span></figcaption></figure>`;
     artGrid.appendChild(a);
   });
 
@@ -984,12 +1597,51 @@
   function closeLightbox(){box.classList.remove('open');boxImg.src='';document.body.style.overflow='';}
   document.addEventListener('click',e=>{
     const link=e.target.closest('[data-lightbox]');
-    if(link){e.preventDefault();const img=link.querySelector('img');openLightbox(link.getAttribute('href'),img?.alt);}
+    if(link){
+      const href=link.getAttribute('href')||'';
+      if(href.startsWith('/image-viewer.html#')) return;
+      e.preventDefault();
+      const img=link.querySelector('img');
+      openLightbox(href,img?.alt);
+    }
     if(e.target===box || e.target===box.querySelector('button')) closeLightbox();
   });
   document.addEventListener('keydown',e=>{if(e.key==='Escape'&&box.classList.contains('open')) closeLightbox();});
   window.addEventListener('pagehide',()=>{feedConnected=false;if(refreshTimer!==null)clearTimeout(refreshTimer);});
 })();
 </script>
+<script id="a8-mobile-nav-v1">
+(() => {
+  'use strict';
+
+  const button = document.getElementById('a8NavToggle');
+  const nav = document.getElementById('a8PrimaryNav');
+
+  if (!button || !nav) return;
+
+  function setOpen(open) {
+    nav.classList.toggle('open', open);
+    button.setAttribute('aria-expanded', open ? 'true' : 'false');
+    button.textContent = open ? '× CLOSE' : '☰ MENU';
+  }
+
+  button.addEventListener('click', () => {
+    setOpen(!nav.classList.contains('open'));
+  });
+
+  nav.addEventListener('click', event => {
+    if (event.target.closest('a')) setOpen(false);
+  });
+
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape') setOpen(false);
+  });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 780) setOpen(false);
+  });
+})();
+</script>
+
 </body>
 </html>

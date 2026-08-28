@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>A8 Walkabout Geometry POC v0.1b</title>
+<title>A8 Walkabout Geometry Prototype v0.1b</title>
 <style>
   :root{
     --bg:#05070a;--panel:#0a0e14;--line:#1c2a38;--text:#eaf3ff;--muted:#8ca2b8;
@@ -38,7 +38,7 @@
 </head>
 <body>
 <div class="wrap">
-  <h1>A8 WALKABOUT — GEOMETRY POC v0.1b</h1>
+  <h1>A8 WALKABOUT — GEOMETRY PROTOTYPE v0.1b</h1>
   <div class="sub">One deterministic driver. No Earth texture. No constellation redraws. Geometry first.</div>
   <div class="badges">
     <div class="badge"><b>DAY SPIN:</b> OFF</div>
@@ -73,7 +73,7 @@
 
   <div class="route">
     <span class="cy">NORTH POLE</span> → south on <span class="hi">LON 64</span> → EQUATOR 128 → SOUTH POLE 256 → continue straight → north on <span class="hi">LON 320</span> → EQUATOR 128 → <span class="cy">NORTH POLE</span>.<br>
-    The globe itself rolls continuously about the fixed equatorial POC axis <span class="hi">192 ↔ 448</span>. The sky panel now follows the A8 pendulum swing directly from the latitude ruler: <span class="cy">0 → 128 → 256 → 128 → 0</span>.
+    The globe itself rolls continuously about the fixed equatorial reference axis <span class="hi">192 ↔ 448</span>. The sky panel now follows the A8 pendulum swing directly from the latitude ruler: <span class="cy">0 → 128 → 256 → 128 → 0</span>.
   </div>
 
   <div class="controls">
@@ -85,7 +85,7 @@
     <input id="scrub" type="range" min="0" max="1000" value="0" aria-label="walk position" />
   </div>
   <div class="timeline"><span>N · LAT 0</span><span>EQ · LAT 128 · LON 64</span><span>S · LAT 256</span><span>EQ · LAT 128 · LON 320</span><span>N · LAT 0</span></div>
-  <div class="note">POC rule: every sky point is transformed from one master point set. Mintaka is the rotation center only as an easy visual reference. The faint background points rotate with the same sky layer, because the whole visible sky—not Orion alone—is the reference field.</div>
+  <div class="note">Geometry rule: every sky point is transformed from one master point set. Mintaka is the rotation center only as an easy visual reference. The faint background points rotate with the same sky layer, because the whole visible sky—not Orion alone—is the reference field.</div>
 </div>
 <script>
 (() => {
@@ -99,7 +99,7 @@
 
   let running = true, duration = 32, u = 0, last = performance.now(), dragging = false;
   const TAU = Math.PI * 2;
-  const yaw = 192 / 512 * TAU; // puts POC roll axis 192/448 onto screen horizontal
+  const yaw = 192 / 512 * TAU; // puts reference roll axis 192/448 onto screen horizontal
 
   function a8LatFromU(p){ return p <= .5 ? p*512 : (1-p)*512; }
   function near(a,b,e=.8){ return Math.abs(a-b)<e; }
@@ -173,10 +173,10 @@
 
     // sphere outline
     ec.strokeStyle='#6d8ca3'; ec.lineWidth=1.4; ec.beginPath(); ec.arc(cx,cy,R,0,TAU); ec.stroke();
-    // fixed POC equatorial roll axis (NOT day axis)
+    // fixed reference equatorial roll axis (NOT day axis)
     ec.strokeStyle='#f6c75b';ec.lineWidth=2;ec.beginPath();ec.moveTo(cx-R-28,cy);ec.lineTo(cx+R+28,cy);ec.stroke();
     ec.fillStyle='#f6c75b';ec.font='14px ui-monospace';ec.textAlign='left';ec.fillText('192',cx-R-4,cy-10);ec.textAlign='right';ec.fillText('448',cx+R+4,cy-10);
-    ec.textAlign='center';ec.fillStyle='#a98e4b';ec.font='12px ui-monospace';ec.fillText('POC ROLL AXIS · EQUATORIAL · DAY AXIS OFF',cx,cy+22);
+    ec.textAlign='center';ec.fillStyle='#a98e4b';ec.font='12px ui-monospace';ec.fillText('REFERENCE ROLL AXIS · EQUATORIAL · DAY AXIS OFF',cx,cy+22);
 
     // fixed dummy at top, gait only; feet do not move from contact point
     const footY=cy-R-2, bx=cx, gait=Math.sin(p*TAU*16)*10;

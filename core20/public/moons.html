@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>A8 Jovian Recovered Motion Observer · Core18 View Rate · v5.4.20 | COSIGO Labs</title>
+<title>A8 Jovian Recovered Motion Observer · Observer View Rate · v5.4.20 | COSIGO Labs</title>
 <meta name="description" content="Auspicious 8 Jovian recovered-motion observer driven read-only from the v5.4.20 recovered Jovian raw ruler and Core20 clock edge stream.">
 <link rel="stylesheet" href="/site-shell.css">
 <style>
@@ -88,7 +88,7 @@ p{margin:.45rem 0}.small{font-size:.9rem;color:var(--muted)}
     <a href="/mintaka.html">MINTAKA</a>
     <a href="/sol.html">SOL</a>
     <a href="/relationship.html">TERRA SHIP SLIP</a>
-    <a href="/index.html#chief-engineer-links">CHIEF ENGINEER</a>
+    
   </div>
   <div class="a8-utility-links">
     <span class="a8-utility-label">UTILITY ·</span>
@@ -372,7 +372,7 @@ async function bootstrap(reason='INITIAL'){
   $('edgeRaw').textContent = Number(clk.currentSelectedRawPulse).toLocaleString();
 
   setViewMultiplier(model.viewMultiplier);
-  $('pageStatus').textContent = 'RUNNING · RECOVERED 1:2:4 + CALLISTO EXAMPLE ORBIT · CORE18 VIEW RATE · v5.4.20';
+  $('pageStatus').textContent = 'RUNNING · RECOVERED 1:2:4 + CALLISTO EXAMPLE ORBIT · OBSERVER VIEW RATE · v5.4.20';
   $('pageStatus').className = 'status good';
 }
 
@@ -440,6 +440,7 @@ bootstrap().then(connectEdges).catch(showError);
     <a href="https://cosigo.io/">COSIGO Home</a>
     <a href="https://a8.cosigo.io/">A8 Public Instrument</a>
     <a href="/">A8 Engineering Lab</a>
+    <a href="/chief-engineer.html" title="Chief Engineer" style="opacity:.32;font-size:.72em">CE</a>
     <a href="https://contact.cosigo.io/">Contact</a>
     <a href="https://github.com/cosigo">COSIGO GitHub</a>
   </div>

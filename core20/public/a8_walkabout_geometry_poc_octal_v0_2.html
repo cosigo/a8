@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>A8 Walkabout — Hard Octal POC v0.2 | COSIGO Labs</title>
+<title>A8 Walkabout — Hard Octal Prototype v0.2 | COSIGO Labs</title>
 <style>
   :root{
     --bg:#05070a;--panel:#0a0e14;--line:#1c2a38;--text:#eaf3ff;--muted:#8ca2b8;
@@ -64,19 +64,19 @@ body::-webkit-scrollbar{
 <link rel="icon" href="https://a8.cosigo.io/assets/cosigo_master_512.png">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="COSIGO Labs — Auspicious 8">
-<meta property="og:title" content="A8 Walkabout — Hard Octal POC v0.2">
+<meta property="og:title" content="A8 Walkabout — Hard Octal Prototype v0.2">
 <meta property="og:description" content="Hard Octal A8 stopped-clock Orion walkabout geometry instrument showing observer travel, rigid sky swing, and local-horizon visibility.">
 <meta property="og:url" content="https://lab.a8.cosigo.io/a8_walkabout_geometry_poc_octal_v0_2.html">
 <meta property="og:image" content="https://a8.cosigo.io/assets/cosigo_master_512.png">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="A8 Walkabout — Hard Octal POC v0.2">
+<meta name="twitter:title" content="A8 Walkabout — Hard Octal Prototype v0.2">
 <meta name="twitter:description" content="Hard Octal A8 stopped-clock Orion walkabout geometry instrument showing observer travel, rigid sky swing, and local-horizon visibility.">
 <meta name="twitter:image" content="https://a8.cosigo.io/assets/cosigo_master_512.png">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "WebApplication",
-  "name": "A8 Walkabout — Hard Octal POC v0.2",
+  "name": "A8 Walkabout — Hard Octal Prototype v0.2",
   "url": "https://lab.a8.cosigo.io/a8_walkabout_geometry_poc_octal_v0_2.html",
   "description": "Hard Octal A8 stopped-clock Orion walkabout geometry instrument showing observer travel, rigid sky swing, and local-horizon visibility.",
   "applicationCategory": "EducationalApplication",
@@ -133,7 +133,7 @@ body::-webkit-scrollbar{
 
   <div class="route">
     <span class="cy">NORTH POLE 000₈</span> → south on <span class="hi">LON 100₈</span> → EQUATOR 200₈ → SOUTH POLE 400₈ → continue straight → north on <span class="hi">LON 500₈</span> → EQUATOR 200₈ → <span class="cy">NORTH POLE 000₈</span>.<br>
-    The globe rolls continuously about the fixed equatorial POC axis <span class="hi">300₈ ↔ 700₈</span>. The sky panel follows the native hard-octal pendulum: <span class="cy">000₈ → 200₈ → 400₈ → 200₈ → 000₈</span>.
+    The globe rolls continuously about the fixed equatorial reference axis <span class="hi">300₈ ↔ 700₈</span>. The sky panel follows the native hard-octal pendulum: <span class="cy">000₈ → 200₈ → 400₈ → 200₈ → 000₈</span>.
   </div>
 
   <div class="controls">
@@ -158,7 +158,7 @@ body::-webkit-scrollbar{
       </div>
     </div>
   </div>
-  <div class="note">POC rule: same master point set and same rigid sky transform as the decimal control. Hard octal changes the ruler, not the geometry. Mintaka is only the visual center reference. UI cycle timing is presentation only and is not A8 clock authority.</div>
+  <div class="note">Geometry rule: same master point set and same rigid sky transform as the decimal control. Hard octal changes the ruler, not the geometry. Mintaka is only the visual center reference. Display cycle timing is presentation only and is not A8 clock authority.</div>
 <div class="note"><b>STOPPED-CLOCK VISIBILITY:</b> MINTAKA is the named visibility anchor. The original rigid constellation geometry and 256-A8 pendulum continue even when line of sight is lost. Named stars below the observer’s local horizon are shown faint grey rather than deleted.</div>
 </div>
 <script>
@@ -177,7 +177,7 @@ body::-webkit-scrollbar{
   const A8_SECOND_MS = 675000 / 1024; // exact implementation bridge: browser milliseconds per native A8 SECOND
   const ANCHOR_DECL_A8 = -0.425379713580247; // MINTAKA catalog declination in native A8 angle units
   let lastAnchorAltA8 = 0, lastVisibility = 'HORIZON', lastFieldAlpha = .35;
-  const yaw = 192 / 512 * TAU; // puts POC roll axis 192/448 onto screen horizontal
+  const yaw = 192 / 512 * TAU; // puts reference roll axis 192/448 onto screen horizontal
 
   function a8LatFromU(p){ return p <= .5 ? p*512 : (1-p)*512; }
   function anchorVisibility(p,lat,declA8=ANCHOR_DECL_A8){
@@ -275,10 +275,10 @@ body::-webkit-scrollbar{
 
     // sphere outline
     ec.strokeStyle='#6d8ca3'; ec.lineWidth=1.4; ec.beginPath(); ec.arc(cx,cy,R,0,TAU); ec.stroke();
-    // fixed POC equatorial roll axis (NOT day axis)
+    // fixed reference equatorial roll axis (NOT day axis)
     ec.strokeStyle='#f6c75b';ec.lineWidth=2;ec.beginPath();ec.moveTo(cx-R-28,cy);ec.lineTo(cx+R+28,cy);ec.stroke();
     ec.fillStyle='#f6c75b';ec.font='14px ui-monospace';ec.textAlign='left';ec.fillText('300₈',cx-R-4,cy-10);ec.textAlign='right';ec.fillText('700₈',cx+R+4,cy-10);
-    ec.textAlign='center';ec.fillStyle='#a98e4b';ec.font='12px ui-monospace';ec.fillText('POC ROLL AXIS · EQUATORIAL · DAY AXIS OFF',cx,cy+22);
+    ec.textAlign='center';ec.fillStyle='#a98e4b';ec.font='12px ui-monospace';ec.fillText('REFERENCE ROLL AXIS · EQUATORIAL · DAY AXIS OFF',cx,cy+22);
 
     // fixed dummy at top, gait only; feet do not move from contact point
     const footY=cy-R-2, bx=cx, gait=Math.sin(p*TAU*16)*10;

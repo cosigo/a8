@@ -166,16 +166,16 @@ body{
   </p>
 </section>
 
-<h2 id="prism">2. Conceptual A8 quartz prism <span class="status research">NOT YET FABRICATED</span></h2>
+<h2 id="prism">2. A8 quartz prism design <span class="status research">NOT YET FABRICATED</span></h2>
 <div class="diagram">
-<svg viewBox="0 0 1160 560" role="img" aria-label="Conceptual labeled A8 quartz prism experiment">
+<svg viewBox="0 0 1160 560" role="img" aria-label="Labeled A8 quartz prism experiment design">
 <defs>
   <linearGradient id="glass" x1="0" x2="1"><stop offset="0" stop-color="#6fd3dc" stop-opacity=".16"/><stop offset="1" stop-color="#b99cff" stop-opacity=".28"/></linearGradient>
   <linearGradient id="rainbow" x1="0" x2="1"><stop offset="0" stop-color="#ff6868"/><stop offset=".22" stop-color="#ffd56a"/><stop offset=".43" stop-color="#72e07d"/><stop offset=".64" stop-color="#6bcff6"/><stop offset=".82" stop-color="#7e8cff"/><stop offset="1" stop-color="#d68cff"/></linearGradient>
   <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#e0bd72"/></marker>
 </defs>
 <rect x="0" y="0" width="1160" height="560" rx="16" fill="#070b0f"/>
-<text x="28" y="38" fill="#e0bd72" font-size="18" font-weight="800">CONCEPTUAL A8 QUARTZ PRISM · single-crystal α-quartz</text>
+<text x="28" y="38" fill="#e0bd72" font-size="18" font-weight="800">A8 QUARTZ PRISM DESIGN · single-crystal α-quartz</text>
 <text x="28" y="62" fill="#9eafbc" font-size="14">Geometry shown for experiment planning; final cut, crystal orientation and target exponent remain open.</text>
 
 <!-- prism -->
@@ -242,7 +242,7 @@ Lₙ = 2ⁿ qₐ
 <tr><td>2²⁴ qₐ = 8⁸ qₐ</td><td>16,777,216</td><td>≈ 8.243955 mm</td><td>small crystal plate</td></tr>
 <tr><td><strong>2²⁷ qₐ = 8⁹ qₐ</strong></td><td><strong>134,217,728</strong></td><td><strong>≈ 65.95164 mm</strong></td><td><strong>practical prism-scale example</strong></td></tr>
 <tr><td>2³⁰ qₐ = 8¹⁰ qₐ</td><td>1,073,741,824</td><td>≈ 0.527613 m</td><td>large baseline / transfer artifact</td></tr>
-<tr><td><strong>A8/31 = 2³¹ qₐ</strong></td><td><strong>2,147,483,648</strong></td><td><strong>≈ 1.055226220 m</strong></td><td><strong>current human-scale ruler candidate</strong></td></tr>
+<tr><td><strong>A8/31 = 2³¹ qₐ</strong></td><td><strong>2,147,483,648</strong></td><td><strong>≈ 1.055226220 m</strong></td><td><strong>current practical-scale ruler candidate</strong></td></tr>
 </table>
 <p class="small">The comparison column uses the present NIST α-quartz lattice parameter a ≈ 0.491378 nm under its declared laboratory reference condition. That number is not native A8 authority; it is only a bridge for understanding present scale.</p>
 <div class="note warning"><strong>Do not demand a literal atom-count certificate.</strong> A finished prism will never be proven by visually counting exactly 2<sup>27</sup> or 2<sup>31</sup> planes from polished face to polished face. The engineering problem is to realize a macroscopic length tied to the microscopic recurrence and then qualify that realization through several independent or partially independent physical witnesses.</div>
@@ -307,7 +307,7 @@ c_A8 = λ_A8 × f_A8</div><p>The measured result is allowed to be ugly. No attem
 
 <h2 id="speed">8. Three ways to approach a new light-speed measurement</h2>
 <div class="grid">
-<section class="card"><h3>A · Vacuum time-of-flight</h3><p><strong>Conceptually cleanest for vacuum c.</strong> Establish a vacuum baseline whose endpoints are transferred from a qualified lattice-defined length, send a pulse across it, and measure the flight interval with independently recovered A8 time.</p><p class="small">Practical obstacle: a roughly one-A8/31 baseline has a light flight time of only a few nanoseconds in legacy comparison. The current 17-bit daily clock display is far too coarse by itself. A native sub-A8-second timing method or a long/multipass optical path is required.</p></section>
+<section class="card"><h3>A · Vacuum time-of-flight</h3><p><strong>Most direct physical route for vacuum c.</strong> Establish a vacuum baseline whose endpoints are transferred from a qualified lattice-defined length, send a pulse across it, and measure the flight interval with independently recovered A8 time.</p><p class="small">Practical obstacle: a roughly one-A8/31 baseline has a light flight time of only a few nanoseconds in legacy comparison. The current 17-bit daily clock display is far too coarse by itself. A native sub-A8-second timing method or a long/multipass optical path is required.</p></section>
 <section class="card"><h3>B · λ × f route</h3><p><strong>Potentially the cleanest native bridge.</strong> For a measurement of <em>vacuum</em> light speed, recover the <strong>vacuum wavelength</strong> against a lattice-defined spatial reference and recover optical frequency against independent A8 time, then multiply them.</p><div class="formula">λ_q(vac) = vacuum wavelength / qₐ
 f_A8     = optical cycles / A8 time
 
@@ -623,7 +623,7 @@ c_vac,A8 = λ_q(vac) × f_A8
   </div>
 
   <p>
-    Its browser/DAC/speaker output is presently only a downstream proof-of-concept transducer.
+    Its browser/DAC/speaker output is presently only a downstream prototype transducer.
     The next architecture question is whether the sampling cadence itself can remain native
     to A8 rather than beginning from somebody else's conventional audio clock.
   </p>
@@ -658,7 +658,7 @@ c_vac,A8 = λ_q(vac) × f_A8
   </p>
 
   <p>
-    The current browser implementation is the <b>666 proof-of-concept layer</b>:
+    The current browser implementation is the <b>666 prototype layer</b>:
     A8 defines the frequency and visual waveform, while Web Audio, the operating-system audio
     stack, DAC and speaker remain conventional downstream machinery. Audible high-frequency
     artifacts observed there are therefore transducer-path observations, not changes in the
@@ -1124,7 +1124,7 @@ EARTH / CELESTIAL 3-D GEOMETRY
           │
           │ binary scaling downward
           ▼
-   HUMAN-OBSERVABLE REGION
+   DIRECTLY OBSERVABLE REGION
           ▲
           │ binary scaling upward
           │
@@ -1144,7 +1144,7 @@ QUARTZ 3-D SPATIAL RECURRENCE
   <p>
     This is not yet the definition of one A8 Unit.
     It tests whether independently recovered microscopic and macroscopic
-    spatial ladders identify a stable human-observable meeting region.
+    spatial ladders identify a stable directly observable meeting region.
   </p>
 
 
@@ -1177,8 +1177,8 @@ QUARTZ 3-D SPATIAL RECURRENCE
   <p>
     Advanced laboratories may determine residual uncertainty and establish
     transfer methods. The recovered spatial baseline should ultimately resolve
-    to a human-scale physical Unit that an ordinary person can hold, compare,
-    subdivide and read directly.
+    to a practical-scale physical Unit that can be held, compared,
+    subdivided and read directly.
   </p>
 
   <p>
@@ -1312,7 +1312,7 @@ QUARTZ 3-D SPATIAL RECURRENCE
     Recover a three-dimensional natural ruler from α-quartz, perturb and
     observe that same spatial structure through time while light traverses
     it, and test whether the resulting microscopic baseline can support a
-    reproducible human-scale ruler beneath the A8 Earth / celestial grid.
+    reproducible practical-scale ruler beneath the A8 Earth / celestial grid.
   </blockquote>
 
   <p>
@@ -1437,7 +1437,7 @@ FAULTS / NOTES</div>
 
 5. The binary ladder is therefore usable as a recoverable A8 spatial ruler.
 
-6. The human-scale candidate remains:
+6. The practical-scale candidate remains:
       1 A8/31 := 2³¹qₐ
 
 7. Independently recovered A8 time is then combined with the qualified ruler to measure,
@@ -1454,7 +1454,7 @@ c ≈ 0.540536 legacy nm</div><p>Using the current A8 candidate:</p><div class="
 
 <h2>16. Future extension — A8 888 / 666 “Rosetta” quartz artifact <span class="status research">DEFERRED</span></h2>
 <div class="grid2">
-<section class="card hero"><h3>Purpose</h3><p>A future quartz artifact could carry the reconstruction instructions for A8 in the same class of material used to investigate the HOW FAR recurrence. The artifact would not become authority merely because information is written into it; the underlying lattice, orientation and physical state must remain independently characterizable.</p><div class="formula">human-visible layer
+<section class="card hero"><h3>Purpose</h3><p>A future quartz artifact could carry the reconstruction instructions for A8 in the same class of material used to investigate the HOW FAR recurrence. The artifact would not become authority merely because information is written into it; the underlying lattice, orientation and physical state must remain independently characterizable.</p><div class="formula">directly readable layer
 + machine-readable binary/octal layer
 + crystallographic orientation marks
 + optical verification structures

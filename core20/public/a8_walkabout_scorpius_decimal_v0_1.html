@@ -134,7 +134,7 @@ body::-webkit-scrollbar{
 
   <div class="route">
     <span class="cy">NORTH POLE 0</span> → south on <span class="hi">LON 64</span> → EQUATOR 128 → SOUTH POLE 256 → continue straight → north on <span class="hi">LON 320</span> → EQUATOR 128 → <span class="cy">NORTH POLE 0</span>.<br>
-    The globe rolls continuously about the fixed equatorial POC axis <span class="hi">192 ↔ 448</span>. The sky panel follows the Decimal Comfort pendulum: <span class="cy">0 → 128 → 256 → 128 → 0</span>.
+    The globe rolls continuously about the fixed equatorial reference axis <span class="hi">192 ↔ 448</span>. The sky panel follows the Decimal Comfort pendulum: <span class="cy">0 → 128 → 256 → 128 → 0</span>.
   </div>
 
   <div class="controls">
@@ -159,7 +159,7 @@ body::-webkit-scrollbar{
       </div>
     </div>
   </div>
-  <div class="note">Scenario B rule: the rotation/reference center is the true celestial-equator point at the selected Scorpius meridian. No star is placed there. Scorpius remains south of the axis exactly as the catalog geometry requires. UI cycle timing is presentation only and is not A8 clock authority.</div>
+  <div class="note">Scenario B rule: the rotation/reference center is the true celestial-equator point at the selected Scorpius meridian. No star is placed there. Scorpius remains south of the axis exactly as the catalog geometry requires. Display cycle timing is presentation only and is not A8 clock authority.</div>
 <div class="note"><b>STOPPED-CLOCK VISIBILITY:</b> ANTARES is the named visibility anchor. The original rigid constellation geometry and 256-A8 pendulum continue even when line of sight is lost. Named stars below the observer’s local horizon are shown faint grey rather than deleted.</div>
 </div>
 <script>
@@ -178,7 +178,7 @@ body::-webkit-scrollbar{
   const A8_SECOND_MS = 675000 / 1024; // exact implementation bridge: browser milliseconds per native A8 SECOND
   const ANCHOR_DECL_A8 = -37.592181491358026; // ANTARES catalog declination in native A8 angle units
   let lastAnchorAltA8 = 0, lastVisibility = 'HORIZON', lastFieldAlpha = .35;
-  const yaw = 192 / 512 * TAU; // puts POC roll axis 192/448 onto screen horizontal
+  const yaw = 192 / 512 * TAU; // puts reference roll axis 192/448 onto screen horizontal
 
   function a8LatFromU(p){ return p <= .5 ? p*512 : (1-p)*512; }
   function anchorVisibility(p,lat,declA8=ANCHOR_DECL_A8){
@@ -274,10 +274,10 @@ body::-webkit-scrollbar{
 
     // sphere outline
     ec.strokeStyle='#6d8ca3'; ec.lineWidth=1.4; ec.beginPath(); ec.arc(cx,cy,R,0,TAU); ec.stroke();
-    // fixed POC equatorial roll axis (NOT day axis)
+    // fixed reference equatorial roll axis (NOT day axis)
     ec.strokeStyle='#f6c75b';ec.lineWidth=2;ec.beginPath();ec.moveTo(cx-R-28,cy);ec.lineTo(cx+R+28,cy);ec.stroke();
     ec.fillStyle='#f6c75b';ec.font='14px ui-monospace';ec.textAlign='left';ec.fillText('192',cx-R-4,cy-10);ec.textAlign='right';ec.fillText('448',cx+R+4,cy-10);
-    ec.textAlign='center';ec.fillStyle='#a98e4b';ec.font='12px ui-monospace';ec.fillText('POC ROLL AXIS · EQUATORIAL · DAY AXIS OFF',cx,cy+22);
+    ec.textAlign='center';ec.fillStyle='#a98e4b';ec.font='12px ui-monospace';ec.fillText('REFERENCE ROLL AXIS · EQUATORIAL · DAY AXIS OFF',cx,cy+22);
 
     // fixed dummy at top, gait only; feet do not move from contact point
     const footY=cy-R-2, bx=cx, gait=Math.sin(p*TAU*16)*10;

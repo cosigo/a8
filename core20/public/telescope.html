@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>A8 Telescope Emulator · v5.4.18 | COSIGO Labs</title><link rel="stylesheet" href="style.css"><style>textarea{width:100%;min-height:220px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>A8 Telescope Emulator · Core20 | COSIGO Labs</title><link rel="stylesheet" href="style.css"><style>textarea{width:100%;min-height:220px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
 /* A8 ANTIQUE TELESCOPE BACKGROUND v1 */
 body{
   background:
@@ -16,20 +16,20 @@ body{
 <link rel="icon" href="https://a8.cosigo.io/assets/cosigo_master_512.png">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="COSIGO Labs — Auspicious 8">
-<meta property="og:title" content="A8 Telescope Emulator · v5.4.18">
+<meta property="og:title" content="A8 Telescope Emulator · Core20">
 <meta property="og:description" content="COSIGO Labs Auspicious 8 telescope and observation laboratory for repeatable Jovian event detection, observer instrumentation, and natural-recurrence experiments.">
 <meta property="og:url" content="https://lab.a8.cosigo.io/telescope.html">
 <meta property="og:image" content="https://a8.cosigo.io/assets/cosigo_master_512.png">
-<meta property="og:image:alt" content="A8 Telescope Emulator · v5.4.18 — COSIGO Labs">
+<meta property="og:image:alt" content="A8 Telescope Emulator · Core20 — COSIGO Labs">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="A8 Telescope Emulator · v5.4.18">
+<meta name="twitter:title" content="A8 Telescope Emulator · Core20">
 <meta name="twitter:description" content="COSIGO Labs Auspicious 8 telescope and observation laboratory for repeatable Jovian event detection, observer instrumentation, and natural-recurrence experiments.">
 <meta name="twitter:image" content="https://a8.cosigo.io/assets/cosigo_master_512.png">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "WebPage",
-  "name": "A8 Telescope Emulator · v5.4.18",
+  "name": "A8 Telescope Emulator · Core20",
   "url": "https://lab.a8.cosigo.io/telescope.html",
   "description": "COSIGO Labs Auspicious 8 telescope and observation laboratory for repeatable Jovian event detection, observer instrumentation, and natural-recurrence experiments.",
   "dateModified": "2026-08-18",
@@ -81,8 +81,8 @@ body{
   </div>
 </nav>
 <main>
-<header><div><div class="eyebrow">AUSPICIOUS 8 · CCD / COUNTER LAB</div><h1>Fake Telescope → Future Real Telescope · v5.4.18</h1><p class="muted">Simulation and a future volunteer observer use the same input contract.</p></div></header>
-<section class="panel controls"><div class="row"><a class="button-link" href="/">ENGINEERING LAB</a><a class="button-link" href="/data.html">OBSERVATION DATA BRIDGE</a><a class="button-link" href="/moons.html">4-MOON VIEW</a></div></section>
+<header><div><div class="eyebrow">AUSPICIOUS 8 · CCD / COUNTER LAB</div><h1>Virtual Telescope → Future Physical Telescope · Core20</h1><p class="muted">This browser bench models the observation record a future physical CCD / counter instrument can produce.</p></div></header>
+<section class="panel controls"><div class="row"><a class="button-link" href="/">ENGINEERING LAB</a><a class="button-link" href="/data.html">OBSERVATION ARCHIVE</a><a class="button-link" href="/moons.html">4-MOON VIEW</a></div></section>
 <section class="panel goodbox"><h2>WHAT A REAL OBSERVER WOULD GIVE US</h2><pre>frameId
 rawPulse       free-running arbitrary counter captured for the frame
 moon           io | eu | ga
@@ -92,7 +92,7 @@ visible        optional
 uncertaintyX   optional</pre><p><b>Only reduction:</b> <span class="mono">x = moonX − jupiterX</span>.</p><p class="small">No degree conversion is required for turn detection. Original images and counter logs remain the evidence.</p></section>
 <section class="panel"><h2>Fake CCD generator</h2><div class="row"><label>Frames<input id="frames" type="number" min="20" max="20000" value="220"></label><label>Pixel noise ±<input id="noise" type="number" min="0" step="0.1" value="0.7"></label><label>Gap every N frames<input id="gap" type="number" min="0" step="1" value="0"></label><button id="generate">GENERATE</button><label>Load real CSV<input id="file" type="file" accept=".csv,.tsv,text/csv,text/tab-separated-values"></label></div><p class="small">Generated data includes Jupiter detector drift, different moon starting phases, arbitrary counter values and centroid noise. Later, replace these rows with real measurements.</p></section>
 <section class="panel"><h2>CCD / counter records</h2><textarea id="csv"></textarea><div class="row"><button id="convert">DERIVE x</button><button id="saveCsv">SAVE CSV</button><button id="saveObs">SAVE .A8OBS</button></div><p id="msg" class="small muted"></p></section>
-<section class="panel"><h2>Engine-facing preview</h2><textarea id="obs" readonly></textarea><p class="small">Lab 11 sees only <span class="mono">rawPulse + moon + signed Jupiter-relative x</span>.</p></section>
+<section class="panel"><h2>Observation-format preview</h2><textarea id="obs" readonly></textarea><p class="small">The reduced observation record keeps only <span class="mono">rawPulse + moon + signed Jupiter-relative x</span>. Exporting it here does not feed or alter Core20.</p></section>
 <section class="panel"><h2>Placard for a future volunteer</h2><pre>1. Run one monotonic free-running counter.
 2. Capture its value with each CCD frame.
 3. Measure Jupiter center X in pixels.
