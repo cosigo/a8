@@ -9,7 +9,7 @@
   <meta name="referrer" content="strict-origin-when-cross-origin">
 
   <title>Auspicious 8 Calendar | COSIGO Labs</title>
-  <meta name="description" content="The Auspicious 8 Calendar: eight compass months, nine planetary weeks, five elemental days, alternating protected Air days, always-protected Aether days, a 360-day structured body, and Wilson's Week at year end.">
+  <meta name="description" content="The Auspicious 8 Calendar: eight compass months, nine planetary weeks, five elemental days, alternating protected Air days, always-protected Quintessence days, a 360-day structured body, and Wilson's Week at year end.">
   <meta name="keywords" content="Auspicious 8, A8 calendar, COSIGO Labs, compass months, planetary weeks, element days, octal calendar, binary calendar, Wilson's Week, protected days, experimental calendar">
   <meta name="author" content="Wendall Wilson · COSIGO Labs">
   <meta name="copyright" content="© 2026 COSIGO Labs. All rights reserved.">
@@ -204,9 +204,636 @@
       }
     }
 
+
+    /* A8 WILSON LIVE INTERVAL V1 */
+    .wilson-live-shell{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:0 1rem;
+      max-height:0;
+      opacity:0;
+      overflow:hidden;
+      transform:translateY(-18px);
+      pointer-events:none;
+      transition:
+        max-height .9s ease,
+        opacity .55s ease,
+        transform .7s ease,
+        padding .7s ease;
+    }
+
+    .wilson-live-shell.active{
+      max-height:1800px;
+      opacity:1;
+      transform:translateY(0);
+      pointer-events:auto;
+      padding-top:1rem;
+      padding-bottom:1rem;
+    }
+
+    .wilson-live-card{
+      position:relative;
+      overflow:hidden;
+      padding:1rem;
+      border:1px solid #b88a2f;
+      border-radius:18px;
+      background:
+        radial-gradient(circle at 18% 10%,rgba(255,220,118,.14),transparent 28rem),
+        linear-gradient(135deg,#2b2312 0%,#111d20 48%,#211b0d 100%);
+      box-shadow:
+        0 22px 60px rgba(0,0,0,.42),
+        inset 0 0 42px rgba(214,170,78,.06);
+    }
+
+    .wilson-live-card::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      border-radius:inherit;
+      box-shadow:inset 0 0 0 1px rgba(255,222,132,.08);
+    }
+
+    .wilson-preview-banner{
+      display:none;
+      margin-bottom:.8rem;
+      padding:.6rem .75rem;
+      border:1px solid #618391;
+      border-radius:9px;
+      background:#092733;
+      color:#b9dbe5;
+      font:800 .68rem/1.35 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+      letter-spacing:.075em;
+      text-align:center;
+    }
+
+    .wilson-live-shell.preview .wilson-preview-banner{
+      display:block;
+    }
+
+    .wilson-live-grid{
+      display:grid;
+      grid-template-columns:minmax(260px,.72fr) minmax(0,1.28fr);
+      gap:1rem;
+      align-items:stretch;
+    }
+
+    .wilson-compass-panel,
+    .wilson-days-panel{
+      min-width:0;
+      padding:1rem;
+      border:1px solid rgba(214,170,78,.30);
+      border-radius:14px;
+      background:rgba(5,17,23,.62);
+    }
+
+    .wilson-live-title{
+      margin:.2rem 0 .65rem;
+      font-size:clamp(1.6rem,4vw,2.65rem);
+      color:#f4d77f;
+    }
+
+    .wilson-live-lede{
+      margin:.35rem 0 1rem;
+      color:#d8c9aa;
+      font-size:.94rem;
+      line-height:1.55;
+    }
+
+    .wilson-compass{
+      position:relative;
+      width:min(300px,82vw);
+      aspect-ratio:1;
+      margin:1rem auto;
+      border:9px double #9b7735;
+      border-radius:50%;
+      background:
+        radial-gradient(circle,#e8d7ad 0 7%,transparent 7.4%),
+        repeating-conic-gradient(
+          from 0deg,
+          rgba(77,58,27,.18) 0 1deg,
+          transparent 1deg 11.25deg
+        ),
+        radial-gradient(circle at 43% 36%,#efe0ba 0%,#c7ad72 52%,#5d4727 100%);
+      box-shadow:
+        0 14px 35px rgba(0,0,0,.46),
+        inset 0 0 28px rgba(47,31,12,.55);
+      color:#302315;
+      font-family:Georgia,"Times New Roman",serif;
+    }
+
+    .wilson-compass > span{
+      position:absolute;
+      z-index:3;
+      font-weight:900;
+      font-size:1rem;
+      text-shadow:0 1px rgba(255,255,255,.35);
+    }
+
+    .wilson-compass .wc-n{top:5%;left:50%;transform:translateX(-50%)}
+    .wilson-compass .wc-e{right:6%;top:50%;transform:translateY(-50%)}
+    .wilson-compass .wc-s{bottom:5%;left:50%;transform:translateX(-50%)}
+    .wilson-compass .wc-w{left:6%;top:50%;transform:translateY(-50%)}
+
+    .wilson-compass-rose{
+      position:absolute;
+      inset:17%;
+      border-radius:50%;
+      background:
+        conic-gradient(
+          from -12deg,
+          transparent 0 11deg,
+          #452f17 11deg 14deg,
+          transparent 14deg 87deg,
+          #452f17 87deg 90deg,
+          transparent 90deg 177deg,
+          #452f17 177deg 180deg,
+          transparent 180deg 267deg,
+          #452f17 267deg 270deg,
+          transparent 270deg
+        );
+      transform-origin:50% 50%;
+    }
+
+    .wilson-compass-rose::before,
+    .wilson-compass-rose::after{
+      content:"";
+      position:absolute;
+      left:50%;
+      top:50%;
+      transform:translate(-50%,-50%);
+    }
+
+    .wilson-compass-rose::before{
+      width:13%;
+      height:88%;
+      clip-path:polygon(50% 0,100% 50%,50% 100%,0 50%);
+      background:linear-gradient(
+        180deg,
+        #7b1f19 0 48%,
+        #352719 48% 100%
+      );
+      box-shadow:0 2px 5px rgba(0,0,0,.35);
+    }
+
+    .wilson-compass-rose::after{
+      width:20%;
+      aspect-ratio:1;
+      border:2px solid #6c5229;
+      border-radius:50%;
+      background:#d5bb7d;
+      box-shadow:0 2px 5px rgba(0,0,0,.32);
+    }
+
+    .wilson-compass.free .wilson-compass-rose{
+      animation:wilson-compass-free 11s linear infinite;
+    }
+
+    @keyframes wilson-compass-free{
+      to{transform:rotate(360deg)}
+    }
+
+    .wilson-compass-message{
+      margin:.8rem auto 0;
+      max-width:32rem;
+      color:#f1d27c;
+      font:900 .72rem/1.45 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+      letter-spacing:.08em;
+      text-align:center;
+    }
+
+    .wilson-state{
+      display:grid;
+      gap:.25rem;
+      margin-bottom:.85rem;
+      padding-bottom:.8rem;
+      border-bottom:1px solid rgba(214,170,78,.22);
+    }
+
+    .wilson-state span{
+      color:#9fb0b5;
+      font-size:.7rem;
+      font-weight:850;
+      letter-spacing:.1em;
+      text-transform:uppercase;
+    }
+
+    .wilson-state strong{
+      color:#f5d777;
+      font:700 clamp(1.35rem,3vw,2rem)/1.1 Georgia,"Times New Roman",serif;
+    }
+
+    .wilson-day-grid{
+      display:grid;
+      grid-template-columns:repeat(5,minmax(0,1fr));
+      gap:.55rem;
+    }
+
+    .wilson-day{
+      position:relative;
+      min-width:0;
+      padding:.85rem .45rem;
+      border:1px solid #705b2f;
+      border-radius:11px;
+      background:linear-gradient(180deg,#2a2417,#121c1f);
+      text-align:center;
+      opacity:.6;
+      transition:.25s ease;
+    }
+
+    .wilson-day .wd-num{
+      display:block;
+      color:#b79b55;
+      font:800 .63rem/1 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+      letter-spacing:.09em;
+    }
+
+    .wilson-day .wd-icon{
+      display:block;
+      margin:.35rem 0 .2rem;
+      font-size:1.65rem;
+    }
+
+    .wilson-day strong{
+      display:block;
+      color:#e2c77d;
+      font:700 .94rem/1.1 Georgia,"Times New Roman",serif;
+    }
+
+    .wilson-day small{
+      display:block;
+      margin-top:.3rem;
+      color:#8d999c;
+      font-size:.59rem;
+      letter-spacing:.055em;
+      text-transform:uppercase;
+    }
+
+    .wilson-day.passed{
+      opacity:.82;
+      border-color:#8c7136;
+    }
+
+    .wilson-day.current{
+      opacity:1;
+      transform:translateY(-3px);
+      border-color:#f0cb68;
+      background:
+        radial-gradient(circle at 50% 0%,rgba(255,227,128,.20),transparent 80%),
+        linear-gradient(180deg,#564419,#211b0d);
+      box-shadow:
+        0 0 0 2px rgba(240,203,104,.12),
+        0 0 24px rgba(225,181,74,.34);
+    }
+
+    .wilson-day.current strong{
+      color:#ffe49b;
+    }
+
+    .wilson-day.leap{
+      grid-column:1/-1;
+      opacity:.34;
+      border-style:dashed;
+    }
+
+    .wilson-day.leap.current{
+      opacity:1;
+      border-style:solid;
+      border-color:#8eb6c5;
+      background:linear-gradient(180deg,#102f40,#0a1720);
+      box-shadow:0 0 28px rgba(75,153,190,.28);
+    }
+
+    .wilson-leap-impact{
+      display:none;
+      margin-top:.85rem;
+      padding:1rem;
+      border:2px solid #91c5ff;
+      border-radius:8px;
+      background:#0526a8;
+      color:white;
+      font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+      box-shadow:0 0 30px rgba(44,102,255,.34);
+    }
+
+    .wilson-leap-impact.show{
+      display:block;
+      animation:wilson-blue-impact .24s steps(2,end) 2;
+    }
+
+    .wilson-leap-impact strong{
+      display:block;
+      margin-bottom:.45rem;
+      font-size:1rem;
+      letter-spacing:.06em;
+    }
+
+    .wilson-leap-impact code{
+      color:#fff;
+    }
+
+    @keyframes wilson-blue-impact{
+      50%{filter:brightness(1.45)}
+    }
+
+    .wilson-preview-tools{
+      margin-top:1rem;
+      padding:.8rem;
+      border:1px solid #315867;
+      border-radius:10px;
+      background:#081d27;
+    }
+
+    .wilson-preview-tools > strong{
+      color:#a9d1de;
+      font-size:.68rem;
+      letter-spacing:.08em;
+    }
+
+    .wilson-preview-tools p{
+      margin:.4rem 0 .65rem;
+      color:#849ca4;
+      font-size:.75rem;
+    }
+
+    .wilson-preview-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:.35rem;
+    }
+
+    .wilson-preview-actions button{
+      min-height:34px;
+      padding:.38rem .55rem;
+      font-size:.65rem;
+    }
+
+    #explore.wilson-live-parked{
+      opacity:.46;
+      filter:saturate(.45);
+      transition:opacity .55s ease,filter .55s ease;
+    }
+
+    @media(max-width:780px){
+      .wilson-live-grid{grid-template-columns:1fr}
+      .wilson-day-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .wilson-day.leap{grid-column:1/-1}
+    }
+
+    @media(max-width:460px){
+      .wilson-day-grid{grid-template-columns:1fr}
+      .wilson-day.leap{grid-column:auto}
+    }
+
     @media (prefers-reduced-motion:reduce){
       #connectCoreButton{animation:none}
+      .wilson-compass.free .wilson-compass-rose{animation:none}
+      .wilson-live-shell{transition:none}
+      .wilson-leap-impact.show{animation:none}
     }
+
+    /* A8 WILSON EASTER EGG + FOUR-YEAR ART CYCLE V2 */
+
+    .wilson-secret-doorway{
+      max-width:var(--max);
+      margin:.18rem auto 0;
+      padding:0 1rem;
+      display:flex;
+      justify-content:flex-end;
+      pointer-events:none;
+    }
+
+    .wilson-secret-trigger{
+      pointer-events:auto;
+      width:31px;
+      height:31px;
+      display:grid;
+      place-items:center;
+      padding:0;
+      border:1px solid rgba(214,170,78,.22);
+      border-radius:50%;
+      background:rgba(15,28,31,.38);
+      color:#b79346;
+      font:700 .9rem/1 Georgia,"Times New Roman",serif;
+      cursor:pointer;
+      opacity:.46;
+      box-shadow:none;
+      transition:
+        opacity .2s ease,
+        border-color .2s ease,
+        color .2s ease,
+        box-shadow .2s ease,
+        transform .2s ease;
+    }
+
+    .wilson-secret-trigger:hover,
+    .wilson-secret-trigger:focus-visible{
+      opacity:1;
+      color:#ffe08a;
+      border-color:#c99a3e;
+      box-shadow:0 0 18px rgba(214,170,78,.20);
+      transform:rotate(12deg);
+      outline:none;
+    }
+
+    .wilson-cycle-art{
+      --wilson-art-url:none;
+      position:absolute;
+      inset:0;
+      z-index:0;
+      pointer-events:none;
+      overflow:hidden;
+      border-radius:inherit;
+      opacity:.80;
+    }
+
+    .wilson-cycle-art::after{
+      content:"";
+      position:absolute;
+      inset:-3%;
+      background-image:var(--wilson-art-url);
+      background-size:cover;
+      background-position:center;
+      background-repeat:no-repeat;
+      opacity:.23;
+      filter:saturate(.75) contrast(1.06);
+      mix-blend-mode:screen;
+    }
+
+    .wilson-live-card::before{
+      z-index:1;
+    }
+
+    .wilson-live-card > :not(.wilson-cycle-art){
+      position:relative;
+      z-index:2;
+    }
+
+    .wilson-live-shell.cycle-a .wilson-cycle-art{
+      background:
+        radial-gradient(circle at 22% 28%,rgba(255,210,91,.34),transparent 15rem),
+        radial-gradient(circle at 76% 18%,rgba(184,115,33,.18),transparent 20rem),
+        linear-gradient(145deg,#392713 0%,#111d1e 48%,#211607 100%);
+    }
+
+    .wilson-live-shell.cycle-b .wilson-cycle-art{
+      background:
+        radial-gradient(circle at 18% 20%,rgba(211,232,255,.21),transparent 7rem),
+        radial-gradient(circle at 78% 18%,rgba(109,142,197,.25),transparent 13rem),
+        radial-gradient(circle at 58% 74%,rgba(233,192,92,.15),transparent 11rem),
+        linear-gradient(145deg,#07131f 0%,#12283a 49%,#251d0d 100%);
+    }
+
+    .wilson-live-shell.cycle-c .wilson-cycle-art{
+      background:
+        radial-gradient(ellipse at 50% 87%,rgba(198,148,66,.25),transparent 23rem),
+        radial-gradient(circle at 17% 34%,rgba(70,126,119,.21),transparent 16rem),
+        linear-gradient(165deg,#071c25 0%,#173033 56%,#3b2912 100%);
+    }
+
+    .wilson-live-shell.cycle-d .wilson-cycle-art{
+      background:
+        radial-gradient(circle at 50% 42%,rgba(92,191,255,.30),transparent 14rem),
+        radial-gradient(circle at 17% 18%,rgba(55,112,202,.27),transparent 18rem),
+        linear-gradient(145deg,#04111f 0%,#082a42 48%,#21180d 100%);
+    }
+
+    .wilson-live-shell.cycle-d .wilson-cycle-art::after{
+      opacity:.18;
+      filter:
+        saturate(.65)
+        hue-rotate(145deg)
+        contrast(1.15);
+    }
+
+    .wilson-cycle-caption{
+      margin:0 0 .7rem;
+      color:#a89058;
+      font:800 .59rem/1.35 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+      letter-spacing:.11em;
+      text-align:right;
+      text-transform:uppercase;
+    }
+
+    .wilson-earned-banner{
+      display:none;
+      align-items:center;
+      justify-content:space-between;
+      gap:.8rem;
+      margin-bottom:.85rem;
+      padding:.72rem .8rem;
+      border:1px solid #ae8332;
+      border-radius:10px;
+      background:
+        linear-gradient(
+          180deg,
+          rgba(77,58,20,.88),
+          rgba(26,27,20,.90)
+        );
+      box-shadow:
+        inset 0 1px rgba(255,236,161,.08),
+        0 8px 25px rgba(0,0,0,.18);
+    }
+
+    .wilson-earned-banner strong{
+      color:#ffe08a;
+      font:850 .71rem/1.45 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+      letter-spacing:.09em;
+    }
+
+    .wilson-earned-banner button{
+      flex:0 0 auto;
+      padding:.45rem .62rem;
+      border:1px solid #8b6d34;
+      border-radius:8px;
+      background:#121d20;
+      color:#d9c58d;
+      cursor:pointer;
+      font-size:.65rem;
+      font-weight:850;
+      letter-spacing:.065em;
+    }
+
+    .wilson-live-shell.earned-preview .wilson-earned-banner{
+      display:flex;
+    }
+
+    .wilson-live-shell.earned-preview .wilson-preview-banner{
+      display:none;
+    }
+
+    .wilson-live-shell.earned-preview .wilson-compass-rose{
+      animation:wilson-compass-free 11s linear infinite;
+    }
+
+    .wilson-cycle-preview-label{
+      flex-basis:100%;
+      margin-top:.28rem;
+      color:#79939c;
+      font-size:.60rem;
+      font-weight:850;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+
+    /*
+     * Leap-year visual band:
+     * 360 structured days + 6 Wilson Gold Days = 366.
+     * Compass ticks remain the independent exact 64-A8-angle ruler.
+     */
+    .today-dial.a8-leap-year{
+      background:
+        radial-gradient(circle,#0b202a 0 36%,transparent 37%),
+        repeating-conic-gradient(
+          from 0deg,
+          rgba(240,207,120,.34) 0 .55deg,
+          transparent .55deg 45deg
+        ),
+        conic-gradient(
+          from 0deg,
+          rgba(214,170,78,.17) 0deg 44.262295deg,
+          rgba(103,143,157,.08) 44.262295deg 88.524590deg,
+          rgba(214,170,78,.17) 88.524590deg 132.786885deg,
+          rgba(103,143,157,.08) 132.786885deg 177.049180deg,
+          rgba(214,170,78,.17) 177.049180deg 221.311475deg,
+          rgba(103,143,157,.08) 221.311475deg 265.573770deg,
+          rgba(214,170,78,.17) 265.573770deg 309.836066deg,
+          rgba(103,143,157,.08) 309.836066deg 354.098361deg,
+          rgba(107,184,224,.70) 354.098361deg 360deg
+        ),
+        radial-gradient(circle,#102e3b,#071821 72%);
+    }
+
+    @media(max-width:780px){
+      .wilson-earned-banner{
+        align-items:stretch;
+        flex-direction:column;
+      }
+
+      .wilson-earned-banner button{
+        width:100%;
+      }
+
+      .wilson-cycle-caption{
+        text-align:left;
+      }
+    }
+
+    @media(prefers-reduced-motion:reduce){
+      .wilson-secret-trigger{
+        transition:none;
+      }
+
+      .wilson-secret-trigger:hover,
+      .wilson-secret-trigger:focus-visible{
+        transform:none;
+      }
+
+      .wilson-live-shell.earned-preview .wilson-compass-rose{
+        animation:none;
+      }
+    }
+
     .hero-title-row{display:flex;align-items:center;gap:.75rem;margin-bottom:.2rem}
     .hero-title-row h1{margin:0}
     .hero-title-mark{width:48px;height:48px;object-fit:contain;flex:0 0 auto;border-radius:8px}
@@ -287,6 +914,83 @@
     .element-row{display:grid;grid-template-columns:repeat(5,1fr);gap:.45rem;margin-top:1rem}
     .element{padding:.8rem .45rem;border-radius:10px;text-align:center;border:1px solid #31515e;background:#0b2430}
     .element .icon{font-size:1.6rem;display:block;margin-bottom:.25rem}
+
+    .day-label{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:.24em;
+      white-space:nowrap;
+    }
+
+    .day-formal{
+      font-family:"Noto Sans Symbols 2","Segoe UI Symbol","Arial Unicode MS",serif;
+      line-height:1;
+    }
+
+    .day-drawing{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-width:1.15em;
+      line-height:1;
+    }
+
+    .day-art{
+      width:1.25em;
+      height:1em;
+      display:inline-block;
+      overflow:visible;
+    }
+
+    .day-art path{
+      fill:none;
+      stroke:currentColor;
+      stroke-width:1.7;
+      stroke-linecap:round;
+      stroke-linejoin:round;
+      vector-effect:non-scaling-stroke;
+    }
+
+    .element-title{
+      min-height:1.7rem;
+      margin-bottom:.25rem;
+      color:var(--ink);
+    }
+
+    .element .element-title strong{
+      display:inline;
+    }
+
+    .calendar thead .day-label,
+    .calendar thead .day-label > span{
+      display:inline-flex;
+      align-items:center;
+      font-size:inherit;
+      color:inherit;
+      letter-spacing:normal;
+      text-transform:none;
+      margin:0;
+    }
+
+    .calendar thead .day-art{
+      width:1.15em;
+      height:.9em;
+    }
+
+    .wilson-element-label{
+      margin:.15rem 0 .25rem;
+    }
+
+    .wilson-element-label strong{
+      display:inline;
+    }
+
+    .date-symbol{
+      font-family:"Noto Sans Symbols 2","Segoe UI Symbol","Arial Unicode MS",serif;
+      font-size:1.18em;
+    }
+
     .element strong{font-family:Georgia,serif;display:block}
     .element small{font-size:.64rem;color:var(--muted);text-transform:uppercase;letter-spacing:.055em}
     .element.air{background:linear-gradient(180deg,#22313a,#0b2430);border-color:#7c8b92}
@@ -363,13 +1067,40 @@
     .today-copy{padding:.8rem .8rem .55rem;min-width:0}
     .today-kicker{display:flex;align-items:center;gap:.55rem;flex-wrap:wrap;color:var(--gold2);font:800 .72rem/1.2 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;letter-spacing:.13em;text-transform:uppercase}
     .live-dot{width:9px;height:9px;border-radius:50%;background:#d2a04c;box-shadow:0 0 0 4px rgba(210,160,76,.10),0 0 16px rgba(210,160,76,.45)}
-    .core-status-strip{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.5rem;margin:.85rem 0 .7rem}
+    .core-status-strip{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.5rem;margin:.75rem 0 .25rem}
     .core-status{padding:.55rem .65rem;border:1px solid #2d4856;border-radius:9px;background:#071a23;font:700 .64rem/1.35 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;letter-spacing:.045em;color:#9aabb1}
     .core-status strong{display:block;margin-top:.15rem;color:#dbc78f;font-size:.75rem}
     .core-status.good{border-color:#3f7255;background:#09241c}.core-status.good strong{color:#9de1b4}
     .core-status.bad{border-color:#805044;background:#281813}.core-status.bad strong{color:#f0ad98}
-    .today-register{margin:.65rem 0 .12rem;font:800 clamp(1.1rem,2.3vw,1.65rem)/1.15 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color:#d8b961;letter-spacing:.08em}
-    .today-name{font:700 clamp(2rem,4.8vw,4.55rem)/.96 Georgia,"Times New Roman",serif;color:#f5e4bf;text-shadow:0 3px 22px #000;margin:.26rem 0 .5rem;letter-spacing:-.02em}
+    .today-register{margin:.9rem 0 .18rem;font:800 clamp(1rem,2vw,1.35rem)/1.15 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color:#d8b961;letter-spacing:.08em}
+
+    .today-name{
+      font:700 clamp(1.8rem,4vw,3.25rem)/1 Georgia,"Times New Roman",serif;
+      color:#f5e4bf;
+      text-shadow:0 3px 22px #000;
+      margin:.32rem 0 .4rem;
+      letter-spacing:-.02em;
+    }
+
+    .today-symbolic{
+      margin:.18rem 0 .38rem;
+      color:#f0cf78;
+      font:800 clamp(1.05rem,3vw,1.45rem)/1.2 "Noto Sans Symbols 2","Segoe UI Symbol",ui-monospace,monospace;
+      letter-spacing:.055em;
+      white-space:nowrap;
+      overflow-x:auto;
+    }
+
+    .today-meta{
+      color:#aebfc3;
+      font:750 .72rem/1.45 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+      letter-spacing:.045em;
+      margin-bottom:.35rem;
+    }
+
+    .today-hidden-paint{
+      display:none!important;
+    }
     .today-name .day-number{color:var(--gold2);white-space:nowrap}
     .today-flags{display:flex;gap:.48rem;flex-wrap:wrap;margin:.75rem 0}
     .today-flag{padding:.38rem .56rem;border:1px solid #365362;border-radius:999px;background:#081b25;color:#c9c2b5;font:750 .68rem/1 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;letter-spacing:.06em;text-transform:uppercase}
@@ -387,7 +1118,7 @@
       radial-gradient(circle,#0b202a 0 36%,transparent 37%),
       /* Exact A8 compass ruler: thin ticks every 64 A8 angle (45 CSS degrees). */
       repeating-conic-gradient(from 0deg,rgba(240,207,120,.34) 0 .55deg,transparent .55deg 45deg),
-      /* Calendar band: 360 structured days + 5-day Wilson's Week = 365. */
+      /* Normal-year band: 360 structured days + 5 Wilson Gold Days = 365. */
       conic-gradient(from 0deg,
         rgba(214,170,78,.17) 0deg 44.383562deg,
         rgba(103,143,157,.08) 44.383562deg 88.767123deg,
@@ -594,7 +1325,7 @@
 
 .date-example-grid{
   display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
+  grid-template-columns:repeat(4,minmax(0,1fr));
   gap:.65rem;
   margin:1rem 0;
 }
@@ -618,6 +1349,12 @@
 .date-example-grid strong{
   color:#f4dc97;
   font:700 1.05rem/1.25 Georgia,"Times New Roman",serif;
+}
+
+.date-example-grid .symbolic-date{
+  display:block;
+  white-space:nowrap;
+  letter-spacing:.03em;
 }
 
 .date-rhythm{
@@ -844,35 +1581,45 @@
         >
           NEW A8 CALENDAR DAY · MERIDIAN 0 · 000₈ · LONDON REFERENCE
           <span style="display:block;color:#9faeb2;font-weight:600">
-            This is the A8 reference date at Meridian 0. Your local civil date may be ahead or behind depending on your location. Compare accordingly.
+            A8 reference date at Meridian 0. Local civil dates may differ by location.
           </span>
         </div>
 
-        <div class="core-status-strip" aria-label="Core20 calendar connection state">
-          <div class="core-status" id="coreFeedStatus">CORE20 FEED<strong>NOT CONNECTED</strong></div>
-          <div class="core-status" id="solOrbitStatus">ABSOLUTE YEAR PHASE27<strong>WAITING</strong></div>
-          <div class="core-status" id="calendarStatus">A8 CALENDAR<strong>WAITING</strong></div>
-        </div>
+        <div class="today-register" id="todayRegister">— · — · —</div>
+
+        <h2 class="today-name" id="todayTitle">
+          Connect to Core20 and read the live A8 calendar identity.
+        </h2>
+
+        <div class="today-symbolic" id="todaySymbolic">— · — · —</div>
+        <div class="today-meta" id="todayMeta">AWAITING LIVE CALENDAR IDENTITY</div>
 
         <div class="today-actions">
           <button class="button" type="button" id="connectCoreButton">CONNECT TO LIVE CORE20 · READ ONLY</button>
-        <a class="button" href="#explore">EXPLORE THE MONTHS</a>
-        <a class="button secondary" href="#protected">PROTECTED DAYS</a>
+          <a class="button" href="#explore">EXPLORE THE MONTHS</a>
+          <a class="button secondary" href="#protected">PROTECTED DAYS</a>
           <button class="button secondary" type="button" id="showTodayButton" disabled>SHOW TODAY IN MONTH GRID</button>
         </div>
 
-        <div class="today-register" id="todayRegister">— · — · —</div>
-        <h2 class="today-name" id="todayTitle">Connect to anchor orbital position and read Core20 counted civil days.</h2>
-        <div class="today-flags" id="todayFlags"></div>
-
         <div class="today-printout" aria-live="polite">
-          <div class="print-row"><span>NAMED A8 DATE</span><strong id="todayPosition">—</strong></div>
-          <div class="print-row"><span>PLANETARY WEEK</span><strong id="todayWeek">—</strong></div>
-          <div class="print-row"><span>ELEMENT DAY</span><strong id="todayElement">—</strong></div>
-          <div class="print-row"><span>WORK / PROTECTED RHYTHM</span><strong id="todayRhythm">—</strong></div>
           <div class="print-row"><span>MONTH COMPASS ANCHOR</span><strong id="todayMonthAnchor">—</strong></div>
           <div class="print-row phase-line"><span>LIVE CALENDAR YEAR PHASE</span><strong id="todayPhase">— A8 · —₈</strong></div>
           <div class="print-row phase-line"><span>LIVE ABSOLUTE SOL PHASE</span><strong id="todayAbsolutePhase">— A8 · —₈</strong></div>
+        </div>
+
+        <div class="core-status-strip core-status-strip-compact" aria-label="Core20 calendar connection state">
+          <div class="core-status" id="coreFeedStatus">CORE20 FEED<strong>NOT CONNECTED</strong></div>
+          <div class="core-status" id="solOrbitStatus">ABSOLUTE YEAR PHASE27<strong>WAITING</strong></div>
+        </div>
+
+        <!-- Existing runtime paint targets retained but no longer public furniture. -->
+        <div class="today-hidden-paint" aria-hidden="true">
+          <div class="core-status" id="calendarStatus">A8 CALENDAR<strong>WAITING</strong></div>
+          <strong id="todayPosition">—</strong>
+          <strong id="todayWeek">—</strong>
+          <strong id="todayElement">—</strong>
+          <strong id="todayRhythm">—</strong>
+          <div id="todayFlags"></div>
         </div>
 
         <details class="today-details">
@@ -881,7 +1628,7 @@
           <p><b>Authority separation:</b> JPL verifies absolute year-wheel orientation once and is translated into native A8 <code>PHASE27</code>. The eccentric-orbit → steady-speed concentric mean-phase transform remains a mathematical orientation/validation proof, not a calendar-day switch. Running date arithmetic is exactly <code>YEAR DAY = native anchor day + (Core20 dayCount − anchor dayCount)</code>, wrapped at the calendar-year length.</p>
           <p><b>Calendar seam:</b> North / Day 1 begins at calendar year phase <code>000₈</code>. The established absolute Sol orientation corresponding to that calendar seam is <code>600₈</code>. Month IDs remain the separate three-bit register <code>000–111</code>.</p>
           <p><b>Compass anchors:</b> N <code>000₈</code> · NE <code>100₈</code> · E <code>200₈</code> · SE <code>300₈</code> · S <code>400₈</code> · SW <code>500₈</code> · W <code>600₈</code> · NW <code>700₈</code>. These remain the exact 64-A8-angle compass references; the month register's compact <code>0₈–7₈</code> labels are not angle values.</p>
-          <p><b>Calendar dial spacing:</b> the recovered year wheel is <code>512 A8 angle</code>. The 360 structured month-days occupy <code>504.9863 A8 angle</code>, so each 45-day month occupies <code>63.1233 A8 angle</code>. Wilson's Week occupies the final <code>7.0137 A8 angle</code> immediately before the North seam. Colored month boundaries therefore sit slightly ahead of the exact 64-angle compass ticks; the thin ticks preserve the uncompromised compass ruler.</p>
+          <p><b>Calendar dial spacing:</b> the recovered year wheel is <code>512 A8 angle</code>. In a normal 365-day A8 year, the 360 structured month-days occupy <code>504.9863 A8 angle</code>, each 45-day month occupies <code>63.1233 A8 angle</code>, and Wilson's five Gold Days occupy the final <code>7.0137 A8 angle</code>. In native Cycle D, the 366-day leap year gives the structured 360 days <code>503.6066 A8 angle</code>, each month <code>62.9508 A8 angle</code>, and six Gold Days <code>8.3934 A8 angle</code>. The thin compass ticks remain the independent exact 64-A8-angle ruler.</p>
           <p><b>Transport:</b> polling only repaints server-owned state. Poll cadence does not advance the calendar. This display does not call the Core20 clock-alignment POST.</p>
           <p><b>Qualified absolute year PHASE27:</b> <code id="todaySol27">—</code></p>
           <p><b>Native integer calendar anchor:</b> <code id="todayCalendarAnchorMath">—</code></p>
@@ -892,6 +1639,30 @@
             <p>This one-shot record establishes orbital orientation only. It does not choose, increment or decrement the integer calendar day. The native A8 YEAR DAY anchor is separate; after that anchor is locked, only Core20's recovered civil-day count advances the calendar.</p>
             <div id="externalProofText">Not loaded.</div>
             <button class="button secondary" type="button" id="loadExternalProofButton">LOAD ONE-SHOT JPL VERIFICATION RECORD</button>
+          </div>
+
+          <div class="wilson-preview-tools">
+            <strong>WILSON SEAM PREVIEW · DISPLAY ONLY</strong>
+            <p>
+              Exercises the calendar presentation with synthetic YEAR DAY values only.
+              It does not write Core20, the calendar checkpoint, year angle, UTC, or the live counted day.
+            </p>
+            <div class="wilson-preview-actions">
+              <button class="button secondary" type="button" data-wilson-preview-day="360">NW 45</button>
+              <button class="button secondary" type="button" data-wilson-preview-day="361">GOLD 1</button>
+              <button class="button secondary" type="button" data-wilson-preview-day="362">GOLD 2</button>
+              <button class="button secondary" type="button" data-wilson-preview-day="363">GOLD 3</button>
+              <button class="button secondary" type="button" data-wilson-preview-day="364">GOLD 4</button>
+              <button class="button secondary" type="button" data-wilson-preview-day="365">GOLD 5</button>
+              <button class="button secondary" type="button" data-wilson-preview-day="366">LEAP GOLD 6</button>
+              <button class="button secondary" type="button" data-wilson-preview-day="1">NORTH 1</button>
+              <span class="wilson-cycle-preview-label">ART CYCLE · DISPLAY ONLY</span>
+              <button class="button secondary" type="button" data-wilson-cycle-preview="0">ART A · 5</button>
+              <button class="button secondary" type="button" data-wilson-cycle-preview="1">ART B · 5</button>
+              <button class="button secondary" type="button" data-wilson-cycle-preview="2">ART C · 5</button>
+              <button class="button secondary" type="button" data-wilson-cycle-preview="3">ART D · 6</button>
+              <button class="button" type="button" id="wilsonPreviewReturn">RETURN TO LIVE</button>
+            </div>
           </div>
         </details>
       </div>
@@ -915,6 +1686,105 @@
   </div>
 </section>
 
+<section class="wilson-live-shell" id="wilsonLiveSection" aria-hidden="true">
+  <div class="wilson-live-card">
+    <div class="wilson-cycle-art" id="wilsonCycleArt" aria-hidden="true"></div>
+
+    <div class="wilson-cycle-caption" id="wilsonCycleCaption">
+      YEAR-END ART · CYCLE A · LANTERN GOLD
+    </div>
+
+    <div class="wilson-earned-banner" id="wilsonEarnedBanner">
+      <strong>YOU STAYED TO THE END. NOW CHOOSE YOUR OWN DIRECTION.</strong>
+      <button type="button" id="wilsonEasterEggReturn">RETURN TO CALENDAR</button>
+    </div>
+
+    <div class="wilson-preview-banner" id="wilsonPreviewBanner">
+      ENGINEERING PREVIEW · DISPLAY ONLY · LIVE CORE20 COUNT REMAINS UNCHANGED
+    </div>
+
+    <div class="wilson-live-grid">
+      <article class="wilson-compass-panel">
+        <div class="eyebrow">Outside the compass month register</div>
+        <h2 class="wilson-live-title" id="wilsonLiveTitle">Wilson&rsquo;s Week</h2>
+
+        <p class="wilson-live-lede" id="wilsonLiveLede">
+          For 360 days, the A8 calendar gives you a direction.
+          During Wilson&rsquo;s Week, the compass is set free.
+          For five Gold Days, everyone may go their own way.
+        </p>
+
+        <div class="wilson-compass" id="wilsonCompass" aria-label="A8 Wilson's Week compass">
+          <span class="wc-n">N</span>
+          <span class="wc-e">E</span>
+          <span class="wc-s">S</span>
+          <span class="wc-w">W</span>
+          <div class="wilson-compass-rose" aria-hidden="true"></div>
+        </div>
+
+        <div class="wilson-compass-message" id="wilsonCompassMessage">
+          360 DAYS OF DIRECTION · 5 DAYS TO CHOOSE YOUR OWN
+        </div>
+      </article>
+
+      <article class="wilson-days-panel">
+        <div class="wilson-state">
+          <span id="wilsonStateKicker">YEAR-END INTERVAL</span>
+          <strong id="wilsonStateText">WILSON&rsquo;S WEEK</strong>
+        </div>
+
+        <div class="wilson-day-grid" id="wilsonDayGrid">
+          <div class="wilson-day" data-wilson-day="1">
+            <span class="wd-num">GOLD 1</span>
+            <span class="wilson-element-label day-label"><span class="day-formal">🜂</span><strong>Fire</strong><span class="day-drawing">🔥</span></span>
+            <small>Protected</small>
+          </div>
+
+          <div class="wilson-day" data-wilson-day="2">
+            <span class="wd-num">GOLD 2</span>
+            <span class="wilson-element-label day-label"><span class="day-formal">🜄</span><strong>Water</strong><span class="day-drawing">🌊</span></span>
+            <small>Protected</small>
+          </div>
+
+          <div class="wilson-day" data-wilson-day="3">
+            <span class="wd-num">GOLD 3</span>
+            <span class="wilson-element-label day-label"><span class="day-formal">🜃</span><strong>Earth</strong><span class="day-drawing"><svg class="day-art" viewBox="0 0 32 20" aria-hidden="true"><path d="M2 17 L8 10 L12 13 L19 5 L30 17"/><path d="M2 17 H30"/></svg></span></span>
+            <small>Protected</small>
+          </div>
+
+          <div class="wilson-day" data-wilson-day="4">
+            <span class="wd-num">GOLD 4</span>
+            <span class="wilson-element-label day-label"><span class="day-formal">🜁</span><strong>Air</strong><span class="day-drawing"><svg class="day-art" viewBox="0 0 32 20" aria-hidden="true"><path d="M2 5 C6 2 10 8 14 5 S22 2 30 5"/><path d="M2 10 C6 7 10 13 14 10 S22 7 30 10"/><path d="M2 15 C6 12 10 18 14 15 S22 12 30 15"/></svg></span></span>
+            <small>Protected</small>
+          </div>
+
+          <div class="wilson-day" data-wilson-day="5">
+            <span class="wd-num">GOLD 5</span>
+            <span class="wilson-element-label day-label"><span class="day-formal">🜀</span><strong>Quintessence (Ether)</strong><span class="day-drawing">✦</span></span>
+            <small>Protected</small>
+          </div>
+
+          <div class="wilson-day leap" data-wilson-day="6">
+            <span class="wd-num">LEAP GOLD 6</span>
+            <span class="wd-icon">✹</span>
+            <strong>Leap Gold Day</strong>
+            <small>Only when required</small>
+          </div>
+        </div>
+
+        <div class="wilson-leap-impact" id="wilsonLeapImpact" role="status" aria-live="polite">
+          <strong>A8 YEAR WHEEL EXCEPTION</strong>
+          <div>LEAP GOLD DAY DETECTED</div>
+          <div><code>360 + 6 = 366</code></div>
+          <div>STRUCTURED CALENDAR REMAINS PARKED</div>
+          <div>NORTH · DAY 1 RESUMES NEXT COUNT</div>
+          <div style="margin-top:.55rem">CALENDAR CORE HEALTHY · THIS IS SUPPOSED TO HAPPEN</div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
 <main id="main">
   <section id="explore" aria-labelledby="explore-title">
     <div class="section-head">
@@ -931,7 +1801,7 @@
         <div class="calendar-scroll" tabindex="0" role="region" aria-label="Scrollable A8 month calendar">
         <table class="calendar" aria-describedby="calendarCaption">
           <caption id="calendarCaption" style="position:absolute;left:-9999px">Selected A8 month showing nine planetary weeks and five elemental day columns.</caption>
-          <thead><tr><th scope="col">Planetary week</th><th scope="col">🔥 Fire<span>Day 1</span></th><th scope="col">🌊 Water<span>Day 2</span></th><th scope="col">⛰ Earth<span>Day 3</span></th><th scope="col">☁ Air<span>Day 4</span></th><th scope="col">✦ Aether<span>Day 5</span></th></tr></thead>
+          <thead><tr><th scope="col">Planetary week</th><th scope="col"><span class="day-label"><span class="day-formal">🜂</span><span class="day-word">Fire</span><span class="day-drawing">🔥</span></span><span>Day 1</span></th><th scope="col"><span class="day-label"><span class="day-formal">🜄</span><span class="day-word">Water</span><span class="day-drawing">🌊</span></span><span>Day 2</span></th><th scope="col"><span class="day-label"><span class="day-formal">🜃</span><span class="day-word">Earth</span><span class="day-drawing"><svg class="day-art" viewBox="0 0 32 20" aria-hidden="true"><path d="M2 17 L8 10 L12 13 L19 5 L30 17"/><path d="M2 17 H30"/></svg></span></span><span>Day 3</span></th><th scope="col"><span class="day-label"><span class="day-formal">🜁</span><span class="day-word">Air</span><span class="day-drawing"><svg class="day-art" viewBox="0 0 32 20" aria-hidden="true"><path d="M2 5 C6 2 10 8 14 5 S22 2 30 5"/><path d="M2 10 C6 7 10 13 14 10 S22 7 30 10"/><path d="M2 15 C6 12 10 18 14 15 S22 12 30 15"/></svg></span></span><span>Day 4</span></th><th scope="col"><span class="day-label"><span class="day-formal">🜀</span><span class="day-word">Quintessence (Ether)</span><span class="day-drawing">✦</span></span><span>Day 5</span></th></tr></thead>
           <tbody id="calendarBody"></tbody>
         </table>
         </div>
@@ -960,7 +1830,7 @@
     <div class="spine">
       <article class="spine-card"><span class="num">8</span><h3>Compass months</h3><p>Three-bit month register: <code>000</code> through <code>111</code>, paired with N, NE, E, SE, S, SW, W and NW.</p></article>
       <article class="spine-card"><span class="num">9</span><h3>Planetary weeks</h3><p>Mercury, Venus, Terra, Mars, Jupiter, Saturn, Uranus, Neptune and Pluto form the nine named week rows.</p></article>
-      <article class="spine-card"><span class="num">5</span><h3>Element days</h3><p>Fire → Water → Earth → Air → Aether. Day numbering stays with the intuitive decimal sequence 1 through 45.</p></article>
+      <article class="spine-card"><span class="num">5</span><h3>Element days</h3><p>Fire → Water → Earth → Air → Quintessence. Day numbering stays with the intuitive decimal sequence 1 through 45.</p></article>
       <article class="spine-card"><span class="num">5 / 6</span><h3>Wilson&rsquo;s Week</h3><p>Year-end celebration outside the eight-month register: five protected gold element days, plus a sixth gold leap-extension day when required.</p></article>
     </div>
   </section>
@@ -968,25 +1838,25 @@
   <section id="protected" aria-labelledby="protected-title">
     <div class="section-head">
       <div><div class="eyebrow">A calendar with protected time built in</div><h2 id="protected-title">Work, life, observance and rest</h2></div>
-      <p>Aether is always protected. Air alternates between ordinary business and protected silver. Holidays and religious observances are assigned only to protected days or Wilson&rsquo;s Week, so ordinary business days remain ordinary business days.</p>
+      <p>Quintessence is always protected. Air alternates between ordinary business and protected silver. Holidays and religious observances are assigned only to protected days or Wilson&rsquo;s Week, so ordinary business days remain ordinary business days.</p>
     </div>
 
     <div class="rule-grid">
       <article class="panel rule-card">
         <h3>The five-day elemental rhythm</h3>
         <div class="element-row">
-          <div class="element"><span class="icon">🔥</span><strong>Fire</strong><small>business · get moving</small></div>
-          <div class="element"><span class="icon">🌊</span><strong>Water</strong><small>business · flow</small></div>
-          <div class="element"><span class="icon">⛰</span><strong>Earth</strong><small>business · grounded</small></div>
-          <div class="element air"><span class="icon">☁</span><strong>Air</strong><small>business / silver</small></div>
-          <div class="element aether"><span class="icon">✦</span><strong>Aether</strong><small>always gold</small></div>
+          <div class="element"><div class="element-title day-label"><span class="day-formal">🜂</span><strong>Fire</strong><span class="day-drawing">🔥</span></div><small>business · get moving</small></div>
+          <div class="element"><div class="element-title day-label"><span class="day-formal">🜄</span><strong>Water</strong><span class="day-drawing">🌊</span></div><small>business · flow</small></div>
+          <div class="element"><div class="element-title day-label"><span class="day-formal">🜃</span><strong>Earth</strong><span class="day-drawing"><svg class="day-art" viewBox="0 0 32 20" aria-hidden="true"><path d="M2 17 L8 10 L12 13 L19 5 L30 17"/><path d="M2 17 H30"/></svg></span></div><small>business · grounded</small></div>
+          <div class="element air"><div class="element-title day-label"><span class="day-formal">🜁</span><strong>Air</strong><span class="day-drawing"><svg class="day-art" viewBox="0 0 32 20" aria-hidden="true"><path d="M2 5 C6 2 10 8 14 5 S22 2 30 5"/><path d="M2 10 C6 7 10 13 14 10 S22 7 30 10"/><path d="M2 15 C6 12 10 18 14 15 S22 12 30 15"/></svg></span></div><small>business / silver</small></div>
+          <div class="element aether"><div class="element-title day-label"><span class="day-formal">🜀</span><strong>Quintessence (Ether)</strong><span class="day-drawing">✦</span></div><small>always gold</small></div>
         </div>
         <div class="rhythm">
-          <div><strong>Week A · 4 / 1</strong><span>Fire, Water, Earth, Air business · Aether protected.</span></div>
-          <div><strong>Week B · 3 / 2</strong><span>Fire, Water, Earth business · Air and Aether protected.</span></div>
+          <div><strong>Week A · 4 / 1</strong><span>Fire, Water, Earth, Air business · Quintessence protected.</span></div>
+          <div><strong>Week B · 3 / 2</strong><span>Fire, Water, Earth business · Air and Quintessence protected.</span></div>
           <div><strong>Forever alternating</strong><span>A → B → A → B continuously through month boundaries.</span></div>
         </div>
-        <div class="notice"><strong>Protected-day rule:</strong> holidays, religious observance, civic observance, family days and festivals belong on Gold Aether days, Silver protected Air days, or Wilson&rsquo;s Week. This is a design rule of the A8 calendar proposal, not a claim about existing civil law.</div>
+        <div class="notice"><strong>Protected-day rule:</strong> holidays, religious observance, civic observance, family days and festivals belong on Gold Quintessence days, Silver protected Air days, or Wilson&rsquo;s Week. This is a design rule of the A8 calendar proposal, not a claim about existing civil law.</div>
       </article>
 
       <article class="panel rule-card">
@@ -1023,7 +1893,7 @@
       <article class="panel year-compact-card wilson-compact">
         <div class="year-compact-number">5</div>
         <h3>Wilson&rsquo;s Week</h3>
-        <p><strong>Fire · Water · Earth · Air · Aether</strong> — all protected Gold Days outside the ordinary month register.</p>
+        <p><strong>Fire · Water · Earth · Air · Quintessence</strong> — all protected Gold Days outside the ordinary month register.</p>
         <p>Normal year: <strong>365</strong>. Leap extension when required: <strong>366</strong>.</p>
       </article>
     </div>
@@ -1064,7 +1934,7 @@
               <p>After month <code>111 · 7₈ · NW</code> closes, the month register has completed every possible three-bit state. Wilson&rsquo;s Week follows the 360-day body as a separate year-end interval:</p>
 
               <ul>
-                <li><strong>Fire · Water · Earth · Air · Aether</strong> — all protected Gold Days.</li>
+                <li><strong>Fire · Water · Earth · Air · Quintessence</strong> — all protected Gold Days.</li>
                 <li>Reserved for year-end celebration, holidays, festivals, family, gratitude, civic and religious observance.</li>
                 <li>Five days in a normal year: 360 + 5 = <strong>365</strong>.</li>
                 <li>A leap correction may add one additional protected Gold Day: 360 + 6 = <strong>366</strong>.</li>
@@ -1079,7 +1949,7 @@
             </article>
 
             <a class="panel feature-image" href="/image-viewer.html#/assets/ausp8_year_end.png" data-lightbox aria-label="Open Wilson's Week artwork">
-              <img src="/assets/thumbs/ausp8_year_end.png" width="360" height="450" loading="lazy" decoding="async" alt="Wilson's Week year-end celebration artwork with Fire, Water, Earth, Air and Aether gold days">
+              <img src="/assets/thumbs/ausp8_year_end.png" width="360" height="450" loading="lazy" decoding="async" alt="Wilson's Week year-end celebration artwork with Fire, Water, Earth, Air and Quintessence gold days">
             </a>
           </div>
         </div>
@@ -1092,10 +1962,10 @@
           <div class="art-grid">
             <a class="panel art-card" href="/image-viewer.html#/assets/ausp8_example.png" data-lightbox>
               <figure>
-                <img src="/assets/thumbs/ausp8_example.png" width="360" height="509" loading="lazy" decoding="async" alt="A8 protected days example with Aether highlighted gold and alternating Air highlighted silver">
+                <img src="/assets/thumbs/ausp8_example.png" width="360" height="509" loading="lazy" decoding="async" alt="A8 protected days example with Quintessence highlighted gold and alternating Air highlighted silver">
                 <figcaption>
                   <strong>Protected Days Example</strong>
-                  <span>Gold Aether · Silver alternating Air · business-day rhythm.</span>
+                  <span>Gold Quintessence · Silver alternating Air · business-day rhythm.</span>
                 </figcaption>
               </figure>
             </a>
@@ -1129,7 +1999,7 @@
       </article>
       <article class="panel rule-card">
         <h3>Week and day language</h3>
-        <p>Example: <strong>Jupiter Week · Aether Day</strong>, or <strong>Venus Week · protected Air Day</strong>.</p>
+        <p>Example: <strong>Jupiter Week · Quintessence Day</strong>, or <strong>Venus Week · protected Air Day</strong>.</p>
         <p>The planetary names are calendar labels following the familiar historical nine-world sequence. Retaining Pluto as the ninth week name is nomenclature for this calendar, not a claim about modern astronomical classification.</p>
       </article>
     </div>
@@ -1153,7 +2023,11 @@
         </div>
         <div>
           <span>NAMED</span>
-          <strong>SW · Saturn · Fire · 2026</strong>
+          <strong>Southwest · Saturn · Fire · 2026</strong>
+        </div>
+        <div>
+          <span>SYMBOLIC</span>
+          <strong class="symbolic-date">5₈ · ♄ · 🜂 · 2026</strong>
         </div>
       </div>
 
@@ -1162,7 +2036,7 @@
         The A8 month, week and element position remain unchanged.
       </p>
 
-      <div class="date-rhythm" aria-label="Protected Aether days">
+      <div class="date-rhythm" aria-label="Protected Quintessence days">
         <span>5</span>
         <span>10</span>
         <span>15</span>
@@ -1175,7 +2049,7 @@
       </div>
 
       <p>
-        Every fifth day is <strong>Aether</strong> and protected:
+        Every fifth day is <strong>Quintessence</strong> and protected:
         5, 10, 15, 20, 25, 30, 35, 40 and 45.
         The five-day elemental rhythm can therefore be counted naturally on one hand.
       </p>
@@ -1215,6 +2089,16 @@
     <span>Original software, text, graphics, diagrams and presentation remain protected works. Contact the authors regarding republication, adaptation, collaboration or licensing.</span>
   </div>
   <div class="easter-egg">⚓ www.com — Wendall Wilsons World dot com-edy · cosigo.io ⚓</div>
+
+  <div class="wilson-secret-doorway">
+    <button
+      class="wilson-secret-trigger"
+      id="wilsonEasterEggTrigger"
+      type="button"
+      aria-label="Open Wilson's Week"
+      title="Choose your own direction"
+    >✥</button>
+  </div>
 </footer>
 
 <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Calendar artwork viewer"><button type="button" aria-label="Close artwork">×</button><img alt=""></div>
@@ -1238,7 +2122,8 @@
     '/image-viewer.html#' + encodeURIComponent(art);
   const planets = ['Mercury','Venus','Terra','Mars','Jupiter','Saturn','Uranus','Neptune','Pluto'];
   const planetGlyph = ['☿','♀','⊕','♂','♃','♄','♅','♆','♇'];
-  const elements = ['Fire','Water','Earth','Air','Aether'];
+  const liveElementGlyph = ['🜂','🜄','🜃','🜁','🜀'];
+  const elements = ['Fire','Water','Earth','Air','Quintessence'];
 
   const register = document.getElementById('monthRegister');
   const body = document.getElementById('calendarBody');
@@ -1261,7 +2146,6 @@
   const YEAR_PHASE27_STATES = 1n << 27n;
   const FINE_PER_A8_ANGLE = 1n << 18n;
   const CALENDAR_NORTH_ABSOLUTE = 384n * FINE_PER_A8_ANGLE; // 600₈ absolute
-  const CALENDAR_DAYS = 365n;
 
   let liveToday = null;
   let userExploringMonth = false;
@@ -1315,28 +2199,195 @@
   }
 
   function countedYearDay(calendarPayload) {
-    const c=(calendarPayload && calendarPayload.calendar) || {};
-    if(c.status!=='CALENDAR_RUNNING_FROM_CORE20_COUNT' || c.anchored!==true || c.yearDay===undefined || c.yearDay===null) {
-      throw new Error(`server-owned A8 calendar unavailable · ${c.status || 'unknown calendar state'}`);
+    const c=
+      (calendarPayload && calendarPayload.calendar) || {};
+
+    if(
+      c.status!=='CALENDAR_RUNNING_FROM_CORE20_COUNT' ||
+      c.anchored!==true ||
+      c.yearDay===undefined ||
+      c.yearDay===null
+    ) {
+      throw new Error(
+        `server-owned A8 calendar unavailable · ${
+          c.status || 'unknown calendar state'
+        }`
+      );
     }
+
     const anchor=c.anchor || {};
+    const yearDay=Number(c.yearDay);
+
+    const suppliedYearLength=
+      Number(c.yearLength);
+
+    const suppliedCycle=
+      Number(c.yearCycle4);
+
+    const yearCycle4=
+      Number.isInteger(suppliedCycle) &&
+      suppliedCycle>=0 &&
+      suppliedCycle<=3
+        ? suppliedCycle
+        : null;
+
+    const yearLength=
+      suppliedYearLength===366
+        ? 366
+        : 365;
+
+    const isLeapYear=
+      c.isLeapYear===true ||
+      yearLength===366;
+
+    const yearCycleLabel=
+      typeof c.yearCycleLabel==='string' &&
+      c.yearCycleLabel
+        ? c.yearCycleLabel
+        : (
+            yearCycle4===null
+              ? null
+              : ['A','B','C','D'][yearCycle4]
+          );
+
+    const calendarRegion=
+      typeof c.calendarRegion==='string' &&
+      c.calendarRegion
+        ? c.calendarRegion
+        : (
+            yearDay<=360
+              ? 'STRUCTURED'
+              : 'WILSON'
+          );
+
+    const serverWilsonDay=
+      c.wilsonDay===null ||
+      c.wilsonDay===undefined
+        ? null
+        : Number(c.wilsonDay);
+
     return {
-      yearDay:Number(c.yearDay),
-      sourceEpoch:String(c.sourceEpoch ?? ''),
-      coreDayCount:BigInt(c.coreDayCount ?? '0'),
-      delta:BigInt(c.countedDaysSinceAnchor ?? '0'),
+      schema:String(c.schema ?? ''),
+      yearDay,
+      yearCycle4,
+      yearCycleLabel,
+      yearLength,
+      isLeapYear,
+      calendarRegion,
+      wilsonDay:serverWilsonDay,
+
+      sourceEpoch:
+        String(c.sourceEpoch ?? ''),
+
+      coreDayCount:
+        BigInt(c.coreDayCount ?? '0'),
+
+      delta:
+        BigInt(
+          c.countedDaysSinceAnchor ?? '0'
+        ),
+
       anchor:{
-        sourceEpoch:String(anchor.sourceEpoch ?? c.sourceEpoch ?? ''),
-        yearDay:Number(anchor.yearDay),
-        yearDayOctal:String(anchor.yearDayOctal ?? ''),
-        coreDayCount:BigInt(anchor.anchorCoreDayCount ?? '0'),
-        authority:String(anchor.authority ?? '')
+        sourceEpoch:
+          String(
+            anchor.sourceEpoch ??
+            c.sourceEpoch ??
+            ''
+          ),
+
+        yearDay:
+          Number(anchor.yearDay),
+
+        yearDayOctal:
+          String(
+            anchor.yearDayOctal ??
+            ''
+          ),
+
+        yearCycle4:
+          anchor.yearCycle4===undefined ||
+          anchor.yearCycle4===null
+            ? null
+            : Number(anchor.yearCycle4),
+
+        yearCycleLabel:
+          String(
+            anchor.yearCycleLabel ??
+            ''
+          ),
+
+        yearLength:
+          anchor.yearLength===undefined ||
+          anchor.yearLength===null
+            ? null
+            : Number(anchor.yearLength),
+
+        coreDayCount:
+          BigInt(
+            anchor.anchorCoreDayCount ??
+            '0'
+          ),
+
+        authority:
+          String(anchor.authority ?? '')
       },
-      authority:String(c.authority ?? '')
+
+      authority:
+        String(c.authority ?? '')
     };
   }
 
-  function calendarIdentity(yearDay) {
+  let wilsonPreviewActive=false;
+  let wilsonCyclePreviewOverride=null;
+  let wilsonImpactTimer=null;
+  let wilsonLastImpactKey='';
+
+  function calendarIdentity(
+    yearDay,
+    calendarState={}
+  ) {
+    if(
+      !Number.isInteger(yearDay) ||
+      yearDay<1 ||
+      yearDay>366
+    ) {
+      throw new Error(
+        `A8 YEAR DAY outside supported calendar interval · ${yearDay}`
+      );
+    }
+
+    const isLeapYear=
+      calendarState &&
+      (
+        calendarState.isLeapYear===true ||
+        Number(calendarState.yearLength)===366
+      )
+        ? true
+        : yearDay===366;
+
+    const yearLength=
+      isLeapYear
+        ? 366
+        : 365;
+
+    const yearCycle4=
+      calendarState &&
+      Number.isInteger(
+        calendarState.yearCycle4
+      )
+        ? calendarState.yearCycle4
+        : null;
+
+    const yearCycleLabel=
+      calendarState &&
+      calendarState.yearCycleLabel
+        ? String(calendarState.yearCycleLabel)
+        : (
+            yearCycle4===null
+              ? null
+              : ['A','B','C','D'][yearCycle4]
+          );
+
     if(yearDay<=360) {
       const zero=yearDay-1;
       const monthIndex=Math.floor(zero/45);
@@ -1345,13 +2396,519 @@
       const weekIndex=Math.floor((monthDay-1)/5);
       const elementIndex=(monthDay-1)%5;
       const weekB=(globalWeek%2)===0;
-      let status='BUSINESS', tone='business';
-      if(elementIndex===4){status='GOLD · PROTECTED';tone='gold';}
-      else if(elementIndex===3 && weekB){status='SILVER · PROTECTED';tone='silver';}
-      return {kind:'MONTH',monthIndex,monthDay,globalWeek,weekIndex,elementIndex,element:elements[elementIndex],planet:planets[weekIndex],weekB,status,tone};
+
+      let status='BUSINESS';
+      let tone='business';
+
+      if(elementIndex===4) {
+        status='GOLD · PROTECTED';
+        tone='gold';
+      } else if(
+        elementIndex===3 &&
+        weekB
+      ) {
+        status='SILVER · PROTECTED';
+        tone='silver';
+      }
+
+      return {
+        kind:'MONTH',
+        monthIndex,
+        monthDay,
+        globalWeek,
+        weekIndex,
+        elementIndex,
+        element:elements[elementIndex],
+        planet:planets[weekIndex],
+        weekB,
+        status,
+        tone,
+        yearLength,
+        isLeapYear,
+        yearCycle4,
+        yearCycleLabel
+      };
     }
+
     const wilsonDay=yearDay-360;
-    return {kind:'WILSON',wilsonDay,element:elements[wilsonDay-1] || 'Gold Extension',status:'GOLD · PROTECTED',tone:'gold'};
+    const leapExtension=wilsonDay===6;
+
+    if(
+      leapExtension &&
+      !isLeapYear
+    ) {
+      throw new Error(
+        'A8 Gold Day 6 requires native leap-year state'
+      );
+    }
+
+    return {
+      kind:'WILSON',
+      wilsonDay,
+      leapExtension,
+      element:
+        leapExtension
+          ? 'Leap Gold Day'
+          : elements[wilsonDay-1],
+      status:'GOLD · PROTECTED',
+      tone:'gold',
+      yearLength,
+      isLeapYear,
+      yearCycle4,
+      yearCycleLabel
+    };
+  }
+
+  function triggerWilsonLeapImpact(key) {
+    const impact=document.getElementById('wilsonLeapImpact');
+    if(!impact || key===wilsonLastImpactKey) return;
+
+    wilsonLastImpactKey=key;
+    impact.classList.add('show');
+
+    if(wilsonImpactTimer!==null) clearTimeout(wilsonImpactTimer);
+
+    wilsonImpactTimer=setTimeout(()=>{
+      impact.classList.remove('show');
+      wilsonImpactTimer=null;
+    },2600);
+  }
+
+  function renderWilsonExperience(identity,yearDay,preview=false) {
+    const section=document.getElementById('wilsonLiveSection');
+    const compass=document.getElementById('wilsonCompass');
+    const title=document.getElementById('wilsonLiveTitle');
+    const lede=document.getElementById('wilsonLiveLede');
+    const kicker=document.getElementById('wilsonStateKicker');
+    const state=document.getElementById('wilsonStateText');
+    const message=document.getElementById('wilsonCompassMessage');
+    const impact=document.getElementById('wilsonLeapImpact');
+    const explore=document.getElementById('explore');
+
+    if(!section || !compass) return;
+
+    if(!preview) {
+      section.classList.remove(
+        'earned-preview'
+      );
+    }
+
+    applyWilsonCyclePresentation(
+      identity
+    );
+
+    const isWilson=identity && identity.kind==='WILSON';
+    const show=preview || isWilson;
+    const wilsonLength=
+      identity && identity.isLeapYear
+        ? 6
+        : 5;
+
+    section.classList.toggle('active',show);
+    section.classList.toggle('preview',preview);
+    section.setAttribute('aria-hidden',show?'false':'true');
+
+    if(explore) {
+      explore.classList.toggle(
+        'wilson-live-parked',
+        isWilson && !preview
+      );
+    }
+
+    if(!show) {
+      compass.classList.remove('free');
+      impact?.classList.remove('show');
+      return;
+    }
+
+    document.querySelectorAll('[data-wilson-day]').forEach(tile=>{
+      const d=Number(tile.dataset.wilsonDay);
+      const current=isWilson && d===identity.wilsonDay;
+      const passed=isWilson && d<identity.wilsonDay;
+      const unavailableLeapDay=
+        d===6 &&
+        !(identity && identity.isLeapYear);
+
+      tile.hidden=unavailableLeapDay;
+      tile.classList.toggle('current',current);
+      tile.classList.toggle('passed',passed);
+    });
+
+    compass.classList.toggle('free',isWilson);
+
+    if(isWilson) {
+      title.textContent="Wilson's Week · Compass Released";
+      lede.textContent=
+        "For 360 days, the A8 calendar gives you a direction. " +
+        "The structured wheel is now complete. For these Gold Days, " +
+        "the compass is free and everyone may go their own way.";
+
+      kicker.textContent=preview
+        ? 'YEAR-END INTERVAL · PREVIEW'
+        : 'LIVE YEAR-END INTERVAL';
+
+      state.textContent=identity.leapExtension
+        ? `LEAP GOLD DAY · GOLD DAY 6 OF 6 · YEAR DAY ${yearDay}`
+        : `GOLD DAY ${identity.wilsonDay} OF ${wilsonLength} · ${identity.element.toUpperCase()}`;
+
+      message.textContent=
+        `360 DAYS OF DIRECTION · ${wilsonLength} DAYS TO CHOOSE YOUR OWN`;
+
+      if(identity.leapExtension) {
+        triggerWilsonLeapImpact(
+          `${preview?'preview':'live'}:${yearDay}`
+        );
+      } else {
+        impact?.classList.remove('show');
+      }
+
+      return;
+    }
+
+    impact?.classList.remove('show');
+
+    if(yearDay===360) {
+      title.textContent='NW · Day 45 · Structured Year Complete';
+      lede.textContent=
+        "The final compass month has reached its final day. " +
+        "The next counted A8 day leaves the directional month register " +
+        "and enters Wilson's Week.";
+
+      kicker.textContent='SEAM PREVIEW';
+      state.textContent='NW · DAY 45 · NEXT COUNT RELEASES THE COMPASS';
+      message.textContent='FINAL STRUCTURED DIRECTION · NORTHWEST';
+      return;
+    }
+
+    if(yearDay===1) {
+      title.textContent='North · Day 1 · New Year';
+      lede.textContent=
+        "Wilson's Week is complete. The free compass settles back onto North " +
+        "and the structured A8 year begins again.";
+
+      kicker.textContent='SEAM PREVIEW';
+      state.textContent='NORTH · DAY 1 · STRUCTURED YEAR RESUMED';
+      message.textContent='COMPASS RE-ENGAGED · NORTH';
+    }
+  }
+
+  const WILSON_CYCLE_PRESENTATIONS =
+    Object.freeze([
+      {
+        key:'a',
+        label:'LANTERN GOLD',
+        days:5,
+        asset:'/assets/wilson/wilson-cycle-a.png'
+      },
+      {
+        key:'b',
+        label:'CELESTIAL PASSAGE',
+        days:5,
+        asset:'/assets/wilson/wilson-cycle-b.png'
+      },
+      {
+        key:'c',
+        label:'EARTH & JOURNEY',
+        days:5,
+        asset:'/assets/wilson/wilson-cycle-c.png'
+      },
+      {
+        key:'d',
+        label:'LEAP BLUE',
+        days:6,
+        asset:'/assets/wilson/wilson-cycle-d-leap.png'
+      }
+    ]);
+
+  function currentNativeWilsonCycle() {
+    const cycle=
+      liveToday &&
+      liveToday.counted &&
+      Number.isInteger(
+        liveToday.counted.yearCycle4
+      )
+        ? liveToday.counted.yearCycle4
+        : null;
+
+    return (
+      cycle!==null &&
+      cycle>=0 &&
+      cycle<=3
+    )
+      ? cycle
+      : null;
+  }
+
+  function wilsonPreviewCycleForDay(yearDay) {
+    if(
+      Number.isInteger(
+        wilsonCyclePreviewOverride
+      )
+    ) {
+      return wilsonCyclePreviewOverride;
+    }
+
+    if(yearDay===366) {
+      return 3;
+    }
+
+    const liveCycle=
+      currentNativeWilsonCycle();
+
+    if(liveCycle===null) {
+      return 0;
+    }
+
+    if(yearDay===1) {
+      return (
+        liveCycle + 1
+      ) % 4;
+    }
+
+    return liveCycle;
+  }
+
+  function wilsonCalendarContext(
+    yearDay,
+    cycle
+  ) {
+    const resolvedCycle=
+      Number.isInteger(cycle) &&
+      cycle>=0 &&
+      cycle<=3
+        ? cycle
+        : 0;
+
+    const isLeapYear=
+      resolvedCycle===3;
+
+    return {
+      yearCycle4:
+        resolvedCycle,
+
+      yearCycleLabel:
+        ['A','B','C','D'][
+          resolvedCycle
+        ],
+
+      yearLength:
+        isLeapYear
+          ? 366
+          : 365,
+
+      isLeapYear
+    };
+  }
+
+  function applyWilsonCyclePresentation(identity) {
+    const section=
+      document.getElementById(
+        'wilsonLiveSection'
+      );
+
+    const art=
+      document.getElementById(
+        'wilsonCycleArt'
+      );
+
+    const caption=
+      document.getElementById(
+        'wilsonCycleCaption'
+      );
+
+    if(!section || !art) {
+      return;
+    }
+
+    let cycle=
+      identity &&
+      Number.isInteger(
+        identity.yearCycle4
+      )
+        ? identity.yearCycle4
+        : currentNativeWilsonCycle();
+
+    if(
+      !Number.isInteger(cycle) ||
+      cycle<0 ||
+      cycle>3
+    ) {
+      cycle=0;
+    }
+
+    const presentation=
+      WILSON_CYCLE_PRESENTATIONS[
+        cycle
+      ];
+
+    section.classList.remove(
+      'cycle-a',
+      'cycle-b',
+      'cycle-c',
+      'cycle-d'
+    );
+
+    section.classList.add(
+      `cycle-${presentation.key}`
+    );
+
+    section.dataset.wilsonCycle=
+      String(cycle);
+
+    section.dataset.wilsonCycleLabel=
+      ['A','B','C','D'][cycle];
+
+    section.dataset.wilsonArtSlot=
+      presentation.asset;
+
+    art.style.setProperty(
+      '--wilson-art-url',
+      `url("${presentation.asset}")`
+    );
+
+    if(caption) {
+      caption.textContent=
+        `YEAR-END ART · CYCLE ${
+          ['A','B','C','D'][cycle]
+        } · ${presentation.label} · ${
+          presentation.days
+        } GOLD DAYS`;
+    }
+  }
+
+  function openWilsonEasterEgg() {
+    const section=
+      document.getElementById(
+        'wilsonLiveSection'
+      );
+
+    if(!section) {
+      return;
+    }
+
+    if(
+      liveToday &&
+      liveToday.identity &&
+      liveToday.identity.kind==='WILSON'
+    ) {
+      wilsonPreviewActive=false;
+      wilsonCyclePreviewOverride=null;
+
+      section.classList.remove(
+        'earned-preview',
+        'preview'
+      );
+
+      renderWilsonExperience(
+        liveToday.identity,
+        liveToday.yearDay,
+        false
+      );
+
+      section.scrollIntoView({
+        behavior:'smooth',
+        block:'start'
+      });
+
+      return;
+    }
+
+    wilsonPreviewActive=true;
+
+    wilsonCyclePreviewOverride=
+      currentNativeWilsonCycle();
+
+    if(
+      !Number.isInteger(
+        wilsonCyclePreviewOverride
+      )
+    ) {
+      /*
+       * Display-only fallback.
+       * No browser/Gregorian year inference.
+       */
+      wilsonCyclePreviewOverride=0;
+    }
+
+    section.classList.add(
+      'earned-preview'
+    );
+
+    previewWilsonYearDay(361);
+  }
+
+  function returnWilsonEasterEggToCalendar() {
+    const trigger=
+      document.getElementById(
+        'wilsonEasterEggTrigger'
+      );
+
+    returnWilsonPreviewToLive();
+
+    trigger?.scrollIntoView({
+      behavior:'smooth',
+      block:'center'
+    });
+  }
+
+  function previewWilsonYearDay(yearDay) {
+    wilsonPreviewActive=true;
+    wilsonLastImpactKey='';
+
+    const cycle=
+      wilsonPreviewCycleForDay(
+        yearDay
+      );
+
+    const identity=
+      calendarIdentity(
+        yearDay,
+        wilsonCalendarContext(
+          yearDay,
+          cycle
+        )
+      );
+
+    renderWilsonExperience(
+      identity,
+      yearDay,
+      true
+    );
+
+    document.getElementById(
+      'wilsonLiveSection'
+    )?.scrollIntoView({
+      behavior:'smooth',
+      block:'start'
+    });
+  }
+
+  function returnWilsonPreviewToLive() {
+    wilsonPreviewActive=false;
+    wilsonCyclePreviewOverride=null;
+    wilsonLastImpactKey='';
+
+    document.getElementById('wilsonLiveSection')
+      ?.classList.remove('earned-preview');
+
+    if(wilsonImpactTimer!==null) {
+      clearTimeout(wilsonImpactTimer);
+      wilsonImpactTimer=null;
+    }
+
+    document.getElementById('wilsonLeapImpact')
+      ?.classList.remove('show');
+
+    if(liveToday) {
+      renderWilsonExperience(
+        liveToday.identity,
+        liveToday.yearDay,
+        false
+      );
+    } else {
+      document.getElementById('wilsonLiveSection')
+        ?.classList.remove('active','preview');
+    }
   }
 
   function setFlags(identity) {
@@ -1385,7 +2942,7 @@
       markTodayCell(liveToday.identity);
       document.getElementById('explore').scrollIntoView({behavior:'smooth',block:'start'});
     } else {
-      document.getElementById('wilson-title').scrollIntoView({behavior:'smooth',block:'start'});
+      document.getElementById('wilsonLiveSection').scrollIntoView({behavior:'smooth',block:'start'});
     }
   }
 
@@ -1409,8 +2966,20 @@
     const calendarPhase=modBig(absolute-CALENDAR_NORTH_ABSOLUTE,YEAR_PHASE27_STATES);
     const counted=countedYearDay(calendarPayload);
     const yearDay=counted.yearDay;
-    const identity=calendarIdentity(yearDay);
-    liveToday={yearDay,identity,calendarPhase,absolute,counted};
+
+    const identity=
+      calendarIdentity(
+        yearDay,
+        counted
+      );
+
+    liveToday={
+      yearDay,
+      identity,
+      calendarPhase,
+      absolute,
+      counted
+    };
 
     setStatus('coreFeedStatus','CORE20 FEED',runtime.status==='RUNNING'?'CONNECTED · RUNNING':'CONNECTED','good');
     setStatus('solOrbitStatus','ABSOLUTE YEAR PHASE27','QUALIFIED · LIVE','good');
@@ -1424,10 +2993,27 @@
     document.getElementById('todayAbsolutePhase').textContent=`${phaseDecimal2(absolute)} A8 · ${phaseOctal2(absolute)}`;
     document.getElementById('todaySol27').textContent=`${y.phase27Binary || phase27BinaryFull(absolute)} · ${y.phase27Octal || phase27OctalFull(absolute)}`;
     document.getElementById('todayCalendarAnchorMath').textContent=`source epoch ${counted.anchor.sourceEpoch} · native YEAR DAY ${counted.anchor.yearDay}${counted.anchor.yearDayOctal ? ` · ${counted.anchor.yearDayOctal}` : ''} · anchor Core20 dayCount ${counted.anchor.coreDayCount.toString()}`;
-    document.getElementById('todayCalendarCountMath').textContent=`Core20 dayCount ${counted.coreDayCount.toString()} − anchor ${counted.anchor.coreDayCount.toString()} = +${counted.delta.toString()} counted days → YEAR DAY ${yearDay}`;
+    document.getElementById('todayCalendarCountMath').textContent=
+      `Core20 dayCount ${counted.coreDayCount.toString()} − anchor ${counted.anchor.coreDayCount.toString()} = +${counted.delta.toString()} counted days → YEAR DAY ${yearDay}/${counted.yearLength}` +
+      (
+        counted.yearCycle4===null
+          ? ' · V1 YEAR-CYCLE FIELD PENDING'
+          : ` · NATIVE CYCLE ${counted.yearCycleLabel} · ${counted.yearCycle4}/3`
+      );
     document.getElementById('todaySelectedRaw').textContent=String(y.currentSelectedRawPulse ?? '—');
     document.getElementById('dialPhase').textContent=phaseOctal2(calendarPhase);
-    document.getElementById('todayDial').style.setProperty('--year-deg',`${Number(calendarPhase)*360/Number(YEAR_PHASE27_STATES)}deg`);
+    const todayDial=
+      document.getElementById('todayDial');
+
+    todayDial.style.setProperty(
+      '--year-deg',
+      `${Number(calendarPhase)*360/Number(YEAR_PHASE27_STATES)}deg`
+    );
+
+    todayDial.classList.toggle(
+      'a8-leap-year',
+      counted.isLeapYear===true
+    );
     highlightNearestCompassPoint(calendarPhase);
 
     const showButton=document.getElementById('showTodayButton');
@@ -1437,24 +3023,51 @@
       const m=months[identity.monthIndex];
       document.getElementById('todayRegister').textContent=`${m.bits} · ${m.oct} · ${m.dir} · ${m.name.toUpperCase()}`;
       document.getElementById('todayTitle').innerHTML=`${identity.planet.toUpperCase()} WEEK · ${identity.element.toUpperCase()} DAY · <span class="day-number">DAY ${identity.monthDay}</span>`;
-      document.getElementById('todayPosition').textContent=`${m.name.toUpperCase()} MONTH · DAY ${identity.monthDay}/45 · YEAR DAY ${yearDay}/365`;
+      document.getElementById('todayPosition').textContent=`${m.name.toUpperCase()} MONTH · DAY ${identity.monthDay}/45 · YEAR DAY ${yearDay}/${counted.yearLength}`;
       document.getElementById('todayWeek').textContent=`${identity.planet.toUpperCase()} · WEEK ${identity.weekIndex+1}/9 · YEAR WEEK ${identity.globalWeek}`;
       document.getElementById('todayElement').textContent=`${identity.element.toUpperCase()} · ELEMENT ${identity.elementIndex+1}/5`;
       document.getElementById('todayRhythm').textContent=`${identity.weekB?'WEEK B · 3/2':'WEEK A · 4/1'} · ${identity.status}`;
+      const liveWeekIndex=Math.floor((identity.monthDay-1)/5);
+      const liveElementIndex=(identity.monthDay-1)%5;
+
+      document.getElementById('todayTitle').textContent=
+        `${m.name.toUpperCase()} · ${planets[liveWeekIndex].toUpperCase()} · ${elements[liveElementIndex].toUpperCase()}`;
+
+      document.getElementById('todaySymbolic').textContent=
+        `${m.oct} · ${planetGlyph[liveWeekIndex]} · ${liveElementGlyph[liveElementIndex]}`;
+
+      document.getElementById('todayMeta').textContent=
+        `DAY ${identity.monthDay} · YEAR DAY ${yearDay}/${counted.yearLength} · ` +
+        `${identity.weekB?'WEEK B · 3/2':'WEEK A · 4/1'} · ${identity.status} · ` +
+        `YEAR WEEK ${identity.globalWeek}`;
       document.getElementById('todayMonthAnchor').textContent=`${m.dir} · ${m.anchor} · ${m.anchorDec} A8 ANGLE`;
       showButton.textContent='SHOW TODAY IN MONTH GRID';
       if(!userExploringMonth){renderMonth(identity.monthIndex);markTodayCell(identity);}
     } else {
       document.getElementById('todayRegister').textContent=`OUTSIDE 000–111 · WILSON'S WEEK`;
       document.getElementById('todayTitle').innerHTML=`${identity.element.toUpperCase()} DAY · <span class="day-number">GOLD DAY ${identity.wilsonDay}</span>`;
-      document.getElementById('todayPosition').textContent=`WILSON'S WEEK · YEAR DAY ${yearDay}/365`;
+      document.getElementById('todayPosition').textContent=`WILSON'S WEEK · YEAR DAY ${yearDay}/${counted.yearLength}`;
       document.getElementById('todayWeek').textContent='NO PLANETARY WEEK · YEAR-END CELEBRATION';
       document.getElementById('todayElement').textContent=identity.element.toUpperCase();
       document.getElementById('todayRhythm').textContent=identity.status;
+      document.getElementById('todayTitle').textContent=
+        `WILSON'S WEEK · ${identity.element.toUpperCase()}`;
+
+      document.getElementById('todaySymbolic').textContent=
+        Number.isInteger(identity.elementIndex)
+          ? `GOLD ${identity.wilsonDay} · ${liveElementGlyph[identity.elementIndex]}`
+          : `GOLD ${identity.wilsonDay}`;
+
+      document.getElementById('todayMeta').textContent=
+        `YEAR DAY ${yearDay}/${counted.yearLength} · ${identity.status}`;
       document.getElementById('todayMonthAnchor').textContent='OUTSIDE MONTH REGISTER';
       showButton.textContent="SHOW WILSON'S WEEK";
     }
     setFlags(identity);
+
+    if(!wilsonPreviewActive) {
+      renderWilsonExperience(identity,yearDay,false);
+    }
   }
 
   async function refreshNativeCalendar() {
@@ -1588,6 +3201,42 @@
   document.getElementById('connectCoreButton').addEventListener('click',connectReadOnly);
   document.getElementById('showTodayButton').addEventListener('click',showTodayInGrid);
   document.getElementById('loadExternalProofButton').addEventListener('click',loadExternalProof);
+
+  document.querySelectorAll('[data-wilson-preview-day]').forEach(button=>{
+    button.addEventListener('click',()=>{
+      document.getElementById('wilsonLiveSection')
+        ?.classList.remove('earned-preview');
+
+      wilsonCyclePreviewOverride=null;
+
+      previewWilsonYearDay(
+        Number(button.dataset.wilsonPreviewDay)
+      );
+    });
+  });
+
+  document.querySelectorAll('[data-wilson-cycle-preview]').forEach(button=>{
+    button.addEventListener('click',()=>{
+      document.getElementById('wilsonLiveSection')
+        ?.classList.remove('earned-preview');
+
+      wilsonCyclePreviewOverride=
+        Number(
+          button.dataset.wilsonCyclePreview
+        );
+
+      previewWilsonYearDay(361);
+    });
+  });
+
+  document.getElementById('wilsonPreviewReturn')
+    .addEventListener('click',returnWilsonPreviewToLive);
+
+  document.getElementById('wilsonEasterEggTrigger')
+    ?.addEventListener('click',openWilsonEasterEgg);
+
+  document.getElementById('wilsonEasterEggReturn')
+    ?.addEventListener('click',returnWilsonEasterEggToCalendar);
 
   renderMonth(0);
 

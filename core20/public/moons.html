@@ -24,8 +24,6 @@ body{
 main{max-width:1120px;margin:auto;padding:18px}
 h1{font-size:1.45rem;margin:0 0 6px} h2{font-size:1.02rem;margin:0 0 8px}
 p{margin:.45rem 0}.small{font-size:.9rem;color:var(--muted)}
-.topbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:14px}
-.topbar a{display:inline-block;padding:8px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel2);color:var(--text);text-decoration:none;font-weight:650}
 .panel{background:rgba(17,24,33,.94);border:1px solid var(--line);border-radius:16px;padding:14px}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}
 .status{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:2px 8px;font-size:.82rem}
@@ -54,63 +52,278 @@ p{margin:.45rem 0}.small{font-size:.9rem;color:var(--muted)}
 .legend{display:flex;gap:12px;flex-wrap:wrap}.swatch{display:inline-flex;align-items:center;gap:6px}.swatch b{display:inline-block;width:12px;height:12px;border-radius:50%}
 .speedbar{display:grid;grid-template-columns:1fr auto auto;gap:12px;align-items:center;margin-top:12px;border:1px solid #7b5a21;background:rgba(23,19,12,.96)}
 .speed-warning{color:#ffd48a;font-weight:900;letter-spacing:.05em}.speed-warning small{display:block;color:var(--muted);font-weight:600;letter-spacing:0;margin-top:4px}.speedbar label{font-size:12px;color:var(--muted)}.speedbar select{background:#0d1117;color:var(--text);border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-weight:800}.speed-rate{text-align:right;font-family:ui-monospace,monospace;font-weight:800;color:#ffd48a}
-#a8-topside-coherence-02{display:block;margin:0;padding:10px 14px;border-bottom:1px solid rgba(255,255,255,.14);background:rgba(7,11,16,.96);font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
-#a8-topside-coherence-02 .a8-topline{max-width:1440px;margin:0 auto;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
-#a8-topside-coherence-02 .cosigo-global-brand{display:flex;gap:8px;align-items:center;text-decoration:none}
-#a8-topside-coherence-02 .cosigo-global-brand img{width:34px;height:34px;object-fit:contain}
-#a8-topside-coherence-02 .cosigo-global-brand span{font-weight:900;letter-spacing:.06em}
-#a8-topside-coherence-02 .cosigo-global-brand small{display:block;opacity:.72;font-size:.62rem}
-#a8-topside-coherence-02 .a8-location{margin-left:auto;font-size:.76rem;font-weight:900;letter-spacing:.07em;color:#e0bd72}
-#a8-topside-coherence-02 .a8-system-links,#a8-topside-coherence-02 .a8-utility-links{max-width:1440px;margin:8px auto 0;display:flex;flex-wrap:wrap;gap:7px;align-items:center}
-#a8-topside-coherence-02 a{text-decoration:none}
-#a8-topside-coherence-02 .a8-system-links a{padding:7px 9px;border:1px solid #425467;border-radius:8px;background:#111820;color:#c8ddf5;font-size:.80rem;font-weight:850}
-#a8-topside-coherence-02 .a8-system-links a[data-current="true"]{border-color:#6d9cff;color:#fff}
-#a8-topside-coherence-02 .a8-utility-links{padding-top:7px;border-top:1px solid rgba(255,255,255,.08)}
-#a8-topside-coherence-02 .a8-utility-links a{color:#92a5b8;font-size:.70rem;font-weight:700}
-#a8-topside-coherence-02 .a8-utility-label{color:#617487;font-size:.68rem;font-weight:900;letter-spacing:.05em}
-@media(max-width:760px){#a8-topside-coherence-02 .a8-location{width:100%;margin-left:0}.speedbar{grid-template-columns:1fr}.speed-rate{text-align:left}}
+/* A8 SINGLE PRIMARY NAV · shared calendar-style behavior */
+.a8-nav-topbar{
+  display:block;
+  margin:0;
+  padding:0;
+  border-bottom:1px solid rgba(255,255,255,.14);
+  background:rgba(7,11,16,.96);
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+}
+
+.a8-navwrap{
+  max-width:1440px;
+  margin:0 auto;
+  padding:10px 14px;
+  display:flex;
+  gap:12px;
+  align-items:center;
+}
+
+.a8-brand{
+  display:flex;
+  gap:8px;
+  align-items:center;
+  flex:0 0 auto;
+  color:var(--text);
+  text-decoration:none;
+}
+
+.a8-brand img{
+  width:34px;
+  height:34px;
+  object-fit:contain;
+}
+
+.a8-brand-text{
+  display:grid;
+  line-height:1.02;
+}
+
+.a8-brand-text strong{
+  font-size:.86rem;
+  letter-spacing:.07em;
+}
+
+.a8-brand-text small{
+  font-size:.62rem;
+  letter-spacing:.08em;
+  opacity:.72;
+}
+
+#a8PrimaryNav{
+  display:flex;
+  gap:6px;
+  align-items:center;
+  margin-left:auto;
+  overflow-x:auto;
+  scrollbar-width:none;
+}
+
+#a8PrimaryNav::-webkit-scrollbar{
+  display:none;
+}
+
+#a8PrimaryNav a{
+  flex:0 0 auto;
+  padding:7px 9px;
+  border:1px solid #425467;
+  border-radius:8px;
+  background:#111820;
+  color:#c8ddf5;
+  text-decoration:none;
+  font-size:.76rem;
+  font-weight:850;
+  white-space:nowrap;
+}
+
+#a8PrimaryNav a:hover,
+#a8PrimaryNav a:focus-visible{
+  border-color:#6d9cff;
+  color:#fff;
+  outline:none;
+}
+
+#a8PrimaryNav a.active{
+  border-color:#6d9cff;
+  background:#18263a;
+  color:#fff;
+}
+
+.nav-toggle{
+  display:none;
+  margin-left:auto;
+  padding:.55rem .75rem;
+  border:1px solid #6d9cff;
+  border-radius:9px;
+  background:#18263a;
+  color:#dceaff;
+  font-weight:900;
+  font-size:.78rem;
+  letter-spacing:.08em;
+  cursor:pointer;
+}
+
+.nav-toggle:hover,
+.nav-toggle:focus-visible{
+  color:#fff;
+  border-color:#9fc1ff;
+  outline:none;
+}
+
+@media(max-width:780px){
+  .a8-navwrap{
+    display:grid;
+    grid-template-columns:1fr auto;
+    gap:8px;
+    align-items:center;
+  }
+
+  .nav-toggle{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+  }
+
+  #a8PrimaryNav{
+    display:none;
+    grid-column:1 / -1;
+    width:100%;
+    margin:0;
+    padding:.35rem;
+    overflow:visible;
+    flex-direction:column;
+    gap:.22rem;
+    border:1px solid #425467;
+    border-radius:11px;
+    background:rgba(7,11,16,.99);
+    box-shadow:0 14px 30px rgba(0,0,0,.34);
+  }
+
+  #a8PrimaryNav.open{
+    display:flex;
+  }
+
+  #a8PrimaryNav a{
+    display:block;
+    width:100%;
+    padding:.68rem .75rem;
+    border-radius:8px;
+    font-size:.78rem;
+  }
+}
+
+@media(max-width:520px){
+  .a8-navwrap{
+    padding:8px 10px;
+  }
+
+  .a8-brand-text strong{
+    font-size:.80rem;
+  }
+
+  .a8-brand-text small{
+    display:none;
+  }
+
+  .nav-toggle{
+    padding:.5rem .62rem;
+    font-size:.74rem;
+    white-space:nowrap;
+  }
+}
+
+@media(max-width:760px){
+  .speedbar{grid-template-columns:1fr}
+  .speed-rate{text-align:left}
+}
 </style>
 </head>
 <body>
-<nav id="a8-topside-coherence-02" aria-label="A8 Time Lab navigation">
-  <div class="a8-topline">
-    <a class="cosigo-global-brand" href="https://cosigo.io/" aria-label="COSIGO home">
+<header id="a8TopNav" class="a8-nav-topbar">
+  <div class="a8-navwrap">
+
+    <a class="a8-brand"
+       href="https://a8.cosigo.io/"
+       aria-label="COSIGO Labs Auspicious 8 public home">
       <img src="/assets/cosigo_master_512.gif" alt="COSIGO">
-      <span>COSIGO<small>LABS · AUSPICIOUS 8</small></span>
+      <span class="a8-brand-text">
+        <strong>COSIGO LABS</strong>
+        <small>AUSPICIOUS 8</small>
+      </span>
     </a>
-    <div class="a8-location">YOU ARE HERE · JUPITER · RECOVERED MOTION</div>
+
+    <button
+      class="nav-toggle"
+      id="a8NavToggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="a8PrimaryNav"
+    >☰ MENU</button>
+
+    <nav id="a8PrimaryNav" aria-label="Auspicious 8 navigation">
+      <a href="/index.html">LAB HOME</a>
+      <a href="/clock.html">CLOCK</a>
+      <a href="/calendar.html">CALENDAR</a>
+      <a href="/moons.html" class="active" aria-current="page">MOONS</a>
+      <a href="/mintaka.html">MINTAKA</a>
+      <a href="/sol.html">SOL</a>
+      <a href="/map-clock-compass.html">MAP · CLOCK · COMPASS</a>
+      <a href="/navigation.html">NAVIGATION</a>
+      <a href="/celestial.html">CELESTIAL</a>
+      <a href="/audio.html">AUDIO</a>
+      <a href="/quartz.html">QUARTZ</a>
+      <a href="https://a8.cosigo.io/">A8 PUBLIC</a>
+      <a href="https://cosigo.io/">COSIGO HOME</a>
+      <a href="https://github.com/cosigo/a8">GITHUB</a>
+    </nav>
+
   </div>
-  <div class="a8-system-links">
-    <a href="/index.html">A8 LAB HOME</a>
-    <a href="/calendar.html">CALENDAR</a>
-    
-    <a href="/moons.html" aria-current="page" data-current="true">MOON MOTION</a>
-    <a href="/mintaka.html">MINTAKA</a>
-    <a href="/sol.html">SOL</a>
-    <a href="/relationship.html">TERRA SHIP SLIP</a>
-    
-  </div>
-  <div class="a8-utility-links">
-    <span class="a8-utility-label">UTILITY ·</span>
-    <a href="/map-clock-compass.html">MAP · CLOCK · COMPASS</a>
-    <a href="/navigation.html">NAVIGATION</a>
-    <a href="/celestial.html">CELESTIAL</a>
-    <a href="https://a8.cosigo.io/canonical.html">CANONICAL</a>
-    <a href="https://a8.cosigo.io/open-research.html">OPEN RESEARCH</a>
-    <a href="https://a8.cosigo.io/">A8 PUBLIC</a>
-    <a href="https://lab.a8.cosigo.io/">LIVE LAB</a>
-    <a href="https://cosigo.io/">COSIGO HOME</a>
-  </div>
-</nav>
+</header>
 
 <main>
-  <div class="topbar">
-    <a href="/">ENGINEERING LAB</a>
-    <a href="/clock.html">A8 CLOCK</a>
-    <a href="/audio.html">AUDIO FREQUENCY BENCH</a>
-  </div>
 
-  <section class="panel">
+  <!-- ENGINE FIRST · four Jovian moon observers -->
+  <section id="moonCards"></section>
+
+  <section class="panel speedbar" aria-label="Jovian observer viewing rate">
+    <div class="speed-warning">ACCELERATED JOVIAN OBSERVER · OUTPUT ONLY
+      <small>Core18 viewing behavior restored. This multiplier changes browser geometry only. It does not change Core20, raw counts, the recovered ruler, qualification, DAY_PHASE17, or the civil clock.</small>
+    </div>
+    <label>Viewing rate
+      <select id="viewMultiplier" aria-label="Display-only Jovian viewing multiplier">
+        <option value="1">1× natural</option>
+        <option value="100">100×</option>
+        <option value="250" selected>250×</option>
+        <option value="500">500×</option>
+      </select>
+    </label>
+    <div class="speed-rate"><span id="viewMultiplierLabel">250×</span><br><span>DISPLAY ONLY</span></div>
+  </section>
+
+    <section
+    id="bottomReadouts"
+    class="grid"
+    style="margin-top:12px;grid-template-columns:1fr"
+  >
+<div class="panel">
+      <h2>Observer cadence</h2>
+      <div class="reads">
+        <div class="read"><div class="k">Edge stream</div><div id="edgeStatus" class="v">—</div></div>
+        <div class="read"><div class="k">Edge sequence</div><div id="edgeSequence" class="v">—</div></div>
+        <div class="read"><div class="k">Authoritative raw</div><div id="edgeRaw" class="v">—</div></div>
+        <div class="read"><div class="k">Edge packet role</div><div id="edgeRole" class="v">READ ONLY</div></div>
+        <div class="read"><div class="k">Observer anchor policy</div><div id="anchorPolicy" class="v">BOOTSTRAP / VISIBILITY</div></div>
+        <div class="read"><div class="k">Exact civil substate</div><div id="civilSubstate" class="v">—</div></div>
+      </div>
+      <p class="small">Packet arrival never sets the beat and is never treated as a phase-comparison instant. Core20 edges are read-only informational evidence. The browser observer anchors from the current Core20/Jovian state at bootstrap or visibility return, then uses performance.now() only for output interpolation. The 100× / 250× / 500× selector accelerates only visible Jovian geometry.</p>
+    </div>
+
+<div class="panel">
+      <h2>Recovered Jovian ruler</h2>
+      <div class="reads">
+        <div class="read"><div class="k">Jovian status</div><div id="jStatus" class="v">—</div></div>
+        <div class="read"><div class="k">Source epoch</div><div id="sourceEpoch" class="v">—</div></div>
+        <div class="read primary"><div class="k">Raw / 512</div><div id="rulerRaw" class="v">—</div></div>
+        <div class="read"><div class="k">WEST lock raw</div><div id="lockRaw" class="v">—</div></div>
+        <div class="read"><div class="k">Qualification</div><div id="qualification" class="v">—</div></div>
+        <div class="read"><div class="k">Mode</div><div id="mode" class="v">—</div></div>
+      </div>
+    </div>
+  </section>
+
+<section class="panel">
     <div id="pageStatus" class="status warn">CONNECTING · v5.4.20</div>
     <h1>Galilean recovered-motion + Callisto example-orbit observer</h1>
     <p>Io, Europa and Ganymede are drawn from the <b>recovered Jovian raw ruler</b>. Core20 remains authoritative. Callisto is restored as a <b>display-only orbital-period outlier</b> so its non-resonant rate can be seen beside the recovered 1:2:4 moons. Following the proven Core18 observer behavior, the page can accelerate <b>visible motion only</b>.</p>
@@ -125,49 +338,6 @@ p{margin:.45rem 0}.small{font-size:.9rem;color:var(--muted)}
     </div>
   </section>
 
-  <section class="panel speedbar" aria-label="Jovian observer viewing rate">
-    <div class="speed-warning">ACCELERATED JOVIAN OBSERVER · OUTPUT ONLY
-      <small>Core18 viewing behavior restored. This multiplier changes browser geometry only. It does not change Core20, raw counts, the recovered ruler, qualification, DAY_PHASE17, or the civil clock.</small>
-    </div>
-    <label>Viewing rate
-      <select id="viewMultiplier" aria-label="Display-only Jovian viewing multiplier">
-        <option value="1">1× natural</option>
-        <option value="250" selected>250×</option>
-        <option value="500">500×</option>
-        <option value="1000">1,000×</option>
-      </select>
-    </label>
-    <div class="speed-rate"><span id="viewMultiplierLabel">250×</span><br><span>DISPLAY ONLY</span></div>
-  </section>
-
-  <section class="grid" style="margin-top:12px">
-    <div class="panel">
-      <h2>Recovered Jovian ruler</h2>
-      <div class="reads">
-        <div class="read"><div class="k">Jovian status</div><div id="jStatus" class="v">—</div></div>
-        <div class="read"><div class="k">Source epoch</div><div id="sourceEpoch" class="v">—</div></div>
-        <div class="read primary"><div class="k">Raw / 512</div><div id="rulerRaw" class="v">—</div></div>
-        <div class="read"><div class="k">WEST lock raw</div><div id="lockRaw" class="v">—</div></div>
-        <div class="read"><div class="k">Qualification</div><div id="qualification" class="v">—</div></div>
-        <div class="read"><div class="k">Mode</div><div id="mode" class="v">—</div></div>
-      </div>
-    </div>
-
-    <div class="panel">
-      <h2>Observer cadence</h2>
-      <div class="reads">
-        <div class="read"><div class="k">Edge stream</div><div id="edgeStatus" class="v">—</div></div>
-        <div class="read"><div class="k">Edge sequence</div><div id="edgeSequence" class="v">—</div></div>
-        <div class="read"><div class="k">Authoritative raw</div><div id="edgeRaw" class="v">—</div></div>
-        <div class="read"><div class="k">Edge packet role</div><div id="edgeRole" class="v">READ ONLY</div></div>
-        <div class="read"><div class="k">Observer anchor policy</div><div id="anchorPolicy" class="v">BOOTSTRAP / VISIBILITY</div></div>
-        <div class="read"><div class="k">Exact civil substate</div><div id="civilSubstate" class="v">—</div></div>
-      </div>
-      <p class="small">Packet arrival never sets the beat and is never treated as a phase-comparison instant. Core20 edges are read-only informational evidence. The browser observer anchors from the current Core20/Jovian state at bootstrap or visibility return, then uses performance.now() only for output interpolation. The 250× / 500× / 1,000× selector accelerates only visible Jovian geometry.</p>
-    </div>
-  </section>
-
-  <section id="moonCards"></section>
 
 </main>
 
@@ -446,5 +616,49 @@ bootstrap().then(connectEdges).catch(showError);
   </div>
   <p>© 2026 COSIGO.</p>
 </footer>
+
+<script id="a8-mobile-nav-v1">
+(() => {
+  'use strict';
+
+  const button = document.getElementById('a8NavToggle');
+  const nav = document.getElementById('a8PrimaryNav');
+
+  if (!button || !nav) return;
+
+  function setOpen(open) {
+    nav.classList.toggle('open', open);
+    button.setAttribute(
+      'aria-expanded',
+      open ? 'true' : 'false'
+    );
+    button.textContent =
+      open ? '× CLOSE' : '☰ MENU';
+  }
+
+  button.addEventListener('click', () => {
+    setOpen(!nav.classList.contains('open'));
+  });
+
+  nav.addEventListener('click', event => {
+    if (event.target.closest('a')) {
+      setOpen(false);
+    }
+  });
+
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape') {
+      setOpen(false);
+    }
+  });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 780) {
+      setOpen(false);
+    }
+  });
+})();
+</script>
+
 </body>
 </html>
