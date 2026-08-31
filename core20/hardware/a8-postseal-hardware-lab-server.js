@@ -244,29 +244,15 @@ function staticPathFor(urlPath) {
 }
 
 function injectMainLabLink(html) {
-  if (
-    html.includes('>A8 LAB HOME<') ||
-    html.includes('>A8 Engineering Lab<')
-  ) {
-    return html;
-  }
-
-  const marker =
-    '<a href="/" ' +
-    'style="position:fixed;right:12px;bottom:12px;z-index:2147483647;' +
-    'padding:8px 11px;border:1px solid #425467;border-radius:9px;' +
-    'background:#0b0f14;color:#b8d8ff;font:700 12px/1.2 ui-monospace,' +
-    'SFMono-Regular,Menlo,Consolas,monospace;text-decoration:none;' +
-    'box-shadow:0 4px 18px #0008">A8 LAB HOME</a>';
-
-  if (/<body(?:\s[^>]*)?>/i.test(html)) {
-    return html.replace(
-      /(<body(?:\s[^>]*)?>)/i,
-      `$1\n${marker}`
-    );
-  }
-
-  return marker + '\n' + html;
+  /*
+   * HISTORICAL COMPATIBILITY NO-OP.
+   *
+   * Site-wide floating A8 LAB HOME injection
+   * is permanently disabled.
+   *
+   * Static HTML must be served exactly as authored.
+   */
+  return html;
 }
 
 function injectCore20Navigation(html) {
@@ -360,9 +346,7 @@ function serveStatic(res, urlPath) {
      * Deep/legacy pages may still receive one simple A8 LAB HOME return link.
      */
     res.end(
-      injectMainLabLink(
-        html
-      )
+      html
     );
 
     return true;
