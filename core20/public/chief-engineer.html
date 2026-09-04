@@ -9,8 +9,8 @@
 :root{
   color-scheme:dark;
   --bg:#080d12;
-  --panel:#101820;
-  --panel2:#0c131a;
+  --panel:rgba(16,24,32,.80);
+  --panel2:rgba(12,19,26,.80);
   --line:#293844;
   --text:#e9f1f7;
   --muted:#8fa4b5;
@@ -25,14 +25,19 @@
 
 body{
   margin:0;
-  background:var(--bg);
+  background-color:var(--bg);
+  background-image:url('/assets/ce_controls.png');
+  background-position:center top;
+  background-size:cover;
+  background-repeat:no-repeat;
+  background-attachment:fixed;
   color:var(--text);
   font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
 }
 
 header{
   border-bottom:1px solid var(--line);
-  background:#070b0f;
+  background:rgba(7,11,15,.80);
   padding:18px 22px;
 }
 
@@ -83,7 +88,7 @@ button{
   padding:9px 13px;
   border-radius:9px;
   border:1px solid #496174;
-  background:#111c25;
+  background:rgba(17,28,37,.80);
   color:var(--text);
   font:inherit;
   font-weight:850;
@@ -103,17 +108,17 @@ button:disabled{
 
 button.primary{
   border-color:#558ed4;
-  background:#10233a;
+  background:rgba(16,35,58,.80);
 }
 
 button.warn{
   border-color:#b68a38;
-  background:#2b2110;
+  background:rgba(43,33,16,.80);
 }
 
 button.danger{
   border-color:#a54e48;
-  background:#301614;
+  background:rgba(48,22,20,.80);
 }
 
 main{
@@ -186,7 +191,7 @@ select{
   padding:8px 10px;
   border:1px solid #496174;
   border-radius:8px;
-  background:#091017;
+  background:rgba(9,16,23,.80);
   color:var(--text);
   font:inherit;
 }
@@ -201,7 +206,7 @@ select{
   padding:12px;
   border:1px solid var(--line);
   border-radius:10px;
-  background:#0d151c;
+  background:rgba(13,21,28,.80);
 }
 
 .step b{
@@ -235,7 +240,7 @@ pre{
   padding:12px;
   border:1px solid #263640;
   border-radius:8px;
-  background:#060b0f;
+  background:rgba(6,11,15,.80);
   line-height:1.45;
   font-size:.76rem;
   max-height:540px;
@@ -259,7 +264,7 @@ pre{
 
 .danger-zone{
   border-color:#7e3a35;
-  background:#1b0e0d;
+  background:rgba(27,14,13,.80);
 }
 
 .danger-zone h2{
