@@ -10,7 +10,6 @@
   // PRESENTATION ONLY.
   // Network packets synchronize this observer; they do not animate it.
   // Web Audio schedules upcoming A8 boundaries ahead of browser rendering.
-  const OBSERVER_HARD_REANCHOR_STATES = 8;
   const AUDIO_LOOKAHEAD_SECONDS = 8.000;
   const AUDIO_SCHEDULER_MS = 50;
 
@@ -37,6 +36,7 @@
     observerRunning: false,
     observerAnchorPhase: 0,
     observerAnchorPerf: performance.now (),
+    observerEpoch: null,
     audioTimer: null,
     nextAudioTickTime: null,
     scheduledTickVoices: new Set (),
@@ -78,6 +78,7 @@
      */
     const normalized = {
       running,
+      sourceEpoch: String (clock.sourceEpoch ?? ''),
       clock: {
         phase17,
         paceFractionNumerator: numerator,
@@ -133,6 +134,11 @@
 
     const normalized = {
       running: true,
+      sourceEpoch: String (
+        edge.sourceEpoch ??
+        state.observerEpoch ??
+        ''
+      ),
       clock: {
         phase17: Number (edge.dayPhase17 || 0),
         paceFractionNumerator: 0,
@@ -145,10 +151,11 @@
     state.running = true;
 
     /*
-     * The Core20 edge supplies authoritative phase.
+     * Core20 edge evidence is authoritative server state.
      *
-     * reanchorObserver() retains the existing presentation rule:
-     * network arrival itself is NOT used as a beat source.
+     * UNIVERSAL DISPLAY-OBSERVER RULE:
+     * ordinary edge arrival is never a phase-comparison instant
+     * and therefore never hard-snaps visible presentation.
      */
     reanchorObserver (normalized);
 
@@ -162,13 +169,6 @@
   function wrapPhase (phase) {
     const p = phase % DAY_STATES;
     return p < 0 ? p + DAY_STATES : p;
-  }
-
-  function signedPhaseDelta (a, b) {
-    let d = wrapPhase (a) - wrapPhase (b);
-    if (d > DAY_STATES / 2) d -= DAY_STATES;
-    if (d < -DAY_STATES / 2) d += DAY_STATES;
-    return d;
   }
 
   function snapshotCorePhase (snapshot = state.core) {
@@ -204,36 +204,44 @@
     const now = performance.now ();
     const serverPhase = snapshotCorePhase (snapshot);
     const nextRunning = Boolean (snapshot && snapshot.running);
+    const nextEpoch = String (
+      snapshot?.sourceEpoch ??
+      state.observerEpoch ??
+      ''
+    );
 
     if (
       !state.observerReady ||
       force ||
+      nextEpoch !== state.observerEpoch ||
       nextRunning !== state.observerRunning
     ) {
       state.observerAnchorPhase = serverPhase;
       state.observerAnchorPerf = now;
+      state.observerEpoch = nextEpoch;
       state.observerReady = true;
       state.observerRunning = nextRunning;
       resetTickSchedule ();
       return;
     }
 
-    // Packet arrival is NOT a beat source. Small SSE/network/event-loop delay
-    // must not make the visible clock hop.
-    const predicted = currentCorePhase (now);
-    const errorStates = signedPhaseDelta (serverPhase, predicted);
-
-    if (Math.abs (errorStates) > OBSERVER_HARD_REANCHOR_STATES) {
-      state.observerAnchorPhase = serverPhase;
-      state.observerAnchorPerf = now;
-      resetTickSchedule ();
-    }
-
+    /*
+     * UNIVERSAL DISPLAY-OBSERVER RULE:
+     *
+     * Ordinary Core20 packet / SSE arrival refreshes evidence only.
+     * Arrival time is never a phase-comparison instant and therefore
+     * never moves the visible clock anchor.
+     *
+     * Hard presentation anchors are limited to bootstrap/snapshot,
+     * sourceEpoch change, run/reconnect transition, and explicit
+     * observer lifecycle boundaries such as visibility return.
+     */
+    state.observerEpoch = nextEpoch;
     state.observerRunning = nextRunning;
   }
 
-  function connectCore () {
-    fetch (
+  function refreshCoreSnapshot () {
+    return fetch (
       '/api/core20/clock',
       {
         cache: 'no-store'
@@ -246,8 +254,11 @@
 
         return r.json ();
       })
-      .then (applyCore20Snapshot)
-      .catch (() => {
+      .then (payload => {
+        applyCore20Snapshot (payload);
+        return payload;
+      })
+      .catch (err => {
         state.coreConnected = false;
 
         $('clockStatus').textContent =
@@ -255,7 +266,13 @@
 
         $('systemDot').className =
           'status-dot stopped';
+
+        throw err;
       });
+  }
+
+  function connectCore () {
+    refreshCoreSnapshot ().catch (() => {});
 
     /*
      * Native Core20 authoritative DAY_PHASE17 edge stream.
@@ -286,6 +303,9 @@
 
     ev.onerror = () => {
       state.coreConnected = false;
+      state.running = false;
+      state.observerRunning = false;
+      resetTickSchedule ();
 
       $('clockStatus').textContent =
         'CORE20 STREAM · RECONNECTING';
@@ -821,17 +841,30 @@
   document.addEventListener ('visibilitychange', () => {
     if (document.hidden) {
       stopTone ();
+      resetTickSchedule ();
       return;
     }
 
-    // Browser suspension/throttling may have interrupted queue maintenance.
-    // Re-seed presentation audio from the current observer phase.
-    if (state.tickEnabled) {
-      ensureAudioContext ().then (() => {
-        resetTickSchedule ();
-        seedTickSchedule ();
-      });
-    }
+    /*
+     * Fresh presentation anchor after visibility return.
+     * Core20 supplies the exact coordinate; browser interpolation
+     * resumes only after that authoritative snapshot.
+     */
+    state.observerReady = false;
+    state.observerRunning = false;
+    state.observerEpoch = null;
+    resetTickSchedule ();
+
+    refreshCoreSnapshot ()
+      .then (() => {
+        if (state.tickEnabled) {
+          return ensureAudioContext ().then (() => {
+            resetTickSchedule ();
+            seedTickSchedule ();
+          });
+        }
+      })
+      .catch (() => {});
   });
 
   createMoonRows ();

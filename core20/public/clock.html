@@ -7,7 +7,7 @@
   "@context": "https://schema.org",
   "@type": "WebPage",
   "name": "A8 Clock Console v3.7 Face · Node Observer",
-  "url": "https://lab.a8.cosigo.io/clock.html",
+  "url": "https://clock.cosigo.io/",
   "description": "COSIGO Labs Auspicious 8 clock instrument using the native 32 × 64 × 64 daily structure and A8 time representation for engineering and metrology exploration.",
   "dateModified": "2026-08-18",
   "inLanguage": "en",
@@ -47,13 +47,13 @@
 <meta name="twitter:card" content="summary">
 <meta property="og:image:alt" content="A8 Clock Console v3.7 Face · Node Observer — COSIGO Labs">
 <meta property="og:image" content="https://a8.cosigo.io/assets/cosigo_master_512.png">
-<meta property="og:url" content="https://lab.a8.cosigo.io/clock.html">
+<meta property="og:url" content="https://clock.cosigo.io/">
 <meta property="og:description" content="COSIGO Labs Auspicious 8 clock instrument using the native 32 × 64 × 64 daily structure and A8 time representation for engineering and metrology exploration.">
 <meta property="og:title" content="A8 Clock Console v3.7 Face · Node Observer">
 <meta property="og:site_name" content="COSIGO Labs — Auspicious 8">
 <meta property="og:type" content="website">
 <link rel="icon" href="https://a8.cosigo.io/assets/cosigo_master_512.png">
-<link rel="canonical" href="https://lab.a8.cosigo.io/clock.html">
+<link rel="canonical" href="https://clock.cosigo.io/">
 <meta name="author" content="COSIGO Labs">
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
 <meta name="description" content="COSIGO Labs Auspicious 8 clock instrument using the native 32 × 64 × 64 daily structure and A8 time representation for engineering and metrology exploration.">
@@ -118,219 +118,168 @@ footer{font-size:12px;color:var(--muted);text-align:center;margin:16px 0}
 #loadConverted,#resetTime,#resetDay,#resetAll{display:none!important}
 #core20LiveBinary{color:#6fe8ff}
 
-/* A8 SINGLE PRIMARY NAV · calendar/moons pattern */
-.a8-nav-topbar{
+</style>
+
+<style id="a8-topside-coherence-02-style">
+#a8-topside-coherence-02{
   display:block;
   margin:0;
-  padding:0;
+  padding:10px 14px;
   border-bottom:1px solid rgba(255,255,255,.14);
   background:rgba(7,11,16,.96);
   font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
 }
 
-.a8-navwrap{
+#a8-topside-coherence-02 .a8-topline{
   max-width:1440px;
   margin:0 auto;
-  padding:10px 14px;
   display:flex;
   gap:12px;
   align-items:center;
+  flex-wrap:wrap;
 }
 
-.a8-brand{
+#a8-topside-coherence-02 .cosigo-global-brand{
   display:flex;
   gap:8px;
   align-items:center;
-  flex:0 0 auto;
-  color:var(--text);
   text-decoration:none;
 }
 
-.a8-brand img{
+#a8-topside-coherence-02 .cosigo-global-brand img{
   width:34px;
   height:34px;
   object-fit:contain;
 }
 
-.a8-brand-text{
-  display:grid;
-  line-height:1.02;
+#a8-topside-coherence-02 .cosigo-global-brand span{
+  font-weight:900;
+  letter-spacing:.06em;
 }
 
-.a8-brand-text strong{
-  font-size:.86rem;
-  letter-spacing:.07em;
-}
-
-.a8-brand-text small{
-  font-size:.62rem;
-  letter-spacing:.08em;
+#a8-topside-coherence-02 .cosigo-global-brand small{
+  display:block;
   opacity:.72;
+  font-size:.62rem;
 }
 
-#a8PrimaryNav{
-  display:flex;
-  gap:6px;
-  align-items:center;
+#a8-topside-coherence-02 a{
+  text-decoration:none;
+}
+
+#a8-topside-coherence-02 .a8-menu{
+  position:relative;
   margin-left:auto;
-  overflow-x:auto;
-  scrollbar-width:none;
 }
 
-#a8PrimaryNav::-webkit-scrollbar{
-  display:none;
-}
-
-#a8PrimaryNav a{
-  flex:0 0 auto;
-  padding:7px 9px;
+#a8-topside-coherence-02 .a8-menu summary{
+  list-style:none;
+  cursor:pointer;
+  padding:8px 11px;
   border:1px solid #425467;
   border-radius:8px;
   background:#111820;
-  color:#c8ddf5;
-  text-decoration:none;
+  color:#e0bd72;
   font-size:.76rem;
-  font-weight:850;
+  font-weight:900;
+  letter-spacing:.07em;
+  user-select:none;
+}
+
+#a8-topside-coherence-02 .a8-menu summary::-webkit-details-marker{
+  display:none;
+}
+
+#a8-topside-coherence-02 .a8-menu summary::after{
+  content:" ▾";
+  color:#92a5b8;
+}
+
+#a8-topside-coherence-02 .a8-menu[open] summary::after{
+  content:" ▴";
+}
+
+#a8-topside-coherence-02 .a8-menu-panel{
+  position:absolute;
+  z-index:1000;
+  right:0;
+  top:calc(100% + 7px);
+  min-width:180px;
+  padding:7px;
+  border:1px solid #425467;
+  border-radius:9px;
+  background:#0d141b;
+  box-shadow:0 12px 28px rgba(0,0,0,.38);
+}
+
+#a8-topside-coherence-02 .a8-menu-panel a{
+  display:block;
+  padding:9px 10px;
+  border-radius:6px;
+  color:#c8ddf5;
+  font-size:.78rem;
+  font-weight:800;
   white-space:nowrap;
 }
 
-#a8PrimaryNav a:hover,
-#a8PrimaryNav a:focus-visible{
-  border-color:#6d9cff;
-  color:#fff;
-  outline:none;
-}
-
-#a8PrimaryNav a.active{
-  border-color:#6d9cff;
-  background:#18263a;
+#a8-topside-coherence-02 .a8-menu-panel a:hover,
+#a8-topside-coherence-02 .a8-menu-panel a:focus{
+  background:#182431;
   color:#fff;
 }
 
-.nav-toggle{
-  display:none;
-  margin-left:auto;
-  padding:.55rem .75rem;
-  border:1px solid #6d9cff;
-  border-radius:9px;
-  background:#18263a;
-  color:#dceaff;
-  font-weight:900;
-  font-size:.78rem;
-  letter-spacing:.08em;
-  cursor:pointer;
-}
-
-.nav-toggle:hover,
-.nav-toggle:focus-visible{
+#a8-topside-coherence-02 .a8-menu-panel a[aria-current="page"]{
+  background:#182431;
   color:#fff;
-  border-color:#9fc1ff;
-  outline:none;
 }
 
-@media(max-width:780px){
-  .a8-navwrap{
-    display:grid;
-    grid-template-columns:1fr auto;
-    gap:8px;
-    align-items:center;
-  }
-
-  .nav-toggle{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-  }
-
-  #a8PrimaryNav{
-    display:none;
-    grid-column:1 / -1;
-    width:100%;
-    margin:0;
-    padding:.35rem;
-    overflow:visible;
-    flex-direction:column;
-    gap:.22rem;
-    border:1px solid #425467;
-    border-radius:11px;
-    background:rgba(7,11,16,.99);
-    box-shadow:0 14px 30px rgba(0,0,0,.34);
-  }
-
-  #a8PrimaryNav.open{
-    display:flex;
-  }
-
-  #a8PrimaryNav a{
-    display:block;
-    width:100%;
-    padding:.68rem .75rem;
-    border-radius:8px;
-    font-size:.78rem;
-  }
-}
-
-@media(max-width:520px){
-  .a8-navwrap{
-    padding:8px 10px;
-  }
-
-  .a8-brand-text strong{
-    font-size:.80rem;
-  }
-
-  .a8-brand-text small{
-    display:none;
-  }
-
-  .nav-toggle{
-    padding:.5rem .62rem;
-    font-size:.74rem;
-    white-space:nowrap;
+@media(max-width:760px){
+  #a8-topside-coherence-02 .a8-menu-panel{
+    min-width:170px;
   }
 }
 </style>
 
-<header id="a8TopNav" class="a8-nav-topbar">
-  <div class="a8-navwrap">
+<nav id="a8-topside-coherence-02"
+     class="cosigo-global-nav"
+     aria-label="A8 Time Lab navigation">
 
-    <a class="a8-brand"
-       href="https://a8.cosigo.io/"
-       aria-label="COSIGO Labs Auspicious 8 public home">
+  <div class="a8-topline">
+
+    <a class="cosigo-global-brand"
+       href="https://cosigo.io/"
+       aria-label="COSIGO home">
       <img src="/assets/cosigo_master_512.gif" alt="COSIGO">
-      <span class="a8-brand-text">
-        <strong>COSIGO LABS</strong>
-        <small>AUSPICIOUS 8</small>
-      </span>
+      <span>COSIGO<small>LABS · AUSPICIOUS 8</small></span>
     </a>
 
-    <button
-      class="nav-toggle"
-      id="a8NavToggle"
-      type="button"
-      aria-expanded="false"
-      aria-controls="a8PrimaryNav"
-    >☰ MENU</button>
+    <details class="a8-menu">
+      <summary>MENU</summary>
 
-    <nav id="a8PrimaryNav" aria-label="Auspicious 8 navigation">
-      <a href="/index.html">LAB HOME</a>
-      <a href="/clock.html" class="active" aria-current="page">CLOCK</a>
-      <a href="/calendar.html">CALENDAR</a>
-      <a href="/moons.html">MOONS</a>
-      <a href="/mintaka.html">MINTAKA</a>
-      <a href="/sol.html">SOL</a>
-      <a href="/map-clock-compass.html">MAP · CLOCK · COMPASS</a>
-      <a href="/navigation.html">NAVIGATION</a>
-      <a href="/celestial.html">CELESTIAL</a>
-      <a href="/audio.html">AUDIO</a>
-      <a href="/quartz.html">QUARTZ</a>
-      <a href="https://a8.cosigo.io/">A8 PUBLIC</a>
-      <a href="https://cosigo.io/">COSIGO HOME</a>
-      <a href="https://github.com/cosigo/a8">GITHUB</a>
-    </nav>
+      <div class="a8-menu-panel">
+        <a href="https://lab.a8.cosigo.io/">LAB HOME</a>
+        <a href="https://clock.cosigo.io/" aria-current="page">CLOCK</a>
+        <a href="https://calendar.cosigo.io/">CALENDAR</a>
+        <a href="https://moons.cosigo.io/">MOONS</a>
+        <a href="https://mintaka.cosigo.io/">MINTAKA</a>
+        <a href="https://sol.cosigo.io/">SOL</a>
+        <a href="https://map.cosigo.io/">MAP · CLOCK · COMPASS</a>
+        <a href="https://sea.cosigo.io/">NAVIGATION</a>
+        <a href="https://stars.cosigo.io/">CELESTIAL</a>
+        <a href="https://audio.cosigo.io/">AUDIO</a>
+        <a href="https://quartz.cosigo.io/">QUARTZ</a>
+        <a href="https://a8.cosigo.io/">A8 PUBLIC</a>
+        <a href="https://about.cosigo.io/">ABOUT</a>
+        <a href="https://contestant.cosigo.io/">FUN</a>
+        <a href="https://cosigo.io/">COSIGO HOME</a>
+        <a href="https://github.com/cosigo/a8">GITHUB</a>
+      </div>
+
+    </details>
 
   </div>
-</header>
+</nav>
+
 <main>
   <div id="a8ClockIntroCard" class="card" style="padding:18px;margin:0 0 16px">
 <h1>Auspicious 8 · Jovian Moon Clock</h1>
@@ -358,7 +307,7 @@ footer{font-size:12px;color:var(--muted);text-align:center;margin:16px 0}
         <div class="k">Authority</div>
         <div id="nodeAuth" class="v">—</div>
         <div class="note" style="margin-top:6px">
-          <a href="/moons.html"
+          <a href="https://moons.cosigo.io/"
              title="Io · Europa · Ganymede · Callisto · Jovian recovery architecture"
              style="color:#8b949e;text-decoration:none;font-weight:700;letter-spacing:.05em">
             JOVIAN M O O O O N S →
@@ -939,6 +888,7 @@ let observerReady = false;
 let observerRunning = false;
 let observerAnchorTotal = 0;
 let observerAnchorPerf = performance.now();
+let observerEpoch = null;
 let observerFrameStarted = false;
 
 const $ = id => document.getElementById(id);
@@ -1009,32 +959,34 @@ function reanchorObserver(st, force = false) {
   const now = performance.now();
   const serverTotal = serverContinuousTotal(st);
   const nextRunning = true;
+  const nextEpoch = String(st.sourceEpoch ?? '');
 
   if (
     !observerReady ||
     force ||
+    nextEpoch !== observerEpoch ||
     nextRunning !== observerRunning
   ) {
     observerAnchorTotal = serverTotal;
     observerAnchorPerf = now;
+    observerEpoch = nextEpoch;
     observerReady = true;
     observerRunning = nextRunning;
     return;
   }
 
   /*
-   * v5.4.18 rule:
-   * ordinary packet arrival is NOT the beat source.
-   * Only a material divergence causes a hard display re-anchor.
+   * UNIVERSAL DISPLAY-OBSERVER RULE:
+   *
+   * Ordinary Core20 polling refreshes engineering evidence only.
+   * Packet arrival is never a civil phase-comparison instant and
+   * therefore never moves the visible clock anchor.
+   *
+   * Hard presentation anchors are limited to bootstrap/connect,
+   * sourceEpoch change, reconnect/run transition, and explicit
+   * observer lifecycle boundaries such as visibility return.
    */
-  const predicted = observerContinuousTotal(now);
-  const err = serverTotal - predicted;
-
-  if (Math.abs(err) > 2) {
-    observerAnchorTotal = serverTotal;
-    observerAnchorPerf = now;
-  }
-
+  observerEpoch = nextEpoch;
   observerRunning = nextRunning;
 }
 
@@ -1942,6 +1894,15 @@ document.addEventListener(
       clockLoaded &&
       !document.hidden
     ) {
+      /*
+       * Fresh presentation anchor after visibility return.
+       * Core20 supplies the exact coordinate; browser
+       * interpolation resumes only after that anchor.
+       */
+      observerReady = false;
+      observerRunning = false;
+      observerEpoch = null;
+
       pollClock();
     }
   }
@@ -1968,50 +1929,5 @@ window.addEventListener('pagehide', () => {
 doConvert();
 renderClock();
 </script>
-
-
-<script id="a8-mobile-nav-v1">
-(() => {
-  'use strict';
-
-  const button = document.getElementById('a8NavToggle');
-  const nav = document.getElementById('a8PrimaryNav');
-
-  if (!button || !nav) return;
-
-  function setOpen(open) {
-    nav.classList.toggle('open', open);
-    button.setAttribute(
-      'aria-expanded',
-      open ? 'true' : 'false'
-    );
-    button.textContent =
-      open ? '× CLOSE' : '☰ MENU';
-  }
-
-  button.addEventListener('click', () => {
-    setOpen(!nav.classList.contains('open'));
-  });
-
-  nav.addEventListener('click', event => {
-    if (event.target.closest('a')) {
-      setOpen(false);
-    }
-  });
-
-  document.addEventListener('keydown', event => {
-    if (event.key === 'Escape') {
-      setOpen(false);
-    }
-  });
-
-  window.addEventListener('resize', () => {
-    if (window.innerWidth > 780) {
-      setOpen(false);
-    }
-  });
-})();
-</script>
-
 </body>
 </html>

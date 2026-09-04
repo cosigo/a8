@@ -1,0 +1,837 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+<meta charset="utf-8">
+
+<meta
+  name="viewport"
+  content="width=device-width,initial-scale=1"
+>
+
+<title>
+A8 Music Composer · Drag Score | COSIGO Labs
+</title>
+
+<meta
+  name="description"
+  content="Compose, edit, play, save and submit exact native A8 music using drag-score bars, native durations and cycles per A8 second."
+>
+
+<link
+  rel="canonical"
+  href="https://composer.cosigo.io/"
+>
+
+<meta
+  property="og:type"
+  content="website"
+>
+
+<meta
+  property="og:title"
+  content="A8 Music Composer · Drag Score"
+>
+
+<meta
+  property="og:description"
+  content="Compose, edit, play and save exact native A8 music."
+>
+
+<meta
+  property="og:url"
+  content="https://composer.cosigo.io/"
+>
+
+<link
+  rel="stylesheet"
+  href="/site-shell.css"
+>
+
+<link
+  rel="stylesheet"
+  href="/a8-composer-v1.css"
+>
+
+</head>
+
+<body>
+
+
+<nav
+  class="cosigo-global-nav"
+  aria-label="A8 Time Lab navigation"
+>
+
+  <div class="a8-topline">
+
+    <a
+      class="cosigo-global-brand"
+      href="https://cosigo.io/"
+    >
+
+      <img
+        src="/assets/cosigo_master_512.gif"
+        alt="COSIGO"
+      >
+
+      <span>
+        COSIGO
+        <small>
+          LABS · AUSPICIOUS 8
+        </small>
+      </span>
+
+    </a>
+
+
+    <div
+      class="a8ComposerMusicDoors"
+      aria-label="A8 music shortcuts"
+    >
+
+      <a
+        class="a8ComposerMusicPill"
+        href="https://audio.cosigo.io/"
+        title="Explore the technical A8 audio bench"
+      >
+        TECHNICAL?
+      </a>
+
+      <a
+        class="a8ComposerMusicPill"
+        href="/contestants.html"
+        title="Hear A8 contestants and winners"
+      >
+        CURIOUS?
+      </a>
+
+    </div>
+
+
+    <details class="a8-menu a8ComposerTopMenu">
+      <summary>MENU</summary>
+
+      <div class="a8-menu-panel">
+        <a href="https://lab.a8.cosigo.io/">LAB HOME</a>
+        <a href="https://clock.cosigo.io/">CLOCK</a>
+        <a href="https://calendar.cosigo.io/">CALENDAR</a>
+        <a href="https://moons.cosigo.io/">MOONS</a>
+        <a href="https://mintaka.cosigo.io/">MINTAKA</a>
+        <a href="https://sol.cosigo.io/">SOL</a>
+        <a href="https://map.cosigo.io/">MAP · CLOCK · COMPASS</a>
+        <a href="https://sea.cosigo.io/">NAVIGATION</a>
+        <a href="https://stars.cosigo.io/">CELESTIAL</a>
+        <a href="https://audio.cosigo.io/">AUDIO</a>
+        <a
+          href="https://composer.cosigo.io/"
+          aria-current="page"
+        >
+          COMPOSER
+        </a>
+        <a href="https://quartz.cosigo.io/">QUARTZ</a>
+        <a href="https://a8.cosigo.io/">A8 PUBLIC</a>
+        <a href="https://about.cosigo.io/">ABOUT</a>
+        <a href="https://contestant.cosigo.io/">FUN</a>
+        <a href="https://cosigo.io/">COSIGO HOME</a>
+        <a href="https://github.com/cosigo/a8">GITHUB</a>
+      </div>
+
+    </details>
+
+  </div>
+
+</nav>
+
+
+<section class="panel">
+
+  <div class="eyebrow">
+    Serious fun · drag native A8 music
+  </div>
+
+  <h1>
+    A8 Music Composer
+  </h1>
+
+  <p class="sub">
+    Drag a note or rest into the open bar.
+    Click any event to adjust it with one controller.
+    Duration changes the event's actual width across
+    the 64 native A8 slots.
+  </p>
+
+</section>
+
+
+<section class="panel">
+
+  <div class="eyebrow">
+    Preview output only
+  </div>
+
+  <div class="controls">
+
+    <button
+      id="connectCore"
+      class="primary"
+    >
+      CONNECT CORE20
+    </button>
+
+    <span
+      id="coreStatus"
+      class="status"
+    >
+      DISCONNECTED · PREVIEW LOCKED
+    </span>
+
+  </div>
+
+</section>
+
+
+<section
+  class="panel"
+  id="palettePanel"
+>
+
+  <div class="eyebrow">
+    A8 note palette
+  </div>
+
+  <h2>
+    Five exact octaves + R
+  </h2>
+
+  <p class="sub">
+    Drag a pitch into the open bar.
+    Click also appends it for touch/mobile use.
+    Numbers are exact cycles / A8 second.
+  </p>
+
+  <div class="palette-scroll">
+
+    <div id="notePalette"></div>
+
+  </div>
+
+</section>
+
+
+<section
+  id="inspector"
+  class="panel inspector"
+>
+
+  <div class="inspector-head">
+
+    <div>
+
+      <div class="eyebrow">
+        Single event controller
+      </div>
+
+      <div class="selection-identity">
+
+        <strong id="selectedType">
+          NO EVENT SELECTED
+        </strong>
+
+        <span id="selectedWhere">
+          Click a note or rest in the open bar.
+        </span>
+
+      </div>
+
+    </div>
+
+    <button
+      id="deleteSelected"
+      type="button"
+    >
+      DELETE EVENT
+    </button>
+
+  </div>
+
+
+  <div id="inspectorEmpty">
+
+    <p class="sub">
+      Drag a note or
+      <strong>R</strong>
+      into the open bar.
+      The inserted event will automatically become selected.
+    </p>
+
+  </div>
+
+
+  <div
+    id="inspectorBody"
+    hidden
+  >
+
+    <div class="inspector-grid">
+
+
+      <div class="inspector-box">
+
+        <div class="eyebrow">
+          Time
+        </div>
+
+        <h3 id="selectedDuration">
+          —
+        </h3>
+
+        <div class="segment-row">
+          <button class="seg-btn" data-duration="1/16">1/16</button>
+          <button class="seg-btn" data-duration="1/8">1/8</button>
+          <button class="seg-btn" data-duration="1/4">1/4</button>
+          <button class="seg-btn" data-duration="1/2">1/2</button>
+          <button class="seg-btn" data-duration="1">1</button>
+          <button class="seg-btn" data-duration="2">2</button>
+          <button class="seg-btn" data-duration="4">4</button>
+        </div>
+
+      </div>
+
+
+      <div
+        class="inspector-box note-only"
+      >
+
+        <div class="eyebrow">
+          Pitch
+        </div>
+
+        <h3 id="inspectorPitchLabel">
+          —
+        </h3>
+
+        <label>
+          EXACT cycles / A8 second
+
+          <input
+            id="inspectorPitch"
+            type="text"
+            value="290"
+          >
+        </label>
+
+        <div class="segment-row">
+
+          <button
+            class="seg-btn"
+            data-pitch-ratio="1/2"
+          >
+            ×1/2
+          </button>
+
+          <button
+            class="seg-btn"
+            data-pitch-ratio="4/3"
+          >
+            ×4/3
+          </button>
+
+          <button
+            class="seg-btn"
+            data-pitch-ratio="3/2"
+          >
+            ×3/2
+          </button>
+
+          <button
+            class="seg-btn"
+            data-pitch-ratio="2/1"
+          >
+            ×2
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <div
+        class="inspector-box note-only"
+      >
+
+        <div class="eyebrow">
+          Character
+        </div>
+
+        <div class="segment-row">
+
+          <button
+            class="seg-btn"
+            data-wave="sine"
+          >
+            SINE
+          </button>
+
+          <button
+            class="seg-btn"
+            data-wave="triangle"
+          >
+            TRIANGLE
+          </button>
+
+          <button
+            class="seg-btn"
+            data-wave="square"
+          >
+            SQUARE
+          </button>
+
+          <button
+            class="seg-btn"
+            data-wave="sawtooth"
+          >
+            SAW
+          </button>
+
+        </div>
+
+
+        <div class="segment-row">
+
+          <button
+            class="seg-btn"
+            data-motion="steady"
+          >
+            STEADY
+          </button>
+
+          <button
+            class="seg-btn"
+            data-motion="rise"
+          >
+            RISE
+          </button>
+
+          <button
+            class="seg-btn"
+            data-motion="fall"
+          >
+            FALL
+          </button>
+
+          <button
+            class="seg-btn"
+            data-motion="whoosh"
+          >
+            WHOOSH
+          </button>
+
+        </div>
+
+
+        <label
+          style="margin-top:9px"
+        >
+          AMPLITUDE / GAIN
+
+          <input
+            id="inspectorGain"
+            type="range"
+            min="0"
+            max="1"
+            step="0.05"
+            value="0.5"
+          >
+
+          <span>
+            <strong id="gainRead">
+              0.50
+            </strong>
+          </span>
+
+        </label>
+
+      </div>
+
+    </div>
+
+
+    <div class="inspector-footer">
+
+      <div class="rest-after">
+
+        <span>
+          INSERT EXPLICIT REST AFTER:
+        </span>
+
+        <button
+          class="seg-btn"
+          data-rest-after="1/16"
+        >
+          1/16
+        </button>
+
+        <button
+          class="seg-btn"
+          data-rest-after="1/8"
+        >
+          1/8
+        </button>
+
+        <button
+          class="seg-btn"
+          data-rest-after="1/4"
+        >
+          1/4
+        </button>
+
+        <button
+          class="seg-btn"
+          data-rest-after="1/2"
+        >
+          1/2
+        </button>
+
+        <button
+          class="seg-btn"
+          data-rest-after="1"
+        >
+          1
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<section
+  id="jovianControls"
+  class="panel"
+>
+
+  <div class="eyebrow">
+    Jovian sandbox
+  </div>
+
+  <h2>
+    1 : 2 : 4 quick structure
+  </h2>
+
+  <div class="jovian-row">
+
+    <span class="sub">
+      IO BASE
+    </span>
+
+    <button
+      class="seg-btn"
+      data-jovian-base="1/16"
+    >
+      1/16
+    </button>
+
+    <button
+      class="seg-btn"
+      data-jovian-base="1/8"
+    >
+      1/8
+    </button>
+
+    <button
+      class="seg-btn selected"
+      data-jovian-base="1/4"
+    >
+      1/4
+    </button>
+
+    <button
+      class="seg-btn"
+      data-jovian-base="1/2"
+    >
+      1/2
+    </button>
+
+    <button
+      class="seg-btn"
+      data-jovian-base="1"
+    >
+      1
+    </button>
+
+    <span
+      id="jovianRead"
+      class="jovian-read"
+    >
+      1/4 : 1/2 : 1
+    </span>
+
+    <button
+      id="insertTrio"
+      class="primary"
+    >
+      INSERT TRIO
+    </button>
+
+    <button
+      id="insertWhoosh"
+      class="primary"
+    >
+      INSERT JUPITER WHOOSH
+    </button>
+
+  </div>
+
+</section>
+
+
+<section
+  class="panel"
+  id="scorePanel"
+>
+
+  <div class="song-head">
+
+    <div>
+
+      <div class="eyebrow">
+        Score
+      </div>
+
+      <h2>
+        Native A8 bars
+      </h2>
+
+      <p class="sub">
+        One open bar at a time.
+        Completed bars collapse into numbered cards.
+        Click any bar to reopen it for revision.
+      </p>
+
+    </div>
+
+
+    <strong
+      id="songSummary"
+      class="sub"
+    >
+      0 bars · 0 complete
+    </strong>
+
+  </div>
+
+
+  <div class="controls">
+
+    <label>
+      SONG TITLE
+
+      <input
+        id="songTitle"
+        type="text"
+        value="Jovian Whoosh No. 1"
+      >
+
+    </label>
+
+  </div>
+
+
+  <div
+    id="bars"
+    class="bar-stack"
+  ></div>
+
+
+  <div
+    id="a8RippleToolbarHost"
+  ></div>
+
+</section>
+
+
+<section class="panel">
+
+  <div class="eyebrow">
+    Submit for curator review
+  </div>
+
+  <h2>
+    Submit your A8 composition
+  </h2>
+
+  <p class="sub">
+    Your composition enters the private curator inbox.
+    Submission does not publish it and cannot alter
+    the current public ditty.
+  </p>
+
+  <div class="controls">
+
+    <label>
+      COMPOSER NAME / HANDLE
+
+      <input
+        id="submitComposer"
+        type="text"
+        maxlength="60"
+        placeholder="Your name or handle"
+      >
+    </label>
+
+    <label>
+      OPTIONAL NOTE TO CURATOR
+
+      <input
+        id="submitNote"
+        type="text"
+        maxlength="280"
+        placeholder="A short note about your composition"
+      >
+    </label>
+
+    <button
+      id="submitReview"
+      class="primary"
+    >
+      SUBMIT FOR REVIEW
+    </button>
+
+  </div>
+
+  <p
+    id="submitStatus"
+    class="status"
+  >
+    Requires exactly 8 complete bars · 512 native slots.
+  </p>
+
+</section>
+
+
+<section class="panel">
+
+  <div class="eyebrow">
+    Player / file
+  </div>
+
+  <h2>
+    Exact A8 score preview
+  </h2>
+
+  <div class="player-row">
+
+    <button
+      id="playSong"
+      class="play"
+      disabled
+    >
+      ▶ PLAY SONG
+    </button>
+
+    <button id="stop">
+      ■ STOP
+    </button>
+
+    <span
+      id="playerStatus"
+      class="status"
+    >
+      READY TO COMPOSE
+    </span>
+
+    <span
+      id="position"
+      class="sub"
+    >
+      0 A8s
+    </span>
+
+  </div>
+
+
+  <div class="file-row">
+
+    <button id="save">
+      SAVE .A8M
+    </button>
+
+    <button id="open">
+      OPEN .A8M
+    </button>
+
+    <input
+      id="file"
+      type="file"
+      accept=".a8m,application/json"
+      hidden
+    >
+
+  </div>
+
+</section>
+
+
+<section class="panel">
+
+  <details>
+
+    <summary>
+      <strong>
+        INVESTIGATE · why dragging cannot contaminate A8 timing
+      </strong>
+    </summary>
+
+    <p>
+      The horizontal bar contains exactly
+      <strong>64 native slots</strong>.
+      Each slot is exactly
+      <strong>1/16 A8 second</strong>.
+    </p>
+
+    <p>
+      Dragging only changes the ordering of explicit
+      NOTE and REST events.
+      The score engine immediately recomputes every
+      START and END from exact native slot arithmetic.
+    </p>
+
+    <p>
+      Mouse coordinates, pixels, animation frames,
+      packet arrival and browser elapsed time never
+      become score timing.
+    </p>
+
+  </details>
+
+</section>
+
+
+<footer class="cosigo-site-footer">
+
+  <strong>
+    COSIGO Labs · Auspicious 8 experimental laboratory
+  </strong>
+
+  <p class="cosigo-disclaimer">
+    Creative sandbox / engineering preview.
+  </p>
+
+</footer>
+
+
+<script src="/a8-music-player-v1.js"></script>
+<script src="/a8-composer-v1.js"></script>
+
+<script
+  src="/a8-composer-core-observer-v1.js"
+  defer
+></script>
+
+</body>
+</html>

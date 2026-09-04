@@ -7,6 +7,7 @@
 <meta name="description" content="COSIGO Labs Auspicious 8 Gate 2C Mintaka celestial observer. Jupiter remains the timekeeper; a headless simulated-observation adapter can feed isolated Mintaka meridian events without controlling the clock.">
 <meta name="author" content="COSIGO Labs">
 <meta name="robots" content="index,follow">
+<link rel="canonical" href="https://mintaka.cosigo.io/">
 <link rel="stylesheet" href="/style.css">
 <link rel="stylesheet" href="/site-shell.css">
 <style>
@@ -182,88 +183,104 @@ code {
 #a8-topside-coherence-02 .cosigo-global-brand small{
   display:block;opacity:.72;font-size:.62rem;
 }
-#a8-topside-coherence-02 .a8-location{
-  margin-left:auto;
-  font-size:.76rem;
-  font-weight:900;
-  letter-spacing:.07em;
-  color:#e0bd72;
-}
-#a8-topside-coherence-02 .a8-system-links,
-#a8-topside-coherence-02 .a8-utility-links{
-  max-width:1440px;
-  margin:8px auto 0;
-  display:flex;
-  flex-wrap:wrap;
-  gap:7px;
-  align-items:center;
-}
 #a8-topside-coherence-02 a{text-decoration:none}
-#a8-topside-coherence-02 .a8-system-links a{
-  padding:7px 9px;
+#a8-topside-coherence-02 .a8-menu{
+  position:relative;
+  margin-left:auto;
+}
+#a8-topside-coherence-02 .a8-menu summary{
+  list-style:none;
+  cursor:pointer;
+  padding:8px 11px;
   border:1px solid #425467;
   border-radius:8px;
   background:#111820;
-  color:#c8ddf5;
-  font-size:.80rem;
-  font-weight:850;
-}
-#a8-topside-coherence-02 .a8-system-links a[data-current="true"]{
-  border-color:#6d9cff;color:#fff;
-}
-#a8-topside-coherence-02 .a8-utility-links{
-  padding-top:7px;
-  border-top:1px solid rgba(255,255,255,.08);
-}
-#a8-topside-coherence-02 .a8-utility-links a{
-  color:#92a5b8;
-  font-size:.70rem;
-  font-weight:700;
-}
-#a8-topside-coherence-02 .a8-utility-label{
-  color:#617487;
-  font-size:.68rem;
+  color:#e0bd72;
+  font-size:.76rem;
   font-weight:900;
-  letter-spacing:.05em;
+  letter-spacing:.07em;
+  user-select:none;
+}
+#a8-topside-coherence-02 .a8-menu summary::-webkit-details-marker{
+  display:none;
+}
+#a8-topside-coherence-02 .a8-menu summary::after{
+  content:" ▾";
+  color:#92a5b8;
+}
+#a8-topside-coherence-02 .a8-menu[open] summary::after{
+  content:" ▴";
+}
+#a8-topside-coherence-02 .a8-menu-panel{
+  position:absolute;
+  z-index:1000;
+  right:0;
+  top:calc(100% + 7px);
+  min-width:180px;
+  padding:7px;
+  border:1px solid #425467;
+  border-radius:9px;
+  background:#0d141b;
+  box-shadow:0 12px 28px rgba(0,0,0,.38);
+}
+#a8-topside-coherence-02 .a8-menu-panel a{
+  display:block;
+  padding:9px 10px;
+  border-radius:6px;
+  color:#c8ddf5;
+  font-size:.78rem;
+  font-weight:800;
+  white-space:nowrap;
+}
+#a8-topside-coherence-02 .a8-menu-panel a:hover,
+#a8-topside-coherence-02 .a8-menu-panel a:focus,
+#a8-topside-coherence-02 .a8-menu-panel a[aria-current="page"]{
+  background:#182431;
+  color:#fff;
 }
 @media(max-width:760px){
-  #a8-topside-coherence-02 .a8-location{
-    width:100%;margin-left:0;
+  #a8-topside-coherence-02 .a8-menu-panel{
+    min-width:170px;
   }
 }
 </style>
-<nav id="a8-topside-coherence-02" class="cosigo-global-nav" aria-label="A8 Time Lab navigation">
+
+<nav id="a8-topside-coherence-02"
+     class="cosigo-global-nav"
+     aria-label="A8 Time Lab navigation">
+
   <div class="a8-topline">
-    <a class="cosigo-global-brand" href="https://cosigo.io/" aria-label="COSIGO home">
+    <a class="cosigo-global-brand"
+       href="https://cosigo.io/"
+       aria-label="COSIGO home">
       <img src="/assets/cosigo_master_512.gif" alt="COSIGO">
       <span>COSIGO<small>LABS · AUSPICIOUS 8</small></span>
     </a>
-    <div class="a8-location">YOU ARE HERE · MINTAKA · EARTH AXIAL ROTATION</div>
-  </div>
-  <div class="a8-system-links">
-    <a href="/index.html">A8 LAB HOME</a>
-    <a href="/calendar.html">CALENDAR</a>
-    
-    <a href="/moons.html">4-MOON VIEW</a>
-    <a href="/mintaka.html" aria-current="page" data-current="true">MINTAKA</a>
-    <a href="/sol.html">SOL</a>
-    <a href="/relationship.html">TERRA SHIP SLIP</a>
-    
-  </div>
-  <div class="a8-utility-links">
-    <span class="a8-utility-label">UTILITY ·</span>
-    <a href="/map-clock-compass.html">MAP · CLOCK · COMPASS</a>
-    <a href="/navigation.html">NAVIGATION</a>
-    <a href="/celestial.html">CELESTIAL</a>
-    <a href="https://a8.cosigo.io/canonical.html">CANONICAL</a>
-    <a href="https://a8.cosigo.io/open-research.html">OPEN RESEARCH</a>
-    <a href="https://a8.cosigo.io/">A8 PUBLIC</a>
-    <a href="https://lab.a8.cosigo.io/">LIVE LAB</a>
-    <a href="https://cosigo.io/">COSIGO HOME</a>
-    <a href="https://contact.cosigo.io/">CONTACT</a>
-    <a href="https://github.com/cosigo">GITHUB</a>
+
+    <details class="a8-menu">
+      <summary>MENU</summary>
+      <div class="a8-menu-panel">
+        <a href="https://lab.a8.cosigo.io/">LAB HOME</a>
+        <a href="https://clock.cosigo.io/">CLOCK</a>
+        <a href="https://calendar.cosigo.io/">CALENDAR</a>
+        <a href="https://moons.cosigo.io/">MOONS</a>
+        <a href="https://mintaka.cosigo.io/" aria-current="page">MINTAKA</a>
+        <a href="https://sol.cosigo.io/">SOL</a>
+        <a href="https://map.cosigo.io/">MAP · CLOCK · COMPASS</a>
+        <a href="https://sea.cosigo.io/">NAVIGATION</a>
+        <a href="https://stars.cosigo.io/">CELESTIAL</a>
+        <a href="https://audio.cosigo.io/">AUDIO</a>
+        <a href="https://quartz.cosigo.io/">QUARTZ</a>
+        <a href="https://a8.cosigo.io/">A8 PUBLIC</a>
+        <a href="https://about.cosigo.io/">ABOUT</a>
+        <a href="https://contestant.cosigo.io/">FUN</a>
+        <a href="https://cosigo.io/">COSIGO HOME</a>
+        <a href="https://github.com/cosigo/a8">GITHUB</a>
+      </div>
+    </details>
   </div>
 </nav>
+
 <main>
 
 <section class="hero">

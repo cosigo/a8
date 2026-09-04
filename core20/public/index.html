@@ -147,45 +147,27 @@ body{
 </head>
 <body>
 
-<style id="a8-topside-coherence-02-style">
-#a8-topside-coherence-02{
-  display:block;
-  margin:0;
-  padding:10px 14px;
-  border-bottom:1px solid rgba(255,255,255,.14);
-  background:rgba(7,11,16,.96);
-  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
-}
-#a8-topside-coherence-02 .a8-topline{
-  max-width:1440px;
-  margin:0 auto;
+<style id="a8-lab-header-menu-style">
+.a8-lab-header-row{
   display:flex;
   gap:12px;
-  align-items:center;
+  align-items:flex-start;
+  justify-content:space-between;
   flex-wrap:wrap;
 }
-#a8-topside-coherence-02 .cosigo-global-brand{
-  display:flex;
-  gap:8px;
-  align-items:center;
-  text-decoration:none;
-}
-#a8-topside-coherence-02 .cosigo-global-brand img{
-  width:34px;height:34px;object-fit:contain;
-}
-#a8-topside-coherence-02 .cosigo-global-brand span{
-  font-weight:900;letter-spacing:.06em;
-}
-#a8-topside-coherence-02 .cosigo-global-brand small{
-  display:block;opacity:.72;font-size:.62rem;
-}#a8-topside-coherence-02 a{text-decoration:none}
 
-#a8-topside-coherence-02 .a8-menu{
+.a8-lab-title-block{
+  min-width:0;
+  flex:1 1 620px;
+}
+
+.a8-lab-header-row .a8-menu{
   position:relative;
   margin-left:auto;
+  flex:0 0 auto;
 }
 
-#a8-topside-coherence-02 .a8-menu summary{
+.a8-lab-header-row .a8-menu summary{
   list-style:none;
   cursor:pointer;
   padding:8px 11px;
@@ -199,20 +181,20 @@ body{
   user-select:none;
 }
 
-#a8-topside-coherence-02 .a8-menu summary::-webkit-details-marker{
+.a8-lab-header-row .a8-menu summary::-webkit-details-marker{
   display:none;
 }
 
-#a8-topside-coherence-02 .a8-menu summary::after{
+.a8-lab-header-row .a8-menu summary::after{
   content:" ▾";
   color:#92a5b8;
 }
 
-#a8-topside-coherence-02 .a8-menu[open] summary::after{
+.a8-lab-header-row .a8-menu[open] summary::after{
   content:" ▴";
 }
 
-#a8-topside-coherence-02 .a8-menu-panel{
+.a8-lab-header-row .a8-menu-panel{
   position:absolute;
   z-index:1000;
   right:0;
@@ -225,7 +207,7 @@ body{
   box-shadow:0 12px 28px rgba(0,0,0,.38);
 }
 
-#a8-topside-coherence-02 .a8-menu-panel a{
+.a8-lab-header-row .a8-menu-panel a{
   display:block;
   padding:9px 10px;
   border-radius:6px;
@@ -233,81 +215,69 @@ body{
   font-size:.78rem;
   font-weight:800;
   white-space:nowrap;
+  text-decoration:none;
 }
 
-#a8-topside-coherence-02 .a8-menu-panel a:hover,
-#a8-topside-coherence-02 .a8-menu-panel a:focus{
+.a8-lab-header-row .a8-menu-panel a:hover,
+.a8-lab-header-row .a8-menu-panel a:focus{
   background:#182431;
   color:#fff;
 }
 
 @media(max-width:760px){
-  #a8-topside-coherence-02 .a8-menu-panel{
+  .a8-lab-header-row .a8-menu{
+    margin-left:0;
+  }
+
+  .a8-lab-header-row .a8-menu-panel{
+    left:0;
+    right:auto;
     min-width:170px;
   }
 }
 </style>
-<nav id="a8-topside-coherence-02" class="cosigo-global-nav" aria-label="A8 Time Lab navigation">
 
 
-
-  <div class="a8-topline">
-    <a class="cosigo-global-brand" href="https://cosigo.io/" aria-label="COSIGO home">
-      <img src="/assets/cosigo_master_512.gif" alt="COSIGO">
-      <span>COSIGO<small>LABS · AUSPICIOUS 8</small></span>
-    </a>
-    <details class="a8-menu">
-      <summary>MENU</summary>
-      <div class="a8-menu-panel">
-        <a href="https://cosigo.io/">MAIN SITE</a>
-        <a href="https://stream.cosigo.io/">STREAM</a>
-        <a href="https://trade.cosigo.io/">TRADE</a>
-        <a href="https://bcnode.io/">BCNODE</a>
-        <a href="https://github.com/cosigo">GITHUB</a>
-      </div>
-    </details>
-  </div>
-  </nav>
 <main>
 
 <header>
   <div class="panel" style="margin:0;flex:1">
-    <div class="eyebrow">AUSPICIOUS 8 · UNIFIED NODE CORE</div>
-    <h1>A8 Time Laboratory v5.4.20</h1>
-    <p class="muted">One raw counter · three independent Jovian recoveries · comparator · qualification · divider · 17-bit clock. The browser is an observer.</p>
+    <div class="a8-lab-header-row">
+
+      <div class="a8-lab-title-block">
+        <div class="eyebrow">AUSPICIOUS 8 · UNIFIED NODE CORE</div>
+        <h1>A8 Time Laboratory v5.4.20</h1>
+        <p class="muted">One raw counter · three independent Jovian recoveries · comparator · qualification · divider · 17-bit clock. Your browser is an observer.</p>
+      </div>
+
+      <details class="a8-menu">
+      <summary>MENU</summary>
+      <div class="a8-menu-panel">
+        <a href="https://lab.a8.cosigo.io/" aria-current="page">LAB HOME</a>
+        <a href="https://clock.cosigo.io/">CLOCK</a>
+        <a href="https://calendar.cosigo.io/">CALENDAR</a>
+        <a href="https://moons.cosigo.io/">MOONS</a>
+        <a href="https://mintaka.cosigo.io/">MINTAKA</a>
+        <a href="https://sol.cosigo.io/">SOL</a>
+        <a href="https://map.cosigo.io/">MAP · CLOCK · COMPASS</a>
+        <a href="https://sea.cosigo.io/">NAVIGATION</a>
+        <a href="https://stars.cosigo.io/">CELESTIAL</a>
+        <a href="https://audio.cosigo.io/">AUDIO</a>
+        <a href="https://quartz.cosigo.io/">QUARTZ</a>
+        <a href="https://a8.cosigo.io/">A8 PUBLIC</a>
+        <a href="https://about.cosigo.io/">ABOUT</a>
+        <a href="https://contestant.cosigo.io/">FUN</a>
+        <a href="https://cosigo.io/">COSIGO HOME</a>
+        <a href="https://github.com/cosigo/a8">GITHUB</a>
+      </div>
+    </details>
+
+    </div>
   </div>
   
 </header>
 
-<section class="panel instruments" id="lab-modules">
-  <div class="instrument-head">
-    <div>
-      <div class="section-kicker">LAB MODULES / INSTRUMENTS</div>
-      <h2>Observer surfaces & companion benches</h2>
-      <p class="muted">Navigation links are separated from live core controls. These pages observe, translate, visualize or extend the laboratory without becoming recovery authority.</p>
-    </div>
-    <div class="pill">LINKS ONLY</div>
-  </div>
 
-  <div class="launcher-grid">
-    <a class="button-link" href="/clock.html">A8 CLOCK</a>
-            <a class="button-link" href="/calendar.html">CALENDAR · A8 CIVIL CALENDAR</a>
-    <a class="button-link core20-primary" href="/moons.html">4-MOON VIEW</a>
-    <a class="button-link" href="/mintaka.html">MINTAKA · EARTH ROTATION WITNESS</a>
-    <a class="button-link" href="/sol.html">SOL · ORBITAL ADVANCE</a>
-    <a class="button-link" href="/relationship.html">TERRA SHIP SLIP · ROTATION / ORBIT</a>
-    <a class="button-link" href="/celestial.html">CELESTIAL MAP · SKY WALKABOUT</a>
-    <a class="button-link" href="/map-clock-compass.html">MAP · CLOCK · COMPASS</a>
-    <a class="button-link" href="/navigation.html">NAVIGATION · POSITION & TRAVEL</a>
-    <a class="button-link" href="/data.html">OBSERVATION ARCHIVE</a>
-    <a class="button-link" href="/telescope.html">TELESCOPE EMULATOR</a>
-    <a class="button-link" href="/audio.html">AUDIO FREQUENCY BENCH</a>
-    <a class="button-link" href="/angle.html">A8 ANGLE TRANSLATOR</a>
-    <a class="button-link" href="/quartz.html">QUARTZ / LENGTH EXPERIMENT</a>
-  </div>
-
-  
-</section>
 
 
 <!-- A8-CORE20-MAIN-INTEGRATION-01-BEGIN -->
@@ -682,6 +652,37 @@ body{
 
 <!-- A8-OLD-EMBEDDED-SIMULATOR-REMOVED-CE-CONSOLE-CLEAN-01 -->
 
+<section class="panel instruments" id="lab-modules">
+  <div class="instrument-head">
+    <div>
+      <div class="section-kicker">LAB MODULES / INSTRUMENTS</div>
+      <h2>Observer surfaces & companion benches</h2>
+      <p class="muted">Navigation links are separated from live core controls. These pages observe, translate, visualize or extend the laboratory without becoming recovery authority.</p>
+    </div>
+    <div class="pill">LINKS ONLY</div>
+  </div>
+
+  <div class="launcher-grid">
+    <a class="button-link" href="/clock.html">A8 CLOCK</a>
+            <a class="button-link" href="/calendar.html">CALENDAR · A8 CIVIL CALENDAR</a>
+    <a class="button-link core20-primary" href="/moons.html">4-MOON VIEW</a>
+    <a class="button-link" href="/mintaka.html">MINTAKA · EARTH ROTATION WITNESS</a>
+    <a class="button-link" href="/sol.html">SOL · ORBITAL ADVANCE</a>
+    <a class="button-link" href="/relationship.html">TERRA SHIP SLIP · ROTATION / ORBIT</a>
+    <a class="button-link" href="/celestial.html">CELESTIAL MAP · SKY WALKABOUT</a>
+    <a class="button-link" href="/map-clock-compass.html">MAP · CLOCK · COMPASS</a>
+    <a class="button-link" href="/navigation.html">NAVIGATION · POSITION & TRAVEL</a>
+    <a class="button-link" href="/data.html">DATA · EVIDENCE</a>
+    <a class="button-link" href="/physical-clock-evidence.html">EMPIRICAL EVIDENCE · PHYSICAL CLOCK</a>
+    <a class="button-link" href="/telescope.html">TELESCOPE EMULATOR</a>
+    <a class="button-link" href="/audio.html">AUDIO FREQUENCY BENCH</a>
+    <a class="button-link" href="/angle.html">A8 ANGLE TRANSLATOR</a>
+    <a class="button-link" href="/quartz.html">QUARTZ / LENGTH EXPERIMENT</a>
+  </div>
+
+  
+</section>
+
 </main>
 <!-- A8-OLD-APPJS-NOT-LOADED-ON-CORE20-MAIN-CE-CONSOLE-CLEAN-01 -->
 
@@ -939,17 +940,18 @@ function c20ReanchorPhase(
   c20PhaseRatePerMs = nextRate;
 
   /*
-   * Proven v5.4.18 rule:
-   * ordinary packet arrival is NOT the beat source.
-   * Only material divergence causes a hard display re-anchor.
+   * UNIVERSAL DISPLAY-OBSERVER RULE:
+   *
+   * Ordinary transport refresh is evidence/status only.
+   * Packet arrival is never a phase-comparison instant and
+   * therefore never snaps visible phase to serverTotal.
+   *
+   * The continuity anchor above may roll forward to predicted
+   * and accept a recovered display-rate update. Hard display
+   * anchors occur only at legitimate observer lifecycle
+   * boundaries such as bootstrap, sourceEpoch change or
+   * visibility return.
    */
-  const err = serverTotal - predicted;
-
-  if (Math.abs(err) > 2) {
-    c20PhaseAnchorTotal = serverTotal;
-    c20PhaseAnchorPerf = now;
-  }
-
   c20PhaseSourceEpoch = nextEpoch;
 }
 
@@ -1883,6 +1885,14 @@ document.addEventListener(
       !document.hidden &&
       !c20ObserverStopped
     ) {
+      /*
+       * Fresh presentation anchor after visibility return.
+       * Core20 supplies the coordinate; browser time supplies
+       * output interpolation only after this anchor.
+       */
+      c20PhaseObserverReady = false;
+      c20PhaseSourceEpoch = null;
+
       c20ObserverPass();
     }
   }

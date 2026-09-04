@@ -1,0 +1,18 @@
+# A8 runtime / diagnostic output
+/_diagnostics/
+
+# Manual emergency working copies in the live public tree
+/public/*.before-*
+/public/*.backup-*
+
+# Generic editor / temporary files
+*.bak
+*.old
+*.orig
+*.tmp
+*.swp
+*~
+
+# Dependencies / cache if introduced later
+node_modules/
+.cache/

@@ -61,6 +61,14 @@ const {
 } = require('../observer/a8-sol-orbital-jovian-scale');
 
 const {
+  deriveMintakaSolRelationship,
+} = require('../observer/a8-mintaka-sol-relationship');
+
+const {
+  TerraShipSlipAccumulator,
+} = require('../observer/a8-terra-ship-slip-accumulator');
+
+const {
   deriveSunReturnRecurrence,
 } = require('../observer/a8-sun-return-recurrence');
 
@@ -430,6 +438,98 @@ function createHardwareLabServer({
     return earthObservationBridge.snapshot();
   };
 
+  /*
+   * SPACESHIP EARTH · TERRA SHIP SLIP
+   *
+   * Downstream state only.
+   * No Core20 clock write.
+   * No observer-authority change.
+   * No inferred missing rotations.
+   */
+  const terraShipSlipAccumulator =
+    new TerraShipSlipAccumulator();
+
+  const currentTerraShipSlip = () => {
+    const earth =
+      currentEarthObservers();
+
+    try {
+      return {
+        ok: true,
+        ready: true,
+        terraShipSlip:
+          deriveMintakaSolRelationship(
+            earth.mintaka,
+            earth.sol
+          ),
+      };
+    } catch (err) {
+      return {
+        ok: true,
+        ready: false,
+        terraShipSlip: null,
+        source: {
+          mintakaStatus:
+            earth.mintaka &&
+            earth.mintaka.status,
+          solStatus:
+            earth.sol &&
+            earth.sol.status,
+        },
+        reason:
+          err && err.message
+            ? err.message
+            : String(err),
+      };
+    }
+  };
+
+  const updateTerraShipSlipAccumulator =
+    trigger => {
+      const state =
+        currentTerraShipSlip();
+
+      if (
+        !state.ready ||
+        !state.terraShipSlip
+      ) {
+        return {
+          ...state,
+          trigger,
+          accumulator:
+            terraShipSlipAccumulator.snapshot(),
+        };
+      }
+
+      try {
+        return {
+          ok: true,
+          ready: true,
+          trigger,
+          relationship:
+            state.terraShipSlip,
+          accumulator:
+            terraShipSlipAccumulator.ingest(
+              state.terraShipSlip
+            ),
+        };
+      } catch (err) {
+        return {
+          ok: false,
+          ready: false,
+          trigger,
+          relationship:
+            state.terraShipSlip,
+          accumulator:
+            terraShipSlipAccumulator.snapshot(),
+          reason:
+            err && err.message
+              ? err.message
+              : String(err),
+        };
+      }
+    };
+
   const currentEarthRotationScale = () =>
     deriveEarthRotationJovianScale(
       currentTimekeeper(),
@@ -466,20 +566,38 @@ function createHardwareLabServer({
     const bridge =
       syncRecoveryInput();
 
-    return earthObservationBridge.observeMintaka(
-      bridge,
-      observation
-    );
+    const result =
+      earthObservationBridge.observeMintaka(
+        bridge,
+        observation
+      );
+
+    return {
+      ...result,
+      terraShipSlip:
+        updateTerraShipSlipAccumulator(
+          'MINTAKA_OBSERVATION'
+        ),
+    };
   };
 
   const observeSolSelected = observation => {
     const bridge =
       syncRecoveryInput();
 
-    return earthObservationBridge.observeSol(
-      bridge,
-      observation
-    );
+    const result =
+      earthObservationBridge.observeSol(
+        bridge,
+        observation
+      );
+
+    return {
+      ...result,
+      terraShipSlip:
+        updateTerraShipSlipAccumulator(
+          'SOL_OBSERVATION'
+        ),
+    };
   };
 
   const observeJovian = event => {
@@ -2041,6 +2159,34 @@ function createHardwareLabServer({
               ok: true,
               bridge:
                 currentEarthObservers(),
+            }
+          );
+        }
+
+        if (
+          req.method === 'GET' &&
+          url.pathname ===
+            '/api/terra-ship-slip'
+        ) {
+          return sendJson(
+            res,
+            200,
+            currentTerraShipSlip()
+          );
+        }
+
+        if (
+          req.method === 'GET' &&
+          url.pathname ===
+            '/api/terra-ship-slip/accumulator'
+        ) {
+          return sendJson(
+            res,
+            200,
+            {
+              ok: true,
+              accumulator:
+                terraShipSlipAccumulator.snapshot(),
             }
           );
         }

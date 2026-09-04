@@ -138,20 +138,16 @@
     }
 
     /*
-     * Proven v5.4.18 rule:
-     * ordinary packet arrival is NOT the beat source.
-     * Only material divergence causes a hard display re-anchor.
+     * UNIVERSAL DISPLAY-OBSERVER RULE:
+     *
+     * Ordinary transport refresh is evidence/status only.
+     * Packet arrival is never a civil phase-comparison instant
+     * and therefore never moves the visible clock anchor.
+     *
+     * Hard display anchors occur only at legitimate observer
+     * lifecycle boundaries: bootstrap/reconnect, sourceEpoch
+     * change, runtime resume/reset, or visibility return.
      */
-    const predicted =
-      observerContinuousTotal(now);
-    const err =
-      serverTotal - predicted;
-
-    if (Math.abs(err) > 2) {
-      clockAnchorTotal = serverTotal;
-      clockAnchorPerf = now;
-    }
-
     clockObserverEpoch = nextEpoch;
     clockObserverRunning = true;
   }
@@ -1063,6 +1059,15 @@
         !document.hidden &&
         refreshTimer !== null
       ) {
+        /*
+         * Fresh presentation anchor after visibility return.
+         * Core20 supplies the exact coordinate. Browser time is
+         * used only for output interpolation after that point.
+         */
+        clockObserverReady = false;
+        clockObserverRunning = false;
+        clockObserverEpoch = null;
+
         refresh();
       }
     }

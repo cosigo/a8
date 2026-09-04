@@ -3,12 +3,96 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Terra Ship Slip | A8 Time Lab v5.4.20</title>
-<meta name="description" content="COSIGO Labs Auspicious 8 Gate 4D Terra Ship Slip: live read-only rotation-orbit relationship and event-triggered downstream accumulator, isolated from A8 clock authority.">
+<title>Spaceship Earth · Terra Ship Slip | A8 Time Lab v5.4.20</title>
+<meta name="description" content="COSIGO Labs Auspicious 8 Spaceship Earth: Terra Ship Slip live read-only rotation-orbit relationship and event-triggered downstream accumulator, isolated from A8 clock authority.">
 <meta name="author" content="COSIGO Labs">
 <meta name="robots" content="index,follow">
+<link rel="canonical" href="https://ship.cosigo.io/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Spaceship Earth · Terra Ship Slip">
+<meta property="og:description" content="Spaceship Earth · Terra Ship Slip: live read-only rotation-orbit relationship and downstream accumulation under the recovered A8 observer chain.">
+<meta property="og:url" content="https://ship.cosigo.io/">
 <link rel="stylesheet" href="/style.css">
 <link rel="stylesheet" href="/site-shell.css">
+
+<style id="a8-spaceship-earth-background">
+  /*
+   * SPACESHIP EARTH
+   * Visual presentation only.
+   * No timing, observer or Core20 authority.
+   */
+  html{
+    background:#02070d;
+  }
+
+  body{
+    min-height:100vh;
+
+    background-image:
+      linear-gradient(
+        90deg,
+        rgba(2,7,13,.66) 0%,
+        rgba(2,7,13,.48) 38%,
+        rgba(2,7,13,.28) 68%,
+        rgba(2,7,13,.42) 100%
+      ),
+      linear-gradient(
+        180deg,
+        rgba(2,7,13,.12) 0%,
+        rgba(2,7,13,.30) 58%,
+        rgba(2,7,13,.78) 100%
+      ),
+      url('/assets/navistar.png');
+
+    background-position:
+      center top,
+      center top,
+      center top;
+
+    background-size:
+      cover,
+      cover,
+      cover;
+
+    background-repeat:
+      no-repeat,
+      no-repeat,
+      no-repeat;
+
+    background-attachment:
+      fixed,
+      fixed,
+      fixed;
+  }
+
+  .hero,
+  .card{
+    background:rgba(10,18,27,.46);
+    backdrop-filter:blur(1px);
+    -webkit-backdrop-filter:blur(1px);
+  }
+
+  @media(max-width:800px){
+    body{
+      background-position:
+        center top,
+        center top,
+        62% top;
+
+      background-attachment:
+        scroll,
+        scroll,
+        scroll;
+    }
+
+    .hero,
+    .card{
+      background:rgba(10,18,27,.68);
+      backdrop-filter:none;
+      -webkit-backdrop-filter:none;
+    }
+  }
+</style>
 <style>
   main{max-width:1180px;margin:auto;padding:28px 20px 72px}
   .hero,.card{border:1px solid var(--line,#2a3744);border-radius:16px;padding:20px;background:var(--panel,#111820)}
@@ -21,6 +105,517 @@
   pre{white-space:pre-wrap;overflow-wrap:anywhere}
   @media(max-width:800px){.grid{grid-template-columns:1fr}}
 </style>
+
+<style id="a8-terra-slip-machine-style">
+
+#a8-terra-slip-machine{
+  position:relative;
+  overflow:hidden;
+}
+
+#a8-terra-slip-machine::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  opacity:.26;
+  background-image:
+    radial-gradient(circle at 10% 20%,currentColor 0 1px,transparent 1.4px),
+    radial-gradient(circle at 30% 75%,currentColor 0 1px,transparent 1.4px),
+    radial-gradient(circle at 73% 23%,currentColor 0 1px,transparent 1.4px),
+    radial-gradient(circle at 90% 67%,currentColor 0 1px,transparent 1.4px);
+  background-size:
+    190px 190px,
+    270px 270px,
+    230px 230px,
+    310px 310px;
+}
+
+.a8-slip-content{
+  position:relative;
+  z-index:1;
+}
+
+.a8-slip-lead{
+  max-width:1050px;
+  line-height:1.65;
+  font-size:1.02rem;
+}
+
+.a8-live-instruments{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:10px;
+  margin:18px 0;
+}
+
+.a8-live-instruments .inst{
+  min-height:91px;
+  padding:12px;
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:12px;
+  background:rgba(255,255,255,.035);
+}
+
+.a8-live-instruments .ik{
+  display:block;
+  font-size:.68rem;
+  letter-spacing:.1em;
+  opacity:.64;
+  text-transform:uppercase;
+}
+
+.a8-live-instruments .iv{
+  display:block;
+  margin-top:7px;
+  font-size:1.08rem;
+  font-weight:900;
+  overflow-wrap:anywhere;
+}
+
+.a8-machine-shell{
+  border:1px solid rgba(255,255,255,.15);
+  border-radius:18px;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 50% 43%,
+      rgba(255,210,85,.10),
+      transparent 23%),
+    rgba(3,8,15,.66);
+}
+
+#a8SlipMachineSvg{
+  display:block;
+  width:100%;
+  height:auto;
+}
+
+.a8-machine-label{
+  font-size:15px;
+  font-weight:800;
+  fill:currentColor;
+}
+
+.a8-machine-small{
+  font-size:12px;
+  fill:currentColor;
+  opacity:.65;
+}
+
+.a8-slip-equation{
+  margin-top:16px;
+  padding:15px 16px;
+  border-left:4px solid currentColor;
+  line-height:1.7;
+  font-weight:800;
+}
+
+.a8-sim-warning{
+  margin-top:13px;
+  line-height:1.55;
+  opacity:.72;
+}
+
+.a8-context-grid{
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:14px;
+  margin-top:18px;
+}
+
+.a8-context-card{
+  padding:16px;
+  border:1px solid rgba(255,255,255,.13);
+  border-radius:14px;
+  background:rgba(255,255,255,.025);
+}
+
+.a8-video-stage{
+  min-height:300px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:12px;
+  background:
+    radial-gradient(circle at 50% 50%,
+      rgba(120,160,255,.18),
+      transparent 42%),
+    rgba(0,0,0,.25);
+  overflow:hidden;
+}
+
+.a8-video-stage iframe{
+  width:100%;
+  aspect-ratio:16/9;
+  border:0;
+}
+
+#a8GaiaPlay{
+  padding:13px 18px;
+  border-radius:999px;
+  border:1px solid currentColor;
+  background:transparent;
+  color:inherit;
+  font:inherit;
+  font-weight:900;
+  cursor:pointer;
+}
+
+#a8GaiaPlay:hover{
+  transform:translateY(-1px);
+}
+
+.a8-source-links{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:12px;
+}
+
+.a8-source-links a{
+  color:inherit;
+}
+
+@media(max-width:900px){
+  .a8-live-instruments{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+
+  .a8-context-grid{
+    grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:540px){
+  .a8-live-instruments{
+    grid-template-columns:1fr;
+  }
+}
+
+</style>
+
+
+<style id="a8-slip-explanation-style">
+
+#a8-slip-mechanical-explanation{
+  margin-top:14px;
+}
+
+.a8-slip-explain-lead{
+  margin:0 0 14px;
+  line-height:1.65;
+  font-size:1rem;
+}
+
+.a8-slip-steps{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:10px;
+}
+
+.a8-slip-step{
+  padding:14px;
+  border:1px solid rgba(255,255,255,.13);
+  border-radius:12px;
+  background:rgba(255,255,255,.025);
+  line-height:1.55;
+}
+
+.a8-slip-step-number{
+  display:block;
+  margin-bottom:5px;
+  font-size:.7rem;
+  letter-spacing:.1em;
+  opacity:.62;
+}
+
+.a8-slip-step-value{
+  display:block;
+  margin-bottom:7px;
+  font-size:1.25rem;
+  font-weight:900;
+}
+
+.a8-slip-result{
+  margin-top:12px;
+  padding:14px;
+  border:1px solid rgba(255,255,255,.16);
+  border-radius:12px;
+  text-align:center;
+  line-height:1.7;
+}
+
+.a8-slip-result-equation{
+  display:block;
+  margin:6px 0;
+  font-size:clamp(1.25rem,3vw,1.85rem);
+  font-weight:900;
+}
+
+.a8-slip-reference-note{
+  margin-top:11px;
+  font-size:.86rem;
+  line-height:1.55;
+  opacity:.67;
+}
+
+@media(max-width:720px){
+  .a8-slip-steps{
+    grid-template-columns:1fr;
+  }
+}
+
+</style>
+
+
+<style id="a8-first-visitor-order-style">
+
+#a8-observatory-reference{
+  position:relative;
+}
+
+.a8-public-kicker{
+  margin-bottom:7px;
+  font-size:.72rem;
+  font-weight:900;
+  letter-spacing:.12em;
+  opacity:.66;
+}
+
+.a8-public-lead{
+  max-width:980px;
+  line-height:1.65;
+}
+
+.a8-observed-grid,
+.a8-ruler-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:10px;
+  margin-top:16px;
+}
+
+.a8-observed-card,
+.a8-ruler{
+  min-width:0;
+  padding:14px;
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:12px;
+  background:rgba(255,255,255,.025);
+}
+
+.a8-observed-label,
+.a8-ruler > span{
+  display:block;
+  margin-bottom:7px;
+  font-size:.68rem;
+  font-weight:900;
+  letter-spacing:.08em;
+  opacity:.62;
+}
+
+.a8-observed-card strong,
+.a8-ruler strong{
+  display:block;
+  font-size:1.14rem;
+  overflow-wrap:anywhere;
+}
+
+.a8-observed-card small,
+.a8-ruler small{
+  display:block;
+  margin-top:6px;
+  line-height:1.45;
+  opacity:.68;
+}
+
+.a8-simple-equation{
+  margin-top:18px;
+  padding:16px;
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:12px;
+  line-height:1.75;
+  text-align:center;
+}
+
+.a8-simple-result{
+  margin-top:8px;
+  font-weight:900;
+  letter-spacing:.08em;
+}
+
+.a8-public-note{
+  margin-top:15px;
+  max-width:1050px;
+  line-height:1.6;
+  opacity:.76;
+}
+
+.a8-public-links{
+  margin-top:10px;
+}
+
+.a8-public-links a{
+  color:inherit;
+}
+
+#a8-engineering-relationship-drawer{
+  margin-top:18px;
+  border:1px solid rgba(255,176,80,.28);
+  border-radius:14px;
+  background:rgba(255,176,80,.035);
+  overflow:hidden;
+}
+
+#a8-engineering-relationship-drawer > summary{
+  padding:16px;
+  cursor:pointer;
+  font-weight:900;
+  letter-spacing:.055em;
+  user-select:none;
+}
+
+#a8-engineering-relationship-drawer .a8-eng-intro{
+  margin:0;
+  padding:0 16px 16px;
+  line-height:1.55;
+  opacity:.72;
+}
+
+#a8-engineering-relationship-body{
+  padding:0 12px 12px;
+}
+
+#a8-engineering-relationship-body > *{
+  margin-top:10px !important;
+}
+
+@media(max-width:900px){
+  .a8-observed-grid,
+  .a8-ruler-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+}
+
+@media(max-width:560px){
+  .a8-observed-grid,
+  .a8-ruler-grid{
+    grid-template-columns:1fr;
+  }
+}
+
+</style>
+
+
+<style id="a8-spaceship-earth-glass-final">
+  /*
+   * SPACESHIP EARTH · FINAL GLASS LAYER
+   *
+   * This block intentionally comes LAST in the CSS cascade.
+   * Presentation only. No Core20 authority.
+   */
+
+  /* Remove old synthetic star/vector point overlay.
+     Navistar now owns the visual navigation background. */
+  #a8-terra-slip-machine::before{
+    content:none !important;
+    display:none !important;
+    background:none !important;
+    opacity:0 !important;
+  }
+
+  /* Primary page surfaces */
+  .hero,
+  .card{
+    background:rgba(7,11,16,.28) !important;
+    backdrop-filter:blur(1px) !important;
+    -webkit-backdrop-filter:blur(1px) !important;
+  }
+
+  /* Main Terra Ship Slip machine well */
+  .a8-machine-shell{
+    background:
+      radial-gradient(
+        circle at 50% 43%,
+        rgba(12,22,33,.26),
+        rgba(5,10,16,.18) 58%,
+        rgba(3,7,12,.24) 100%
+      ) !important;
+  }
+
+  /* Live gauges */
+  .a8-live-instruments .inst{
+    background:rgba(8,14,21,.22) !important;
+  }
+
+  /* Explanatory / contextual cards */
+  .a8-context-card,
+  .a8-slip-step,
+  .a8-observed-card,
+  .a8-ruler{
+    background:rgba(8,14,21,.18) !important;
+  }
+
+  /* Engineering drawer */
+  #a8-engineering-relationship-drawer{
+    background:rgba(24,17,10,.20) !important;
+  }
+
+  /* External-media stage */
+  .a8-video-stage{
+    background:rgba(5,10,16,.20) !important;
+  }
+
+  /* Generic legacy panels/pre blocks inherited from style.css */
+  .panel{
+    background:rgba(8,14,21,.24) !important;
+  }
+
+  pre{
+    background:rgba(6,11,17,.24) !important;
+  }
+
+  .metrics > div{
+    background:rgba(8,14,21,.22) !important;
+  }
+
+  /* Keep controls readable */
+  button,
+  input,
+  select{
+    background:rgba(14,20,27,.72) !important;
+  }
+
+  /* Mobile needs a little more contrast */
+  @media(max-width:800px){
+    .hero,
+    .card{
+      background:rgba(7,11,16,.46) !important;
+      backdrop-filter:none !important;
+      -webkit-backdrop-filter:none !important;
+    }
+
+    .a8-live-instruments .inst,
+    .a8-context-card,
+    .a8-slip-step,
+    .a8-observed-card,
+    .a8-ruler{
+      background:rgba(8,14,21,.34) !important;
+    }
+  }
+</style>
+
+
+<style id="a8-dual-clock-display-style">
+  #a8LiveClock{
+    display:block;
+    white-space:pre-line !important;
+    line-height:1.30;
+  }
+</style>
+
 </head>
 <body>
 
@@ -56,94 +651,110 @@
 #a8-topside-coherence-02 .cosigo-global-brand small{
   display:block;opacity:.72;font-size:.62rem;
 }
-#a8-topside-coherence-02 .a8-location{
-  margin-left:auto;
-  font-size:.76rem;
-  font-weight:900;
-  letter-spacing:.07em;
-  color:#e0bd72;
-}
-#a8-topside-coherence-02 .a8-system-links,
-#a8-topside-coherence-02 .a8-utility-links{
-  max-width:1440px;
-  margin:8px auto 0;
-  display:flex;
-  flex-wrap:wrap;
-  gap:7px;
-  align-items:center;
-}
 #a8-topside-coherence-02 a{text-decoration:none}
-#a8-topside-coherence-02 .a8-system-links a{
-  padding:7px 9px;
+#a8-topside-coherence-02 .a8-menu{
+  position:relative;
+  margin-left:auto;
+}
+#a8-topside-coherence-02 .a8-menu summary{
+  list-style:none;
+  cursor:pointer;
+  padding:8px 11px;
   border:1px solid #425467;
   border-radius:8px;
   background:#111820;
-  color:#c8ddf5;
-  font-size:.80rem;
-  font-weight:850;
-}
-#a8-topside-coherence-02 .a8-system-links a[data-current="true"]{
-  border-color:#6d9cff;color:#fff;
-}
-#a8-topside-coherence-02 .a8-utility-links{
-  padding-top:7px;
-  border-top:1px solid rgba(255,255,255,.08);
-}
-#a8-topside-coherence-02 .a8-utility-links a{
-  color:#92a5b8;
-  font-size:.70rem;
-  font-weight:700;
-}
-#a8-topside-coherence-02 .a8-utility-label{
-  color:#617487;
-  font-size:.68rem;
+  color:#e0bd72;
+  font-size:.76rem;
   font-weight:900;
-  letter-spacing:.05em;
+  letter-spacing:.07em;
+  user-select:none;
+}
+#a8-topside-coherence-02 .a8-menu summary::-webkit-details-marker{
+  display:none;
+}
+#a8-topside-coherence-02 .a8-menu summary::after{
+  content:" ▾";
+  color:#92a5b8;
+}
+#a8-topside-coherence-02 .a8-menu[open] summary::after{
+  content:" ▴";
+}
+#a8-topside-coherence-02 .a8-menu-panel{
+  position:absolute;
+  z-index:1000;
+  right:0;
+  top:calc(100% + 7px);
+  min-width:180px;
+  padding:7px;
+  border:1px solid #425467;
+  border-radius:9px;
+  background:#0d141b;
+  box-shadow:0 12px 28px rgba(0,0,0,.38);
+}
+#a8-topside-coherence-02 .a8-menu-panel a{
+  display:block;
+  padding:9px 10px;
+  border-radius:6px;
+  color:#c8ddf5;
+  font-size:.78rem;
+  font-weight:800;
+  white-space:nowrap;
+}
+#a8-topside-coherence-02 .a8-menu-panel a:hover,
+#a8-topside-coherence-02 .a8-menu-panel a:focus,
+#a8-topside-coherence-02 .a8-menu-panel a[aria-current="page"]{
+  background:#182431;
+  color:#fff;
 }
 @media(max-width:760px){
-  #a8-topside-coherence-02 .a8-location{
-    width:100%;margin-left:0;
+  #a8-topside-coherence-02 .a8-menu-panel{
+    min-width:170px;
   }
 }
 </style>
-<nav id="a8-topside-coherence-02" class="cosigo-global-nav" aria-label="A8 Time Lab navigation">
+
+<nav id="a8-topside-coherence-02"
+     class="cosigo-global-nav"
+     aria-label="A8 Time Lab navigation">
+
   <div class="a8-topline">
-    <a class="cosigo-global-brand" href="https://cosigo.io/" aria-label="COSIGO home">
+    <a class="cosigo-global-brand"
+       href="https://cosigo.io/"
+       aria-label="COSIGO home">
       <img src="/assets/cosigo_master_512.gif" alt="COSIGO">
       <span>COSIGO<small>LABS · AUSPICIOUS 8</small></span>
     </a>
-    <div class="a8-location">YOU ARE HERE · TERRA SHIP SLIP · ROTATION / ORBIT RELATIONSHIP</div>
-  </div>
-  <div class="a8-system-links">
-    <a href="/index.html">A8 LAB HOME</a>
-    <a href="/calendar.html">CALENDAR</a>
-    
-    <a href="/moons.html">4-MOON VIEW</a>
-    <a href="/mintaka.html">MINTAKA</a>
-    <a href="/sol.html">SOL</a>
-    <a href="/relationship.html" aria-current="page" data-current="true">TERRA SHIP SLIP</a>
-    
-  </div>
-  <div class="a8-utility-links">
-    <span class="a8-utility-label">UTILITY ·</span>
-    <a href="/map-clock-compass.html">MAP · CLOCK · COMPASS</a>
-    <a href="/navigation.html">NAVIGATION</a>
-    <a href="/celestial.html">CELESTIAL</a>
-    <a href="https://a8.cosigo.io/canonical.html">CANONICAL</a>
-    <a href="https://a8.cosigo.io/open-research.html">OPEN RESEARCH</a>
-    <a href="https://a8.cosigo.io/">A8 PUBLIC</a>
-    <a href="https://lab.a8.cosigo.io/">LIVE LAB</a>
-    <a href="https://cosigo.io/">COSIGO HOME</a>
-    <a href="https://contact.cosigo.io/">CONTACT</a>
-    <a href="https://github.com/cosigo">GITHUB</a>
+
+    <details class="a8-menu">
+      <summary>MENU</summary>
+      <div class="a8-menu-panel">
+        <a href="https://lab.a8.cosigo.io/">LAB HOME</a>
+        <a href="https://clock.cosigo.io/">CLOCK</a>
+        <a href="https://calendar.cosigo.io/">CALENDAR</a>
+        <a href="https://moons.cosigo.io/">MOONS</a>
+        <a href="https://mintaka.cosigo.io/">MINTAKA</a>
+        <a href="https://sol.cosigo.io/">SOL</a>
+        <a href="https://map.cosigo.io/">MAP · CLOCK · COMPASS</a>
+        <a href="https://sea.cosigo.io/">NAVIGATION</a>
+        <a href="https://stars.cosigo.io/">CELESTIAL</a>
+        <a href="https://audio.cosigo.io/">AUDIO</a>
+        <a href="https://quartz.cosigo.io/">QUARTZ</a>
+        <a href="https://a8.cosigo.io/">A8 PUBLIC</a>
+        <a href="https://about.cosigo.io/">ABOUT</a>
+        <a href="https://contestant.cosigo.io/">FUN</a>
+        <a href="https://cosigo.io/">COSIGO HOME</a>
+        <a href="https://github.com/cosigo/a8">GITHUB</a>
+      </div>
+    </details>
   </div>
 </nav>
+
 <main>
 
 <section class="hero">
     <div class="eyebrow">AUSPICIOUS 8 · TIME LAB v5.4.20 · GATE 4D</div>
-    <h1 class="title">TERRA SHIP SLIP</h1>
-    <p><b>LIVE ROTATION ↔ ORBIT RELATIONSHIP · EVENT-TRIGGERED DOWNSTREAM ACCUMULATION</b></p>
+    <h1 class="title">SPACESHIP EARTH</h1>
+    <p><b>TERRA SHIP SLIP · LIVE ROTATION ↔ ORBIT RELATIONSHIP · EVENT-TRIGGERED DOWNSTREAM ACCUMULATION</b></p>
     <p class="muted">
       Jupiter remains the upstream natural timekeeper.
       Mintaka witnesses Earth axial rotation.
@@ -152,6 +763,636 @@
       while the clock and every upstream observer remain outside its write boundary.
     </p>
   </section>
+
+<section
+    id="a8-terra-slip-machine"
+    class="card"
+    style="margin-top:16px"
+  >
+    <div class="a8-slip-content">
+
+      <h2>TERRA SHIP SLIP · LIVE ROTATION / ORBIT MACHINE</h2>
+
+      <p class="a8-slip-lead">
+        Terra rotates while Terra simultaneously advances around Sol.
+        The stellar axial return and the solar return therefore do not
+        close at the same instant. A8 calls that rotation / orbit
+        mismatch <b>Terra Ship Slip</b>.
+      </p>
+
+      <p class="a8-slip-lead">
+        The astronomical motions are not new. What A8 adds here is one
+        native ruler, recovered raw evidence and a visible machine showing
+        the relationship in A8 time, A8 angle and native A8 rates.
+      </p>
+
+      <div class="a8-live-instruments">
+
+        <div class="inst">
+          <span class="ik">A8 TIME · CORE20</span>
+          <span id="a8LiveClock" class="iv">CONNECTING</span>
+        </div>
+
+        <div class="inst">
+          <span class="ik">DAY PHASE</span>
+          <span id="a8LiveDayPhase" class="iv">CONNECTING</span>
+        </div>
+
+        <div class="inst">
+          <span class="ik">SELECTED RAW COUNT</span>
+          <span id="a8LiveRaw" class="iv">CONNECTING</span>
+        </div>
+
+        <div class="inst">
+          <span class="ik">A8 ANGLE · FULL ROTATION</span>
+          <span class="iv">512 A8 · 1000₈ RECURRENCE</span>
+          <span class="ik" style="margin-top:6px">
+            STORED STATES · 000₈ → 777₈
+          </span>
+        </div>
+
+        <div class="inst">
+          <span class="ik">ORBITAL ADVANCE / AXIAL ROTATION</span>
+          <span id="a8LiveSlipRate" class="iv">CONNECTING</span>
+        </div>
+
+        <div class="inst">
+          <span class="ik">SUN CLOSURE / AXIAL ROTATION</span>
+          <span id="a8LiveClosure" class="iv">CONNECTING</span>
+        </div>
+
+        <div class="inst">
+          <span class="ik">SOL ANGLE / RAW COUNT</span>
+          <span id="a8LiveSolRawRate" class="iv">CONNECTING</span>
+        </div>
+
+        <div class="inst">
+          <span class="ik">SUN RETURN</span>
+          <span id="a8LiveSunReturn" class="iv">CONNECTING</span>
+        </div>
+
+      </div>
+
+      <div class="a8-machine-shell">
+
+        <svg
+          id="a8SlipMachineSvg"
+          viewBox="0 0 1000 570"
+          role="img"
+          aria-label="Animated Terra Ship Slip rotation and orbital advance simulation"
+        >
+
+          <!-- stars / fixed reference -->
+          <g opacity=".8">
+            <circle cx="86" cy="80" r="5" fill="currentColor"/>
+            <circle cx="86" cy="80" r="14"
+                    fill="none"
+                    stroke="currentColor"
+                    opacity=".25"/>
+
+            <text
+              x="112"
+              y="86"
+              class="a8-machine-label"
+            >
+              MINTAKA · AXIAL ROTATION WITNESS
+            </text>
+
+            <line
+              x1="90"
+              y1="102"
+              x2="420"
+              y2="260"
+              stroke="currentColor"
+              stroke-dasharray="7 9"
+              opacity=".22"
+            />
+          </g>
+
+          <!-- orbit -->
+          <ellipse
+            cx="500"
+            cy="270"
+            rx="350"
+            ry="170"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            opacity=".24"
+          />
+
+          <!-- orbital direction arrow -->
+          <path
+            d="M 780 166 Q 845 210 850 270"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="4"
+            opacity=".55"
+          />
+
+          <text
+            x="770"
+            y="145"
+            class="a8-machine-small"
+          >
+            ORBITAL ADVANCE
+          </text>
+
+          <!-- Sol -->
+          <g>
+            <circle
+              cx="500"
+              cy="270"
+              r="46"
+              fill="currentColor"
+              opacity=".88"
+            />
+
+            <circle
+              cx="500"
+              cy="270"
+              r="67"
+              fill="none"
+              stroke="currentColor"
+              opacity=".13"
+            />
+
+            <text
+              x="500"
+              y="277"
+              text-anchor="middle"
+              font-size="18"
+              font-weight="900"
+              fill="#081018"
+            >
+              SOL
+            </text>
+          </g>
+
+          <!-- animated explanatory Terra -->
+          <g id="a8DemoTerra">
+
+            <circle
+              cx="0"
+              cy="0"
+              r="33"
+              fill="#17283b"
+              stroke="currentColor"
+              stroke-width="3"
+            />
+
+            <g id="a8DemoTerraSpin">
+              <line
+                x1="0"
+                y1="0"
+                x2="0"
+                y2="-30"
+                stroke="currentColor"
+                stroke-width="5"
+                stroke-linecap="round"
+              />
+              <circle
+                cx="0"
+                cy="-30"
+                r="5"
+                fill="currentColor"
+              />
+            </g>
+
+            <text
+              x="0"
+              y="57"
+              text-anchor="middle"
+              class="a8-machine-label"
+            >
+              TERRA
+            </text>
+
+          </g>
+
+          <!-- visible slip wedge -->
+          <g>
+            <path
+              id="a8SlipArc"
+              d=""
+              fill="none"
+              stroke="currentColor"
+              stroke-width="8"
+              stroke-linecap="round"
+              opacity=".85"
+            />
+          </g>
+
+        </svg>
+
+      </div>
+
+      <div class="a8-slip-equation">
+
+        <div style="
+          display:grid;
+          grid-template-columns:1fr auto 1fr auto 1fr;
+          gap:14px;
+          align-items:center;
+          text-align:center;
+          font-size:clamp(1rem,2.5vw,1.55rem);
+        ">
+
+          <div>
+            <strong>512 A8</strong><br>
+            <small>FULL AXIAL TURN</small>
+          </div>
+
+          <div>−</div>
+
+          <div>
+            <strong id="a8EquationSlip">1 A8</strong><br>
+            <small>ORBITAL ADVANCE</small>
+          </div>
+
+          <div>=</div>
+
+          <div>
+            <strong id="a8EquationClosure">511 A8 · 777₈</strong><br>
+            <small>SUN CLOSURE</small>
+          </div>
+
+        </div>
+
+        <div style="
+          margin-top:14px;
+          text-align:center;
+          font-size:.9rem;
+          font-weight:600;
+          opacity:.72;
+        ">
+          TERRA ROTATES WHILE TERRA MOVES FORWARD AROUND SOL
+        </div>
+
+      </div>
+
+      <div
+        id="a8-slip-mechanical-explanation"
+        class="card"
+      >
+
+        <h3>WHAT 512 − 1 = 511 MEANS</h3>
+
+        <p class="a8-slip-explain-lead">
+          Start with Terra at one orientation relative to the stars and Sol.
+          Terra then rotates, but Terra is not sitting still while it rotates:
+          the entire planet is simultaneously advancing around Sol.
+          Terra Ship Slip is the A8 expression of that rotation / orbit
+          mismatch.
+        </p>
+
+        <div class="a8-slip-steps">
+
+          <div class="a8-slip-step">
+
+            <span class="a8-slip-step-number">
+              1 · FULL AXIAL TURN
+            </span>
+
+            <span class="a8-slip-step-value">
+              512 A8 · 1000₈ recurrence
+            </span>
+
+            One complete axial rotation relative to the stellar witness.
+            The stored A8 angular states run
+            <b>000₈ → 777₈</b>; <b>1000₈</b> is the return to the
+            starting direction.
+
+          </div>
+
+          <div class="a8-slip-step">
+
+            <span class="a8-slip-step-number">
+              2 · ORBITAL ADVANCE DURING THAT TURN
+            </span>
+
+            <span class="a8-slip-step-value">
+              1 A8
+            </span>
+
+            During that same complete axial rotation, the recovered Core20
+            relationship shows Terra advancing by
+            <b>1 A8 angle</b> around Sol.
+
+          </div>
+
+          <div class="a8-slip-step">
+
+            <span class="a8-slip-step-number">
+              3 · SUN CLOSURE PER AXIAL TURN
+            </span>
+
+            <span class="a8-slip-step-value">
+              511 A8 · 777₈
+            </span>
+
+            Because Terra moved forward while rotating, one stellar axial
+            turn does not produce one complete Sun return. The Sun-relative
+            closure gained during that axial rotation is:
+
+            <b>512 − 1 = 511 A8</b>.
+
+          </div>
+
+          <div class="a8-slip-step">
+
+            <span class="a8-slip-step-number">
+              4 · COMPLETE SUN RETURN
+            </span>
+
+            <span class="a8-slip-step-value">
+              512 / 511 axial rotations
+            </span>
+
+            A complete Sun-relative return requires the full
+            <b>512 A8</b> closure. At <b>511 A8</b> of closure per
+            axial rotation, the recovered relationship is therefore
+            <b>512/511 axial rotations per Sun return</b>.
+
+          </div>
+
+        </div>
+
+        <div class="a8-slip-result">
+
+          <b>TERRA ROTATES WHILE TERRA MOVES FORWARD AROUND SOL</b>
+
+          <span class="a8-slip-result-equation">
+            512 A8 − 1 A8 = 511 A8
+          </span>
+
+          FULL AXIAL TURN − ORBITAL ADVANCE = SUN CLOSURE
+
+          <span class="a8-slip-result-equation">
+            SUN RETURN = 512 / 511 AXIAL ROTATIONS
+          </span>
+
+        </div>
+
+        <p class="a8-slip-reference-note">
+          <b>DATA NOTE:</b>
+          1 A8 orbital advance and 511 A8 Sun closure are the recovered
+          Core20 reference relationship. When the live Terra Ship Slip
+          endpoint is qualified, the live reader replaces the displayed
+          relationship values from Core20. The moving outside-view graphic
+          is an explanatory simulation only; its browser animation speed
+          does not define A8 time, angle, raw count or rate.
+        </p>
+
+      </div>
+
+
+      <p class="a8-sim-warning">
+        <b>SIMULATION NOTICE:</b>
+        the moving Terra graphic is an accelerated explanatory simulation.
+        Browser animation speed is not A8 time, does not advance raw count,
+        does not accumulate Terra Ship Slip and has no Core20 authority.
+        The instrument values above are read-only Core20 data.
+      </p>
+
+      <div class="a8-context-grid">
+
+        <div class="a8-context-card">
+
+          <h3>OUTSIDE LOOKING IN · GALACTIC CONTEXT</h3>
+
+          <p>
+            We observe from inside the Solar System and inside the Milky Way.
+            Face-on and outside-the-galaxy views are therefore reconstructed
+            simulations built from astronomical observations and models.
+            They are useful visualization, not a camera placed outside the
+            Galaxy.
+          </p>
+
+          <p>
+            The Solar System itself moves around the Galactic centre.
+            That larger motion is mainstream astronomical context; it is
+            not currently part of the defining Terra Ship Slip authority
+            chain shown on this page.
+          </p>
+
+          <div class="a8-source-links">
+            <a
+              href="https://science.nasa.gov/solar-system/solar-system-facts/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              NASA · SOLAR SYSTEM FACTS
+            </a>
+
+            <a
+              href="https://www.esa.int/Science_Exploration/Space_Science/Gaia/Guide_to_our_galaxy"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              ESA · GAIA MILKY WAY
+            </a>
+          </div>
+
+        </div>
+
+        <div class="a8-context-card">
+
+          <h3>ESA / GAIA · OUTSIDE-VIEW SIMULATION</h3>
+
+          <div
+            id="a8GaiaStage"
+            class="a8-video-stage"
+          >
+            <button
+              id="a8GaiaPlay"
+              type="button"
+            >
+              PLAY ESA / GAIA OUTSIDE VIEW
+            </button>
+          </div>
+
+          <p class="a8-sim-warning">
+            External media loads only after PLAY is selected.
+            ESA/Gaia visualization is contextual reference only and has
+            no A8 authority.
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+<section
+  id="a8-observatory-reference"
+  class="card"
+  style="margin-top:16px"
+>
+
+  <div class="a8-public-kicker">
+    SAME SKY · DIFFERENT RULER
+  </div>
+
+  <h2>OBSERVATORY REFERENCE · CONVERTED TO A8</h2>
+
+  <p class="a8-public-lead">
+    The motion shown above is established astronomy.
+    These values use published mean Earth rotation and orbital
+    reference data, then express the same physical relationship
+    on the A8 full-turn ruler.
+  </p>
+
+  <div class="a8-observed-grid">
+
+    <div class="a8-observed-card">
+      <span class="a8-observed-label">
+        A8 FULL TURN
+      </span>
+      <strong>512 A8</strong>
+      <small>000₈ → 777₈ · 1000₈ recurrence</small>
+    </div>
+
+    <div class="a8-observed-card">
+      <span class="a8-observed-label">
+        STELLAR ROTATIONS / ORBIT
+      </span>
+      <strong>366.256398765</strong>
+      <small>published mean-reference conversion</small>
+    </div>
+
+    <div class="a8-observed-card">
+      <span class="a8-observed-label">
+        ORBITAL ADVANCE / STELLAR ROTATION
+      </span>
+      <strong>1.397927795 A8</strong>
+      <small>mean published astronomy → A8 angle</small>
+    </div>
+
+    <div class="a8-observed-card">
+      <span class="a8-observed-label">
+        SUN CLOSURE / STELLAR ROTATION
+      </span>
+      <strong>510.602072205 A8</strong>
+      <small>512 − orbital advance</small>
+    </div>
+
+    <div class="a8-observed-card">
+      <span class="a8-observed-label">
+        MEAN SUN RETURN
+      </span>
+      <strong>1.002737803</strong>
+      <small>stellar rotations per Sun return</small>
+    </div>
+
+    <div class="a8-observed-card">
+      <span class="a8-observed-label">
+        SOURCE STATUS
+      </span>
+      <strong>PUBLISHED REFERENCE</strong>
+      <small>comparison evidence · not Core20 authority</small>
+    </div>
+
+  </div>
+
+  <div class="a8-simple-equation">
+    <div>
+      <b>Terra turns.</b>
+    </div>
+
+    <div>
+      <b>Terra also travels around Sol.</b>
+    </div>
+
+    <div>
+      <b>Those motions do not close together.</b>
+    </div>
+
+    <div class="a8-simple-result">
+      COUNT IT · MEASURE IT · COMPARE IT
+    </div>
+  </div>
+
+  <p class="a8-public-note">
+    Published mean reference:
+    JPL Solar System Dynamics lists a mean sidereal day of
+    <b>86164.09054 legacy seconds</b> and a sidereal year of
+    <b>365.25636 legacy days</b>. Those legacy quantities are used
+    here only as published source coordinates from which the
+    relationship is converted to the native 512-A8 angular ruler.
+  </p>
+
+  <p class="a8-public-links">
+    <a
+      href="https://ssd.jpl.nasa.gov/astro_par.html"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      JPL · ASTRODYNAMIC PARAMETERS
+    </a>
+  </p>
+
+  <h3 style="margin-top:22px">
+    A8 RULER KEY
+  </h3>
+
+  <div class="a8-ruler-grid">
+
+    <div class="a8-ruler">
+      <span>ANGLE</span>
+      <strong>512 A8</strong>
+      <small>one complete turn</small>
+    </div>
+
+    <div class="a8-ruler">
+      <span>CRYSTAL-SCALE LADDER</span>
+      <strong>A8/0</strong>
+      <small>≈ 0.535455 legacy nm from current ladder stake</small>
+    </div>
+
+    <div class="a8-ruler">
+      <span>HUMAN LENGTH</span>
+      <strong>A8/31</strong>
+      <small>≈ 1.14988 legacy m</small>
+    </div>
+
+    <div class="a8-ruler">
+      <span>GENERAL ROUTE SCALE</span>
+      <strong>A8/41</strong>
+      <small>≈ 1.17747 legacy km</small>
+    </div>
+
+    <div class="a8-ruler">
+      <span>EARTH NAVIGATION</span>
+      <strong>A8 NAV</strong>
+      <small>
+        ≈ 1.22197 legacy km · ≈ 1.03779 A8/41
+      </small>
+    </div>
+
+    <div class="a8-ruler">
+      <span>SOLAR ORBIT LENGTH</span>
+      <strong>RUNG OPEN</strong>
+      <small>
+        calculate first · choose useful rung afterward
+      </small>
+    </div>
+
+  </div>
+
+  <p class="a8-public-note">
+    The orbital-distance rung is deliberately not forced to a pretty
+    value. If the useful result is 65.78 A8/69, then 65.78 A8/69 is
+    what gets published. The binary ladder stays clean; Nature's
+    measured number does not have to be.
+  </p>
+
+</section>
+
+
+
 
   <section class="grid">
     <div class="card">
@@ -199,7 +1440,11 @@
     </div>
   </section>
 
-  <section class="card" style="margin-top:16px">
+  
+  
+
+
+<section class="card" style="margin-top:16px">
     <h2>Event wiring</h2>
     <pre>ACCEPTED MINTAKA OBSERVATION
         │
@@ -240,12 +1485,43 @@ gap >1
   </section>
 
   <section class="card" style="margin-top:16px">
-    <h2>Still absent</h2>
+    <h2>Current Core20 closure</h2>
+
+    <pre>JUPITER · IO / EUROPA / GANYMEDE
+        │
+        ▼
+RECOVERED NATURAL ELAPSED-TIME RULER
+        │
+        ├──► MINTAKA · EARTH AXIAL ROTATION
+        │
+        └──► SOL · EARTH ORBITAL ADVANCE
+                    │
+                    ▼
+             TERRA SHIP SLIP
+                    │
+                    ▼
+        RECOVERED SUN-RETURN RECURRENCE
+                    │
+                    ▼
+             2^17 DAY_PHASE17
+                    │
+                    ▼
+            32 × 64 × 64 A8 CLOCK</pre>
+
+    <p>
+      The distinction between stellar return and solar return is established
+      astronomy. Core20 expresses the relationship with native A8 angle and
+      recovered raw evidence, then carries the recovered Sun-return recurrence
+      downstream into DAY_PHASE17.
+    </p>
+
     <p class="muted">
-      Terra Ship Slip authority · Mean Sun · solar-day recurrence · Earth-day
-      authority/divider · calendar rule · clock discipline · legacy timestamp in the defining path.
+      Mintaka witnesses axial rotation. Sol witnesses orbital direction.
+      Terra Ship Slip is their recovered rotation / orbit relationship.
+      Browser graphics remain presentation only.
     </p>
   </section>
+
 </main>
 
 <script>
@@ -309,5 +1585,980 @@ async function refresh(){
 refresh();
 setInterval(refresh,1000);
 </script>
+
+<script id="a8-terra-slip-machine-script">
+(() => {
+  'use strict';
+
+  const $ = id => document.getElementById(id);
+
+  const ui = {
+    clock: $('a8LiveClock'),
+    day: $('a8LiveDayPhase'),
+    year: $('a8LiveYearAngle'),
+    raw: $('a8LiveRaw'),
+    slip: $('a8LiveSlipRate'),
+    solRaw: $('a8LiveSolRawRate'),
+    closure: $('a8LiveClosure'),
+    sunReturn: $('a8LiveSunReturn'),
+
+    svgSlip: $('a8SvgSlip'),
+    svgClosure: $('a8SvgClosure'),
+
+    liveMarker: $('a8LiveOrbitMarker'),
+    demoTerra: $('a8DemoTerra'),
+    demoSpin: $('a8DemoTerraSpin'),
+    slipArc: $('a8SlipArc'),
+
+    gaiaPlay: $('a8GaiaPlay'),
+    gaiaStage: $('a8GaiaStage')
+  };
+
+  let liveOrbitDegrees = null;
+  let liveSlip = 1;
+
+  function rationalText(r){
+    if (!r) return '—';
+
+    if (r.text) return String(r.text);
+
+    if (
+      r.numerator !== undefined &&
+      r.denominator !== undefined
+    ) {
+      if (String(r.denominator) === '1') {
+        return String(r.numerator);
+      }
+
+      return `${r.numerator}/${r.denominator}`;
+    }
+
+    return '—';
+  }
+
+  function rationalNumber(r){
+    if (!r) return null;
+
+    const n = Number(r.numerator);
+    const d = Number(r.denominator);
+
+    if (
+      !Number.isFinite(n) ||
+      !Number.isFinite(d) ||
+      d === 0
+    ) {
+      return null;
+    }
+
+    return n / d;
+  }
+
+  function gcd(a,b){
+    a = a < 0n ? -a : a;
+    b = b < 0n ? -b : b;
+
+    while (b !== 0n) {
+      const t = b;
+      b = a % b;
+      a = t;
+    }
+
+    return a;
+  }
+
+  function closureAndReturn(r){
+    if (!r) return null;
+
+    try {
+      const n = BigInt(r.numerator);
+      const d = BigInt(r.denominator);
+
+      if (d === 0n) return null;
+
+      const closureN = 512n * d - n;
+      const closureD = d;
+
+      let cg = gcd(closureN, closureD);
+
+      const cN = closureN / cg;
+      const cD = closureD / cg;
+
+      const returnN = 512n * d;
+      const returnD = closureN;
+
+      let rg = gcd(returnN, returnD);
+
+      const rN = returnN / rg;
+      const rD = returnD / rg;
+
+      return {
+        closure:
+          cD === 1n
+            ? String(cN)
+            : `${cN}/${cD}`,
+
+        sunReturn:
+          rD === 1n
+            ? String(rN)
+            : `${rN}/${rD}`
+      };
+
+    } catch (_) {
+      return null;
+    }
+  }
+
+  function octalInteger(value, minDigits=1){
+    try {
+      const x = BigInt(String(value));
+
+      return (
+        x.toString(8).padStart(minDigits,'0') +
+        '₈'
+      );
+    } catch (_) {
+      return '—';
+    }
+  }
+
+  async function json(url){
+    const r = await fetch(url, {cache:'no-store'});
+
+    if (!r.ok) {
+      throw new Error(`${url} · HTTP ${r.status}`);
+    }
+
+    return r.json();
+  }
+
+  async function refreshLive(){
+    try {
+      const [
+        clockPayload,
+        yearPayload,
+        relationshipPayload,
+        accumulatorPayload,
+        solScalePayload
+      ] = await Promise.all([
+        json('/api/core20/clock'),
+        json('/api/core20/year-angle'),
+        json('/api/terra-ship-slip'),
+        json('/api/terra-ship-slip/accumulator'),
+        json('/api/hardware/sol-orbital-scale')
+      ]);
+
+      const c =
+        clockPayload.clock || {};
+
+      if (ui.clock) {
+        const phaseForClock =
+          Number(c.dayPhase17);
+
+        const derivedDecimalClock =
+          Number.isInteger(phaseForClock)
+            ? `${String(Math.floor(phaseForClock / 4096)).padStart(2,'0')}:${String(Math.floor((phaseForClock % 4096) / 64)).padStart(2,'0')}:${String(phaseForClock % 64).padStart(2,'0')}`
+            : null;
+
+        const decimalClock =
+          c.clock?.decimal ||
+          derivedDecimalClock;
+
+        const rawOctalClock =
+          c.clock?.octal ||
+          c.clock?.textOctal ||
+          null;
+
+        const octalClock =
+          rawOctalClock &&
+          !String(rawOctalClock).endsWith('₈')
+            ? `${rawOctalClock}₈`
+            : rawOctalClock;
+
+        ui.clock.textContent =
+          decimalClock && octalClock
+            ? `${decimalClock} · BASE 10\n${octalClock} · BASE 8`
+            : decimalClock
+              ? `${decimalClock} · BASE 10`
+              : octalClock
+                ? `${octalClock} · BASE 8`
+                : c.status || '—';
+      }
+
+      if (ui.day) {
+        const d = c.dayPhase17;
+
+        ui.day.textContent =
+          d !== undefined
+            ? `${d} · ${octalInteger(d,6)}`
+            : '—';
+      }
+
+      if (ui.raw) {
+        const raw =
+          c.currentSelectedRawPulse;
+
+        ui.raw.textContent =
+          raw !== undefined
+            ? `${raw} · ${octalInteger(raw)}`
+            : '—';
+      }
+
+      const y =
+        yearPayload.yearAngle || {};
+
+      if (ui.year) {
+        ui.year.textContent =
+          y.phase9Octal ||
+          (
+            y.aligned === false
+              ? 'AWAITING ONE-SHOT ORIENTATION'
+              : '—'
+          );
+      }
+
+      if (
+        y.phase27 !== undefined &&
+        y.phase27 !== null
+      ) {
+        const p = Number(y.phase27);
+
+        if (Number.isFinite(p)) {
+          liveOrbitDegrees =
+            (p / 134217728) * 360;
+        }
+      }
+
+      let slip = null;
+
+      if (
+        relationshipPayload.ready &&
+        relationshipPayload.terraShipSlip
+      ) {
+        slip =
+          relationshipPayload
+            .terraShipSlip
+            .solAdvancePerMintakaRotation512;
+      }
+
+      const scale =
+        solScalePayload.scale || {};
+
+      if (!slip) {
+        slip =
+          scale.solAdvancePerEarthAxialRotation512;
+      }
+
+      if (slip) {
+        const v = rationalNumber(slip);
+
+        if (Number.isFinite(v)) {
+          liveSlip = v;
+        }
+
+        const txt = rationalText(slip);
+
+        if (ui.slip) {
+          ui.slip.textContent =
+            `${txt} A8 / axial rotation`;
+        }
+
+        if (ui.svgSlip) {
+          ui.svgSlip.textContent = txt;
+        }
+
+        const cr = closureAndReturn(slip);
+
+        if (cr) {
+          if (ui.closure) {
+            ui.closure.textContent =
+              `${cr.closure} A8`;
+          }
+
+          if (ui.sunReturn) {
+            ui.sunReturn.textContent =
+              `${cr.sunReturn} axial rotations`;
+          }
+
+          if (ui.svgClosure) {
+            ui.svgClosure.textContent =
+              cr.closure;
+          }
+        }
+      }
+
+      if (ui.solRaw) {
+        const r =
+          scale.solAdvancePerRawPulse512;
+
+        ui.solRaw.textContent =
+          r
+            ? `${rationalText(r)} A8 / raw`
+            : '—';
+      }
+
+      /*
+       * Existing accumulator remains read-only.
+       * Merely touching the response here does not
+       * accumulate or alter anything.
+       */
+      void accumulatorPayload;
+
+    } catch (err) {
+      if (ui.clock) {
+        ui.clock.textContent =
+          'CORE20 DATA UNAVAILABLE';
+      }
+
+      console.warn(
+        'Terra Ship Slip presentation refresh:',
+        err
+      );
+    }
+  }
+
+  function pointOnEllipse(deg){
+    const a =
+      deg * Math.PI / 180;
+
+    return {
+      x: 500 + 350 * Math.cos(a),
+      y: 270 + 170 * Math.sin(a)
+    };
+  }
+
+  function polar(cx,cy,r,deg){
+    const a =
+      (deg - 90) * Math.PI / 180;
+
+    return {
+      x: cx + r * Math.cos(a),
+      y: cy + r * Math.sin(a)
+    };
+  }
+
+  function arcPath(cx,cy,r,startDeg,endDeg){
+    const start =
+      polar(cx,cy,r,endDeg);
+
+    const end =
+      polar(cx,cy,r,startDeg);
+
+    const large =
+      endDeg - startDeg <= 180 ? 0 : 1;
+
+    return [
+      'M',start.x,start.y,
+      'A',r,r,0,large,0,end.x,end.y
+    ].join(' ');
+  }
+
+  const animationStart =
+    performance.now();
+
+  function animate(now){
+    const seconds =
+      (now - animationStart) / 1000;
+
+    /*
+     * EXPLANATORY MOTION ONLY.
+     *
+     * One displayed axial turn ≈ 3.2 s.
+     * One displayed orbit ≈ 42 s.
+     *
+     * These speeds are deliberately accelerated
+     * and never feed Core20.
+     */
+
+    const demoOrbitDeg =
+      (seconds / 42) * 360;
+
+    const demoSpinDeg =
+      (seconds / 3.2) * 360;
+
+    if (ui.demoTerra) {
+      const p =
+        pointOnEllipse(demoOrbitDeg);
+
+      ui.demoTerra.setAttribute(
+        'transform',
+        `translate(${p.x} ${p.y})`
+      );
+    }
+
+    if (ui.demoSpin) {
+      ui.demoSpin.setAttribute(
+        'transform',
+        `rotate(${demoSpinDeg})`
+      );
+    }
+
+    /*
+     * Separate small marker = actual Core20
+     * absolute year-angle position.
+     */
+    if (
+      ui.liveMarker &&
+      Number.isFinite(liveOrbitDegrees)
+    ) {
+      const p =
+        pointOnEllipse(liveOrbitDegrees);
+
+      ui.liveMarker.setAttribute(
+        'transform',
+        `translate(${p.x} ${p.y})`
+      );
+
+      ui.liveMarker.setAttribute(
+        'opacity',
+        '1'
+      );
+    }
+
+    /*
+     * Slip is ~1/512 turn in the current recovered
+     * relationship. Magnify ×24 so a person can see it.
+     */
+    if (ui.slipArc) {
+      const actualSlipDeg =
+        liveSlip * 360 / 512;
+
+      const visible =
+        Math.max(
+          .5,
+          Math.min(
+            150,
+            actualSlipDeg * 24
+          )
+        );
+
+      ui.slipArc.setAttribute(
+        'd',
+        arcPath(
+          820,
+          445,
+          45,
+          0,
+          visible
+        )
+      );
+    }
+
+    requestAnimationFrame(animate);
+  }
+
+  if (
+    ui.gaiaPlay &&
+    ui.gaiaStage
+  ) {
+    ui.gaiaPlay.addEventListener(
+      'click',
+      () => {
+        const iframe =
+          document.createElement('iframe');
+
+        iframe.src =
+          'https://www.youtube-nocookie.com/embed/wEZBNsU4dMU?rel=0';
+
+        iframe.title =
+          'ESA Gaia Milky Way outside-view simulation';
+
+        iframe.loading =
+          'lazy';
+
+        iframe.allow =
+          'accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture';
+
+        iframe.allowFullscreen =
+          true;
+
+        iframe.referrerPolicy =
+          'strict-origin-when-cross-origin';
+
+        ui.gaiaStage.replaceChildren(
+          iframe
+        );
+      },
+      {once:true}
+    );
+  }
+
+  /*
+   * Live numeric refresh is handled by the
+   * independent v2 instrument reader below.
+   */
+  requestAnimationFrame(animate);
+
+})();
+</script>
+
+
+<script id="a8-terra-slip-live-data-v2">
+(() => {
+  'use strict';
+
+  const $ = id =>
+    document.getElementById(id);
+
+  function rat(r){
+    if (!r) return '—';
+
+    if (r.text) return String(r.text);
+
+    if (
+      r.numerator !== undefined &&
+      r.denominator !== undefined
+    ) {
+      return String(r.denominator) === '1'
+        ? String(r.numerator)
+        : `${r.numerator}/${r.denominator}`;
+    }
+
+    return '—';
+  }
+
+  function num(r){
+    if (!r) return null;
+
+    const n = Number(r.numerator);
+    const d = Number(r.denominator);
+
+    return (
+      Number.isFinite(n) &&
+      Number.isFinite(d) &&
+      d !== 0
+    )
+      ? n / d
+      : null;
+  }
+
+  function oct(value){
+    try {
+      return BigInt(String(value)).toString(8) + '₈';
+    } catch (_) {
+      return '—';
+    }
+  }
+
+  async function get(url){
+    const r = await fetch(
+      url,
+      {cache:'no-store'}
+    );
+
+    if (!r.ok) {
+      throw new Error(
+        `${url} HTTP ${r.status}`
+      );
+    }
+
+    return r.json();
+  }
+
+  async function updateClock(){
+    try {
+      const payload =
+        await get('/api/core20/clock');
+
+      const c =
+        payload.clock || {};
+
+      const phaseForClock =
+        Number(c.dayPhase17);
+
+      const derivedDecimalClock =
+        Number.isInteger(phaseForClock)
+          ? `${String(Math.floor(phaseForClock / 4096)).padStart(2,'0')}:${String(Math.floor((phaseForClock % 4096) / 64)).padStart(2,'0')}:${String(phaseForClock % 64).padStart(2,'0')}`
+          : null;
+
+      const decimalClock =
+        c.clock?.decimal ||
+        derivedDecimalClock;
+
+      const rawOctalClock =
+        c.clock?.octal ||
+        c.clock?.textOctal ||
+        null;
+
+      const octalClock =
+        rawOctalClock &&
+        !String(rawOctalClock).endsWith('₈')
+          ? `${rawOctalClock}₈`
+          : rawOctalClock;
+
+      const clockText =
+        decimalClock && octalClock
+          ? `${decimalClock} · BASE 10\n${octalClock} · BASE 8`
+          : decimalClock
+            ? `${decimalClock} · BASE 10`
+            : octalClock
+              ? `${octalClock} · BASE 8`
+              : c.status || '—';
+
+      if ($('a8LiveClock')) {
+        $('a8LiveClock').textContent =
+          clockText;
+      }
+
+      if ($('a8LiveDayPhase')) {
+        const d =
+          c.dayPhase17;
+
+        $('a8LiveDayPhase').textContent =
+          d !== undefined
+            ? `${d} · ${oct(d)}`
+            : '—';
+      }
+
+      if ($('a8LiveRaw')) {
+        const raw =
+          c.currentSelectedRawPulse;
+
+        $('a8LiveRaw').textContent =
+          raw !== undefined
+            ? `${raw} · ${oct(raw)}`
+            : '—';
+      }
+
+    } catch (_) {
+      if ($('a8LiveClock')) {
+        $('a8LiveClock').textContent =
+          'CORE20 UNAVAILABLE';
+      }
+    }
+  }
+
+  async function updateRelationship(){
+    try {
+      const payload =
+        await get('/api/terra-ship-slip');
+
+      if (
+        !payload.ready ||
+        !payload.terraShipSlip
+      ) {
+        if ($('a8LiveSlipRate')) {
+          $('a8LiveSlipRate').textContent =
+            '1 A8 / rotation · RECOVERED REFERENCE';
+        }
+
+        return;
+      }
+
+      const slip =
+        payload
+          .terraShipSlip
+          .solAdvancePerMintakaRotation512;
+
+      const slipText =
+        rat(slip);
+
+      const slipNumber =
+        num(slip);
+
+      if ($('a8LiveSlipRate')) {
+        $('a8LiveSlipRate').textContent =
+          `${slipText} A8 / rotation`;
+      }
+
+      if ($('a8EquationSlip')) {
+        $('a8EquationSlip').textContent =
+          `${slipText} A8`;
+      }
+
+      if (Number.isFinite(slipNumber)) {
+
+        const closure =
+          512 - slipNumber;
+
+        const closureText =
+          Number.isInteger(closure)
+            ? String(closure)
+            : closure.toFixed(6);
+
+        if ($('a8LiveClosure')) {
+          $('a8LiveClosure').textContent =
+            `${closureText} A8`;
+        }
+
+        if ($('a8EquationClosure')) {
+          $('a8EquationClosure').textContent =
+            `${closureText} A8`;
+        }
+
+        if ($('a8LiveSunReturn')) {
+          /*
+           * Display is derived from the live
+           * relationship value only.
+           */
+          $('a8LiveSunReturn').textContent =
+            `${512}/${closureText} axial rotations`;
+        }
+      }
+
+    } catch (_) {
+      if ($('a8LiveSlipRate')) {
+        $('a8LiveSlipRate').textContent =
+          '1 A8 / rotation · RECOVERED REFERENCE';
+      }
+    }
+  }
+
+  async function updateSolRate(){
+    try {
+      const payload =
+        await get(
+          '/api/hardware/sol-orbital-scale'
+        );
+
+      const scale =
+        payload.scale || {};
+
+      const r =
+        scale.solAdvancePerRawPulse512;
+
+      if ($('a8LiveSolRawRate')) {
+        $('a8LiveSolRawRate').textContent =
+          r
+            ? `${rat(r)} A8 / raw`
+            : 'NOT AVAILABLE';
+      }
+
+    } catch (_) {
+      if ($('a8LiveSolRawRate')) {
+        $('a8LiveSolRawRate').textContent =
+          'SCALE UNAVAILABLE';
+      }
+    }
+  }
+
+  async function refresh(){
+    /*
+     * Independent calls:
+     * failure of one instrument cannot blank
+     * the others.
+     */
+    updateClock();
+    updateRelationship();
+    updateSolRate();
+  }
+
+  refresh();
+
+  setInterval(
+    refresh,
+    1000
+  );
+
+})();
+</script>
+
+
+<script id="a8-first-visitor-order-script">
+(() => {
+  'use strict';
+
+  function run(){
+
+    const machine =
+      document.getElementById(
+        'a8-terra-slip-machine'
+      );
+
+    const reference =
+      document.getElementById(
+        'a8-observatory-reference'
+      );
+
+    if (!machine || !reference) {
+      console.warn(
+        'A8 first-visitor layout: public sections missing'
+      );
+      return;
+    }
+
+    /*
+     * GEARS FIRST.
+     *
+     * Put the actual moving diagram directly below
+     * the machine heading before explanatory cards.
+     */
+    const shell =
+      machine.querySelector(
+        '.a8-machine-shell'
+      );
+
+    const machineHeading =
+      machine.querySelector('h2');
+
+    if (shell && machineHeading) {
+      machineHeading.after(shell);
+    }
+
+    /*
+     * Create one closed engineering drawer.
+     */
+    let drawer =
+      document.getElementById(
+        'a8-engineering-relationship-drawer'
+      );
+
+    if (!drawer) {
+
+      drawer =
+        document.createElement('details');
+
+      drawer.id =
+        'a8-engineering-relationship-drawer';
+
+      const summary =
+        document.createElement('summary');
+
+      summary.textContent =
+        'A8 ENGINEERING · CORE20 RELATIONSHIP / ACCUMULATOR';
+
+      const intro =
+        document.createElement('p');
+
+      intro.className =
+        'a8-eng-intro';
+
+      intro.textContent =
+        'Internal qualification state, Gate history, accumulator state and read-only wiring. Useful to engineers; not required to understand the astronomical relationship.';
+
+      const body =
+        document.createElement('div');
+
+      body.id =
+        'a8-engineering-relationship-body';
+
+      drawer.append(
+        summary,
+        intro,
+        body
+      );
+
+      const root =
+        document.querySelector('main') ||
+        document.querySelector('.wrap') ||
+        document.body;
+
+      root.append(drawer);
+    }
+
+    const body =
+      document.getElementById(
+        'a8-engineering-relationship-body'
+      );
+
+    if (!body) return;
+
+    /*
+     * Find the smallest matching SECTION for each
+     * engineering-only phrase.
+     */
+    const allSections =
+      [...document.querySelectorAll('section')];
+
+    function smallestSection(text){
+
+      const matches =
+        allSections.filter(section => {
+
+          if (
+            section.id ===
+              'a8-terra-slip-machine' ||
+            section.id ===
+              'a8-observatory-reference'
+          ) {
+            return false;
+          }
+
+          return (
+            section.textContent ||
+            ''
+          ).includes(text);
+        });
+
+      matches.sort(
+        (a,b) =>
+          (a.textContent || '').length -
+          (b.textContent || '').length
+      );
+
+      return matches[0] || null;
+    }
+
+    const markerTexts = [
+      'Gate 4B exact relationship',
+      'Updated by accepted observer events',
+      'UPSTREAM WRITE CAPABILITY',
+      'CURRENT TERRA SHIP SLIP / ROTATION',
+      'ACCUMULATED TERRA SHIP SLIP',
+      'Event wiring',
+      'Integration discipline'
+    ];
+
+    const nodes = [];
+
+    for (const text of markerTexts) {
+      const section =
+        smallestSection(text);
+
+      if (
+        section &&
+        !nodes.includes(section)
+      ) {
+        nodes.push(section);
+      }
+    }
+
+    const liveState =
+      document.getElementById(
+        'liveState'
+      );
+
+    if (liveState) {
+      const section =
+        liveState.closest('section');
+
+      if (
+        section &&
+        section.id !==
+          'a8-terra-slip-machine' &&
+        section.id !==
+          'a8-observatory-reference' &&
+        !nodes.includes(section)
+      ) {
+        nodes.push(section);
+      }
+    }
+
+    for (const node of nodes) {
+      body.append(node);
+    }
+
+    if (!nodes.length) {
+      console.warn(
+        'A8 first-visitor layout: no engineering sections moved'
+      );
+    }
+
+  }
+
+  if (
+    document.readyState === 'loading'
+  ) {
+    document.addEventListener(
+      'DOMContentLoaded',
+      run,
+      {once:true}
+    );
+  } else {
+    run();
+  }
+
+})();
+</script>
+
 </body>
 </html>

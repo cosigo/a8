@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>A8 Observation Archive · Core20 | COSIGO Labs</title>
+<title>A8 Data · Evidence | COSIGO Labs</title>
 <link rel="stylesheet" href="style.css">
 <style>
 .file-grid{display:grid;gap:10px}.file-card{border:1px solid var(--line);border-radius:12px;padding:12px;background:var(--panel)}
@@ -16,27 +16,27 @@
 <meta name="description" content="COSIGO Labs Auspicious 8 read-only observation archive boundary for source provenance, evidence preservation, and future verified inspection.">
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
 <meta name="author" content="COSIGO Labs">
-<link rel="canonical" href="https://lab.a8.cosigo.io/data.html">
+<link rel="canonical" href="https://data.cosigo.io/">
 <link rel="icon" href="https://a8.cosigo.io/assets/cosigo_master_512.png">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="COSIGO Labs — Auspicious 8">
-<meta property="og:title" content="A8 Observation Archive · Core20">
+<meta property="og:title" content="A8 Data · Evidence">
 <meta property="og:description" content="COSIGO Labs Auspicious 8 read-only observation archive boundary for source provenance, evidence preservation, and future verified inspection.">
-<meta property="og:url" content="https://lab.a8.cosigo.io/data.html">
+<meta property="og:url" content="https://data.cosigo.io/">
 <meta property="og:image" content="https://a8.cosigo.io/assets/cosigo_master_512.png">
 <meta property="og:image:alt" content="A8 Observation Archive · Core20 — COSIGO Labs">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="A8 Observation Archive · Core20">
+<meta name="twitter:title" content="A8 Data · Evidence">
 <meta name="twitter:description" content="COSIGO Labs Auspicious 8 read-only observation archive boundary for source provenance, evidence preservation, and future verified inspection.">
 <meta name="twitter:image" content="https://a8.cosigo.io/assets/cosigo_master_512.png">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "WebPage",
-  "name": "A8 Observation Archive · Core20",
-  "url": "https://lab.a8.cosigo.io/data.html",
+  "name": "A8 Data · Evidence",
+  "url": "https://data.cosigo.io/",
   "description": "COSIGO Labs Auspicious 8 read-only observation archive boundary for source provenance, evidence preservation, and future verified inspection.",
-  "dateModified": "2026-08-28",
+  "dateModified": "2026-08-30",
   "inLanguage": "en",
   "isPartOf": {
     "@type": "WebSite",
@@ -68,71 +68,581 @@
   ]
 }
 </script>
+
+<style id="a8-living-evidence-style">
+.evidence-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:14px;
+}
+@media (max-width:700px){
+  .evidence-grid{
+    grid-template-columns:minmax(0,1fr);
+  }
+}
+.evidence-card{
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:16px;
+  background:var(--panel);
+}
+.evidence-card h2,.evidence-card h3{margin-top:0}
+.evidence-status{
+  display:inline-block;
+  border:1px solid #46a36f;
+  border-radius:999px;
+  padding:4px 9px;
+  font-weight:900;
+}
+.photo-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:14px;
+}
+.photo-grid figure{margin:0}
+.photo-grid img{
+  display:block;
+  width:100%;
+  height:auto;
+  border:1px solid var(--line);
+  border-radius:12px;
+}
+.photo-grid figcaption{
+  padding:8px 2px 0;
+  font-size:.83rem;
+  opacity:.82;
+}
+.proof-table{
+  width:100%;
+  border-collapse:collapse;
+}
+.proof-table th,.proof-table td{
+  text-align:left;
+  vertical-align:top;
+  border-bottom:1px solid var(--line);
+  padding:9px 8px;
+}
+.pass{font-weight:900}
+.hash{
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  overflow-wrap:anywhere;
+  font-size:.79rem;
+}
+.evidence-stage{margin-top:12px}
+.evidence-stage summary{
+  cursor:pointer;
+  font-weight:900;
+}
+.evidence-stage pre,.wiring{
+  white-space:pre-wrap;
+  overflow-wrap:anywhere;
+}
+.current-next{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:14px;
+}
+</style>
+
 </head>
 <body>
-<nav class="cosigo-global-nav" aria-label="COSIGO and A8 global navigation">
-  <a class="cosigo-global-brand" href="https://cosigo.io/" aria-label="COSIGO home">
-    <img src="/assets/cosigo_master_512.gif" alt="COSIGO">
-    <span>COSIGO<small>LABS · AUSPICIOUS 8</small></span>
-  </a>
-  <div class="cosigo-global-links">
-    <a href="/index.html">A8 LAB HOME</a>
-    <a href="/calendar.html">CALENDAR</a>
-    <a href="https://a8.cosigo.io/">A8 PUBLIC</a>
-    <a class="cosigo-exit" href="https://cosigo.io/">COSIGO HOME</a>
-    <a class="cosigo-exit" href="https://contact.cosigo.io/">CONTACT</a>
-    <a href="https://github.com/cosigo">GITHUB</a>
+<style id="a8-topside-coherence-02-style">
+#a8-topside-coherence-02{
+  display:block;
+  margin:0;
+  padding:10px 14px;
+  border-bottom:1px solid rgba(255,255,255,.14);
+  background:rgba(7,11,16,.96);
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+}
+#a8-topside-coherence-02 .a8-topline{
+  max-width:1440px;
+  margin:0 auto;
+  display:flex;
+  gap:12px;
+  align-items:center;
+  flex-wrap:wrap;
+}
+#a8-topside-coherence-02 .cosigo-global-brand{
+  display:flex;
+  gap:8px;
+  align-items:center;
+  text-decoration:none;
+}
+#a8-topside-coherence-02 .cosigo-global-brand img{
+  width:34px;
+  height:34px;
+  object-fit:contain;
+}
+#a8-topside-coherence-02 .cosigo-global-brand span{
+  font-weight:900;
+  letter-spacing:.06em;
+}
+#a8-topside-coherence-02 .cosigo-global-brand small{
+  display:block;
+  opacity:.72;
+  font-size:.62rem;
+}
+#a8-topside-coherence-02 a{text-decoration:none}
+#a8-topside-coherence-02 .a8-menu{
+  position:relative;
+  margin-left:auto;
+}
+#a8-topside-coherence-02 .a8-menu summary{
+  list-style:none;
+  cursor:pointer;
+  padding:8px 11px;
+  border:1px solid #425467;
+  border-radius:8px;
+  background:#111820;
+  color:#e0bd72;
+  font-size:.76rem;
+  font-weight:900;
+  letter-spacing:.07em;
+  user-select:none;
+}
+#a8-topside-coherence-02 .a8-menu summary::-webkit-details-marker{
+  display:none;
+}
+#a8-topside-coherence-02 .a8-menu summary::after{
+  content:" ▾";
+  color:#92a5b8;
+}
+#a8-topside-coherence-02 .a8-menu[open] summary::after{
+  content:" ▴";
+}
+#a8-topside-coherence-02 .a8-menu-panel{
+  position:absolute;
+  z-index:1000;
+  right:0;
+  top:calc(100% + 7px);
+  min-width:180px;
+  padding:7px;
+  border:1px solid #425467;
+  border-radius:9px;
+  background:#0d141b;
+  box-shadow:0 12px 28px rgba(0,0,0,.38);
+}
+#a8-topside-coherence-02 .a8-menu-panel a{
+  display:block;
+  padding:9px 10px;
+  border-radius:6px;
+  color:#c8ddf5;
+  font-size:.78rem;
+  font-weight:800;
+  white-space:nowrap;
+}
+#a8-topside-coherence-02 .a8-menu-panel a:hover,
+#a8-topside-coherence-02 .a8-menu-panel a:focus,
+#a8-topside-coherence-02 .a8-menu-panel a[aria-current="page"]{
+  background:#182431;
+  color:#fff;
+}
+@media(max-width:760px){
+  #a8-topside-coherence-02 .a8-menu-panel{
+    min-width:170px;
+  }
+}
+</style>
+
+<nav id="a8-topside-coherence-02"
+     class="cosigo-global-nav"
+     aria-label="A8 Time Lab navigation">
+
+  <div class="a8-topline">
+
+    <a class="cosigo-global-brand"
+       href="https://cosigo.io/"
+       aria-label="COSIGO home">
+      <img src="/assets/cosigo_master_512.gif" alt="COSIGO">
+      <span>COSIGO<small>LABS · AUSPICIOUS 8</small></span>
+    </a>
+
+    <details class="a8-menu">
+      <summary>MENU</summary>
+
+      <div class="a8-menu-panel">
+        <a href="https://lab.a8.cosigo.io/">LAB HOME</a>
+        <a href="https://clock.cosigo.io/">CLOCK</a>
+        <a href="https://calendar.cosigo.io/">CALENDAR</a>
+        <a href="https://moons.cosigo.io/">MOONS</a>
+        <a href="https://mintaka.cosigo.io/">MINTAKA</a>
+        <a href="https://sol.cosigo.io/">SOL</a>
+        <a href="https://map.cosigo.io/">MAP · CLOCK · COMPASS</a>
+        <a href="https://sea.cosigo.io/">NAVIGATION</a>
+        <a href="https://stars.cosigo.io/">CELESTIAL</a>
+        <a href="https://audio.cosigo.io/">AUDIO</a>
+        <a href="https://quartz.cosigo.io/">QUARTZ</a>
+        <a href="https://data.cosigo.io/" aria-current="page">DATA · EVIDENCE</a>
+        <a href="https://a8.cosigo.io/">A8 PUBLIC</a>
+        <a href="https://about.cosigo.io/">ABOUT</a>
+        <a href="https://contestant.cosigo.io/">FUN</a>
+        <a href="https://cosigo.io/">COSIGO HOME</a>
+        <a href="https://github.com/cosigo/a8">GITHUB</a>
+      </div>
+
+    </details>
+
   </div>
 </nav>
+
 <main>
-<header><div><div class="eyebrow">AUSPICIOUS 8 · OBSERVATION ARCHIVE</div>
-<h1>Observation evidence boundary · Core20</h1>
-<p class="muted">Read-only provenance boundary for future real observation evidence. Nothing on this page feeds archive timestamps, published periods, or file values into Core20 authority.</p>
-</div><div id="status" class="pill warn">SCANNING</div></header>
-
-<section class="panel controls"><div class="row">
-<a class="button-link" href="/">ENGINEERING LAB</a>
-<a class="button-link" href="/moons.html">4-MOON VIEW</a>
-<a class="button-link" href="/clock.html">A8 CLOCK</a>
-<a class="button-link" href="/audio.html">A8 FREQUENCY TRAINER</a>
-<a class="button-link" href="/angle.html">A8 ANGLE TRANSLATOR</a>
-<a class="button-link" href="/telescope.html">A8 TELESCOPE EMULATOR</a>
-
-</div></section>
-
-<section class="panel goodbox">
-  <h2>WALLFLOWER PLACARD · WHAT DO I DO HERE?</h2>
-  <p><b>There is nothing to operate here at present.</b></p>
-  <p>The observation archive landing area is currently empty, and no public archive inspector is connected to Core20.</p>
-  <p>When real observation evidence is added later, this page may expose provenance, fingerprints and bounded read-only inspection. <b>INSPECT will mean LOOK, not IMPORT.</b></p>
-  <p>Nothing listed or inspected here automatically becomes clock authority. A source file crosses the observation boundary only after its physical columns are understood and a deterministic reduction is verified.</p>
-  <p class="muted">Nature first → source encoding second → verified reduction → native A8 representation → recovery last.</p>
-</section>
-
-<section class="panel warning"><h2>Separation rule</h2>
-<p><b>Archive inspection may contain conventional source timestamps, published periods and other source metadata.</b> Those values remain source evidence and do not become defining Core20 timing authority merely because they are present in an archive.</p>
-<p class="muted">A source file crosses the observation boundary only after its physical columns are understood and a deterministic reduction is verified. A three-column mutual-event light curve is not called an apparent x-position stream unless a documented physical reduction creates one.</p>
-</section>
-
-<section class="panel goodbox">
-  <h2>Observation archive status</h2>
-  <div class="metrics four">
-    <div><span class="k">ARCHIVE</span><strong>EMPTY</strong></div>
-    <div><span class="k">ACCESS MODEL</span><strong>READ ONLY</strong></div>
-    <div><span class="k">CORE20 INPUT</span><strong>NONE</strong></div>
-    <div><span class="k">AUTO IMPORT</span><strong>DISABLED</strong></div>
+<header>
+  <div>
+    <div class="eyebrow">AUSPICIOUS 8 · LIVING DATA</div>
+    <h1>Data · evidence · reproducibility</h1>
+    <p class="muted">
+      Growing laboratory record of apparatus, raw observations,
+      source code, fingerprints, failures, passes and bounded claims.
+    </p>
   </div>
-  <p class="muted">No observation files are currently loaded in the public archive landing area. This status is informational; the archive is not a Core20 control surface.</p>
+  <div class="pill">LIVING RECORD</div>
+</header>
+
+<section class="panel goodbox">
+  <h2>Evidence workflow</h2>
+  <p><b>
+    Build it → observe it → preserve the raw result → hash it →
+    publish the method → state exactly what it establishes.
+  </b></p>
+  <p>
+    This page is the stable entrance to A8 evidence branches.
+    New work is appended rather than silently replacing prior results.
+  </p>
+</section>
+
+<div class="evidence-grid">
+
+<section class="evidence-card">
+  <span class="evidence-status">ENTRY 001 · STAGE 11 · PASS</span>
+  <h2>Physical Clock · Living Evidence</h2>
+  <p>
+    LM555 physical oscillator → real electrical edges →
+    independent ATmega328P hardware counters →
+    event stamper → Pi physical evidence bridge.
+  </p>
+  <p>
+    Includes photographs, wiring, raw observations, hashes,
+    failures, passes, CURRENT and NEXT.
+  </p>
+  <p>
+    <a class="button-link" href="/physical-clock-evidence.html">
+      OPEN PHYSICAL CLOCK EVIDENCE
+    </a>
+  </p>
+</section>
+
+<section class="evidence-card">
+  <span class="evidence-status">ENTRY 002 · INDEPENDENT CORROBORATION</span>
+  <h2>Jovian Observation Evidence</h2>
+
+  <p>
+    Independent ground-based and spacecraft archives preserve decades
+    of observations of Io, Europa, Ganymede and Callisto.
+  </p>
+
+  <p>
+    <b>USNO / NAROO · 1967–1998</b><br>
+    553 photographic plates · 2,650 individual observations ·
+    4,819 measured Galilean-satellite positions.
+  </p>
+
+  <p>
+    <b>PHEMU03 international campaign</b><br>
+    377 observations · 118 mutual events · 42 observing sites.
+  </p>
+
+  <p>
+    <b>NASA / JPL Voyager</b><br>
+    Spacecraft imagery independently records Io, Europa, Ganymede
+    and Callisto as physical observed bodies.
+  </p>
+
+  <div class="photo-grid">
+    <figure>
+      <a id="a8-entry002-image-enlarge"
+         href="/assets/evidence/pia00012-galilean-satellites.jpg"
+         target="_blank" rel="noopener"
+         title="Open full-size Voyager image"
+         style="display:block;max-width:320px;margin:0 auto;">
+        <img
+          src="/assets/evidence/pia00012-galilean-satellites.jpg"
+          alt="Voyager 1 image showing Io, Europa, Ganymede and Callisto — click to enlarge"
+          style="display:block;width:100%;max-width:320px;height:auto;">
+      </a>
+      <figcaption>
+        Voyager 1 · Galilean satellites · Io · Europa · Ganymede · Callisto.
+        Credit: NASA/JPL · PIA00012.<br>
+        SHA-256:
+        17c8e5013df478d8d94f01aa19a8394df09d0074136df2c4faff4e3bbf24e7d8
+      </figcaption>
+    </figure>
+  </div>
+
+  <p><b>ROLE · INDEPENDENT CORROBORATION</b><br>
+    These archives support the observed Jovian system and its recurrent
+    motions. They are evidence/provenance and are not automatically
+    imported as Core20 clock authority.
+  </p>
+
+  <p>
+    <a class="button-link" href="https://www.jpl.nasa.gov/images/pia00012-galilean-satellites/">
+      NASA/JPL · GALILEAN SATELLITES
+    </a>
+  </p>
+
+  <p>
+    <a class="button-link" href="https://www.sciencedirect.com/science/article/pii/S0019103524004044">
+      USNO / NAROO · 1967–1998 OBSERVATIONS
+    </a>
+  </p>
+
+  <p>
+    <a class="button-link" href="https://doi.org/10.1051/0004-6361:200810420">
+      PHEMU03 · OBSERVED MUTUAL EVENTS
+    </a>
+  </p>
+</section>
+
+<section class="evidence-card">
+  <span class="evidence-status">ENTRY 003 · PRESERVED OBSERVATIONS</span>
+  <h2>Pulkovo Observatory · Galilean Moons · 2018</h2>
+
+  <p>
+    CDS/VizieR catalogue J/other/SoSyR/53.368:
+    452 measured positions of the Galilean satellites.
+    Satellite IDs: 1 = Io, 2 = Europa, 3 = Ganymede, 4 = Callisto.
+  </p>
+
+  <p>
+    The observation table and original CDS documentation are preserved
+    here byte for byte, with SHA-256 fingerprints for verification.
+  </p>
+
+  <p>
+    <a class="button-link"
+       href="/assets/evidence/pulkovo-2018/satsdat.dat" download>
+      DOWNLOAD OBSERVATION TABLE
+    </a>
+  </p>
+  <p><b>satsdat.dat · SHA-256</b><br>
+    <code style="overflow-wrap:anywhere;">949d6be0a6e02280d1ad152084e844c9c1c9997e7b3d6f86e6e49c9f415bc095</code>
+  </p>
+
+  <p>
+    <a class="button-link"
+       href="/assets/evidence/pulkovo-2018/ReadMe" download>
+      DOWNLOAD CDS README
+    </a>
+  </p>
+  <p><b>ReadMe · SHA-256</b><br>
+    <code style="overflow-wrap:anywhere;">b857b39552bb02c0406c28887582bb26f155b0078a341e38ab351671dc104b6e</code>
+  </p>
+
+  <p>
+    <b>Companion table · Measured moon-to-moon coordinates</b><br>
+    671 differential coordinate records covering all six pairs
+    of Io, Europa, Ganymede and Callisto.
+  </p>
+  <p>
+    <a class="button-link" href="/assets/evidence/pulkovo-2018/satsatd.dat" download>
+      DOWNLOAD MOON-PAIR COORDINATES
+    </a>
+  </p>
+  <p><b>satsatd.dat · SHA-256</b><br>
+    <code style="overflow-wrap:anywhere;">b29f6b7dd61a20ee426cf83f0f4947da90cb3b0e9095e34e7ae0c4f232ef6223</code>
+  </p>
+
+  <p><b>ROLE · INDEPENDENT OBSERVATION EVIDENCE</b><br>
+    These catalogue measurements and their documentation are
+    evidence/provenance. They are not automatically imported
+    as Core20 clock authority.
+  </p>
+
+  <details id="a8-pulkovo-coordinate-audit-v1">
+    <summary><b>COORDINATE CHECK · OPTIONAL FOLLOW-UP</b></summary>
+    <p>
+      Internal comparison found 385 moon-pair records with unique
+      absolute positions at exactly matching catalogue dates.
+      The remaining 286 pair records lacked both matching positions.
+      Using first-minus-second coordinates, with differential RA
+      projected by cos(mean declination), 384 matched records agree
+      within approximately 0.413 arcsecond in each coordinate.
+    </p>
+    <p>
+      We observed a coordinate difference between the two tables for
+      Europa / Callisto at catalogue date 2018/05/05.90303.
+      No catalogue correction or Core20 change is being implemented
+      from this observation at this time.
+      The preserved source files and published analysis are available
+      for anyone who wishes to investigate further.
+    </p>
+  
+    <p id="a8-pulkovo-core20-scope">
+      <b>RELEVANCE TO CORE20</b><br>
+      Callisto lies outside the Io–Europa–Ganymede Laplace resonance
+      underlying Core20's three-channel Jovian recurrence recovery.
+      This Europa / Callisto catalogue comparison is supplementary
+      evidence and is not an input to the primary recovery contract.
+      The coordinate observation is therefore retained as an optional
+      investigation opportunity; no Core20 change is being implemented
+      from it at this time.
+    </p>
+  </details>
+
+  <details id="a8-pulkovo-recurrence-results-v2">
+    <summary><b>EXPLORATORY RECURRENCE · RESULTS AND DOWNLOADS</b></summary>
+
+    <p>
+      V1 scans one frequency per moon pair. V2 fits two frequencies,
+      following the highest-scoring V1 candidate above two catalogue days.
+      Other primary alias branches remain untested.
+    </p>
+
+    <p><b>Highest-scoring V2 fit for each pair</b><br>
+      Periods below are fitted components in catalogue days.
+      Displayed digits identify the fit outputs; uncertainty has not
+      been established.
+    </p>
+
+    <div style="overflow-x:auto;">
+      <table style="width:100%;border-collapse:collapse;">
+        <thead><tr>
+          <th style="text-align:left;padding:6px;">Moon pair</th>
+          <th style="text-align:left;padding:6px;">Two fitted periods</th>
+        </tr></thead>
+        <tbody><tr><td style="padding:6px;">Io / Europa</td><td style="padding:6px;">3.5477 + 1.7675</td></tr><tr><td style="padding:6px;">Io / Ganymede</td><td style="padding:6px;">7.1509 + 1.7677</td></tr><tr><td style="padding:6px;">Io / Callisto</td><td style="padding:6px;">16.6532 + 2.2834</td></tr><tr><td style="padding:6px;">Europa / Ganymede</td><td style="padding:6px;">7.1374 + 3.5501</td></tr><tr><td style="padding:6px;">Europa / Callisto</td><td style="padding:6px;">16.6078 + 3.5377</td></tr><tr><td style="padding:6px;">Ganymede / Callisto</td><td style="padding:6px;">16.6404 + 7.1310</td></tr></tbody>
+      </table>
+    </div>
+
+    <p>
+      A component near 1.77 days ranks first in pairs 12 and 13.
+      In pair 14 it ranks second:
+      16.6621 + 1.7692 days.
+      The approximately 2.28-day alias ranks first there.
+      Daily sampling aliases remain competitive.
+    </p>
+
+    <p>
+      Pair 24 sensitivity check: omitting catalogue line 640 changes
+      the leading fit from 16.6078 + 3.5377
+      to 16.6085 + 3.5378 days.
+      This sensitivity result is retained for optional independent follow-up.
+    </p>
+
+    <p>
+      These are exploratory sky-coordinate fits using the catalogue's
+      recorded dates. They remain independent archive analysis and
+      are not imported as Core20 clock authority.
+    </p>
+
+    <p>
+      <a class="button-link" href="/assets/evidence/pulkovo-2018/analysis/recurrence-scan-v1/report.json" download>
+        DOWNLOAD V1 REPORT
+      </a><br>
+      SHA-256:<br>
+      <code style="overflow-wrap:anywhere;">770bec6e8c2e034825804c1505f76d1fb5b2039fc8438c83f03f2690f7473ded</code>
+    </p><p>
+      <a class="button-link" href="/assets/evidence/pulkovo-2018/analysis/recurrence-scan-v2/report.json" download>
+        DOWNLOAD V2 REPORT
+      </a><br>
+      SHA-256:<br>
+      <code style="overflow-wrap:anywhere;">621523e2db0c4d878b671d1f7c433d6360c17fc55911a9d43136d68a29ced54e</code>
+    </p>
+
+    <p>
+      <a class="button-link" href="/assets/evidence/pulkovo-2018/analysis/pulkovo-2018-analysis-v2.zip" download>
+        DOWNLOAD COMPLETE ANALYSIS BUNDLE
+      </a>
+    </p>
+    <p>
+      Includes the three original source files, both analysis scripts,
+      both reports, scan curves, dependency versions and SHA256SUMS.
+    </p>
+    <p>Bundle SHA-256:<br>
+      <code style="overflow-wrap:anywhere;">4808b1bda7330f569ce87e9f818c8124e3df5e6b340b2f3bcecdcb959f560125</code>
+    </p>
+  </details>
+
+  <p class="muted">
+    Status: source files, coordinate check and exploratory recurrence
+    scans V1/V2 published. Sampling aliases remain open. The coordinate observation is available for optional follow-up.
+  </p>
+
+  <p>
+    <a class="button-link"
+       href="https://cdsarc.cds.unistra.fr/viz-bin/cat/J/other/SoSyR/53.368">
+      ORIGINAL CDS / VIZIER CATALOGUE
+    </a>
+  </p>
+</section>
+
+<section class="evidence-card">
+  <h2>Historical Observation Archive</h2>
+  <p>
+    Preserved earlier A8 observation/data page from the Core18-era
+    development chain that led into Core20.
+  </p>
+  <p>
+    It remains inspectable as historical engineering evidence and is
+    not current operating authority.
+  </p>
+  <p>
+    <a class="button-link" href="/observation-archive-historical.html">
+      OPEN PRESERVED HISTORICAL ARCHIVE
+    </a>
+  </p>
+</section>
+
+<section class="evidence-card">
+  <h2>Observation Archive · Current Boundary</h2>
+  <p>
+    Read-only boundary for future astronomical source evidence,
+    provenance, source fingerprints and verified reductions.
+  </p>
+  <p><b>Inspect means look, not import.</b></p>
+</section>
+
+<section class="evidence-card">
+  <h2>Jovian Recovery Data</h2>
+  <p>
+    Next branch: physical EVENT + rawPulse evidence enters
+    the Io ×4 / Europa ×2 / Ganymede ×1 recovery contract.
+  </p>
+  <p class="muted">Status: NEXT.</p>
+</section>
+
+<section class="evidence-card">
+  <h2>Growing evidence branches</h2>
+  <p>
+    Mintaka · Sol · Sun-return · audio · navigation · telescope /
+    observatory evidence can be added without overloading one page.
+  </p>
+</section>
+
+</div>
+
+<section class="panel warning">
+  <h2>Evidence / authority separation</h2>
+  <p>
+    Published timestamps, comparison values, source metadata and
+    archive files remain evidence/provenance unless a separately
+    verified recovery contract gives them a defined role.
+  </p>
+  <p class="muted">
+    Nature first → source encoding second → verified reduction →
+    native A8 representation → recovery last.
+  </p>
 </section>
 
 <section class="panel">
-  <h2>Future archive inspection contract</h2>
-  <p>When real source evidence is present, a future read-only inspector may expose filename, source classification, file size, SHA-256 fingerprint and a bounded source sample.</p>
-  <p><b>Inspection does not grant authority.</b> Listing, hashing or viewing a file does not make that file part of the Core20 timing chain.</p>
-  <p class="muted">Original evidence remains preserved. Any later reduction or adapter must be separately documented and verified.</p>
+  <h2>Permanent reference</h2>
+  <p>
+    <code>/data.html</code> is the durable evidence index.
+    Individual experimental branches receive their own pages so
+    links, results and historical context do not disappear as A8 grows.
+  </p>
 </section>
-
-
 </main><footer class="cosigo-site-footer">
   <strong>COSIGO Labs · Auspicious 8 experimental laboratory</strong>
   <p class="cosigo-disclaimer">Research / engineering notice: A8 pages may contain provisional models, simulations, comparison values, hypotheses and unreplicated experiment designs. Unless a page explicitly states otherwise, material shown here is not a certified metrology standard, accredited measurement result, or final Foundation definition. Legacy / SI values are comparison coordinates where identified, not native A8 authority.</p>

@@ -55,8 +55,244 @@
     ]
   }
   </script>
+
+<style id="a8-public-shell-width-fix">
+/* A8 PUBLIC SHELL WIDTH REPAIR */
+
+.page-shell{
+  width:100%;
+  max-width:1680px;
+  min-width:0;
+  box-sizing:border-box;
+}
+
+.instrument-grid{
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  min-width:0;
+}
+
+.instrument-grid > *,
+.quadrant{
+  min-width:0;
+}
+
+.site-footer{
+  grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);
+  width:100%;
+  max-width:100%;
+  min-width:0;
+  box-sizing:border-box;
+}
+
+.site-footer > *{
+  min-width:0;
+}
+
+.footer-links{
+  min-width:0;
+  flex-wrap:wrap;
+  row-gap:8px;
+}
+
+.footer-links a,
+.footer-links button{
+  max-width:100%;
+  white-space:normal;
+}
+
+.a8-public-local-actions{
+  display:flex;
+  justify-content:flex-end;
+  align-items:center;
+  min-width:0;
+}
+
+@media(max-width:780px){
+  .instrument-grid{
+    grid-template-columns:minmax(0,1fr);
+  }
+
+  .site-footer{
+    grid-template-columns:minmax(0,1fr);
+  }
+
+  .footer-links{
+    justify-content:flex-start;
+  }
+}
+
+@media(max-width:480px){
+  .a8-public-local-actions{
+    width:100%;
+    justify-content:flex-start;
+  }
+}
+
+    .contestants-hook{
+      margin:24px 0 28px;
+      padding:22px 24px;
+      border-radius:16px;
+      border:1px solid rgba(216,183,108,.34);
+      background:
+        radial-gradient(circle at 14% 18%,rgba(239,167,95,.18),transparent 18rem),
+        radial-gradient(circle at 84% 18%,rgba(189,156,255,.16),transparent 18rem),
+        radial-gradient(circle at 50% 100%,rgba(220,230,238,.08),transparent 22rem),
+        linear-gradient(135deg,rgba(33,24,18,.97),rgba(17,22,28,.97) 52%,rgba(28,19,34,.97));
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,.03) inset,
+        0 18px 48px rgba(0,0,0,.30),
+        0 0 36px rgba(216,183,108,.10),
+        0 0 44px rgba(189,156,255,.10);
+    }
+    .contestants-hook__eyebrow{
+      font-size:.78rem;
+      font-weight:900;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      color:#d8b76c;
+      margin-bottom:10px;
+    }
+    .contestants-hook h2{
+      margin:0 0 10px;
+      font-size:clamp(1.45rem,3.2vw,2.25rem);
+      line-height:1.08;
+      letter-spacing:-.02em;
+    }
+    .contestants-hook p{
+      margin:.45rem 0 .85rem;
+      color:#dce5ea;
+      max-width:880px;
+    }
+    .contestants-hook__chips{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin:14px 0 16px;
+    }
+    .contestants-hook__chip{
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.05);
+      color:#f4ead1;
+      font-size:.86rem;
+      font-weight:900;
+      letter-spacing:.06em;
+    }
+    .contestants-hook__actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin:16px 0 10px;
+    }
+    .contestants-hook__actions a{
+      text-decoration:none;
+      border-radius:10px;
+      padding:10px 14px;
+      font-weight:900;
+      letter-spacing:.02em;
+      border:1px solid #41505f;
+      background:#121a22;
+      color:#edf3f6;
+    }
+    .contestants-hook__actions a:hover{
+      border-color:#6f8397;
+      transform:translateY(-1px);
+    }
+    .contestants-hook__actions .contestants-hook__primary{
+      border-color:#d8b76c;
+      background:linear-gradient(135deg,#2b2213,#1c1b2a);
+      box-shadow:0 0 24px rgba(216,183,108,.16),0 0 30px rgba(189,156,255,.12);
+    }
+    .contestants-hook__note{
+      color:#b9c5cd;
+      font-size:.94rem;
+      margin-top:8px;
+    }
+    @media (max-width: 720px){
+      .contestants-hook{padding:18px 16px}
+      .contestants-hook__actions a{width:100%;text-align:center}
+    }
+
+  </style>
+
 </head>
 <body>
+<style id="a8-public-hero-menu-style">
+.a8-public-local-actions .a8-menu{
+  position:relative;
+  flex:0 0 auto;
+  margin-right:10px;
+}
+
+.a8-public-local-actions .a8-menu summary{
+  list-style:none;
+  cursor:pointer;
+  padding:8px 11px;
+  border:1px solid #425467;
+  border-radius:8px;
+  background:#111820;
+  color:#e0bd72;
+  font-size:.76rem;
+  font-weight:900;
+  letter-spacing:.07em;
+  user-select:none;
+}
+
+.a8-public-local-actions .a8-menu summary::-webkit-details-marker{
+  display:none;
+}
+
+.a8-public-local-actions .a8-menu summary::after{
+  content:" ▾";
+  color:#92a5b8;
+}
+
+.a8-public-local-actions .a8-menu[open] summary::after{
+  content:" ▴";
+}
+
+.a8-public-local-actions .a8-menu-panel{
+  position:absolute;
+  z-index:1000;
+  right:0;
+  top:calc(100% + 7px);
+  min-width:180px;
+  padding:7px;
+  border:1px solid #425467;
+  border-radius:9px;
+  background:#0d141b;
+  box-shadow:0 12px 28px rgba(0,0,0,.38);
+}
+
+.a8-public-local-actions .a8-menu-panel a{
+  display:block;
+  padding:9px 10px;
+  border-radius:6px;
+  color:#c8ddf5;
+  font-size:.78rem;
+  font-weight:800;
+  white-space:nowrap;
+  text-decoration:none;
+}
+
+.a8-public-local-actions .a8-menu-panel a:hover,
+.a8-public-local-actions .a8-menu-panel a:focus,
+.a8-public-local-actions .a8-menu-panel a[aria-current="page"]{
+  background:#182431;
+  color:#fff;
+}
+
+@media(max-width:480px){
+  .a8-public-local-actions .a8-menu-panel{
+    left:0;
+    right:auto;
+  }
+}
+</style>
+
+
+
   <div class="page-shell">
     <header class="site-header">
       <div class="brand-lockup">
@@ -67,13 +303,40 @@
           <div class="tagline">Nature → Observation → Binary Representation</div>
         </div>
       </div>
-      <div class="header-actions">
-        <a class="ghost-button" href="about.html">ABOUT A8</a>
-        <a class="ghost-button" href="unified.html">MAP · CLOCK · COMPASS</a>
-        <a class="ghost-button lab-link" href="https://lab.a8.cosigo.io/" rel="noopener">ENGINEERING LAB</a>
-        <button class="ghost-button" id="openWhitepaper" type="button">RESEARCH NOTE / WHITEPAPER</button>
+      <div class="a8-public-local-actions">
+        <details class="a8-menu">
+      <summary>MENU</summary>
+
+      <div class="a8-menu-panel">
+        <a href="https://lab.a8.cosigo.io/">LAB HOME</a>
+        <a href="https://clock.cosigo.io/">CLOCK</a>
+        <a href="https://calendar.cosigo.io/">CALENDAR</a>
+        <a href="https://moons.cosigo.io/">MOONS</a>
+        <a href="https://mintaka.cosigo.io/">MINTAKA</a>
+        <a href="https://sol.cosigo.io/">SOL</a>
+        <a href="https://map.cosigo.io/">MAP · CLOCK · COMPASS</a>
+        <a href="https://sea.cosigo.io/">NAVIGATION</a>
+        <a href="https://stars.cosigo.io/">CELESTIAL</a>
+        <a href="https://audio.cosigo.io/">AUDIO</a>
+        <a href="https://quartz.cosigo.io/">QUARTZ</a>
+        <a href="https://a8.cosigo.io/" aria-current="page">A8 PUBLIC</a>
+        <a href="https://about.cosigo.io/">ABOUT</a>
+        <a href="https://contestant.cosigo.io/">FUN</a>
+        <a href="https://cosigo.io/">COSIGO HOME</a>
+        <a href="https://github.com/cosigo/a8">GITHUB</a>
+      </div>
+
+    </details>
+
+        <button class="ghost-button"
+                id="openWhitepaper"
+                type="button">RESEARCH NOTE / WHITEPAPER</button>
       </div>
     </header>
+
+
+    
+
 
     <main class="instrument-grid">
       <section class="quadrant q1" aria-labelledby="q1-title">
@@ -253,6 +516,18 @@
       </section>
     </main>
 
+    <section class="contestants-hook" aria-label="Choose an Auspicious 8 path">
+      <div class="contestants-hook__eyebrow">MUSIC UNDER JUPITER · PICK YOUR DOOR</div>
+      <h2>Where do you want to enter?</h2>
+
+      <div class="contestants-hook__actions">
+        <a href="https://lab.a8.cosigo.io/audio.html">TECHNICAL?</a>
+        <a href="https://a8.cosigo.io/canonical.html">ENGINEER?</a>
+        <a href="https://a8.cosigo.io/about.html">ORIENTATION?</a>
+        <a class="contestants-hook__primary" href="https://lab.a8.cosigo.io/contestants.html">CURIOUS? →</a>
+      </div>
+    </section>
+
     <footer class="site-footer">
       <div>
         <strong>© 2026 COSIGO Labs. All rights reserved.</strong><br>
@@ -308,6 +583,6 @@
     </form>
   </dialog>
 
-  <script src="assets/a8.js?v=20260822-clock-presentation01"></script>
+  <script src="assets/a8.js?v=20260829-universal-observer01"></script>
 </body>
 </html>

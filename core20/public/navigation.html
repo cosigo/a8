@@ -13,7 +13,7 @@
   <meta name="publisher" content="COSIGO Labs / COSIGO Systems">
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
 
-  <link rel="canonical" href="https://lab.a8.cosigo.io/navigation.html">
+  <link rel="canonical" href="https://sea.cosigo.io/">
   <link rel="icon" href="https://a8.cosigo.io/assets/cosigo_master_512.png" type="image/png">
   <link rel="apple-touch-icon" href="https://a8.cosigo.io/assets/cosigo_master_512.png">
 
@@ -21,7 +21,7 @@
   <meta property="og:site_name" content="COSIGO Labs — Auspicious 8">
   <meta property="og:title" content="Auspicious 8 — Navigation, Position &amp; Travel">
   <meta property="og:description" content="Same Earth. Same journey. Different ruler. A recoverable navigation architecture using celestial direction, A8 angles and Earth geometry.">
-  <meta property="og:url" content="https://lab.a8.cosigo.io/navigation.html">
+  <meta property="og:url" content="https://sea.cosigo.io/">
   <meta property="og:image" content="https://a8.cosigo.io/assets/cosigo_master_512.png">
   <meta property="og:image:alt" content="COSIGO Labs — Auspicious 8">
 
@@ -44,8 +44,8 @@
       },
       {
         "@type": ["WebPage", "LearningResource", "TechArticle"],
-        "@id": "https://lab.a8.cosigo.io/navigation.html#page",
-        "url": "https://lab.a8.cosigo.io/navigation.html",
+        "@id": "https://sea.cosigo.io/#page",
+        "url": "https://sea.cosigo.io/",
         "name": "Auspicious 8 — Navigation, Position & Travel",
         "headline": "Same Earth. Same journey. Different ruler.",
         "description": "Educational and experimental A8 navigation surface covering celestial direction, Earth coordinates, Earth-derived navigation distance, the A8/31 length-ladder cross-check, speed, elapsed time, dead reckoning, marine routes and aviation paths.",
@@ -318,26 +318,182 @@
     @media(max-width:980px){.primer-grid{grid-template-columns:1fr}.use-cases{grid-template-columns:repeat(2,1fr)}}
     @media(max-width:640px){.primer-steps,.use-cases{grid-template-columns:1fr}.scale-map{min-height:0}}
   </style>
+
+
+<style>
+/* A8-SEA-FILM-GLASS-FINAL · thin maritime film */
+.hero-line,
+.card,
+.callout,
+.footer-panel,
+#a8-topside-coherence-02 .a8-menu-panel,
+#a8-topside-coherence-02 .a8-menu-panel a:hover,
+#a8-topside-coherence-02 .a8-menu-panel a:focus,
+#a8-topside-coherence-02 .a8-menu-panel a[aria-current="page"] {
+  background: rgba(7,14,22,.16) !important;
+  backdrop-filter: blur(.6px);
+  -webkit-backdrop-filter: blur(.6px);
+}
+
+@media (max-width:760px) {
+.hero-line,
+.card,
+.callout,
+.footer-panel,
+#a8-topside-coherence-02 .a8-menu-panel,
+#a8-topside-coherence-02 .a8-menu-panel a:hover,
+#a8-topside-coherence-02 .a8-menu-panel a:focus,
+#a8-topside-coherence-02 .a8-menu-panel a[aria-current="page"] {
+    background: rgba(7,14,22,.24) !important;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+</style>
+
 </head>
 <body>
-  <div class="topbar">
-    <div class="wrap">
-      <a class="brand" href="https://a8.cosigo.io/" aria-label="COSIGO Labs — Auspicious 8 public home">
-        <img src="https://a8.cosigo.io/assets/cosigo_master_512.png" alt="COSIGO">
-        <span>COSIGO LABS<small>AUSPICIOUS 8 · NAVIGATION</small></span>
-      </a>
-      <nav aria-label="A8 navigation">
+  <style id="a8-topside-coherence-02-style">
+/* A8 SINGLE DROPDOWN NAV · SITE STANDARD */
+#a8-topside-coherence-02{
+  display:block;
+  margin:0;
+  padding:10px 14px;
+  border-bottom:1px solid rgba(255,255,255,.14);
+  background:rgba(7,11,16,.96);
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+}
+#a8-topside-coherence-02 .a8-topline{
+  max-width:1440px;
+  margin:0 auto;
+  display:flex;
+  gap:12px;
+  align-items:center;
+  flex-wrap:wrap;
+}
+#a8-topside-coherence-02 .cosigo-global-brand{
+  display:flex;
+  gap:8px;
+  align-items:center;
+  text-decoration:none;
+}
+#a8-topside-coherence-02 .cosigo-global-brand img{
+  width:34px;
+  height:34px;
+  object-fit:contain;
+}
+#a8-topside-coherence-02 .cosigo-global-brand span{
+  font-weight:900;
+  letter-spacing:.06em;
+}
+#a8-topside-coherence-02 .cosigo-global-brand small{
+  display:block;
+  opacity:.72;
+  font-size:.62rem;
+}
+#a8-topside-coherence-02 a{
+  text-decoration:none;
+}
+#a8-topside-coherence-02 .a8-menu{
+  position:relative;
+  margin-left:auto;
+}
+#a8-topside-coherence-02 .a8-menu summary{
+  list-style:none;
+  cursor:pointer;
+  padding:8px 11px;
+  border:1px solid #425467;
+  border-radius:8px;
+  background:#111820;
+  color:#e0bd72;
+  font-size:.76rem;
+  font-weight:900;
+  letter-spacing:.07em;
+  user-select:none;
+}
+#a8-topside-coherence-02 .a8-menu summary::-webkit-details-marker{
+  display:none;
+}
+#a8-topside-coherence-02 .a8-menu summary::after{
+  content:" ▾";
+  color:#92a5b8;
+}
+#a8-topside-coherence-02 .a8-menu[open] summary::after{
+  content:" ▴";
+}
+#a8-topside-coherence-02 .a8-menu-panel{
+  position:absolute;
+  z-index:1000;
+  right:0;
+  top:calc(100% + 7px);
+  min-width:180px;
+  padding:7px;
+  border:1px solid #425467;
+  border-radius:9px;
+  background:#0d141b;
+  box-shadow:0 12px 28px rgba(0,0,0,.38);
+}
+#a8-topside-coherence-02 .a8-menu-panel a{
+  display:block;
+  padding:9px 10px;
+  border-radius:6px;
+  color:#c8ddf5;
+  font-size:.78rem;
+  font-weight:800;
+  white-space:nowrap;
+}
+#a8-topside-coherence-02 .a8-menu-panel a:hover,
+#a8-topside-coherence-02 .a8-menu-panel a:focus,
+#a8-topside-coherence-02 .a8-menu-panel a[aria-current="page"]{
+  background:#182431;
+  color:#fff;
+}
+@media(max-width:760px){
+  #a8-topside-coherence-02 .a8-menu-panel{
+    min-width:170px;
+  }
+}
+</style>
+
+<nav id="a8-topside-coherence-02"
+     class="cosigo-global-nav"
+     aria-label="A8 Time Lab navigation">
+
+  <div class="a8-topline">
+
+    <a class="cosigo-global-brand"
+       href="https://cosigo.io/"
+       aria-label="COSIGO home">
+      <img src="/assets/cosigo_master_512.gif" alt="COSIGO">
+      <span>COSIGO<small>LABS · AUSPICIOUS 8</small></span>
+    </a>
+
+    <details class="a8-menu">
+      <summary>MENU</summary>
+
+      <div class="a8-menu-panel">
         <a href="https://lab.a8.cosigo.io/">LAB HOME</a>
-        <a href="/calendar.html">CALENDAR</a>
-        <a href="https://lab.a8.cosigo.io/navigation.html" aria-current="page">NAVIGATION</a>
-        <a href="https://lab.a8.cosigo.io/map-clock-compass.html">MAP · CLOCK · COMPASS</a>
-        <a href="https://lab.a8.cosigo.io/celestial.html">CELESTIAL MAP</a>
-        <a href="https://a8.cosigo.io/canonical.html">CANONICAL</a>
-        <a href="https://a8.cosigo.io/about.html">ABOUT A8</a>
+        <a href="https://clock.cosigo.io/">CLOCK</a>
+        <a href="https://calendar.cosigo.io/">CALENDAR</a>
+        <a href="https://moons.cosigo.io/">MOONS</a>
+        <a href="https://mintaka.cosigo.io/">MINTAKA</a>
+        <a href="https://sol.cosigo.io/">SOL</a>
+        <a href="https://map.cosigo.io/">MAP · CLOCK · COMPASS</a>
+        <a href="https://sea.cosigo.io/" aria-current="page">NAVIGATION</a>
+        <a href="https://stars.cosigo.io/">CELESTIAL</a>
+        <a href="https://audio.cosigo.io/">AUDIO</a>
+        <a href="https://quartz.cosigo.io/">QUARTZ</a>
+        <a href="https://a8.cosigo.io/">A8 PUBLIC</a>
+        <a href="https://about.cosigo.io/">ABOUT</a>
+        <a href="https://contestant.cosigo.io/">FUN</a>
         <a href="https://cosigo.io/">COSIGO HOME</a>
-      </nav>
-    </div>
+        <a href="https://github.com/cosigo/a8">GITHUB</a>
+      </div>
+
+    </details>
+
   </div>
+</nav>
 
   <main>
     <header class="hero wrap">
@@ -348,7 +504,7 @@
       <p class="subline">Use modern tools when they are useful. Keep the underlying method recoverable from Nature. GPS can assist and verify; it does not have to define the coordinate, direction, distance or time architecture.</p>
       <div class="hero-actions">
         <a class="button primary" href="https://lab.a8.cosigo.io/map-clock-compass.html">OPEN EARTH MAP →</a>
-        <a class="button secondary" href="https://lab.a8.cosigo.io/celestial.html">OPEN CELESTIAL MAP →</a>
+        <a class="button secondary" href="https://stars.cosigo.io/">OPEN CELESTIAL MAP →</a>
       </div>
     </header>
 
@@ -644,7 +800,7 @@
 <text fill="#8fc5ff" font-family="sans-serif" font-size="12" x="132" y="153">altitude</text>
 <text fill="#9eacb9" font-family="sans-serif" font-size="12" x="42" y="226">horizon</text>
 </svg>
-<div class="button-row"><a class="button secondary" href="https://lab.a8.cosigo.io/celestial.html">OPEN CELESTIAL MAP</a></div>
+<div class="button-row"><a class="button secondary" href="https://stars.cosigo.io/">OPEN CELESTIAL MAP</a></div>
 <div class="visual-note">Preferred architecture: celestial fix → dead reckon → celestial fix → expose and correct drift.</div>
 </article>
 
@@ -670,7 +826,7 @@
           <strong>Satellites are useful. They are not foundational.</strong>
           <p>Today, use GPS/GNSS, modern ephemerides, computers and sensors as excellent aids and comparison channels. A recoverable system asks a second question: if that infrastructure is gone, what can be rebuilt from observable Nature and local instruments?</p>
           <div class="button-row">
-            <a class="button primary" href="https://lab.a8.cosigo.io/celestial.html">OPEN CELESTIAL MAP →</a>
+            <a class="button primary" href="https://stars.cosigo.io/">OPEN CELESTIAL MAP →</a>
             <a class="button secondary" href="https://lab.a8.cosigo.io/map-clock-compass.html">OPEN EARTH MAP →</a>
           </div>
         </aside>
@@ -758,9 +914,9 @@
         <a href="https://cosigo.io/">COSIGO HOME</a> ·
         <a href="https://a8.cosigo.io/">A8 PUBLIC</a> ·
         <a href="https://lab.a8.cosigo.io/">ENGINEERING LAB</a> ·
-        <a href="https://lab.a8.cosigo.io/navigation.html">NAVIGATION</a> ·
+        <a href="https://sea.cosigo.io/">NAVIGATION</a> ·
         <a href="https://lab.a8.cosigo.io/map-clock-compass.html">MAP · CLOCK · COMPASS</a> ·
-        <a href="https://lab.a8.cosigo.io/celestial.html">CELESTIAL MAP</a> ·
+        <a href="https://stars.cosigo.io/">CELESTIAL MAP</a> ·
         <a href="https://a8.cosigo.io/canonical.html">CANONICAL</a> ·
         <a href="https://a8.cosigo.io/open-research.html">OPEN RESEARCH</a> ·
         <a href="https://a8.cosigo.io/about.html">ABOUT A8</a> ·

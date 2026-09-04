@@ -246,13 +246,13 @@ body{
 <meta name="description" content="COSIGO Labs Auspicious 8 audio laboratory for exploring A8 timing, tone, frequency relationships, and native measurement methods in an engineering test environment.">
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
 <meta name="author" content="COSIGO Labs">
-<link rel="canonical" href="https://lab.a8.cosigo.io/audio.html">
+<link rel="canonical" href="https://audio.cosigo.io/">
 <link rel="icon" href="https://a8.cosigo.io/assets/cosigo_master_512.png">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="COSIGO Labs — Auspicious 8">
 <meta property="og:title" content="A8 Frequency Trainer · Core20">
 <meta property="og:description" content="COSIGO Labs Auspicious 8 audio laboratory for exploring A8 timing, tone, frequency relationships, and native measurement methods in an engineering test environment.">
-<meta property="og:url" content="https://lab.a8.cosigo.io/audio.html">
+<meta property="og:url" content="https://audio.cosigo.io/">
 <meta property="og:image" content="https://a8.cosigo.io/assets/cosigo_master_512.png">
 <meta property="og:image:alt" content="A8 Frequency Trainer · Core20 — COSIGO Labs">
 <meta name="twitter:card" content="summary">
@@ -264,7 +264,7 @@ body{
   "@context": "https://schema.org",
   "@type": "WebPage",
   "name": "A8 Frequency Trainer · Core20",
-  "url": "https://lab.a8.cosigo.io/audio.html",
+  "url": "https://audio.cosigo.io/",
   "description": "COSIGO Labs Auspicious 8 audio laboratory for exploring A8 timing, tone, frequency relationships, and native measurement methods in an engineering test environment.",
   "dateModified": "2026-08-18",
   "inLanguage": "en",
@@ -362,24 +362,205 @@ body{
 
 </head>
 <body>
-<nav class="cosigo-global-nav" aria-label="COSIGO and A8 global navigation">
-  <a class="cosigo-global-brand" href="https://cosigo.io/" aria-label="COSIGO home">
-    <img src="/assets/cosigo_master_512.gif" alt="COSIGO">
-    <span>COSIGO<small>LABS · AUSPICIOUS 8</small></span>
-  </a>
-  <div class="cosigo-global-links">
-    <a href="/index.html">A8 LAB HOME</a>
-    <a href="/calendar.html">CALENDAR</a>
-    <a href="/moons.html">4-MOON VIEW</a>
-    <a href="/clock.html">A8 CLOCK</a>
-    <a href="https://a8.cosigo.io/">A8 PUBLIC</a>
-    <a class="cosigo-exit" href="https://cosigo.io/">COSIGO HOME</a>
-    <a class="cosigo-exit" href="https://contact.cosigo.io/">CONTACT</a>
-    <a href="https://github.com/cosigo">GITHUB</a>
+<style id="a8-topside-coherence-02-style">
+#a8-topside-coherence-02{
+  display:block;
+  margin:0;
+  padding:10px 14px;
+  border-bottom:1px solid rgba(255,255,255,.14);
+  background:rgba(7,11,16,.96);
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+}
+#a8-topside-coherence-02 .a8-topline{
+  max-width:1440px;
+  margin:0 auto;
+  display:flex;
+  gap:12px;
+  align-items:center;
+  flex-wrap:wrap;
+}
+#a8-topside-coherence-02 .cosigo-global-brand{
+  display:flex;
+  gap:8px;
+  align-items:center;
+  text-decoration:none;
+}
+#a8-topside-coherence-02 .cosigo-global-brand img{
+  width:34px;
+  height:34px;
+  object-fit:contain;
+}
+#a8-topside-coherence-02 .cosigo-global-brand span{
+  font-weight:900;
+  letter-spacing:.06em;
+}
+#a8-topside-coherence-02 .cosigo-global-brand small{
+  display:block;
+  opacity:.72;
+  font-size:.62rem;
+}
+#a8-topside-coherence-02 a{text-decoration:none}
+
+/* A8 AUDIO · HUMAN MUSIC DOORS */
+#a8-topside-coherence-02 .a8-music-doors{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin-left:auto;
+}
+
+#a8-topside-coherence-02 .a8-music-pill{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:34px;
+  padding:7px 11px;
+  border:1px solid #425467;
+  border-radius:999px;
+  background:rgba(17,24,32,.74);
+  color:#c8ddf5;
+  font-size:.72rem;
+  font-weight:900;
+  letter-spacing:.055em;
+  white-space:nowrap;
+}
+
+#a8-topside-coherence-02 .a8-music-pill:hover,
+#a8-topside-coherence-02 .a8-music-pill:focus-visible{
+  background:#182431;
+  color:#fff;
+  border-color:#6f8499;
+  outline:none;
+}
+
+#a8-topside-coherence-02 .a8-menu{
+  position:relative;
+  margin-left:auto;
+}
+#a8-topside-coherence-02 .a8-menu summary{
+  list-style:none;
+  cursor:pointer;
+  padding:8px 11px;
+  border:1px solid #425467;
+  border-radius:8px;
+  background:#111820;
+  color:#e0bd72;
+  font-size:.76rem;
+  font-weight:900;
+  letter-spacing:.07em;
+  user-select:none;
+}
+#a8-topside-coherence-02 .a8-menu summary::-webkit-details-marker{
+  display:none;
+}
+#a8-topside-coherence-02 .a8-menu summary::after{
+  content:" ▾";
+  color:#92a5b8;
+}
+#a8-topside-coherence-02 .a8-menu[open] summary::after{
+  content:" ▴";
+}
+#a8-topside-coherence-02 .a8-menu-panel{
+  position:absolute;
+  z-index:1000;
+  right:0;
+  top:calc(100% + 7px);
+  min-width:180px;
+  padding:7px;
+  border:1px solid #425467;
+  border-radius:9px;
+  background:#0d141b;
+  box-shadow:0 12px 28px rgba(0,0,0,.38);
+}
+#a8-topside-coherence-02 .a8-menu-panel a{
+  display:block;
+  padding:9px 10px;
+  border-radius:6px;
+  color:#c8ddf5;
+  font-size:.78rem;
+  font-weight:800;
+  white-space:nowrap;
+}
+#a8-topside-coherence-02 .a8-menu-panel a:hover,
+#a8-topside-coherence-02 .a8-menu-panel a:focus,
+#a8-topside-coherence-02 .a8-menu-panel a[aria-current="page"]{
+  background:#182431;
+  color:#fff;
+}
+@media(max-width:760px){
+  #a8-topside-coherence-02 .a8-menu-panel{
+    min-width:170px;
+  }
+
+  #a8-topside-coherence-02 .a8-music-doors{
+    order:3;
+    width:100%;
+    margin-left:0;
+  }
+}
+</style>
+
+<nav id="a8-topside-coherence-02"
+     class="cosigo-global-nav"
+     aria-label="A8 Time Lab navigation">
+
+  <div class="a8-topline">
+
+    <a class="cosigo-global-brand"
+       href="https://cosigo.io/"
+       aria-label="COSIGO home">
+      <img src="/assets/cosigo_master_512.gif" alt="COSIGO">
+      <span>COSIGO<small>LABS · AUSPICIOUS 8</small></span>
+    </a>
+
+    <div class="a8-music-doors"
+         aria-label="A8 music shortcuts">
+
+      <a class="a8-music-pill"
+         href="/composer.html"
+         title="Make music in the A8 Composer">
+        MUSICIAN?
+      </a>
+
+      <a class="a8-music-pill"
+         href="/contestants.html"
+         title="Hear A8 contestants and winners">
+        CURIOUS?
+      </a>
+
+    </div>
+
+    <details class="a8-menu">
+      <summary>MENU</summary>
+
+      <div class="a8-menu-panel">
+        <a href="https://lab.a8.cosigo.io/">LAB HOME</a>
+        <a href="https://clock.cosigo.io/">CLOCK</a>
+        <a href="https://calendar.cosigo.io/">CALENDAR</a>
+        <a href="https://moons.cosigo.io/">MOONS</a>
+        <a href="https://mintaka.cosigo.io/">MINTAKA</a>
+        <a href="https://sol.cosigo.io/">SOL</a>
+        <a href="https://map.cosigo.io/">MAP · CLOCK · COMPASS</a>
+        <a href="https://sea.cosigo.io/">NAVIGATION</a>
+        <a href="https://stars.cosigo.io/">CELESTIAL</a>
+        <a href="https://audio.cosigo.io/" aria-current="page">AUDIO</a>
+        <a href="https://composer.cosigo.io/">
+          COMPOSER
+        </a>
+        <a href="https://quartz.cosigo.io/">QUARTZ</a>
+        <a href="https://a8.cosigo.io/">A8 PUBLIC</a>
+        <a href="https://about.cosigo.io/">ABOUT</a>
+        <a href="https://contestant.cosigo.io/">FUN</a>
+        <a href="https://cosigo.io/">COSIGO HOME</a>
+        <a href="https://github.com/cosigo/a8">GITHUB</a>
+      </div>
+
+    </details>
+
   </div>
 </nav>
 
-  <section class="panel">
+<section class="panel">
     <h1>Auspicious 8 — Frequency Trainer</h1>
     <p class="sub">
       Learn frequency using the A8 second. The physical sound does not change; the time ruler used to count its cycles does.
@@ -453,7 +634,90 @@ body{
     #a8-chime .tone.live{transform:translateY(-4px) scale(1.04);background:light-dark(#25292d,#f0f2f4);color:light-dark(#fff,#111315)}
     #a8-chime .foot{font-size:11px;line-height:1.45;opacity:.48;margin-top:15px}
     @media(max-width:520px){#a8-chime{padding:0}#a8-chime .readout{text-align:left}.a8root .tonebox{grid-template-columns:1fr}.a8root .seconds{gap:3px}.a8root .sec{height:14px}}
+
     @media(prefers-reduced-motion:reduce){#a8-chime *{transition:none!important}}
+  </style>
+
+  <style id="a8-audio-glass-cards-final">
+    /*
+     * A8 AUDIO · GLASS PRESENTATION
+     * Presentation only.
+     * No Core20 / ditty / WebAudio authority changes.
+     */
+
+    /* Primary Audio laboratory cards */
+    .panel{
+      background:rgba(7,11,16,.28) !important;
+      backdrop-filter:blur(1px);
+      -webkit-backdrop-filter:blur(1px);
+    }
+
+    /* Core-connected music information card */
+    .a8-core-music{
+      background:rgba(8,12,18,.24) !important;
+    }
+
+    /* Numerical/readout wells */
+    .readout > div{
+      background:rgba(7,11,16,.14);
+    }
+
+    /* Native ditty card */
+    #a8-chime .panel{
+      background:rgba(7,11,16,.24) !important;
+      backdrop-filter:blur(1px);
+      -webkit-backdrop-filter:blur(1px);
+    }
+
+    /* Ditty metric wells */
+    #a8-chime .metric{
+      background:rgba(10,15,21,.16) !important;
+    }
+
+    /* Tone pads remain visible but reveal the antique artwork */
+    #a8-chime .tone{
+      background:rgba(18,23,29,.18) !important;
+    }
+
+    /* Active tone remains an obvious instrument state */
+    #a8-chime .tone.live{
+      background:#f0f2f4 !important;
+      color:#111315 !important;
+    }
+
+    /* Keep implementation/readout text blocks glassy */
+    .a8-core-music pre{
+      background:rgba(0,0,0,.16) !important;
+    }
+
+    /*
+     * Controls deliberately remain stronger than cards.
+     * CONNECT beacon, buttons, selects and nav retain
+     * their existing presentation.
+     */
+
+    @media(max-width:760px){
+      .panel{
+        background:rgba(7,11,16,.44) !important;
+        backdrop-filter:none;
+        -webkit-backdrop-filter:none;
+      }
+
+      .a8-core-music{
+        background:rgba(8,12,18,.38) !important;
+      }
+
+      .readout > div,
+      #a8-chime .metric{
+        background:rgba(8,14,21,.28) !important;
+      }
+
+      #a8-chime .panel{
+        background:rgba(7,11,16,.40) !important;
+        backdrop-filter:none;
+        -webkit-backdrop-filter:none;
+      }
+    }
   </style>
 
   <div class="wrap">
@@ -2545,7 +2809,7 @@ drawScope();
   <div class="cosigo-footer-links">
     <a href="https://cosigo.io/">COSIGO Home</a>
     <a href="https://a8.cosigo.io/">A8 Public Instrument</a>
-    <a href="/">A8 Engineering Lab</a>
+    <a href="https://lab.a8.cosigo.io/">A8 Engineering Lab</a>
     <a href="https://contact.cosigo.io/">Contact</a>
     <a href="https://docs.cosigo.io/">COSIGO Docs / WP</a>
     <a href="https://github.com/cosigo">COSIGO GitHub</a>

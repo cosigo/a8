@@ -1,0 +1,715 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>A8 Physical Clock · Living Evidence | COSIGO Labs</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.file-grid{display:grid;gap:10px}.file-card{border:1px solid var(--line);border-radius:12px;padding:12px;background:var(--panel)}
+.tag{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:2px 8px;margin:2px;font-size:.78rem}
+.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;overflow-wrap:anywhere}
+.warning{border-left:4px solid #d9a441}.goodbox{border-left:4px solid #46a36f}
+#sample{white-space:pre-wrap;max-height:420px;overflow:auto}
+</style>
+<link rel="stylesheet" href="/site-shell.css">
+<meta name="description" content="COSIGO Labs Auspicious 8 read-only observation archive boundary for source provenance, evidence preservation, and future verified inspection.">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+<meta name="author" content="COSIGO Labs">
+<link rel="canonical" href="https://data.cosigo.io/physical-clock-evidence.html">
+<link rel="icon" href="https://a8.cosigo.io/assets/cosigo_master_512.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="COSIGO Labs — Auspicious 8">
+<meta property="og:title" content="A8 Physical Clock · Living Evidence">
+<meta property="og:description" content="COSIGO Labs Auspicious 8 read-only observation archive boundary for source provenance, evidence preservation, and future verified inspection.">
+<meta property="og:url" content="https://data.cosigo.io/physical-clock-evidence.html">
+<meta property="og:image" content="https://a8.cosigo.io/assets/cosigo_master_512.png">
+<meta property="og:image:alt" content="A8 Observation Archive · Core20 — COSIGO Labs">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="A8 Physical Clock · Living Evidence">
+<meta name="twitter:description" content="COSIGO Labs Auspicious 8 read-only observation archive boundary for source provenance, evidence preservation, and future verified inspection.">
+<meta name="twitter:image" content="https://a8.cosigo.io/assets/cosigo_master_512.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "A8 Physical Clock · Living Evidence",
+  "url": "https://data.cosigo.io/physical-clock-evidence.html",
+  "description": "COSIGO Labs Auspicious 8 read-only observation archive boundary for source provenance, evidence preservation, and future verified inspection.",
+  "dateModified": "2026-08-30",
+  "inLanguage": "en",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "COSIGO Labs — Auspicious 8",
+    "url": "https://a8.cosigo.io/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "COSIGO Labs",
+    "url": "https://cosigo.io/"
+  },
+  "about": [
+    {
+      "@type": "Thing",
+      "name": "Observational data"
+    },
+    {
+      "@type": "Thing",
+      "name": "Telescope events"
+    },
+    {
+      "@type": "Thing",
+      "name": "Observation provenance"
+    },
+    {
+      "@type": "Thing",
+      "name": "Auspicious 8 laboratory"
+    }
+  ]
+}
+</script>
+
+<style id="a8-living-evidence-style">
+.evidence-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:14px;
+}
+.evidence-card{
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:16px;
+  background:var(--panel);
+}
+.evidence-card h2,.evidence-card h3{margin-top:0}
+.evidence-status{
+  display:inline-block;
+  border:1px solid #46a36f;
+  border-radius:999px;
+  padding:4px 9px;
+  font-weight:900;
+}
+.photo-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:14px;
+}
+.photo-grid figure{margin:0}
+.photo-grid img{
+  display:block;
+  width:100%;
+  height:auto;
+  border:1px solid var(--line);
+  border-radius:12px;
+}
+.photo-grid figcaption{
+  padding:8px 2px 0;
+  font-size:.83rem;
+  opacity:.82;
+}
+.proof-table{
+  width:100%;
+  border-collapse:collapse;
+}
+.proof-table th,.proof-table td{
+  text-align:left;
+  vertical-align:top;
+  border-bottom:1px solid var(--line);
+  padding:9px 8px;
+}
+.pass{font-weight:900}
+.hash{
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  overflow-wrap:anywhere;
+  font-size:.79rem;
+}
+.evidence-stage{margin-top:12px}
+.evidence-stage summary{
+  cursor:pointer;
+  font-weight:900;
+}
+.evidence-stage pre,.wiring{
+  white-space:pre-wrap;
+  overflow-wrap:anywhere;
+}
+.current-next{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:14px;
+}
+</style>
+
+</head>
+<body>
+<style id="a8-topside-coherence-02-style">
+#a8-topside-coherence-02{
+  display:block;
+  margin:0;
+  padding:10px 14px;
+  border-bottom:1px solid rgba(255,255,255,.14);
+  background:rgba(7,11,16,.96);
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+}
+#a8-topside-coherence-02 .a8-topline{
+  max-width:1440px;
+  margin:0 auto;
+  display:flex;
+  gap:12px;
+  align-items:center;
+  flex-wrap:wrap;
+}
+#a8-topside-coherence-02 .cosigo-global-brand{
+  display:flex;
+  gap:8px;
+  align-items:center;
+  text-decoration:none;
+}
+#a8-topside-coherence-02 .cosigo-global-brand img{
+  width:34px;
+  height:34px;
+  object-fit:contain;
+}
+#a8-topside-coherence-02 .cosigo-global-brand span{
+  font-weight:900;
+  letter-spacing:.06em;
+}
+#a8-topside-coherence-02 .cosigo-global-brand small{
+  display:block;
+  opacity:.72;
+  font-size:.62rem;
+}
+#a8-topside-coherence-02 a{text-decoration:none}
+#a8-topside-coherence-02 .a8-menu{
+  position:relative;
+  margin-left:auto;
+}
+#a8-topside-coherence-02 .a8-menu summary{
+  list-style:none;
+  cursor:pointer;
+  padding:8px 11px;
+  border:1px solid #425467;
+  border-radius:8px;
+  background:#111820;
+  color:#e0bd72;
+  font-size:.76rem;
+  font-weight:900;
+  letter-spacing:.07em;
+  user-select:none;
+}
+#a8-topside-coherence-02 .a8-menu summary::-webkit-details-marker{
+  display:none;
+}
+#a8-topside-coherence-02 .a8-menu summary::after{
+  content:" ▾";
+  color:#92a5b8;
+}
+#a8-topside-coherence-02 .a8-menu[open] summary::after{
+  content:" ▴";
+}
+#a8-topside-coherence-02 .a8-menu-panel{
+  position:absolute;
+  z-index:1000;
+  right:0;
+  top:calc(100% + 7px);
+  min-width:180px;
+  padding:7px;
+  border:1px solid #425467;
+  border-radius:9px;
+  background:#0d141b;
+  box-shadow:0 12px 28px rgba(0,0,0,.38);
+}
+#a8-topside-coherence-02 .a8-menu-panel a{
+  display:block;
+  padding:9px 10px;
+  border-radius:6px;
+  color:#c8ddf5;
+  font-size:.78rem;
+  font-weight:800;
+  white-space:nowrap;
+}
+#a8-topside-coherence-02 .a8-menu-panel a:hover,
+#a8-topside-coherence-02 .a8-menu-panel a:focus,
+#a8-topside-coherence-02 .a8-menu-panel a[aria-current="page"]{
+  background:#182431;
+  color:#fff;
+}
+@media(max-width:760px){
+  #a8-topside-coherence-02 .a8-menu-panel{
+    min-width:170px;
+  }
+}
+</style>
+
+<nav id="a8-topside-coherence-02"
+     class="cosigo-global-nav"
+     aria-label="A8 Time Lab navigation">
+
+  <div class="a8-topline">
+
+    <a class="cosigo-global-brand"
+       href="https://cosigo.io/"
+       aria-label="COSIGO home">
+      <img src="/assets/cosigo_master_512.gif" alt="COSIGO">
+      <span>COSIGO<small>LABS · AUSPICIOUS 8</small></span>
+    </a>
+
+    <details class="a8-menu">
+      <summary>MENU</summary>
+
+      <div class="a8-menu-panel">
+        <a href="https://lab.a8.cosigo.io/">LAB HOME</a>
+        <a href="https://clock.cosigo.io/">CLOCK</a>
+        <a href="https://calendar.cosigo.io/">CALENDAR</a>
+        <a href="https://moons.cosigo.io/">MOONS</a>
+        <a href="https://mintaka.cosigo.io/">MINTAKA</a>
+        <a href="https://sol.cosigo.io/">SOL</a>
+        <a href="https://map.cosigo.io/">MAP · CLOCK · COMPASS</a>
+        <a href="https://sea.cosigo.io/">NAVIGATION</a>
+        <a href="https://stars.cosigo.io/">CELESTIAL</a>
+        <a href="https://audio.cosigo.io/">AUDIO</a>
+        <a href="https://quartz.cosigo.io/">QUARTZ</a>
+        <a href="https://data.cosigo.io/">DATA · EVIDENCE</a>
+        <a href="https://a8.cosigo.io/">A8 PUBLIC</a>
+        <a href="https://about.cosigo.io/">ABOUT</a>
+        <a href="https://contestant.cosigo.io/">FUN</a>
+        <a href="https://cosigo.io/">COSIGO HOME</a>
+        <a href="https://github.com/cosigo/a8">GITHUB</a>
+      </div>
+
+    </details>
+
+  </div>
+</nav>
+
+<main>
+
+<header>
+  <div>
+    <div class="eyebrow">
+      AUSPICIOUS 8 · PHYSICAL CLOCK · LIVING EVIDENCE
+    </div>
+    <h1>Physical raw-pulse verification</h1>
+    <p class="muted">
+      As-tested apparatus, raw integer evidence, event stamping,
+      independent hardware counters, Pi bridge and sealed proof records.
+    </p>
+  </div>
+  <div class="pill">STAGE 11 · PASS</div>
+</header>
+
+<section class="panel goodbox">
+  <h2>Current physical boundary</h2>
+  <pre class="wiring">LM555CN physical oscillator
+        ↓
+real electrical voltage transitions
+        ↓
+1 kΩ signal path
+        ↓
+ ┌──────┴──────┐
+ ↓             ↓
+Arduino A      Arduino B
+Timer1 D5/T1   Timer1 D5/T1
+shadow count   event stamper v3
+                    ↓
+             Pi bridge v1.1
+                    ↓
+           EVENT + rawPulse</pre>
+
+  <p>
+    The apparatus removes the requirement to trust a software
+    simulation for the existence of the underlying pulse events.
+  </p>
+  <p class="muted">
+    Arduino and Pi firmware remain software and are therefore preserved,
+    hashed and independently inspectable.
+  </p>
+</section>
+
+<section class="panel">
+  <h2>As-tested apparatus</h2>
+
+<p>
+  <b>SW 28 · 2026</b><br>
+  Southwest · Saturn · Earth · 2026<br>
+  <span class="muted">Legacy reference · 2026-08-30</span>
+</p>
+
+<div class="photo-grid">
+    <figure>
+      <img
+        src="/evidence/physical-clock/a8-physical-clock-bench-20260830-overview.jpg"
+        alt="A8 physical clock as-tested apparatus overview">
+      <figcaption>
+        Whole-rig view used during the published Stage 5–11 sequence.
+      </figcaption>
+    </figure>
+
+    <figure>
+      <img
+        src="/evidence/physical-clock/a8-physical-clock-bench-20260830-breadboard.jpg"
+        alt="A8 physical clock LM555 breadboard close-up">
+      <figcaption>
+        Breadboard close-up. The written wiring contract is authoritative
+        where wires visually overlap.
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="panel">
+  <h2>As-tested wiring contract</h2>
+
+  <pre class="wiring">LM555CN
+
+PIN 1 → GND
+
+PIN 2 ─┐
+       ├── joined
+PIN 6 ─┘
+
+PIN 3 → output
+PIN 4 → +5 V normal running
+PIN 5 → unused
+PIN 7 → resistor junction
+PIN 8 → +5 V
+
+TIMING NETWORK
+
++5 V
+ │
+10 kΩ
+ │
+PIN 7
+ │
+100 kΩ
+ │
+PIN 2 + PIN 6
+ │
+0.1 µF
+ │
+GND
+
+COUNTER SIGNAL
+
+LM555 PIN 3
+ │
+1 kΩ
+ │
+ ├── Arduino A D5 / T1
+ └── Arduino B D5 / T1
+
+Arduino A GND ── Arduino B GND ── LM555 GND
+
+Arduino A 5 V  X  Arduino B 5 V
+NO direct 5 V rail tie.
+
+Arduino B supplies LM555 5 V / GND in the as-tested rig.</pre>
+</section>
+
+<section class="panel">
+<h2>Proof ledger</h2>
+
+<table class="proof-table">
+<thead>
+<tr>
+  <th>Stage</th>
+  <th>Test</th>
+  <th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr><td>3</td><td>LM555 physical raw-pulse proof</td><td class="pass">PASS</td></tr>
+<tr><td>4</td><td>Physical event stamping</td><td class="pass">PASS</td></tr>
+<tr><td>5</td><td>Timer1 16-bit rollover continuity</td><td class="pass">PASS</td></tr>
+<tr><td>6</td><td>Dual independent hardware counters</td><td class="pass">PASS</td></tr>
+<tr><td>7</td><td>Physical source stop / resume</td><td class="pass">PASS</td></tr>
+<tr><td>8</td><td>Independent event-stamp witnessing</td><td class="pass">PASS</td></tr>
+<tr><td>9</td><td>Identity cannot manufacture raw edges</td><td class="pass">PASS</td></tr>
+<tr><td>10</td><td>Pi physical evidence bridge v1.1</td><td class="pass">PASS</td></tr>
+<tr><td>11</td><td>Bridge cannot manufacture raw evidence</td><td class="pass">PASS</td></tr>
+</tbody>
+</table>
+</section>
+
+<details class="panel evidence-stage">
+<summary>Stage 3 · LM555 physical raw-pulse proof · PASS</summary>
+<pre>RAW_COUNT_A = 30
+RAW_COUNT_B = 247
+DELTA_RAW_EDGES = 217
+
+SOURCE = LM555CN
+COUNTER = Arduino B ATmega328P Timer1 D5/T1</pre>
+</details>
+
+<details class="panel evidence-stage">
+<summary>Stage 4 · Physical event stamper · PASS</summary>
+<pre>RAW_START       = 30
+IO_WEST         = 173
+MINTAKA_TRANSIT = 317
+SOL_OBSERVATION = 460
+
+DELTAS = 143, 144, 143
+EVENT_INPUT = identity only</pre>
+</details>
+
+<details class="panel evidence-stage">
+<summary>Stage 5 · Timer1 rollover · PASS</summary>
+<pre>LAST BELOW:
+63412 = 0x0000F7B4
+
+BOUNDARY:
+0x0000FFFF
+      ↓
+0x00010000
+
+FIRST OBSERVED ABOVE:
+67639 = 0x00010837
+
+OBSERVED DELTA = 4227 physical edges</pre>
+
+<p class="hash">
+RAW SHA-256:
+c23bb743d2c87a7a64d55aa940d06c87ce46cd94f016f7ec5c72cc25d1193537
+</p>
+
+<p class="hash">
+PASS SHA-256:
+cb54086d4159612382be42a3cd2cdc0c01d8c0efaca6e2c3f1fd8bee5c4e850f
+</p>
+</details>
+
+<details class="panel evidence-stage">
+<summary>Stage 6 · Dual independent counters · PASS</summary>
+<pre>A = 99,454,808,1163,1517,1872,2227,2581,2936
+B = 101,456,810,1165,1520,1874,2229,2583,2938
+
+MAX INTERVAL DISAGREEMENT = 1 edge</pre>
+
+<p class="hash">
+A RAW SHA-256:
+5ead086889c5cd4d1a0edae8f6b53616c9adf8bfb010af0ddafefa90d8c017e8
+</p>
+
+<p class="hash">
+B RAW SHA-256:
+37c4075c17623d7c7a2004074c914f5f86c8d6f31ffc7349d016a07c0f6ea0d5
+</p>
+
+<p class="hash">
+PASS SHA-256:
+6d17c9375f27e2e95b3e6fd7381b63609f51c041904f287dc753aa7da5c94fa7
+</p>
+</details>
+
+<details class="panel evidence-stage">
+<summary>Stage 7 · Physical source stop / resume · PASS</summary>
+<pre>A STOPPED:
+5280 → 5280 → 5280 → 5280
+
+B STOPPED:
+5282 → 5282 → 5282 → 5282
+
+SOURCE RESTORED:
+
+A:
+6172 → 6386 → 6600
+
+B:
+6171 → 6385 → 6599</pre>
+
+<p class="hash">
+PASS SHA-256:
+5b562341dae8f9e4afb6853d84553993d6e854ce550c3aad6b5dcdfab69417f2
+</p>
+</details>
+
+<details class="panel evidence-stage">
+<summary>Stage 8 · Independent event witness · PASS</summary>
+<pre>IO_WEST:
+A 242 → B 262 → A 278
+
+EUROPA_WEST:
+A 421 → B 441 → A 457
+
+GANYMEDE_WEST:
+A 600 → B 620 → A 636
+
+MINTAKA_TRANSIT:
+A 779 → B 799 → A 815
+
+SOL_OBSERVATION:
+A 958 → B 978 → A 994
+
+Every B stamp landed inside the independent A bracket.</pre>
+
+<p class="hash">
+PASS SHA-256:
+347369a538aad1f670c659d47e13497ff6a718d0275b1e9e04cef3b6affaf2e1
+</p>
+</details>
+
+<details class="panel evidence-stage">
+<summary>Stage 9 · Identity cannot create raw evidence · PASS</summary>
+<pre>LM555 STOPPED
+
+ARDUINO A:
+3549 repeated unchanged across seven observations
+
+ARDUINO B:
+IO_WEST          3548
+EUROPA_WEST      3548
+GANYMEDE_WEST    3548
+MINTAKA_TRANSIT  3548
+SOL_OBSERVATION  3548
+
+RAW ADVANCE = 0</pre>
+
+<p class="hash">
+PASS SHA-256:
+42c98aaf4b17d8bd0215458363471039d39b63b35c547ff0bfca1cb1eca3fbf2
+</p>
+</details>
+
+<details class="panel evidence-stage" open>
+<summary>Stage 10 · Pi physical event/evidence bridge · PASS</summary>
+<pre>A8_PHYSICAL_EVIDENCE_BRIDGE_V1_1_READY
+INPUT=EVENT_IDENTITY_ONLY
+OUTPUT=EVENT,rawPulse,rawHex
+
+IO_WEST          18371
+IO_EAST          18372
+EUROPA_WEST      18372
+EUROPA_EAST      18373
+GANYMEDE_WEST    18373
+GANYMEDE_EAST    18374
+MINTAKA_TRANSIT  18374
+SOL_OBSERVATION  18375</pre>
+
+<p>
+<b>Failed v1 preserved:</b>
+initial serial-wait implementation hung and was replaced rather than hidden.
+</p>
+
+<p class="hash">
+FAILED V1 SHA-256:
+34e24c7ba9670b65d1d24a41e1fa548159fdbc87c93105356de252218195d08b
+</p>
+
+<p class="hash">
+BRIDGE V1.1 SOURCE SHA-256:
+6a88ccb627b4ec02dc02110c195b5d2e33e894c804fe1ee3c93be904828c9dc4
+</p>
+
+<p class="hash">
+PASS SHA-256:
+40ed17a4d73719328a4a6958c306570cb2273a8b4250ef345fbb9dc523ef8438
+</p>
+</details>
+
+<details class="panel evidence-stage" open>
+<summary>Stage 11 · Bridge cannot create raw evidence · PASS</summary>
+
+<pre>LM555 STOPPED
+
+IO_WEST          30020
+IO_EAST          30020
+EUROPA_WEST      30020
+EUROPA_EAST      30020
+GANYMEDE_WEST    30020
+GANYMEDE_EAST    30020
+MINTAKA_TRANSIT  30020
+SOL_OBSERVATION  30020
+
+COMMON RAW HEX = 0x00007544
+RAW ADVANCE = 0</pre>
+
+<p class="hash">
+RAW SHA-256:
+7cb77f9b5edce0db5589787600828cf7b4e04a0ea6bf51fb74c0be8b87dc90ae
+</p>
+
+<p class="hash">
+PASS SHA-256:
+9238e7900182607ed7fd782b8dd20b7d75a879177bd00461d771664d917df183
+</p>
+</details>
+
+<section class="panel warning">
+<h2>What this establishes</h2>
+
+<p>
+The raw-pulse foundation can physically exist as an analog oscillator
+producing electrical transitions counted by ATmega328P hardware Timer1
+peripherals.
+</p>
+
+<p>
+Observation identity is separate from raw-pulse evidence. When the
+physical source is stopped, identities do not cause the hardware count
+or Pi bridge representation of that count to advance.
+</p>
+
+<h3>What this does not establish</h3>
+
+<p>
+These experiments do not claim Arduino or Pi software is incapable of
+error or deception, nor that the LM555 is a final astronomical
+oscillator. Source, firmware, raw files and hashes remain inspectable.
+</p>
+</section>
+
+<div class="current-next">
+
+<section class="evidence-card">
+<h2>CURRENT</h2>
+<p><b>Physical verification · Stage 11 PASS</b></p>
+<p>Pi physical evidence bridge · v1.1</p>
+<p>Physical apparatus may remain offline / on-demand.</p>
+</section>
+
+<section class="evidence-card">
+<h2>NEXT</h2>
+<p><b>Physical evidence → Jovian recurrence consumer</b></p>
+
+<pre>Io × 4
+Europa × 2
+Ganymede × 1
+      ↓
+common recovered Jovian ruler
+      ↓
+Mintaka
+      ↓
+Sol
+      ↓
+Sun-return
+      ↓
+DAY_PHASE17</pre>
+</section>
+
+</div>
+
+<section class="panel">
+<a class="button-link" href="/data.html">← DATA · EVIDENCE HUB</a>
+<a class="button-link" href="/clock.html">CLOCK</a>
+<a class="button-link" href="/moons.html">MOONS</a>
+<a class="button-link" href="/mintaka.html">MINTAKA</a>
+<a class="button-link" href="/sol.html">SOL</a>
+</section>
+
+</main><footer class="cosigo-site-footer">
+  <strong>COSIGO Labs · Auspicious 8 experimental laboratory</strong>
+  <p class="cosigo-disclaimer">Research / engineering notice: A8 pages may contain provisional models, simulations, comparison values, hypotheses and unreplicated experiment designs. Unless a page explicitly states otherwise, material shown here is not a certified metrology standard, accredited measurement result, or final Foundation definition. Legacy / SI values are comparison coordinates where identified, not native A8 authority.</p>
+  <p class="cosigo-disclaimer">COSIGO is primarily an educational and experimental project. Nothing in this laboratory is an investment offering, promise of financial return, or financial, investment, legal or tax advice. See the project-status notice for the current public description.</p>
+  <div class="cosigo-footer-links">
+    <a href="https://cosigo.io/">COSIGO Home</a>
+    <a href="https://a8.cosigo.io/">A8 Public Instrument</a>
+    <a href="/">A8 Engineering Lab</a>
+    <a href="https://contact.cosigo.io/">Contact</a>
+    <a href="https://docs.cosigo.io/">COSIGO Docs / WP</a>
+    <a href="https://github.com/cosigo">COSIGO GitHub</a>
+    <a href="https://github.com/cosigo/cosigo.io">Main-site source</a>
+    <a href="https://cosigo.io/project-status.html">Educational Purpose / Project Status</a>
+  </div>
+  <p>© 2026 COSIGO. COSIGO™ rights and trademark notices remain governed by the official COSIGO site.</p>
+</footer>
+</body></html>

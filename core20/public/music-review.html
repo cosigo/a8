@@ -1,0 +1,612 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+<meta charset="utf-8">
+
+<meta
+  name="viewport"
+  content="width=device-width,initial-scale=1"
+>
+
+<title>
+A8 Music Review | COSIGO Labs
+</title>
+
+<link
+  rel="stylesheet"
+  href="/site-shell.css"
+>
+
+<style>
+
+body{
+  max-width:1100px;
+  margin:24px auto;
+  padding:0 16px 60px;
+  font-family:system-ui,sans-serif;
+}
+
+.panel{
+  margin:16px 0;
+  padding:16px;
+  border:1px solid rgba(127,127,127,.35);
+  border-radius:14px;
+}
+
+h1{
+  margin:.2rem 0;
+  font-size:clamp(2.2rem,6vw,4.5rem);
+}
+
+.sub{
+  opacity:.68;
+}
+
+.grid{
+  display:grid;
+  gap:10px;
+}
+
+.item{
+  padding:14px;
+  border:1px solid rgba(127,127,127,.35);
+  border-radius:10px;
+}
+
+.head{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  flex-wrap:wrap;
+}
+
+.actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:10px;
+}
+
+button{
+  min-height:42px;
+  padding:8px 12px;
+  cursor:pointer;
+}
+
+pre{
+  max-height:500px;
+  overflow:auto;
+  padding:12px;
+  border-radius:8px;
+  background:rgba(127,127,127,.12);
+}
+
+.current{
+  font-size:1.1rem;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>
+A8 Music Review
+</h1>
+
+<p class="sub">
+Private curator surface.
+Approval and publication are deliberately separate.
+</p>
+
+
+<section class="panel">
+
+<h2>
+Incoming submissions
+</h2>
+
+<div
+  id="incoming"
+  class="grid"
+>
+Loading…
+</div>
+
+</section>
+
+
+<section class="panel">
+
+<h2>
+Approved library
+</h2>
+
+<div
+  id="approved"
+  class="grid"
+>
+Loading…
+</div>
+
+</section>
+
+
+<section class="panel">
+
+<h2>
+Current curated ditty pointer
+</h2>
+
+<div
+  id="current"
+  class="current"
+>
+Loading…
+</div>
+
+</section>
+
+
+<section
+  id="inspection"
+  class="panel"
+  hidden
+>
+
+<h2>
+Native score inspection
+</h2>
+
+<div id="inspectMeta"></div>
+
+<pre id="inspectScore"></pre>
+
+</section>
+
+
+<script>
+
+(() => {
+  'use strict';
+
+  const $ =
+    id =>
+      document.getElementById(id);
+
+
+  function esc(
+    value
+  ) {
+    return String(
+      value ?? ''
+    )
+      .replaceAll(
+        '&',
+        '&amp;'
+      )
+      .replaceAll(
+        '<',
+        '&lt;'
+      )
+      .replaceAll(
+        '>',
+        '&gt;'
+      )
+      .replaceAll(
+        '"',
+        '&quot;'
+      );
+  }
+
+
+  async function api(
+    url,
+    options = {}
+  ) {
+    const response =
+      await fetch(
+        url,
+        {
+          cache:
+            'no-store',
+
+          ...options,
+
+          headers: {
+            'Content-Type':
+              'application/json',
+
+            ...(
+              options.headers ||
+              {}
+            )
+          }
+        }
+      );
+
+
+    const body =
+      await response.json();
+
+
+    if (!response.ok) {
+      throw new Error(
+        body.message ||
+        'REQUEST FAILED'
+      );
+    }
+
+
+    return body;
+  }
+
+
+  function card(
+    item,
+    bucket
+  ) {
+    const node =
+      document.createElement(
+        'article'
+      );
+
+
+    node.className =
+      'item';
+
+
+    node.dataset.id =
+      item.id;
+
+
+    node.dataset.bucket =
+      bucket;
+
+
+    node.innerHTML = `
+      <div class="head">
+
+        <div>
+          <strong>
+            ${esc(item.title)}
+          </strong>
+
+          <div>
+            by ${esc(item.composer)}
+          </div>
+        </div>
+
+        <div class="sub">
+          ${esc(item.submittedAt)}
+        </div>
+
+      </div>
+
+      <p>
+        8 bars ·
+        512 native slots ·
+        ${item.summary.notes} notes ·
+        ${item.summary.rests} rests
+      </p>
+
+      ${
+        item.note
+          ? `<p class="sub">${esc(item.note)}</p>`
+          : ''
+      }
+
+      <div class="actions">
+
+        <button data-action="inspect">
+          INSPECT SCORE
+        </button>
+
+        ${
+          bucket ===
+          'incoming'
+            ? `
+              <button data-action="approve">
+                APPROVE
+              </button>
+
+              <button data-action="reject">
+                REJECT
+              </button>
+            `
+            : ''
+        }
+
+      </div>
+    `;
+
+
+    return node;
+  }
+
+
+  async function loadLists() {
+    const [
+      incoming,
+      approved
+    ] =
+      await Promise.all([
+        api(
+          '/api/music-review/admin/incoming'
+        ),
+
+        api(
+          '/api/music-review/admin/approved'
+        )
+      ]);
+
+
+    $('incoming')
+      .innerHTML =
+        '';
+
+
+    if (
+      !incoming.items.length
+    ) {
+      $('incoming')
+        .textContent =
+          'No incoming submissions.';
+
+    } else {
+      incoming.items.forEach(
+        item =>
+          $('incoming')
+            .appendChild(
+              card(
+                item,
+                'incoming'
+              )
+            )
+      );
+    }
+
+
+    $('approved')
+      .innerHTML =
+        '';
+
+
+    if (
+      !approved.items.length
+    ) {
+      $('approved')
+        .textContent =
+          'No approved compositions yet.';
+
+    } else {
+      approved.items.forEach(
+        item =>
+          $('approved')
+            .appendChild(
+              card(
+                item,
+                'approved'
+              )
+            )
+      );
+    }
+  }
+
+
+  async function loadCurrent() {
+    try {
+      const result =
+        await api(
+          '/api/music-review/current'
+        );
+
+
+      $('current')
+        .innerHTML = `
+          <strong>
+            ${esc(result.meta.title)}
+          </strong>
+
+          <div>
+            by ${esc(result.meta.composer)}
+          </div>
+
+          <div class="sub">
+            Selected ${esc(result.meta.publishedAt)}
+          </div>
+        `;
+
+    } catch (_) {
+      $('current')
+        .textContent =
+          'No curated current ditty selected yet.';
+    }
+  }
+
+
+  async function inspect(
+    bucket,
+    id
+  ) {
+    const result =
+      await api(
+        '/api/music-review/admin/item' +
+        '?bucket=' +
+        encodeURIComponent(
+          bucket
+        ) +
+        '&id=' +
+        encodeURIComponent(
+          id
+        )
+      );
+
+
+    $('inspection')
+      .hidden =
+        false;
+
+
+    $('inspectMeta')
+      .innerHTML = `
+        <strong>
+          ${esc(result.item.score.title)}
+        </strong>
+        · by
+        ${esc(result.item.metadata.composer)}
+    `;
+
+
+    $('inspectScore')
+      .textContent =
+        JSON.stringify(
+          result.item.score,
+          null,
+          2
+        );
+
+
+    $('inspection')
+      .scrollIntoView({
+        behavior:
+          'smooth',
+        block:
+          'start'
+      });
+  }
+
+
+  async function mutate(
+    action,
+    id
+  ) {
+    await api(
+      '/api/music-review/admin/' +
+      action,
+      {
+        method:
+          'POST',
+
+        body:
+          JSON.stringify({
+            id
+          })
+      }
+    );
+
+
+    await loadLists();
+    await loadCurrent();
+  }
+
+
+  document.body
+    .addEventListener(
+      'click',
+      async event => {
+
+        const button =
+          event.target.closest(
+            '[data-action]'
+          );
+
+
+        if (!button) {
+          return;
+        }
+
+
+        const item =
+          button.closest(
+            '[data-id]'
+          );
+
+
+        if (!item) {
+          return;
+        }
+
+
+        try {
+          const action =
+            button.dataset.action;
+
+
+          if (
+            action ===
+            'inspect'
+          ) {
+            await inspect(
+              item.dataset.bucket,
+              item.dataset.id
+            );
+
+          } else if (
+            action ===
+            'approve'
+          ) {
+            await mutate(
+              'approve',
+              item.dataset.id
+            );
+
+          } else if (
+            action ===
+            'reject'
+          ) {
+            await mutate(
+              'reject',
+              item.dataset.id
+            );
+
+          } else if (
+            action ===
+            'publish'
+          ) {
+            await mutate(
+              'publish',
+              item.dataset.id
+            );
+          }
+
+        } catch (error) {
+          alert(
+            error.message ||
+            String(error)
+          );
+        }
+      }
+    );
+
+
+  Promise.all([
+    loadLists(),
+    loadCurrent()
+  ])
+    .catch(
+      error => {
+        $('incoming')
+          .textContent =
+            error.message;
+
+        $('approved')
+          .textContent =
+            error.message;
+      }
+    );
+
+})();
+
+</script>
+
+<!-- A8-MUSIC-REVIEW-CURATOR-V2-BEGIN -->
+<script src="/a8-music-player-v1.js"></script>
+<script src="/a8-music-review-curator-v2.js?v=20260831-promotion-v1r4"></script>
+<!-- A8-MUSIC-REVIEW-CURATOR-V2-END -->
+
+</body>
+</html>

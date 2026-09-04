@@ -11,14 +11,14 @@
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
   <meta name="theme-color" content="#0a0d10">
 
-  <link rel="canonical" href="https://a8.cosigo.io/about.html">
-  <link rel="icon" href="assets/cosigo_master_512.png">
+  <link rel="canonical" href="https://about.cosigo.io/">
+  <link rel="icon" href="https://a8.cosigo.io/assets/cosigo_master_512.png">
 
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="COSIGO Labs">
   <meta property="og:title" content="Auspicious 8 — Nature on One Scale">
   <meta property="og:description" content="From atomic scale through human and planetary scales: one exact A8 doubling ladder, with comparison extensions into subatomic physics.">
-  <meta property="og:url" content="https://a8.cosigo.io/about.html">
+  <meta property="og:url" content="https://about.cosigo.io/">
   <meta property="og:image" content="https://a8.cosigo.io/assets/cosigo_master_512.png">
   <meta property="og:image:alt" content="COSIGO Labs — Auspicious 8">
 
@@ -32,10 +32,10 @@
     "@context": "https://schema.org",
     "@type": "WebPage",
     "name": "Auspicious 8 — Nature on One Scale",
-    "url": "https://a8.cosigo.io/about.html",
+    "url": "https://about.cosigo.io/",
     "description": "A simple introduction to Auspicious 8, an experimental COSIGO Labs measurement architecture built from observable natural recurrence, geometry and exact binary scaling.",
     "datePublished": "2026-08-16",
-    "dateModified": "2026-08-23",
+    "dateModified": "2026-09-02",
     "inLanguage": "en",
     "isPartOf": {
       "@type": "WebSite",
@@ -75,7 +75,7 @@
       z-index:-2;
       background:
         linear-gradient(rgba(5,10,12,.42),rgba(5,10,12,.56)),
-        url("assets/a8_about_jungle_background.png") center center / cover no-repeat;
+        url("https://a8.cosigo.io/assets/a8_about_jungle_background.png") center center / cover no-repeat;
     }
     body::after{
       content:"";
@@ -180,444 +180,2916 @@
     @media(max-width:720px){.grid,.facts,.three-rule{grid-template-columns:1fr}.scale-grid{grid-template-columns:1fr}.topbar{align-items:flex-start}.toplinks{max-width:58%}header{padding-top:48px}.ladder-wrap{overflow-x:auto}.barbell{gap:8px}}
   </style>
 <!-- A8-ABOUT-ORIGINAL-JUNGLE-BACKGROUND-RESTORED-20260823 -->
+
+<style id="a8-about-front-door-v0-style">
+.a8-front-door{
+  min-height:58vh;
+  display:grid;
+  place-items:center;
+  text-align:center;
+  padding:34px 0 54px;
+}
+.a8-front-inner{
+  width:min(980px,100%);
+}
+.a8-front-inner h1{
+  margin:.2rem 0 .55rem;
+}
+.a8-front-tagline{
+  font-size:1.12rem;
+  opacity:.92;
+  margin:0 auto 2rem;
+}
+.a8-five-doors{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:12px;
+}
+.a8-door{
+  appearance:none;
+  border:1px solid rgba(255,255,255,.24);
+  border-radius:14px;
+  background:rgba(7,11,16,.28);
+  color:#fff;
+  min-height:108px;
+  font:800 1.05rem/1 system-ui,sans-serif;
+  letter-spacing:.08em;
+  cursor:pointer;
+  backdrop-filter:blur(2px);
+}
+.a8-door:hover,
+.a8-door:focus{
+  background:rgba(7,11,16,.42);
+  border-color:rgba(255,255,255,.48);
+}
+.a8-door small{
+  display:block;
+  margin-top:9px;
+  font-size:.68rem;
+  font-weight:600;
+  letter-spacing:.04em;
+  opacity:.62;
+}
+@media(max-width:760px){
+  .a8-five-doors{
+    grid-template-columns:1fr 1fr;
+  }
+  .a8-five-doors .a8-door:last-child{
+    grid-column:1/-1;
+  }
+}
+</style>
+
+
+<style id="a8-about-question-dialog-style-v1">
+.a8-question-dialog{
+  width:min(720px,calc(100vw - 32px));
+  border:1px solid rgba(255,255,255,.24);
+  border-radius:18px;
+  padding:0;
+  background:rgba(7,11,16,.88);
+  color:#eef5f7;
+  box-shadow:0 24px 80px rgba(0,0,0,.62);
+  backdrop-filter:blur(12px);
+}
+.a8-question-dialog::backdrop{
+  background:rgba(0,0,0,.58);
+}
+.a8-dialog-inner{
+  position:relative;
+  padding:30px;
+}
+.a8-dialog-inner h2{
+  margin:.35rem 0 1rem;
+}
+.a8-dialog-inner p{
+  max-width:62ch;
+}
+.a8-dialog-close{
+  position:absolute;
+  right:14px;
+  top:12px;
+  border:0;
+  background:transparent;
+  color:#fff;
+  font-size:1.8rem;
+  cursor:pointer;
+}
+.a8-what-rule{
+  margin:22px 0;
+  padding:15px 17px;
+  border-left:4px solid var(--gold);
+  background:rgba(255,255,255,.06);
+  border-radius:8px;
+}
+.a8-dialog-next{
+  margin-top:24px;
+  padding-top:16px;
+  border-top:1px solid rgba(255,255,255,.14);
+  opacity:.76;
+  font-size:.92rem;
+}
+</style>
+
+
+<style id="a8-about-where-links-v1">
+.a8-dialog-links{
+  display:flex;
+  flex-wrap:wrap;
+  gap:9px;
+  margin-top:22px;
+}
+.a8-dialog-links a{
+  color:#f4f8fa;
+  text-decoration:none;
+  border:1px solid rgba(255,255,255,.22);
+  background:rgba(7,11,16,.28);
+  border-radius:9px;
+  padding:9px 12px;
+  font-weight:800;
+  font-size:.82rem;
+  letter-spacing:.04em;
+}
+.a8-dialog-links a:hover,
+.a8-dialog-links a:focus{
+  background:rgba(7,11,16,.46);
+  border-color:rgba(255,255,255,.46);
+}
+</style>
+
+
+<style id="a8-about-when-v1">
+.a8-when-chain{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:8px;
+  margin:18px 0;
+}
+.a8-when-chain span{
+  padding:8px 10px;
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:8px;
+  background:rgba(7,11,16,.22);
+  font-size:.78rem;
+  font-weight:800;
+  letter-spacing:.035em;
+}
+.a8-when-chain b{
+  color:var(--gold);
+}
+</style>
+
+
+<style id="a8-about-how-v1">
+.a8-how-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin:20px 0;
+}
+.a8-how-card{
+  border:1px solid rgba(255,255,255,.17);
+  border-radius:10px;
+  padding:13px 14px;
+  background:rgba(7,11,16,.22);
+}
+.a8-how-card strong{
+  color:var(--gold);
+  letter-spacing:.05em;
+}
+.a8-how-card p{
+  margin:.55rem 0;
+  font-size:.91rem;
+}
+.a8-how-card small{
+  opacity:.68;
+}
+@media(max-width:620px){
+  .a8-how-grid{
+    grid-template-columns:1fr;
+  }
+}
+</style>
+
+
+<style id="a8-about-why-v1">
+.a8-why-list{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin:20px 0;
+}
+.a8-why-list > div{
+  padding:13px 14px;
+  border:1px solid rgba(255,255,255,.16);
+  border-radius:10px;
+  background:rgba(7,11,16,.22);
+}
+.a8-why-list strong{
+  color:var(--gold);
+  font-size:.82rem;
+  letter-spacing:.055em;
+}
+.a8-why-list p{
+  margin:.5rem 0 0;
+  font-size:.9rem;
+}
+@media(max-width:620px){
+  .a8-why-list{
+    grid-template-columns:1fr;
+  }
+}
+</style>
+
+
+<style id="a8-about-canonical-v1">
+.a8-reference-doors{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin-top:22px;
+}
+.a8-ref-door{
+  appearance:none;
+  border:1px solid rgba(255,255,255,.20);
+  border-radius:12px;
+  background:rgba(7,11,16,.24);
+  color:#fff;
+  min-height:76px;
+  padding:12px;
+  font:800 .88rem/1 system-ui,sans-serif;
+  letter-spacing:.07em;
+  cursor:pointer;
+}
+.a8-ref-door small{
+  display:block;
+  margin-top:8px;
+  font-size:.64rem;
+  font-weight:600;
+  letter-spacing:.025em;
+  opacity:.62;
+}
+.a8-ref-door:hover,
+.a8-ref-door:focus{
+  background:rgba(7,11,16,.40);
+}
+
+.a8-canonical-grid{
+  display:grid;
+  gap:10px;
+  margin-top:20px;
+}
+.a8-canonical-item{
+  border:1px solid rgba(255,255,255,.16);
+  border-radius:11px;
+  padding:14px 15px;
+  background:rgba(7,11,16,.22);
+}
+.a8-canonical-item h3{
+  margin:.5rem 0 .65rem;
+}
+.a8-equation{
+  font-family:ui-monospace,SFMono-Regular,Consolas,monospace;
+  font-weight:800;
+  margin:.25rem 0;
+}
+.a8-status{
+  display:inline-block;
+  border-radius:999px;
+  padding:4px 8px;
+  font-size:.66rem;
+  font-weight:900;
+  letter-spacing:.07em;
+  border:1px solid currentColor;
+}
+.a8-status.canonical{color:#d7f5df}
+.a8-status.derived{color:#d7e9ff}
+.a8-status.research{color:#ffe4ae}
+
+.a8-mini-links{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+  margin-top:10px;
+}
+.a8-mini-links a{
+  color:#fff;
+  text-decoration:none;
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:7px;
+  padding:6px 8px;
+  font-size:.72rem;
+  font-weight:800;
+  background:rgba(255,255,255,.04);
+}
+@media(max-width:620px){
+  .a8-reference-doors{
+    grid-template-columns:1fr;
+  }
+}
+</style>
+
+
+<style id="a8-about-data-v1">
+.a8-data-grid{
+  display:grid;
+  gap:10px;
+  margin:20px 0;
+}
+.a8-data-grid article{
+  border:1px solid rgba(255,255,255,.16);
+  border-radius:11px;
+  padding:14px 15px;
+  background:rgba(7,11,16,.22);
+}
+.a8-data-grid strong{
+  color:var(--gold);
+  letter-spacing:.05em;
+}
+.a8-data-grid p{
+  margin:.55rem 0 .8rem;
+}
+.a8-data-grid a{
+  display:inline-block;
+  color:#fff;
+  text-decoration:none;
+  border:1px solid rgba(255,255,255,.20);
+  border-radius:8px;
+  padding:7px 10px;
+  background:rgba(255,255,255,.04);
+  font-size:.72rem;
+  font-weight:800;
+  letter-spacing:.035em;
+}
+.a8-data-grid a:hover,
+.a8-data-grid a:focus{
+  background:rgba(255,255,255,.10);
+}
+</style>
+
+
+<style id="a8-about-research-v1">
+.a8-research-state{
+  display:grid;
+  gap:10px;
+  margin:20px 0;
+}
+.a8-research-state > div{
+  border:1px solid rgba(255,255,255,.16);
+  border-radius:11px;
+  padding:13px 15px;
+  background:rgba(7,11,16,.22);
+}
+.a8-research-state strong{
+  margin-left:7px;
+  letter-spacing:.045em;
+}
+.a8-research-state p{
+  margin:.5rem 0 0 1.7rem;
+}
+.a8-research-dot{
+  font-size:1.1rem;
+}
+.a8-research-dot.working{color:#d7f5df}
+.a8-research-dot.active{color:#ffe4ae}
+.a8-research-dot.open{color:#dce7ef}
+
+.a8-research-questions{
+  display:grid;
+  gap:7px;
+  margin:20px 0;
+  padding:14px 16px;
+  border:1px solid rgba(255,255,255,.15);
+  border-radius:10px;
+  background:rgba(7,11,16,.18);
+}
+.a8-research-questions span::before{
+  content:"→ ";
+  color:var(--gold);
+  font-weight:900;
+}
+.a8-research-invite{
+  font-size:1.05rem;
+  font-weight:800;
+  text-align:center;
+  margin:24px 0 4px;
+}
+</style>
+
+
+<style id="a8-about-check-shell-v1">
+.a8-check-shell{
+  margin:28px 0 4px;
+  padding:20px;
+  border:1px solid rgba(255,255,255,.20);
+  border-radius:16px;
+  background:rgba(7,11,16,.26);
+  backdrop-filter:blur(2px);
+}
+.a8-check-heading{
+  display:flex;
+  justify-content:space-between;
+  gap:18px;
+  align-items:flex-start;
+}
+.a8-check-heading h2{
+  margin:.25rem 0 0;
+}
+.a8-check-state{
+  border:1px solid rgba(255,255,255,.20);
+  border-radius:999px;
+  padding:5px 9px;
+  font-size:.64rem;
+  font-weight:900;
+  letter-spacing:.07em;
+  opacity:.72;
+}
+.a8-check-intro{
+  margin:.8rem 0 1rem;
+  max-width:60ch;
+}
+.a8-check-selector{
+  display:grid;
+  grid-template-columns:auto 1fr;
+  align-items:center;
+  gap:12px;
+}
+.a8-check-selector label{
+  font-size:.72rem;
+  font-weight:900;
+  letter-spacing:.07em;
+  color:var(--gold);
+}
+.a8-check-selector select{
+  width:100%;
+  padding:10px 12px;
+  border-radius:9px;
+  border:1px solid rgba(255,255,255,.18);
+  background:rgba(7,11,16,.54);
+  color:#fff;
+}
+.a8-check-empty{
+  display:grid;
+  gap:5px;
+  margin-top:14px;
+  padding:15px;
+  border:1px dashed rgba(255,255,255,.18);
+  border-radius:10px;
+  background:rgba(255,255,255,.025);
+}
+.a8-check-empty span{
+  opacity:.72;
+  font-size:.9rem;
+}
+.a8-check-status-row{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:14px;
+}
+.a8-check-status-row span{
+  border:1px solid rgba(255,255,255,.16);
+  border-radius:999px;
+  padding:4px 8px;
+  font-size:.62rem;
+  font-weight:900;
+  letter-spacing:.06em;
+}
+@media(max-width:620px){
+  .a8-check-heading{
+    display:block;
+  }
+  .a8-check-state{
+    display:inline-block;
+    margin-top:10px;
+  }
+  .a8-check-selector{
+    grid-template-columns:1fr;
+  }
+}
+</style>
+
+
+<style id="a8-about-angle-check-v1">
+.a8-angle-check{
+  margin-top:15px;
+}
+.a8-angle-benchmarks{
+  display:flex;
+  gap:7px;
+  flex-wrap:wrap;
+  margin-bottom:13px;
+}
+.a8-angle-benchmarks button{
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:8px;
+  background:rgba(255,255,255,.04);
+  color:#fff;
+  padding:7px 9px;
+  font-size:.7rem;
+  font-weight:850;
+  cursor:pointer;
+}
+.a8-angle-inputs{
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  gap:12px;
+  align-items:end;
+}
+.a8-angle-inputs label span{
+  display:block;
+  margin-bottom:6px;
+  font-size:.67rem;
+  font-weight:900;
+  letter-spacing:.06em;
+  color:var(--gold);
+}
+.a8-angle-inputs input{
+  box-sizing:border-box;
+  width:100%;
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:9px;
+  background:rgba(5,9,13,.52);
+  color:#fff;
+  padding:11px 12px;
+  font:800 1rem ui-monospace,SFMono-Regular,Consolas,monospace;
+}
+.a8-angle-swap{
+  padding:10px 0;
+  color:var(--gold);
+  font-weight:900;
+}
+.a8-angle-results{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:8px;
+  margin-top:14px;
+}
+.a8-angle-results > div{
+  min-width:0;
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:9px;
+  padding:10px;
+  background:rgba(7,11,16,.20);
+}
+.a8-angle-results small{
+  display:block;
+  min-height:2.2em;
+  font-size:.59rem;
+  font-weight:850;
+  letter-spacing:.045em;
+  opacity:.64;
+}
+.a8-angle-results strong{
+  display:block;
+  margin-top:5px;
+  overflow-wrap:anywhere;
+  font-family:ui-monospace,SFMono-Regular,Consolas,monospace;
+}
+.a8-angle-verdict{
+  margin-top:12px;
+  padding:10px 12px;
+  border-left:4px solid #8bd49b;
+  border-radius:7px;
+  background:rgba(139,212,155,.08);
+  font-weight:850;
+}
+.a8-angle-note{
+  margin:10px 0 13px;
+  font-size:.82rem;
+  opacity:.70;
+}
+@media(max-width:760px){
+  .a8-angle-results{
+    grid-template-columns:1fr 1fr;
+  }
+}
+@media(max-width:560px){
+  .a8-angle-inputs{
+    grid-template-columns:1fr;
+  }
+  .a8-angle-swap{
+    display:none;
+  }
+}
+</style>
+
+
+<style id="a8-about-time-check-v1">
+.a8-time-benchmarks{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+  margin:15px 0 13px;
+}
+.a8-time-benchmarks button{
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:8px;
+  background:rgba(255,255,255,.04);
+  color:#fff;
+  padding:7px 9px;
+  font-size:.7rem;
+  font-weight:850;
+  cursor:pointer;
+}
+</style>
+
+
+<style id="a8-about-music-check-v1">
+.a8-music-section{
+  margin-top:16px;
+  padding-top:15px;
+  border-top:1px solid rgba(255,255,255,.13);
+}
+.a8-music-section:first-child{
+  border-top:0;
+}
+.a8-music-timing-inputs{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+  margin-top:12px;
+}
+.a8-music-timing-inputs label span{
+  display:block;
+  margin-bottom:6px;
+  font-size:.65rem;
+  font-weight:900;
+  letter-spacing:.055em;
+  color:var(--gold);
+}
+.a8-music-timing-inputs input{
+  box-sizing:border-box;
+  width:100%;
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:9px;
+  background:rgba(5,9,13,.52);
+  color:#fff;
+  padding:10px 11px;
+  font:800 .95rem ui-monospace,SFMono-Regular,Consolas,monospace;
+}
+.a8-music-bars{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin:15px 0;
+  font-family:ui-monospace,SFMono-Regular,Consolas,monospace;
+}
+.a8-music-bar{
+  border:1px solid rgba(255,255,255,.16);
+  border-radius:8px;
+  background:rgba(7,11,16,.22);
+  padding:7px 9px;
+  white-space:nowrap;
+}
+.a8-music-bar b{
+  color:var(--gold);
+}
+@media(max-width:620px){
+  .a8-music-timing-inputs{
+    grid-template-columns:1fr;
+  }
+}
+</style>
+
+
+<style id="a8-about-explore-shell-v1">
+.a8-explore-shell{
+  margin-top:28px;
+  padding-top:22px;
+  border-top:1px solid rgba(255,255,255,.16);
+}
+.a8-explore-heading h2{
+  margin:.25rem 0 .4rem;
+}
+.a8-explore-heading p{
+  max-width:62ch;
+  opacity:.76;
+}
+.a8-explore-list{
+  display:grid;
+  gap:9px;
+  margin-top:17px;
+}
+.a8-explore-item{
+  border:1px solid rgba(255,255,255,.17);
+  border-radius:11px;
+  background:rgba(7,11,16,.22);
+  overflow:hidden;
+}
+.a8-explore-item summary{
+  cursor:pointer;
+  list-style:none;
+  display:grid;
+  grid-template-columns:minmax(130px,.45fr) 1fr auto;
+  gap:12px;
+  align-items:center;
+  padding:13px 15px;
+}
+.a8-explore-item summary::-webkit-details-marker{
+  display:none;
+}
+.a8-explore-item summary::after{
+  content:"+";
+  font-size:1.15rem;
+  font-weight:900;
+  color:var(--gold);
+}
+.a8-explore-item[open] summary::after{
+  content:"−";
+}
+.a8-explore-item summary strong{
+  letter-spacing:.055em;
+}
+.a8-explore-item summary span{
+  font-size:.78rem;
+  opacity:.65;
+}
+.a8-explore-body{
+  padding:0 15px 15px;
+}
+.a8-explore-slot{
+  min-height:76px;
+  display:grid;
+  place-items:center;
+  border:1px dashed rgba(255,255,255,.17);
+  border-radius:9px;
+  background:rgba(255,255,255,.025);
+  font-size:.68rem;
+  font-weight:850;
+  letter-spacing:.05em;
+  text-align:center;
+  opacity:.55;
+}
+@media(max-width:620px){
+  .a8-explore-item summary{
+    grid-template-columns:1fr auto;
+  }
+  .a8-explore-item summary span{
+    grid-column:1 / -1;
+    grid-row:2;
+  }
+}
+</style>
+
+
+<style id="a8-about-ruler-example-v2">
+.a8-ruler-example{
+  display:grid;
+  gap:17px;
+}
+.a8-ruler-copy{
+  display:grid;
+  gap:8px;
+}
+.a8-ruler-copy h3{
+  margin:.25rem 0 0;
+}
+.a8-ruler-copy p{
+  margin:.25rem 0;
+}
+.a8-ruler-status-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+}
+.a8-ruler-tag{
+  display:inline-flex;
+  align-items:center;
+  width:max-content;
+  padding:4px 8px;
+  border:1px solid rgba(255,255,255,.16);
+  border-radius:999px;
+  font-size:.68rem;
+  font-weight:900;
+  letter-spacing:.07em;
+}
+.a8-ruler-tag.exact{
+  color:#fff1c9;
+  background:rgba(216,183,108,.10);
+}
+.a8-ruler-tag.realized{
+  color:#bce8c7;
+  background:rgba(143,208,160,.10);
+}
+.a8-ruler-tag.cross{
+  color:#bfe7ea;
+  background:rgba(123,211,216,.09);
+}
+.a8-ruler-rule{
+  display:grid;
+  gap:3px;
+  margin:8px 0;
+  padding:13px 15px;
+  border-left:4px solid var(--gold);
+  border-radius:7px;
+  background:rgba(216,183,108,.07);
+}
+.a8-ruler-rule strong{
+  font-family:ui-monospace,SFMono-Regular,Consolas,monospace;
+}
+.a8-ruler-rule span{
+  opacity:.8;
+}
+.a8-ruler-status{
+  font-size:.89rem;
+  opacity:.8;
+}
+.a8-barbell-mini{
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  gap:10px;
+  align-items:stretch;
+  margin:5px 0;
+}
+.a8-barbell-mini > div{
+  display:grid;
+  align-content:center;
+  gap:4px;
+  padding:12px;
+  border:1px solid rgba(255,255,255,.13);
+  border-radius:10px;
+  background:rgba(7,11,16,.19);
+}
+.a8-barbell-mini small{
+  opacity:.62;
+  font-size:.66rem;
+  letter-spacing:.07em;
+}
+.a8-barbell-mini strong{
+  color:var(--gold);
+}
+.a8-barbell-mini span{
+  font-size:.79rem;
+  line-height:1.45;
+  opacity:.8;
+}
+.a8-barbell-mini .a8-barbell-meet{
+  min-width:150px;
+  text-align:center;
+  border-color:rgba(216,183,108,.35);
+  background:rgba(216,183,108,.08);
+}
+.a8-barbell-meet span{
+  color:var(--gold);
+  font-weight:900;
+  letter-spacing:.1em;
+}
+.a8-barbell-meet strong{
+  color:#fff1c9;
+  font-family:ui-monospace,SFMono-Regular,Consolas,monospace;
+  font-size:.84rem;
+}
+.a8-ruler-figure{
+  margin:4px 0;
+}
+.a8-ruler-figure svg{
+  display:block;
+  width:100%;
+  height:auto;
+  border-radius:14px;
+}
+.a8-ruler-figure figcaption{
+  margin-top:8px;
+  text-align:center;
+  font-size:.73rem;
+  opacity:.64;
+}
+.a8-ruler-figure circle{
+  fill:#d8b76c;
+  stroke:#f2dfae;
+  stroke-width:2;
+}
+.a8-ruler-figure line{
+  stroke:rgba(255,255,255,.38);
+  stroke-width:2;
+}
+.a8-ruler-figure .a8-human-node{
+  fill:#d8b76c;
+  stroke:#fff1c9;
+  stroke-width:4;
+}
+.a8-svg-kicker{
+  fill:#9eacb7;
+  font:800 17px system-ui,sans-serif;
+  letter-spacing:4px;
+}
+.a8-svg-rung{
+  fill:#f2d697;
+  font:900 22px ui-monospace,SFMono-Regular,Consolas,monospace;
+}
+.a8-svg-native{
+  fill:#edf3f6;
+  font:750 16px ui-monospace,SFMono-Regular,Consolas,monospace;
+}
+.a8-svg-example{
+  fill:#9eacb7;
+  font:500 15px system-ui,sans-serif;
+}
+.a8-svg-human{
+  fill:#fff1c9;
+  font-size:27px;
+}
+.a8-macro-closure{
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  gap:10px;
+  align-items:center;
+}
+.a8-macro-card{
+  display:grid;
+  gap:4px;
+  padding:13px;
+  border:1px solid rgba(123,211,216,.23);
+  border-radius:10px;
+  background:rgba(123,211,216,.05);
+}
+.a8-macro-card small{
+  opacity:.62;
+  font-size:.66rem;
+  letter-spacing:.07em;
+}
+.a8-macro-card strong{
+  color:#bfe7ea;
+}
+.a8-macro-card b{
+  font-family:ui-monospace,SFMono-Regular,Consolas,monospace;
+  font-size:.9rem;
+}
+.a8-macro-card span{
+  font-size:.77rem;
+  opacity:.72;
+}
+.a8-macro-arrow{
+  display:grid;
+  gap:2px;
+  text-align:center;
+  color:var(--gold);
+  font:900 .95rem ui-monospace,SFMono-Regular,Consolas,monospace;
+}
+.a8-macro-arrow small{
+  font:600 .64rem system-ui,sans-serif;
+  opacity:.65;
+  color:inherit;
+}
+.a8-closure-math{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+}
+.a8-closure-math > div{
+  display:grid;
+  gap:4px;
+  padding:11px 12px;
+  border:1px solid rgba(255,255,255,.13);
+  border-radius:9px;
+  background:rgba(7,11,16,.17);
+}
+.a8-closure-math small{
+  opacity:.6;
+  font-size:.64rem;
+  letter-spacing:.07em;
+}
+.a8-closure-math strong{
+  font:750 .78rem ui-monospace,SFMono-Regular,Consolas,monospace;
+}
+.a8-closure-math span{
+  font-size:.74rem;
+  opacity:.72;
+}
+.a8-closure-math .a8-closure-highlight{
+  grid-column:1 / -1;
+  border-color:rgba(143,208,160,.34);
+  background:rgba(143,208,160,.07);
+}
+.a8-closure-highlight strong{
+  color:#bce8c7;
+  font-size:.88rem;
+}
+.a8-ruler-bottom{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:9px;
+}
+.a8-ruler-principle{
+  display:grid;
+  gap:5px;
+  padding:12px;
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:9px;
+  background:rgba(7,11,16,.18);
+}
+.a8-ruler-principle strong{
+  color:var(--gold);
+  letter-spacing:.055em;
+}
+.a8-ruler-principle span{
+  font-size:.82rem;
+  opacity:.74;
+}
+.a8-orb-teaser{
+  display:grid;
+  gap:5px;
+  padding:13px 14px;
+  border-left:4px solid #8eb9ff;
+  border-radius:8px;
+  background:rgba(142,185,255,.06);
+}
+.a8-orb-teaser small{
+  font-size:.67rem;
+  font-weight:900;
+  letter-spacing:.09em;
+  opacity:.68;
+}
+.a8-orb-teaser strong{
+  color:#c9dcff;
+}
+.a8-orb-teaser span{
+  font-size:.82rem;
+  opacity:.75;
+}
+@media(max-width:760px){
+  .a8-barbell-mini,
+  .a8-macro-closure,
+  .a8-closure-math,
+  .a8-ruler-bottom{
+    grid-template-columns:1fr;
+  }
+  .a8-barbell-mini .a8-barbell-meet{
+    min-width:0;
+  }
+  .a8-macro-arrow{
+    padding:2px 0;
+  }
+  .a8-closure-math .a8-closure-highlight{
+    grid-column:auto;
+  }
+}
+</style>
+
 </head>
 <body>
 <div class="shell">
 
   <nav class="topbar" aria-label="COSIGO Labs navigation">
-    <a class="brand" href="https://cosigo.io/" rel="noopener">
-      <img src="assets/cosigo_master_512.png" alt="COSIGO">
+    <a class="brand" href="https://cosigo.io/">
+      <img src="https://a8.cosigo.io/assets/cosigo_master_512.png" alt="COSIGO">
       <span><strong>COSIGO LABS</strong><small>Auspicious 8 research</small></span>
     </a>
     <div class="toplinks">
       <a href="https://a8.cosigo.io/">A8 Public</a>
-      <a href="https://lab.a8.cosigo.io/">Engineering Lab</a>
+      <a href="https://lab.cosigo.io/">Engineering Lab</a>
       <a href="https://contact.cosigo.io/">Contact</a>
     </div>
   </nav>
 
-  <header>
-    <div class="eyebrow">AUSPICIOUS 8 · SIMPLE INTRODUCTION</div>
-    <h1>Nature.<br>One scale.</h1>
-    <p class="lead">Auspicious 8 (A8) is an experimental measurement architecture. It starts with observable Nature, builds rulers from reproducible relationships, and uses one exact doubling ladder to move from atomic scale through human and planetary scales without inventing unrelated units.</p>
-    <div class="motto">Nature first. Ruler second. Simple first. Proof underneath.</div>
-  </header>
+  <main class="a8-front-door">
+    <div class="a8-front-inner">
 
-  <main>
-    <section class="rulebox" aria-label="A8 simple operating rule">
-      <div class="big">One ladder. <span class="gold">Pick the rung.</span> State the rung. Stay on the rung.</div>
-      <div class="sub">Changing rungs changes the size of the measuring step — not the object, trip, speed or laws of physics.</div>
-    </section>
+      <div class="eyebrow">AUSPICIOUS 8 · MEASUREMENT WORLD</div>
 
-    <h2>Nature on one A8 scale</h2>
-    <p>The same exact doubling rule can be followed from atomic structure to people, landscapes and larger motion scales. The picture below uses the current working <strong>A8/31 ≈ 1.14988 legacy m</strong> stake and simply asks where familiar physical scales fall. It does not make those objects new authorities.</p>
+      <h1>Auspicious 8</h1>
 
-    <figure class="nature-scale" aria-labelledby="nature-scale-title">
-      <svg viewBox="0 0 1200 790" role="img" aria-labelledby="nature-scale-title nature-scale-desc">
-        <title id="nature-scale-title">Auspicious 8 scale of Nature from subatomic comparison references through atomic, human and large scales</title>
-        <desc id="nature-scale-desc">A vertical binary doubling ladder. A8/0 is about 0.535 nanometres at atomic and crystal scale. A8/31 is about 1.15 metres at human scale. Larger rungs reach kilometre and flight-scale lengths. Negative rungs show comparison positions for the Bohr radius, proton charge radius and Planck length.</desc>
+      <p class="a8-front-tagline">
+        Our universe, different ruler.
+      </p>
 
-        <defs>
-          <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#0b1424"/>
-            <stop offset=".46" stop-color="#111c26"/>
-            <stop offset="1" stop-color="#102018"/>
-          </linearGradient>
-          <linearGradient id="ladderGlow" x1="0" y1="1" x2="0" y2="0">
-            <stop offset="0" stop-color="#7bd3d8"/>
-            <stop offset=".48" stop-color="#d8b76c"/>
-            <stop offset="1" stop-color="#8eb9ff"/>
-          </linearGradient>
-          <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
-            <feGaussianBlur stdDeviation="5" result="b"/>
-            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-          </filter>
-        </defs>
+      <div class="a8-five-doors" aria-label="Explore Auspicious 8">
 
-        <rect width="1200" height="790" fill="url(#sky)"/>
+        <button class="a8-door" type="button" data-open="a8-what-dialog">
+          WHAT
+          <small>what is Auspicious 8?</small>
+        </button>
 
-        <!-- stars -->
-        <g fill="#dce8ff" opacity=".55">
-          <circle cx="95" cy="74" r="2"/><circle cx="173" cy="120" r="1.6"/><circle cx="1088" cy="86" r="2"/>
-          <circle cx="1032" cy="149" r="1.4"/><circle cx="907" cy="58" r="1.6"/><circle cx="308" cy="67" r="1.4"/>
-          <circle cx="726" cy="95" r="1.6"/><circle cx="455" cy="133" r="1.3"/>
-        </g>
+        <button class="a8-door" type="button" data-open="a8-where-dialog">
+          WHERE
+          <small>position · direction · navigation</small>
+        </button>
 
-        <!-- large-scale Nature silhouettes -->
-        <path d="M0 330 L120 255 L210 305 L340 198 L470 316 L585 232 L720 315 L825 236 L950 308 L1060 248 L1200 322 L1200 520 L0 520 Z"
-              fill="#14251f" opacity=".95"/>
-        <path d="M0 388 Q120 350 245 382 T505 374 T780 384 T1020 370 T1200 388 V520 H0Z"
-              fill="#17322b" opacity=".72"/>
+        <button class="a8-door" type="button" data-open="a8-when-dialog">
+          WHEN
+          <small>recurrence · rotation · clock</small>
+        </button>
 
-        <!-- central ladder -->
-        <line x1="600" y1="80" x2="600" y2="705" stroke="#293845" stroke-width="16" stroke-linecap="round"/>
-        <line x1="600" y1="80" x2="600" y2="705" stroke="url(#ladderGlow)" stroke-width="5" stroke-linecap="round" filter="url(#glow)"/>
+        <button class="a8-door" type="button" data-open="a8-how-dialog">
+          HOW
+          <small>realize · test · apply</small>
+        </button>
 
-        <!-- key ticks -->
-        <g stroke="#d9e3ea" stroke-width="2">
-          <line x1="574" y1="126" x2="626" y2="126"/>
-          <line x1="574" y1="190" x2="626" y2="190"/>
-          <line x1="570" y1="265" x2="630" y2="265"/>
-          <line x1="566" y1="376" x2="634" y2="376"/>
-          <line x1="570" y1="474" x2="630" y2="474"/>
-          <line x1="574" y1="558" x2="626" y2="558"/>
-          <line x1="574" y1="614" x2="626" y2="614"/>
-          <line x1="574" y1="663" x2="626" y2="663"/>
-          <line x1="574" y1="708" x2="626" y2="708"/>
-        </g>
+        <button class="a8-door" type="button" data-open="a8-why-dialog">
+          WHY
+          <small>why build another ruler?</small>
+        </button>
 
-        <!-- labels right: ordinary and larger -->
-        <g font-family="system-ui,Segoe UI,sans-serif">
-          <text x="650" y="114" fill="#8eb9ff" font-size="15" font-weight="900">A8/48</text>
-          <text x="650" y="134" fill="#edf3f6" font-size="18" font-weight="800">≈ 150.7 km</text>
-          <text x="650" y="153" fill="#9eacb7" font-size="13">large-motion / near-space scale</text>
-
-          <text x="650" y="181" fill="#8eb9ff" font-size="15" font-weight="900">A8/45</text>
-          <text x="650" y="201" fill="#edf3f6" font-size="18" font-weight="800">≈ 18.84 km</text>
-          <text x="650" y="220" fill="#9eacb7" font-size="13">aircraft-scale working neighborhood</text>
-
-          <text x="650" y="256" fill="#8fd0a0" font-size="15" font-weight="900">A8/41</text>
-          <text x="650" y="276" fill="#edf3f6" font-size="18" font-weight="800">≈ 1.177 km</text>
-          <text x="650" y="295" fill="#9eacb7" font-size="13">terrain / route-scale rung</text>
-
-          <text x="650" y="366" fill="#d8b76c" font-size="16" font-weight="900">A8/31</text>
-          <text x="650" y="388" fill="#fff4cf" font-size="21" font-weight="900">≈ 1.14988 m</text>
-          <text x="650" y="408" fill="#cdbf91" font-size="13">current human-scale working stake</text>
-
-          <text x="650" y="465" fill="#7bd3d8" font-size="15" font-weight="900">A8/20</text>
-          <text x="650" y="485" fill="#edf3f6" font-size="18" font-weight="800">≈ 0.561 mm</text>
-          <text x="650" y="504" fill="#9eacb7" font-size="13">fine mechanical / grain scale</text>
-
-          <text x="650" y="549" fill="#7bd3d8" font-size="15" font-weight="900">A8/10</text>
-          <text x="650" y="569" fill="#edf3f6" font-size="18" font-weight="800">≈ 0.548 µm</text>
-          <text x="650" y="588" fill="#9eacb7" font-size="13">cellular / microscopic scale</text>
-
-          <text x="650" y="605" fill="#7bd3d8" font-size="15" font-weight="900">A8/0</text>
-          <text x="650" y="625" fill="#edf3f6" font-size="18" font-weight="800">≈ 0.535 nm</text>
-          <text x="650" y="644" fill="#9eacb7" font-size="13">atomic / crystal scale — not a quantum floor</text>
-        </g>
-
-        <!-- left-side nature icons -->
-        <g transform="translate(145 105)">
-          <!-- moon / orbital arc -->
-          <circle cx="74" cy="28" r="20" fill="none" stroke="#8eb9ff" stroke-width="3"/>
-          <path d="M22 62 Q80 20 140 62" fill="none" stroke="#526b89" stroke-width="2" stroke-dasharray="7 6"/>
-          <path d="M26 70 L44 48 L64 70 L87 34 L112 70 Z" fill="none" stroke="#8fd0a0" stroke-width="3"/>
-          <text x="0" y="98" fill="#dfe8ee" font-size="14" font-weight="800">SKY · EARTH · MOTION</text>
-        </g>
-
-        <g transform="translate(178 316)">
-          <!-- human -->
-          <circle cx="60" cy="30" r="14" fill="none" stroke="#d8b76c" stroke-width="4"/>
-          <path d="M60 45 V100 M30 67 L60 58 L92 67 M60 100 L34 145 M60 100 L88 145"
-                fill="none" stroke="#d8b76c" stroke-width="5" stroke-linecap="round"/>
-          <line x1="118" y1="18" x2="118" y2="146" stroke="#7d6d45" stroke-width="3"/>
-          <line x1="109" y1="18" x2="127" y2="18" stroke="#7d6d45" stroke-width="3"/>
-          <line x1="109" y1="146" x2="127" y2="146" stroke="#7d6d45" stroke-width="3"/>
-          <text x="0" y="176" fill="#f1d99c" font-size="14" font-weight="900">HUMAN REFERENCE</text>
-        </g>
-
-        <g transform="translate(112 548)">
-          <!-- atom / crystal -->
-          <circle cx="95" cy="56" r="7" fill="#7bd3d8"/>
-          <ellipse cx="95" cy="56" rx="62" ry="22" fill="none" stroke="#7bd3d8" stroke-width="2" transform="rotate(18 95 56)"/>
-          <ellipse cx="95" cy="56" rx="62" ry="22" fill="none" stroke="#8eb9ff" stroke-width="2" transform="rotate(-42 95 56)"/>
-          <ellipse cx="95" cy="56" rx="62" ry="22" fill="none" stroke="#d8b76c" stroke-width="2" transform="rotate(78 95 56)"/>
-          <g fill="#edf3f6">
-            <circle cx="150" cy="72" r="4"/><circle cx="56" cy="24" r="4"/><circle cx="83" cy="115" r="4"/>
-          </g>
-          <text x="12" y="150" fill="#cceef0" font-size="14" font-weight="900">ATOM · QUARTZ</text>
-        </g>
-
-        <!-- quantum/subatomic comparison extension -->
-        <g font-family="system-ui,Segoe UI,sans-serif">
-          <rect x="40" y="684" width="1115" height="80" rx="14" fill="#091017" stroke="#3c5260"/>
-          <text x="64" y="708" fill="#f5d78c" font-size="14" font-weight="900">BELOW A8/0 · COMPARISON EXTENSION</text>
-          <text x="64" y="733" fill="#dce5ea" font-size="14">
-            A8/−3 ≈ 0.0669 nm · Bohr radius 0.0529 nm
-          </text>
-          <text x="456" y="733" fill="#dce5ea" font-size="14">
-            A8/−19 ≈ 1.02 fm · proton radius 0.841 fm
-          </text>
-          <text x="834" y="733" fill="#dce5ea" font-size="14">
-            A8/−85 ≈ 1.38×10⁻³⁵ m · Planck length 1.62×10⁻³⁵ m
-          </text>
-          <text x="64" y="754" fill="#8596a3" font-size="11">
-            Scale positions are derived from the current A8/31 stake. Planck length is a theoretical reference scale, not an established minimum physical length.
-          </text>
-        </g>
-
-        <!-- arrows -->
-        <g fill="#d8b76c">
-          <path d="M600 63 l-8 14 h16z"/>
-          <path d="M600 723 l-8-14 h16z"/>
-        </g>
-        <text x="545" y="50" fill="#9eacb7" font-size="12" font-weight="800">LARGER</text>
-        <text x="540" y="780" fill="#9eacb7" font-size="12" font-weight="800">SMALLER</text>
-      </svg>
-      <figcaption class="nature-scale-copy">
-        <strong>Read it vertically:</strong> every one-rung move changes the physical length by exactly ×2 or ÷2.
-        A8/0 is derived from the current A8/31 working stake and lands at about <strong>0.535 nm</strong>, already in the atomic/crystal neighborhood.
-        Going smaller does not require a new ruler; the same ladder can continue through negative rung numbers for comparison.
-      </figcaption>
-    </figure>
-
-    <div class="quantum-note">
-      <b>What would A8 look like at “quantum scale”?</b>
-      There is no single quantum length. Atomic quantum structure, nuclear structure and the Planck scale are radically different sizes.
-      On the current A8 ladder, the Bohr radius lies near <strong>A8/−3</strong>, the proton charge radius near <strong>A8/−19</strong>,
-      and the Planck length near <strong>A8/−85</strong>. These are comparison placements, not new A8 definitions.
-      <div class="scale-source">
-        Comparison values: 2022 CODATA / NIST —
-        <a href="https://physics.nist.gov/cuu/Constants/" rel="noopener">fundamental constants</a>.
       </div>
-    </div>
 
-    <h2>The basic idea</h2>
-    <div class="grid">
-      <section class="card when">
-        <strong class="key">WHEN · Recovered natural time</strong>
-        <p>Io, Europa and Ganymede recover the primary natural timebase. Mintaka independently witnesses Earth's stellar rotation against that timebase, while Mean-Sun recurrence supplies the working civil-day duration authority.</p>
+
+      <section class="a8-check-shell" aria-label="A8 cross-check workbench">
+
+        <div class="a8-check-heading">
+          <div>
+            <div class="eyebrow">CHECK / CONVERT</div>
+            <h2>A8 Cross-Check</h2>
+          </div>
+
+          <span class="a8-check-state">WORKBENCH SOCKET</span>
+        </div>
+
+        <p class="a8-check-intro">
+          Enter a relationship from either side and check how it maps
+          across the A8 measurement world.
+        </p>
+
+        <div class="a8-check-selector">
+          <label for="a8-check-module">MODULE</label>
+          <select id="a8-check-module">
+            <option value="angle" selected>ANGLE</option>
+            <option value="time">TIME</option>
+            <option disabled>LENGTH · coming later</option>
+            <option disabled>SPEED · coming later</option>
+            <option disabled>POSITION · coming later</option>
+            <option value="music">MUSIC</option>
+          </select>
+        </div>
+
+        <div class="a8-angle-check" id="a8-angle-check">
+
+          <div class="a8-angle-benchmarks">
+            <button type="button" data-angle-deg="45">⅛ TURN</button>
+            <button type="button" data-angle-deg="90">¼ TURN</button>
+            <button type="button" data-angle-deg="180">½ TURN</button>
+            <button type="button" data-angle-deg="360">FULL TURN</button>
+          </div>
+
+          <div class="a8-angle-inputs">
+            <label>
+              <span>LEGACY DEGREE COMPARISON</span>
+              <input id="a8-angle-degrees"
+                     type="number"
+                     step="any"
+                     value="90">
+            </label>
+
+            <div class="a8-angle-swap">⇄</div>
+
+            <label>
+              <span>NATIVE A8 TURN AMOUNT</span>
+              <input id="a8-angle-native"
+                     type="number"
+                     step="any"
+                     value="128">
+            </label>
+          </div>
+
+          <div class="a8-angle-results">
+
+            <div>
+              <small>A8 TURN AMOUNT</small>
+              <strong id="a8-angle-out-native">128</strong>
+            </div>
+
+            <div>
+              <small>OCTAL AMOUNT</small>
+              <strong id="a8-angle-out-octal">200₈</strong>
+            </div>
+
+            <div>
+              <small>WRAPPED PHASE</small>
+              <strong id="a8-angle-out-phase">128 · 200₈</strong>
+            </div>
+
+            <div>
+              <small>FRACTION OF TURN</small>
+              <strong id="a8-angle-out-fraction">1/4</strong>
+            </div>
+
+            <div>
+              <small>LEGACY COMPARISON</small>
+              <strong id="a8-angle-out-degrees">90°</strong>
+            </div>
+
+          </div>
+
+          <div class="a8-angle-verdict" id="a8-angle-verdict">
+            ✓ CHECKS · legacy 90° ↔ native A8 128
+          </div>
+
+          <div class="a8-angle-note">
+            Legacy degrees are a translation bridge only.
+            The native angular relationship is one full turn = 512 A8.
+          </div>
+
+          <div class="a8-mini-links">
+            <a href="https://angle.cosigo.io/">OPEN ANGLE</a>
+            <a href="https://map.cosigo.io/">SEE MAP</a>
+            <a href="https://stars.cosigo.io/">SEE STARS</a>
+          </div>
+
+        </div>
+
+
+        <div class="a8-time-check" id="a8-time-check" hidden>
+
+          <div class="a8-time-benchmarks">
+            <button type="button" data-a8-sec="1">1 A8 SECOND</button>
+            <button type="button" data-a8-sec="64">1 A8 MINUTE</button>
+            <button type="button" data-a8-sec="4096">1 A8 HOUR</button>
+            <button type="button" data-a8-sec="131072">1 EARTH DAY</button>
+          </div>
+
+          <div class="a8-angle-inputs">
+            <label>
+              <span>NATIVE A8 ELAPSED SECONDS</span>
+              <input id="a8-time-native"
+                     type="number"
+                     step="any"
+                     value="4096">
+            </label>
+
+            <div class="a8-angle-swap">⇄</div>
+
+            <label>
+              <span>LEGACY SECONDS · COMPARISON</span>
+              <input id="a8-time-legacy"
+                     type="number"
+                     step="any"
+                     value="2700">
+            </label>
+          </div>
+
+          <div class="a8-angle-results">
+
+            <div>
+              <small>A8 ELAPSED</small>
+              <strong id="a8-time-out-native">4096</strong>
+            </div>
+
+            <div>
+              <small>NATIVE H:M:S</small>
+              <strong id="a8-time-out-hms">01:00:00</strong>
+            </div>
+
+            <div>
+              <small>DAY PHASE17</small>
+              <strong id="a8-time-out-phase">4096</strong>
+            </div>
+
+            <div>
+              <small>FRACTION OF DAY</small>
+              <strong id="a8-time-out-fraction">1/32</strong>
+            </div>
+
+            <div>
+              <small>LEGACY COMPARISON</small>
+              <strong id="a8-time-out-legacy">2700 s</strong>
+            </div>
+
+          </div>
+
+          <div class="a8-angle-verdict" id="a8-time-verdict">
+            ✓ CHECKS · 1 A8 hour ↔ 2700 legacy seconds
+          </div>
+
+          <div class="a8-angle-note">
+            Native structure: 32 × 64 × 64 = 2¹⁷ states per Earth day.
+            The legacy-second value is a comparison bridge only.
+          </div>
+
+          <div class="a8-mini-links">
+            <a href="https://moons.cosigo.io/">MOONS</a>
+            <a href="https://clock.cosigo.io/">CLOCK</a>
+            <a href="https://calendar.cosigo.io/">CALENDAR</a>
+            <a href="https://data.cosigo.io/">VERIFY</a>
+          </div>
+
+        </div>
+
+
+        <div class="a8-music-check" id="a8-music-check" hidden>
+
+          <div class="a8-music-section">
+            <div class="eyebrow">PITCH / FREQUENCY</div>
+
+            <div class="a8-angle-inputs">
+              <label>
+                <span>LEGACY Hz · COMPARISON</span>
+                <input id="a8-music-hz"
+                       type="number"
+                       step="any"
+                       value="440">
+              </label>
+
+              <div class="a8-angle-swap">⇄</div>
+
+              <label>
+                <span>CYCLES / A8 SECOND</span>
+                <input id="a8-music-a8freq"
+                       type="number"
+                       step="any"
+                       value="290.0390625">
+              </label>
+            </div>
+
+            <div class="a8-angle-results">
+
+              <div>
+                <small>LEGACY FREQUENCY</small>
+                <strong id="a8-music-out-hz">440 Hz</strong>
+              </div>
+
+              <div>
+                <small>NATIVE FREQUENCY</small>
+                <strong id="a8-music-out-a8freq">290.0390625 cyc/A8s</strong>
+              </div>
+
+              <div>
+                <small>A8 PERIOD</small>
+                <strong id="a8-music-out-period">—</strong>
+              </div>
+
+              <div>
+                <small>CYCLES / A8 MINUTE</small>
+                <strong id="a8-music-out-minute">—</strong>
+              </div>
+
+            </div>
+
+            <div class="a8-angle-note">
+              Legacy Hz is a comparison bridge.
+              Native A8 pitch is expressed as cycles per A8 second.
+            </div>
+          </div>
+
+
+          <div class="a8-music-section">
+            <div class="eyebrow">RHYTHM / TIMING</div>
+
+            <div class="a8-music-timing-inputs">
+
+              <label>
+                <span>BEATS / A8 MINUTE</span>
+                <input id="a8-music-tempo"
+                       type="number"
+                       min="0.000001"
+                       step="any"
+                       value="64">
+              </label>
+
+              <label>
+                <span>BEATS / BAR</span>
+                <input id="a8-music-beats"
+                       type="number"
+                       min="1"
+                       max="16"
+                       step="1"
+                       value="4">
+              </label>
+
+              <label>
+                <span>NUMBER OF BARS</span>
+                <input id="a8-music-barcount"
+                       type="number"
+                       min="1"
+                       max="16"
+                       step="1"
+                       value="4">
+              </label>
+
+            </div>
+
+            <div class="a8-music-bars" id="a8-music-bars"
+                 aria-label="Music timing bars"></div>
+
+            <div class="a8-angle-results">
+
+              <div>
+                <small>BEAT DURATION</small>
+                <strong id="a8-music-out-beat">1 A8 s</strong>
+              </div>
+
+              <div>
+                <small>BAR DURATION</small>
+                <strong id="a8-music-out-bar">4 A8 s</strong>
+              </div>
+
+              <div>
+                <small>TOTAL ELAPSED</small>
+                <strong id="a8-music-out-total">16 A8 s</strong>
+              </div>
+
+              <div>
+                <small>LEGACY COMPARISON</small>
+                <strong id="a8-music-out-total-legacy">10.546875 s</strong>
+              </div>
+
+            </div>
+
+            <div class="a8-angle-verdict" id="a8-music-verdict">
+              ✓ CHECKS · 64 beats/A8 minute = 1 beat/A8 second
+            </div>
+          </div>
+
+          <div class="a8-mini-links">
+            <a href="https://audio.cosigo.io/">HEAR IT</a>
+            <a href="https://composer.cosigo.io/">COMPOSE IT</a>
+            <a href="https://clock.cosigo.io/">TIME RULER</a>
+          </div>
+
+        </div>
+
+        <div class="a8-check-status-row">
+          <span>EXACT</span>
+          <span>COMPARISON</span>
+          <span>RESEARCH</span>
+        </div>
+
       </section>
-      <section class="card far">
-        <strong class="key">HOW FAR · Micro ↔ macro</strong>
-        <p>Quartz supplies a microscopic geometric witness. Earth supplies a macroscopic geometric witness. A8 brings both toward human scale on the same doubling ladder and compares where they meet.</p>
+
+      <div class="a8-reference-doors" aria-label="Reference and investigation">
+
+        <button class="a8-ref-door" type="button" data-open="a8-canonical-dialog">
+          CANONICAL
+          <small>definitions · formulas · trace</small>
+        </button>
+
+        <button class="a8-ref-door" type="button" data-open="a8-data-dialog">
+          DATA
+          <small>evidence · sources · hashes</small>
+        </button>
+
+        <button class="a8-ref-door" type="button" data-open="a8-research-dialog">
+          RESEARCH
+          <small>open questions · bring your field</small>
+        </button>
+
+      </div>
+
+
+      <section class="a8-explore-shell" aria-label="Explore Auspicious 8">
+
+        <div class="a8-explore-heading">
+          <div class="eyebrow">EXPLORE</div>
+          <h2>Open a door.</h2>
+          <p>
+            Concrete examples live here without turning About into
+            one continuous wall of material.
+          </p>
+        </div>
+
+        <div class="a8-explore-list">
+
+          <details class="a8-explore-item">
+            <summary>
+              <strong>A8 RULER</strong>
+              <span>length · scale · physical examples</span>
+            </summary>
+            <div class="a8-explore-body">
+              <div class="a8-ruler-example">
+
+                <div class="a8-ruler-copy">
+
+                  <div class="a8-ruler-status-row">
+                    <span class="a8-ruler-tag exact">EXACT LADDER</span>
+                    <span class="a8-ruler-tag realized">REALIZED RULER</span>
+                    <span class="a8-ruler-tag cross">MACRO CROSS-CHECKED</span>
+                  </div>
+
+                  <h3>One ladder. Pick the rung. State the rung.</h3>
+
+                  <p>
+                    A8 length uses one exact binary ladder.
+                    Moving to another rung changes the size of the measuring
+                    step — not the object, route, orbit or physical motion.
+                  </p>
+
+                  <div class="a8-ruler-rule">
+                    <strong>1 A8/31 := 1 native A8 length</strong>
+                    <span>
+                      current operational legacy comparison =
+                      1.149877521286 m
+                    </span>
+                  </div>
+
+                  <div class="a8-barbell-mini">
+
+                    <div>
+                      <small>LINEAR MICRO WITNESS</small>
+                      <strong>α-QUARTZ</strong>
+                      <span>
+                        q = (a + c) / 2
+                        <br>
+                        Q↑ = 2³¹q
+                        = 1.108009220571 m
+                      </span>
+                    </div>
+
+                    <div class="a8-barbell-meet">
+                      <span>MEET</span>
+                      <strong>1.149877521286 m</strong>
+                    </div>
+
+                    <div>
+                      <small>LINEAR MACRO WITNESS</small>
+                      <strong>EARTH</strong>
+                      <span>
+                        C<sub>E,mean</sub> =
+                        (C<sub>eq</sub> + C<sub>mer</sub>) / 2
+                        <br>
+                        E↓ = C<sub>E,mean</sub> / 2²⁵
+                        = 1.193327897829 m
+                      </span>
+                    </div>
+
+                  </div>
+
+                  <p class="a8-ruler-status">
+                    Quartz and Earth are treated as linear witnesses at both
+                    ends. Their geometric meeting establishes the present
+                    A8/31 realization. Exact powers of two then generate every
+                    other rung.
+                  </p>
+
+                </div>
+
+
+                <figure class="a8-ruler-figure">
+                  <svg viewBox="0 0 920 660"
+                       role="img"
+                       aria-labelledby="a8-ruler-title a8-ruler-desc">
+
+                    <title id="a8-ruler-title">
+                      Auspicious 8 native binary length ladder
+                    </title>
+
+                    <desc id="a8-ruler-desc">
+                      Native A8 length rungs from atomic and microscopic scale
+                      through the human reference rung, terrain, aircraft and
+                      larger-motion scales. A8 slash 31 is one native A8
+                      length. Every rung relationship is an exact power of two.
+                    </desc>
+
+                    <defs>
+                      <linearGradient id="a8-ruler-bg"
+                                      x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0" stop-color="#111d2c"/>
+                        <stop offset=".52" stop-color="#15231f"/>
+                        <stop offset="1" stop-color="#17130e"/>
+                      </linearGradient>
+
+                      <linearGradient id="a8-ruler-line"
+                                      x1="0" y1="1" x2="0" y2="0">
+                        <stop offset="0" stop-color="#7bd3d8"/>
+                        <stop offset=".48" stop-color="#d8b76c"/>
+                        <stop offset="1" stop-color="#8eb9ff"/>
+                      </linearGradient>
+                    </defs>
+
+                    <rect x="1" y="1" width="918" height="658"
+                          rx="22"
+                          fill="url(#a8-ruler-bg)"
+                          stroke="rgba(255,255,255,.16)"/>
+
+                    <text x="60" y="65" class="a8-svg-kicker">
+                      LARGER
+                    </text>
+
+                    <text x="60" y="620" class="a8-svg-kicker">
+                      SMALLER
+                    </text>
+
+                    <line x1="455" y1="92"
+                          x2="455" y2="584"
+                          stroke="url(#a8-ruler-line)"
+                          stroke-width="7"
+                          stroke-linecap="round"/>
+
+
+                    <!-- A8/48 -->
+                    <g transform="translate(0 120)">
+                      <circle cx="455" cy="0" r="11"/>
+                      <line x1="455" y1="0" x2="500" y2="0"/>
+                      <text x="520" y="-8" class="a8-svg-rung">
+                        A8/48
+                      </text>
+                      <text x="520" y="18" class="a8-svg-native">
+                        131,072 native A8 lengths
+                      </text>
+                      <text x="520" y="42" class="a8-svg-example">
+                        ≈ 150.716746 km · larger-motion scale
+                      </text>
+                    </g>
+
+
+                    <!-- A8/45 -->
+                    <g transform="translate(0 190)">
+                      <circle cx="455" cy="0" r="10"/>
+                      <line x1="410" y1="0" x2="455" y2="0"/>
+                      <text x="390" y="-8"
+                            text-anchor="end"
+                            class="a8-svg-rung">
+                        A8/45
+                      </text>
+                      <text x="390" y="18"
+                            text-anchor="end"
+                            class="a8-svg-native">
+                        16,384 native A8 lengths
+                      </text>
+                      <text x="390" y="42"
+                            text-anchor="end"
+                            class="a8-svg-example">
+                        ≈ 18.839593 km · aircraft-scale neighborhood
+                      </text>
+                    </g>
+
+
+                    <!-- A8/41 -->
+                    <g transform="translate(0 260)">
+                      <circle cx="455" cy="0" r="10"/>
+                      <line x1="455" y1="0" x2="500" y2="0"/>
+                      <text x="520" y="-8" class="a8-svg-rung">
+                        A8/41
+                      </text>
+                      <text x="520" y="18" class="a8-svg-native">
+                        1,024 native A8 lengths
+                      </text>
+                      <text x="520" y="42" class="a8-svg-example">
+                        ≈ 1.177474582 km · terrain / route scale
+                      </text>
+                    </g>
+
+
+                    <!-- A8/31 -->
+                    <g transform="translate(0 350)">
+                      <circle cx="455" cy="0" r="16"
+                              class="a8-human-node"/>
+                      <line x1="390" y1="0" x2="439" y2="0"/>
+                      <text x="370" y="-12"
+                            text-anchor="end"
+                            class="a8-svg-rung a8-svg-human">
+                        A8/31
+                      </text>
+                      <text x="370" y="16"
+                            text-anchor="end"
+                            class="a8-svg-native">
+                        1 native A8 length
+                      </text>
+                      <text x="370" y="42"
+                            text-anchor="end"
+                            class="a8-svg-example">
+                        realized ≈ 1.149877521 m
+                      </text>
+                    </g>
+
+
+                    <!-- A8/20 -->
+                    <g transform="translate(0 435)">
+                      <circle cx="455" cy="0" r="9"/>
+                      <line x1="455" y1="0" x2="500" y2="0"/>
+                      <text x="520" y="-8" class="a8-svg-rung">
+                        A8/20
+                      </text>
+                      <text x="520" y="18" class="a8-svg-native">
+                        1 / 2,048 native A8 length
+                      </text>
+                      <text x="520" y="42" class="a8-svg-example">
+                        ≈ 0.561464 mm · fine mechanical scale
+                      </text>
+                    </g>
+
+
+                    <!-- A8/10 -->
+                    <g transform="translate(0 505)">
+                      <circle cx="455" cy="0" r="9"/>
+                      <line x1="410" y1="0" x2="455" y2="0"/>
+                      <text x="390" y="-8"
+                            text-anchor="end"
+                            class="a8-svg-rung">
+                        A8/10
+                      </text>
+                      <text x="390" y="18"
+                            text-anchor="end"
+                            class="a8-svg-native">
+                        1 / 2,097,152 native A8 length
+                      </text>
+                      <text x="390" y="42"
+                            text-anchor="end"
+                            class="a8-svg-example">
+                        ≈ 0.548304 μm · microscopic scale
+                      </text>
+                    </g>
+
+
+                    <!-- A8/0 -->
+                    <g transform="translate(0 575)">
+                      <circle cx="455" cy="0" r="9"/>
+                      <line x1="455" y1="0" x2="500" y2="0"/>
+                      <text x="520" y="-8" class="a8-svg-rung">
+                        A8/0
+                      </text>
+                      <text x="520" y="18" class="a8-svg-native">
+                        1 / 2,147,483,648 native A8 length
+                      </text>
+                      <text x="520" y="42" class="a8-svg-example">
+                        ≈ 0.535453447 nm · atomic / crystal scale
+                      </text>
+                    </g>
+
+                  </svg>
+
+                  <figcaption>
+                    Native value first. Legacy comparison second.
+                    Every displayed rung follows from the same realized
+                    A8/31 length by exact powers of two.
+                  </figcaption>
+                </figure>
+
+
+                <div class="a8-macro-closure">
+
+                  <div class="a8-macro-card">
+                    <small>EARTH SURFACE</small>
+                    <strong>A8 NAV</strong>
+                    <b>1 A8 NAV</b>
+
+                    <span>
+                      <small>LADDER VIEW</small><br>
+                      2.075573921 A8/40<br>
+                      1.037786961 A8/41<br>
+                      just above A8/41
+                    </span>
+
+                    <span>
+                      <small>CONSTRUCTION</small><br>
+                      C<sub>E,mean</sub> / 2¹⁵
+                    </span>
+
+                    <span>
+                      <small>LEGACY COMPARISON</small><br>
+                      ≈ 1.221967767 km
+                    </span>
+                  </div>
+
+                  <div class="a8-macro-arrow">
+                    <small>A8-TO-A8</small>
+                    <span>1 A8 ORB</span>
+                    <span>= 16.066031974 A8 NAV</span>
+                    <span>≈ 2⁴ A8 NAV</span>
+                    <small>+0.4127% residual</small>
+                  </div>
+
+                  <div class="a8-macro-card">
+                    <small>SPACESHIP EARTH</small>
+                    <strong>A8 ORB</strong>
+                    <b>1 A8 ORB</b>
+
+                    <span>
+                      <small>LADDER VIEW</small><br>
+                      2.084139811 A8/44<br>
+                      1.042069906 A8/45<br>
+                      just above A8/45
+                    </span>
+
+                    <span>
+                      mean orbital distance traveled
+                      in one A8 SECOND
+                    </span>
+
+                    <span>
+                      <small>LEGACY COMPARISON</small><br>
+                      ≈ 19.632173222 km
+                    </span>
+                  </div>
+
+                </div>
+
+
+                <div class="a8-closure-math">
+
+                  <div>
+                    <small>BRING EARTH-SURFACE DISTANCE DOWN</small>
+                    <strong>
+                      A8 NAV / 2¹⁰
+                      = 1.193327897829 m
+                    </strong>
+                  </div>
+
+                  <div>
+                    <small>BRING ORBITAL DISTANCE DOWN</small>
+                    <strong>
+                      A8 ORB / 2¹⁴
+                      = 1.198252760149 m
+                    </strong>
+                  </div>
+
+                  <div>
+                    <small>MACRO MEETING</small>
+                    <strong>
+                      √(NAV↓ × ORB↓)
+                      = 1.195787793606 m
+                    </strong>
+                  </div>
+
+                  <div class="a8-closure-highlight">
+                    <small>QUARTZ ↔ MACRO CROSS-CHECK</small>
+                    <strong>
+                      √(Q↑ × macro)
+                      = 1.151062075286 m
+                    </strong>
+                    <span>
+                      only 1.184554 mm / 0.1030%
+                      from the adopted 1.149877521286 m barbell
+                    </span>
+                  </div>
+
+                </div>
+
+
+                <div class="a8-ruler-bottom">
+
+                  <div class="a8-ruler-principle">
+                    <strong>EXACT</strong>
+                    <span>
+                      Every A8 rung differs by an exact power of two.
+                    </span>
+                  </div>
+
+                  <div class="a8-ruler-principle">
+                    <strong>REALIZED</strong>
+                    <span>
+                      A8/31 = 1 native length with current operational
+                      comparison 1.149877521286 m.
+                    </span>
+                  </div>
+
+                  <div class="a8-ruler-principle">
+                    <strong>EARTH</strong>
+                    <span>
+                      A8 NAV carries the same mean-Earth geometry into
+                      terrestrial navigation.
+                    </span>
+                  </div>
+
+                  <div class="a8-ruler-principle">
+                    <strong>ORBIT</strong>
+                    <span>
+                      A8 ORB carries established A8 distance and time into
+                      Spaceship Earth's mean orbital motion.
+                    </span>
+                  </div>
+
+                </div>
+
+
+                <div class="a8-orb-teaser">
+                  <small>HOW FAST</small>
+                  <strong>
+                    Spaceship Earth mean orbital speed =
+                    1 A8 ORB per A8 SECOND
+                  </strong>
+                  <span>
+                    Distance and time are established first.
+                    Speed follows as distance ÷ elapsed A8 time.
+                  </span>
+                </div>
+
+
+                <div class="a8-mini-links">
+                  <a href="https://quartz.cosigo.io/">OPEN QUARTZ</a>
+                  <a href="https://sea.cosigo.io/">OPEN NAVIGATION</a>
+                  <a href="https://ship.cosigo.io/">OPEN SPACESHIP EARTH</a>
+                  <a href="https://data.cosigo.io/">CHECK EVIDENCE</a>
+                </div>
+
+              </div>
+            </div>
+          </details>
+
+          <details class="a8-explore-item">
+            <summary>
+              <strong>A8 JOURNEY</strong>
+              <span>flight · sea route · elapsed time</span>
+            </summary>
+            <div class="a8-explore-body">
+              <div class="a8-explore-slot">
+                ROUTE + TRAVEL EXAMPLES INSTALL LATER
+              </div>
+            </div>
+          </details>
+
+          <details class="a8-explore-item">
+            <summary>
+              <strong>A8 SPEED</strong>
+              <span>distance · elapsed time · motion</span>
+            </summary>
+            <div class="a8-explore-body">
+              <div class="a8-explore-slot">
+                SPEED EXAMPLE INSTALLS LATER
+              </div>
+            </div>
+          </details>
+
+          <details class="a8-explore-item">
+            <summary>
+              <strong>A8 NAVIGATION</strong>
+              <span>where · direction · distance · arrival</span>
+            </summary>
+            <div class="a8-explore-body">
+              <div class="a8-explore-slot">
+                MAP + NAVIGATION EXAMPLE INSTALLS LATER
+              </div>
+            </div>
+          </details>
+
+          <details class="a8-explore-item">
+            <summary>
+              <strong>A8 TIME</strong>
+              <span>recurrence · Earth day · clock</span>
+            </summary>
+            <div class="a8-explore-body">
+              <div class="a8-explore-slot">
+                TIME PICTURE + EXAMPLE INSTALLS LATER
+              </div>
+            </div>
+          </details>
+
+          <details class="a8-explore-item">
+            <summary>
+              <strong>A8 SOUND</strong>
+              <span>pitch · rhythm · music</span>
+            </summary>
+            <div class="a8-explore-body">
+              <div class="a8-explore-slot">
+                SOUND / MUSIC EXAMPLE INSTALLS LATER
+              </div>
+            </div>
+          </details>
+
+        </div>
+
       </section>
-      <section class="card where">
-        <strong class="key">WHERE / ANGLE · 512 around</strong>
-        <p>A full turn is represented as 512 A8 angle units. The circle, π, trigonometry and the physical world do not change; only the ruler used to label the turn changes.</p>
-      </section>
-      <section class="card fast">
-        <strong class="key">HOW FAST · Distance over time</strong>
-        <p>Once distance and time exist independently, speed follows. Ships, aircraft and rockets can all be expressed on the same ruler architecture; application-specific rung choices remain open until they are deliberately tested and selected.</p>
-      </section>
-    </div>
 
-    <h2>The length “barbell”</h2>
-    <p>You do not have to be a crystallographer or geodesist to understand the working experiment. Reduce each 3-D witness to a reproducible length comparison, bring the tiny one up and the huge one down, then see where the common human-scale ruler settles.</p>
-    <div class="barbell" aria-label="Quartz to Earth A8 length barbell">
-      <div class="weight">
-        <small>MICRO WITNESS</small>
-        <b class="cyan">QUARTZ</b>
-        <div class="a8-range"><strong>A8/0 → A8/31</strong></div>
-        <div class="a8-range-mini">≈ 0.516 nm × 2<sup>31</sup> → ≈ 1.108 m</div>
-        <div>≈ 1.108 m at the human comparison level</div>
-        <small>current symmetric quartz reduction · ≈ 0.964 A8/31</small>
-      </div>
-      <div class="bar"><div class="pivot">A8/31 = 1<br><span class="gold">≈ 1.15 m</span></div></div>
-      <div class="weight">
-        <small>MACRO WITNESS</small>
-        <b class="green">EARTH</b>
-        <div class="a8-range"><strong>A8/31 → A8/56</strong></div>
-        <div class="a8-range-mini">≈ 1.193 m × 2<sup>25</sup> → ≈ 40,041 km</div>
-        <div>≈ 1.193 m at the human comparison level</div>
-        <small>mean Earth circumference brought down the ladder · ≈ 1.038 A8/31</small>
-      </div>
-    </div>
-    <p style="text-align:center;color:var(--muted)">Legacy metre values are comparison bridges. The current working A8 statement is simply <strong style="color:var(--text)">A8/31 = 1 human A8 length</strong>.</p>
-
-    <h2>The part that makes scaling easy</h2>
-    <p>Every step on the length ladder is exactly twice the step below it. Nothing fancy happens between rungs.</p>
-    <div class="ladder-wrap" aria-label="A8 doubling ladder from rung 31 to rung 41">
-      <div class="ladder-head">
-        <b>Each rung = ×2</b>
-        <div>Ten rungs = ×2¹⁰ = ×1024</div>
-      </div>
-      <div class="ladder">
-        <div class="rung major"><span class="label">A8/31</span><span class="value">≈1.15 m</span></div>
-        <div class="rung"><span class="label">/32</span><span class="value">×2</span></div>
-        <div class="rung"><span class="label">/33</span><span class="value">×4</span></div>
-        <div class="rung"><span class="label">/34</span><span class="value">×8</span></div>
-        <div class="rung"><span class="label">/35</span><span class="value">×16</span></div>
-        <div class="rung"><span class="label">/36</span><span class="value">×32</span></div>
-        <div class="rung"><span class="label">/37</span><span class="value">×64</span></div>
-        <div class="rung"><span class="label">/38</span><span class="value">×128</span></div>
-        <div class="rung"><span class="label">/39</span><span class="value">×256</span></div>
-        <div class="rung"><span class="label">/40</span><span class="value">×512</span></div>
-        <div class="rung major"><span class="label">A8/41</span><span class="value">≈1.177 km</span></div>
-      </div>
-      <div class="scrollhint">On a small screen, slide the ladder sideways.</div>
-      <div class="equation">A8/41 = 1024 × A8/31 ≈ 1,177.47 legacy metres ≈ 1.177 km</div>
-    </div>
-
-    <div class="three-rule" aria-label="A8 rung operating rule">
-      <div><span>1</span>Pick a useful rung</div>
-      <div><span>2</span>State the rung</div>
-      <div><span>3</span>Stay on it for the instrument</div>
-    </div>
-
-    <h2>Why change rungs at all?</h2>
-    <p>For the same reason people do not normally measure a continent in millimetres. The rung selects a useful numerical scale and useful resolution. The ladder preserves the exact relationship between every scale.</p>
-
-    <div class="scale-grid">
-      <article class="scale-card">
-        <div class="tag">MODEL SCALE</div>
-        <svg viewBox="0 0 260 110" role="img" aria-label="model train">
-          <rect x="30" y="38" width="165" height="36" rx="5" fill="none" stroke="#7bd3d8" stroke-width="3"/>
-          <rect x="48" y="46" width="34" height="15" rx="2" fill="none" stroke="#7bd3d8" stroke-width="2"/>
-          <rect x="92" y="46" width="34" height="15" rx="2" fill="none" stroke="#7bd3d8" stroke-width="2"/>
-          <rect x="136" y="46" width="34" height="15" rx="2" fill="none" stroke="#7bd3d8" stroke-width="2"/>
-          <path d="M195 45h20l16 29h-36z" fill="none" stroke="#7bd3d8" stroke-width="3"/>
-          <circle cx="67" cy="80" r="9" fill="#0d1318" stroke="#d8b76c" stroke-width="3"/>
-          <circle cx="172" cy="80" r="9" fill="#0d1318" stroke="#d8b76c" stroke-width="3"/>
-          <path d="M20 91h220" stroke="#52616d" stroke-width="3"/>
-        </svg>
-        <h3>Model train · 1:64</h3>
-        <p>64 = 2⁶. A real dimension written as <strong>x A8/31</strong> becomes the same coefficient <strong>x A8/25</strong> in a 1:64 model.</p>
-        <div class="mini">Same shape. Same coefficient. Six rungs smaller.</div>
-      </article>
-
-      <article class="scale-card">
-        <div class="tag">HUMAN SCALE</div>
-        <svg viewBox="0 0 260 110" role="img" aria-label="human scale ruler">
-          <path d="M130 16v78" stroke="#d8b76c" stroke-width="5" stroke-linecap="round"/>
-          <circle cx="130" cy="18" r="10" fill="none" stroke="#d8b76c" stroke-width="3"/>
-          <path d="M105 48h50M130 48l-23 30M130 48l23 30" stroke="#d8b76c" stroke-width="3" stroke-linecap="round"/>
-          <path d="M42 96h176" stroke="#52616d" stroke-width="3"/>
-          <path d="M46 88v16M80 91v10M114 91v10M148 91v10M182 91v10M216 88v16" stroke="#8eb9ff" stroke-width="2"/>
-        </svg>
-        <h3>A8/31 · human rung</h3>
-        <p>The current working stake is <strong>1 A8/31 ≈ 1.15 legacy m</strong>. It is a convenient human-size anchor in the general length ladder.</p>
-        <div class="mini">This is the ladder reference, not a claim that every object must be one rung long.</div>
-      </article>
-
-      <article class="scale-card">
-        <div class="tag">EARTH NAVIGATION</div>
-        <svg viewBox="0 0 260 110" role="img" aria-label="ship navigation">
-          <path d="M35 67h190l-22 23H63z" fill="none" stroke="#8eb9ff" stroke-width="3"/>
-          <path d="M92 67V40h55v27M119 40V21M119 23l34 15h-34" fill="none" stroke="#8eb9ff" stroke-width="3" stroke-linejoin="round"/>
-          <path d="M22 98c22-10 42 10 64 0s42 10 64 0 42 10 88 0" fill="none" stroke="#7bd3d8" stroke-width="3"/>
-        </svg>
-        <h3>A8 NAV · ships & routes</h3>
-        <p>Navigation keeps its Earth-derived ruler: <strong>mean Earth circumference ÷ 32,768</strong>. That is ≈1.222 legacy km.</p>
-        <div class="mini">Cross-check: 1 A8 NAV ≈ 1.03779 A8/41. Almost A8/41 — not forced to equal it.</div>
-      </article>
-
-      <article class="scale-card">
-        <div class="tag">LARGER SCALE</div>
-        <svg viewBox="0 0 260 110" role="img" aria-label="aircraft and rocket scale">
-          <path d="M28 58h73l45-24 13 4-25 20h66l28-9 7 6-29 14h-72l25 20-13 4-45-24H28z" fill="none" stroke="#8fd0a0" stroke-width="3" stroke-linejoin="round"/>
-          <path d="M222 25l12 19-5 35-7 15-7-15-5-35z" fill="none" stroke="#efa75f" stroke-width="3"/>
-          <path d="M217 82l-7 17M227 82l7 17" stroke="#efa75f" stroke-width="3"/>
-        </svg>
-        <h3>Aircraft & rockets</h3>
-        <p>The same exact ladder can scale to larger distances and faster motion when needed. No aviation, rocket or Mach-test rung is assigned on this introduction page.</p>
-        <div class="mini">Application scale remains an open engineering choice. The ladder exists first; a specific working rung is selected only when the instrument is actually defined.</div>
-      </article>
-    </div>
-
-    <h2>Scale models make the idea obvious</h2>
-    <p>A8 scaling is especially easy to see with trains because common model scales are already powers of two. A 1:64 model is exactly six binary rungs smaller than the real object.</p>
-    <div class="model-compare" aria-label="real train to 1 to 64 model train">
-      <div class="trainbox">
-        <svg viewBox="0 0 360 110" role="img" aria-label="real train">
-          <rect x="24" y="31" width="245" height="48" rx="6" fill="none" stroke="#8fd0a0" stroke-width="3"/>
-          <path d="M269 42h35l31 37h-66z" fill="none" stroke="#8fd0a0" stroke-width="3"/>
-          <rect x="44" y="41" width="45" height="20" rx="2" fill="none" stroke="#8fd0a0" stroke-width="2"/>
-          <rect x="101" y="41" width="45" height="20" rx="2" fill="none" stroke="#8fd0a0" stroke-width="2"/>
-          <rect x="158" y="41" width="45" height="20" rx="2" fill="none" stroke="#8fd0a0" stroke-width="2"/>
-          <circle cx="76" cy="87" r="11" fill="#0d1318" stroke="#d8b76c" stroke-width="3"/><circle cx="242" cy="87" r="11" fill="#0d1318" stroke="#d8b76c" stroke-width="3"/>
-          <path d="M10 102h340" stroke="#52616d" stroke-width="3"/>
-        </svg>
-        <b>REAL TRAIN</b><small>dimension = x A8/31</small>
-      </div>
-      <div class="scale-arrow">÷64 →<small>six rungs down</small></div>
-      <div class="trainbox">
-        <svg viewBox="0 0 360 110" role="img" aria-label="one to sixty four model train">
-          <g transform="translate(118 52) scale(.42) translate(-118 -52)">
-            <rect x="24" y="31" width="245" height="48" rx="6" fill="none" stroke="#7bd3d8" stroke-width="5"/>
-            <path d="M269 42h35l31 37h-66z" fill="none" stroke="#7bd3d8" stroke-width="5"/>
-            <circle cx="76" cy="87" r="11" fill="#0d1318" stroke="#d8b76c" stroke-width="5"/><circle cx="242" cy="87" r="11" fill="#0d1318" stroke="#d8b76c" stroke-width="5"/>
-          </g>
-          <path d="M70 102h220" stroke="#52616d" stroke-width="3"/>
-        </svg>
-        <b>1:64 MODEL</b><small>same coefficient x A8/25</small>
-      </div>
-    </div>
-    <div class="equation">Same object proportions + same numerical coefficient + different rung = exact scale relationship</div>
-
-    <h2>Speed works the same way</h2>
-    <p>Speed is just distance over time. Once the time ruler and length ruler are established, the instrument chooses a sensible distance rung for the job. A8 does not need a completely different physics system for a ship, airplane or rocket.</p>
-    <div class="speed-road">
-      <article class="motion">
-        <svg viewBox="0 0 300 90" role="img" aria-label="ship moving across water">
-          <path d="M25 55h170l-22 22H52z" fill="none" stroke="#8eb9ff" stroke-width="3"/><path d="M83 55V31h48v24M105 31V15M105 17l31 12h-31" fill="none" stroke="#8eb9ff" stroke-width="3"/><path d="M14 83c22-8 39 8 61 0s39 8 61 0 39 8 79 0" fill="none" stroke="#7bd3d8" stroke-width="3"/><path d="M210 44h64" stroke="#d8b76c" stroke-width="3" stroke-dasharray="8 6"/><path d="M265 37l12 7-12 7" fill="none" stroke="#d8b76c" stroke-width="3"/></svg>
-        <span class="use">SHIP / EARTH ROUTE</span>
-        <h3>Use A8 NAV</h3>
-        <p>For terrestrial navigation, keep the Earth-derived route ruler and express motion as A8 NAV over a stated A8 time interval.</p>
-      </article>
-      <article class="motion">
-        <svg viewBox="0 0 300 90" role="img" aria-label="airplane in flight">
-          <path d="M24 48h86l52-29 15 4-30 25h79l35-11 8 7-38 17h-84l30 25-15 4-52-29H24z" fill="none" stroke="#8fd0a0" stroke-width="3" stroke-linejoin="round"/><path d="M232 73h48" stroke="#d8b76c" stroke-width="3" stroke-dasharray="8 6"/><path d="M272 66l12 7-12 7" fill="none" stroke="#d8b76c" stroke-width="3"/></svg>
-        <span class="use">AIRCRAFT</span>
-        <h3>Aviation already fits the ladder</h3>
-        <p>A representative Airbus ACJ319 long-range cruise of <strong>447 knots</strong> is about <strong>827.8 legacy km/h</strong>. In one A8 HOUR that aircraft covers about <strong>620.9 km</strong>, or approximately <strong>32.96 A8/45 per A8 HOUR</strong>. A8/41 remains a useful route-scale length neighborhood; no separate aviation ruler is required.</p>
-        <p class="mini">Example only · Airbus ACJ319 long-range speed 0.78 Mach / 447 kts.</p>
-      </article>
-      <article class="motion">
-        <svg viewBox="0 0 300 90" role="img" aria-label="rocket and Mach test">
-          <path d="M116 74l15-47 19-16 19 16 15 47-34-10z" fill="none" stroke="#efa75f" stroke-width="3"/><circle cx="150" cy="35" r="7" fill="none" stroke="#efa75f" stroke-width="3"/><path d="M135 68l-15 18M165 68l15 18M144 67l6 20 6-20" fill="none" stroke="#efa75f" stroke-width="3"/><path d="M205 42h68" stroke="#d8b76c" stroke-width="3" stroke-dasharray="8 6"/><path d="M265 35l12 7-12 7" fill="none" stroke="#d8b76c" stroke-width="3"/></svg>
-        <span class="use">ROCKET / MACH TEST</span>
-        <h3>Lunar-mission motion fits the ladder too</h3>
-        <p>NASA reports Apollo 17 — the last crewed lunar landing mission — at <strong>1,484,933.8 legacy miles</strong> traveled over <strong>12 days 13 hours 52 minutes</strong>. Its whole-mission average is about <strong>7,916.6 legacy km/h</strong>, equivalent to about <strong>5,937.5 km per A8 HOUR</strong> or <strong>39.39 A8/48 per A8 HOUR</strong>.</p>
-        <p><strong>Mach remains a dimensionless ratio to the local speed of sound.</strong> A8 can express the underlying distance and elapsed time without turning Mach into a new ruler.</p>
-        <p class="mini">Whole-mission average only — not launch, translunar, lunar-orbit, return-entry or peak velocity.</p>
-      </article>
-    </div>
-
-    <section class="rulebox" style="margin-top:22px">
-      <div class="big">Same ruler. Different rung. <span class="gold">Useful resolution.</span></div>
-      <div class="sub">A model train does not become a different kind of geometry. A ship does not sail farther. An aircraft does not fly faster. A rocket does not change its trajectory. Only the measuring step changes.</div>
-    </section>
-
-    <h2>A8 NAV is close to A8/41 — but they are not the same definition</h2>
-    <div class="facts">
-      <div class="fact"><b>≈1.150 m</b><span>current legacy comparison for 1 A8/31</span></div>
-      <div class="fact"><b>≈1.177 km</b><span>A8/41 = 1024 × A8/31</span></div>
-      <div class="fact"><b>≈1.222 km</b><span>1 A8 NAV from Earth circumference ÷ 32,768</span></div>
-    </div>
-    <p><strong>A8/41</strong> comes from the general exact doubling ladder. <strong>A8 NAV</strong> comes independently from dividing the mean Earth circumference by 32,768 (= 2¹⁵ = 8⁵). The present cross-check is approximately <strong>1 A8 NAV = 1.03779 A8/41</strong>. Their closeness is observed; it is not forced.</p>
-
-    <section class="plain">
-      <h2 style="margin-top:0">A8 does not claim that Nature is binary everywhere.</h2>
-      <p>Natural phenomena come first. Binary and octal are engineered ways to represent, divide and count them. A finite register or ladder is a ruler placed on Nature; it is not Nature itself.</p>
-      <p>The useful feature is exact scaling: every rung relationship is known without inventing another unrelated unit. If finer resolution is needed, move down the same ladder. If numbers become too large, move up the same ladder.</p>
-    </section>
-
-    <section class="plain">
-      <h2 style="margin-top:0">What is fixed, and what is still experimental?</h2>
-      <p><strong>Mathematically fixed:</strong> the exact doubling relationship between A8 length rungs; the 512-state angular representation; and the 32×64×64 civil-day representation.</p>
-      <p><strong>Current working stake:</strong> A8/31 = 1 native human-scale length, with a present legacy comparison of approximately 1.15 m (engineering comparison ≈1.14988 m).</p>
-      <p><strong>Application choices:</strong> aviation, rocket, machining and other instruments may later select a useful rung from the same ladder. No application-specific rung is assigned here.</p>
-      <p><strong>Experimental:</strong> physical realization, uncertainty, refinements of the quartz/Earth comparison, and independent replication. A better physical measurement may refine the legacy comparison without breaking the ladder.</p>
-    </section>
-
-    <div class="status"><strong>Research status:</strong> A8 is an experimental COSIGO Labs project. Software demonstrations test architecture and usability. Physical metrology claims require physical realization, uncertainty analysis, independent measurement and replication. No declaration is above reproduction.</div>
-
-    <h2>See it, then inspect it</h2>
-    <p>The public pages teach the ruler first. The engineering laboratory exposes the recovery, comparison and experimental machinery underneath.</p>
-    <div class="buttons">
-      <a class="primary" href="https://a8.cosigo.io/">OPEN A8 PUBLIC INSTRUMENT</a>
-      <a href="https://lab.a8.cosigo.io/navigation.html">NAVIGATION / DISTANCE</a>
-      <a href="https://lab.a8.cosigo.io/">OPEN ENGINEERING LAB</a>
-      <a href="https://lab.a8.cosigo.io/quartz.html">QUARTZ / LENGTH EXPERIMENT</a>
-      <a href="https://github.com/cosigo" rel="noopener">COSIGO GITHUB</a>
-      <a href="https://contact.cosigo.io/" rel="noopener">CONTACT</a>
     </div>
   </main>
 
-  <footer>
-    <strong>© 2026 COSIGO Labs · Auspicious 8 experimental research and engineering publication.</strong>
-    <div>Natural phenomena, mathematical facts and established scientific principles are not claimed as proprietary. Original software, text, diagrams, graphics and presentation remain protected works of their respective authors. Legacy/SI values used in A8 research are comparison coordinates unless explicitly identified otherwise.</div>
-    <nav>
-      <a href="https://cosigo.io/">COSIGO Home</a>
-      <a href="https://cosigo.io/status.html">System Status</a>
-      <a href="https://node.cosigo.io/">Bitcoin Verification Node</a>
-      <a href="https://a8.cosigo.io/">A8 Public</a>
-      <a href="https://lab.a8.cosigo.io/">A8 Lab</a>
-      <a href="https://contact.cosigo.io/">Contact</a>
-    </nav>
-  </footer>
 </div>
+
+<dialog id="a8-what-dialog" class="a8-question-dialog">
+  <div class="a8-dialog-inner">
+    <button class="a8-dialog-close" type="button" aria-label="Close">×</button>
+
+    <div class="eyebrow">WHAT</div>
+    <h2>What is Auspicious 8?</h2>
+
+    <p>
+      Auspicious 8 is an experimental measurement architecture.
+      It starts with observable Nature, identifies reproducible
+      relationships, and builds rulers that can be stated and
+      checked directly.
+    </p>
+
+    <p>
+      A8 changes the ruler — not the universe.
+      Geometry, physical motion, matter and natural phenomena remain
+      what they are. Native A8 measurements describe them using a
+      different measurement structure.
+    </p>
+
+    <div class="a8-what-rule">
+      <strong>Nature first.</strong>
+      Observation → relationship → ruler → comparison.
+    </div>
+
+    <p>
+      Binary subdivision and octal notation provide the engineered
+      representation. Legacy units may be shown alongside A8 for
+      familiar comparison, but they do not define the native ruler.
+    </p>
+
+    <div class="a8-dialog-next">
+      More doors lead to where A8 measures, when it measures,
+      how the rulers are realized, and why the architecture was built.
+    </div>
+  </div>
+</dialog>
+
+
+<dialog id="a8-where-dialog" class="a8-question-dialog">
+  <div class="a8-dialog-inner">
+    <button class="a8-dialog-close" type="button" aria-label="Close">×</button>
+
+    <div class="eyebrow">WHERE</div>
+    <h2>Where are we?</h2>
+
+    <p>
+      A8 describes position and direction with a native angular ruler.
+      One complete turn contains <strong>512 states</strong>.
+      A quarter turn is 128 and a half turn is 256.
+    </p>
+
+    <div class="a8-what-rule">
+      <strong>Full turn = 2⁹ = 512.</strong><br>
+      Position and direction use the same physical geometry —
+      only the ruler and representation change.
+    </div>
+
+    <p>
+      From that angular relationship A8 can describe celestial position,
+      longitude, latitude, bearing, compass direction and navigation.
+      The map does not move. The journey does not change.
+      The measuring language does.
+    </p>
+
+    <div class="a8-dialog-links">
+      <a href="https://angle.cosigo.io/">ANGLE</a>
+      <a href="https://stars.cosigo.io/">STARS</a>
+      <a href="https://map.cosigo.io/">MAP</a>
+      <a href="https://sea.cosigo.io/">SEA / NAVIGATION</a>
+      <a href="https://calculate.cosigo.io/earth-rotation/">CALCULATE · EARTH ROTATION</a>
+    </div>
+
+    <div class="a8-dialog-next">
+      Later, CHECK / CONVERT will let this relationship be tested
+      directly between native A8 angle and familiar comparison rulers.
+    </div>
+  </div>
+</dialog>
+
+
+
+<dialog id="a8-when-dialog" class="a8-question-dialog">
+  <div class="a8-dialog-inner">
+    <button class="a8-dialog-close" type="button" aria-label="Close">×</button>
+
+    <div class="eyebrow">WHEN</div>
+    <h2>When are we?</h2>
+
+    <p>
+      A8 begins with recurring motion in the Jovian system.
+      Io, Europa and Ganymede provide independently recoverable
+      recurrence relationships from which a natural elapsed-time
+      ruler can be recovered.
+    </p>
+
+    <div class="a8-when-chain" aria-label="A8 time authority chain">
+      <span>JUPITER</span>
+      <b>→</b>
+      <span>IO · EUROPA · GANYMEDE</span>
+      <b>→</b>
+      <span>RECOVERED ELAPSED-TIME RULER</span>
+    </div>
+
+    <p>
+      That ruler is then used to observe Earth.
+      <strong>Mintaka witnesses Earth’s axial rotation.</strong>
+      It is not the clock.
+      <strong>Sol provides the orbital-direction witness.</strong>
+      Their relationship exposes the rotation–orbit difference
+      called <strong>Terra Ship Slip</strong>.
+    </p>
+
+    <div class="a8-when-chain">
+      <span>MINTAKA</span>
+      <b>+</b>
+      <span>SOL</span>
+      <b>→</b>
+      <span>TERRA SHIP SLIP</span>
+      <b>→</b>
+      <span>SUN-RETURN RECURRENCE</span>
+    </div>
+
+    <div class="a8-what-rule">
+      <strong>One recovered Earth day = 2¹⁷ native day states.</strong><br>
+      32 × 64 × 64 = 131,072.
+    </div>
+
+    <p>
+      The civil clock is the downstream expression of that relationship:
+      32 native hours, 64 native minutes per hour,
+      and 64 native seconds per minute.
+    </p>
+
+    <div class="a8-dialog-links">
+      <a href="https://moons.cosigo.io/">MOONS</a>
+      <a href="https://telescope.cosigo.io/">TELESCOPE</a>
+      <a href="https://mintaka.cosigo.io/">MINTAKA</a>
+      <a href="https://sol.cosigo.io/">SOL</a>
+      <a href="https://ship.cosigo.io/">SPACESHIP EARTH</a>
+      <a href="https://clock.cosigo.io/">CLOCK</a>
+      <a href="https://calendar.cosigo.io/">CALENDAR</a>
+      <a href="https://data.cosigo.io/">VERIFY / DATA</a>
+    </div>
+
+    <div class="a8-dialog-next">
+      Browser clocks, UTC, NTP and network arrival time may assist
+      comparison or transport, but they do not define the ongoing
+      native A8 time ruler.
+    </div>
+  </div>
+</dialog>
+
+
+
+<dialog id="a8-how-dialog" class="a8-question-dialog">
+  <div class="a8-dialog-inner">
+    <button class="a8-dialog-close" type="button" aria-label="Close">×</button>
+
+    <div class="eyebrow">HOW</div>
+    <h2>How does A8 become a measurement?</h2>
+
+    <p>
+      A8 separates what is directly observed from what is derived.
+      A ruler must first have a reproducible relationship or physical
+      witness. Calculations come downstream.
+    </p>
+
+    <div class="a8-how-grid">
+
+      <div class="a8-how-card">
+        <strong>HOW FAR</strong>
+        <p>
+          Length research uses recurring structure in α-quartz and
+          exact powers-of-two scaling to investigate a recoverable
+          spatial ruler.
+        </p>
+        <small>RESEARCH · physical qualification remains provisional</small>
+      </div>
+
+      <div class="a8-how-card">
+        <strong>HOW LONG</strong>
+        <p>
+          Elapsed time comes from the recovered Jovian recurrence
+          ruler and its downstream Earth-day relationship.
+        </p>
+        <small>WORKING · see WHEN</small>
+      </div>
+
+      <div class="a8-how-card">
+        <strong>HOW FAST</strong>
+        <p>
+          Speed does not define either parent ruler. It is derived
+          only after distance and elapsed time are independently known.
+        </p>
+        <small>speed = qualified distance / qualified elapsed time</small>
+      </div>
+
+      <div class="a8-how-card">
+        <strong>HOW DO WE CHECK?</strong>
+        <p>
+          Telescope observations, physical counter evidence,
+          archived source material, hashes and reconstruction reports
+          provide inspection paths beyond the finished display.
+        </p>
+        <small>DATA / EVIDENCE</small>
+      </div>
+
+    </div>
+
+    <div class="a8-what-rule">
+      <strong>Observe first. Derive second.</strong><br>
+      Preserve enough evidence that another investigator can check
+      what happened.
+    </div>
+
+    <p>
+      Once a ruler exists it can be applied elsewhere.
+      Music already uses native A8 elapsed time and pitch expressed
+      in cycles per A8 second. Other fields can attach to the same
+      measurement architecture as they are investigated.
+    </p>
+
+    <div class="a8-dialog-links">
+      <a href="https://quartz.cosigo.io/">QUARTZ</a>
+      <a href="https://telescope.cosigo.io/">TELESCOPE</a>
+      <a href="https://data.cosigo.io/">DATA / EVIDENCE</a>
+      <a href="https://audio.cosigo.io/">AUDIO</a>
+      <a href="https://composer.cosigo.io/">COMPOSER</a>
+    </div>
+
+    <div class="a8-dialog-next">
+      CHECK / CONVERT will later connect native A8 quantities,
+      exact relationships and familiar comparison rulers in both directions.
+    </div>
+  </div>
+</dialog>
+
+
+
+<dialog id="a8-why-dialog" class="a8-question-dialog">
+  <div class="a8-dialog-inner">
+    <button class="a8-dialog-close" type="button" aria-label="Close">×</button>
+
+    <div class="eyebrow">WHY</div>
+    <h2>Why build another ruler?</h2>
+
+    <p>
+      Because measurement is a choice of ruler and representation.
+      A8 asks whether useful rulers can be reconstructed from observable
+      relationships, stated exactly where possible, and checked against
+      physical evidence.
+    </p>
+
+    <div class="a8-why-list">
+
+      <div>
+        <strong>NATURE FIRST</strong>
+        <p>
+          Start with something observable or reproducible before assigning
+          the measuring language.
+        </p>
+      </div>
+
+      <div>
+        <strong>EXACT RELATIONSHIPS FIRST</strong>
+        <p>
+          Ratios and powers of two can remain exact even when familiar
+          decimal comparisons do not terminate neatly.
+        </p>
+      </div>
+
+      <div>
+        <strong>BINARY FOR STRUCTURE</strong>
+        <p>
+          Halving and doubling provide a consistent way to subdivide,
+          scale and implement rulers in physical or digital instruments.
+        </p>
+      </div>
+
+      <div>
+        <strong>OCTAL FOR HUMAN READABILITY</strong>
+        <p>
+          One octal digit maps directly to three binary bits, making
+          native machine states easier to read without changing the
+          underlying relationship.
+        </p>
+      </div>
+
+      <div>
+        <strong>KEEP ROLES SEPARATE</strong>
+        <p>
+          A witness is not automatically a clock. A derived quantity
+          does not define its parent rulers. Transport does not become
+          authority merely because it carries the measurement.
+        </p>
+      </div>
+
+      <div>
+        <strong>KEEP THE BRIDGE</strong>
+        <p>
+          Legacy units remain useful for comparison, communication and
+          checking familiar magnitudes. They can sit beside the native
+          ruler without defining it.
+        </p>
+      </div>
+
+    </div>
+
+    <div class="a8-what-rule">
+      <strong>Same universe, different ruler.</strong><br>
+      The purpose is not to change the phenomenon. It is to investigate
+      another coherent way of measuring and relating it.
+    </div>
+
+    <p>
+      The result should remain inspectable. Definitions lead to formulas,
+      formulas lead to working instruments, and instruments lead to
+      evidence that another person can examine.
+    </p>
+
+    <div class="a8-dialog-next">
+      The next doors will expose the canonical relationships,
+      the evidence behind them, the open research frontier,
+      and a cross-check converter for testing the numbers yourself.
+    </div>
+  </div>
+</dialog>
+
+
+
+<dialog id="a8-canonical-dialog" class="a8-question-dialog">
+  <div class="a8-dialog-inner">
+    <button class="a8-dialog-close" type="button" aria-label="Close">×</button>
+
+    <div class="eyebrow">CANONICAL</div>
+    <h2>Reference relationships</h2>
+
+    <p>
+      This is the compact mathematical index.
+      Follow the links to see where each relationship is implemented,
+      observed or investigated.
+    </p>
+
+    <div class="a8-canonical-grid">
+
+      <article class="a8-canonical-item">
+        <span class="a8-status canonical">CANONICAL</span>
+        <h3>Angular ruler</h3>
+        <div class="a8-equation">1 turn = 2⁹ = 512</div>
+        <div class="a8-equation">quarter turn = 128</div>
+        <p>Native full-turn phase uses 512 states.</p>
+        <div class="a8-mini-links">
+          <a href="https://angle.cosigo.io/">ANGLE</a>
+          <a href="https://map.cosigo.io/">MAP</a>
+          <a href="https://stars.cosigo.io/">STARS</a>
+        </div>
+      </article>
+
+      <article class="a8-canonical-item">
+        <span class="a8-status canonical">CANONICAL</span>
+        <h3>Daily phase</h3>
+        <div class="a8-equation">32 × 64 × 64 = 2¹⁷</div>
+        <div class="a8-equation">DAY_PHASE17 = 131,072 states</div>
+        <p>The native civil day is the downstream expression of the recovered day relationship.</p>
+        <div class="a8-mini-links">
+          <a href="https://moons.cosigo.io/">MOONS</a>
+          <a href="https://clock.cosigo.io/">CLOCK</a>
+          <a href="https://data.cosigo.io/">EVIDENCE</a>
+        </div>
+      </article>
+
+      <article class="a8-canonical-item">
+        <span class="a8-status canonical">CANONICAL</span>
+        <h3>Position</h3>
+        <div class="a8-equation">longitude wrap = 512</div>
+        <div class="a8-equation">pole → pole = 256</div>
+        <p>Position uses the same native angular ruler.</p>
+        <div class="a8-mini-links">
+          <a href="https://map.cosigo.io/">MAP</a>
+          <a href="https://sea.cosigo.io/">SEA</a>
+        </div>
+      </article>
+
+      <article class="a8-canonical-item">
+        <span class="a8-status derived">DERIVED</span>
+        <h3>Speed</h3>
+        <div class="a8-equation">speed = distance / elapsed time</div>
+        <p>Speed is downstream. It does not define either parent ruler.</p>
+        <div class="a8-mini-links">
+          <a href="https://quartz.cosigo.io/">QUARTZ</a>
+          <a href="https://clock.cosigo.io/">CLOCK</a>
+        </div>
+      </article>
+
+      <article class="a8-canonical-item">
+        <span class="a8-status research">RESEARCH</span>
+        <h3>Length realization</h3>
+        <div class="a8-equation">L(n+1) = 2 L(n)</div>
+        <div class="a8-equation">A8/31 = 2³¹ qₐ</div>
+        <p>
+          The binary ladder is exact; the present α-quartz physical
+          realization remains provisional and subject to qualification.
+        </p>
+        <div class="a8-mini-links">
+          <a href="https://quartz.cosigo.io/">QUARTZ</a>
+          <a href="https://data.cosigo.io/">DATA</a>
+        </div>
+      </article>
+
+    </div>
+
+    <div class="a8-dialog-next">
+      CHECK / CONVERT will later let each relationship load directly
+      into the cross-check workbench instead of asking you to trust the printed number.
+    </div>
+  </div>
+</dialog>
+
+
+
+<dialog id="a8-data-dialog" class="a8-question-dialog">
+  <div class="a8-dialog-inner">
+    <button class="a8-dialog-close" type="button" aria-label="Close">×</button>
+
+    <div class="eyebrow">DATA · EVIDENCE</div>
+    <h2>Don’t just read it. Inspect it.</h2>
+
+    <p>
+      A8 keeps evidence separate from presentation.
+      Definitions and formulas can point here so the underlying
+      observations, records and reconstruction material can be examined.
+    </p>
+
+    <div class="a8-data-grid">
+
+      <article>
+        <strong>PHYSICAL EVIDENCE</strong>
+        <p>
+          Counter records and physical-clock evidence preserve what
+          happened in hardware rather than asking the display to prove itself.
+        </p>
+        <a href="https://data.cosigo.io/physical-clock-evidence.html">
+          OPEN PHYSICAL EVIDENCE
+        </a>
+      </article>
+
+      <article>
+        <strong>OBSERVATION EVIDENCE</strong>
+        <p>
+          Historical astronomical observations preserve source material
+          that can be inspected independently of the finished A8 presentation.
+        </p>
+        <a href="https://data.cosigo.io/observation-archive-historical.html">
+          OPEN OBSERVATION ARCHIVE
+        </a>
+      </article>
+
+      <article>
+        <strong>RAW MATERIAL</strong>
+        <p>
+          Source files, hashes, reports, machine-readable records and
+          downloadable evidence remain available for reconstruction and checking.
+        </p>
+        <a href="https://data.cosigo.io/">
+          OPEN DATA / EVIDENCE
+        </a>
+      </article>
+
+    </div>
+
+    <div class="a8-what-rule">
+      <strong>Presentation is not proof.</strong><br>
+      Follow the relationship into the evidence and decide whether
+      the number checks out.
+    </div>
+
+    <div class="a8-dialog-next">
+      DATA is the evidence cabinet. It does not become the upstream
+      measurement authority merely because it preserves the record.
+    </div>
+  </div>
+</dialog>
+
+
+
+<dialog id="a8-research-dialog" class="a8-question-dialog">
+  <div class="a8-dialog-inner">
+    <button class="a8-dialog-close" type="button" aria-label="Close">×</button>
+
+    <div class="eyebrow">RESEARCH</div>
+    <h2>The doors are open.</h2>
+
+    <p>
+      Auspicious 8 is not a finished catalog of measurements.
+      Some branches are working, some are being physically qualified,
+      and many fields have barely been opened.
+    </p>
+
+    <div class="a8-research-state">
+
+      <div>
+        <span class="a8-research-dot working">●</span>
+        <strong>WORKING</strong>
+        <p>
+          Time, angle, mapping, navigation, music and evidence already
+          have working A8 branches to inspect.
+        </p>
+      </div>
+
+      <div>
+        <span class="a8-research-dot active">◐</span>
+        <strong>UNDER INVESTIGATION</strong>
+        <p>
+          Quartz length realization, optics and other physical
+          constructions still require continued qualification.
+        </p>
+      </div>
+
+      <div>
+        <span class="a8-research-dot open">○</span>
+        <strong>OPEN TERRITORY</strong>
+        <p>
+          Biology, chemistry, electricity, magnetism, thermodynamics,
+          materials, manufacturing and fields not yet considered remain
+          invitations rather than finished claims.
+        </p>
+      </div>
+
+    </div>
+
+    <div class="a8-what-rule">
+      <strong>Bring your field.</strong><br>
+      Observe the phenomenon. Identify what can actually be measured.
+      Test the relationships. Challenge the ruler. Preserve enough
+      method and evidence that somebody else can reproduce or falsify it.
+    </div>
+
+    <div class="a8-research-questions">
+      <strong>A useful place to begin:</strong>
+      <span>What is directly observable?</span>
+      <span>What recurs or holds a relationship?</span>
+      <span>What is native measurement and what is derived?</span>
+      <span>What is only a legacy comparison?</span>
+      <span>What result would show that the idea is wrong?</span>
+    </div>
+
+    <p class="a8-research-invite">
+      You do not have to finish A8. Open one door.
+    </p>
+
+    <div class="a8-dialog-next">
+      The dedicated Research room will hold the expanding frontier.
+      About remains the front door — not the warehouse.
+    </div>
+  </div>
+</dialog>
+
+
+<script id="a8-about-question-dialog-v1">
+document.querySelectorAll('[data-open]').forEach(button => {
+  button.addEventListener('click', () => {
+    const dialog = document.getElementById(button.dataset.open);
+    if (dialog) dialog.showModal();
+  });
+});
+
+document.querySelectorAll('.a8-dialog-close').forEach(button => {
+  button.addEventListener('click', () => button.closest('dialog').close());
+});
+
+document.querySelectorAll('.a8-question-dialog').forEach(dialog => {
+  dialog.addEventListener('click', event => {
+    if (event.target === dialog) dialog.close();
+  });
+});
+</script>
+
+
+<script id="a8-about-angle-check-v1">
+(() => {
+  const deg = document.getElementById('a8-angle-degrees');
+  const nat = document.getElementById('a8-angle-native');
+
+  const outNative = document.getElementById('a8-angle-out-native');
+  const outOctal = document.getElementById('a8-angle-out-octal');
+  const outPhase = document.getElementById('a8-angle-out-phase');
+  const outFraction = document.getElementById('a8-angle-out-fraction');
+  const outDegrees = document.getElementById('a8-angle-out-degrees');
+  const verdict = document.getElementById('a8-angle-verdict');
+
+  const near = (a,b,eps=1e-10) => Math.abs(a-b) < eps;
+
+  function clean(n){
+    if (!Number.isFinite(n)) return '—';
+    if (near(n, Math.round(n))) return String(Math.round(n));
+    return Number(n.toFixed(9)).toString();
+  }
+
+  function gcd(a,b){
+    a=Math.abs(a); b=Math.abs(b);
+    while (b) [a,b]=[b,a%b];
+    return a || 1;
+  }
+
+  function fractionOfTurn(a8){
+    if (!Number.isFinite(a8)) return '—';
+
+    if (near(a8, Math.round(a8))) {
+      const n=Math.round(a8);
+      const g=gcd(n,512);
+      return `${n/g}/${512/g}`;
+    }
+
+    return clean(a8/512);
+  }
+
+  function octalNumber(value, digits=6){
+    if (!Number.isFinite(value)) return '—';
+
+    const sign=value < 0 ? '-' : '';
+    let x=Math.abs(value);
+
+    let whole=Math.floor(x);
+    let frac=x-whole;
+    let out=whole.toString(8);
+
+    if (frac > 1e-12) {
+      let tail='';
+      for (let i=0;i<digits;i++) {
+        frac *= 8;
+        const d=Math.floor(frac + 1e-12);
+        tail += String(d);
+        frac -= d;
+        if (frac < 1e-12) break;
+      }
+      tail=tail.replace(/0+$/,'');
+      if (tail) out += '.' + tail;
+    }
+
+    return sign + out + '₈';
+  }
+
+  function render(a8){
+    if (!Number.isFinite(a8)) return;
+
+    const degrees = a8 * 360 / 512;
+    const phase = ((a8 % 512) + 512) % 512;
+
+    outNative.textContent = clean(a8);
+    outOctal.textContent = octalNumber(a8);
+    outPhase.textContent =
+      `${clean(phase)} · ${octalNumber(phase)}`;
+    outFraction.textContent = fractionOfTurn(a8);
+    outDegrees.textContent = `${clean(degrees)}°`;
+
+    if (near(Math.abs(a8),512)) {
+      verdict.textContent =
+        '✓ CHECKS · full turn = 512 A8 = 1000₈ recurrence → phase 000₈';
+    } else {
+      verdict.textContent =
+        `✓ CHECKS · legacy ${clean(degrees)}° ↔ native A8 ${clean(a8)}`;
+    }
+  }
+
+  function fromDegrees(){
+    const d=Number(deg.value);
+    if (!Number.isFinite(d)) return;
+    const a8=d * 512 / 360;
+    nat.value=clean(a8);
+    render(a8);
+  }
+
+  function fromNative(){
+    const a8=Number(nat.value);
+    if (!Number.isFinite(a8)) return;
+    const d=a8 * 360 / 512;
+    deg.value=clean(d);
+    render(a8);
+  }
+
+  deg.addEventListener('input', fromDegrees);
+  nat.addEventListener('input', fromNative);
+
+  document.querySelectorAll('[data-angle-deg]').forEach(button => {
+    button.addEventListener('click', () => {
+      deg.value=button.dataset.angleDeg;
+      fromDegrees();
+    });
+  });
+
+  render(128);
+})();
+</script>
+
+
+<script id="a8-about-time-check-v1">
+(() => {
+  const selector = document.getElementById('a8-check-module');
+  const anglePanel = document.getElementById('a8-angle-check');
+  const timePanel = document.getElementById('a8-time-check');
+
+  const nat = document.getElementById('a8-time-native');
+  const legacy = document.getElementById('a8-time-legacy');
+
+  const outNative = document.getElementById('a8-time-out-native');
+  const outHMS = document.getElementById('a8-time-out-hms');
+  const outPhase = document.getElementById('a8-time-out-phase');
+  const outFraction = document.getElementById('a8-time-out-fraction');
+  const outLegacy = document.getElementById('a8-time-out-legacy');
+  const verdict = document.getElementById('a8-time-verdict');
+
+  const DAY = 131072;
+  const HOUR = 4096;
+  const MINUTE = 64;
+
+  // Comparison bridge:
+  // 1 A8 second = 675/1024 legacy second.
+  const A8_TO_LEGACY = 675 / 1024;
+
+  const near = (a,b,eps=1e-10) => Math.abs(a-b) < eps;
+
+  function clean(n){
+    if (!Number.isFinite(n)) return '—';
+    if (near(n, Math.round(n))) return String(Math.round(n));
+    return Number(n.toFixed(9)).toString();
+  }
+
+  function gcd(a,b){
+    a=Math.abs(a); b=Math.abs(b);
+    while (b) [a,b]=[b,a%b];
+    return a || 1;
+  }
+
+  function fractionDay(a8){
+    if (!Number.isFinite(a8)) return '—';
+
+    if (near(a8, Math.round(a8))) {
+      const n=Math.round(a8);
+      const g=gcd(n, DAY);
+      return `${n/g}/${DAY/g}`;
+    }
+
+    return clean(a8 / DAY);
+  }
+
+  function pad2(n){
+    return String(n).padStart(2,'0');
+  }
+
+  function nativeHMS(a8){
+    let phase=((a8 % DAY) + DAY) % DAY;
+
+    const h=Math.floor(phase / HOUR);
+    phase -= h * HOUR;
+
+    const m=Math.floor(phase / MINUTE);
+    const sec=phase - m * MINUTE;
+
+    return `${pad2(h)}:${pad2(m)}:${clean(sec).padStart(2,'0')}`;
+  }
+
+  function render(a8){
+    if (!Number.isFinite(a8)) return;
+
+    const legacySec=a8 * A8_TO_LEGACY;
+    const phase=((a8 % DAY) + DAY) % DAY;
+
+    outNative.textContent=clean(a8);
+    outHMS.textContent=nativeHMS(a8);
+    outPhase.textContent=clean(phase);
+    outFraction.textContent=fractionDay(a8);
+    outLegacy.textContent=`${clean(legacySec)} s`;
+
+    if (near(a8, DAY)) {
+      verdict.textContent =
+        '✓ CHECKS · 32 × 64 × 64 = 131072 = 2¹⁷ native day states';
+    } else if (near(a8, HOUR)) {
+      verdict.textContent =
+        '✓ CHECKS · 1 A8 hour ↔ 2700 legacy seconds = 45 legacy minutes';
+    } else {
+      verdict.textContent =
+        `✓ CHECKS · ${clean(a8)} A8 seconds ↔ ${clean(legacySec)} legacy seconds`;
+    }
+  }
+
+  function fromNative(){
+    const a8=Number(nat.value);
+    if (!Number.isFinite(a8)) return;
+
+    legacy.value=clean(a8 * A8_TO_LEGACY);
+    render(a8);
+  }
+
+  function fromLegacy(){
+    const ls=Number(legacy.value);
+    if (!Number.isFinite(ls)) return;
+
+    const a8=ls / A8_TO_LEGACY;
+    nat.value=clean(a8);
+    render(a8);
+  }
+
+  selector.addEventListener('change', () => {
+    anglePanel.hidden = selector.value !== 'angle';
+    timePanel.hidden = selector.value !== 'time';
+  });
+
+  nat.addEventListener('input', fromNative);
+  legacy.addEventListener('input', fromLegacy);
+
+  document.querySelectorAll('[data-a8-sec]').forEach(button => {
+    button.addEventListener('click', () => {
+      nat.value=button.dataset.a8Sec;
+      fromNative();
+    });
+  });
+
+  render(4096);
+})();
+</script>
+
+
+<script id="a8-about-music-check-v1">
+(() => {
+  const selector = document.getElementById('a8-check-module');
+  const musicPanel = document.getElementById('a8-music-check');
+
+  const hz = document.getElementById('a8-music-hz');
+  const a8freq = document.getElementById('a8-music-a8freq');
+
+  const outHz = document.getElementById('a8-music-out-hz');
+  const outA8 = document.getElementById('a8-music-out-a8freq');
+  const outPeriod = document.getElementById('a8-music-out-period');
+  const outMinute = document.getElementById('a8-music-out-minute');
+
+  const tempo = document.getElementById('a8-music-tempo');
+  const beats = document.getElementById('a8-music-beats');
+  const barcount = document.getElementById('a8-music-barcount');
+
+  const bars = document.getElementById('a8-music-bars');
+  const outBeat = document.getElementById('a8-music-out-beat');
+  const outBar = document.getElementById('a8-music-out-bar');
+  const outTotal = document.getElementById('a8-music-out-total');
+  const outLegacy = document.getElementById('a8-music-out-total-legacy');
+  const verdict = document.getElementById('a8-music-verdict');
+
+  // Comparison bridge only:
+  // 1 A8 second = 675/1024 legacy second.
+  const A8_TO_LEGACY = 675 / 1024;
+
+  function clean(n){
+    if (!Number.isFinite(n)) return '—';
+    if (Math.abs(n - Math.round(n)) < 1e-10)
+      return String(Math.round(n));
+    return Number(n.toFixed(9)).toString();
+  }
+
+  function renderFrequency(nativeFreq){
+    if (!(nativeFreq > 0)) return;
+
+    const legacyHz = nativeFreq / A8_TO_LEGACY;
+    const periodA8 = 1 / nativeFreq;
+
+    outHz.textContent = `${clean(legacyHz)} Hz`;
+    outA8.textContent = `${clean(nativeFreq)} cyc/A8s`;
+    outPeriod.textContent = `${clean(periodA8)} A8 s`;
+    outMinute.textContent = `${clean(nativeFreq * 64)} cycles`;
+  }
+
+  function fromHz(){
+    const legacyHz = Number(hz.value);
+    if (!(legacyHz > 0)) return;
+
+    const nativeFreq = legacyHz * A8_TO_LEGACY;
+    a8freq.value = clean(nativeFreq);
+    renderFrequency(nativeFreq);
+  }
+
+  function fromA8Freq(){
+    const nativeFreq = Number(a8freq.value);
+    if (!(nativeFreq > 0)) return;
+
+    hz.value = clean(nativeFreq / A8_TO_LEGACY);
+    renderFrequency(nativeFreq);
+  }
+
+  function renderBars(barN, beatN){
+    bars.replaceChildren();
+
+    for (let b=0; b<barN; b++) {
+      const el=document.createElement('div');
+      el.className='a8-music-bar';
+
+      const label=document.createElement('b');
+      label.textContent=`${b+1} `;
+
+      const marks=document.createTextNode(
+        '| ' + Array(beatN).fill('●').join(' ') + ' |'
+      );
+
+      el.append(label, marks);
+      bars.appendChild(el);
+    }
+  }
+
+  function renderTiming(){
+    const t=Number(tempo.value);
+    let beatN=Math.round(Number(beats.value));
+    let barN=Math.round(Number(barcount.value));
+
+    if (!(t > 0)) return;
+
+    beatN=Math.min(16,Math.max(1,beatN || 1));
+    barN=Math.min(16,Math.max(1,barN || 1));
+
+    beats.value=beatN;
+    barcount.value=barN;
+
+    const beatDuration=64 / t;
+    const barDuration=beatDuration * beatN;
+    const total=barDuration * barN;
+    const legacy=total * A8_TO_LEGACY;
+
+    outBeat.textContent=`${clean(beatDuration)} A8 s`;
+    outBar.textContent=`${clean(barDuration)} A8 s`;
+    outTotal.textContent=`${clean(total)} A8 s`;
+    outLegacy.textContent=`${clean(legacy)} s`;
+
+    if (Math.abs(t - 64) < 1e-10) {
+      verdict.textContent =
+        `✓ CHECKS · 64 beats/A8 minute = 1 beat/A8 second`;
+    } else {
+      verdict.textContent =
+        `✓ CHECKS · beat duration = 64 / ${clean(t)} A8 seconds`;
+    }
+
+    renderBars(barN,beatN);
+  }
+
+  selector.addEventListener('change', () => {
+    musicPanel.hidden = selector.value !== 'music';
+  });
+
+  hz.addEventListener('input', fromHz);
+  a8freq.addEventListener('input', fromA8Freq);
+
+  tempo.addEventListener('input', renderTiming);
+  beats.addEventListener('input', renderTiming);
+  barcount.addEventListener('input', renderTiming);
+
+  renderFrequency(440 * A8_TO_LEGACY);
+  renderTiming();
+})();
+</script>
+
 </body>
 </html>

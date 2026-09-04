@@ -1,0 +1,990 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>A8 Contestants · Music Under Jupiter | COSIGO Labs</title>
+<meta name="description" content="Listen to Auspicious 8 weekly, monthly and yearly music winners beneath Jupiter and its moons.">
+<meta name="author" content="COSIGO Labs">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+<meta name="theme-color" content="#05070b">
+<link rel="icon" href="https://a8.cosigo.io/assets/cosigo_master_512.png">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="COSIGO Labs — Auspicious 8">
+<meta property="og:title" content="A8 Contestants · Music Under Jupiter | COSIGO Labs">
+<meta property="og:description" content="Hear Auspicious 8 music first, then explore the live A8 clock, calendar and Jovian timing relationship.">
+<meta property="og:url" content="https://contestant.cosigo.io/">
+<meta property="og:image" content="https://a8.cosigo.io/assets/cosigo_master_512.png">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="A8 Contestants · Music Under Jupiter | COSIGO Labs">
+<meta name="twitter:description" content="Auspicious 8 music under Jupiter · ears first · same world, different ruler.">
+<meta name="twitter:image" content="https://a8.cosigo.io/assets/cosigo_master_512.png">
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"WebPage",
+  "name":"A8 Contestants · Music Under Jupiter",
+  "url":"https://contestant.cosigo.io/",
+  "dateModified":"2026-08-31",
+  "isPartOf":{
+    "@type":"WebSite",
+    "name":"COSIGO Labs — Auspicious 8",
+    "url":"https://a8.cosigo.io/"
+  }
+}
+</script>
+<link rel="canonical" href="https://contestant.cosigo.io/">
+<link rel="stylesheet" href="/site-shell.css">
+
+<style>
+:root{
+  color-scheme:dark;
+  --bg:#05070b;--card:rgba(8,12,19,.28);--line:rgba(255,255,255,.15);
+  --text:#f7f2e8;--muted:#bbb7ae;--gold:#f1cc73;--blue:#add8ff;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:#05070b;color:var(--text);
+  font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif
+}
+a{color:inherit}
+button,a.pill{
+  min-height:46px;padding:.75rem 1rem;border-radius:999px;
+  border:1px solid var(--line);font:800 .85rem inherit;letter-spacing:.04em
+}
+button{cursor:pointer}
+
+.hero{
+  position:relative;min-height:680px;display:flex;align-items:flex-end;
+  overflow:hidden;border-bottom:1px solid var(--line);
+  background:
+    linear-gradient(180deg,rgba(3,5,8,.03),rgba(3,5,8,.18) 40%,#05070b 100%),
+    url("/assets/a8_jovian_moons_bg.png") center/cover no-repeat
+}
+.hero-inner{
+  width:min(1150px,100%);margin:auto;padding:8rem 1.2rem 3rem
+}
+.kicker{
+  color:var(--gold);font-size:.72rem;font-weight:900;
+  letter-spacing:.2em;text-transform:uppercase
+}
+h1{
+  margin:.4rem 0 .8rem;max-width:850px;
+  font:900 clamp(3.5rem,10vw,7.5rem)/.84 Georgia,serif;
+  letter-spacing:-.06em
+}
+h1 span{color:var(--gold)}
+.lede{max-width:650px;font-size:1.1rem;line-height:1.55}
+.actions,.moons{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1.2rem}
+.actions a,.moons a{text-decoration:none}
+.primary{background:var(--gold);color:#171108;border-color:transparent!important}
+.moons a{
+  padding:.48rem .7rem;border:1px solid var(--line);border-radius:999px;
+  background:rgba(4,7,12,.68);font-size:.74rem;font-weight:850
+}
+.float-note{
+  position:absolute;color:rgba(255,230,166,.55);font:2rem Georgia,serif;
+  animation:float 6s ease-in-out infinite alternate;pointer-events:none
+}
+.n1{left:8%;top:22%}.n2{right:12%;top:18%;animation-delay:-2s}
+.n3{right:28%;top:54%;font-size:3rem;animation-delay:-4s}
+@keyframes float{to{transform:translate(16px,18px) rotate(8deg);opacity:.35}}
+
+main{width:min(1150px,100%);margin:auto;padding:2rem 1.2rem 5rem}
+.section{margin-top:3.5rem}
+.label{
+  color:var(--gold);font-size:.7rem;font-weight:900;
+  letter-spacing:.17em;text-transform:uppercase
+}
+h2{margin:.35rem 0 1rem;font:900 clamp(2rem,5vw,3.5rem)/1 Georgia,serif}
+
+.today{
+  padding:1.4rem;border:1px solid rgba(241,204,115,.35);border-radius:22px;
+  background:linear-gradient(135deg,rgba(241,204,115,.12),rgba(8,13,21,.30))
+}
+.today-name{margin:.8rem 0 .25rem;font:900 clamp(1.7rem,5vw,3.1rem) Georgia,serif}
+.symbols{color:var(--gold);font-size:clamp(1.4rem,4vw,2.3rem);font-weight:900}
+.meta{margin-top:.65rem;color:var(--muted);font-size:.8rem;line-height:1.5}
+.dot{display:inline-block;width:.6rem;height:.6rem;border-radius:50%;background:#777;margin-right:.4rem}
+
+.grid{
+  display:grid;grid-template-columns:1.35fr .825fr .825fr;gap:1rem
+}
+.card{
+  border:1px solid var(--line);border-radius:22px;background:var(--card);
+  padding:1.3rem;min-width:0
+}
+.weekly{border-color:rgba(241,204,115,.45)}
+.badge{color:var(--gold);font-size:.69rem;font-weight:950;letter-spacing:.15em}
+.title{margin:.5rem 0 .15rem;font:900 clamp(1.8rem,4vw,3rem) Georgia,serif}
+.by{color:var(--muted)}
+.stats{display:flex;gap:.4rem;flex-wrap:wrap;margin:1rem 0}
+.stat{
+  padding:.34rem .6rem;border:1px solid var(--line);
+  border-radius:999px;font-size:.7rem;font-weight:800
+}
+.player{display:flex;gap:.5rem;flex-wrap:wrap}
+.play{background:var(--gold);color:#171108}
+.stop{background:#181d25;color:white}
+.status{min-height:1.2rem;margin-top:.7rem;color:var(--muted);font-size:.77rem;font-weight:750}
+.track{height:8px;margin-top:1rem;background:#1c222c;border-radius:99px;overflow:hidden}
+.track div{height:100%;width:0;background:linear-gradient(90deg,#e99b55,var(--gold),var(--blue))}
+.rail{
+  margin-top:.9rem;padding:.65rem 0;overflow:hidden;
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line)
+}
+.rail-inner{display:flex;gap:.35rem;width:max-content}
+.note{
+  padding:.3rem .48rem;border-radius:999px;background:rgba(255,255,255,.08);
+  font:700 .7rem ui-monospace,monospace
+}
+.empty{color:var(--muted);line-height:1.55}
+
+.curiosity{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+details{border:1px solid var(--line);border-radius:18px;background:var(--card)}
+summary{cursor:pointer;padding:1rem;font-weight:900}
+details p{padding:0 1rem 1rem;margin:0;color:var(--muted);line-height:1.6}
+details a{color:var(--gold)}
+
+.bottom{
+  padding:1.3rem;border:1px solid var(--line);border-radius:22px;
+  background:linear-gradient(125deg,rgba(98,157,215,.1),rgba(241,204,115,.08))
+}
+
+
+.reality{
+  margin-top:1.2rem;
+  padding:clamp(1.5rem,4vw,2.5rem);
+  border:1px solid rgba(241,204,115,.42);
+  border-radius:22px;
+  text-align:center;
+  background:
+    radial-gradient(
+      circle at 50% 0%,
+      rgba(241,204,115,.14),
+      transparent 52%
+    ),
+    rgba(7,10,16,.9);
+}
+.reality-main{
+  margin:0;
+  font:
+    900 clamp(2rem,6vw,4.6rem)/.94
+    Georgia,
+    serif;
+  letter-spacing:-.045em;
+}
+.reality-sub{
+  margin:.9rem 0 0;
+  color:var(--gold);
+  font-size:clamp(.95rem,2.5vw,1.35rem);
+  font-weight:950;
+  letter-spacing:.13em;
+}
+.reality-copy{
+  max-width:760px;
+  margin:1.1rem auto 0;
+  color:var(--muted);
+  font-size:.95rem;
+  line-height:1.65;
+}
+
+
+.composer-door{
+  margin:2rem auto 0;
+  padding:1.5rem 1rem;
+  text-align:center;
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+}
+.composer-door-kicker{
+  color:var(--muted);
+  font-size:.68rem;
+  font-weight:900;
+  letter-spacing:.17em;
+  text-transform:uppercase;
+}
+.composer-door-link{
+  display:inline-block;
+  margin:.55rem 0 .35rem;
+  color:var(--gold);
+  text-decoration:none;
+  font:900 clamp(1.55rem,4vw,2.5rem)/1 Georgia,serif;
+}
+.composer-door-link:hover{
+  text-decoration:underline;
+  text-underline-offset:.16em;
+}
+.composer-door-note{
+  color:var(--muted);
+  font-size:.82rem;
+}
+
+
+.musician-hook{
+  margin:2rem 0 0;
+  padding:clamp(1.4rem,4vw,2.3rem);
+  border:1px solid rgba(173,216,255,.32);
+  border-radius:22px;
+  text-align:center;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(173,216,255,.08),
+      rgba(241,204,115,.09)
+    );
+}
+.musician-hook .mh-kicker{
+  color:var(--blue);
+  font-size:.69rem;
+  font-weight:950;
+  letter-spacing:.17em;
+  text-transform:uppercase;
+}
+.musician-hook .mh-main{
+  margin:.55rem auto .25rem;
+  max-width:900px;
+  font:900 clamp(2rem,6vw,4rem)/.96 Georgia,serif;
+  letter-spacing:-.04em;
+}
+.musician-hook .mh-main span{
+  color:var(--gold);
+}
+.musician-hook .mh-copy{
+  max-width:720px;
+  margin:.9rem auto 1.1rem;
+  color:var(--muted);
+  line-height:1.65;
+}
+.musician-hook .mh-link{
+  display:inline-block;
+  padding:.8rem 1.05rem;
+  border-radius:999px;
+  background:var(--gold);
+  color:#171108;
+  text-decoration:none;
+  font-size:.82rem;
+  font-weight:950;
+  letter-spacing:.05em;
+}
+
+@media(max-width:850px){.grid{grid-template-columns:1fr}}
+@media(max-width:650px){.curiosity{grid-template-columns:1fr}.hero{min-height:620px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto}.float-note{animation:none}}
+
+/* A8 SINGLE DROPDOWN NAV · SITE STANDARD */
+#a8-topside-coherence-02{
+  display:block;
+  margin:0;
+  padding:10px 14px;
+  border-bottom:1px solid rgba(255,255,255,.14);
+  background:rgba(7,11,16,.96);
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+}
+
+#a8-topside-coherence-02 .a8-topline{
+  max-width:1440px;
+  margin:0 auto;
+  display:flex;
+  gap:12px;
+  align-items:center;
+  flex-wrap:wrap;
+}
+
+#a8-topside-coherence-02 .cosigo-global-brand{
+  display:flex;
+  gap:8px;
+  align-items:center;
+  text-decoration:none;
+}
+
+#a8-topside-coherence-02 .cosigo-global-brand img{
+  width:34px;
+  height:34px;
+  object-fit:contain;
+}
+
+#a8-topside-coherence-02 .cosigo-global-brand span{
+  font-weight:900;
+  letter-spacing:.06em;
+}
+
+#a8-topside-coherence-02 .cosigo-global-brand small{
+  display:block;
+  opacity:.72;
+  font-size:.62rem;
+}
+
+#a8-topside-coherence-02 a{
+  text-decoration:none;
+}
+
+#a8-topside-coherence-02 .a8-menu{
+  position:relative;
+  margin-left:0;
+}
+
+#a8-topside-coherence-02 .a8-contestant-doors{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  margin-left:auto;
+  flex-wrap:nowrap;
+}
+
+#a8-topside-coherence-02 .a8-contestant-door{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:8px 11px;
+  border:1px solid #425467;
+  border-radius:8px;
+  background:#111820;
+  color:#c8ddf5;
+  font-size:.76rem;
+  font-weight:900;
+  letter-spacing:.07em;
+  line-height:1;
+  white-space:nowrap;
+}
+
+#a8-topside-coherence-02 .a8-contestant-door:hover,
+#a8-topside-coherence-02 .a8-contestant-door:focus{
+  background:#182431;
+  color:#fff;
+}
+
+#a8-topside-coherence-02 .a8-menu summary{
+  list-style:none;
+  cursor:pointer;
+  padding:8px 11px;
+  border:1px solid #425467;
+  border-radius:8px;
+  background:#111820;
+  color:#e0bd72;
+  font-size:.76rem;
+  font-weight:900;
+  letter-spacing:.07em;
+  user-select:none;
+}
+
+#a8-topside-coherence-02 .a8-menu summary::-webkit-details-marker{
+  display:none;
+}
+
+#a8-topside-coherence-02 .a8-menu summary::after{
+  content:" ▾";
+  color:#92a5b8;
+}
+
+#a8-topside-coherence-02 .a8-menu[open] summary::after{
+  content:" ▴";
+}
+
+#a8-topside-coherence-02 .a8-menu-panel{
+  position:absolute;
+  z-index:1000;
+  right:0;
+  top:calc(100% + 7px);
+  min-width:180px;
+  padding:7px;
+  border:1px solid #425467;
+  border-radius:9px;
+  background:#0d141b;
+  box-shadow:0 12px 28px rgba(0,0,0,.38);
+}
+
+#a8-topside-coherence-02 .a8-menu-panel a{
+  display:block;
+  padding:9px 10px;
+  border-radius:6px;
+  color:#c8ddf5;
+  font-size:.78rem;
+  font-weight:800;
+  white-space:nowrap;
+}
+
+#a8-topside-coherence-02 .a8-menu-panel a:hover,
+#a8-topside-coherence-02 .a8-menu-panel a:focus,
+#a8-topside-coherence-02 .a8-menu-panel a[aria-current="page"]{
+  background:#182431;
+  color:#fff;
+}
+
+@media(max-width:760px){
+  #a8-topside-coherence-02 .a8-menu-panel{
+    min-width:170px;
+  }
+}
+
+
+/* A8-CONTESTANT-GLASS-FINAL · presentation only */
+
+.card,
+.today,
+details {
+  backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(1px);
+}
+
+@media(max-width:760px) {
+  :root {
+    --card: rgba(8,12,19,.44);
+  }
+
+  .card,
+  .today,
+  details {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+
+</style>
+</head>
+
+<body>
+
+<nav id="a8-topside-coherence-02"
+     class="cosigo-global-nav"
+     aria-label="A8 Time Lab navigation">
+
+  <div class="a8-topline">
+
+    <a class="cosigo-global-brand"
+       href="https://cosigo.io/"
+       aria-label="COSIGO home">
+      <img src="/assets/cosigo_master_512.gif" alt="COSIGO">
+      <span>COSIGO<small>LABS · AUSPICIOUS 8</small></span>
+    </a>
+
+    <div
+      class="a8-contestant-doors"
+      aria-label="A8 orientation shortcuts"
+    >
+
+      <a
+        class="a8-contestant-door"
+        href="https://audio.cosigo.io/"
+        title="Explore the technical A8 audio bench"
+      >
+        TECHNICAL?
+      </a>
+
+      <a
+        class="a8-contestant-door"
+        href="/index.html"
+        title="Enter the A8 engineering laboratory"
+      >
+        ENGINEER?
+      </a>
+
+      <a
+        class="a8-contestant-door"
+        href="https://a8.cosigo.io/about.html"
+        title="Start with the simple introduction to Auspicious 8"
+      >
+        ORIENTATION?
+      </a>
+
+    </div>
+
+    <details class="a8-menu">
+      <summary>MENU</summary>
+
+      <div class="a8-menu-panel">
+        <a href="https://lab.a8.cosigo.io/">LAB HOME</a>
+        <a href="https://clock.cosigo.io/">CLOCK</a>
+        <a href="https://calendar.cosigo.io/">CALENDAR</a>
+        <a href="https://moons.cosigo.io/">MOONS</a>
+        <a href="https://mintaka.cosigo.io/">MINTAKA</a>
+        <a href="https://sol.cosigo.io/">SOL</a>
+        <a href="https://map.cosigo.io/">MAP · CLOCK · COMPASS</a>
+        <a href="https://sea.cosigo.io/">NAVIGATION</a>
+        <a href="https://stars.cosigo.io/">CELESTIAL</a>
+        <a href="https://audio.cosigo.io/">AUDIO</a>
+        <a href="https://composer.cosigo.io/">COMPOSER</a>
+        <a href="https://contestant.cosigo.io/" aria-current="page">CONTESTANTS</a>
+        <a href="https://quartz.cosigo.io/">QUARTZ</a>
+        <a href="https://a8.cosigo.io/">A8 PUBLIC</a>
+        <a href="https://about.cosigo.io/">ABOUT</a>
+        <a href="https://contestant.cosigo.io/">FUN</a>
+        <a href="https://cosigo.io/">COSIGO HOME</a>
+        <a href="https://github.com/cosigo/a8">GITHUB</a>
+      </div>
+
+    </details>
+
+  </div>
+</nav>
+
+<header class="hero">
+  <span class="float-note n1">♪</span>
+  <span class="float-note n2">♫</span>
+  <span class="float-note n3">♬</span>
+
+  <div class="hero-inner">
+    <div class="kicker">Auspicious 8 · listen first</div>
+
+    <h1>Music under <span>Jupiter.</span></h1>
+
+    <p class="lede">
+      No homework required. Press play. Poke around.
+      If you eventually ask “what does Jupiter have to do with music?”
+      — now we&rsquo;re having fun.
+    </p>
+
+    <div class="actions">
+      <a class="pill primary" href="#winners">▶ HEAR THE WINNER</a>
+      <a class="pill" href="#why">WHAT&rsquo;S JUPITER?</a>
+    </div>
+
+    <div class="moons">
+      <a href="https://moons.cosigo.io/">IO</a>
+      <a href="https://moons.cosigo.io/">EUROPA</a>
+      <a href="https://moons.cosigo.io/">GANYMEDE</a>
+      <a href="https://moons.cosigo.io/">CALLISTO</a>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<section class="today">
+  <div class="label"><span id="dateDot" class="dot"></span>TODAY IN A8</div>
+  <div id="todayName" class="today-name">Reading the live A8 date…</div>
+  <div id="todaySymbols" class="symbols">— · — · —</div>
+  <div id="todayMeta" class="meta">Core20 calendar · read only</div>
+</section>
+
+
+<section class="reality" aria-label="A8 real world statement">
+  <p class="reality-main">
+    A8 MEASURES YOUR WORLD.<br>
+    IT DOESN&rsquo;T RUN YOUR LIFE.
+  </p>
+
+  <p class="reality-sub">
+    SAME WORLD · DIFFERENT RULER
+  </p>
+
+  <p class="reality-copy">
+    This is not a game or a virtual world.
+    Jupiter is Jupiter. Earth is Earth.
+    Days still pass, music still sounds, journeys still have distance,
+    and a human lifetime is still a human lifetime.
+    Auspicious 8 is another coherent way to measure, name and organize
+    those real things — one you can actually use alongside conventional systems.
+  </p>
+</section>
+
+
+<section class="musician-hook" aria-label="Invitation to musicians">
+
+  <div class="mh-kicker">MUSICIANS · EARS FIRST</div>
+
+  <div class="mh-main">
+    FORGET THE SHEET MUSIC FOR A MINUTE.<br>
+    <span>HEAR THE SYSTEM FIRST.</span>
+  </div>
+
+  <p class="mh-copy">
+    No staff required. No theory lesson required. No A8 homework required.
+    Press play and listen. If it catches your ear, open the Composer and
+    start moving notes around.
+  </p>
+
+  <a class="mh-link" href="https://composer.cosigo.io/">
+    OPEN THE A8 COMPOSER →
+  </a>
+
+</section>
+
+<section id="winners" class="section">
+  <div class="label">A8 MUSIC SPOTLIGHT</div>
+  <h2>Listen to the winners.</h2>
+
+  <div class="grid">
+
+    <article class="card weekly">
+      <div class="badge">★ WEEKLY SPOTLIGHT</div>
+      <div id="weekTitle" class="title">Loading…</div>
+      <div id="weekComposer" class="by">—</div>
+      <div id="weekStats" class="stats"></div>
+
+      <div class="player">
+        <button id="play" class="play" type="button" disabled>▶ LISTEN</button>
+        <button id="stop" class="stop" type="button" disabled>■ STOP</button>
+      </div>
+
+      <div id="status" class="status" aria-live="polite">Loading spotlight…</div>
+
+      <div class="track"><div id="progress"></div></div>
+
+      <div id="rail" class="rail">
+        <div id="railInner" class="rail-inner"></div>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="badge">★ MONTHLY WINNER</div>
+      <div class="title">The stage is open.</div>
+      <p class="empty">
+        No monthly winner has been crowned yet.
+        When the curator chooses one, it gets this stage.
+      </p>
+    </article>
+
+    <article class="card">
+      <div class="badge">★ YEARLY WINNER</div>
+      <div class="title">One for the orbit.</div>
+      <p class="empty">
+        Waiting for a composition that earns the yearly spotlight.
+      </p>
+    </article>
+
+  </div>
+</section>
+
+<section id="why" class="section">
+  <div class="label">CURIOSITY → INVESTIGATION</div>
+  <h2>Okay… what&rsquo;s all this?</h2>
+
+  <div class="curiosity">
+    <details>
+      <summary>What&rsquo;s Jupiter doing here?</summary>
+      <p>
+        A8 uses observable recurring motion in Jupiter&rsquo;s moon system
+        as part of its natural timing reference.
+        New to A8? Start with the public quick reference for the clock,
+        number system, angle, tone and Jovian relationship in one place.
+        <a href="https://a8.cosigo.io/">Open the A8 quick reference →</a>
+      </p>
+    </details>
+
+    <details>
+      <summary>Why these moons?</summary>
+      <p>
+        Io, Europa and Ganymede expose the recoverable 1:2:4 relationship.
+        Callisto is shown as a useful non-resonant comparison.
+        This is the deeper view of the actual Jovian motion relationship.
+        <a href="https://moons.cosigo.io/">See the Jovian system →</a>
+      </p>
+    </details>
+
+    <details>
+      <summary>What&rsquo;s that strange date?</summary>
+      <p>
+        Eight compass months, planetary weeks and elemental days.
+        The identity above comes from the live server-owned A8 calendar.
+        The Calendar explains why the direction, planet and element shown
+        above change with the native A8 day.
+        <a href="https://calendar.cosigo.io/">Explain today&rsquo;s A8 date →</a>
+      </p>
+    </details>
+
+    <details>
+      <summary>What makes the music A8?</summary>
+      <p>
+        The Composer writes note durations in native A8 time.
+        During playback, those musical durations use the same A8 time ruler
+        represented by the Core20 clock. The browser remains the final speaker
+        adapter; it does not define the musical timing.
+        <a href="https://clock.cosigo.io/">See the A8 clock →</a>
+      </p>
+    </details>
+  </div>
+</section>
+
+<section class="composer-door" aria-label="Try the A8 Composer">
+  <div class="composer-door-kicker">HEARD SOMETHING YOU LIKE?</div>
+
+  <a href="https://composer.cosigo.io/" class="composer-door-link">
+    TRY MAKING ONE →
+  </a>
+
+  <div class="composer-door-note">
+    No experience required. Open the Composer and poke around.
+  </div>
+</section>
+
+<section class="section bottom">
+  <div class="label">KEEP POKING</div>
+  <h2>Make one. Hear one. Ask why.</h2>
+
+  <div class="actions">
+    <a class="pill primary" href="https://composer.cosigo.io/">MAKE A DITTY</a>
+    <a class="pill" href="https://audio.cosigo.io/">AUDIO DEMO</a>
+    <a class="pill" href="https://clock.cosigo.io/">A8 CLOCK</a>
+    <a class="pill" href="https://calendar.cosigo.io/">A8 CALENDAR</a>
+  </div>
+</section>
+
+</main>
+
+<footer class="cosigo-site-footer">
+  <strong>COSIGO Labs · Auspicious 8 experimental laboratory</strong>
+  <p class="cosigo-disclaimer">Research / engineering notice: A8 pages may contain provisional models, simulations, comparison values, hypotheses and unreplicated experiment designs. Unless a page explicitly states otherwise, material shown here is not a certified metrology standard, accredited measurement result, or final Foundation definition. Legacy / SI values are comparison coordinates where identified, not native A8 authority.</p>
+  <div class="cosigo-footer-links">
+    <a href="https://cosigo.io/">COSIGO Home</a>
+    <a href="https://a8.cosigo.io/">A8 Public Instrument</a>
+    <a href="https://lab.a8.cosigo.io/">A8 Engineering Lab</a>
+    <a href="/chief-engineer.html" title="Chief Engineer" style="opacity:.32;font-size:.72em">CE</a>
+    <a href="https://contact.cosigo.io/">Contact</a>
+    <a href="https://github.com/cosigo">COSIGO GitHub</a>
+  </div>
+  <p>© 2026 COSIGO.</p>
+</footer>
+
+<script src="/a8-music-player-v1.js"></script>
+
+<script>
+(()=>{
+'use strict';
+
+const $=id=>document.getElementById(id);
+
+const months=[
+  ['0₈','North'],['1₈','Northeast'],['2₈','East'],['3₈','Southeast'],
+  ['4₈','South'],['5₈','Southwest'],['6₈','West'],['7₈','Northwest']
+];
+
+const planets=[
+  ['Mercury','☿'],['Venus','♀'],['Terra','⊕'],['Mars','♂'],['Jupiter','♃'],
+  ['Saturn','♄'],['Uranus','♅'],['Neptune','♆'],['Pluto','♇']
+];
+
+const elements=[
+  ['Fire','🜂'],['Water','🜄'],['Earth','🜃'],['Air','🜁'],['Quintessence','🜀']
+];
+
+function identity(yearDay){
+  if(yearDay>360)return{wilson:yearDay-360};
+
+  const z=yearDay-1;
+  const month=Math.floor(z/45);
+  const monthDay=(z%45)+1;
+  const globalWeek=Math.floor(z/5)+1;
+  const week=Math.floor((monthDay-1)/5);
+  const element=(monthDay-1)%5;
+  const weekB=globalWeek%2===0;
+
+  let status='BUSINESS';
+  if(element===4)status='GOLD · PROTECTED';
+  else if(element===3&&weekB)status='SILVER · PROTECTED';
+
+  return{month,monthDay,globalWeek,week,element,weekB,status};
+}
+
+async function paintDate(){
+  try{
+    const r=await fetch('/api/core20/calendar',{cache:'no-store'});
+    const p=await r.json();
+    const c=p.calendar||{};
+
+    if(
+      !r.ok||
+      c.status!=='CALENDAR_RUNNING_FROM_CORE20_COUNT'||
+      c.anchored!==true||
+      c.yearDay==null
+    ) throw new Error(c.status||'calendar unavailable');
+
+    const yd=Number(c.yearDay);
+    const yl=Number.isFinite(Number(c.yearLength))?String(c.yearLength):'—';
+    const x=identity(yd);
+
+    if(x.wilson){
+      const e=elements[x.wilson-1]||['Gold Extension','✦'];
+      $('todayName').textContent=`WILSON'S WEEK · ${e[0]}`.toUpperCase();
+      $('todaySymbols').textContent=`GOLD ${x.wilson} · ${e[1]}`;
+      $('todayMeta').textContent=`YEAR DAY ${yd}/${yl} · GOLD · PROTECTED · NO MONTH · NO PLANETARY WEEK`;
+    }else{
+      const m=months[x.month],p=planets[x.week],e=elements[x.element];
+      $('todayName').textContent=`${m[1]} · ${p[0]} · ${e[0]}`.toUpperCase();
+      $('todaySymbols').textContent=`${m[0]} · ${p[1]} · ${e[1]}`;
+      $('todayMeta').textContent=
+        `DAY ${x.monthDay} · YEAR DAY ${yd}/${yl} · `+
+        `${x.weekB?'WEEK B · 3/2':'WEEK A · 4/1'} · ${x.status} · YEAR WEEK ${x.globalWeek}`;
+    }
+
+    $('dateDot').style.background='#8dd5a4';
+  }catch(err){
+    $('todayName').textContent='LIVE A8 DATE UNAVAILABLE';
+    $('todaySymbols').textContent='— · — · —';
+    $('todayMeta').textContent=String(err.message||err);
+    $('dateDot').style.background='#cf7367';
+  }
+}
+
+paintDate();
+setInterval(paintDate,30000);
+
+
+const BAR=64n,SLOTS=16n;
+
+function frac(v){
+  const s=String(v).trim();
+  const a=s.split('/');
+  return a.length===1
+    ?[BigInt(a[0]),1n]
+    :[BigInt(a[0]),BigInt(a[1])];
+}
+
+function slots(v){
+  const [n,d]=frac(v);
+  const q=n*SLOTS;
+  if(d===0n||q%d!==0n)throw new Error('EVENT OFF 1/16 A8 GRID');
+  return q/d;
+}
+
+function flatten(score){
+  if(!score||score.format!=='A8M-1'||!Array.isArray(score.bars)||score.bars.length!==8)
+    throw new Error('INVALID SPOTLIGHT SCORE');
+
+  const events=[];
+
+  score.bars.forEach((bar,bi)=>{
+    if(!bar||bar.complete!==true||!Array.isArray(bar.events))
+      throw new Error(`INVALID BAR ${bi+1}`);
+
+    bar.events.forEach(ev=>{
+      const start=slots(ev.startA8);
+      const dur=slots(ev.durationA8);
+
+      if(start<0n||start>=BAR||dur<=0n||start+dur>BAR)
+        throw new Error('EVENT OUTSIDE BAR');
+
+      events.push({
+        ...ev,
+        startA8:(BigInt(bi)*BAR+start).toString()+'/16'
+      });
+    });
+  });
+
+  return{...score,events};
+}
+
+let current=null;
+
+const player=
+  typeof window.A8MusicPlayerV1==='function'
+  ?new window.A8MusicPlayerV1({
+    onState:s=>{
+      if(s.type==='CORE_READY')$('status').textContent='READY · CORE20 CONNECTED';
+
+      if(s.type==='PLAYING'){
+        $('status').textContent=`PLAYING · ${s.eventCount} A8 EVENTS`;
+        $('stop').disabled=false;
+      }
+
+      if(s.type==='POSITION'){
+        const total=Number(s.totalA8),elapsed=Number(s.elapsedA8);
+        const ratio=total>0?Math.max(0,Math.min(1,elapsed/total)):0;
+
+        $('progress').style.width=(ratio*100)+'%';
+
+        const rail=$('rail');
+        rail.scrollLeft=(rail.scrollWidth-rail.clientWidth)*ratio;
+
+        $('status').textContent=`PLAYING · ${elapsed.toFixed(2)} / ${total.toFixed(2)} A8s`;
+      }
+
+      if(s.type==='COMPLETE'){
+        $('progress').style.width='100%';
+        $('status').textContent='THAT WAS THE WEEKLY SPOTLIGHT ✦';
+        $('stop').disabled=true;
+      }
+
+      if(s.type==='STOPPED'){
+        $('status').textContent=s.reason||'STOPPED';
+        $('stop').disabled=true;
+      }
+    }
+  })
+  :null;
+
+function stat(text){
+  const x=document.createElement('span');
+  x.className='stat';
+  x.textContent=text;
+  $('weekStats').appendChild(x);
+}
+
+function rail(score){
+  $('railInner').innerHTML='';
+
+  score.bars
+    .flatMap(b=>b.events)
+    .filter(e=>e.type==='note')
+    .forEach(e=>{
+      const x=document.createElement('span');
+      x.className='note';
+      x.textContent=e.noteName||(e.label?String(e.label).split('·')[0].trim():'♪');
+      $('railInner').appendChild(x);
+    });
+}
+
+async function loadWinner(){
+  try{
+    const r=await fetch('/api/music-review/current',{cache:'no-store'});
+    const p=await r.json();
+
+    if(!r.ok||p.ok!==true||!p.score)throw new Error(p.message||'NO WEEKLY WINNER');
+
+    current=p;
+    const m=p.meta||{},s=m.summary||{};
+
+    $('weekTitle').textContent=m.title||p.score.title||'Untitled';
+    $('weekComposer').textContent=m.composer?`by ${m.composer}`:'A8 composer';
+
+    if(s.bars!=null)stat(`${s.bars} bars`);
+    if(s.notes!=null)stat(`${s.notes} notes`);
+    if(s.rests!=null)stat(`${s.rests} rests`);
+
+    rail(p.score);
+
+    if(!player)throw new Error('A8 MUSIC PLAYER NOT AVAILABLE');
+
+    $('play').disabled=false;
+    $('status').textContent='READY · PRESS LISTEN';
+
+  }catch(err){
+    $('weekTitle').textContent='Weekly stage waiting';
+    $('weekComposer').textContent='No promoted composition available';
+    $('status').textContent=String(err.message||err);
+  }
+}
+
+$('play').addEventListener('click',async()=>{
+  if(!current||!player)return;
+
+  $('play').disabled=true;
+  $('progress').style.width='0%';
+  $('rail').scrollLeft=0;
+  $('status').textContent='CONNECTING TO CORE20…';
+
+  try{
+    await player.connectCore();
+    await player.play(flatten(current.score));
+  }catch(err){
+    $('status').textContent='PLAYBACK ERROR · '+String(err.message||err);
+  }finally{
+    $('play').disabled=false;
+  }
+});
+
+$('stop').addEventListener('click',()=>{
+  if(player)player.stop('STOPPED BY LISTENER');
+});
+
+loadWinner();
+
+})();
+</script>
+
+</body>
+</html>

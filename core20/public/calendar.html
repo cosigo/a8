@@ -19,14 +19,14 @@
   <meta name="subject" content="Experimental Auspicious 8 calendar architecture and live Core20 calendar reference">
   <meta name="classification" content="Research · Calendar · Timekeeping · Experimental">
   <meta name="format-detection" content="telephone=no">
-  <link rel="canonical" href="https://lab.a8.cosigo.io/calendar.html">
+  <link rel="canonical" href="https://calendar.cosigo.io/">
 
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="COSIGO Labs · Auspicious 8">
   <meta property="og:title" content="Auspicious 8 Calendar">
   <meta property="og:description" content="8 compass months · 9 planetary weeks · 5 element days · protected time · Wilson's Week.">
-  <meta property="og:url" content="https://lab.a8.cosigo.io/calendar.html">
-  <meta property="og:image" content="https://lab.a8.cosigo.io/assets/ausp8_total.png">
+  <meta property="og:url" content="https://calendar.cosigo.io/">
+  <meta property="og:image" content="https://calendar.cosigo.io/assets/ausp8_total.png">
   <meta property="og:image:type" content="image/png">
   <meta property="og:image:width" content="1122">
   <meta property="og:image:height" content="1402">
@@ -36,7 +36,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Auspicious 8 Calendar · COSIGO Labs">
   <meta name="twitter:description" content="Eight compass months, nine planetary weeks, five element days, live Core20 year-wheel position, protected time and Wilson's Week.">
-  <meta name="twitter:image" content="https://lab.a8.cosigo.io/assets/ausp8_total.png">
+  <meta name="twitter:image" content="https://calendar.cosigo.io/assets/ausp8_total.png">
   <meta name="twitter:image:alt" content="Auspicious 8 year calendar with eight compass months and Wilson's Week.">
 
   <link rel="icon" href="/assets/cosigo_master_512.gif" type="image/gif">
@@ -47,13 +47,13 @@
     "@context":"https://schema.org",
     "@type":"WebPage",
     "name":"Auspicious 8 Calendar",
-    "url":"https://lab.a8.cosigo.io/calendar.html",
+    "url":"https://calendar.cosigo.io/",
     "description":"A working COSIGO Labs calendar architecture using eight compass months, nine planetary weeks, five elemental days and an intercalary year-end celebration interval.",
     "inLanguage":"en",
     "isPartOf":{"@type":"WebSite","name":"COSIGO Labs · Auspicious 8","url":"https://a8.cosigo.io/"},
     "author":{"@type":"Person","name":"Wendall Wilson","url":"https://github.com/cosigo"},
     "publisher":{"@type":"Organization","name":"COSIGO Labs","url":"https://cosigo.io/"},
-    "primaryImageOfPage":{"@type":"ImageObject","url":"https://lab.a8.cosigo.io/assets/ausp8_total.png"},
+    "primaryImageOfPage":{"@type":"ImageObject","url":"https://calendar.cosigo.io/assets/ausp8_total.png"},
     "about":["experimental calendar design","binary and octal representation","compass directions","planetary nomenclature","protected time"]
   }
   </script>
@@ -97,46 +97,119 @@
     .skip{position:absolute;left:-9999px;top:0;background:#fff;color:#000;padding:.7rem 1rem;z-index:9999}
     .skip:focus{left:1rem;top:1rem}
 
-    .topbar{
-      position:sticky;top:0;z-index:100;
-      background:rgba(5,16,24,.93);
-      backdrop-filter:blur(14px);
-      border-bottom:1px solid rgba(214,170,78,.32);
-      box-shadow:0 8px 28px rgba(0,0,0,.26);
+    /* A8 SINGLE DROPDOWN NAV · SITE STANDARD */
+    #a8-topside-coherence-02{
+      display:block;
+      margin:0;
+      padding:10px 14px;
+      border-bottom:1px solid rgba(255,255,255,.14);
+      background:rgba(7,11,16,.96);
+      font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
     }
-    .navwrap{max-width:var(--max);margin:auto;padding:.62rem 1rem;display:flex;gap:1rem;align-items:center}
-    .brand{display:flex;align-items:center;gap:.65rem;text-decoration:none;white-space:nowrap;min-width:max-content}
-    .brandmark{width:38px;height:38px;color:var(--gold2);filter:drop-shadow(0 0 8px rgba(214,170,78,.18))}
-    .brandtext{display:grid;line-height:1.02}
-    .brandtext strong{font-family:Georgia,"Times New Roman",serif;letter-spacing:.08em;color:var(--gold2)}
-    .brandtext small{font-size:.65rem;letter-spacing:.17em;color:var(--muted)}
-    nav{display:flex;gap:.28rem;overflow:auto;scrollbar-width:none;padding:.12rem 0;margin-left:auto}
-    nav::-webkit-scrollbar{display:none}
-    nav a{padding:.48rem .62rem;border-radius:9px;text-decoration:none;font-size:.76rem;letter-spacing:.045em;white-space:nowrap;color:#d7cbb7;border:1px solid transparent}
-    nav a:hover,nav a:focus-visible{border-color:rgba(214,170,78,.38);background:#102b38;color:#fff;outline:none}
-    nav a.active{background:linear-gradient(180deg,#3a2d16,#211b10);border-color:#8e6f34;color:#f8d881}
 
-    /* A8 MOBILE DROPDOWN NAV V1 */
-    .nav-toggle{
-      display:none;
-      margin-left:auto;
-      padding:.55rem .75rem;
-      border:1px solid #8e6f34;
-      border-radius:9px;
-      background:linear-gradient(180deg,#3a2d16,#211b10);
-      color:#f8d881;
+    #a8-topside-coherence-02 .a8-topline{
+      max-width:1440px;
+      margin:0 auto;
+      display:flex;
+      gap:12px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+
+    #a8-topside-coherence-02 .cosigo-global-brand{
+      display:flex;
+      gap:8px;
+      align-items:center;
+      text-decoration:none;
+    }
+
+    #a8-topside-coherence-02 .cosigo-global-brand img{
+      width:34px;
+      height:34px;
+      object-fit:contain;
+    }
+
+    #a8-topside-coherence-02 .cosigo-global-brand span{
       font-weight:900;
-      font-size:.78rem;
-      letter-spacing:.08em;
-      cursor:pointer;
+      letter-spacing:.06em;
     }
 
-    .nav-toggle:hover,
-    .nav-toggle:focus-visible{
-      border-color:#d6aa4e;
-      color:#fff1b1;
-      outline:none;
-      box-shadow:0 0 16px rgba(214,170,78,.25);
+    #a8-topside-coherence-02 .cosigo-global-brand small{
+      display:block;
+      opacity:.72;
+      font-size:.62rem;
+    }
+
+    #a8-topside-coherence-02 a{
+      text-decoration:none;
+    }
+
+    #a8-topside-coherence-02 .a8-menu{
+      position:relative;
+      margin-left:auto;
+    }
+
+    #a8-topside-coherence-02 .a8-menu summary{
+      list-style:none;
+      cursor:pointer;
+      padding:8px 11px;
+      border:1px solid #425467;
+      border-radius:8px;
+      background:#111820;
+      color:#e0bd72;
+      font-size:.76rem;
+      font-weight:900;
+      letter-spacing:.07em;
+      user-select:none;
+    }
+
+    #a8-topside-coherence-02 .a8-menu summary::-webkit-details-marker{
+      display:none;
+    }
+
+    #a8-topside-coherence-02 .a8-menu summary::after{
+      content:" ▾";
+      color:#92a5b8;
+    }
+
+    #a8-topside-coherence-02 .a8-menu[open] summary::after{
+      content:" ▴";
+    }
+
+    #a8-topside-coherence-02 .a8-menu-panel{
+      position:absolute;
+      z-index:1000;
+      right:0;
+      top:calc(100% + 7px);
+      min-width:180px;
+      padding:7px;
+      border:1px solid #425467;
+      border-radius:9px;
+      background:#0d141b;
+      box-shadow:0 12px 28px rgba(0,0,0,.38);
+    }
+
+    #a8-topside-coherence-02 .a8-menu-panel a{
+      display:block;
+      padding:9px 10px;
+      border-radius:6px;
+      color:#c8ddf5;
+      font-size:.78rem;
+      font-weight:800;
+      white-space:nowrap;
+    }
+
+    #a8-topside-coherence-02 .a8-menu-panel a:hover,
+    #a8-topside-coherence-02 .a8-menu-panel a:focus,
+    #a8-topside-coherence-02 .a8-menu-panel a[aria-current="page"]{
+      background:#182431;
+      color:#fff;
+    }
+
+    @media(max-width:760px){
+      #a8-topside-coherence-02 .a8-menu-panel{
+        min-width:170px;
+      }
     }
 
     .hero{position:relative;overflow:hidden;border-bottom:1px solid rgba(214,170,78,.28)}
@@ -1143,7 +1216,7 @@
     .calendar td.today-cell{outline:4px solid #162c35;outline-offset:-4px;box-shadow:inset 0 0 0 2px #ffe17c,0 0 18px rgba(214,170,78,.46);z-index:2;font-weight:900}.calendar td.today-cell::before{content:"TODAY";position:absolute;top:2px;right:3px;font:900 .42rem/1 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;letter-spacing:.08em;color:#2c2518;background:#ffe17c;padding:2px 3px;border-radius:3px}
     .calendar td.today-cell.air-protected::before{background:#e9f1f5}.calendar td.today-cell.business::before{background:#b8e6c5}
     @media (max-width:900px){.today-grid{grid-template-columns:1fr}.today-dial-wrap{min-height:290px}.today-panel::after{display:none}.core-status-strip{grid-template-columns:1fr}}
-    @media print{.topbar,.actions,.today-actions,.lightbox,.external-proof button{display:none!important}.today-shell{margin:0}.today-panel{box-shadow:none;border:2px solid #80652f}.today-printout{box-shadow:none}.today-dial{box-shadow:none}body{background:#fff;color:#111}.today-panel{background:#10232d;-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+    @media print{#a8-topside-coherence-02,.actions,.today-actions,.lightbox,.external-proof button{display:none!important}.today-shell{margin:0}.today-panel{box-shadow:none;border:2px solid #80652f}.today-printout{box-shadow:none}.today-dial{box-shadow:none}body{background:#fff;color:#111}.today-panel{background:#10232d;-webkit-print-color-adjust:exact;print-color-adjust:exact}}
     @media (max-width:1100px){
       .hero-inner{grid-template-columns:1fr}.hero-art{justify-self:start;max-width:230px}.hero-art img{height:140px}.month-register{grid-template-columns:repeat(4,1fr)}.art-grid{grid-template-columns:repeat(3,minmax(0,190px))}.footer-inner{grid-template-columns:1fr 1fr}.spine{grid-template-columns:1fr 1fr}.yearmath{grid-template-columns:repeat(3,1fr)}
     }
@@ -1514,37 +1587,45 @@
 <body>
 <a class="skip" href="#main">Skip to calendar</a>
 
-<header class="topbar">
-  <div class="navwrap">
-    <a class="brand" href="https://a8.cosigo.io/" aria-label="COSIGO Labs Auspicious 8 public home">
-      <img class="brandmark" src="/assets/cosigo_master_512.gif" alt="COSIGO">
-      <span class="brandtext"><strong>COSIGO LABS</strong><small>AUSPICIOUS 8</small></span>
+<nav id="a8-topside-coherence-02"
+     class="cosigo-global-nav"
+     aria-label="A8 Time Lab navigation">
+
+  <div class="a8-topline">
+
+    <a class="cosigo-global-brand"
+       href="https://cosigo.io/"
+       aria-label="COSIGO home">
+      <img src="/assets/cosigo_master_512.gif" alt="COSIGO">
+      <span>COSIGO<small>LABS · AUSPICIOUS 8</small></span>
     </a>
 
-    <button
-      class="nav-toggle"
-      id="a8NavToggle"
-      type="button"
-      aria-expanded="false"
-      aria-controls="a8PrimaryNav"
-    >☰ MENU</button>
+    <details class="a8-menu">
+      <summary>MENU</summary>
 
-    <nav id="a8PrimaryNav" aria-label="Auspicious 8 navigation">
-      <a href="/clock.html">CLOCK</a>
-      <a href="/moons.html">MOONS</a>
-      <a href="/mintaka.html">MINTAKA</a>
-      <a href="/sol.html">SOL</a>
-      <a href="/map-clock-compass.html">MAP · CLOCK · COMPASS</a>
-      <a href="/navigation.html">NAVIGATION</a>
-      <a href="/celestial.html">CELESTIAL</a>
-      <a href="/audio.html">AUDIO</a>
-      <a href="/quartz.html">QUARTZ</a>
-      <a href="https://a8.cosigo.io/">A8 PUBLIC</a>
-      <a href="https://cosigo.io/">COSIGO HOME</a>
-      <a href="https://github.com/cosigo/a8">GITHUB</a>
-    </nav>
+      <div class="a8-menu-panel">
+        <a href="https://lab.a8.cosigo.io/">LAB HOME</a>
+        <a href="https://clock.cosigo.io/">CLOCK</a>
+        <a href="https://calendar.cosigo.io/" aria-current="page">CALENDAR</a>
+        <a href="https://moons.cosigo.io/">MOONS</a>
+        <a href="https://mintaka.cosigo.io/">MINTAKA</a>
+        <a href="https://sol.cosigo.io/">SOL</a>
+        <a href="https://map.cosigo.io/">MAP · CLOCK · COMPASS</a>
+        <a href="https://sea.cosigo.io/">NAVIGATION</a>
+        <a href="https://stars.cosigo.io/">CELESTIAL</a>
+        <a href="https://audio.cosigo.io/">AUDIO</a>
+        <a href="https://quartz.cosigo.io/">QUARTZ</a>
+        <a href="https://a8.cosigo.io/">A8 PUBLIC</a>
+        <a href="https://about.cosigo.io/">ABOUT</a>
+        <a href="https://contestant.cosigo.io/">FUN</a>
+        <a href="https://cosigo.io/">COSIGO HOME</a>
+        <a href="https://github.com/cosigo/a8">GITHUB</a>
+      </div>
+
+    </details>
+
   </div>
-</header>
+</nav>
 
 <div class="hero">
   <div class="hero-inner">
@@ -2079,7 +2160,7 @@
       <svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="27" fill="none" stroke="currentColor" stroke-width="2"/><path d="M32 3l5 24 24 5-24 5-5 24-5-24-24-5 24-5z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="32" cy="32" r="9" fill="none" stroke="currentColor" stroke-width="2"/><text x="32" y="37" text-anchor="middle" font-size="16" fill="currentColor" font-family="Georgia">8</text></svg>
       <div><h3>COSIGO Labs · Auspicious 8</h3><p>Experimental ground-up measurement and representation research. Nature first; ruler second; legacy conversion last.</p></div>
     </div>
-    <div><h3>Explore A8</h3><a href="https://a8.cosigo.io/">A8 Public Instrument</a><a href="/">A8 Engineering Lab</a><a href="/calendar.html">Calendar</a><a href="/clock.html">Clock</a><a href="/moons.html">Four-Moon Observer</a><a href="/map-clock-compass.html">Map · Clock · Compass</a></div>
+    <div><h3>Explore A8</h3><a href="https://a8.cosigo.io/">A8 Public Instrument</a><a href="https://lab.a8.cosigo.io/">A8 Engineering Lab</a><a href="https://calendar.cosigo.io/">Calendar</a><a href="https://clock.cosigo.io/">Clock</a><a href="https://moons.cosigo.io/">Four-Moon Observer</a><a href="/map-clock-compass.html">Map · Clock · Compass</a></div>
     <div><h3>Research</h3><a href="https://a8.cosigo.io/">A8 Public</a><a href="/jovian-operations.html">Core20 Front Page</a><a href="/relationship.html">Mintaka · Sol Relationship</a><a href="/data.html">Observation Archive</a><a href="/telescope.html">Telescope Emulator</a><a href="/angle.html">Angle Translator</a></div>
     <div><h3>COSIGO</h3><a href="https://cosigo.io/">COSIGO Home</a><a href="https://cosigo.io/">COSIGO Home</a><a href="https://github.com/cosigo/a8">GitHub · A8</a><p>COSIGO™ · CIGO™ · Auspicious 8™</p></div>
   </div>
@@ -3259,38 +3340,5 @@
   window.addEventListener('pagehide',()=>{feedConnected=false;if(refreshTimer!==null)clearTimeout(refreshTimer);});
 })();
 </script>
-<script id="a8-mobile-nav-v1">
-(() => {
-  'use strict';
-
-  const button = document.getElementById('a8NavToggle');
-  const nav = document.getElementById('a8PrimaryNav');
-
-  if (!button || !nav) return;
-
-  function setOpen(open) {
-    nav.classList.toggle('open', open);
-    button.setAttribute('aria-expanded', open ? 'true' : 'false');
-    button.textContent = open ? '× CLOSE' : '☰ MENU';
-  }
-
-  button.addEventListener('click', () => {
-    setOpen(!nav.classList.contains('open'));
-  });
-
-  nav.addEventListener('click', event => {
-    if (event.target.closest('a')) setOpen(false);
-  });
-
-  document.addEventListener('keydown', event => {
-    if (event.key === 'Escape') setOpen(false);
-  });
-
-  window.addEventListener('resize', () => {
-    if (window.innerWidth > 780) setOpen(false);
-  });
-})();
-</script>
-
 </body>
 </html>

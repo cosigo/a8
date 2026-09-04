@@ -19,24 +19,203 @@
 const fs = require('fs');
 const path = require('path');
 
-const CALENDAR_DAYS = 365n;
+const COMMON_YEAR_DAYS = 365;
+const LEAP_YEAR_DAYS = 366;
+const FOUR_YEAR_CYCLE_DAYS = 1461n;
+
+const LEAP_YEAR_CYCLE4 = 3;
+
+/*
+ * ONE-TIME CURRENT DEPLOYMENT MIGRATION
+ *
+ * Current A8 year is Cycle B / index 1.
+ *
+ * This aligns:
+ *   current 2026 A8 year -> B -> 365
+ *   next    2027 A8 year -> C -> 365
+ *   next    2028 A8 year -> D -> 366
+ *   next    2029 A8 year -> A -> 365
+ *
+ * After migration the native cycle advances only from
+ * Core20 integer civil-day rollover.
+ *
+ * Gregorian / UTC / host time do not advance this register.
+ */
+const LEGACY_V1_MIGRATION_YEAR_CYCLE4 = 1;
+
+const YEAR_CYCLE_LABELS =
+  Object.freeze([
+    'A',
+    'B',
+    'C',
+    'D',
+  ]);
+
 const DEFAULT_CHECKPOINT_PATH =
   '/var/lib/a8-core20/calendar-checkpoint.json';
 
-function wrapYearDay(zeroBased) {
-  const q =
-    ((zeroBased % CALENDAR_DAYS) + CALENDAR_DAYS) %
-    CALENDAR_DAYS;
-
-  return Number(q) + 1;
+function validYearCycle4(value) {
+  return (
+    Number.isSafeInteger(value) &&
+    value >= 0 &&
+    value <= 3
+  );
 }
 
-function validYearDay(value) {
+function yearCycleLabel(yearCycle4) {
+  if (!validYearCycle4(yearCycle4)) {
+    throw new Error(
+      `invalid native A8 yearCycle4 · ${yearCycle4}`
+    );
+  }
+
+  return YEAR_CYCLE_LABELS[yearCycle4];
+}
+
+function yearLengthForCycle(yearCycle4) {
+  if (!validYearCycle4(yearCycle4)) {
+    throw new Error(
+      `invalid native A8 yearCycle4 · ${yearCycle4}`
+    );
+  }
+
+  return yearCycle4 === LEAP_YEAR_CYCLE4
+    ? LEAP_YEAR_DAYS
+    : COMMON_YEAR_DAYS;
+}
+
+function validYearDay(value, yearCycle4) {
+  if (!validYearCycle4(yearCycle4)) {
+    return false;
+  }
+
   return (
     Number.isSafeInteger(value) &&
     value >= 1 &&
-    value <= Number(CALENDAR_DAYS)
+    value <=
+      yearLengthForCycle(yearCycle4)
   );
+}
+
+function calendarRegionForYearDay(yearDay) {
+  return yearDay <= 360
+    ? 'STRUCTURED'
+    : 'WILSON';
+}
+
+function wilsonDayForYearDay(yearDay) {
+  return yearDay <= 360
+    ? null
+    : yearDay - 360;
+}
+
+function advanceCalendarPosition(
+  anchorYearDay,
+  anchorYearCycle4,
+  delta
+) {
+  if (
+    !validYearDay(
+      anchorYearDay,
+      anchorYearCycle4
+    )
+  ) {
+    throw new Error(
+      'native A8 anchor calendar position invalid'
+    );
+  }
+
+  let remaining =
+    BigInt(delta);
+
+  if (remaining < 0n) {
+    throw new Error(
+      'native A8 calendar delta may not be negative'
+    );
+  }
+
+  /*
+   * 365 + 365 + 365 + 366 = 1461.
+   *
+   * The complete four-year register is periodic,
+   * so complete 1461-day rotations may be removed
+   * without changing year/day position.
+   */
+  remaining %=
+    FOUR_YEAR_CYCLE_DAYS;
+
+  let yearDay =
+    BigInt(anchorYearDay);
+
+  let yearCycle4 =
+    anchorYearCycle4;
+
+  while (remaining > 0n) {
+    const yearLength =
+      BigInt(
+        yearLengthForCycle(
+          yearCycle4
+        )
+      );
+
+    const incrementsToYearEnd =
+      yearLength - yearDay;
+
+    if (
+      remaining <=
+      incrementsToYearEnd
+    ) {
+      yearDay +=
+        remaining;
+
+      remaining = 0n;
+      break;
+    }
+
+    remaining -=
+      incrementsToYearEnd + 1n;
+
+    yearDay = 1n;
+
+    yearCycle4 =
+      (yearCycle4 + 1) % 4;
+  }
+
+  const numericYearDay =
+    Number(yearDay);
+
+  const yearLength =
+    yearLengthForCycle(
+      yearCycle4
+    );
+
+  return {
+    yearDay:
+      numericYearDay,
+
+    yearCycle4,
+
+    yearCycleLabel:
+      yearCycleLabel(
+        yearCycle4
+      ),
+
+    yearLength,
+
+    isLeapYear:
+      yearCycle4 ===
+        LEAP_YEAR_CYCLE4,
+
+    calendarRegion:
+      calendarRegionForYearDay(
+        numericYearDay
+      ),
+
+    wilsonDay:
+      wilsonDayForYearDay(
+        numericYearDay
+      ),
+  };
 }
 
 class A8Core20CalendarAnchor {
@@ -66,6 +245,7 @@ class A8Core20CalendarAnchor {
     this.lastCheckpointDayCount = null;
     this.lastPersistenceError = null;
     this.lastWriteReason = null;
+    this.checkpointMigration = null;
     this.restorationStatus =
       'CALENDAR_NOT_RESTORED_THIS_PROCESS';
 
@@ -184,6 +364,7 @@ class A8Core20CalendarAnchor {
   _loadCheckpoint() {
     this.persistedCheckpoint = null;
     this.lastCheckpointDayCount = null;
+    this.checkpointMigration = null;
 
     if (
       !this.checkpointPath ||
@@ -203,22 +384,61 @@ class A8Core20CalendarAnchor {
           )
         );
 
+      const checkpointSchema =
+        String(
+          parsed &&
+          parsed.schema
+            ? parsed.schema
+            : ''
+        );
+
+      const legacyV1 =
+        checkpointSchema ===
+          'A8-CORE20-CALENDAR-CHECKPOINT-V1';
+
+      const nativeV2 =
+        checkpointSchema ===
+          'A8-CORE20-CALENDAR-CHECKPOINT-V2';
+
       if (
         !parsed ||
-        parsed.schema !==
-          'A8-CORE20-CALENDAR-CHECKPOINT-V1'
+        (!legacyV1 && !nativeV2)
       ) {
         throw new Error(
           'unsupported calendar checkpoint schema'
         );
       }
 
-      const yearDay =
-        Number(parsed.yearDay);
+      const yearCycle4 =
+        legacyV1
+          ? LEGACY_V1_MIGRATION_YEAR_CYCLE4
+          : Number(
+              parsed.yearCycle4
+            );
 
-      if (!validYearDay(yearDay)) {
+      if (
+        !validYearCycle4(
+          yearCycle4
+        )
+      ) {
         throw new Error(
-          'calendar checkpoint yearDay invalid'
+          'calendar checkpoint yearCycle4 invalid'
+        );
+      }
+
+      const yearDay =
+        Number(
+          parsed.yearDay
+        );
+
+      if (
+        !validYearDay(
+          yearDay,
+          yearCycle4
+        )
+      ) {
+        throw new Error(
+          'calendar checkpoint yearDay invalid for native year cycle'
         );
       }
 
@@ -249,11 +469,51 @@ class A8Core20CalendarAnchor {
         );
       }
 
+      this.checkpointMigration =
+        legacyV1
+          ? 'LEGACY_V1_CURRENT_2026_A8_YEAR_SEEDED_CYCLE_B_INDEX_1'
+          : (
+              parsed.checkpointMigration ??
+              null
+            );
+
       this.persistedCheckpoint = {
         ...parsed,
+
         sourceEpoch,
+
         yearDay,
+
+        yearCycle4,
+
+        yearCycleLabel:
+          yearCycleLabel(
+            yearCycle4
+          ),
+
+        yearLength:
+          yearLengthForCycle(
+            yearCycle4
+          ),
+
+        isLeapYear:
+          yearCycle4 ===
+            LEAP_YEAR_CYCLE4,
+
+        calendarRegion:
+          calendarRegionForYearDay(
+            yearDay
+          ),
+
+        wilsonDay:
+          wilsonDayForYearDay(
+            yearDay
+          ),
+
         observedCoreDayCount,
+
+        checkpointMigration:
+          this.checkpointMigration,
       };
 
       this.lastCheckpointDayCount =
@@ -274,14 +534,37 @@ class A8Core20CalendarAnchor {
   _checkpointPayload({
     sourceEpoch,
     yearDay,
+    yearCycle4,
     observedCoreDayCount,
     observedDayPhase17 = null,
     observedRawPulse = null,
+    checkpointMigration = null,
     reason,
   }) {
+    if (
+      !validYearDay(
+        yearDay,
+        yearCycle4
+      )
+    ) {
+      throw new Error(
+        'cannot persist invalid native A8 calendar position'
+      );
+    }
+
+    const yearLength =
+      yearLengthForCycle(
+        yearCycle4
+      );
+
+    const migration =
+      checkpointMigration ??
+      this.checkpointMigration ??
+      null;
+
     return {
       schema:
-        'A8-CORE20-CALENDAR-CHECKPOINT-V1',
+        'A8-CORE20-CALENDAR-CHECKPOINT-V2',
 
       sourceEpoch:
         String(sourceEpoch),
@@ -291,20 +574,52 @@ class A8Core20CalendarAnchor {
       yearDayOctal:
         `${yearDay.toString(8)}₈`,
 
+      yearCycle4,
+
+      yearCycleLabel:
+        yearCycleLabel(
+          yearCycle4
+        ),
+
+      yearLength,
+
+      isLeapYear:
+        yearCycle4 ===
+          LEAP_YEAR_CYCLE4,
+
+      calendarRegion:
+        calendarRegionForYearDay(
+          yearDay
+        ),
+
+      wilsonDay:
+        wilsonDayForYearDay(
+          yearDay
+        ),
+
       observedCoreDayCount:
-        String(observedCoreDayCount),
+        String(
+          observedCoreDayCount
+        ),
 
       observedDayPhase17:
         observedDayPhase17 === null ||
         observedDayPhase17 === undefined
           ? null
-          : String(observedDayPhase17),
+          : String(
+              observedDayPhase17
+            ),
 
       observedRawPulse:
         observedRawPulse === null ||
         observedRawPulse === undefined
           ? null
-          : String(observedRawPulse),
+          : String(
+              observedRawPulse
+            ),
+
+      checkpointMigration:
+        migration,
 
       checkpointReason:
         String(reason),
@@ -314,6 +629,9 @@ class A8Core20CalendarAnchor {
 
       runningAdvance:
         'CORE20_INTEGER_CIVIL_DAY_COUNT_ONLY',
+
+      leapAdvance:
+        'NATIVE_A8_YEAR_CYCLE4_ONLY_AT_YEAR_ROLLOVER',
 
       lostElapsedTimeRecovered:
         false,
@@ -422,14 +740,26 @@ class A8Core20CalendarAnchor {
   _makeRestoredAnchor({
     sourceEpoch,
     yearDay,
+    yearCycle4,
     currentCoreDayCount,
   }) {
+    if (
+      !validYearDay(
+        yearDay,
+        yearCycle4
+      )
+    ) {
+      throw new Error(
+        'restored native A8 calendar position invalid'
+      );
+    }
+
     const diag =
       this._yearAngleDiagnostic();
 
     return {
       schema:
-        'A8-CORE20-CALENDAR-ANCHOR-V1',
+        'A8-CORE20-CALENDAR-ANCHOR-V2',
 
       sourceEpoch:
         String(sourceEpoch),
@@ -439,13 +769,31 @@ class A8Core20CalendarAnchor {
       yearDayOctal:
         `${yearDay.toString(8)}₈`,
 
+      yearCycle4,
+
+      yearCycleLabel:
+        yearCycleLabel(
+          yearCycle4
+        ),
+
+      yearLength:
+        yearLengthForCycle(
+          yearCycle4
+        ),
+
+      isLeapYear:
+        yearCycle4 ===
+          LEAP_YEAR_CYCLE4,
+
       /*
        * A restarted Core20 clock establishes a new local dayCount origin.
-       * The persisted integer YEAR DAY is therefore rebased to the current
+       * Persisted native calendar position is rebased to the current
        * Core20 dayCount. No elapsed outage time is inferred.
        */
       anchorCoreDayCount:
-        String(currentCoreDayCount),
+        String(
+          currentCoreDayCount
+        ),
 
       yearAnglePhase27AtAnchor:
         diag.phase27,
@@ -454,13 +802,16 @@ class A8Core20CalendarAnchor {
         diag.phase27Octal,
 
       authority:
-        'RESTORED_NATIVE_A8_INTEGER_YEAR_DAY_CHECKPOINT',
+        'RESTORED_NATIVE_A8_INTEGER_CALENDAR_CHECKPOINT',
 
       runningAdvance:
         'CORE20_INTEGER_CIVIL_DAY_COUNT_ONLY',
 
       restoredFromCheckpoint:
         true,
+
+      checkpointMigration:
+        this.checkpointMigration,
 
       lostElapsedTimeRecovered:
         false,
@@ -527,10 +878,21 @@ class A8Core20CalendarAnchor {
           .yearDay
       );
 
+    const yearCycle4 =
+      Number(
+        this.persistedCheckpoint
+          .yearCycle4
+      );
+
     this.anchor =
       this._makeRestoredAnchor({
-        sourceEpoch: epoch,
+        sourceEpoch:
+          epoch,
+
         yearDay,
+
+        yearCycle4,
+
         currentCoreDayCount:
           dayCount,
       });
@@ -545,6 +907,8 @@ class A8Core20CalendarAnchor {
 
         yearDay,
 
+        yearCycle4,
+
         observedCoreDayCount:
           dayCount,
 
@@ -553,6 +917,9 @@ class A8Core20CalendarAnchor {
 
         observedRawPulse:
           edge.rawPulse ?? null,
+
+        checkpointMigration:
+          this.checkpointMigration,
 
         reason:
           'RESTART_REBASE_TO_CURRENT_CORE20_DAYCOUNT',
@@ -565,10 +932,70 @@ class A8Core20CalendarAnchor {
     return true;
   }
 
-  establish(yearDay) {
-    if (!validYearDay(yearDay)) {
+  establish(
+    yearDay,
+    yearCycle4 = null
+  ) {
+    let resolvedYearCycle4;
+
+    if (
+      yearCycle4 !== null &&
+      yearCycle4 !== undefined
+    ) {
+      resolvedYearCycle4 =
+        Number(yearCycle4);
+    } else if (
+      this.persistedCheckpoint &&
+      validYearCycle4(
+        Number(
+          this.persistedCheckpoint
+            .yearCycle4
+        )
+      )
+    ) {
+      resolvedYearCycle4 =
+        Number(
+          this.persistedCheckpoint
+            .yearCycle4
+        );
+    } else {
+      /*
+       * Current deployment migration seed only.
+       *
+       * Existing callers historically supplied yearDay only.
+       * The deployed 2026 A8 year is Cycle B / index 1.
+       */
+      resolvedYearCycle4 =
+        LEGACY_V1_MIGRATION_YEAR_CYCLE4;
+
+      this.checkpointMigration =
+        'CURRENT_2026_A8_YEAR_SEEDED_CYCLE_B_INDEX_1';
+    }
+
+    if (
+      !validYearCycle4(
+        resolvedYearCycle4
+      )
+    ) {
       throw new Error(
-        'native A8 yearDay must be an integer 1..365'
+        'native A8 yearCycle4 must be an integer 0..3'
+      );
+    }
+
+    if (
+      !validYearDay(
+        yearDay,
+        resolvedYearCycle4
+      )
+    ) {
+      throw new Error(
+        `native A8 yearDay must be an integer 1..${
+          yearLengthForCycle(
+            resolvedYearCycle4
+          )
+        } for yearCycle4 ${
+          resolvedYearCycle4
+        }`
       );
     }
 
@@ -582,13 +1009,16 @@ class A8Core20CalendarAnchor {
     ) {
       if (
         this.anchor.yearDay ===
-        yearDay
+          yearDay &&
+        this.anchor.yearCycle4 ===
+          resolvedYearCycle4
       ) {
         return {
-          applied: false,
+          applied:
+            false,
 
           reason:
-            'ALREADY_LOCKED_SAME_NATIVE_YEAR_DAY',
+            'ALREADY_LOCKED_SAME_NATIVE_CALENDAR_POSITION',
 
           anchor:
             { ...this.anchor },
@@ -619,7 +1049,7 @@ class A8Core20CalendarAnchor {
 
     this.anchor = {
       schema:
-        'A8-CORE20-CALENDAR-ANCHOR-V1',
+        'A8-CORE20-CALENDAR-ANCHOR-V2',
 
       sourceEpoch:
         q.sourceEpoch,
@@ -628,6 +1058,23 @@ class A8Core20CalendarAnchor {
 
       yearDayOctal:
         `${yearDay.toString(8)}₈`,
+
+      yearCycle4:
+        resolvedYearCycle4,
+
+      yearCycleLabel:
+        yearCycleLabel(
+          resolvedYearCycle4
+        ),
+
+      yearLength:
+        yearLengthForCycle(
+          resolvedYearCycle4
+        ),
+
+      isLeapYear:
+        resolvedYearCycle4 ===
+          LEAP_YEAR_CYCLE4,
 
       anchorCoreDayCount:
         q.coreDayCount.toString(),
@@ -639,13 +1086,16 @@ class A8Core20CalendarAnchor {
         diag.phase27Octal,
 
       authority:
-        'NATIVE_A8_INTEGER_YEAR_DAY_ONE_SHOT',
+        'NATIVE_A8_INTEGER_CALENDAR_POSITION_ONE_SHOT',
 
       runningAdvance:
         'CORE20_INTEGER_CIVIL_DAY_COUNT_ONLY',
 
       restoredFromCheckpoint:
         false,
+
+      checkpointMigration:
+        this.checkpointMigration,
 
       lostElapsedTimeRecovered:
         false,
@@ -679,23 +1129,31 @@ class A8Core20CalendarAnchor {
 
         yearDay,
 
+        yearCycle4:
+          resolvedYearCycle4,
+
         observedCoreDayCount:
           q.coreDayCount.toString(),
 
         observedDayPhase17:
-          clock.dayPhase17 ?? null,
+          clock.dayPhase17 ??
+          null,
 
         observedRawPulse:
           clock.currentSelectedRawPulse ??
           null,
 
+        checkpointMigration:
+          this.checkpointMigration,
+
         reason:
-          'NATIVE_YEAR_DAY_ANCHOR_ESTABLISHED',
+          'NATIVE_CALENDAR_POSITION_ANCHOR_ESTABLISHED',
       })
     );
 
     return {
-      applied: true,
+      applied:
+        true,
 
       anchor:
         { ...this.anchor },
@@ -713,7 +1171,9 @@ class A8Core20CalendarAnchor {
         edge.sourceEpoch === undefined
       ) {
         return {
-          observed: false,
+          observed:
+            false,
+
           reason:
             'EDGE_MISSING_CALENDAR_FIELDS',
         };
@@ -725,7 +1185,9 @@ class A8Core20CalendarAnchor {
 
       if (!this.anchor) {
         return {
-          observed: false,
+          observed:
+            false,
+
           reason:
             this.persistedCheckpoint
               ? this.restorationStatus
@@ -734,24 +1196,30 @@ class A8Core20CalendarAnchor {
       }
 
       const epoch =
-        String(edge.sourceEpoch);
+        String(
+          edge.sourceEpoch
+        );
 
       if (
         this.anchor.sourceEpoch !==
-        epoch
+          epoch
       ) {
         this.restorationStatus =
           'CALENDAR_REANCHOR_REQUIRED_SOURCE_EPOCH_MISMATCH';
 
         return {
-          observed: false,
+          observed:
+            false,
+
           reason:
             this.restorationStatus,
         };
       }
 
       const edgeDayCount =
-        BigInt(edge.dayCount);
+        BigInt(
+          edge.dayCount
+        );
 
       const anchorCount =
         BigInt(
@@ -765,17 +1233,18 @@ class A8Core20CalendarAnchor {
 
       if (delta < 0n) {
         return {
-          observed: false,
+          observed:
+            false,
+
           reason:
             'CORE20_DAYCOUNT_REGRESSION',
         };
       }
 
-      const yearDay =
-        wrapYearDay(
-          BigInt(
-            this.anchor.yearDay - 1
-          ) +
+      const position =
+        advanceCalendarPosition(
+          this.anchor.yearDay,
+          this.anchor.yearCycle4,
           delta
         );
 
@@ -784,23 +1253,32 @@ class A8Core20CalendarAnchor {
 
       if (
         this.lastCheckpointDayCount !==
-        edgeDayText
+          edgeDayText
       ) {
         this._persistCheckpoint(
           this._checkpointPayload({
             sourceEpoch:
               epoch,
 
-            yearDay,
+            yearDay:
+              position.yearDay,
+
+            yearCycle4:
+              position.yearCycle4,
 
             observedCoreDayCount:
               edgeDayText,
 
             observedDayPhase17:
-              edge.dayPhase17 ?? null,
+              edge.dayPhase17 ??
+              null,
 
             observedRawPulse:
-              edge.rawPulse ?? null,
+              edge.rawPulse ??
+              null,
+
+            checkpointMigration:
+              this.checkpointMigration,
 
             reason:
               'CORE20_INTEGER_DAYCOUNT_CHANGED',
@@ -809,8 +1287,30 @@ class A8Core20CalendarAnchor {
       }
 
       return {
-        observed: true,
-        yearDay,
+        observed:
+          true,
+
+        yearDay:
+          position.yearDay,
+
+        yearCycle4:
+          position.yearCycle4,
+
+        yearCycleLabel:
+          position.yearCycleLabel,
+
+        yearLength:
+          position.yearLength,
+
+        isLeapYear:
+          position.isLeapYear,
+
+        calendarRegion:
+          position.calendarRegion,
+
+        wilsonDay:
+          position.wilsonDay,
+
         coreDayCount:
           edgeDayText,
       };
@@ -823,7 +1323,9 @@ class A8Core20CalendarAnchor {
         }`;
 
       return {
-        observed: false,
+        observed:
+          false,
+
         reason:
           this.lastPersistenceError,
       };
@@ -836,13 +1338,18 @@ class A8Core20CalendarAnchor {
 
     return {
       schema:
-        'A8-CORE20-CALENDAR-PERSISTENCE-V1',
+        'A8-CORE20-CALENDAR-PERSISTENCE-V2',
 
       mode:
-        'DEBUG_RESTART_LAST_KNOWN_INTEGER_DAY',
+        'DEBUG_RESTART_LAST_KNOWN_INTEGER_CALENDAR_POSITION',
 
       checkpointLoaded:
         !!cp,
+
+      checkpointStorageSchema:
+        cp
+          ? cp.schema
+          : null,
 
       checkpointSourceEpoch:
         cp
@@ -859,6 +1366,36 @@ class A8Core20CalendarAnchor {
           ? cp.yearDayOctal
           : null,
 
+      checkpointYearCycle4:
+        cp
+          ? cp.yearCycle4
+          : null,
+
+      checkpointYearCycleLabel:
+        cp
+          ? cp.yearCycleLabel
+          : null,
+
+      checkpointYearLength:
+        cp
+          ? cp.yearLength
+          : null,
+
+      checkpointIsLeapYear:
+        cp
+          ? cp.isLeapYear
+          : null,
+
+      checkpointCalendarRegion:
+        cp
+          ? cp.calendarRegion
+          : null,
+
+      checkpointWilsonDay:
+        cp
+          ? cp.wilsonDay
+          : null,
+
       checkpointObservedCoreDayCount:
         cp
           ? cp.observedCoreDayCount
@@ -873,6 +1410,11 @@ class A8Core20CalendarAnchor {
         cp
           ? cp.checkpointReason
           : null,
+
+      checkpointMigration:
+        cp
+          ? cp.checkpointMigration
+          : this.checkpointMigration,
 
       restorationStatus:
         this.restorationStatus,
@@ -921,7 +1463,7 @@ class A8Core20CalendarAnchor {
     } catch (err) {
       return {
         schema:
-          'A8-CORE20-CALENDAR-V1',
+          'A8-CORE20-CALENDAR-V2',
 
         status:
           'CALENDAR_AWAITING_QUALIFIED_CORE20',
@@ -954,9 +1496,11 @@ class A8Core20CalendarAnchor {
 
     if (!this.anchor) {
       let status =
-        'CALENDAR_AWAITING_NATIVE_YEAR_DAY_ANCHOR';
+        'CALENDAR_AWAITING_NATIVE_CALENDAR_POSITION_ANCHOR';
 
-      if (this.persistedCheckpoint) {
+      if (
+        this.persistedCheckpoint
+      ) {
         status =
           this.persistedCheckpoint
             .sourceEpoch ===
@@ -967,7 +1511,7 @@ class A8Core20CalendarAnchor {
 
       return {
         schema:
-          'A8-CORE20-CALENDAR-V1',
+          'A8-CORE20-CALENDAR-V2',
 
         status,
 
@@ -986,7 +1530,7 @@ class A8Core20CalendarAnchor {
         requiredOneShot:
           this.persistedCheckpoint
             ? null
-            : 'NATIVE_A8_INTEGER_YEAR_DAY_1_TO_365',
+            : 'NATIVE_A8_YEAR_DAY_PLUS_YEAR_CYCLE4',
 
         persistence:
           this._persistenceView(),
@@ -1007,11 +1551,11 @@ class A8Core20CalendarAnchor {
 
     if (
       this.anchor.sourceEpoch !==
-      q.sourceEpoch
+        q.sourceEpoch
     ) {
       return {
         schema:
-          'A8-CORE20-CALENDAR-V1',
+          'A8-CORE20-CALENDAR-V2',
 
         status:
           'CALENDAR_ANCHOR_STALE_SOURCE_EPOCH',
@@ -1064,7 +1608,7 @@ class A8Core20CalendarAnchor {
     if (delta < 0n) {
       return {
         schema:
-          'A8-CORE20-CALENDAR-V1',
+          'A8-CORE20-CALENDAR-V2',
 
         status:
           'CALENDAR_CORE20_DAYCOUNT_REGRESSION',
@@ -1101,17 +1645,16 @@ class A8Core20CalendarAnchor {
       };
     }
 
-    const yearDay =
-      wrapYearDay(
-        BigInt(
-          this.anchor.yearDay - 1
-        ) +
+    const position =
+      advanceCalendarPosition(
+        this.anchor.yearDay,
+        this.anchor.yearCycle4,
         delta
       );
 
     return {
       schema:
-        'A8-CORE20-CALENDAR-V1',
+        'A8-CORE20-CALENDAR-V2',
 
       status:
         'CALENDAR_RUNNING_FROM_CORE20_COUNT',
@@ -1122,10 +1665,29 @@ class A8Core20CalendarAnchor {
       sourceEpoch:
         q.sourceEpoch,
 
-      yearDay,
+      yearDay:
+        position.yearDay,
 
       yearDayOctal:
-        `${yearDay.toString(8)}₈`,
+        `${position.yearDay.toString(8)}₈`,
+
+      yearCycle4:
+        position.yearCycle4,
+
+      yearCycleLabel:
+        position.yearCycleLabel,
+
+      yearLength:
+        position.yearLength,
+
+      isLeapYear:
+        position.isLeapYear,
+
+      calendarRegion:
+        position.calendarRegion,
+
+      wilsonDay:
+        position.wilsonDay,
 
       coreDayCount:
         q.coreDayCount.toString(),
@@ -1141,6 +1703,9 @@ class A8Core20CalendarAnchor {
 
       runningAdvance:
         'CORE20_INTEGER_CIVIL_DAY_COUNT_ONLY',
+
+      leapAdvance:
+        'NATIVE_A8_YEAR_CYCLE4_ONLY_AT_YEAR_ROLLOVER',
 
       yearAngleRole:
         'READ_ONLY_ORIENTATION_AND_SEASONAL_DIAGNOSTIC',
