@@ -77,6 +77,14 @@ const {
 } = require('../observer/a8-day-phase17-civil-clock');
 
 const {
+  MintakaPhase17,
+} = require('../observer/a8-mintaka-phase17-clock');
+
+const {
+  OpposingClockDiscrepancy,
+} = require('../observer/a8-opposing-clock-discrepancy');
+
+const {
   Core20ServerOwnedRuntime,
 } = require('./a8-core20-server-owned-runtime');
 
@@ -380,6 +388,10 @@ function createHardwareLabServer({
     new SelectedSourceEarthObservationBridge(),
   civilDayPhase17 =
     new CivilDayPhase17(),
+  mintakaPhase17 =
+    new MintakaPhase17(),
+  opposingClockDiscrepancy =
+    new OpposingClockDiscrepancy(),
 } = {}) {
   if (selector.mode === 'NONE') {
     selector.select(
@@ -560,6 +572,216 @@ function createHardwareLabServer({
       bridge,
       currentSunReturnRecurrence()
     );
+  };
+
+  /*
+   * INDEPENDENT MINTAKA 2^17 STELLAR CLOCK
+   *
+   * Downstream/read-only.
+   * Selected raw counter + recovered Mintaka recurrence only.
+   */
+  const currentMintakaPhase17 = () => {
+    const bridge =
+      syncRecoveryInput();
+
+    const earth =
+      currentEarthObservers();
+
+    const earthScale =
+      deriveEarthRotationJovianScale(
+        currentTimekeeper(),
+        earth
+      );
+
+    return mintakaPhase17.snapshot(
+      bridge,
+      earthScale,
+      earth.mintaka
+    );
+  };
+
+  /*
+   * OPPOSING CLOCK INSTRUMENT
+   *
+   * One selected-raw snapshot feeds BOTH clocks and the
+   * exact discrepancy accumulator.
+   *
+   * This prevents sequential HTTP reads from manufacturing
+   * an artificial phase difference.
+   */
+  const currentOpposingClockInstrument = () => {
+    const bridge =
+      syncRecoveryInput();
+
+    const earth =
+      currentEarthObservers();
+
+    const earthScale =
+      deriveEarthRotationJovianScale(
+        currentTimekeeper(),
+        earth
+      );
+
+    const solScale =
+      deriveSolOrbitalJovianScale(
+        earthScale,
+        earth
+      );
+
+    const sunReturn =
+      deriveSunReturnRecurrence(
+        earthScale,
+        solScale
+      );
+
+    civilDayPhase17.syncSource(
+      bridge
+    );
+
+    const mintakaClock =
+      mintakaPhase17.snapshot(
+        bridge,
+        earthScale,
+        earth.mintaka
+      );
+
+    const civilClock =
+      civilDayPhase17.snapshot(
+        bridge,
+        sunReturn
+      );
+
+    const discrepancy =
+      opposingClockDiscrepancy.snapshot(
+        bridge,
+        earthScale,
+        sunReturn
+      );
+
+    const bridgeRaw =
+      bridge.lastRawPulse === null ||
+      bridge.lastRawPulse === undefined
+        ? null
+        : String(
+            bridge.lastRawPulse
+          );
+
+    const mintakaRaw =
+      mintakaClock.selectedRawPulse ??
+      null;
+
+    const civilRaw =
+      civilClock.currentSelectedRawPulse ??
+      null;
+
+    const rawAgreement =
+      bridgeRaw !== null &&
+      mintakaRaw === bridgeRaw &&
+      civilRaw === bridgeRaw;
+
+    const ready =
+      mintakaClock.status ===
+        'MINTAKA_PHASE17_STELLAR_CLOCK_ACTIVE' &&
+      civilClock.status ===
+        'DAY_PHASE17_CIVIL_CLOCK_ACTIVE' &&
+      discrepancy.status ===
+        'OPPOSING_CLOCK_DISCREPANCY_ACTIVE' &&
+      discrepancy.ready === true &&
+      rawAgreement;
+
+    return {
+      schema:
+        'A8-OPPOSING-CLOCK-INSTRUMENT-V1',
+
+      status:
+        ready
+          ? 'OPPOSING_CLOCK_INSTRUMENT_ACTIVE'
+          : 'OPPOSING_CLOCK_INSTRUMENT_WAITING',
+
+      ready,
+
+      sourceEpoch:
+        bridge.sourceEpoch,
+
+      sourceMode:
+        bridge.mode ?? null,
+
+      rig:
+        bridge.rig ?? null,
+
+      selectedRawPulse:
+        bridgeRaw,
+
+      sameSelectedRawPulse:
+        rawAgreement,
+
+      rawSampleAudit: {
+        bridge:
+          bridgeRaw,
+
+        mintakaClock:
+          mintakaRaw,
+
+        civilClock:
+          civilRaw,
+      },
+
+      mintakaClock,
+      civilClock,
+      discrepancy,
+
+      naturalInputs: {
+        earthRotationScale:
+          earthScale,
+
+        sunReturnRecurrence:
+          sunReturn,
+      },
+
+      authorityBoundary: {
+        writesA8Core:
+          false,
+
+        writesMintakaObserver:
+          false,
+
+        writesSolObserver:
+          false,
+
+        writesTerraShipSlip:
+          false,
+
+        writesCivilClock:
+          false,
+
+        writesCalendar:
+          false,
+
+        changesAuthority:
+          false,
+
+        usesLegacyTime:
+          false,
+
+        usesHostTime:
+          false,
+
+        usesBrowserTime:
+          false,
+
+        usesFrequencyHz:
+          false,
+
+        usesUTC:
+          false,
+
+        usesNTP:
+          false,
+
+        usesGPS:
+          false,
+      },
+    };
   };
 
   const observeMintakaSelected = observation => {
@@ -2189,6 +2411,68 @@ function createHardwareLabServer({
                 terraShipSlipAccumulator.snapshot(),
             }
           );
+        }
+
+        if (
+          req.method === 'GET' &&
+          url.pathname ===
+            '/api/mintaka/clock'
+        ) {
+          try {
+            return sendJson(
+              res,
+              200,
+              {
+                ok: true,
+                clock:
+                  currentMintakaPhase17(),
+              }
+            );
+          } catch (err) {
+            return sendJson(
+              res,
+              500,
+              {
+                ok: false,
+                error:
+                  err &&
+                  err.message
+                    ? err.message
+                    : String(err),
+              }
+            );
+          }
+        }
+
+        if (
+          req.method === 'GET' &&
+          url.pathname ===
+            '/api/opposing-clocks'
+        ) {
+          try {
+            return sendJson(
+              res,
+              200,
+              {
+                ok: true,
+                instrument:
+                  currentOpposingClockInstrument(),
+              }
+            );
+          } catch (err) {
+            return sendJson(
+              res,
+              500,
+              {
+                ok: false,
+                error:
+                  err &&
+                  err.message
+                    ? err.message
+                    : String(err),
+              }
+            );
+          }
         }
 
         if (

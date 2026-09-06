@@ -148,6 +148,182 @@ code {
 
 </style>
 
+
+<style id="a8-mintaka-stellar-console-style">
+
+#a8-mintaka-stellar-console{
+  margin:0 0 16px;
+  padding:18px;
+  border:1px solid rgba(160,210,255,.18);
+  border-radius:16px;
+  background:rgba(5,10,18,.48);
+  backdrop-filter:blur(2px);
+  -webkit-backdrop-filter:blur(2px);
+}
+
+.a8-mintaka-console-head{
+  display:flex;
+  gap:12px;
+  align-items:flex-start;
+  justify-content:space-between;
+  flex-wrap:wrap;
+}
+
+.a8-mintaka-console-head h2{
+  margin:4px 0 0;
+}
+
+.a8-mintaka-console-kicker{
+  display:block;
+  font-size:.68rem;
+  font-weight:900;
+  letter-spacing:.11em;
+  opacity:.66;
+}
+
+#a8MintakaClockStatus{
+  font-size:.72rem;
+  font-weight:900;
+  letter-spacing:.08em;
+}
+
+.a8-mintaka-clock-face{
+  margin-top:16px;
+  padding:20px;
+  border:1px solid rgba(160,210,255,.18);
+  border-radius:14px;
+  text-align:center;
+  background:rgba(5,12,21,.34);
+}
+
+#a8MintakaClockFace{
+  display:block;
+  font-size:clamp(2.4rem,8vw,5.4rem);
+  font-weight:900;
+  letter-spacing:-.04em;
+  overflow-wrap:anywhere;
+}
+
+#a8MintakaPhase17{
+  display:block;
+  margin-top:8px;
+  font-size:.92rem;
+  font-weight:800;
+  opacity:.76;
+}
+
+.a8-mintaka-console-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:10px;
+  margin-top:14px;
+}
+
+.a8-mintaka-console-stat{
+  min-width:0;
+  padding:12px;
+  border:1px solid rgba(160,210,255,.13);
+  border-radius:11px;
+  background:rgba(5,12,21,.24);
+}
+
+.a8-mintaka-console-stat span{
+  display:block;
+  font-size:.64rem;
+  font-weight:900;
+  letter-spacing:.08em;
+  opacity:.62;
+}
+
+.a8-mintaka-console-stat strong{
+  display:block;
+  margin-top:6px;
+  overflow-wrap:anywhere;
+}
+
+.a8-mintaka-view-controls{
+  display:flex;
+  justify-content:center;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:16px;
+}
+
+.a8-mintaka-view-controls button{
+  padding:8px 12px;
+  border:1px solid rgba(160,210,255,.22);
+  border-radius:999px;
+  color:inherit;
+  font:inherit;
+  font-size:.72rem;
+  font-weight:900;
+  letter-spacing:.06em;
+  cursor:pointer;
+}
+
+.a8-mintaka-view-controls button.active{
+  border-color:currentColor;
+}
+
+#a8MintakaShipCompare{
+  margin-top:14px;
+  padding:14px;
+  border:1px solid rgba(160,210,255,.13);
+  border-radius:12px;
+  background:rgba(5,12,21,.20);
+}
+
+#a8MintakaShipCompare[hidden]{
+  display:none;
+}
+
+.a8-mintaka-compare-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:10px;
+  margin-top:10px;
+}
+
+.a8-mintaka-compare-grid > div{
+  padding:11px;
+  border:1px solid rgba(160,210,255,.11);
+  border-radius:10px;
+}
+
+.a8-mintaka-compare-grid span{
+  display:block;
+  font-size:.64rem;
+  font-weight:900;
+  letter-spacing:.08em;
+  opacity:.62;
+}
+
+.a8-mintaka-compare-grid strong{
+  display:block;
+  margin-top:6px;
+  overflow-wrap:anywhere;
+}
+
+#a8MintakaBoundary{
+  margin-top:14px;
+  font-size:.72rem;
+  font-weight:900;
+  letter-spacing:.07em;
+  opacity:.8;
+}
+
+@media(max-width:760px){
+  .a8-mintaka-console-grid{
+    grid-template-columns:1fr;
+  }
+
+  .a8-mintaka-compare-grid{
+    grid-template-columns:1fr;
+  }
+}
+
+</style>
+
 </head>
 <body>
 
@@ -292,6 +468,127 @@ code {
       Mintaka is a distant celestial direction observed against that upstream time ruler.
       The adapter may emit observation evidence rapidly, but it has no route to the A8 clock.
     </p>
+
+  </section>
+
+  <section
+    id="a8-mintaka-stellar-console"
+    aria-label="Mintaka stellar rotation clock"
+  >
+    <div class="a8-mintaka-console-head">
+      <div>
+        <span class="a8-mintaka-console-kicker">
+          EARTH ROTATION · STELLAR WITNESS · READ ONLY
+        </span>
+        <h2>MINTAKA_PHASE17</h2>
+      </div>
+
+      <span id="a8MintakaClockStatus">CONNECTING</span>
+    </div>
+
+    <div class="a8-mintaka-clock-face">
+      <strong id="a8MintakaClockFace">—</strong>
+      <span id="a8MintakaPhase17">
+        MINTAKA_PHASE17 · —
+      </span>
+    </div>
+
+    <div class="a8-mintaka-console-grid">
+      <div class="a8-mintaka-console-stat">
+        <span>SELECTED RAW PULSE</span>
+        <strong id="a8MintakaSelectedRaw">—</strong>
+      </div>
+
+      <div class="a8-mintaka-console-stat">
+        <span>SOURCE EPOCH</span>
+        <strong id="a8MintakaSourceEpoch">—</strong>
+      </div>
+
+      <div class="a8-mintaka-console-stat">
+        <span>SOURCE / RIG</span>
+        <strong id="a8MintakaSource">—</strong>
+      </div>
+
+      <div class="a8-mintaka-console-stat">
+        <span>LOCKED RAW / EARTH AXIAL ROTATION</span>
+        <strong id="a8MintakaLockedRecurrence">—</strong>
+      </div>
+
+      <div class="a8-mintaka-console-stat">
+        <span>OBSERVED RECURRENCE CHANGE</span>
+        <strong id="a8MintakaRecurrenceChanged">—</strong>
+      </div>
+
+      <div class="a8-mintaka-console-stat">
+        <span>COMPLETED MINTAKA ROTATIONS</span>
+        <strong id="a8MintakaCompletedRotations">—</strong>
+      </div>
+    </div>
+
+    <div class="a8-mintaka-view-controls">
+      <button
+        type="button"
+        class="active"
+        data-a8-mintaka-view="stellar"
+        aria-pressed="true"
+      >
+        STELLAR CLOCK
+      </button>
+
+      <button
+        type="button"
+        data-a8-mintaka-view="ship"
+        aria-pressed="false"
+      >
+        COMPARE SHIP SLIP
+      </button>
+    </div>
+
+    <div id="a8MintakaShipCompare" hidden>
+      <span class="a8-mintaka-console-kicker">
+        DOWNSTREAM COMPARISON · MINTAKA DOES NOT CAUSE THE SLIP
+      </span>
+
+      <div class="a8-mintaka-compare-grid">
+        <div>
+          <span>MINTAKA CLOCK · COMPARISON SAMPLE</span>
+          <strong id="a8MintakaCompareClock">—</strong>
+        </div>
+
+        <div>
+          <span>SOL-RETURN / CIVIL CLOCK</span>
+          <strong id="a8MintakaCompareCivil">—</strong>
+        </div>
+
+        <div>
+          <span>CURRENT RELATION</span>
+          <strong id="a8MintakaCompareLeader">—</strong>
+        </div>
+
+        <div>
+          <span>SHIP SLIP GEOMETRY</span>
+          <strong id="a8MintakaCompareGeometry">—</strong>
+        </div>
+
+        <div>
+          <span>COMPARISON RAW SAMPLE</span>
+          <strong id="a8MintakaCompareRaw">—</strong>
+        </div>
+
+        <div>
+          <span>SHIP CONSOLE</span>
+          <strong>
+            <a href="https://ship.cosigo.io/">
+              OPEN SPACESHIP EARTH
+            </a>
+          </strong>
+        </div>
+      </div>
+    </div>
+
+    <div id="a8MintakaBoundary">
+      VERIFYING STELLAR CLOCK BOUNDARY
+    </div>
   </section>
 
   <section class="grid">
@@ -354,10 +651,13 @@ MintakaRotationObserver</pre>
   </section>
 
   <section class="card" style="margin-top:16px">
-    <h2>Still absent</h2>
+    <h2>Current boundary</h2>
     <p class="muted">
-      Sol · Mean Sun · Earth-day authority/divider · Mintaka clock discipline · Ship Slip.
-      This page itself has no event-injection or control POST function.
+      Mintaka remains an Earth axial-rotation witness, not the timekeeper and
+      not a clock authority. Recovered Mintaka recurrence now drives the
+      independent read-only MINTAKA_PHASE17 stellar clock. Sol and Terra Ship
+      Slip remain downstream relationships. This public page exposes no
+      observation-injection or authority-changing POST control.
     </p>
   </section>
 </main>
@@ -371,14 +671,49 @@ function exactRecurrence(r){
 
 async function refresh(){
   try{
-    const [coreResponse,mintakaResponse]=await Promise.all([
+    const [
+      coreResponse,
+      mintakaResponse
+    ]=await Promise.all([
       fetch('/api/state',{cache:'no-store'}),
       fetch('/api/mintaka',{cache:'no-store'})
     ]);
 
     const core=await coreResponse.json();
     const mintakaPayload=await mintakaResponse.json();
+
+    const [
+      stellarResult,
+      opposingResult
+    ]=await Promise.allSettled([
+      fetch(
+        '/api/mintaka/clock',
+        {cache:'no-store'}
+      ).then(
+        r => r.ok ? r.json() : {}
+      ),
+
+      fetch(
+        '/api/opposing-clocks',
+        {cache:'no-store'}
+      ).then(
+        r => r.ok ? r.json() : {}
+      )
+    ]);
+
+    const stellarPayload =
+      stellarResult.status === 'fulfilled'
+        ? stellarResult.value
+        : {};
+
+    const opposingPayload =
+      opposingResult.status === 'fulfilled'
+        ? opposingResult.value
+        : {};
+
     const m=mintakaPayload.observer || {};
+    const stellar=stellarPayload.clock || {};
+    const opposing=opposingPayload.instrument || {};
 
     document.getElementById('coreVersion').textContent =
       core.version ? `A8 v${core.version}` : 'A8 CORE';
@@ -395,11 +730,168 @@ async function refresh(){
     document.getElementById('eventCount').textContent=String(m.eventCount ?? 0);
     document.getElementById('latestSpan').textContent=m.latestSpanRaw || '—';
     document.getElementById('recurrence').textContent=exactRecurrence(m.recurrence);
+
+    document.getElementById('a8MintakaClockStatus').textContent =
+      stellar.status || 'NOT READY';
+
+    document.getElementById('a8MintakaClockFace').textContent =
+      stellar.clock && stellar.clock.textOctal
+        ? stellar.clock.textOctal
+        : '—';
+
+    document.getElementById('a8MintakaPhase17').textContent =
+      `MINTAKA_PHASE17 · ${
+        stellar.mintakaPhase17Octal ||
+        stellar.mintakaPhase17 ||
+        '—'
+      }`;
+
+    document.getElementById('a8MintakaSelectedRaw').textContent =
+      stellar.selectedRawPulse || '—';
+
+    document.getElementById('a8MintakaSourceEpoch').textContent =
+      stellar.sourceEpoch ?? '—';
+
+    const sourceParts = [
+      stellar.sourceMode,
+      stellar.rig
+    ].filter(Boolean);
+
+    if (stellar.sourceMode === 'VIRTUAL') {
+      sourceParts.push('QUALIFICATION');
+    }
+
+    document.getElementById('a8MintakaSource').textContent =
+      sourceParts.join(' · ') || '—';
+
+    document.getElementById('a8MintakaLockedRecurrence').textContent =
+      stellar.lockedRawPerEarthAxialRotation
+        ? stellar.lockedRawPerEarthAxialRotation.text
+        : '—';
+
+    document.getElementById('a8MintakaRecurrenceChanged').textContent =
+      stellar.observedRecurrenceChanged === true
+        ? 'CHANGED · LOCK PRESERVED'
+        : stellar.observedRecurrenceChanged === false
+          ? 'NO'
+          : '—';
+
+    document.getElementById('a8MintakaCompletedRotations').textContent =
+      stellar.completedMintakaRotations ?? '—';
+
+    const embeddedMintaka =
+      opposing.mintakaClock || {};
+
+    const embeddedCivil =
+      opposing.civilClock || {};
+
+    const discrepancy =
+      opposing.discrepancy || {};
+
+    document.getElementById('a8MintakaCompareClock').textContent =
+      embeddedMintaka.clock &&
+      embeddedMintaka.clock.textOctal
+        ? embeddedMintaka.clock.textOctal
+        : '—';
+
+    document.getElementById('a8MintakaCompareCivil').textContent =
+      embeddedCivil.clock &&
+      embeddedCivil.clock.textOctal
+        ? embeddedCivil.clock.textOctal
+        : '—';
+
+    document.getElementById('a8MintakaCompareLeader').textContent =
+      discrepancy.accumulated &&
+      discrepancy.accumulated.currentLeader
+        ? discrepancy.accumulated.currentLeader
+        : '—';
+
+    document.getElementById('a8MintakaCompareGeometry').textContent =
+      discrepancy.relativeBeat &&
+      discrepancy.relativeBeat.geometricLeg
+        ? discrepancy.relativeBeat.geometricLeg
+        : '—';
+
+    document.getElementById('a8MintakaCompareRaw').textContent =
+      opposing.sameSelectedRawPulse === true
+        ? `${opposing.selectedRawPulse} · VERIFIED`
+        : opposing.selectedRawPulse || '—';
+
+    const boundaryKeys = [
+      'writesA8Core',
+      'writesJovianTimekeeper',
+      'writesMintakaObserver',
+      'writesSolObserver',
+      'writesTerraShipSlip',
+      'writesCivilClock',
+      'writesCalendar',
+      'changesAuthority',
+      'usesHostTime',
+      'usesLegacyTime',
+      'usesFrequencyHz',
+      'usesUTC',
+      'usesNTP',
+      'usesGPS'
+    ];
+
+    const stellarBoundaryPass =
+      stellar.status ===
+        'MINTAKA_PHASE17_STELLAR_CLOCK_ACTIVE' &&
+      boundaryKeys.every(
+        key => stellar[key] === false
+      );
+
+    document.getElementById('a8MintakaBoundary').textContent =
+      stellarBoundaryPass
+        ? 'PASS · MINTAKA STELLAR CLOCK · NATIVE · READ ONLY'
+        : 'BOUNDARY CHECK REQUIRED';
   }catch(err){
     document.getElementById('coreVersion').textContent='CORE UNAVAILABLE';
     document.getElementById('observerStatus').textContent='OBSERVER UNAVAILABLE';
   }
 }
+
+document
+  .querySelectorAll('[data-a8-mintaka-view]')
+  .forEach(button => {
+    button.addEventListener(
+      'click',
+      () => {
+        const view =
+          button.dataset.a8MintakaView === 'ship'
+            ? 'ship'
+            : 'stellar';
+
+        document
+          .querySelectorAll('[data-a8-mintaka-view]')
+          .forEach(b => {
+            const active =
+              b.dataset.a8MintakaView === view;
+
+            b.classList.toggle(
+              'active',
+              active
+            );
+
+            b.setAttribute(
+              'aria-pressed',
+              active ? 'true' : 'false'
+            );
+          });
+
+        const compare =
+          document.getElementById(
+            'a8MintakaShipCompare'
+          );
+
+        if (compare) {
+          compare.hidden =
+            view !== 'ship';
+        }
+      }
+    );
+  });
+
 refresh();
 setInterval(refresh,1000);
 </script>

@@ -616,6 +616,210 @@
   }
 </style>
 
+
+<style id="a8-public-opposing-clock-style">
+#a8-public-opposing-clock{
+  margin:16px 0 18px;
+  padding:16px;
+  border:1px solid rgba(255,255,255,.15);
+  border-radius:14px;
+  background:rgba(7,13,20,.26);
+}
+
+.a8-opp-head{
+  display:flex;
+  gap:12px;
+  align-items:flex-start;
+  justify-content:space-between;
+  flex-wrap:wrap;
+}
+
+.a8-opp-kicker{
+  display:block;
+  font-size:.68rem;
+  font-weight:900;
+  letter-spacing:.1em;
+  opacity:.66;
+}
+
+.a8-opp-head h3{
+  margin:5px 0 0;
+}
+
+#a8OppStatus{
+  font-size:.72rem;
+  font-weight:900;
+  letter-spacing:.08em;
+}
+
+.a8-opp-clocks{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
+  margin-top:15px;
+}
+
+.a8-opp-clock{
+  min-width:0;
+  padding:15px;
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:12px;
+  background:rgba(8,14,21,.22);
+}
+
+.a8-opp-clock span{
+  display:block;
+  font-size:.68rem;
+  font-weight:900;
+  letter-spacing:.09em;
+  opacity:.66;
+}
+
+.a8-opp-clock strong{
+  display:block;
+  margin-top:7px;
+  font-size:clamp(1.45rem,4vw,2.35rem);
+  overflow-wrap:anywhere;
+}
+
+.a8-opp-clock small{
+  display:block;
+  margin-top:6px;
+  opacity:.72;
+}
+
+.a8-opp-motion{
+  margin-top:14px;
+  text-align:center;
+}
+
+#a8OppLeader{
+  display:block;
+  font-size:1.12rem;
+  font-weight:900;
+}
+
+#a8OppLeg{
+  display:block;
+  margin-top:4px;
+  font-size:.76rem;
+  letter-spacing:.08em;
+  opacity:.7;
+}
+
+.a8-opp-track-wrap{
+  margin-top:16px;
+}
+
+.a8-opp-track-labels{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  font-size:.67rem;
+  font-weight:900;
+  letter-spacing:.08em;
+  opacity:.65;
+}
+
+.a8-opp-track{
+  position:relative;
+  height:12px;
+  margin-top:8px;
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:999px;
+  background:rgba(255,255,255,.05);
+}
+
+#a8OppMarker{
+  position:absolute;
+  top:50%;
+  left:0;
+  width:18px;
+  height:18px;
+  border:3px solid currentColor;
+  border-radius:50%;
+  background:#07111a;
+  transform:translate(-50%,-50%);
+  transition:left .7s linear;
+}
+
+.a8-opp-view-controls{
+  display:flex;
+  gap:8px;
+  justify-content:center;
+  flex-wrap:wrap;
+  margin-top:16px;
+}
+
+.a8-opp-view-controls button{
+  padding:8px 12px;
+  border:1px solid rgba(255,255,255,.22);
+  border-radius:999px;
+  color:inherit;
+  cursor:pointer;
+  font:inherit;
+  font-size:.72rem;
+  font-weight:900;
+  letter-spacing:.06em;
+}
+
+.a8-opp-view-controls button.active{
+  border-color:currentColor;
+}
+
+#a8OppPrimary{
+  margin-top:12px;
+  text-align:center;
+  font-size:clamp(1.15rem,3vw,1.55rem);
+  font-weight:900;
+  overflow-wrap:anywhere;
+}
+
+.a8-opp-detail{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:10px;
+  margin-top:15px;
+}
+
+.a8-opp-detail > div{
+  min-width:0;
+  padding:11px;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:10px;
+  background:rgba(8,14,21,.16);
+}
+
+.a8-opp-detail span{
+  display:block;
+  font-size:.64rem;
+  font-weight:900;
+  letter-spacing:.08em;
+  opacity:.62;
+}
+
+.a8-opp-detail strong{
+  display:block;
+  margin-top:6px;
+  overflow-wrap:anywhere;
+}
+
+#a8OppBoundary{
+  margin-top:14px;
+  font-size:.72rem;
+  font-weight:900;
+  letter-spacing:.06em;
+  opacity:.78;
+}
+
+@media(max-width:760px){
+  .a8-opp-clocks,
+  .a8-opp-detail{
+    grid-template-columns:1fr;
+  }
+}
+</style>
+
 </head>
 <body>
 
@@ -772,6 +976,110 @@
     <div class="a8-slip-content">
 
       <h2>TERRA SHIP SLIP · LIVE ROTATION / ORBIT MACHINE</h2>
+
+      <section
+        id="a8-public-opposing-clock"
+        aria-label="Terra Ship Slip opposing native clocks"
+      >
+        <div class="a8-opp-head">
+          <div>
+            <span class="a8-opp-kicker">
+              NATIVE CLOCK COMPARISON · READ ONLY
+            </span>
+            <h3>TWO CLOCKS · ONE SELECTED RAW SAMPLE</h3>
+          </div>
+
+          <span id="a8OppStatus">CONNECTING</span>
+        </div>
+
+        <div class="a8-opp-clocks">
+          <div class="a8-opp-clock">
+            <span>MINTAKA STELLAR CLOCK</span>
+            <strong id="a8OppMintakaClock">—</strong>
+            <small id="a8OppMintakaPhase">MINTAKA_PHASE17 · —</small>
+          </div>
+
+          <div class="a8-opp-clock">
+            <span>SOL-RETURN / CIVIL CLOCK</span>
+            <strong id="a8OppCivilClock">—</strong>
+            <small id="a8OppCivilPhase">DAY_PHASE17 · —</small>
+          </div>
+        </div>
+
+        <div class="a8-opp-motion">
+          <strong id="a8OppLeader">—</strong>
+          <span id="a8OppLeg">—</span>
+        </div>
+
+        <div class="a8-opp-track-wrap">
+          <div class="a8-opp-track-labels">
+            <span>ALIGNMENT</span>
+            <span>OPPOSITION</span>
+          </div>
+
+          <div class="a8-opp-track">
+            <span id="a8OppMarker"></span>
+          </div>
+        </div>
+
+        <div class="a8-opp-view-controls">
+          <button
+            type="button"
+            class="active"
+            data-a8-slip-view="folded"
+            aria-pressed="true"
+          >
+            FOLDED SEPARATION
+          </button>
+
+          <button
+            type="button"
+            data-a8-slip-view="unwrapped"
+            aria-pressed="false"
+          >
+            UNWRAPPED JOURNEY
+          </button>
+        </div>
+
+        <div id="a8OppPrimary">—</div>
+
+        <div class="a8-opp-detail">
+          <div>
+            <span>FOLDED · PHASE17</span>
+            <strong id="a8OppFoldedPhase">—</strong>
+          </div>
+
+          <div>
+            <span>UNWRAPPED · ANGLE512</span>
+            <strong id="a8OppUnwrappedAngle">—</strong>
+          </div>
+
+          <div>
+            <span>RELATIVE TURNS / CARRY</span>
+            <strong id="a8OppCarry">—</strong>
+          </div>
+
+          <div>
+            <span>COMMON RAW ANCHOR</span>
+            <strong id="a8OppAnchor">—</strong>
+          </div>
+
+          <div>
+            <span>CURRENT RAW SAMPLE</span>
+            <strong id="a8OppRaw">—</strong>
+          </div>
+
+          <div>
+            <span>SOURCE</span>
+            <strong id="a8OppSource">—</strong>
+          </div>
+        </div>
+
+        <div id="a8OppBoundary">
+          VERIFYING NATIVE / READ-ONLY BOUNDARY
+        </div>
+      </section>
+
 
       <p class="a8-slip-lead">
         Terra rotates while Terra simultaneously advances around Sol.
@@ -2099,6 +2407,9 @@ setInterval(refresh,1000);
   const $ = id =>
     document.getElementById(id);
 
+  let opposingInstrument = null;
+  let opposingView = 'folded';
+
   function rat(r){
     if (!r) return '—';
 
@@ -2331,6 +2642,202 @@ setInterval(refresh,1000);
     }
   }
 
+
+  function renderOpposing(){
+    const i = opposingInstrument;
+
+    if (!i || !i.ready) {
+      if ($('a8OppStatus')) {
+        $('a8OppStatus').textContent =
+          'OPPOSING CLOCK · NOT READY';
+      }
+      return;
+    }
+
+    const m = i.mintakaClock || {};
+    const c = i.civilClock || {};
+    const d = i.discrepancy || {};
+    const a = d.accumulated || {};
+    const b = d.relativeBeat || {};
+    const audit = i.rawSampleAudit || {};
+    const boundary = i.authorityBoundary || {};
+
+    if ($('a8OppStatus')) {
+      $('a8OppStatus').textContent =
+        'LIVE · NATIVE · READ ONLY';
+    }
+
+    if ($('a8OppMintakaClock')) {
+      $('a8OppMintakaClock').textContent =
+        m.clock?.textOctal || '—';
+    }
+
+    if ($('a8OppCivilClock')) {
+      $('a8OppCivilClock').textContent =
+        c.clock?.textOctal || '—';
+    }
+
+    if ($('a8OppMintakaPhase')) {
+      $('a8OppMintakaPhase').textContent =
+        `MINTAKA_PHASE17 · ${
+          m.mintakaPhase17Octal ||
+          m.mintakaPhase17 ||
+          '—'
+        }`;
+    }
+
+    if ($('a8OppCivilPhase')) {
+      $('a8OppCivilPhase').textContent =
+        `DAY_PHASE17 · ${
+          c.dayPhase17Octal ||
+          c.dayPhase17 ||
+          '—'
+        }`;
+    }
+
+    if ($('a8OppLeader')) {
+      $('a8OppLeader').textContent =
+        a.currentLeader || '—';
+    }
+
+    if ($('a8OppLeg')) {
+      $('a8OppLeg').textContent =
+        b.geometricLeg || '—';
+    }
+
+    const separation =
+      num(b.geometricSeparationRotations);
+
+    if (
+      Number.isFinite(separation) &&
+      $('a8OppMarker')
+    ) {
+      const pct =
+        Math.max(
+          0,
+          Math.min(
+            100,
+            separation * 2 * 100
+          )
+        );
+
+      $('a8OppMarker').style.left =
+        `${pct}%`;
+    }
+
+    const foldedPhase =
+      rat(b.geometricSeparationPhase17);
+
+    const unwrappedAngle =
+      rat(a.unwrappedDiscrepancyAngle512);
+
+    const unwrappedRotations =
+      rat(a.unwrappedDiscrepancyRotations);
+
+    if ($('a8OppFoldedPhase')) {
+      $('a8OppFoldedPhase').textContent =
+        foldedPhase;
+    }
+
+    if ($('a8OppUnwrappedAngle')) {
+      $('a8OppUnwrappedAngle').textContent =
+        unwrappedAngle;
+    }
+
+    if ($('a8OppCarry')) {
+      $('a8OppCarry').textContent =
+        String(b.completedBeats ?? '—');
+    }
+
+    if ($('a8OppAnchor')) {
+      $('a8OppAnchor').textContent =
+        d.anchorRawPulse || '—';
+    }
+
+    if ($('a8OppRaw')) {
+      $('a8OppRaw').textContent =
+        i.sameSelectedRawPulse === true
+          ? `${i.selectedRawPulse} · VERIFIED`
+          : `${i.selectedRawPulse || '—'} · CHECK`;
+    }
+
+    if ($('a8OppSource')) {
+      const source =
+        [
+          i.sourceMode,
+          i.rig
+        ].filter(Boolean);
+
+      if (i.sourceMode === 'VIRTUAL') {
+        source.push('QUALIFICATION');
+      }
+
+      $('a8OppSource').textContent =
+        source.join(' · ') || '—';
+    }
+
+    if ($('a8OppPrimary')) {
+      $('a8OppPrimary').textContent =
+        opposingView === 'folded'
+          ? `FOLDED SEPARATION · ${foldedPhase} PHASE17`
+          : `UNWRAPPED SLIP · ${unwrappedRotations} ROTATION`;
+    }
+
+    const keys = [
+      'writesA8Core',
+      'writesMintakaObserver',
+      'writesSolObserver',
+      'writesTerraShipSlip',
+      'writesCivilClock',
+      'writesCalendar',
+      'changesAuthority',
+      'usesLegacyTime',
+      'usesHostTime',
+      'usesBrowserTime',
+      'usesFrequencyHz',
+      'usesUTC',
+      'usesNTP',
+      'usesGPS'
+    ];
+
+    const boundaryPass =
+      d.nativeOnly === true &&
+      i.sameSelectedRawPulse === true &&
+      audit.bridge === i.selectedRawPulse &&
+      audit.mintakaClock === i.selectedRawPulse &&
+      audit.civilClock === i.selectedRawPulse &&
+      keys.every(
+        key => boundary[key] === false
+      );
+
+    if ($('a8OppBoundary')) {
+      $('a8OppBoundary').textContent =
+        boundaryPass
+          ? 'PASS · SAME RAW SAMPLE · NATIVE ONLY · READ ONLY'
+          : 'BOUNDARY CHECK REQUIRED';
+    }
+  }
+
+  async function updateOpposing(){
+    try {
+      const payload =
+        await get('/api/opposing-clocks');
+
+      opposingInstrument =
+        payload.instrument || null;
+
+      renderOpposing();
+
+    } catch (_) {
+      opposingInstrument = null;
+
+      if ($('a8OppStatus')) {
+        $('a8OppStatus').textContent =
+          'OPPOSING CLOCK · UNAVAILABLE';
+      }
+    }
+  }
+
   async function refresh(){
     /*
      * Independent calls:
@@ -2340,7 +2847,42 @@ setInterval(refresh,1000);
     updateClock();
     updateRelationship();
     updateSolRate();
+    updateOpposing();
   }
+
+  document
+    .querySelectorAll('[data-a8-slip-view]')
+    .forEach(button => {
+      button.addEventListener(
+        'click',
+        () => {
+          opposingView =
+            button.dataset.a8SlipView === 'unwrapped'
+              ? 'unwrapped'
+              : 'folded';
+
+          document
+            .querySelectorAll('[data-a8-slip-view]')
+            .forEach(b => {
+              const active =
+                b.dataset.a8SlipView ===
+                opposingView;
+
+              b.classList.toggle(
+                'active',
+                active
+              );
+
+              b.setAttribute(
+                'aria-pressed',
+                active ? 'true' : 'false'
+              );
+            });
+
+          renderOpposing();
+        }
+      );
+    });
 
   refresh();
 
