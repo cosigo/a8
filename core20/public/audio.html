@@ -360,6 +360,63 @@ body{
 
 </style>
 
+
+<style id="a8-mobile-dark-glass-foreground-lock-v1">
+/*
+ * A8-MOBILE-DARK-GLASS-FOREGROUND-LOCK-v1
+ *
+ * Desktop already presents the intended dark laboratory.
+ * On phone-size displays do not let CanvasText/light-dark()
+ * choose a light-OS black foreground over dark glass.
+ */
+@media (max-width:760px){
+
+  html{
+    color-scheme:dark;
+  }
+
+  body{
+    color:#eef5f8;
+  }
+
+  :root{
+    --muted:#a9bac8;
+  }
+
+  .panel{
+    color:#eef5f8 !important;
+  }
+
+  .panel h1,
+  .panel h2,
+  .panel h3,
+  .panel h4,
+  .panel p,
+  .panel li,
+  .panel td,
+  .panel th,
+  .panel label,
+  .panel summary,
+  .panel output{
+    color:inherit;
+  }
+
+  /*
+   * Native chime lives inside the same dark laboratory.
+   * This also makes its light-dark() declarations resolve
+   * to the desktop-equivalent dark presentation.
+   */
+  #a8-chime{
+    color-scheme:dark;
+    color:#f1f3f5 !important;
+  }
+
+  #a8-chime .panel{
+    color:#f1f3f5 !important;
+  }
+}
+</style>
+
 </head>
 <body>
 <style id="a8-topside-coherence-02-style">
@@ -517,13 +574,13 @@ body{
          aria-label="A8 music shortcuts">
 
       <a class="a8-music-pill"
-         href="/composer.html"
+         href="https://composer.cosigo.io/"
          title="Make music in the A8 Composer">
         MUSICIAN?
       </a>
 
       <a class="a8-music-pill"
-         href="/contestants.html"
+         href="https://contestant.cosigo.io/"
          title="Hear A8 contestants and winners">
         CURIOUS?
       </a>
@@ -534,7 +591,7 @@ body{
       <summary>MENU</summary>
 
       <div class="a8-menu-panel">
-        <a href="https://lab.a8.cosigo.io/">LAB HOME</a>
+        <a href="https://lab.cosigo.io/">LAB HOME</a>
         <a href="https://clock.cosigo.io/">CLOCK</a>
         <a href="https://calendar.cosigo.io/">CALENDAR</a>
         <a href="https://moons.cosigo.io/">MOONS</a>

@@ -1583,6 +1583,64 @@
 }
 </style>
 
+
+<!-- A8 CALENDAR MOON PHASE OVERLAY v2 -->
+<style id="a8-calendar-moon-phase-style">
+
+/* A8 CALENDAR MOON CONTINUOUS PAINTER v3 */
+/* A8 CALENDAR MOON SIZE 125 v1 */
+
+.a8-moon-phase{
+  display:inline-flex;
+  width:25px;
+  height:25px;
+  margin-left:.30rem;
+  vertical-align:-7px;
+  align-items:center;
+  justify-content:center;
+  flex:0 0 auto;
+  pointer-events:none;
+}
+
+.a8-moon-phase svg{
+  display:block;
+  width:25px;
+  height:25px;
+  overflow:visible;
+}
+
+.a8-moon-phase circle,
+.a8-moon-phase path{
+  vector-effect:non-scaling-stroke;
+}
+
+@media(max-width:640px){
+
+  .a8-moon-phase{
+    width:21px;
+    height:21px;
+    margin-left:.18rem;
+    vertical-align:-5px;
+  }
+
+  .a8-moon-phase svg{
+    width:21px;
+    height:21px;
+  }
+
+}
+
+@media print{
+
+  .a8-moon-phase{
+    -webkit-print-color-adjust:exact;
+    print-color-adjust:exact;
+  }
+
+}
+
+</style>
+
 </head>
 <body>
 <a class="skip" href="#main">Skip to calendar</a>
@@ -1604,7 +1662,7 @@
       <summary>MENU</summary>
 
       <div class="a8-menu-panel">
-        <a href="https://lab.a8.cosigo.io/">LAB HOME</a>
+        <a href="https://lab.cosigo.io/">LAB HOME</a>
         <a href="https://clock.cosigo.io/">CLOCK</a>
         <a href="https://calendar.cosigo.io/" aria-current="page">CALENDAR</a>
         <a href="https://moons.cosigo.io/">MOONS</a>
@@ -3147,8 +3205,19 @@
     setFlags(identity);
 
     if(!wilsonPreviewActive) {
-      renderWilsonExperience(identity,yearDay,false);
+
+      renderWilsonExperience(
+        identity,
+        yearDay,
+        false
+      );
+
+      paintMoonOverlayOnWilson(
+        identity
+      );
     }
+
+    paintMoonOverlayOnDisplayedMonth();
   }
 
   async function refreshNativeCalendar() {
@@ -3223,6 +3292,632 @@
     }
   }
 
+
+  /*
+   * A8 MOON OBSERVATIONAL OVERLAY
+   *
+   * Core20 is the elapsed-time ruler.
+   * Luna is aligned once to that ruler.
+   *
+   * Runtime authority remains Core20.
+   */
+
+  const MOON_ANCHOR_SOURCE_EPOCH='3';
+  const MOON_ANCHOR_CORE_DAYCOUNT=9n;
+  const MOON_ANCHOR_DAY_PHASE17=18841;
+
+  const MOON_RECURRENCE_A8_SECOND=
+    3870633.342140416;
+
+  const A8_DAY_SECOND=131072;
+  const A8_DAY_MIDPOINT=65536;
+
+  const MOON_PHASE_NAMES=[
+    'New Moon',
+    'Waxing Crescent',
+    'First Quarter',
+    'Waxing Gibbous',
+    'Full Moon',
+    'Waning Gibbous',
+    'Third Quarter',
+    'Waning Crescent'
+  ];
+
+
+  function moonMod(value,modulus){
+    return ((value%modulus)+modulus)%modulus;
+  }
+
+
+  function moonPhaseAtCoreDay(targetCoreDayCount){
+
+    const wholeDayDelta=
+      Number(
+        targetCoreDayCount
+        - MOON_ANCHOR_CORE_DAYCOUNT
+      );
+
+    /*
+      Each tiny calendar Moon represents the
+      midpoint of that A8 civil day.
+    */
+
+    const elapsedA8Second=
+      wholeDayDelta*A8_DAY_SECOND
+      + A8_DAY_MIDPOINT
+      - MOON_ANCHOR_DAY_PHASE17;
+
+    const lunarPosition=
+      moonMod(
+        elapsedA8Second,
+        MOON_RECURRENCE_A8_SECOND
+      );
+
+    const fraction=
+      lunarPosition
+      / MOON_RECURRENCE_A8_SECOND;
+
+    const phaseIndex=
+      Math.round(fraction*8)%8;
+
+    return {
+      fraction,
+      phaseIndex,
+      name:MOON_PHASE_NAMES[phaseIndex]
+    };
+  }
+
+
+
+  /*
+   * A8 CALENDAR MOON CONTINUOUS PAINTER v3
+   *
+   * No eight-picture quantization.
+   * Every A8 civil day receives the actual
+   * continuous phase fraction already produced
+   * by the native lunar recurrence.
+   */
+
+  function moonGlyphSVG(fraction){
+
+    const p=
+      moonMod(
+        Number(fraction),
+        1
+      );
+
+    const black='#050505';
+    const white='#ffffff';
+    const edge='#aeb8bd';
+
+    const cx=8;
+    const cy=8;
+    const radius=6;
+
+    /*
+      Exact New / Full endpoints get perfectly
+      clean disks.
+    */
+
+    if(
+      p<0.000001 ||
+      p>0.999999
+    ){
+      return `
+        <circle
+          cx="8"
+          cy="8"
+          r="6"
+          fill="${black}"
+          stroke="${edge}"
+          stroke-width=".70">
+        </circle>
+      `;
+    }
+
+    if(
+      Math.abs(p-0.5)<0.000001
+    ){
+      return `
+        <circle
+          cx="8"
+          cy="8"
+          r="6"
+          fill="${white}"
+          stroke="${black}"
+          stroke-width=".70">
+        </circle>
+      `;
+    }
+
+    /*
+      Projected lunar terminator.
+
+      cosPhase drives the terminator from:
+        right limb → center → left limb
+      during waxing, then reverses during waning.
+
+      48 samples are far beyond what a 20px glyph
+      can visibly resolve, so the edge appears smooth
+      without adding meaningful browser work.
+    */
+
+    const cosPhase=
+      Math.cos(
+        2*Math.PI*p
+      );
+
+    const samples=48;
+    const points=[];
+
+    const point=(x,y)=>
+      `${x.toFixed(3)},${y.toFixed(3)}`;
+
+    const edgeX=y=>{
+      const inside=
+        Math.max(
+          0,
+          radius*radius-y*y
+        );
+
+      return Math.sqrt(inside);
+    };
+
+
+    if(p<0.5){
+
+      /*
+        WAXING
+
+        Follow the illuminated right-hand limb
+        from top to bottom.
+      */
+
+      for(
+        let i=0;
+        i<=samples;
+        i+=1
+      ){
+        const y=
+          -radius
+          + (
+              2*radius*i/samples
+            );
+
+        const x=
+          cx+edgeX(y);
+
+        points.push(
+          point(
+            x,
+            cy+y
+          )
+        );
+      }
+
+      /*
+        Return along the continuously moving
+        terminator.
+      */
+
+      for(
+        let i=samples;
+        i>=0;
+        i-=1
+      ){
+        const y=
+          -radius
+          + (
+              2*radius*i/samples
+            );
+
+        const x=
+          cx
+          + cosPhase*edgeX(y);
+
+        points.push(
+          point(
+            x,
+            cy+y
+          )
+        );
+      }
+
+    } else {
+
+      /*
+        WANING
+
+        Follow the illuminated left-hand limb.
+      */
+
+      for(
+        let i=0;
+        i<=samples;
+        i+=1
+      ){
+        const y=
+          -radius
+          + (
+              2*radius*i/samples
+            );
+
+        const x=
+          cx-edgeX(y);
+
+        points.push(
+          point(
+            x,
+            cy+y
+          )
+        );
+      }
+
+      /*
+        Return along the opposite moving
+        terminator.
+      */
+
+      for(
+        let i=samples;
+        i>=0;
+        i-=1
+      ){
+        const y=
+          -radius
+          + (
+              2*radius*i/samples
+            );
+
+        const x=
+          cx
+          - cosPhase*edgeX(y);
+
+        points.push(
+          point(
+            x,
+            cy+y
+          )
+        );
+      }
+    }
+
+    const path=
+      'M'
+      + points.join(' L')
+      + ' Z';
+
+    return `
+      <circle
+        cx="${cx}"
+        cy="${cy}"
+        r="${radius}"
+        fill="${black}">
+      </circle>
+
+      <path
+        d="${path}"
+        fill="${white}">
+      </path>
+
+      <circle
+        cx="${cx}"
+        cy="${cy}"
+        r="${radius}"
+        fill="none"
+        stroke="${edge}"
+        stroke-width=".70">
+      </circle>
+    `;
+  }
+
+
+  function makeMoonGlyph(targetCoreDayCount){
+
+    const phase=
+      moonPhaseAtCoreDay(
+        targetCoreDayCount
+      );
+
+    const moon=
+      document.createElement('span');
+
+    moon.className='a8-moon-phase';
+
+    moon.setAttribute(
+      'role',
+      'img'
+    );
+
+    moon.setAttribute(
+      'aria-label',
+      phase.name
+    );
+
+    const illuminated=
+      (
+        1-Math.cos(
+          2*Math.PI*phase.fraction
+        )
+      )/2;
+
+    moon.title=
+      `Moon phase · ${phase.name} · ${
+        Math.round(illuminated*100)
+      }% illuminated`;
+
+    moon.innerHTML=
+      `<svg
+        viewBox="0 0 16 16"
+        aria-hidden="true"
+        focusable="false">
+        ${moonGlyphSVG(phase.fraction)}
+      </svg>`;
+
+    return moon;
+  }
+
+
+  function moonNativeReady(){
+
+    return !!(
+      liveToday &&
+      liveToday.counted &&
+      String(
+        liveToday.counted.sourceEpoch
+      )===MOON_ANCHOR_SOURCE_EPOCH
+    );
+  }
+
+
+  function coreDayForYearDay(targetYearDay){
+
+    if(!moonNativeReady()){
+      return null;
+    }
+
+    /*
+      Existing server-owned YEAR DAY tells us where
+      the requested calendar square sits relative
+      to the current Core20 civil day count.
+    */
+
+    return (
+      liveToday.counted.coreDayCount
+      + BigInt(
+          targetYearDay
+          - liveToday.yearDay
+        )
+    );
+  }
+
+
+  function clearDisplayedMonthMoons(){
+
+    document
+      .querySelectorAll(
+        '#calendarBody .a8-moon-phase'
+      )
+      .forEach(
+        moon=>moon.remove()
+      );
+  }
+
+
+  function paintMoonOverlayOnDisplayedMonth(
+    forcedMonthIndex=null
+  ){
+
+    clearDisplayedMonthMoons();
+
+    if(!moonNativeReady()){
+      return;
+    }
+
+    let monthIndex=
+      Number.isInteger(forcedMonthIndex)
+        ? forcedMonthIndex
+        : -1;
+
+    if(monthIndex<0){
+
+      const chips=[
+        ...document.querySelectorAll(
+          '.month-chip'
+        )
+      ];
+
+      monthIndex=
+        chips.findIndex(
+          chip=>
+            chip.classList.contains('active')
+        );
+    }
+
+    if(
+      monthIndex<0 ||
+      monthIndex>7
+    ){
+      return;
+    }
+
+    const cells=[
+      ...document.querySelectorAll(
+        '#calendarBody td'
+      )
+    ];
+
+    if(cells.length!==45){
+      return;
+    }
+
+    cells.forEach(
+      (cell,index)=>{
+
+        const targetYearDay=
+          monthIndex*45
+          + index
+          + 1;
+
+        const targetCoreDay=
+          coreDayForYearDay(
+            targetYearDay
+          );
+
+        if(targetCoreDay===null){
+          return;
+        }
+
+        cell.appendChild(
+          makeMoonGlyph(
+            targetCoreDay
+          )
+        );
+      }
+    );
+  }
+
+
+  function clearWilsonMoons(){
+
+    document
+      .querySelectorAll(
+        '#wilsonLiveSection .a8-moon-phase'
+      )
+      .forEach(
+        moon=>moon.remove()
+      );
+  }
+
+
+  function findWilsonGoldLabel(goldDay){
+
+    const root=
+      document.getElementById(
+        'wilsonLiveSection'
+      );
+
+    if(!root){
+      return null;
+    }
+
+    const pattern=
+      goldDay===6
+        ? /^(?:LEAP\s+)?GOLD\s+6\b/i
+        : new RegExp(
+            `^GOLD\\s+${goldDay}\\b`,
+            'i'
+          );
+
+    const nodes=[
+      ...root.querySelectorAll('*')
+    ];
+
+    /*
+      First prefer an element whose own text node
+      contains the Gold label. This avoids attaching
+      the Moon to a giant parent panel.
+    */
+
+    const exact=
+      nodes.find(
+        element=>{
+
+          const ownText=[
+            ...element.childNodes
+          ]
+            .filter(
+              node=>node.nodeType===3
+            )
+            .map(
+              node=>node.nodeValue || ''
+            )
+            .join(' ')
+            .replace(/\s+/g,' ')
+            .trim();
+
+          return pattern.test(ownText);
+        }
+      );
+
+    if(exact){
+      return exact;
+    }
+
+    return (
+      nodes.find(
+        element=>{
+
+          const text=
+            (element.textContent || '')
+              .replace(/\s+/g,' ')
+              .trim();
+
+          return (
+            pattern.test(text) &&
+            text.length<70
+          );
+        }
+      )
+      || null
+    );
+  }
+
+
+  function paintMoonOverlayOnWilson(identity){
+
+    clearWilsonMoons();
+
+    if(
+      !moonNativeReady() ||
+      !identity ||
+      identity.kind!=='WILSON'
+    ){
+      return;
+    }
+
+    const goldCount=
+      identity.isLeapYear===true ||
+      Number(identity.yearLength)===366
+        ? 6
+        : 5;
+
+    for(
+      let goldDay=1;
+      goldDay<=goldCount;
+      goldDay+=1
+    ){
+
+      const target=
+        findWilsonGoldLabel(
+          goldDay
+        );
+
+      if(!target){
+        continue;
+      }
+
+      const targetYearDay=
+        360 + goldDay;
+
+      const targetCoreDay=
+        coreDayForYearDay(
+          targetYearDay
+        );
+
+      if(targetCoreDay===null){
+        continue;
+      }
+
+      target.appendChild(
+        makeMoonGlyph(
+          targetCoreDay
+        )
+      );
+    }
+  }
+
+
   function counts(monthIndex) {
     let business=0, protectedDays=0;
     for(let w=0;w<9;w++) {
@@ -3263,7 +3958,12 @@
       }
       body.appendChild(tr);
     }
+
     markTodayCell(liveToday?.identity);
+
+    paintMoonOverlayOnDisplayedMonth(
+      index
+    );
   }
 
   months.forEach((m,i)=>{

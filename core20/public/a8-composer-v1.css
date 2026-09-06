@@ -1,19 +1,20 @@
 
 
 :root{
-  color-scheme:dark light;
+  color-scheme:dark;
+  /* A8-COMPOSER-ROOT-DARK-SCHEME-v1 */
 
   --line:
     color-mix(
       in srgb,
-      CanvasText 23%,
+      #eef5f8 23%,
       transparent
     );
 
   --muted:
     color-mix(
       in srgb,
-      CanvasText 65%,
+      #eef5f8 65%,
       transparent
     );
 
@@ -28,6 +29,8 @@
 }
 
 body{
+  color:#eef5f8;
+  /* A8-COMPOSER-EXPLICIT-DARK-PALETTE-v1 */
   max-width:1180px;
 
   margin:22px auto;
@@ -67,7 +70,7 @@ body{
   background:
     color-mix(
       in srgb,
-      Canvas 90%,
+      #111315 90%,
       transparent
     );
 
@@ -129,8 +132,8 @@ button{
   padding:
     7px 10px;
 
-  background:Canvas;
-  color:CanvasText;
+  background:#111315;
+  color:#eef5f8;
 
   cursor:pointer;
   font-weight:750;
@@ -415,8 +418,8 @@ button.selected{
 
   border-radius:7px;
 
-  background:Canvas;
-  color:CanvasText;
+  background:#111315;
+  color:#eef5f8;
 }
 
 .segment-row{
@@ -644,7 +647,7 @@ button.selected{
     color-mix(
       in srgb,
       var(--blue) 35%,
-      Canvas
+      #111315
     );
 }
 
@@ -652,8 +655,8 @@ button.selected{
   background:
     color-mix(
       in srgb,
-      CanvasText 12%,
-      Canvas
+      #eef5f8 12%,
+      #111315
     );
 
   border-style:dashed;
@@ -721,7 +724,7 @@ button.selected{
 }
 
 .bar-meter strong{
-  color:CanvasText;
+  color:#eef5f8;
 }
 
 .bar-buttons{
@@ -790,8 +793,8 @@ input[type=text]{
 
   border-radius:8px;
 
-  background:Canvas;
-  color:CanvasText;
+  background:#111315;
+  color:#eef5f8;
 }
 
 
@@ -883,8 +886,8 @@ body {
   cursor: pointer;
   user-select: none;
 
-  background: Canvas;
-  color: CanvasText;
+  background: #111315;
+  color: #eef5f8;
 
   font-size: .82rem;
   font-weight: 700;
@@ -1141,50 +1144,76 @@ body {
     rgba(8,14,21,.16) !important;
 }
 
+/* ==================================================
+   A8-COMPOSER-DESKTOP-GLASS-ALL-WIDTHS-v1
+
+   Desktop presentation is authoritative at every width.
+   Responsive rules may rearrange layout, but they do not
+   repaint the Composer laboratory.
+
+   color-scheme is scoped to the dark operational surfaces
+   so #111315 / #eef5f8 cannot flip to light-OS colors
+   on phones.
+   ================================================== */
+
+.panel,
+#a8ComposerCoreObserver{
+  color-scheme:dark;
+  color:#eef5f8;
+}
 
 /*
- * Small screens get a little more density for readability.
- * Controls themselves retain their existing stronger paint.
+ * No mobile glass repaint exists here.
+ * Phone/tablet inherit the exact desktop glass paint:
+ *
+ * panel                  rgba(7,11,16,.28) + blur(1px)
+ * inspector-box          rgba(8,14,21,.18)
+ * bar-card               rgba(5,10,18,.14)
+ * Core20 observer        rgba(7,11,16,.22) + blur(1px)
+ * observer state         rgba(8,14,21,.20)
+ * observer cell          rgba(8,14,21,.16)
  */
-@media(max-width:760px){
 
-  .panel{
-    background:
-      rgba(7,11,16,.44) !important;
 
-    backdrop-filter:
-      none;
 
-    -webkit-backdrop-filter:
-      none;
+/* ==========================================================
+   A8 COMPOSER MOBILE PALETTE POINTER DRAG v1
+
+   Only palette source controls own touch drag.
+   The page outside these controls keeps normal scrolling.
+   ========================================================== */
+
+@media (hover:none), (pointer:coarse){
+
+  .note-source,
+  .rest-source{
+    touch-action:none;
+
+    -webkit-user-select:none;
+    user-select:none;
   }
 
-  .inspector-box{
-    background:
-      rgba(8,14,21,.30);
-  }
+  .note-source.a8-touch-drag-source,
+  .rest-source.a8-touch-drag-source{
+    transform:scale(1.06);
 
-  .bar-card{
-    background:
-      rgba(5,10,18,.26) !important;
-  }
+    opacity:.78;
 
-  #a8ComposerCoreObserver{
-    background:
-      rgba(7,11,16,.38) !important;
+    outline:
+      3px solid
+      var(--gold);
 
-    backdrop-filter:
-      none;
-
-    -webkit-backdrop-filter:
-      none;
-  }
-
-  #a8ComposerCoreObserver
-  .a8CoreObserverState,
-  #a8ComposerCoreObserver
-  .a8CoreObserverCell{
-    background:
-      rgba(8,14,21,.28) !important;
+    outline-offset:2px;
   }
 }
+
+
+/*
+ * Active finger drag only.
+ * No score geometry or timing change.
+ */
+body.a8-composer-touch-dragging{
+  -webkit-user-select:none;
+  user-select:none;
+}
+

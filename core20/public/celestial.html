@@ -92,6 +92,20 @@
     .mono{white-space:pre-wrap}
     @media (max-width:1000px){
       .grid,.hero-copy,.callout,.footer-grid{grid-template-columns:1fr}
+
+      /* A8 STARS MOBILE CARD WIDTH NORMALIZATION v1
+         Long deployment filenames must wrap inside the mobile
+         LAB NOTES cards instead of widening the page. */
+      #notes > .panel{
+        min-width:0;
+        max-width:100%;
+      }
+
+      #notes .mono{
+        overflow-wrap:anywhere;
+        word-break:break-word;
+      }
+
       iframe{width:100%}
     }
   
@@ -101,6 +115,21 @@ body{
     linear-gradient(rgba(5,9,14,.62), rgba(5,9,14,.76)),
     url("/assets/a8_celestial_atlas_bg.png")
       center center / cover fixed no-repeat !important;
+}
+
+
+/* A8 STARS MOBILE SHELL STABILITY v1
+   Phone rendering stabilization only.
+   Desktop presentation remains unchanged. */
+@media(max-width:700px){
+  body{
+    background-attachment:scroll,scroll !important;
+  }
+
+  #atlas iframe,
+  #atlas .auto-frame{
+    background:#050b12 !important;
+  }
 }
 
 </style>
@@ -269,7 +298,7 @@ body{
       <summary>MENU</summary>
 
       <div class="a8-menu-panel">
-        <a href="https://lab.a8.cosigo.io/">LAB HOME</a>
+        <a href="https://lab.cosigo.io/">LAB HOME</a>
         <a href="https://clock.cosigo.io/">CLOCK</a>
         <a href="https://calendar.cosigo.io/">CALENDAR</a>
         <a href="https://moons.cosigo.io/">MOONS</a>
@@ -348,7 +377,7 @@ body{
     <section id="atlas" class="panel" style="margin-bottom:14px;">
       <div class="module-title"><h2>1 · A8 CELESTIAL ATLAS — DECIMAL COMFORT</h2><div class="mini">CLICK / HOVER VECTOR REVIEW</div></div>
       <p class="subtle">Same internal starfield geometry as the approved review file. Outside axes moved clear of the starfield. Hover labels use A8 HOUR / A8 LON / A8 LAT.</p>
-      <iframe class="auto-frame" scrolling="no" src="a8_celestial_atlas_decimal_review_v0_2.html" title="A8 Celestial Atlas — Decimal Comfort Review v0.2"></iframe>
+      <iframe class="auto-frame" scrolling="no" src="a8_celestial_atlas_decimal_review_v0_2.html?v=20260905-popup110" title="A8 Celestial Atlas — Decimal Comfort Review v0.2"></iframe>
       <div class="placard"><b>Polar Projection Warning:</b> this is a flat equirectangular projection of spherical celestial geometry. Near the poles, horizontal distortion becomes extreme. Polaris can look surprising on the flat sheet while still being mathematically correct.</div>
     </section>
 
@@ -360,12 +389,13 @@ body{
         <button class="ghost-button" id="showDecimalScorpius" type="button">SCORPIUS</button>
       </div>
 
-      <iframe
+      <!-- A8 STARS WALKABOUT CACHE BUST v1 -->
+<iframe
         id="decimalWalkabout"
         class="auto-frame"
         scrolling="no"
-        src="a8_walkabout_geometry_poc_v0_1b.html"
-        title="A8 Walkabout — Orion · Decimal Comfort">
+        src="a8_walkabout_geometry_poc_v0_1b.html?v=20260905-3264"
+        title="A8 Walkabout — Orion · Decimal Comfort" loading="lazy">
       </iframe>
       <div class="callout">
         <div class="placard"><b>A8 latitude pendulum:</b><br>North Pole 0 → Equator 128 → South Pole 256 → Equator 128 → North Pole 0.<br><br>The opposite side is carried by longitude, not by inventing a second set of latitudes.</div>
@@ -410,41 +440,45 @@ body{
 
 <script>
 (() => {
+  /* A8 STARS NONDESTRUCTIVE IFRAME FIT v1
+     Measure natural child content without collapsing the live
+     iframe. This prevents page-position jumps on desktop and mobile. */
   function fitFrame(frame) {
     try {
       const doc = frame.contentDocument;
-      if (!doc) return;
+      if (!doc || !doc.body) return;
 
       /*
-       * Important:
-       * child pages may use min-height:100vh.
-       * Inside an iframe that creates an auto-height feedback loop.
-       * Neutralize it before measuring actual document content.
+       * Child pages may use min-height:100vh.
+       * Neutralize that inside the embedded copy so natural content
+       * height can be measured without viewport feedback.
        */
       if (doc.documentElement) {
         doc.documentElement.style.minHeight = '0';
         doc.documentElement.style.overflow = 'hidden';
       }
 
-      if (doc.body) {
-        doc.body.style.minHeight = '0';
-        doc.body.style.overflow = 'hidden';
+      doc.body.style.minHeight = '0';
+      doc.body.style.overflow = 'hidden';
+
+      /*
+       * getBoundingClientRect().height measures the body's natural
+       * laid-out content without first changing the iframe viewport.
+       */
+      const h = Math.ceil(
+        doc.body.getBoundingClientRect().height
+      );
+
+      if (h <= 0) return;
+
+      const current = frame.getBoundingClientRect().height;
+
+      /*
+       * Avoid needless layout writes for tiny rounding differences.
+       */
+      if (Math.abs(current - h) > 2) {
+        frame.style.height = h + 'px';
       }
-
-      frame.style.height = '1px';
-
-      requestAnimationFrame(() => {
-        const h = Math.max(
-          doc.body ? doc.body.scrollHeight : 0,
-          doc.body ? doc.body.offsetHeight : 0,
-          doc.documentElement ? doc.documentElement.scrollHeight : 0,
-          doc.documentElement ? doc.documentElement.offsetHeight : 0
-        );
-
-        if (h > 0) {
-          frame.style.height = h + 'px';
-        }
-      });
 
     } catch (_) {}
   }
@@ -458,8 +492,22 @@ body{
     });
   });
 
+  /* A8 STARS MOBILE IFRAME RESIZE GUARD v1
+     Mobile browser chrome frequently changes viewport HEIGHT
+     while the user taps controls. The iframe layout only needs
+     remeasurement when the available WIDTH actually changes. */
   let resizeTimer;
+  let lastLayoutWidth = window.innerWidth;
+
   window.addEventListener('resize', () => {
+    const nextLayoutWidth = window.innerWidth;
+
+    if (Math.abs(nextLayoutWidth - lastLayoutWidth) < 2) {
+      return;
+    }
+
+    lastLayoutWidth = nextLayoutWidth;
+
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(() => {
       frames.forEach(fitFrame);
@@ -477,14 +525,14 @@ body{
     const scorpius = document.getElementById('showDecimalScorpius');
 
     orion.addEventListener('click', () => {
-      frame.src = 'a8_walkabout_geometry_poc_v0_1b.html';
+      frame.src = 'a8_walkabout_geometry_poc_v0_1b.html?v=20260905-3264';
       frame.title = 'A8 Walkabout — Orion · Decimal Comfort';
       title.textContent =
         '2 · STOPPED-CLOCK WALKABOUT — ORION / DECIMAL COMFORT';
     });
 
     scorpius.addEventListener('click', () => {
-      frame.src = 'a8_walkabout_scorpius_decimal_v0_1.html';
+      frame.src = 'a8_walkabout_scorpius_decimal_v0_1.html?v=20260905-3264';
       frame.title = 'A8 Walkabout — Scorpius · Decimal Comfort';
       title.textContent =
         '2 · STOPPED-CLOCK WALKABOUT — SCORPIUS / DECIMAL COMFORT';

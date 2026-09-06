@@ -257,7 +257,7 @@ footer{font-size:12px;color:var(--muted);text-align:center;margin:16px 0}
       <summary>MENU</summary>
 
       <div class="a8-menu-panel">
-        <a href="https://lab.a8.cosigo.io/">LAB HOME</a>
+        <a href="https://lab.cosigo.io/">LAB HOME</a>
         <a href="https://clock.cosigo.io/" aria-current="page">CLOCK</a>
         <a href="https://calendar.cosigo.io/">CALENDAR</a>
         <a href="https://moons.cosigo.io/">MOONS</a>
@@ -838,6 +838,7 @@ footer{font-size:12px;color:var(--muted);text-align:center;margin:16px 0}
   <p>© 2026 COSIGO. COSIGO™ rights and trademark notices remain governed by the official COSIGO site.</p>
 </footer>
 
+<script src="/a8-music-player-v1.js?v=2821023e320657b7"></script>
 <script>
 'use strict';
 
@@ -860,6 +861,28 @@ let alarmOn = false;
 let alarmPhase = 0;
 let previousPhase = null;
 let audioCtx = null;
+
+/*
+ * A8 CLOCK WEEKLY DITTY ALARM v1.1
+ *
+ * AUTHORITY:
+ *   authoritative Core20 A8 edge
+ *      -> local A8 phase
+ *      -> alarm comparison
+ *
+ * OUTPUT:
+ *   cached WEEKLY A8 score
+ *      -> existing A8MusicPlayerV1
+ *      -> speaker
+ *
+ * No network request occurs when alarm fires.
+ */
+let alarmDittyPlayer = null;
+let alarmDittyScore = null;
+let alarmDittyMeta = null;
+let alarmDittySource = null;
+let alarmDittyLoadToken = 0;
+let alarmArmText = '';
 
 /*
  * STRICT A8 AUDIO EDGE STREAM
@@ -1497,7 +1520,7 @@ function processAuthoritativeCoreEdge(edge) {
     $('alarmMsg').textContent =
       'A8 ALARM';
 
-    alarmTone();
+    void fireAlarmPayload();
   }
 
   if (
@@ -1539,6 +1562,548 @@ function startCoreEdgeStream() {
 }
 
 
+/*
+ * Exact native review-score adapter.
+ *
+ * Same rule as the existing curator adapter:
+ *
+ *   global slot =
+ *     barIndex * 64 +
+ *     local event slot
+ *
+ * Native grid:
+ *   16 slots / A8 second
+ */
+
+const ALARM_DITTY_BAR_SLOTS =
+  64n;
+
+const ALARM_DITTY_SLOTS_PER_A8_SECOND =
+  16n;
+
+
+function alarmDittyIntegerFraction(
+  value,
+  label
+) {
+  const source =
+    String(
+      value ?? ''
+    ).trim();
+
+
+  if (!source) {
+    throw new Error(
+      label +
+      ' REQUIRED'
+    );
+  }
+
+
+  let n;
+  let d;
+
+
+  if (
+    source.includes('/')
+  ) {
+    const parts =
+      source.split('/');
+
+
+    if (
+      parts.length !== 2
+    ) {
+      throw new Error(
+        'INVALID ' +
+        label
+      );
+    }
+
+
+    n =
+      BigInt(
+        parts[0]
+      );
+
+
+    d =
+      BigInt(
+        parts[1]
+      );
+
+  } else {
+    n =
+      BigInt(source);
+
+    d =
+      1n;
+  }
+
+
+  if (
+    d === 0n
+  ) {
+    throw new Error(
+      'INVALID ' +
+      label
+    );
+  }
+
+
+  if (
+    d < 0n
+  ) {
+    n =
+      -n;
+
+    d =
+      -d;
+  }
+
+
+  return {
+    n,
+    d
+  };
+}
+
+
+function alarmDittyExactGridSlots(
+  value,
+  label
+) {
+  const {
+    n,
+    d
+  } =
+    alarmDittyIntegerFraction(
+      value,
+      label
+    );
+
+
+  const scaled =
+    n *
+    ALARM_DITTY_SLOTS_PER_A8_SECOND;
+
+
+  if (
+    scaled % d !==
+      0n
+  ) {
+    throw new Error(
+      label +
+      ' DOES NOT LAND ON 1/16 A8 GRID'
+    );
+  }
+
+
+  return (
+    scaled /
+    d
+  );
+}
+
+
+function alarmDittyFlattenReviewScore(
+  score
+) {
+  if (
+    !score ||
+    typeof score !==
+      'object'
+  ) {
+    throw new Error(
+      'A8 REVIEW SCORE REQUIRED'
+    );
+  }
+
+
+  if (
+    score.format !==
+      'A8M-1'
+  ) {
+    throw new Error(
+      'UNSUPPORTED A8M FORMAT'
+    );
+  }
+
+
+  if (
+    !Array.isArray(
+      score.bars
+    ) ||
+    score.bars.length !==
+      8
+  ) {
+    throw new Error(
+      'A8 WEEKLY SCORE MUST CONTAIN 8 BARS'
+    );
+  }
+
+
+  const events =
+    [];
+
+
+  score.bars.forEach(
+    (
+      bar,
+      barIndex
+    ) => {
+
+      if (
+        !bar ||
+        !Array.isArray(
+          bar.events
+        )
+      ) {
+        throw new Error(
+          'INVALID BAR ' +
+          (
+            barIndex +
+            1
+          )
+        );
+      }
+
+
+      if (
+        bar.complete !==
+          true
+      ) {
+        throw new Error(
+          'INCOMPLETE BAR ' +
+          (
+            barIndex +
+            1
+          )
+        );
+      }
+
+
+      for (
+        const event
+        of bar.events
+      ) {
+        const localStart =
+          alarmDittyExactGridSlots(
+            event.startA8,
+            'EVENT START'
+          );
+
+
+        const duration =
+          alarmDittyExactGridSlots(
+            event.durationA8,
+            'EVENT DURATION'
+          );
+
+
+        if (
+          localStart <
+            0n ||
+          localStart >=
+            ALARM_DITTY_BAR_SLOTS
+        ) {
+          throw new Error(
+            'EVENT START OUTSIDE BAR'
+          );
+        }
+
+
+        if (
+          duration <=
+            0n ||
+          localStart +
+            duration >
+            ALARM_DITTY_BAR_SLOTS
+        ) {
+          throw new Error(
+            'EVENT EXTENDS OUTSIDE BAR'
+          );
+        }
+
+
+        const globalStart =
+          (
+            BigInt(
+              barIndex
+            ) *
+            ALARM_DITTY_BAR_SLOTS
+          ) +
+          localStart;
+
+
+        events.push({
+          ...event,
+
+          /*
+           * Exact native slot fraction.
+           * No decimal conversion.
+           */
+          startA8:
+            globalStart
+              .toString() +
+            '/16'
+        });
+      }
+    }
+  );
+
+
+  return {
+    ...score,
+    events
+  };
+}
+
+
+function ensureAlarmDittyPlayer() {
+  if (
+    typeof window
+      .A8MusicPlayerV1 !==
+      'function'
+  ) {
+    throw new Error(
+      'A8 MUSIC PLAYER UNAVAILABLE'
+    );
+  }
+
+
+  if (!alarmDittyPlayer) {
+    alarmDittyPlayer =
+      new window
+        .A8MusicPlayerV1();
+  }
+
+
+  return alarmDittyPlayer;
+}
+
+
+function unlockAlarmDittyAudio() {
+  try {
+    const player =
+      ensureAlarmDittyPlayer();
+
+
+    const context =
+      player.ensureContext();
+
+
+    if (
+      context.state ===
+        'suspended'
+    ) {
+      /*
+       * ARM is a user gesture.
+       * Unlock the eventual speaker output now.
+       */
+      void context.resume();
+    }
+
+  } catch (_) {}
+}
+
+
+async function alarmDittyFetchCandidate(
+  url
+) {
+  const response =
+    await fetch(
+      url,
+      {
+        cache:
+          'no-store'
+      }
+    );
+
+
+  if (!response.ok) {
+    return null;
+  }
+
+
+  const payload =
+    await response
+      .json()
+      .catch(
+        () => null
+      );
+
+
+  if (
+    !payload ||
+    payload.ok !==
+      true ||
+    !payload.score
+  ) {
+    return null;
+  }
+
+
+  return payload;
+}
+
+
+async function preloadAlarmDitty(
+  token,
+  armedText
+) {
+  try {
+    const player =
+      ensureAlarmDittyPlayer();
+
+
+    /*
+     * Player Core readiness is observer/output
+     * preparation only.
+     */
+    const corePromise =
+      player.connectCore();
+
+
+    /*
+     * WEEKLY is authoritative selection for
+     * this alarm feature.
+     *
+     * CURRENT is retained only as compatibility
+     * fallback if no weekly score is published.
+     */
+    let payload =
+      await alarmDittyFetchCandidate(
+        '/api/music-review/weekly'
+      );
+
+
+    let source =
+      'WEEKLY';
+
+
+    if (!payload) {
+      payload =
+        await alarmDittyFetchCandidate(
+          '/api/music-review/current'
+        );
+
+      source =
+        'CURRENT';
+    }
+
+
+    if (!payload) {
+      throw new Error(
+        'NO A8 DITTY AVAILABLE'
+      );
+    }
+
+
+    await corePromise;
+
+
+    const flatScore =
+      alarmDittyFlattenReviewScore(
+        payload.score
+      );
+
+
+    /*
+     * Existing A8 player independently validates
+     * its flat A8M-1 input.
+     */
+    window.A8MusicPlayerV1
+      .validateScore(
+        flatScore
+      );
+
+
+    if (
+      token !==
+        alarmDittyLoadToken ||
+      !alarmOn
+    ) {
+      return;
+    }
+
+
+    alarmDittyScore =
+      flatScore;
+
+    alarmDittyMeta =
+      payload.meta ||
+      null;
+
+    alarmDittySource =
+      source;
+
+
+    const title =
+      (
+        alarmDittyMeta &&
+        alarmDittyMeta.title
+      ) ||
+      flatScore.title ||
+      'A8 DITTY';
+
+
+    if ($('alarmMsg')) {
+      $('alarmMsg').textContent =
+        armedText +
+        ' · ' +
+        source +
+        ' DITTY READY · ' +
+        title;
+    }
+
+  } catch (_) {
+
+    if (
+      token !==
+        alarmDittyLoadToken ||
+      !alarmOn
+    ) {
+      return;
+    }
+
+
+    alarmDittyScore =
+      null;
+
+    alarmDittyMeta =
+      null;
+
+    alarmDittySource =
+      null;
+
+
+    if ($('alarmMsg')) {
+      $('alarmMsg').textContent =
+        armedText +
+        ' · 8-PULSE FALLBACK READY';
+    }
+  }
+}
+
+
+/*
+ * Native fallback alarm.
+ *
+ * count = 8
+ *
+ * pitch:
+ *   512 cycles / A8 second
+ *
+ * pulse:
+ *   1/4 A8 second
+ *
+ * silence:
+ *   1/8 A8 second
+ *
+ * Only this final loudspeaker adapter converts
+ * native values to WebAudio seconds / Hz.
+ */
 function alarmTone() {
   if (
     !$('alarmSound') ||
@@ -1547,27 +2112,133 @@ function alarmTone() {
     return;
   }
 
-  tone(
-    660,
-    0.16,
-    0.07,
-    0
-  );
 
-  tone(
-    880,
-    0.16,
-    0.07,
-    0.20
-  );
+  try {
+    ensureAudio();
 
-  tone(
-    1040,
-    0.22,
-    0.07,
-    0.40
-  );
+
+    if (
+      !audioCtx ||
+      audioCtx.state !==
+        'running'
+    ) {
+      return;
+    }
+
+
+    const cyclesPerA8Second =
+      512;
+
+    const pulseA8 =
+      1 / 4;
+
+    const gapA8 =
+      1 / 8;
+
+    const stepA8 =
+      pulseA8 +
+      gapA8;
+
+
+    const speakerHz =
+      cyclesPerA8Second /
+      A8_AUDIO_STATE_SEC;
+
+    const speakerDuration =
+      pulseA8 *
+      A8_AUDIO_STATE_SEC;
+
+    const speakerStep =
+      stepA8 *
+      A8_AUDIO_STATE_SEC;
+
+
+    const startAt =
+      audioCtx.currentTime +
+      0.08;
+
+
+    for (
+      let i = 0;
+      i < 8;
+      i += 1
+    ) {
+      toneAt(
+        speakerHz,
+        speakerDuration,
+        0.11,
+        startAt +
+          i *
+          speakerStep
+      );
+    }
+
+  } catch (_) {}
 }
+
+
+async function fireAlarmPayload() {
+  if (
+    !$('alarmSound') ||
+    !$('alarmSound').checked
+  ) {
+    return;
+  }
+
+
+  /*
+   * CRITICAL:
+   * NO FETCH AT ALARM TIME.
+   *
+   * Only the score cached during ARM may play.
+   */
+  if (
+    alarmDittyScore &&
+    alarmDittyPlayer
+  ) {
+    try {
+      await alarmDittyPlayer
+        .play(
+          alarmDittyScore
+        );
+
+
+      const title =
+        (
+          alarmDittyMeta &&
+          alarmDittyMeta.title
+        ) ||
+        alarmDittyScore.title ||
+        'A8 DITTY';
+
+
+      if ($('alarmMsg')) {
+        $('alarmMsg').textContent =
+          'A8 ALARM · ' +
+          (
+            alarmDittySource ||
+            'DITTY'
+          ) +
+          ' · ' +
+          title;
+      }
+
+
+      return;
+
+    } catch (_) {}
+  }
+
+
+  if ($('alarmMsg')) {
+    $('alarmMsg').textContent =
+      'A8 ALARM · 8-PULSE FALLBACK';
+  }
+
+
+  alarmTone();
+}
+
 
 function gongTone() {
   tone(
@@ -1866,16 +2537,59 @@ if ($('arm')) {
     }
     alarmPhase = compose(h, m, s);
     alarmOn = true;
+
+    alarmDittyScore = null;
+    alarmDittyMeta = null;
+    alarmDittySource = null;
+
+    alarmArmText =
+      `A8 ALARM armed for ${dec2(h)}:${dec2(m)}:${dec2(s)}`;
+
+    const dittyToken =
+      ++alarmDittyLoadToken;
+
+    /*
+     * Existing Clock output + music-player output
+     * are both unlocked by the ARM gesture.
+     */
+    ensureAudio();
+    unlockAlarmDittyAudio();
+
     if ($('alarmMsg')) {
-      $('alarmMsg').textContent = `A8 ALARM armed for ${dec2(h)}:${dec2(m)}:${dec2(s)}`;
+      $('alarmMsg').textContent =
+        alarmArmText +
+        ' · LOADING WEEKLY DITTY';
     }
+
+    void preloadAlarmDitty(
+      dittyToken,
+      alarmArmText
+    );
   };
 }
 
 if ($('off')) {
   $('off').onclick = () => {
     alarmOn = false;
-    if ($('alarmMsg')) $('alarmMsg').textContent = 'Alarm off.';
+
+    alarmDittyLoadToken += 1;
+    alarmDittyScore = null;
+    alarmDittyMeta = null;
+    alarmDittySource = null;
+
+    if (
+      alarmDittyPlayer &&
+      alarmDittyPlayer.playing
+    ) {
+      alarmDittyPlayer.stop(
+        'ALARM DISABLED'
+      );
+    }
+
+    if ($('alarmMsg')) {
+      $('alarmMsg').textContent =
+        'Alarm off.';
+    }
   };
 }
 

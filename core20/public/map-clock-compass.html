@@ -120,12 +120,42 @@ footer{margin-top:42px;border-top:1px solid var(--line);padding-top:18px;color:v
 .map-probe-hint{margin:10px 0 2px;color:var(--muted);font-size:.9rem}
 .map-probe-hint strong{color:#f0d18b}
 .exact-map{touch-action:manipulation}
+
+/* A8 MOBILE NATIVE MAP PINCH v1
+   On phones the exact map owns two-finger zoom.
+   Browser page zoom is not used while touching this SVG.
+   Desktop remains unchanged. */
+@media(max-width:640px){
+  .exact-map-card > .svg-wrap{
+    overflow:visible;
+    position:relative;
+    background:#0d141b;
+    border-radius:0;
+  }
+
+  #exactMap{
+    display:block;
+    width:100%;
+    max-width:100%;
+    height:auto;
+    aspect-ratio:1076 / 560;
+    min-height:1px;
+    background:#0d141b;
+    touch-action:none;
+    overscroll-behavior:contain;
+  }
+}
 .map-probe-crosshair{stroke:#eef4f8;stroke-width:1.1;stroke-dasharray:5 5;opacity:.72;pointer-events:none}
 .map-probe-dot{fill:#f2d084;stroke:#163c65;stroke-width:2;pointer-events:none}
 .map-probe-box{fill:#0b1219;fill-opacity:.96;stroke:#d7b86d;stroke-width:1.4;pointer-events:none}
 .map-probe-title{font:800 13px system-ui,-apple-system,Segoe UI,sans-serif;fill:#f0d18b;letter-spacing:.08em;pointer-events:none}
 .map-probe-value{font:800 17px ui-monospace,SFMono-Regular,Consolas,monospace;fill:#f3f7fa;pointer-events:none}
 .map-probe-city{font:600 13px system-ui,-apple-system,Segoe UI,sans-serif;fill:#aebdca;pointer-events:none}
+@media(max-width:640px){
+  .map-probe-title{font-size:11px}
+  .map-probe-value{font-size:13px}
+  .map-probe-city{font-size:11px}
+}
 
 
 .map-legend-title{font:800 13px system-ui,-apple-system,Segoe UI,sans-serif;fill:#f0d18b;letter-spacing:.08em}
@@ -143,9 +173,6 @@ body{
 </head>
 <body><main>
 <header>
-<div class="eyebrow">COSIGO Labs · Auspicious 8</div>
-<h1>Unified Map · Clock · Compass</h1>
-<p class="lead">One physical 512-state cycle. Two complete views. Pick your poison: <strong>Decimal 512</strong> or <strong>Octal 1000₈</strong>. Map, clock, compass, coordinates and phase labels switch together. No mixed notation.</p>
 <style id="a8-topside-coherence-02-style">
 /* A8 SINGLE DROPDOWN NAV · SITE STANDARD */
 #a8-topside-coherence-02{
@@ -266,7 +293,7 @@ body{
       <summary>MENU</summary>
 
       <div class="a8-menu-panel">
-        <a href="https://lab.a8.cosigo.io/">LAB HOME</a>
+        <a href="https://lab.cosigo.io/">LAB HOME</a>
         <a href="https://clock.cosigo.io/">CLOCK</a>
         <a href="https://calendar.cosigo.io/">CALENDAR</a>
         <a href="https://moons.cosigo.io/">MOONS</a>
@@ -288,6 +315,11 @@ body{
 
   </div>
 </nav>
+
+<div class="eyebrow">COSIGO Labs · Auspicious 8</div>
+<h1>Unified Map · Clock · Compass</h1>
+<p class="lead">One physical 512-state cycle. Two complete views. Pick your poison: <strong>Decimal 512</strong> or <strong>Octal 1000₈</strong>. Map, clock, compass, coordinates and phase labels switch together. No mixed notation.</p>
+
 <div style="max-width:1180px;margin:12px auto 0;padding:0 20px;color:#f4d990;font:800 .78rem ui-monospace,monospace;letter-spacing:.06em">ENGINEERING LAB INTEGRATION · OBSERVER / REPRESENTATION SURFACE · NO FEEDBACK TO RECOVERY CORE</div>
 </header>
 
@@ -310,26 +342,788 @@ body{
 <div class="warn" style="margin-top:12px"><strong>Rule:</strong> map 512 + clock 512 + compass 512, or map 1000₈ + clock 1000₈ + compass 1000₈. Never cross the two views.</div>
 </section>
 
-<h2>1. One Ruler Everywhere</h2>
+<!-- A8 MAP PAGE TOYS FIRST SHUFFLE v1 -->
+<h2>1. Exact World Grid — computed geometry</h2>
 <div class="card">
-<div class="instrument-row"><div class="title">MAP — LONGITUDE FULL WRAP</div><div class="ticks" id="mapTicks"></div></div>
-<div class="instrument-row"><div class="title">CLOCK — FULL-DAY PHASE RING</div><div class="ticks" id="clockTicks"></div></div>
-<div class="instrument-row"><div class="title">COMPASS — FULL TURN</div><div class="ticks" id="compassTicks"></div></div>
-<div class="instrument-row"><div class="title">MAP — LATITUDE POLE TO POLE (HALF TURN)</div><div class="lat-ticks" id="latTicks"></div></div>
-<p class="caption">Longitude, clock phase and compass bearing are the same complete 512-state turn expressed in the selected notation. Latitude is a half-turn from North Pole to South Pole, so it ends at 256 decimal / 400₈.</p>
+  <p><strong>Measurement surface rule:</strong> this map is generated from the coordinate mathematics, not from decorative artwork. Decimal and octal modes change <em>labels only</em>. Coastline context, grid positions, city markers and great-circle routes stay fixed.</p>
+  <div class="mapfacts">
+    <div class="fact"><strong>Latitude rule</strong><span>North 0 → Equator 128 → South 256<br>Octal: 000₈ → 200₈ → 400₈</span></div>
+    <div class="fact"><strong>Longitude rule</strong><span>Greenwich seam = 0 / 512<br>Opposite meridian = 256</span></div>
+    <div class="fact"><strong>Projection</strong><span>Equirectangular display of the same Earth.<br>Shortest route is still computed on the sphere.</span></div>
+    <div class="fact"><strong>Engineer sniff test</strong><span>Equal spacing pole-to-pole. Equal spacing east-west. Same pixels in both numeral modes.</span></div>
+  </div>
 </div>
 
-<h2>2. Live Alignment Demo</h2>
-<div class="card hero sliderbox">
-<label for="phase">Shared full-turn phase</label>
-<input id="phase" type="range" min="0" max="512" step="0.00390625" value="128">
-<div class="demovalue" id="phaseValue"></div>
-<div class="triptych" style="margin-top:14px">
-<div class="instrument"><div class="label">MAP LONGITUDE PHASE</div><div class="value" id="mapValue"></div><p>Greenwich = start/rollover. Pacific opposite = half-turn.</p></div>
-<div class="instrument"><div class="label">CLOCK DAY PHASE</div><div class="value" id="clockPhaseValue"></div><div class="formula" id="clockTimeValue"></div></div>
-<div class="instrument"><div class="label">COMPASS BEARING</div><div class="value" id="compassValue"></div><p id="directionValue"></p></div>
+<div class="card exact-map-card">
+  <div class="svg-wrap">
+    <svg id="exactMap" class="exact-map" viewBox="-76 0 1076 560" aria-label="A8 exact world coordinate map"></svg>
+  </div>
+  <div class="map-probe-hint"><strong>MAP PROBE:</strong> hover and pause anywhere on the map; on touch screens, tap a point. Display is intentionally limited to one fractional A8 digit.</div>
+  <p id="exactMapCaption" class="caption"></p>
+  <div class="anchor-grid">
+    <div class="anchor-card"><strong>London</strong><span id="anchorLondon"></span></div>
+    <div class="anchor-card"><strong>Tokyo</strong><span id="anchorTokyo"></span></div>
+    <div class="anchor-card"><strong>Buenos Aires</strong><span id="anchorBuenosAires"></span></div>
+    <div class="anchor-card"><strong>Los Angeles</strong><span id="anchorLosAngeles"></span></div>
+  </div>
 </div>
+
+
+<!-- A8 COORDINATE WORKBENCH GREAT CIRCLE v1 -->
+<!-- A8 COORDINATE WORKBENCH PLACEMENT v2 -->
+<style id="a8-coordinate-workbench-style">
+.a8-workbench-rule{
+  margin:12px 0 16px;
+  padding:10px 12px;
+  border:1px solid rgba(255,255,255,.16);
+  border-radius:10px;
+  font-weight:800;
+  letter-spacing:.03em;
+}
+.a8-point-card{
+  padding:14px;
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:12px;
+  background:rgba(255,255,255,.025);
+}
+.a8-point-title{
+  font-weight:900;
+  letter-spacing:.08em;
+  margin-bottom:10px;
+}
+.a8-a8-inputs{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+.a8-a8-inputs label{
+  display:block;
+  font-size:.78rem;
+  font-weight:800;
+  letter-spacing:.04em;
+}
+.a8-a8-inputs input{
+  width:100%;
+  box-sizing:border-box;
+  margin-top:5px;
+}
+.a8-point-secondary{
+  margin-top:10px;
+  line-height:1.45;
+}
+.a8-point-reference{
+  margin-top:6px;
+  font-weight:700;
+}
+.a8-point-controls{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+  margin-top:12px;
+}
+.a8-point-controls button,
+.a8-workbench-controls button,
+.a8-travel-modes button{
+  cursor:pointer;
+}
+.a8-map-pick-status{
+  margin:14px 0;
+  padding:9px 11px;
+  border-left:3px solid currentColor;
+  font-weight:700;
+}
+.a8-route-result{
+  margin-top:14px;
+}
+.a8-route-big{
+  font-size:1.55rem;
+  font-weight:900;
+  margin:.15rem 0;
+}
+.a8-route-angle{
+  font-weight:700;
+}
+.a8-workbench-controls{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:12px;
+}
+.a8-travel-panel{
+  margin-top:16px;
+  padding-top:14px;
+  border-top:1px solid rgba(255,255,255,.14);
+}
+.a8-travel-modes{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:8px;
+  margin-top:10px;
+}
+.a8-travel-modes button{
+  min-height:58px;
+  padding:8px;
+}
+.a8-travel-modes button.active{
+  outline:2px solid currentColor;
+  outline-offset:2px;
+}
+.a8-travel-speed{
+  display:block;
+  margin-top:4px;
+  font-size:.72rem;
+  opacity:.78;
+}
+.a8-custom-speed{
+  margin-top:12px;
+}
+.a8-custom-speed input{
+  max-width:220px;
+  margin-left:8px;
+}
+.a8-travel-result{
+  margin-top:14px;
+}
+.a8-travel-big{
+  font-size:1.4rem;
+  font-weight:900;
+}
+@media(max-width:720px){
+  .a8-a8-inputs{
+    grid-template-columns:1fr;
+  }
+  .a8-travel-modes{
+    grid-template-columns:1fr 1fr;
+  }
+}
+
+
+/* ==========================================================
+   A8-MAP-MOBILE-DEGREASE-v1
+
+   Mobile presentation containment only.
+   Desktop geometry / calculations remain authoritative.
+   ========================================================== */
+
+@media (max-width:760px){
+
+  /*
+   * Give the phone a little more useful horizontal room.
+   * Desktop main padding remains untouched.
+   */
+  main{
+    width:100%;
+    max-width:100%;
+    padding:
+      18px 12px 56px;
+  }
+
+
+  /*
+   * DESKTOP GRID MINIMUMS ARE TOO LARGE FOR PHONES.
+   *
+   * Original:
+   *   .grid  min 300px
+   *   .grid2 min 390px
+   *
+   * A narrow viewport must be allowed to become
+   * one real fluid column.
+   */
+  .grid,
+  .grid2{
+    grid-template-columns:
+      minmax(0,1fr)
+      !important;
+
+    width:100%;
+    max-width:100%;
+  }
+
+  .grid > *,
+  .grid2 > *{
+    min-width:0;
+    width:100%;
+    max-width:100%;
+  }
+
+
+  /*
+   * Cards must never establish a wider minimum
+   * than their phone column.
+   */
+  .card,
+  .instrument,
+  .a8-point-card,
+  .results,
+  .fact,
+  .anchor-card,
+  .rule{
+    min-width:0;
+    max-width:100%;
+  }
+
+  .card{
+    padding:14px;
+  }
+
+
+  /*
+   * FORM CONTROLS
+   *
+   * Keep all coordinate and speed inputs inside
+   * the physical card boundary.
+   */
+  .converter input,
+  .a8-a8-inputs input,
+  .a8-custom-speed input{
+    display:block;
+
+    width:100%;
+    min-width:0;
+    max-width:100%;
+
+    margin-left:0;
+  }
+
+  .a8-custom-speed label{
+    display:grid;
+    grid-template-columns:minmax(0,1fr);
+    gap:6px;
+  }
+
+
+  /*
+   * Buttons remain finger-sized but cannot widen
+   * their parent card.
+   */
+  .a8-point-controls,
+  .a8-workbench-controls{
+    display:grid;
+    grid-template-columns:
+      repeat(2,minmax(0,1fr));
+
+    width:100%;
+    max-width:100%;
+    gap:8px;
+  }
+
+  .a8-point-controls button,
+  .a8-workbench-controls button,
+  .a8-travel-modes button,
+  .modebtn{
+    min-width:0;
+    max-width:100%;
+
+    white-space:normal;
+    overflow-wrap:anywhere;
+  }
+
+
+  /*
+   * Existing travel buttons become two fluid
+   * columns instead of inheriting desktop pressure.
+   */
+  .a8-travel-modes{
+    grid-template-columns:
+      repeat(2,minmax(0,1fr))
+      !important;
+
+    width:100%;
+  }
+
+
+  /*
+   * Long calculated readouts must wrap inside
+   * their presentation cards rather than becoming
+   * a new viewport width.
+   */
+  .result-main,
+  .a8-route-big,
+  .a8-route-angle,
+  .a8-travel-big,
+  .a8-map-pick-status,
+  .a8-route-result,
+  .a8-travel-result,
+  .a8-point-secondary,
+  .a8-point-reference,
+  .formula,
+  .route-small{
+    max-width:100%;
+
+    overflow-wrap:anywhere;
+    word-break:break-word;
+  }
+
+
+  /*
+   * Wide reference tables stay inside the card.
+   * If a table genuinely needs more room, only the
+   * table scrolls — not the entire A8 page.
+   */
+  table{
+    display:block;
+
+    width:100%;
+    max-width:100%;
+
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+  }
+
+
+  /*
+   * SVG / MAP / COMPASS CONTAINMENT
+   */
+  .compasswrap,
+  .mapwrap,
+  .svg-wrap{
+    min-width:0;
+    max-width:100%;
+  }
+
+  .compasswrap{
+    padding:5px;
+  }
+
+
+  /*
+   * The existing desktop compass deliberately
+   * ignores touch pointers. On a phone, the face
+   * becomes an intentional drag surface instead.
+   *
+   * Scrolling remains normal everywhere outside
+   * the compass.
+   */
+  #a8CompassInteractive{
+    width:100%;
+    max-width:100%;
+
+    touch-action:none;
+  }
+
+
+  /*
+   * Keep COSIGO + MENU together as the real top row
+   * instead of allowing MENU to fall below the logo.
+   */
+  #a8-topside-coherence-02 .a8-topline{
+    flex-wrap:nowrap;
+  }
+
+  #a8-topside-coherence-02 .cosigo-global-brand{
+    min-width:0;
+  }
+
+  #a8-topside-coherence-02 .a8-menu{
+    margin-left:auto;
+    flex:0 0 auto;
+  }
+
+
+  /*
+   * Mobile browsers are happier when the decorative
+   * full-page background does not use fixed attachment.
+   */
+  body{
+    background-attachment:
+      scroll
+      !important;
+  }
+}
+
+@media (max-width:360px){
+
+  /*
+   * Very narrow phones get one control per row
+   * rather than compressed half-buttons.
+   */
+  .a8-point-controls,
+  .a8-workbench-controls{
+    grid-template-columns:
+      minmax(0,1fr);
+  }
+}
+
+
+
+/* A8 MAP SHORTEST ROUTE UI v1 */
+
+.a8-city-pickers{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin:12px 0;
+}
+
+.a8-city-pickers label{
+  display:block;
+  color:var(--muted);
+  font-size:.78rem;
+  font-weight:800;
+  letter-spacing:.05em;
+}
+
+.a8-city-pickers select{
+  display:block;
+  width:100%;
+  box-sizing:border-box;
+  margin-top:5px;
+  padding:9px 10px;
+  border:1px solid var(--line);
+  border-radius:8px;
+  background:#080d12;
+  color:var(--text);
+  font:inherit;
+}
+
+.a8-city-pickers-note{
+  grid-column:1 / -1;
+  color:var(--muted);
+  font-size:.82rem;
+}
+
+.map-route-user{
+  fill:none;
+  stroke:var(--green);
+  stroke-width:4;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  pointer-events:none;
+}
+
+.map-route-user-dot{
+  fill:var(--green);
+  stroke:#163c65;
+  stroke-width:2.4;
+  pointer-events:none;
+}
+
+.map-route-user-label{
+  font:900 15px system-ui,-apple-system,Segoe UI,sans-serif;
+  fill:#eef4f8;
+  paint-order:stroke;
+  stroke:#0d141b;
+  stroke-width:5px;
+  pointer-events:none;
+}
+
+@media(max-width:720px){
+  .a8-city-pickers{
+    grid-template-columns:1fr;
+  }
+
+  .a8-city-pickers-note{
+    grid-column:auto;
+  }
+}
+
+</style>
+
+<h2>2. A8 Coordinate &amp; Travel Workbench</h2>
+
+<div class="card converter">
+
+<p>
+  <strong>A8 first.</strong>
+  Click the map to capture two positions, or enter A8 coordinates directly.
+  The first map click fills POINT A; the second fills POINT B.
+  Conventional coordinates are shown afterward only as a legacy comparison.
+</p>
+
+<p class="route-small">
+  The 123-city shelf remains a nearby reference finder.
+  City-center coordinates are approximate reference points, not boundaries.
+</p>
+
+<div class="a8-workbench-rule">
+  DISTANCE IS GEOMETRY · TRAVEL MODE CHANGES TIME ONLY
 </div>
+
+<div class="grid2">
+
+  <section class="a8-point-card">
+    <div class="a8-point-title">POINT A</div>
+
+    <div class="a8-a8-inputs">
+      <label>
+        A8 LAT
+        <input
+          id="a8LatA"
+          type="text"
+          inputmode="decimal"
+          autocomplete="off"
+          placeholder="0 → 256">
+      </label>
+
+      <label>
+        A8 LON
+        <input
+          id="a8LonA"
+          type="text"
+          inputmode="decimal"
+          autocomplete="off"
+          placeholder="0 → 512">
+      </label>
+    </div>
+
+    <div
+      id="legacyA"
+      class="route-small a8-point-secondary">
+      legacy comparison · —
+    </div>
+
+    <div
+      id="referenceA"
+      class="a8-point-reference">
+      reference · —
+    </div>
+
+    <div class="a8-point-controls">
+      <button type="button" id="armMapA">
+        SET A FROM MAP
+      </button>
+
+      <button type="button" id="clearA">
+        CLEAR A
+      </button>
+    </div>
+  </section>
+
+
+  <section class="a8-point-card">
+    <div class="a8-point-title">POINT B</div>
+
+    <div class="a8-a8-inputs">
+      <label>
+        A8 LAT
+        <input
+          id="a8LatB"
+          type="text"
+          inputmode="decimal"
+          autocomplete="off"
+          placeholder="0 → 256">
+      </label>
+
+      <label>
+        A8 LON
+        <input
+          id="a8LonB"
+          type="text"
+          inputmode="decimal"
+          autocomplete="off"
+          placeholder="0 → 512">
+      </label>
+    </div>
+
+    <div
+      id="legacyB"
+      class="route-small a8-point-secondary">
+      legacy comparison · —
+    </div>
+
+    <div
+      id="referenceB"
+      class="a8-point-reference">
+      reference · —
+    </div>
+
+    <div class="a8-point-controls">
+      <button type="button" id="armMapB">
+        SET B FROM MAP
+      </button>
+
+      <button type="button" id="clearB">
+        CLEAR B
+      </button>
+    </div>
+  </section>
+
+</div>
+
+
+
+<!-- A8 MAP MINIMAL QUICK CITIES v1 -->
+<div class="a8-city-pickers"
+     id="a8QuickCityPickers">
+
+  <label>
+    QUICK CITY · POINT A
+    <select id="quickCityA">
+      <option value="">— MAP / MANUAL —</option>
+      <option value="London">London</option>
+      <option value="Tokyo">Tokyo</option>
+      <option value="Los Angeles">Los Angeles</option>
+      <option value="Buenos Aires">Buenos Aires</option>
+    </select>
+  </label>
+
+  <label>
+    QUICK CITY · POINT B
+    <select id="quickCityB">
+      <option value="">— MAP / MANUAL —</option>
+      <option value="London">London</option>
+      <option value="Tokyo">Tokyo</option>
+      <option value="Los Angeles">Los Angeles</option>
+      <option value="Buenos Aires">Buenos Aires</option>
+    </select>
+  </label>
+
+  <div class="a8-city-pickers-note">
+    Four quick anchors only. Map clicks and manual A8
+    coordinates remain available for any position on Earth.
+  </div>
+
+</div>
+
+<div
+  id="mapPickStatus"
+  class="a8-map-pick-status">
+  MAP CLICK READY · first click fills POINT A
+</div>
+
+
+<div class="a8-workbench-controls">
+  <button type="button" id="swapPoints">
+    SWAP A ↔ B
+  </button>
+
+  <button type="button" id="clearPoints">
+    CLEAR BOTH
+  </button>
+</div>
+
+
+<div
+  class="results a8-route-result"
+  id="coordResults">
+  <strong>SET POINT A AND POINT B.</strong>
+</div>
+
+
+<div class="a8-travel-panel">
+
+  <div>
+    <strong>GENERAL TRAVEL MODEL</strong>
+  </div>
+
+  <p class="route-small">
+    Select a general reference speed.
+    The A8/NAV distance does not change when the travel method changes.
+  </p>
+
+  <div class="a8-travel-modes">
+
+    <button
+      type="button"
+      class="a8-travel-mode"
+      data-name="SHIP"
+      data-speed="24">
+      <strong>SHIP</strong>
+      <span
+        class="a8-travel-speed"
+        id="shipSpeed"></span>
+    </button>
+
+    <button
+      type="button"
+      class="a8-travel-mode"
+      data-name="CAR"
+      data-speed="48">
+      <strong>CAR</strong>
+      <span
+        class="a8-travel-speed"
+        id="carSpeed"></span>
+    </button>
+
+    <button
+      type="button"
+      class="a8-travel-mode"
+      data-name="TRAIN"
+      data-speed="96">
+      <strong>TRAIN</strong>
+      <span
+        class="a8-travel-speed"
+        id="trainSpeed"></span>
+    </button>
+
+    <button
+      type="button"
+      class="a8-travel-mode"
+      data-name="PLANE"
+      data-speed="512">
+      <strong>PLANE</strong>
+      <span
+        class="a8-travel-speed"
+        id="planeSpeed"></span>
+    </button>
+
+  </div>
+
+
+  <div class="a8-custom-speed">
+    <label>
+      <strong>CUSTOM</strong>
+      <input
+        id="customTravelSpeed"
+        type="text"
+        inputmode="decimal"
+        autocomplete="off"
+        placeholder="A8/NAV per A8 HOUR">
+    </label>
+  </div>
+
+
+  <div
+    id="travelResults"
+    class="results a8-travel-result">
+    Select SHIP, CAR, TRAIN, PLANE, or enter a custom speed.
+  </div>
+
+</div>
+
+
+<p class="route-small">
+  <strong>Shortest great-circle model:</strong>
+  A→B uses the shortest spherical surface arc.
+  Longitude <strong>0 / 512 is one meridian</strong>,
+  so the route crosses that wrap whenever doing so is shorter.
+  Shortest surface angle is always 0 → 256 A8 states;
+  shortest surface distance is always 0 → 16384 A8/NAV.
+  At exactly 256 the points are antipodal and multiple
+  equal shortest great-circle routes exist.
+</p>
+
+<!-- A8 WORKBENCH TRAINING DISCLAIMER v1 -->
+<div class="atlas-note" style="margin-top:16px">
+  <strong>TRAINING / DEMONSTRATION ONLY.</strong>
+  Travel modes use generalized average speeds for user-friendly comparison.
+  They do not model actual roads, rail lines, shipping lanes, air routes,
+  stops, weather, borders, currents, or operating schedules.
+  The underlying A8 coordinate, angular, rhumb-line, and A8/NAV calculations
+  retain their mathematical precision. The averaged travel methods affect
+  only the hypothetical elapsed-time estimate.
+  A8 is demonstrated here as a complete measurement framework capable of
+  precise geographic calculation. Conventional systems currently have far
+  greater routing infrastructure, datasets, and institutional support.
+</div>
+
+<div class="formula" style="margin-top:12px">A8 POSITION DOMAIN
+LAT 0 → 256
+LON 0 → 512 → 0 recurrence
+
+RHUMB-LINE SURFACE DISTANCE
+A8/NAV = A8 RHUMB ANGLE × 64
+
+GENERAL TRAVEL TIME
+A8 HOUR = A8/NAV distance ÷ A8/NAV per A8 HOUR
+
+DISTANCE IS GEOMETRY.
+TRAVEL MODE CHANGES TIME ONLY.
+
+Legacy coordinates, kilometres and legacy hours are comparison outputs only.</div>
+
+</div>
+
 
 <h2>3. Compass</h2>
 <div class="card" style="margin-bottom:14px">
@@ -340,7 +1134,7 @@ body{
   </nav>
 </div>
 <div class="grid2">
-<section class="card hero"><div class="compasswrap"><svg viewBox="0 0 660 660" aria-label="A8 unified compass">
+<section class="card hero"><div class="compasswrap"><svg id="a8CompassInteractive" viewBox="0 0 660 660" aria-label="A8 unified compass">
 <circle cx="330" cy="330" r="250" fill="#f6edd7" stroke="#173b6c" stroke-width="4"/>
 <circle cx="330" cy="330" r="215" fill="none" stroke="#c7a45f" stroke-width="2"/>
 <circle cx="330" cy="330" r="155" fill="none" stroke="#c7a45f" stroke-width="1.5"/>
@@ -424,11 +1218,19 @@ body{
 <text id="compassLabel6" x="43.0" y="330.0" text-anchor="middle" dominant-baseline="middle" font-size="22" font-weight="800" fill="#173b6c"></text>
 <text x="192.8" y="192.8" text-anchor="middle" dominant-baseline="middle" font-size="22" font-weight="800" fill="#7b2b1d">NW</text>
 <text id="compassLabel7" x="127.1" y="127.1" text-anchor="middle" dominant-baseline="middle" font-size="22" font-weight="800" fill="#173b6c"></text>
+<!-- A8 INTERACTIVE COMPASS NEEDLE v1 -->
+<g id="a8CompassNeedle" pointer-events="none">
 <line x1="330" y1="330" x2="330" y2="100" stroke="#173b6c" stroke-width="8"/>
 <polygon points="330,76 316,116 344,116" fill="#173b6c"/>
 <line x1="330" y1="330" x2="330" y2="548" stroke="#b58b3a" stroke-width="6"/>
+</g>
 <circle cx="330" cy="330" r="13" fill="#d7b86d" stroke="#173b6c" stroke-width="3"/>
-</svg></div><p class="caption">Conventional clockwise orientation remains unchanged. Decimal mode cardinals: N 0/512, E 128, S 256, W 384. Octal mode: N 000/1000₈, E 200₈, S 400₈, W 600₈.</p></section>
+</svg></div><p class="caption">Conventional clockwise orientation remains unchanged. Decimal mode cardinals: N 0/512, E 128, S 256, W 384. Octal mode: N 000/1000₈, E 200₈, S 400₈, W 600₈.</p><p class="route-small">
+<strong>INTERACTIVE COMPASS:</strong>
+move a mouse around the compass face, or drag a finger across it on a touch screen.
+Leave the compass or lift your finger and it returns North.
+</p>
+</section>
 <section class="card">
 <h3>Same physical directions</h3>
 <table>
@@ -446,99 +1248,40 @@ body{
 </section>
 </div>
 
-<h2>4. Exact World Grid — computed geometry</h2>
+
+<h2>4. One Ruler Everywhere</h2>
 <div class="card">
-  <p><strong>Measurement surface rule:</strong> this map is generated from the coordinate mathematics, not from decorative artwork. Decimal and octal modes change <em>labels only</em>. Coastline context, grid positions, city markers and great-circle routes stay fixed.</p>
-  <div class="mapfacts">
-    <div class="fact"><strong>Latitude rule</strong><span>North 0 → Equator 128 → South 256<br>Octal: 000₈ → 200₈ → 400₈</span></div>
-    <div class="fact"><strong>Longitude rule</strong><span>Greenwich seam = 0 / 512<br>Opposite meridian = 256</span></div>
-    <div class="fact"><strong>Projection</strong><span>Equirectangular display of the same Earth.<br>Shortest route is still computed on the sphere.</span></div>
-    <div class="fact"><strong>Engineer sniff test</strong><span>Equal spacing pole-to-pole. Equal spacing east-west. Same pixels in both numeral modes.</span></div>
-  </div>
+<div class="instrument-row"><div class="title">MAP — LONGITUDE FULL WRAP</div><div class="ticks" id="mapTicks"></div></div>
+<div class="instrument-row"><div class="title">CLOCK — FULL-DAY PHASE RING</div><div class="ticks" id="clockTicks"></div></div>
+<div class="instrument-row"><div class="title">COMPASS — FULL TURN</div><div class="ticks" id="compassTicks"></div></div>
+<div class="instrument-row"><div class="title">MAP — LATITUDE POLE TO POLE (HALF TURN)</div><div class="lat-ticks" id="latTicks"></div></div>
+<p class="caption">Longitude, clock phase and compass bearing are the same complete 512-state turn expressed in the selected notation. Latitude is a half-turn from North Pole to South Pole, so it ends at 256 decimal / 400₈.</p>
 </div>
 
-<div class="card exact-map-card">
-  <div class="svg-wrap">
-    <svg id="exactMap" class="exact-map" viewBox="-76 0 1076 560" aria-label="A8 exact world coordinate map"></svg>
-  </div>
-  <div class="map-probe-hint"><strong>MAP PROBE:</strong> hover and pause anywhere on the map; on touch screens, tap a point. Display is intentionally limited to one fractional A8 digit.</div>
-  <p id="exactMapCaption" class="caption"></p>
-  <div class="anchor-grid">
-    <div class="anchor-card"><strong>London</strong><span id="anchorLondon"></span></div>
-    <div class="anchor-card"><strong>Tokyo</strong><span id="anchorTokyo"></span></div>
-    <div class="anchor-card"><strong>Buenos Aires</strong><span id="anchorBuenosAires"></span></div>
-    <div class="anchor-card"><strong>Los Angeles</strong><span id="anchorLosAngeles"></span></div>
-  </div>
+
+<h2>5. Live Alignment Demo</h2>
+<div class="card hero sliderbox">
+<label for="phase">Shared full-turn phase</label>
+<input id="phase" type="range" min="0" max="512" step="0.00390625" value="128">
+<div class="demovalue" id="phaseValue"></div>
+<div class="triptych" style="margin-top:14px">
+<div class="instrument"><div class="label">MAP LONGITUDE PHASE</div><div class="value" id="mapValue"></div><p>Greenwich = start/rollover. Pacific opposite = half-turn.</p></div>
+<div class="instrument"><div class="label">CLOCK DAY PHASE</div><div class="value" id="clockPhaseValue"></div><div class="formula" id="clockTimeValue"></div></div>
+<div class="instrument"><div class="label">COMPASS BEARING</div><div class="value" id="compassValue"></div><p id="directionValue"></p></div>
+</div>
 </div>
 
-<div class="grid2 map-secondary-grid">
-  <section class="card">
-    <h3>32 A8 hour-zone preview</h3>
-    <div class="svg-wrap smallsvg">
-      <svg id="zoneMap" class="exact-map" viewBox="-76 0 1076 520" aria-label="32 A8 hour-zone preview map"></svg>
-    </div>
-    <p class="caption">Separate presentation layer only: 32 equal longitude sectors, each 16 A8 longitude units wide. This helps connect the map to the 32-hour daily structure without changing the underlying coordinate grid.</p>
-  </section>
-  <section class="card">
-    <h3>Great-circle route examples</h3>
-    <div class="route-legend">
-      <div><span class="route-pill gold"></span><strong>Tokyo ↔ Los Angeles</strong><span>Shortest spherical surface route. Plotted as a bowed arc on the flat display.</span></div>
-      <div><span class="route-pill blue"></span><strong>London ↔ Buenos Aires</strong><span>Second check route crossing hemispheres and showing the same sphere-to-map principle.</span></div>
-    </div>
-    <div class="route-note">
-      <strong>Perspective check:</strong> a straight ruler line on the flat picture is not the authority. The authority is the route computed on the sphere and then displayed on the map.
-    </div>
-    <table>
-      <tr><th>Reference</th><th>A8 significance</th></tr>
-      <tr><td>Great circle</td><td>Shortest route across the sphere.</td></tr>
-      <tr><td>Greenwich seam</td><td>Left/right edge wrap at longitude 0 / 512.</td></tr>
-      <tr><td>Equator line</td><td>Exactly halfway down the map at 128 / 200₈.</td></tr>
-      <tr><td>City anchors</td><td>Computed from the same conversion engine used by the atlas table below.</td></tr>
-    </table>
-  </section>
-</div>
-
-<h2>5. Quick Coordinate Converter — corrected notation</h2>
-<div class="card converter">
-<p><strong>This converter outputs only the currently selected A8 display mode.</strong> Conventional latitude is hard-limited to −90…+90 and conventional longitude to −180…+180. Values such as 181° are rejected rather than silently wrapped.</p>
-<p class="route-small"><strong>40-city reference finder:</strong> after conversion, the nearest curated major-city reference point is identified by great-circle separation on the sphere. City-center coordinates are approximate reference points, not administrative boundaries.</p>
-<div class="grid2">
-<div><label for="lat">Conventional latitude: north +, south −</label><input id="lat" type="number" min="-90" max="90" step="any" value="35.6762"></div>
-<div><label for="lon">Conventional longitude: east +, west −</label><input id="lon" type="number" min="-180" max="180" step="any" value="139.6503"></div>
-</div>
-<div class="results" id="coordResults"></div>
-<div class="formula" style="margin-top:12px">INPUT DOMAIN
-Latitude:  −90° … +90°
-Longitude: −180° … +180°
-
-A8_LAT = (90 − conventional_latitude) × 256 / 180
-
-For conventional longitude λ:
-if λ ≥ 0: eastward λE = λ
-if λ < 0: eastward λE = 360 + λ
-
-A8_LON = λE × 512 / 360
-
-±180° are the same opposite meridian:
-+180° = −180° = A8 256 = 400₈
-
-Longitude output wraps only at the A8 ruler:
-0 / 512 decimal  ↔  000 / 1000₈ octal
-
-Latitude does not wrap:
-North 0 → Equator 128 → South 256
-North 000₈ → Equator 200₈ → South 400₈</div>
-</div>
 
 <h2>6. Known Coordinate Check</h2>
 <div class="card">
 <table id="cityTable">
-<tr><th>Location</th><th>Conventional source</th><th id="a8Heading">A8 Decimal</th></tr>
-<tr><td>Tokyo</td><td>35.6762° N, 139.6503° E</td><td id="tokyoA8"></td></tr>
-<tr><td>Los Angeles</td><td>34.0522° N, 118.2437° W</td><td id="laA8"></td></tr>
-<tr><td>Buenos Aires</td><td>34.6037° S, 58.3816° W</td><td id="baA8"></td></tr>
+<tr><th>Location</th><th id="a8Heading">A8 Decimal</th><th>Conventional source</th></tr>
+<tr><td>Tokyo</td><td id="tokyoA8"></td><td>35.6762° N, 139.6503° E</td></tr>
+<tr><td>Los Angeles</td><td id="laA8"></td><td>34.0522° N, 118.2437° W</td></tr>
+<tr><td>Buenos Aires</td><td id="baA8"></td><td>34.6037° S, 58.3816° W</td></tr>
 </table>
 </div>
+
 
 <h2>7. Clock Representation</h2>
 <div class="grid2">
@@ -567,12 +1310,14 @@ SS = 00…77₈</div>
 </section>
 </div>
 
+
 <h2>8. What Never Changes</h2>
 <div class="rule">Same Earth · same west-to-east rotation · same compass directions · same great circles · same 512 physical states. Only the notation view changes.</div>
 
 
+
 <h2>9. City & Route Atlas</h2>
-<div class="rule" style="margin-bottom:14px"><strong>Distance-rung principle:</strong> the quartz-derived length quantity is fixed. A larger or smaller A8/n rung is only an exact binary display scale. Physical uncertainty remains physical; changing rung introduces no conversion approximation.</div>
+<div class="rule" style="margin-bottom:14px"><strong>Earth travel ruler:</strong> route distance is expressed in A8/NAV. Binary A8/n length-ladder rungs remain useful as secondary scale cross-checks, but they do not define the navigation ruler.</div>
 <div class="card hero">
   <p><strong>Real-world adoption layer:</strong> major cities can be placed into A8 hour sectors, given A8 decimal or octal coordinates, and connected by route distances using the same unified display mode as the map, clock and compass.</p>
   <div class="atlas-note">This atlas stays inside the same discipline: same Earth, same cities, same geometry, new ruler only. <strong>A8 values are shown first.</strong> Operating-time examples are published only when a source or explicit calculation is identified; otherwise the route remains a geometric distance reference.</div>
@@ -596,12 +1341,12 @@ SS = 00…77₈</div>
     <table id="atlasRouteTable">
       <tr>
         <th>Route</th>
-        <th id="atlasRouteHeading">A8 navigation distance</th>
+        <th id="atlasRouteHeading">A8/NAV distance</th>
         <th>Elapsed travel reference</th>
         <th>Legacy geometry check</th>
       </tr>
     </table>
-    <p class="route-small"><strong>Navigation distance display:</strong> this atlas now uses the provisional rung <strong>2<sup>40</sup>q<sub>a</sub></strong> because it gives readable route numbers. In Decimal mode the rung is labeled <strong>A8/40</strong>; in hard Octal the same exponent is <strong>A8/50₈</strong> because 40₁₀ = 50₈. The rung changes the display scale, not the physical distance.</p>
+    <p class="route-small" data-a8-nav-length-crosscheck="secondary"><strong>Secondary length cross-check:</strong> 1 A8/NAV ≈ <strong>1.0378 A8/41</strong> under the current operational A8 length realization. This comparison is subordinate to the Earth-travel ruler; <strong>A8/NAV</strong> remains the route-distance unit.</p>
     <p class="route-small"><strong>A8 elapsed time is shown first.</strong> 1 A8 hour = 45 legacy minutes, so legacy elapsed hours × 4/3 = A8 hours. A day remains the same physical full-day interval: 24 legacy hours = 32 A8 hours. Local clock changes and date-line changes do <strong>not</strong> alter elapsed travel time.</p>
   </section>
 </div>
@@ -628,6 +1373,49 @@ SS = 00…77₈</div>
 <a href="https://www.mol-service.com/blog/vessel-speed-and-sailing-days" target="_blank" rel="noopener">MOL — Routes and Speed of Cargo Ship</a>.
 External links open only when selected; the instrument itself makes no network requests.</p>
 </div>
+
+
+<h2>10. Secondary Map References</h2>
+
+<div class="atlas-note" style="margin-bottom:14px">
+  <strong>SECONDARY / PROVISIONAL.</strong>
+  The underlying A8 longitude grid is fixed geometry.
+  How those sectors are grouped into civil time zones is an adoption choice,
+  not a defining part of the coordinate ruler. One sector per zone,
+  two sectors per zone (16 zones), or another practical convention can be
+  examined separately. The preview below is retained as a visual reference.
+  Great-circle examples are retained here as geometry checks; the A→B workbench above now uses the same shortest great-circle authority.
+</div>
+
+<div class="grid2 map-secondary-grid">
+  <section class="card">
+    <h3>32 A8 longitude-sector preview · secondary</h3>
+    <div class="svg-wrap smallsvg">
+      <svg id="zoneMap" class="exact-map" viewBox="-76 0 1076 520" aria-label="32 A8 hour-zone preview map"></svg>
+    </div>
+    <p class="caption">Separate presentation layer only: 32 equal longitude sectors, each 16 A8 longitude units wide. This helps connect the map to the 32-hour daily structure without changing the underlying coordinate grid.</p>
+  </section>
+  <section class="card">
+    <h3>Great-circle route examples</h3>
+    <div class="route-legend">
+      <div><span class="route-pill gold"></span><strong>Tokyo ↔ Los Angeles</strong><span>Shortest spherical surface route. Plotted as a bowed arc on the flat display.</span></div>
+      <div><span class="route-pill blue"></span><strong>London ↔ Buenos Aires</strong><span>Second check route crossing hemispheres and showing the same sphere-to-map principle.</span></div>
+    </div>
+    <div class="route-note">
+      <strong>Perspective check:</strong> a straight ruler line on the flat picture is not the authority. The authority is the route computed on the sphere and then displayed on the map.
+    </div>
+    <table>
+      <tr><th>Reference</th><th>A8 significance</th></tr>
+      <tr><td>Great circle</td><td>Shortest route across the sphere.</td></tr>
+      <tr><td>Greenwich seam</td><td>Left/right edge wrap at longitude 0 / 512.</td></tr>
+      <tr><td>Equator line</td><td>Exactly halfway down the map at 128 / 200₈.</td></tr>
+      <tr><td>City anchors</td><td>Computed from the same conversion engine used by the atlas table below.</td></tr>
+    </table>
+  </section>
+</div>
+
+
+
 
 <footer>
 <div><strong>COSIGO Labs — Auspicious 8</strong> · Unified Map · Clock · Compass v0.10</div>
@@ -725,6 +1513,195 @@ function nearestDirection(p) {
   return names[idx];
 }
 
+/* A8 INTERACTIVE COMPASS NEEDLE v1 */
+
+function installCompassMouseNeedle() {
+  const svg =
+    document.getElementById(
+      'a8CompassInteractive'
+    );
+
+  const needle =
+    document.getElementById(
+      'a8CompassNeedle'
+    );
+
+  if (!svg || !needle) return;
+
+  svg.style.cursor = 'crosshair';
+
+  let currentAngle = 0;
+  let targetAngle = 0;
+  let frame = null;
+
+  const reduceMotion =
+    window.matchMedia
+    && window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches;
+
+
+  function shortestDelta(
+    from,
+    to
+  ) {
+    return (
+      ((to - from + 540) % 360)
+      - 180
+    );
+  }
+
+
+  function applyNeedle(angle) {
+    needle.setAttribute(
+      'transform',
+      'rotate('
+      + angle.toFixed(4)
+      + ' 330 330)'
+    );
+  }
+
+
+  function animateNeedle() {
+    const delta =
+      shortestDelta(
+        currentAngle,
+        targetAngle
+      );
+
+    if (
+      reduceMotion
+      || Math.abs(delta) < 0.04
+    ) {
+      currentAngle =
+        targetAngle;
+
+      applyNeedle(
+        currentAngle
+      );
+
+      frame = null;
+      return;
+    }
+
+    /*
+     * Small inertial lag:
+     * enough to feel like a compass needle,
+     * not enough to feel disconnected
+     * from the mouse.
+     */
+    currentAngle +=
+      delta * 0.24;
+
+    applyNeedle(
+      currentAngle
+    );
+
+    frame =
+      requestAnimationFrame(
+        animateNeedle
+      );
+  }
+
+
+  function steerNeedle(angle) {
+    targetAngle = angle;
+
+    if (frame === null) {
+      frame =
+        requestAnimationFrame(
+          animateNeedle
+        );
+    }
+  }
+
+
+  svg.addEventListener(
+    'pointermove',
+    event => {
+      /*
+       * Mouse / pen interaction only.
+       * Touch remains ordinary page scrolling.
+       */
+      if (
+        event.pointerType
+        && event.pointerType !== 'mouse'
+        && event.pointerType !== 'pen'
+      ) {
+        return;
+      }
+
+      const ctm =
+        svg.getScreenCTM();
+
+      if (!ctm) return;
+
+      const point =
+        svg.createSVGPoint();
+
+      point.x =
+        event.clientX;
+
+      point.y =
+        event.clientY;
+
+      const local =
+        point.matrixTransform(
+          ctm.inverse()
+        );
+
+      const dx =
+        local.x - 330;
+
+      const dy =
+        local.y - 330;
+
+      /*
+       * Avoid noisy angle changes
+       * directly over the pivot.
+       */
+      if (
+        Math.hypot(dx, dy) < 8
+      ) {
+        return;
+      }
+
+      /*
+       * atan2(dx,-dy) gives:
+       *
+       * NORTH =   0°
+       * EAST  =  90°
+       * SOUTH = 180°
+       * WEST  = -90°
+       */
+      const angle =
+        Math.atan2(
+          dx,
+          -dy
+        )
+        * 180
+        / Math.PI;
+
+      steerNeedle(angle);
+    }
+  );
+
+
+  svg.addEventListener(
+    'pointerleave',
+    () => {
+      steerNeedle(0);
+    }
+  );
+
+
+  /*
+   * Initial physical presentation:
+   * needle resting at North.
+   */
+  applyNeedle(0);
+}
+
 function updatePhase() {
   const p = parseFloat(document.getElementById('phase').value);
   const disp = formatPhase(p);
@@ -786,37 +1763,1551 @@ function referenceSeparationText(sep) {
   return octFixed(sep,1,3) + '₈ A8 angle units';
 }
 
-function updateConverter() {
-  const lat = parseFloat(document.getElementById('lat').value);
-  const lon = parseFloat(document.getElementById('lon').value);
-  const box = document.getElementById('coordResults');
-  if (!Number.isFinite(lat) || !Number.isFinite(lon) ||
-      lat < -90 || lat > 90 || lon < -180 || lon > 180) {
-    box.innerHTML = '<strong>OUT OF DOMAIN.</strong> Use conventional latitude −90…+90 and longitude −180…+180. 181° is not accepted; use −179° instead.';
+/* A8 COORDINATE WORKBENCH GREAT CIRCLE v1 */
+
+const A8_NAV_KM_COMPARISON = 1.221967767;
+
+const A8_TRAVEL_PRESETS = {
+  SHIP: 24,
+  CAR: 48,
+  TRAIN: 96,
+  PLANE: 512
+};
+
+let workbenchPointA = null;
+let workbenchPointB = null;
+
+let mapFillTarget = null;
+
+let selectedTravelName = null;
+let selectedTravelSpeed = null;
+let customTravelSpeedValue = null;
+
+
+function workbenchOctalFixed(value, places=1) {
+  if (!Number.isFinite(value)) return '—';
+
+  const negative = value < 0;
+  const v = Math.abs(value);
+
+  const scale = Math.pow(8, places);
+  const units = Math.round(v * scale);
+
+  const whole = Math.floor(units / scale);
+  const fraction = units % scale;
+
+  let out = whole.toString(8);
+
+  if (places > 0) {
+    out += '.' + fraction.toString(8).padStart(places, '0');
+  }
+
+  return (negative ? '−' : '') + out;
+}
+
+
+function workbenchFormatA8(value, places=1) {
+  if (!Number.isFinite(value)) return '—';
+
+  if (mode === 'decimal') {
+    return value.toLocaleString(
+      undefined,
+      {
+        minimumFractionDigits: places,
+        maximumFractionDigits: places
+      }
+    );
+  }
+
+  return workbenchOctalFixed(value, places) + '₈';
+}
+
+
+function workbenchInputValue(value) {
+  if (!Number.isFinite(value)) return '';
+
+  if (mode === 'decimal') {
+    return value.toFixed(3);
+  }
+
+  return workbenchOctalFixed(value, 3);
+}
+
+
+function parseWorkbenchA8(textValue) {
+  let s = String(textValue ?? '')
+    .trim()
+    .replace(/₈/g, '');
+
+  if (!s) return NaN;
+
+  if (mode === 'decimal') {
+    const n = Number(s);
+    return Number.isFinite(n) ? n : NaN;
+  }
+
+  if (!/^[+]?[0-7]+(?:\.[0-7]+)?$/.test(s)) {
+    return NaN;
+  }
+
+  s = s.replace(/^\+/, '');
+
+  const parts = s.split('.');
+
+  let n = parseInt(parts[0], 8);
+
+  if (parts.length > 1) {
+    const frac = parts[1];
+
+    for (let i = 0; i < frac.length; i++) {
+      n += parseInt(frac[i], 8) / Math.pow(8, i + 1);
+    }
+  }
+
+  return n;
+}
+
+
+function normalizeWorkbenchLon(a8lon) {
+  if (!Number.isFinite(a8lon)) return NaN;
+
+  let v = a8lon % 512;
+
+  if (v < 0) v += 512;
+
+  if (Math.abs(v - 512) < 1e-10) v = 0;
+
+  return v;
+}
+
+
+function conventionalFromA8Coordinate(a8lat, a8lon) {
+  const lat =
+    90 - a8lat * 180 / 256;
+
+  const east =
+    normalizeWorkbenchLon(a8lon) * 360 / 512;
+
+  const lon =
+    east > 180
+      ? east - 360
+      : east;
+
+  return {
+    lat,
+    lon
+  };
+}
+
+
+function legacyCoordinateText(point) {
+  if (!point) {
+    return 'legacy comparison · —';
+  }
+
+  const p = conventionalFromA8Coordinate(
+    point.lat,
+    point.lon
+  );
+
+  const ns = p.lat >= 0 ? 'N' : 'S';
+  const ew = p.lon >= 0 ? 'E' : 'W';
+
+  return (
+    'legacy comparison · '
+    + Math.abs(p.lat).toFixed(4)
+    + '° '
+    + ns
+    + ' · '
+    + Math.abs(p.lon).toFixed(4)
+    + '° '
+    + ew
+  );
+}
+
+
+function workbenchReferenceText(point) {
+  if (!point) {
+    return 'reference · —';
+  }
+
+  const p = conventionalFromA8Coordinate(
+    point.lat,
+    point.lon
+  );
+
+  const nearest = nearestReferenceCity(
+    p.lat,
+    p.lon
+  );
+
+  if (!nearest) {
+    return 'reference · —';
+  }
+
+  const exactish =
+    nearest.sep < 0.0002;
+
+  const close =
+    nearest.sep <= REFERENCE_CLOSE_LIMIT_A8;
+
+  if (exactish) {
+    return (
+      'REFERENCE · '
+      + nearest.city.name
+    );
+  }
+
+  if (close) {
+    return (
+      'NEAR LISTED REFERENCE · '
+      + nearest.city.name
+      + ' · '
+      + referenceSeparationText(nearest.sep)
+    );
+  }
+
+  return (
+    'NEAREST SHELF · '
+    + nearest.city.name
+    + ' · '
+    + referenceSeparationText(nearest.sep)
+  );
+}
+
+
+function workbenchPointFromInputs(which) {
+  const latEl = document.getElementById(
+    which === 'A' ? 'a8LatA' : 'a8LatB'
+  );
+
+  const lonEl = document.getElementById(
+    which === 'A' ? 'a8LonA' : 'a8LonB'
+  );
+
+  const lat =
+    parseWorkbenchA8(latEl.value);
+
+  const lon =
+    parseWorkbenchA8(lonEl.value);
+
+  if (
+    !Number.isFinite(lat)
+    || !Number.isFinite(lon)
+    || lat < 0
+    || lat > 256
+    || lon < 0
+    || lon > 512
+  ) {
+    return null;
+  }
+
+  return {
+    lat,
+    lon: normalizeWorkbenchLon(lon)
+  };
+}
+
+
+function renderWorkbenchPoint(
+  which,
+  point,
+  rewriteInputs=true
+) {
+  const latEl = document.getElementById(
+    which === 'A' ? 'a8LatA' : 'a8LatB'
+  );
+
+  const lonEl = document.getElementById(
+    which === 'A' ? 'a8LonA' : 'a8LonB'
+  );
+
+  const legacyEl = document.getElementById(
+    which === 'A' ? 'legacyA' : 'legacyB'
+  );
+
+  const refEl = document.getElementById(
+    which === 'A' ? 'referenceA' : 'referenceB'
+  );
+
+  if (rewriteInputs) {
+    latEl.value =
+      point
+        ? workbenchInputValue(point.lat)
+        : '';
+
+    lonEl.value =
+      point
+        ? workbenchInputValue(point.lon)
+        : '';
+  }
+
+  legacyEl.textContent =
+    legacyCoordinateText(point);
+
+  refEl.textContent =
+    workbenchReferenceText(point);
+}
+
+
+function rhumbDistanceA8(pointA, pointB) {
+  if (!pointA || !pointB) return null;
+
+  const TWO_PI =
+    Math.PI * 2;
+
+  const phi1 =
+    Math.PI / 2
+    - pointA.lat * Math.PI / 256;
+
+  const phi2 =
+    Math.PI / 2
+    - pointB.lat * Math.PI / 256;
+
+  const lambda1 =
+    normalizeWorkbenchLon(pointA.lon)
+    * TWO_PI / 512;
+
+  const lambda2 =
+    normalizeWorkbenchLon(pointB.lon)
+    * TWO_PI / 512;
+
+  const dPhi =
+    phi2 - phi1;
+
+  let dLambda =
+    lambda2 - lambda1;
+
+  if (dLambda > Math.PI) {
+    dLambda -= TWO_PI;
+  }
+
+  if (dLambda < -Math.PI) {
+    dLambda += TWO_PI;
+  }
+
+  const poleGuard = 1e-12;
+
+  const safePhi1 = Math.max(
+    -Math.PI / 2 + poleGuard,
+    Math.min(
+      Math.PI / 2 - poleGuard,
+      phi1
+    )
+  );
+
+  const safePhi2 = Math.max(
+    -Math.PI / 2 + poleGuard,
+    Math.min(
+      Math.PI / 2 - poleGuard,
+      phi2
+    )
+  );
+
+  const dPsi =
+    Math.log(
+      Math.tan(
+        Math.PI / 4 + safePhi2 / 2
+      )
+      /
+      Math.tan(
+        Math.PI / 4 + safePhi1 / 2
+      )
+    );
+
+  const q =
+    Math.abs(dPsi) > 1e-12
+      ? dPhi / dPsi
+      : Math.cos(phi1);
+
+  const angularRadians =
+    Math.sqrt(
+      dPhi * dPhi
+      + q * q * dLambda * dLambda
+    );
+
+  const a8Angle =
+    angularRadians
+    / TWO_PI
+    * 512;
+
+  const a8Nav =
+    a8Angle * 64;
+
+  return {
+    a8Angle,
+    a8Nav
+  };
+}
+
+
+function workbenchLegacyKm(a8Nav) {
+  return (
+    a8Nav
+    * A8_NAV_KM_COMPARISON
+  );
+}
+
+
+
+/* A8 MAP SHORTEST GREAT-CIRCLE ROUTE v1 */
+
+function shortestWrappedA8LonDelta(
+  fromLon,
+  toLon
+) {
+  return (
+    (
+      (
+        toLon
+        - fromLon
+        + 256
+      ) % 512
+      + 512
+    ) % 512
+  ) - 256;
+}
+
+
+function workbenchGeoPointFromA8(point) {
+  const latitude =
+    90
+    - point.lat * 180 / 256;
+
+  const wrappedLon =
+    (
+      (
+        point.lon % 512
+      )
+      + 512
+    ) % 512;
+
+  const east =
+    wrappedLon * 360 / 512;
+
+  const longitude =
+    east > 180
+      ? east - 360
+      : east;
+
+  return {
+    lat: latitude,
+    lon: longitude
+  };
+}
+
+
+function workbenchGreatCircleMetrics(a, b) {
+  /*
+   * Native A8 latitude:
+   *
+   *   0   = North Pole
+   *   128 = Equator
+   *   256 = South Pole
+   */
+  const phi1 =
+    (128 - a.lat)
+    * Math.PI
+    / 256;
+
+  const phi2 =
+    (128 - b.lat)
+    * Math.PI
+    / 256;
+
+  const dPhi =
+    phi2 - phi1;
+
+  const rawLonDelta =
+    b.lon - a.lon;
+
+  const wrappedLonDelta =
+    shortestWrappedA8LonDelta(
+      a.lon,
+      b.lon
+    );
+
+  /*
+   * 256 A8 longitude states = π radians.
+   */
+  const dLambda =
+    wrappedLonDelta
+    * Math.PI
+    / 256;
+
+  const sinPhi =
+    Math.sin(dPhi / 2);
+
+  const sinLambda =
+    Math.sin(dLambda / 2);
+
+  let h =
+    sinPhi * sinPhi
+    + Math.cos(phi1)
+      * Math.cos(phi2)
+      * sinLambda
+      * sinLambda;
+
+  h = Math.max(
+    0,
+    Math.min(1, h)
+  );
+
+  const centralRad =
+    2 * Math.atan2(
+      Math.sqrt(h),
+      Math.sqrt(
+        Math.max(
+          0,
+          1 - h
+        )
+      )
+    );
+
+  /*
+   * π radians = 256 A8 angular states.
+   */
+  const angleA8 =
+    centralRad
+    * 256
+    / Math.PI;
+
+  /*
+   * Earth circumference = 32768 A8/NAV.
+   *
+   * 32768 / 512 = 64 A8/NAV
+   * per A8 angular state.
+   */
+  const a8Nav =
+    angleA8 * 64;
+
+  return {
+    centralRad,
+    angleA8,
+    a8Nav,
+    rawLonDeltaA8:
+      rawLonDelta,
+    wrappedLonDeltaA8:
+      wrappedLonDelta,
+
+    seamWrapUsed:
+      Math.abs(rawLonDelta)
+      > 256 + 1e-9,
+
+    antipodal:
+      Math.abs(
+        angleA8 - 256
+      ) < 0.001
+  };
+}
+
+
+function drawWorkbenchRoute(
+  distance=null
+) {
+  const svg =
+    document.getElementById(
+      'exactMap'
+    );
+
+  if (!svg) return;
+
+  const old =
+    svg.querySelector(
+      '#a8WorkbenchRouteLayer'
+    );
+
+  if (old) {
+    old.remove();
+  }
+
+  if (
+    !workbenchPointA
+    || !workbenchPointB
+  ) {
     return;
   }
-  const label = mode === 'decimal' ? 'A8 DECIMAL 512' : 'A8 OCTAL 1000₈';
-  const nearest = nearestReferenceCity(lat, lon);
-  const exactish = nearest.sep < 0.0002;
-  const close = nearest.sep <= REFERENCE_CLOSE_LIMIT_A8;
-  const cityLabel = exactish ? 'REFERENCE CITY'
-    : close ? 'NEAREST LISTED REFERENCE'
-    : 'NO CLOSE LISTED CITY';
-  const cityName = close || exactish
-    ? nearest.city.name
-    : 'Nearest listed · ' + nearest.city.name;
+
+  const metrics =
+    distance
+    || workbenchGreatCircleMetrics(
+      workbenchPointA,
+      workbenchPointB
+    );
+
+  const geoA =
+    workbenchGeoPointFromA8(
+      workbenchPointA
+    );
+
+  const geoB =
+    workbenchGeoPointFromA8(
+      workbenchPointB
+    );
+
+  const NS =
+    'http://www.w3.org/2000/svg';
+
+  const group =
+    document.createElementNS(
+      NS,
+      'g'
+    );
+
+  group.id =
+    'a8WorkbenchRouteLayer';
+
+  group.setAttribute(
+    'pointer-events',
+    'none'
+  );
+
+  /*
+   * Exact antipodes have no unique
+   * shortest great-circle direction.
+   * Do not invent one.
+   */
+  if (
+    metrics.angleA8 > 1e-9
+    && !metrics.antipodal
+  ) {
+    const route =
+      document.createElementNS(
+        NS,
+        'path'
+      );
+
+    route.setAttribute(
+      'd',
+      pathFromGeoPoints(
+        greatCirclePoints(
+          geoA,
+          geoB
+        )
+      )
+    );
+
+    route.setAttribute(
+      'class',
+      'map-route-user'
+    );
+
+    group.appendChild(route);
+  }
+
+  [
+    ['A', geoA],
+    ['B', geoB]
+  ].forEach(([label, geo]) => {
+    const [x, y] =
+      projectLonLat(
+        geo.lon,
+        geo.lat
+      );
+
+    const dot =
+      document.createElementNS(
+        NS,
+        'circle'
+      );
+
+    dot.setAttribute('cx', x);
+    dot.setAttribute('cy', y);
+    dot.setAttribute('r', 6);
+    dot.setAttribute(
+      'class',
+      'map-route-user-dot'
+    );
+
+    group.appendChild(dot);
+
+    const labelNode =
+      document.createElementNS(
+        NS,
+        'text'
+      );
+
+    labelNode.setAttribute(
+      'x',
+      x + 9
+    );
+
+    labelNode.setAttribute(
+      'y',
+      y - 9
+    );
+
+    labelNode.setAttribute(
+      'class',
+      'map-route-user-label'
+    );
+
+    labelNode.textContent =
+      label;
+
+    group.appendChild(
+      labelNode
+    );
+  });
+
+  /*
+   * Keep the route underneath the probe overlay.
+   */
+  const probe =
+    svg.querySelector(
+      '#mapProbe'
+    );
+
+  if (probe) {
+    svg.insertBefore(
+      group,
+      probe
+    );
+  } else {
+    svg.appendChild(
+      group
+    );
+  }
+}
+
+
+function setWorkbenchQuickCity(
+  which,
+  cityName
+) {
+  if (!cityName) return;
+
+  const city =
+    cityByName(cityName);
+
+  if (!city) return;
+
+  const a8lat =
+    (90 - city.lat)
+    * 256
+    / 180;
+
+  const east =
+    city.lon >= 0
+      ? city.lon
+      : 360 + city.lon;
+
+  const a8lon =
+    east
+    * 512
+    / 360;
+
+  const point = {
+    lat: a8lat,
+    lon: a8lon
+  };
+
+  if (which === 'A') {
+    workbenchPointA =
+      point;
+  } else {
+    workbenchPointB =
+      point;
+  }
+
+  mapFillTarget =
+    null;
+
+  updateConverter(true);
+}
+
+
+function installWorkbenchQuickCities() {
+  const cityA =
+    document.getElementById(
+      'quickCityA'
+    );
+
+  const cityB =
+    document.getElementById(
+      'quickCityB'
+    );
+
+  if (!cityA || !cityB) {
+    return;
+  }
+
+  cityA.addEventListener(
+    'change',
+    () => {
+      setWorkbenchQuickCity(
+        'A',
+        cityA.value
+      );
+    }
+  );
+
+  cityB.addEventListener(
+    'change',
+    () => {
+      setWorkbenchQuickCity(
+        'B',
+        cityB.value
+      );
+    }
+  );
+
+  [
+    'a8LatA',
+    'a8LonA'
+  ].forEach(id => {
+    document
+      .getElementById(id)
+      .addEventListener(
+        'input',
+        () => {
+          cityA.value = '';
+        }
+      );
+  });
+
+  [
+    'a8LatB',
+    'a8LonB'
+  ].forEach(id => {
+    document
+      .getElementById(id)
+      .addEventListener(
+        'input',
+        () => {
+          cityB.value = '';
+        }
+      );
+  });
+
+  document
+    .getElementById('armMapA')
+    .addEventListener(
+      'click',
+      () => {
+        cityA.value = '';
+      }
+    );
+
+  document
+    .getElementById('armMapB')
+    .addEventListener(
+      'click',
+      () => {
+        cityB.value = '';
+      }
+    );
+
+  document
+    .getElementById('clearA')
+    .addEventListener(
+      'click',
+      () => {
+        cityA.value = '';
+      }
+    );
+
+  document
+    .getElementById('clearB')
+    .addEventListener(
+      'click',
+      () => {
+        cityB.value = '';
+      }
+    );
+
+  document
+    .getElementById('clearPoints')
+    .addEventListener(
+      'click',
+      () => {
+        cityA.value = '';
+        cityB.value = '';
+      }
+    );
+
+  /*
+   * Keep quick-city labels coherent
+   * when the existing SWAP control is used.
+   */
+  document
+    .getElementById('swapPoints')
+    .addEventListener(
+      'click',
+      () => {
+        const tmp =
+          cityA.value;
+
+        cityA.value =
+          cityB.value;
+
+        cityB.value =
+          tmp;
+      }
+    );
+}
+
+function renderWorkbenchDistance() {
+  const box =
+    document.getElementById(
+      'coordResults'
+    );
+
+  if (
+    !workbenchPointA
+    || !workbenchPointB
+  ) {
+    box.innerHTML =
+      '<strong>SET POINT A AND POINT B.</strong>';
+
+    drawWorkbenchRoute();
+
+    return null;
+  }
+
+  const distance =
+    workbenchGreatCircleMetrics(
+      workbenchPointA,
+      workbenchPointB
+    );
+
+  const legacyKm =
+    distance.a8Nav
+    * A8_NAV_KM_COMPARISON;
+
+  const seamNote =
+    distance.seamWrapUsed
+      ? (
+          '<div class="route-small">'
+          + '<strong>0 / 512 WRAP USED.</strong> '
+          + 'Flat-map long way rejected; '
+          + 'shorter Greenwich crossing selected.'
+          + '</div>'
+        )
+      : '';
+
+  const antipodalNote =
+    distance.antipodal
+      ? (
+          '<div class="route-small">'
+          + '<strong>ANTIPODAL.</strong> '
+          + 'Multiple equal shortest '
+          + 'great-circle routes exist.'
+          + '</div>'
+        )
+      : '';
+
   box.innerHTML =
-    '<div><strong>'+label+'</strong></div>' +
-    '<div class="result-main">'+coordText(lat,lon)+'</div>' +
-    '<div class="city-reference">' +
-      '<div>' +
-        '<div class="city-kicker">'+cityLabel+'</div>' +
-        '<div class="city-name">'+cityName+'</div>' +
-        '<div class="city-coord">'+referenceCityCoordText(nearest.city)+'</div>' +
-      '</div>' +
-      '<div class="city-sep"><strong>GREAT-CIRCLE SEPARATION</strong><br>'+referenceSeparationText(nearest.sep)+'</div>' +
-    '</div>' +
-    '<div class="city-reference-note">Matching uses full-precision spherical geometry, not straight-line distance on the flat map. A city is called close only within '+REFERENCE_CLOSE_LIMIT_A8.toFixed(1)+' A8 angle units; otherwise the page reports only the nearest listed reference. A8 display remains one fractional digit. Reference shelf: '+REFERENCE_CITIES.length+' cities.</div>';
+    '<div><strong>'
+    + 'SHORTEST GREAT-CIRCLE ROUTE'
+    + '</strong></div>'
+
+    + '<div class="a8-route-big">'
+    + workbenchFormatA8(
+        distance.a8Nav,
+        2
+      )
+    + ' A8/NAV'
+    + '</div>'
+
+    + '<div class="a8-route-angle">'
+    + 'surface angle · '
+    + workbenchFormatA8(
+        distance.angleA8,
+        2
+      )
+    + ' / '
+    + workbenchFormatA8(
+        256,
+        0
+      )
+    + ' maximum'
+    + '</div>'
+
+    + '<div class="route-small">'
+    + 'shortest wrapped longitude separation · '
+    + workbenchFormatA8(
+        Math.abs(
+          distance.wrappedLonDeltaA8
+        ),
+        2
+      )
+    + '</div>'
+
+    + '<div class="route-small">'
+    + 'legacy comparison · ≈ '
+    + legacyKm.toLocaleString(
+        undefined,
+        {
+          maximumFractionDigits:1
+        }
+      )
+    + ' km'
+    + '</div>'
+
+    + seamNote
+    + antipodalNote;
+
+  drawWorkbenchRoute(
+    distance
+  );
+
+  return distance;
+}
+
+
+function formatA8Duration(a8Hours) {
+  if (!Number.isFinite(a8Hours)) {
+    return '—';
+  }
+
+  let totalSeconds =
+    Math.round(
+      a8Hours * 4096
+    );
+
+  if (totalSeconds < 0) {
+    totalSeconds = 0;
+  }
+
+  const daySeconds =
+    131072;
+
+  const days =
+    Math.floor(
+      totalSeconds / daySeconds
+    );
+
+  let rem =
+    totalSeconds % daySeconds;
+
+  const hours =
+    Math.floor(rem / 4096);
+
+  rem %= 4096;
+
+  const minutes =
+    Math.floor(rem / 64);
+
+  const seconds =
+    rem % 64;
+
+  if (mode === 'decimal') {
+    return (
+      days.toLocaleString()
+      + ' DAY'
+      + (days === 1 ? '' : 'S')
+      + ' · '
+      + String(hours).padStart(2, '0')
+      + ':'
+      + String(minutes).padStart(2, '0')
+      + ':'
+      + String(seconds).padStart(2, '0')
+      + ' A8'
+    );
+  }
+
+  return (
+    days.toString(8)
+    + '₈ DAY'
+    + (days === 1 ? '' : 'S')
+    + ' · '
+    + hours.toString(8).padStart(2, '0')
+    + ':'
+    + minutes.toString(8).padStart(2, '0')
+    + ':'
+    + seconds.toString(8).padStart(2, '0')
+    + '₈ A8'
+  );
+}
+
+
+function renderTravelPresetLabels() {
+  const mapping = [
+    ['shipSpeed', A8_TRAVEL_PRESETS.SHIP],
+    ['carSpeed', A8_TRAVEL_PRESETS.CAR],
+    ['trainSpeed', A8_TRAVEL_PRESETS.TRAIN],
+    ['planeSpeed', A8_TRAVEL_PRESETS.PLANE]
+  ];
+
+  for (const [id, speed] of mapping) {
+    const el =
+      document.getElementById(id);
+
+    if (!el) continue;
+
+    el.textContent =
+      workbenchFormatA8(speed, 0)
+      + ' A8/NAV / A8 HOUR';
+  }
+
+  const custom =
+    document.getElementById(
+      'customTravelSpeed'
+    );
+
+  if (
+    custom
+    && customTravelSpeedValue !== null
+    && Number.isFinite(customTravelSpeedValue)
+  ) {
+    custom.value =
+      workbenchInputValue(
+        customTravelSpeedValue
+      );
+  }
+}
+
+
+function renderTravelResult(distance=null) {
+  const box =
+    document.getElementById(
+      'travelResults'
+    );
+
+  if (!distance) {
+    distance =
+      rhumbDistanceA8(
+        workbenchPointA,
+        workbenchPointB
+      );
+  }
+
+  if (!distance) {
+    box.innerHTML =
+      'Set POINT A and POINT B first.';
+    return;
+  }
+
+  if (
+    !Number.isFinite(selectedTravelSpeed)
+    || selectedTravelSpeed <= 0
+  ) {
+    box.innerHTML =
+      'Select SHIP, CAR, TRAIN, PLANE, '
+      + 'or enter a custom speed.';
+    return;
+  }
+
+  const a8Hours =
+    distance.a8Nav
+    / selectedTravelSpeed;
+
+  const legacyHours =
+    a8Hours * 0.75;
+
+  const legacyKmh =
+    selectedTravelSpeed
+    * A8_NAV_KM_COMPARISON
+    / 0.75;
+
+  box.innerHTML =
+    '<div><strong>'
+    + selectedTravelName
+    + ' · GENERAL REFERENCE SPEED'
+    + '</strong></div>'
+    + '<div>'
+    + workbenchFormatA8(
+        selectedTravelSpeed,
+        1
+      )
+    + ' A8/NAV per A8 HOUR'
+    + '</div>'
+    + '<div class="route-small">'
+    + 'legacy speed comparison · ≈ '
+    + legacyKmh.toLocaleString(
+        undefined,
+        {
+          maximumFractionDigits: 0
+        }
+      )
+    + ' km/h'
+    + '</div>'
+    + '<div class="a8-travel-big" '
+    + 'style="margin-top:10px">'
+    + workbenchFormatA8(
+        a8Hours,
+        1
+      )
+    + ' A8 HOUR'
+    + '</div>'
+    + '<div>'
+    + formatA8Duration(a8Hours)
+    + '</div>'
+    + '<div class="route-small">'
+    + 'legacy time comparison · ≈ '
+    + legacyHours.toLocaleString(
+        undefined,
+        {
+          maximumFractionDigits: 1
+        }
+      )
+    + ' legacy hours'
+    + '</div>'
+    + '<div class="route-small" '
+    + 'style="margin-top:7px">'
+    + 'General calculation only · '
+    + 'roads, rails, ports, oceans, borders, stops, '
+    + 'weather and actual routing are not modeled.'
+    + '</div>';
+}
+
+
+function updateTravelButtons() {
+  document
+    .querySelectorAll(
+      '.a8-travel-mode'
+    )
+    .forEach(button => {
+      button.classList.toggle(
+        'active',
+        button.dataset.name
+          === selectedTravelName
+      );
+    });
+}
+
+
+function updateMapPickStatus(message=null) {
+  const box =
+    document.getElementById(
+      'mapPickStatus'
+    );
+
+  if (!box) return;
+
+  if (message) {
+    box.textContent = message;
+    return;
+  }
+
+  if (mapFillTarget === 'A') {
+    box.textContent =
+      'MAP ARMED · next click replaces POINT A';
+    return;
+  }
+
+  if (mapFillTarget === 'B') {
+    box.textContent =
+      'MAP ARMED · next click replaces POINT B';
+    return;
+  }
+
+  if (!workbenchPointA) {
+    box.textContent =
+      'MAP CLICK READY · first click fills POINT A';
+    return;
+  }
+
+  if (!workbenchPointB) {
+    box.textContent =
+      'POINT A SET · next map click fills POINT B';
+    return;
+  }
+
+  box.textContent =
+    'POINTS A + B SET · use SET A FROM MAP or SET B FROM MAP to replace one';
+}
+
+
+function setWorkbenchPointFromA8(
+  a8lat,
+  a8lon
+) {
+  let target =
+    mapFillTarget;
+
+  if (!target) {
+    if (!workbenchPointA) {
+      target = 'A';
+    }
+
+    else if (!workbenchPointB) {
+      target = 'B';
+    }
+
+    else {
+      updateMapPickStatus(
+        'POINTS A + B ALREADY SET · choose SET A FROM MAP or SET B FROM MAP'
+      );
+
+      return;
+    }
+  }
+
+  const point = {
+    lat: Math.max(
+      0,
+      Math.min(
+        256,
+        a8lat
+      )
+    ),
+    lon: normalizeWorkbenchLon(a8lon)
+  };
+
+  if (target === 'A') {
+    workbenchPointA = point;
+  }
+
+  else {
+    workbenchPointB = point;
+  }
+
+  mapFillTarget = null;
+
+  updateConverter(true);
+
+  updateMapPickStatus(
+    'POINT '
+    + target
+    + ' CAPTURED FROM MAP'
+    + (
+        workbenchPointA
+        && workbenchPointB
+          ? ' · A→B READY'
+          : ''
+      )
+  );
+}
+
+
+function updateConverter(rewriteInputs=true) {
+  renderWorkbenchPoint(
+    'A',
+    workbenchPointA,
+    rewriteInputs
+  );
+
+  renderWorkbenchPoint(
+    'B',
+    workbenchPointB,
+    rewriteInputs
+  );
+
+  renderTravelPresetLabels();
+
+  const distance =
+    renderWorkbenchDistance();
+
+  renderTravelResult(distance);
+
+  updateTravelButtons();
+
+  if (!mapFillTarget) {
+    updateMapPickStatus();
+  }
+}
+
+
+function installCoordinateWorkbench() {
+  const latA =
+    document.getElementById('a8LatA');
+
+  const lonA =
+    document.getElementById('a8LonA');
+
+  const latB =
+    document.getElementById('a8LatB');
+
+  const lonB =
+    document.getElementById('a8LonB');
+
+  function readA() {
+    workbenchPointA =
+      workbenchPointFromInputs('A');
+
+    updateConverter(false);
+  }
+
+  function readB() {
+    workbenchPointB =
+      workbenchPointFromInputs('B');
+
+    updateConverter(false);
+  }
+
+  latA.addEventListener(
+    'input',
+    readA
+  );
+
+  lonA.addEventListener(
+    'input',
+    readA
+  );
+
+  latB.addEventListener(
+    'input',
+    readB
+  );
+
+  lonB.addEventListener(
+    'input',
+    readB
+  );
+
+
+  document
+    .getElementById('armMapA')
+    .addEventListener(
+      'click',
+      () => {
+        mapFillTarget = 'A';
+        updateMapPickStatus();
+      }
+    );
+
+
+  document
+    .getElementById('armMapB')
+    .addEventListener(
+      'click',
+      () => {
+        mapFillTarget = 'B';
+        updateMapPickStatus();
+      }
+    );
+
+
+  document
+    .getElementById('clearA')
+    .addEventListener(
+      'click',
+      () => {
+        workbenchPointA = null;
+        mapFillTarget = null;
+        updateConverter(true);
+      }
+    );
+
+
+  document
+    .getElementById('clearB')
+    .addEventListener(
+      'click',
+      () => {
+        workbenchPointB = null;
+        mapFillTarget = null;
+        updateConverter(true);
+      }
+    );
+
+
+  document
+    .getElementById('clearPoints')
+    .addEventListener(
+      'click',
+      () => {
+        workbenchPointA = null;
+        workbenchPointB = null;
+        mapFillTarget = null;
+
+        updateConverter(true);
+      }
+    );
+
+
+  document
+    .getElementById('swapPoints')
+    .addEventListener(
+      'click',
+      () => {
+        const tmp =
+          workbenchPointA;
+
+        workbenchPointA =
+          workbenchPointB;
+
+        workbenchPointB =
+          tmp;
+
+        updateConverter(true);
+      }
+    );
+
+
+  document
+    .querySelectorAll(
+      '.a8-travel-mode'
+    )
+    .forEach(button => {
+      button.addEventListener(
+        'click',
+        () => {
+          selectedTravelName =
+            button.dataset.name;
+
+          selectedTravelSpeed =
+            Number(
+              button.dataset.speed
+            );
+
+          customTravelSpeedValue =
+            null;
+
+          const custom =
+            document.getElementById(
+              'customTravelSpeed'
+            );
+
+          custom.value = '';
+
+          updateTravelButtons();
+          renderTravelResult();
+        }
+      );
+    });
+
+
+  document
+    .getElementById('customTravelSpeed')
+    .addEventListener(
+      'input',
+      event => {
+        const value =
+          parseWorkbenchA8(
+            event.target.value
+          );
+
+        if (
+          Number.isFinite(value)
+          && value > 0
+        ) {
+          customTravelSpeedValue =
+            value;
+
+          selectedTravelName =
+            'CUSTOM';
+
+          selectedTravelSpeed =
+            value;
+        }
+
+        else {
+          customTravelSpeedValue =
+            null;
+
+          if (
+            selectedTravelName
+            === 'CUSTOM'
+          ) {
+            selectedTravelName =
+              null;
+
+            selectedTravelSpeed =
+              null;
+          }
+        }
+
+        updateTravelButtons();
+        renderTravelResult();
+      }
+    );
+
+
+  updateMapPickStatus();
+  renderTravelPresetLabels();
 }
 
 
@@ -875,8 +3366,9 @@ function updateAtlas() {
     mode === 'decimal' ? 'A8 hour sector' : 'A8 hour sector₈';
   document.getElementById('atlasCoordHeading').textContent =
     mode === 'decimal' ? 'A8 decimal coordinates' : 'A8 octal coordinates';
+  /* A8-MAP-NAV-RULER-PRIORITY-v1 */
   document.getElementById('atlasRouteHeading').textContent =
-    navigationRungLabel() + ' navigation distance';
+    'A8/NAV distance';
 
   // Put A8 information before legacy coordinates.
   cityTable.innerHTML =
@@ -896,8 +3388,8 @@ function updateAtlas() {
     }).join('');
 
   routeTable.innerHTML =
-    '<tr><th>Route</th><th>' + navigationRungLabel() +
-    ' navigation distance</th><th>Elapsed travel reference</th><th>Legacy geometry check</th></tr>' +
+    '<tr><th>Route</th><th>A8/NAV distance</th>' +
+    '<th>Elapsed travel reference</th><th>Legacy geometry check</th></tr>' +
     ROUTE_DATA.map(r => {
       const legacy = r.km.toLocaleString(undefined,{maximumFractionDigits:0}) + ' km · ' +
                      r.nm.toLocaleString(undefined,{maximumFractionDigits:0}) + ' nmi';
@@ -916,7 +3408,11 @@ function updateAtlas() {
       }
 
       return '<tr><td>' + r.a + ' ↔ ' + r.b + '</td><td>' +
-             formatA8Distance(r.a8m) + '</td><td>' + note +
+             workbenchFormatA8(
+               r.km / A8_NAV_KM_COMPARISON,
+               1
+             ) + ' A8/NAV' +
+             '</td><td>' + note +
              '</td><td>' + legacy + '</td></tr>';
     }).join('');
 }
@@ -1057,13 +3553,57 @@ function showMapProbe(point) {
   h.setAttribute('y1', point.y); h.setAttribute('y2', point.y);
   dot.setAttribute('cx', point.x); dot.setAttribute('cy', point.y);
 
-  const boxW = 350, boxH = 78;
+  const mobileProbe =
+    window.matchMedia('(max-width:640px)').matches;
+
+  const boxW = mobileProbe ? 260 : 350;
+  const boxH = mobileProbe ? 72 : 78;
+
   let bx = point.x + 16;
   let by = point.y - boxH - 14;
   if (bx + boxW > MAP_W - 8) bx = point.x - boxW - 16;
   if (bx < 8) bx = 8;
   if (by < 8) by = point.y + 16;
   if (by + boxH > MAP_H - 8) by = MAP_H - boxH - 8;
+
+  /* A8 MAP MOBILE PROBE v1
+     Desktop probe placement remains unchanged.
+     On phones the probe stays compact, close to the tap,
+     and fully inside the map surface. */
+  if (mobileProbe) {
+    bx = point.x - boxW / 2;
+    by = point.y + 10;
+
+    bx = Math.max(
+      8,
+      Math.min(
+        bx,
+        MAP_W - boxW - 8
+      )
+    );
+
+    if (by + boxH > MAP_H - 8) {
+      by = point.y - boxH - 10;
+    }
+
+    by = Math.max(
+      8,
+      Math.min(
+        by,
+        MAP_H - boxH - 8
+      )
+    );
+  }
+
+  box.setAttribute(
+    'width',
+    String(boxW)
+  );
+
+  box.setAttribute(
+    'height',
+    String(boxH)
+  );
 
   box.setAttribute('x', bx); box.setAttribute('y', by);
   title.setAttribute('x', bx + 12); title.setAttribute('y', by + 21);
@@ -1136,14 +3676,38 @@ function installExactMapProbe() {
   svg.onpointerleave = () => hideMapProbe();
 
   svg.onpointerdown = event => {
-    if (event.pointerType === 'mouse') return;
-    const point = mapPointFromPointer(svg, event);
+    if (
+      event.pointerType === 'mouse'
+      && event.button !== 0
+    ) {
+      return;
+    }
+
+    const point =
+      mapPointFromPointer(
+        svg,
+        event
+      );
+
     if (!point) return;
+
     if (mapProbeTimer) {
       clearTimeout(mapProbeTimer);
       mapProbeTimer = null;
     }
+
     showMapProbe(point);
+
+    const position =
+      conventionalFromMapPoint(
+        point.x,
+        point.y
+      );
+
+    setWorkbenchPointFromA8(
+      position.a8lat,
+      position.a8lon
+    );
   };
 }
 
@@ -1281,6 +3845,339 @@ function updateModeMap() {
 }
 
 
+
+/* A8 MOBILE NATIVE MAP PINCH v1 JS */
+function installMobileExactMapPinch() {
+  if (!window.matchMedia('(max-width:640px)').matches) {
+    return;
+  }
+
+  const svg = document.getElementById('exactMap');
+
+  if (!svg) {
+    return;
+  }
+
+  const BASE = {
+    x: -76,
+    y: 0,
+    w: 1076,
+    h: 560
+  };
+
+  const MIN_ZOOM = 1;
+  const MAX_ZOOM = 8;
+
+  const pointers = new Map();
+
+  let pinch = null;
+
+  function clamp(value, min, max) {
+    return Math.max(
+      min,
+      Math.min(max, value)
+    );
+  }
+
+  function pointerPoint(event) {
+    return {
+      x: event.clientX,
+      y: event.clientY
+    };
+  }
+
+  function distance(a, b) {
+    return Math.hypot(
+      b.x - a.x,
+      b.y - a.y
+    );
+  }
+
+  function midpoint(a, b) {
+    return {
+      x: (a.x + b.x) / 2,
+      y: (a.y + b.y) / 2
+    };
+  }
+
+  function currentViewBox() {
+    const vb = svg.viewBox.baseVal;
+
+    return {
+      x: vb.x,
+      y: vb.y,
+      w: vb.width,
+      h: vb.height
+    };
+  }
+
+  function setViewBox(x, y, w, h) {
+    svg.setAttribute(
+      'viewBox',
+      `${x} ${y} ${w} ${h}`
+    );
+  }
+
+  function beginPinch() {
+    if (pointers.size < 2) {
+      pinch = null;
+      return;
+    }
+
+    const pts =
+      Array.from(pointers.values());
+
+    const a = pts[0];
+    const b = pts[1];
+
+    const d = distance(a, b);
+
+    if (!Number.isFinite(d) || d <= 0) {
+      pinch = null;
+      return;
+    }
+
+    const rect =
+      svg.getBoundingClientRect();
+
+    if (!rect.width || !rect.height) {
+      pinch = null;
+      return;
+    }
+
+    const view =
+      currentViewBox();
+
+    const mid =
+      midpoint(a, b);
+
+    const fx =
+      clamp(
+        (mid.x - rect.left) / rect.width,
+        0,
+        1
+      );
+
+    const fy =
+      clamp(
+        (mid.y - rect.top) / rect.height,
+        0,
+        1
+      );
+
+    pinch = {
+      distance: d,
+
+      startZoom:
+        BASE.w / view.w,
+
+      anchorX:
+        view.x + fx * view.w,
+
+      anchorY:
+        view.y + fy * view.h
+    };
+
+    if (typeof hideMapProbe === 'function') {
+      hideMapProbe();
+    }
+  }
+
+  function updatePinch() {
+    if (
+      !pinch ||
+      pointers.size < 2
+    ) {
+      return;
+    }
+
+    const pts =
+      Array.from(pointers.values());
+
+    const a = pts[0];
+    const b = pts[1];
+
+    const d =
+      distance(a, b);
+
+    if (
+      !Number.isFinite(d) ||
+      d <= 0
+    ) {
+      return;
+    }
+
+    const ratio =
+      d / pinch.distance;
+
+    const zoom =
+      clamp(
+        pinch.startZoom * ratio,
+        MIN_ZOOM,
+        MAX_ZOOM
+      );
+
+    const w =
+      BASE.w / zoom;
+
+    const h =
+      BASE.h / zoom;
+
+    const rect =
+      svg.getBoundingClientRect();
+
+    if (!rect.width || !rect.height) {
+      return;
+    }
+
+    const mid =
+      midpoint(a, b);
+
+    const fx =
+      clamp(
+        (mid.x - rect.left) / rect.width,
+        0,
+        1
+      );
+
+    const fy =
+      clamp(
+        (mid.y - rect.top) / rect.height,
+        0,
+        1
+      );
+
+    let x =
+      pinch.anchorX - fx * w;
+
+    let y =
+      pinch.anchorY - fy * h;
+
+    x = clamp(
+      x,
+      BASE.x,
+      BASE.x + BASE.w - w
+    );
+
+    y = clamp(
+      y,
+      BASE.y,
+      BASE.y + BASE.h - h
+    );
+
+    setViewBox(
+      x,
+      y,
+      w,
+      h
+    );
+  }
+
+  svg.addEventListener(
+    'pointerdown',
+    event => {
+      if (event.pointerType !== 'touch') {
+        return;
+      }
+
+      pointers.set(
+        event.pointerId,
+        pointerPoint(event)
+      );
+
+      try {
+        svg.setPointerCapture(
+          event.pointerId
+        );
+      } catch (_) {
+      }
+
+      if (pointers.size >= 2) {
+        event.preventDefault();
+
+        /*
+         * Do not let the second finger become another
+         * coordinate selection in the existing map handler.
+         */
+        event.stopImmediatePropagation();
+
+        beginPinch();
+      }
+    },
+    {
+      capture: true,
+      passive: false
+    }
+  );
+
+  svg.addEventListener(
+    'pointermove',
+    event => {
+      if (
+        event.pointerType !== 'touch' ||
+        !pointers.has(event.pointerId)
+      ) {
+        return;
+      }
+
+      pointers.set(
+        event.pointerId,
+        pointerPoint(event)
+      );
+
+      if (
+        pinch &&
+        pointers.size >= 2
+      ) {
+        event.preventDefault();
+        updatePinch();
+      }
+    },
+    {
+      capture: true,
+      passive: false
+    }
+  );
+
+  function endPointer(event) {
+    pointers.delete(
+      event.pointerId
+    );
+
+    if (pointers.size < 2) {
+      pinch = null;
+    }
+  }
+
+  svg.addEventListener(
+    'pointerup',
+    endPointer,
+    {
+      capture: true,
+      passive: true
+    }
+  );
+
+  svg.addEventListener(
+    'pointercancel',
+    endPointer,
+    {
+      capture: true,
+      passive: true
+    }
+  );
+
+  svg.addEventListener(
+    'lostpointercapture',
+    endPointer,
+    {
+      capture: true,
+      passive: true
+    }
+  );
+}
+
+
 function setMode(next) {
   mode = next;
   document.getElementById('decimalBtn').classList.toggle('active',mode==='decimal');
@@ -1294,11 +4191,243 @@ function setMode(next) {
   updateVerifiedBenchmark();
 }
 
+installCompassMouseNeedle();
+
 document.getElementById('decimalBtn').addEventListener('click',()=>setMode('decimal'));
 document.getElementById('octalBtn').addEventListener('click',()=>setMode('octal'));
 document.getElementById('phase').addEventListener('input',updatePhase);
-document.getElementById('lat').addEventListener('input',updateConverter);
-document.getElementById('lon').addEventListener('input',updateConverter);
+installCoordinateWorkbench();
+installWorkbenchQuickCities();
 setMode('decimal');
+installMobileExactMapPinch();
 </script>
+
+
+<script id="a8-map-mobile-touch-compass-v1">
+'use strict';
+
+/*
+ * A8 MAP MOBILE TOUCH COMPASS v1
+ *
+ * Presentation input only.
+ * Does not alter A8 angle mathematics.
+ * Existing mouse / pen compass remains untouched.
+ */
+
+(() => {
+
+  const svg =
+    document.getElementById(
+      'a8CompassInteractive'
+    );
+
+  const needle =
+    document.getElementById(
+      'a8CompassNeedle'
+    );
+
+  if (!svg || !needle) {
+    return;
+  }
+
+
+  let activeTouchPointer = null;
+
+
+  function angleFromPointer(event) {
+
+    const ctm =
+      svg.getScreenCTM();
+
+    if (!ctm) {
+      return null;
+    }
+
+
+    const point =
+      svg.createSVGPoint();
+
+    point.x =
+      event.clientX;
+
+    point.y =
+      event.clientY;
+
+
+    const local =
+      point.matrixTransform(
+        ctm.inverse()
+      );
+
+
+    const dx =
+      local.x - 330;
+
+    const dy =
+      local.y - 330;
+
+
+    /*
+     * Ignore unstable direction directly
+     * over the physical compass pivot.
+     */
+    if (
+      Math.hypot(dx,dy) < 8
+    ) {
+      return null;
+    }
+
+
+    /*
+     * Same orientation used by the existing
+     * desktop compass:
+     *
+     * NORTH =   0°
+     * EAST  =  90°
+     * SOUTH = 180°
+     * WEST  = -90°
+     */
+    return (
+      Math.atan2(
+        dx,
+        -dy
+      )
+      * 180
+      / Math.PI
+    );
+  }
+
+
+  function applyTouchPointer(event) {
+
+    const angle =
+      angleFromPointer(
+        event
+      );
+
+    if (angle === null) {
+      return;
+    }
+
+
+    needle.setAttribute(
+      'transform',
+      `rotate(${angle} 330 330)`
+    );
+  }
+
+
+  svg.addEventListener(
+    'pointerdown',
+    event => {
+
+      if (
+        event.pointerType !== 'touch'
+      ) {
+        return;
+      }
+
+
+      activeTouchPointer =
+        event.pointerId;
+
+
+      if (
+        typeof svg.setPointerCapture
+        === 'function'
+      ) {
+        try {
+          svg.setPointerCapture(
+            event.pointerId
+          );
+        } catch (_) {
+          /* presentation only */
+        }
+      }
+
+
+      event.preventDefault();
+
+      applyTouchPointer(
+        event
+      );
+    }
+  );
+
+
+  svg.addEventListener(
+    'pointermove',
+    event => {
+
+      if (
+        event.pointerType !== 'touch'
+        || event.pointerId
+           !== activeTouchPointer
+      ) {
+        return;
+      }
+
+
+      event.preventDefault();
+
+      applyTouchPointer(
+        event
+      );
+    }
+  );
+
+
+  function releaseTouchPointer(event) {
+
+    if (
+      activeTouchPointer === null
+      || event.pointerId
+         !== activeTouchPointer
+    ) {
+      return;
+    }
+
+
+    if (
+      typeof svg.releasePointerCapture
+      === 'function'
+    ) {
+      try {
+        svg.releasePointerCapture(
+          activeTouchPointer
+        );
+      } catch (_) {
+        /* presentation only */
+      }
+    }
+
+
+    activeTouchPointer =
+      null;
+
+
+    /*
+     * Same physical rest behavior as desktop:
+     * release the instrument → North.
+     */
+    needle.setAttribute(
+      'transform',
+      'rotate(0 330 330)'
+    );
+  }
+
+
+  svg.addEventListener(
+    'pointerup',
+    releaseTouchPointer
+  );
+
+  svg.addEventListener(
+    'pointercancel',
+    releaseTouchPointer
+  );
+
+})();
+</script>
+
 </main></body></html>

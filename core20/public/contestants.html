@@ -323,17 +323,23 @@ details a{color:var(--gold)}
   text-decoration:none;
 }
 
+/* A8-CONTESTANT-TOPROW-MENU-RIGHT-v1 */
 #a8-topside-coherence-02 .a8-menu{
   position:relative;
-  margin-left:0;
+  margin-left:auto;
+  order:2;
 }
 
 #a8-topside-coherence-02 .a8-contestant-doors{
   display:flex;
   align-items:center;
   gap:6px;
-  margin-left:auto;
-  flex-wrap:nowrap;
+
+  order:3;
+  width:100%;
+  margin-left:0;
+
+  flex-wrap:wrap;
 }
 
 #a8-topside-coherence-02 .a8-contestant-door{
@@ -445,6 +451,32 @@ details {
 }
 
 </style>
+
+<style id="a8-mobile-dark-glass-foreground-lock-v1">
+/*
+ * A8-MOBILE-DARK-GLASS-FOREGROUND-LOCK-v1
+ * Keep mobile contestant cards visually identical in
+ * foreground intent to the working desktop presentation.
+ */
+@media (max-width:760px){
+
+  html{
+    color-scheme:dark;
+  }
+
+  body{
+    color:#eef5f8;
+  }
+
+  .card,
+  .hero,
+  article,
+  details{
+    color:inherit;
+  }
+}
+</style>
+
 </head>
 
 <body>
@@ -477,7 +509,7 @@ details {
 
       <a
         class="a8-contestant-door"
-        href="/index.html"
+        href="https://lab.cosigo.io/"
         title="Enter the A8 engineering laboratory"
       >
         ENGINEER?
@@ -497,7 +529,7 @@ details {
       <summary>MENU</summary>
 
       <div class="a8-menu-panel">
-        <a href="https://lab.a8.cosigo.io/">LAB HOME</a>
+        <a href="https://lab.cosigo.io/">LAB HOME</a>
         <a href="https://clock.cosigo.io/">CLOCK</a>
         <a href="https://calendar.cosigo.io/">CALENDAR</a>
         <a href="https://moons.cosigo.io/">MOONS</a>

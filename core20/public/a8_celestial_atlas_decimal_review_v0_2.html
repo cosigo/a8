@@ -47,6 +47,56 @@ body::-webkit-scrollbar{
   display:none;
 }
 
+
+/* A8 STARS MOBILE ATLAS STABILITY v1 */
+@media(max-width:700px){
+  main{
+    padding:8px;
+  }
+
+  header{
+    margin-bottom:7px;
+  }
+
+  h1{
+    font-size:16px;
+  }
+
+  .eyebrow,
+  .sub{
+    font-size:10px;
+  }
+
+  .card{
+    padding:6px;
+  }
+
+  .legend{
+    gap:6px;
+    font-size:9px;
+  }
+
+  .tooltip{
+    min-width:0;
+    width:90px;
+    max-width:calc(100% - 12px);
+    padding:3px 4px;
+    border-radius:5px;
+    box-shadow:none;
+    font-size:9px;
+    line-height:1.15;
+  }
+
+  .tooltip strong{
+    font-size:10px;
+    margin-bottom:2px;
+  }
+
+  .tooltip .row{
+    gap:4px;
+  }
+}
+
 </style><meta name="description" content="Decimal-comfort A8 celestial atlas instrument using the 512 × 256 celestial ruler and catalog stars as reference markers.">
 <meta name="robots" content="noindex,follow">
 <meta name="author" content="COSIGO Labs">
@@ -138,7 +188,71 @@ const grid=document.getElementById('grid'),starG=document.getElementById('stars'
 function line(x1,y1,x2,y2,cls){const e=document.createElementNS('http://www.w3.org/2000/svg','line');e.setAttribute('x1',x1);e.setAttribute('y1',y1);e.setAttribute('x2',x2);e.setAttribute('y2',y2);e.setAttribute('class',cls);grid.appendChild(e)}
 for(let h=0;h<=32;h++){const x=PLOT_X + (1-h/32)*PLOT_W; line(x,PLOT_Y,x,PLOT_Y+PLOT_H,(h%4===0)?'grid major':'grid')}
 for(let a=0;a<=256;a+=16){const y=PLOT_Y + (a/256)*PLOT_H; line(PLOT_X,y,PLOT_X+PLOT_W,y,(a%64===0)?'grid major':'grid')}
-function moveTip(ev){const r=wrap.getBoundingClientRect();let x=ev.clientX-r.left+14,y=ev.clientY-r.top+14;const tw=210,th=92;if(x+tw>r.width)x-=tw+28;if(y+th>r.height)y-=th+28;tip.style.left=x+'px';tip.style.top=y+'px'}
+function moveTip(ev){
+  const r=wrap.getBoundingClientRect();
+
+  /*
+   * Desktop keeps the original placement behavior.
+   */
+  if(!window.matchMedia('(max-width:700px)').matches){
+    let x=ev.clientX-r.left+14;
+    let y=ev.clientY-r.top+14;
+    const tw=210,th=92;
+
+    if(x+tw>r.width) x-=tw+28;
+    if(y+th>r.height) y-=th+28;
+
+    tip.style.left=x+'px';
+    tip.style.top=y+'px';
+    return;
+  }
+
+  /*
+   * Phone placement:
+   * center on the selected star,
+   * prefer directly above it,
+   * flip underneath near the top,
+   * clamp completely inside the sky surface.
+   */
+  const margin=6;
+  const gap=8;
+
+  const px=ev.clientX-r.left;
+  const py=ev.clientY-r.top;
+
+  const tw=Math.min(
+    tip.offsetWidth || 90,
+    Math.max(0,r.width-margin*2)
+  );
+
+  const th=tip.offsetHeight || 56;
+
+  let x=px-tw/2;
+  let y=py-th-gap;
+
+  if(y<margin){
+    y=py+gap;
+  }
+
+  x=Math.max(
+    margin,
+    Math.min(
+      x,
+      r.width-tw-margin
+    )
+  );
+
+  y=Math.max(
+    margin,
+    Math.min(
+      y,
+      r.height-th-margin
+    )
+  );
+
+  tip.style.left=x+'px';
+  tip.style.top=y+'px';
+}
 function showTip(ev,s){tip.innerHTML=`<strong>${s.name}</strong><div class="row"><span class="k">A8 HOUR</span><span>${s.chour}</span></div><div class="row"><span class="k">A8 LON</span><span>${s.clon}</span></div><div class="row"><span class="k">A8 LAT</span><span>${s.clat}</span></div>`;tip.style.display='block';moveTip(ev)}
 function hideTip(){tip.style.display='none'}
 stars.forEach(s=>{const c=document.createElementNS('http://www.w3.org/2000/svg','circle'); c.setAttribute('class','star'); c.setAttribute('cx',PLOT_X + s.x); c.setAttribute('cy',PLOT_Y + s.y); c.setAttribute('r',s.r); c.setAttribute('fill',s.color || '#f7fbff'); c.addEventListener('mouseenter',e=>showTip(e,s)); c.addEventListener('mousemove',moveTip); c.addEventListener('mouseleave',hideTip); c.addEventListener('click',e=>{e.stopPropagation();showTip(e,s)}); starG.appendChild(c)});

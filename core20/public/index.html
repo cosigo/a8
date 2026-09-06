@@ -249,19 +249,204 @@ main .panel{
 </style>
 
 
-<main>
 
-<header>
-  <div class="panel" style="margin:0;flex:1">
-    <div class="a8-lab-header-row">
+<style id="a8-lab-global-topbar-style-v1">
+/*
+ * A8-LAB-GLOBAL-TOPBAR-v1
+ * COSIGO identity left · existing Lab MENU right
+ */
 
-      <div class="a8-lab-title-block">
-        <div class="eyebrow">AUSPICIOUS 8 · UNIFIED NODE CORE</div>
-        <h1>A8 Time Laboratory v5.4.20</h1>
-        <p class="muted">One raw counter · three independent Jovian recoveries · comparator · qualification · divider · 17-bit clock. Your browser is an observer.</p>
-      </div>
+#a8-lab-global-topbar{
+  display:block;
+  margin:0;
+  padding:10px 14px;
 
-      <details class="a8-menu">
+  border-bottom:
+    1px solid rgba(255,255,255,.14);
+
+  background:
+    rgba(7,11,16,.96);
+
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Consolas,
+    "Liberation Mono",
+    monospace;
+}
+
+#a8-lab-global-topbar .a8-topline{
+  max-width:1440px;
+  margin:0 auto;
+
+  display:flex;
+  gap:12px;
+  align-items:center;
+
+  flex-wrap:nowrap;
+}
+
+#a8-lab-global-topbar .cosigo-global-brand{
+  display:flex;
+  gap:8px;
+  align-items:center;
+
+  color:#eef5f8;
+  text-decoration:none;
+}
+
+#a8-lab-global-topbar .cosigo-global-brand img{
+  width:34px;
+  height:34px;
+  object-fit:contain;
+}
+
+#a8-lab-global-topbar .cosigo-global-brand span{
+  font-weight:900;
+  letter-spacing:.06em;
+}
+
+#a8-lab-global-topbar .cosigo-global-brand small{
+  display:block;
+
+  color:#9eafbc;
+
+  font-size:.62rem;
+  font-weight:700;
+  letter-spacing:.12em;
+}
+
+#a8-lab-global-topbar .a8-menu{
+  position:relative;
+  margin-left:auto;
+
+  flex:0 0 auto;
+}
+
+#a8-lab-global-topbar .a8-menu summary{
+  list-style:none;
+  cursor:pointer;
+
+  padding:8px 11px;
+
+  border:
+    1px solid #425467;
+
+  border-radius:8px;
+
+  background:#111820;
+  color:#e0bd72;
+
+  font-size:.76rem;
+  font-weight:900;
+  letter-spacing:.07em;
+
+  user-select:none;
+}
+
+#a8-lab-global-topbar
+.a8-menu summary::-webkit-details-marker{
+  display:none;
+}
+
+#a8-lab-global-topbar
+.a8-menu summary::after{
+  content:" ▾";
+  color:#92a5b8;
+}
+
+#a8-lab-global-topbar
+.a8-menu[open] summary::after{
+  content:" ▴";
+}
+
+#a8-lab-global-topbar .a8-menu-panel{
+  position:absolute;
+  z-index:1000;
+
+  right:0;
+  top:calc(100% + 7px);
+
+  min-width:180px;
+  padding:7px;
+
+  border:
+    1px solid #425467;
+
+  border-radius:9px;
+
+  background:#0d141b;
+
+  box-shadow:
+    0 12px 28px rgba(0,0,0,.38);
+}
+
+#a8-lab-global-topbar .a8-menu-panel a{
+  display:block;
+
+  padding:9px 10px;
+  border-radius:6px;
+
+  color:#c8ddf5;
+  text-decoration:none;
+
+  font-size:.78rem;
+  font-weight:800;
+
+  white-space:nowrap;
+}
+
+#a8-lab-global-topbar .a8-menu-panel a:hover,
+#a8-lab-global-topbar .a8-menu-panel a:focus{
+  background:#182431;
+  color:#fff;
+}
+
+@media(max-width:760px){
+
+  #a8-lab-global-topbar{
+    padding:8px 10px;
+  }
+
+  #a8-lab-global-topbar .a8-menu{
+    margin-left:auto;
+  }
+
+  #a8-lab-global-topbar .a8-menu-panel{
+    right:0;
+    left:auto;
+    min-width:170px;
+  }
+}
+</style>
+
+
+<nav
+  id="a8-lab-global-topbar"
+  class="cosigo-global-nav"
+  aria-label="A8 Time Lab navigation"
+>
+
+  <div class="a8-topline">
+
+    <a
+      class="cosigo-global-brand"
+      href="https://cosigo.io/"
+      aria-label="COSIGO home"
+    >
+      <img
+        src="/assets/cosigo_master_512.gif"
+        alt="COSIGO"
+      >
+
+      <span>
+        COSIGO
+        <small>LABS · AUSPICIOUS 8</small>
+      </span>
+    </a>
+
+<details class="a8-menu">
       <summary>MENU</summary>
       <div class="a8-menu-panel">
         <a href="https://clock.cosigo.io/">CLOCK</a>
@@ -281,6 +466,24 @@ main .panel{
         <a href="https://github.com/cosigo/a8">GITHUB</a>
       </div>
     </details>
+
+  </div>
+
+</nav>
+
+<main>
+
+<header>
+  <div class="panel" style="margin:0;flex:1">
+    <div class="a8-lab-header-row">
+
+      <div class="a8-lab-title-block">
+        <div class="eyebrow">AUSPICIOUS 8 · UNIFIED NODE CORE</div>
+        <h1>A8 Time Laboratory v5.4.20</h1>
+        <p class="muted">One raw counter · three independent Jovian recoveries · comparator · qualification · divider · 17-bit clock. Your browser is an observer.</p>
+      </div>
+
+      
 
     </div>
   </div>

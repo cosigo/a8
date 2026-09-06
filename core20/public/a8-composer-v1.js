@@ -4479,6 +4479,528 @@
 
 
   /*
+   * A8 COMPOSER MOBILE PALETTE POINTER DRAG v1
+   *
+   * Mobile/coarse-pointer bridge only.
+   *
+   * Desktop HTML5 drag/drop remains authoritative
+   * for mouse operation.
+   *
+   * This bridge changes only score ORDER / INSERTION.
+   * It deliberately reuses:
+   *
+   *   insertionIndex()
+   *   addPaletteItem()
+   *
+   * Pointer position NEVER defines A8 duration.
+   */
+
+  let mobilePaletteDrag =
+    null;
+
+  let mobilePaletteLane =
+    null;
+
+  let mobilePaletteSuppressClick =
+    false;
+
+
+  function mobilePalettePayload(
+    source
+  ) {
+    if (
+      !source ||
+      !source.dataset
+    ) {
+      return null;
+    }
+
+
+    if (
+      source.dataset
+        .paletteType ===
+      'rest'
+    ) {
+      return {
+        kind:
+          'palette',
+
+        type:
+          'rest'
+      };
+    }
+
+
+    if (
+      source.dataset
+        .paletteType !==
+      'note'
+    ) {
+      return null;
+    }
+
+
+    return {
+      kind:
+        'palette',
+
+      type:
+        'note',
+
+      noteName:
+        source.dataset
+          .noteName,
+
+      octaveShift:
+        Number(
+          source.dataset
+            .octaveShift
+        ),
+
+      pitch:
+        source.dataset
+          .pitch
+    };
+  }
+
+
+  function mobilePaletteLaneAt(
+    clientX,
+    clientY
+  ) {
+    const target =
+      document.elementFromPoint(
+        clientX,
+        clientY
+      );
+
+
+    if (!target) {
+      return null;
+    }
+
+
+    return target.closest(
+      '.music-lane'
+    );
+  }
+
+
+  function clearMobilePaletteLane() {
+    if (!mobilePaletteLane) {
+      return;
+    }
+
+
+    mobilePaletteLane
+      .classList
+      .remove(
+        'drag-over'
+      );
+
+
+    mobilePaletteLane =
+      null;
+  }
+
+
+  function clearMobilePaletteDrag() {
+    clearMobilePaletteLane();
+
+
+    if (
+      mobilePaletteDrag &&
+      mobilePaletteDrag.source
+    ) {
+      mobilePaletteDrag
+        .source
+        .classList
+        .remove(
+          'a8-touch-drag-source'
+        );
+
+
+      try {
+        if (
+          mobilePaletteDrag
+            .source
+            .hasPointerCapture &&
+          mobilePaletteDrag
+            .source
+            .hasPointerCapture(
+              mobilePaletteDrag
+                .pointerId
+            )
+        ) {
+          mobilePaletteDrag
+            .source
+            .releasePointerCapture(
+              mobilePaletteDrag
+                .pointerId
+            );
+        }
+      } catch (_) {}
+    }
+
+
+    document.body
+      .classList
+      .remove(
+        'a8-composer-touch-dragging'
+      );
+
+
+    mobilePaletteDrag =
+      null;
+  }
+
+
+  $('notePalette')
+    .addEventListener(
+      'pointerdown',
+      event => {
+
+        /*
+         * Mouse keeps the proven HTML5
+         * drag/drop path.
+         */
+        if (
+          event.pointerType ===
+          'mouse'
+        ) {
+          return;
+        }
+
+
+        if (
+          event.isPrimary ===
+          false
+        ) {
+          return;
+        }
+
+
+        const source =
+          event.target.closest(
+            '[data-palette-type]'
+          );
+
+
+        if (!source) {
+          return;
+        }
+
+
+        const payload =
+          mobilePalettePayload(
+            source
+          );
+
+
+        if (!payload) {
+          return;
+        }
+
+
+        mobilePaletteDrag = {
+          pointerId:
+            event.pointerId,
+
+          source,
+
+          payload,
+
+          startX:
+            event.clientX,
+
+          startY:
+            event.clientY,
+
+          dragging:
+            false
+        };
+
+
+        try {
+          source.setPointerCapture(
+            event.pointerId
+          );
+        } catch (_) {}
+      }
+    );
+
+
+  window.addEventListener(
+    'pointermove',
+    event => {
+
+      if (
+        !mobilePaletteDrag ||
+        event.pointerId !==
+          mobilePaletteDrag
+            .pointerId
+      ) {
+        return;
+      }
+
+
+      const dx =
+        event.clientX -
+        mobilePaletteDrag
+          .startX;
+
+      const dy =
+        event.clientY -
+        mobilePaletteDrag
+          .startY;
+
+
+      /*
+       * Tiny movement does not yet count
+       * as a drag.
+       */
+      if (
+        !mobilePaletteDrag
+          .dragging &&
+        Math.hypot(
+          dx,
+          dy
+        ) < 7
+      ) {
+        return;
+      }
+
+
+      if (
+        !mobilePaletteDrag
+          .dragging
+      ) {
+        mobilePaletteDrag
+          .dragging =
+            true;
+
+
+        mobilePaletteDrag
+          .source
+          .classList
+          .add(
+            'a8-touch-drag-source'
+          );
+
+
+        document.body
+          .classList
+          .add(
+            'a8-composer-touch-dragging'
+          );
+      }
+
+
+      /*
+       * Once the note is actually moving,
+       * this is score dragging, not page scroll.
+       */
+      event.preventDefault();
+
+
+      const lane =
+        mobilePaletteLaneAt(
+          event.clientX,
+          event.clientY
+        );
+
+
+      if (
+        lane ===
+        mobilePaletteLane
+      ) {
+        return;
+      }
+
+
+      clearMobilePaletteLane();
+
+
+      if (lane) {
+        mobilePaletteLane =
+          lane;
+
+
+        lane.classList
+          .add(
+            'drag-over'
+          );
+      }
+    },
+    {
+      passive:
+        false
+    }
+  );
+
+
+  window.addEventListener(
+    'pointerup',
+    event => {
+
+      if (
+        !mobilePaletteDrag ||
+        event.pointerId !==
+          mobilePaletteDrag
+            .pointerId
+      ) {
+        return;
+      }
+
+
+      const state =
+        mobilePaletteDrag;
+
+
+      const lane =
+        mobilePaletteLaneAt(
+          event.clientX,
+          event.clientY
+        );
+
+
+      const wasDragging =
+        state.dragging;
+
+
+      clearMobilePaletteDrag();
+
+
+      if (!wasDragging) {
+        return;
+      }
+
+
+      event.preventDefault();
+
+
+      /*
+       * Some mobile browsers emit a click
+       * immediately after touch drag.
+       */
+      mobilePaletteSuppressClick =
+        true;
+
+
+      window.setTimeout(
+        () => {
+          mobilePaletteSuppressClick =
+            false;
+        },
+        350
+      );
+
+
+      /*
+       * Release outside a bar means:
+       * do nothing.
+       */
+      if (!lane) {
+        return;
+      }
+
+
+      const bar =
+        barById(
+          Number(
+            lane.dataset
+              .barLane
+          )
+        );
+
+
+      if (!bar) {
+        return;
+      }
+
+
+      const index =
+        insertionIndex(
+          lane,
+          event.clientX
+        );
+
+
+      try {
+        /*
+         * SAME score insertion path
+         * used by desktop DROP.
+         */
+        activeBarId =
+          bar.id;
+
+
+        addPaletteItem(
+          state.payload,
+          index
+        );
+
+      } catch (error) {
+        showError(
+          error
+        );
+      }
+    },
+    {
+      passive:
+        false
+    }
+  );
+
+
+  window.addEventListener(
+    'pointercancel',
+    event => {
+
+      if (
+        !mobilePaletteDrag ||
+        event.pointerId !==
+          mobilePaletteDrag
+            .pointerId
+      ) {
+        return;
+      }
+
+
+      clearMobilePaletteDrag();
+    }
+  );
+
+
+  $('notePalette')
+    .addEventListener(
+      'click',
+      event => {
+
+        if (
+          !mobilePaletteSuppressClick
+        ) {
+          return;
+        }
+
+
+        if (
+          !event.target.closest(
+            '[data-palette-type]'
+          )
+        ) {
+          return;
+        }
+
+
+        event.preventDefault();
+        event.stopPropagation();
+      },
+      true
+    );
+
+
+  /*
    * PALETTE DRAG
    */
   $('notePalette')
