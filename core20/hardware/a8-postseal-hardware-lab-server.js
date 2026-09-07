@@ -392,6 +392,7 @@ function createHardwareLabServer({
     new MintakaPhase17(),
   opposingClockDiscrepancy =
     new OpposingClockDiscrepancy(),
+  terraShipSlipLifetimeLedger = null,
 } = {}) {
   if (selector.mode === 'NONE') {
     selector.select(
@@ -1161,6 +1162,258 @@ function createHardwareLabServer({
     }
   );
 
+  /*
+   * TERRA SHIP SLIP · LIFETIME PERSISTENCE
+   *
+   * Downstream observer only.
+   * The Core20 native edge provides the checkpoint cadence.
+   * No host timer, UTC cadence, cron, or missing-motion inference.
+   */
+  const currentTerraLifetimeEdge =
+    () => {
+      const c =
+        core20Runtime
+          .clockSnapshot();
+
+      if (
+        !c ||
+        c.status !==
+          'CORE20_CLOCK_RUNNING'
+      ) {
+        return null;
+      }
+
+      const totalState =
+        BigInt(c.dayCount) *
+          131072n +
+        BigInt(c.dayPhase17);
+
+      return {
+        schema:
+          'A8-CORE20-CLOCK-EDGE-V1',
+
+        sequence: null,
+
+        sourceEpoch:
+          String(c.sourceEpoch),
+
+        deltaStates: '0',
+
+        rawPulse:
+          String(
+            c.currentSelectedRawPulse
+          ),
+
+        totalState:
+          totalState.toString(),
+
+        dayCount:
+          String(c.dayCount),
+
+        dayPhase17:
+          String(c.dayPhase17),
+
+        clockAuthority:
+          c.clockAuthority,
+
+        definingPathTouched:
+          false,
+
+        browserTimingAuthority:
+          false,
+      };
+    };
+
+  /*
+   * TERRA SHIP SLIP · NATIVE A8 CALENDAR FIREWALL
+   *
+   * Only a fully-running native A8 calendar position may
+   * enter the lifetime/report layer.
+   *
+   * Awaiting / stale / reanchor-required calendar states
+   * become null. Slip accumulation continues; date/report
+   * advancement pauses.
+   *
+   * No persistence fallback.
+   * No external position fallback.
+   * No conventional-time fallback.
+   */
+  const currentNativeA8CalendarForTerra =
+    () => {
+      const c =
+        calendarAnchor.snapshot();
+
+      if (
+        !c ||
+        c.status !==
+          'CALENDAR_RUNNING_FROM_CORE20_COUNT' ||
+        c.anchored !== true
+      ) {
+        return null;
+      }
+
+      const p =
+        c.persistence || {};
+
+      /*
+       * Explicit authority firewall.
+       * These flags are inspected only to reject contamination;
+       * none of the persistence object enters Terra state.
+       */
+      if (
+        p.usesUTC !== false ||
+        p.usesJPL !== false ||
+        p.usesYearAngle !== false ||
+        p.usesBrowserTime !== false ||
+        p.usesHostTime !== false ||
+        p.usesLegacySeconds !== false ||
+        p.usesNetworkCadence !== false
+      ) {
+        return null;
+      }
+
+      const required = [
+        'yearCycle4',
+        'yearCycleLabel',
+        'yearDay',
+        'yearDayOctal',
+        'yearLength',
+        'isLeapYear',
+        'calendarRegion',
+        'coreDayCount',
+      ];
+
+      for (const key of required) {
+        if (
+          c[key] === undefined ||
+          c[key] === null
+        ) {
+          return null;
+        }
+      }
+
+      /*
+       * WHITELIST ONLY.
+       *
+       * No anchor object.
+       * No persistence object.
+       * No migration provenance.
+       * No year-angle diagnostic.
+       * No external reference.
+       */
+      return {
+        yearCycle4:
+          c.yearCycle4,
+
+        yearCycleLabel:
+          c.yearCycleLabel,
+
+        yearDay:
+          c.yearDay,
+
+        yearDayOctal:
+          c.yearDayOctal,
+
+        yearLength:
+          c.yearLength,
+
+        isLeapYear:
+          c.isLeapYear,
+
+        calendarRegion:
+          c.calendarRegion,
+
+        coreDayCount:
+          c.coreDayCount,
+      };
+    };
+
+  const observeTerraLifetime =
+    ({
+      edge,
+      reason = 'CLOCK_EDGE',
+      forceWrite = false,
+      cleanShutdown = false,
+    } = {}) => {
+      if (
+        !terraShipSlipLifetimeLedger
+      ) {
+        return null;
+      }
+
+      const bridge =
+        recoveryBridge.snapshot();
+
+      const earthScale =
+        currentEarthRotationScale();
+
+      const sunReturn =
+        currentSunReturnRecurrence();
+
+      const discrepancy =
+        opposingClockDiscrepancy
+          .snapshot(
+            bridge,
+            earthScale,
+            sunReturn
+          );
+
+      if (
+        !discrepancy ||
+        discrepancy.ready !== true
+      ) {
+        return (
+          terraShipSlipLifetimeLedger
+            .snapshot()
+        );
+      }
+
+      return (
+        terraShipSlipLifetimeLedger
+          .observe({
+            edge,
+            discrepancy,
+            calendar:
+              currentNativeA8CalendarForTerra(),
+
+            accumulator:
+              terraShipSlipAccumulator
+                .snapshot(),
+
+            reason,
+            forceWrite,
+            cleanShutdown,
+          })
+      );
+    };
+
+  const sealTerraShipSlipLifetime =
+    () => {
+      if (
+        !terraShipSlipLifetimeLedger
+      ) {
+        return null;
+      }
+
+      const edge =
+        currentTerraLifetimeEdge();
+
+      if (!edge) {
+        return (
+          terraShipSlipLifetimeLedger
+            .snapshot()
+        );
+      }
+
+      return observeTerraLifetime({
+        edge,
+        reason:
+          'CLEAN_SHUTDOWN',
+        forceWrite: true,
+        cleanShutdown: true,
+      });
+    };
+
   nativeDittyBridge =
     new A8Core20NativeDittyBridge({
       getRaw:
@@ -1272,6 +1525,28 @@ function createHardwareLabServer({
         }
       }
     );
+
+  const removeTerraLifetimeEdgeListener =
+    terraShipSlipLifetimeLedger
+      ? core20Runtime.onClockEdge(
+          edge => {
+            try {
+              observeTerraLifetime({
+                edge,
+                reason:
+                  'CLOCK_EDGE',
+              });
+            } catch (err) {
+              console.error(
+                'TERRA SHIP SLIP LIFETIME OBSERVER ·',
+                err && err.message
+                  ? err.message
+                  : String(err)
+              );
+            }
+          }
+        )
+      : () => {};
 
   /*
    * Flight recorder observes the authoritative Core20 edge stream.
@@ -2416,6 +2691,28 @@ function createHardwareLabServer({
         if (
           req.method === 'GET' &&
           url.pathname ===
+            '/api/terra-ship-slip/lifetime'
+        ) {
+          return sendJson(
+            res,
+            200,
+            {
+              ok: true,
+              lifetime:
+                terraShipSlipLifetimeLedger
+                  ? terraShipSlipLifetimeLedger
+                      .snapshot()
+                  : {
+                      status:
+                        'LIFETIME_PERSISTENCE_DISABLED',
+                    },
+            }
+          );
+        }
+
+        if (
+          req.method === 'GET' &&
+          url.pathname ===
             '/api/mintaka/clock'
         ) {
           try {
@@ -2944,6 +3241,8 @@ function createHardwareLabServer({
     nativeDittyClients.clear();
     nativeDittyBridge.reset();
 
+    removeTerraLifetimeEdgeListener();
+
     removeFlightRecorderEdgeListener();
 
     removeCore20EdgeListener();
@@ -2971,6 +3270,8 @@ function createHardwareLabServer({
     earthObservationBridge,
     core20Runtime,
     nativeDittyBridge,
+    terraShipSlipLifetimeLedger,
+    sealTerraShipSlipLifetime,
     flightRecorder,
   };
 }

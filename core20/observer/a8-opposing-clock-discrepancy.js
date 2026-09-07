@@ -1,5 +1,11 @@
 'use strict';
 
+const fs = require('fs');
+const path = require('path');
+
+const ORIGIN_CHECKPOINT_SCHEMA =
+  'A8-TERRA-SHIP-SLIP-ORIGIN-CHECKPOINT-V2';
+
 /*
  * AUSPICIOUS 8 · v5.4.20 POST-SEAL
  * MINTAKA ↔ CIVIL OPPOSING-CLOCK DISCREPANCY
@@ -401,7 +407,10 @@ const BOUNDARY = Object.freeze({
 });
 
 class OpposingClockDiscrepancy {
-  constructor() {
+  constructor({
+    sourceRunGeneration = null,
+    checkpointDirectory = null,
+  } = {}) {
     this._sourceEpoch = null;
     this._mode = null;
     this._rig = null;
@@ -413,6 +422,403 @@ class OpposingClockDiscrepancy {
 
     this._lockedCivilRawPerSunReturn =
       null;
+
+    this._sourceRunGeneration =
+      sourceRunGeneration === null ||
+      sourceRunGeneration === undefined
+        ? null
+        : String(
+            sourceRunGeneration
+          );
+
+    this._checkpointDirectory =
+      checkpointDirectory;
+
+    if (
+      (
+        this._sourceRunGeneration === null
+      ) !==
+      (
+        this._checkpointDirectory === null
+      )
+    ) {
+      throw new Error(
+        'Terra persistence requires sourceRunGeneration and checkpointDirectory together'
+      );
+    }
+
+    if (
+      this._sourceRunGeneration !== null &&
+      !/^[1-9][0-9]*$/.test(
+        this._sourceRunGeneration
+      )
+    ) {
+      throw new Error(
+        'sourceRunGeneration must be a positive integer'
+      );
+    }
+
+    this._persistedOrigin = null;
+
+    this._lastPersistenceError = null;
+
+    this._originPersistenceStatus =
+      this._checkpointDirectory
+        ? 'WAITING_FOR_SOURCE'
+        : 'CHECKPOINT_DISABLED';
+  }
+
+  _checkpointPathForCurrentSource() {
+    if (
+      !this._checkpointDirectory ||
+      !this._sourceRunGeneration ||
+      this._sourceEpoch === null
+    ) {
+      return null;
+    }
+
+    return path.join(
+      this._checkpointDirectory,
+      `run-${this._sourceRunGeneration}-epoch-${this._sourceEpoch}-origin.json`
+    );
+  }
+
+  _loadOriginForCurrentSource() {
+    this._persistedOrigin = null;
+    this._lastPersistenceError = null;
+
+    const checkpointPath =
+      this._checkpointPathForCurrentSource();
+
+    if (!checkpointPath) {
+      this._originPersistenceStatus =
+        'CHECKPOINT_DISABLED';
+
+      return false;
+    }
+
+    if (
+      !fs.existsSync(
+        checkpointPath
+      )
+    ) {
+      this._originPersistenceStatus =
+        'NO_CHECKPOINT_FOR_SOURCE_RUN';
+
+      return false;
+    }
+
+    try {
+      const parsed =
+        JSON.parse(
+          fs.readFileSync(
+            checkpointPath,
+            'utf8'
+          )
+        );
+
+      if (
+        !parsed ||
+        parsed.schema !==
+          ORIGIN_CHECKPOINT_SCHEMA
+      ) {
+        throw new Error(
+          'unsupported Terra Ship Slip origin checkpoint schema'
+        );
+      }
+
+      if (
+        String(
+          parsed.sourceRunGeneration ?? ''
+        ) !==
+        this._sourceRunGeneration
+      ) {
+        throw new Error(
+          'Terra checkpoint sourceRunGeneration mismatch'
+        );
+      }
+
+      if (
+        String(
+          parsed.sourceEpoch ?? ''
+        ) !==
+        String(
+          this._sourceEpoch
+        )
+      ) {
+        throw new Error(
+          'Terra checkpoint sourceEpoch mismatch'
+        );
+      }
+
+      const originText =
+        String(
+          parsed.originRawPulse ?? ''
+        );
+
+      if (
+        !/^(0|[1-9][0-9]*)$/.test(
+          originText
+        )
+      ) {
+        throw new Error(
+          'Terra checkpoint originRawPulse invalid'
+        );
+      }
+
+      const mintaka =
+        parsePositiveFraction(
+          parsed
+            .lockedMintakaRawPerEarthAxialRotation,
+          'checkpoint Mintaka recurrence'
+        );
+
+      const civil =
+        parsePositiveFraction(
+          parsed
+            .lockedCivilRawPerSunReturn,
+          'checkpoint Sun-return recurrence'
+        );
+
+      this._anchorRawPulse =
+        BigInt(
+          originText
+        );
+
+      this._lockedMintakaRawPerRotation =
+        mintaka;
+
+      this._lockedCivilRawPerSunReturn =
+        civil;
+
+      this._persistedOrigin = {
+        sourceRunGeneration:
+          this._sourceRunGeneration,
+
+        sourceEpoch:
+          String(
+            this._sourceEpoch
+          ),
+
+        originRawPulse:
+          this._anchorRawPulse,
+
+        mintaka,
+
+        civil,
+      };
+
+      this._originPersistenceStatus =
+        'RESTORED_FROM_EXACT_SOURCE_RUN_ORIGIN';
+
+      return true;
+    } catch (err) {
+      this._originPersistenceStatus =
+        'CHECKPOINT_LOAD_FAILED';
+
+      this._lastPersistenceError =
+        `CHECKPOINT_LOAD_FAILED · ${
+          err && err.message
+            ? err.message
+            : String(err)
+        }`;
+
+      return false;
+    }
+  }
+
+  _originCheckpointPayload() {
+    if (
+      !this._sourceRunGeneration ||
+      this._sourceEpoch === null ||
+      this._anchorRawPulse === null ||
+      !this._lockedMintakaRawPerRotation ||
+      !this._lockedCivilRawPerSunReturn
+    ) {
+      throw new Error(
+        'cannot persist incomplete Terra Ship Slip origin'
+      );
+    }
+
+    return {
+      schema:
+        ORIGIN_CHECKPOINT_SCHEMA,
+
+      sourceRunGeneration:
+        this._sourceRunGeneration,
+
+      sourceEpoch:
+        String(
+          this._sourceEpoch
+        ),
+
+      rawContinuityIdentity:
+        `${this._sourceRunGeneration}:${this._sourceEpoch}`,
+
+      originRawPulse:
+        this._anchorRawPulse
+          .toString(),
+
+      lockedMintakaRawPerEarthAxialRotation: {
+        numerator:
+          this
+            ._lockedMintakaRawPerRotation
+            .n
+            .toString(),
+
+        denominator:
+          this
+            ._lockedMintakaRawPerRotation
+            .d
+            .toString(),
+      },
+
+      lockedCivilRawPerSunReturn: {
+        numerator:
+          this
+            ._lockedCivilRawPerSunReturn
+            .n
+            .toString(),
+
+        denominator:
+          this
+            ._lockedCivilRawPerSunReturn
+            .d
+            .toString(),
+      },
+
+      identity:
+        'SOURCE_RUN_GENERATION + SOURCE_EPOCH',
+
+      authority:
+        'PERSISTED_NATIVE_COMMON_RAW_ORIGIN',
+
+      accumulatorMethod:
+        'COMMON_RAW_ANCHOR_EXACT_RATIONAL',
+
+      storedAccumulatedTotal:
+        false,
+
+      infersOutageElapsedTime:
+        false,
+
+      manufacturesRawContinuity:
+        false,
+
+      usesUTC:
+        false,
+
+      usesHostTime:
+        false,
+
+      usesBrowserTime:
+        false,
+
+      usesLegacyTime:
+        false,
+
+      usesFrequencyHz:
+        false,
+
+      usesNTP:
+        false,
+
+      usesGPS:
+        false,
+    };
+  }
+
+  _persistOriginCheckpoint() {
+    const checkpointPath =
+      this._checkpointPathForCurrentSource();
+
+    if (!checkpointPath) {
+      return true;
+    }
+
+    try {
+      const payload =
+        this._originCheckpointPayload();
+
+      fs.mkdirSync(
+        this._checkpointDirectory,
+        {
+          recursive: true,
+          mode: 0o750,
+        }
+      );
+
+      const tmp =
+        `${checkpointPath}.tmp-${process.pid}`;
+
+      const fd =
+        fs.openSync(
+          tmp,
+          'w',
+          0o600
+        );
+
+      try {
+        fs.writeFileSync(
+          fd,
+          JSON.stringify(
+            payload,
+            null,
+            2
+          ) + '\n',
+          'utf8'
+        );
+
+        fs.fsyncSync(fd);
+      } finally {
+        fs.closeSync(fd);
+      }
+
+      fs.renameSync(
+        tmp,
+        checkpointPath
+      );
+
+      this._persistedOrigin = {
+        sourceRunGeneration:
+          this._sourceRunGeneration,
+
+        sourceEpoch:
+          String(
+            this._sourceEpoch
+          ),
+
+        originRawPulse:
+          this._anchorRawPulse,
+
+        mintaka:
+          this
+            ._lockedMintakaRawPerRotation,
+
+        civil:
+          this
+            ._lockedCivilRawPerSunReturn,
+      };
+
+      this._originPersistenceStatus =
+        'NEW_EXACT_SOURCE_RUN_ORIGIN_PERSISTED';
+
+      this._lastPersistenceError = null;
+
+      return true;
+    } catch (err) {
+      this._originPersistenceStatus =
+        'CHECKPOINT_WRITE_FAILED';
+
+      this._lastPersistenceError =
+        `CHECKPOINT_WRITE_FAILED · ${
+          err && err.message
+            ? err.message
+            : String(err)
+        }`;
+
+      return false;
+    }
   }
 
   _clearLock() {
@@ -444,6 +850,8 @@ class OpposingClockDiscrepancy {
         parsed.rig;
 
       this._clearLock();
+
+      this._loadOriginForCurrentSource();
     } else {
       this._mode =
         parsed.mode;
@@ -494,6 +902,34 @@ class OpposingClockDiscrepancy {
       accumulatorMethod:
         'COMMON_RAW_ANCHOR_EXACT_RATIONAL',
 
+      sourceRunGeneration:
+        this._sourceRunGeneration,
+
+      rawContinuityIdentity:
+        this._sourceRunGeneration === null
+          ? null
+          : `${this._sourceRunGeneration}:${this._sourceEpoch}`,
+
+      originPersistence: {
+        enabled:
+          Boolean(
+            this._checkpointDirectory
+          ),
+
+        status:
+          this._originPersistenceStatus,
+
+        checkpointLoaded:
+          this._persistedOrigin !== null,
+
+        restoredFromCheckpoint:
+          this._originPersistenceStatus ===
+            'RESTORED_FROM_EXACT_SOURCE_RUN_ORIGIN',
+
+        lastError:
+          this._lastPersistenceError,
+      },
+
       ...BOUNDARY,
     };
 
@@ -533,6 +969,20 @@ class OpposingClockDiscrepancy {
     }
 
     if (
+      this._checkpointDirectory &&
+      this._lastPersistenceError
+    ) {
+      return {
+        ...base,
+
+        status:
+          'TERRA_SHIP_SLIP_ORIGIN_CHECKPOINT_UNAVAILABLE',
+
+        ready: false,
+      };
+    }
+
+    if (
       this._anchorRawPulse === null
     ) {
       this._anchorRawPulse =
@@ -543,6 +993,35 @@ class OpposingClockDiscrepancy {
 
       this._lockedCivilRawPerSunReturn =
         observedCivil;
+
+      if (
+        !this._persistOriginCheckpoint()
+      ) {
+        return {
+          ...base,
+
+          status:
+            'TERRA_SHIP_SLIP_ORIGIN_CHECKPOINT_WRITE_FAILED',
+
+          ready: false,
+        };
+      }
+
+      /*
+       * base was created before the atomic origin write.
+       * Refresh the diagnostic in this same snapshot.
+       */
+      base.originPersistence.status =
+        this._originPersistenceStatus;
+
+      base.originPersistence.checkpointLoaded =
+        this._persistedOrigin !== null;
+
+      base.originPersistence.restoredFromCheckpoint =
+        false;
+
+      base.originPersistence.lastError =
+        this._lastPersistenceError;
     }
 
     if (
@@ -953,6 +1432,7 @@ class OpposingClockDiscrepancy {
 
 module.exports = {
   SCHEMA,
+  ORIGIN_CHECKPOINT_SCHEMA,
   EARTH_SCALE_SCHEMA,
   SUN_RETURN_SCHEMA,
 
