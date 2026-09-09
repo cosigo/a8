@@ -308,12 +308,13 @@
       <summary>MENU</summary>
 
       <div class="a8-menu-panel">
-        <a href="https://lab.a8.cosigo.io/">LAB HOME</a>
+        <a href="https://lab.cosigo.io/">LAB HOME</a>
         <a href="https://clock.cosigo.io/">CLOCK</a>
         <a href="https://calendar.cosigo.io/">CALENDAR</a>
         <a href="https://moons.cosigo.io/">MOONS</a>
         <a href="https://mintaka.cosigo.io/">MINTAKA</a>
         <a href="https://sol.cosigo.io/">SOL</a>
+        <a href="https://ship.cosigo.io/">EARTHSHIP</a>
         <a href="https://map.cosigo.io/">MAP · CLOCK · COMPASS</a>
         <a href="https://sea.cosigo.io/">NAVIGATION</a>
         <a href="https://stars.cosigo.io/">CELESTIAL</a>
@@ -367,7 +368,7 @@
         <div class="clock-live-link">
           <a
             class="primary-button link-button"
-            href="https://lab.a8.cosigo.io/clock.html"
+            href="https://clock.cosigo.io/"
             target="_blank"
             rel="noopener"
           >LIVE A8 CORE CLOCK →</a>
@@ -521,10 +522,10 @@
       <h2>Where do you want to enter?</h2>
 
       <div class="contestants-hook__actions">
-        <a href="https://lab.a8.cosigo.io/audio.html">TECHNICAL?</a>
-        <a href="https://a8.cosigo.io/canonical.html">ENGINEER?</a>
+        <a href="https://audio.cosigo.io/">TECHNICAL?</a>
+        <a href="https://about.cosigo.io/#canonical">ENGINEER?</a>
         <a href="https://a8.cosigo.io/about.html">ORIENTATION?</a>
-        <a class="contestants-hook__primary" href="https://lab.a8.cosigo.io/contestants.html">CURIOUS? →</a>
+        <a class="contestants-hook__primary" href="https://contestant.cosigo.io/">CURIOUS? →</a>
       </div>
     </section>
 
@@ -536,11 +537,11 @@
       <div class="footer-links">
         <a href="about.html">About A8</a>
         <a href="unified.html">Map · Clock · Compass</a>
-        <a href="canonical.html">Canonical Reference</a>
+        <a href="https://about.cosigo.io/#canonical">Canonical Reference</a>
         <a href="open-research.html">Open Research</a>
         <button id="footerWhitepaper" type="button">Whitepaper</button>
         <a href="https://contact.cosigo.io/" rel="noopener">Contact</a>
-        <a href="https://lab.a8.cosigo.io/" rel="noopener">Engineering Lab</a>
+        <a href="https://lab.cosigo.io/" rel="noopener">Engineering Lab</a>
         <a href="https://github.com/cosigo" rel="noopener">GitHub</a>
         <a href="https://cosigo.io/project-status.html" rel="noopener">Project Status</a>
         <a href="https://cosigo.io/" rel="noopener">COSIGO</a>
@@ -550,38 +551,719 @@
   </div>
 
   <dialog id="whitepaperDialog" class="whitepaper-dialog">
-    <form method="dialog" class="dialog-shell">
-      <div class="dialog-head">
-        <div>
-          <div class="eyebrow">COSIGO LABS · PUBLIC RESEARCH NOTE</div>
-          <h2>Auspicious 8 · What it is</h2>
-        </div>
-        <button class="dialog-close" value="cancel" aria-label="Close whitepaper">×</button>
-      </div>
-      <div class="dialog-body">
-        <p class="lead">Auspicious 8 (A8) is an experimental measurement architecture asking a simple question: if a modern measurement system were designed from naturally recoverable physical phenomena outward, with binary machines underneath, what would the ruler look like?</p>
-        <h3>Nature first; register second</h3>
-        <p>A8 does not claim that Nature itself is a nine-bit or seventeen-bit register. Natural phenomena are observed first. Registers, octal notation and finite states are engineered rulers used to represent those phenomena.</p>
-        <h3>Time</h3>
-        <p>The research uses independently observable Jovian moon recurrences as a natural reference architecture. Io, Europa and Ganymede provide three parallel channels with a 1:2:4 structure; Callisto is retained as a slower witness. The Earth-day public clock divides one A8 day into 32 A8 hours, each into 64 A8 minutes, each into 64 A8 seconds: 32 × 64 × 64 = 131,072 states.</p>
-        <h3>Angle</h3>
-        <p>A full turn is represented by 512 states. Geometry, π and trigonometry do not change; only the angular ruler changes. Octal 000–777 maps directly to a nine-bit phase register, with the completed turn rolling through 1000₈ back to zero.</p>
-        <h3>What this page is</h3>
-        <p>This page is a public instrument and educational visualization. It is intentionally simpler than the engineering laboratory. The clock renders the shared A8 core as a read-only observer; browser time does not define or align it. The moon display is a local accelerated visualization, not a live astronomical recovery feed, and it does not control or feed the core.</p>
-        <h3>Progression</h3>
-        <p>Current work includes physical-time recovery, clock/calendar design, angle representation, real-observation replay interfaces and instrument-emulation testing. Future work may include real telescope/counter observations, distributed observers, native calculator design and exploration of other measurement domains.</p>
-        <h3>Research notice</h3>
-        <p>Natural phenomena, mathematical facts and general scientific principles are not claimed as proprietary. Original software, written material, diagrams, graphics and presentation published by COSIGO Labs remain protected works. Please contact the authors regarding republication, adaptation, collaboration or licensing of those materials.</p>
-        <p class="version-note">Auspicious 8 Public Research Note · Version 1.3 · 2026</p>
-      </div>
-      <div class="dialog-actions">
-        <a class="primary-button link-button" href="about.html">OPEN SIMPLE INTRODUCTION</a>
-        <a class="ghost-button link-button" href="whitepaper.html">OPEN FULL WHITEPAPER</a>
-        <a class="ghost-button link-button" href="https://contact.cosigo.io/" rel="noopener">CONTACT AUTHORS</a>
-        <button class="ghost-button" value="cancel">CLOSE</button>
-      </div>
-    </form>
-  </dialog>
+<div class="a8-simple-paper">
+
+<style>
+#whitepaperDialog{
+  width:min(94vw,900px);
+  max-width:900px;
+  max-height:92vh;
+}
+#whitepaperDialog .a8-simple-paper{
+  max-width:800px;
+  margin:0 auto;
+  padding:clamp(1rem,3vw,2.2rem);
+  line-height:1.65;
+}
+#whitepaperDialog .simple-paper-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:1rem;
+}
+#whitepaperDialog .simple-paper-kicker{
+  font-size:.78rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  opacity:.72;
+}
+#whitepaperDialog .a8-simple-paper h2{
+  margin:.35rem 0 .2rem;
+  font-size:clamp(2rem,6vw,3.6rem);
+  line-height:1;
+}
+#whitepaperDialog .simple-paper-subtitle{
+  margin:.25rem 0 1.8rem;
+  font-weight:700;
+  letter-spacing:.04em;
+}
+#whitepaperDialog .a8-simple-paper h3{
+  margin:2.2rem 0 .65rem;
+  font-size:1.15rem;
+  letter-spacing:.055em;
+}
+#whitepaperDialog .simple-rule{
+  margin:1.35rem 0;
+  padding:1rem 1.1rem;
+  border:1px solid currentColor;
+  border-radius:14px;
+  text-align:center;
+  font-weight:800;
+}
+#whitepaperDialog .simple-sequence{
+  margin:1.35rem 0;
+  text-align:center;
+  line-height:1.8;
+  font-weight:800;
+}
+#whitepaperDialog .speed-list{
+  display:grid;
+  gap:.15rem;
+  margin:1.25rem 0;
+}
+#whitepaperDialog .speed-row{
+  display:grid;
+  grid-template-columns:minmax(10rem,1fr) minmax(14rem,1.4fr);
+  gap:1rem;
+  padding:.65rem .2rem;
+  border-bottom:1px solid rgba(127,127,127,.3);
+}
+#whitepaperDialog .simple-paper-links{
+  display:flex;
+  flex-wrap:wrap;
+  gap:.65rem;
+  margin-top:2rem;
+  padding-top:1.2rem;
+  border-top:1px solid currentColor;
+}
+#whitepaperDialog .simple-paper-end{
+  margin-top:2rem;
+  padding:1.4rem 0 .4rem;
+  border-top:1px solid currentColor;
+  text-align:center;
+  font-weight:800;
+}
+#whitepaperDialog .simple-paper-date{
+  margin-top:1.25rem;
+  text-align:center;
+  font-size:.78rem;
+  opacity:.66;
+}
+@media(max-width:620px){
+  #whitepaperDialog .speed-row{
+    grid-template-columns:1fr;
+    gap:.1rem;
+  }
+}
+</style>
+
+<div class="simple-paper-top">
+  <div>
+    <div class="simple-paper-kicker">
+      COSIGO LABS · PUBLIC RESEARCH NOTE
+    </div>
+    <h2>AUSPICIOUS 8</h2>
+    <div class="simple-paper-subtitle">
+      THE SIMPLE WHITEPAPER
+    </div>
+  </div>
+
+  <form method="dialog">
+    <button type="submit" aria-label="Close whitepaper">×</button>
+  </form>
+</div>
+
+
+<p>Auspicious 8 begins with a simple question:</p>
+
+<div class="simple-rule">
+WHAT HAPPENS IF WE STOP USING A DIFFERENT ARBITRARY RULER
+FOR EVERY JOB AND LET ONE NATURALLY ANCHORED BINARY
+ARCHITECTURE DO THE WORK?
+</div>
+
+<p>
+A8 does not change Earth, physics, geometry, π, light,
+moons, airplanes, ships, maps, stars, music, or calendars.
+</p>
+
+<p>
+<strong>
+A8 does not change Nature.
+It changes the arbitrary rulers we use to measure it.
+</strong>
+</p>
+
+
+<h3>IT STARTED WITH MOONS</h3>
+
+<p>
+A8 began by looking at Jupiter.
+Io, Europa, and Ganymede show the familiar 1:2:4 orbital
+relationship.
+</p>
+
+<p>
+Instead of beginning with a manufactured clock and asking
+Nature to obey it, A8 asked whether recurring natural motion
+could provide the reference.
+</p>
+
+<p>
+That investigation eventually produced the A8 time architecture.
+</p>
+
+<div class="simple-rule">
+32 A8 HOURS × 64 A8 MINUTES × 64 A8 SECONDS
+</div>
+
+<p>
+One Earth day contains exactly <strong>2¹⁷ native A8 day states</strong>.
+One A8 HOUR is 45 legacy minutes when a familiar comparison
+is useful.
+</p>
+
+<p>
+For speed, every moving object can answer the same question:
+</p>
+
+<p><strong>How far did it move during one A8 HOUR?</strong></p>
+
+
+<h3>THEN EARTH BECAME THE LENGTH RULER</h3>
+
+<p>
+A8 length is anchored to the mean circumference of Earth.
+</p>
+
+<div class="simple-rule">
+1 A8/41 = 1 A8 NAV
+</div>
+
+<p>
+They are the same physical length.
+</p>
+
+<p>
+<strong>/41</strong> is its address on the binary length ladder.
+<strong>NAV</strong> is its practical name for
+<strong>Earth navigation by land or sea.</strong>
+</p>
+
+<div class="simple-rule">
+ONE RUNG → DOUBLE OR HALVE
+</div>
+
+<p>
+Ten rungs below NAV:
+<strong>A8/31 ≈ 1.1933 legacy meters</strong>
+</p>
+
+<p>
+Nine rungs above NAV:
+<strong>A8/50 = 512 A8 NAV</strong>
+</p>
+
+<p>
+Sixteen rungs above NAV:
+<strong>A8/57 = 65,536 A8 NAV</strong>
+</p>
+
+<p>
+Nothing new is invented at each scale.
+The same naturally anchored ruler is simply continued.
+</p>
+
+
+<h3>THEN SPEED BECAME SIMPLE</h3>
+
+<div class="simple-rule">
+PUSH THE RUNG · NOT THE NUMBER
+</div>
+
+<p>
+Measure how far something travels during one A8 HOUR.
+Then move up or down the same A8 length ladder until the
+result sits nearest 1.
+</p>
+
+<div class="speed-list">
+
+  <div class="speed-row">
+    <strong>SNAIL · A8/36</strong>
+    <span>≈ 0.9482 per A8 HOUR</span>
+  </div>
+
+  <div class="speed-row">
+    <strong>WALKING · A8/43</strong>
+    <span>≈ 0.7672 per A8 HOUR</span>
+  </div>
+
+  <div class="speed-row">
+    <strong>BICYCLE · A8/45</strong>
+    <span>≈ 0.7672 per A8 HOUR</span>
+  </div>
+
+  <div class="speed-row">
+    <strong>SHIP · A8/46</strong>
+    <span>≈ 0.7104 per A8 HOUR</span>
+  </div>
+
+  <div class="speed-row">
+    <strong>ROAD · A8/47</strong>
+    <span>≈ 0.9590 per A8 HOUR</span>
+  </div>
+
+  <div class="speed-row">
+    <strong>AIRCRAFT · A8/50</strong>
+    <span>≈ 0.9923 per A8 HOUR</span>
+  </div>
+
+  <div class="speed-row">
+    <strong>MOON · A8/52</strong>
+    <span>≈ 1.1030 · mean local orbit around Earth</span>
+  </div>
+
+  <div class="speed-row">
+    <strong>APOLLO 17 · A8/53</strong>
+    <span>≈ 1.1862 · whole-mission average</span>
+  </div>
+
+  <div class="speed-row">
+    <strong>SPACESHIP EARTH · A8/57</strong>
+    <span>≈ 1.0041 · mean orbit around Sol</span>
+  </div>
+
+  <div class="speed-row">
+    <strong>LIGHT · A8/70</strong>
+    <span>≈ 1.234 per A8 HOUR</span>
+  </div>
+
+</div>
+
+<div class="simple-rule">
+SNAIL TO LIGHT · 34 BINARY RUNGS
+</div>
+
+<p>
+Same ladder. Same A8 HOUR. The rung carries the scale.
+</p>
+
+
+<h3>SPEED VIEW AND NAV VIEW</h3>
+
+<p>
+A representative aircraft lands near:
+</p>
+
+<p><strong>0.9923 A8/50 per A8 HOUR</strong></p>
+
+<div class="simple-rule">
+A8/50 = 512 A8/41<br>
+A8/41 = A8 NAV
+</div>
+
+<p>
+So the same aircraft covers roughly:
+<strong>508 A8 NAV per A8 HOUR</strong>.
+</p>
+
+<p>
+Nothing has changed physical measurement systems.
+The same motion is being read at another rung of the same ruler.
+</p>
+
+<div class="simple-rule">
+SPEED RUNG FOR INTUITION<br>
+NAV RUNG FOR EARTH TRAVEL ACCOUNTING
+</div>
+
+
+<h3>SPACESHIP EARTH FOUND A NEIGHBORHOOD</h3>
+
+<p>
+A8 NAV lives at <strong>/41</strong>.
+Spaceship Earth's mean orbital motion around Sol lands near
+<strong>/57</strong>.
+</p>
+
+<div class="simple-rule">
+A8/57 = 2¹⁶ × A8/41<br>
+= 65,536 A8 NAV
+</div>
+
+<p>
+Earth's mean orbital motion appears near:
+</p>
+
+<p><strong>1.0041 A8/57 per A8 HOUR</strong></p>
+
+<p>
+A8 did not define /57 as an Earth-orbit unit.
+The existing Earth-derived ladder was followed until Earth's
+mean orbital motion sat nearest 1.
+</p>
+
+<p>
+Earth does not remain at that exact value.
+Its elliptical orbit moves its speed above and below the mean
+during the year.
+</p>
+
+<p>
+So /57 is an <strong>orbital-speed neighborhood</strong>,
+not a perfect fixed value and not a privileged position
+in the universe.
+</p>
+
+
+<h3>YOU CAN HEAR THE ARCHITECTURE</h3>
+
+<p>
+A8 is not limited to things that can be seen on a ruler or map.
+It can be heard.
+</p>
+
+<p>
+A current native A8 audio reference is:
+</p>
+
+<div class="simple-rule">
+512 CYCLES PER A8 SECOND
+</div>
+
+<p>
+Ordinary digital audio hardware may require translation at the
+browser or DAC boundary, but the native relationship remains A8.
+</p>
+
+<p>
+Rhythm can use the clock directly:
+</p>
+
+<div class="simple-rule">
+64 BEATS PER A8 MINUTE<br>
+= 1 BEAT PER A8 SECOND
+</div>
+
+<p>
+A simple musical phrase can therefore be:
+</p>
+
+<p><strong>4 beats × 4 bars = 16 A8 SECONDS</strong></p>
+
+<p>
+Music already contains one of the simplest binary relationships
+humans recognize:
+<strong>an octave is a doubling of frequency.</strong>
+</p>
+
+<p>
+A8 does not invent that relationship.
+It gives doubling a native home.
+</p>
+
+<p>
+Frequency, rhythm, duration, clock structure, and musical scale
+can therefore be explored together.
+</p>
+
+<p><strong>You can hear the ruler.</strong></p>
+
+
+<h3>THE CALENDAR USES THE SAME LANGUAGE</h3>
+
+<p>
+A clock tells us where we are in a day.
+A calendar tells us where we are in a year.
+</p>
+
+<p>
+A8 extends the same readable structure into its calendar:
+</p>
+
+<div class="simple-rule">
+8 MONTHS<br>
+45 DAYS PER STRUCTURED MONTH
+</div>
+
+<p>
+Each structured month contains:
+</p>
+
+<div class="simple-rule">
+9 WEEKS × 5 ELEMENTAL DAYS = 45 DAYS
+</div>
+
+<p>
+Eight structured months contain:
+<strong>360 days</strong>.
+</p>
+
+<p>
+The remaining year-end interval is
+<strong>Wilson's Week</strong>:
+5 Gold Days in a normal 365-day year and 6 Gold Days in a
+leap year.
+</p>
+
+<p>
+The elemental day sequence is:
+</p>
+
+<div class="simple-rule">
+FIRE · WATER · EARTH · AIR · AETHER
+</div>
+
+<p>
+These elements are part of the A8 calendar's organizational
+and teaching language.
+They are not claims about supernatural forces.
+</p>
+
+<p>
+The calendar can make several recurring ideas visible together:
+</p>
+
+<div class="simple-rule">
+SPACE · TIME · DIRECTION · SEASON · ELEMENT
+</div>
+
+<p>
+It becomes more than a numbered list of dates.
+It can teach where a day sits within larger repeating structures.
+</p>
+
+
+<h3>AN EASY DAY TO LIVE WITH</h3>
+
+<p>
+A 32-hour A8 day also makes ordinary planning easy to see.
+</p>
+
+<p>
+For example:
+</p>
+
+<div class="simple-rule">
+11 A8 HOURS · WORK<br>
+10 A8 HOURS · RECREATION<br>
+11 A8 HOURS · REST
+</div>
+
+<p>
+<strong>11 + 10 + 11 = 32</strong>
+</p>
+
+<p>
+That is an example, not a prescribed lifestyle.
+</p>
+
+<p>
+The point is that an entire day remains visible at once.
+Work, recreation, rest, appointments, travel, and astronomical
+events can all occupy the same 32-hour field.
+</p>
+
+
+<h3>TIME · CALENDAR · SPACE</h3>
+
+<p>
+The clock, calendar, and celestial instruments have different jobs.
+</p>
+
+<p>
+The clock measures recurring daily time.
+</p>
+
+<p>
+The calendar organizes the civil year.
+</p>
+
+<p>
+Celestial observation supplies physical orientation and events.
+</p>
+
+<p>
+Keeping those jobs separate lets A8 show where Earth is in
+its year without making the calendar itself another clock.
+</p>
+
+
+<h3>WE DID THE 511 HOMEWORK</h3>
+
+<p>
+A8 is not only a ruler described on paper.
+</p>
+
+<div class="simple-rule">
+0 → 511 STATES AROUND ONE COMPLETE TURN<br>
+NEXT STATE → RETURN TO 0
+</div>
+
+<p>
+That 512-part geometry has already been laid out across:
+</p>
+
+<div class="simple-rule">
+MAP · SEA · STARS · CLOCK · COMPASS
+</div>
+
+<p>
+A full turn is 512 A8 angular states.
+A quarter turn is 128.
+A half turn is 256.
+</p>
+
+<p>
+On Earth, longitude uses that complete-turn architecture.
+Latitude uses the corresponding pole-to-pole field.
+</p>
+
+<p>
+On land or at sea, a position can be stated with A8 coordinates.
+In the sky, stars can be placed using the same angular language.
+</p>
+
+<p>
+For travel, A8 NAV measures Earth distance and the speed ladder
+describes motion during an A8 HOUR.
+</p>
+
+<p>
+These are not unrelated conversion systems bolted together
+afterward.
+They are applications of one measurement architecture.
+</p>
+
+
+<h3>COORDINATES MAKE LOCATION SIMPLE</h3>
+
+<p>
+Anyone who has entered latitude and longitude into Google Maps
+already understands the central idea:
+</p>
+
+<div class="simple-rule">
+A COORDINATE IDENTIFIES A LOCATION
+</div>
+
+<p>
+A8 does not move the location.
+It changes the angular ruler used to state it.
+</p>
+
+<div class="simple-sequence">
+WHERE?<br>
+DIRECTION?<br>
+DISTANCE?<br>
+SPEED?<br>
+ELAPSED TIME?<br>
+ARRIVAL?
+</div>
+
+<div class="simple-rule">
+POSITION → DIRECTION → DISTANCE → SPEED → ELAPSED TIME → ARRIVAL
+</div>
+
+<p>
+Position is angular.
+Direction is angular.
+Distance uses the A8 binary length ladder.
+Earth travel can be counted directly in A8 NAV.
+Speed uses that same ladder over one A8 HOUR.
+</p>
+
+
+<h3>ONE ARCHITECTURE · DIFFERENT EXPERIENCES</h3>
+
+<p><strong>SEE IT</strong> on Maps and Stars.</p>
+
+<p><strong>TRAVEL THROUGH IT</strong> with NAV.</p>
+
+<p><strong>WATCH IT</strong> on the Clock and Calendar.</p>
+
+<p><strong>HEAR IT</strong> through Audio and Composer.</p>
+
+<p><strong>MEASURE MOTION</strong> with the speed ladder.</p>
+
+<p><strong>LOCATE EVENTS</strong> with coordinates.</p>
+
+<p>
+A clock, map, calendar, compass, navigation ruler,
+frequency reference, rhythm, and speed ruler begin to behave
+like members of one family rather than unrelated tools.
+</p>
+
+
+<h3>WHAT A8 IS NOT CLAIMING</h3>
+
+<p>
+A8 is not claiming that Nature secretly writes numbers
+in A8 notation.
+</p>
+
+<p>
+Binary and octal are engineered representations.
+</p>
+
+<p>
+A8 is not claiming that numerical near-hits prove hidden laws.
+</p>
+
+<p>
+A8 does not alter observations to make numbers prettier.
+</p>
+
+<p>
+Calculations can retain the precision required underneath
+while public displays remain readable.
+</p>
+
+<p>
+A8 does not change geometry or physics.
+</p>
+
+<p>
+<strong>
+It changes the arbitrary rulers used to describe them.
+</strong>
+</p>
+
+<div class="simple-rule">
+CAN ONE NATURALLY ANCHORED, POWER-OF-TWO MEASUREMENT
+ARCHITECTURE DESCRIBE SPACE, TIME, POSITION, DISTANCE,
+MOTION, FREQUENCY, RHYTHM, AND CALENDAR STRUCTURE
+MORE SIMPLY?
+</div>
+
+
+<h3>IQ TEST</h3>
+
+<p>Can you count to two?</p>
+
+<p>Double it.</p>
+
+<p>Do it again.</p>
+
+<p>
+Move up or down the ladder until the thing you are measuring
+sits near 1.
+</p>
+
+<p>
+You now understand the central scaling rule of Auspicious 8.
+</p>
+
+<div class="simple-paper-end">
+ONE WORLD · ONE ARCHITECTURE<br>
+PUSH THE RUNG · NOT THE NUMBER
+</div>
+
+<div class="simple-paper-date">
+Auspicious 8 · Public Research Note · Revised 2026-09-09
+</div>
+
+<nav class="simple-paper-links" aria-label="A8 research links"><a class="primary-button link-button" href="about.html">OPEN SIMPLE INTRODUCTION</a>
+<a class="ghost-button link-button" href="whitepaper.html">OPEN FULL WHITEPAPER</a>
+<a class="ghost-button link-button" href="https://contact.cosigo.io/" rel="noopener">CONTACT AUTHORS</a></nav>
+
+<form method="dialog" style="margin-top:1.5rem;text-align:center">
+  <button type="submit">CLOSE</button>
+</form>
+
+</div>
+</dialog>
 
   <script src="assets/a8.js?v=20260829-universal-observer01"></script>
 </body>

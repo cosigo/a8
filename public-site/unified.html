@@ -152,7 +152,7 @@ body{
 <a href="unified.html"><span class="navico">⌖</span>MAP · CLOCK · COMPASS</a>
 <a href="canonical.html"><span class="navico">≡</span>CANONICAL</a>
 <a href="open-research.html"><span class="navico">⚗</span>OPEN RESEARCH</a>
-<a href="https://lab.a8.cosigo.io/"><span class="navico">⚙</span>ENGINEERING LAB</a>
+<a href="https://lab.cosigo.io/"><span class="navico">⚙</span>ENGINEERING LAB</a>
 <a href="about.html"><span class="navico">i</span>ABOUT A8</a>
 <a class="escape" href="canonical.html#principle"><span class="navico">8</span>888 ESCAPE HATCH</a>
 </nav>
@@ -435,7 +435,7 @@ SS = 00…77₈</div>
 <div class="rule" style="margin-bottom:14px"><strong>Distance-rung principle:</strong> the quartz-derived length quantity is fixed. A larger or smaller A8/n rung is only an exact binary display scale. Physical uncertainty remains physical; changing rung introduces no conversion approximation.</div>
 <div class="card hero">
   <p><strong>Real-world adoption layer:</strong> major cities can be placed into A8 hour sectors, given A8 decimal or octal coordinates, and connected by route distances using the same unified display mode as the map, clock and compass.</p>
-  <div class="atlas-note">This atlas stays inside the same discipline: same Earth, same cities, same geometry, new ruler only. <strong>A8 values are shown first.</strong> Operating-time examples are published only when a source or explicit calculation is identified; otherwise the route remains a geometric distance reference.</div>
+  <div class="atlas-note">This atlas stays inside the same discipline: same Earth, same cities, same geometry, A8 ruler throughout. <strong>A8 values are shown first.</strong> Operating-time examples are published only when a source or explicit calculation is identified; otherwise the route remains a geometric distance reference.</div>
 </div>
 
 <div class="grid2" style="margin-top:14px">
@@ -497,7 +497,7 @@ External links open only when selected; the instrument itself makes no network r
 <a href="unified.html"><span class="navico">⌖</span>MAP · CLOCK · COMPASS</a>
 <a href="canonical.html"><span class="navico">≡</span>CANONICAL</a>
 <a href="open-research.html"><span class="navico">⚗</span>OPEN RESEARCH</a>
-<a href="https://lab.a8.cosigo.io/"><span class="navico">⚙</span>ENGINEERING LAB</a>
+<a href="https://lab.cosigo.io/"><span class="navico">⚙</span>ENGINEERING LAB</a>
 <a href="about.html"><span class="navico">i</span>ABOUT A8</a>
 <a class="escape" href="canonical.html#principle"><span class="navico">8</span>888 ESCAPE HATCH</a>
 </div>
@@ -698,7 +698,7 @@ function navigationRungLabel() {
 }
 
 function formatA8Distance(a8_31_count) {
-  // 2^40 qa = 2^9 × 2^31 qa = 512 × A8/31.
+  // A8/40 = 2^9 × A8/31 = 512 × A8/31.
   const navCount = a8_31_count / 512;
   if (mode === 'decimal') {
     return navCount.toLocaleString(undefined,{maximumFractionDigits:1}) + ' ' + navigationRungLabel();
