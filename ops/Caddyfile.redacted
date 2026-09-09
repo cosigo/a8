@@ -298,95 +298,1972 @@ bcseek.com, www.bcseek.com {
 }
 
 a8.cosigo.io {
-    encode zstd gzip
+	# A8 MUSIC REVIEW · PUBLIC SUBMISSION BRIDGE
+	#
+	# Ordinary review transport only.
+	# No Core20 timing or music authority.
 
-    # A8 PUBLIC INSTRUMENT = READ-ONLY VIEW OF THE SHARED A8 CORE.
-    # Only these two GET endpoints cross from the facing site to Node.
-    # Control, replay, calibration and other write paths remain private.
-# A8 CORE20 PUBLIC OBSERVER BRIDGE
-    #
-    # Narrow transport bridge only:
-    #   GET  clock state
-    #   GET  authoritative Core20 edge stream
-    #   POST momentary CONNECT with server-enforced empty body
-    #
-    # No control/replay/raw-injection endpoint is exposed.
+	@a8_music_submit {
+		method POST
+		path /api/music-review/submit
+	}
+	handle @a8_music_submit {
+		reverse_proxy 127.0.0.1:18021
+	}
 
-    @a8_core20_clock {
-        method GET
-        path /api/core20/clock
-    }
-    handle @a8_core20_clock {
-        reverse_proxy 127.0.0.1:18020
-    }
+	@a8_music_current {
+		method GET
+		path /api/music-review/current /api/music-review/weekly /api/music-review/monthly /api/music-review/yearly
+	}
+	handle @a8_music_current {
+		reverse_proxy 127.0.0.1:18021
+	}
 
-    @a8_core20_edges {
-        method GET
-        path /api/core20/edges
-    }
-    handle @a8_core20_edges {
-        reverse_proxy 127.0.0.1:18020
-    }
+	encode zstd gzip
 
-    @a8_core20_connect {
-        method POST
-        path /api/core20/connect
-    }
-    handle @a8_core20_connect {
-        reverse_proxy 127.0.0.1:18020
-    }
+	# A8 PUBLIC INSTRUMENT = READ-ONLY VIEW OF THE SHARED A8 CORE.
+	# Only these two GET endpoints cross from the facing site to Node.
+	# Control, replay, calibration and other write paths remain private.
+	# A8 CORE20 PUBLIC OBSERVER BRIDGE
+	#
+	# Narrow transport bridge only:
+	#   GET  clock state
+	#   GET  authoritative Core20 edge stream
+	#   POST momentary CONNECT with server-enforced empty body
+	#
+	# No control/replay/raw-injection endpoint is exposed.
 
-    handle {
-        root * /srv/sites/a8.cosigo.io/public
-        file_server
-    }
+	@a8_core20_clock {
+		method GET
+		path /api/core20/clock
+	}
+	handle @a8_core20_clock {
+		reverse_proxy 127.0.0.1:18020
+	}
+
+	@a8_core20_edges {
+		method GET
+		path /api/core20/edges
+	}
+	handle @a8_core20_edges {
+		reverse_proxy 127.0.0.1:18020
+	}
+
+	@a8_core20_connect {
+		method POST
+		path /api/core20/connect
+	}
+	handle @a8_core20_connect {
+		reverse_proxy 127.0.0.1:18020
+	}
+
+	# CANONICAL REFERENCE RETIRED INTO ABOUT
+	handle /canonical.html {
+		redir "https://about.cosigo.io/#canonical" 308
+	}
+
+	handle {
+		root * /srv/sites/a8.cosigo.io/public
+		file_server
+	}
 }
 
 lab.a8.cosigo.io {
+	# a8_data_evidence_rollin
+	@a8_physical_evidence_old path /physical-clock-evidence.html
+	redir @a8_physical_evidence_old https://data.cosigo.io/physical-clock-evidence.html 308
+
+	@a8_observation_archive_old path /observation-archive-historical.html
+	redir @a8_observation_archive_old https://data.cosigo.io/observation-archive-historical.html 308
+
+	# MIGRATION #15 · QUARTZ
+	@a8_quartz_migrated path /quartz.html
+	redir @a8_quartz_migrated https://quartz.cosigo.io/ 308
+
+	# MIGRATION #16 · TELESCOPE
+	@a8_telescope_migrated path /telescope.html
+	redir @a8_telescope_migrated https://telescope.cosigo.io/ 308
+
+	# MIGRATION #14 · ANGLE
+	@a8_angle_migrated {
+		path /angle.html
+	}
+	handle @a8_angle_migrated {
+		redir https://angle.cosigo.io/ 308
+	}
+
+	# MIGRATION #13 · DATA
+	@a8_data_migrated {
+		path /data.html
+	}
+	handle @a8_data_migrated {
+		redir https://data.cosigo.io/ 308
+	}
+
+	# MIGRATION #12 · SEA
+	@a8_sea_migrated {
+		path /navigation.html
+	}
+	handle @a8_sea_migrated {
+		redir https://sea.cosigo.io/ 308
+	}
+
+	# MIGRATION #11 · STARS ACTIVE FAMILY
+	@a8_stars_decimal_parent {
+		path /celestial.html
+	}
+	handle @a8_stars_decimal_parent {
+		redir https://stars.cosigo.io/ 308
+	}
+
+	@a8_stars_octal_parent {
+		path /celestial-octal.html
+	}
+	handle @a8_stars_octal_parent {
+		redir https://stars.cosigo.io/celestial-octal.html 308
+	}
+
+	@a8_stars_family_migrated {
+		path \
+ /a8_celestial_atlas_decimal_review_v0_2.html \
+ /a8_walkabout_geometry_poc_v0_1b.html \
+ /a8_walkabout_scorpius_decimal_v0_1.html \
+ /a8_celestial_atlas_octal_dense_v0_3.html \
+ /a8_walkabout_scorpius_octal_v0_1.html \
+ /a8_walkabout_geometry_poc_octal_v0_2.html
+	}
+	handle @a8_stars_family_migrated {
+		redir https://stars.cosigo.io{uri} 308
+	}
+
+	# MIGRATION #10 · CONTESTANT CANONICAL REDIRECT
+	@a8_contestant_migrated {
+		path /contestants.html
+	}
+	handle @a8_contestant_migrated {
+		redir https://contestant.cosigo.io/ 308
+	}
+
+	# MIGRATION #9 · COMPOSER CANONICAL REDIRECT
+	@a8_composer_migrated {
+		path /composer.html
+	}
+	handle @a8_composer_migrated {
+		redir https://composer.cosigo.io/ 308
+	}
+
+	# MIGRATION #8 · AUDIO CANONICAL REDIRECT
+	@a8_audio_migrated {
+		path /audio.html
+	}
+	handle @a8_audio_migrated {
+		redir https://audio.cosigo.io/ 308
+	}
+
+	# MIGRATION #7 · SPACESHIP EARTH / TERRA SHIP SLIP
+	@a8_ship_migrated {
+		path /relationship.html
+	}
+	handle @a8_ship_migrated {
+		redir https://ship.cosigo.io/ 308
+	}
+
+	# MIGRATION #6 · MAP CANONICAL REDIRECT
+	@a8_map_migrated {
+		path /map-clock-compass.html
+	}
+	handle @a8_map_migrated {
+		redir https://map.cosigo.io/ 308
+	}
+
+	# MIGRATION #5 · SOL CANONICAL REDIRECT
+	@a8_sol_migrated {
+		path /sol.html
+	}
+	handle @a8_sol_migrated {
+		redir https://sol.cosigo.io/ 308
+	}
+
+	# MIGRATION #4 · MINTAKA CANONICAL REDIRECT
+	@a8_mintaka_migrated {
+		path /mintaka.html
+	}
+	handle @a8_mintaka_migrated {
+		redir https://mintaka.cosigo.io/ 308
+	}
+
+	# MIGRATION #3 · CALENDAR CANONICAL REDIRECT
+	@a8_calendar_migrated {
+		path /calendar.html
+	}
+	handle @a8_calendar_migrated {
+		redir https://calendar.cosigo.io/ 308
+	}
+
+	# MIGRATION #2 · CLOCK CANONICAL REDIRECT
+	@a8_clock_migrated {
+		path /clock.html
+	}
+	handle @a8_clock_migrated {
+		redir https://clock.cosigo.io/ 308
+	}
+
+	# A8 MUSIC REVIEW · PRIVATE CURATOR BRIDGE
+
+	@a8_music_submit {
+		method POST
+		path /api/music-review/submit
+	}
+	handle @a8_music_submit {
+		reverse_proxy 127.0.0.1:18021
+	}
+
+	@a8_music_current {
+		method GET
+		path /api/music-review/current /api/music-review/weekly /api/music-review/monthly /api/music-review/yearly
+	}
+	handle @a8_music_current {
+		reverse_proxy 127.0.0.1:18021
+	}
+
+	@a8_music_review_page {
+		method GET
+		path /music-review /music-review.html
+	}
+	handle @a8_music_review_page {
+		basic_auth {
+			greg <REDACTED_BCRYPT_HASH>
+		}
+		reverse_proxy 127.0.0.1:18020
+	}
+
+	@a8_music_review_admin {
+		path /api/music-review/admin/*
+	}
+	handle @a8_music_review_admin {
+		basic_auth {
+			greg <REDACTED_BCRYPT_HASH>
+		}
+		reverse_proxy 127.0.0.1:18021
+	}
+
+	encode zstd gzip
+
+	# CORE20 OPERATING LAB
+	#
+	# Public observation remains open.
+	# CONNECT remains open.
+	#
+	# Chief Engineer operating paths require authentication.
+
+	@a8_ce_pulse {
+		path /pulse /pulse/*
+	}
+	handle @a8_ce_pulse {
+		basic_auth {
+			greg <REDACTED_BCRYPT_HASH>
+		}
+		reverse_proxy 127.0.0.1:18020
+	}
+
+	# CHIEF ENGINEER PRIVATE READ SURFACE
+	#
+	# Protect the CE operations page and diagnostic recorder.
+	# No recorder endpoint is live yet; this boundary is installed first.
+	@a8_ce_private_read {
+		method GET
+		path /chief-engineer /chief-engineer.html /chief-engineer/* /api/core20/flight-recorder /api/core20/flight-recorder/*
+	}
+	handle @a8_ce_private_read {
+		basic_auth {
+			greg <REDACTED_BCRYPT_HASH>
+		}
+		reverse_proxy 127.0.0.1:18020
+	}
+
+	# PUBLIC CORE20 DITTY CONTROLS
+	#
+	# Narrow downstream music controls only.
+	# These do not expose runtime restart, calibration,
+	# raw injection, or other Chief Engineer writes.
+	@a8_public_ditty_write {
+		method POST
+		path /api/core20/ditty/start /api/core20/ditty/reset
+	}
+	handle @a8_public_ditty_write {
+		reverse_proxy 127.0.0.1:18020
+	}
+
+	@a8_ce_write {
+		method POST PUT PATCH DELETE
+		not path /api/core20/connect
+		not path /api/core20/ditty/start
+		not path /api/core20/ditty/reset
+	}
+	handle @a8_ce_write {
+		basic_auth {
+			greg <REDACTED_BCRYPT_HASH>
+		}
+		reverse_proxy 127.0.0.1:18020
+	}
+
+	reverse_proxy 127.0.0.1:18020
+}
+
+# A8 LAB HOST MIGRATION · PARALLEL QUALIFICATION
+lab.cosigo.io {
+	# a8_data_evidence_rollin
+	@a8_physical_evidence_old path /physical-clock-evidence.html
+	redir @a8_physical_evidence_old https://data.cosigo.io/physical-clock-evidence.html 308
+
+	@a8_observation_archive_old path /observation-archive-historical.html
+	redir @a8_observation_archive_old https://data.cosigo.io/observation-archive-historical.html 308
+
+	# MIGRATION #15 · QUARTZ
+	@a8_quartz_migrated path /quartz.html
+	redir @a8_quartz_migrated https://quartz.cosigo.io/ 308
+
+	# MIGRATION #16 · TELESCOPE
+	@a8_telescope_migrated path /telescope.html
+	redir @a8_telescope_migrated https://telescope.cosigo.io/ 308
+
+	# MIGRATION #14 · ANGLE
+	@a8_angle_migrated {
+		path /angle.html
+	}
+	handle @a8_angle_migrated {
+		redir https://angle.cosigo.io/ 308
+	}
+
+	# MIGRATION #13 · DATA
+	@a8_data_migrated {
+		path /data.html
+	}
+	handle @a8_data_migrated {
+		redir https://data.cosigo.io/ 308
+	}
+
+	# MIGRATION #12 · SEA
+	@a8_sea_migrated {
+		path /navigation.html
+	}
+	handle @a8_sea_migrated {
+		redir https://sea.cosigo.io/ 308
+	}
+
+	# MIGRATION #11 · STARS ACTIVE FAMILY
+	@a8_stars_decimal_parent {
+		path /celestial.html
+	}
+	handle @a8_stars_decimal_parent {
+		redir https://stars.cosigo.io/ 308
+	}
+
+	@a8_stars_octal_parent {
+		path /celestial-octal.html
+	}
+	handle @a8_stars_octal_parent {
+		redir https://stars.cosigo.io/celestial-octal.html 308
+	}
+
+	@a8_stars_family_migrated {
+		path \
+ /a8_celestial_atlas_decimal_review_v0_2.html \
+ /a8_walkabout_geometry_poc_v0_1b.html \
+ /a8_walkabout_scorpius_decimal_v0_1.html \
+ /a8_celestial_atlas_octal_dense_v0_3.html \
+ /a8_walkabout_scorpius_octal_v0_1.html \
+ /a8_walkabout_geometry_poc_octal_v0_2.html
+	}
+	handle @a8_stars_family_migrated {
+		redir https://stars.cosigo.io{uri} 308
+	}
+
+	# MIGRATION #10 · CONTESTANT CANONICAL REDIRECT
+	@a8_contestant_migrated {
+		path /contestants.html
+	}
+	handle @a8_contestant_migrated {
+		redir https://contestant.cosigo.io/ 308
+	}
+
+	# MIGRATION #9 · COMPOSER CANONICAL REDIRECT
+	@a8_composer_migrated {
+		path /composer.html
+	}
+	handle @a8_composer_migrated {
+		redir https://composer.cosigo.io/ 308
+	}
+
+	# MIGRATION #8 · AUDIO CANONICAL REDIRECT
+	@a8_audio_migrated {
+		path /audio.html
+	}
+	handle @a8_audio_migrated {
+		redir https://audio.cosigo.io/ 308
+	}
+
+	# MIGRATION #7 · SPACESHIP EARTH / TERRA SHIP SLIP
+	@a8_ship_migrated {
+		path /relationship.html
+	}
+	handle @a8_ship_migrated {
+		redir https://ship.cosigo.io/ 308
+	}
+
+	# MIGRATION #6 · MAP CANONICAL REDIRECT
+	@a8_map_migrated {
+		path /map-clock-compass.html
+	}
+	handle @a8_map_migrated {
+		redir https://map.cosigo.io/ 308
+	}
+
+	# MIGRATION #5 · SOL CANONICAL REDIRECT
+	@a8_sol_migrated {
+		path /sol.html
+	}
+	handle @a8_sol_migrated {
+		redir https://sol.cosigo.io/ 308
+	}
+
+	# MIGRATION #4 · MINTAKA CANONICAL REDIRECT
+	@a8_mintaka_migrated {
+		path /mintaka.html
+	}
+	handle @a8_mintaka_migrated {
+		redir https://mintaka.cosigo.io/ 308
+	}
+
+	# MIGRATION #3 · CALENDAR CANONICAL REDIRECT
+	@a8_calendar_migrated {
+		path /calendar.html
+	}
+	handle @a8_calendar_migrated {
+		redir https://calendar.cosigo.io/ 308
+	}
+
+	# MIGRATION #2 · CLOCK CANONICAL REDIRECT
+	@a8_clock_migrated {
+		path /clock.html
+	}
+	handle @a8_clock_migrated {
+		redir https://clock.cosigo.io/ 308
+	}
+
+	# A8 MUSIC REVIEW · PRIVATE CURATOR BRIDGE
+
+	@a8_music_submit {
+		method POST
+		path /api/music-review/submit
+	}
+	handle @a8_music_submit {
+		reverse_proxy 127.0.0.1:18021
+	}
+
+	@a8_music_current {
+		method GET
+		path /api/music-review/current /api/music-review/weekly /api/music-review/monthly /api/music-review/yearly
+	}
+	handle @a8_music_current {
+		reverse_proxy 127.0.0.1:18021
+	}
+
+	@a8_music_review_page {
+		method GET
+		path /music-review /music-review.html
+	}
+	handle @a8_music_review_page {
+		basic_auth {
+			greg <REDACTED_BCRYPT_HASH>
+		}
+		reverse_proxy 127.0.0.1:18020
+	}
+
+	@a8_music_review_admin {
+		path /api/music-review/admin/*
+	}
+	handle @a8_music_review_admin {
+		basic_auth {
+			greg <REDACTED_BCRYPT_HASH>
+		}
+		reverse_proxy 127.0.0.1:18021
+	}
+
+	encode zstd gzip
+
+	# CORE20 OPERATING LAB
+	#
+	# Public observation remains open.
+	# CONNECT remains open.
+	#
+	# Chief Engineer operating paths require authentication.
+
+	@a8_ce_pulse {
+		path /pulse /pulse/*
+	}
+	handle @a8_ce_pulse {
+		basic_auth {
+			greg <REDACTED_BCRYPT_HASH>
+		}
+		reverse_proxy 127.0.0.1:18020
+	}
+
+	# CHIEF ENGINEER PRIVATE READ SURFACE
+	#
+	# Protect the CE operations page and diagnostic recorder.
+	# No recorder endpoint is live yet; this boundary is installed first.
+	@a8_ce_private_read {
+		method GET
+		path /chief-engineer /chief-engineer.html /chief-engineer/* /api/core20/flight-recorder /api/core20/flight-recorder/*
+	}
+	handle @a8_ce_private_read {
+		basic_auth {
+			greg <REDACTED_BCRYPT_HASH>
+		}
+		reverse_proxy 127.0.0.1:18020
+	}
+
+	# PUBLIC CORE20 DITTY CONTROLS
+	#
+	# Narrow downstream music controls only.
+	# These do not expose runtime restart, calibration,
+	# raw injection, or other Chief Engineer writes.
+	@a8_public_ditty_write {
+		method POST
+		path /api/core20/ditty/start /api/core20/ditty/reset
+	}
+	handle @a8_public_ditty_write {
+		reverse_proxy 127.0.0.1:18020
+	}
+
+	@a8_ce_write {
+		method POST PUT PATCH DELETE
+		not path /api/core20/connect
+		not path /api/core20/ditty/start
+		not path /api/core20/ditty/reset
+	}
+	handle @a8_ce_write {
+		basic_auth {
+			greg <REDACTED_BCRYPT_HASH>
+		}
+		reverse_proxy 127.0.0.1:18020
+	}
+
+	# A8 LAB PRESENTATION AUTHORITY · /srv/sites
+	#
+	# Core20 remains machinery only.
+	# Public Core20/hardware APIs cross this explicit bridge.
+	# Presentation and unknown paths never fall through to Core20.
+
+	@a8_lab_core20_api {
+		path /api/core20/* /api/hardware/*
+	}
+	handle @a8_lab_core20_api {
+		reverse_proxy 127.0.0.1:18020
+	}
+
+	handle {
+		root * /srv/sites/lab.cosigo.io/public
+		file_server
+	}
+}
+
+
+# ============================================================
+# A8 MOONS · CANONICAL OBSERVER HOST
+# moons.cosigo.io
+#
+# Presentation-only hostname.
+# Core20 remains at 127.0.0.1:18020.
+# Exposes only the read transports required by moons.html.
+# No Chief Engineer writes or blanket Core20 proxy.
+# ============================================================
+
+moons.cosigo.io {
+	encode zstd gzip
+
+	# Core20 clock snapshot · read only
+	@moons_clock {
+		method GET
+		path /api/core20/clock
+	}
+	handle @moons_clock {
+		reverse_proxy 127.0.0.1:18020
+	}
+
+	# Core20 authoritative edge stream · read only SSE
+	@moons_edges {
+		method GET
+		path /api/core20/edges
+	}
+	handle @moons_edges {
+		reverse_proxy 127.0.0.1:18020
+	}
+
+	# Jovian observer/timekeeper state · read only
+	@moons_jovian {
+		method GET
+		path /api/hardware/jovian-timekeeper
+	}
+	handle @moons_jovian {
+		reverse_proxy 127.0.0.1:18020
+	}
+
+	# Canonical Moons entry.
+	handle / {
+		root * /srv/sites/moons.cosigo.io/public
+		rewrite * /moons.html
+		file_server
+	}
+
+	# Preserve direct /moons.html during migration.
+	handle /moons.html {
+		root * /srv/sites/moons.cosigo.io/public
+		file_server
+	}
+
+	# Static dependencies used by Moons.
+	handle /site-shell.css {
+		root * /srv/sites/moons.cosigo.io/public
+		file_server
+	}
+
+	handle /assets/* {
+		root * /srv/sites/moons.cosigo.io/public
+		file_server
+	}
+
+	# Do NOT silently create clock/calendar/etc copies under this hostname.
+	# Existing absolute-path lab navigation is returned to the old lab
+	# until each destination receives its own canonical COSIGO hostname.
+	handle {
+		redir https://lab.a8.cosigo.io{uri} 302
+	}
+}
+
+clock.cosigo.io {
+	root * /srv/apps/a8_time_lab_v5_4_20_postseal_hw/public
+
+	@core20_clock_get {
+		method GET
+		path /api/core20/clock
+	}
+
+	@core20_clock_path {
+		path /api/core20/clock
+	}
+
+	@core20_edges_get {
+		method GET
+		path /api/core20/edges
+	}
+
+	@core20_edges_path {
+		path /api/core20/edges
+	}
+
+	@core20_connect_post {
+		method POST
+		path /api/core20/connect
+	}
+
+	@core20_connect_path {
+		path /api/core20/connect
+	}
+
+	# A8 CLOCK WEEKLY DITTY READ BRIDGE v1
+	#
+	# Read-only alarm preload:
+	# WEEKLY first, CURRENT compatibility fallback.
+	#
+	# No submit/admin/publish/write path.
+	@a8_clock_ditty_get {
+		method GET
+		path /api/music-review/weekly /api/music-review/current
+	}
+
+	@a8_clock_ditty_path {
+		path /api/music-review/weekly /api/music-review/current
+	}
+
+	route {
+		handle @core20_clock_get {
+			reverse_proxy 127.0.0.1:18020
+		}
+
+		handle @core20_clock_path {
+			respond "Method Not Allowed" 405
+		}
+
+		handle @core20_edges_get {
+			reverse_proxy 127.0.0.1:18020
+		}
+
+		handle @core20_edges_path {
+			respond "Method Not Allowed" 405
+		}
+
+		handle @core20_connect_post {
+			reverse_proxy 127.0.0.1:18020
+		}
+
+		handle @core20_connect_path {
+			respond "Method Not Allowed" 405
+		}
+
+		handle @a8_clock_ditty_get {
+			reverse_proxy 127.0.0.1:18021
+		}
+
+		handle @a8_clock_ditty_path {
+			respond "Method Not Allowed" 405
+		}
+
+		handle /api/* {
+			respond "Not Found" 404
+		}
+
+		handle / {
+			rewrite * /clock.html
+			file_server
+		}
+
+		handle /clock.html {
+			file_server
+		}
+
+		handle /a8-music-player-v1.js {
+			file_server
+		}
+
+		handle /site-shell.css {
+			file_server
+		}
+
+		handle /assets/* {
+			file_server
+		}
+
+		handle {
+			redir https://lab.a8.cosigo.io{uri} 302
+		}
+	}
+}
+
+calendar.cosigo.io {
+	root * /srv/apps/a8_time_lab_v5_4_20_postseal_hw/public
+
+	@calendar_year_angle_get {
+		method GET
+		path /api/core20/year-angle
+	}
+
+	@calendar_year_angle_path {
+		path /api/core20/year-angle
+	}
+
+	@calendar_runtime_get {
+		method GET
+		path /api/core20/runtime
+	}
+
+	@calendar_runtime_path {
+		path /api/core20/runtime
+	}
+
+	@calendar_state_get {
+		method GET
+		path /api/core20/calendar
+	}
+
+	@calendar_state_path {
+		path /api/core20/calendar
+	}
+
+	route {
+		handle @calendar_year_angle_get {
+			reverse_proxy 127.0.0.1:18020
+		}
+
+		handle @calendar_year_angle_path {
+			respond "Method Not Allowed" 405
+		}
+
+		handle @calendar_runtime_get {
+			reverse_proxy 127.0.0.1:18020
+		}
+
+		handle @calendar_runtime_path {
+			respond "Method Not Allowed" 405
+		}
+
+		# A8 EVENTS CALENDAR CORS v1
+		handle @calendar_state_get {
+			header Access-Control-Allow-Origin https://events.cosigo.io
+			header Vary Origin
+			reverse_proxy 127.0.0.1:18020
+		}
+
+		handle @calendar_state_path {
+			respond "Method Not Allowed" 405
+		}
+
+		# Nothing else under /api is exposed by Calendar.
+		handle /api/* {
+			respond "Not Found" 404
+		}
+
+		handle / {
+			rewrite * /calendar.html
+			file_server
+		}
+
+		handle /calendar.html {
+			file_server
+		}
+
+		# Calendar artwork, thumbnails and COSIGO mark.
+		handle /assets/* {
+			file_server
+		}
+
+		# Everything not yet migrated returns to the existing lab.
+		handle {
+			redir https://lab.a8.cosigo.io{uri} 302
+		}
+	}
+}
+
+mintaka.cosigo.io {
+	root * /srv/sites/mintaka.cosigo.io/public
+
+	# Core20 civil clock snapshot · read only.
+	# Downstream YOUR LOCAL A8 CLOCK presentation only.
+	@mintaka_core20_clock_get {
+		method GET
+		path /api/core20/clock
+	}
+	handle @mintaka_core20_clock_get {
+		reverse_proxy 127.0.0.1:18020
+	}
+
+	@mintaka_core20_clock_path {
+		path /api/core20/clock
+	}
+	handle @mintaka_core20_clock_path {
+		respond "Method Not Allowed" 405
+	}
+
+
+	@mintaka_state_get {
+		method GET
+		path /api/state
+	}
+
+	@mintaka_state_path {
+		path /api/state
+	}
+
+	@mintaka_observer_get {
+		method GET
+		path /api/mintaka
+	}
+
+	@mintaka_observer_path {
+		path /api/mintaka
+	}
+
+	@mintaka_clock_get {
+		method GET
+		path /api/mintaka/clock
+	}
+
+	@mintaka_clock_path {
+		path /api/mintaka/clock
+	}
+
+	@mintaka_opposing_get {
+		method GET
+		path /api/opposing-clocks
+	}
+
+	@mintaka_opposing_path {
+		path /api/opposing-clocks
+	}
+
+	route {
+		handle @mintaka_state_get {
+			reverse_proxy 127.0.0.1:18020
+		}
+
+		handle @mintaka_state_path {
+			respond "Method Not Allowed" 405
+		}
+
+		handle @mintaka_observer_get {
+			reverse_proxy 127.0.0.1:18020
+		}
+
+		handle @mintaka_observer_path {
+			respond "Method Not Allowed" 405
+		}
+
+		handle @mintaka_clock_get {
+			reverse_proxy 127.0.0.1:18020
+		}
+
+		handle @mintaka_clock_path {
+			respond "Method Not Allowed" 405
+		}
+
+		handle @mintaka_opposing_get {
+			reverse_proxy 127.0.0.1:18020
+		}
+
+		handle @mintaka_opposing_path {
+			respond "Method Not Allowed" 405
+		}
+
+		# Independent physical Pulse Box · observer only.
+		# It does not alter or define the Mintaka observer.
+		@mintaka_pulse_box_snapshot {
+			method GET
+			path /api/pulse-box/snapshot
+		}
+		handle @mintaka_pulse_box_snapshot {
+			rewrite * /snapshot
+			reverse_proxy 127.0.0.1:28788
+		}
+
+		@mintaka_pulse_box_snapshot_path {
+			path /api/pulse-box/snapshot
+		}
+		handle @mintaka_pulse_box_snapshot_path {
+			respond "Method Not Allowed" 405
+		}
+
+		# IMPORTANT:
+		# /api/mintaka/observe is deliberately NOT exposed here.
+		handle /api/* {
+			respond "Not Found" 404
+		}
+
+		handle / {
+			rewrite * /mintaka.html
+			file_server
+		}
+
+		handle /mintaka.html {
+			file_server
+		}
+
+		handle /style.css {
+			file_server
+		}
+
+		handle /site-shell.css {
+			file_server
+		}
+
+		handle /assets/* {
+			file_server
+		}
+
+		handle {
+			redir https://lab.a8.cosigo.io{uri} 302
+		}
+	}
+}
+
+sol.cosigo.io {
+	root * /srv/sites/sol.cosigo.io/public
+
+	@sol_state_get {
+		method GET
+		path /api/state
+	}
+	@sol_state_path {
+		path /api/state
+	}
+
+	@sol_observer_get {
+		method GET
+		path /api/sol
+	}
+	@sol_observer_path {
+		path /api/sol
+	}
+
+	@sol_scale_get {
+		method GET
+		path /api/hardware/sol-orbital-scale
+	}
+	@sol_scale_path {
+		path /api/hardware/sol-orbital-scale
+	}
+
+	@sol_year_angle_get {
+		method GET
+		path /api/core20/year-angle
+	}
+	@sol_year_angle_path {
+		path /api/core20/year-angle
+	}
+
+	route {
+		handle @sol_state_get {
+			reverse_proxy 127.0.0.1:18020
+		}
+		handle @sol_state_path {
+			respond "Method Not Allowed" 405
+		}
+
+		handle @sol_observer_get {
+			reverse_proxy 127.0.0.1:18020
+		}
+		handle @sol_observer_path {
+			respond "Method Not Allowed" 405
+		}
+
+		handle @sol_scale_get {
+			reverse_proxy 127.0.0.1:18020
+		}
+		handle @sol_scale_path {
+			respond "Method Not Allowed" 405
+		}
+
+		handle @sol_year_angle_get {
+			reverse_proxy 127.0.0.1:18020
+		}
+		handle @sol_year_angle_path {
+			respond "Method Not Allowed" 405
+		}
+
+		# Independent physical Pulse Box · observer only.
+		# It does not alter or define the Sol observer.
+		@sol_pulse_box_snapshot {
+			method GET
+			path /api/pulse-box/snapshot
+		}
+		handle @sol_pulse_box_snapshot {
+			rewrite * /snapshot
+			reverse_proxy 127.0.0.1:28788
+		}
+
+		@sol_pulse_box_snapshot_path {
+			path /api/pulse-box/snapshot
+		}
+		handle @sol_pulse_box_snapshot_path {
+			respond "Method Not Allowed" 405
+		}
+
+		# /api/sol/observe deliberately NOT exposed.
+		# No CE, control, alignment, or blanket Core20 API access.
+		handle /api/* {
+			respond "Not Found" 404
+		}
+
+		handle / {
+			rewrite * /sol.html
+			file_server
+		}
+
+		handle /sol.html {
+			file_server
+		}
+
+		handle /style.css {
+			file_server
+		}
+
+		handle /site-shell.css {
+			file_server
+		}
+
+		handle /assets/* {
+			file_server
+		}
+
+		handle {
+			redir https://lab.a8.cosigo.io{uri} 302
+		}
+	}
+}
+
+map.cosigo.io {
+	root * /srv/sites/map.cosigo.io/public
+
+	route {
+		# Map · Clock · Compass is static/local-interactive.
+		# It has no Core20 transport dependency.
+		handle /api/* {
+			respond "Not Found" 404
+		}
+
+		handle / {
+			rewrite * /map-clock-compass.html
+			file_server
+		}
+
+		handle /map-clock-compass.html {
+			file_server
+		}
+
+		handle /assets/cosigo_master_512.gif {
+			file_server
+		}
+
+		handle /assets/a8_map_clock_compass_bg.png {
+			file_server
+		}
+
+		# Unmigrated A8 destinations remain on the old lab.
+		handle {
+			redir https://lab.a8.cosigo.io{uri} 302
+		}
+	}
+}
+
+ship.cosigo.io {
+	root * /srv/sites/ship.cosigo.io/public
+
+	route {
+		# SPACESHIP EARTH · READ-ONLY LIVE GAUGES
+		@ship_reads {
+			method GET
+			path /api/core20/clock /api/core20/year-angle /api/terra-ship-slip /api/terra-ship-slip/accumulator /api/hardware/sol-orbital-scale /api/opposing-clocks
+		}
+		handle @ship_reads {
+			reverse_proxy 127.0.0.1:18020
+		}
+
+		# Independent physical Pulse Box · observer only.
+		# Not selected as Core20 authority.
+		@ship_pulse_box_snapshot {
+			method GET
+			path /api/pulse-box/snapshot
+		}
+		handle @ship_pulse_box_snapshot {
+			rewrite * /snapshot
+			reverse_proxy 127.0.0.1:28788
+		}
+
+		@ship_pulse_box_snapshot_path {
+			path /api/pulse-box/snapshot
+		}
+		handle @ship_pulse_box_snapshot_path {
+			respond "Method Not Allowed" 405
+		}
+
+		# Exact gauge paths exist, but writes do not.
+		@ship_read_paths {
+			path /api/core20/clock /api/core20/year-angle /api/terra-ship-slip /api/terra-ship-slip/accumulator /api/hardware/sol-orbital-scale /api/opposing-clocks
+		}
+		handle @ship_read_paths {
+			respond "Method Not Allowed" 405
+		}
+
+		# Everything else under /api stays below decks.
+		handle /api/* {
+			respond "Not Found" 404
+		}
+
+		handle / {
+			rewrite * /relationship.html
+			file_server
+		}
+
+		handle /relationship.html {
+			file_server
+		}
+
+		handle /style.css {
+			file_server
+		}
+
+		handle /site-shell.css {
+			file_server
+		}
+
+		handle /assets/cosigo_master_512.gif {
+			file_server
+		}
+
+		handle /assets/navistar.png {
+			file_server
+		}
+
+		# Unmigrated presentation destinations remain at the old lab.
+		handle {
+			redir https://lab.a8.cosigo.io{uri} 302
+		}
+	}
+}
+
+audio.cosigo.io {
+	root * /srv/sites/audio.cosigo.io/public
+
+	route {
+		# AUDIO · LIVE CORE20 READS
+
+		@audio_day_phase {
+			method GET
+			path /api/hardware/day-phase17
+		}
+		handle @audio_day_phase {
+			reverse_proxy 127.0.0.1:18020
+		}
+
+		@audio_clock {
+			method GET
+			path /api/core20/clock
+		}
+		handle @audio_clock {
+			reverse_proxy 127.0.0.1:18020
+		}
+
+		# Native Core20 clock-edge stream · SSE
+		@audio_edges {
+			method GET
+			path /api/core20/edges
+		}
+		handle @audio_edges {
+			reverse_proxy 127.0.0.1:18020
+		}
+
+		# Native ditty event stream · downstream only · SSE
+		@audio_ditty_events {
+			method GET
+			path /api/core20/ditty/events
+		}
+		handle @audio_ditty_events {
+			reverse_proxy 127.0.0.1:18020
+		}
+
+		# Explicit native ditty controls.
+		# Core20 accepts only an empty JSON object; no timing fields.
+		@audio_ditty_start {
+			method POST
+			path /api/core20/ditty/start
+		}
+		handle @audio_ditty_start {
+			reverse_proxy 127.0.0.1:18020
+		}
+
+		@audio_ditty_reset {
+			method POST
+			path /api/core20/ditty/reset
+		}
+		handle @audio_ditty_reset {
+			reverse_proxy 127.0.0.1:18020
+		}
+
+		# Known Audio API paths reject all other methods.
+		@audio_known_api_paths {
+			path /api/hardware/day-phase17 /api/core20/clock /api/core20/edges /api/core20/ditty/events /api/core20/ditty/start /api/core20/ditty/reset
+		}
+		handle @audio_known_api_paths {
+			respond "Method Not Allowed" 405
+		}
+
+		# Everything else under /api remains below decks.
+		handle /api/* {
+			respond "Not Found" 404
+		}
+
+		# Canonical Audio entry.
+		handle / {
+			rewrite * /audio.html
+			file_server
+		}
+
+		# Preserve direct source path during qualification.
+		handle /audio.html {
+			file_server
+		}
+
+		# Exact static dependencies only.
+		handle /site-shell.css {
+			file_server
+		}
+
+		handle /assets/cosigo_master_512.gif {
+			file_server
+		}
+
+		handle /assets/a8_audio_antique_bg.png {
+			file_server
+		}
+
+		# Unmigrated presentation destinations remain on the old lab
+		# until their own canonical hostname is qualified.
+		handle {
+			redir https://lab.a8.cosigo.io{uri} 302
+		}
+	}
+}
+
+composer.cosigo.io {
+	route {
+		# COMPOSER · READ-ONLY CORE20 OBSERVATION
+		@a8_composer_clock {
+			method GET
+			path /api/core20/clock
+		}
+		handle @a8_composer_clock {
+			reverse_proxy 127.0.0.1:18020
+		}
+
+		# COMPOSER · PUBLIC CURATOR-INBOX SUBMISSION ONLY
+		@a8_composer_submit {
+			method POST
+			path /api/music-review/submit
+		}
+		handle @a8_composer_submit {
+			reverse_proxy 127.0.0.1:18021
+		}
+
+		# Known Composer APIs with the wrong method.
+		@a8_composer_known_api {
+			path /api/core20/clock /api/music-review/submit
+		}
+		handle @a8_composer_known_api {
+			respond "METHOD NOT ALLOWED" 405
+		}
+
+		# No curator reads, admin APIs, CONNECT, or broad Core20 proxy.
+		handle /api/* {
+			respond "NOT FOUND" 404
+		}
+
+		# Canonical Composer presentation.
+		handle / {
+			root * /srv/sites/composer.cosigo.io/public
+			rewrite * /composer.html
+			file_server
+		}
+
+		handle /composer.html {
+			root * /srv/sites/composer.cosigo.io/public
+			file_server
+		}
+
+		handle /site-shell.css {
+			root * /srv/sites/composer.cosigo.io/public
+			file_server
+		}
+
+		handle /a8-composer-v1.css {
+			root * /srv/sites/composer.cosigo.io/public
+			file_server
+		}
+
+		handle /a8-composer-core-observer-v1.js {
+			root * /srv/sites/composer.cosigo.io/public
+			file_server
+		}
+
+		handle /a8-composer-v1.js {
+			root * /srv/sites/composer.cosigo.io/public
+			file_server
+		}
+
+		handle /a8-music-player-v1.js {
+			root * /srv/sites/composer.cosigo.io/public
+			file_server
+		}
+
+		handle /assets/cosigo_master_512.gif {
+			root * /srv/sites/composer.cosigo.io/public
+			file_server
+		}
+
+		handle /assets/a8_audio_antique_bg.png {
+			root * /srv/sites/composer.cosigo.io/public
+			file_server
+		}
+
+		# Unmigrated presentation destinations continue through old lab.
+		handle {
+			redir https://lab.a8.cosigo.io{uri} 302
+		}
+	}
+}
+
+contestant.cosigo.io {
+	route {
+		# CONTESTANT · CORE20 READ-ONLY CLOCK
+		@a8_contestant_clock {
+			method GET
+			path /api/core20/clock
+		}
+		handle @a8_contestant_clock {
+			reverse_proxy 127.0.0.1:18020
+		}
+
+		# CONTESTANT · CORE20 READ-ONLY CALENDAR
+		@a8_contestant_calendar {
+			method GET
+			path /api/core20/calendar
+		}
+		handle @a8_contestant_calendar {
+			reverse_proxy 127.0.0.1:18020
+		}
+
+		# CONTESTANT · CURRENT CURATED MUSIC ONLY
+		@a8_contestant_current {
+			method GET
+			path /api/music-review/current
+		}
+		handle @a8_contestant_current {
+			reverse_proxy 127.0.0.1:18021
+		}
+
+		# Known Contestant APIs with wrong methods.
+		@a8_contestant_known_api {
+			path /api/core20/clock /api/core20/calendar /api/music-review/current
+		}
+		handle @a8_contestant_known_api {
+			respond "METHOD NOT ALLOWED" 405
+		}
+
+		# No submit, curator/admin, promotion reads, CONNECT or broad proxy.
+		handle /api/* {
+			respond "NOT FOUND" 404
+		}
+
+		# Canonical Contestant presentation.
+		handle / {
+			root * /srv/sites/contestant.cosigo.io/public
+			rewrite * /contestants.html
+			file_server
+		}
+
+		handle /contestants.html {
+			root * /srv/sites/contestant.cosigo.io/public
+			file_server
+		}
+
+		handle /site-shell.css {
+			root * /srv/sites/contestant.cosigo.io/public
+			file_server
+		}
+
+		handle /a8-music-player-v1.js {
+			root * /srv/sites/contestant.cosigo.io/public
+			file_server
+		}
+
+		handle /assets/cosigo_master_512.gif {
+			root * /srv/sites/contestant.cosigo.io/public
+			file_server
+		}
+
+		handle /assets/a8_jovian_moons_bg.png {
+			root * /srv/sites/contestant.cosigo.io/public
+			file_server
+		}
+
+		# Unmigrated presentation destinations remain on old lab.
+		handle {
+			redir https://lab.a8.cosigo.io{uri} 302
+		}
+	}
+}
+
+stars.cosigo.io {
+	route {
+		# STARS · STATIC CELESTIAL FAMILY ONLY.
+		# No Core20 or other API transport is exposed.
+		handle /api/* {
+			respond "NOT FOUND" 404
+		}
+
+		# Canonical Decimal Comfort entry.
+		handle / {
+			root * /srv/sites/stars.cosigo.io/public
+			rewrite * /celestial.html
+			file_server
+		}
+
+		# Parent pages.
+		handle /celestial.html {
+			root * /srv/sites/stars.cosigo.io/public
+			file_server
+		}
+
+		handle /celestial-octal.html {
+			root * /srv/sites/stars.cosigo.io/public
+			file_server
+		}
+
+		# Decimal family.
+		handle /a8_celestial_atlas_decimal_review_v0_2.html {
+			root * /srv/sites/stars.cosigo.io/public
+			file_server
+		}
+
+		handle /a8_walkabout_geometry_poc_v0_1b.html {
+			root * /srv/sites/stars.cosigo.io/public
+			file_server
+		}
+
+		handle /a8_walkabout_scorpius_decimal_v0_1.html {
+			root * /srv/sites/stars.cosigo.io/public
+			file_server
+		}
+
+		# Hard Octal family.
+		handle /a8_celestial_atlas_octal_dense_v0_3.html {
+			root * /srv/sites/stars.cosigo.io/public
+			file_server
+		}
+
+		handle /a8_walkabout_scorpius_octal_v0_1.html {
+			root * /srv/sites/stars.cosigo.io/public
+			file_server
+		}
+
+		handle /a8_walkabout_geometry_poc_octal_v0_2.html {
+			root * /srv/sites/stars.cosigo.io/public
+			file_server
+		}
+
+		# Exact local assets.
+		handle /assets/cosigo_master_512.gif {
+			root * /srv/sites/stars.cosigo.io/public
+			file_server
+		}
+
+		handle /assets/a8_celestial_atlas_bg.png {
+			root * /srv/sites/stars.cosigo.io/public
+			file_server
+		}
+
+		# A8 STARS EVENT COORDINATE ASSETS v1
+		handle /stars-event-coordinate.css {
+			root * /srv/sites/stars.cosigo.io/public
+			file_server
+		}
+
+		handle /stars-event-coordinate.js {
+			root * /srv/sites/stars.cosigo.io/public
+			file_server
+		}
+
+		# Anything not yet migrated remains available from old lab.
+		handle {
+			redir https://lab.a8.cosigo.io{uri} 302
+		}
+	}
+}
+
+sea.cosigo.io {
+	route {
+		# SEA · STATIC NAVIGATION PAGE ONLY
+		handle /api/* {
+			respond "NOT FOUND" 404
+		}
+
+		handle / {
+			root * /srv/sites/sea.cosigo.io/public
+			rewrite * /navigation.html
+			file_server
+		}
+
+		handle /navigation.html {
+			root * /srv/sites/sea.cosigo.io/public
+			file_server
+		}
+
+		handle /assets/cosigo_master_512.gif {
+			root * /srv/sites/sea.cosigo.io/public
+			file_server
+		}
+
+		handle {
+			redir https://lab.a8.cosigo.io{uri} 302
+		}
+	}
+}
+
+data.cosigo.io {
+	route {
+		# DATA · THREE-PAGE STATIC EVIDENCE FAMILY
+		# Independent presentation/evidence workspace.
+		# No Core20 API exposure.
+		handle /api/* {
+			respond "NOT FOUND" 404
+		}
+
+		handle / {
+			root * /srv/sites/data.cosigo.io/public
+			rewrite * /data.html
+			file_server
+		}
+
+		handle {
+			root * /srv/sites/data.cosigo.io/public
+			file_server
+		}
+	}
+}
+
+angle.cosigo.io {
+	route {
+		# ANGLE · STATIC PRESENTATION.
+		# Existing dead /api/angle translator is NOT promoted.
+		handle /api/* {
+			respond "NOT FOUND" 404
+		}
+
+		handle / {
+			root * /srv/sites/angle.cosigo.io/public
+			rewrite * /angle.html
+			file_server
+		}
+
+		handle /angle.html {
+			root * /srv/sites/angle.cosigo.io/public
+			file_server
+		}
+
+		handle /site-shell.css {
+			root * /srv/sites/angle.cosigo.io/public
+			file_server
+		}
+
+		handle /assets/cosigo_master_512.gif {
+			root * /srv/sites/angle.cosigo.io/public
+			file_server
+		}
+
+		handle /assets/a8_angle_antique_bg.png {
+			root * /srv/sites/angle.cosigo.io/public
+			file_server
+		}
+
+		handle {
+			redir https://lab.a8.cosigo.io{uri} 302
+		}
+	}
+}
+
+quartz.cosigo.io {
+	route {
+		# QUARTZ · STATIC PRESENTATION
+		handle /api/* {
+			respond "NOT FOUND" 404
+		}
+
+		handle / {
+			root * /srv/sites/quartz.cosigo.io/public
+			rewrite * /quartz.html
+			file_server
+		}
+
+		handle /quartz.html {
+			root * /srv/sites/quartz.cosigo.io/public
+			file_server
+		}
+
+		handle /site-shell.css {
+			root * /srv/sites/quartz.cosigo.io/public
+			file_server
+		}
+
+		handle /assets/cosigo_master_512.gif {
+			root * /srv/sites/quartz.cosigo.io/public
+			file_server
+		}
+
+		handle {
+			redir https://lab.a8.cosigo.io{uri} 302
+		}
+	}
+}
+
+telescope.cosigo.io {
+	route {
+		# TELESCOPE · STATIC PRESENTATION
+		handle /api/* {
+			respond "NOT FOUND" 404
+		}
+
+		handle / {
+			root * /srv/apps/a8_time_lab_v5_4_20_postseal_hw/public
+			rewrite * /telescope.html
+			file_server
+		}
+
+		handle /telescope.html {
+			root * /srv/apps/a8_time_lab_v5_4_20_postseal_hw/public
+			file_server
+		}
+
+		handle /style.css {
+			root * /srv/apps/a8_time_lab_v5_4_20_postseal_hw/public
+			file_server
+		}
+
+		handle /site-shell.css {
+			root * /srv/apps/a8_time_lab_v5_4_20_postseal_hw/public
+			file_server
+		}
+
+		handle /assets/cosigo_master_512.gif {
+			root * /srv/apps/a8_time_lab_v5_4_20_postseal_hw/public
+			file_server
+		}
+
+		handle {
+			redir https://lab.a8.cosigo.io{uri} 302
+		}
+	}
+}
+
+# A8 MIGRATION #17 · ABOUT
+about.cosigo.io {
+    route {
+        # ABOUT · STATIC PRESENTATION ONLY
+        handle /api/* {
+            respond "NOT FOUND" 404
+        }
+
+        handle / {
+            root * /srv/sites/about.cosigo.io/public
+            rewrite * /about.html
+            file_server
+        }
+
+        handle /about.html {
+            root * /srv/sites/about.cosigo.io/public
+            file_server
+        }
+
+        # Do not expose the rest of the old A8 static tree.
+        handle {
+            respond "NOT FOUND" 404
+        }
+    }
+}
+
+# A8 · CALCULATE · STATIC MATHEMATICAL CHECKS
+calculate.cosigo.io {
+    route {
+        handle /api/* {
+            respond "NOT FOUND" 404
+        }
+
+        handle / {
+            root * /srv/sites/calculate.cosigo.io/public
+            rewrite * /index.html
+            file_server
+        }
+
+        handle /earth-rotation {
+            redir /earth-rotation/ 308
+        }
+
+        handle /earth-rotation/ {
+            root * /srv/sites/calculate.cosigo.io/public
+            rewrite * /earth-rotation/index.html
+            file_server
+        }
+
+        handle {
+            respond "NOT FOUND" 404
+        }
+    }
+}
+
+# ------------------------------------------------------------
+# A8 PAPER · standalone public research note
+# ------------------------------------------------------------
+a8paper.cosigo.io {
+	encode zstd gzip
+
+	@api path /api/*
+	respond @api "Not Found" 404
+
+	handle / {
+		root * /srv/sites/a8paper.cosigo.io/public
+		rewrite * /whitepaper.html
+		file_server
+	}
+
+	handle /whitepaper.html {
+		root * /srv/sites/a8paper.cosigo.io/public
+		file_server
+	}
+
+	handle /assets/cosigo_master_512.png {
+		root * /srv/sites/a8paper.cosigo.io/public
+		file_server
+	}
+
+	handle {
+		respond "Not Found" 404
+	}
+}
+
+# ------------------------------------------------------------
+# A8 OPEN RESEARCH · contributor handoff surface
+# ------------------------------------------------------------
+research.cosigo.io {
+	encode zstd gzip
+
+	@api path /api/*
+	respond @api "Not Found" 404
+
+	handle / {
+		root * /srv/sites/research.cosigo.io/public
+		rewrite * /open-research.html
+		file_server
+	}
+
+	handle /open-research.html {
+		root * /srv/sites/research.cosigo.io/public
+		file_server
+	}
+
+	handle /a8-icon-192.png {
+		root * /srv/sites/research.cosigo.io/public
+		file_server
+	}
+
+	handle /a8-icon.svg {
+		root * /srv/sites/research.cosigo.io/public
+		file_server
+	}
+
+	handle /apple-touch-icon.png {
+		root * /srv/sites/research.cosigo.io/public
+		file_server
+	}
+
+	handle /site.webmanifest {
+		root * /srv/sites/research.cosigo.io/public
+		file_server
+	}
+
+	handle {
+		respond "Not Found" 404
+	}
+}
+
+# ============================================================
+# A8 CHIEF ENGINEER · DEDICATED HELM
+# Parallel qualification host · lab.cosigo.io remains intact
+# ============================================================
+ce.cosigo.io {
     encode zstd gzip
 
-    # CORE20 OPERATING LAB
-    #
-    # Public observation remains open.
-    # CONNECT remains open.
-    #
-    # Chief Engineer operating paths require authentication.
-
-    @a8_ce_pulse {
-        path /pulse /pulse/*
-    }
-    handle @a8_ce_pulse {
+    route {
+        # Entire CE surface is private.
         basic_auth {
             greg <REDACTED_BCRYPT_HASH>
         }
-        reverse_proxy 127.0.0.1:18020
-    }
 
-    # PUBLIC CORE20 DITTY CONTROLS
-    #
-    # Narrow downstream music controls only.
-    # These do not expose runtime restart, calibration,
-    # raw injection, or other Chief Engineer writes.
-    @a8_public_ditty_write {
-        method POST
-        path /api/core20/ditty/start /api/core20/ditty/reset
-    }
-    handle @a8_public_ditty_write {
-        reverse_proxy 127.0.0.1:18020
-    }
+        # Presentation destinations already migrated.
+        @ce_calendar path /calendar.html
+        redir @ce_calendar https://calendar.cosigo.io/ 308
 
-    @a8_ce_write {
-        method POST PUT PATCH DELETE
-        not path /api/core20/connect
-        not path /api/core20/ditty/start
-        not path /api/core20/ditty/reset
-    }
-    handle @a8_ce_write {
-        basic_auth {
-            greg <REDACTED_BCRYPT_HASH>
+        @ce_stars path /celestial.html
+        redir @ce_stars https://stars.cosigo.io/ 308
+
+        @ce_map path /map-clock-compass.html
+        redir @ce_map https://map.cosigo.io/ 308
+
+        @ce_mintaka path /mintaka.html
+        redir @ce_mintaka https://mintaka.cosigo.io/ 308
+
+        @ce_moons path /moons.html
+        redir @ce_moons https://moons.cosigo.io/ 308
+
+        @ce_sea path /navigation.html
+        redir @ce_sea https://sea.cosigo.io/ 308
+
+        @ce_ship path /relationship.html
+        redir @ce_ship https://ship.cosigo.io/ 308
+
+        @ce_sol path /sol.html
+        redir @ce_sol https://sol.cosigo.io/ 308
+
+        @ce_index path /index.html
+        redir @ce_index / 308
+
+        # Music Review · only routes actually used by CE source.
+        @ce_music_review path /api/music-review/current /api/music-review/admin/*
+        reverse_proxy @ce_music_review 127.0.0.1:18021
+
+        # Independent physical Pulse Box · observer only.
+        # This does NOT select or alter the Core20 source.
+        @ce_pulse_box_snapshot {
+            method GET
+            path /api/pulse-box/snapshot
         }
-        reverse_proxy 127.0.0.1:18020
-    }
+        handle @ce_pulse_box_snapshot {
+            rewrite * /snapshot
+            reverse_proxy 127.0.0.1:28788
+        }
 
-    reverse_proxy 127.0.0.1:18020
+        @ce_pulse_box_snapshot_path {
+            path /api/pulse-box/snapshot
+        }
+        handle @ce_pulse_box_snapshot_path {
+            respond "Method Not Allowed" 405
+        }
+
+        # Read-only native opposing-clock instruments.
+        @ce_native_clock_instruments {
+            method GET
+            path /api/mintaka/clock /api/opposing-clocks
+        }
+        reverse_proxy @ce_native_clock_instruments 127.0.0.1:18020
+
+        # Exact Chief Engineer Core20 / hardware requirements.
+        @ce_core20 path /pulse /pulse/* /api/core20/calendar /api/core20/calendar/anchor /api/core20/civil-realign /api/core20/clock /api/core20/connect /api/core20/flight-recorder /api/core20/flight-recorder/clear /api/core20/runtime /api/core20/runtime/start /api/core20/runtime/stop /api/core20/runtime/resume-diagnostic /api/core20/year-angle /api/core20/year-angle/align-jpl /api/hardware/source /api/hardware/source/select /api/hardware/virtual/advance
+        reverse_proxy @ce_core20 127.0.0.1:18020
+
+        root * /srv/sites/ce.cosigo.io/public
+
+        handle / {
+            rewrite * /chief-engineer.html
+            file_server
+        }
+
+        handle /chief-engineer {
+            rewrite * /chief-engineer.html
+            file_server
+        }
+
+        handle /music-review {
+            rewrite * /music-review.html
+            file_server
+        }
+
+        @ce_static path /chief-engineer.html /discipline-harness.html /discipline.html /discipline-runner.html /disturbance-recovery.html /hardware-interface.html /hardware-source.html /holdover-reacquisition.html /local-device-reader.html /multi-window-recovery.html /music-review.html /pre-actuator-seal.html /pseudo-terminal-link.html /rate-continuity.html /rate-slew.html /receive-only-transport.html /repeated-holdover.html /site-shell.css /style.css /a8-music-player-v1.js /a8-music-review-curator-v2.js
+
+        handle @ce_static {
+            file_server
+        }
+
+        handle /assets/* {
+            file_server
+        }
+
+        # Anything not explicitly part of CE is denied.
+        handle {
+            respond "Not Found" 404
+        }
+    }
+}
+
+
+# A8 ASTRONOMICAL EVENTS · STATIC NATIVE REGISTER
+events.cosigo.io {
+	root * /srv/sites/events.cosigo.io/public
+	file_server
 }
