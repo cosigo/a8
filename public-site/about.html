@@ -1188,7 +1188,7 @@
   font-size:.82rem;
   opacity:.74;
 }
-.a8-orb-teaser{
+.a8-earth-orbit-teaser{
   display:grid;
   gap:5px;
   padding:13px 14px;
@@ -1196,16 +1196,16 @@
   border-radius:8px;
   background:rgba(142,185,255,.06);
 }
-.a8-orb-teaser small{
+.a8-earth-orbit-teaser small{
   font-size:.67rem;
   font-weight:900;
   letter-spacing:.09em;
   opacity:.68;
 }
-.a8-orb-teaser strong{
+.a8-earth-orbit-teaser strong{
   color:#c9dcff;
 }
-.a8-orb-teaser span{
+.a8-earth-orbit-teaser span{
   font-size:.82rem;
   opacity:.75;
 }
@@ -1459,7 +1459,7 @@
   opacity: .62;
 }
 
-.a8-speed-proof-orb {
+.a8-speed-proof-earth {
   margin-top: 1rem;
   padding-top: 1rem;
   border-top: 1px solid rgba(255,255,255,.11);
@@ -2186,7 +2186,6 @@
             <option value="time">TIME</option>
             <option value="length">LENGTH / DISTANCE</option>
             <option value="nav">A8 NAV · DISTANCE + SPEED</option>
-            <option value="orb">A8 ORB · DISTANCE + SPEED</option>
             <option value="pitch">PITCH / FREQUENCY</option>
             <option value="rhythm">RHYTHM / TIMING</option>
           </select>
@@ -2694,218 +2693,7 @@
         </div>
 
 
-        <div class="a8-scalar-check" id="a8-orb-check" hidden>
 
-          <div class="eyebrow">A8 ORB · DISTANCE + SPEED</div>
-
-          <div class="a8-angle-inputs">
-            <label>
-              <span>NATIVE DISTANCE · A8 ORB</span>
-              <input id="a8-orb-distance"
-                     type="number"
-                     step="any"
-                     value="1">
-            </label>
-
-            <div class="a8-angle-swap">⇄</div>
-
-            <label class="a8-legacy-side">
-              <span>LEGACY km · COMPARISON</span>
-              <input id="a8-orb-distance-legacy"
-                     type="number"
-                     step="any"
-                     value="19.632173222">
-            </label>
-          </div>
-
-          <div class="a8-angle-results">
-            <div>
-              <small>NATIVE DISTANCE</small>
-              <strong id="a8-orb-out-distance">1 A8 ORB</strong>
-            </div>
-
-            <div>
-              <small>A8-TO-A8 DISTANCE</small>
-              <strong id="a8-orb-out-nav">16.066031974 A8 NAV</strong>
-            </div>
-
-            <div class="a8-legacy-side">
-              <small>LEGACY DISTANCE EQUIVALENT · DISTANCE ONLY</small>
-              <strong id="a8-orb-out-distance-legacy">1 A8 ORB = 19.632173222 km</strong>
-            </div>
-          </div>
-
-          <div class="a8-rate-box">
-            <div class="eyebrow">SPACESHIP EARTH · MEAN ORBITAL SPEED</div>
-
-            <div class="a8-orb-defining-rate">
-              <strong>1 A8 ORB / A8 SECOND</strong>
-            </div>
-
-            <div class="a8-angle-results">
-              <div>
-                <small>PER A8 SECOND</small>
-                <strong>1 A8 ORB / A8 SECOND</strong>
-                <div class="a8-orb-year-mini">
-                  <small>ONE NORMAL CIVIL YEAR · 365 EARTH DAYS</small>
-                  <b>47,841,280 A8 SECOND</b>
-                  <span>→ 47,841,280 A8 ORB</span>
-                </div>
-              </div>
-
-              <div>
-                <small>PER A8 MINUTE</small>
-                <strong>64 A8 ORB / A8 MINUTE</strong>
-                <div class="a8-orb-year-mini">
-                  <small>ONE NORMAL CIVIL YEAR · 365 EARTH DAYS</small>
-                  <b>747,520 A8 MINUTE</b>
-                  <span>× 64 → 47,841,280 A8 ORB</span>
-                </div>
-              </div>
-
-              <div>
-                <small>PER A8 HOUR</small>
-                <strong>4096 A8 ORB / A8 HOUR</strong>
-                <div class="a8-orb-year-mini">
-                  <small>ONE NORMAL CIVIL YEAR · 365 EARTH DAYS</small>
-                  <b>11,680 A8 HOUR</b>
-                  <span>× 4096 → 47,841,280 A8 ORB</span>
-                </div>
-              </div>
-
-              <div class="a8-legacy-side">
-                <small>LEGACY SPEED · SAME MOTION</small>
-                <strong id="a8-orb-rate-legacy">19.632173222 km / 0.6591796875 legacy s ≈ 29.782733895 km/s</strong>
-              </div>
-            </div>
-          </div>
-
-          <div class="a8-angle-verdict">
-            ✓ SPACESHIP EARTH · 1 A8 ORB / A8 SECOND
-          </div>
-
-          <div class="a8-angle-note">
-            A8 ORB by itself is distance. The 19.632173222 km value above is only the
-            legacy length equivalent of 1 A8 ORB — no time denominator has been applied.
-            Spaceship Earth's mean orbital speed appears only when that distance is divided
-            by 1 A8 SECOND: 1 A8 ORB / A8 SECOND.
-          </div>
-
-
-          <section class="a8-orb-full-closure">
-
-            <div class="eyebrow">
-              COMPLETE ORBIT · WORK IT BOTH WAYS
-            </div>
-
-            <div class="a8-orb-full-grid">
-
-              <article class="a8-orb-full-main">
-                <small>COMPLETE EARTH ORBITAL PATH</small>
-                <strong>≈ 939,887,968.906 legacy km</strong>
-                <span>≈ 1.486807268 A8/70</span>
-              </article>
-
-              <article>
-                <small>A8 LENGTH-LADDER SCALE</small>
-                <strong>1 A8/70</strong>
-                <span>≈ 632,151,852.586 legacy km</span>
-              </article>
-
-              <article>
-                <small>ORBITAL RECURRENCE · COMPARISON</small>
-                <strong>≈ 47,874,881.61792 A8 SECOND</strong>
-                <span>
-                  365.25636 legacy Earth days
-                  × 131,072 A8 SECOND / Earth day
-                </span>
-              </article>
-
-            </div>
-
-            <div class="a8-orb-way-grid">
-
-              <article>
-                <small>FORWARD · FULL PATH → ONE A8 ORB</small>
-
-                <strong>
-                  939,887,968.906 legacy km
-                  ÷ 47,874,881.61792 A8 SECOND
-                </strong>
-
-                <span>
-                  ≈ 19.632173222 km
-                  = 1 A8 ORB
-                </span>
-              </article>
-
-              <article>
-                <small>BACKWARD · ONE A8 ORB → FULL PATH</small>
-
-                <strong>
-                  19.632173222 km
-                  × 47,874,881.61792
-                </strong>
-
-                <span>
-                  ≈ 939,887,968.906 legacy km
-                </span>
-              </article>
-
-            </div>
-
-            <div class="a8-orb-scale-proof">
-
-              <small>
-                A8/70 SCALE CHECK · LENGTH LADDER ONLY
-              </small>
-
-              <strong>
-                939,887,968.906 km
-                ÷ 632,151,852.586 km
-                ≈ 1.486807268 A8/70
-              </strong>
-
-              <span>
-                A8/70 gives the complete orbital path a manageable
-                A8 length-scale number. It does not define A8 ORB.
-              </span>
-
-            </div>
-
-            <div class="a8-orb-closure-note">
-
-              <strong>
-                SAME ORBIT · SAME A8 ORB · FORWARD OR BACKWARD
-              </strong>
-
-              <span>
-                Divide the complete path by the orbital A8-second count
-                to recover one A8 ORB. Multiply one A8 ORB by that same
-                count and the complete path returns.
-              </span>
-
-              <span>
-                The 365.25636-day figure is an astronomical comparison.
-                Core20's recovered Sun-return recurrence remains the
-                native A8 authority.
-              </span>
-
-            </div>
-
-          </section>
-
-
-
-
-
-
-          <div class="a8-mini-links">
-            <a href="https://ship.cosigo.io/">SPACESHIP EARTH</a>
-            <a href="https://clock.cosigo.io/">CLOCK</a>
-          </div>
-
-        </div>
 
 
         <div class="a8-check-status-row">
@@ -3219,19 +3007,13 @@
                 </figure>
 
 
+
                 <div class="a8-macro-closure">
 
                   <div class="a8-macro-card">
                     <small>EARTH SURFACE</small>
                     <strong>A8 NAV</strong>
-                    <b>1 A8 NAV</b>
-
-                    <span>
-                      <small>LADDER VIEW</small><br>
-                      2 A8/40<br>
-                      1 A8/41<br>
-                      just above A8/41
-                    </span>
+                    <b>1 A8 NAV = 1 A8/41</b>
 
                     <span>
                       <small>CONSTRUCTION</small><br>
@@ -3240,78 +3022,68 @@
 
                     <span>
                       <small>LEGACY COMPARISON</small><br>
-                      ≈ 1.221967767 km
+                      ≈ 1.2220 km
                     </span>
                   </div>
 
                   <div class="a8-macro-arrow">
-                    <small>A8-TO-A8</small>
-                    <span>1 A8 ORB</span>
-                    <span>= 16.066031974 A8 NAV</span>
-                    <span>≈ 2⁴ A8 NAV</span>
-                    <small>+0.4127% residual</small>
+                    <small>EXACT BINARY LADDER</small>
+                    <span>A8/41 → A8/45</span>
+                    <span>+4 rungs · ×16</span>
+                    <span>1 A8/45 = 16 A8 NAV</span>
                   </div>
 
                   <div class="a8-macro-card">
-                    <small>SPACESHIP EARTH</small>
-                    <strong>A8 ORB</strong>
-                    <b>1 A8 ORB</b>
+                    <small>EARTH ORBIT SPEED RUNG</small>
+                    <strong>A8/45</strong>
+                    <b>1 A8/45</b>
 
                     <span>
                       <small>LADDER VIEW</small><br>
-                      2.084139811 A8/44<br>
-                      1.042069906 A8/45<br>
-                      just above A8/45
-                    </span>
-
-                    <span>
-                      mean orbital distance traveled
-                      in one A8 SECOND
+                      16 A8 NAV<br>
+                      exact binary rung
                     </span>
 
                     <span>
                       <small>LEGACY COMPARISON</small><br>
-                      ≈ 19.632173222 km
+                      ≈ 19.5515 km
                     </span>
                   </div>
 
                 </div>
 
 
+
                 <div class="a8-closure-math">
 
                   <div>
-                    <small>BRING EARTH-SURFACE DISTANCE DOWN</small>
+                    <small>DISTANCE RUNG</small>
                     <strong>
-                      A8 NAV / 2¹⁰
-                      = 1.193327897829 m
+                      1 A8/45 = 16 A8 NAV
                     </strong>
                   </div>
 
                   <div>
-                    <small>BRING ORBITAL DISTANCE DOWN</small>
+                    <small>EARTH · PER A8 SECOND</small>
                     <strong>
-                      A8 ORB / 2¹⁴
-                      = 1.198252760149 m
+                      ≈ 1.0041 A8/45 per A8 SECOND
                     </strong>
                   </div>
 
                   <div>
-                    <small>HISTORICAL MACRO WITNESS · NOT DEFINING</small>
+                    <small>HOUR-SCALE RUNG</small>
                     <strong>
-                      √(NAV↓ × ORB↓)
-                      = 1.195787793606 m
+                      1 A8/57 = 65,536 A8 NAV
                     </strong>
                   </div>
 
                   <div class="a8-closure-highlight">
-                    <small>QUARTZ ↔ MACRO CROSS-CHECK</small>
+                    <small>EARTH · PER A8 HOUR</small>
                     <strong>
-                      √(Q↑ × macro)
-                      = 1.151062075286 m
+                      ≈ 1.0041 A8/57 per A8 HOUR
                     </strong>
                     <span>
-                      historical Quartz ↔ Earth comparison only · does not define the sealed ruler
+                      same mean orbital motion · different binary rung
                     </span>
                   </div>
 
@@ -3346,23 +3118,24 @@
                   <div class="a8-ruler-principle">
                     <strong>ORBIT</strong>
                     <span>
-                      A8 ORB carries established A8 distance and time into
-                      Spaceship Earth's mean orbital motion.
+                      Spaceship Earth's mean orbital motion uses the same
+                      binary length ladder: ≈ 1.0041 A8/45 per A8 SECOND.
                     </span>
                   </div>
 
                 </div>
 
 
-                <div class="a8-orb-teaser">
+
+                <div class="a8-earth-orbit-teaser">
                   <small>HOW FAST</small>
                   <strong>
                     Spaceship Earth mean orbital speed =
-                    1 A8 ORB per A8 SECOND
+                    ≈ 1.0041 A8/45 per A8 SECOND
                   </strong>
                   <span>
-                    Distance and time are established first.
-                    Speed follows as distance ÷ elapsed A8 time.
+                    Same motion on the hour-scale rung:
+                    ≈ 1.0041 A8/57 per A8 HOUR.
                   </span>
                 </div>
 
@@ -3569,8 +3342,8 @@
 
       <article class="a8-future-card">
         <small>ORBIT</small>
-        <strong>A8 ORB</strong>
-        <span>Orbital distance joined directly to recovered A8 elapsed time.</span>
+        <strong>A8/45 · A8/57</strong>
+        <span>Earth mean orbital speed expressed on the same binary length ladder.</span>
       </article>
 
       <article class="a8-future-card">
@@ -3775,34 +3548,37 @@
 
       </div>
 
-      <div class="a8-speed-proof-orb">
-        <div class="eyebrow">SPACESHIP EARTH · EXACT CLOSURE</div>
+
+      <div class="a8-speed-proof-earth">
+        <div class="eyebrow">
+          SPACESHIP EARTH · MEAN SPEED CROSS-CHECK
+        </div>
 
         <div class="a8-speed-proof-grid">
           <article>
-            <small>FORWARD</small>
+            <small>PER A8 SECOND</small>
             <strong>
-              1 A8 ORB ÷ 1 A8 SECOND
+              ≈ 1.0041 A8/45
               <br>
-              = 1 A8 ORB / A8 SECOND
+              per A8 SECOND
             </strong>
           </article>
 
           <article>
-            <small>BACK TO DISTANCE</small>
+            <small>RUNG IDENTITY</small>
             <strong>
-              1 A8 ORB / A8 SECOND × 1 A8 SECOND
+              1 A8/45
               <br>
-              = 1 A8 ORB
+              = 16 A8 NAV
             </strong>
           </article>
 
           <article>
-            <small>BACK TO TIME</small>
+            <small>PER A8 HOUR</small>
             <strong>
-              1 A8 ORB ÷ (1 A8 ORB / A8 SECOND)
+              ≈ 1.0041 A8/57
               <br>
-              = 1 A8 SECOND
+              per A8 HOUR
             </strong>
           </article>
         </div>
@@ -3828,8 +3604,8 @@
       </article>
       <article class="a8-awesome-metric">
         <small>SPACESHIP EARTH</small>
-        <strong>1 A8 ORB / A8 SECOND</strong>
-        <span>Exact full-orbit mean speed by the A8 ORB construction.</span>
+        <strong>≈ 1.0041 A8/57 / A8 HOUR</strong>
+        <span>Same mean motion = ≈ 1.0041 A8/45 per A8 SECOND.</span>
       </article>
     </div>
 
@@ -5501,9 +5277,6 @@ document.querySelectorAll('.a8-question-dialog').forEach(dialog => {
   const A8_31_M = 1.193327897829;
   const NAV_KM = 1.221967767;
   const NAV_TO_A8_41 = 1;
-  const ORB_KM = 19.632173222;
-  const ORB_TO_NAV = 16.066031974;
-
   const A8_SECOND_LEGACY_S = 675 / 1024;
   const A8_HOUR_LEGACY_H = 0.75;
 
@@ -5553,7 +5326,6 @@ document.querySelectorAll('.a8-question-dialog').forEach(dialog => {
     time: $('a8-time-check'),
     length: $('a8-length-check'),
     nav: $('a8-nav-check'),
-    orb: $('a8-orb-check'),
     pitch: $('a8-music-check'),
     rhythm: $('a8-music-check')
   };
@@ -5693,54 +5465,6 @@ document.querySelectorAll('.a8-question-dialog').forEach(dialog => {
   // NAV SPEED
   // Practical NAV speed ladder is presentation-only:
   // fixed denominator = A8 HOUR; binary NAV amounts are static cross-checks.
-
-  // ORB DISTANCE
-
-  const od = $('a8-orb-distance');
-  const odl = $('a8-orb-distance-legacy');
-  let orbSource = 'native';
-
-  function updateOrbDistance() {
-    let native = finite(od.value) ? num(od.value) : 0;
-    let legacy = finite(odl.value) ? num(odl.value) : 0;
-
-    if (orbSource === 'legacy') {
-      native = legacy / ORB_KM;
-      od.value = fmt(native,12);
-    } else {
-      legacy = native * ORB_KM;
-      odl.value = fmt(legacy,12);
-    }
-
-    $('a8-orb-out-distance').textContent =
-      `${fmt(native)} A8 ORB`;
-
-    $('a8-orb-out-nav').textContent =
-      `${fmt(native*ORB_TO_NAV,9)} A8 NAV`;
-
-    $('a8-orb-out-distance-legacy').textContent =
-      `${fmt(native)} A8 ORB = ${fmt(legacy,9)} km`;
-  }
-
-  od.addEventListener('input',() => {
-    orbSource='native';
-    updateOrbDistance();
-  });
-
-  odl.addEventListener('input',() => {
-    orbSource='legacy';
-    updateOrbDistance();
-  });
-
-  updateOrbDistance();
-
-  // ORB DEFINING SPEED
-
-  const orbLegacyKmS =
-    ORB_KM / A8_SECOND_LEGACY_S;
-
-  $('a8-orb-rate-legacy').textContent =
-    `${fmt(ORB_KM,9)} km / ${fmt(A8_SECOND_LEGACY_S,10)} legacy s ≈ ${fmt(orbLegacyKmS,9)} km/s`;
 
   // PITCH remains native 512 example.
 
