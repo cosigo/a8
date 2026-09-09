@@ -1,51 +1,1203 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Auspicious 8 · Public Research Note v1.3 · COSIGO Labs</title>
-  <link rel="icon" href="assets/cosigo_master_512.png">
-  <style>
-    :root{--bg:#090b0d;--ink:#e9ebed;--muted:#a6adb5;--line:#343a40;--gold:#d6a13a;--orange:#dc5a0a}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Georgia,"Times New Roman",serif;line-height:1.7}.wrap{width:min(880px,calc(100% - 32px));margin:auto;padding:32px 0 70px}.top{display:flex;align-items:center;justify-content:space-between;gap:16px;border-bottom:1px solid var(--line);padding-bottom:18px}.brand{display:flex;align-items:center;gap:14px}.brand img{width:58px;height:58px;border-radius:50%}.eyebrow{font:800 .68rem system-ui;letter-spacing:.2em;color:var(--gold)}h1{font-size:clamp(2rem,6vw,4rem);line-height:1;margin:.5rem 0}.dek{font-size:1.15rem;color:#c7ccd1;max-width:65ch}.meta{font:600 .72rem ui-monospace,monospace;color:var(--muted);margin:1rem 0 2rem}h2{font:800 1rem system-ui;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin:2.5rem 0 .65rem}p{color:#cbd0d5}.callout{border-left:3px solid var(--orange);padding:12px 16px;background:#101317;color:#d7dade;margin:1.5rem 0}.formula{font:600 .9rem ui-monospace,monospace;background:#101317;border:1px solid var(--line);padding:12px 14px;border-radius:8px;color:#f0d18d}.back{font:700 .75rem system-ui;text-decoration:none;color:var(--ink);border:1px solid var(--line);border-radius:7px;padding:.65rem .8rem}.foot{border-top:1px solid var(--line);margin-top:3rem;padding-top:1rem;font:500 .72rem system-ui;color:var(--muted)}@media print{body{background:white;color:black}.wrap{width:100%;padding:0}.top .back{display:none}p,.dek,.meta,.foot{color:#333}.callout,.formula{background:#f4f4f4;color:#111}.eyebrow,h2{color:#7b5310}}
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Auspicious 8 technical whitepaper: native angle, recovered time, Earth-derived binary length, navigation, speed, calendar, audio and engineering architecture.">
+<link rel="canonical" href="https://a8.cosigo.io/whitepaper.html">
+<title>Auspicious 8 · Technical Whitepaper</title>
+
+<style>
+:root{
+  color-scheme:dark;
+  --bg:#071018;
+  --panel:#0d1822;
+  --panel2:#101e2a;
+  --line:#29404f;
+  --text:#edf5f8;
+  --muted:#9db0bb;
+  --accent:#9fdcf2;
+  --good:#bde8c8;
+  --max:1120px;
+}
+
+*{box-sizing:border-box}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  background:
+    radial-gradient(circle at 50% -15%,#173040 0,#071018 42rem);
+  color:var(--text);
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+  line-height:1.65;
+}
+
+a{
+  color:var(--accent);
+}
+
+.wrap{
+  width:min(var(--max),calc(100% - 32px));
+  margin:0 auto;
+}
+
+.topbar{
+  position:sticky;
+  top:0;
+  z-index:20;
+  border-bottom:1px solid var(--line);
+  background:rgba(7,16,24,.94);
+  backdrop-filter:blur(12px);
+}
+
+.topbar .wrap{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:18px;
+  padding:12px 0;
+}
+
+.brand{
+  font-weight:900;
+  letter-spacing:.08em;
+}
+
+.nav{
+  display:flex;
+  flex-wrap:wrap;
+  gap:13px;
+  font-size:.82rem;
+  font-weight:800;
+}
+
+.nav a{
+  color:var(--text);
+  text-decoration:none;
+}
+
+.hero{
+  padding:80px 0 52px;
+}
+
+.eyebrow{
+  color:var(--accent);
+  font-size:.78rem;
+  font-weight:900;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+}
+
+h1{
+  max-width:920px;
+  margin:.3rem 0 1rem;
+  font-size:clamp(2.6rem,7vw,6rem);
+  line-height:.94;
+  letter-spacing:-.055em;
+}
+
+.hero p{
+  max-width:850px;
+  font-size:clamp(1.05rem,2vw,1.35rem);
+  color:#d2e0e7;
+}
+
+.seal{
+  display:inline-block;
+  margin-top:18px;
+  padding:10px 14px;
+  border:1px solid var(--line);
+  border-radius:999px;
+  color:var(--good);
+  font-weight:900;
+}
+
+.toc{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+  gap:10px;
+  margin:18px 0 60px;
+}
+
+.toc a{
+  padding:12px 14px;
+  border:1px solid var(--line);
+  border-radius:10px;
+  background:rgba(13,24,34,.7);
+  color:var(--text);
+  text-decoration:none;
+  font-weight:800;
+}
+
+section{
+  padding:36px 0;
+  scroll-margin-top:80px;
+}
+
+.card{
+  padding:26px;
+  border:1px solid var(--line);
+  border-radius:18px;
+  background:rgba(13,24,34,.82);
+}
+
+section h2{
+  margin:.15rem 0 1rem;
+  font-size:clamp(1.8rem,4vw,3rem);
+  letter-spacing:-.035em;
+}
+
+h3{
+  margin-top:1.8rem;
+}
+
+p{
+  max-width:900px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:14px;
+  margin:22px 0;
+}
+
+.metric{
+  padding:20px;
+  border:1px solid var(--line);
+  border-radius:14px;
+  background:var(--panel2);
+}
+
+.metric small{
+  display:block;
+  color:var(--muted);
+  font-weight:900;
+  letter-spacing:.08em;
+  margin-bottom:6px;
+}
+
+.metric strong{
+  display:block;
+  font-size:1.15rem;
+}
+
+.eq{
+  margin:20px 0;
+  padding:17px 20px;
+  overflow-x:auto;
+  border-left:4px solid var(--accent);
+  border-radius:8px;
+  background:#07131c;
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Consolas,
+    monospace;
+  font-size:1rem;
+  white-space:normal;
+}
+
+.note{
+  padding:18px 20px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  color:#d8e5eb;
+  background:rgba(16,30,42,.75);
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  margin:20px 0;
+}
+
+th,td{
+  padding:11px 10px;
+  border-bottom:1px solid var(--line);
+  text-align:left;
+  vertical-align:top;
+}
+
+th{
+  color:var(--accent);
+}
+
+code{
+  color:#d6f1ff;
+}
+
+footer{
+  margin-top:60px;
+  padding:42px 0 70px;
+  border-top:1px solid var(--line);
+  color:var(--muted);
+}
+
+.closing{
+  margin:30px 0;
+  padding:28px;
+  border:1px solid var(--line);
+  border-radius:18px;
+  text-align:center;
+  background:var(--panel2);
+}
+
+.closing strong{
+  display:block;
+  font-size:clamp(1.5rem,4vw,3rem);
+}
+
+@media(max-width:700px){
+  .topbar .wrap{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+
+  .hero{
+    padding-top:54px;
+  }
+
+  th,td{
+    font-size:.87rem;
+  }
+}
+</style>
 </head>
-<body><main class="wrap">
-  <div class="top"><div class="brand"><img src="assets/cosigo_master_512.png" alt="COSIGO"><div><div class="eyebrow">COSIGO LABS · PUBLIC RESEARCH NOTE</div><strong>AUSPICIOUS 8</strong></div></div><div><a class="back" href="index.html">← INSTRUMENT</a> &nbsp; <a class="back" href="https://lab.cosigo.io/" rel="noopener">ENGINEERING LAB ↗</a></div></div>
-  <h1>Auspicious 8</h1>
-  <p class="dek">An experimental measurement architecture built from naturally recoverable phenomena outward, with binary/eightfold representation designed for the machines that must ultimately count, store and transmit the measurements.</p>
-  <div class="meta">Public Research Note · Version 1.3 · 2026 · COSIGO Labs</div>
 
-  <h2>1 · The question</h2>
-  <p>Historical measurement systems are extraordinarily useful, but many of their rulers were optimized for administrative practice, hand calculation, inherited geometry and the instruments of earlier eras. A8 asks a narrower engineering question: if a system were being designed today, could natural recurrence and binary machinery be connected more directly?</p>
-  <div class="callout"><strong>Governing distinction:</strong> the natural phenomenon is not the register, and the register is not Nature. A register is a finite engineered ruler placed on a physical phenomenon.</div>
+<body>
 
-  <h2>2 · Physical time and independent recovery</h2>
-  <p>The present A8 time research uses the Jovian moons Io, Europa and Ganymede as three parallel observational reference channels. Each channel is intended to be independently recoverable from repeated observations against one arbitrary monotonic local pulse counter. Their 1:2:4 structure permits a common normalized comparison while preserving disagreement as evidence rather than averaging it away. Callisto is retained as a slower witness and research channel.</p>
-  <p>The research path deliberately separates the defining physical observation from conventional timestamps. Real-observation replay work therefore reduces telescope observations to a signed Jupiter-relative displacement plus a raw pulse count.</p>
-  <div class="formula">defining observation → rawPulse + moon + signed Jupiter-relative displacement x</div>
+<header class="topbar">
+  <div class="wrap">
+    <div class="brand">AUSPICIOUS 8</div>
 
-  <h2>3 · The Earth-day clock</h2>
-  <p>For the human daily clock, one Earth day is represented as one A8 day divided into 32 A8 hours, each A8 hour into 64 A8 minutes, and each A8 minute into 64 A8 seconds. This produces exactly 131,072 states, or 2¹⁷ states, across the day.</p>
-  <div class="formula">decimal comfort: 32 × 64 × 64 = 131,072 = 2¹⁷<br>native octal: 40₈ × 100₈ × 100₈ = 400000₈ states</div>
-  <p>The native engineering form is a seventeen-bit day-phase register. Octal provides a compact human-readable representation because each octal digit corresponds exactly to three binary bits. Decimal may remain as a comfort display during adoption without becoming the native definition. Bare legacy labels are avoided: these are A8 HOUR, A8 MINUTE and A8 SECOND subdivisions, not conventional hour/minute/second units.</p>
+    <nav class="nav" aria-label="Technical whitepaper navigation">
+      <a href="https://a8.cosigo.io/">A8 PUBLIC</a>
+      <a href="https://about.cosigo.io/">ABOUT</a>
+      <a href="https://research.cosigo.io/">RESEARCH</a>
+      <a href="https://data.cosigo.io/">DATA</a>
+      <a href="https://cosigo.io/">COSIGO</a>
+    </nav>
+  </div>
+</header>
 
-  <h2>4 · Angle</h2>
-  <p>A8 represents a full turn with 512 states, exactly 2⁹. This does not alter circle geometry, π or trigonometry. It changes only the ruler placed around the circle.</p>
-  <div class="formula">full turn = 512 states = 1000₈ rollover → 000₈</div>
-  <p>Quarter, half and eighth turns fall on exact binary boundaries. The three-octal-digit range 000₈–777₈ maps directly to the nine-bit range 000000000₂–111111111₂.</p>
+<main>
 
-  <h2>5 · Why this public page is simpler</h2>
-  <p>The public instrument intentionally hides recovery epochs, calibration controls, replay modes, diagnostic tolerances and fault injection used by the engineering laboratory. Its clock samples the visitor’s local wall clock once when the page loads or when the visitor explicitly resynchronizes it, then free-runs from the browser’s monotonic timer. That local wall-clock sample is a presentation alignment only; it is not claimed as the physical definition of A8 time.</p>
-  <p>The Jovian display on the public page is likewise a visualization of the architecture, not a live telescope feed or recovery authority. Its motion is deliberately accelerated and the page displays the selected plant-step rate plus an approximate ×N natural Ganymede-rate reference so the animation cannot be mistaken for natural orbital speed.</p>
+<div class="wrap hero">
+  <div class="eyebrow">
+    TECHNICAL WHITEPAPER · CURRENT PUBLIC ARCHITECTURE
+  </div>
 
-  <h2>6 · Work demonstrated so far</h2>
-  <p>Engineering work has covered arbitrary-oscillator recovery, parallel Io/Europa/Ganymede channels, holdover behavior, equal-duration 8:4:2 qualification, real-observation replay contracts, relative-pixel telescope reduction, simulated CCD/counter instruments, noise, periodic missing observations and irregular observatory gaps. Some tests intentionally end in rejection or holdover; those outcomes are evidence about observability rather than failures to be hidden.</p>
+  <h1>
+    One world.<br>
+    One architecture.
+  </h1>
 
-  <h2>7 · Future progression</h2>
-  <p>Possible future work includes real telescope/counter data, distributed observing sites, longer-baseline qualification, the relationship between terrestrial observing windows and Jovian recurrence, calendar design, a native A8 calculator and exploration of other physical measurement domains. These are research directions, not claims that every domain will reduce neatly to the same structure.</p>
+  <p>
+    Auspicious 8 does not change Nature. It changes the rulers used to
+    describe Nature. The objective is a coherent native measurement
+    architecture built from natural references, exact binary relationships,
+    reversible calculation and application names that do not create
+    unnecessary new units.
+  </p>
 
-  <h2>8 · Publication and research notice</h2>
-  <p>Auspicious 8 is presented as experimental research. Natural phenomena, mathematical facts and general scientific principles are not claimed as proprietary. Original source code, written material, diagrams, graphics and presentation published by COSIGO Labs remain protected works of their respective authors. Please contact the authors regarding republication, adaptation, collaboration or licensing of those materials.</p>
-  <p>This publication is not a patent claim, scientific certification or assertion that natural phenomena themselves belong to COSIGO Labs. It is a dated public presentation of an ongoing research architecture and its authored implementation.</p>
+  <p>
+    The simple whitepaper explains what A8 feels like. This paper shows
+    how the machinery fits together.
+  </p>
 
-  <div class="foot">© 2026 COSIGO Labs. All rights reserved. COSIGO™ · CIGO™ · Auspicious 8™. COSIGO™ is presented on the official COSIGO site as a claimed trademark with a U.S. trademark application pending. Contact: https://contact.cosigo.io/</div>
-</main></body></html>
+  <div class="seal">
+    A8/PERFECT · MINIMUM MACHINERY · COMPLETE CALCULABILITY
+  </div>
+</div>
+
+<div class="wrap">
+
+<nav class="toc" aria-label="Table of contents">
+  <a href="#premise">01 · Premise</a>
+  <a href="#perfect">02 · A8/PERFECT</a>
+  <a href="#angle">03 · Angle</a>
+  <a href="#time">04 · Time</a>
+  <a href="#recovery">05 · Natural recovery</a>
+  <a href="#length">06 · Length</a>
+  <a href="#nav">07 · Navigation</a>
+  <a href="#speed">08 · Speed</a>
+  <a href="#orbit">09 · Spaceship Earth</a>
+  <a href="#calendar">10 · Calendar</a>
+  <a href="#audio">11 · Audio</a>
+  <a href="#witnesses">12 · Physical witnesses</a>
+  <a href="#engineering">13 · Engineering discipline</a>
+  <a href="#claims">14 · Claims and limits</a>
+  <a href="#derivations">15 · Derivation sheet</a>
+</nav>
+
+
+<section id="premise">
+  <div class="eyebrow">01 · PREMISE</div>
+  <h2>The world stays put. The ruler changes.</h2>
+
+  <p>
+    Human measurement systems often accumulate unrelated bases,
+    conversion factors and special-purpose units. A8 asks whether many
+    of those jobs can instead share one binary architecture.
+  </p>
+
+  <p>
+    The design rule is not that Nature is binary. Binary and octal are
+    engineered representations chosen because exact halving, doubling
+    and machine-state grouping are useful. Geometry, physics,
+    trigonometry and π are unchanged.
+  </p>
+
+  <div class="grid">
+    <div class="metric">
+      <small>ANGLE</small>
+      <strong>2⁹ = 512 per turn</strong>
+    </div>
+
+    <div class="metric">
+      <small>DAY</small>
+      <strong>2¹⁷ A8 SECOND</strong>
+    </div>
+
+    <div class="metric">
+      <small>LENGTH</small>
+      <strong>one binary ladder</strong>
+    </div>
+
+    <div class="metric">
+      <small>SPEED</small>
+      <strong>distance ÷ elapsed A8 time</strong>
+    </div>
+  </div>
+</section>
+
+
+<section id="perfect">
+  <div class="eyebrow">02 · A8/PERFECT</div>
+  <h2>Throw away machinery, not calculability.</h2>
+
+  <p>
+    A8/PERFECT is the working simplification criterion:
+    retain the minimum independent machinery required to preserve
+    complete derivation, forward calculation and reverse calculation.
+  </p>
+
+  <div class="eq">
+    REMOVE A CONCEPT → RECALCULATE → IF THE RELATIONSHIP REMAINS
+    REVERSIBLE, THE REMOVED CONCEPT WAS REDUNDANT
+  </div>
+
+  <p>
+    This principle is why A8 NAV no longer requires a conversion to
+    A8/41. They are the same physical length. It is also why a separate
+    orbital-distance ruler is unnecessary: Spaceship Earth's motion can
+    already be expressed directly on the ordinary A8 length ladder.
+  </p>
+
+  <div class="note">
+    Simplification stops when another removal would prevent a quantity
+    from being recovered, checked or calculated in reverse.
+  </div>
+</section>
+
+
+<section id="angle">
+  <div class="eyebrow">03 · ANGLE</div>
+  <h2>A complete turn is 512 A8 angle.</h2>
+
+  <div class="eq">
+    1 full turn = 512 A8 angle = 2⁹ A8 angle = 1000₈
+  </div>
+
+  <p>
+    A running phase register occupies the 512 states from 0 through 511.
+    In octal that is 000₈ through 777₈. The next count completes the
+    recurrence at 1000₈ and wraps to phase 000₈.
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Geometry</th>
+        <th>A8 angle</th>
+        <th>Octal</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>North / origin</td>
+        <td>0</td>
+        <td>000₈</td>
+      </tr>
+      <tr>
+        <td>Quarter turn</td>
+        <td>128</td>
+        <td>200₈</td>
+      </tr>
+      <tr>
+        <td>Half turn</td>
+        <td>256</td>
+        <td>400₈</td>
+      </tr>
+      <tr>
+        <td>Three-quarter turn</td>
+        <td>384</td>
+        <td>600₈</td>
+      </tr>
+      <tr>
+        <td>Completed turn</td>
+        <td>512</td>
+        <td>1000₈</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>
+    A8 changes the angular ruler, not the circle. The same angular
+    geometry can be expressed on maps, compasses, celestial charts and
+    rotating dials.
+  </p>
+
+  <p>
+    Working instruments:
+    <a href="https://angle.cosigo.io/">Angle</a>,
+    <a href="https://map.cosigo.io/">Map</a> and
+    <a href="https://stars.cosigo.io/">Stars</a>.
+  </p>
+</section>
+
+
+<section id="time">
+  <div class="eyebrow">04 · TIME</div>
+  <h2>The civil day is an exact 32 × 64 × 64 structure.</h2>
+
+  <div class="eq">
+    32 A8 HOUR × 64 A8 MINUTE × 64 A8 SECOND
+    = 131,072
+    = 2¹⁷ A8 SECOND per day
+  </div>
+
+  <p>
+    DAY_PHASE17 is therefore a direct binary state:
+    five bits of hour, six bits of minute and six bits of second.
+  </p>
+
+  <div class="grid">
+    <div class="metric">
+      <small>A8 HOUR</small>
+      <strong>4096 = 2¹² A8 SECOND</strong>
+    </div>
+
+    <div class="metric">
+      <small>A8 MINUTE</small>
+      <strong>64 = 2⁶ A8 SECOND</strong>
+    </div>
+
+    <div class="metric">
+      <small>A8 DAY</small>
+      <strong>131,072 = 2¹⁷ A8 SECOND</strong>
+    </div>
+  </div>
+
+  <p>
+    For comparison with legacy civil time, one A8 HOUR corresponds to
+    45 legacy minutes, and one A8 SECOND corresponds to
+    675/1024 legacy second. Those comparisons do not define the native
+    architecture.
+  </p>
+
+  <p>
+    Working instrument:
+    <a href="https://clock.cosigo.io/">Clock</a>.
+  </p>
+</section>
+
+
+<section id="recovery">
+  <div class="eyebrow">05 · NATURAL RECOVERY</div>
+  <h2>The clock architecture separates reference from display.</h2>
+
+  <p>
+    The operating A8 time architecture does not treat a computer's
+    ordinary wall clock as its foundational authority. The conceptual
+    chain begins with observable Jovian recurrence.
+  </p>
+
+  <div class="eq">
+    JUPITER
+    → IO / EUROPA / GANYMEDE RECURRENCE
+    → RECOVERED ELAPSED-TIME RULER
+    → MINTAKA ROTATION WITNESS
+    → SOL ORBITAL-DIRECTION WITNESS
+    → TERRA SHIP SLIP
+    → RECOVERED SUN-RETURN RECURRENCE
+    → DAY_PHASE17
+    → 32 × 64 × 64 CIVIL CLOCK
+  </div>
+
+  <p>
+    Io, Europa and Ganymede provide the 1:2:4 recurrence structure used
+    by the recovery architecture. Mintaka is a rotation witness rather
+    than a replacement clock. Sol is an orbital-direction witness.
+    Terra Ship Slip relates rotation and orbit.
+  </p>
+
+  <p>
+    A fundamental engineering rule is separation of clocks:
+    CPU clock, operating-system clock, counted oscillator and external
+    natural recurrence must not be silently conflated.
+  </p>
+
+  <p>
+    Working instrument:
+    <a href="https://moons.cosigo.io/">Moons</a>.
+  </p>
+</section>
+
+
+<section id="length">
+  <div class="eyebrow">06 · LENGTH</div>
+  <h2>One Earth-derived ladder. Every rung differs by ×2.</h2>
+
+  <p>
+    A8 length is anchored to mean-Earth geometry. The terrestrial
+    navigation rung is the mean Earth circumference divided by 2¹⁵.
+  </p>
+
+  <div class="eq">
+    1 A8 NAV = 1 A8/41 = C(E,mean) / 32,768
+  </div>
+
+  <p>
+    The mean-Earth construction uses the equatorial and meridional
+    circumferences as the macro geometric reference. Once A8/41 is
+    established, every other length rung is produced by exact powers
+    of two.
+  </p>
+
+  <div class="eq">
+    A8/n = A8/41 × 2^(n − 41)
+  </div>
+
+  <div class="eq">
+    A8/n = C(E,mean) / 2^(56 − n)
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Rung</th>
+        <th>Exact ladder relation</th>
+        <th>Legacy comparison</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>A8/0</td>
+        <td>A8/41 ÷ 2⁴¹</td>
+        <td>≈ 0.5556 nm</td>
+      </tr>
+      <tr>
+        <td>A8/31</td>
+        <td>A8 NAV ÷ 1024</td>
+        <td>≈ 1.1933 m</td>
+      </tr>
+      <tr>
+        <td>A8/41</td>
+        <td>1 A8 NAV</td>
+        <td>≈ 1.2220 km</td>
+      </tr>
+      <tr>
+        <td>A8/45</td>
+        <td>16 A8 NAV</td>
+        <td>≈ 19.5515 km</td>
+      </tr>
+      <tr>
+        <td>A8/57</td>
+        <td>65,536 A8 NAV</td>
+        <td>≈ 80,082.8796 km</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="note">
+    Exact native powers of two remain exact. Decimal legacy comparisons
+    are displayed compactly; calculation may retain additional precision.
+  </div>
+</section>
+
+
+<section id="nav">
+  <div class="eyebrow">07 · NAVIGATION</div>
+  <h2>A8 NAV is not another ruler.</h2>
+
+  <div class="eq">
+    A8 NAV = A8/41
+  </div>
+
+  <p>
+    These two names are exactly interchangeable. A8/41 is the address on
+    the universal length ladder. A8 NAV is the application name when
+    that same physical length is used for Earth navigation on land or
+    water.
+  </p>
+
+  <div class="eq">
+    Earth circumference = 32,768 A8 NAV
+  </div>
+
+  <p>
+    With 32 longitudinal hour sectors, each sector spans exactly
+    1024 A8 NAV around the Earth reference circumference.
+  </p>
+
+  <p>
+    The navigation architecture keeps distinct physical questions
+    distinct:
+  </p>
+
+  <div class="eq">
+    POSITION
+    → DIRECTION
+    → DISTANCE
+    → SPEED
+    → ELAPSED TIME
+    → ARRIVAL
+  </div>
+
+  <p>
+    Position and direction are angular. Distance is linear. Speed combines
+    linear distance with elapsed time. Arrival is derived from those
+    relationships rather than hidden inside a special-purpose unit.
+  </p>
+
+  <p>
+    Working instrument:
+    <a href="https://sea.cosigo.io/">Navigation</a>.
+  </p>
+</section>
+
+
+<section id="speed">
+  <div class="eyebrow">08 · SPEED</div>
+  <h2>Push the rung. Not the number.</h2>
+
+  <p>
+    A8 does not need a different speed unit for every class of motion.
+    Choose one elapsed-time denominator, calculate the distance traveled
+    during it, then select the binary length rung that places the
+    coefficient nearest one.
+  </p>
+
+  <div class="eq">
+    SPEED = DISTANCE / ELAPSED A8 TIME
+  </div>
+
+  <p>
+    For the standard transport view, the denominator is one A8 HOUR.
+    Let D be the distance traveled in A8 NAV during that hour.
+  </p>
+
+  <div class="eq">
+    n = 41 + round(log₂(D))
+  </div>
+
+  <div class="eq">
+    coefficient = D / 2^(n − 41)
+  </div>
+
+  <p>
+    The physical motion does not change when the rung changes. Only its
+    most convenient binary address changes.
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Example</th>
+        <th>Nearest rung</th>
+        <th>A8 speed view</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Walking</td>
+        <td>A8/43</td>
+        <td>≈ 0.7672 A8/43 per A8 HOUR</td>
+      </tr>
+      <tr>
+        <td>Bicycle</td>
+        <td>A8/45</td>
+        <td>≈ 0.7672 A8/45 per A8 HOUR</td>
+      </tr>
+      <tr>
+        <td>Ship example</td>
+        <td>A8/46</td>
+        <td>≈ 0.7104 A8/46 per A8 HOUR</td>
+      </tr>
+      <tr>
+        <td>Road example</td>
+        <td>A8/47</td>
+        <td>≈ 0.9590 A8/47 per A8 HOUR</td>
+      </tr>
+      <tr>
+        <td>Aircraft example</td>
+        <td>A8/50</td>
+        <td>≈ 0.9923 A8/50 per A8 HOUR</td>
+      </tr>
+      <tr>
+        <td>Moon local mean orbit</td>
+        <td>A8/52</td>
+        <td>≈ 1.1030 A8/52 per A8 HOUR</td>
+      </tr>
+      <tr>
+        <td>Apollo 17 whole-mission average</td>
+        <td>A8/53</td>
+        <td>≈ 1.1862 A8/53 per A8 HOUR</td>
+      </tr>
+      <tr>
+        <td>Spaceship Earth mean orbit</td>
+        <td>A8/57</td>
+        <td>≈ 1.0041 A8/57 per A8 HOUR</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>
+    The moving-body labels are examples, not ownership claims. A rung
+    belongs to the ladder, not to an aircraft, ship, moon or planet.
+  </p>
+</section>
+
+
+<section id="orbit">
+  <div class="eyebrow">09 · SPACESHIP EARTH</div>
+  <h2>Earth's orbital speed requires no special ruler.</h2>
+
+  <p>
+    Earth mean orbital motion demonstrates why the universal ladder is
+    useful.
+  </p>
+
+  <div class="eq">
+    1 A8/45 = 16 A8 NAV
+  </div>
+
+  <div class="eq">
+    Earth mean motion ≈ 1.0041 A8/45 per A8 SECOND
+  </div>
+
+  <p>
+    An A8 HOUR contains exactly 4096 = 2¹² A8 SECOND. A8/57 is exactly
+    twelve binary length rungs above A8/45.
+  </p>
+
+  <div class="eq">
+    A8/57 = 2¹² × A8/45
+  </div>
+
+  <div class="eq">
+    1 A8 HOUR = 2¹² × A8 SECOND
+  </div>
+
+  <p>
+    Therefore the coefficient is preserved:
+  </p>
+
+  <div class="eq">
+    ≈ 1.0041 A8/45 per A8 SECOND
+    =
+    ≈ 1.0041 A8/57 per A8 HOUR
+  </div>
+
+  <p>
+    This is not a claim that Earth occupies a privileged cosmic position.
+    A8 is an Earth-use measurement architecture, so Earth is a practical
+    reference body. Actual orbital speed varies through the elliptical
+    orbit; A8/57 is the mean orbital-speed neighborhood.
+  </p>
+
+  <p>
+    Working instrument:
+    <a href="https://ship.cosigo.io/">Spaceship Earth</a>.
+  </p>
+</section>
+
+
+<section id="calendar">
+  <div class="eyebrow">10 · CALENDAR</div>
+  <h2>The civil year is organized without changing astronomy.</h2>
+
+  <p>
+    The A8 calendar separates recurring civil structure from astronomical
+    events.
+  </p>
+
+  <div class="eq">
+    8 months × 45 structured days = 360 days
+  </div>
+
+  <p>
+    Each 45-day month contains nine five-day elemental weeks:
+    Fire, Water, Earth, Air and Aether.
+  </p>
+
+  <p>
+    The remaining days form Wilson's Week: five Gold Days in a normal
+    365-day year and six in a leap year.
+  </p>
+
+  <div class="eq">
+    CALENDAR = DATE STRUCTURE
+    <br>
+    EVENTS = WHAT NATURE IS DOING ON THOSE DATES
+  </div>
+
+  <p>
+    Astronomical-event information therefore belongs to the event
+    register rather than a second calendar engine.
+  </p>
+
+  <p>
+    One everyday 32-hour allocation example is:
+  </p>
+
+  <div class="eq">
+    11 A8 HOUR work
+    + 10 recreation
+    + 11 rest
+    = 32 A8 HOUR
+  </div>
+
+  <p>
+    That is an example of native arithmetic, not a prescribed lifestyle.
+  </p>
+
+  <p>
+    Working instrument:
+    <a href="https://calendar.cosigo.io/">Calendar</a>.
+  </p>
+</section>
+
+
+<section id="audio">
+  <div class="eyebrow">11 · AUDIO</div>
+  <h2>The same divider logic can be heard.</h2>
+
+  <p>
+    The current native A8 audio reference is 512 cycles per A8 SECOND.
+  </p>
+
+  <div class="eq">
+    512 cycles / A8 SECOND = 2⁹ cycles / A8 SECOND
+  </div>
+
+  <p>
+    Musical octaves already operate by frequency doubling. A8 does not
+    invent that physical relationship; it gives doubling a native
+    numerical home.
+  </p>
+
+  <div class="eq">
+    64 beats / A8 MINUTE
+    = 1 beat / A8 SECOND
+  </div>
+
+  <p>
+    Browser audio engines and digital-to-analog hardware may require a
+    legacy-facing sample-rate or frequency translation at the boundary.
+    That engineering bridge does not replace the native A8 relationship.
+  </p>
+
+  <p>
+    Working instruments:
+    <a href="https://audio.cosigo.io/">Audio</a> and
+    <a href="https://composer.cosigo.io/">Composer</a>.
+  </p>
+</section>
+
+
+<section id="witnesses">
+  <div class="eyebrow">12 · PHYSICAL WITNESSES</div>
+  <h2>A witness checks a ruler. It does not secretly resize it.</h2>
+
+  <p>
+    Alpha quartz remains valuable because its lattice recurrence is a
+    reproducible natural material structure. Under the current A8
+    architecture, however, quartz is a witness measured against the
+    Earth-defined length ladder rather than a co-defining anchor.
+  </p>
+
+  <p>
+    The same discipline applies to biological sizes, astronomical
+    distances and other natural examples. An object may land close to
+    an A8 rung without becoming the definition of that rung.
+  </p>
+
+  <div class="note">
+    Near-one results are useful observations. They are not automatically
+    hidden laws of Nature.
+  </div>
+
+  <p>
+    Working instrument:
+    <a href="https://quartz.cosigo.io/">Quartz</a>.
+  </p>
+</section>
+
+
+<section id="engineering">
+  <div class="eyebrow">13 · ENGINEERING DISCIPLINE</div>
+  <h2>Native first. Translation second.</h2>
+
+  <p>
+    A8 separates exact architecture from comparison values.
+  </p>
+
+  <div class="grid">
+    <div class="metric">
+      <small>EXACT</small>
+      <strong>powers of two</strong>
+    </div>
+
+    <div class="metric">
+      <small>EXACT</small>
+      <strong>register states and counts</strong>
+    </div>
+
+    <div class="metric">
+      <small>EXACT</small>
+      <strong>NAV = A8/41</strong>
+    </div>
+
+    <div class="metric">
+      <small>APPROXIMATE</small>
+      <strong>legacy comparison decimals</strong>
+    </div>
+  </div>
+
+  <p>
+    Public approximate decimal values are normally displayed to no more
+    than four decimal places. That is a presentation rule, not a
+    numerical limitation. Internal calculations may retain whatever
+    precision is required.
+  </p>
+
+  <h3>Independent recoverability</h3>
+
+  <p>
+    A physical proof is stronger when the result can be reconstructed
+    from event identities and raw counted oscillator edges rather than
+    from an ordinary timestamp supplied by the host operating system.
+  </p>
+
+  <h3>Application separation</h3>
+
+  <p>
+    Presentation software may visualize, translate and teach the
+    recovered state. It must not silently become the authority from
+    which the state supposedly originated.
+  </p>
+
+  <h3>Reversibility</h3>
+
+  <p>
+    Whenever practical, a relationship should survive calculation in
+    both directions:
+  </p>
+
+  <div class="eq">
+    distance / time = speed
+    <br>
+    speed × time = distance
+    <br>
+    distance / speed = time
+  </div>
+
+  <p>
+    This is the engineering boundary behind A8/PERFECT: simplification
+    is desirable only while calculability survives.
+  </p>
+</section>
+
+
+<section id="claims">
+  <div class="eyebrow">14 · CLAIMS AND LIMITS</div>
+  <h2>What A8 is — and what it is not claiming.</h2>
+
+  <div class="grid">
+    <div class="card">
+      <h3>A8 does claim</h3>
+      <p>
+        A coherent engineered measurement architecture can share exact
+        binary relationships across angle, civil time, length,
+        navigation and speed.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>A8 does not claim</h3>
+      <p>
+        That geometry, π, trigonometry or physical law changes when the
+        ruler changes.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>A8 does claim</h3>
+      <p>
+        Natural astronomical and material recurrences can act as
+        observable references and witnesses.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>A8 does not claim</h3>
+      <p>
+        That every near-integer relationship is metaphysical,
+        geocentric or numerologically significant.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>A8 does claim</h3>
+      <p>
+        Binary and octal are useful representations for exact powers of
+        two and machine state.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>A8 does not claim</h3>
+      <p>
+        That Nature itself must be binary.
+      </p>
+    </div>
+  </div>
+
+  <p>
+    Measurement domains that do not yet have a defensible natural
+    physical anchor should remain open rather than being filled with an
+    invented definition merely for completeness.
+  </p>
+</section>
+
+
+<section id="derivations">
+  <div class="eyebrow">15 · DERIVATION SHEET</div>
+  <h2>The architecture on one page.</h2>
+
+  <h3>Angle</h3>
+
+  <div class="eq">
+    full turn = 512 A8 angle = 2⁹
+  </div>
+
+  <h3>Civil time</h3>
+
+  <div class="eq">
+    day = 32 × 64 × 64
+    = 131,072
+    = 2¹⁷ A8 SECOND
+  </div>
+
+  <div class="eq">
+    A8 HOUR = 64 × 64
+    = 4096
+    = 2¹² A8 SECOND
+  </div>
+
+  <h3>Length</h3>
+
+  <div class="eq">
+    A8 NAV = A8/41
+  </div>
+
+  <div class="eq">
+    A8/n = A8/41 × 2^(n − 41)
+  </div>
+
+  <h3>Earth orbital speed</h3>
+
+  <div class="eq">
+    A8/45 = 16 A8 NAV
+  </div>
+
+  <div class="eq">
+    A8/57 = 65,536 A8 NAV
+  </div>
+
+  <div class="eq">
+    Earth mean speed
+    ≈ 1.0041 A8/45 per A8 SECOND
+    ≈ 1.0041 A8/57 per A8 HOUR
+  </div>
+
+  <h3>Navigation</h3>
+
+  <div class="eq">
+    POSITION
+    → DIRECTION
+    → DISTANCE
+    → SPEED
+    → ELAPSED TIME
+    → ARRIVAL
+  </div>
+
+  <h3>Speed-ladder rule</h3>
+
+  <div class="eq">
+    PUSH THE RUNG · NOT THE NUMBER
+  </div>
+
+  <h3>A8/PERFECT rule</h3>
+
+  <div class="eq">
+    REMOVE REDUNDANCY UNTIL THE NEXT REMOVAL WOULD BREAK
+    CALCULATION OR REVERSIBILITY
+  </div>
+
+  <div class="closing">
+    <strong>ONE WORLD · ONE ARCHITECTURE</strong>
+    <span>PUSH THE RUNG · NOT THE NUMBER</span>
+  </div>
+</section>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <strong>AUSPICIOUS 8</strong>
+    <p>
+      Technical whitepaper · current public architecture ·
+      exact native relationships first · legacy comparisons second.
+    </p>
+
+    <p>
+      Continue with
+      <a href="https://about.cosigo.io/">About</a>,
+      <a href="https://research.cosigo.io/">Research</a>,
+      <a href="https://data.cosigo.io/">Data</a>,
+      <a href="https://clock.cosigo.io/">Clock</a>,
+      <a href="https://sea.cosigo.io/">Navigation</a> and
+      <a href="https://stars.cosigo.io/">Stars</a>.
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>
