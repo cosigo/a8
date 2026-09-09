@@ -6084,7 +6084,222 @@ document.querySelectorAll('.a8-question-dialog').forEach(dialog => {
 
       </div>
 
-      <div class="a8-511-heading">
+
+      <!-- A8 CHALLENGE ROUND THREE EARTH SPEED v1 -->
+
+      <style id="a8-challenge-round3-style">
+        .a8-round3{
+          margin:28px 0;
+          padding:20px;
+          border:1px solid #3b4e5c;
+          border-radius:16px;
+          background:rgba(0,0,0,.16);
+        }
+
+        .a8-round3 h3{
+          margin:0 0 10px;
+        }
+
+        .a8-round3-question{
+          margin:15px 0;
+          font-weight:800;
+        }
+
+        .a8-round3-input-row{
+          display:flex;
+          flex-wrap:wrap;
+          gap:10px;
+          align-items:center;
+          margin:14px 0;
+        }
+
+        .a8-round3-input-row input{
+          width:110px;
+          padding:10px 12px;
+          font:inherit;
+        }
+
+        .a8-round3-input-row button{
+          padding:10px 14px;
+          cursor:pointer;
+        }
+
+        .a8-round3-feedback{
+          min-height:1.5em;
+          font-weight:800;
+        }
+
+        .a8-round3-proof{
+          margin-top:18px;
+          display:grid;
+          gap:10px;
+        }
+
+        .a8-round3-proof-card{
+          padding:14px;
+          border:1px solid #344653;
+          border-radius:12px;
+        }
+
+        .a8-round3-proof-card small{
+          display:block;
+          margin-bottom:6px;
+          font-weight:900;
+          letter-spacing:.07em;
+        }
+
+        .a8-round3-proof-card strong{
+          display:block;
+          line-height:1.55;
+        }
+
+        .a8-round3-pass{
+          margin-top:16px;
+          text-align:center;
+          font-weight:900;
+        }
+      </style>
+
+      <section class="a8-round3">
+
+        <div class="a8-511-heading">
+          ROUND THREE · HOW FAST?
+        </div>
+
+        <p>
+          Spaceship Earth travels on average approximately
+          <strong>65,806.5639 A8 NAV</strong>
+          during one A8 HOUR.
+        </p>
+
+        <p>
+          The speed ladder tells us:
+        </p>
+
+        <p>
+          <strong>A8/57 = 65,536 A8 NAV</strong>
+        </p>
+
+        <div class="a8-round3-question">
+          CLOSEST WHOLE A8/57 SPEED NUMBER?
+        </div>
+
+        <div class="a8-round3-input-row">
+          <input
+            id="a8-round3-answer"
+            type="text"
+            inputmode="numeric"
+            autocomplete="off"
+            aria-label="Round Three closest whole number">
+
+          <button
+            id="a8-round3-check"
+            type="button">
+            CHECK
+          </button>
+        </div>
+
+        <div
+          id="a8-round3-feedback"
+          class="a8-round3-feedback"
+          aria-live="polite">
+        </div>
+
+        <div
+          id="a8-round3-reveal"
+          class="a8-round3-proof"
+          hidden>
+
+          <div class="a8-round3-proof-card">
+            <small>NAV VIEW</small>
+            <strong>
+              ≈ 65,806.5639 A8 NAV per A8 HOUR
+            </strong>
+          </div>
+
+          <div class="a8-round3-proof-card">
+            <small>RUNG IDENTITY</small>
+            <strong>
+              A8/57 = 65,536 A8 NAV
+            </strong>
+          </div>
+
+          <div class="a8-round3-proof-card">
+            <small>NATIVE CROSS-CHECK</small>
+            <strong>
+              65,806.5639 ÷ 65,536<br>
+              ≈ 1.0041 A8/57 per A8 HOUR
+            </strong>
+          </div>
+
+          <div class="a8-round3-proof-card">
+            <small>LEGACY COMPARISON</small>
+            <strong>
+              ≈ 80,413.5 legacy km traveled in one A8 HOUR<br>
+              ÷ ≈ 80,082.8796 legacy km per A8/57<br>
+              ≈ 1.0041
+            </strong>
+          </div>
+
+          <div class="a8-round3-pass">
+            PASS · SAME ANSWER FROM BOTH DIRECTIONS
+          </div>
+
+          <p>
+            Spaceship Earth occupies the
+            <strong>A8/57 orbital-speed neighborhood.</strong>
+            Its actual orbital speed varies through the year.
+          </p>
+
+        </div>
+
+      </section>
+
+      <script>
+      (() => {
+        const input =
+          document.getElementById('a8-round3-answer');
+
+        const check =
+          document.getElementById('a8-round3-check');
+
+        const feedback =
+          document.getElementById('a8-round3-feedback');
+
+        const reveal =
+          document.getElementById('a8-round3-reveal');
+
+        if (!input || !check || !feedback || !reveal) return;
+
+        const test = () => {
+          if (input.value.trim() === '1') {
+            feedback.textContent =
+              'PASS · closest whole number is 1';
+
+            reveal.hidden = false;
+            return;
+          }
+
+          reveal.hidden = true;
+
+          feedback.textContent =
+            'TRY AGAIN · compare 65,806.5639 with 65,536.';
+        };
+
+        check.addEventListener('click', test);
+
+        input.addEventListener('keydown', e => {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            test();
+          }
+        });
+      })();
+      </script>
+
+      <!-- /A8 CHALLENGE ROUND THREE EARTH SPEED v1 -->
+
+<div class="a8-511-heading">
         YOUR COMPASS · TERMINAL STATE
       </div>
 
