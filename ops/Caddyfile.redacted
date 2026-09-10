@@ -927,7 +927,7 @@ clock.cosigo.io {
 }
 
 calendar.cosigo.io {
-	root * /srv/apps/a8_time_lab_v5_4_20_postseal_hw/public
+	root * /srv/sites/calendar.cosigo.io/public
 
 	@calendar_year_angle_get {
 		method GET
@@ -1004,6 +1004,12 @@ calendar.cosigo.io {
 		}
 
 		# Everything not yet migrated returns to the existing lab.
+		# CALENDAR ARTWORK VIEWER · SITE-OWNED
+		handle /image-viewer.html {
+			root * /srv/sites/calendar.cosigo.io/public
+			file_server
+		}
+
 		handle {
 			respond 404
 		}
