@@ -1859,6 +1859,12 @@ quartz.cosigo.io {
 			file_server
 		}
 
+		# QUARTZ FARM BACKGROUND · SITE-OWNED
+		handle /assets/a8_quartz_farm_bg.png {
+			root * /srv/sites/quartz.cosigo.io/public
+			file_server
+		}
+
 		handle {
 			respond 404
 		}
