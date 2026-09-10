@@ -20,6 +20,7 @@
 <meta name="twitter:image" content="https://a8.cosigo.io/assets/cosigo_master_512.png">
 <meta name="twitter:image:alt" content="Whitepaper page for Auspicious 8">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Auspicious 8 Whitepaper | A8 Time & Natural Measurement","url":"https://a8.cosigo.io/whitepaper.html","description":"Technical whitepaper for Auspicious 8: A8 Time, the 32 hour clock, Jupiter moon recurrence, native angle, Earth-derived binary length, A8 NAV, calendar and audio.","inLanguage":"en","isPartOf":{"@type":"WebSite","name":"Auspicious 8","alternateName":"A8","url":"https://a8.cosigo.io/"},"publisher":{"@type":"Organization","name":"COSIGO Labs","url":"https://cosigo.io/"},"about":[{"@type":"Thing","name":"Auspicious 8"},{"@type":"Thing","name":"A8 Time"},{"@type":"Thing","name":"32 Hour Clock"},{"@type":"Thing","name":"Jupiter moon recurrence"},{"@type":"Thing","name":"512-state angle ruler"},{"@type":"Thing","name":"Earth-derived binary length"},{"@type":"Thing","name":"A8 NAV"},{"@type":"Thing","name":"binary and octal measurement"}]}</script>
+  <link rel="stylesheet" href="/site-shell.css">
 <style>
 :root{
   color-scheme:dark;
@@ -288,23 +289,325 @@ footer{
   }
 }
 </style>
+<style id="a8whitepaper-shell-integration">
+
+  .a8paperCompactNav{
+    position:relative;
+    z-index:1000;
+
+    width:100%;
+    min-height:72px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:18px;
+
+    padding:10px 18px;
+
+    font-family:
+      Inter,
+      ui-sans-serif,
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      sans-serif;
+  }
+
+  .a8paperBrand{
+    min-width:0;
+
+    display:flex;
+    align-items:center;
+    gap:11px;
+
+    color:inherit;
+    text-decoration:none;
+  }
+
+  .a8paperBrand img{
+    width:48px;
+    height:48px;
+    flex:0 0 48px;
+    object-fit:contain;
+  }
+
+  .a8paperBrandWords{
+    min-width:0;
+    display:flex;
+    flex-direction:column;
+    line-height:1.05;
+  }
+
+  .a8paperBrandWords strong{
+    font-size:.92rem;
+    letter-spacing:.12em;
+    white-space:nowrap;
+  }
+
+  .a8paperBrandWords small{
+    margin-top:3px;
+
+    font-size:.58rem;
+    font-weight:800;
+    letter-spacing:.10em;
+
+    color:#a6adb5;
+    white-space:nowrap;
+  }
+
+
+  /* MENU remains one compact control until opened. */
+
+  .a8paperMenu{
+    position:relative;
+    flex:0 0 auto;
+    margin-left:auto;
+  }
+
+  .a8paperMenu > summary{
+    list-style:none;
+    cursor:pointer;
+    user-select:none;
+
+    padding:.65rem .85rem;
+
+    border:1px solid #343a40;
+    border-radius:8px;
+
+    background:#101317;
+    color:#e9ebed;
+
+    font-size:.72rem;
+    font-weight:900;
+    letter-spacing:.12em;
+  }
+
+  .a8paperMenu > summary::-webkit-details-marker{
+    display:none;
+  }
+
+  .a8paperMenu > summary::after{
+    content:" ▾";
+    color:#d6a13a;
+  }
+
+  .a8paperMenu[open] > summary::after{
+    content:" ▴";
+  }
+
+
+  /* Dropdown hangs from upper-right instead of
+     expanding the page horizontally. */
+
+  .a8paperMenuPanel{
+    position:absolute;
+    top:calc(100% + 8px);
+    right:0;
+
+    width:270px;
+    max-width:calc(100vw - 24px);
+    max-height:72vh;
+
+    overflow-y:auto;
+    overscroll-behavior:contain;
+
+    display:grid;
+    gap:2px;
+
+    padding:8px;
+
+    border:1px solid #343a40;
+    border-radius:10px;
+
+    background:#090b0d;
+    box-shadow:0 16px 40px rgba(0,0,0,.45);
+  }
+
+  .a8paperMenuPanel a{
+    display:block;
+
+    padding:9px 10px;
+
+    border-radius:6px;
+
+    color:#e9ebed;
+    text-decoration:none;
+
+    font-size:.69rem;
+    font-weight:800;
+    letter-spacing:.07em;
+  }
+
+  .a8paperMenuPanel a:hover,
+  .a8paperMenuPanel a:focus{
+    background:#151a1f;
+    color:#f0d18d;
+    outline:none;
+  }
+
+  .a8paperMenuRule{
+    height:1px;
+    margin:5px 2px;
+    background:#343a40;
+  }
+
+
+  /* Keep the paper itself a paper. */
+
+  main.wrap{
+    padding-top:40px;
+  }
+
+  body > .cosigo-site-footer,
+  body > footer{
+    font-family:
+      Inter,
+      ui-sans-serif,
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      sans-serif;
+  }
+
+
+  /* Phone: still icon/identity left, MENU right.
+     No navigation links spilled across screen. */
+
+  @media (max-width:640px){
+
+    .a8paperCompactNav{
+      min-height:62px;
+      gap:8px;
+      padding:8px 10px;
+    }
+
+    .a8paperBrand{
+      gap:7px;
+    }
+
+    .a8paperBrand img{
+      width:38px;
+      height:38px;
+      flex-basis:38px;
+    }
+
+    .a8paperBrandWords strong{
+      font-size:.72rem;
+      letter-spacing:.08em;
+    }
+
+    .a8paperBrandWords small{
+      font-size:.46rem;
+      letter-spacing:.055em;
+    }
+
+    .a8paperMenu > summary{
+      padding:.58rem .65rem;
+      font-size:.62rem;
+    }
+
+    .a8paperMenuPanel{
+      position:fixed;
+      top:66px;
+      right:8px;
+
+      width:min(290px,calc(100vw - 16px));
+      max-height:calc(100vh - 78px);
+    }
+
+    main.wrap{
+      width:min(880px,calc(100% - 24px));
+      padding-top:28px;
+    }
+  }
+
+
+  @media (max-width:390px){
+
+    .a8paperBrandWords small:last-child{
+      white-space:normal;
+      max-width:135px;
+    }
+
+  }
+
+
+  @media print{
+
+    .a8paperCompactNav,
+    body > .cosigo-site-footer,
+    body > footer{
+      display:none !important;
+    }
+
+  }
+
+</style>
 </head>
 
 <body>
+<nav id="a8-topside-coherence-02"
+     class="a8paperCompactNav"
+     aria-label="COSIGO Auspicious 8 navigation">
 
-<header class="topbar">
-  <div class="wrap">
-    <div class="brand">AUSPICIOUS 8</div>
+  <a class="a8paperBrand"
+     href="https://cosigo.io/"
+     aria-label="COSIGO home">
 
-    <nav class="nav" aria-label="Technical whitepaper navigation">
+    <img
+      src="https://a8.cosigo.io/assets/cosigo_master_512.png"
+      alt="COSIGO">
+
+    <span class="a8paperBrandWords">
+      <strong>COSIGO</strong>
+      <small>AUSPICIOUS 8</small>
+      <small>FUNDAMENTAL LABORATORY</small>
+    </span>
+  </a>
+
+  <details class="a8paperMenu">
+    <summary>MENU</summary>
+
+    <div class="a8paperMenuPanel">
+
+      <a href="https://lab.cosigo.io/">LAB HOME</a>
+
+      <a href="https://clock.cosigo.io/">CLOCK</a>
+      <a href="https://calendar.cosigo.io/">CALENDAR</a>
+      <a href="https://moons.cosigo.io/">MOONS</a>
+
+      <a href="https://mintaka.cosigo.io/">MINTAKA</a>
+      <a href="https://sol.cosigo.io/">SOL</a>
+      <a href="https://ship.cosigo.io/">EARTHSHIP</a>
+
+      <a href="https://map.cosigo.io/">MAP · CLOCK · COMPASS</a>
+      <a href="https://sea.cosigo.io/">NAVIGATION</a>
+      <a href="https://stars.cosigo.io/">CELESTIAL</a>
+
+      <a href="https://audio.cosigo.io/">AUDIO</a>
+      <a href="https://quartz.cosigo.io/">QUARTZ</a>
+
+      <div class="a8paperMenuRule"></div>
+
       <a href="https://a8.cosigo.io/">A8 PUBLIC</a>
       <a href="https://about.cosigo.io/">ABOUT</a>
-      <a href="https://research.cosigo.io/">RESEARCH</a>
-      <a href="https://data.cosigo.io/">DATA</a>
-      <a href="https://cosigo.io/">COSIGO</a>
-    </nav>
-  </div>
-</header>
+      <a href="https://contestant.cosigo.io/">FUN</a>
+
+      <div class="a8paperMenuRule"></div>
+
+      <a href="https://cosigo.io/">COSIGO HOME</a>
+      <a href="https://github.com/cosigo/a8">GITHUB</a>
+
+    </div>
+  </details>
+
+</nav>
+
+
+
 
 <main>
 
@@ -1353,5 +1656,22 @@ footer{
   </div>
 </footer>
 
+
+<footer class="cosigo-site-footer">
+  <strong>COSIGO Labs · Auspicious 8 experimental laboratory</strong>
+  <p class="cosigo-disclaimer">Research / engineering notice: A8 pages may contain provisional models, simulations, comparison values, hypotheses and unreplicated experiment designs. Unless a page explicitly states otherwise, material shown here is not a certified metrology standard, accredited measurement result, or final Foundation definition. Legacy / SI values are comparison coordinates where identified, not native A8 authority.</p>
+  <p class="cosigo-disclaimer">COSIGO is primarily an educational and experimental project. Nothing in this laboratory is an investment offering, promise of financial return, or financial, investment, legal or tax advice. See the project-status notice for the current public description.</p>
+  <div class="cosigo-footer-links">
+    <a href="https://cosigo.io/">COSIGO Home</a>
+    <a href="https://a8.cosigo.io/">A8 Public Instrument</a>
+    <a href="https://lab.cosigo.io/">A8 Engineering Lab</a>
+    <a href="https://contact.cosigo.io/">Contact</a>
+    <a href="https://docs.cosigo.io/">COSIGO Docs / WP</a>
+    <a href="https://github.com/cosigo">COSIGO GitHub</a>
+    <a href="https://github.com/cosigo/cosigo.io">Main-site source</a>
+    <a href="https://cosigo.io/project-status.html">Educational Purpose / Project Status</a>
+  </div>
+  <p>© 2026 COSIGO. COSIGO™ rights and trademark notices remain governed by the official COSIGO site.</p>
+</footer>
 </body>
 </html>
