@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<style>
+:root{
+  --bg:#071013;
+  --panel:#0c181c;
+  --text:#e8f1f2;
+  --muted:#91a5aa;
+  --cyan:#bfe7ea;
+  --gold:#e8c96f;
+  --line:rgba(191,231,234,.18);
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  background:
+    radial-gradient(circle at 50% 0%,
+      rgba(80,150,160,.08),transparent 32rem),
+    var(--bg);
+  color:var(--text);
+  font-family:
+    system-ui,-apple-system,BlinkMacSystemFont,
+    "Segoe UI",sans-serif;
+  line-height:1.55;
+}
+
+main{
+  width:min(900px,calc(100% - 32px));
+  margin:0 auto;
+  padding:54px 0 80px;
+}
+
+.eyebrow{
+  color:var(--gold);
+  font-size:.76rem;
+  font-weight:900;
+  letter-spacing:.12em;
+}
+
+h1{
+  margin:.25rem 0 .5rem;
+  font-size:clamp(2.5rem,8vw,5rem);
+  line-height:.95;
+}
+
+.lead{
+  max-width:700px;
+  color:var(--muted);
+  font-size:1.08rem;
+}
+
+.card{
+  display:block;
+  margin-top:30px;
+  padding:24px;
+  border:1px solid var(--line);
+  border-radius:14px;
+  background:rgba(12,24,28,.9);
+  text-decoration:none;
+  color:inherit;
+}
+
+.card:hover{
+  border-color:rgba(232,201,111,.6);
+}
+
+.card small{
+  color:var(--gold);
+  font-weight:800;
+  letter-spacing:.08em;
+}
+
+.card h2{
+  margin:.35rem 0 .5rem;
+  color:var(--cyan);
+}
+
+.math{
+  margin-top:14px;
+  font-family:
+    ui-monospace,SFMono-Regular,Consolas,monospace;
+  color:var(--gold);
+}
+
+footer{
+  margin-top:42px;
+  padding-top:20px;
+  border-top:1px solid var(--line);
+  color:var(--muted);
+}
+
+a{color:var(--cyan)}
+
+
+/* ==================================================
+   A8-CALCULATE-TOPBAR-v1
+   COSIGO identity left · canonical A8 menu right
+   ================================================== */
+
+#a8-calculate-topbar{
+  display:block;
+  margin:0;
+  padding:10px 14px;
+
+  border-bottom:
+    1px solid
+    rgba(255,255,255,.14);
+
+  background:
+    rgba(7,11,16,.96);
+
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Consolas,
+    "Liberation Mono",
+    monospace;
+}
+
+#a8-calculate-topbar .a8-topline{
+  max-width:1440px;
+  margin:0 auto;
+
+  display:flex;
+  gap:12px;
+  align-items:center;
+  flex-wrap:nowrap;
+}
+
+#a8-calculate-topbar .cosigo-global-brand{
+  display:flex;
+  gap:8px;
+  align-items:center;
+
+  color:#eef5f8;
+  text-decoration:none;
+}
+
+#a8-calculate-topbar .cosigo-global-brand img{
+  width:34px;
+  height:34px;
+  object-fit:contain;
+}
+
+#a8-calculate-topbar .cosigo-global-brand span{
+  font-weight:900;
+  letter-spacing:.06em;
+}
+
+#a8-calculate-topbar .cosigo-global-brand small{
+  display:block;
+
+  color:#9eafbc;
+  font-size:.62rem;
+  font-weight:700;
+  letter-spacing:.12em;
+}
+
+#a8-calculate-topbar .a8-menu{
+  position:relative;
+  margin-left:auto;
+}
+
+#a8-calculate-topbar .a8-menu summary{
+  list-style:none;
+  cursor:pointer;
+
+  padding:8px 11px;
+
+  border:
+    1px solid
+    #425467;
+
+  border-radius:8px;
+
+  background:#111820;
+  color:#e0bd72;
+
+  font-size:.76rem;
+  font-weight:900;
+  letter-spacing:.07em;
+
+  user-select:none;
+}
+
+#a8-calculate-topbar
+.a8-menu summary::-webkit-details-marker{
+  display:none;
+}
+
+#a8-calculate-topbar
+.a8-menu summary::after{
+  content:" ▾";
+  color:#92a5b8;
+}
+
+#a8-calculate-topbar
+.a8-menu[open] summary::after{
+  content:" ▴";
+}
+
+#a8-calculate-topbar .a8-menu-panel{
+  position:absolute;
+  z-index:1000;
+
+  right:0;
+  top:calc(100% + 7px);
+
+  min-width:180px;
+  padding:7px;
+
+  border:
+    1px solid
+    #425467;
+
+  border-radius:9px;
+
+  background:#0d141b;
+
+  box-shadow:
+    0 12px 28px
+    rgba(0,0,0,.38);
+}
+
+#a8-calculate-topbar .a8-menu-panel a{
+  display:block;
+
+  padding:9px 10px;
+  border-radius:6px;
+
+  color:#c8ddf5;
+  text-decoration:none;
+
+  font-size:.78rem;
+  font-weight:800;
+
+  white-space:nowrap;
+}
+
+#a8-calculate-topbar .a8-menu-panel a:hover,
+#a8-calculate-topbar .a8-menu-panel a:focus{
+  background:#182431;
+  color:#fff;
+}
+
+@media(max-width:760px){
+
+  #a8-calculate-topbar{
+    padding:8px 10px;
+  }
+
+  #a8-calculate-topbar .a8-menu-panel{
+    min-width:170px;
+  }
+}
+
+</style>
+<!-- A8 CALCULATE SEARCH IDENTITY -->
+<title>A8 Calculate | Reproducible A8 Mathematics | Auspicious 8</title>
+<meta name="description" content="Reproducible Auspicious 8 calculations and mathematical checks for A8 Time, 512-state angle, Earth-derived binary length, A8 NAV and related relationships.">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+<link rel="canonical" href="https://calculate.cosigo.io/">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="COSIGO Labs">
+<meta property="og:title" content="A8 Calculate | Reproducible A8 Mathematics">
+<meta property="og:description" content="Reproducible Auspicious 8 calculations and mathematical checks for A8 Time, 512-state angle, Earth-derived binary length, A8 NAV and related relationships.">
+<meta property="og:url" content="https://calculate.cosigo.io/">
+<meta property="og:image" content="https://a8.cosigo.io/assets/cosigo_master_512.png">
+<meta property="og:image:alt" content="A8 Calculate | Reproducible A8 Mathematics">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="A8 Calculate | Reproducible A8 Mathematics">
+<meta name="twitter:description" content="Reproducible Auspicious 8 calculations and mathematical checks for A8 Time, 512-state angle, Earth-derived binary length, A8 NAV and related relationships.">
+<meta name="twitter:image" content="https://a8.cosigo.io/assets/cosigo_master_512.png">
+<meta name="twitter:image:alt" content="A8 Calculate | Reproducible A8 Mathematics">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"A8 Calculate | Reproducible A8 Mathematics | Auspicious 8","url":"https://calculate.cosigo.io/","description":"Reproducible Auspicious 8 calculations and mathematical checks for A8 Time, 512-state angle, Earth-derived binary length, A8 NAV and related relationships.","inLanguage":"en","isPartOf":{"@type":"WebSite","name":"Auspicious 8","alternateName":"A8","url":"https://a8.cosigo.io/"},"publisher":{"@type":"Organization","name":"COSIGO Labs","url":"https://cosigo.io/"},"about":[{"@type":"Thing","name":"Auspicious 8"},{"@type":"Thing","name":"A8 Time"},{"@type":"Thing","name":"512-state angle ruler"},{"@type":"Thing","name":"Earth-derived binary length"},{"@type":"Thing","name":"A8 NAV"},{"@type":"Thing","name":"reproducible mathematics"}]}</script>
+<!-- /A8 CALCULATE SEARCH IDENTITY -->
+</head>
+
+<body>
+
+<nav
+  id="a8-calculate-topbar"
+  class="cosigo-global-nav"
+  aria-label="A8 Time Lab navigation"
+>
+
+  <div class="a8-topline">
+
+    <a
+      class="cosigo-global-brand"
+      href="https://cosigo.io/"
+      aria-label="COSIGO home"
+    >
+      <img
+        src="https://composer.cosigo.io/assets/cosigo_master_512.gif"
+        alt="COSIGO"
+      >
+
+      <span>
+        COSIGO
+        <small>LABS · AUSPICIOUS 8</small>
+      </span>
+    </a>
+
+
+    <details class="a8-menu">
+      <summary>MENU</summary>
+
+      <div class="a8-menu-panel">
+        <a href="https://lab.cosigo.io/">LAB HOME</a>
+        <a href="https://clock.cosigo.io/">CLOCK</a>
+        <a href="https://calendar.cosigo.io/">CALENDAR</a>
+        <a href="https://moons.cosigo.io/">MOONS</a>
+        <a href="https://mintaka.cosigo.io/">MINTAKA</a>
+        <a href="https://sol.cosigo.io/">SOL</a>
+        <a href="https://ship.cosigo.io/">EARTHSHIP</a>
+        <a href="https://map.cosigo.io/">MAP · CLOCK · COMPASS</a>
+        <a href="https://sea.cosigo.io/">NAVIGATION</a>
+        <a href="https://stars.cosigo.io/">CELESTIAL</a>
+        <a href="https://audio.cosigo.io/">AUDIO</a>
+        <a href="https://composer.cosigo.io/">COMPOSER</a>
+        <a href="https://quartz.cosigo.io/">QUARTZ</a>
+        <a href="https://a8.cosigo.io/">A8 PUBLIC</a>
+        <a href="https://about.cosigo.io/">ABOUT</a>
+        <a href="https://contestant.cosigo.io/">FUN</a>
+        <a href="https://cosigo.io/">COSIGO HOME</a>
+        <a href="https://github.com/cosigo/a8">GITHUB</a>
+      </div>
+
+    </details>
+
+  </div>
+
+</nav>
+
+<main>
+
+<div class="eyebrow">AUSPICIOUS 8</div>
+<h1>CALCULATE</h1>
+
+<p class="lead">
+Reproducible calculations, derivations and mathematical checks.
+Do not take the relationship on faith. Work it through.
+</p>
+
+<a class="card" href="/earth-rotation/">
+  <small>MATHEMATICAL CHECK 001</small>
+
+  <h2>Earth Rotation Closure</h2>
+
+  <p>
+    Check the native A8 relationship among angle, clock,
+    Earth-surface navigation distance, rotational speed
+    and the binary length ladder.
+  </p>
+
+  <div class="math">
+    512 angle
+    ↔ 4 A8 minutes
+    ↔ 64 A8 NAV
+    ↔ ¼ NAV / A8 SECOND
+    ↔ A8/41 → A8/39
+  </div>
+</a>
+
+<footer>
+  <a href="https://a8.cosigo.io/about.html">
+    Auspicious 8 About
+  </a>
+</footer>
+
+</main>
+</body>
+</html>

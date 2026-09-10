@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Auspicious 8 Research Note | A8 Time &amp; Natural Measurement</title>
+<meta name="description" content="Auspicious 8 public research note covering A8 Time, Jupiter moon recurrence, the 32 hour Earth-day clock, 512-state angle ruler and natural measurement architecture.">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+<link rel="canonical" href="https://a8paper.cosigo.io/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Auspicious 8">
+<meta property="og:title" content="Auspicious 8 Research Note | A8 Time">
+<meta property="og:description" content="Auspicious 8 public research note covering A8 Time, Jupiter moon recurrence, the 32 hour Earth-day clock, 512-state angle ruler and natural measurement architecture.">
+<meta property="og:url" content="https://a8paper.cosigo.io/">
+<meta property="og:image" content="https://a8.cosigo.io/assets/cosigo_master_512.png">
+<meta property="og:image:alt" content="Auspicious 8 public research note">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Auspicious 8 Research Note | A8 Time">
+<meta name="twitter:description" content="Auspicious 8 public research note covering A8 Time, Jupiter moon recurrence, the 32 hour Earth-day clock, 512-state angle ruler and natural measurement architecture.">
+<meta name="twitter:image" content="https://a8.cosigo.io/assets/cosigo_master_512.png">
+<meta name="twitter:image:alt" content="Auspicious 8 public research note">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Auspicious 8 Research Note | A8 Time & Natural Measurement","url":"https://a8paper.cosigo.io/","description":"Auspicious 8 public research note covering A8 Time, Jupiter moon recurrence, the 32 hour Earth-day clock, 512-state angle ruler and natural measurement architecture.","inLanguage":"en","isPartOf":{"@type":"WebSite","name":"Auspicious 8","alternateName":"A8","url":"https://a8.cosigo.io/"},"publisher":{"@type":"Organization","name":"COSIGO Labs","url":"https://cosigo.io/"},"about":[{"@type":"Thing","name":"Auspicious 8"},{"@type":"Thing","name":"A8 Time"},{"@type":"Thing","name":"32 Hour Clock"},{"@type":"Thing","name":"Jupiter"},{"@type":"Thing","name":"Io"},{"@type":"Thing","name":"Europa"},{"@type":"Thing","name":"Ganymede"},{"@type":"Thing","name":"Callisto"},{"@type":"Thing","name":"Jupiter moon recurrence"},{"@type":"Thing","name":"512-state angle ruler"},{"@type":"Thing","name":"binary and octal measurement"},{"@type":"Thing","name":"natural measurement"}]}</script>
+<link rel="icon" href="assets/cosigo_master_512.png">
+    <link rel="stylesheet" href="/site-shell.css">
+<style>
+    :root{--bg:#090b0d;--ink:#e9ebed;--muted:#a6adb5;--line:#343a40;--gold:#d6a13a;--orange:#dc5a0a}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Georgia,"Times New Roman",serif;line-height:1.7}.wrap{width:min(880px,calc(100% - 32px));margin:auto;padding:32px 0 70px}.top{display:flex;align-items:center;justify-content:space-between;gap:16px;border-bottom:1px solid var(--line);padding-bottom:18px}.brand{display:flex;align-items:center;gap:14px}.brand img{width:58px;height:58px;border-radius:50%}.eyebrow{font:800 .68rem system-ui;letter-spacing:.2em;color:var(--gold)}h1{font-size:clamp(2rem,6vw,4rem);line-height:1;margin:.5rem 0}.dek{font-size:1.15rem;color:#c7ccd1;max-width:65ch}.meta{font:600 .72rem ui-monospace,monospace;color:var(--muted);margin:1rem 0 2rem}h2{font:800 1rem system-ui;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin:2.5rem 0 .65rem}p{color:#cbd0d5}.callout{border-left:3px solid var(--orange);padding:12px 16px;background:#101317;color:#d7dade;margin:1.5rem 0}.formula{font:600 .9rem ui-monospace,monospace;background:#101317;border:1px solid var(--line);padding:12px 14px;border-radius:8px;color:#f0d18d}.back{font:700 .75rem system-ui;text-decoration:none;color:var(--ink);border:1px solid var(--line);border-radius:7px;padding:.65rem .8rem}.foot{border-top:1px solid var(--line);margin-top:3rem;padding-top:1rem;font:500 .72rem system-ui;color:var(--muted)}@media print{body{background:white;color:black}.wrap{width:100%;padding:0}.top .back{display:none}p,.dek,.meta,.foot{color:#333}.callout,.formula{background:#f4f4f4;color:#111}.eyebrow,h2{color:#7b5310}}
+  </style>
+
+<style id="a8paper-shell-integration">
+
+  .a8paperCompactNav{
+    position:relative;
+    z-index:1000;
+
+    width:100%;
+    min-height:72px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:18px;
+
+    padding:10px 18px;
+
+    font-family:
+      Inter,
+      ui-sans-serif,
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      sans-serif;
+  }
+
+  .a8paperBrand{
+    min-width:0;
+
+    display:flex;
+    align-items:center;
+    gap:11px;
+
+    color:inherit;
+    text-decoration:none;
+  }
+
+  .a8paperBrand img{
+    width:48px;
+    height:48px;
+    flex:0 0 48px;
+    object-fit:contain;
+  }
+
+  .a8paperBrandWords{
+    min-width:0;
+    display:flex;
+    flex-direction:column;
+    line-height:1.05;
+  }
+
+  .a8paperBrandWords strong{
+    font-size:.92rem;
+    letter-spacing:.12em;
+    white-space:nowrap;
+  }
+
+  .a8paperBrandWords small{
+    margin-top:3px;
+
+    font-size:.58rem;
+    font-weight:800;
+    letter-spacing:.10em;
+
+    color:#a6adb5;
+    white-space:nowrap;
+  }
+
+
+  /* MENU remains one compact control until opened. */
+
+  .a8paperMenu{
+    position:relative;
+    flex:0 0 auto;
+    margin-left:auto;
+  }
+
+  .a8paperMenu > summary{
+    list-style:none;
+    cursor:pointer;
+    user-select:none;
+
+    padding:.65rem .85rem;
+
+    border:1px solid #343a40;
+    border-radius:8px;
+
+    background:#101317;
+    color:#e9ebed;
+
+    font-size:.72rem;
+    font-weight:900;
+    letter-spacing:.12em;
+  }
+
+  .a8paperMenu > summary::-webkit-details-marker{
+    display:none;
+  }
+
+  .a8paperMenu > summary::after{
+    content:" ▾";
+    color:#d6a13a;
+  }
+
+  .a8paperMenu[open] > summary::after{
+    content:" ▴";
+  }
+
+
+  /* Dropdown hangs from upper-right instead of
+     expanding the page horizontally. */
+
+  .a8paperMenuPanel{
+    position:absolute;
+    top:calc(100% + 8px);
+    right:0;
+
+    width:270px;
+    max-width:calc(100vw - 24px);
+    max-height:72vh;
+
+    overflow-y:auto;
+    overscroll-behavior:contain;
+
+    display:grid;
+    gap:2px;
+
+    padding:8px;
+
+    border:1px solid #343a40;
+    border-radius:10px;
+
+    background:#090b0d;
+    box-shadow:0 16px 40px rgba(0,0,0,.45);
+  }
+
+  .a8paperMenuPanel a{
+    display:block;
+
+    padding:9px 10px;
+
+    border-radius:6px;
+
+    color:#e9ebed;
+    text-decoration:none;
+
+    font-size:.69rem;
+    font-weight:800;
+    letter-spacing:.07em;
+  }
+
+  .a8paperMenuPanel a:hover,
+  .a8paperMenuPanel a:focus{
+    background:#151a1f;
+    color:#f0d18d;
+    outline:none;
+  }
+
+  .a8paperMenuRule{
+    height:1px;
+    margin:5px 2px;
+    background:#343a40;
+  }
+
+
+  /* Keep the paper itself a paper. */
+
+  main.wrap{
+    padding-top:40px;
+  }
+
+  body > .cosigo-site-footer,
+  body > footer{
+    font-family:
+      Inter,
+      ui-sans-serif,
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      sans-serif;
+  }
+
+
+  /* Phone: still icon/identity left, MENU right.
+     No navigation links spilled across screen. */
+
+  @media (max-width:640px){
+
+    .a8paperCompactNav{
+      min-height:62px;
+      gap:8px;
+      padding:8px 10px;
+    }
+
+    .a8paperBrand{
+      gap:7px;
+    }
+
+    .a8paperBrand img{
+      width:38px;
+      height:38px;
+      flex-basis:38px;
+    }
+
+    .a8paperBrandWords strong{
+      font-size:.72rem;
+      letter-spacing:.08em;
+    }
+
+    .a8paperBrandWords small{
+      font-size:.46rem;
+      letter-spacing:.055em;
+    }
+
+    .a8paperMenu > summary{
+      padding:.58rem .65rem;
+      font-size:.62rem;
+    }
+
+    .a8paperMenuPanel{
+      position:fixed;
+      top:66px;
+      right:8px;
+
+      width:min(290px,calc(100vw - 16px));
+      max-height:calc(100vh - 78px);
+    }
+
+    main.wrap{
+      width:min(880px,calc(100% - 24px));
+      padding-top:28px;
+    }
+  }
+
+
+  @media (max-width:390px){
+
+    .a8paperBrandWords small:last-child{
+      white-space:normal;
+      max-width:135px;
+    }
+
+  }
+
+
+  @media print{
+
+    .a8paperCompactNav,
+    body > .cosigo-site-footer,
+    body > footer{
+      display:none !important;
+    }
+
+  }
+
+</style>
+
+</head>
+<body>
+<nav id="a8-topside-coherence-02"
+     class="a8paperCompactNav"
+     aria-label="COSIGO Auspicious 8 navigation">
+
+  <a class="a8paperBrand"
+     href="https://cosigo.io/"
+     aria-label="COSIGO home">
+
+    <img
+      src="https://a8.cosigo.io/assets/cosigo_master_512.png"
+      alt="COSIGO">
+
+    <span class="a8paperBrandWords">
+      <strong>COSIGO</strong>
+      <small>AUSPICIOUS 8</small>
+      <small>FUNDAMENTAL LABORATORY</small>
+    </span>
+  </a>
+
+  <details class="a8paperMenu">
+    <summary>MENU</summary>
+
+    <div class="a8paperMenuPanel">
+
+      <a href="https://lab.cosigo.io/">LAB HOME</a>
+
+      <a href="https://clock.cosigo.io/">CLOCK</a>
+      <a href="https://calendar.cosigo.io/">CALENDAR</a>
+      <a href="https://moons.cosigo.io/">MOONS</a>
+
+      <a href="https://mintaka.cosigo.io/">MINTAKA</a>
+      <a href="https://sol.cosigo.io/">SOL</a>
+      <a href="https://ship.cosigo.io/">EARTHSHIP</a>
+
+      <a href="https://map.cosigo.io/">MAP · CLOCK · COMPASS</a>
+      <a href="https://sea.cosigo.io/">NAVIGATION</a>
+      <a href="https://stars.cosigo.io/">CELESTIAL</a>
+
+      <a href="https://audio.cosigo.io/">AUDIO</a>
+      <a href="https://quartz.cosigo.io/">QUARTZ</a>
+
+      <div class="a8paperMenuRule"></div>
+
+      <a href="https://a8.cosigo.io/">A8 PUBLIC</a>
+      <a href="https://about.cosigo.io/">ABOUT</a>
+      <a href="https://contestant.cosigo.io/">FUN</a>
+
+      <div class="a8paperMenuRule"></div>
+
+      <a href="https://cosigo.io/">COSIGO HOME</a>
+      <a href="https://github.com/cosigo/a8">GITHUB</a>
+
+    </div>
+  </details>
+
+</nav>
+<main class="wrap">
+
+  <h1>Auspicious 8</h1>
+  <p class="dek">An experimental measurement architecture built from naturally recoverable phenomena outward, with binary/eightfold representation designed for the machines that must ultimately count, store and transmit the measurements.</p>
+  <div class="meta">Public Research Note · Version 1.3 · 2026 · COSIGO Labs</div>
+
+  <h2>1 · The question</h2>
+  <p>Historical measurement systems are extraordinarily useful, but many of their rulers were optimized for administrative practice, hand calculation, inherited geometry and the instruments of earlier eras. A8 asks a narrower engineering question: if a system were being designed today, could natural recurrence and binary machinery be connected more directly?</p>
+  <div class="callout"><strong>Governing distinction:</strong> the natural phenomenon is not the register, and the register is not Nature. A register is a finite engineered ruler placed on a physical phenomenon.</div>
+
+  <h2>2 · Physical time and independent recovery</h2>
+  <p>The present A8 time research uses the Jovian moons Io, Europa and Ganymede as three parallel observational reference channels. Each channel is intended to be independently recoverable from repeated observations against one arbitrary monotonic local pulse counter. Their 1:2:4 structure permits a common normalized comparison while preserving disagreement as evidence rather than averaging it away. Callisto is retained as a slower witness and research channel.</p>
+  <p>The research path deliberately separates the defining physical observation from conventional timestamps. Real-observation replay work therefore reduces telescope observations to a signed Jupiter-relative displacement plus a raw pulse count.</p>
+  <div class="formula">defining observation → rawPulse + moon + signed Jupiter-relative displacement x</div>
+
+  <h2>3 · The Earth-day clock</h2>
+  <p>For the human daily clock, one Earth day is represented as one A8 day divided into 32 A8 hours, each A8 hour into 64 A8 minutes, and each A8 minute into 64 A8 seconds. This produces exactly 131,072 states, or 2¹⁷ states, across the day.</p>
+  <div class="formula">decimal comfort: 32 × 64 × 64 = 131,072 = 2¹⁷<br>native octal: 40₈ × 100₈ × 100₈ = 400000₈ states</div>
+  <p>The native engineering form is a seventeen-bit day-phase register. Octal provides a compact human-readable representation because each octal digit corresponds exactly to three binary bits. Decimal may remain as a comfort display during adoption without becoming the native definition. Bare legacy labels are avoided: these are A8 HOUR, A8 MINUTE and A8 SECOND subdivisions, not conventional hour/minute/second units.</p>
+
+  <h2>4 · Angle</h2>
+  <p>A8 represents a full turn with 512 states, exactly 2⁹. This does not alter circle geometry, π or trigonometry. It changes only the ruler placed around the circle.</p>
+  <div class="formula">full turn = 512 states = 1000₈ rollover → 000₈</div>
+  <p>Quarter, half and eighth turns fall on exact binary boundaries. The three-octal-digit range 000₈–777₈ maps directly to the nine-bit range 000000000₂–111111111₂.</p>
+
+  <h2>5 · Why this public page is simpler</h2>
+  <p>The public instrument intentionally hides recovery epochs, calibration controls, replay modes, diagnostic tolerances and fault injection used by the engineering laboratory. Its clock samples the visitor’s local wall clock once when the page loads or when the visitor explicitly resynchronizes it, then free-runs from the browser’s monotonic timer. That local wall-clock sample is a presentation alignment only; it is not claimed as the physical definition of A8 time.</p>
+  <p>The Jovian display on the public page is likewise a visualization of the architecture, not a live telescope feed or recovery authority. Its motion is deliberately accelerated and the page displays the selected plant-step rate plus an approximate ×N natural Ganymede-rate reference so the animation cannot be mistaken for natural orbital speed.</p>
+
+  <h2>6 · Work demonstrated so far</h2>
+  <p>Engineering work has covered arbitrary-oscillator recovery, parallel Io/Europa/Ganymede channels, holdover behavior, equal-duration 8:4:2 qualification, real-observation replay contracts, relative-pixel telescope reduction, simulated CCD/counter instruments, noise, periodic missing observations and irregular observatory gaps. Some tests intentionally end in rejection or holdover; those outcomes are evidence about observability rather than failures to be hidden.</p>
+
+  <h2>7 · Future progression</h2>
+  <p>Possible future work includes real telescope/counter data, distributed observing sites, longer-baseline qualification, the relationship between terrestrial observing windows and Jovian recurrence, calendar design, a native A8 calculator and exploration of other physical measurement domains. These are research directions, not claims that every domain will reduce neatly to the same structure.</p>
+
+  <h2>8 · Publication and research notice</h2>
+  <p>Auspicious 8 is presented as experimental research. Natural phenomena, mathematical facts and general scientific principles are not claimed as proprietary. Original source code, written material, diagrams, graphics and presentation published by COSIGO Labs remain protected works of their respective authors. Please contact the authors regarding republication, adaptation, collaboration or licensing of those materials.</p>
+  <p>This publication is not a patent claim, scientific certification or assertion that natural phenomena themselves belong to COSIGO Labs. It is a dated public presentation of an ongoing research architecture and its authored implementation.</p>
+
+  <div class="foot">© 2026 COSIGO Labs. All rights reserved. COSIGO™ · CIGO™ · Auspicious 8™. COSIGO™ is presented on the official COSIGO site as a claimed trademark with a U.S. trademark application pending. Contact: https://contact.cosigo.io/</div>
+</main>
+<footer class="cosigo-site-footer">
+  <strong>COSIGO Labs · Auspicious 8 experimental laboratory</strong>
+  <p class="cosigo-disclaimer">Research / engineering notice: A8 pages may contain provisional models, simulations, comparison values, hypotheses and unreplicated experiment designs. Unless a page explicitly states otherwise, material shown here is not a certified metrology standard, accredited measurement result, or final Foundation definition. Legacy / SI values are comparison coordinates where identified, not native A8 authority.</p>
+  <p class="cosigo-disclaimer">COSIGO is primarily an educational and experimental project. Nothing in this laboratory is an investment offering, promise of financial return, or financial, investment, legal or tax advice. See the project-status notice for the current public description.</p>
+  <div class="cosigo-footer-links">
+    <a href="https://cosigo.io/">COSIGO Home</a>
+    <a href="https://a8.cosigo.io/">A8 Public Instrument</a>
+    <a href="https://lab.cosigo.io/">A8 Engineering Lab</a>
+    <a href="https://contact.cosigo.io/">Contact</a>
+    <a href="https://docs.cosigo.io/">COSIGO Docs / WP</a>
+    <a href="https://github.com/cosigo">COSIGO GitHub</a>
+    <a href="https://github.com/cosigo/cosigo.io">Main-site source</a>
+    <a href="https://cosigo.io/project-status.html">Educational Purpose / Project Status</a>
+  </div>
+  <p>© 2026 COSIGO. COSIGO™ rights and trademark notices remain governed by the official COSIGO site.</p>
+</footer>
+</body></html>
