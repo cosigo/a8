@@ -298,6 +298,10 @@ bcseek.com, www.bcseek.com {
 }
 
 a8.cosigo.io {
+	# RETIRED A8 LAB PORTAL
+	@a8_old_labs_portal path /labs.html
+	redir @a8_old_labs_portal https://lab.cosigo.io/ 308
+
 	# A8 MUSIC REVIEW · PUBLIC SUBMISSION BRIDGE
 	#
 	# Ordinary review transport only.
