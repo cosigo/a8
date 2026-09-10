@@ -5356,6 +5356,519 @@
     );
 
 
+
+  /*
+   * A8 COMPOSER MOBILE EXISTING SCORE REORDER v1
+   *
+   * Touch / pen bridge for rearranging an EXISTING
+   * note or rest inside its current A8 score bar.
+   *
+   * Mouse keeps the proven HTML5 drag/drop path.
+   *
+   * This bridge does NOT define duration or timing.
+   * It deliberately reuses the existing:
+   *
+   *   insertionIndex()
+   *   moveEventWithinBar()
+   *
+   * Same-bar movement only, matching desktop behavior.
+   */
+
+  let mobileScoreDrag =
+    null;
+
+  let mobileScoreLane =
+    null;
+
+  let mobileScoreSuppressClick =
+    false;
+
+
+  function mobileScoreLaneAt(
+    clientX,
+    clientY
+  ) {
+    const target =
+      document.elementFromPoint(
+        clientX,
+        clientY
+      );
+
+
+    if (!target) {
+      return null;
+    }
+
+
+    return target.closest(
+      '.music-lane'
+    );
+  }
+
+
+  function clearMobileScoreLane() {
+    if (!mobileScoreLane) {
+      return;
+    }
+
+
+    mobileScoreLane
+      .classList
+      .remove(
+        'drag-over'
+      );
+
+
+    mobileScoreLane =
+      null;
+  }
+
+
+  function clearMobileScoreDrag() {
+    clearMobileScoreLane();
+
+
+    if (
+      mobileScoreDrag &&
+      mobileScoreDrag.source
+    ) {
+      mobileScoreDrag
+        .source
+        .classList
+        .remove(
+          'a8-touch-score-drag-source'
+        );
+
+
+      try {
+        if (
+          mobileScoreDrag
+            .source
+            .hasPointerCapture &&
+          mobileScoreDrag
+            .source
+            .hasPointerCapture(
+              mobileScoreDrag
+                .pointerId
+            )
+        ) {
+          mobileScoreDrag
+            .source
+            .releasePointerCapture(
+              mobileScoreDrag
+                .pointerId
+            );
+        }
+      } catch (_) {}
+    }
+
+
+    document.body
+      .classList
+      .remove(
+        'a8-composer-score-touch-dragging'
+      );
+
+
+    mobileScoreDrag =
+      null;
+  }
+
+
+  $('bars')
+    .addEventListener(
+      'pointerdown',
+      event => {
+
+        /*
+         * Mouse keeps native HTML5 drag/drop.
+         */
+        if (
+          event.pointerType ===
+          'mouse'
+        ) {
+          return;
+        }
+
+
+        if (
+          event.isPrimary ===
+          false
+        ) {
+          return;
+        }
+
+
+        const chip =
+          event.target.closest(
+            '.score-chip'
+          );
+
+
+        if (!chip) {
+          return;
+        }
+
+
+        const card =
+          chip.closest(
+            '.bar-card'
+          );
+
+        const lane =
+          chip.closest(
+            '.music-lane'
+          );
+
+
+        if (
+          !card ||
+          !lane
+        ) {
+          return;
+        }
+
+
+        const barId =
+          Number(
+            card.dataset
+              .barId
+          );
+
+        const eventId =
+          Number(
+            chip.dataset
+              .eventId
+          );
+
+
+        if (
+          !Number.isInteger(
+            barId
+          ) ||
+          !Number.isInteger(
+            eventId
+          )
+        ) {
+          return;
+        }
+
+
+        mobileScoreDrag = {
+          pointerId:
+            event.pointerId,
+
+          source:
+            chip,
+
+          barId,
+
+          eventId,
+
+          startX:
+            event.clientX,
+
+          startY:
+            event.clientY,
+
+          dragging:
+            false
+        };
+
+
+        try {
+          chip.setPointerCapture(
+            event.pointerId
+          );
+        } catch (_) {}
+      }
+    );
+
+
+  window.addEventListener(
+    'pointermove',
+    event => {
+
+      if (
+        !mobileScoreDrag ||
+        event.pointerId !==
+          mobileScoreDrag
+            .pointerId
+      ) {
+        return;
+      }
+
+
+      const dx =
+        event.clientX -
+        mobileScoreDrag
+          .startX;
+
+      const dy =
+        event.clientY -
+        mobileScoreDrag
+          .startY;
+
+
+      /*
+       * Preserve normal tap/select behavior.
+       */
+      if (
+        !mobileScoreDrag
+          .dragging &&
+        Math.hypot(
+          dx,
+          dy
+        ) < 7
+      ) {
+        return;
+      }
+
+
+      if (
+        !mobileScoreDrag
+          .dragging
+      ) {
+        mobileScoreDrag
+          .dragging =
+            true;
+
+
+        mobileScoreDrag
+          .source
+          .classList
+          .add(
+            'a8-touch-score-drag-source'
+          );
+
+
+        document.body
+          .classList
+          .add(
+            'a8-composer-score-touch-dragging'
+          );
+      }
+
+
+      event.preventDefault();
+
+
+      let lane =
+        mobileScoreLaneAt(
+          event.clientX,
+          event.clientY
+        );
+
+
+      /*
+       * Existing-event reorder remains
+       * strictly inside its source bar.
+       */
+      if (
+        lane &&
+        Number(
+          lane.dataset
+            .barLane
+        ) !==
+          mobileScoreDrag.barId
+      ) {
+        lane =
+          null;
+      }
+
+
+      if (
+        lane ===
+        mobileScoreLane
+      ) {
+        return;
+      }
+
+
+      clearMobileScoreLane();
+
+
+      if (lane) {
+        mobileScoreLane =
+          lane;
+
+
+        lane.classList
+          .add(
+            'drag-over'
+          );
+      }
+    },
+    {
+      passive:
+        false
+    }
+  );
+
+
+  window.addEventListener(
+    'pointerup',
+    event => {
+
+      if (
+        !mobileScoreDrag ||
+        event.pointerId !==
+          mobileScoreDrag
+            .pointerId
+      ) {
+        return;
+      }
+
+
+      const state =
+        mobileScoreDrag;
+
+
+      let lane =
+        mobileScoreLaneAt(
+          event.clientX,
+          event.clientY
+        );
+
+
+      if (
+        lane &&
+        Number(
+          lane.dataset
+            .barLane
+        ) !==
+          state.barId
+      ) {
+        lane =
+          null;
+      }
+
+
+      const wasDragging =
+        state.dragging;
+
+
+      clearMobileScoreDrag();
+
+
+      if (!wasDragging) {
+        return;
+      }
+
+
+      event.preventDefault();
+
+
+      /*
+       * Kill the synthetic click some mobile
+       * browsers emit after a finger drag.
+       */
+      mobileScoreSuppressClick =
+        true;
+
+
+      window.setTimeout(
+        () => {
+          mobileScoreSuppressClick =
+            false;
+        },
+        350
+      );
+
+
+      /*
+       * Release outside the source bar:
+       * leave score unchanged.
+       */
+      if (!lane) {
+        return;
+      }
+
+
+      const bar =
+        barById(
+          state.barId
+        );
+
+
+      if (!bar) {
+        return;
+      }
+
+
+      const index =
+        insertionIndex(
+          lane,
+          event.clientX
+        );
+
+
+      try {
+        /*
+         * SAME score reorder function
+         * used by desktop DROP.
+         */
+        moveEventWithinBar(
+          bar,
+          state.eventId,
+          index
+        );
+
+      } catch (error) {
+        showError(
+          error
+        );
+      }
+    },
+    {
+      passive:
+        false
+    }
+  );
+
+
+  window.addEventListener(
+    'pointercancel',
+    event => {
+
+      if (
+        !mobileScoreDrag ||
+        event.pointerId !==
+          mobileScoreDrag
+            .pointerId
+      ) {
+        return;
+      }
+
+
+      clearMobileScoreDrag();
+    }
+  );
+
+
+  /*
+   * Suppress only the post-drag synthetic click.
+   * Ordinary phone taps still select score events.
+   */
+  $('bars')
+    .addEventListener(
+      'click',
+      event => {
+
+        if (
+          !mobileScoreSuppressClick
+        ) {
+          return;
+        }
+
+
+        event.preventDefault();
+        event.stopPropagation();
+      },
+      true
+    );
+
+
   $('bars')
     .addEventListener(
       'dragstart',

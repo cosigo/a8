@@ -1217,3 +1217,36 @@ body.a8-composer-touch-dragging{
   user-select:none;
 }
 
+/* ==================================================
+   A8 COMPOSER MOBILE EXISTING SCORE REORDER v1
+
+   Existing score chips become direct touch-drag
+   handles on coarse/touch devices.
+
+   Pointer position changes ORDER only.
+   It never defines A8 duration.
+   ================================================== */
+
+@media (hover:none), (pointer:coarse){
+
+  #bars .score-chip{
+    touch-action:none;
+  }
+
+  #bars
+  .score-chip
+  .a8-touch-score-drag-source{
+    cursor:grabbing;
+  }
+
+  #bars
+  .score-chip.a8-touch-score-drag-source{
+    opacity:.68;
+  }
+}
+
+body.a8-composer-score-touch-dragging{
+  user-select:none;
+  -webkit-user-select:none;
+}
+
