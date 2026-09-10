@@ -373,246 +373,117 @@ a8.cosigo.io {
 }
 
 lab.a8.cosigo.io {
-	# a8_data_evidence_rollin
-	@a8_physical_evidence_old path /physical-clock-evidence.html
-	redir @a8_physical_evidence_old https://data.cosigo.io/physical-clock-evidence.html 308
+	# RETIRED A8 LAB HOST
+	#
+	# Historical presentation compatibility only.
+	# No Core20 proxy, API, CE, pulse, music, write or fallback authority.
 
-	@a8_observation_archive_old path /observation-archive-historical.html
-	redir @a8_observation_archive_old https://data.cosigo.io/observation-archive-historical.html 308
-
-	# MIGRATION #15 · QUARTZ
-	@a8_quartz_migrated path /quartz.html
-	redir @a8_quartz_migrated https://quartz.cosigo.io/ 308
-
-	# MIGRATION #16 · TELESCOPE
-	@a8_telescope_migrated path /telescope.html
-	redir @a8_telescope_migrated https://telescope.cosigo.io/ 308
-
-	# MIGRATION #14 · ANGLE
-	@a8_angle_migrated {
-		path /angle.html
-	}
-	handle @a8_angle_migrated {
-		redir https://angle.cosigo.io/ 308
+	handle / {
+		redir https://lab.cosigo.io/ 308
 	}
 
-	# MIGRATION #13 · DATA
-	@a8_data_migrated {
-		path /data.html
-	}
-	handle @a8_data_migrated {
-		redir https://data.cosigo.io/ 308
+	handle /index.html {
+		redir https://lab.cosigo.io/ 308
 	}
 
-	# MIGRATION #12 · SEA
-	@a8_sea_migrated {
-		path /navigation.html
-	}
-	handle @a8_sea_migrated {
-		redir https://sea.cosigo.io/ 308
+	# MIGRATED PRESENTATION ROUTES
+
+	handle /moons.html {
+		redir https://moons.cosigo.io/ 308
 	}
 
-	# MIGRATION #11 · STARS ACTIVE FAMILY
-	@a8_stars_decimal_parent {
-		path /celestial.html
-	}
-	handle @a8_stars_decimal_parent {
-		redir https://stars.cosigo.io/ 308
-	}
-
-	@a8_stars_octal_parent {
-		path /celestial-octal.html
-	}
-	handle @a8_stars_octal_parent {
-		redir https://stars.cosigo.io/celestial-octal.html 308
-	}
-
-	@a8_stars_family_migrated {
-		path \
- /a8_celestial_atlas_decimal_review_v0_2.html \
- /a8_walkabout_geometry_poc_v0_1b.html \
- /a8_walkabout_scorpius_decimal_v0_1.html \
- /a8_celestial_atlas_octal_dense_v0_3.html \
- /a8_walkabout_scorpius_octal_v0_1.html \
- /a8_walkabout_geometry_poc_octal_v0_2.html
-	}
-	handle @a8_stars_family_migrated {
-		redir https://stars.cosigo.io{uri} 308
-	}
-
-	# MIGRATION #10 · CONTESTANT CANONICAL REDIRECT
-	@a8_contestant_migrated {
-		path /contestants.html
-	}
-	handle @a8_contestant_migrated {
-		redir https://contestant.cosigo.io/ 308
-	}
-
-	# MIGRATION #9 · COMPOSER CANONICAL REDIRECT
-	@a8_composer_migrated {
-		path /composer.html
-	}
-	handle @a8_composer_migrated {
-		redir https://composer.cosigo.io/ 308
-	}
-
-	# MIGRATION #8 · AUDIO CANONICAL REDIRECT
-	@a8_audio_migrated {
-		path /audio.html
-	}
-	handle @a8_audio_migrated {
-		redir https://audio.cosigo.io/ 308
-	}
-
-	# MIGRATION #7 · SPACESHIP EARTH / TERRA SHIP SLIP
-	@a8_ship_migrated {
-		path /relationship.html
-	}
-	handle @a8_ship_migrated {
-		redir https://ship.cosigo.io/ 308
-	}
-
-	# MIGRATION #6 · MAP CANONICAL REDIRECT
-	@a8_map_migrated {
-		path /map-clock-compass.html
-	}
-	handle @a8_map_migrated {
-		redir https://map.cosigo.io/ 308
-	}
-
-	# MIGRATION #5 · SOL CANONICAL REDIRECT
-	@a8_sol_migrated {
-		path /sol.html
-	}
-	handle @a8_sol_migrated {
-		redir https://sol.cosigo.io/ 308
-	}
-
-	# MIGRATION #4 · MINTAKA CANONICAL REDIRECT
-	@a8_mintaka_migrated {
-		path /mintaka.html
-	}
-	handle @a8_mintaka_migrated {
-		redir https://mintaka.cosigo.io/ 308
-	}
-
-	# MIGRATION #3 · CALENDAR CANONICAL REDIRECT
-	@a8_calendar_migrated {
-		path /calendar.html
-	}
-	handle @a8_calendar_migrated {
-		redir https://calendar.cosigo.io/ 308
-	}
-
-	# MIGRATION #2 · CLOCK CANONICAL REDIRECT
-	@a8_clock_migrated {
-		path /clock.html
-	}
-	handle @a8_clock_migrated {
+	handle /clock.html {
 		redir https://clock.cosigo.io/ 308
 	}
 
-	# A8 MUSIC REVIEW · PRIVATE CURATOR BRIDGE
-
-	@a8_music_submit {
-		method POST
-		path /api/music-review/submit
-	}
-	handle @a8_music_submit {
-		reverse_proxy 127.0.0.1:18021
+	handle /calendar.html {
+		redir https://calendar.cosigo.io/ 308
 	}
 
-	@a8_music_current {
-		method GET
-		path /api/music-review/current /api/music-review/weekly /api/music-review/monthly /api/music-review/yearly
-	}
-	handle @a8_music_current {
-		reverse_proxy 127.0.0.1:18021
+	handle /mintaka.html {
+		redir https://mintaka.cosigo.io/ 308
 	}
 
-	@a8_music_review_page {
-		method GET
-		path /music-review /music-review.html
-	}
-	handle @a8_music_review_page {
-		basic_auth {
-			greg <REDACTED_BCRYPT_HASH>
-		}
-		reverse_proxy 127.0.0.1:18020
+	handle /sol.html {
+		redir https://sol.cosigo.io/ 308
 	}
 
-	@a8_music_review_admin {
-		path /api/music-review/admin/*
-	}
-	handle @a8_music_review_admin {
-		basic_auth {
-			greg <REDACTED_BCRYPT_HASH>
-		}
-		reverse_proxy 127.0.0.1:18021
+	handle /map-clock-compass.html {
+		redir https://map.cosigo.io/ 308
 	}
 
-	encode zstd gzip
-
-	# CORE20 OPERATING LAB
-	#
-	# Public observation remains open.
-	# CONNECT remains open.
-	#
-	# Chief Engineer operating paths require authentication.
-
-	@a8_ce_pulse {
-		path /pulse /pulse/*
-	}
-	handle @a8_ce_pulse {
-		basic_auth {
-			greg <REDACTED_BCRYPT_HASH>
-		}
-		reverse_proxy 127.0.0.1:18020
+	handle /relationship.html {
+		redir https://ship.cosigo.io/ 308
 	}
 
-	# CHIEF ENGINEER PRIVATE READ SURFACE
-	#
-	# Protect the CE operations page and diagnostic recorder.
-	# No recorder endpoint is live yet; this boundary is installed first.
-	@a8_ce_private_read {
-		method GET
-		path /chief-engineer /chief-engineer.html /chief-engineer/* /api/core20/flight-recorder /api/core20/flight-recorder/*
-	}
-	handle @a8_ce_private_read {
-		basic_auth {
-			greg <REDACTED_BCRYPT_HASH>
-		}
-		reverse_proxy 127.0.0.1:18020
+	handle /audio.html {
+		redir https://audio.cosigo.io/ 308
 	}
 
-	# PUBLIC CORE20 DITTY CONTROLS
-	#
-	# Narrow downstream music controls only.
-	# These do not expose runtime restart, calibration,
-	# raw injection, or other Chief Engineer writes.
-	@a8_public_ditty_write {
-		method POST
-		path /api/core20/ditty/start /api/core20/ditty/reset
-	}
-	handle @a8_public_ditty_write {
-		reverse_proxy 127.0.0.1:18020
+	handle /composer.html {
+		redir https://composer.cosigo.io/ 308
 	}
 
-	@a8_ce_write {
-		method POST PUT PATCH DELETE
-		not path /api/core20/connect
-		not path /api/core20/ditty/start
-		not path /api/core20/ditty/reset
-	}
-	handle @a8_ce_write {
-		basic_auth {
-			greg <REDACTED_BCRYPT_HASH>
-		}
-		reverse_proxy 127.0.0.1:18020
+	handle /contestants.html {
+		redir https://contestant.cosigo.io/ 308
 	}
 
-	reverse_proxy 127.0.0.1:18020
+	handle /navigation.html {
+		redir https://sea.cosigo.io/ 308
+	}
+
+	handle /data.html {
+		redir https://data.cosigo.io/ 308
+	}
+
+	handle /angle.html {
+		redir https://angle.cosigo.io/ 308
+	}
+
+	handle /quartz.html {
+		redir https://quartz.cosigo.io/ 308
+	}
+
+	handle /telescope.html {
+		redir https://telescope.cosigo.io/ 308
+	}
+
+	handle /physical-clock-evidence.html {
+		redir https://data.cosigo.io/physical-clock-evidence.html 308
+	}
+
+	handle /observation-archive-historical.html {
+		redir https://data.cosigo.io/observation-archive-historical.html 308
+	}
+
+	# STARS FAMILY
+
+	handle /celestial.html {
+		redir https://stars.cosigo.io/ 308
+	}
+
+	handle /celestial-octal.html {
+		redir https://stars.cosigo.io/celestial-octal.html 308
+	}
+
+	@a8_old_stars_family path \
+		/a8_celestial_atlas_decimal_review_v0_2.html \
+		/a8_walkabout_geometry_poc_v0_1b.html \
+		/a8_walkabout_scorpius_decimal_v0_1.html \
+		/a8_celestial_atlas_octal_dense_v0_3.html \
+		/a8_walkabout_scorpius_octal_v0_1.html \
+		/a8_walkabout_geometry_poc_octal_v0_2.html
+
+	handle @a8_old_stars_family {
+		redir https://stars.cosigo.io{uri} 308
+	}
+
+	# Anything else under the retired hostname is dead.
+	handle {
+		respond 404
+	}
 }
+
 
 # A8 LAB HOST MIGRATION · PARALLEL QUALIFICATION
 lab.cosigo.io {
