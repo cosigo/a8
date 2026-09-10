@@ -1,0 +1,4045 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="color-scheme" content="dark light">
+  <meta name="theme-color" content="#071823">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+
+  <title>Auspicious 8 Calendar | COSIGO Labs</title>
+  <meta name="description" content="The Auspicious 8 Calendar: eight compass months, nine planetary weeks, five elemental days, alternating protected Air days, always-protected Aether days, a 360-day structured body, and Wilson's Week at year end.">
+  <meta name="keywords" content="Auspicious 8, A8 calendar, COSIGO Labs, compass months, planetary weeks, element days, octal calendar, binary calendar, Wilson's Week, protected days, experimental calendar">
+  <meta name="author" content="Wendall Wilson · COSIGO Labs">
+  <meta name="copyright" content="© 2026 COSIGO Labs. All rights reserved.">
+  <meta name="application-name" content="Auspicious 8 Calendar">
+  <meta name="creator" content="Wendall Wilson · COSIGO Labs">
+  <meta name="publisher" content="COSIGO Labs">
+  <meta name="subject" content="Experimental Auspicious 8 calendar architecture and live Core20 calendar reference">
+  <meta name="classification" content="Research · Calendar · Timekeeping · Experimental">
+  <meta name="format-detection" content="telephone=no">
+  <link rel="canonical" href="https://calendar.cosigo.io/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="COSIGO Labs · Auspicious 8">
+  <meta property="og:title" content="Auspicious 8 Calendar">
+  <meta property="og:description" content="8 compass months · 9 planetary weeks · 5 element days · protected time · Wilson's Week.">
+  <meta property="og:url" content="https://calendar.cosigo.io/">
+  <meta property="og:image" content="https://calendar.cosigo.io/assets/ausp8_total.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1122">
+  <meta property="og:image:height" content="1402">
+  <meta property="og:image:alt" content="Auspicious 8 year calendar artwork showing eight compass months and the year-end celebration interval.">
+  <meta property="og:locale" content="en_US">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Auspicious 8 Calendar · COSIGO Labs">
+  <meta name="twitter:description" content="Eight compass months, nine planetary weeks, five element days, live Core20 year-wheel position, protected time and Wilson's Week.">
+  <meta name="twitter:image" content="https://calendar.cosigo.io/assets/ausp8_total.png">
+  <meta name="twitter:image:alt" content="Auspicious 8 year calendar with eight compass months and Wilson's Week.">
+
+  <link rel="icon" href="/assets/cosigo_master_512.gif" type="image/gif">
+  <link rel="shortcut icon" href="/assets/cosigo_master_512.gif" type="image/gif">
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebPage",
+    "name":"Auspicious 8 Calendar",
+    "url":"https://calendar.cosigo.io/",
+    "description":"A working COSIGO Labs calendar architecture using eight compass months, nine planetary weeks, five elemental days and an intercalary year-end celebration interval.",
+    "inLanguage":"en",
+    "isPartOf":{"@type":"WebSite","name":"COSIGO Labs · Auspicious 8","url":"https://a8.cosigo.io/"},
+    "author":{"@type":"Person","name":"Wendall Wilson","url":"https://github.com/cosigo"},
+    "publisher":{"@type":"Organization","name":"COSIGO Labs","url":"https://cosigo.io/"},
+    "primaryImageOfPage":{"@type":"ImageObject","url":"https://calendar.cosigo.io/assets/ausp8_total.png"},
+    "about":["experimental calendar design","binary and octal representation","compass directions","planetary nomenclature","protected time"]
+  }
+  </script>
+
+  <style>
+    :root{
+      --ink:#e9dcc3;
+      --muted:#b7ab96;
+      --night:#06141e;
+      --night2:#0a202d;
+      --panel:#0b1d28e8;
+      --panel-solid:#0b1d28;
+      --gold:#d6aa4e;
+      --gold2:#f0cf78;
+      --silver:#c6d0d6;
+      --silver2:#eef3f6;
+      --parchment:#e7d6ad;
+      --parchment2:#cdbb8e;
+      --parchment-ink:#2e2519;
+      --line:#31505e;
+      --good:#8dc9a6;
+      --danger:#e19575;
+      --shadow:0 18px 55px rgba(0,0,0,.35);
+      --radius:18px;
+      --max:1440px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      color:var(--ink);
+      background:
+        radial-gradient(circle at 18% 0%,rgba(47,95,111,.22),transparent 34rem),
+        linear-gradient(180deg,#06131d 0,#081a25 36rem,#06131d 100%);
+      font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      line-height:1.55;
+    }
+    a{color:inherit}
+    img{max-width:100%;display:block}
+    button,input,select{font:inherit}
+    .skip{position:absolute;left:-9999px;top:0;background:#fff;color:#000;padding:.7rem 1rem;z-index:9999}
+    .skip:focus{left:1rem;top:1rem}
+
+    /* A8 SINGLE DROPDOWN NAV · SITE STANDARD */
+    #a8-topside-coherence-02{
+      display:block;
+      margin:0;
+      padding:10px 14px;
+      border-bottom:1px solid rgba(255,255,255,.14);
+      background:rgba(7,11,16,.96);
+      font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+    }
+
+    #a8-topside-coherence-02 .a8-topline{
+      max-width:1440px;
+      margin:0 auto;
+      display:flex;
+      gap:12px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+
+    #a8-topside-coherence-02 .cosigo-global-brand{
+      display:flex;
+      gap:8px;
+      align-items:center;
+      text-decoration:none;
+    }
+
+    #a8-topside-coherence-02 .cosigo-global-brand img{
+      width:34px;
+      height:34px;
+      object-fit:contain;
+    }
+
+    #a8-topside-coherence-02 .cosigo-global-brand span{
+      font-weight:900;
+      letter-spacing:.06em;
+    }
+
+    #a8-topside-coherence-02 .cosigo-global-brand small{
+      display:block;
+      opacity:.72;
+      font-size:.62rem;
+    }
+
+    #a8-topside-coherence-02 a{
+      text-decoration:none;
+    }
+
+    #a8-topside-coherence-02 .a8-menu{
+      position:relative;
+      margin-left:auto;
+    }
+
+    #a8-topside-coherence-02 .a8-menu summary{
+      list-style:none;
+      cursor:pointer;
+      padding:8px 11px;
+      border:1px solid #425467;
+      border-radius:8px;
+      background:#111820;
+      color:#e0bd72;
+      font-size:.76rem;
+      font-weight:900;
+      letter-spacing:.07em;
+      user-select:none;
+    }
+
+    #a8-topside-coherence-02 .a8-menu summary::-webkit-details-marker{
+      display:none;
+    }
+
+    #a8-topside-coherence-02 .a8-menu summary::after{
+      content:" ▾";
+      color:#92a5b8;
+    }
+
+    #a8-topside-coherence-02 .a8-menu[open] summary::after{
+      content:" ▴";
+    }
+
+    #a8-topside-coherence-02 .a8-menu-panel{
+      position:absolute;
+      z-index:1000;
+      right:0;
+      top:calc(100% + 7px);
+      min-width:180px;
+      padding:7px;
+      border:1px solid #425467;
+      border-radius:9px;
+      background:#0d141b;
+      box-shadow:0 12px 28px rgba(0,0,0,.38);
+    }
+
+    #a8-topside-coherence-02 .a8-menu-panel a{
+      display:block;
+      padding:9px 10px;
+      border-radius:6px;
+      color:#c8ddf5;
+      font-size:.78rem;
+      font-weight:800;
+      white-space:nowrap;
+    }
+
+    #a8-topside-coherence-02 .a8-menu-panel a:hover,
+    #a8-topside-coherence-02 .a8-menu-panel a:focus,
+    #a8-topside-coherence-02 .a8-menu-panel a[aria-current="page"]{
+      background:#182431;
+      color:#fff;
+    }
+
+    @media(max-width:760px){
+      #a8-topside-coherence-02 .a8-menu-panel{
+        min-width:170px;
+      }
+    }
+
+    .hero{position:relative;overflow:hidden;border-bottom:1px solid rgba(214,170,78,.28)}
+    .hero::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,16,24,.96) 0%,rgba(5,16,24,.82) 42%,rgba(5,16,24,.28) 75%,rgba(5,16,24,.9) 100%),url('/assets/thumbs/ausp8_total.png') center 24%/cover no-repeat;filter:saturate(.85)}
+    .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,#06131d 100%)}
+    .hero-inner{position:relative;z-index:1;max-width:var(--max);margin:auto;padding:5.2rem 1.25rem 6rem;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(260px,.55fr);gap:2rem;align-items:center}
+    .eyebrow{color:var(--gold2);text-transform:uppercase;letter-spacing:.22em;font-size:.72rem;font-weight:800}
+    h1,h2,h3{font-family:Georgia,"Times New Roman",serif;margin:0;color:#f0dfbd}
+    h1{font-size:clamp(2.7rem,7vw,6.2rem);line-height:.92;letter-spacing:-.035em;text-shadow:0 3px 20px #000}
+    h1 span{display:block;color:var(--gold2);font-size:.43em;letter-spacing:.06em;margin-top:.32em;text-transform:uppercase}
+    .lede{font-size:clamp(1.02rem,1.7vw,1.32rem);max-width:62rem;color:#e6d8c1;margin:1.4rem 0 0}
+    .hero-stats{display:grid;grid-template-columns:repeat(4,minmax(92px,1fr));gap:.65rem;margin:1.6rem 0}
+    .hero-stats div{padding:.85rem .8rem;border:1px solid rgba(214,170,78,.33);background:rgba(6,21,30,.7);border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.18)}
+    .hero-stats strong{display:block;font:700 1.5rem/1 Georgia,serif;color:var(--gold2)}
+    .hero-stats small{display:block;margin-top:.34rem;color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.08em}
+    .actions{display:flex;gap:.7rem;flex-wrap:wrap}
+    .button{display:inline-flex;align-items:center;gap:.5rem;text-decoration:none;padding:.72rem .95rem;border:1px solid #7c6534;border-radius:10px;background:linear-gradient(180deg,#3b3019,#221c11);color:#f2d981;font-weight:750;font-size:.82rem;letter-spacing:.035em;box-shadow:0 8px 20px rgba(0,0,0,.18)}
+    .button.secondary{background:#0d2936;border-color:#315867;color:#e8e0cf}
+    .button:hover{transform:translateY(-1px);filter:brightness(1.08)}
+
+    /* CORE20 PUBLIC CONNECT BEACON V1 */
+    #connectCoreButton{
+      position:relative;
+      border:2px solid #f2cf69 !important;
+      background:
+        linear-gradient(180deg,#8a681c 0%,#594010 58%,#30230b 100%) !important;
+      color:#fff3bd !important;
+      font-weight:900 !important;
+      letter-spacing:.075em;
+      text-shadow:0 1px 2px #000;
+      box-shadow:
+        0 0 0 2px rgba(255,221,115,.30),
+        0 0 18px rgba(242,196,72,.72),
+        0 0 38px rgba(242,196,72,.32),
+        inset 0 1px 0 rgba(255,245,196,.28);
+      animation:a8-connect-gold-pulse 1.9s ease-in-out infinite;
+    }
+
+    #connectCoreButton:hover,
+    #connectCoreButton:focus-visible{
+      border-color:#fff0a8 !important;
+      color:#fffce8 !important;
+      filter:brightness(1.18);
+      box-shadow:
+        0 0 0 3px rgba(255,232,145,.38),
+        0 0 26px rgba(255,215,86,.92),
+        0 0 52px rgba(255,196,43,.46),
+        inset 0 1px 0 rgba(255,255,230,.38);
+    }
+
+    @keyframes a8-connect-gold-pulse{
+      0%,100%{
+        box-shadow:
+          0 0 0 2px rgba(255,221,115,.28),
+          0 0 14px rgba(242,196,72,.58),
+          0 0 28px rgba(242,196,72,.24),
+          inset 0 1px 0 rgba(255,245,196,.24);
+      }
+      50%{
+        box-shadow:
+          0 0 0 3px rgba(255,226,125,.42),
+          0 0 28px rgba(255,207,70,.88),
+          0 0 52px rgba(242,196,72,.40),
+          inset 0 1px 0 rgba(255,250,210,.34);
+      }
+    }
+
+
+    /* A8 WILSON LIVE INTERVAL V1 */
+    .wilson-live-shell{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:0 1rem;
+      max-height:0;
+      opacity:0;
+      overflow:hidden;
+      transform:translateY(-18px);
+      pointer-events:none;
+      transition:
+        max-height .9s ease,
+        opacity .55s ease,
+        transform .7s ease,
+        padding .7s ease;
+    }
+
+    .wilson-live-shell.active{
+      max-height:1800px;
+      opacity:1;
+      transform:translateY(0);
+      pointer-events:auto;
+      padding-top:1rem;
+      padding-bottom:1rem;
+    }
+
+    .wilson-live-card{
+      position:relative;
+      overflow:hidden;
+      padding:1rem;
+      border:1px solid #b88a2f;
+      border-radius:18px;
+      background:
+        radial-gradient(circle at 18% 10%,rgba(255,220,118,.14),transparent 28rem),
+        linear-gradient(135deg,#2b2312 0%,#111d20 48%,#211b0d 100%);
+      box-shadow:
+        0 22px 60px rgba(0,0,0,.42),
+        inset 0 0 42px rgba(214,170,78,.06);
+    }
+
+    .wilson-live-card::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      border-radius:inherit;
+      box-shadow:inset 0 0 0 1px rgba(255,222,132,.08);
+    }
+
+    .wilson-preview-banner{
+      display:none;
+      margin-bottom:.8rem;
+      padding:.6rem .75rem;
+      border:1px solid #618391;
+      border-radius:9px;
+      background:#092733;
+      color:#b9dbe5;
+      font:800 .68rem/1.35 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+      letter-spacing:.075em;
+      text-align:center;
+    }
+
+    .wilson-live-shell.preview .wilson-preview-banner{
+      display:block;
+    }
+
+    .wilson-live-grid{
+      display:grid;
+      grid-template-columns:minmax(260px,.72fr) minmax(0,1.28fr);
+      gap:1rem;
+      align-items:stretch;
+    }
+
+    .wilson-compass-panel,
+    .wilson-days-panel{
+      min-width:0;
+      padding:1rem;
+      border:1px solid rgba(214,170,78,.30);
+      border-radius:14px;
+      background:rgba(5,17,23,.62);
+    }
+
+    .wilson-live-title{
+      margin:.2rem 0 .65rem;
+      font-size:clamp(1.6rem,4vw,2.65rem);
+      color:#f4d77f;
+    }
+
+    .wilson-live-lede{
+      margin:.35rem 0 1rem;
+      color:#d8c9aa;
+      font-size:.94rem;
+      line-height:1.55;
+    }
+
+    .wilson-compass{
+      position:relative;
+      width:min(300px,82vw);
+      aspect-ratio:1;
+      margin:1rem auto;
+      border:9px double #9b7735;
+      border-radius:50%;
+      background:
+        radial-gradient(circle,#e8d7ad 0 7%,transparent 7.4%),
+        repeating-conic-gradient(
+          from 0deg,
+          rgba(77,58,27,.18) 0 1deg,
+          transparent 1deg 11.25deg
+        ),
+        radial-gradient(circle at 43% 36%,#efe0ba 0%,#c7ad72 52%,#5d4727 100%);
+      box-shadow:
+        0 14px 35px rgba(0,0,0,.46),
+        inset 0 0 28px rgba(47,31,12,.55);
+      color:#302315;
+      font-family:Georgia,"Times New Roman",serif;
+    }
+
+    .wilson-compass > span{
+      position:absolute;
+      z-index:3;
+      font-weight:900;
+      font-size:1rem;
+      text-shadow:0 1px rgba(255,255,255,.35);
+    }
+
+    .wilson-compass .wc-n{top:5%;left:50%;transform:translateX(-50%)}
+    .wilson-compass .wc-e{right:6%;top:50%;transform:translateY(-50%)}
+    .wilson-compass .wc-s{bottom:5%;left:50%;transform:translateX(-50%)}
+    .wilson-compass .wc-w{left:6%;top:50%;transform:translateY(-50%)}
+
+    .wilson-compass-rose{
+      position:absolute;
+      inset:17%;
+      border-radius:50%;
+      background:
+        conic-gradient(
+          from -12deg,
+          transparent 0 11deg,
+          #452f17 11deg 14deg,
+          transparent 14deg 87deg,
+          #452f17 87deg 90deg,
+          transparent 90deg 177deg,
+          #452f17 177deg 180deg,
+          transparent 180deg 267deg,
+          #452f17 267deg 270deg,
+          transparent 270deg
+        );
+      transform-origin:50% 50%;
+    }
+
+    .wilson-compass-rose::before,
+    .wilson-compass-rose::after{
+      content:"";
+      position:absolute;
+      left:50%;
+      top:50%;
+      transform:translate(-50%,-50%);
+    }
+
+    .wilson-compass-rose::before{
+      width:13%;
+      height:88%;
+      clip-path:polygon(50% 0,100% 50%,50% 100%,0 50%);
+      background:linear-gradient(
+        180deg,
+        #7b1f19 0 48%,
+        #352719 48% 100%
+      );
+      box-shadow:0 2px 5px rgba(0,0,0,.35);
+    }
+
+    .wilson-compass-rose::after{
+      width:20%;
+      aspect-ratio:1;
+      border:2px solid #6c5229;
+      border-radius:50%;
+      background:#d5bb7d;
+      box-shadow:0 2px 5px rgba(0,0,0,.32);
+    }
+
+    .wilson-compass.free .wilson-compass-rose{
+      animation:wilson-compass-free 11s linear infinite;
+    }
+
+    @keyframes wilson-compass-free{
+      to{transform:rotate(360deg)}
+    }
+
+    .wilson-compass-message{
+      margin:.8rem auto 0;
+      max-width:32rem;
+      color:#f1d27c;
+      font:900 .72rem/1.45 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+      letter-spacing:.08em;
+      text-align:center;
+    }
+
+    .wilson-state{
+      display:grid;
+      gap:.25rem;
+      margin-bottom:.85rem;
+      padding-bottom:.8rem;
+      border-bottom:1px solid rgba(214,170,78,.22);
+    }
+
+    .wilson-state span{
+      color:#9fb0b5;
+      font-size:.7rem;
+      font-weight:850;
+      letter-spacing:.1em;
+      text-transform:uppercase;
+    }
+
+    .wilson-state strong{
+      color:#f5d777;
+      font:700 clamp(1.35rem,3vw,2rem)/1.1 Georgia,"Times New Roman",serif;
+    }
+
+    .wilson-day-grid{
+      display:grid;
+      grid-template-columns:repeat(5,minmax(0,1fr));
+      gap:.55rem;
+    }
+
+    .wilson-day{
+      position:relative;
+      min-width:0;
+      padding:.85rem .45rem;
+      border:1px solid #705b2f;
+      border-radius:11px;
+      background:linear-gradient(180deg,#2a2417,#121c1f);
+      text-align:center;
+      opacity:.6;
+      transition:.25s ease;
+    }
+
+    .wilson-day .wd-num{
+      display:block;
+      color:#b79b55;
+      font:800 .63rem/1 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+      letter-spacing:.09em;
+    }
+
+    .wilson-day .wd-icon{
+      display:block;
+      margin:.35rem 0 .2rem;
+      font-size:1.65rem;
+    }
+
+    .wilson-day strong{
+      display:block;
+      color:#e2c77d;
+      font:700 .94rem/1.1 Georgia,"Times New Roman",serif;
+    }
+
+    .wilson-day small{
+      display:block;
+      margin-top:.3rem;
+      color:#8d999c;
+      font-size:.59rem;
+      letter-spacing:.055em;
+      text-transform:uppercase;
+    }
+
+    .wilson-day.passed{
+      opacity:.82;
+      border-color:#8c7136;
+    }
+
+    .wilson-day.current{
+      opacity:1;
+      transform:translateY(-3px);
+      border-color:#f0cb68;
+      background:
+        radial-gradient(circle at 50% 0%,rgba(255,227,128,.20),transparent 80%),
+        linear-gradient(180deg,#564419,#211b0d);
+      box-shadow:
+        0 0 0 2px rgba(240,203,104,.12),
+        0 0 24px rgba(225,181,74,.34);
+    }
+
+    .wilson-day.current strong{
+      color:#ffe49b;
+    }
+
+    .wilson-day.leap{
+      grid-column:1/-1;
+      opacity:.34;
+      border-style:dashed;
+    }
+
+    .wilson-day.leap.current{
+      opacity:1;
+      border-style:solid;
+      border-color:#8eb6c5;
+      background:linear-gradient(180deg,#102f40,#0a1720);
+      box-shadow:0 0 28px rgba(75,153,190,.28);
+    }
+
+    .wilson-leap-impact{
+      display:none;
+      margin-top:.85rem;
+      padding:1rem;
+      border:2px solid #91c5ff;
+      border-radius:8px;
+      background:#0526a8;
+      color:white;
+      font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+      box-shadow:0 0 30px rgba(44,102,255,.34);
+    }
+
+    .wilson-leap-impact.show{
+      display:block;
+      animation:wilson-blue-impact .24s steps(2,end) 2;
+    }
+
+    .wilson-leap-impact strong{
+      display:block;
+      margin-bottom:.45rem;
+      font-size:1rem;
+      letter-spacing:.06em;
+    }
+
+    .wilson-leap-impact code{
+      color:#fff;
+    }
+
+    @keyframes wilson-blue-impact{
+      50%{filter:brightness(1.45)}
+    }
+
+    .wilson-preview-tools{
+      margin-top:1rem;
+      padding:.8rem;
+      border:1px solid #315867;
+      border-radius:10px;
+      background:#081d27;
+    }
+
+    .wilson-preview-tools > strong{
+      color:#a9d1de;
+      font-size:.68rem;
+      letter-spacing:.08em;
+    }
+
+    .wilson-preview-tools p{
+      margin:.4rem 0 .65rem;
+      color:#849ca4;
+      font-size:.75rem;
+    }
+
+    .wilson-preview-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:.35rem;
+    }
+
+    .wilson-preview-actions button{
+      min-height:34px;
+      padding:.38rem .55rem;
+      font-size:.65rem;
+    }
+
+    #explore.wilson-live-parked{
+      opacity:.46;
+      filter:saturate(.45);
+      transition:opacity .55s ease,filter .55s ease;
+    }
+
+    @media(max-width:780px){
+      .wilson-live-grid{grid-template-columns:1fr}
+      .wilson-day-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .wilson-day.leap{grid-column:1/-1}
+    }
+
+    @media(max-width:460px){
+      .wilson-day-grid{grid-template-columns:1fr}
+      .wilson-day.leap{grid-column:auto}
+    }
+
+    @media (prefers-reduced-motion:reduce){
+      #connectCoreButton{animation:none}
+      .wilson-compass.free .wilson-compass-rose{animation:none}
+      .wilson-live-shell{transition:none}
+      .wilson-leap-impact.show{animation:none}
+    }
+
+    /* A8 WILSON EASTER EGG + FOUR-YEAR ART CYCLE V2 */
+
+    .wilson-secret-doorway{
+      max-width:var(--max);
+      margin:.18rem auto 0;
+      padding:0 1rem;
+      display:flex;
+      justify-content:flex-end;
+      pointer-events:none;
+    }
+
+    .wilson-secret-trigger{
+      pointer-events:auto;
+      width:31px;
+      height:31px;
+      display:grid;
+      place-items:center;
+      padding:0;
+      border:1px solid rgba(214,170,78,.22);
+      border-radius:50%;
+      background:rgba(15,28,31,.38);
+      color:#b79346;
+      font:700 .9rem/1 Georgia,"Times New Roman",serif;
+      cursor:pointer;
+      opacity:.46;
+      box-shadow:none;
+      transition:
+        opacity .2s ease,
+        border-color .2s ease,
+        color .2s ease,
+        box-shadow .2s ease,
+        transform .2s ease;
+    }
+
+    .wilson-secret-trigger:hover,
+    .wilson-secret-trigger:focus-visible{
+      opacity:1;
+      color:#ffe08a;
+      border-color:#c99a3e;
+      box-shadow:0 0 18px rgba(214,170,78,.20);
+      transform:rotate(12deg);
+      outline:none;
+    }
+
+    .wilson-cycle-art{
+      --wilson-art-url:none;
+      position:absolute;
+      inset:0;
+      z-index:0;
+      pointer-events:none;
+      overflow:hidden;
+      border-radius:inherit;
+      opacity:.80;
+    }
+
+    .wilson-cycle-art::after{
+      content:"";
+      position:absolute;
+      inset:-3%;
+      background-image:var(--wilson-art-url);
+      background-size:cover;
+      background-position:center;
+      background-repeat:no-repeat;
+      opacity:.23;
+      filter:saturate(.75) contrast(1.06);
+      mix-blend-mode:screen;
+    }
+
+    .wilson-live-card::before{
+      z-index:1;
+    }
+
+    .wilson-live-card > :not(.wilson-cycle-art){
+      position:relative;
+      z-index:2;
+    }
+
+    .wilson-live-shell.cycle-a .wilson-cycle-art{
+      background:
+        radial-gradient(circle at 22% 28%,rgba(255,210,91,.34),transparent 15rem),
+        radial-gradient(circle at 76% 18%,rgba(184,115,33,.18),transparent 20rem),
+        linear-gradient(145deg,#392713 0%,#111d1e 48%,#211607 100%);
+    }
+
+    .wilson-live-shell.cycle-b .wilson-cycle-art{
+      background:
+        radial-gradient(circle at 18% 20%,rgba(211,232,255,.21),transparent 7rem),
+        radial-gradient(circle at 78% 18%,rgba(109,142,197,.25),transparent 13rem),
+        radial-gradient(circle at 58% 74%,rgba(233,192,92,.15),transparent 11rem),
+        linear-gradient(145deg,#07131f 0%,#12283a 49%,#251d0d 100%);
+    }
+
+    .wilson-live-shell.cycle-c .wilson-cycle-art{
+      background:
+        radial-gradient(ellipse at 50% 87%,rgba(198,148,66,.25),transparent 23rem),
+        radial-gradient(circle at 17% 34%,rgba(70,126,119,.21),transparent 16rem),
+        linear-gradient(165deg,#071c25 0%,#173033 56%,#3b2912 100%);
+    }
+
+    .wilson-live-shell.cycle-d .wilson-cycle-art{
+      background:
+        radial-gradient(circle at 50% 42%,rgba(92,191,255,.30),transparent 14rem),
+        radial-gradient(circle at 17% 18%,rgba(55,112,202,.27),transparent 18rem),
+        linear-gradient(145deg,#04111f 0%,#082a42 48%,#21180d 100%);
+    }
+
+    .wilson-live-shell.cycle-d .wilson-cycle-art::after{
+      opacity:.18;
+      filter:
+        saturate(.65)
+        hue-rotate(145deg)
+        contrast(1.15);
+    }
+
+    .wilson-cycle-caption{
+      margin:0 0 .7rem;
+      color:#a89058;
+      font:800 .59rem/1.35 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+      letter-spacing:.11em;
+      text-align:right;
+      text-transform:uppercase;
+    }
+
+    .wilson-earned-banner{
+      display:none;
+      align-items:center;
+      justify-content:space-between;
+      gap:.8rem;
+      margin-bottom:.85rem;
+      padding:.72rem .8rem;
+      border:1px solid #ae8332;
+      border-radius:10px;
+      background:
+        linear-gradient(
+          180deg,
+          rgba(77,58,20,.88),
+          rgba(26,27,20,.90)
+        );
+      box-shadow:
+        inset 0 1px rgba(255,236,161,.08),
+        0 8px 25px rgba(0,0,0,.18);
+    }
+
+    .wilson-earned-banner strong{
+      color:#ffe08a;
+      font:850 .71rem/1.45 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+      letter-spacing:.09em;
+    }
+
+    .wilson-earned-banner button{
+      flex:0 0 auto;
+      padding:.45rem .62rem;
+      border:1px solid #8b6d34;
+      border-radius:8px;
+      background:#121d20;
+      color:#d9c58d;
+      cursor:pointer;
+      font-size:.65rem;
+      font-weight:850;
+      letter-spacing:.065em;
+    }
+
+    .wilson-live-shell.earned-preview .wilson-earned-banner{
+      display:flex;
+    }
+
+    .wilson-live-shell.earned-preview .wilson-preview-banner{
+      display:none;
+    }
+
+    .wilson-live-shell.earned-preview .wilson-compass-rose{
+      animation:wilson-compass-free 11s linear infinite;
+    }
+
+    .wilson-cycle-preview-label{
+      flex-basis:100%;
+      margin-top:.28rem;
+      color:#79939c;
+      font-size:.60rem;
+      font-weight:850;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+
+    /*
+     * Leap-year visual band:
+     * 360 structured days + 6 Wilson Gold Days = 366.
+     * Compass ticks remain the independent exact 64-A8-angle ruler.
+     */
+    .today-dial.a8-leap-year{
+      background:
+        radial-gradient(circle,#0b202a 0 36%,transparent 37%),
+        repeating-conic-gradient(
+          from 0deg,
+          rgba(240,207,120,.34) 0 .55deg,
+          transparent .55deg 45deg
+        ),
+        conic-gradient(
+          from 0deg,
+          rgba(214,170,78,.17) 0deg 44.262295deg,
+          rgba(103,143,157,.08) 44.262295deg 88.524590deg,
+          rgba(214,170,78,.17) 88.524590deg 132.786885deg,
+          rgba(103,143,157,.08) 132.786885deg 177.049180deg,
+          rgba(214,170,78,.17) 177.049180deg 221.311475deg,
+          rgba(103,143,157,.08) 221.311475deg 265.573770deg,
+          rgba(214,170,78,.17) 265.573770deg 309.836066deg,
+          rgba(103,143,157,.08) 309.836066deg 354.098361deg,
+          rgba(107,184,224,.70) 354.098361deg 360deg
+        ),
+        radial-gradient(circle,#102e3b,#071821 72%);
+    }
+
+    @media(max-width:780px){
+      .wilson-earned-banner{
+        align-items:stretch;
+        flex-direction:column;
+      }
+
+      .wilson-earned-banner button{
+        width:100%;
+      }
+
+      .wilson-cycle-caption{
+        text-align:left;
+      }
+    }
+
+    @media(prefers-reduced-motion:reduce){
+      .wilson-secret-trigger{
+        transition:none;
+      }
+
+      .wilson-secret-trigger:hover,
+      .wilson-secret-trigger:focus-visible{
+        transform:none;
+      }
+
+      .wilson-live-shell.earned-preview .wilson-compass-rose{
+        animation:none;
+      }
+    }
+
+    .hero-title-row{display:flex;align-items:center;gap:.75rem;margin-bottom:.2rem}
+    .hero-title-row h1{margin:0}
+    .hero-title-mark{width:48px;height:48px;object-fit:contain;flex:0 0 auto;border-radius:8px}
+    @media (max-width:520px){.hero-title-mark{width:38px;height:38px}.hero-title-row{gap:.55rem}}
+
+    .hero-art{justify-self:end;width:100%;max-width:250px;background:#081722;padding:.45rem;border-radius:12px;border:1px solid #8b6e37;box-shadow:var(--shadow);transform:rotate(.7deg);overflow:hidden}
+    .hero-art img{width:100%;height:150px;object-fit:contain;object-position:center;border-radius:7px;background:#06131b}
+    .hero-art figcaption{font-size:.65rem;color:var(--muted);padding:.35rem .2rem .02rem;text-align:center}
+
+    main{max-width:var(--max);margin:auto;padding:0 1rem 1.25rem}
+    section{scroll-margin-top:72px}
+    .section-head{display:flex;gap:1rem;align-items:end;justify-content:space-between;margin:3.6rem 0 1.25rem}
+    .section-head h2{font-size:clamp(1.9rem,4vw,3.2rem)}
+    .section-head p{max-width:46rem;margin:0;color:var(--muted)}
+    .panel{background:linear-gradient(180deg,rgba(13,37,49,.95),rgba(7,24,33,.96));border:1px solid rgba(214,170,78,.24);border-radius:var(--radius);box-shadow:var(--shadow)}
+    .parchment{background:linear-gradient(180deg,#eadab6,#ccb98d);color:var(--parchment-ink);border-color:#8d7441}
+
+    .spine{display:grid;grid-template-columns:repeat(4,1fr);gap:.85rem}
+    .spine-card{padding:1.15rem;border-radius:14px;border:1px solid #2b4c5a;background:#091c26;min-height:150px}
+    .spine-card .num{font:700 2rem Georgia,serif;color:var(--gold2)}
+    .spine-card h3{font-size:1rem;margin:.25rem 0;color:#f1e3c9}
+    .spine-card p{font-size:.88rem;color:var(--muted);margin:.35rem 0 0}
+
+    .month-register{display:grid;grid-template-columns:repeat(8,1fr);gap:.55rem}
+    .month-chip{position:relative;padding:.8rem .55rem;border-radius:12px;border:1px solid #816b3c;background:linear-gradient(180deg,#ede0bd,#cdb989);color:#2b2419;text-align:center;cursor:pointer;transition:.18s;box-shadow:0 7px 18px rgba(0,0,0,.16)}
+    .month-chip:hover,.month-chip.active{transform:translateY(-2px);box-shadow:0 11px 24px rgba(0,0,0,.23);outline:2px solid var(--gold2);outline-offset:1px}
+    .month-chip code{font-size:.71rem;color:#574a30}
+    .month-chip strong{display:block;font:700 1.32rem Georgia,serif;margin:.18rem 0}
+    .month-chip small{display:block;font-size:.69rem;letter-spacing:.08em;text-transform:uppercase}
+
+    .explorer{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(280px,.7fr);gap:1rem;margin-top:1rem}
+    .calendar-wrap{padding:1rem;overflow:visible;min-width:0}
+    .calendar-pan-cue{
+      display:none;
+      margin:.1rem 0 .55rem;
+      color:#665530;
+      font:800 .68rem/1.2 Inter,sans-serif;
+      letter-spacing:.08em;
+      text-align:right;
+      text-transform:uppercase;
+    }
+    .calendar-scroll{
+      max-width:100%;
+      min-width:0;
+      overflow-x:auto;
+      overflow-y:hidden;
+      -webkit-overflow-scrolling:touch;
+      overscroll-behavior-x:contain;
+      touch-action:pan-x pan-y;
+      scrollbar-width:thin;
+      box-shadow:inset -20px 0 16px -18px rgba(44,37,25,.9);
+    }
+    .cal-title{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin:0 0 .75rem}
+    .cal-title h3{color:#2c2519;font-size:1.45rem}
+    .cal-title .badge{border:1px solid #836e43;padding:.3rem .55rem;border-radius:999px;font-size:.72rem;background:rgba(255,255,255,.22)}
+    table.calendar{width:100%;border-collapse:collapse;min-width:650px;font-family:Georgia,"Times New Roman",serif;background:rgba(255,255,255,.18)}
+    .calendar th,.calendar td{border:1px solid rgba(79,61,30,.35);padding:.58rem .45rem;text-align:center}
+    .calendar thead th{background:#2b3b3a;color:#f8e7be;font-size:.86rem}
+    .calendar thead th span{display:block;font-size:.62rem;font-family:Inter,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#d8cdb5;margin-top:.15rem}
+    .calendar tbody th{text-align:left;background:#ded0aa;white-space:nowrap;font-size:.85rem}
+    .calendar td{font-size:1.12rem;background:#eadcb8;position:relative}
+    .calendar td.business::after{content:"BUSINESS";display:block;font:600 .48rem Inter,sans-serif;letter-spacing:.08em;color:#746547;margin-top:.12rem}
+    .calendar td.air-protected{background:linear-gradient(145deg,#f5f8fa,#b7c2c8);box-shadow:inset 0 0 0 2px #eaf2f5;color:#20282b}
+    .calendar td.air-protected::after{content:"SILVER · PROTECTED";display:block;font:700 .46rem Inter,sans-serif;letter-spacing:.055em;color:#45545b;margin-top:.12rem}
+    .calendar td.aether{background:linear-gradient(145deg,#ffe89b,#c89425);box-shadow:inset 0 0 0 2px #ffeec0;color:#352611}
+    .calendar td.aether::after{content:"GOLD · PROTECTED";display:block;font:700 .46rem Inter,sans-serif;letter-spacing:.055em;color:#594110;margin-top:.12rem}
+
+    .month-side{padding:1rem;display:grid;gap:.8rem;align-content:start}
+    .month-side h3{font-size:1.5rem}
+    .month-side p{margin:0;color:#d4c8b3}
+    .month-side .metric{display:grid;grid-template-columns:1fr auto;gap:.5rem;border-bottom:1px solid #24424e;padding:.48rem 0;font-size:.88rem}
+    .month-side .metric strong{color:var(--gold2)}
+    .mini-note{padding:.75rem;border-left:3px solid var(--gold);background:#0d2b38;border-radius:0 10px 10px 0;color:#cfc4b0;font-size:.82rem}
+
+    .rule-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+    .rule-card{padding:1.25rem}
+    .rule-card h3{font-size:1.45rem;margin-bottom:.7rem}
+    .element-row{display:grid;grid-template-columns:repeat(5,1fr);gap:.45rem;margin-top:1rem}
+    .element{padding:.8rem .45rem;border-radius:10px;text-align:center;border:1px solid #31515e;background:#0b2430}
+    .element .icon{font-size:1.6rem;display:block;margin-bottom:.25rem}
+
+    .day-label{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:.24em;
+      white-space:nowrap;
+    }
+
+    .day-formal{
+      font-family:"Noto Sans Symbols 2","Segoe UI Symbol","Arial Unicode MS",serif;
+      line-height:1;
+    }
+
+    .day-drawing{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-width:1.15em;
+      line-height:1;
+    }
+
+    .day-art{
+      width:1.25em;
+      height:1em;
+      display:inline-block;
+      overflow:visible;
+    }
+
+    .day-art path{
+      fill:none;
+      stroke:currentColor;
+      stroke-width:1.7;
+      stroke-linecap:round;
+      stroke-linejoin:round;
+      vector-effect:non-scaling-stroke;
+    }
+
+    .element-title{
+      min-height:1.7rem;
+      margin-bottom:.25rem;
+      color:var(--ink);
+    }
+
+    .element .element-title strong{
+      display:inline;
+    }
+
+    .calendar thead .day-label,
+    .calendar thead .day-label > span{
+      display:inline-flex;
+      align-items:center;
+      font-size:inherit;
+      color:inherit;
+      letter-spacing:normal;
+      text-transform:none;
+      margin:0;
+    }
+
+    .calendar thead .day-art{
+      width:1.15em;
+      height:.9em;
+    }
+
+    .wilson-element-label{
+      margin:.15rem 0 .25rem;
+    }
+
+    .wilson-element-label strong{
+      display:inline;
+    }
+
+    .date-symbol{
+      font-family:"Noto Sans Symbols 2","Segoe UI Symbol","Arial Unicode MS",serif;
+      font-size:1.18em;
+    }
+
+    .element strong{font-family:Georgia,serif;display:block}
+    .element small{font-size:.64rem;color:var(--muted);text-transform:uppercase;letter-spacing:.055em}
+    .element.air{background:linear-gradient(180deg,#22313a,#0b2430);border-color:#7c8b92}
+    .element.aether{background:linear-gradient(180deg,#57451d,#171f1e);border-color:#b88a2f}
+    .element.aether strong{color:#ffd976}
+
+    .rhythm{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;margin-top:1rem}
+    .rhythm div{background:#071923;border:1px solid #294752;padding:.8rem;border-radius:10px}
+    .rhythm strong{display:block;color:var(--gold2);font:700 1.35rem Georgia,serif}
+    .rhythm span{font-size:.75rem;color:var(--muted)}
+    .notice{margin-top:1rem;padding:.85rem 1rem;border:1px solid rgba(214,170,78,.3);border-radius:12px;background:#251f12;color:#ead9b3;font-size:.86rem}
+
+    .art-grid{display:grid;grid-template-columns:repeat(4,minmax(0,200px));gap:.8rem;justify-content:center;align-items:start}
+    .art-card{width:100%;max-width:200px;justify-self:center;overflow:hidden;text-decoration:none;transition:.18s}
+    .art-card:hover{transform:translateY(-2px)}
+    .art-card figure{margin:0}
+    .art-card img{width:100%;height:225px;object-fit:contain;padding:.35rem;background:#07131a}
+    .art-card figcaption{padding:.55rem .6rem .7rem}
+    .art-card strong{font-family:Georgia,serif;font-size:.88rem;color:#f3dfb5}
+    .art-card span{display:block;color:var(--muted);font-size:.65rem;line-height:1.35;margin-top:.14rem}
+
+    .feature-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(220px,280px);gap:1rem;align-items:start}
+    .feature-copy{padding:1.3rem}
+    .feature-copy h3{font-size:1.7rem}
+    .feature-copy p{color:#d2c5af}
+    .feature-copy ul{padding-left:1.1rem;color:#d4c8b5}
+    .feature-copy li{margin:.36rem 0}
+    .feature-image{width:100%;max-width:280px;justify-self:center;overflow:hidden}
+    .feature-image img{width:100%;height:320px;object-fit:contain;padding:.45rem;background:#07131a}
+
+    .yearmath{display:grid;grid-template-columns:repeat(5,1fr);gap:.7rem}
+    .yearmath div{padding:1rem;text-align:center}
+    .yearmath strong{display:block;font:700 1.8rem Georgia,serif;color:var(--gold2)}
+    .yearmath span{font-size:.74rem;color:var(--muted);text-transform:uppercase;letter-spacing:.07em}
+
+    .research-note{padding:1.15rem 1.25rem;margin-top:1rem;border-left:4px solid #5f899b;background:#0a2633}
+    .research-note strong{color:#e8d9bb}
+
+    /* CALENDAR BOTTOM COMPACTION V1 */
+    main > section:nth-last-of-type(2) .section-head,
+    main > section:last-of-type .section-head{
+      margin-top:2rem;
+      margin-bottom:.85rem;
+    }
+
+    main > section:last-of-type{
+      margin-bottom:0;
+    }
+
+    footer{border-top:1px solid rgba(214,170,78,.28);background:#041018;margin-top:1.25rem}
+    .footer-inner{max-width:var(--max);margin:auto;padding:2rem 1rem 1rem;display:grid;grid-template-columns:1.25fr repeat(3,1fr);gap:1.4rem}
+    .footer-brand{display:flex;gap:.8rem;align-items:flex-start}
+    .footer-brand svg{width:48px;color:var(--gold2);flex:0 0 auto}
+    .footer h3{font:700 .9rem Inter,sans-serif;letter-spacing:.07em;text-transform:uppercase;color:#e8d4aa;margin:0 0 .6rem}
+    .footer p,.footer a{font-size:.78rem;color:#9fa5a3}
+    .footer a{display:block;text-decoration:none;margin:.26rem 0}
+    .footer a:hover{color:#fff}
+    .legal{max-width:var(--max);margin:auto;padding:1rem;border-top:1px solid #19323d;color:#86969b;font-size:.72rem;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+    .easter-egg{text-align:center;background:#020b10;border-top:1px solid rgba(214,170,78,.18);padding:.55rem 1rem;color:#8a7651;font:italic .71rem Georgia,serif;letter-spacing:.08em}
+
+    .lightbox{position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:1000;display:none;align-items:center;justify-content:center;padding:2rem}
+    .lightbox.open{display:flex}
+    .lightbox img{max-height:92vh;max-width:min(92vw,1200px);border:1px solid #94743a;box-shadow:0 20px 70px #000}
+    .lightbox button{position:absolute;top:1rem;right:1rem;width:46px;height:46px;border-radius:999px;border:1px solid #725c31;background:#081a24;color:#fff;font-size:1.4rem;cursor:pointer}
+
+
+
+    /* CORE20 LIVE CALENDAR REGISTER · NATIVE ORBIT READOUT --------------- */
+    .today-shell{max-width:var(--max);margin:-2.4rem auto 0;padding:0 1rem;position:relative;z-index:4}
+    .today-panel{position:relative;overflow:hidden;border:1px solid #9d7d38;border-radius:22px;background:linear-gradient(145deg,#071923 0%,#0b2632 48%,#07151d 100%);box-shadow:0 24px 70px rgba(0,0,0,.48),inset 0 0 0 1px rgba(240,207,120,.08);padding:1.25rem}
+    .today-panel::before{content:"";position:absolute;inset:7px;border:1px solid rgba(214,170,78,.18);border-radius:16px;pointer-events:none}
+    .today-panel::after{content:"✦  CORE20 NATIVE YEAR WHEEL  ✦";position:absolute;right:1.25rem;top:.8rem;font:700 .6rem/1.2 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;letter-spacing:.14em;color:#967b45;opacity:.82}
+    .today-grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(280px,.65fr);gap:1.1rem;align-items:stretch}
+    .today-copy{padding:.8rem .8rem .55rem;min-width:0}
+    .today-kicker{display:flex;align-items:center;gap:.55rem;flex-wrap:wrap;color:var(--gold2);font:800 .72rem/1.2 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;letter-spacing:.13em;text-transform:uppercase}
+    .live-dot{width:9px;height:9px;border-radius:50%;background:#d2a04c;box-shadow:0 0 0 4px rgba(210,160,76,.10),0 0 16px rgba(210,160,76,.45)}
+    .core-status-strip{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.5rem;margin:.75rem 0 .25rem}
+    .core-status{padding:.55rem .65rem;border:1px solid #2d4856;border-radius:9px;background:#071a23;font:700 .64rem/1.35 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;letter-spacing:.045em;color:#9aabb1}
+    .core-status strong{display:block;margin-top:.15rem;color:#dbc78f;font-size:.75rem}
+    .core-status.good{border-color:#3f7255;background:#09241c}.core-status.good strong{color:#9de1b4}
+    .core-status.bad{border-color:#805044;background:#281813}.core-status.bad strong{color:#f0ad98}
+    .today-register{margin:.9rem 0 .18rem;font:800 clamp(1rem,2vw,1.35rem)/1.15 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color:#d8b961;letter-spacing:.08em}
+
+    .today-name{
+      font:700 clamp(1.8rem,4vw,3.25rem)/1 Georgia,"Times New Roman",serif;
+      color:#f5e4bf;
+      text-shadow:0 3px 22px #000;
+      margin:.32rem 0 .4rem;
+      letter-spacing:-.02em;
+    }
+
+    .today-symbolic{
+      margin:.18rem 0 .38rem;
+      color:#f0cf78;
+      font:800 clamp(1.05rem,3vw,1.45rem)/1.2 "Noto Sans Symbols 2","Segoe UI Symbol",ui-monospace,monospace;
+      letter-spacing:.055em;
+      white-space:nowrap;
+      overflow-x:auto;
+    }
+
+    .today-meta{
+      color:#aebfc3;
+      font:750 .72rem/1.45 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+      letter-spacing:.045em;
+      margin-bottom:.35rem;
+    }
+
+    .today-hidden-paint{
+      display:none!important;
+    }
+    .today-name .day-number{color:var(--gold2);white-space:nowrap}
+    .today-flags{display:flex;gap:.48rem;flex-wrap:wrap;margin:.75rem 0}
+    .today-flag{padding:.38rem .56rem;border:1px solid #365362;border-radius:999px;background:#081b25;color:#c9c2b5;font:750 .68rem/1 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;letter-spacing:.06em;text-transform:uppercase}
+    .today-flag.gold{background:linear-gradient(180deg,#5d4818,#2a2415);border-color:#bc8c2d;color:#ffe28a;box-shadow:0 0 18px rgba(214,170,78,.12)}
+    .today-flag.silver{background:linear-gradient(180deg,#34414a,#17232b);border-color:#9baab1;color:#f3f7f9}
+    .today-flag.business{border-color:#4b8262;color:#a9dfba;background:#0d2b22}
+    .today-printout{margin-top:.95rem;position:relative;background:linear-gradient(180deg,#efe1bc,#d0bd90);color:#2e261a;border:1px solid #92743d;border-radius:9px;padding:.8rem 1rem .72rem;font:700 .83rem/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;box-shadow:inset 0 1px rgba(255,255,255,.6),0 8px 24px rgba(0,0,0,.22)}
+    .today-printout::before,.today-printout::after{content:"";position:absolute;left:12px;right:12px;height:1px;background:repeating-linear-gradient(90deg,#806f4d 0 7px,transparent 7px 11px);opacity:.45}
+    .today-printout::before{top:7px}.today-printout::after{bottom:7px}
+    .print-row{display:flex;justify-content:space-between;gap:1rem;border-bottom:1px dotted rgba(63,49,27,.26);padding:.18rem 0}.print-row:last-child{border-bottom:0}
+    .print-row span:first-child{color:#65563a}.print-row strong{text-align:right;color:#2b2419}
+    .phase-line{font-size:1rem}.phase-line strong{color:#6e4b09}
+    .today-dial-wrap{display:grid;place-items:center;padding:.7rem;min-height:330px}
+    .today-dial{--year-deg:0deg;position:relative;width:min(280px,74vw);aspect-ratio:1;border-radius:50%;background:
+      radial-gradient(circle,#0b202a 0 36%,transparent 37%),
+      /* Exact A8 compass ruler: thin ticks every 64 A8 angle (45 CSS degrees). */
+      repeating-conic-gradient(from 0deg,rgba(240,207,120,.34) 0 .55deg,transparent .55deg 45deg),
+      /* Normal-year band: 360 structured days + 5 Wilson Gold Days = 365. */
+      conic-gradient(from 0deg,
+        rgba(214,170,78,.17) 0deg 44.383562deg,
+        rgba(103,143,157,.08) 44.383562deg 88.767123deg,
+        rgba(214,170,78,.17) 88.767123deg 133.150685deg,
+        rgba(103,143,157,.08) 133.150685deg 177.534247deg,
+        rgba(214,170,78,.17) 177.534247deg 221.917808deg,
+        rgba(103,143,157,.08) 221.917808deg 266.301370deg,
+        rgba(214,170,78,.17) 266.301370deg 310.684932deg,
+        rgba(103,143,157,.08) 310.684932deg 355.068493deg,
+        rgba(225,184,74,.68) 355.068493deg 360deg),
+      radial-gradient(circle,#102e3b,#071821 72%);border:2px solid #8f7138;box-shadow:inset 0 0 0 8px #071923,inset 0 0 0 9px rgba(240,207,120,.22),0 12px 35px #0008}
+    .today-dial::before{content:"";position:absolute;inset:17%;border:1px solid rgba(214,170,78,.35);border-radius:50%}
+    .today-dial::after{content:"";position:absolute;left:50%;top:50%;width:5px;height:40%;border-radius:999px;background:linear-gradient(#f2d276,#8c671e);transform-origin:50% 100%;transform:translate(-50%,-100%) rotate(var(--year-deg));box-shadow:0 0 12px #e5b84a88}
+    .dial-hub{position:absolute;width:18px;height:18px;left:50%;top:50%;transform:translate(-50%,-50%);border-radius:50%;background:#e0bb5b;border:4px solid #362d1e;z-index:3;box-shadow:0 0 15px #d6aa4e88}
+    .dial-label{position:absolute;font:800 .62rem/1.08 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color:#d6c49d;text-shadow:0 2px 4px #000;z-index:4;text-align:center}.dial-label b{display:block;color:#8fa6ad;font-size:.54rem;margin-top:2px}.dial-label.current{color:#ffe083;text-shadow:0 0 10px #d6aa4e}.dial-label.current b{color:#ffe083}
+    .d-n{left:50%;top:5%;transform:translateX(-50%)}.d-ne{right:10%;top:15%}.d-e{right:3%;top:50%;transform:translateY(-50%)}.d-se{right:9%;bottom:15%}.d-s{left:50%;bottom:5%;transform:translateX(-50%)}.d-sw{left:9%;bottom:15%}.d-w{left:3%;top:50%;transform:translateY(-50%)}.d-nw{left:9%;top:15%}
+    .dial-center{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);text-align:center;z-index:2;margin-top:34px;width:132px}.dial-center strong{display:block;font:800 1.2rem Georgia,serif;color:#f1d277}.dial-center small{display:block;color:#9facad;font-size:.56rem;letter-spacing:.08em;text-transform:uppercase;margin-top:.12rem}
+    .today-source{display:flex;justify-content:space-between;gap:.7rem;flex-wrap:wrap;margin:.8rem .2rem 0;color:#82979d;font:600 .64rem/1.45 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;letter-spacing:.035em}.today-source b{color:#a7c8d2}.today-source .warn{color:#e7ba6e}
+    .today-actions{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.82rem}.today-actions button{cursor:pointer}
+    .today-details{margin-top:.8rem;border-top:1px solid #244451;padding-top:.68rem;color:#9cacaf;font-size:.72rem}.today-details summary{cursor:pointer;color:#c8b78f;font-weight:750;letter-spacing:.04em}.today-details code{color:#e4cf9c}
+    .external-proof{margin-top:.65rem;padding:.7rem;border:1px solid #384c55;border-radius:9px;background:#071820}.external-proof strong{color:#d3bd82}.external-proof .button{margin-top:.5rem}
+    .calendar td.today-cell{outline:4px solid #162c35;outline-offset:-4px;box-shadow:inset 0 0 0 2px #ffe17c,0 0 18px rgba(214,170,78,.46);z-index:2;font-weight:900}.calendar td.today-cell::before{content:"TODAY";position:absolute;top:2px;right:3px;font:900 .42rem/1 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;letter-spacing:.08em;color:#2c2518;background:#ffe17c;padding:2px 3px;border-radius:3px}
+    .calendar td.today-cell.air-protected::before{background:#e9f1f5}.calendar td.today-cell.business::before{background:#b8e6c5}
+    @media (max-width:900px){.today-grid{grid-template-columns:1fr}.today-dial-wrap{min-height:290px}.today-panel::after{display:none}.core-status-strip{grid-template-columns:1fr}}
+    @media print{#a8-topside-coherence-02,.actions,.today-actions,.lightbox,.external-proof button{display:none!important}.today-shell{margin:0}.today-panel{box-shadow:none;border:2px solid #80652f}.today-printout{box-shadow:none}.today-dial{box-shadow:none}body{background:#fff;color:#111}.today-panel{background:#10232d;-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+    @media (max-width:1100px){
+      .hero-inner{grid-template-columns:1fr}.hero-art{justify-self:start;max-width:230px}.hero-art img{height:140px}.month-register{grid-template-columns:repeat(4,1fr)}.art-grid{grid-template-columns:repeat(3,minmax(0,190px))}.footer-inner{grid-template-columns:1fr 1fr}.spine{grid-template-columns:1fr 1fr}.yearmath{grid-template-columns:repeat(3,1fr)}
+    }
+    @media (max-width:780px){
+      .calendar-pan-cue{
+        display:block;
+      }
+
+      .navwrap{
+        display:grid;
+        grid-template-columns:1fr auto;
+        gap:.55rem .75rem;
+        align-items:center;
+      }
+
+      .brand{
+        margin:0;
+      }
+
+      .nav-toggle{
+        display:inline-flex;
+        align-items:center;
+        justify-content:center;
+      }
+
+      #a8PrimaryNav{
+        display:none;
+        grid-column:1 / -1;
+        width:100%;
+        margin:0;
+        padding:.35rem;
+        overflow:visible;
+        flex-direction:column;
+        gap:.22rem;
+        border:1px solid rgba(214,170,78,.26);
+        border-radius:11px;
+        background:rgba(4,15,22,.98);
+        box-shadow:0 14px 30px rgba(0,0,0,.34);
+      }
+
+      #a8PrimaryNav.open{
+        display:flex;
+      }
+
+      #a8PrimaryNav a{
+        display:block;
+        width:100%;
+        padding:.68rem .75rem;
+        border-radius:8px;
+        font-size:.78rem;
+      }
+
+      .hero-inner{padding-top:3.2rem}
+      .hero-stats{grid-template-columns:1fr 1fr}
+      .explorer,.rule-grid,.feature-grid{grid-template-columns:1fr}
+
+      /* A8 MOBILE RHYTHM WIDTH NORMALIZATION V1 */
+      .rule-grid,
+      .rule-card{
+        min-width:0;
+        width:100%;
+        max-width:100%;
+        box-sizing:border-box;
+      }
+
+      .month-register{grid-template-columns:repeat(2,1fr)}
+
+      .element-row{
+        grid-template-columns:repeat(5,minmax(90px,1fr));
+        width:100%;
+        max-width:100%;
+        min-width:0;
+        overflow-x:auto;
+        overflow-y:hidden;
+      }
+
+      .rhythm{
+        grid-template-columns:1fr;
+        width:100%;
+        max-width:100%;
+        min-width:0;
+      }
+
+      .rhythm > div{
+        min-width:0;
+      }
+      .art-grid{grid-template-columns:repeat(2,minmax(0,180px));gap:.65rem}
+      .art-card{max-width:180px}
+      .art-card img{height:200px}
+      .feature-image{max-width:230px}
+      .feature-image img{height:260px}
+      .yearmath{grid-template-columns:1fr 1fr}
+      .footer-inner{grid-template-columns:1fr}
+      .section-head{display:block}
+      .section-head p{margin-top:.5rem}
+    }
+    @media (max-width:520px){
+      .spine{grid-template-columns:1fr}
+      .art-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:.55rem}
+      .art-card{max-width:160px}
+      .art-card img{height:170px;padding:.25rem}
+      .art-card figcaption{padding:.45rem}
+      .art-card strong{font-size:.78rem}
+      .art-card span{font-size:.6rem}
+      .hero-art{display:block;max-width:190px}
+      .hero-art img{height:115px}
+      .feature-image{max-width:200px}
+      .feature-image img{height:225px}
+      .yearmath{grid-template-columns:1fr 1fr}
+      .hero-stats{grid-template-columns:1fr 1fr}
+
+      .navwrap{
+        padding:.52rem .7rem;
+        gap:.45rem;
+      }
+
+      .brand{
+        min-width:0;
+        white-space:normal;
+        gap:.45rem;
+      }
+
+      .brandmark{
+        width:32px;
+        height:32px;
+        flex:0 0 32px;
+      }
+
+      .brandtext{
+        min-width:0;
+      }
+
+      .brandtext strong{
+        font-size:.88rem;
+        letter-spacing:.055em;
+        white-space:nowrap;
+      }
+
+      .brandtext small{
+        display:none;
+      }
+
+      .nav-toggle{
+        padding:.5rem .62rem;
+        font-size:.74rem;
+        white-space:nowrap;
+      }
+    }
+  </style>
+
+<style id="a8-date-shorthand-card-style">
+.date-shorthand-card{
+  margin-top:1rem;
+  padding:1.15rem;
+  border-color:rgba(214,170,78,.48);
+  background:
+    radial-gradient(circle at 88% 12%,rgba(214,170,78,.14),transparent 34%),
+    linear-gradient(180deg,rgba(15,44,56,.98),rgba(7,25,34,.98));
+}
+
+.date-shorthand-kicker{
+  color:var(--gold2);
+  font-size:.67rem;
+  font-weight:900;
+  letter-spacing:.16em;
+  margin-bottom:.35rem;
+}
+
+.date-shorthand-card h3{
+  font-size:1.35rem;
+  margin-bottom:.35rem;
+}
+
+.date-shorthand-lede,
+.date-shorthand-card p{
+  color:#cfc5b1;
+  line-height:1.55;
+}
+
+.date-example-grid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:.65rem;
+  margin:1rem 0;
+}
+
+.date-example-grid div{
+  padding:.8rem;
+  border:1px solid rgba(214,170,78,.28);
+  border-radius:10px;
+  background:rgba(5,20,28,.72);
+}
+
+.date-example-grid span{
+  display:block;
+  color:#899da3;
+  font-size:.6rem;
+  font-weight:800;
+  letter-spacing:.12em;
+  margin-bottom:.3rem;
+}
+
+.date-example-grid strong{
+  color:#f4dc97;
+  font:700 1.05rem/1.25 Georgia,"Times New Roman",serif;
+}
+
+.date-example-grid .symbolic-date{
+  display:block;
+  white-space:nowrap;
+  letter-spacing:.03em;
+}
+
+.date-rhythm{
+  display:grid;
+  grid-template-columns:repeat(9,minmax(0,1fr));
+  gap:.35rem;
+  margin:.9rem 0;
+}
+
+.date-rhythm span{
+  display:grid;
+  place-items:center;
+  min-height:38px;
+  border:1px solid #9d7b2e;
+  border-radius:8px;
+  background:linear-gradient(180deg,#624915,#32270e);
+  color:#ffe594;
+  font-weight:900;
+}
+
+@media(max-width:780px){
+  .date-example-grid{
+    grid-template-columns:1fr;
+  }
+
+  .date-rhythm{
+    grid-template-columns:repeat(5,1fr);
+  }
+}
+</style>
+
+
+<style id="a8-year-consolidation-style">
+.year-compact-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:1rem;
+}
+
+.year-compact-card{
+  padding:1.2rem;
+}
+
+.year-compact-number{
+  font:700 2.8rem/1 Georgia,"Times New Roman",serif;
+  color:var(--gold2);
+  margin-bottom:.35rem;
+}
+
+.year-compact-card h3{
+  font-size:1.35rem;
+  margin-bottom:.55rem;
+}
+
+.year-compact-card p{
+  margin:.38rem 0 0;
+  color:#cfc5b1;
+}
+
+.wilson-compact{
+  border-color:rgba(214,170,78,.5);
+  background:
+    radial-gradient(circle at 90% 12%,rgba(214,170,78,.13),transparent 36%),
+    linear-gradient(180deg,rgba(34,38,32,.96),rgba(13,29,34,.98));
+}
+
+.year-details{
+  margin-top:1rem;
+  overflow:hidden;
+}
+
+.year-details > summary{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1rem;
+  padding:1rem 1.15rem;
+  cursor:pointer;
+  list-style:none;
+  color:#f1d984;
+  background:linear-gradient(180deg,#112e3b,#091d27);
+}
+
+.year-details > summary::-webkit-details-marker{
+  display:none;
+}
+
+.year-details > summary strong{
+  display:block;
+  font-size:.82rem;
+  letter-spacing:.09em;
+}
+
+.year-details > summary small{
+  display:block;
+  margin-top:.24rem;
+  color:#9eacae;
+  font-size:.7rem;
+  letter-spacing:.025em;
+}
+
+.year-details-arrow{
+  font-size:1.45rem;
+  line-height:1;
+  transition:transform .18s ease;
+}
+
+.year-details[open] .year-details-arrow{
+  transform:rotate(180deg);
+}
+
+.year-details-body{
+  padding:0 1.1rem 1.2rem;
+}
+
+.year-detail-block{
+  padding-top:1.35rem;
+  margin-top:1.2rem;
+  border-top:1px solid rgba(214,170,78,.18);
+}
+
+.year-detail-block:first-child{
+  margin-top:0;
+}
+
+.year-detail-block h3{
+  font-size:clamp(1.35rem,3vw,2rem);
+  margin:.2rem 0 .7rem;
+}
+
+.year-detail-block > p{
+  color:#cfc5b1;
+}
+
+.year-print-action{
+  margin-top:1.35rem;
+  padding-top:1rem;
+  border-top:1px solid rgba(214,170,78,.18);
+}
+
+@media(max-width:780px){
+  .year-compact-grid{
+    grid-template-columns:1fr;
+  }
+
+  .year-details > summary{
+    align-items:flex-start;
+  }
+
+  .year-details-body{
+    padding:0 .75rem 1rem;
+  }
+}
+</style>
+
+
+<style>
+/* A8 CALENDAR EVENTS BRIDGE v1 */
+.calendar td{
+  position:relative;
+}
+
+.a8-event-star{
+  position:absolute;
+  right:3px;
+  bottom:2px;
+  z-index:4;
+  border:0;
+  padding:0 2px;
+  margin:0;
+  background:transparent;
+  color:#9b681d;
+  font:900 .72rem/1 system-ui,sans-serif;
+  cursor:pointer;
+  text-shadow:0 1px 0 rgba(255,255,255,.65);
+}
+
+.a8-event-star:hover,
+.a8-event-star:focus-visible{
+  color:#111;
+  transform:scale(1.14);
+  outline:none;
+}
+
+.a8-event-popup{
+  position:fixed;
+  inset:0;
+  z-index:10000;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+  background:rgba(4,8,12,.72);
+}
+
+.a8-event-popup.open{
+  display:flex;
+}
+
+.a8-event-popup-panel{
+  position:relative;
+  width:min(680px,96vw);
+  max-height:min(82vh,760px);
+  overflow:auto;
+  border:1px solid #7e6942;
+  border-radius:12px;
+  padding:20px;
+  background:#f5f0e5;
+  color:#181818;
+  box-shadow:0 24px 70px rgba(0,0,0,.48);
+}
+
+.a8-event-popup-close{
+  position:absolute;
+  top:8px;
+  right:10px;
+  border:0;
+  background:transparent;
+  color:#333;
+  cursor:pointer;
+  font:700 1.5rem/1 sans-serif;
+}
+
+.a8-event-popup-heading{
+  margin:0 36px 14px 0;
+  font-size:.82rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:#715829;
+}
+
+.a8-event-card{
+  border-top:1px solid #c9b98f;
+  padding:14px 0 4px;
+}
+
+.a8-event-card:first-child{
+  border-top:0;
+  padding-top:0;
+}
+
+.a8-event-card h3{
+  margin:0 0 8px;
+  font-size:1.05rem;
+}
+
+.a8-event-meta{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px 14px;
+  margin:0 0 8px;
+  font:700 .76rem/1.35 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  color:#574b39;
+}
+
+.a8-event-summary{
+  margin:7px 0 10px;
+  line-height:1.48;
+}
+
+.a8-event-detail{
+  display:inline-block;
+  margin-top:3px;
+  font-weight:800;
+  color:#624510;
+  text-decoration:none;
+}
+
+.a8-event-detail:hover{
+  text-decoration:underline;
+}
+</style>
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to calendar</a>
+
+<nav id="a8-topside-coherence-02"
+     class="cosigo-global-nav"
+     aria-label="A8 Time Lab navigation">
+
+  <div class="a8-topline">
+
+    <a class="cosigo-global-brand"
+       href="https://cosigo.io/"
+       aria-label="COSIGO home">
+      <img src="/assets/cosigo_master_512.gif" alt="COSIGO">
+      <span>COSIGO<small>LABS · AUSPICIOUS 8</small></span>
+    </a>
+
+    <details class="a8-menu">
+      <summary>MENU</summary>
+
+      <div class="a8-menu-panel">
+        <a href="https://lab.cosigo.io/">LAB HOME</a>
+        <a href="https://clock.cosigo.io/">CLOCK</a>
+        <a href="https://calendar.cosigo.io/" aria-current="page">CALENDAR</a>
+        <a href="https://moons.cosigo.io/">MOONS</a>
+        <a href="https://mintaka.cosigo.io/">MINTAKA</a>
+        <a href="https://sol.cosigo.io/">SOL</a>
+        <a href="https://ship.cosigo.io/">EARTHSHIP</a>
+        <a href="https://map.cosigo.io/">MAP · CLOCK · COMPASS</a>
+        <a href="https://sea.cosigo.io/">NAVIGATION</a>
+        <a href="https://stars.cosigo.io/">CELESTIAL</a>
+        <a href="https://audio.cosigo.io/">AUDIO</a>
+        <a href="https://quartz.cosigo.io/">QUARTZ</a>
+        <a href="https://a8.cosigo.io/">A8 PUBLIC</a>
+        <a href="https://about.cosigo.io/">ABOUT</a>
+        <a href="https://contestant.cosigo.io/">FUN</a>
+        <a href="https://cosigo.io/">COSIGO HOME</a>
+        <a href="https://github.com/cosigo/a8">GITHUB</a>
+      </div>
+
+    </details>
+
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="eyebrow">COSIGO Labs · Calendar Architecture · Working Public Research</div>
+      <div class="hero-title-row">
+        <svg class="hero-title-mark" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="27" fill="none" stroke="currentColor" stroke-width="2"/><path d="M32 3l5 24 24 5-24 5-5 24-5-24-24-5 24-5z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="32" cy="32" r="9" fill="none" stroke="currentColor" stroke-width="2"/><text x="32" y="37" text-anchor="middle" font-size="16" fill="currentColor" font-family="Georgia">8</text></svg>
+        <h1>Auspicious 8 <span>Calendar</span></h1>
+      </div>
+      <p class="lede">A year designed as a memorable operating rhythm: <strong>8 compass months</strong>, <strong>9 planetary weeks per month</strong>, <strong>5 elemental days per week</strong>, protected time built into the cycle, and a gold year-end interval called <strong>Wilson&rsquo;s Week</strong>.</p>
+    </div>
+  </div>
+</div>
+
+<section class="today-shell" id="today" aria-labelledby="todayTitle">
+  <div class="today-panel">
+    <div class="today-grid">
+      <div class="today-copy">
+        <div class="today-kicker"><span class="live-dot" id="todayLiveDot"></span><span>CORE20 · LIVE A8 CALENDAR REGISTER</span><span id="todayHealth">READY · CONNECT</span></div>
+
+        <div
+          class="meridian-day-notice"
+          role="note"
+          style="
+            margin:.7rem 0 .2rem;
+            padding:.6rem .75rem;
+            border:1px solid rgba(214,170,78,.34);
+            border-radius:9px;
+            background:rgba(37,31,18,.72);
+            color:#d9c69b;
+            font:700 .67rem/1.45 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+            letter-spacing:.045em;
+          "
+        >
+          NEW A8 CALENDAR DAY · MERIDIAN 0 · 000₈ · LONDON REFERENCE
+          <span style="display:block;color:#9faeb2;font-weight:600">
+            A8 reference date at Meridian 0. Local civil dates may differ by location.
+          </span>
+        </div>
+
+        <div class="today-register" id="todayRegister">— · — · —</div>
+
+        <h2 class="today-name" id="todayTitle">
+          Connect to Core20 and read the live A8 calendar identity.
+        </h2>
+
+        <div class="today-symbolic" id="todaySymbolic">— · — · —</div>
+        <div class="today-meta" id="todayMeta">AWAITING LIVE CALENDAR IDENTITY</div>
+
+        <div class="today-actions">
+          <button class="button" type="button" id="connectCoreButton">CONNECT TO LIVE CORE20 · READ ONLY</button>
+          <a class="button" href="#explore">EXPLORE THE MONTHS</a>
+          <a class="button secondary" href="#protected">PROTECTED DAYS</a>
+          <button class="button secondary" type="button" id="showTodayButton" disabled>SHOW TODAY IN MONTH GRID</button>
+        </div>
+
+        <div class="today-printout" aria-live="polite">
+          <div class="print-row"><span>MONTH COMPASS ANCHOR</span><strong id="todayMonthAnchor">—</strong></div>
+          <div class="print-row phase-line"><span>LIVE CALENDAR YEAR PHASE</span><strong id="todayPhase">— A8 · —₈</strong></div>
+          <div class="print-row phase-line"><span>LIVE ABSOLUTE SOL PHASE</span><strong id="todayAbsolutePhase">— A8 · —₈</strong></div>
+        </div>
+
+        <div class="core-status-strip core-status-strip-compact" aria-label="Core20 calendar connection state">
+          <div class="core-status" id="coreFeedStatus">CORE20 FEED<strong>NOT CONNECTED</strong></div>
+          <div class="core-status" id="solOrbitStatus">ABSOLUTE YEAR PHASE27<strong>WAITING</strong></div>
+        </div>
+
+        <!-- Existing runtime paint targets retained but no longer public furniture. -->
+        <div class="today-hidden-paint" aria-hidden="true">
+          <div class="core-status" id="calendarStatus">A8 CALENDAR<strong>WAITING</strong></div>
+          <strong id="todayPosition">—</strong>
+          <strong id="todayWeek">—</strong>
+          <strong id="todayElement">—</strong>
+          <strong id="todayRhythm">—</strong>
+          <div id="todayFlags"></div>
+        </div>
+
+        <details class="today-details">
+          <summary>NATIVE REGISTER / AUTHORITY DETAILS</summary>
+          <p><b>Calendar day path:</b> the integer A8 <code>YEAR DAY</code> is anchored once for the qualified Core20 source epoch, then the server advances it only from Core20's integer recovered civil-day <code>dayCount</code>. The live <code>ABSOLUTE YEAR PHASE27</code> remains a read-only orbital-orientation / seasonal register and cannot create or remove calendar days. Browser date/time is not an input.</p>
+          <p><b>Authority separation:</b> JPL verifies absolute year-wheel orientation once and is translated into native A8 <code>PHASE27</code>. The eccentric-orbit → steady-speed concentric mean-phase transform remains a mathematical orientation/validation proof, not a calendar-day switch. Running date arithmetic is exactly <code>YEAR DAY = native anchor day + (Core20 dayCount − anchor dayCount)</code>, wrapped at the calendar-year length.</p>
+          <p><b>Calendar seam:</b> North / Day 1 begins at calendar year phase <code>000₈</code>. The established absolute Sol orientation corresponding to that calendar seam is <code>600₈</code>. Month IDs remain the separate three-bit register <code>000–111</code>.</p>
+          <p><b>Compass anchors:</b> N <code>000₈</code> · NE <code>100₈</code> · E <code>200₈</code> · SE <code>300₈</code> · S <code>400₈</code> · SW <code>500₈</code> · W <code>600₈</code> · NW <code>700₈</code>. These remain the exact 64-A8-angle compass references; the month register's compact <code>0₈–7₈</code> labels are not angle values.</p>
+          <p><b>Calendar dial spacing:</b> the recovered year wheel is <code>512 A8 angle</code>. In a normal 365-day A8 year, the 360 structured month-days occupy <code>504.9863 A8 angle</code>, each 45-day month occupies <code>63.1233 A8 angle</code>, and Wilson's five Gold Days occupy the final <code>7.0137 A8 angle</code>. In native Cycle D, the 366-day leap year gives the structured 360 days <code>503.6066 A8 angle</code>, each month <code>62.9508 A8 angle</code>, and six Gold Days <code>8.3934 A8 angle</code>. The thin compass ticks remain the independent exact 64-A8-angle ruler.</p>
+          <p><b>Transport:</b> polling only repaints server-owned state. Poll cadence does not advance the calendar. This display does not call the Core20 clock-alignment POST.</p>
+          <p><b>Qualified absolute year PHASE27:</b> <code id="todaySol27">—</code></p>
+          <p><b>Native integer calendar anchor:</b> <code id="todayCalendarAnchorMath">—</code></p>
+          <p><b>Counted civil-day advance:</b> <code id="todayCalendarCountMath">—</code></p>
+          <p><b>Core20 selected raw carried with qualified year phase:</b> <code id="todaySelectedRaw">—</code></p>
+          <div class="external-proof">
+            <strong>OPTIONAL EXTERNAL ORIENTATION RECORD · QUARANTINED</strong>
+            <p>This one-shot record establishes orbital orientation only. It does not choose, increment or decrement the integer calendar day. The native A8 YEAR DAY anchor is separate; after that anchor is locked, only Core20's recovered civil-day count advances the calendar.</p>
+            <div id="externalProofText">Not loaded.</div>
+            <button class="button secondary" type="button" id="loadExternalProofButton">LOAD ONE-SHOT JPL VERIFICATION RECORD</button>
+          </div>
+
+          <div class="wilson-preview-tools">
+            <strong>WILSON SEAM PREVIEW · DISPLAY ONLY</strong>
+            <p>
+              Exercises the calendar presentation with synthetic YEAR DAY values only.
+              It does not write Core20, the calendar checkpoint, year angle, UTC, or the live counted day.
+            </p>
+            <div class="wilson-preview-actions">
+              <button class="button secondary" type="button" data-wilson-preview-day="360">NW 45</button>
+              <button class="button secondary" type="button" data-wilson-preview-day="361">GOLD 1</button>
+              <button class="button secondary" type="button" data-wilson-preview-day="362">GOLD 2</button>
+              <button class="button secondary" type="button" data-wilson-preview-day="363">GOLD 3</button>
+              <button class="button secondary" type="button" data-wilson-preview-day="364">GOLD 4</button>
+              <button class="button secondary" type="button" data-wilson-preview-day="365">GOLD 5</button>
+              <button class="button secondary" type="button" data-wilson-preview-day="366">LEAP GOLD 6</button>
+              <button class="button secondary" type="button" data-wilson-preview-day="1">NORTH 1</button>
+              <span class="wilson-cycle-preview-label">ART CYCLE · DISPLAY ONLY</span>
+              <button class="button secondary" type="button" data-wilson-cycle-preview="0">ART A · 5</button>
+              <button class="button secondary" type="button" data-wilson-cycle-preview="1">ART B · 5</button>
+              <button class="button secondary" type="button" data-wilson-cycle-preview="2">ART C · 5</button>
+              <button class="button secondary" type="button" data-wilson-cycle-preview="3">ART D · 6</button>
+              <button class="button" type="button" id="wilsonPreviewReturn">RETURN TO LIVE</button>
+            </div>
+          </div>
+        </details>
+      </div>
+
+      <div class="today-dial-wrap" aria-label="Live A8 calendar year phase on the 000₈–777₈ compass ruler">
+        <div class="today-dial" id="todayDial">
+          <span class="dial-label d-n" data-dir="N">N<b>000₈</b></span>
+          <span class="dial-label d-ne" data-dir="NE">NE<b>100₈</b></span>
+          <span class="dial-label d-e" data-dir="E">E<b>200₈</b></span>
+          <span class="dial-label d-se" data-dir="SE">SE<b>300₈</b></span>
+          <span class="dial-label d-s" data-dir="S">S<b>400₈</b></span>
+          <span class="dial-label d-sw" data-dir="SW">SW<b>500₈</b></span>
+          <span class="dial-label d-w" data-dir="W">W<b>600₈</b></span>
+          <span class="dial-label d-nw" data-dir="NW">NW<b>700₈</b></span>
+          <span class="dial-hub"></span>
+          <span class="dial-center"><strong id="dialPhase">—</strong><small>calendar year phase</small></span>
+        </div>
+      </div>
+    </div>
+    <div class="today-source"><span><b>NATIVE PATH:</b> ONE-SHOT YEAR-WHEEL ORIENTATION + NATIVE INTEGER YEAR-DAY ANCHOR → CORE20 INTEGER CIVIL-DAY COUNT → A8 CALENDAR</span><span id="todayRefreshState">DISPLAY DISCONNECTED</span></div>
+  </div>
+</section>
+
+<section class="wilson-live-shell" id="wilsonLiveSection" aria-hidden="true">
+  <div class="wilson-live-card">
+    <div class="wilson-cycle-art" id="wilsonCycleArt" aria-hidden="true"></div>
+
+    <div class="wilson-cycle-caption" id="wilsonCycleCaption">
+      YEAR-END ART · CYCLE A · LANTERN GOLD
+    </div>
+
+    <div class="wilson-earned-banner" id="wilsonEarnedBanner">
+      <strong>YOU STAYED TO THE END. NOW CHOOSE YOUR OWN DIRECTION.</strong>
+      <button type="button" id="wilsonEasterEggReturn">RETURN TO CALENDAR</button>
+    </div>
+
+    <div class="wilson-preview-banner" id="wilsonPreviewBanner">
+      ENGINEERING PREVIEW · DISPLAY ONLY · LIVE CORE20 COUNT REMAINS UNCHANGED
+    </div>
+
+    <div class="wilson-live-grid">
+      <article class="wilson-compass-panel">
+        <div class="eyebrow">Outside the compass month register</div>
+        <h2 class="wilson-live-title" id="wilsonLiveTitle">Wilson&rsquo;s Week</h2>
+
+        <p class="wilson-live-lede" id="wilsonLiveLede">
+          For 360 days, the A8 calendar gives you a direction.
+          During Wilson&rsquo;s Week, the compass is set free.
+          For five Gold Days, everyone may go their own way.
+        </p>
+
+        <div class="wilson-compass" id="wilsonCompass" aria-label="A8 Wilson's Week compass">
+          <span class="wc-n">N</span>
+          <span class="wc-e">E</span>
+          <span class="wc-s">S</span>
+          <span class="wc-w">W</span>
+          <div class="wilson-compass-rose" aria-hidden="true"></div>
+        </div>
+
+        <div class="wilson-compass-message" id="wilsonCompassMessage">
+          360 DAYS OF DIRECTION · 5 DAYS TO CHOOSE YOUR OWN
+        </div>
+      </article>
+
+      <article class="wilson-days-panel">
+        <div class="wilson-state">
+          <span id="wilsonStateKicker">YEAR-END INTERVAL</span>
+          <strong id="wilsonStateText">WILSON&rsquo;S WEEK</strong>
+        </div>
+
+        <div class="wilson-day-grid" id="wilsonDayGrid">
+          <div class="wilson-day" data-wilson-day="1">
+            <span class="wd-num">GOLD 1</span>
+            <span class="wilson-element-label day-label"><span class="day-formal">🜂</span><strong>Fire</strong><span class="day-drawing">🔥</span></span>
+            <small>Protected</small>
+          </div>
+
+          <div class="wilson-day" data-wilson-day="2">
+            <span class="wd-num">GOLD 2</span>
+            <span class="wilson-element-label day-label"><span class="day-formal">🜄</span><strong>Water</strong><span class="day-drawing">🌊</span></span>
+            <small>Protected</small>
+          </div>
+
+          <div class="wilson-day" data-wilson-day="3">
+            <span class="wd-num">GOLD 3</span>
+            <span class="wilson-element-label day-label"><span class="day-formal">🜃</span><strong>Earth</strong><span class="day-drawing"><svg class="day-art" viewBox="0 0 32 20" aria-hidden="true"><path d="M2 17 L8 10 L12 13 L19 5 L30 17"/><path d="M2 17 H30"/></svg></span></span>
+            <small>Protected</small>
+          </div>
+
+          <div class="wilson-day" data-wilson-day="4">
+            <span class="wd-num">GOLD 4</span>
+            <span class="wilson-element-label day-label"><span class="day-formal">🜁</span><strong>Air</strong><span class="day-drawing"><svg class="day-art" viewBox="0 0 32 20" aria-hidden="true"><path d="M2 5 C6 2 10 8 14 5 S22 2 30 5"/><path d="M2 10 C6 7 10 13 14 10 S22 7 30 10"/><path d="M2 15 C6 12 10 18 14 15 S22 12 30 15"/></svg></span></span>
+            <small>Protected</small>
+          </div>
+
+          <div class="wilson-day" data-wilson-day="5">
+            <span class="wd-num">GOLD 5</span>
+            <span class="wilson-element-label day-label"><span class="day-formal">✦</span><strong>Aether</strong><span class="day-drawing">✦</span></span>
+            <small>Protected</small>
+          </div>
+
+          <div class="wilson-day leap" data-wilson-day="6">
+            <span class="wd-num">LEAP GOLD 6</span>
+            <span class="wd-icon">✹</span>
+            <strong>Leap Gold Day</strong>
+            <small>Only when required</small>
+          </div>
+        </div>
+
+        <div class="wilson-leap-impact" id="wilsonLeapImpact" role="status" aria-live="polite">
+          <strong>A8 YEAR WHEEL EXCEPTION</strong>
+          <div>LEAP GOLD DAY DETECTED</div>
+          <div><code>360 + 6 = 366</code></div>
+          <div>STRUCTURED CALENDAR REMAINS PARKED</div>
+          <div>NORTH · DAY 1 RESUMES NEXT COUNT</div>
+          <div style="margin-top:.55rem">CALENDAR CORE HEALTHY · THIS IS SUPPOSED TO HAPPEN</div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<main id="main">
+  <section id="explore" aria-labelledby="explore-title">
+    <div class="section-head">
+      <div><div class="eyebrow">3-bit month register</div><h2 id="explore-title">Eight compass months</h2></div>
+      <p>Binary identifies the machine state, the octal digit is the compact A8 readable abbreviation, and the compass name makes the month memorable.</p>
+    </div>
+
+    <div class="month-register" id="monthRegister" role="tablist" aria-label="Choose an A8 compass month"></div>
+
+    <div class="explorer">
+      <div class="panel parchment calendar-wrap">
+        <div class="cal-title"><h3 id="monthTitle">000 · 0₈ · N · North</h3><span class="badge" id="monthType">MONTH A · 32 / 13</span></div>
+        <div class="calendar-pan-cue" aria-hidden="true">DRAG / SWIPE LEFT · MORE CALENDAR →</div>
+        <div class="calendar-scroll" tabindex="0" role="region" aria-label="Scrollable A8 month calendar">
+        <table class="calendar" aria-describedby="calendarCaption">
+          <caption id="calendarCaption" style="position:absolute;left:-9999px">Selected A8 month showing nine planetary weeks and five elemental day columns.</caption>
+          <thead><tr><th scope="col">Planetary week</th><th scope="col"><span class="day-label"><span class="day-formal">🜂</span><span class="day-word">Fire</span><span class="day-drawing">🔥</span></span><span>Day 1</span></th><th scope="col"><span class="day-label"><span class="day-formal">🜄</span><span class="day-word">Water</span><span class="day-drawing">🌊</span></span><span>Day 2</span></th><th scope="col"><span class="day-label"><span class="day-formal">🜃</span><span class="day-word">Earth</span><span class="day-drawing"><svg class="day-art" viewBox="0 0 32 20" aria-hidden="true"><path d="M2 17 L8 10 L12 13 L19 5 L30 17"/><path d="M2 17 H30"/></svg></span></span><span>Day 3</span></th><th scope="col"><span class="day-label"><span class="day-formal">🜁</span><span class="day-word">Air</span><span class="day-drawing"><svg class="day-art" viewBox="0 0 32 20" aria-hidden="true"><path d="M2 5 C6 2 10 8 14 5 S22 2 30 5"/><path d="M2 10 C6 7 10 13 14 10 S22 7 30 10"/><path d="M2 15 C6 12 10 18 14 15 S22 12 30 15"/></svg></span></span><span>Day 4</span></th><th scope="col"><span class="day-label"><span class="day-formal">✦</span><span class="day-word">Aether</span><span class="day-drawing">✦</span></span><span>Day 5</span></th></tr></thead>
+          <tbody id="calendarBody"></tbody>
+        </table>
+        </div>
+      </div>
+
+      <aside class="panel month-side" aria-live="polite">
+        <div class="eyebrow">Selected month</div>
+        <h3 id="sideTitle">North</h3>
+        <p id="sideDesc">Month register 000 · octal 0₈ · compass North.</p>
+        <div class="metric"><span>Structured days</span><strong>45</strong></div>
+        <div class="metric"><span>Planetary weeks</span><strong>9</strong></div>
+        <div class="metric"><span>Business days</span><strong id="businessCount">32</strong></div>
+        <div class="metric"><span>Protected days</span><strong id="protectedCount">13</strong></div>
+        <div class="metric"><span>Opening week form</span><strong id="openingForm">A · 4/1</strong></div>
+        <a class="button" id="monthArtwork" href="/image-viewer.html#/assets/ausp8_north.png">OPEN MONTH ARTWORK</a>
+        <div class="mini-note"><strong>Important:</strong> month boundaries do not reset the 4/1 → 3/2 alternation. Because each month contains nine weeks, the next month begins with the opposite week form.</div>
+      </aside>
+    </div>
+  </section>
+
+  <section aria-labelledby="structure-title">
+    <div class="section-head">
+      <div><div class="eyebrow">The whole machine</div><h2 id="structure-title">Calendar architecture at a glance</h2></div>
+      <p>The year has an exact 360-day structured body. The week rhythm alternates continuously across month boundaries; it does not restart merely because a month changes.</p>
+    </div>
+    <div class="spine">
+      <article class="spine-card"><span class="num">8</span><h3>Compass months</h3><p>Three-bit month register: <code>000</code> through <code>111</code>, paired with N, NE, E, SE, S, SW, W and NW.</p></article>
+      <article class="spine-card"><span class="num">9</span><h3>Planetary weeks</h3><p>Mercury, Venus, Terra, Mars, Jupiter, Saturn, Uranus, Neptune and Pluto form the nine named week rows.</p></article>
+      <article class="spine-card"><span class="num">5</span><h3>Element days</h3><p>Fire → Water → Earth → Air → Aether. Day numbering stays with the intuitive decimal sequence 1 through 45.</p></article>
+      <article class="spine-card"><span class="num">5 / 6</span><h3>Wilson&rsquo;s Week</h3><p>Year-end celebration outside the eight-month register: five protected gold element days, plus a sixth gold leap-extension day when required.</p></article>
+    </div>
+  </section>
+
+  <section id="protected" aria-labelledby="protected-title">
+    <div class="section-head">
+      <div><div class="eyebrow">A calendar with protected time built in</div><h2 id="protected-title">Work, life, observance and rest</h2></div>
+      <p>Aether is always protected. Air alternates between ordinary business and protected silver. Holidays and religious observances are assigned only to protected days or Wilson&rsquo;s Week, so ordinary business days remain ordinary business days.</p>
+    </div>
+
+    <div class="rule-grid">
+      <article class="panel rule-card">
+        <h3>The five-day elemental rhythm</h3>
+        <div class="element-row">
+          <div class="element"><div class="element-title day-label"><span class="day-formal">🜂</span><strong>Fire</strong><span class="day-drawing">🔥</span></div><small>business · get moving</small></div>
+          <div class="element"><div class="element-title day-label"><span class="day-formal">🜄</span><strong>Water</strong><span class="day-drawing">🌊</span></div><small>business · flow</small></div>
+          <div class="element"><div class="element-title day-label"><span class="day-formal">🜃</span><strong>Earth</strong><span class="day-drawing"><svg class="day-art" viewBox="0 0 32 20" aria-hidden="true"><path d="M2 17 L8 10 L12 13 L19 5 L30 17"/><path d="M2 17 H30"/></svg></span></div><small>business · grounded</small></div>
+          <div class="element air"><div class="element-title day-label"><span class="day-formal">🜁</span><strong>Air</strong><span class="day-drawing"><svg class="day-art" viewBox="0 0 32 20" aria-hidden="true"><path d="M2 5 C6 2 10 8 14 5 S22 2 30 5"/><path d="M2 10 C6 7 10 13 14 10 S22 7 30 10"/><path d="M2 15 C6 12 10 18 14 15 S22 12 30 15"/></svg></span></div><small>business / silver</small></div>
+          <div class="element aether"><div class="element-title day-label"><span class="day-formal">✦</span><strong>Aether</strong><span class="day-drawing">✦</span></div><small>always gold</small></div>
+        </div>
+        <div class="rhythm">
+          <div><strong>Week A · 4 / 1</strong><span>Fire, Water, Earth, Air business · Aether protected.</span></div>
+          <div><strong>Week B · 3 / 2</strong><span>Fire, Water, Earth business · Air and Aether protected.</span></div>
+          <div><strong>Forever alternating</strong><span>A → B → A → B continuously through month boundaries.</span></div>
+        </div>
+        <div class="notice"><strong>Protected-day rule:</strong> holidays, religious observance, civic observance, family days and festivals belong on Gold Aether days, Silver protected Air days, or Wilson&rsquo;s Week. This is a design rule of the A8 calendar proposal, not a claim about existing civil law.</div>
+      </article>
+
+      <article class="panel rule-card">
+        <h3>A 32-A8-hour business day with room to live</h3>
+        <p style="color:var(--muted);margin-top:0">The proposed ordinary business-day rhythm uses the native A8 day rather than legacy hours.</p>
+        <div class="rhythm">
+          <div><strong>11 A8 HOUR</strong><span>Work block total, including one A8 HOUR lunch break.</span></div>
+          <div><strong>10 A8 HOUR</strong><span>Recreation, family, errands, learning, community and personal time.</span></div>
+          <div><strong>11 A8 HOUR</strong><span>Rest / sleep block.</span></div>
+        </div>
+        <div class="notice"><strong>32 A8 HOUR total:</strong> 11 work + 10 recreation + 11 rest. Protected days are intentionally not assigned the ordinary business-day schedule.</div>
+        <p style="font-size:.82rem;color:var(--muted)">A8 HOUR means 1/32 of the A8 day. It is not a legacy hour with a new label.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="year-consolidated" aria-labelledby="wilson-title">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">Year structure · year-end</div>
+        <h2 id="wilson-title">360 structured days · then Wilson&rsquo;s Week</h2>
+      </div>
+      <p>The ordinary eight-month register closes cleanly at 360 days. A separate protected gold interval then closes the year.</p>
+    </div>
+
+    <div class="year-compact-grid">
+      <article class="panel year-compact-card">
+        <div class="year-compact-number">360</div>
+        <h3>Structured year body</h3>
+        <p><strong>72</strong> five-day weeks · <strong>36 + 36</strong> alternating week forms.</p>
+        <p><strong>252 business days + 108 protected days</strong>.</p>
+      </article>
+
+      <article class="panel year-compact-card wilson-compact">
+        <div class="year-compact-number">5</div>
+        <h3>Wilson&rsquo;s Week</h3>
+        <p><strong>Fire · Water · Earth · Air · Aether</strong> — all protected Gold Days outside the ordinary month register.</p>
+        <p>Normal year: <strong>365</strong>. Leap extension when required: <strong>366</strong>.</p>
+      </article>
+    </div>
+
+    <details class="panel year-details" id="yearDetails">
+      <summary>
+        <span>
+          <strong>YEAR DETAILS &amp; ARTWORK</strong>
+          <small>Arithmetic · eight month pages · Wilson&rsquo;s Week · explanation plates · print</small>
+        </span>
+        <span class="year-details-arrow" aria-hidden="true">⌄</span>
+      </summary>
+
+      <div class="year-details-body">
+        <div class="year-detail-block">
+          <div class="eyebrow">Why the alternation closes cleanly</div>
+          <h3 id="yearmath-title">The 360-day body balances exactly</h3>
+          <p>There are 72 five-day weeks in eight months. Because 72 is even, exactly half are Week A and half are Week B, and the annual alternation returns to its starting orientation after the structured body.</p>
+          <div class="research-note"><strong>Month rhythm:</strong> four months contain 32 business / 13 protected days and four contain 31 business / 14 protected days. The month types alternate because nine weeks is odd. The eight-month body therefore closes at 252 business + 108 protected = 360 days.</div>
+        </div>
+
+        <div class="year-detail-block">
+          <div class="eyebrow">Calendar atlas</div>
+          <h3 id="art-title">The eight month pages</h3>
+          <p>Each artwork carries the same calendar machinery while the compass identity changes. Open any page at full resolution.</p>
+
+          <div class="art-grid" id="artGrid"></div>
+        </div>
+
+        <div class="year-detail-block">
+          <div class="eyebrow">Outside the month register</div>
+          <h3>Wilson&rsquo;s Week · full year-end notes</h3>
+
+          <div class="feature-grid">
+            <article class="panel feature-copy">
+              <h3>Five gold element days</h3>
+
+              <p>After month <code>111 · 7₈ · NW</code> closes, the month register has completed every possible three-bit state. Wilson&rsquo;s Week follows the 360-day body as a separate year-end interval:</p>
+
+              <ul>
+                <li><strong>Fire · Water · Earth · Air · Aether</strong> — all protected Gold Days.</li>
+                <li>Reserved for year-end celebration, holidays, festivals, family, gratitude, civic and religious observance.</li>
+                <li>Five days in a normal year: 360 + 5 = <strong>365</strong>.</li>
+                <li>A leap correction may add one additional protected Gold Day: 360 + 6 = <strong>366</strong>.</li>
+                <li>The optional sixth day is a leap-extension day; it does not invent a sixth element or a ninth month.</li>
+              </ul>
+
+              <div class="notice">The phrase <strong>open-ended</strong> means the celebration sits outside the ordinary month/week register. The ordinary form is five Gold Days, with the sixth used only when leap correction requires it.</div>
+
+              <div class="notice"><strong>Possible continuous year-end break:</strong> depending on how the ordinary work rhythm meets the year-end boundary, Wilson&rsquo;s Week may join directly to one or two adjacent non-work days. This can produce a continuous year-end break of <strong>6, 7, or 8 days</strong>: five Gold Days plus one or two adjacent non-work days, with the leap-extension Gold Day adding one further day when required. The exact continuous break therefore depends on calendar alignment and leap-year status; Wilson&rsquo;s Week itself remains the defined five-day interval, or six days when the leap correction is present.</div>
+
+              <a class="button" href="/image-viewer.html#/assets/ausp8_year_end.png">OPEN WILSON&rsquo;S WEEK ARTWORK</a>
+            </article>
+
+            <a class="panel feature-image" href="/image-viewer.html#/assets/ausp8_year_end.png" data-lightbox aria-label="Open Wilson's Week artwork">
+              <img src="/assets/thumbs/ausp8_year_end.png" width="360" height="450" loading="lazy" decoding="async" alt="Wilson's Week year-end celebration artwork with Fire, Water, Earth, Air and Aether gold days">
+            </a>
+          </div>
+        </div>
+
+        <div class="year-detail-block">
+          <div class="eyebrow">Show, then explain</div>
+          <h3 id="explain-title">Examples and explanation plates</h3>
+          <p>The artwork is playful; the rules underneath it are explicit. These plates explain protected days, year structure and the operating rhythm.</p>
+
+          <div class="art-grid">
+            <a class="panel art-card" href="/image-viewer.html#/assets/ausp8_example.png" data-lightbox>
+              <figure>
+                <img src="/assets/thumbs/ausp8_example.png" width="360" height="509" loading="lazy" decoding="async" alt="A8 protected days example with Aether highlighted gold and alternating Air highlighted silver">
+                <figcaption>
+                  <strong>Protected Days Example</strong>
+                  <span>Gold Aether · Silver alternating Air · business-day rhythm.</span>
+                </figcaption>
+              </figure>
+            </a>
+
+            <a class="panel art-card" href="/image-viewer.html#/assets/ausp8_total.png" data-lightbox>
+              <figure>
+                <img src="/assets/thumbs/ausp8_total.png" width="360" height="450" loading="lazy" decoding="async" alt="Auspicious 8 complete year calendar overview">
+                <figcaption>
+                  <strong>One-Year Overview</strong>
+                  <span>All eight compass months and the year-end interval together.</span>
+                </figcaption>
+              </figure>
+            </a>
+          </div>
+        </div>
+
+        <div class="actions year-print-action">
+          <button class="button secondary" type="button" onclick="window.print()">PRINT A8 TODAY</button>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <section aria-labelledby="language-title">
+    <div class="section-head"><div><div class="eyebrow">Native vocabulary</div><h2 id="language-title">A date people can actually remember</h2></div><p>The machine can retain exact binary state while people speak in compass, planet and element names.</p></div>
+    <div class="rule-grid">
+      <article class="panel rule-card">
+        <h3>Month language</h3>
+        <p><code>000 · 0₈ · N · North</code> through <code>111 · 7₈ · NW · Northwest</code>.</p>
+        <p>The 3-bit state is exact; the octal digit is compact; the compass name is mnemonic.</p>
+      </article>
+      <article class="panel rule-card">
+        <h3>Week and day language</h3>
+        <p>Example: <strong>Jupiter Week · Aether Day</strong>, or <strong>Venus Week · protected Air Day</strong>.</p>
+        <p>The planetary names are calendar labels following the familiar historical nine-world sequence. Retaining Pluto as the ninth week name is nomenclature for this calendar, not a claim about modern astronomical classification.</p>
+      </article>
+    </div>
+
+    <aside class="panel date-shorthand-card" id="a8DateShorthandCard">
+      <div class="date-shorthand-kicker">DATE SHORTHAND · ONE-HAND RHYTHM</div>
+      <h3>Write it the way that is useful</h3>
+
+      <p class="date-shorthand-lede">
+        The written form can change without changing the underlying calendar position.
+      </p>
+
+      <div class="date-example-grid" aria-label="Equivalent A8 date notation">
+        <div>
+          <span>QUICK</span>
+          <strong>(5) 26 · 2026</strong>
+        </div>
+        <div>
+          <span>COMPASS</span>
+          <strong>SW 26 · 2026</strong>
+        </div>
+        <div>
+          <span>NAMED</span>
+          <strong>Southwest · Saturn · Fire · 2026</strong>
+        </div>
+        <div>
+          <span>SYMBOLIC</span>
+          <strong class="symbolic-date">5₈ · ♄ · 🜂 · 2026</strong>
+        </div>
+      </div>
+
+      <p>
+        A conventional year may be appended as a familiar reference.
+        The A8 month, week and element position remain unchanged.
+      </p>
+
+      <div class="date-rhythm" aria-label="Protected Aether days">
+        <span>5</span>
+        <span>10</span>
+        <span>15</span>
+        <span>20</span>
+        <span>25</span>
+        <span>30</span>
+        <span>35</span>
+        <span>40</span>
+        <span>45</span>
+      </div>
+
+      <p>
+        Every fifth day is <strong>Aether</strong> and protected:
+        5, 10, 15, 20, 25, 30, 35, 40 and 45.
+        The five-day elemental rhythm can therefore be counted naturally on one hand.
+      </p>
+
+      <p>
+        Planetary week and element names repeat in every compass month.
+        <strong>Saturn · Fire is always Day 26</strong>, so it occurs once in every month.
+        Include a month number, compass direction or month name whenever the
+        full-year date must be unambiguous.
+      </p>
+    </aside>
+  </section>
+
+  <section aria-labelledby="status-title">
+    <div class="section-head"><div><div class="eyebrow">Research status</div><h2 id="status-title">What this page is — and is not</h2></div></div>
+    <div class="panel rule-card">
+      <p>This is a <strong>COSIGO Labs experimental calendar architecture</strong>: a proposal for organizing the civil year around an eight-month register, a five-day elemental rhythm and pre-allocated protected time. The images are illustrative presentation artwork; the exact calendar rules are the text and generated tables on this page.</p>
+      <p>It does not claim that compass directions, planet names or classical elements cause the astronomical year. They are memorable descriptive labels placed on an engineered calendar. The underlying A8 project continues to separate Nature, observation, physical rulers and engineered representation.</p>
+      <p>The live calendar panel reads Core20's qualified absolute year phase directly and derives the named A8 date from that native year position. The one-shot external orientation record remains upstream and isolated; it never supplies the page's running rate, day number, month, week or element. The formal leap-correction rule remains an open research item.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="27" fill="none" stroke="currentColor" stroke-width="2"/><path d="M32 3l5 24 24 5-24 5-5 24-5-24-24-5 24-5z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="32" cy="32" r="9" fill="none" stroke="currentColor" stroke-width="2"/><text x="32" y="37" text-anchor="middle" font-size="16" fill="currentColor" font-family="Georgia">8</text></svg>
+      <div><h3>COSIGO Labs · Auspicious 8</h3><p>Experimental ground-up measurement and representation research. Nature first; ruler second; legacy conversion last.</p></div>
+    </div>
+    <div><h3>Explore A8</h3><a href="https://a8.cosigo.io/">A8 Public Instrument</a><a href="https://lab.cosigo.io/">A8 Engineering Lab</a><a href="https://calendar.cosigo.io/">Calendar</a><a href="https://clock.cosigo.io/">Clock</a><a href="https://moons.cosigo.io/">Four-Moon Observer</a><a href="/map-clock-compass.html">Map · Clock · Compass</a></div>
+    <div><h3>Research</h3><a href="https://a8.cosigo.io/">A8 Public</a><a href="/jovian-operations.html">Core20 Front Page</a><a href="/relationship.html">Mintaka · Sol Relationship</a><a href="/data.html">Observation Archive</a><a href="/telescope.html">Telescope Emulator</a><a href="/angle.html">Angle Translator</a></div>
+    <div><h3>COSIGO</h3><a href="https://cosigo.io/">COSIGO Home</a><a href="https://cosigo.io/">COSIGO Home</a><a href="https://github.com/cosigo/a8">GitHub · A8</a><p>COSIGO™ · CIGO™ · Auspicious 8™</p></div>
+  </div>
+  <div class="legal">
+    <span>© 2026 COSIGO Labs. All rights reserved.</span>
+    <span>Natural phenomena, mathematical facts and general scientific principles are not claimed as proprietary.</span>
+    <span>Original software, text, graphics, diagrams and presentation remain protected works. Contact the authors regarding republication, adaptation, collaboration or licensing.</span>
+  </div>
+  <div class="easter-egg">⚓ www.com — Wendall Wilsons World dot com-edy · cosigo.io ⚓</div>
+
+  <div class="wilson-secret-doorway">
+    <button
+      class="wilson-secret-trigger"
+      id="wilsonEasterEggTrigger"
+      type="button"
+      aria-label="Open Wilson's Week"
+      title="Choose your own direction"
+    >✥</button>
+  </div>
+</footer>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Calendar artwork viewer"><button type="button" aria-label="Close artwork">×</button><img alt=""></div>
+
+<script>
+(() => {
+  'use strict';
+
+  const months = [
+    {bits:'000', oct:'0₈', dir:'N',  name:'North',     anchor:'000₈', anchorDec:0,   art:'/assets/ausp8_north.png'},
+    {bits:'001', oct:'1₈', dir:'NE', name:'Northeast', anchor:'100₈', anchorDec:64,  art:'/assets/ausp8_ne.png'},
+    {bits:'010', oct:'2₈', dir:'E',  name:'East',      anchor:'200₈', anchorDec:128, art:'/assets/ausp8_east.png'},
+    {bits:'011', oct:'3₈', dir:'SE', name:'Southeast', anchor:'300₈', anchorDec:192, art:'/assets/ausp8_se.png'},
+    {bits:'100', oct:'4₈', dir:'S',  name:'South',     anchor:'400₈', anchorDec:256, art:'/assets/ausp8_south.png'},
+    {bits:'101', oct:'5₈', dir:'SW', name:'Southwest', anchor:'500₈', anchorDec:320, art:'/assets/ausp8_sw.png'},
+    {bits:'110', oct:'6₈', dir:'W',  name:'West',      anchor:'600₈', anchorDec:384, art:'/assets/ausp8_west.png'},
+    {bits:'111', oct:'7₈', dir:'NW', name:'Northwest', anchor:'700₈', anchorDec:448, art:'/assets/ausp8_nw.png'}
+  ];
+
+  const artworkViewerUrl = art =>
+    '/image-viewer.html#' + encodeURIComponent(art);
+  const planets = ['Mercury','Venus','Terra','Mars','Jupiter','Saturn','Uranus','Neptune','Pluto'];
+  const planetGlyph = ['☿','♀','⊕','♂','♃','♄','♅','♆','♇'];
+  const liveElementGlyph = ['🜂','🜄','🜃','🜁','✦'];
+  const elements = ['Fire','Water','Earth','Air','Aether'];
+
+  const register = document.getElementById('monthRegister');
+  const body = document.getElementById('calendarBody');
+  const artGrid = document.getElementById('artGrid');
+
+  /*
+   * NATIVE A8 CALENDAR BRIDGE
+   * -------------------------
+   * Inputs:
+   *   /api/core20/year-angle → qualified ABSOLUTE YEAR PHASE27 (read-only position)
+   *   /api/core20/calendar   → server-owned native integer YEAR DAY
+   *
+   * YEAR DAY is anchored separately from orbital angle. After the native anchor
+   * is locked, only Core20 integer dayCount advances the date.
+   * The stored one-shot UTC/JPL alignment instant may parameterize the ellipse
+   * correction; browser current date/time is never read and polling is display only.
+   *
+   * Calendar seam: absolute Sol phase 600₈ (270°) = North / Day 1.
+   */
+  const YEAR_PHASE27_STATES = 1n << 27n;
+  const FINE_PER_A8_ANGLE = 1n << 18n;
+  const CALENDAR_NORTH_ABSOLUTE = 384n * FINE_PER_A8_ANGLE; // 600₈ absolute
+
+  let liveToday = null;
+  let userExploringMonth = false;
+  let feedConnected = false;
+  let refreshTimer = null;
+  let refreshBusy = false;
+
+  const modBig = (a,m) => ((a % m) + m) % m;
+
+  function setStatus(id, label, value, kind='') {
+    const el=document.getElementById(id);
+    if(!el) return;
+    el.className=`core-status ${kind}`.trim();
+    el.innerHTML=`${label}<strong>${value}</strong>`;
+  }
+
+  async function api(path, options={}) {
+    const response = await fetch(path, {
+      cache:'no-store',
+      headers:{'Accept':'application/json','Content-Type':'application/json'},
+      ...options
+    });
+    let payload=null;
+    try { payload=await response.json(); } catch (_) {}
+    if(!response.ok || !payload || payload.ok===false) {
+      throw new Error((payload && payload.error) || `${path} · HTTP ${response.status}`);
+    }
+    return payload;
+  }
+
+  function phaseDecimal2(p) {
+    const q=modBig(p,YEAR_PHASE27_STATES);
+    const scaled=(q*100n + FINE_PER_A8_ANGLE/2n)/FINE_PER_A8_ANGLE;
+    const whole=scaled/100n;
+    const frac=(scaled%100n).toString().padStart(2,'0');
+    return `${whole}.${frac}`;
+  }
+
+  function phaseOctal2(p) {
+    const q=modBig(p,YEAR_PHASE27_STATES);
+    const full=q.toString(8).padStart(9,'0');
+    return `${full.slice(0,3)}.${full.slice(3,5)}₈`;
+  }
+
+  function phase27OctalFull(p) {
+    return `${modBig(p,YEAR_PHASE27_STATES).toString(8).padStart(9,'0')}₈`;
+  }
+
+  function phase27BinaryFull(p) {
+    return `${modBig(p,YEAR_PHASE27_STATES).toString(2).padStart(27,'0')}₂`;
+  }
+
+  function countedYearDay(calendarPayload) {
+    const c=
+      (calendarPayload && calendarPayload.calendar) || {};
+
+    if(
+      c.status!=='CALENDAR_RUNNING_FROM_CORE20_COUNT' ||
+      c.anchored!==true ||
+      c.yearDay===undefined ||
+      c.yearDay===null
+    ) {
+      throw new Error(
+        `server-owned A8 calendar unavailable · ${
+          c.status || 'unknown calendar state'
+        }`
+      );
+    }
+
+    const anchor=c.anchor || {};
+    const yearDay=Number(c.yearDay);
+
+    const suppliedYearLength=
+      Number(c.yearLength);
+
+    const suppliedCycle=
+      Number(c.yearCycle4);
+
+    const yearCycle4=
+      Number.isInteger(suppliedCycle) &&
+      suppliedCycle>=0 &&
+      suppliedCycle<=3
+        ? suppliedCycle
+        : null;
+
+    const yearLength=
+      suppliedYearLength===366
+        ? 366
+        : 365;
+
+    const isLeapYear=
+      c.isLeapYear===true ||
+      yearLength===366;
+
+    const yearCycleLabel=
+      typeof c.yearCycleLabel==='string' &&
+      c.yearCycleLabel
+        ? c.yearCycleLabel
+        : (
+            yearCycle4===null
+              ? null
+              : ['A','B','C','D'][yearCycle4]
+          );
+
+    const calendarRegion=
+      typeof c.calendarRegion==='string' &&
+      c.calendarRegion
+        ? c.calendarRegion
+        : (
+            yearDay<=360
+              ? 'STRUCTURED'
+              : 'WILSON'
+          );
+
+    const serverWilsonDay=
+      c.wilsonDay===null ||
+      c.wilsonDay===undefined
+        ? null
+        : Number(c.wilsonDay);
+
+    return {
+      schema:String(c.schema ?? ''),
+      yearDay,
+      yearCycle4,
+      yearCycleLabel,
+      yearLength,
+      isLeapYear,
+      calendarRegion,
+      wilsonDay:serverWilsonDay,
+
+      sourceEpoch:
+        String(c.sourceEpoch ?? ''),
+
+      coreDayCount:
+        BigInt(c.coreDayCount ?? '0'),
+
+      delta:
+        BigInt(
+          c.countedDaysSinceAnchor ?? '0'
+        ),
+
+      anchor:{
+        sourceEpoch:
+          String(
+            anchor.sourceEpoch ??
+            c.sourceEpoch ??
+            ''
+          ),
+
+        yearDay:
+          Number(anchor.yearDay),
+
+        yearDayOctal:
+          String(
+            anchor.yearDayOctal ??
+            ''
+          ),
+
+        yearCycle4:
+          anchor.yearCycle4===undefined ||
+          anchor.yearCycle4===null
+            ? null
+            : Number(anchor.yearCycle4),
+
+        yearCycleLabel:
+          String(
+            anchor.yearCycleLabel ??
+            ''
+          ),
+
+        yearLength:
+          anchor.yearLength===undefined ||
+          anchor.yearLength===null
+            ? null
+            : Number(anchor.yearLength),
+
+        coreDayCount:
+          BigInt(
+            anchor.anchorCoreDayCount ??
+            '0'
+          ),
+
+        authority:
+          String(anchor.authority ?? '')
+      },
+
+      authority:
+        String(c.authority ?? '')
+    };
+  }
+
+  let wilsonPreviewActive=false;
+  let wilsonCyclePreviewOverride=null;
+  let wilsonImpactTimer=null;
+  let wilsonLastImpactKey='';
+
+  function calendarIdentity(
+    yearDay,
+    calendarState={}
+  ) {
+    if(
+      !Number.isInteger(yearDay) ||
+      yearDay<1 ||
+      yearDay>366
+    ) {
+      throw new Error(
+        `A8 YEAR DAY outside supported calendar interval · ${yearDay}`
+      );
+    }
+
+    const isLeapYear=
+      calendarState &&
+      (
+        calendarState.isLeapYear===true ||
+        Number(calendarState.yearLength)===366
+      )
+        ? true
+        : yearDay===366;
+
+    const yearLength=
+      isLeapYear
+        ? 366
+        : 365;
+
+    const yearCycle4=
+      calendarState &&
+      Number.isInteger(
+        calendarState.yearCycle4
+      )
+        ? calendarState.yearCycle4
+        : null;
+
+    const yearCycleLabel=
+      calendarState &&
+      calendarState.yearCycleLabel
+        ? String(calendarState.yearCycleLabel)
+        : (
+            yearCycle4===null
+              ? null
+              : ['A','B','C','D'][yearCycle4]
+          );
+
+    if(yearDay<=360) {
+      const zero=yearDay-1;
+      const monthIndex=Math.floor(zero/45);
+      const monthDay=(zero%45)+1;
+      const globalWeek=Math.floor(zero/5)+1;
+      const weekIndex=Math.floor((monthDay-1)/5);
+      const elementIndex=(monthDay-1)%5;
+      const weekB=(globalWeek%2)===0;
+
+      let status='BUSINESS';
+      let tone='business';
+
+      if(elementIndex===4) {
+        status='GOLD · PROTECTED';
+        tone='gold';
+      } else if(
+        elementIndex===3 &&
+        weekB
+      ) {
+        status='SILVER · PROTECTED';
+        tone='silver';
+      }
+
+      return {
+        kind:'MONTH',
+        monthIndex,
+        monthDay,
+        globalWeek,
+        weekIndex,
+        elementIndex,
+        element:elements[elementIndex],
+        planet:planets[weekIndex],
+        weekB,
+        status,
+        tone,
+        yearLength,
+        isLeapYear,
+        yearCycle4,
+        yearCycleLabel
+      };
+    }
+
+    const wilsonDay=yearDay-360;
+    const leapExtension=wilsonDay===6;
+
+    if(
+      leapExtension &&
+      !isLeapYear
+    ) {
+      throw new Error(
+        'A8 Gold Day 6 requires native leap-year state'
+      );
+    }
+
+    return {
+      kind:'WILSON',
+      wilsonDay,
+      leapExtension,
+      element:
+        leapExtension
+          ? 'Leap Gold Day'
+          : elements[wilsonDay-1],
+      status:'GOLD · PROTECTED',
+      tone:'gold',
+      yearLength,
+      isLeapYear,
+      yearCycle4,
+      yearCycleLabel
+    };
+  }
+
+  function triggerWilsonLeapImpact(key) {
+    const impact=document.getElementById('wilsonLeapImpact');
+    if(!impact || key===wilsonLastImpactKey) return;
+
+    wilsonLastImpactKey=key;
+    impact.classList.add('show');
+
+    if(wilsonImpactTimer!==null) clearTimeout(wilsonImpactTimer);
+
+    wilsonImpactTimer=setTimeout(()=>{
+      impact.classList.remove('show');
+      wilsonImpactTimer=null;
+    },2600);
+  }
+
+  function renderWilsonExperience(identity,yearDay,preview=false) {
+    const section=document.getElementById('wilsonLiveSection');
+    const compass=document.getElementById('wilsonCompass');
+    const title=document.getElementById('wilsonLiveTitle');
+    const lede=document.getElementById('wilsonLiveLede');
+    const kicker=document.getElementById('wilsonStateKicker');
+    const state=document.getElementById('wilsonStateText');
+    const message=document.getElementById('wilsonCompassMessage');
+    const impact=document.getElementById('wilsonLeapImpact');
+    const explore=document.getElementById('explore');
+
+    if(!section || !compass) return;
+
+    if(!preview) {
+      section.classList.remove(
+        'earned-preview'
+      );
+    }
+
+    applyWilsonCyclePresentation(
+      identity
+    );
+
+    const isWilson=identity && identity.kind==='WILSON';
+    const show=preview || isWilson;
+    const wilsonLength=
+      identity && identity.isLeapYear
+        ? 6
+        : 5;
+
+    section.classList.toggle('active',show);
+    section.classList.toggle('preview',preview);
+    section.setAttribute('aria-hidden',show?'false':'true');
+
+    if(explore) {
+      explore.classList.toggle(
+        'wilson-live-parked',
+        isWilson && !preview
+      );
+    }
+
+    if(!show) {
+      compass.classList.remove('free');
+      impact?.classList.remove('show');
+      return;
+    }
+
+    document.querySelectorAll('[data-wilson-day]').forEach(tile=>{
+      const d=Number(tile.dataset.wilsonDay);
+      const current=isWilson && d===identity.wilsonDay;
+      const passed=isWilson && d<identity.wilsonDay;
+      const unavailableLeapDay=
+        d===6 &&
+        !(identity && identity.isLeapYear);
+
+      tile.hidden=unavailableLeapDay;
+      tile.classList.toggle('current',current);
+      tile.classList.toggle('passed',passed);
+    });
+
+    compass.classList.toggle('free',isWilson);
+
+    if(isWilson) {
+      title.textContent="Wilson's Week · Compass Released";
+      lede.textContent=
+        "For 360 days, the A8 calendar gives you a direction. " +
+        "The structured wheel is now complete. For these Gold Days, " +
+        "the compass is free and everyone may go their own way.";
+
+      kicker.textContent=preview
+        ? 'YEAR-END INTERVAL · PREVIEW'
+        : 'LIVE YEAR-END INTERVAL';
+
+      state.textContent=identity.leapExtension
+        ? `LEAP GOLD DAY · GOLD DAY 6 OF 6 · YEAR DAY ${yearDay}`
+        : `GOLD DAY ${identity.wilsonDay} OF ${wilsonLength} · ${identity.element.toUpperCase()}`;
+
+      message.textContent=
+        `360 DAYS OF DIRECTION · ${wilsonLength} DAYS TO CHOOSE YOUR OWN`;
+
+      if(identity.leapExtension) {
+        triggerWilsonLeapImpact(
+          `${preview?'preview':'live'}:${yearDay}`
+        );
+      } else {
+        impact?.classList.remove('show');
+      }
+
+      return;
+    }
+
+    impact?.classList.remove('show');
+
+    if(yearDay===360) {
+      title.textContent='NW · Day 45 · Structured Year Complete';
+      lede.textContent=
+        "The final compass month has reached its final day. " +
+        "The next counted A8 day leaves the directional month register " +
+        "and enters Wilson's Week.";
+
+      kicker.textContent='SEAM PREVIEW';
+      state.textContent='NW · DAY 45 · NEXT COUNT RELEASES THE COMPASS';
+      message.textContent='FINAL STRUCTURED DIRECTION · NORTHWEST';
+      return;
+    }
+
+    if(yearDay===1) {
+      title.textContent='North · Day 1 · New Year';
+      lede.textContent=
+        "Wilson's Week is complete. The free compass settles back onto North " +
+        "and the structured A8 year begins again.";
+
+      kicker.textContent='SEAM PREVIEW';
+      state.textContent='NORTH · DAY 1 · STRUCTURED YEAR RESUMED';
+      message.textContent='COMPASS RE-ENGAGED · NORTH';
+    }
+  }
+
+  const WILSON_CYCLE_PRESENTATIONS =
+    Object.freeze([
+      {
+        key:'a',
+        label:'LANTERN GOLD',
+        days:5,
+        asset:'/assets/wilson/wilson-cycle-a.png'
+      },
+      {
+        key:'b',
+        label:'CELESTIAL PASSAGE',
+        days:5,
+        asset:'/assets/wilson/wilson-cycle-b.png'
+      },
+      {
+        key:'c',
+        label:'EARTH & JOURNEY',
+        days:5,
+        asset:'/assets/wilson/wilson-cycle-c.png'
+      },
+      {
+        key:'d',
+        label:'LEAP BLUE',
+        days:6,
+        asset:'/assets/wilson/wilson-cycle-d-leap.png'
+      }
+    ]);
+
+  function currentNativeWilsonCycle() {
+    const cycle=
+      liveToday &&
+      liveToday.counted &&
+      Number.isInteger(
+        liveToday.counted.yearCycle4
+      )
+        ? liveToday.counted.yearCycle4
+        : null;
+
+    return (
+      cycle!==null &&
+      cycle>=0 &&
+      cycle<=3
+    )
+      ? cycle
+      : null;
+  }
+
+  function wilsonPreviewCycleForDay(yearDay) {
+    if(
+      Number.isInteger(
+        wilsonCyclePreviewOverride
+      )
+    ) {
+      return wilsonCyclePreviewOverride;
+    }
+
+    if(yearDay===366) {
+      return 3;
+    }
+
+    const liveCycle=
+      currentNativeWilsonCycle();
+
+    if(liveCycle===null) {
+      return 0;
+    }
+
+    if(yearDay===1) {
+      return (
+        liveCycle + 1
+      ) % 4;
+    }
+
+    return liveCycle;
+  }
+
+  function wilsonCalendarContext(
+    yearDay,
+    cycle
+  ) {
+    const resolvedCycle=
+      Number.isInteger(cycle) &&
+      cycle>=0 &&
+      cycle<=3
+        ? cycle
+        : 0;
+
+    const isLeapYear=
+      resolvedCycle===3;
+
+    return {
+      yearCycle4:
+        resolvedCycle,
+
+      yearCycleLabel:
+        ['A','B','C','D'][
+          resolvedCycle
+        ],
+
+      yearLength:
+        isLeapYear
+          ? 366
+          : 365,
+
+      isLeapYear
+    };
+  }
+
+  function applyWilsonCyclePresentation(identity) {
+    const section=
+      document.getElementById(
+        'wilsonLiveSection'
+      );
+
+    const art=
+      document.getElementById(
+        'wilsonCycleArt'
+      );
+
+    const caption=
+      document.getElementById(
+        'wilsonCycleCaption'
+      );
+
+    if(!section || !art) {
+      return;
+    }
+
+    let cycle=
+      identity &&
+      Number.isInteger(
+        identity.yearCycle4
+      )
+        ? identity.yearCycle4
+        : currentNativeWilsonCycle();
+
+    if(
+      !Number.isInteger(cycle) ||
+      cycle<0 ||
+      cycle>3
+    ) {
+      cycle=0;
+    }
+
+    const presentation=
+      WILSON_CYCLE_PRESENTATIONS[
+        cycle
+      ];
+
+    section.classList.remove(
+      'cycle-a',
+      'cycle-b',
+      'cycle-c',
+      'cycle-d'
+    );
+
+    section.classList.add(
+      `cycle-${presentation.key}`
+    );
+
+    section.dataset.wilsonCycle=
+      String(cycle);
+
+    section.dataset.wilsonCycleLabel=
+      ['A','B','C','D'][cycle];
+
+    section.dataset.wilsonArtSlot=
+      presentation.asset;
+
+    art.style.setProperty(
+      '--wilson-art-url',
+      `url("${presentation.asset}")`
+    );
+
+    if(caption) {
+      caption.textContent=
+        `YEAR-END ART · CYCLE ${
+          ['A','B','C','D'][cycle]
+        } · ${presentation.label} · ${
+          presentation.days
+        } GOLD DAYS`;
+    }
+  }
+
+  function openWilsonEasterEgg() {
+    const section=
+      document.getElementById(
+        'wilsonLiveSection'
+      );
+
+    if(!section) {
+      return;
+    }
+
+    if(
+      liveToday &&
+      liveToday.identity &&
+      liveToday.identity.kind==='WILSON'
+    ) {
+      wilsonPreviewActive=false;
+      wilsonCyclePreviewOverride=null;
+
+      section.classList.remove(
+        'earned-preview',
+        'preview'
+      );
+
+      renderWilsonExperience(
+        liveToday.identity,
+        liveToday.yearDay,
+        false
+      );
+
+      section.scrollIntoView({
+        behavior:'smooth',
+        block:'start'
+      });
+
+      return;
+    }
+
+    wilsonPreviewActive=true;
+
+    wilsonCyclePreviewOverride=
+      currentNativeWilsonCycle();
+
+    if(
+      !Number.isInteger(
+        wilsonCyclePreviewOverride
+      )
+    ) {
+      /*
+       * Display-only fallback.
+       * No browser/Gregorian year inference.
+       */
+      wilsonCyclePreviewOverride=0;
+    }
+
+    section.classList.add(
+      'earned-preview'
+    );
+
+    previewWilsonYearDay(361);
+  }
+
+  function returnWilsonEasterEggToCalendar() {
+    const trigger=
+      document.getElementById(
+        'wilsonEasterEggTrigger'
+      );
+
+    returnWilsonPreviewToLive();
+
+    trigger?.scrollIntoView({
+      behavior:'smooth',
+      block:'center'
+    });
+  }
+
+  function previewWilsonYearDay(yearDay) {
+    wilsonPreviewActive=true;
+    wilsonLastImpactKey='';
+
+    const cycle=
+      wilsonPreviewCycleForDay(
+        yearDay
+      );
+
+    const identity=
+      calendarIdentity(
+        yearDay,
+        wilsonCalendarContext(
+          yearDay,
+          cycle
+        )
+      );
+
+    renderWilsonExperience(
+      identity,
+      yearDay,
+      true
+    );
+
+    document.getElementById(
+      'wilsonLiveSection'
+    )?.scrollIntoView({
+      behavior:'smooth',
+      block:'start'
+    });
+  }
+
+  function returnWilsonPreviewToLive() {
+    wilsonPreviewActive=false;
+    wilsonCyclePreviewOverride=null;
+    wilsonLastImpactKey='';
+
+    document.getElementById('wilsonLiveSection')
+      ?.classList.remove('earned-preview');
+
+    if(wilsonImpactTimer!==null) {
+      clearTimeout(wilsonImpactTimer);
+      wilsonImpactTimer=null;
+    }
+
+    document.getElementById('wilsonLeapImpact')
+      ?.classList.remove('show');
+
+    if(liveToday) {
+      renderWilsonExperience(
+        liveToday.identity,
+        liveToday.yearDay,
+        false
+      );
+    } else {
+      document.getElementById('wilsonLiveSection')
+        ?.classList.remove('active','preview');
+    }
+  }
+
+  function setFlags(identity) {
+    const box=document.getElementById('todayFlags');
+    box.innerHTML='';
+    const add=(text,cls='')=>{const x=document.createElement('span');x.className=`today-flag ${cls}`.trim();x.textContent=text;box.appendChild(x);};
+    if(identity.kind==='MONTH') {
+      add(identity.weekB?'WEEK B · 3/2':'WEEK A · 4/1');
+      add(identity.status,identity.tone);
+      add(`YEAR WEEK ${identity.globalWeek}`);
+    } else {
+      add("WILSON'S WEEK",'gold');
+      add(identity.status,'gold');
+      add('NO MONTH · NO PLANETARY WEEK');
+    }
+  }
+
+  function markTodayCell(identity) {
+    document.querySelectorAll('#calendarBody td.today-cell').forEach(td=>{td.classList.remove('today-cell');td.removeAttribute('aria-current');});
+    if(!identity || identity.kind!=='MONTH') return;
+    if(!document.querySelectorAll('.month-chip')[identity.monthIndex]?.classList.contains('active')) return;
+    const td=[...document.querySelectorAll('#calendarBody td')].find(x=>Number(x.textContent.trim().slice(0,2))===identity.monthDay);
+    if(td){td.classList.add('today-cell');td.setAttribute('aria-current','date');}
+  }
+
+  function showTodayInGrid() {
+    if(!liveToday) return;
+    if(liveToday.identity.kind==='MONTH') {
+      userExploringMonth=false;
+      renderMonth(liveToday.identity.monthIndex);
+      markTodayCell(liveToday.identity);
+      document.getElementById('explore').scrollIntoView({behavior:'smooth',block:'start'});
+    } else {
+      document.getElementById('wilsonLiveSection').scrollIntoView({behavior:'smooth',block:'start'});
+    }
+  }
+
+  function highlightNearestCompassPoint(calendarPhase) {
+    // Visual compass reference only. This never chooses the calendar month.
+    const angleState=Number(modBig(calendarPhase,YEAR_PHASE27_STATES)/FINE_PER_A8_ANGLE);
+    const nearest=Math.round(angleState/64)%8;
+    document.querySelectorAll('.dial-label').forEach(x=>x.classList.remove('current'));
+    document.querySelector(`.dial-label[data-dir="${months[nearest].dir}"]`)?.classList.add('current');
+  }
+
+  function paintQualifiedYearAngle(anglePayload, runtimePayload, calendarPayload) {
+    const y=anglePayload.yearAngle || {};
+    const runtime=(runtimePayload && runtimePayload.runtime) || {};
+
+    if(y.status!=='YEAR_ANGLE_RUNNING_FROM_RECOVERED_SOL' || y.aligned!==true || y.phase27===undefined || y.phase27===null) {
+      throw new Error(`qualified Core20 absolute year phase unavailable · ${y.status || 'unknown state'}`);
+    }
+
+    const absolute=modBig(BigInt(y.phase27),YEAR_PHASE27_STATES);
+    const calendarPhase=modBig(absolute-CALENDAR_NORTH_ABSOLUTE,YEAR_PHASE27_STATES);
+    const counted=countedYearDay(calendarPayload);
+    const yearDay=counted.yearDay;
+
+    const identity=
+      calendarIdentity(
+        yearDay,
+        counted
+      );
+
+    liveToday={
+      yearDay,
+      identity,
+      calendarPhase,
+      absolute,
+      counted
+    };
+
+    setStatus('coreFeedStatus','CORE20 FEED',runtime.status==='RUNNING'?'CONNECTED · RUNNING':'CONNECTED','good');
+    setStatus('solOrbitStatus','ABSOLUTE YEAR PHASE27','QUALIFIED · LIVE','good');
+    setStatus('calendarStatus','A8 CALENDAR',identity.kind==='MONTH'?`${months[identity.monthIndex].name.toUpperCase()} · DAY ${identity.monthDay}`:`WILSON'S WEEK · DAY ${identity.wilsonDay}`,'good');
+
+    document.getElementById('todayHealth').textContent='LIVE · READ ONLY';
+    document.getElementById('todayLiveDot').style.background='#78d69c';
+    document.getElementById('todayLiveDot').style.boxShadow='0 0 0 4px rgba(120,214,156,.1),0 0 16px rgba(120,214,156,.7)';
+    document.getElementById('todayRefreshState').textContent=`SERVER-OWNED COUNTED CALENDAR · +${counted.delta.toString()} CORE20 DAYS FROM NATIVE ANCHOR`;
+    document.getElementById('todayPhase').textContent=`${phaseDecimal2(calendarPhase)} A8 · ${phaseOctal2(calendarPhase)}`;
+    document.getElementById('todayAbsolutePhase').textContent=`${phaseDecimal2(absolute)} A8 · ${phaseOctal2(absolute)}`;
+    document.getElementById('todaySol27').textContent=`${y.phase27Binary || phase27BinaryFull(absolute)} · ${y.phase27Octal || phase27OctalFull(absolute)}`;
+    document.getElementById('todayCalendarAnchorMath').textContent=`source epoch ${counted.anchor.sourceEpoch} · native YEAR DAY ${counted.anchor.yearDay}${counted.anchor.yearDayOctal ? ` · ${counted.anchor.yearDayOctal}` : ''} · anchor Core20 dayCount ${counted.anchor.coreDayCount.toString()}`;
+    document.getElementById('todayCalendarCountMath').textContent=
+      `Core20 dayCount ${counted.coreDayCount.toString()} − anchor ${counted.anchor.coreDayCount.toString()} = +${counted.delta.toString()} counted days → YEAR DAY ${yearDay}/${counted.yearLength}` +
+      (
+        counted.yearCycle4===null
+          ? ' · V1 YEAR-CYCLE FIELD PENDING'
+          : ` · NATIVE CYCLE ${counted.yearCycleLabel} · ${counted.yearCycle4}/3`
+      );
+    document.getElementById('todaySelectedRaw').textContent=String(y.currentSelectedRawPulse ?? '—');
+    document.getElementById('dialPhase').textContent=phaseOctal2(calendarPhase);
+    const todayDial=
+      document.getElementById('todayDial');
+
+    todayDial.style.setProperty(
+      '--year-deg',
+      `${Number(calendarPhase)*360/Number(YEAR_PHASE27_STATES)}deg`
+    );
+
+    todayDial.classList.toggle(
+      'a8-leap-year',
+      counted.isLeapYear===true
+    );
+    highlightNearestCompassPoint(calendarPhase);
+
+    const showButton=document.getElementById('showTodayButton');
+    showButton.disabled=false;
+
+    if(identity.kind==='MONTH') {
+      const m=months[identity.monthIndex];
+      document.getElementById('todayRegister').textContent=`${m.bits} · ${m.oct} · ${m.dir} · ${m.name.toUpperCase()}`;
+      document.getElementById('todayTitle').innerHTML=`${identity.planet.toUpperCase()} WEEK · ${identity.element.toUpperCase()} DAY · <span class="day-number">DAY ${identity.monthDay}</span>`;
+      document.getElementById('todayPosition').textContent=`${m.name.toUpperCase()} MONTH · DAY ${identity.monthDay}/45 · YEAR DAY ${yearDay}/${counted.yearLength}`;
+      document.getElementById('todayWeek').textContent=`${identity.planet.toUpperCase()} · WEEK ${identity.weekIndex+1}/9 · YEAR WEEK ${identity.globalWeek}`;
+      document.getElementById('todayElement').textContent=`${identity.element.toUpperCase()} · ELEMENT ${identity.elementIndex+1}/5`;
+      document.getElementById('todayRhythm').textContent=`${identity.weekB?'WEEK B · 3/2':'WEEK A · 4/1'} · ${identity.status}`;
+      const liveWeekIndex=Math.floor((identity.monthDay-1)/5);
+      const liveElementIndex=(identity.monthDay-1)%5;
+
+      document.getElementById('todayTitle').textContent=
+        `${m.name.toUpperCase()} · ${planets[liveWeekIndex].toUpperCase()} · ${elements[liveElementIndex].toUpperCase()}`;
+
+      document.getElementById('todaySymbolic').textContent=
+        `${m.oct} · ${planetGlyph[liveWeekIndex]} · ${liveElementGlyph[liveElementIndex]}`;
+
+      document.getElementById('todayMeta').textContent=
+        `DAY ${identity.monthDay} · YEAR DAY ${yearDay}/${counted.yearLength} · ` +
+        `${identity.weekB?'WEEK B · 3/2':'WEEK A · 4/1'} · ${identity.status} · ` +
+        `YEAR WEEK ${identity.globalWeek}`;
+      document.getElementById('todayMonthAnchor').textContent=`${m.dir} · ${m.anchor} · ${m.anchorDec} A8 ANGLE`;
+      showButton.textContent='SHOW TODAY IN MONTH GRID';
+      if(!userExploringMonth){renderMonth(identity.monthIndex);markTodayCell(identity);}
+    } else {
+      document.getElementById('todayRegister').textContent=`OUTSIDE 000–111 · WILSON'S WEEK`;
+      document.getElementById('todayTitle').innerHTML=`${identity.element.toUpperCase()} DAY · <span class="day-number">GOLD DAY ${identity.wilsonDay}</span>`;
+      document.getElementById('todayPosition').textContent=`WILSON'S WEEK · YEAR DAY ${yearDay}/${counted.yearLength}`;
+      document.getElementById('todayWeek').textContent='NO PLANETARY WEEK · YEAR-END CELEBRATION';
+      document.getElementById('todayElement').textContent=identity.element.toUpperCase();
+      document.getElementById('todayRhythm').textContent=identity.status;
+      document.getElementById('todayTitle').textContent=
+        `WILSON'S WEEK · ${identity.element.toUpperCase()}`;
+
+      document.getElementById('todaySymbolic').textContent=
+        Number.isInteger(identity.elementIndex)
+          ? `GOLD ${identity.wilsonDay} · ${liveElementGlyph[identity.elementIndex]}`
+          : `GOLD ${identity.wilsonDay}`;
+
+      document.getElementById('todayMeta').textContent=
+        `YEAR DAY ${yearDay}/${counted.yearLength} · ${identity.status}`;
+      document.getElementById('todayMonthAnchor').textContent='OUTSIDE MONTH REGISTER';
+      showButton.textContent="SHOW WILSON'S WEEK";
+    }
+    setFlags(identity);
+
+    if(!wilsonPreviewActive) {
+      renderWilsonExperience(identity,yearDay,false);
+    }
+  }
+
+  async function refreshNativeCalendar() {
+    if(!feedConnected || refreshBusy) return;
+    refreshBusy=true;
+    try {
+      const [anglePayload,runtimePayload,calendarPayload]=await Promise.all([
+        api('/api/core20/year-angle'),
+        api('/api/core20/runtime'),
+        api('/api/core20/calendar')
+      ]);
+      paintQualifiedYearAngle(anglePayload,runtimePayload,calendarPayload);
+    } catch(err) {
+      document.getElementById('todayHealth').textContent='QUALIFIED YEAR PHASE REQUIRED';
+      document.getElementById('todayLiveDot').style.background='#d77862';
+      setStatus('coreFeedStatus','CORE20 FEED','CONNECTED / CHECK STATE','bad');
+      setStatus('solOrbitStatus','ABSOLUTE YEAR PHASE27','NOT QUALIFIED','bad');
+      setStatus('calendarStatus','A8 CALENDAR','HOLD · NO GUESSING','bad');
+      document.getElementById('todayRefreshState').textContent=String(err.message||err);
+    } finally {
+      refreshBusy=false;
+    }
+  }
+
+  function scheduleRefresh() {
+    if(refreshTimer!==null) clearTimeout(refreshTimer);
+    if(!feedConnected) return;
+    refreshTimer=setTimeout(async()=>{
+      await refreshNativeCalendar();
+      scheduleRefresh();
+    },1000);
+  }
+
+  async function connectReadOnly() {
+    if(feedConnected) return;
+    feedConnected=true;
+    const btn=document.getElementById('connectCoreButton');
+    btn.disabled=true;
+    btn.textContent='CONNECTING TO CORE20…';
+    document.getElementById('todayHealth').textContent='CONNECTING · READ ONLY';
+    setStatus('coreFeedStatus','CORE20 FEED','CONNECTING');
+    try {
+      await refreshNativeCalendar();
+      if(!liveToday) throw new Error('qualified year phase not available');
+      btn.textContent='CORE20 CONNECTED · READ ONLY';
+      scheduleRefresh();
+    } catch (_) {
+      feedConnected=false;
+      btn.disabled=false;
+      btn.textContent='RETRY CORE20 · READ ONLY';
+    }
+  }
+
+  async function loadExternalProof() {
+    const btn=document.getElementById('loadExternalProofButton');
+    const out=document.getElementById('externalProofText');
+    btn.disabled=true;
+    out.textContent='Loading isolated verification record…';
+    try {
+      const payload=await api('/api/core20/year-angle');
+      const y=payload.yearAngle || {};
+      const a=y.alignment || y.previousAlignment || null;
+      if(!a) throw new Error('no stored one-shot verification record');
+      const lon=a.jplObsEcLon360!==undefined ? Number(a.jplObsEcLon360).toFixed(2)+'°' : 'position unavailable';
+      const stale=y.aligned===false ? ` · ${y.status || 'STALE FOR CURRENT SOURCE EPOCH'}` : '';
+      out.textContent=`JPL Horizons · ${lon} · stored source epoch ${a.sourceEpoch ?? '—'}${stale} · ONE-SHOT ORIENTATION PROVENANCE · NO RUNNING DAY AUTHORITY`;
+      btn.textContent='ONE-SHOT RECORD LOADED';
+    } catch(err) {
+      out.textContent=`Verification record unavailable · ${String(err.message||err)}`;
+      btn.disabled=false;
+      btn.textContent='RETRY ONE-SHOT VERIFICATION RECORD';
+    }
+  }
+
+  function counts(monthIndex) {
+    let business=0, protectedDays=0;
+    for(let w=0;w<9;w++) {
+      const weekB=((monthIndex*9+w)%2)===1;
+      business += weekB ? 3 : 4;
+      protectedDays += weekB ? 2 : 1;
+    }
+    return {business, protectedDays};
+  }
+
+
+  /*
+   * A8 CALENDAR EVENTS BRIDGE v1
+   *
+   * Calendar owns the date.
+   * Events owns astronomical event records.
+   * This layer performs a read-only YEAR DAY lookup.
+   */
+  const CALENDAR_EVENTS_JSON=
+    '/data/astronomical-events.json';
+
+  const CALENDAR_EVENTS_DETAIL_BASE=
+    'https://events.cosigo.io/#';
+
+  let calendarEventsByDay=
+    new Map();
+
+  let calendarEventsDefaultCycle4=
+    null;
+
+  let calendarEventPopupBound=
+    false;
+
+
+  function calendarEventKey(
+    cycle4,
+    yearDay
+  ){
+    return `${cycle4}:${yearDay}`;
+  }
+
+
+  function activeCalendarEventCycle4(){
+
+    if(
+      liveToday &&
+      liveToday.identity &&
+      Number.isInteger(
+        liveToday.identity.yearCycle4
+      )
+    ){
+      return liveToday.identity.yearCycle4;
+    }
+
+    return calendarEventsDefaultCycle4;
+  }
+
+
+  function calendarEventsForYearDay(
+    yearDay
+  ){
+
+    const cycle4=
+      activeCalendarEventCycle4();
+
+    if(!Number.isInteger(cycle4)){
+      return [];
+    }
+
+    return (
+      calendarEventsByDay.get(
+        calendarEventKey(
+          cycle4,
+          yearDay
+        )
+      ) || []
+    );
+  }
+
+
+  function closeCalendarEventPopup(){
+
+    const popup=
+      document.getElementById(
+        'calendarEventPopup'
+      );
+
+    if(!popup){
+      return;
+    }
+
+    popup.classList.remove('open');
+    document.body.style.overflow='';
+  }
+
+
+  function ensureCalendarEventPopupBindings(){
+
+    if(calendarEventPopupBound){
+      return;
+    }
+
+    const popup=
+      document.getElementById(
+        'calendarEventPopup'
+      );
+
+    const close=
+      document.getElementById(
+        'calendarEventPopupClose'
+      );
+
+    if(!popup || !close){
+      return;
+    }
+
+    close.addEventListener(
+      'click',
+      closeCalendarEventPopup
+    );
+
+    popup.addEventListener(
+      'click',
+      event=>{
+        if(event.target===popup){
+          closeCalendarEventPopup();
+        }
+      }
+    );
+
+    document.addEventListener(
+      'keydown',
+      event=>{
+        if(
+          event.key==='Escape' &&
+          popup.classList.contains('open')
+        ){
+          closeCalendarEventPopup();
+        }
+      }
+    );
+
+    calendarEventPopupBound=true;
+  }
+
+
+  function appendCalendarEventMeta(
+    holder,
+    text
+  ){
+
+    if(!text){
+      return;
+    }
+
+    const span=
+      document.createElement('span');
+
+    span.textContent=text;
+
+    holder.appendChild(span);
+  }
+
+
+  function openCalendarEventPopup(
+    yearDay
+  ){
+
+    const events=
+      calendarEventsForYearDay(
+        yearDay
+      );
+
+    if(!events.length){
+      return;
+    }
+
+    ensureCalendarEventPopupBindings();
+
+    const popup=
+      document.getElementById(
+        'calendarEventPopup'
+      );
+
+    const cards=
+      document.getElementById(
+        'calendarEventPopupCards'
+      );
+
+    const heading=
+      document.getElementById(
+        'calendarEventPopupHeading'
+      );
+
+    if(!popup || !cards || !heading){
+      return;
+    }
+
+    cards.replaceChildren();
+
+    heading.textContent=
+      events.length===1
+        ? `YEAR DAY ${yearDay} · 1 ASTRONOMICAL EVENT`
+        : `YEAR DAY ${yearDay} · ${events.length} ASTRONOMICAL EVENTS`;
+
+    for(const event of events){
+
+      const card=
+        document.createElement('article');
+
+      card.className=
+        'a8-event-card';
+
+      const title=
+        document.createElement('h3');
+
+      title.textContent=
+        event.title || event.id || 'EVENT';
+
+      card.appendChild(title);
+
+
+      const meta=
+        document.createElement('div');
+
+      meta.className=
+        'a8-event-meta';
+
+
+      const publicDate=
+        event.a8 &&
+        event.a8.publicDate
+          ? event.a8.publicDate
+          : null;
+
+      appendCalendarEventMeta(
+        meta,
+        publicDate && publicDate.display
+          ? publicDate.display
+          : (
+              event.a8 &&
+              event.a8.quickDate
+                ? event.a8.quickDate
+                : `YEAR DAY ${yearDay}`
+            )
+      );
+
+
+      if(
+        event.a8 &&
+        event.a8.time
+      ){
+
+        const t=
+          event.a8.time;
+
+        const timeParts=[];
+
+        if(t.decimalHHMMSSApprox){
+          timeParts.push(
+            t.decimalHHMMSSApprox
+          );
+        }
+
+        if(t.octalHHMMSSApprox){
+          timeParts.push(
+            t.octalHHMMSSApprox
+          );
+        }
+
+        if(timeParts.length){
+          appendCalendarEventMeta(
+            meta,
+            `A8 TIME · ${timeParts.join(' · ')}`
+          );
+        }
+      }
+
+
+      if(event.precisionClass){
+        appendCalendarEventMeta(
+          meta,
+          `PRECISION · ${event.precisionClass}`
+        );
+      }
+
+
+      if(event.status){
+        appendCalendarEventMeta(
+          meta,
+          `STATUS · ${event.status}`
+        );
+      }
+
+
+      if(
+        event.sky &&
+        event.sky.generalXY
+      ){
+        const xy=
+          event.sky.generalXY;
+
+        const xyParts=[];
+
+        if(xy.decimal){
+          xyParts.push(xy.decimal);
+        }
+
+        if(xy.octal){
+          xyParts.push(xy.octal);
+        }
+
+        if(xyParts.length){
+          appendCalendarEventMeta(
+            meta,
+            `SKY · ${xyParts.join(' · ')}`
+          );
+        }
+      }
+
+
+      card.appendChild(meta);
+
+
+      if(event.summary){
+
+        const summary=
+          document.createElement('p');
+
+        summary.className=
+          'a8-event-summary';
+
+        summary.textContent=
+          event.summary;
+
+        card.appendChild(summary);
+      }
+
+
+      const anchor=
+        event.detailAnchor ||
+        event.id;
+
+      if(anchor){
+
+        const more=
+          document.createElement('a');
+
+        more.className=
+          'a8-event-detail';
+
+        more.href=
+          CALENDAR_EVENTS_DETAIL_BASE +
+          encodeURIComponent(anchor);
+
+        more.target='_blank';
+        more.rel='noopener';
+
+        more.textContent=
+          'MORE DETAILS →';
+
+        card.appendChild(more);
+      }
+
+
+      cards.appendChild(card);
+    }
+
+
+    popup.classList.add('open');
+    document.body.style.overflow='hidden';
+
+    document
+      .getElementById(
+        'calendarEventPopupClose'
+      )
+      ?.focus();
+  }
+
+
+  function paintCalendarEventMarker(
+    td,
+    yearDay
+  ){
+
+    td
+      .querySelectorAll(
+        '.a8-event-star'
+      )
+      .forEach(
+        marker=>marker.remove()
+      );
+
+    const events=
+      calendarEventsForYearDay(
+        yearDay
+      );
+
+    if(!events.length){
+      return;
+    }
+
+    const marker=
+      document.createElement('button');
+
+    marker.type='button';
+    marker.className='a8-event-star';
+
+    marker.textContent=
+      events.length>1
+        ? `★${events.length}`
+        : '★';
+
+    marker.title=
+      events.length===1
+        ? events[0].title
+        : `${events.length} astronomical events`;
+
+    marker.setAttribute(
+      'aria-label',
+      events.length===1
+        ? `Astronomical event: ${events[0].title}`
+        : `${events.length} astronomical events on this A8 day`
+    );
+
+    marker.addEventListener(
+      'click',
+      event=>{
+        event.preventDefault();
+        event.stopPropagation();
+
+        openCalendarEventPopup(
+          yearDay
+        );
+      }
+    );
+
+    td.appendChild(marker);
+  }
+
+
+  async function loadCalendarAstronomicalEvents(){
+
+    try{
+
+      const response=
+        await fetch(
+          CALENDAR_EVENTS_JSON,
+          {
+            cache:'no-store'
+          }
+        );
+
+      if(!response.ok){
+        throw new Error(
+          `EVENT REGISTER HTTP ${response.status}`
+        );
+      }
+
+      const documentData=
+        await response.json();
+
+      if(
+        !documentData ||
+        !Array.isArray(
+          documentData.events
+        )
+      ){
+        throw new Error(
+          'EVENT REGISTER HAS NO events ARRAY'
+        );
+      }
+
+      const next=
+        new Map();
+
+      let defaultCycle=
+        null;
+
+      for(
+        const event of
+        documentData.events
+      ){
+
+        if(
+          !event ||
+          !event.a8 ||
+          !Number.isInteger(
+            event.a8.yearDay
+          ) ||
+          !Number.isInteger(
+            event.a8.yearCycle4
+          )
+        ){
+          continue;
+        }
+
+        if(defaultCycle===null){
+          defaultCycle=
+            event.a8.yearCycle4;
+        }
+
+        const key=
+          calendarEventKey(
+            event.a8.yearCycle4,
+            event.a8.yearDay
+          );
+
+        if(!next.has(key)){
+          next.set(
+            key,
+            []
+          );
+        }
+
+        next
+          .get(key)
+          .push(event);
+      }
+
+      calendarEventsByDay=
+        next;
+
+      calendarEventsDefaultCycle4=
+        defaultCycle;
+
+
+      const activeButtons=
+        Array.from(
+          document.querySelectorAll(
+            '.month-chip'
+          )
+        );
+
+      const activeIndex=
+        activeButtons.findIndex(
+          button=>
+            button.classList.contains(
+              'active'
+            )
+        );
+
+      renderMonth(
+        activeIndex>=0
+          ? activeIndex
+          : 0
+      );
+
+      console.info(
+        `A8 Calendar Events · ${documentData.events.length} records loaded`
+      );
+
+    }catch(error){
+
+      console.warn(
+        'A8 Calendar Events unavailable',
+        error
+      );
+    }
+  }
+
+
+  function renderMonth(index) {
+    const m=months[index];
+    const c=counts(index);
+    document.querySelectorAll('.month-chip').forEach((b,i)=>b.classList.toggle('active',i===index));
+    document.getElementById('monthTitle').textContent=`${m.bits} · ${m.oct} · ${m.dir} · ${m.name}`;
+    document.getElementById('monthType').textContent=`MONTH ${index%2===0?'A':'B'} · ${c.business} / ${c.protectedDays}`;
+    document.getElementById('sideTitle').textContent=m.name;
+    document.getElementById('sideDesc').textContent=`Month register ${m.bits} · compact ${m.oct} · compass name ${m.dir} · compass anchor ${m.anchor}.`;
+    document.getElementById('businessCount').textContent=c.business;
+    document.getElementById('protectedCount').textContent=c.protectedDays;
+    document.getElementById('openingForm').textContent=index%2===0?'A · 4/1':'B · 3/2';
+    document.getElementById('monthArtwork').href=artworkViewerUrl(m.art);
+    body.innerHTML='';
+    for(let w=0;w<9;w++) {
+      const tr=document.createElement('tr');
+      const th=document.createElement('th');
+      th.scope='row';
+      th.textContent=`${planetGlyph[w]} ${planets[w]}`;
+      tr.appendChild(th);
+      const weekB=((index*9+w)%2)===1;
+      for(let d=0;d<5;d++) {
+        const td=document.createElement('td');
+        const yearDay=(index*45)+(w*5)+d+1;
+        td.textContent=String(w*5+d+1).padStart(2,'0');
+        td.dataset.yearDay=String(yearDay);
+        if(d===4) td.className='aether';
+        else if(d===3 && weekB) td.className='air-protected';
+        else td.className='business';
+        paintCalendarEventMarker(td,yearDay);
+        tr.appendChild(td);
+      }
+      body.appendChild(tr);
+    }
+    markTodayCell(liveToday?.identity);
+  }
+
+  months.forEach((m,i)=>{
+    const b=document.createElement('button');
+    b.type='button'; b.className='month-chip'; b.role='tab';
+    b.innerHTML=`<code>${m.bits} · ${m.oct}</code><strong>${m.dir}</strong><small>${m.name} · ${m.anchor}</small>`;
+    b.addEventListener('click',()=>{userExploringMonth=true;renderMonth(i);markTodayCell(liveToday?.identity);});
+    register.appendChild(b);
+
+    const a=document.createElement('a');
+    a.className='panel art-card'; a.href=artworkViewerUrl(m.art); a.dataset.lightbox='';
+    a.innerHTML=`<figure><img src="${m.art.replace('/assets/','/assets/thumbs/')}" width="360" height="450" loading="lazy" decoding="async" alt="Auspicious 8 ${m.name} compass month calendar artwork"><figcaption><strong>${m.bits} · ${m.oct} · ${m.dir} · ${m.name}</strong><span>${m.anchor} compass anchor · 45 days · 9 planetary weeks</span></figcaption></figure>`;
+    artGrid.appendChild(a);
+  });
+
+  document.getElementById('connectCoreButton').addEventListener('click',connectReadOnly);
+  document.getElementById('showTodayButton').addEventListener('click',showTodayInGrid);
+  document.getElementById('loadExternalProofButton').addEventListener('click',loadExternalProof);
+
+  document.querySelectorAll('[data-wilson-preview-day]').forEach(button=>{
+    button.addEventListener('click',()=>{
+      document.getElementById('wilsonLiveSection')
+        ?.classList.remove('earned-preview');
+
+      wilsonCyclePreviewOverride=null;
+
+      previewWilsonYearDay(
+        Number(button.dataset.wilsonPreviewDay)
+      );
+    });
+  });
+
+  document.querySelectorAll('[data-wilson-cycle-preview]').forEach(button=>{
+    button.addEventListener('click',()=>{
+      document.getElementById('wilsonLiveSection')
+        ?.classList.remove('earned-preview');
+
+      wilsonCyclePreviewOverride=
+        Number(
+          button.dataset.wilsonCyclePreview
+        );
+
+      previewWilsonYearDay(361);
+    });
+  });
+
+  document.getElementById('wilsonPreviewReturn')
+    .addEventListener('click',returnWilsonPreviewToLive);
+
+  document.getElementById('wilsonEasterEggTrigger')
+    ?.addEventListener('click',openWilsonEasterEgg);
+
+  document.getElementById('wilsonEasterEggReturn')
+    ?.addEventListener('click',returnWilsonEasterEggToCalendar);
+
+  renderMonth(0);
+  loadCalendarAstronomicalEvents();
+
+  const box=document.getElementById('lightbox');
+  const boxImg=box.querySelector('img');
+  function openLightbox(href,alt){boxImg.src=href;boxImg.alt=alt||'A8 calendar artwork';box.classList.add('open');document.body.style.overflow='hidden';}
+  function closeLightbox(){box.classList.remove('open');boxImg.src='';document.body.style.overflow='';}
+  document.addEventListener('click',e=>{
+    const link=e.target.closest('[data-lightbox]');
+    if(link){
+      const href=link.getAttribute('href')||'';
+      if(href.startsWith('/image-viewer.html#')) return;
+      e.preventDefault();
+      const img=link.querySelector('img');
+      openLightbox(href,img?.alt);
+    }
+    if(e.target===box || e.target===box.querySelector('button')) closeLightbox();
+  });
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&box.classList.contains('open')) closeLightbox();});
+  window.addEventListener('pagehide',()=>{feedConnected=false;if(refreshTimer!==null)clearTimeout(refreshTimer);});
+})();
+</script>
+
+<!-- A8 CALENDAR EVENTS BRIDGE v1 -->
+<div
+  class="a8-event-popup"
+  id="calendarEventPopup"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="calendarEventPopupHeading"
+>
+  <div class="a8-event-popup-panel">
+    <button
+      class="a8-event-popup-close"
+      id="calendarEventPopupClose"
+      type="button"
+      aria-label="Close astronomical events"
+    >×</button>
+
+    <div
+      class="a8-event-popup-heading"
+      id="calendarEventPopupHeading"
+    >ASTRONOMICAL EVENTS</div>
+
+    <div id="calendarEventPopupCards"></div>
+  </div>
+</div>
+
+</body>
+</html>
