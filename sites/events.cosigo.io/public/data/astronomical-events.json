@@ -1,0 +1,3173 @@
+{
+  "schema": "A8-ASTRONOMICAL-EVENTS-V1",
+  "authority": "A8_NATIVE_PRESENTATION",
+  "purpose": "Astronomical events expressed in A8 date, A8 time, and A8 celestial coordinates.",
+  "calendarContract": {
+    "eventKey": "id",
+    "dayKey": "a8.yearDay",
+    "popupTitle": "title",
+    "popupSummary": "summary",
+    "detailAnchor": "detailAnchor"
+  },
+  "coordinateContract": {
+    "system": "A8_CELESTIAL",
+    "longitude": "0_TO_512",
+    "latitude": "0_TO_256",
+    "longitudeRecurrence": 512,
+    "northPole": 0,
+    "equator": 128,
+    "southPole": 256
+  },
+  "timeContract": {
+    "system": "A8_NATIVE",
+    "dayStructure": "32x64x64",
+    "terminalStatesPerDay": 131072
+  },
+  "rules": [
+    "Public event dates are A8 dates.",
+    "Public event times are A8 native times.",
+    "Sky positions use A8 celestial coordinates.",
+    "Reference stars use coordinates from the A8 celestial catalogue.",
+    "Calendar consumes event records; Calendar does not own astronomical event data.",
+    "Detailed astronomical explanation belongs to events.cosigo.io.",
+    "Legacy date, time, degree, or catalogue values are provenance or downstream comparison only.",
+    "No astronomical event is invented merely to fill the calendar."
+  ],
+  "events": [
+    {
+      "id": "quadrantids-2026",
+      "title": "QUADRANTIDS · MAXIMUM",
+      "category": "METEOR",
+      "status": "CATALOGUED",
+      "precisionClass": "WINDOW",
+      "a8": {
+        "yearCycle4": 1,
+        "yearCycleLabel": "B",
+        "yearDay": 14,
+        "yearDayOctal": "16₈",
+        "calendarRegion": "STRUCTURED",
+        "monthIndex": 0,
+        "monthOctal": "0₈",
+        "monthDay": 14,
+        "quickDate": "(0) 14",
+        "time": {
+          "dayPhase17CenterApprox": 117237,
+          "decimalHHMMSSApprox": "28:39:53",
+          "octalHHMMSSApprox": "34:47:65₈",
+          "sourcePrecision": "MINUTE"
+        },
+        "publicDate": {
+          "display": "(0) 14 · 2026",
+          "quick": "(0) 14",
+          "compass": "N 14 · 2026",
+          "named": "North · Terra · Air · 2026",
+          "symbolic": "0₈ · ⊕ · 🜁",
+          "month": 0,
+          "planetaryWeek": "Terra",
+          "elementDay": "Air",
+          "legacyYearBridge": 2026
+        }
+      },
+      "summary": "Sharp Quadrantid maximum; bright Moon compromises the 2026 visual return.",
+      "detailAnchor": "quadrantids-2026",
+      "sourceKey": "IMO_METEOR_CALENDAR_2026",
+      "legacyProvenance": {
+        "date": "2026-01-03",
+        "timescale": "UT",
+        "timeUT": "21:28",
+        "timePrecision": "MINUTE"
+      },
+      "sky": {
+        "mode": "FIXED_RADIANT_APPROX",
+        "coordinateSystem": "A8_CELESTIAL",
+        "longitude512": 326.4,
+        "latitude256": 57.6,
+        "sourceEquatorial": {
+          "raDeg": 229.5,
+          "decDeg": 49.5
+        },
+        "referenceStars": [],
+        "sourcePrecision": "PUBLISHED_RADIANT_APPROX",
+        "generalXY": {
+          "x": 326,
+          "y": 58,
+          "decimal": "X 326 · Y 58",
+          "octal": "X 506₈ · Y 72₈",
+          "precisionClass": "GENERAL_WHOLE_A8_GRID",
+          "purpose": "Public ballpark position on the A8 512 × 256 celestial sheet.",
+          "finerSourceCoordinate": {
+            "x": 326.4,
+            "y": 57.6
+          }
+        },
+        "generalXYStatus": "READY"
+      },
+      "eventData": {
+        "code": "QUA",
+        "zhr": 80
+      }
+    },
+    {
+      "id": "perihelion-2026",
+      "title": "PERIHELION",
+      "category": "ORBITAL",
+      "status": "CATALOGUED",
+      "precisionClass": "WINDOW",
+      "a8": {
+        "yearCycle4": 1,
+        "yearCycleLabel": "B",
+        "yearDay": 14,
+        "yearDayOctal": "16₈",
+        "calendarRegion": "STRUCTURED",
+        "monthIndex": 0,
+        "monthOctal": "0₈",
+        "monthDay": 14,
+        "quickDate": "(0) 14",
+        "time": {
+          "dayPhase17CenterApprox": 94208,
+          "decimalHHMMSSApprox": "23:00:00",
+          "octalHHMMSSApprox": "27:0:0₈",
+          "sourcePrecision": "MINUTE"
+        },
+        "publicDate": {
+          "display": "(0) 14 · 2026",
+          "quick": "(0) 14",
+          "compass": "N 14 · 2026",
+          "named": "North · Terra · Air · 2026",
+          "symbolic": "0₈ · ⊕ · 🜁",
+          "month": 0,
+          "planetaryWeek": "Terra",
+          "elementDay": "Air",
+          "legacyYearBridge": 2026
+        }
+      },
+      "summary": "Terra reaches its 2026 minimum distance from Sol.",
+      "detailAnchor": "perihelion-2026",
+      "sourceKey": "USNO_SEASONS_2026",
+      "legacyProvenance": {
+        "date": "2026-01-03",
+        "timescale": "UT",
+        "timeUT": "17:15",
+        "timePrecision": "MINUTE"
+      },
+      "sky": {
+        "mode": "EPHEMERIS_TRACK",
+        "coordinateSystem": "A8_CELESTIAL",
+        "body": "TERRA_SOL_RELATIONSHIP",
+        "positionSemantics": "Moving body; do not replace with a fixed zodiac or constellation coordinate.",
+        "generalXYStatus": "READY",
+        "generalXY": {
+          "x": 405,
+          "y": 160,
+          "decimal": "X 405 · Y 160",
+          "octal": "X 625₈ · Y 240₈",
+          "precisionClass": "GENERAL_WHOLE_A8_GRID",
+          "referenceObject": "SOL",
+          "finerSourceCoordinate": {
+            "x": 404.607405,
+            "y": 160.383411,
+            "apparentRaDeg": 284.48958149,
+            "apparentDecDeg": -22.76958604
+          }
+        },
+        "generalXYSemantics": "General event reference patch; not local altitude/azimuth and not a permanent coordinate for moving bodies.",
+        "ephemeris": {
+          "provider": "NASA/JPL Horizons",
+          "observerCenter": "500@399 · Earth geocenter",
+          "quantity": "2 · apparent RA/DEC",
+          "targetCommand": "10",
+          "referenceTimeUT": "2026-Jan-03 17:15:00",
+          "timeBasis": "SOURCE_TIME"
+        }
+      }
+    },
+    {
+      "id": "24p-schaumasse-perihelion-2026",
+      "title": "24P/SCHAUMASSE · PERIHELION",
+      "category": "COMET",
+      "status": "CATALOGUED",
+      "precisionClass": "DAY",
+      "a8": {
+        "yearCycle4": 1,
+        "yearCycleLabel": "B",
+        "yearDay": 19,
+        "yearDayOctal": "23₈",
+        "calendarRegion": "STRUCTURED",
+        "monthIndex": 0,
+        "monthOctal": "0₈",
+        "monthDay": 19,
+        "quickDate": "(0) 19",
+        "publicDate": {
+          "display": "(0) 19 · 2026",
+          "quick": "(0) 19",
+          "compass": "N 19 · 2026",
+          "named": "North · Mars · Air · 2026",
+          "symbolic": "0₈ · ♂ · 🜁",
+          "month": 0,
+          "planetaryWeek": "Mars",
+          "elementDay": "Air",
+          "legacyYearBridge": 2026
+        }
+      },
+      "summary": "Perihelion of 24P/Schaumasse; BAA predicted a peak near magnitude 8.4.",
+      "detailAnchor": "24p-schaumasse-perihelion-2026",
+      "sourceKey": "BAA_COMET_TABLE_2026",
+      "legacyProvenance": {
+        "date": "2026-01-08",
+        "timescale": "UT"
+      },
+      "sky": {
+        "mode": "EPHEMERIS_TRACK",
+        "coordinateSystem": "A8_CELESTIAL",
+        "body": "24P/Schaumasse",
+        "positionSemantics": "Moving body; do not replace with a fixed zodiac or constellation coordinate.",
+        "generalXYStatus": "READY",
+        "generalXY": {
+          "x": 285,
+          "y": 110,
+          "decimal": "X 285 · Y 110",
+          "octal": "X 435₈ · Y 156₈",
+          "precisionClass": "GENERAL_WHOLE_A8_GRID",
+          "referenceObject": "24P/SCHAUMASSE",
+          "finerSourceCoordinate": {
+            "x": 285.298043,
+            "y": 109.836587,
+            "apparentRaDeg": 200.60018673,
+            "apparentDecDeg": 12.77114982
+          }
+        },
+        "generalXYSemantics": "General event reference patch; not local altitude/azimuth and not a permanent coordinate for moving bodies.",
+        "ephemeris": {
+          "provider": "NASA/JPL Horizons",
+          "observerCenter": "500@399 · Earth geocenter",
+          "quantity": "2 · apparent RA/DEC",
+          "targetCommand": "DES=24P;CAP;NOFRAG",
+          "referenceTimeUT": "2026-Jan-08 12:00:00",
+          "timeBasis": "DATE_MIDPOINT_REFERENCE"
+        }
+      },
+      "eventData": {
+        "predictedPeakDate": "2026-01-07",
+        "predictedPeakMagnitude": 8.4
+      }
+    },
+    {
+      "id": "jupiter-opposition-2026",
+      "title": "JUPITER · OPPOSITION",
+      "category": "PLANETARY",
+      "status": "CATALOGUED",
+      "precisionClass": "DAY",
+      "a8": {
+        "yearCycle4": 1,
+        "yearCycleLabel": "B",
+        "yearDay": 21,
+        "yearDayOctal": "25₈",
+        "calendarRegion": "STRUCTURED",
+        "monthIndex": 0,
+        "monthOctal": "0₈",
+        "monthDay": 21,
+        "quickDate": "(0) 21",
+        "publicDate": {
+          "display": "(0) 21 · 2026",
+          "quick": "(0) 21",
+          "compass": "N 21 · 2026",
+          "named": "North · Jupiter · Fire · 2026",
+          "symbolic": "0₈ · ♃ · 🜂",
+          "month": 0,
+          "planetaryWeek": "Jupiter",
+          "elementDay": "Fire",
+          "legacyYearBridge": 2026
+        }
+      },
+      "summary": "Jupiter at opposition and its brightest viewing period of 2026.",
+      "detailAnchor": "jupiter-opposition-2026",
+      "sourceKey": "NASA_SKYWATCH_JAN_2026",
+      "legacyProvenance": {
+        "date": "2026-01-10",
+        "timescale": "UT"
+      },
+      "sky": {
+        "mode": "EPHEMERIS_TRACK",
+        "coordinateSystem": "A8_CELESTIAL",
+        "body": "JUPITER",
+        "positionSemantics": "Moving body; do not replace with a fixed zodiac or constellation coordinate.",
+        "generalXYStatus": "READY",
+        "generalXY": {
+          "x": 159,
+          "y": 96,
+          "decimal": "X 159 · Y 96",
+          "octal": "X 237₈ · Y 140₈",
+          "precisionClass": "GENERAL_WHOLE_A8_GRID",
+          "referenceObject": "JUPITER",
+          "finerSourceCoordinate": {
+            "x": 158.969093,
+            "y": 96.435159,
+            "apparentRaDeg": 111.7751438,
+            "apparentDecDeg": 22.1940291
+          }
+        },
+        "generalXYSemantics": "General event reference patch; not local altitude/azimuth and not a permanent coordinate for moving bodies.",
+        "ephemeris": {
+          "provider": "NASA/JPL Horizons",
+          "observerCenter": "500@399 · Earth geocenter",
+          "quantity": "2 · apparent RA/DEC",
+          "targetCommand": "599",
+          "referenceTimeUT": "2026-Jan-10 12:00:00",
+          "timeBasis": "DATE_MIDPOINT_REFERENCE"
+        }
+      }
+    },
+    {
+      "id": "c2024-e1-wierzchos-perihelion-2026",
+      "title": "C/2024 E1 WIERZCHOS · PERIHELION",
+      "category": "COMET",
+      "status": "CATALOGUED",
+      "precisionClass": "DAY",
+      "a8": {
+        "yearCycle4": 1,
+        "yearCycleLabel": "B",
+        "yearDay": 31,
+        "yearDayOctal": "37₈",
+        "calendarRegion": "STRUCTURED",
+        "monthIndex": 0,
+        "monthOctal": "0₈",
+        "monthDay": 31,
+        "quickDate": "(0) 31",
+        "publicDate": {
+          "display": "(0) 31 · 2026",
+          "quick": "(0) 31",
+          "compass": "N 31 · 2026",
+          "named": "North · Uranus · Fire · 2026",
+          "symbolic": "0₈ · ♅ · 🜂",
+          "month": 0,
+          "planetaryWeek": "Uranus",
+          "elementDay": "Fire",
+          "legacyYearBridge": 2026
+        }
+      },
+      "summary": "Perihelion of C/2024 E1 (Wierzchos).",
+      "detailAnchor": "c2024-e1-wierzchos-perihelion-2026",
+      "sourceKey": "BAA_COMET_TABLE_2026",
+      "legacyProvenance": {
+        "date": "2026-01-20",
+        "timescale": "UT"
+      },
+      "sky": {
+        "mode": "EPHEMERIS_TRACK",
+        "coordinateSystem": "A8_CELESTIAL",
+        "body": "C/2024 E1 (Wierzchos)",
+        "positionSemantics": "Moving body; do not replace with a fixed zodiac or constellation coordinate.",
+        "generalXYStatus": "READY",
+        "generalXY": {
+          "x": 444,
+          "y": 184,
+          "decimal": "X 444 · Y 184",
+          "octal": "X 674₈ · Y 270₈",
+          "precisionClass": "GENERAL_WHOLE_A8_GRID",
+          "referenceObject": "C/2024 E1",
+          "finerSourceCoordinate": {
+            "x": 444.061543,
+            "y": 184.387469,
+            "apparentRaDeg": 312.23077224,
+            "apparentDecDeg": -39.64743918
+          }
+        },
+        "generalXYSemantics": "General event reference patch; not local altitude/azimuth and not a permanent coordinate for moving bodies.",
+        "ephemeris": {
+          "provider": "NASA/JPL Horizons",
+          "observerCenter": "500@399 · Earth geocenter",
+          "quantity": "2 · apparent RA/DEC",
+          "targetCommand": "DES=2024 E1;CAP",
+          "referenceTimeUT": "2026-Jan-20 12:00:00",
+          "timeBasis": "DATE_MIDPOINT_REFERENCE"
+        }
+      },
+      "eventData": {
+        "predictedPeakDate": "2026-01-25",
+        "predictedPeakMagnitude": 5.1
+      }
+    },
+    {
+      "id": "annular-solar-eclipse-2026-02-17",
+      "title": "ANNULAR SOLAR ECLIPSE",
+      "category": "ECLIPSE",
+      "status": "CATALOGUED",
+      "precisionClass": "WINDOW",
+      "a8": {
+        "yearCycle4": 1,
+        "yearCycleLabel": "B",
+        "yearDay": 59,
+        "yearDayOctal": "73₈",
+        "calendarRegion": "STRUCTURED",
+        "monthIndex": 1,
+        "monthOctal": "1₈",
+        "monthDay": 14,
+        "quickDate": "(1) 14",
+        "time": {
+          "dayPhase17CenterApprox": 66727,
+          "decimalHHMMSSApprox": "16:18:39",
+          "octalHHMMSSApprox": "20:22:47₈",
+          "sourcePrecision": "SECOND"
+        },
+        "publicDate": {
+          "display": "(1) 14 · 2026",
+          "quick": "(1) 14",
+          "compass": "NE 14 · 2026",
+          "named": "Northeast · Terra · Air · 2026",
+          "symbolic": "1₈ · ⊕ · 🜁",
+          "month": 1,
+          "planetaryWeek": "Terra",
+          "elementDay": "Air",
+          "legacyYearBridge": 2026
+        }
+      },
+      "summary": "Annular solar eclipse; annularity crosses Antarctica.",
+      "detailAnchor": "annular-solar-eclipse-2026-02-17",
+      "sourceKey": "NASA_GSFC_ECLIPSES_2026",
+      "legacyProvenance": {
+        "date": "2026-02-17",
+        "timescale": "UT",
+        "timeUT": "12:13:05",
+        "timePrecision": "SECOND"
+      },
+      "sky": {
+        "mode": "ECLIPSE_GEOMETRY",
+        "coordinateSystem": "A8_CELESTIAL",
+        "eclipseKind": "SOLAR_ANNULAR",
+        "positionSemantics": "Eclipse geometry is not a fixed-star radiant. Retain eclipse path / zenith provenance and derive observer views separately.",
+        "generalXYStatus": "READY",
+        "generalXY": {
+          "x": 471,
+          "y": 145,
+          "decimal": "X 471 · Y 145",
+          "octal": "X 727₈ · Y 221₈",
+          "precisionClass": "GENERAL_WHOLE_A8_GRID",
+          "referenceObject": "SOL",
+          "finerSourceCoordinate": {
+            "x": 470.722721,
+            "y": 144.893343,
+            "apparentRaDeg": 330.9769134,
+            "apparentDecDeg": -11.87813194
+          }
+        },
+        "generalXYSemantics": "General event reference patch; not local altitude/azimuth and not a permanent coordinate for moving bodies.",
+        "ephemeris": {
+          "provider": "NASA/JPL Horizons",
+          "observerCenter": "500@399 · Earth geocenter",
+          "quantity": "2 · apparent RA/DEC",
+          "targetCommand": "10",
+          "referenceTimeUT": "2026-Feb-17 12:13:05",
+          "timeBasis": "SOURCE_TIME"
+        }
+      },
+      "eventData": {
+        "magnitude": 0.963,
+        "centralDuration": "02m20s"
+      }
+    },
+    {
+      "id": "total-lunar-eclipse-2026-03-03",
+      "title": "TOTAL LUNAR ECLIPSE",
+      "category": "ECLIPSE",
+      "status": "CATALOGUED",
+      "precisionClass": "WINDOW",
+      "a8": {
+        "yearCycle4": 1,
+        "yearCycleLabel": "B",
+        "yearDay": 73,
+        "yearDayOctal": "111₈",
+        "calendarRegion": "STRUCTURED",
+        "monthIndex": 1,
+        "monthOctal": "1₈",
+        "monthDay": 28,
+        "quickDate": "(1) 28",
+        "time": {
+          "dayPhase17CenterApprox": 63248,
+          "decimalHHMMSSApprox": "15:28:16",
+          "octalHHMMSSApprox": "17:34:20₈",
+          "sourcePrecision": "SECOND"
+        },
+        "publicDate": {
+          "display": "(1) 28 · 2026",
+          "quick": "(1) 28",
+          "compass": "NE 28 · 2026",
+          "named": "Northeast · Saturn · Earth · 2026",
+          "symbolic": "1₈ · ♄ · 🜃",
+          "month": 1,
+          "planetaryWeek": "Saturn",
+          "elementDay": "Earth",
+          "legacyYearBridge": 2026
+        }
+      },
+      "summary": "Total lunar eclipse.",
+      "detailAnchor": "total-lunar-eclipse-2026-03-03",
+      "sourceKey": "NASA_GSFC_ECLIPSES_2026",
+      "legacyProvenance": {
+        "date": "2026-03-03",
+        "timescale": "UT",
+        "timeUT": "11:34:52",
+        "timePrecision": "SECOND"
+      },
+      "sky": {
+        "mode": "ECLIPSE_GEOMETRY",
+        "coordinateSystem": "A8_CELESTIAL",
+        "eclipseKind": "LUNAR_TOTAL",
+        "positionSemantics": "Eclipse geometry is not a fixed-star radiant. Retain eclipse path / zenith provenance and derive observer views separately.",
+        "generalXYStatus": "READY",
+        "generalXY": {
+          "x": 233,
+          "y": 119,
+          "decimal": "X 233 · Y 119",
+          "octal": "X 351₈ · Y 167₈",
+          "precisionClass": "GENERAL_WHOLE_A8_GRID",
+          "referenceObject": "MOON",
+          "finerSourceCoordinate": {
+            "x": 233.346864,
+            "y": 118.902736,
+            "apparentRaDeg": 164.07201362,
+            "apparentDecDeg": 6.39651348
+          }
+        },
+        "generalXYSemantics": "General event reference patch; not local altitude/azimuth and not a permanent coordinate for moving bodies.",
+        "ephemeris": {
+          "provider": "NASA/JPL Horizons",
+          "observerCenter": "500@399 · Earth geocenter",
+          "quantity": "2 · apparent RA/DEC",
+          "targetCommand": "301",
+          "referenceTimeUT": "2026-Mar-03 11:34:52",
+          "timeBasis": "SOURCE_TIME"
+        }
+      },
+      "eventData": {
+        "umbralMagnitude": 1.1507,
+        "moonZenithLegacy": {
+          "latDeg": 6.0,
+          "lonDeg": -171.0
+        }
+      }
+    },
+    {
+      "id": "88p-howell-perihelion-2026",
+      "title": "88P/HOWELL · PERIHELION",
+      "category": "COMET",
+      "status": "CATALOGUED",
+      "precisionClass": "DAY",
+      "a8": {
+        "yearCycle4": 1,
+        "yearCycleLabel": "B",
+        "yearDay": 88,
+        "yearDayOctal": "130₈",
+        "calendarRegion": "STRUCTURED",
+        "monthIndex": 1,
+        "monthOctal": "1₈",
+        "monthDay": 43,
+        "quickDate": "(1) 43",
+        "publicDate": {
+          "display": "(1) 43 · 2026",
+          "quick": "(1) 43",
+          "compass": "NE 43 · 2026",
+          "named": "Northeast · Pluto · Earth · 2026",
+          "symbolic": "1₈ · ♇ · 🜃",
+          "month": 1,
+          "planetaryWeek": "Pluto",
+          "elementDay": "Earth",
+          "legacyYearBridge": 2026
+        }
+      },
+      "summary": "Perihelion of 88P/Howell.",
+      "detailAnchor": "88p-howell-perihelion-2026",
+      "sourceKey": "BAA_COMET_TABLE_2026",
+      "legacyProvenance": {
+        "date": "2026-03-18",
+        "timescale": "UT"
+      },
+      "sky": {
+        "mode": "EPHEMERIS_TRACK",
+        "coordinateSystem": "A8_CELESTIAL",
+        "body": "88P/Howell",
+        "positionSemantics": "Moving body; do not replace with a fixed zodiac or constellation coordinate.",
+        "generalXYStatus": "READY",
+        "generalXY": {
+          "x": 459,
+          "y": 153,
+          "decimal": "X 459 · Y 153",
+          "octal": "X 713₈ · Y 231₈",
+          "precisionClass": "GENERAL_WHOLE_A8_GRID",
+          "referenceObject": "88P/HOWELL",
+          "finerSourceCoordinate": {
+            "x": 459.202492,
+            "y": 152.555154,
+            "apparentRaDeg": 322.87675218,
+            "apparentDecDeg": -17.26534261
+          }
+        },
+        "generalXYSemantics": "General event reference patch; not local altitude/azimuth and not a permanent coordinate for moving bodies.",
+        "ephemeris": {
+          "provider": "NASA/JPL Horizons",
+          "observerCenter": "500@399 · Earth geocenter",
+          "quantity": "2 · apparent RA/DEC",
+          "targetCommand": "DES=88P;CAP;NOFRAG",
+          "referenceTimeUT": "2026-Mar-18 12:00:00",
+          "timeBasis": "DATE_MIDPOINT_REFERENCE"
+        }
+      },
+      "eventData": {
+        "predictedPeakDate": "2026-03-23",
+        "predictedPeakMagnitude": 9.3
+      }
+    },
+    {
+      "id": "march-equinox-2026",
+      "title": "MARCH EQUINOX",
+      "category": "ORBITAL",
+      "status": "CATALOGUED",
+      "precisionClass": "WINDOW",
+      "a8": {
+        "yearCycle4": 1,
+        "yearCycleLabel": "B",
+        "yearDay": 90,
+        "yearDayOctal": "132₈",
+        "calendarRegion": "STRUCTURED",
+        "monthIndex": 1,
+        "monthOctal": "1₈",
+        "monthDay": 45,
+        "quickDate": "(1) 45",
+        "time": {
+          "dayPhase17CenterApprox": 80646,
+          "decimalHHMMSSApprox": "19:44:06",
+          "octalHHMMSSApprox": "23:54:6₈",
+          "sourcePrecision": "MINUTE"
+        },
+        "publicDate": {
+          "display": "(1) 45 · 2026",
+          "quick": "(1) 45",
+          "compass": "NE 45 · 2026",
+          "named": "Northeast · Pluto · Aether · 2026",
+          "symbolic": "1₈ · ♇ · ✡",
+          "month": 1,
+          "planetaryWeek": "Pluto",
+          "elementDay": "Aether",
+          "legacyYearBridge": 2026
+        }
+      },
+      "summary": "The March equinox crossing.",
+      "detailAnchor": "march-equinox-2026",
+      "sourceKey": "USNO_SEASONS_2026",
+      "legacyProvenance": {
+        "date": "2026-03-20",
+        "timescale": "UT",
+        "timeUT": "14:46",
+        "timePrecision": "MINUTE"
+      },
+      "sky": {
+        "mode": "EPHEMERIS_TRACK",
+        "coordinateSystem": "A8_CELESTIAL",
+        "body": "TERRA_SOL_RELATIONSHIP",
+        "positionSemantics": "Moving body; do not replace with a fixed zodiac or constellation coordinate.",
+        "generalXYStatus": "READY",
+        "generalXY": {
+          "x": 0,
+          "y": 128,
+          "decimal": "X 0 · Y 128",
+          "octal": "X 0₈ · Y 200₈",
+          "precisionClass": "GENERAL_WHOLE_A8_GRID",
+          "referenceObject": "SOL",
+          "finerSourceCoordinate": {
+            "x": 511.999967,
+            "y": 127.999866,
+            "apparentRaDeg": 359.99997688,
+            "apparentDecDeg": 9.446e-05
+          }
+        },
+        "generalXYSemantics": "General event reference patch; not local altitude/azimuth and not a permanent coordinate for moving bodies.",
+        "ephemeris": {
+          "provider": "NASA/JPL Horizons",
+          "observerCenter": "500@399 · Earth geocenter",
+          "quantity": "2 · apparent RA/DEC",
+          "targetCommand": "10",
+          "referenceTimeUT": "2026-Mar-20 14:46:00",
+          "timeBasis": "SOURCE_TIME"
+        }
+      }
+    },
+    {
+      "id": "c2026-a1-maps-perihelion-2026",
+      "title": "C/2026 A1 MAPS · BREAKUP / NOMINAL PERIHELION",
+      "category": "COMET",
+      "status": "OBSERVED",
+      "precisionClass": "WINDOW",
+      "a8": {
+        "yearCycle4": 1,
+        "yearCycleLabel": "B",
+        "yearDay": 105,
+        "yearDayOctal": "151₈",
+        "calendarRegion": "STRUCTURED",
+        "monthIndex": 2,
+        "monthOctal": "2₈",
+        "monthDay": 15,
+        "quickDate": "(2) 15",
+        "time": {
+          "dayPhase17CenterApprox": 73728,
+          "decimalHHMMSSApprox": "18:00:00",
+          "octalHHMMSSApprox": "22:0:0₈",
+          "sourcePrecision": "APPROX_MINUTE"
+        },
+        "publicDate": {
+          "display": "(2) 15 · 2026",
+          "quick": "(2) 15",
+          "compass": "E 15 · 2026",
+          "named": "East · Terra · Aether · 2026",
+          "symbolic": "2₈ · ⊕ · ✡",
+          "month": 2,
+          "planetaryWeek": "Terra",
+          "elementDay": "Aether",
+          "legacyYearBridge": 2026
+        }
+      },
+      "summary": "Kreutz sungrazer C/2026 A1 broke up before its extremely close nominal perihelion.",
+      "detailAnchor": "c2026-a1-maps-perihelion-2026",
+      "sourceKey": "BAA_C2026A1_2026",
+      "legacyProvenance": {
+        "date": "2026-04-04",
+        "timescale": "UT",
+        "timeUT": "13:30",
+        "timePrecision": "APPROX_MINUTE"
+      },
+      "sky": {
+        "mode": "EPHEMERIS_TRACK",
+        "coordinateSystem": "A8_CELESTIAL",
+        "body": "C/2026 A1 (MAPS)",
+        "positionSemantics": "Moving body; do not replace with a fixed zodiac or constellation coordinate.",
+        "generalXYStatus": "READY",
+        "generalXY": {
+          "x": 19,
+          "y": 120,
+          "decimal": "X 19 · Y 120",
+          "octal": "X 23₈ · Y 170₈",
+          "precisionClass": "GENERAL_WHOLE_A8_GRID",
+          "referenceObject": "C/2026 A1",
+          "finerSourceCoordinate": {
+            "x": 19.260093,
+            "y": 119.747545,
+            "apparentRaDeg": 13.54225268,
+            "apparentDecDeg": 5.80250738
+          }
+        },
+        "generalXYSemantics": "General event reference patch; not local altitude/azimuth and not a permanent coordinate for moving bodies.",
+        "ephemeris": {
+          "provider": "NASA/JPL Horizons",
+          "observerCenter": "500@399 · Earth geocenter",
+          "quantity": "2 · apparent RA/DEC",
+          "targetCommand": "DES=2026 A1;CAP",
+          "referenceTimeUT": "2026-Apr-04 13:30:00",
+          "timeBasis": "SOURCE_TIME"
+        }
+      },
+      "eventData": {
+        "perihelionDistanceAU": 0.0057,
+        "approxAltitudeAbovePhotosphereKm": 158000,
+        "outcome": "DISRUPTED_BEFORE_PERIHELION"
+      }
+    },
+    {
+      "id": "c2025-r3-panstarrs-perihelion-2026",
+      "title": "C/2025 R3 PANSTARRS · PERIHELION",
+      "category": "COMET",
+      "status": "OBSERVED",
+      "precisionClass": "DAY",
+      "a8": {
+        "yearCycle4": 1,
+        "yearCycleLabel": "B",
+        "yearDay": 120,
+        "yearDayOctal": "170₈",
+        "calendarRegion": "STRUCTURED",
+        "monthIndex": 2,
+        "monthOctal": "2₈",
+        "monthDay": 30,
+        "quickDate": "(2) 30",
+        "publicDate": {
+          "display": "(2) 30 · 2026",
+          "quick": "(2) 30",
+          "compass": "E 30 · 2026",
+          "named": "East · Saturn · Aether · 2026",
+          "symbolic": "2₈ · ♄ · ✡",
+          "month": 2,
+          "planetaryWeek": "Saturn",
+          "elementDay": "Aether",
+          "legacyYearBridge": 2026
+        }
+      },
+      "summary": "Bright 2026 comet; perihelion date retained from the BAA annual orbital table.",
+      "detailAnchor": "c2025-r3-panstarrs-perihelion-2026",
+      "sourceKey": "BAA_COMET_TABLE_2026",
+      "legacyProvenance": {
+        "date": "2026-04-19",
+        "timescale": "UT"
+      },
+      "sky": {
+        "mode": "EPHEMERIS_TRACK",
+        "coordinateSystem": "A8_CELESTIAL",
+        "body": "C/2025 R3 (PANSTARRS)",
+        "positionSemantics": "Moving body; do not replace with a fixed zodiac or constellation coordinate.",
+        "generalXYStatus": "READY",
+        "generalXY": {
+          "x": 9,
+          "y": 104,
+          "decimal": "X 9 · Y 104",
+          "octal": "X 11₈ · Y 150₈",
+          "precisionClass": "GENERAL_WHOLE_A8_GRID",
+          "referenceObject": "C/2025 R3",
+          "finerSourceCoordinate": {
+            "x": 8.554593,
+            "y": 103.935844,
+            "apparentRaDeg": 6.01494838,
+            "apparentDecDeg": 16.92010955
+          }
+        },
+        "generalXYSemantics": "General event reference patch; not local altitude/azimuth and not a permanent coordinate for moving bodies.",
+        "ephemeris": {
+          "provider": "NASA/JPL Horizons",
+          "observerCenter": "500@399 · Earth geocenter",
+          "quantity": "2 · apparent RA/DEC",
+          "targetCommand": "DES=2025 R3;CAP",
+          "referenceTimeUT": "2026-Apr-19 12:00:00",
+          "timeBasis": "DATE_MIDPOINT_REFERENCE"
+        }
+      },
+      "eventData": {
+        "predictedPeakDate": "2026-04-24",
+        "annualTablePredictedPeakMagnitude": 7.8,
+        "observedBrighteningNote": "BAA later reported about sixth magnitude by April 8 and possible third magnitude near perihelion."
+      },
+      "notes": [
+        "Later BAA prose rounded perihelion to April 20; the annual orbital table and independent orbital listings give April 19. Provenance retained."
+      ]
+    },
+    {
+      "id": "lyrids-2026",
+      "title": "LYRIDS · MAXIMUM",
+      "category": "METEOR",
+      "status": "CATALOGUED",
+      "precisionClass": "DAY",
+      "a8": {
+        "yearCycle4": 1,
+        "yearCycleLabel": "B",
+        "yearDay": 123,
+        "yearDayOctal": "173₈",
+        "calendarRegion": "STRUCTURED",
+        "monthIndex": 2,
+        "monthOctal": "2₈",
+        "monthDay": 33,
+        "quickDate": "(2) 33",
+        "publicDate": {
+          "display": "(2) 33 · 2026",
+          "quick": "(2) 33",
+          "compass": "E 33 · 2026",
+          "named": "East · Uranus · Earth · 2026",
+          "symbolic": "2₈ · ♅ · 🜃",
+          "month": 2,
+          "planetaryWeek": "Uranus",
+          "elementDay": "Earth",
+          "legacyYearBridge": 2026
+        }
+      },
+      "summary": "Annual Lyrid maximum.",
+      "detailAnchor": "lyrids-2026",
+      "sourceKey": "IMO_METEOR_CALENDAR_2026",
+      "legacyProvenance": {
+        "date": "2026-04-22",
+        "timescale": "UT"
+      },
+      "sky": {
+        "mode": "FIXED_RADIANT_APPROX",
+        "coordinateSystem": "A8_CELESTIAL",
+        "longitude512": 385.422,
+        "latitude256": 79.644,
+        "sourceEquatorial": {
+          "raDeg": 271,
+          "decDeg": 34
+        },
+        "referenceStars": [],
+        "sourcePrecision": "PUBLISHED_RADIANT_APPROX",
+        "generalXY": {
+          "x": 385,
+          "y": 80,
+          "decimal": "X 385 · Y 80",
+          "octal": "X 601₈ · Y 120₈",
+          "precisionClass": "GENERAL_WHOLE_A8_GRID",
+          "purpose": "Public ballpark position on the A8 512 × 256 celestial sheet.",
+          "finerSourceCoordinate": {
+            "x": 385.422,
+            "y": 79.644
+          }
+        },
+        "generalXYStatus": "READY"
+      },
+      "eventData": {
+        "code": "LYR",
+        "zhr": 18
+      }
+    },
+    {
+      "id": "eta-aquariids-2026",
+      "title": "ETA AQUARIIDS · MAXIMUM",
+      "category": "METEOR",
+      "status": "CATALOGUED",
+      "precisionClass": "DAY",
+      "a8": {
+        "yearCycle4": 1,
+        "yearCycleLabel": "B",
+        "yearDay": 137,
+        "yearDayOctal": "211₈",
+        "calendarRegion": "STRUCTURED",
+        "monthIndex": 3,
+        "monthOctal": "3₈",
+        "monthDay": 2,
+        "quickDate": "(3) 2",
+        "publicDate": {
+          "display": "(3) 2 · 2026",
+          "quick": "(3) 2",
+          "compass": "SE 2 · 2026",
+          "named": "Southeast · Mercury · Water · 2026",
+          "symbolic": "3₈ · ☿ · 🜄",
+          "month": 3,
+          "planetaryWeek": "Mercury",
+          "elementDay": "Water",
+          "legacyYearBridge": 2026
+        }
+      },
+      "summary": "Strong southern-favoured Eta Aquariid maximum; moonlight is unfavorable in 2026.",
+      "detailAnchor": "eta-aquariids-2026",
+      "sourceKey": "IMO_METEOR_CALENDAR_2026",
+      "legacyProvenance": {
+        "date": "2026-05-06",
+        "timescale": "UT"
+      },
+      "sky": {
+        "mode": "FIXED_RADIANT_APPROX",
+        "coordinateSystem": "A8_CELESTIAL",
+        "longitude512": 480.711,
+        "latitude256": 129.422,
+        "sourceEquatorial": {
+          "raDeg": 338,
+          "decDeg": -1
+        },
+        "referenceStars": [],
+        "sourcePrecision": "PUBLISHED_RADIANT_APPROX",
+        "generalXY": {
+          "x": 481,
+          "y": 129,
+          "decimal": "X 481 · Y 129",
+          "octal": "X 741₈ · Y 201₈",
+          "precisionClass": "GENERAL_WHOLE_A8_GRID",
+          "purpose": "Public ballpark position on the A8 512 × 256 celestial sheet.",
+          "finerSourceCoordinate": {
+            "x": 480.711,
+            "y": 129.422
+          }
+        },
+        "generalXYStatus": "READY"
+      },
+      "eventData": {
+        "code": "ETA",
+        "zhr": 50
+      }
+    },
+    {
+      "id": "220p-mcnaught-first-outburst-2026",
+      "title": "220P/MCNAUGHT · MAJOR OUTBURST OBSERVED",
+      "category": "COMET",
+      "status": "OBSERVED",
+      "precisionClass": "WINDOW",
+      "a8": {
+        "yearCycle4": 1,
+        "yearCycleLabel": "B",
+        "yearDay": 162,
+        "yearDayOctal": "242₈",
+        "calendarRegion": "STRUCTURED",
+        "monthIndex": 3,
+        "monthOctal": "3₈",
+        "monthDay": 27,
+        "quickDate": "(3) 27",
+        "time": {
+          "dayPhase17CenterApprox": 61713,
+          "decimalHHMMSSApprox": "15:04:17",
+          "octalHHMMSSApprox": "17:4:21₈",
+          "sourcePrecision": "MINUTE"
+        },
+        "publicDate": {
+          "display": "(3) 27 · 2026",
+          "quick": "(3) 27",
+          "compass": "SE 27 · 2026",
+          "named": "Southeast · Saturn · Water · 2026",
+          "symbolic": "3₈ · ♄ · 🜄",
+          "month": 3,
+          "planetaryWeek": "Saturn",
+          "elementDay": "Water",
+          "legacyYearBridge": 2026
+        }
+      },
+      "summary": "Large apparent outburst of 220P/McNaught first identified in ZTF images.",
+      "detailAnchor": "220p-mcnaught-first-outburst-2026",
+      "sourceKey": "ATEL_17829",
+      "legacyProvenance": {
+        "date": "2026-05-31",
+        "timescale": "UT",
+        "timeUT": "11:18",
+        "timePrecision": "MINUTE"
+      },
+      "sky": {
+        "mode": "EPHEMERIS_TRACK",
+        "coordinateSystem": "A8_CELESTIAL",
+        "body": "220P/McNaught",
+        "positionSemantics": "Moving body; do not replace with a fixed zodiac or constellation coordinate.",
+        "generalXYStatus": "READY",
+        "generalXY": {
+          "x": 0,
+          "y": 127,
+          "decimal": "X 0 · Y 127",
+          "octal": "X 0₈ · Y 177₈",
+          "precisionClass": "GENERAL_WHOLE_A8_GRID",
+          "referenceObject": "220P/MCNAUGHT",
+          "finerSourceCoordinate": {
+            "x": 511.549103,
+            "y": 126.504848,
+            "apparentRaDeg": 359.68296271,
+            "apparentDecDeg": 1.05127893
+          }
+        },
+        "generalXYSemantics": "General event reference patch; not local altitude/azimuth and not a permanent coordinate for moving bodies.",
+        "ephemeris": {
+          "provider": "NASA/JPL Horizons",
+          "observerCenter": "500@399 · Earth geocenter",
+          "quantity": "2 · apparent RA/DEC",
+          "targetCommand": "DES=220P;CAP;NOFRAG",
+          "referenceTimeUT": "2026-May-31 11:18:00",
+          "timeBasis": "SOURCE_TIME"
+        }
+      },
+      "eventData": {
+        "observedRMag": 11.05
+      }
+    },
+    {
+      "id": "venus-jupiter-conjunction-2026",
+      "title": "VENUS · JUPITER CONJUNCTION",
+      "category": "PLANETARY",
+      "status": "CATALOGUED",
+      "precisionClass": "DAY",
+      "a8": {
+        "yearCycle4": 1,
+        "yearCycleLabel": "B",
+        "yearDay": 171,
+        "yearDayOctal": "253₈",
+        "calendarRegion": "STRUCTURED",
+        "monthIndex": 3,
+        "monthOctal": "3₈",
+        "monthDay": 36,
+        "quickDate": "(3) 36",
+        "publicDate": {
+          "display": "(3) 36 · 2026",
+          "quick": "(3) 36",
+          "compass": "SE 36 · 2026",
+          "named": "Southeast · Neptune · Fire · 2026",
+          "symbolic": "3₈ · ♆ · 🜂",
+          "month": 3,
+          "planetaryWeek": "Neptune",
+          "elementDay": "Fire",
+          "legacyYearBridge": 2026
+        }
+      },
+      "summary": "Venus and Jupiter appear in close conjunction after sunset.",
+      "detailAnchor": "venus-jupiter-conjunction-2026",
+      "sourceKey": "NASA_SKYWATCH_JUN_2026",
+      "legacyProvenance": {
+        "date": "2026-06-09",
+        "timescale": "UT"
+      },
+      "sky": {
+        "mode": "MOVING_BODY_PAIR",
+        "coordinateSystem": "A8_CELESTIAL",
+        "bodies": [
+          "VENUS",
+          "JUPITER"
+        ],
+        "positionSemantics": "Use event-time ephemerides for both bodies; constellation is descriptive only.",
+        "generalXYStatus": "READY",
+        "generalXY": {
+          "x": 167,
+          "y": 95,
+          "decimal": "X 167 · Y 95",
+          "octal": "X 247₈ · Y 137₈",
+          "precisionClass": "GENERAL_WHOLE_A8_GRID",
+          "referenceObject": "VENUS",
+          "finerSourceCoordinate": {
+            "x": 167.471496,
+            "y": 95.216924,
+            "apparentRaDeg": 117.7533953,
+            "apparentDecDeg": 23.0506001
+          }
+        },
+        "generalXYSemantics": "General event reference patch; not local altitude/azimuth and not a permanent coordinate for moving bodies.",
+        "ephemeris": {
+          "provider": "NASA/JPL Horizons",
+          "observerCenter": "500@399 · Earth geocenter",
+          "quantity": "2 · apparent RA/DEC",
+          "targetCommand": "299",
+          "referenceTimeUT": "2026-Jun-09 12:00:00",
+          "timeBasis": "DATE_MIDPOINT_REFERENCE"
+        }
+      }
+    },
+    {
+      "id": "220p-mcnaught-perihelion-2026",
+      "title": "220P/MCNAUGHT · PERIHELION",
+      "category": "COMET",
+      "status": "OBSERVED",
+      "precisionClass": "DAY",
+      "a8": {
+        "yearCycle4": 1,
+        "yearCycleLabel": "B",
+        "yearDay": 176,
+        "yearDayOctal": "260₈",
+        "calendarRegion": "STRUCTURED",
+        "monthIndex": 3,
+        "monthOctal": "3₈",
+        "monthDay": 41,
+        "quickDate": "(3) 41",
+        "publicDate": {
+          "display": "(3) 41 · 2026",
+          "quick": "(3) 41",
+          "compass": "SE 41 · 2026",
+          "named": "Southeast · Pluto · Fire · 2026",
+          "symbolic": "3₈ · ♇ · 🜂",
+          "month": 3,
+          "planetaryWeek": "Pluto",
+          "elementDay": "Fire",
+          "legacyYearBridge": 2026
+        }
+      },
+      "summary": "Perihelion of 220P/McNaught during its extraordinary 2026 apparition.",
+      "detailAnchor": "220p-mcnaught-perihelion-2026",
+      "sourceKey": "BAA_COMET_TABLE_2026",
+      "legacyProvenance": {
+        "date": "2026-06-14",
+        "timescale": "UT"
+      },
+      "sky": {
+        "mode": "EPHEMERIS_TRACK",
+        "coordinateSystem": "A8_CELESTIAL",
+        "body": "220P/McNaught",
+        "positionSemantics": "Moving body; do not replace with a fixed zodiac or constellation coordinate.",
+        "generalXYStatus": "READY",
+        "generalXY": {
+          "x": 13,
+          "y": 123,
+          "decimal": "X 13 · Y 123",
+          "octal": "X 15₈ · Y 173₈",
+          "precisionClass": "GENERAL_WHOLE_A8_GRID",
+          "referenceObject": "220P/MCNAUGHT",
+          "finerSourceCoordinate": {
+            "x": 13.006142,
+            "y": 122.576023,
+            "apparentRaDeg": 9.14494386,
+            "apparentDecDeg": 3.81373394
+          }
+        },
+        "generalXYSemantics": "General event reference patch; not local altitude/azimuth and not a permanent coordinate for moving bodies.",
+        "ephemeris": {
+          "provider": "NASA/JPL Horizons",
+          "observerCenter": "500@399 · Earth geocenter",
+          "quantity": "2 · apparent RA/DEC",
+          "targetCommand": "DES=220P;CAP;NOFRAG",
+          "referenceTimeUT": "2026-Jun-14 12:00:00",
+          "timeBasis": "DATE_MIDPOINT_REFERENCE"
+        }
+      }
+    },
+    {
+      "id": "venus-lunar-occultation-2026-06-17",
+      "title": "MOON OCCULTS VENUS",
+      "category": "PLANETARY",
+      "status": "CATALOGUED",
+      "precisionClass": "DAY",
+      "a8": {
+        "yearCycle4": 1,
+        "yearCycleLabel": "B",
+        "yearDay": 179,
+        "yearDayOctal": "263₈",
+        "calendarRegion": "STRUCTURED",
+        "monthIndex": 3,
+        "monthOctal": "3₈",
+        "monthDay": 44,
+        "quickDate": "(3) 44",
+        "publicDate": {
+          "display": "(3) 44 · 2026",
+          "quick": "(3) 44",
+          "compass": "SE 44 · 2026",
+          "named": "Southeast · Pluto · Air · 2026",
+          "symbolic": "3₈ · ♇ · 🜁",
+          "month": 3,
+          "planetaryWeek": "Pluto",
+          "elementDay": "Air",
+          "legacyYearBridge": 2026
+        }
+      },
+      "summary": "The Moon passes in front of Venus for observers in the visibility path.",
+      "detailAnchor": "venus-lunar-occultation-2026-06-17",
+      "sourceKey": "NASA_SKYWATCH_JUN_2026",
+      "legacyProvenance": {
+        "date": "2026-06-17",
+        "timescale": "UT"
+      },
+      "sky": {
+        "mode": "OCCULTATION_PATH",
+        "coordinateSystem": "A8_CELESTIAL",
+        "bodies": [
+          "MOON",
+          "VENUS"
+        ],
+        "generalXYStatus": "READY",
+        "generalXY": {
+          "x": 181,
+          "y": 98,
+          "decimal": "X 181 · Y 98",
+          "octal": "X 265₈ · Y 142₈",
+          "precisionClass": "GENERAL_WHOLE_A8_GRID",
+          "referenceObject": "VENUS",
+          "finerSourceCoordinate": {
+            "x": 181.431452,
+            "y": 98.064119,
+            "apparentRaDeg": 127.56898983,
+            "apparentDecDeg": 21.04866638
+          }
+        },
+        "generalXYSemantics": "General event reference patch; not local altitude/azimuth and not a permanent coordinate for moving bodies.",
+        "ephemeris": {
+          "provider": "NASA/JPL Horizons",
+          "observerCenter": "500@399 · Earth geocenter",
+          "quantity": "2 · apparent RA/DEC",
+          "targetCommand": "299",
+          "referenceTimeUT": "2026-Jun-17 12:00:00",
+          "timeBasis": "DATE_MIDPOINT_REFERENCE"
+        }
+      }
+    },
+    {
+      "id": "june-solstice-2026",
+      "title": "JUNE SOLSTICE",
+      "category": "ORBITAL",
+      "status": "CATALOGUED",
+      "precisionClass": "WINDOW",
+      "a8": {
+        "yearCycle4": 1,
+        "yearCycleLabel": "B",
+        "yearDay": 183,
+        "yearDayOctal": "267₈",
+        "calendarRegion": "STRUCTURED",
+        "monthIndex": 4,
+        "monthOctal": "4₈",
+        "monthDay": 3,
+        "quickDate": "(4) 3",
+        "time": {
+          "dayPhase17CenterApprox": 45875,
+          "decimalHHMMSSApprox": "11:12:51",
+          "octalHHMMSSApprox": "13:14:63₈",
+          "sourcePrecision": "MINUTE"
+        },
+        "publicDate": {
+          "display": "(4) 3 · 2026",
+          "quick": "(4) 3",
+          "compass": "S 3 · 2026",
+          "named": "South · Mercury · Earth · 2026",
+          "symbolic": "4₈ · ☿ · 🜃",
+          "month": 4,
+          "planetaryWeek": "Mercury",
+          "elementDay": "Earth",
+          "legacyYearBridge": 2026
+        }
+      },
+      "summary": "The June solstice.",
+      "detailAnchor": "june-solstice-2026",
+      "sourceKey": "USNO_SEASONS_2026",
+      "legacyProvenance": {
+        "date": "2026-06-21",
+        "timescale": "UT",
+        "timeUT": "08:24",
+        "timePrecision": "MINUTE"
+      },
+      "sky": {
+        "mode": "EPHEMERIS_TRACK",
+        "coordinateSystem": "A8_CELESTIAL",
+        "body": "TERRA_SOL_RELATIONSHIP",
+        "positionSemantics": "Moving body; do not replace with a fixed zodiac or constellation coordinate.",
+        "generalXYStatus": "READY",
+        "generalXY": {
+          "x": 128,
+          "y": 95,
+          "decimal": "X 128 · Y 95",
+          "octal": "X 200₈ · Y 137₈",
+          "precisionClass": "GENERAL_WHOLE_A8_GRID",
+          "referenceObject": "SOL",
+          "finerSourceCoordinate": {
+            "x": 127.99946,
+            "y": 94.66605,
+            "apparentRaDeg": 89.9996206,
+            "apparentDecDeg": 23.43793338
+          }
+        },
+        "generalXYSemantics": "General event reference patch; not local altitude/azimuth and not a permanent coordinate for moving bodies.",
+        "ephemeris": {
+          "provider": "NASA/JPL Horizons",
+          "observerCenter": "500@399 · Earth geocenter",
+          "quantity": "2 · apparent RA/DEC",
+          "targetCommand": "10",
+          "referenceTimeUT": "2026-Jun-21 08:24:00",
+          "timeBasis": "SOURCE_TIME"
+        }
+      }
+    },
+    {
+      "id": "aphelion-2026",
+      "title": "APHELION",
+      "category": "ORBITAL",
+      "status": "CATALOGUED",
+      "precisionClass": "WINDOW",
+      "a8": {
+        "yearCycle4": 1,
+        "yearCycleLabel": "B",
+        "yearDay": 198,
+        "yearDayOctal": "306₈",
+        "calendarRegion": "STRUCTURED",
+        "monthIndex": 4,
+        "monthOctal": "4₈",
+        "monthDay": 18,
+        "quickDate": "(4) 18",
+        "time": {
+          "dayPhase17CenterApprox": 95573,
+          "decimalHHMMSSApprox": "23:21:21",
+          "octalHHMMSSApprox": "27:25:25₈",
+          "sourcePrecision": "MINUTE"
+        },
+        "publicDate": {
+          "display": "(4) 18 · 2026",
+          "quick": "(4) 18",
+          "compass": "S 18 · 2026",
+          "named": "South · Mars · Earth · 2026",
+          "symbolic": "4₈ · ♂ · 🜃",
+          "month": 4,
+          "planetaryWeek": "Mars",
+          "elementDay": "Earth",
+          "legacyYearBridge": 2026
+        }
+      },
+      "summary": "Terra reaches its 2026 maximum distance from Sol.",
+      "detailAnchor": "aphelion-2026",
+      "sourceKey": "USNO_SEASONS_2026",
+      "legacyProvenance": {
+        "date": "2026-07-06",
+        "timescale": "UT",
+        "timeUT": "17:30",
+        "timePrecision": "MINUTE"
+      },
+      "sky": {
+        "mode": "EPHEMERIS_TRACK",
+        "coordinateSystem": "A8_CELESTIAL",
+        "body": "TERRA_SOL_RELATIONSHIP",
+        "positionSemantics": "Moving body; do not replace with a fixed zodiac or constellation coordinate.",
+        "generalXYStatus": "READY",
+        "generalXY": {
+          "x": 151,
+          "y": 96,
+          "decimal": "X 151 · Y 96",
+          "octal": "X 227₈ · Y 140₈",
+          "precisionClass": "GENERAL_WHOLE_A8_GRID",
+          "referenceObject": "SOL",
+          "finerSourceCoordinate": {
+            "x": 150.640089,
+            "y": 95.813131,
+            "apparentRaDeg": 105.9188126,
+            "apparentDecDeg": 22.6313925
+          }
+        },
+        "generalXYSemantics": "General event reference patch; not local altitude/azimuth and not a permanent coordinate for moving bodies.",
+        "ephemeris": {
+          "provider": "NASA/JPL Horizons",
+          "observerCenter": "500@399 · Earth geocenter",
+          "quantity": "2 · apparent RA/DEC",
+          "targetCommand": "10",
+          "referenceTimeUT": "2026-Jul-06 17:30:00",
+          "timeBasis": "SOURCE_TIME"
+        }
+      }
+    },
+    {
+      "id": "alpha-capricornids-2026",
+      "title": "ALPHA CAPRICORNIDS · MAXIMUM",
+      "category": "METEOR",
+      "status": "CATALOGUED",
+      "precisionClass": "DAY",
+      "a8": {
+        "yearCycle4": 1,
+        "yearCycleLabel": "B",
+        "yearDay": 223,
+        "yearDayOctal": "337₈",
+        "calendarRegion": "STRUCTURED",
+        "monthIndex": 4,
+        "monthOctal": "4₈",
+        "monthDay": 43,
+        "quickDate": "(4) 43",
+        "publicDate": {
+          "display": "(4) 43 · 2026",
+          "quick": "(4) 43",
+          "compass": "S 43 · 2026",
+          "named": "South · Pluto · Earth · 2026",
+          "symbolic": "4₈ · ♇ · 🜃",
+          "month": 4,
+          "planetaryWeek": "Pluto",
+          "elementDay": "Earth",
+          "legacyYearBridge": 2026
+        }
+      },
+      "summary": "Low-rate stream notable for bright fireballs.",
+      "detailAnchor": "alpha-capricornids-2026",
+      "sourceKey": "IMO_METEOR_CALENDAR_2026",
+      "legacyProvenance": {
+        "date": "2026-07-31",
+        "timescale": "UT"
+      },
+      "sky": {
+        "mode": "FIXED_RADIANT_APPROX",
+        "coordinateSystem": "A8_CELESTIAL",
+        "longitude512": 436.622,
+        "latitude256": 142.222,
+        "sourceEquatorial": {
+          "raDeg": 307,
+          "decDeg": -10
+        },
+        "referenceStars": [],
+        "sourcePrecision": "PUBLISHED_RADIANT_APPROX",
+        "generalXY": {
+          "x": 437,
+          "y": 142,
+          "decimal": "X 437 · Y 142",
+          "octal": "X 665₈ · Y 216₈",
+          "precisionClass": "GENERAL_WHOLE_A8_GRID",
+          "purpose": "Public ballpark position on the A8 512 × 256 celestial sheet.",
+          "finerSourceCoordinate": {
+            "x": 436.622,
+            "y": 142.222
+          }
+        },
+        "generalXYStatus": "READY"
+      },
+      "eventData": {
+        "code": "CAP",
+        "zhr": 5
+      }
+    },
+    {
+      "id": "southern-delta-aquariids-2026",
+      "title": "SOUTHERN DELTA AQUARIIDS · MAXIMUM",
+      "category": "METEOR",
+      "status": "CATALOGUED",
+      "precisionClass": "DAY",
+      "a8": {
+        "yearCycle4": 1,
+        "yearCycleLabel": "B",
+        "yearDay": 223,
+        "yearDayOctal": "337₈",
+        "calendarRegion": "STRUCTURED",
+        "monthIndex": 4,
+        "monthOctal": "4₈",
+        "monthDay": 43,
+        "quickDate": "(4) 43",
+        "publicDate": {
+          "display": "(4) 43 · 2026",
+          "quick": "(4) 43",
+          "compass": "S 43 · 2026",
+          "named": "South · Pluto · Earth · 2026",
+          "symbolic": "4₈ · ♇ · 🜃",
+          "month": 4,
+          "planetaryWeek": "Pluto",
+          "elementDay": "Earth",
+          "legacyYearBridge": 2026
+        }
+      },
+      "summary": "Southern Delta Aquariid maximum.",
+      "detailAnchor": "southern-delta-aquariids-2026",
+      "sourceKey": "IMO_METEOR_CALENDAR_2026",
+      "legacyProvenance": {
+        "date": "2026-07-31",
+        "timescale": "UT"
+      },
+      "sky": {
+        "mode": "FIXED_RADIANT_APPROX",
+        "coordinateSystem": "A8_CELESTIAL",
+        "longitude512": 483.556,
+        "latitude256": 151.324,
+        "sourceEquatorial": {
+          "raDeg": 340,
+          "decDeg": -16.4
+        },
+        "referenceStars": [],
+        "sourcePrecision": "PUBLISHED_RADIANT_APPROX",
+        "generalXY": {
+          "x": 484,
+          "y": 151,
+          "decimal": "X 484 · Y 151",
+          "octal": "X 744₈ · Y 227₈",
+          "precisionClass": "GENERAL_WHOLE_A8_GRID",
+          "purpose": "Public ballpark position on the A8 512 × 256 celestial sheet.",
+          "finerSourceCoordinate": {
+            "x": 483.556,
+            "y": 151.324
+          }
+        },
+        "generalXYStatus": "READY"
+      },
+      "eventData": {
+        "code": "SDA",
+        "zhr": 25
+      }
+    },
+    {
+      "id": "10p-tempel2-perihelion-2026",
+      "title": "10P/TEMPEL 2 · PERIHELION",
+      "category": "COMET",
+      "status": "CATALOGUED",
+      "precisionClass": "DAY",
+      "a8": {
+        "yearCycle4": 1,
+        "yearCycleLabel": "B",
+        "yearDay": 225,
+        "yearDayOctal": "341₈",
+        "calendarRegion": "STRUCTURED",
+        "monthIndex": 4,
+        "monthOctal": "4₈",
+        "monthDay": 45,
+        "quickDate": "(4) 45",
+        "publicDate": {
+          "display": "(4) 45 · 2026",
+          "quick": "(4) 45",
+          "compass": "S 45 · 2026",
+          "named": "South · Pluto · Aether · 2026",
+          "symbolic": "4₈ · ♇ · ✡",
+          "month": 4,
+          "planetaryWeek": "Pluto",
+          "elementDay": "Aether",
+          "legacyYearBridge": 2026
+        }
+      },
+      "summary": "Perihelion of 10P/Tempel 2; BAA predicted a peak near magnitude 7.4.",
+      "detailAnchor": "10p-tempel2-perihelion-2026",
+      "sourceKey": "BAA_COMET_TABLE_2026",
+      "legacyProvenance": {
+        "date": "2026-08-02",
+        "timescale": "UT"
+      },
+      "sky": {
+        "mode": "EPHEMERIS_TRACK",
+        "coordinateSystem": "A8_CELESTIAL",
+        "body": "10P/Tempel 2",
+        "positionSemantics": "Moving body; do not replace with a fixed zodiac or constellation coordinate.",
+        "generalXYStatus": "READY",
+        "generalXY": {
+          "x": 467,
+          "y": 163,
+          "decimal": "X 467 · Y 163",
+          "octal": "X 723₈ · Y 243₈",
+          "precisionClass": "GENERAL_WHOLE_A8_GRID",
+          "referenceObject": "10P/TEMPEL 2",
+          "finerSourceCoordinate": {
+            "x": 466.931707,
+            "y": 163.121165,
+            "apparentRaDeg": 328.31135655,
+            "apparentDecDeg": -24.69456921
+          }
+        },
+        "generalXYSemantics": "General event reference patch; not local altitude/azimuth and not a permanent coordinate for moving bodies.",
+        "ephemeris": {
+          "provider": "NASA/JPL Horizons",
+          "observerCenter": "500@399 · Earth geocenter",
+          "quantity": "2 · apparent RA/DEC",
+          "targetCommand": "DES=10P;CAP;NOFRAG",
+          "referenceTimeUT": "2026-Aug-02 12:00:00",
+          "timeBasis": "DATE_MIDPOINT_REFERENCE"
+        }
+      },
+      "eventData": {
+        "predictedPeakDate": "2026-08-03",
+        "predictedPeakMagnitude": 7.4
+      }
+    },
+    {
+      "id": "220p-mcnaught-second-outburst-observed-2026",
+      "title": "220P/MCNAUGHT · SECOND OUTBURST OBSERVED",
+      "category": "COMET",
+      "status": "OBSERVED",
+      "precisionClass": "WINDOW",
+      "a8": {
+        "yearCycle4": 1,
+        "yearCycleLabel": "B",
+        "yearDay": 231,
+        "yearDayOctal": "347₈",
+        "calendarRegion": "STRUCTURED",
+        "monthIndex": 5,
+        "monthOctal": "5₈",
+        "monthDay": 6,
+        "quickDate": "(5) 6",
+        "timeWindow": {
+          "start": "01:22:48",
+          "end": "02:44:06",
+          "approximate": true
+        },
+        "publicDate": {
+          "display": "(5) 6 · 2026",
+          "quick": "(5) 6",
+          "compass": "SW 6 · 2026",
+          "named": "Southwest · Venus · Fire · 2026",
+          "symbolic": "5₈ · ♀ · 🜂",
+          "month": 5,
+          "planetaryWeek": "Venus",
+          "elementDay": "Fire",
+          "legacyYearBridge": 2026
+        }
+      },
+      "summary": "Photometric observations document 220P/McNaught during its second strong outburst of 2026.",
+      "detailAnchor": "220p-mcnaught-second-outburst-observed-2026",
+      "sourceKey": "ATEL_17956",
+      "legacyProvenance": {
+        "date": "2026-08-08",
+        "timescale": "UT",
+        "timeWindowUT": [
+          "01:01",
+          "02:01"
+        ]
+      },
+      "sky": {
+        "mode": "EPHEMERIS_TRACK",
+        "coordinateSystem": "A8_CELESTIAL",
+        "body": "220P/McNaught",
+        "positionSemantics": "Moving body; do not replace with a fixed zodiac or constellation coordinate.",
+        "generalXYStatus": "READY",
+        "generalXY": {
+          "x": 58,
+          "y": 114,
+          "decimal": "X 58 · Y 114",
+          "octal": "X 72₈ · Y 162₈",
+          "precisionClass": "GENERAL_WHOLE_A8_GRID",
+          "referenceObject": "220P/MCNAUGHT",
+          "finerSourceCoordinate": {
+            "x": 58.371247,
+            "y": 114.306479,
+            "apparentRaDeg": 41.04228304,
+            "apparentDecDeg": 9.62825692
+          }
+        },
+        "generalXYSemantics": "General event reference patch; not local altitude/azimuth and not a permanent coordinate for moving bodies.",
+        "ephemeris": {
+          "provider": "NASA/JPL Horizons",
+          "observerCenter": "500@399 · Earth geocenter",
+          "quantity": "2 · apparent RA/DEC",
+          "targetCommand": "DES=220P;CAP;NOFRAG",
+          "referenceTimeUT": "2026-Aug-08 01:31:00",
+          "timeBasis": "SOURCE_WINDOW_MIDPOINT"
+        }
+      },
+      "notes": [
+        "The second outburst began in early August. This record uses the documented August 8 observing window, not an invented onset instant."
+      ]
+    },
+    {
+      "id": "total-solar-eclipse-2026-08-12",
+      "title": "TOTAL SOLAR ECLIPSE",
+      "category": "ECLIPSE",
+      "status": "CATALOGUED",
+      "precisionClass": "WINDOW",
+      "a8": {
+        "yearCycle4": 1,
+        "yearCycleLabel": "B",
+        "yearDay": 235,
+        "yearDayOctal": "353₈",
+        "calendarRegion": "STRUCTURED",
+        "monthIndex": 5,
+        "monthOctal": "5₈",
+        "monthDay": 10,
+        "quickDate": "(5) 10",
+        "time": {
+          "dayPhase17CenterApprox": 97128,
+          "decimalHHMMSSApprox": "23:45:40",
+          "octalHHMMSSApprox": "27:55:50₈",
+          "sourcePrecision": "SECOND"
+        },
+        "publicDate": {
+          "display": "(5) 10 · 2026",
+          "quick": "(5) 10",
+          "compass": "SW 10 · 2026",
+          "named": "Southwest · Venus · Aether · 2026",
+          "symbolic": "5₈ · ♀ · ✡",
+          "month": 5,
+          "planetaryWeek": "Venus",
+          "elementDay": "Aether",
+          "legacyYearBridge": 2026
+        }
+      },
+      "summary": "Total solar eclipse across the Arctic, Greenland, Iceland and Spain.",
+      "detailAnchor": "total-solar-eclipse-2026-08-12",
+      "sourceKey": "NASA_GSFC_ECLIPSES_2026",
+      "legacyProvenance": {
+        "date": "2026-08-12",
+        "timescale": "UT",
+        "timeUT": "17:47:05",
+        "timePrecision": "SECOND"
+      },
+      "sky": {
+        "mode": "ECLIPSE_GEOMETRY",
+        "coordinateSystem": "A8_CELESTIAL",
+        "eclipseKind": "SOLAR_TOTAL",
+        "positionSemantics": "Eclipse geometry is not a fixed-star radiant. Retain eclipse path / zenith provenance and derive observer views separately.",
+        "generalXYStatus": "READY",
+        "generalXY": {
+          "x": 203,
+          "y": 107,
+          "decimal": "X 203 · Y 107",
+          "octal": "X 313₈ · Y 153₈",
+          "precisionClass": "GENERAL_WHOLE_A8_GRID",
+          "referenceObject": "SOL",
+          "finerSourceCoordinate": {
+            "x": 202.592187,
+            "y": 106.949665,
+            "apparentRaDeg": 142.44763153,
+            "apparentDecDeg": 14.80101646
+          }
+        },
+        "generalXYSemantics": "General event reference patch; not local altitude/azimuth and not a permanent coordinate for moving bodies.",
+        "ephemeris": {
+          "provider": "NASA/JPL Horizons",
+          "observerCenter": "500@399 · Earth geocenter",
+          "quantity": "2 · apparent RA/DEC",
+          "targetCommand": "10",
+          "referenceTimeUT": "2026-Aug-12 17:47:05",
+          "timeBasis": "SOURCE_TIME"
+        }
+      },
+      "eventData": {
+        "magnitude": 1.039,
+        "centralDuration": "02m18s"
+      }
+    },
+    {
+      "id": "perseids-2026",
+      "title": "PERSEIDS · MAXIMUM",
+      "category": "METEOR",
+      "status": "CATALOGUED",
+      "precisionClass": "WINDOW",
+      "a8": {
+        "yearCycle4": 1,
+        "yearCycleLabel": "B",
+        "yearDay": 236,
+        "yearDayOctal": "354₈",
+        "calendarRegion": "STRUCTURED",
+        "monthIndex": 5,
+        "monthOctal": "5₈",
+        "monthDay": 11,
+        "quickDate": "(5) 11",
+        "timeWindow": {
+          "start": "02:42:43",
+          "end": "05:21:21",
+          "approximate": true
+        },
+        "publicDate": {
+          "display": "(5) 11 · 2026",
+          "quick": "(5) 11",
+          "compass": "SW 11 · 2026",
+          "named": "Southwest · Terra · Fire · 2026",
+          "symbolic": "5₈ · ⊕ · 🜂",
+          "month": 5,
+          "planetaryWeek": "Terra",
+          "elementDay": "Fire",
+          "legacyYearBridge": 2026
+        }
+      },
+      "summary": "Major Perseid maximum under excellent lunar conditions.",
+      "detailAnchor": "perseids-2026",
+      "sourceKey": "IMO_METEOR_CALENDAR_2026",
+      "legacyProvenance": {
+        "date": "2026-08-13",
+        "timescale": "UT",
+        "timeWindowUT": [
+          "02:00",
+          "04:00"
+        ]
+      },
+      "sky": {
+        "mode": "FIXED_RADIANT_APPROX",
+        "coordinateSystem": "A8_CELESTIAL",
+        "longitude512": 68.267,
+        "latitude256": 45.511,
+        "sourceEquatorial": {
+          "raDeg": 48,
+          "decDeg": 58
+        },
+        "referenceStars": [],
+        "sourcePrecision": "PUBLISHED_RADIANT_APPROX",
+        "generalXY": {
+          "x": 68,
+          "y": 46,
+          "decimal": "X 68 · Y 46",
+          "octal": "X 104₈ · Y 56₈",
+          "precisionClass": "GENERAL_WHOLE_A8_GRID",
+          "purpose": "Public ballpark position on the A8 512 × 256 celestial sheet.",
+          "finerSourceCoordinate": {
+            "x": 68.267,
+            "y": 45.511
+          }
+        },
+        "generalXYStatus": "READY"
+      },
+      "eventData": {
+        "code": "PER",
+        "zhr": 100
+      }
+    },
+    {
+      "id": "partial-lunar-eclipse-2026-08-28",
+      "title": "PARTIAL LUNAR ECLIPSE",
+      "category": "ECLIPSE",
+      "status": "CATALOGUED",
+      "precisionClass": "WINDOW",
+      "a8": {
+        "yearCycle4": 1,
+        "yearCycleLabel": "B",
+        "yearDay": 251,
+        "yearDayOctal": "373₈",
+        "calendarRegion": "STRUCTURED",
+        "monthIndex": 5,
+        "monthOctal": "5₈",
+        "monthDay": 26,
+        "quickDate": "(5) 26",
+        "time": {
+          "dayPhase17CenterApprox": 23126,
+          "decimalHHMMSSApprox": "05:41:22",
+          "octalHHMMSSApprox": "5:51:26₈",
+          "sourcePrecision": "SECOND"
+        },
+        "publicDate": {
+          "display": "(5) 26 · 2026",
+          "quick": "(5) 26",
+          "compass": "SW 26 · 2026",
+          "named": "Southwest · Saturn · Fire · 2026",
+          "symbolic": "5₈ · ♄ · 🜂",
+          "month": 5,
+          "planetaryWeek": "Saturn",
+          "elementDay": "Fire",
+          "legacyYearBridge": 2026
+        }
+      },
+      "summary": "Partial lunar eclipse.",
+      "detailAnchor": "partial-lunar-eclipse-2026-08-28",
+      "sourceKey": "NASA_GSFC_ECLIPSES_2026",
+      "legacyProvenance": {
+        "date": "2026-08-28",
+        "timescale": "UT",
+        "timeUT": "04:14:04",
+        "timePrecision": "SECOND"
+      },
+      "sky": {
+        "mode": "ECLIPSE_GEOMETRY",
+        "coordinateSystem": "A8_CELESTIAL",
+        "eclipseKind": "LUNAR_PARTIAL",
+        "positionSemantics": "Eclipse geometry is not a fixed-star radiant. Retain eclipse path / zenith provenance and derive observer views separately.",
+        "generalXYStatus": "READY",
+        "generalXY": {
+          "x": 479,
+          "y": 141,
+          "decimal": "X 479 · Y 141",
+          "octal": "X 737₈ · Y 215₈",
+          "precisionClass": "GENERAL_WHOLE_A8_GRID",
+          "referenceObject": "MOON",
+          "finerSourceCoordinate": {
+            "x": 478.628524,
+            "y": 141.221556,
+            "apparentRaDeg": 336.53568078,
+            "apparentDecDeg": -9.29640661
+          }
+        },
+        "generalXYSemantics": "General event reference patch; not local altitude/azimuth and not a permanent coordinate for moving bodies.",
+        "ephemeris": {
+          "provider": "NASA/JPL Horizons",
+          "observerCenter": "500@399 · Earth geocenter",
+          "quantity": "2 · apparent RA/DEC",
+          "targetCommand": "301",
+          "referenceTimeUT": "2026-Aug-28 04:14:04",
+          "timeBasis": "SOURCE_TIME"
+        }
+      },
+      "eventData": {
+        "umbralMagnitude": 0.9299,
+        "moonZenithLegacy": {
+          "latDeg": -9.0,
+          "lonDeg": -63.0
+        }
+      }
+    },
+    {
+      "id": "september-epsilon-perseids-2026",
+      "title": "SEPTEMBER EPSILON PERSEIDS · MAXIMUM",
+      "category": "METEOR",
+      "status": "CATALOGUED",
+      "precisionClass": "WINDOW",
+      "a8": {
+        "yearCycle4": 1,
+        "yearCycleLabel": "B",
+        "yearDay": 263,
+        "yearDayOctal": "407₈",
+        "calendarRegion": "STRUCTURED",
+        "monthIndex": 5,
+        "monthOctal": "5₈",
+        "monthDay": 38,
+        "quickDate": "(5) 38",
+        "time": {
+          "dayPhase17CenterApprox": 98304,
+          "decimalHHMMSSApprox": "24:00:00",
+          "octalHHMMSSApprox": "30:0:0₈",
+          "sourcePrecision": "HOUR"
+        },
+        "publicDate": {
+          "display": "(5) 38 · 2026",
+          "quick": "(5) 38",
+          "compass": "SW 38 · 2026",
+          "named": "Southwest · Neptune · Earth · 2026",
+          "symbolic": "5₈ · ♆ · 🜃",
+          "month": 5,
+          "planetaryWeek": "Neptune",
+          "elementDay": "Earth",
+          "legacyYearBridge": 2026
+        }
+      },
+      "summary": "Bright-meteor stream with a modeled 2026 maximum.",
+      "detailAnchor": "september-epsilon-perseids-2026",
+      "sourceKey": "IMO_METEOR_CALENDAR_2026",
+      "legacyProvenance": {
+        "date": "2026-09-09",
+        "timescale": "UT",
+        "timeUT": "18:00",
+        "timePrecision": "HOUR"
+      },
+      "sky": {
+        "mode": "FIXED_RADIANT_APPROX",
+        "coordinateSystem": "A8_CELESTIAL",
+        "longitude512": 68.267,
+        "latitude256": 71.111,
+        "sourceEquatorial": {
+          "raDeg": 48,
+          "decDeg": 40
+        },
+        "referenceStars": [],
+        "sourcePrecision": "PUBLISHED_RADIANT_APPROX",
+        "generalXY": {
+          "x": 68,
+          "y": 71,
+          "decimal": "X 68 · Y 71",
+          "octal": "X 104₈ · Y 107₈",
+          "precisionClass": "GENERAL_WHOLE_A8_GRID",
+          "purpose": "Public ballpark position on the A8 512 × 256 celestial sheet.",
+          "finerSourceCoordinate": {
+            "x": 68.267,
+            "y": 71.111
+          }
+        },
+        "generalXYStatus": "READY"
+      },
+      "eventData": {
+        "code": "SPE",
+        "zhr": 8
+      }
+    },
+    {
+      "id": "venus-lunar-occultation-2026-09-14",
+      "title": "MOON OCCULTS VENUS",
+      "category": "PLANETARY",
+      "status": "CATALOGUED",
+      "precisionClass": "DAY",
+      "a8": {
+        "yearCycle4": 1,
+        "yearCycleLabel": "B",
+        "yearDay": 268,
+        "yearDayOctal": "414₈",
+        "calendarRegion": "STRUCTURED",
+        "monthIndex": 5,
+        "monthOctal": "5₈",
+        "monthDay": 43,
+        "quickDate": "(5) 43",
+        "publicDate": {
+          "display": "(5) 43 · 2026",
+          "quick": "(5) 43",
+          "compass": "SW 43 · 2026",
+          "named": "Southwest · Pluto · Earth · 2026",
+          "symbolic": "5₈ · ♇ · 🜃",
+          "month": 5,
+          "planetaryWeek": "Pluto",
+          "elementDay": "Earth",
+          "legacyYearBridge": 2026
+        }
+      },
+      "summary": "Second 2026 lunar occultation of Venus; visible from parts of Asia, Africa, Europe and western Russia.",
+      "detailAnchor": "venus-lunar-occultation-2026-09-14",
+      "sourceKey": "NASA_VENUS_OCCULTATIONS_2026",
+      "legacyProvenance": {
+        "date": "2026-09-14",
+        "timescale": "UT"
+      },
+      "sky": {
+        "mode": "OCCULTATION_PATH",
+        "coordinateSystem": "A8_CELESTIAL",
+        "bodies": [
+          "MOON",
+          "VENUS"
+        ],
+        "generalXYStatus": "READY",
+        "generalXY": {
+          "x": 297,
+          "y": 152,
+          "decimal": "X 297 · Y 152",
+          "octal": "X 451₈ · Y 230₈",
+          "precisionClass": "GENERAL_WHOLE_A8_GRID",
+          "referenceObject": "VENUS",
+          "finerSourceCoordinate": {
+            "x": 296.564837,
+            "y": 152.445692,
+            "apparentRaDeg": 208.52215129,
+            "apparentDecDeg": -17.18837713
+          }
+        },
+        "generalXYSemantics": "General event reference patch; not local altitude/azimuth and not a permanent coordinate for moving bodies.",
+        "ephemeris": {
+          "provider": "NASA/JPL Horizons",
+          "observerCenter": "500@399 · Earth geocenter",
+          "quantity": "2 · apparent RA/DEC",
+          "targetCommand": "299",
+          "referenceTimeUT": "2026-Sep-14 12:00:00",
+          "timeBasis": "DATE_MIDPOINT_REFERENCE"
+        }
+      }
+    },
+    {
+      "id": "september-equinox-2026",
+      "title": "SEPTEMBER EQUINOX",
+      "category": "ORBITAL",
+      "status": "CATALOGUED",
+      "precisionClass": "WINDOW",
+      "a8": {
+        "yearCycle4": 1,
+        "yearCycleLabel": "B",
+        "yearDay": 277,
+        "yearDayOctal": "425₈",
+        "calendarRegion": "STRUCTURED",
+        "monthIndex": 6,
+        "monthOctal": "6₈",
+        "monthDay": 7,
+        "quickDate": "(6) 7",
+        "time": {
+          "dayPhase17CenterApprox": 455,
+          "decimalHHMMSSApprox": "00:07:07",
+          "octalHHMMSSApprox": "0:7:7₈",
+          "sourcePrecision": "MINUTE"
+        },
+        "publicDate": {
+          "display": "(6) 7 · 2026",
+          "quick": "(6) 7",
+          "compass": "W 7 · 2026",
+          "named": "West · Venus · Water · 2026",
+          "symbolic": "6₈ · ♀ · 🜄",
+          "month": 6,
+          "planetaryWeek": "Venus",
+          "elementDay": "Water",
+          "legacyYearBridge": 2026
+        }
+      },
+      "summary": "The September equinox crossing.",
+      "detailAnchor": "september-equinox-2026",
+      "sourceKey": "USNO_SEASONS_2026",
+      "legacyProvenance": {
+        "date": "2026-09-23",
+        "timescale": "UT",
+        "timeUT": "00:05",
+        "timePrecision": "MINUTE"
+      },
+      "sky": {
+        "mode": "EPHEMERIS_TRACK",
+        "coordinateSystem": "A8_CELESTIAL",
+        "body": "TERRA_SOL_RELATIONSHIP",
+        "positionSemantics": "Moving body; do not replace with a fixed zodiac or constellation coordinate.",
+        "generalXYStatus": "READY",
+        "generalXY": {
+          "x": 256,
+          "y": 128,
+          "decimal": "X 256 · Y 128",
+          "octal": "X 400₈ · Y 200₈",
+          "precisionClass": "GENERAL_WHOLE_A8_GRID",
+          "referenceObject": "SOL",
+          "finerSourceCoordinate": {
+            "x": 255.999784,
+            "y": 127.999919,
+            "apparentRaDeg": 179.99984792,
+            "apparentDecDeg": 5.66e-05
+          }
+        },
+        "generalXYSemantics": "General event reference patch; not local altitude/azimuth and not a permanent coordinate for moving bodies.",
+        "ephemeris": {
+          "provider": "NASA/JPL Horizons",
+          "observerCenter": "500@399 · Earth geocenter",
+          "quantity": "2 · apparent RA/DEC",
+          "targetCommand": "10",
+          "referenceTimeUT": "2026-Sep-23 00:05:00",
+          "timeBasis": "SOURCE_TIME"
+        }
+      }
+    },
+    {
+      "id": "neptune-opposition-2026",
+      "title": "NEPTUNE · OPPOSITION",
+      "category": "PLANETARY",
+      "status": "CATALOGUED",
+      "precisionClass": "DAY",
+      "a8": {
+        "yearCycle4": 1,
+        "yearCycleLabel": "B",
+        "yearDay": 279,
+        "yearDayOctal": "427₈",
+        "calendarRegion": "STRUCTURED",
+        "monthIndex": 6,
+        "monthOctal": "6₈",
+        "monthDay": 9,
+        "quickDate": "(6) 9",
+        "publicDate": {
+          "display": "(6) 9 · 2026",
+          "quick": "(6) 9",
+          "compass": "W 9 · 2026",
+          "named": "West · Venus · Air · 2026",
+          "symbolic": "6₈ · ♀ · 🜁",
+          "month": 6,
+          "planetaryWeek": "Venus",
+          "elementDay": "Air",
+          "legacyYearBridge": 2026
+        }
+      },
+      "summary": "Neptune at opposition.",
+      "detailAnchor": "neptune-opposition-2026",
+      "sourceKey": "NASA_NOTABLE_2026",
+      "legacyProvenance": {
+        "date": "2026-09-25",
+        "timescale": "UT"
+      },
+      "sky": {
+        "mode": "EPHEMERIS_TRACK",
+        "coordinateSystem": "A8_CELESTIAL",
+        "body": "NEPTUNE",
+        "positionSemantics": "Moving body; do not replace with a fixed zodiac or constellation coordinate.",
+        "generalXYStatus": "READY",
+        "generalXY": {
+          "x": 5,
+          "y": 128,
+          "decimal": "X 5 · Y 128",
+          "octal": "X 5₈ · Y 200₈",
+          "precisionClass": "GENERAL_WHOLE_A8_GRID",
+          "referenceObject": "NEPTUNE",
+          "finerSourceCoordinate": {
+            "x": 4.736179,
+            "y": 128.148384,
+            "apparentRaDeg": 3.33012587,
+            "apparentDecDeg": -0.1043328
+          }
+        },
+        "generalXYSemantics": "General event reference patch; not local altitude/azimuth and not a permanent coordinate for moving bodies.",
+        "ephemeris": {
+          "provider": "NASA/JPL Horizons",
+          "observerCenter": "500@399 · Earth geocenter",
+          "quantity": "2 · apparent RA/DEC",
+          "targetCommand": "899",
+          "referenceTimeUT": "2026-Sep-25 12:00:00",
+          "timeBasis": "DATE_MIDPOINT_REFERENCE"
+        }
+      }
+    },
+    {
+      "id": "saturn-opposition-2026",
+      "title": "SATURN · OPPOSITION",
+      "category": "PLANETARY",
+      "status": "CATALOGUED",
+      "precisionClass": "DAY",
+      "a8": {
+        "yearCycle4": 1,
+        "yearCycleLabel": "B",
+        "yearDay": 288,
+        "yearDayOctal": "440₈",
+        "calendarRegion": "STRUCTURED",
+        "monthIndex": 6,
+        "monthOctal": "6₈",
+        "monthDay": 18,
+        "quickDate": "(6) 18",
+        "publicDate": {
+          "display": "(6) 18 · 2026",
+          "quick": "(6) 18",
+          "compass": "W 18 · 2026",
+          "named": "West · Mars · Earth · 2026",
+          "symbolic": "6₈ · ♂ · 🜃",
+          "month": 6,
+          "planetaryWeek": "Mars",
+          "elementDay": "Earth",
+          "legacyYearBridge": 2026
+        }
+      },
+      "summary": "Saturn at opposition.",
+      "detailAnchor": "saturn-opposition-2026",
+      "sourceKey": "NASA_NOTABLE_2026",
+      "legacyProvenance": {
+        "date": "2026-10-04",
+        "timescale": "UT"
+      },
+      "sky": {
+        "mode": "EPHEMERIS_TRACK",
+        "coordinateSystem": "A8_CELESTIAL",
+        "body": "SATURN",
+        "positionSemantics": "Moving body; do not replace with a fixed zodiac or constellation coordinate.",
+        "generalXYStatus": "READY",
+        "generalXY": {
+          "x": 16,
+          "y": 125,
+          "decimal": "X 16 · Y 125",
+          "octal": "X 20₈ · Y 175₈",
+          "precisionClass": "GENERAL_WHOLE_A8_GRID",
+          "referenceObject": "SATURN",
+          "finerSourceCoordinate": {
+            "x": 16.290325,
+            "y": 125.1932,
+            "apparentRaDeg": 11.45413493,
+            "apparentDecDeg": 1.97353142
+          }
+        },
+        "generalXYSemantics": "General event reference patch; not local altitude/azimuth and not a permanent coordinate for moving bodies.",
+        "ephemeris": {
+          "provider": "NASA/JPL Horizons",
+          "observerCenter": "500@399 · Earth geocenter",
+          "quantity": "2 · apparent RA/DEC",
+          "targetCommand": "699",
+          "referenceTimeUT": "2026-Oct-04 12:00:00",
+          "timeBasis": "DATE_MIDPOINT_REFERENCE"
+        }
+      }
+    },
+    {
+      "id": "draconids-2026",
+      "title": "DRACONIDS · MAXIMUM",
+      "category": "METEOR",
+      "status": "CATALOGUED",
+      "precisionClass": "WINDOW",
+      "a8": {
+        "yearCycle4": 1,
+        "yearCycleLabel": "B",
+        "yearDay": 293,
+        "yearDayOctal": "445₈",
+        "calendarRegion": "STRUCTURED",
+        "monthIndex": 6,
+        "monthOctal": "6₈",
+        "monthDay": 23,
+        "quickDate": "(6) 23",
+        "time": {
+          "dayPhase17CenterApprox": 5461,
+          "decimalHHMMSSApprox": "01:21:21",
+          "octalHHMMSSApprox": "1:25:25₈",
+          "sourcePrecision": "HOUR"
+        },
+        "publicDate": {
+          "display": "(6) 23 · 2026",
+          "quick": "(6) 23",
+          "compass": "W 23 · 2026",
+          "named": "West · Jupiter · Earth · 2026",
+          "symbolic": "6₈ · ♃ · 🜃",
+          "month": 6,
+          "planetaryWeek": "Jupiter",
+          "elementDay": "Earth",
+          "legacyYearBridge": 2026
+        }
+      },
+      "summary": "Slow Draconid meteors; 2026 has moonless observing conditions.",
+      "detailAnchor": "draconids-2026",
+      "sourceKey": "IMO_METEOR_CALENDAR_2026",
+      "legacyProvenance": {
+        "date": "2026-10-09",
+        "timescale": "UT",
+        "timeUT": "01:00",
+        "timePrecision": "HOUR"
+      },
+      "sky": {
+        "mode": "FIXED_RADIANT_APPROX",
+        "coordinateSystem": "A8_CELESTIAL",
+        "longitude512": 374.044,
+        "latitude256": 48.356,
+        "sourceEquatorial": {
+          "raDeg": 263,
+          "decDeg": 56
+        },
+        "referenceStars": [],
+        "sourcePrecision": "PUBLISHED_RADIANT_APPROX",
+        "generalXY": {
+          "x": 374,
+          "y": 48,
+          "decimal": "X 374 · Y 48",
+          "octal": "X 566₈ · Y 60₈",
+          "precisionClass": "GENERAL_WHOLE_A8_GRID",
+          "purpose": "Public ballpark position on the A8 512 × 256 celestial sheet.",
+          "finerSourceCoordinate": {
+            "x": 374.044,
+            "y": 48.356
+          }
+        },
+        "generalXYStatus": "READY"
+      },
+      "eventData": {
+        "code": "DRA",
+        "zhr": 5
+      }
+    },
+    {
+      "id": "southern-taurids-annual-2026",
+      "title": "SOUTHERN TAURIDS · ANNUAL COMPONENT",
+      "category": "METEOR",
+      "status": "CATALOGUED",
+      "precisionClass": "DAY",
+      "a8": {
+        "yearCycle4": 1,
+        "yearCycleLabel": "B",
+        "yearDay": 298,
+        "yearDayOctal": "452₈",
+        "calendarRegion": "STRUCTURED",
+        "monthIndex": 6,
+        "monthOctal": "6₈",
+        "monthDay": 28,
+        "quickDate": "(6) 28",
+        "publicDate": {
+          "display": "(6) 28 · 2026",
+          "quick": "(6) 28",
+          "compass": "W 28 · 2026",
+          "named": "West · Saturn · Earth · 2026",
+          "symbolic": "6₈ · ♄ · 🜃",
+          "month": 6,
+          "planetaryWeek": "Saturn",
+          "elementDay": "Earth",
+          "legacyYearBridge": 2026
+        }
+      },
+      "summary": "Annual-component maximum; 2026 is not a Taurid swarm year.",
+      "detailAnchor": "southern-taurids-annual-2026",
+      "sourceKey": "IMO_METEOR_CALENDAR_2026",
+      "legacyProvenance": {
+        "date": "2026-10-14",
+        "timescale": "UT"
+      },
+      "sky": {
+        "mode": "FIXED_RADIANT_APPROX",
+        "coordinateSystem": "A8_CELESTIAL",
+        "longitude512": 73.956,
+        "latitude256": 107.378,
+        "sourceEquatorial": {
+          "raDeg": 52,
+          "decDeg": 14.5
+        },
+        "referenceStars": [],
+        "sourcePrecision": "PUBLISHED_RADIANT_APPROX",
+        "generalXY": {
+          "x": 74,
+          "y": 107,
+          "decimal": "X 74 · Y 107",
+          "octal": "X 112₈ · Y 153₈",
+          "precisionClass": "GENERAL_WHOLE_A8_GRID",
+          "purpose": "Public ballpark position on the A8 512 × 256 celestial sheet.",
+          "finerSourceCoordinate": {
+            "x": 73.956,
+            "y": 107.378
+          }
+        },
+        "generalXYStatus": "READY"
+      },
+      "eventData": {
+        "code": "STA",
+        "zhr": 7,
+        "component": "ANNUAL"
+      }
+    },
+    {
+      "id": "orionids-2026",
+      "title": "ORIONIDS · MAXIMUM",
+      "category": "METEOR",
+      "status": "CATALOGUED",
+      "precisionClass": "DAY",
+      "a8": {
+        "yearCycle4": 1,
+        "yearCycleLabel": "B",
+        "yearDay": 305,
+        "yearDayOctal": "461₈",
+        "calendarRegion": "STRUCTURED",
+        "monthIndex": 6,
+        "monthOctal": "6₈",
+        "monthDay": 35,
+        "quickDate": "(6) 35",
+        "publicDate": {
+          "display": "(6) 35 · 2026",
+          "quick": "(6) 35",
+          "compass": "W 35 · 2026",
+          "named": "West · Uranus · Aether · 2026",
+          "symbolic": "6₈ · ♅ · ✡",
+          "month": 6,
+          "planetaryWeek": "Uranus",
+          "elementDay": "Aether",
+          "legacyYearBridge": 2026
+        }
+      },
+      "summary": "Annual Orionid maximum from Halley debris.",
+      "detailAnchor": "orionids-2026",
+      "sourceKey": "IMO_METEOR_CALENDAR_2026",
+      "legacyProvenance": {
+        "date": "2026-10-21",
+        "timescale": "UT"
+      },
+      "sky": {
+        "mode": "FIXED_RADIANT_APPROX",
+        "coordinateSystem": "A8_CELESTIAL",
+        "longitude512": 135.111,
+        "latitude256": 105.244,
+        "sourceEquatorial": {
+          "raDeg": 95,
+          "decDeg": 16
+        },
+        "referenceStars": [],
+        "sourcePrecision": "PUBLISHED_RADIANT_APPROX",
+        "generalXY": {
+          "x": 135,
+          "y": 105,
+          "decimal": "X 135 · Y 105",
+          "octal": "X 207₈ · Y 151₈",
+          "precisionClass": "GENERAL_WHOLE_A8_GRID",
+          "purpose": "Public ballpark position on the A8 512 × 256 celestial sheet.",
+          "finerSourceCoordinate": {
+            "x": 135.111,
+            "y": 105.244
+          }
+        },
+        "generalXYStatus": "READY"
+      },
+      "eventData": {
+        "code": "ORI",
+        "zhr": 20
+      }
+    },
+    {
+      "id": "southern-taurids-fireball-2026",
+      "title": "SOUTHERN TAURIDS · FIREBALL COMPONENT",
+      "category": "METEOR",
+      "status": "CATALOGUED",
+      "precisionClass": "DAY",
+      "a8": {
+        "yearCycle4": 1,
+        "yearCycleLabel": "B",
+        "yearDay": 320,
+        "yearDayOctal": "500₈",
+        "calendarRegion": "STRUCTURED",
+        "monthIndex": 7,
+        "monthOctal": "7₈",
+        "monthDay": 5,
+        "quickDate": "(7) 5",
+        "publicDate": {
+          "display": "(7) 5 · 2026",
+          "quick": "(7) 5",
+          "compass": "NW 5 · 2026",
+          "named": "Northwest · Mercury · Aether · 2026",
+          "symbolic": "7₈ · ☿ · ✡",
+          "month": 7,
+          "planetaryWeek": "Mercury",
+          "elementDay": "Aether",
+          "legacyYearBridge": 2026
+        }
+      },
+      "summary": "Fireball-component date; 2026 is not a swarm year, so this is secondary to the annual component.",
+      "detailAnchor": "southern-taurids-fireball-2026",
+      "sourceKey": "IMO_METEOR_CALENDAR_2026",
+      "legacyProvenance": {
+        "date": "2026-11-05",
+        "timescale": "UT"
+      },
+      "sky": {
+        "mode": "FIXED_RADIANT_APPROX",
+        "coordinateSystem": "A8_CELESTIAL",
+        "longitude512": 73.956,
+        "latitude256": 107.378,
+        "sourceEquatorial": {
+          "raDeg": 52,
+          "decDeg": 14.5
+        },
+        "referenceStars": [],
+        "sourcePrecision": "PUBLISHED_RADIANT_APPROX",
+        "generalXY": {
+          "x": 74,
+          "y": 107,
+          "decimal": "X 74 · Y 107",
+          "octal": "X 112₈ · Y 153₈",
+          "precisionClass": "GENERAL_WHOLE_A8_GRID",
+          "purpose": "Public ballpark position on the A8 512 × 256 celestial sheet.",
+          "finerSourceCoordinate": {
+            "x": 73.956,
+            "y": 107.378
+          }
+        },
+        "generalXYStatus": "READY"
+      },
+      "eventData": {
+        "code": "STA",
+        "zhr": 7,
+        "component": "FIREBALL"
+      }
+    },
+    {
+      "id": "venus-lunar-occultation-2026-11-07",
+      "title": "MOON OCCULTS VENUS",
+      "category": "PLANETARY",
+      "status": "CATALOGUED",
+      "precisionClass": "DAY",
+      "a8": {
+        "yearCycle4": 1,
+        "yearCycleLabel": "B",
+        "yearDay": 322,
+        "yearDayOctal": "502₈",
+        "calendarRegion": "STRUCTURED",
+        "monthIndex": 7,
+        "monthOctal": "7₈",
+        "monthDay": 7,
+        "quickDate": "(7) 7",
+        "publicDate": {
+          "display": "(7) 7 · 2026",
+          "quick": "(7) 7",
+          "compass": "NW 7 · 2026",
+          "named": "Northwest · Venus · Water · 2026",
+          "symbolic": "7₈ · ♀ · 🜄",
+          "month": 7,
+          "planetaryWeek": "Venus",
+          "elementDay": "Water",
+          "legacyYearBridge": 2026
+        }
+      },
+      "summary": "Third 2026 lunar occultation of Venus; visible from southern South America.",
+      "detailAnchor": "venus-lunar-occultation-2026-11-07",
+      "sourceKey": "NASA_VENUS_OCCULTATIONS_2026",
+      "legacyProvenance": {
+        "date": "2026-11-07",
+        "timescale": "UT"
+      },
+      "sky": {
+        "mode": "OCCULTATION_PATH",
+        "coordinateSystem": "A8_CELESTIAL",
+        "bodies": [
+          "MOON",
+          "VENUS"
+        ],
+        "generalXYStatus": "READY",
+        "generalXY": {
+          "x": 285,
+          "y": 145,
+          "decimal": "X 285 · Y 145",
+          "octal": "X 435₈ · Y 221₈",
+          "precisionClass": "GENERAL_WHOLE_A8_GRID",
+          "referenceObject": "VENUS",
+          "finerSourceCoordinate": {
+            "x": 285.499111,
+            "y": 145.386764,
+            "apparentRaDeg": 200.74156213,
+            "apparentDecDeg": -12.22506827
+          }
+        },
+        "generalXYSemantics": "General event reference patch; not local altitude/azimuth and not a permanent coordinate for moving bodies.",
+        "ephemeris": {
+          "provider": "NASA/JPL Horizons",
+          "observerCenter": "500@399 · Earth geocenter",
+          "quantity": "2 · apparent RA/DEC",
+          "targetCommand": "299",
+          "referenceTimeUT": "2026-Nov-07 12:00:00",
+          "timeBasis": "DATE_MIDPOINT_REFERENCE"
+        }
+      }
+    },
+    {
+      "id": "northern-taurids-2026",
+      "title": "NORTHERN TAURIDS · MAXIMUM",
+      "category": "METEOR",
+      "status": "CATALOGUED",
+      "precisionClass": "DAY",
+      "a8": {
+        "yearCycle4": 1,
+        "yearCycleLabel": "B",
+        "yearDay": 327,
+        "yearDayOctal": "507₈",
+        "calendarRegion": "STRUCTURED",
+        "monthIndex": 7,
+        "monthOctal": "7₈",
+        "monthDay": 12,
+        "quickDate": "(7) 12",
+        "publicDate": {
+          "display": "(7) 12 · 2026",
+          "quick": "(7) 12",
+          "compass": "NW 12 · 2026",
+          "named": "Northwest · Terra · Water · 2026",
+          "symbolic": "7₈ · ⊕ · 🜄",
+          "month": 7,
+          "planetaryWeek": "Terra",
+          "elementDay": "Water",
+          "legacyYearBridge": 2026
+        }
+      },
+      "summary": "Northern Taurid maximum.",
+      "detailAnchor": "northern-taurids-2026",
+      "sourceKey": "IMO_METEOR_CALENDAR_2026",
+      "legacyProvenance": {
+        "date": "2026-11-12",
+        "timescale": "UT"
+      },
+      "sky": {
+        "mode": "FIXED_RADIANT_APPROX",
+        "coordinateSystem": "A8_CELESTIAL",
+        "longitude512": 82.489,
+        "latitude256": 96.427,
+        "sourceEquatorial": {
+          "raDeg": 58,
+          "decDeg": 22.2
+        },
+        "referenceStars": [],
+        "sourcePrecision": "PUBLISHED_RADIANT_APPROX",
+        "generalXY": {
+          "x": 82,
+          "y": 96,
+          "decimal": "X 82 · Y 96",
+          "octal": "X 122₈ · Y 140₈",
+          "precisionClass": "GENERAL_WHOLE_A8_GRID",
+          "purpose": "Public ballpark position on the A8 512 × 256 celestial sheet.",
+          "finerSourceCoordinate": {
+            "x": 82.489,
+            "y": 96.427
+          }
+        },
+        "generalXYStatus": "READY"
+      },
+      "eventData": {
+        "code": "NTA",
+        "zhr": 5
+      }
+    },
+    {
+      "id": "leonids-2026",
+      "title": "LEONIDS · NODAL MAXIMUM",
+      "category": "METEOR",
+      "status": "CATALOGUED",
+      "precisionClass": "WINDOW",
+      "a8": {
+        "yearCycle4": 1,
+        "yearCycleLabel": "B",
+        "yearDay": 332,
+        "yearDayOctal": "514₈",
+        "calendarRegion": "STRUCTURED",
+        "monthIndex": 7,
+        "monthOctal": "7₈",
+        "monthDay": 17,
+        "quickDate": "(7) 17",
+        "time": {
+          "dayPhase17CenterApprox": 129707,
+          "decimalHHMMSSApprox": "31:42:43",
+          "octalHHMMSSApprox": "37:52:53₈",
+          "sourcePrecision": "MINUTE"
+        },
+        "publicDate": {
+          "display": "(7) 17 · 2026",
+          "quick": "(7) 17",
+          "compass": "NW 17 · 2026",
+          "named": "Northwest · Mars · Water · 2026",
+          "symbolic": "7₈ · ♂ · 🜄",
+          "month": 7,
+          "planetaryWeek": "Mars",
+          "elementDay": "Water",
+          "legacyYearBridge": 2026
+        }
+      },
+      "summary": "Regular Leonid nodal maximum; no major storm is predicted for 2026.",
+      "detailAnchor": "leonids-2026",
+      "sourceKey": "IMO_METEOR_CALENDAR_2026",
+      "legacyProvenance": {
+        "date": "2026-11-17",
+        "timescale": "UT",
+        "timeUT": "23:45",
+        "timePrecision": "MINUTE"
+      },
+      "sky": {
+        "mode": "FIXED_RADIANT_APPROX",
+        "coordinateSystem": "A8_CELESTIAL",
+        "longitude512": 216.178,
+        "latitude256": 96.711,
+        "sourceEquatorial": {
+          "raDeg": 152,
+          "decDeg": 22
+        },
+        "referenceStars": [],
+        "sourcePrecision": "PUBLISHED_RADIANT_APPROX",
+        "generalXY": {
+          "x": 216,
+          "y": 97,
+          "decimal": "X 216 · Y 97",
+          "octal": "X 330₈ · Y 141₈",
+          "precisionClass": "GENERAL_WHOLE_A8_GRID",
+          "purpose": "Public ballpark position on the A8 512 × 256 celestial sheet.",
+          "finerSourceCoordinate": {
+            "x": 216.178,
+            "y": 96.711
+          }
+        },
+        "generalXYStatus": "READY"
+      },
+      "eventData": {
+        "code": "LEO",
+        "zhr": 15
+      }
+    },
+    {
+      "id": "uranus-opposition-2026",
+      "title": "URANUS · OPPOSITION",
+      "category": "PLANETARY",
+      "status": "CATALOGUED",
+      "precisionClass": "DAY",
+      "a8": {
+        "yearCycle4": 1,
+        "yearCycleLabel": "B",
+        "yearDay": 340,
+        "yearDayOctal": "524₈",
+        "calendarRegion": "STRUCTURED",
+        "monthIndex": 7,
+        "monthOctal": "7₈",
+        "monthDay": 25,
+        "quickDate": "(7) 25",
+        "publicDate": {
+          "display": "(7) 25 · 2026",
+          "quick": "(7) 25",
+          "compass": "NW 25 · 2026",
+          "named": "Northwest · Jupiter · Aether · 2026",
+          "symbolic": "7₈ · ♃ · ✡",
+          "month": 7,
+          "planetaryWeek": "Jupiter",
+          "elementDay": "Aether",
+          "legacyYearBridge": 2026
+        }
+      },
+      "summary": "Uranus at opposition.",
+      "detailAnchor": "uranus-opposition-2026",
+      "sourceKey": "NASA_NOTABLE_2026",
+      "legacyProvenance": {
+        "date": "2026-11-25",
+        "timescale": "UT"
+      },
+      "sky": {
+        "mode": "EPHEMERIS_TRACK",
+        "coordinateSystem": "A8_CELESTIAL",
+        "body": "URANUS",
+        "positionSemantics": "Moving body; do not replace with a fixed zodiac or constellation coordinate.",
+        "generalXYStatus": "READY",
+        "generalXY": {
+          "x": 88,
+          "y": 98,
+          "decimal": "X 88 · Y 98",
+          "octal": "X 130₈ · Y 142₈",
+          "precisionClass": "GENERAL_WHOLE_A8_GRID",
+          "referenceObject": "URANUS",
+          "finerSourceCoordinate": {
+            "x": 87.770204,
+            "y": 98.497828,
+            "apparentRaDeg": 61.7134249,
+            "apparentDecDeg": 20.74371472
+          }
+        },
+        "generalXYSemantics": "General event reference patch; not local altitude/azimuth and not a permanent coordinate for moving bodies.",
+        "ephemeris": {
+          "provider": "NASA/JPL Horizons",
+          "observerCenter": "500@399 · Earth geocenter",
+          "quantity": "2 · apparent RA/DEC",
+          "targetCommand": "799",
+          "referenceTimeUT": "2026-Nov-25 12:00:00",
+          "timeBasis": "DATE_MIDPOINT_REFERENCE"
+        }
+      }
+    },
+    {
+      "id": "161p-hartley-iras-perihelion-2026",
+      "title": "161P/HARTLEY-IRAS · PERIHELION",
+      "category": "COMET",
+      "status": "CATALOGUED",
+      "precisionClass": "DAY",
+      "a8": {
+        "yearCycle4": 1,
+        "yearCycleLabel": "B",
+        "yearDay": 342,
+        "yearDayOctal": "526₈",
+        "calendarRegion": "STRUCTURED",
+        "monthIndex": 7,
+        "monthOctal": "7₈",
+        "monthDay": 27,
+        "quickDate": "(7) 27",
+        "publicDate": {
+          "display": "(7) 27 · 2026",
+          "quick": "(7) 27",
+          "compass": "NW 27 · 2026",
+          "named": "Northwest · Saturn · Water · 2026",
+          "symbolic": "7₈ · ♄ · 🜄",
+          "month": 7,
+          "planetaryWeek": "Saturn",
+          "elementDay": "Water",
+          "legacyYearBridge": 2026
+        }
+      },
+      "summary": "Perihelion of 161P/Hartley-IRAS; BAA predicted a 2026 peak near magnitude 9.2.",
+      "detailAnchor": "161p-hartley-iras-perihelion-2026",
+      "sourceKey": "BAA_COMET_TABLE_2026",
+      "legacyProvenance": {
+        "date": "2026-11-27",
+        "timescale": "UT"
+      },
+      "sky": {
+        "mode": "EPHEMERIS_TRACK",
+        "coordinateSystem": "A8_CELESTIAL",
+        "body": "161P/Hartley-IRAS",
+        "positionSemantics": "Moving body; do not replace with a fixed zodiac or constellation coordinate.",
+        "generalXYStatus": "READY",
+        "generalXY": {
+          "x": 412,
+          "y": 100,
+          "decimal": "X 412 · Y 100",
+          "octal": "X 634₈ · Y 144₈",
+          "precisionClass": "GENERAL_WHOLE_A8_GRID",
+          "referenceObject": "161P/HARTLEY-IRAS",
+          "finerSourceCoordinate": {
+            "x": 411.930523,
+            "y": 100.46914,
+            "apparentRaDeg": 289.63864901,
+            "apparentDecDeg": 19.3576359
+          }
+        },
+        "generalXYSemantics": "General event reference patch; not local altitude/azimuth and not a permanent coordinate for moving bodies.",
+        "ephemeris": {
+          "provider": "NASA/JPL Horizons",
+          "observerCenter": "500@399 · Earth geocenter",
+          "quantity": "2 · apparent RA/DEC",
+          "targetCommand": "DES=161P;CAP;NOFRAG",
+          "referenceTimeUT": "2026-Nov-27 12:00:00",
+          "timeBasis": "DATE_MIDPOINT_REFERENCE"
+        }
+      },
+      "eventData": {
+        "predictedPeakDate": "2026-10-05",
+        "predictedPeakMagnitude": 9.2
+      }
+    },
+    {
+      "id": "geminids-2026",
+      "title": "GEMINIDS · MAXIMUM",
+      "category": "METEOR",
+      "status": "CATALOGUED",
+      "precisionClass": "WINDOW",
+      "a8": {
+        "yearCycle4": 1,
+        "yearCycleLabel": "B",
+        "yearDay": 359,
+        "yearDayOctal": "547₈",
+        "calendarRegion": "STRUCTURED",
+        "monthIndex": 7,
+        "monthOctal": "7₈",
+        "monthDay": 44,
+        "quickDate": "(7) 44",
+        "time": {
+          "dayPhase17CenterApprox": 76459,
+          "decimalHHMMSSApprox": "18:42:43",
+          "octalHHMMSSApprox": "22:52:53₈",
+          "sourcePrecision": "HOUR"
+        },
+        "publicDate": {
+          "display": "(7) 44 · 2026",
+          "quick": "(7) 44",
+          "compass": "NW 44 · 2026",
+          "named": "Northwest · Pluto · Air · 2026",
+          "symbolic": "7₈ · ♇ · 🜁",
+          "month": 7,
+          "planetaryWeek": "Pluto",
+          "elementDay": "Air",
+          "legacyYearBridge": 2026
+        }
+      },
+      "summary": "Broad, strong Geminid maximum; one of the strongest annual showers.",
+      "detailAnchor": "geminids-2026",
+      "sourceKey": "IMO_METEOR_CALENDAR_2026",
+      "legacyProvenance": {
+        "date": "2026-12-14",
+        "timescale": "UT",
+        "timeUT": "14:00",
+        "timePrecision": "HOUR"
+      },
+      "sky": {
+        "mode": "FIXED_RADIANT_APPROX",
+        "coordinateSystem": "A8_CELESTIAL",
+        "longitude512": 159.289,
+        "latitude256": 81.067,
+        "sourceEquatorial": {
+          "raDeg": 112,
+          "decDeg": 33
+        },
+        "referenceStars": [],
+        "sourcePrecision": "PUBLISHED_RADIANT_APPROX",
+        "generalXY": {
+          "x": 159,
+          "y": 81,
+          "decimal": "X 159 · Y 81",
+          "octal": "X 237₈ · Y 121₈",
+          "precisionClass": "GENERAL_WHOLE_A8_GRID",
+          "purpose": "Public ballpark position on the A8 512 × 256 celestial sheet.",
+          "finerSourceCoordinate": {
+            "x": 159.289,
+            "y": 81.067
+          }
+        },
+        "generalXYStatus": "READY"
+      },
+      "eventData": {
+        "code": "GEM",
+        "zhr": 150
+      }
+    },
+    {
+      "id": "december-solstice-2026",
+      "title": "DECEMBER SOLSTICE",
+      "category": "ORBITAL",
+      "status": "CATALOGUED",
+      "precisionClass": "WINDOW",
+      "a8": {
+        "yearCycle4": 2,
+        "yearCycleLabel": "C",
+        "yearDay": 1,
+        "yearDayOctal": "1₈",
+        "calendarRegion": "STRUCTURED",
+        "monthIndex": 0,
+        "monthOctal": "0₈",
+        "monthDay": 1,
+        "quickDate": "(0) 1",
+        "time": {
+          "dayPhase17CenterApprox": 113778,
+          "decimalHHMMSSApprox": "27:49:50",
+          "octalHHMMSSApprox": "33:61:62₈",
+          "sourcePrecision": "MINUTE"
+        },
+        "publicDate": {
+          "display": "(0) 1 · 2026",
+          "quick": "(0) 1",
+          "compass": "N 1 · 2026",
+          "named": "North · Mercury · Fire · 2026",
+          "symbolic": "0₈ · ☿ · 🜂",
+          "month": 0,
+          "planetaryWeek": "Mercury",
+          "elementDay": "Fire",
+          "legacyYearBridge": 2026
+        }
+      },
+      "summary": "The December solstice; this lands on the next A8 cycle seam.",
+      "detailAnchor": "december-solstice-2026",
+      "sourceKey": "USNO_SEASONS_2026",
+      "legacyProvenance": {
+        "date": "2026-12-21",
+        "timescale": "UT",
+        "timeUT": "20:50",
+        "timePrecision": "MINUTE"
+      },
+      "sky": {
+        "mode": "EPHEMERIS_TRACK",
+        "coordinateSystem": "A8_CELESTIAL",
+        "body": "TERRA_SOL_RELATIONSHIP",
+        "positionSemantics": "Moving body; do not replace with a fixed zodiac or constellation coordinate.",
+        "generalXYStatus": "READY",
+        "generalXY": {
+          "x": 384,
+          "y": 161,
+          "decimal": "X 384 · Y 161",
+          "octal": "X 600₈ · Y 241₈",
+          "precisionClass": "GENERAL_WHOLE_A8_GRID",
+          "referenceObject": "SOL",
+          "finerSourceCoordinate": {
+            "x": 383.999721,
+            "y": 161.333213,
+            "apparentRaDeg": 269.99980366,
+            "apparentDecDeg": -23.43741536
+          }
+        },
+        "generalXYSemantics": "General event reference patch; not local altitude/azimuth and not a permanent coordinate for moving bodies.",
+        "ephemeris": {
+          "provider": "NASA/JPL Horizons",
+          "observerCenter": "500@399 · Earth geocenter",
+          "quantity": "2 · apparent RA/DEC",
+          "targetCommand": "10",
+          "referenceTimeUT": "2026-Dec-21 20:50:00",
+          "timeBasis": "SOURCE_TIME"
+        }
+      }
+    },
+    {
+      "id": "ursids-2026",
+      "title": "URSIDS · MAXIMUM",
+      "category": "METEOR",
+      "status": "CATALOGUED",
+      "precisionClass": "DAY",
+      "a8": {
+        "yearCycle4": 2,
+        "yearCycleLabel": "C",
+        "yearDay": 2,
+        "yearDayOctal": "2₈",
+        "calendarRegion": "STRUCTURED",
+        "monthIndex": 0,
+        "monthOctal": "0₈",
+        "monthDay": 2,
+        "quickDate": "(0) 2",
+        "publicDate": {
+          "display": "(0) 2 · 2026",
+          "quick": "(0) 2",
+          "compass": "N 2 · 2026",
+          "named": "North · Mercury · Water · 2026",
+          "symbolic": "0₈ · ☿ · 🜄",
+          "month": 0,
+          "planetaryWeek": "Mercury",
+          "elementDay": "Water",
+          "legacyYearBridge": 2026
+        }
+      },
+      "summary": "Annual Ursid maximum; exact peak timing is treated as day-level in this digest.",
+      "detailAnchor": "ursids-2026",
+      "sourceKey": "IMO_METEOR_CALENDAR_2026",
+      "legacyProvenance": {
+        "date": "2026-12-22",
+        "timescale": "UT"
+      },
+      "sky": {
+        "mode": "FIXED_RADIANT_APPROX",
+        "coordinateSystem": "A8_CELESTIAL",
+        "longitude512": 308.622,
+        "latitude256": 19.911,
+        "sourceEquatorial": {
+          "raDeg": 217,
+          "decDeg": 76
+        },
+        "referenceStars": [],
+        "sourcePrecision": "PUBLISHED_RADIANT_APPROX",
+        "generalXY": {
+          "x": 309,
+          "y": 20,
+          "decimal": "X 309 · Y 20",
+          "octal": "X 465₈ · Y 24₈",
+          "precisionClass": "GENERAL_WHOLE_A8_GRID",
+          "purpose": "Public ballpark position on the A8 512 × 256 celestial sheet.",
+          "finerSourceCoordinate": {
+            "x": 308.622,
+            "y": 19.911
+          }
+        },
+        "generalXYStatus": "READY"
+      },
+      "eventData": {
+        "code": "URS",
+        "zhr": 10
+      }
+    }
+  ],
+  "catalog": {
+    "id": "A8_2026_PRIMARY_SKY_DIGEST",
+    "legacyBridgeYear": 2026,
+    "assembledDate": "2026-09-08",
+    "scope": "Primary public astronomical events suitable for A8 Calendar markers.",
+    "inclusionRules": [
+      "All 2026 solar and lunar eclipses.",
+      "Terra perihelion, aphelion, equinoxes and solstices.",
+      "Major annual meteor showers plus notable variable or fireball-producing streams.",
+      "Comets predicted near magnitude 10 or brighter, or comets with scientifically notable 2026 disruption or outburst behavior.",
+      "Major planetary oppositions, bright conjunctions and notable occultations."
+    ],
+    "notPrimaryByDefault": [
+      "Routine lunar phases.",
+      "Weak unremarkable minor meteor streams.",
+      "Routine faint comet perihelia.",
+      "Ordinary minor conjunctions."
+    ],
+    "precisionPolicy": {
+      "DAY": "Source establishes the event day but not a sufficiently precise public event instant.",
+      "WINDOW": "Source supplies an approximate, rounded or bounded time. A8 time is derived but remains explicitly approximate.",
+      "PHASE17": "Reserved for source evidence fine enough to identify one unique A8 day state."
+    },
+    "generalSkyXY": {
+      "coordinateFrame": "A8_CELESTIAL_512_BY_256",
+      "x": "A8 celestial longitude · 0→512 wrap",
+      "y": "A8 celestial latitude · 0 north pole → 128 equator → 256 south pole",
+      "publicPrecision": "Nearest whole A8 grid coordinate.",
+      "engineeringDirection": "Retain finer source-derived coordinates and permit deeper binary/octal fixed-point refinement without changing the public coordinate frame.",
+      "observerNote": "General X/Y is celestial-sheet position, not local altitude/azimuth."
+    }
+  },
+  "sources": {
+    "USNO_SEASONS_2026": {
+      "publisher": "United States Naval Observatory",
+      "record": "Earth's Seasons · 2026 · Universal Time"
+    },
+    "NASA_GSFC_ECLIPSES_2026": {
+      "publisher": "NASA GSFC",
+      "record": "2026 Solar and Lunar Eclipse Catalogs"
+    },
+    "IMO_METEOR_CALENDAR_2026": {
+      "publisher": "International Meteor Organization",
+      "record": "2026 Meteor Shower Calendar"
+    },
+    "BAA_COMET_TABLE_2026": {
+      "publisher": "British Astronomical Association · Comet Section",
+      "record": "2026 Comet Table"
+    },
+    "BAA_C2026A1_2026": {
+      "publisher": "British Astronomical Association",
+      "record": "C/2026 A1 (MAPS) · Kreutz sungrazer coverage"
+    },
+    "ATEL_17829": {
+      "publisher": "The Astronomer's Telegram",
+      "record": "ATel 17829 · Large apparent outburst of 220P/McNaught"
+    },
+    "ATEL_17956": {
+      "publisher": "The Astronomer's Telegram",
+      "record": "ATel 17956 · 220P/McNaught during second outburst"
+    },
+    "NASA_SKYWATCH_JAN_2026": {
+      "publisher": "NASA Science",
+      "record": "What's Up · January 2026"
+    },
+    "NASA_SKYWATCH_JUN_2026": {
+      "publisher": "NASA Science",
+      "record": "What's Up · June 2026"
+    },
+    "NASA_VENUS_OCCULTATIONS_2026": {
+      "publisher": "NASA",
+      "record": "Lunar Occultation of Venus · 2026 follow-up"
+    },
+    "NASA_NOTABLE_2026": {
+      "publisher": "NASA",
+      "record": "Most Notable 2026 Astronomical Events"
+    },
+    "JPL_HORIZONS_A8_XY_2026": {
+      "publisher": "NASA/JPL Solar System Dynamics",
+      "record": "Horizons observer ephemerides",
+      "role": "External moving-event position provenance only",
+      "observerCenter": "500@399 · Earth geocenter",
+      "quantity": "2 · apparent RA/DEC",
+      "translation": "X=RA×512/360; Y=(90-DEC)×256/180"
+    }
+  }
+}

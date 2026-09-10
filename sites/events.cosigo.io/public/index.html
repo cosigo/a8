@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>A8 Astronomical Events</title>
+  <meta
+    name="description"
+    content="Astronomical events expressed with A8 native dates, time and celestial coordinates."
+  >
+  <style>
+    :root{
+      color-scheme:dark;
+      --bg:#07131a;
+      --panel:#0d202a;
+      --line:#80652f;
+      --text:#e8edf0;
+      --muted:#9eb0b8;
+      --gold:#d6aa4e;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    }
+    main{
+      width:min(920px,calc(100% - 32px));
+      margin:0 auto;
+      padding:64px 0 80px;
+    }
+    .eyebrow{
+      color:var(--gold);
+      font-size:.74rem;
+      font-weight:900;
+      letter-spacing:.16em;
+    }
+    h1{
+      margin:.45rem 0 .7rem;
+      font-size:clamp(2rem,7vw,4.4rem);
+      line-height:.96;
+    }
+    .lede{
+      max-width:720px;
+      color:var(--muted);
+      line-height:1.65;
+    }
+    .contract{
+      margin-top:42px;
+      padding:24px;
+      border:1px solid var(--line);
+      border-radius:14px;
+      background:var(--panel);
+    }
+    .row{
+      display:grid;
+      grid-template-columns:110px 1fr;
+      gap:18px;
+      padding:12px 0;
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .row:last-child{border-bottom:0}
+    .key{
+      color:var(--gold);
+      font-weight:900;
+      letter-spacing:.06em;
+    }
+    .value{
+      color:var(--text);
+      line-height:1.5;
+    }
+    .status{
+      margin-top:36px;
+      color:var(--muted);
+      font-size:.84rem;
+      letter-spacing:.05em;
+    }
+    @media(max-width:520px){
+      .row{grid-template-columns:1fr;gap:4px}
+    }
+  </style>
+  <link rel="stylesheet" href="/events-digest.css?v=20260908a">
+  <!-- A8 EVENTS NEXT STAR BRIDGE v1 -->
+  <link rel="stylesheet" href="/events-next.css?v=1">
+
+<style>
+/* A8 ESCAPE HATCH v1 */
+.a8-escape-hatch{
+  width:min(920px,calc(100% - 32px));
+  margin:16px auto 0;
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+}
+.a8-escape-hatch a{
+  display:inline-block;
+  padding:6px 9px;
+  border:1px solid rgba(214,170,78,.48);
+  border-radius:6px;
+  color:#d6aa4e;
+  background:rgba(13,32,42,.88);
+  text-decoration:none;
+  font-size:.72rem;
+  font-weight:800;
+  letter-spacing:.05em;
+}
+.a8-escape-hatch a:hover,
+.a8-escape-hatch a:focus-visible{
+  border-color:#d6aa4e;
+  color:#fff;
+}
+</style>
+</head>
+<body>
+<!-- A8 ESCAPE HATCH v1 -->
+<nav class="a8-escape-hatch" aria-label="A8 navigation">
+  <a href="https://calendar.cosigo.io/">← CALENDAR</a>
+  <a href="https://stars.cosigo.io/">STARS HOME</a>
+  <a href="https://a8.cosigo.io/">A8 PUBLIC</a>
+</nav>
+
+<main class="events-digest">
+  <div class="eyebrow">A8 ASTRONOMICAL EVENTS REGISTER</div>
+  <h1>EVENTS</h1>
+  <p class="lead">Nature on the A8 calendar. Pick the date, read the A8 time when known, then go to the general X/Y patch on the A8 celestial sheet.</p>
+  <div id="eventStatus" class="events-status">LOADING 2026 SKY DIGEST…</div>
+  <section id="eventGrid" class="event-grid" aria-label="2026 astronomical events"></section>
+</main>
+  <script src="/events-digest.js?v=20260908a"></script>
+  <!-- A8 EVENTS NEXT STAR BRIDGE v1 -->
+  <script src="/events-next.js?v=1"></script>
+</body>
+</html>

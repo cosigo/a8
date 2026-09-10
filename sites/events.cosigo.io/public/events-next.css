@@ -1,0 +1,93 @@
+/* A8 EVENTS NEXT STAR BRIDGE v1 */
+
+.a8-events-live-bridge{
+  margin:18px 0 24px;
+}
+
+.a8-live-state{
+  margin:0 0 8px;
+  font:700 11px/1.45 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  letter-spacing:.05em;
+  color:var(--muted,#8fa8b7);
+}
+
+.a8-next-group,
+.a8-calendar-selected{
+  border:1px solid var(--border,#34505f);
+  border-radius:12px;
+  padding:14px;
+  margin:0 0 14px;
+  background:rgba(7,16,25,.74);
+}
+
+.a8-next-group{
+  border-width:2px;
+  border-color:var(--accent,#d8c47a);
+  box-shadow:
+    inset 0 0 0 1px rgba(216,196,122,.18),
+    0 0 20px rgba(216,196,122,.09);
+}
+
+.a8-next-heading,
+.a8-selected-heading{
+  margin:0 0 10px;
+  font:900 13px/1.3 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  letter-spacing:.10em;
+}
+
+.a8-next-heading{
+  color:var(--accent,#d8c47a);
+}
+
+.a8-selected-heading{
+  color:var(--ink,#e9f2f7);
+}
+
+.a8-live-event-card{
+  padding:12px 0;
+  border-top:1px solid rgba(143,168,183,.22);
+}
+
+.a8-live-event-card:first-of-type{
+  border-top:0;
+}
+
+.a8-live-event-card h3{
+  margin:0 0 7px;
+  font-size:18px;
+}
+
+.a8-live-meta{
+  display:flex;
+  flex-wrap:wrap;
+  gap:5px 14px;
+  margin-bottom:8px;
+  font:700 11px/1.45 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  color:var(--muted,#8fa8b7);
+}
+
+.a8-live-summary{
+  margin:7px 0 11px;
+  line-height:1.5;
+}
+
+.a8-stars-link{
+  display:inline-block;
+  padding:8px 11px;
+  border:1px solid var(--accent,#d8c47a);
+  border-radius:7px;
+  color:var(--accent,#d8c47a);
+  font-weight:900;
+  text-decoration:none;
+}
+
+.a8-stars-link:hover,
+.a8-stars-link:focus-visible{
+  background:rgba(216,196,122,.10);
+}
+
+.a8-events-live-error{
+  padding:12px;
+  border:1px solid #714b4b;
+  border-radius:9px;
+}
