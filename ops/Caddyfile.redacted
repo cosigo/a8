@@ -942,7 +942,7 @@ moons.cosigo.io {
 	# Existing absolute-path lab navigation is returned to the old lab
 	# until each destination receives its own canonical COSIGO hostname.
 	handle {
-		redir https://lab.a8.cosigo.io{uri} 302
+		respond 404
 	}
 }
 
@@ -1050,7 +1050,7 @@ clock.cosigo.io {
 		}
 
 		handle {
-			redir https://lab.a8.cosigo.io{uri} 302
+			respond 404
 		}
 	}
 }
@@ -1134,7 +1134,7 @@ calendar.cosigo.io {
 
 		# Everything not yet migrated returns to the existing lab.
 		handle {
-			redir https://lab.a8.cosigo.io{uri} 302
+			respond 404
 		}
 	}
 }
@@ -1275,7 +1275,7 @@ mintaka.cosigo.io {
 		}
 
 		handle {
-			redir https://lab.a8.cosigo.io{uri} 302
+			respond 404
 		}
 	}
 }
@@ -1390,7 +1390,7 @@ sol.cosigo.io {
 		}
 
 		handle {
-			redir https://lab.a8.cosigo.io{uri} 302
+			respond 404
 		}
 	}
 }
@@ -1424,7 +1424,7 @@ map.cosigo.io {
 
 		# Unmigrated A8 destinations remain on the old lab.
 		handle {
-			redir https://lab.a8.cosigo.io{uri} 302
+			respond 404
 		}
 	}
 }
@@ -1500,7 +1500,7 @@ ship.cosigo.io {
 
 		# Unmigrated presentation destinations remain at the old lab.
 		handle {
-			redir https://lab.a8.cosigo.io{uri} 302
+			respond 404
 		}
 	}
 }
@@ -1603,7 +1603,7 @@ audio.cosigo.io {
 		# Unmigrated presentation destinations remain on the old lab
 		# until their own canonical hostname is qualified.
 		handle {
-			redir https://lab.a8.cosigo.io{uri} 302
+			respond 404
 		}
 	}
 }
@@ -1690,7 +1690,7 @@ composer.cosigo.io {
 
 		# Unmigrated presentation destinations continue through old lab.
 		handle {
-			redir https://lab.a8.cosigo.io{uri} 302
+			respond 404
 		}
 	}
 }
@@ -1771,7 +1771,7 @@ contestant.cosigo.io {
 
 		# Unmigrated presentation destinations remain on old lab.
 		handle {
-			redir https://lab.a8.cosigo.io{uri} 302
+			respond 404
 		}
 	}
 }
@@ -1858,7 +1858,7 @@ stars.cosigo.io {
 
 		# Anything not yet migrated remains available from old lab.
 		handle {
-			redir https://lab.a8.cosigo.io{uri} 302
+			respond 404
 		}
 	}
 }
@@ -1887,7 +1887,7 @@ sea.cosigo.io {
 		}
 
 		handle {
-			redir https://lab.a8.cosigo.io{uri} 302
+			respond 404
 		}
 	}
 }
@@ -1949,7 +1949,7 @@ angle.cosigo.io {
 		}
 
 		handle {
-			redir https://lab.a8.cosigo.io{uri} 302
+			respond 404
 		}
 	}
 }
@@ -1983,7 +1983,7 @@ quartz.cosigo.io {
 		}
 
 		handle {
-			redir https://lab.a8.cosigo.io{uri} 302
+			respond 404
 		}
 	}
 }
@@ -2022,7 +2022,7 @@ telescope.cosigo.io {
 		}
 
 		handle {
-			redir https://lab.a8.cosigo.io{uri} 302
+			respond 404
 		}
 	}
 }
