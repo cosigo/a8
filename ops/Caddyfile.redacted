@@ -1010,6 +1010,12 @@ calendar.cosigo.io {
 			file_server
 		}
 
+		# A8 EVENTS REGISTER · CALENDAR READ
+		handle /data/astronomical-events.json {
+			root * /srv/sites/calendar.cosigo.io/public
+			file_server
+		}
+
 		handle {
 			respond 404
 		}
