@@ -8,7 +8,7 @@ c0ad041f7dba0936dad9a6cd9d03c6db19c936f4b1fa6813ca253b78dc457373  ops/a8-shadow-
 16e6173cda9518a5d6f41445d39df7e9c0db84c42a9c9b61ab067a94d6f7f269  ops/a8-shadow-core/transplant1/a8-external-pulse-rig-contract.js
 fee9568c5634216a99047399ab15795c40d140793fe1518ef04b434d442aa58d  ops/a8-shadow-core/transplant1/a8-jovian-phase-timekeeper.js
 c7fba01c60f901ca98520b2b83e779b25de17eaff4c2fff35dd4387d041a94ed  ops/a8-shadow-core/transplant1/a8-jovian-recovery-wrapper.js
-0c3a0f163bae357a7c744a0a9da676cc8d045294a2825b9d6dfd8c1aeaec1346  ops/a8-shadow-recorder/recorder.js
+b484d2b68b8af89bab47faff3d30f3f83d4237e635f999bb1df1a468ee1a85ea  ops/a8-shadow-recorder/recorder.js
 ff9e40344bf1960b8b94728de8df383e31fe1a0db6627c10d84dd48abab2949a  ops/a8-shadow-recorder/verify-tape.js
 e5ce2a67273c5819ac4090355961c2304620ead6d6facba5ba02afde07e1bb13  ops/a8-shadow-recorder/a8-shadow-recorder.service
-f4a530418c728d1593b52cd284f222c29ceb6430e6ec8432111fc0bdb8165003  ops/a8-shadow/README.md
+84e92775b3d8bda8c646bca078e1497bbf40b11c0dc6e339ce5d01b8478ddf2f  ops/a8-shadow/README.md

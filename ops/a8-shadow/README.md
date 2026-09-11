@@ -74,3 +74,46 @@ record every genuine WEST/EAST witness before enabling Jovian ingest.
 
 Möbius bacon may be tasted from both sides.
 It may not be chewed from an end.
+
+## Nursery camera · Jovian witness recorder
+
+Installed 2026-09-11.
+
+Recorder now exposes localhost-only:
+
+127.0.0.1:18026
+POST /api/recorder/jovian-witness
+
+Accepted caller payload:
+
+- moon
+- turn
+
+The caller may NOT supply:
+
+- rawPulse
+- sourceEpoch
+- clock phase
+- DAY_PHASE17
+- frequency
+- timestamp
+
+For each accepted witness the recorder independently captures the current
+physical Pulse Box source snapshot and writes a hash-chained:
+
+JOVIAN_TURN_WITNESS
+
+Receipt UTC and recorder monotonic time remain
+NON_DEFINING_RECORDKEEPING_ONLY.
+
+The recorder does not inject Shadow.
+The recorder does not inject Core20.
+
+At installation:
+- previous Epoch-4 tape sealed normally
+- previous tape hash chain verified intact
+- new Epoch-4 tape opened
+- no Jovian witness had yet been submitted
+
+Rule:
+Nature gets the first live spoonful.

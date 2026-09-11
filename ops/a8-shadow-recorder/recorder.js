@@ -20,6 +20,12 @@ const STATUS_FILE =
 const POLL_MS = 5000;
 const FSYNC_EVERY = 12;
 
+const WITNESS_HOST =
+  '127.0.0.1';
+
+const WITNESS_PORT =
+  18026;
+
 const TAPE_SCHEMA =
   'A8-SHADOW-HEARTBEAT-TAPE-V1';
 
@@ -364,6 +370,270 @@ function anomaly(previous, current) {
 
   return false;
 }
+
+function sendJson(
+  res,
+  statusCode,
+  payload
+) {
+  const body =
+    JSON.stringify(
+      payload,
+      null,
+      2
+    ) + '\n';
+
+  res.writeHead(
+    statusCode,
+    {
+      'Content-Type':
+        'application/json',
+      'Content-Length':
+        Buffer.byteLength(body)
+    }
+  );
+
+  res.end(body);
+}
+
+function readJsonBody(req) {
+  return new Promise(
+    (resolve, reject) => {
+      let body = '';
+
+      req.setEncoding('utf8');
+
+      req.on('data', chunk => {
+        body += chunk;
+
+        if (body.length > 1024) {
+          reject(
+            new Error(
+              'REQUEST_BODY_TOO_LARGE'
+            )
+          );
+        }
+      });
+
+      req.on('end', () => {
+        try {
+          resolve(
+            JSON.parse(body || '{}')
+          );
+        } catch (err) {
+          reject(
+            new Error(
+              'INVALID_JSON'
+            )
+          );
+        }
+      });
+
+      req.on('error', reject);
+    }
+  );
+}
+
+function normalizeJovianWitness(body) {
+  if (
+    !body ||
+    typeof body !== 'object' ||
+    Array.isArray(body)
+  ) {
+    throw new Error(
+      'WITNESS_MUST_BE_OBJECT'
+    );
+  }
+
+  const allowed =
+    new Set([
+      'moon',
+      'turn'
+    ]);
+
+  for (
+    const key of
+    Object.keys(body)
+  ) {
+    if (!allowed.has(key)) {
+      throw new Error(
+        `UNSUPPORTED_FIELD:${key}`
+      );
+    }
+  }
+
+  const moon =
+    String(
+      body.moon || ''
+    ).toLowerCase();
+
+  if (
+    moon !== 'io' &&
+    moon !== 'eu' &&
+    moon !== 'ga'
+  ) {
+    throw new Error(
+      'MOON_MUST_BE_io_eu_ga'
+    );
+  }
+
+  const turn =
+    String(
+      body.turn || ''
+    ).toUpperCase();
+
+  if (
+    turn !== 'WEST' &&
+    turn !== 'EAST'
+  ) {
+    throw new Error(
+      'TURN_MUST_BE_WEST_OR_EAST'
+    );
+  }
+
+  return {
+    moon,
+    turn
+  };
+}
+
+async function recordJovianWitness(
+  body
+) {
+  const witness =
+    normalizeJovianWitness(body);
+
+  /*
+   * Recorder captures physical state itself.
+   * Caller cannot supply rawPulse, epoch,
+   * phase, frequency or timestamp.
+   */
+  const snapshot =
+    await fetchSnapshot();
+
+  if (fd === null) {
+    throw new Error(
+      'RECORDER_WAITING_FOR_SOURCE'
+    );
+  }
+
+  if (
+    snapshot.sourceEpoch !==
+    sourceEpoch
+  ) {
+    throw new Error(
+      'SOURCE_EPOCH_CHANGED_BEFORE_WITNESS'
+    );
+  }
+
+  if (
+    lastSnapshot &&
+    anomaly(
+      lastSnapshot,
+      snapshot
+    )
+  ) {
+    throw new Error(
+      'PHYSICAL_SOURCE_ANOMALY'
+    );
+  }
+
+  writeRecord(
+    'JOVIAN_TURN_WITNESS',
+    {
+      witness,
+      sourceSnapshot:
+        snapshot,
+
+      recorderRole:
+        RECEIPT_ROLE,
+
+      receiptTimeDefinesClock:
+        false,
+
+      injectsShadow:
+        false,
+
+      injectsCore20:
+        false
+    }
+  );
+
+  return {
+    witness,
+    sourceSnapshot:
+      snapshot,
+    recordSequence:
+      sequence - 1,
+    recordHash:
+      previousRecordHash
+  };
+}
+
+const witnessServer =
+  http.createServer(
+    async (req, res) => {
+      if (
+        req.method === 'POST' &&
+        req.url ===
+          '/api/recorder/jovian-witness'
+      ) {
+        try {
+          const body =
+            await readJsonBody(req);
+
+          const recorded =
+            await recordJovianWitness(
+              body
+            );
+
+          sendJson(
+            res,
+            200,
+            {
+              ok: true,
+              recorded
+            }
+          );
+        } catch (err) {
+          sendJson(
+            res,
+            400,
+            {
+              ok: false,
+              error:
+                String(
+                  err.message || err
+                )
+            }
+          );
+        }
+
+        return;
+      }
+
+      sendJson(
+        res,
+        404,
+        {
+          ok: false,
+          error:
+            'NOT_FOUND'
+        }
+      );
+    }
+  );
+
+witnessServer.listen(
+  WITNESS_PORT,
+  WITNESS_HOST,
+  () => {
+    console.log(
+      'A8 SHADOW JOVIAN WITNESS CAMERA · ' +
+      `${WITNESS_HOST}:${WITNESS_PORT}`
+    );
+  }
+);
 
 async function poll() {
   if (stopping) {
