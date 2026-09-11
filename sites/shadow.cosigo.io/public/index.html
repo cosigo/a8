@@ -1,0 +1,618 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>A8 Shadow Core20 · Physical Clock Test</title>
+<style>
+:root{
+  color-scheme:dark;
+  --bg:#090b0e;
+  --panel:#11151a;
+  --line:#2b333d;
+  --text:#eef3f7;
+  --muted:#929da8;
+  --good:#8ff0a4;
+  --warn:#ffd479;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  min-height:100vh;
+  background:var(--bg);
+  color:var(--text);
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+main{
+  width:min(1100px,94vw);
+  margin:0 auto;
+  padding:48px 0 70px;
+}
+.kicker{
+  color:var(--muted);
+  font-size:.8rem;
+  letter-spacing:.14em;
+}
+h1{
+  margin:.35rem 0 .5rem;
+  font-size:clamp(1.8rem,4vw,3.2rem);
+}
+.sub{
+  color:var(--muted);
+  margin-bottom:32px;
+}
+.clocks{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px;
+}
+.card{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:24px;
+}
+.card h2{
+  margin:0 0 18px;
+  font-size:1rem;
+  letter-spacing:.1em;
+}
+.clock{
+  font-size:clamp(2rem,6vw,4.5rem);
+  font-weight:700;
+  margin:12px 0;
+}
+.good{color:var(--good)}
+.warn{color:var(--warn)}
+.rows{
+  display:grid;
+  gap:8px;
+  margin-top:18px;
+  color:var(--muted);
+  font-size:.9rem;
+}
+.rows b{color:var(--text)}
+.divergence{
+  margin-top:18px;
+  text-align:center;
+  padding:22px;
+}
+.divergence .value{
+  margin-top:8px;
+  font-size:clamp(1.3rem,3vw,2rem);
+  font-weight:700;
+}
+footer{
+  color:var(--muted);
+  margin-top:28px;
+  font-size:.8rem;
+}
+
+.rig{
+  margin-top:18px;
+}
+.rig img{
+  display:block;
+  width:100%;
+  height:auto;
+  margin-top:16px;
+  border-radius:12px;
+  border:1px solid var(--line);
+}
+.rig-note{
+  margin-top:12px;
+  color:var(--muted);
+  font-size:.78rem;
+  letter-spacing:.08em;
+}
+
+
+.chronicle{
+  margin-top:18px;
+}
+.chronicle summary{
+  cursor:pointer;
+  font-weight:700;
+  letter-spacing:.08em;
+  list-style:none;
+}
+.chronicle summary::-webkit-details-marker{
+  display:none;
+}
+.chronicle summary span{
+  float:right;
+  color:var(--muted);
+  font-size:.72rem;
+  font-weight:400;
+}
+.chronicle article{
+  margin-top:24px;
+  max-width:820px;
+  line-height:1.7;
+}
+.chronicle h2{
+  font-size:1.35rem;
+}
+.chronicle h3{
+  margin-top:2rem;
+  color:var(--good);
+}
+.chronicle p{
+  color:#cbd3da;
+}
+.chronicle blockquote{
+  margin:1.4rem 0;
+  padding:14px 18px;
+  border-left:3px solid var(--good);
+  background:#0c1014;
+}
+.chronicle pre{
+  overflow:auto;
+  padding:14px;
+  border:1px solid var(--line);
+  border-radius:10px;
+  background:#080a0c;
+  color:var(--good);
+  white-space:pre-wrap;
+  word-break:break-word;
+}
+.chronicle .chain{
+  padding:14px;
+  border:1px solid var(--line);
+  border-radius:10px;
+  background:#0c1014;
+}
+.chronicle .warning{
+  color:var(--warn);
+  font-weight:700;
+  letter-spacing:.05em;
+}
+.chronicle .ending{
+  margin-top:2rem;
+  color:var(--muted);
+  font-style:italic;
+}
+
+@media(max-width:700px){
+  .clocks{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<main>
+  <div class="kicker">AUSPICIOUS 8 · PHYSICAL CLOCK EXPERIMENT</div>
+  <h1>SHADOW CORE20</h1>
+  <div class="sub">Same organism · different heartbeat · refining in progress</div>
+
+  <section class="clocks">
+    <article class="card">
+      <h2>CORE20 · CURRENT AUTHORITY</h2>
+      <div class="clock good" id="coreClock">—:—:—</div>
+      <div class="rows">
+        <div>DAY_PHASE17 · <b id="corePhase">—</b></div>
+        <div>SOURCE EPOCH · <b id="coreEpoch">—</b></div>
+        <div>AUTHORITY · <b>CORE20</b></div>
+      </div>
+    </article>
+
+    <article class="card">
+      <h2>SHADOW CORE20 · PHYSICAL</h2>
+      <div class="clock warn" id="shadowClock">BABY ALIVE</div>
+      <div class="rows">
+        <div>CLOCK · <b>NOT YET RECOVERED</b></div>
+        <div>PHYSICAL EPOCH · <b id="shadowEpoch">—</b></div>
+        <div>RAW COUNT · <b id="shadowRaw">—</b></div>
+        <div>AUTHORITY · <b>NOT YET</b></div>
+      </div>
+    </article>
+  </section>
+
+  <section class="card divergence">
+    <div class="kicker">DIVERGENCE · SHADOW − CORE20</div>
+    <div class="value warn" id="divergence">
+      WAITING FOR SHADOW DAY_PHASE17
+    </div>
+  </section>
+
+  <section class="card rig">
+    <div class="kicker">MINIMI · LIVE CRIB RIG</div>
+    <img
+      src="/assets/crib-rig.png"
+      alt="A8 Physical Shadow Clock live bench setup"
+      loading="lazy">
+    <div class="rig-note">
+      ORIGINAL BENCH PHOTOGRAPHS · NO REWIRING · LABELS ONLY
+    </div>
+  </section>
+
+
+  <details class="card chronicle">
+    <summary>
+      MINIMI’S MINIMI · BIRTH RECORD
+      <span>OPEN FAMILY ALBUM</span>
+    </summary>
+
+    <article>
+      <h2>The Birth of the A8 Physical Shadow Core20</h2>
+
+      <p>
+        There comes a point in every engineering project when somebody looks
+        at a perfectly functioning machine and asks:
+        <em>What if we build another one, give it a worse heartbeat, refuse
+        to let it cheat, and watch what happens?</em>
+      </p>
+
+      <p>
+        Thus Minimi’s Minimi was conceived.
+      </p>
+
+      <h3>Conception · Same organism, different heartbeat</h3>
+
+      <p>
+        The existing Core20 already runs the A8 clock from its recovered
+        natural chain. The Shadow experiment takes the same timing organism,
+        denies it Dad’s pace, gives it an independent physical heartbeat from
+        the 555 Pulse Box, and requires Nature to rebuild the clock around it.
+      </p>
+
+      <p class="chain">
+        555 physical oscillator →
+        Arduino / Pulse Box raw counter →
+        Jovian recurrence recovery →
+        Mintaka Earth rotation →
+        Sol orbital advance →
+        Mintaka–Sol relationship →
+        Terra Ship Slip →
+        recovered Sun-return →
+        DAY_PHASE17 →
+        A8 civil clock
+      </p>
+
+      <p>
+        Only after Shadow builds that chain independently do we compare it
+        with Core20.
+      </p>
+
+      <blockquote>
+        Core20 may stand beside the crib with a clipboard.
+        Core20 does not feed the baby.
+      </blockquote>
+
+      <p class="warning">
+        DO NOT FEED THE ANIMALS BACON · CORE20 COMPARISON IS NON-DEFINING
+      </p>
+
+      <h3>The ultrasound</h3>
+
+      <p>
+        Read-only discovery found an empty Shadow berth: no Shadow service,
+        no Shadow state, no Shadow presentation workspace, and port 18024
+        available.
+      </p>
+
+      <p>
+        The physical Pulse Box was already alive on its own source epoch.
+        Core20 remained separately authoritative. No operating Core20 state
+        was changed.
+      </p>
+
+      <h3>Birth certificate</h3>
+
+      <p>
+        The first Shadow daemon was intentionally tiny. It could observe the
+        physical Pulse Box and look sideways at Core20 for comparison.
+        It could not select a source, steer Core20, write to the Arduino, or
+        claim clock authority.
+      </p>
+
+      <p>
+        Its first sealed source was:
+      </p>
+
+      <pre>774b7799e3f483f93040f13adeb2b058cdf04e573e528d40b943b332863c22d0</pre>
+
+      <p>
+        Then <code>a8-shadow-core.service</code> was born on
+        <code>127.0.0.1:18024</code>.
+      </p>
+
+      <h3>First words</h3>
+
+      <p>
+        The newborn eventually answered:
+      </p>
+
+      <pre>SHADOW_BABY_ALIVE</pre>
+
+      <p>
+        It reported the physical 555 source independently while Dad/Core20
+        appeared only in the comparison compartment.
+      </p>
+
+      <pre>OBSERVING_ONLY
+AUTHORITY · NOT_YET
+sourceSelected: false
+drivesCore20: false</pre>
+
+      <p>
+        The baby’s first word was effectively “Mama.”
+        Dad was reportedly offended.
+      </p>
+
+      <h3>Bacon University</h3>
+
+      <p>
+        Pulses alone do not grant authority. Any idiot can count pulses.
+        The 555 may drift, wander with temperature, or behave like a drunk
+        uncle at a wedding. That is allowed.
+      </p>
+
+      <p>
+        The question is whether Nature can rebuild a stable timing ruler
+        around that physical heartbeat.
+      </p>
+
+      <p>
+        Minimi therefore has to graduate through Jupiter, Mintaka, Sol,
+        Terra Ship Slip, Sun-return recovery, and finally its own
+        DAY_PHASE17 before it earns authority.
+      </p>
+
+      <blockquote>
+        No honorary degrees from Bacon University.
+      </blockquote>
+
+      <h3>The invisible baby problem</h3>
+
+      <p>
+        Technically Minimi was alive. Publicly, shadow.cosigo.io was blank.
+        Beavis correctly observed that buying baby gifts while being unable
+        to see the baby was unsatisfying.
+      </p>
+
+      <p>
+        So the nursery window was built.
+      </p>
+
+      <p>
+        Core20 received its live clock. Shadow deliberately showed
+        <strong>BABY ALIVE</strong> and
+        <strong>CLOCK · NOT YET RECOVERED</strong>.
+        The central divergence display waits until Shadow independently owns
+        DAY_PHASE17.
+      </p>
+
+      <h3>The delayed birth certificate</h3>
+
+      <p>
+        The first HTTPS visit arrived before the TLS certificate did.
+        Caddy completed the ACME challenge, authorization, and certificate
+        issuance shortly afterward.
+      </p>
+
+      <p>
+        Apparently even experimental offspring require paperwork before the
+        world is allowed to look at them.
+      </p>
+
+      <h3>Matryoshka Minimi</h3>
+
+      <p>
+        The page initially had telemetry but no photograph of the actual
+        apparatus. Nobody wants to visit a nursery just to listen to a crying
+        baby through an intercom.
+      </p>
+
+      <p>
+        So the real bench photographs were installed: original hardware,
+        original wiring, labels only, with identifying network information
+        obscured.
+      </p>
+
+      <p>
+        Core20. Minimi. Minimi’s Minimi.
+        Nested experimental dolls of increasingly questionable judgment.
+      </p>
+
+      <h3>The nursery camera</h3>
+
+      <p>
+        Revisiting old terminal archaeology sucks, so Minimi received a
+        flight recorder.
+      </p>
+
+      <p>
+        The recorder watches the physical Pulse Box only. Core20 is not an
+        input.
+      </p>
+
+      <p>
+        It records source epoch, raw count, report sequence and status into an
+        append-only evidence tape. Each record cryptographically links to the
+        previous record through SHA-256.
+      </p>
+
+      <p>
+        Receipt time is explicitly marked:
+      </p>
+
+      <pre>NON_DEFINING_RECORDKEEPING_ONLY</pre>
+
+      <p>
+        The wall clock documenting when Linux recorded evidence therefore
+        never becomes part of the timing authority.
+      </p>
+
+      <p>
+        The first physical tape began on Source Epoch 4 and immediately
+        passed hash-chain verification.
+      </p>
+
+      <h3>Organ transplants</h3>
+
+      <p>
+        The newborn currently has a heartbeat, eyes, a nursery window,
+        a family photograph and a recorder.
+      </p>
+
+      <p>
+        The actual timing organs arrive one at a time:
+      </p>
+
+      <p class="chain">
+        Jovian recovery →
+        Mintaka →
+        Sol →
+        Mintaka–Sol relationship →
+        Terra Ship Slip →
+        Sun-return →
+        independent DAY_PHASE17
+      </p>
+
+      <p>
+        Each transplant must qualify before the next.
+      </p>
+
+      <h3>The bacon question</h3>
+
+      <p>
+        Once Shadow owns its own DAY_PHASE17, the large divergence indicator
+        finally becomes the main experiment.
+      </p>
+
+      <blockquote>
+        Do Dad and Minimi consume bacon at the same rate?
+      </blockquote>
+
+      <p>
+        If Shadow gains, its independently recovered clock is faster.
+        If Shadow loses, it is slower.
+        If divergence remains bounded over a long run, the result becomes
+        considerably more interesting.
+      </p>
+
+      <h3>Death and mummification</h3>
+
+      <p>
+        Eventually Source Epoch 4 will end. The 555 may stop. An Arduino may
+        reboot. A wire may receive the traditional laboratory elbow.
+      </p>
+
+      <p>
+        When that happens, continuity is not invented.
+      </p>
+
+      <p>
+        The run ends. The recorder tape is sealed. Final state and software
+        hashes are preserved. The specimen is mummified.
+      </p>
+
+      <p>
+        Future Shadow instances may replay that preserved evidence offline
+        through the same machinery.
+      </p>
+
+      <p>
+        Parents may watch the reruns.
+      </p>
+
+      <p>
+        Nobody else will.
+      </p>
+
+      <h3>Current pediatric chart</h3>
+
+      <p>
+        Minimi’s Minimi is alive.
+        Shadow Core20 is isolated.
+        The physical 555/Pulse Box is running independently.
+        The recorder is preserving the physical run.
+        Core20 remains untouched and authoritative.
+        Shadow has no timing authority yet.
+      </p>
+
+      <p>
+        That is intentional.
+      </p>
+
+      <blockquote>
+        Same core. Different heartbeat. Independent natural recovery.
+        Compare only after the child can tell time by itself.
+      </blockquote>
+
+      <p>
+        Or, for Beavis:
+      </p>
+
+      <blockquote>
+        We gave a 555 timer a baby, prohibited Dad from helping with the
+        homework, installed a nursery camera, and are now waiting to see
+        which one eats bacon faster.
+      </blockquote>
+
+      <p class="ending">
+        Engineering continues.
+        Future minimiminimiminimi matryoshkas are advised to read the family
+        history before touching anything.
+      </p>
+    </article>
+  </details>
+
+  <footer>
+    Physical oscillator: 555 · Shadow drives Core20: NO ·
+    Core20 comparison is read-only.
+  </footer>
+</main>
+
+<script>
+async function update(){
+  try{
+    const r = await fetch('/api/shadow/comparison', {
+      cache:'no-store'
+    });
+
+    if(!r.ok) throw new Error('HTTP '+r.status);
+
+    const d = await r.json();
+
+    document.getElementById('corePhase').textContent =
+      d.core20?.dayPhase17 ?? '—';
+
+    document.getElementById('coreEpoch').textContent =
+      d.core20?.sourceEpoch ?? '—';
+
+    document.getElementById('shadowEpoch').textContent =
+      d.physical555?.sourceEpoch ?? '—';
+
+    document.getElementById('shadowRaw').textContent =
+      d.physical555?.rawCount ?? '—';
+
+    /*
+      We deliberately do NOT manufacture a Shadow clock.
+      Until Shadow owns DAY_PHASE17, this stays explicit.
+    */
+
+    const p = Number(d.core20?.dayPhase17);
+
+    if(Number.isFinite(p)){
+      const h = Math.floor(p / 4096);
+      const rem = p % 4096;
+      const m = Math.floor(rem / 64);
+      const s = rem % 64;
+
+      document.getElementById('coreClock').textContent =
+        String(h).padStart(2,'0') + ':' +
+        String(m).padStart(2,'0') + ':' +
+        String(s).padStart(2,'0');
+    }
+  }catch(err){
+    document.getElementById('divergence').textContent =
+      'SHADOW FEED UNAVAILABLE';
+  }
+}
+
+update();
+setInterval(update,1000);
+</script>
+</body>
+</html>

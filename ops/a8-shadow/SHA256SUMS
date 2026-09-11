@@ -1,0 +1,9 @@
+702a41d6f2a81c9598dca05caf6e1260b9b054dea13a5f925717b04f54c7f8db  sites/shadow.cosigo.io/public/index.html
+17a1c3ff44bfdf11a55518ed4d7872f6c98c9554045a2424f3cb19dc6a1a0b53  sites/shadow.cosigo.io/public/assets/crib-rig.png
+774b7799e3f483f93040f13adeb2b058cdf04e573e528d40b943b332863c22d0  ops/a8-shadow-core/server.js
+e6298a5d8d875727ed6429bc95b7b1b08129e37fab198a53e07c8a87cf839e59  ops/a8-shadow-core/a8-shadow-core.service
+7599c7b8bace502f91cfbdfcab2862c317bae5417fedceb9912cc869a59f558e  ops/a8-shadow-core/Caddyfile.shadow.cosigo.io
+0c3a0f163bae357a7c744a0a9da676cc8d045294a2825b9d6dfd8c1aeaec1346  ops/a8-shadow-recorder/recorder.js
+ff9e40344bf1960b8b94728de8df383e31fe1a0db6627c10d84dd48abab2949a  ops/a8-shadow-recorder/verify-tape.js
+e5ce2a67273c5819ac4090355961c2304620ead6d6facba5ba02afde07e1bb13  ops/a8-shadow-recorder/a8-shadow-recorder.service
+1d67fc578b7af4402054a92303de4b485d1e551cbf7ba6426c21b3d817ecd830  ops/a8-shadow/README.md
