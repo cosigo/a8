@@ -3,15 +3,24 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Spaceship Earth · Terra Ship Slip | A8 Time Lab v5.4.20</title>
-<meta name="description" content="COSIGO Labs Auspicious 8 Spaceship Earth: Terra Ship Slip live read-only rotation-orbit relationship and event-triggered downstream accumulator, isolated from A8 clock authority.">
-<meta name="author" content="COSIGO Labs">
-<meta name="robots" content="index,follow">
+<title>Terra Ship Slip | Earth Rotation &amp; Orbit | Auspicious 8</title>
+<meta name="description" content="Explore Terra Ship Slip, the Auspicious 8 relationship between Earth rotation and orbital progress around the Sun, shown as a live read-only natural relationship.">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
 <link rel="canonical" href="https://ship.cosigo.io/">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Spaceship Earth · Terra Ship Slip">
-<meta property="og:description" content="Spaceship Earth · Terra Ship Slip: live read-only rotation-orbit relationship and downstream accumulation under the recovered A8 observer chain.">
+<meta property="og:site_name" content="Auspicious 8">
+<meta property="og:title" content="Terra Ship Slip | Earth Rotation &amp; Orbit">
+<meta property="og:description" content="Explore Terra Ship Slip, the Auspicious 8 relationship between Earth rotation and orbital progress around the Sun, shown as a live read-only natural relationship.">
 <meta property="og:url" content="https://ship.cosigo.io/">
+<meta property="og:image" content="https://a8.cosigo.io/assets/cosigo_master_512.png">
+<meta property="og:image:alt" content="Ship instrument for Auspicious 8">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Terra Ship Slip | Earth Rotation &amp; Orbit">
+<meta name="twitter:description" content="Explore Terra Ship Slip, the Auspicious 8 relationship between Earth rotation and orbital progress around the Sun, shown as a live read-only natural relationship.">
+<meta name="twitter:image" content="https://a8.cosigo.io/assets/cosigo_master_512.png">
+<meta name="twitter:image:alt" content="Ship instrument for Auspicious 8">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Terra Ship Slip | Earth Rotation & Orbit | Auspicious 8","url":"https://ship.cosigo.io/","description":"Explore Terra Ship Slip, the Auspicious 8 relationship between Earth rotation and orbital progress around the Sun, shown as a live read-only natural relationship.","inLanguage":"en","isPartOf":{"@type":"WebSite","name":"Auspicious 8","alternateName":"A8","url":"https://a8.cosigo.io/"},"publisher":{"@type":"Organization","name":"COSIGO Labs","url":"https://cosigo.io/"},"about":[{"@type":"Thing","name":"Auspicious 8"},{"@type":"Thing","name":"Terra Ship Slip"},{"@type":"Thing","name":"Earth rotation"},{"@type":"Thing","name":"Earth orbit"},{"@type":"Thing","name":"Sun return"}]}</script>
+<meta name="author" content="COSIGO Labs">
 <link rel="stylesheet" href="/style.css">
 <link rel="stylesheet" href="/site-shell.css">
 
@@ -3161,35 +3170,11 @@ setInterval(refresh,1000);
         b.geometricLeg || '—';
     }
 
-    const separation =
-      num(b.geometricSeparationRotations);
-
-    if (
-      Number.isFinite(separation) &&
-      $('a8OppMarker')
-    ) {
-      const pct =
-        Math.max(
-          0,
-          Math.min(
-            100,
-            separation * 2 * 100
-          )
-        );
-
-      $('a8OppMarker').style.left =
-        `${pct}%`;
-
-      const progress =
-        $('a8OppProgressNote');
-
-      if (progress) {
-        progress.textContent =
-          'LIVE ACTUAL PROGRESS · ' +
-          pct.toFixed(3) +
-          '% OF CURRENT FOLDED RELATIVE-PHASE LEG · NO SPEED-UP';
-      }
-    }
+    /*
+     * Public alignment/opposition marker is driven below
+     * by persistent lifetime Ship Slip, not source-run
+     * opposing-clock separation.
+     */
 
     const foldedPhase =
       rat(b.geometricSeparationPhase17);
@@ -3959,23 +3944,43 @@ setInterval(refresh,1000);
 
   async function refreshSlipHero() {
     try {
-      const response =
-        await fetch(
+      const [
+        lifetimeResponse,
+        opposingResponse
+      ] = await Promise.all([
+        fetch(
+          '/api/terra-ship-slip/lifetime',
+          {cache:'no-store'}
+        ),
+        fetch(
           '/api/opposing-clocks',
           {cache:'no-store'}
-        );
+        )
+      ]);
 
-      if (!response.ok) {
+      if (!lifetimeResponse.ok) {
         throw new Error(
-          `HTTP ${response.status}`
+          `LIFETIME HTTP ${lifetimeResponse.status}`
         );
       }
 
-      const payload =
-        await response.json();
+      if (!opposingResponse.ok) {
+        throw new Error(
+          `OPPOSING HTTP ${opposingResponse.status}`
+        );
+      }
+
+      const lifetimePayload =
+        await lifetimeResponse.json();
+
+      const opposingPayload =
+        await opposingResponse.json();
+
+      const lifetime =
+        lifetimePayload.lifetime || {};
 
       const instrument =
-        payload.instrument || {};
+        opposingPayload.instrument || {};
 
       if (!instrument.ready) {
         throw new Error(
@@ -3994,13 +3999,13 @@ setInterval(refresh,1000);
 
       const parts =
         rationalParts(
-          accumulated
-            .unwrappedDiscrepancyAngle512
+          lifetime
+            .lifetimeTerraShipSlip512
         );
 
       if (!parts) {
         throw new Error(
-          'native discrepancy unavailable'
+          'native lifetime unavailable'
         );
       }
 
@@ -4029,6 +4034,47 @@ setInterval(refresh,1000);
           parts.d * 512n,
           6
         );
+
+      const fullTurn =
+        parts.d * 512n;
+
+      const halfTurn =
+        parts.d * 256n;
+
+      const lifetimePhase =
+        ((parts.n % fullTurn) + fullTurn) % fullTurn;
+
+      const foldedLifetime =
+        lifetimePhase <= halfTurn
+          ? lifetimePhase
+          : fullTurn - lifetimePhase;
+
+      const lifetimeBarPercent =
+        fixedRational(
+          foldedLifetime * 100n,
+          halfTurn,
+          3
+        );
+
+      const marker =
+        document.getElementById('a8OppMarker');
+
+      if (marker) {
+        marker.style.left =
+          `${lifetimeBarPercent}%`;
+      }
+
+      const progress =
+        document.getElementById(
+          'a8OppProgressNote'
+        );
+
+      if (progress) {
+        progress.textContent =
+          'LIVE LIFETIME PROGRESS · ' +
+          lifetimeBarPercent +
+          '% OF CURRENT FOLDED RELATIVE-PHASE LEG · NO SPEED-UP';
+      }
 
       const leader =
         accumulated.currentLeader || '—';
