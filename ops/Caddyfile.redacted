@@ -2091,6 +2091,51 @@ ce.cosigo.io {
         @ce_music_review path /api/music-review/current /api/music-review/admin/*
         reverse_proxy @ce_music_review 127.0.0.1:18021
 
+        # Ship presentation one-shot recovery.
+        # Entire CE route remains behind the ce.cosigo.io basic_auth boundary.
+        @ce_ship_recovery_status {
+            method GET
+            path /api/ship-recovery/status
+        }
+        handle @ce_ship_recovery_status {
+            rewrite * /status
+            reverse_proxy 127.0.0.1:18022
+        }
+
+        @ce_ship_recovery_history {
+            method GET
+            path /api/ship-recovery/history
+        }
+        handle @ce_ship_recovery_history {
+            rewrite * /history
+            reverse_proxy 127.0.0.1:18022
+        }
+
+        @ce_ship_recovery_arm {
+            method POST
+            path /api/ship-recovery/arm
+        }
+        handle @ce_ship_recovery_arm {
+            rewrite * /arm
+            reverse_proxy 127.0.0.1:18022
+        }
+
+        @ce_ship_recovery_apply {
+            method POST
+            path /api/ship-recovery/apply
+        }
+        handle @ce_ship_recovery_apply {
+            rewrite * /apply
+            reverse_proxy 127.0.0.1:18022
+        }
+
+        @ce_ship_recovery_wrong_method {
+            path /api/ship-recovery/status /api/ship-recovery/history /api/ship-recovery/arm /api/ship-recovery/apply
+        }
+        handle @ce_ship_recovery_wrong_method {
+            respond "Method Not Allowed" 405
+        }
+
         # Independent physical Pulse Box · observer only.
         # This does NOT select or alter the Core20 source.
         @ce_pulse_box_snapshot {

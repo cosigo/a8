@@ -1,0 +1,44 @@
+[Unit]
+Description=A8 Ship Presentation One-Shot Recovery Service
+After=network.target
+Wants=network.target
+
+[Service]
+Type=simple
+
+User=greg
+Group=greg
+
+ExecStart=/usr/bin/node /opt/a8-ship-recovery/server.js
+
+Environment=PORT=18022
+Environment=TARGET_FILE=/srv/sites/ship.cosigo.io/public/relationship.html
+Environment=RECOVERY_FILE=/opt/a8-ship-recovery/recovery/relationship.html
+Environment=DATA_DIR=/var/lib/a8-ship-recovery
+Environment=EXPECTED_SHA=b5097154b582a00de96509263c3a9e624efadf54374ac60a16be26f87249f01f
+Environment=PINNED_TAG=ship-lifetime-recovery-2026-09-11
+Environment=PINNED_COMMIT=072269b7b06b2f2a568e218e3678b6f1bac6071f
+
+StateDirectory=a8-ship-recovery
+StateDirectoryMode=0750
+
+Restart=on-failure
+RestartSec=2
+
+NoNewPrivileges=yes
+PrivateTmp=yes
+PrivateDevices=yes
+ProtectSystem=strict
+ProtectHome=yes
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectControlGroups=yes
+RestrictSUIDSGID=yes
+LockPersonality=yes
+RestrictAddressFamilies=AF_INET AF_UNIX
+
+ReadWritePaths=/srv/sites/ship.cosigo.io/public
+ReadWritePaths=/var/lib/a8-ship-recovery
+
+[Install]
+WantedBy=multi-user.target
