@@ -11,6 +11,13 @@ const PULSE_URL =
 const CORE20_URL =
   'http://127.0.0.1:18020/api/core20/clock';
 
+const {
+  ShadowJovianEngine,
+} = require('./jovian-engine');
+
+const shadowJovian =
+  new ShadowJovianEngine();
+
 function getJson(url) {
   return new Promise((resolve, reject) => {
     const req = http.get(url, (res) => {
@@ -55,6 +62,19 @@ function getJson(url) {
 
     req.on('error', reject);
   });
+}
+
+async function refreshShadowJovian() {
+  const pulse =
+    await getJson(PULSE_URL);
+
+  return {
+    pulse,
+    state:
+      shadowJovian.ingestPhysical(
+        pulse
+      ),
+  };
 }
 
 function sendJson(res, statusCode, obj) {
@@ -123,6 +143,42 @@ const server = http.createServer(
           port: PORT
         }
       });
+      return;
+    }
+
+    if (
+      url.pathname ===
+      '/api/shadow/jovian'
+    ) {
+      try {
+        const result =
+          await refreshShadowJovian();
+
+        sendJson(res, 200, {
+          ok: true,
+          physical: {
+            sourceEpoch:
+              result.pulse.SOURCE_EPOCH,
+            rawCount:
+              result.pulse.RAW_COUNT,
+            reportSequence:
+              result.pulse.REPORT_SEQUENCE,
+            status:
+              result.pulse.STATUS,
+          },
+          shadowJovian:
+            result.state,
+        });
+      } catch (err) {
+        sendJson(res, 503, {
+          ok: false,
+          error:
+            'SHADOW_JOVIAN_REFRESH_FAILED',
+          detail:
+            err.message,
+        });
+      }
+
       return;
     }
 
@@ -209,5 +265,20 @@ server.listen(
     console.log(
       `A8 SHADOW BABY · ${HOST}:${PORT}`
     );
+
+    refreshShadowJovian()
+      .then(result => {
+        console.log(
+          'A8 SHADOW JOVIAN ORGAN · ' +
+          `E${result.state.sourceEpoch} · ` +
+          result.state.jovian.status
+        );
+      })
+      .catch(err => {
+        console.error(
+          'A8 SHADOW JOVIAN ORGAN WAITING · ' +
+          err.message
+        );
+      });
   }
 );

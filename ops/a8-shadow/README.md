@@ -39,3 +39,38 @@ https://shadow.cosigo.io/
 Family rule:
 
 DO NOT FEED THE ANIMALS BACON.
+
+## Transplant 1 · Jovian recovery organ
+
+Installed 2026-09-11.
+
+Physical path now present in Shadow:
+
+555 Pulse Box
+→ Shadow physical Epoch adapter
+→ Gate 6A raw pulse witness
+→ Gate 6F recovery-input bridge
+→ Gate 6G Jovian recovery wrapper
+→ Gate 6H Jovian phase timekeeper
+
+Current state at installation:
+
+- physical SOURCE_EPOCH preserved as Epoch 4
+- Jovian status: SEEKING_JOVIAN_TURNS
+- Jovian observation count: 0
+- timekeeper: WAITING_FOR_JOVIAN_QUALIFICATION
+- recovered Jovian raw ruler: not yet
+- DAY_PHASE17: not yet
+- Core20 runtime input: false
+- Core20 clock input: false
+- Core20 recovered-ruler input: false
+- writes Core20: false
+- Jovian POST ingest remains forbidden
+
+No Jovian event was fabricated during transplant qualification.
+
+Next rule:
+record every genuine WEST/EAST witness before enabling Jovian ingest.
+
+Möbius bacon may be tasted from both sides.
+It may not be chewed from an end.
