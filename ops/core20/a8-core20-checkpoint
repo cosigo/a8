@@ -1,0 +1,173 @@
+#!/usr/bin/env bash
+set -u
+
+ROOT="/home/greg/a8-backups/automatic-core20"
+STAMP="$(date -u +%Y%m%dT%H%M%SZ)"
+OUT="$ROOT/core20-checkpoint-$STAMP"
+
+mkdir -p "$OUT"
+
+FAIL=0
+
+cat > "$OUT/PROVENANCE.txt" <<TXT
+A8 CORE20 AUTOMATIC OPERATING CHECKPOINT
+
+Host UTC is used only for:
+- backup scheduling
+- directory/file naming
+
+Host time does NOT enter:
+- A8 physical pace
+- DAY_PHASE17 progression
+- Year Angle progression
+- calendar progression
+- source authority
+
+This checkpoint is evidence/recovery material only.
+TXT
+
+capture_url() {
+    NAME="$1"
+    URL="$2"
+
+    if curl \
+        --fail \
+        --silent \
+        --show-error \
+        --max-time 10 \
+        "$URL" \
+        > "$OUT/$NAME.json"
+    then
+        :
+    else
+        echo "CAPTURE FAILED · $URL" \
+            > "$OUT/$NAME.ERROR"
+        FAIL=1
+    fi
+}
+
+capture_url \
+    physical-source \
+    http://127.0.0.1:28788/snapshot
+
+capture_url \
+    core20-clock \
+    http://127.0.0.1:18020/api/core20/clock
+
+capture_url \
+    core20-calendar \
+    http://127.0.0.1:18020/api/core20/calendar
+
+capture_url \
+    core20-year-angle \
+    http://127.0.0.1:18020/api/core20/year-angle
+
+# A8 FIVE-BODY PREDICTION CHECKPOINT V1
+if /usr/bin/node \
+    /srv/apps/a8_time_lab_v5_4_20_postseal_hw/observer/a8-five-body-marker-engine.js \
+    > "$OUT/five-body-marker.json"
+then
+    :
+else
+    echo "CAPTURE FAILED · five-body marker engine" \
+        > "$OUT/five-body-marker.ERROR"
+    FAIL=1
+fi
+
+systemctl show \
+    a8-core20.service \
+    a8-core20-external-physical.service \
+    a8-shadow-core.service \
+    a8-shadow-recorder.service \
+    -p Id \
+    -p MainPID \
+    -p NRestarts \
+    -p ActiveState \
+    -p SubState \
+    > "$OUT/services.txt" 2>&1 || FAIL=1
+
+mkdir -p "$OUT/config"
+
+cp -a \
+    /srv/apps/a8_time_lab_v5_4_20_postseal_hw/hardware/a8-core20-server-owned-runtime.js \
+    "$OUT/config/" || FAIL=1
+
+cp -a \
+    /srv/apps/a8_time_lab_v5_4_20_postseal_hw/hardware/a8-postseal-hardware-lab-server.js \
+    "$OUT/config/" || FAIL=1
+
+cp -a \
+    /srv/apps/a8_time_lab_v5_4_20_postseal_hw/observer/a8-core20-calendar-anchor.js \
+    "$OUT/config/" || FAIL=1
+
+cp -a \
+    /srv/apps/a8_time_lab_v5_4_20_postseal_hw/observer/a8-year-angle-jpl-bridge.js \
+    "$OUT/config/" || FAIL=1
+
+cp -a \
+    /srv/apps/a8_time_lab_v5_4_20_postseal_hw/observer/a8-five-body-marker-engine.js \
+    "$OUT/config/" || FAIL=1
+
+cp -a \
+    /srv/apps/a8_time_lab_v5_4_20_postseal_hw/observer/five-body/a8-five-body-operating-seed-v2.json \
+    "$OUT/config/" || FAIL=1
+
+cp -a \
+    /usr/local/sbin/a8-core20-autorecover \
+    "$OUT/config/" || FAIL=1
+
+cp -a \
+    /usr/local/sbin/a8-core20-external-physical-feed.py \
+    "$OUT/config/" || FAIL=1
+
+cp -a \
+    /usr/local/lib/a8-core20-service.js \
+    "$OUT/config/" || FAIL=1
+
+cp -a \
+    /etc/a8-core20/external-physical.env \
+    "$OUT/config/" || FAIL=1
+
+cp -a \
+    /etc/systemd/system/a8-core20.service.d/external-physical.conf \
+    "$OUT/config/" || FAIL=1
+
+cp -a \
+    /etc/systemd/system/a8-core20-external-physical.service \
+    "$OUT/config/" || FAIL=1
+
+cp -a \
+    /home/greg/a8-github-sync-20260829/ops/core20/core20-epoch5-rebirth-2026-09-12.md \
+    "$OUT/" || FAIL=1
+
+(
+    cd "$OUT"
+
+    find . \
+        -type f \
+        ! -name SHA256SUMS \
+        -print0 \
+        | sort -z \
+        | xargs -0 sha256sum \
+        > SHA256SUMS
+)
+
+if [ "$FAIL" = 0 ]; then
+    echo "PASS" > "$OUT/CHECKPOINT_STATUS"
+else
+    echo "PARTIAL · INVESTIGATE" > "$OUT/CHECKPOINT_STATUS"
+fi
+
+# Operational retention only.
+# Never part of A8 authority.
+find "$ROOT" \
+    -mindepth 1 \
+    -maxdepth 1 \
+    -type d \
+    -name 'core20-checkpoint-*' \
+    -mtime +7 \
+    -exec rm -rf {} +
+
+echo "A8-CHECKPOINT · $STAMP · $(cat "$OUT/CHECKPOINT_STATUS")"
+
+exit "$FAIL"
