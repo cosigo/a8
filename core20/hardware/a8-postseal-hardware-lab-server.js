@@ -139,7 +139,444 @@ const CORE20_VIRTUAL_SCALE =
 const CORE20_VIRTUAL_Q = 97n * CORE20_VIRTUAL_SCALE;
 const CORE20_VIRTUAL_JOVIAN_RULER = 4n * CORE20_VIRTUAL_Q;
 const CORE20_VIRTUAL_EARTH_ROTATION_RAW = 4n * CORE20_VIRTUAL_JOVIAN_RULER;
-const CORE20_EXPECTED_SUN_RETURN = '416611827712/511';
+const CORE20_SOL_HOLDOVER_PATH =
+  process.env.A8_SOL_RATE_HOLDOVER_PATH || '';
+
+const CORE20_SOL_HOLDOVER_SCHEMA =
+  'A8-SOL-RATE-HOLDOVER-V1';
+
+
+function solHoldoverAbs(v) {
+  return v < 0n ? -v : v;
+}
+
+function solHoldoverGcd(a, b) {
+  a = solHoldoverAbs(a);
+  b = solHoldoverAbs(b);
+
+  while (b !== 0n) {
+    const t = a % b;
+    a = b;
+    b = t;
+  }
+
+  return a;
+}
+
+function solHoldoverReduce(n, d) {
+  if (d === 0n) {
+    throw new Error(
+      'Sol holdover denominator must be non-zero'
+    );
+  }
+
+  if (d < 0n) {
+    n = -n;
+    d = -d;
+  }
+
+  const g = solHoldoverGcd(n, d);
+
+  return {
+    n: n / g,
+    d: d / g,
+  };
+}
+
+function solHoldoverParseFraction(
+  value,
+  label
+) {
+  if (
+    !value ||
+    typeof value !== 'object' ||
+    Array.isArray(value)
+  ) {
+    throw new Error(
+      `${label} must be a fraction object`
+    );
+  }
+
+  const nText =
+    String(value.numerator ?? '');
+
+  const dText =
+    String(value.denominator ?? '');
+
+  if (
+    !/^-?(0|[1-9][0-9]*)$/.test(nText) ||
+    !/^(0|[1-9][0-9]*)$/.test(dText)
+  ) {
+    throw new Error(
+      `${label} must contain integer numerator/denominator`
+    );
+  }
+
+  const n = BigInt(nText);
+  const d = BigInt(dText);
+
+  if (d <= 0n) {
+    throw new Error(
+      `${label}.denominator must be positive`
+    );
+  }
+
+  return solHoldoverReduce(n, d);
+}
+
+function solHoldoverFractionObject(value) {
+  const r =
+    solHoldoverReduce(
+      value.n,
+      value.d
+    );
+
+  return {
+    numerator:
+      r.n.toString(),
+
+    denominator:
+      r.d.toString(),
+
+    text:
+      r.d === 1n
+        ? r.n.toString()
+        : `${r.n}/${r.d}`,
+  };
+}
+
+let solRateHoldoverCache = null;
+
+function loadQualifiedSolRateHoldover() {
+  if (solRateHoldoverCache) {
+    return solRateHoldoverCache;
+  }
+
+  if (!CORE20_SOL_HOLDOVER_PATH) {
+    throw new Error(
+      'Sol rate holdover path is not configured'
+    );
+  }
+
+  if (
+    !fs.existsSync(
+      CORE20_SOL_HOLDOVER_PATH
+    )
+  ) {
+    throw new Error(
+      'qualified Sol rate holdover checkpoint missing'
+    );
+  }
+
+  const parsed =
+    JSON.parse(
+      fs.readFileSync(
+        CORE20_SOL_HOLDOVER_PATH,
+        'utf8'
+      )
+    );
+
+  if (
+    !parsed ||
+    parsed.schema !==
+      CORE20_SOL_HOLDOVER_SCHEMA ||
+    !String(
+      parsed.status || ''
+    ).startsWith('QUALIFIED_')
+  ) {
+    throw new Error(
+      'Sol rate holdover checkpoint is not qualified'
+    );
+  }
+
+  const relationship =
+    solHoldoverParseFraction(
+      parsed
+        .solAdvancePerMintakaRotation512,
+      'Sol advance per Mintaka rotation'
+    );
+
+  if (
+    relationship.n <= 0n ||
+    relationship.n >=
+      512n * relationship.d
+  ) {
+    throw new Error(
+      'Sol holdover relationship must be >0 and <512 A8 per rotation'
+    );
+  }
+
+  solRateHoldoverCache =
+    parsed;
+
+  return solRateHoldoverCache;
+}
+
+function writeQualifiedSolRateHoldover(
+  payload
+) {
+  if (!CORE20_SOL_HOLDOVER_PATH) {
+    throw new Error(
+      'Sol rate holdover path is not configured'
+    );
+  }
+
+  const dir =
+    path.dirname(
+      CORE20_SOL_HOLDOVER_PATH
+    );
+
+  fs.mkdirSync(
+    dir,
+    {
+      recursive: true,
+      mode: 0o750,
+    }
+  );
+
+  const tmp =
+    CORE20_SOL_HOLDOVER_PATH +
+    `.tmp-${process.pid}`;
+
+  const fd =
+    fs.openSync(
+      tmp,
+      'w',
+      0o600
+    );
+
+  try {
+    fs.writeFileSync(
+      fd,
+      JSON.stringify(
+        payload,
+        null,
+        2
+      ) + '\n',
+      'utf8'
+    );
+
+    fs.fsyncSync(fd);
+  } finally {
+    fs.closeSync(fd);
+  }
+
+  fs.renameSync(
+    tmp,
+    CORE20_SOL_HOLDOVER_PATH
+  );
+
+  solRateHoldoverCache =
+    payload;
+
+  return payload;
+}
+
+function solHoldoverEffectiveSolSnapshot(
+  earth
+) {
+  const sol =
+    earth &&
+    earth.sol
+      ? earth.sol
+      : null;
+
+  const mintaka =
+    earth &&
+    earth.mintaka
+      ? earth.mintaka
+      : null;
+
+  if (
+    !sol ||
+    !mintaka ||
+    mintaka.status !== 'RECOVERED' ||
+    !mintaka.recurrence
+  ) {
+    return sol;
+  }
+
+  const certificate =
+    loadQualifiedSolRateHoldover();
+
+  const heldPerRotation =
+    solHoldoverParseFraction(
+      certificate
+        .solAdvancePerMintakaRotation512,
+      'held Sol advance per Mintaka rotation'
+    );
+
+  const rawPerRotation =
+    solHoldoverParseFraction(
+      {
+        numerator:
+          mintaka.recurrence
+            .reducedNumerator,
+
+        denominator:
+          mintaka.recurrence
+            .reducedDenominator,
+      },
+      'Mintaka raw per rotation'
+    );
+
+  if (rawPerRotation.n <= 0n) {
+    throw new Error(
+      'Mintaka raw per rotation must be positive'
+    );
+  }
+
+  /*
+   * Held natural relation:
+   *
+   *   Sol angle / Mintaka rotation
+   *
+   * Newly recovered local ruler:
+   *
+   *   raw / Mintaka rotation
+   *
+   * Therefore:
+   *
+   *   Sol angle / raw
+   */
+  const perRaw =
+    solHoldoverReduce(
+      heldPerRotation.n *
+        rawPerRotation.d,
+
+      heldPerRotation.d *
+        rawPerRotation.n
+    );
+
+  return {
+    ...sol,
+
+    status:
+      'TRACKING',
+
+    forwardAdvancePerRawPulse512:
+      solHoldoverFractionObject(
+        perRaw
+      ),
+
+    rateMode:
+      'HOLDOVER',
+
+    rateAuthority:
+      'PERSISTED_LAST_QUALIFIED_SOL_RELATIONSHIP',
+
+    rateHoldover: {
+      schema:
+        certificate.schema,
+
+      status:
+        certificate.status,
+
+      relationshipBasis:
+        certificate.relationshipBasis,
+
+      solAdvancePerMintakaRotation512:
+        certificate
+          .solAdvancePerMintakaRotation512,
+
+      authorityBoundary:
+        certificate.authorityBoundary ||
+        null,
+    },
+  };
+}
+
+function persistObservedSolRateHoldover(
+  earth
+) {
+  if (
+    !earth ||
+    !earth.mintaka ||
+    !earth.sol ||
+    earth.mintaka.status !==
+      'RECOVERED' ||
+    earth.sol.status !==
+      'TRACKING' ||
+    !Number.isSafeInteger(
+      earth.sol.intervalCount
+    ) ||
+    earth.sol.intervalCount < 1
+  ) {
+    return null;
+  }
+
+  const relationship =
+    deriveMintakaSolRelationship(
+      earth.mintaka,
+      earth.sol
+    );
+
+  const samples =
+    Array.isArray(
+      earth.sol.samples
+    )
+      ? earth.sol.samples.slice(-2)
+      : [];
+
+  const payload = {
+    schema:
+      CORE20_SOL_HOLDOVER_SCHEMA,
+
+    status:
+      'QUALIFIED_OBSERVED_HOLDOVER',
+
+    role:
+      'PERSISTED_LAST_QUALIFIED_SOL_ORBIT_RELATIONSHIP',
+
+    relationshipBasis:
+      'SOL_A8_ANGLE_ADVANCE_PER_MINTAKA_STELLAR_ROTATION',
+
+    solAdvancePerMintakaRotation512:
+      relationship
+        .solAdvancePerMintakaRotation512,
+
+    evidence: {
+      sourceEpoch:
+        earth.sourceEpoch,
+
+      mintaka:
+        relationship
+          .evidenceWindows
+          .mintaka,
+
+      sol:
+        relationship
+          .evidenceWindows
+          .sol,
+
+      latestSolSamples:
+        samples,
+    },
+
+    authorityBoundary: {
+      crossRunUse:
+        'RATE_RELATIONSHIP_ONLY_NO_RAW_CONTINUITY',
+
+      manufacturesRawContinuity:
+        false,
+
+      infersOutageElapsedTime:
+        false,
+
+      networkCadenceAuthority:
+        false,
+
+      bootstrapOnlyUntilNextQualifiedSolObservation:
+        false,
+    },
+  };
+
+  return (
+    writeQualifiedSolRateHoldover(
+      payload
+    )
+  );
+}
 
 const MIME = {
   '.html': 'text/html; charset=utf-8',
@@ -451,6 +888,51 @@ function createHardwareLabServer({
     return earthObservationBridge.snapshot();
   };
 
+
+  let solHoldoverEnabled =
+    false;
+
+  const currentEffectiveEarthObservers =
+    () => {
+      const earth =
+        currentEarthObservers();
+
+      if (
+        earth.sol &&
+        earth.sol.status ===
+          'TRACKING' &&
+        earth.sol
+          .forwardAdvancePerRawPulse512
+      ) {
+        return {
+          ...earth,
+
+          sol: {
+            ...earth.sol,
+
+            rateMode:
+              'OBSERVED',
+
+            rateAuthority:
+              'CURRENT_SELECTED_RAW_STAMPED_SOL_OBSERVATIONS',
+          },
+        };
+      }
+
+      if (!solHoldoverEnabled) {
+        return earth;
+      }
+
+      return {
+        ...earth,
+
+        sol:
+          solHoldoverEffectiveSolSnapshot(
+            earth
+          ),
+      };
+    };
+
   /*
    * SPACESHIP EARTH · TERRA SHIP SLIP
    *
@@ -462,19 +944,74 @@ function createHardwareLabServer({
   const terraShipSlipAccumulator =
     new TerraShipSlipAccumulator();
 
+  /*
+   * EXTERNAL PHYSICAL EARTH EVIDENCE
+   *
+   * Real Mintaka / Sol observation lane.
+   *
+   * Raw authority:
+   *   Arduino-B Timer1/D5 physical counter.
+   *
+   * This lane does NOT derive physical raw from Core mapped raw.
+   * It does NOT write the civil clock.
+   * It does NOT write the legacy Gate-6F Earth observers.
+   * It does NOT write Terra Ship Slip.
+   */
+  const {
+    PhysicalEarthEvidenceLedger,
+  } = require(
+    '../observer/a8-physical-earth-evidence-ledger'
+  );
+
+  const physicalEarthEvidenceLedger =
+    new PhysicalEarthEvidenceLedger({
+      directory:
+        process.env
+          .A8_CORE20_PHYSICAL_EARTH_EVIDENCE_DIR ||
+        '/home/greg/.local/state/a8-core20/physical-earth-evidence',
+
+      expectedSourceEpoch:
+        process.env
+          .A8_CORE20_EXTERNAL_PHYSICAL_EPOCH,
+    });
+
   const currentTerraShipSlip = () => {
     const earth =
-      currentEarthObservers();
+      currentEffectiveEarthObservers();
 
     try {
+      const relationship =
+        deriveMintakaSolRelationship(
+          earth.mintaka,
+          earth.sol
+        );
+
       return {
         ok: true,
         ready: true,
-        terraShipSlip:
-          deriveMintakaSolRelationship(
-            earth.mintaka,
-            earth.sol
-          ),
+
+        solRateMode:
+          earth.sol &&
+          earth.sol.rateMode
+            ? earth.sol.rateMode
+            : 'OBSERVED',
+
+        solRateHoldover:
+          earth.sol &&
+          earth.sol.rateMode ===
+            'HOLDOVER'
+            ? earth.sol.rateHoldover
+            : null,
+
+        terraShipSlip: {
+          ...relationship,
+
+          solRateMode:
+            earth.sol &&
+            earth.sol.rateMode
+              ? earth.sol.rateMode
+              : 'OBSERVED',
+        },
       };
     } catch (err) {
       return {
@@ -549,11 +1086,33 @@ function createHardwareLabServer({
       currentEarthObservers()
     );
 
-  const currentSolOrbitalScale = () =>
-    deriveSolOrbitalJovianScale(
-      currentEarthRotationScale(),
-      currentEarthObservers()
-    );
+  const currentSolOrbitalScale = () => {
+    const earth =
+      currentEffectiveEarthObservers();
+
+    const scale =
+      deriveSolOrbitalJovianScale(
+        currentEarthRotationScale(),
+        earth
+      );
+
+    return {
+      ...scale,
+
+      solRateMode:
+        earth.sol &&
+        earth.sol.rateMode
+          ? earth.sol.rateMode
+          : 'UNAVAILABLE',
+
+      solRateHoldover:
+        earth.sol &&
+        earth.sol.rateMode ===
+          'HOLDOVER'
+          ? earth.sol.rateHoldover
+          : null,
+    };
+  };
 
   const currentSunReturnRecurrence = () =>
     deriveSunReturnRecurrence(
@@ -615,7 +1174,7 @@ function createHardwareLabServer({
       syncRecoveryInput();
 
     const earth =
-      currentEarthObservers();
+      currentEffectiveEarthObservers();
 
     const earthScale =
       deriveEarthRotationJovianScale(
@@ -814,8 +1373,29 @@ function createHardwareLabServer({
         observation
       );
 
+    let solRateHoldover =
+      null;
+
+    if (
+      result.observer &&
+      result.observer.status ===
+        'TRACKING' &&
+      Number.isSafeInteger(
+        result.observer.intervalCount
+      ) &&
+      result.observer.intervalCount > 0
+    ) {
+      solRateHoldover =
+        persistObservedSolRateHoldover(
+          result.bridge
+        );
+    }
+
     return {
       ...result,
+
+      solRateHoldover,
+
       terraShipSlip:
         updateTerraShipSlipAccumulator(
           'SOL_OBSERVATION'
@@ -957,6 +1537,8 @@ function createHardwareLabServer({
     selector.select(MODE_REAL);
     syncRecoveryInput();
 
+    solHoldoverEnabled = false;
+
     selector.select(MODE_VIRTUAL);
     jovianFixture.reset();
     jovianRecovery.forgetRecovery();
@@ -1007,33 +1589,57 @@ function createHardwareLabServer({
       throw new Error('server-owned Mintaka recovery failed');
     }
 
-    observeSolSelected({
-      type: 'SOL_CELESTIAL_DIRECTION',
-      witness: 'SOL',
-      angle512: { numerator: '100', denominator: '1' },
-    });
+    /*
+     * SOL RATE HOLDOVER RECOVERY
+     *
+     * No artificial direction pair is injected here.
+     *
+     * The persisted natural relationship is:
+     *
+     *   Sol A8 angle advance / Mintaka stellar rotation
+     *
+     * Fresh Mintaka recovery above supplies:
+     *
+     *   selected raw / Mintaka stellar rotation
+     *
+     * Their exact ratio restores:
+     *
+     *   Sol A8 angle advance / selected raw
+     *
+     * Old absolute raw counts are never replayed across runs.
+     */
+    solHoldoverEnabled =
+      true;
 
-    advanceVirtualRawDirect(CORE20_VIRTUAL_EARTH_ROTATION_RAW);
+    const effectiveEarth =
+      currentEffectiveEarthObservers();
 
-    const sol = observeSolSelected({
-      type: 'SOL_CELESTIAL_DIRECTION',
-      witness: 'SOL',
-      angle512: { numerator: '101', denominator: '1' },
-    });
-
-    if (!sol.observer || sol.observer.status !== 'TRACKING') {
-      throw new Error('server-owned Sol recovery failed');
+    if (
+      !effectiveEarth.sol ||
+      effectiveEarth.sol.status !==
+        'TRACKING' ||
+      effectiveEarth.sol.rateMode !==
+        'HOLDOVER' ||
+      !effectiveEarth.sol
+        .forwardAdvancePerRawPulse512
+    ) {
+      throw new Error(
+        'qualified Sol rate holdover recovery failed'
+      );
     }
 
-    const recurrence = currentSunReturnRecurrence();
+    const recurrence =
+      currentSunReturnRecurrence();
 
     if (
       !recurrence ||
-      recurrence.status !== 'SUN_RETURN_RECURRENCE_RECOVERED' ||
-      !recurrence.rawPerSunReturnRecurrence ||
-      recurrence.rawPerSunReturnRecurrence.text !== CORE20_EXPECTED_SUN_RETURN
+      recurrence.status !==
+        'SUN_RETURN_RECURRENCE_RECOVERED' ||
+      !recurrence.rawPerSunReturnRecurrence
     ) {
-      throw new Error('server-owned Sun-return recovery failed');
+      throw new Error(
+        'server-owned Sun-return recovery failed from qualified Sol holdover'
+      );
     }
 
     // Keep the pure Gate-6M endpoint alive as an internal natural phase coordinate.
@@ -1098,6 +1704,9 @@ function createHardwareLabServer({
      * This number never enters recovered spans or time authority.
      */
     qualificationPresentationMs: 750,
+
+    externalPaceOnly:
+      process.env.A8_CORE20_EXTERNAL_PHYSICAL === '1',
   });
 
   /*
@@ -1179,6 +1788,18 @@ function createHardwareLabServer({
         !c ||
         c.status !==
           'CORE20_CLOCK_RUNNING'
+      ) {
+        return null;
+      }
+
+      /*
+       * Temporary external physical holdover preserves civil continuity only.
+       * It is explicitly NOT qualified Terra Ship Slip evidence.
+       */
+      if (
+        c.alignment &&
+        c.alignment.role ===
+          'TEMPORARY_EXTERNAL_PHYSICAL_HOLDOVER'
       ) {
         return null;
       }
@@ -1732,6 +2353,314 @@ function createHardwareLabServer({
             return sendJson(
               res,
               400,
+              {
+                ok: false,
+                error:
+                  err && err.message
+                    ? err.message
+                    : String(err),
+              }
+            );
+          }
+        }
+
+        /*
+         * TEMPORARY EXTERNAL PHYSICAL HOLDOVER
+         *
+         * Loopback service input only.
+         *
+         * Input contains physical counter identity/count only.
+         * No timestamp, seconds, Hz, UTC or elapsed host time.
+         */
+        if (
+          req.method === 'GET' &&
+          url.pathname ===
+            '/api/core20/physical-earth-evidence'
+        ) {
+          return sendJson(
+            res,
+            200,
+            {
+              ok: true,
+
+              evidence:
+                physicalEarthEvidenceLedger
+                  .snapshot(),
+            }
+          );
+        }
+
+        if (
+          req.method === 'POST' &&
+          url.pathname ===
+            '/api/core20/external-physical/sample'
+        ) {
+          try {
+            if (
+              process.env
+                .A8_CORE20_EXTERNAL_PHYSICAL !==
+              '1'
+            ) {
+              throw new Error(
+                'external physical mode is not enabled'
+              );
+            }
+
+            if (
+              req.headers[
+                'x-a8-external-physical'
+              ] !== '1'
+            ) {
+              return sendJson(
+                res,
+                403,
+                {
+                  ok: false,
+                  error:
+                    'EXTERNAL PHYSICAL HEADER REQUIRED',
+                }
+              );
+            }
+
+            const body =
+              await readJsonBody(req);
+
+            const allowed =
+              new Set([
+                'SOURCE_EPOCH',
+                'RAW_COUNT',
+                'REPORT_SEQUENCE',
+                'STATUS',
+              ]);
+
+            for (
+              const key of
+              Object.keys(body)
+            ) {
+              if (!allowed.has(key)) {
+                throw new Error(
+                  `unsupported external physical field: ${key}`
+                );
+              }
+            }
+
+            if (
+              String(body.SOURCE_EPOCH) !== String(process.env.A8_CORE20_EXTERNAL_PHYSICAL_EPOCH || '')
+            ) {
+              throw new Error(
+                'physical SOURCE_EPOCH changed · continuity broken'
+              );
+            }
+
+            if (
+              body.STATUS !== 'ACTIVE'
+            ) {
+              throw new Error(
+                'physical source is not ACTIVE'
+              );
+            }
+
+            const rawText =
+              String(
+                body.RAW_COUNT ?? ''
+              );
+
+            if (
+              !/^[0-9]+$/.test(rawText)
+            ) {
+              throw new Error(
+                'physical RAW_COUNT invalid'
+              );
+            }
+
+            const physicalRaw =
+              BigInt(rawText);
+
+            const PHYSICAL_ANCHOR =
+              BigInt(
+                process.env.A8_CORE20_EXTERNAL_PHYSICAL_ANCHOR
+              );
+
+            const CORE_ANCHOR =
+              BigInt(
+                process.env.A8_CORE20_EXTERNAL_CORE_ANCHOR
+              );
+
+            const RATIO_NUMERATOR =
+              BigInt(
+                process.env.A8_CORE20_EXTERNAL_RATIO_NUMERATOR
+              );
+
+            const RATIO_DENOMINATOR =
+              BigInt(
+                process.env.A8_CORE20_EXTERNAL_RATIO_DENOMINATOR
+              );
+
+            if (
+              physicalRaw <
+              PHYSICAL_ANCHOR
+            ) {
+              throw new Error(
+                'physical raw regressed behind configured external anchor'
+              );
+            }
+
+            physicalEarthEvidenceLedger
+              .notePhysicalSample({
+                SOURCE_EPOCH:
+                  body.SOURCE_EPOCH,
+
+                RAW_COUNT:
+                  rawText,
+
+                REPORT_SEQUENCE:
+                  body.REPORT_SEQUENCE ??
+                  null,
+
+                STATUS:
+                  body.STATUS,
+              });
+
+            await ensureCore20RuntimeRunning();
+
+            const physicalDelta =
+              physicalRaw -
+              PHYSICAL_ANCHOR;
+
+            const externalCoreAdvance =
+              (
+                physicalDelta *
+                RATIO_NUMERATOR
+              ) /
+              RATIO_DENOMINATOR;
+
+            const targetCoreRaw =
+              CORE_ANCHOR +
+              externalCoreAdvance;
+
+            const advanced =
+              core20Runtime
+                .advanceEmergencyToTarget(
+                  targetCoreRaw.toString()
+                );
+
+            let clock =
+              core20Runtime
+                .clockSnapshot();
+
+            if (
+              clock.status !==
+              'CORE20_CLOCK_RUNNING'
+            ) {
+              core20Runtime
+                .installExternalPhysicalHoldoverAlignment({
+                  anchorRawPulse:
+                    CORE_ANCHOR.toString(),
+
+                  targetDayCount:
+                    String(
+                      process.env.A8_CORE20_EXTERNAL_DAY_COUNT || '0'
+                    ),
+
+                  targetDayPhase17:
+                    String(
+                      process.env.A8_CORE20_EXTERNAL_DAY_PHASE17
+                    ),
+
+                  externalPhysicalSourceEpoch:
+                    String(
+                      process.env.A8_CORE20_EXTERNAL_PHYSICAL_EPOCH
+                    ),
+                });
+
+              clock =
+                core20Runtime
+                  .clockSnapshot();
+            }
+
+            const alignment =
+              clock.alignment || {};
+
+            if (
+              alignment.role !==
+              'TEMPORARY_EXTERNAL_PHYSICAL_HOLDOVER' ||
+              alignment
+                .externalPhysicalSourceEpoch !==
+              String(
+                process.env.A8_CORE20_EXTERNAL_PHYSICAL_EPOCH
+              )
+            ) {
+              throw new Error(
+                'emergency alignment identity mismatch'
+              );
+            }
+
+            return sendJson(
+              res,
+              200,
+              {
+                ok: true,
+
+                mode:
+                  'TEMPORARY_EXTERNAL_PHYSICAL_HOLDOVER',
+
+                authority:
+                  'NONE · ENGINEERED PHYSICAL PACE · LEGACY RATE/PHASE BOOTSTRAP · JOVIAN QUALIFICATION PENDING',
+
+                physical: {
+                  sourceEpoch:
+                    String(
+                      process.env.A8_CORE20_EXTERNAL_PHYSICAL_EPOCH
+                    ),
+
+                  rawCount:
+                    physicalRaw.toString(),
+
+                  reportSequence:
+                    body.REPORT_SEQUENCE ??
+                    null,
+
+                  status:
+                    body.STATUS,
+                },
+
+                mapping: {
+                  physicalAnchorRaw:
+                    PHYSICAL_ANCHOR.toString(),
+
+                  coreAnchorRaw:
+                    CORE_ANCHOR.toString(),
+
+                  ratio:
+                    `${process.env.A8_CORE20_EXTERNAL_RATIO_NUMERATOR}/` +
+                    `${process.env.A8_CORE20_EXTERNAL_RATIO_DENOMINATOR}`,
+
+                  ratioLower:
+                    null,
+
+                  ratioUpper:
+                    null,
+
+                  physicalDelta:
+                    physicalDelta.toString(),
+
+                  externalCoreAdvance:
+                    externalCoreAdvance.toString(),
+
+                  targetCoreRaw:
+                    targetCoreRaw.toString(),
+
+                  advancedThisSample:
+                    advanced.toString(),
+                },
+
+                clock,
+              }
+            );
+          } catch (err) {
+            return sendJson(
+              res,
+              409,
               {
                 ok: false,
                 error:
@@ -2814,6 +3743,41 @@ function createHardwareLabServer({
             const body =
               await readJsonBody(req);
 
+
+            if (
+              process.env
+                .A8_CORE20_EXTERNAL_PHYSICAL ===
+              '1'
+            ) {
+              const physicalEvidence =
+                physicalEarthEvidenceLedger
+                  .recordMintaka(
+                    body
+                  );
+
+              return sendJson(
+                res,
+                200,
+                {
+                  ok: true,
+
+                  mode:
+                    'EXTERNAL_PHYSICAL_EVIDENCE_ONLY',
+
+                  physicalEvidence,
+
+                  mappedCoreObserverUpdated:
+                    false,
+
+                  terraShipSlipUpdated:
+                    false,
+
+                  authority:
+                    'ARDUINO_B_PHYSICAL_RAW · SOURCE_EPOCH_BOUND · NO HOST TIME',
+                }
+              );
+            }
+
             const result =
               observeMintakaSelected(
                 body
@@ -2889,6 +3853,41 @@ function createHardwareLabServer({
           try {
             const body =
               await readJsonBody(req);
+
+
+            if (
+              process.env
+                .A8_CORE20_EXTERNAL_PHYSICAL ===
+              '1'
+            ) {
+              const physicalEvidence =
+                physicalEarthEvidenceLedger
+                  .recordSol(
+                    body
+                  );
+
+              return sendJson(
+                res,
+                200,
+                {
+                  ok: true,
+
+                  mode:
+                    'EXTERNAL_PHYSICAL_EVIDENCE_ONLY',
+
+                  physicalEvidence,
+
+                  mappedCoreObserverUpdated:
+                    false,
+
+                  terraShipSlipUpdated:
+                    false,
+
+                  authority:
+                    'ARDUINO_B_PHYSICAL_RAW · SOURCE_EPOCH_BOUND · NO HOST TIME',
+                }
+              );
+            }
 
             const result =
               observeSolSelected(
