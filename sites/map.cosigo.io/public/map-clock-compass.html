@@ -1014,6 +1014,18 @@ body{
     The A8/NAV distance does not change when the travel method changes.
   </p>
 
+<div class="route-small"
+     data-a8-car-half-day-note="v1"
+     style="margin-top:8px">
+  <strong>CAR · PRACTICAL HALF-DAY USE</strong><br>
+  CAR 48 is the reference speed while driving.
+  If you plan to drive only half of each 32-hour A8 day
+  — 16 A8 HOURS — use half the moving speed as the
+  effective whole-day journey rate.
+  For CAR 48, enter <strong>CUSTOM 24</strong>.
+  48 × 16/32 = 24 A8/NAV per A8 HOUR.
+</div>
+
   <div class="a8-travel-modes">
 
     <button
@@ -2870,7 +2882,7 @@ function renderTravelResult(distance=null) {
 
   if (!distance) {
     distance =
-      rhumbDistanceA8(
+      workbenchGreatCircleMetrics(
         workbenchPointA,
         workbenchPointB
       );
