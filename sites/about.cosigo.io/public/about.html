@@ -646,7 +646,7 @@
 </style>
 
 
-<style id="a8-about-angle-check-v1">
+<style id="a8-about-angle-check-style-v1">
 .a8-angle-check{
   margin-top:15px;
 }
@@ -751,7 +751,7 @@
 </style>
 
 
-<style id="a8-about-time-check-v1">
+<style id="a8-about-time-check-style-v1">
 .a8-time-benchmarks{
   display:flex;
   flex-wrap:wrap;
@@ -771,7 +771,7 @@
 </style>
 
 
-<style id="a8-about-music-check-v1">
+<style id="a8-about-music-check-style-v1">
 .a8-music-section{
   margin-top:16px;
   padding-top:15px;
@@ -2280,7 +2280,7 @@
 
 .a8-earth-motion-head small,
 .a8-earth-branch > small,
-.a8-beavis-check > small{
+.a8-sanity-check > small{
   display:block;
   font-weight:800;
   letter-spacing:.075em;
@@ -2390,20 +2390,20 @@
   line-height:1.5;
 }
 
-.a8-beavis-check{
+.a8-sanity-check{
   margin:18px 0;
   border:2px solid currentColor;
   border-radius:12px;
   padding:16px;
 }
 
-.a8-beavis-check > div{
+.a8-sanity-check > div{
   display:grid;
   gap:3px;
   margin-top:12px;
 }
 
-.a8-beavis-check span{
+.a8-sanity-check span{
   display:block;
 }
 
@@ -2681,12 +2681,12 @@
 
       <div class="a8-earth-result">
         <span>MEAN ORBIT SPEED</span>
-        <b>1 A8 ORB / A8 SECOND</b>
+        <b>≈ 1.0041 A8/57 / A8 HOUR</b>
       </div>
 
       <div class="a8-earth-result">
         <span>ELAPSED A8 TIME</span>
-        <b id="a8-earth-orbit-seconds-out">—</b>
+        <b id="a8-earth-orbit-hours-out">—</b>
       </div>
 
       <div class="a8-earth-result">
@@ -2721,8 +2721,8 @@
 
   </div>
 
-  <div class="a8-beavis-check">
-    <small>BEAVIS CHECK</small>
+  <div class="a8-sanity-check">
+    <small>SANITY CHECK</small>
 
     <div>
       <strong>1 A8 ANGLE</strong>
@@ -2758,20 +2758,6 @@
 </div>
 
 
-<div class="a8-angle-verdict" id="a8-angle-verdict">
-            ✓ CHECKS · native A8 128 ↔ legacy comparison 90°
-          </div>
-
-          <div class="a8-angle-note">
-            Legacy degrees are a translation bridge only.
-            The native angular relationship is one full turn = 512 A8.
-          </div>
-
-          <div class="a8-mini-links">
-            <a href="https://angle.cosigo.io/">OPEN ANGLE</a>
-            <a href="https://map.cosigo.io/">SEE MAP</a>
-            <a href="https://stars.cosigo.io/">SEE STARS</a>
-          </div>
 
         </div>
 
@@ -3045,6 +3031,16 @@
               <small>REAL-WORLD SCALE · RECOGNITION ONLY</small>
               <strong id="a8-length-scale-example">HUMAN SCALE · ≈ 1.1933 m · A8/31 ruler · everyday human reach</strong>
             </div>
+
+            <div id="a8-length-application" hidden>
+              <small>APPLICATION</small>
+              <strong>EARTH TRAVEL · DISTANCE + SPEED</strong>
+            </div>
+
+            <div id="a8-length-ruler-principle" hidden>
+              <small>RULER PRINCIPLE</small>
+              <strong>FASTER MOTION NATURALLY MOVES TO HIGHER BINARY RUNGS</strong>
+            </div>
           </div>
 
           <div class="a8-angle-verdict">
@@ -3064,7 +3060,7 @@
 
         <div class="a8-scalar-check" id="a8-nav-check" hidden>
 
-          <div class="eyebrow">A8 NAV · DISTANCE + SPEED</div>
+          <div class="eyebrow">A8 NAV · DISTANCE CONVERTER</div>
 
           <div class="a8-angle-inputs">
             <label>
@@ -3108,11 +3104,17 @@
             </div>
           </div>
 
+          <div class="a8-angle-note">
+            This converter measures distance only: A8 NAV ⇄ legacy kilometres.
+            Speed requires distance ÷ elapsed time.
+            The cards below use one A8 HOUR as the fixed time denominator.
+          </div>
+
           <div class="a8-rate-box">
             <div class="eyebrow">SPEED · PRACTICAL BINARY SCALE</div>
 
             <div class="a8-nav-speed-reference">
-              <strong>DENOMINATOR STAYS FIXED · A8 HOUR</strong>
+              <strong>FIXED TIME DENOMINATOR · 1 A8 HOUR</strong>
               <span>
                 Change only the binary NAV amount.
                 Legacy translation uses kilometres per legacy hour and knots.
@@ -3515,7 +3517,7 @@
                   </div>
 
                   <div class="a8-macro-card">
-                    <small>EARTH ORBIT SPEED RUNG</small>
+                    <small>EARTH ORBIT DISTANCE RUNG</small>
                     <strong>A8/45</strong>
                     <b>1 A8/45</b>
 
@@ -5482,7 +5484,6 @@ document.querySelectorAll('.a8-question-dialog').forEach(dialog => {
   const outPhase = document.getElementById('a8-angle-out-phase');
   const outFraction = document.getElementById('a8-angle-out-fraction');
   const outDegrees = document.getElementById('a8-angle-out-degrees');
-  const verdict = document.getElementById('a8-angle-verdict');
 
   const near = (a,b,eps=1e-10) => Math.abs(a-b) < eps;
 
@@ -5549,13 +5550,6 @@ document.querySelectorAll('.a8-question-dialog').forEach(dialog => {
     outFraction.textContent = fractionOfTurn(a8);
     outDegrees.textContent = `${clean(degrees)}°`;
 
-    if (near(Math.abs(a8),512)) {
-      verdict.textContent =
-        '✓ CHECKS · full turn = 512 A8 = 1000₈ recurrence → phase 000₈';
-    } else {
-      verdict.textContent =
-        `✓ CHECKS · legacy ${clean(degrees)}° ↔ native A8 ${clean(a8)}`;
-    }
   }
 
   function fromDegrees(){
@@ -6070,6 +6064,7 @@ document.querySelectorAll('.a8-question-dialog').forEach(dialog => {
     const rung = num(lr.value);
     const exponent = rung - 31;
     const unitM = A8_31_M * Math.pow(2,exponent);
+    const isNavRung = rung === 41;
 
     let native = finite(ln.value) ? num(ln.value) : 0;
     let legacy = finite(ll.value) ? num(ll.value) : 0;
@@ -6083,7 +6078,9 @@ document.querySelectorAll('.a8-question-dialog').forEach(dialog => {
     }
 
     $('a8-length-out-rung').textContent =
-      `${fmt(native)} A8/${rung}`;
+      isNavRung
+        ? `${fmt(native)} A8/41 = ${fmt(native)} A8 NAV`
+        : `${fmt(native)} A8/${rung}`;
 
     const factor =
       exponent >= 0
@@ -6093,11 +6090,20 @@ document.querySelectorAll('.a8-question-dialog').forEach(dialog => {
     $('a8-length-out-factor').textContent = factor;
 
     $('a8-length-out-native').textContent =
-      `${fmt(native)} A8/${rung} = ` +
-      `${fmt(native*Math.pow(2,exponent),12)} A8/31`;
+      isNavRung
+        ? `${fmt(native)} A8/41 = ${fmt(native)} A8 NAV = ` +
+          `${fmt(native*Math.pow(2,exponent),12)} A8/31`
+        : `${fmt(native)} A8/${rung} = ` +
+          `${fmt(native*Math.pow(2,exponent),12)} A8/31`;
 
     $('a8-length-out-legacy').textContent =
       legacyLength(legacy);
+
+    $('a8-length-application').hidden =
+      !isNavRung;
+
+    $('a8-length-ruler-principle').hidden =
+      !isNavRung;
   }
 
   ln.addEventListener('input',() => {
@@ -7382,8 +7388,8 @@ document.querySelectorAll('.a8-question-dialog').forEach(dialog => {
   const orbitClockOut =
     document.getElementById('a8-earth-orbit-clock-out');
 
-  const orbitA8SecondsOut =
-    document.getElementById('a8-earth-orbit-seconds-out');
+  const orbitA8HoursOut =
+    document.getElementById('a8-earth-orbit-hours-out');
 
   const orbitDistanceOut =
     document.getElementById('a8-earth-orbit-distance-out');
@@ -7416,11 +7422,19 @@ document.querySelectorAll('.a8-question-dialog').forEach(dialog => {
     64;
 
   /*
-    Existing A8 ORB distance comparison.
-    Mean orbital speed = 1 A8 ORB / A8 SECOND.
+    Sealed A8 length-ladder expression for Earth's mean orbital motion.
+
+    1 A8/57 = 65,536 A8 NAV.
+    Mean Earth orbital speed ≈ 1.0041 A8/57 / A8 HOUR.
+
+    The full-precision comparison below preserves the existing
+    mean-orbit calculator while using the common A8 length ruler.
   */
-  const A8_ORB_KM =
-    19.632173222;
+  const A8_57_KM =
+    80082.87960281226;
+
+  const EARTH_MEAN_ORBIT_SPEED_A857_PER_HOUR =
+    1.0041269983814134;
 
   let syncing = false;
 
@@ -7556,22 +7570,21 @@ document.querySelectorAll('.a8-question-dialog').forEach(dialog => {
       ANGLES_PER_TURN;
 
     /*
-      Mean orbital speed:
-        1 A8 ORB / A8 SECOND
-
-      Therefore elapsed A8 seconds and distance in A8 ORB
-      have the same numerical value.
+      Mean orbital speed on the sealed A8 length ladder:
+        ≈ 1.0041 A8/57 / A8 HOUR
     */
-    const orbitA8Seconds =
+    const orbitA8Hours =
       orbitDays *
-      A8_SECONDS_PER_DAY;
+      A8_SECONDS_PER_DAY /
+      A8_SECONDS_PER_HOUR;
 
-    const orbitDistanceOrb =
-      orbitA8Seconds;
+    const orbitDistanceA857 =
+      orbitA8Hours *
+      EARTH_MEAN_ORBIT_SPEED_A857_PER_HOUR;
 
     const orbitDistanceKm =
-      orbitDistanceOrb *
-      A8_ORB_KM;
+      orbitDistanceA857 *
+      A8_57_KM;
 
     master.value =
       inputValue(angle);
@@ -7597,11 +7610,11 @@ document.querySelectorAll('.a8-question-dialog').forEach(dialog => {
     orbitClockOut.textContent =
       a8ClockFromDays(orbitDays);
 
-    orbitA8SecondsOut.textContent =
-      `${fmtComma4(orbitA8Seconds)} A8 SECOND`;
+    orbitA8HoursOut.textContent =
+      `${fmtComma4(orbitA8Hours)} A8 HOUR`;
 
     orbitDistanceOut.textContent =
-      `${fmtComma4(orbitDistanceOrb)} A8 ORB`;
+      `${fmtComma4(orbitDistanceA857)} A8/57`;
 
     orbitDistanceKmOut.textContent =
       `${fmtComma4(orbitDistanceKm)} km`;

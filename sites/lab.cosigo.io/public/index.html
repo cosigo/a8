@@ -3,24 +3,26 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>A8 Time Lab v5.4.20 | COSIGO Labs</title>
-<meta name="description" content="Auspicious 8 engineering laboratory: raw oscillator recovery, independent Jovian channels, comparator, qualification, replay, clock, angle, quartz, and integrated map-clock-compass instruments.">
+<title>A8 Laboratory | Physical Source, Core20 & Predictive System</title>
+<meta name="twitter:image:alt" content="A8 Laboratory showing the physical Epoch-5 source, Core20, predictive system and retained fallback paths">
+<meta property="og:image:alt" content="A8 Laboratory showing the physical Epoch-5 source, Core20, predictive system and retained fallback paths">
+<meta name="description" content="Explore the A8 operating laboratory: Epoch-5 physical RAW, Core20, predictive astronomy, and clearly labeled standby and recovery paths.">
 <meta name="author" content="COSIGO Labs">
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
 <meta name="theme-color" content="#0b0f14">
 <link rel="canonical" href="https://lab.cosigo.io/">
 <link rel="icon" href="https://a8.cosigo.io/assets/cosigo_master_512.png">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="COSIGO Labs — Auspicious 8">
-<meta property="og:title" content="A8 Time Laboratory v5.4.20 | COSIGO Labs">
-<meta property="og:description" content="Engineering laboratory for A8 Jovian recovery, replay, clock, angle, quartz and integrated navigation instruments.">
+<meta property="og:site_name" content="Auspicious 8">
+<meta property="og:title" content="A8 Laboratory | Physical Source, Core20 & Predictive System">
+<meta property="og:description" content="See the current A8 physical source, Core20 operating state, predictive work, and retained standby recovery architecture.">
 <meta property="og:url" content="https://lab.cosigo.io/">
 <meta property="og:image" content="https://a8.cosigo.io/assets/cosigo_master_512.png">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="A8 Time Laboratory v5.4.20 | COSIGO Labs">
-<meta name="twitter:description" content="Auspicious 8 engineering laboratory. Nature first; ruler second.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="A8 Laboratory | Physical Source, Core20 & Predictive System">
+<meta name="twitter:description" content="See the current A8 physical source, Core20 operating state, predictive work, and retained standby recovery architecture.">
 <meta name="twitter:image" content="https://a8.cosigo.io/assets/cosigo_master_512.png">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"A8 Time Laboratory v5.4.20","url":"https://lab.cosigo.io/","dateModified":"2026-08-16","isPartOf":{"@type":"WebSite","name":"COSIGO Labs — Auspicious 8","url":"https://a8.cosigo.io/"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"A8 Laboratory | Physical Source, Core20 & Predictive System","url":"https://lab.cosigo.io/","description":"Explore the A8 operating laboratory: Epoch-5 physical RAW, Core20, predictive astronomy, and clearly labeled standby and recovery paths.","inLanguage":"en","isPartOf":{"@type":"WebSite","name":"Auspicious 8","alternateName":"A8","url":"https://a8.cosigo.io/"},"publisher":{"@type":"Organization","name":"COSIGO Labs","url":"https://cosigo.io/"},"about":[{"@type":"Thing","name":"A8 Time"},{"@type":"Thing","name":"32 Hour Clock"},{"@type":"Thing","name":"Jupiter"},{"@type":"Thing","name":"Io"},{"@type":"Thing","name":"Europa"},{"@type":"Thing","name":"Ganymede"},{"@type":"Thing","name":"Callisto"},{"@type":"Thing","name":"Jupiter moon recurrence"},{"@type":"Thing","name":"Natural time ruler"}]}</script>
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="/site-shell.css">
 
@@ -504,9 +506,9 @@ main .panel{
     <div class="a8-lab-header-row">
 
       <div class="a8-lab-title-block">
-        <div class="eyebrow">AUSPICIOUS 8 · UNIFIED NODE CORE</div>
-        <h1>A8 Time Laboratory v5.4.20</h1>
-        <p class="muted">One raw counter · three independent Jovian recoveries · comparator · qualification · divider · 17-bit clock. Your browser is an observer.</p>
+        <div class="eyebrow">AUSPICIOUS 8 · OPERATING LABORATORY</div>
+        <h1>A8 Laboratory · Physical Core &amp; Predictive System</h1>
+        <p class="muted">Epoch-5 physical RAW is the designated primary path. Core20, predictive instruments, and the recovery machinery already built remain available. Your browser is an observer.</p>
       </div>
       <a
         class="a8-lab-whitepaper"
@@ -521,7 +523,101 @@ main .panel{
   
 </header>
 
+<style id="a8-primary-standby-policy-style">
+#a8-primary-standby-policy .a8-path-grid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:10px;
+  margin-top:12px;
+}
+#a8-primary-standby-policy .a8-path-card{
+  border:1px solid #2a3744;
+  border-radius:10px;
+  padding:12px;
+  background:rgba(11,18,25,.82);
+  min-width:0;
+}
+#a8-primary-standby-policy .a8-path-label{
+  display:block;
+  font-size:.66rem;
+  letter-spacing:.09em;
+  opacity:.68;
+}
+#a8-primary-standby-policy .a8-path-state{
+  display:block;
+  margin-top:5px;
+  font-weight:900;
+  line-height:1.3;
+}
+#a8-primary-standby-policy .a8-path-note{
+  display:block;
+  margin-top:7px;
+  font-size:.78rem;
+  line-height:1.45;
+  opacity:.78;
+}
+@media(max-width:900px){
+  #a8-primary-standby-policy .a8-path-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+}
+@media(max-width:560px){
+  #a8-primary-standby-policy .a8-path-grid{
+    grid-template-columns:1fr;
+  }
+}
+</style>
 
+<section class="panel" id="a8-primary-standby-policy">
+  <div class="section-kicker">SOURCE POLICY · PRIMARY + STANDBY</div>
+  <h2>Keep the physical path running. Keep the spare machinery ready.</h2>
+
+  <div class="a8-path-grid">
+
+    <div class="a8-path-card">
+      <span class="a8-path-label">DESIGNATED PRIMARY</span>
+      <span class="a8-path-state">EPOCH-5 PHYSICAL RAW</span>
+      <span class="a8-path-note">
+        Arduino A → Arduino B → Pi → physical RAW → Core20.
+        Actual live state is shown by the observer below.
+      </span>
+    </div>
+
+    <div class="a8-path-card">
+      <span class="a8-path-label">FALLBACK / HOLDOVER</span>
+      <span class="a8-path-state">STANDBY</span>
+      <span class="a8-path-note">
+        Existing continuity and holdover mechanisms remain installed.
+        They are intentionally inactive while the primary path is healthy.
+      </span>
+    </div>
+
+    <div class="a8-path-card">
+      <span class="a8-path-label">EMERGENCY / LEGACY RECOVERY</span>
+      <span class="a8-path-state">OFFLINE</span>
+      <span class="a8-path-note">
+        Virtual and legacy-contaminated recovery tools are retained.
+        If activated, A8 labels the fallback openly.
+      </span>
+    </div>
+
+    <div class="a8-path-card">
+      <span class="a8-path-label">PREDICTIVE SYSTEM</span>
+      <span class="a8-path-state">A8 PREDICTS · NATURE ANSWERS</span>
+      <span class="a8-path-note">
+        Predictions are preserved before observation; later evidence
+        records the witnessed result and residual.
+      </span>
+    </div>
+
+  </div>
+
+  <p class="muted" style="margin:12px 0 0">
+    Standby does not mean discarded. Recovery mechanisms remain available
+    for Ardilla failure, power trouble, source transitions and engineering
+    diagnostics without being silently promoted to physical authority.
+  </p>
+</section>
 
 
 <!-- A8-CORE20-MAIN-INTEGRATION-01-BEGIN -->
@@ -533,12 +629,12 @@ main .panel{
   <section class="panel" id="core20-upstream-operator">
     <div class="c20v-head">
       <div>
-        <div class="c20v-kicker">UPSTREAM OBSERVER · RAW SOURCE → JOVIAN TIME BASE</div>
-        <h2>Upstream timekeeping observer</h2>
+        <div class="c20v-kicker">PRIMARY SOURCE OBSERVER · PHYSICAL RAW → CORE20</div>
+        <h2>Physical source observer</h2>
         <p class="muted">
-          Observe the currently selected raw source. The three moon channels below
-          recover independently; this panel shows the selected raw counter and
-          the normalized Jovian ruler that emerges from them.
+          Observe the source Core20 is actually consuming. Epoch-5 physical RAW is
+          the designated primary path; Jovian recovery remains visible here while
+          alternate source, holdover and emergency mechanisms remain in standby.
         </p>
       </div>
       <div id="c20vStatus" class="pill warn">READY</div>
@@ -549,8 +645,30 @@ main .panel{
 
     <div class="c20v-grid">
       <div class="c20v-stat">
-        <span class="c20v-k">SOURCE · EPOCH</span>
-        <span class="c20v-v"><span id="c20vSource">—</span> · <span id="c20vEpoch">—</span></span>
+        <span class="c20v-k">PHYSICAL PACE SOURCE · EPOCH</span>
+        <span class="c20v-v">
+          <span id="c20vPhysicalSource">ARDUINO A/B + PI</span>
+          ·
+          <span id="c20vPhysicalEpoch">—</span>
+        </span>
+        <span
+          id="c20vPhysicalState"
+          class="c20v-k"
+          style="margin-top:7px"
+        >CHECKING PHYSICAL SOURCE</span>
+      </div>
+
+      <div class="c20v-stat">
+        <span class="c20v-k">CORE20 INTERNAL DOMAIN · EPOCH</span>
+        <span class="c20v-v">
+          <span id="c20vSource">—</span>
+          ·
+          <span id="c20vEpoch">—</span>
+        </span>
+        <span
+          class="c20v-k"
+          style="margin-top:7px"
+        >TEMPORARY MAPPED / HOLDOVER DOMAIN</span>
       </div>
 
       <div class="c20v-stat">
@@ -569,21 +687,31 @@ main .panel{
       </div>
 
       <div class="c20v-stat">
-        <span class="c20v-k">SIMULATOR PACE</span>
+        <span class="c20v-k">SOURCE PACE / MODE</span>
         <span id="c20vPace" class="c20v-v">—</span>
       </div>
     </div>
+
+    <p
+      class="muted"
+      style="margin:11px 0 0;font-size:.78rem;line-height:1.45"
+    >
+      EPOCH-5 is the external physical counter supplying the running pace.
+      The Epoch-3 value shown above is Core20's retained internal mapped
+      coordinate. JOVIAN LOCKED means recurrence/comparator qualification;
+      it does not mean the virtual source is pacing the clock.
+    </p>
   </section>
 
   <section class="panel" id="core20-downstream-operator">
     <div class="c20v-head">
       <div>
-        <div class="c20v-kicker">DOWNSTREAM OBSERVER · EARTH / SOL → CIVIL CLOCK</div>
-        <h2>Recovered A8 civil clock</h2>
+        <div class="c20v-kicker">CORE20 OBSERVER · PHYSICAL RAW → CIVIL / PREDICTIVE STATE</div>
+        <h2>Core20 running state</h2>
         <p class="muted">
-          The normalized Jovian ruler continues downstream through Mintaka
-          Earth axial rotation, Sol orbital advance, recovered Sun return,
-          exact 2^17 DAY_PHASE17, and native 32 × 64 × 64.
+          Core20 continues from the selected source through the retained Jovian,
+          Mintaka, Sol, Sun-return and DAY_PHASE17 machinery. Current bootstrap
+          limitations remain visible rather than being hidden or rewritten.
         </p>
       </div>
     </div>
@@ -729,7 +857,7 @@ main .panel{
         style="padding:14px 16px"
       >
         <span class="c20v-k">
-          ABSOLUTE YEAR ORIENTATION · ONE-SHOT VERIFICATION
+          LEGACY / RECOVERY ORIENTATION · STANDBY TOOL
         </span>
 
         <div
@@ -745,17 +873,17 @@ main .panel{
             font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
           "
         >
-          <b>MOON-DRIVEN CORE ALREADY RUNNING</b>
+          <b>PRIMARY PHYSICAL PATH</b>
           <span>→</span>
-          <span>CAPTURE RAW + ONE UTC INSTANT</span>
+          <span>EPOCH-5 RAW CONTINUES</span>
           <span>→</span>
-          <span>JPL HORIZONS · VERIFY ONCE</span>
+          <span>RECOVERY TOOLS RETAINED</span>
           <span>→</span>
-          <b>PLACE YEAR WHEEL · 000₈–777₈</b>
+          <b>ONE-SHOT ORIENTATION ONLY IF REQUIRED</b>
           <span>→</span>
-          <b>JPL OUT · UTC OUT · NETWORK OUT</b>
+          <b>NORMAL RUNNING PATH · NO UTC / NTP / GPS</b>
           <span>→</span>
-          <span>RAW + RECOVERED SOL RATE CONTINUE</span>
+          <span>FALLBACK IS LABELED IF ACTIVATED</span>
         </div>
 
         <p
@@ -767,10 +895,9 @@ main .panel{
             font-size:.78rem;
           "
         >
-          The comparison instant has fraction-of-a-second resolution.
-          Network response time has no timing authority.
-          JPL establishes position once; Io / Europa / Ganymede remain
-          underneath the running system.
+          Legacy and external one-shot recovery mechanisms remain available
+          for exceptional engineering use. They do not supply the normal running
+          pace and are not silently promoted when the physical path is healthy.
         </p>
       </div>
 
@@ -791,7 +918,7 @@ main .panel{
         <b>ARCHITECTURE BOUNDARY</b>
 
         <span>→</span>
-        <span>SIMULATED RAW SOURCE</span>
+        <span>EPOCH-5 PHYSICAL RAW · PRIMARY</span>
 
         <span>→</span>
         <span>IO / EUROPA / GANYMEDE RECOVERY</span>
@@ -806,7 +933,7 @@ main .panel{
         <span>NO UTC / NTP / GPS / NETWORK TIMING AUTHORITY</span>
 
         <span>→</span>
-        <span>OBSERVATORY-CONFIRMED JOVIAN RECURRENCE · PHYSICAL RAW INPUT NEXT</span>
+        <span>FALLBACK / HOLDOVER / LEGACY PATHS RETAINED · STANDBY UNTIL REQUIRED</span>
       </div>
     </div>
   </section>
@@ -901,7 +1028,7 @@ main .panel{
     <div>
       <div class="section-kicker">LAB MODULES / INSTRUMENTS</div>
       <h2>Observer surfaces & companion benches</h2>
-      <p class="muted">Navigation links are separated from live core controls. These pages observe, translate, visualize or extend the laboratory without becoming recovery authority.</p>
+      <p class="muted">These pages observe, translate, visualize or extend the laboratory. Recovery and fallback benches may intentionally show STANDBY, EMERGENCY MODE or OFFLINE while the Epoch-5 physical path is healthy.</p>
     </div>
     <div class="pill">LINKS ONLY</div>
   </div>
@@ -1994,6 +2121,52 @@ function c20Render(payload, clockPayload) {
   const phase = tk.phase || {};
   const comparator = jovian.comparator || {};
   const gate6a = source.gate6a || {};
+
+  /*
+   * DISPLAY-ONLY SOURCE LAYER SEPARATION
+   *
+   * Epoch-5 = external physical Arduino/Pi source.
+   * Epoch-3 = retained Core20 internal mapped domain.
+   *
+   * No pacing, mapping, alignment or authority value is changed here.
+   */
+  const clockRuntime =
+    clockPayload?.clock?.runtime ??
+    clockPayload?.runtime ??
+    {};
+
+  const clockAlignment =
+    clockPayload?.clock?.alignment ??
+    clockRuntime?.alignment ??
+    {};
+
+  const physicalEpoch =
+    clockAlignment.externalPhysicalSourceEpoch ??
+    null;
+
+  const physicalActive =
+    clockRuntime.pulseGeneratorOwner ===
+      'EXTERNAL_PHYSICAL_SOURCE' &&
+    physicalEpoch !== null &&
+    physicalEpoch !== undefined &&
+    String(physicalEpoch) !== '';
+
+  c20Value(
+    'c20vPhysicalSource',
+    'ARDUINO A/B + PI'
+  );
+
+  c20Value(
+    'c20vPhysicalEpoch',
+    physicalEpoch ?? '—'
+  );
+
+  c20Value(
+    'c20vPhysicalState',
+    physicalActive
+      ? 'ACTIVE · EXTERNAL PHYSICAL RAW'
+      : 'STANDBY / OFFLINE'
+  );
 
   c20RenderJovianEngine(
     jovian,
