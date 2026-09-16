@@ -243,6 +243,7 @@ body {
         <a href="https://moons.cosigo.io/">MOONS</a>
         <a href="https://mintaka.cosigo.io/">MINTAKA</a>
         <a href="https://sol.cosigo.io/" aria-current="page">SOL</a>
+        <a href="https://ship.cosigo.io/">EARTHSHIP</a>
         <a href="https://map.cosigo.io/">MAP · CLOCK · COMPASS</a>
         <a href="https://sea.cosigo.io/">NAVIGATION</a>
         <a href="https://stars.cosigo.io/">CELESTIAL</a>
@@ -261,71 +262,53 @@ body {
 <main>
 
 <section class="hero">
-    <div class="eyebrow">AUSPICIOUS 8 · TIME LAB v5.4.20 · LIVE CORE20 SOL</div>
+    <div class="eyebrow">AUSPICIOUS 8 · SOL FIELD OBSERVATORY</div>
     <h1 class="sol">SOL</h1>
-    <p><b>EARTH ORBITAL ADVANCE · LIVE RECOVERED POSITION / GATE 3C EVIDENCE</b></p>
+    <p><b>EARTH ORBITAL-DIRECTION WITNESS · PHYSICAL + PREDICTIVE PROGRAM</b></p>
     <p class="muted">
-      Jupiter / Io–Europa–Ganymede remains the elapsed-time authority.
-      Mintaka witnesses axial rotation.
-      Sol direction samples may now be generated rapidly by a headless laboratory adapter,
-      but the adapter has no A8 core read/control path and no host-time pacer.
+      Epoch-5 physical RAW supplies the designated running pace through the
+      Core20 mapped domain. The recovered Sol-return rate advances that mapping;
+      the A8 Year Angle is a separate orientation instrument. Real sky observation
+      remains the field-evidence path.
     </p>
   </section>
 
-  <section class="grid">
-    <div class="card">
-      <span class="k">JOVIAN CORE</span>
-      <span id="coreVersion" class="v">CONNECTING</span>
-      <p class="muted">Presentation reads <code>/api/state</code>.</p>
-    </div>
-    <div class="card">
-      <span class="k">GATE 3C SOL OBSERVER · EVIDENCE</span>
-      <span id="observerStatus" class="v">CONNECTING</span>
-      <p class="muted">Stored qualification observations from <code>/api/sol</code>.</p>
-    </div>
-    <div class="card">
-      <span class="k">CLOCK WRITE CAPABILITY</span>
-      <span class="v good">NONE</span>
-      <p class="muted">Observation acceleration is downstream only.</p>
-    </div>
+  <section class="grid" id="a8-sol-live-instruments">
 
     <div class="card">
-      <span class="k">GATE 3C DIRECTION SAMPLES</span>
-      <span id="sampleCount" class="v">0</span>
-    </div>
-    <div class="card">
-      <span class="k">LAST GATE 3C SOL OBSERVATION</span>
-      <span id="lastAngle" class="v">—</span>
-    </div>
-    <div class="card">
-      <span class="k">GATE 3C RECOVERED ADVANCE</span>
-      <span id="totalAdvance" class="v">—</span>
-    </div>
-
-    <div class="card">
-      <span class="k">GATE 3C RELATIVE SOL COORDINATE · RATE RECOVERY ONLY</span>
-      <span id="liveSolAngle" class="v">—</span>
+      <span class="k">PHYSICAL PACE SOURCE · EPOCH-5</span>
+      <span id="a8SolPhysicalPulseState" class="v">CONNECTING</span>
+      <p
+        id="a8SolPhysicalPulseDetail"
+        class="muted"
+      >
+        EPOCH — · RAW — · SEQ —
+      </p>
       <p class="muted">
-        Raw-advanced coordinate anchored to the synthetic 100→101 Gate 3C
-        recovery samples. Not the absolute year angle.
+        Arduino A → Arduino B → Pi physical RAW.
+        Designated external physical pace source.
       </p>
     </div>
 
     <div class="card">
-      <span class="k">CURRENT SELECTED RAW</span>
-      <span id="liveRaw" class="v">—</span>
-    </div>
-
-    <div class="card">
-      <span class="k">RECOVERED SOL RATE</span>
+      <span class="k">RECOVERED SOL-RETURN RATE</span>
       <span id="solRate" class="v">—</span>
       <p class="muted">
         Native A8 angle512 per selected raw pulse.
+        Rate recovery and Year Angle orientation are separate instruments.
       </p>
     </div>
 
     <div class="card">
-      <span class="k">ABSOLUTE SOL / YEAR ANGLE · 9 BIT · 000₈–777₈</span>
+      <span class="k">CORE20 SELECTED RAW COORDINATE</span>
+      <span id="liveRaw" class="v">—</span>
+      <p class="muted">
+        Running raw coordinate used by the current mapped domain.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="k">A8 YEAR ANGLE · 9 BIT · 000₈–777₈</span>
       <span id="absoluteSolAngle" class="v">—</span>
       <span
         id="absoluteSolDecimal"
@@ -333,14 +316,16 @@ body {
         style="display:block;margin-top:6px"
       >—</span>
       <p class="muted">
-        Primary live year-wheel position.
-        JPL establishes absolute orientation once per source epoch;
-        selected raw + recovered Sol rate continue the motion.
+        Live year-wheel position once A8 year orientation is qualified.
+        Year orientation remains provisional until an A8-derived method is
+        physically and observationally qualified.
+        Selected raw + recovered Sol-return rate continue the motion afterward.
+        No external ephemeris is designated as the Year Angle orientation source.
       </p>
     </div>
 
     <div class="card">
-      <span class="k">ABSOLUTE YEAR ANGLE · PHASE27 · 9 BIT | 18 BIT</span>
+      <span class="k">A8 YEAR ANGLE · PHASE27 · 9 BIT | 18 BIT</span>
       <span id="livePhase27" class="v">—</span>
 
       <span
@@ -354,6 +339,11 @@ body {
         class="muted"
         style="display:block;margin-top:3px"
       >—</span>
+    </div>
+
+    <div class="card">
+      <span class="k">LIVE SOL / YEAR-ANGLE MAPPING STATUS</span>
+      <span id="liveSolStatus" class="v">CONNECTING</span>
     </div>
 
     <div
@@ -388,13 +378,200 @@ body {
       </p>
     </div>
 
-    <div class="card">
-      <span class="k">LIVE CORE20 SOL STATUS</span>
-      <span id="liveSolStatus" class="v">CONNECTING</span>
+  </section>
+
+  <details
+    id="a8-sol-fallback-instruments"
+    class="card"
+    style="margin-top:16px"
+  >
+    <summary
+      style="
+        cursor:pointer;
+        font-weight:900;
+        letter-spacing:.08em;
+        line-height:1.4;
+      "
+    >
+      EARLIER QUALIFICATION / FALLBACK INSTRUMENTS
+    </summary>
+
+    <p class="muted" style="margin-top:12px">
+      Retained for qualification, recovery, diagnostics, emergency use and
+      independent comparison. These instruments remain functional but dormant.
+      They do not define the normal A8 Year Angle path or the Epoch-5 running pace.
+    </p>
+
+    <div class="grid" style="margin-top:14px">
+
+      <div class="card">
+        <span class="k">CORE20 INTERNAL DOMAIN · DIAGNOSTIC</span>
+        <span id="coreVersion" class="v">CONNECTING</span>
+        <p class="muted">Presentation reads <code>/api/state</code>.</p>
+      </div>
+
+      <div class="card">
+        <span class="k">CLOCK WRITE CAPABILITY</span>
+        <span class="v good">NONE</span>
+        <p class="muted">
+          Observation machinery remains downstream/read-only.
+        </p>
+      </div>
+
+      <div class="card">
+        <span class="k">RETAINED GATE 3C QUALIFICATION OBSERVER</span>
+        <span id="observerStatus" class="v">CONNECTING</span>
+        <p class="muted">
+          Stored qualification observations from <code>/api/sol</code>.
+        </p>
+      </div>
+
+      <div class="card">
+        <span class="k">RETAINED GATE 3C DIRECTION SAMPLES</span>
+        <span id="sampleCount" class="v">0</span>
+      </div>
+
+      <div class="card">
+        <span class="k">LAST RETAINED GATE 3C OBSERVATION</span>
+        <span id="lastAngle" class="v">—</span>
+      </div>
+
+      <div class="card">
+        <span class="k">RETAINED GATE 3C RECOVERED ADVANCE</span>
+        <span id="totalAdvance" class="v">—</span>
+      </div>
+
+      <div class="card">
+        <span class="k">RETAINED GATE 3C RELATIVE COORDINATE · RATE RECOVERY ONLY</span>
+        <span id="liveSolAngle" class="v">—</span>
+        <p class="muted">
+          Raw-advanced coordinate anchored to the synthetic 100→101 Gate 3C
+          recovery samples. This is not the absolute A8 Year Angle.
+        </p>
+      </div>
+
+      <div class="card" id="a8-external-orientation-fallback">
+        <span class="k">EXTERNAL / JPL ORIENTATION BRIDGE · FALLBACK</span>
+        <span class="v warn">DORMANT · AVAILABLE</span>
+
+        <span
+          id="a8ExternalOrientationRawStatus"
+          class="muted"
+          style="display:block;margin-top:8px;overflow-wrap:anywhere"
+        >BACKEND STATUS · —</span>
+
+        <p class="muted">
+          Preserved emergency orientation and independent-comparison path.
+          This machinery remains installed and may be used when deliberately
+          invoked for recovery, diagnosis or comparison.
+        </p>
+
+        <p class="muted">
+          It does not define the normal running rate and is not the preferred
+          A8 Year Angle orientation path.
+        </p>
+      </div>
+
+    </div>
+  </details>
+  <section class="card" style="margin-top:16px" id="a8-sol-current-program">
+    <h2>Current physical + predictive Sol program</h2>
+
+    <div class="grid">
+      <div class="card">
+        <span class="k">PHYSICAL PACE</span>
+        <span class="v">EPOCH-5 RAW</span>
+        <p class="muted">
+          Arduino A → Arduino B → Pi.
+        </p>
+      </div>
+
+      <div class="card">
+        <span class="k">PREDICTIVE MODEL</span>
+        <span class="v">SEALED FIVE-BODY SOL LANE</span>
+        <p class="muted">
+          Prediction is preserved before later observation.
+        </p>
+      </div>
+
+      <div class="card">
+        <span class="k">FIELD EVIDENCE</span>
+        <span class="v">NEXT CLEAR OPPORTUNITY</span>
+        <p class="muted">
+          Real solar observation is now recorded against Epoch-5 physical RAW; a matching prediction residual remains a separate comparison against the preserved prediction.
+        </p>
+      </div>
+
+      <div class="card">
+        <span class="k">A8 YEAR ORIENTATION</span>
+        <span class="v">A8 METHOD · TO BE QUALIFIED</span>
+        <p class="muted">
+          Year orientation will be derived and qualified through A8's own
+          Nature-facing physical and observational evidence path.
+        </p>
+      </div>
+    </div>
+
+    <p class="muted" style="margin-top:12px">
+      A8 predicts first. Nature answers later. The residual is measured;
+      the original prediction is not rewritten to fit the observation.
+    </p>
+
+    <div
+      id="a8-sol-field-observation-2026-09-14"
+      class="card"
+      style="margin-top:16px"
+    >
+      <div class="eyebrow">
+        NATURE ANSWER · FIELD EVIDENCE · 2026-09-14
+      </div>
+
+      <h3>SOL LIMB · DETECTOR CENTER-LINE CROSSING</h3>
+
+      <p>
+        A real solar-limb sweep was recorded while the direct
+        <b>Epoch-5 physical counter remained ACTIVE</b>.
+        The visible solar limb crossed the geometric center line of the
+        camera pane at approximately <b>16.7 seconds</b> into the original
+        recording.
+      </p>
+
+      <pre>SOURCE_EPOCH   · 5
+EVENT          · SOL LIMB / DETECTOR CENTER-LINE CROSSING
+VIDEO OFFSET   · ≈ 16.7 s
+
+RAW BEFORE     · 853149723
+RAW AFTER      · 853149734
+RAW BRACKET    · 11 PHYSICAL COUNTS
+
+PRECISION      · RAW BRACKET
+RESIDUAL       · NOT YET BOUND TO MATCHING PRESERVED PREDICTION</pre>
+
+      <p class="muted">
+        The bracket deliberately does not invent an instantaneous exposure
+        pulse. A detector-fixed dirt / polarizer mark remained fixed in the
+        camera field while the solar limb moved past it, so that artifact is
+        excluded from celestial interpretation. This observation records the
+        geometric crossing only; it does not claim a free-drift rate.
+      </p>
+
+      <p>
+        <a
+          href="/assets/sol-field-observation-2026-09-14.json"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          OPEN MACHINE-READABLE EVIDENCE RECORD
+        </a>
+      </p>
     </div>
   </section>
+
   <section class="card" style="margin-top:16px">
     <h2>Sol observation boundary · sky evidence, not a clock</h2>
+    <p class="muted">
+      <b>SIMULATION / INJECTION CONTRACT · STANDBY ENGINEERING TOOL</b>
+    </p>
 
     <pre>OBSERVED SOL DIRECTION
         │
@@ -419,15 +596,15 @@ SolCelestialObserver
     </p>
 
     <p class="muted">
-      The historical <code>tools/fake-sol-observer.js</code> program was a
-      laboratory qualification fixture for this boundary. It was never the
-      definition of Sol motion, a solar ephemeris, or an A8 timing source.
-      Genuine Sol-direction evidence can enter through the same observation
-      contract without gaining clock-write authority.
+      The historical <code>tools/fake-sol-observer.js</code> program remains
+      installed as a laboratory qualification fixture for this boundary.
+      It is a standby engineering tool, not the definition of Sol motion,
+      a solar ephemeris, or an A8 timing source. Genuine Sol-direction evidence
+      can enter through the same observation contract without gaining clock-write authority.
     </p>
   </section>
   <section class="card" style="margin-top:16px">
-    <h2>Historical Gate 3C · clock-immunity stress proof</h2>
+    <h2>Historical Gate 3C · retained isolation proof</h2>
 
     <pre>START SOL DIRECTION  511.75 A8
 EXPLICIT STEP        3/8 A8 per observation interval
@@ -453,41 +630,39 @@ CORE RAW STATE       MUST NOT MOVE</pre>
   <section class="card" style="margin-top:16px">
     <h2>Current Core20 Sol role</h2>
 
-    <pre>Jupiter / Io · Europa · Ganymede
+    <pre>EPOCH-5 PHYSICAL RAW
         │
         ▼
-RECOVERED NATURAL ELAPSED-TIME RULER
+TEMPORARY CORE20 MAPPED DOMAIN
         │
         ├──────────────► Mintaka · Earth axial-rotation witness
         │
         └──────────────► Sol · orbital-direction witness
                               │
                               ▼
-                    Mintaka–Sol relationship
+                    sealed predictive model
                               │
                               ▼
-                       Terra Ship Slip
+                    prediction preserved
                               │
                               ▼
-                 recovered Sun-return recurrence
+                    Nature observation
                               │
                               ▼
-                    exact 2^17 DAY_PHASE17
-                              │
-                              ▼
-                    32 × 64 × 64 A8 clock</pre>
+                       residual</pre>
 
     <p>
-      Sol is measured against the recovered Jovian/Mintaka frame. It is an
-      orbital-direction witness, not an independent clock and not a direct
-      clock-write input.
+      Sol remains an orbital-direction witness, not an independent clock and
+      not a direct clock-write input. The running pace currently arrives from
+      Epoch-5 physical RAW through Core20's temporary mapped domain.
     </p>
 
     <p class="muted">
-      Absolute year-wheel orientation may be established by the separate
-      one-shot external bridge. After alignment, ongoing Sol motion remains
-      selected raw + recovered native Sol angle/raw. The external bridge
-      does not define the running rate.
+      Absolute year-wheel orientation may be established or checked by the
+      A8-derived year orientation once physically qualified. After that event,
+      ongoing Sol motion remains selected raw + recovered native Sol angle/raw.
+      The external bridge does not define the running rate and is not a
+      continuous operating feed.
     </p>
   </section>
 </main>
@@ -499,7 +674,161 @@ function rationalText(r){
   return `${r.numerator}/${r.denominator}`;
 }
 
+
+let a8SolPulseBoxPrevious = null;
+let a8SolPulseBoxBusy = false;
+
+function a8SolPulseBoxMotion(sample) {
+  if (
+    !sample ||
+    sample.SOURCE_EPOCH == null ||
+    sample.RAW_COUNT == null ||
+    sample.REPORT_SEQUENCE == null
+  ) {
+    return 'CHECK · INCOMPLETE REPORT';
+  }
+
+  const epoch =
+    String(sample.SOURCE_EPOCH);
+
+  let raw;
+  let sequence;
+
+  try {
+    raw =
+      BigInt(String(sample.RAW_COUNT));
+
+    sequence =
+      BigInt(String(sample.REPORT_SEQUENCE));
+  } catch (_) {
+    return 'CHECK · INVALID REPORT';
+  }
+
+  if (!a8SolPulseBoxPrevious) {
+    a8SolPulseBoxPrevious = {
+      epoch,
+      raw,
+      sequence,
+      lastAdvance: null
+    };
+
+    return 'BASELINE';
+  }
+
+  if (epoch !== a8SolPulseBoxPrevious.epoch) {
+    a8SolPulseBoxPrevious = {
+      epoch,
+      raw,
+      sequence,
+      lastAdvance: null
+    };
+
+    return 'NEW PHYSICAL EPOCH · BASELINE';
+  }
+
+  if (sequence < a8SolPulseBoxPrevious.sequence) {
+    return 'CHECK · REPORT SEQUENCE REGRESSION';
+  }
+
+  if (raw < a8SolPulseBoxPrevious.raw) {
+    return 'CHECK · RAW REGRESSION';
+  }
+
+  if (raw > a8SolPulseBoxPrevious.raw) {
+    const delta =
+      raw - a8SolPulseBoxPrevious.raw;
+
+    a8SolPulseBoxPrevious = {
+      epoch,
+      raw,
+      sequence,
+      lastAdvance: delta
+    };
+
+    return (
+      'ADVANCE OBSERVED · LATEST RAW +' +
+      delta
+    );
+  }
+
+  const lastAdvance =
+    a8SolPulseBoxPrevious.lastAdvance;
+
+  a8SolPulseBoxPrevious = {
+    epoch,
+    raw,
+    sequence,
+    lastAdvance
+  };
+
+  return lastAdvance === null
+    ? 'BASELINE · SAME RAW'
+    : (
+        'ADVANCE OBSERVED · LATEST RAW +' +
+        lastAdvance
+      );
+}
+
+async function refreshSolPulseBox(){
+  if (a8SolPulseBoxBusy) return;
+
+  a8SolPulseBoxBusy = true;
+
+  try {
+    const response =
+      await fetch(
+        '/api/pulse-box/snapshot',
+        {cache:'no-store'}
+      );
+
+    if (!response.ok) {
+      throw new Error(
+        `HTTP ${response.status}`
+      );
+    }
+
+    const p =
+      await response.json();
+
+    const motion =
+      a8SolPulseBoxMotion(p);
+
+    document
+      .getElementById(
+        'a8SolPhysicalPulseState'
+      )
+      .textContent =
+        `${p.STATUS || 'CHECK'} · ${motion}`;
+
+    document
+      .getElementById(
+        'a8SolPhysicalPulseDetail'
+      )
+      .textContent =
+        `EPOCH ${p.SOURCE_EPOCH ?? '—'} · RAW ${p.RAW_COUNT ?? '—'} · SEQ ${p.REPORT_SEQUENCE ?? '—'}`;
+
+  } catch (_) {
+    document
+      .getElementById(
+        'a8SolPhysicalPulseState'
+      )
+      .textContent =
+        'UNREACHABLE · CORE20 UNAFFECTED';
+
+    document
+      .getElementById(
+        'a8SolPhysicalPulseDetail'
+      )
+      .textContent =
+        'PHYSICAL REPORT UNAVAILABLE';
+  } finally {
+    a8SolPulseBoxBusy = false;
+  }
+}
+
 async function refresh(){
+  refreshSolPulseBox();
+
   try{
     const [coreResponse,solResponse]=await Promise.all([
       fetch('/api/state',{cache:'no-store'}),
@@ -757,7 +1086,7 @@ setInterval(refresh,1000);
             )
           : (
               year.status ||
-              'AWAITING ONE-SHOT YEAR ORIENTATION'
+              'AWAITING A8 YEAR ORIENTATION'
             );
 
 
@@ -824,7 +1153,7 @@ setInterval(refresh,1000);
       } else {
 
         byId('livePhase27').textContent =
-          'AWAITING YEAR ORIENTATION';
+          'AWAITING A8 YEAR ORIENTATION';
 
         byId('yearFineFraction').textContent =
           '—';
@@ -860,6 +1189,89 @@ setInterval(refresh,1000);
     1000
   );
 
+})();
+</script>
+
+
+<script id="a8-year-angle-presentation-adapter">
+(() => {
+  'use strict';
+
+  /*
+   * PRESENTATION BOUNDARY ONLY.
+   *
+   * Do not alter Core20, /api/core20/year-angle, JPL fallback
+   * machinery, recovery state, or stored backend semantics here.
+   *
+   * Old backend emergency/fallback status names are preserved
+   * behind glass while the primary Sol instrument uses current
+   * A8 public semantics.
+   */
+
+  const front =
+    document.getElementById('absoluteSolAngle');
+
+  const mappingStatus =
+    document.getElementById('liveSolStatus');
+
+  const phase27 =
+    document.getElementById('livePhase27');
+
+  const fallback =
+    document.getElementById('a8ExternalOrientationRawStatus');
+
+  if (!front || !mappingStatus || !phase27 || !fallback) return;
+
+  const legacyOrientationStates = new Set([
+    'YEAR_ANGLE_AWAITING_ONE_SHOT_JPL_ALIGN',
+    'AWAITING ONE-SHOT YEAR ORIENTATION'
+  ]);
+
+  let adapting = false;
+
+  function translate(el) {
+    if (!el) return null;
+
+    const raw = String(el.textContent || '').trim();
+
+    if (!legacyOrientationStates.has(raw)) {
+      return null;
+    }
+
+    el.textContent = 'AWAITING A8 YEAR ORIENTATION';
+    return raw;
+  }
+
+  function adapt() {
+    if (adapting) return;
+
+    adapting = true;
+
+    const rawStates = [
+      translate(front),
+      translate(phase27),
+      translate(mappingStatus)
+    ].filter(Boolean);
+
+    if (rawStates.length) {
+      fallback.textContent =
+        'BACKEND STATUS · ' + rawStates[0];
+    }
+
+    adapting = false;
+  }
+
+  const observer = new MutationObserver(adapt);
+
+  for (const el of [front, phase27, mappingStatus]) {
+    observer.observe(el, {
+      childList: true,
+      characterData: true,
+      subtree: true
+    });
+  }
+
+  adapt();
 })();
 </script>
 
