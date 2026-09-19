@@ -610,6 +610,242 @@ class A8YearAngleJplBridge {
   }
 
 
+  validateNativeSolAngle512(
+    angle512
+  ) {
+    /*
+     * Native angle512 -> PHASE27.
+     *
+     * Full turn:
+     *   512 angle states
+     *   2^27 PHASE27 states
+     *
+     * Therefore:
+     *   1 angle512 unit = 2^18 PHASE27 states.
+     */
+    const angle =
+      decimalRational(
+        String(
+          angle512
+        )
+      );
+
+    if (
+      angle.numerator < 0n ||
+      angle.numerator >=
+        512n *
+        angle.denominator
+    ) {
+      throw new Error(
+        'native Sol angle512 must be >= 0 and < 512'
+      );
+    }
+
+    const fineNumerator =
+      angle.numerator *
+      FINE_STATES_PER_ANGLE512;
+
+    if (
+      fineNumerator %
+        angle.denominator !==
+      0n
+    ) {
+      throw new Error(
+        'native Sol angle512 is not exactly representable in PHASE27'
+      );
+    }
+
+    const phase27 =
+      fineNumerator /
+      angle.denominator;
+
+    return {
+      phase27,
+
+      phase9:
+        phase27 >>
+        18n,
+    };
+  }
+
+
+  alignNativeSol({
+    rawAtYearAlign,
+    angle512,
+    physicalSourceEpoch,
+    physicalRawCount,
+    physicalReportSequence = null,
+    rawAuthority = null,
+    coreMapping = null,
+  }) {
+    const epoch =
+      this._epoch();
+
+    /*
+     * Preserve one-shot semantics.
+     * Do not silently replace a valid alignment
+     * already belonging to this Core source epoch.
+     */
+    if (
+      this.alignment &&
+      this.alignment.sourceEpoch ===
+        epoch
+    ) {
+      return {
+        applied:
+          false,
+
+        alignment:
+          { ...this.alignment },
+
+        yearAngle:
+          this.snapshot(),
+      };
+    }
+
+    /*
+     * Native orientation may establish absolute position.
+     * It may NOT manufacture the recovered Sol rate.
+     */
+    this._solRate();
+
+    const rawText =
+      String(
+        rawAtYearAlign
+      );
+
+    if (
+      !/^[0-9]+$/.test(
+        rawText
+      )
+    ) {
+      throw new Error(
+        'native Sol year-angle Core RAW must be an unsigned integer'
+      );
+    }
+
+    const rawAtAlign =
+      BigInt(
+        rawText
+      );
+
+    const rawNow =
+      BigInt(
+        this.getRaw()
+      );
+
+    if (
+      rawAtAlign >
+      rawNow
+    ) {
+      throw new Error(
+        'native Sol year-angle Core RAW cannot be ahead of current selected RAW'
+      );
+    }
+
+    const {
+      phase27:
+        phase27AtAlign,
+
+      phase9:
+        phase9AtAlign,
+    } =
+      this.validateNativeSolAngle512(
+        angle512
+      );
+
+    this.alignment = {
+      schema:
+        'A8-YEAR-ANGLE-NATIVE-SOL-ONE-SHOT-V1',
+
+      sourceEpoch:
+        epoch,
+
+      rawAtYearAlign:
+        rawAtAlign.toString(),
+
+      a8YearPhase27AtAlign:
+        phase27AtAlign.toString(),
+
+      a8YearPhase9AtAlign:
+        phase9AtAlign.toString(),
+
+      nativeAngle512AtAlign:
+        String(
+          angle512
+        ),
+
+      comparisonSource:
+        'NATIVE_SOL_CELESTIAL_DIRECTION',
+
+      target:
+        'SUN',
+
+      zeroDefinition:
+        'SOL_APPARENT_ECLIPTIC_LONGITUDE_0_VERNAL_EQUINOX',
+
+      physicalSourceEpoch:
+        physicalSourceEpoch === null ||
+        physicalSourceEpoch === undefined
+          ? null
+          : String(
+              physicalSourceEpoch
+            ),
+
+      physicalRawCount:
+        physicalRawCount === null ||
+        physicalRawCount === undefined
+          ? null
+          : String(
+              physicalRawCount
+            ),
+
+      physicalReportSequence:
+        physicalReportSequence,
+
+      rawAuthority:
+        rawAuthority,
+
+      coreMapping:
+        coreMapping
+          ? { ...coreMapping }
+          : null,
+
+      externalBridgeOnly:
+        false,
+
+      externalSourceDefinesRate:
+        false,
+
+      externalSourceDefinesRecurrence:
+        false,
+
+      usesJpl:
+        false,
+
+      usesUtc:
+        false,
+
+      usesHostTime:
+        false,
+
+      networkCadenceAuthority:
+        false,
+    };
+
+    return {
+      applied:
+        true,
+
+      alignment:
+        { ...this.alignment },
+
+      yearAngle:
+        this.snapshot(),
+    };
+  }
+
+
   async alignOnce() {
     const epoch =
       this._epoch();

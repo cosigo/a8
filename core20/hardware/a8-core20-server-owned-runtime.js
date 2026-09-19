@@ -55,6 +55,8 @@ class Core20ServerOwnedRuntime {
     setTimeoutFn = setTimeout,
     intervalMs = 2,
     qualificationPresentationMs = 0,
+    externalPhysicalPrimary = false,
+    legacyEmergencyEnabled = false,
   } = {}) {
     for (const [name, fn] of Object.entries({
       prepareVirtual, advanceRaw, getRaw, getSourceEpoch, getRecurrenceText
@@ -81,6 +83,35 @@ class Core20ServerOwnedRuntime {
     this.timer = null;
     this.lastPaceNs = 0n;
     this.paceRemainder = 0n;
+
+    /*
+     * PRIMARY EXTERNAL PHYSICAL PACE
+     *
+     * When true, selected RAW advances only from qualified
+     * external physical RAW deltas. Host monotonic time is
+     * not sampled for pacing.
+     */
+    this.externalPhysicalPrimary =
+      externalPhysicalPrimary === true;
+
+    /*
+     * LEGACY EMERGENCY RESERVE
+     *
+     * Explicit break-glass opt-in only. Merely losing PRIMARY
+     * may never activate host-monotonic pacing or UTC alignment.
+     */
+    this.legacyEmergencyEnabled =
+      legacyEmergencyEnabled === true;
+
+    if (
+      this.externalPhysicalPrimary &&
+      this.legacyEmergencyEnabled
+    ) {
+      throw new Error(
+        'PRIMARY physical pace and LEGACY emergency reserve cannot be active simultaneously'
+      );
+    }
+
     this.rawPerDayNumerator = null;
     this.rawPerDayDenominator = null;
     this.alignment = null;
@@ -160,7 +191,12 @@ class Core20ServerOwnedRuntime {
       this.rawPerDayNumerator = q.numerator;
       this.rawPerDayDenominator = q.denominator;
       this.paceRemainder = 0n;
-      this.lastPaceNs = BigInt(this.monotonicNowNs());
+
+      this.lastPaceNs =
+        this.legacyEmergencyEnabled
+          ? BigInt(this.monotonicNowNs())
+          : 0n;
+
       this.status = 'RUNNING';
 
       this.timer = this.setIntervalFn(() => {
@@ -187,6 +223,20 @@ class Core20ServerOwnedRuntime {
     }
   }
 
+  _requireLegacyEmergencyReserve(action) {
+    if (!this.legacyEmergencyEnabled) {
+      throw new Error(
+        `LEGACY EMERGENCY RESERVE DISCONNECTED · ${action}`
+      );
+    }
+
+    if (this.externalPhysicalPrimary) {
+      throw new Error(
+        `LEGACY EMERGENCY RESERVE REFUSED WHILE PRIMARY ACTIVE · ${action}`
+      );
+    }
+  }
+
   stop() {
     this._clearTimer();
     this.status = 'STOPPED';
@@ -204,6 +254,10 @@ class Core20ServerOwnedRuntime {
         `diagnostic resume requires STOPPED runtime; current=${this.status}`
       );
     }
+
+    this._requireLegacyEmergencyReserve(
+      'diagnostic resume'
+    );
 
     if (
       this.rawPerDayNumerator === null ||
@@ -381,7 +435,11 @@ class Core20ServerOwnedRuntime {
       dayCount: after.dayCount.toString(),
       dayPhase17: after.dayPhase17.toString(),
       clockAuthority:
-        'RECOVERED_JOVIAN_MINTAKA_SOL_SUN_RETURN',
+        this.alignment &&
+        this.alignment.role ===
+          'TEMPORARY_EXTERNAL_PHYSICAL_HOLDOVER'
+          ? 'TEMPORARY_EXTERNAL_PHYSICAL_HOLDOVER · NATIVE_AUTHORITY_FALSE'
+          : 'RECOVERED_JOVIAN_MINTAKA_SOL_SUN_RETURN',
       definingPathTouched: false,
       browserTimingAuthority: false,
     };
@@ -398,10 +456,33 @@ class Core20ServerOwnedRuntime {
     }
   }
 
-  tick(nowNs = this.monotonicNowNs()) {
+  tick(nowNs = null) {
     if (this.status !== 'RUNNING') return 0n;
 
-    const now = BigInt(nowNs);
+    /*
+     * PRIMARY:
+     * scheduler cadence is execution only.
+     * No host-monotonic value is sampled or used for RAW pace.
+     */
+    if (this.externalPhysicalPrimary) {
+      return 0n;
+    }
+
+    /*
+     * No silent fallback.
+     * Host-monotonic pacing exists only behind explicit
+     * LEGACY emergency promotion.
+     */
+    this._requireLegacyEmergencyReserve(
+      'host monotonic RAW pacing'
+    );
+
+    const now =
+      BigInt(
+        nowNs === null
+          ? this.monotonicNowNs()
+          : nowNs
+      );
     const elapsed = now - this.lastPaceNs;
     this.lastPaceNs = now;
     if (elapsed <= 0n) return 0n;
@@ -431,6 +512,240 @@ class Core20ServerOwnedRuntime {
     return due;
   }
 
+  advanceExternalPhysicalToTarget(targetRawPulse) {
+    if (!this.externalPhysicalPrimary) {
+      throw new Error(
+        'external physical RAW advance requires PRIMARY physical mode'
+      );
+    }
+
+    if (this.status !== 'RUNNING') {
+      throw new Error(
+        `external physical RAW advance requires RUNNING Core20; current=${this.status}`
+      );
+    }
+
+    const target =
+      BigInt(targetRawPulse);
+
+    const current =
+      BigInt(this.getRaw());
+
+    if (target < current) {
+      throw new Error(
+        `external physical RAW target regressed: target=${target} current=${current}`
+      );
+    }
+
+    const due =
+      target - current;
+
+    if (due === 0n) {
+      return 0n;
+    }
+
+    const before =
+      this._clockCoordinate();
+
+    this.advanceRaw(due);
+
+    const after =
+      this._clockCoordinate();
+
+    if (before && after) {
+      this._emitClockEdge(
+        before,
+        after
+      );
+    }
+
+    return due;
+  }
+
+  installExternalPhysicalAlignment({
+    anchorRawPulse,
+    targetDayPhase17,
+    targetDayCount = '0',
+    externalPhysicalSourceEpoch,
+  }) {
+    if (!this.externalPhysicalPrimary) {
+      throw new Error(
+        'external physical alignment requires PRIMARY physical mode'
+      );
+    }
+
+    if (this.status !== 'RUNNING') {
+      throw new Error(
+        `external physical alignment requires RUNNING Core20; current=${this.status}`
+      );
+    }
+
+    const epoch =
+      String(this.getSourceEpoch());
+
+    const anchorRaw =
+      BigInt(anchorRawPulse);
+
+    const phase =
+      BigInt(targetDayPhase17);
+
+    const dayCount =
+      BigInt(targetDayCount);
+
+    const rawNow =
+      BigInt(this.getRaw());
+
+    if (anchorRaw > rawNow) {
+      throw new Error(
+        'external physical historical RAW anchor is ahead of current RAW'
+      );
+    }
+
+    if (
+      phase < 0n ||
+      phase >= DAY_STATES
+    ) {
+      throw new Error(
+        'external physical DAY_PHASE17 anchor out of range'
+      );
+    }
+
+    if (dayCount < 0n) {
+      throw new Error(
+        'external physical dayCount anchor cannot be negative'
+      );
+    }
+
+    if (String(externalPhysicalSourceEpoch) !== String(process.env.A8_CORE20_EXTERNAL_PHYSICAL_EPOCH || '')) {
+      throw new Error(
+        'external physical SOURCE_EPOCH does not match configured source'
+      );
+    }
+
+    if (this.alignment) {
+      if (
+        this.alignment.role ===
+          'TEMPORARY_EXTERNAL_PHYSICAL_HOLDOVER' &&
+        this.alignment.externalPhysicalSourceEpoch === String(process.env.A8_CORE20_EXTERNAL_PHYSICAL_EPOCH || '')
+      ) {
+        return {
+          applied: false,
+          alignment: { ...this.alignment },
+          clock: this.clockSnapshot(),
+        };
+      }
+
+      throw new Error(
+        'refusing to overwrite existing alignment'
+      );
+    }
+
+    this.alignmentSeq += 1;
+
+    this.alignment = {
+      source:
+        `ARDUINO A TIMER2/D11 → ARDUINO B TIMER1/D5 → PI REPORTER · SOURCE_EPOCH ${process.env.A8_CORE20_EXTERNAL_PHYSICAL_EPOCH}`,
+
+      role:
+        process.env.A8_CORE20_EXTERNAL_JOVIAN_QUALIFIED === '1'
+          ? 'QUALIFIED_EXTERNAL_PHYSICAL_PRIMARY'
+          : 'TEMPORARY_EXTERNAL_PHYSICAL_HOLDOVER',
+
+      sourceEpoch:
+        epoch,
+
+      serverStampedRawPulse:
+        anchorRaw.toString(),
+
+      targetDayCount:
+        dayCount.toString(),
+
+      targetDayPhase17:
+        phase.toString(),
+
+      externalPhysicalSourceEpoch:
+        String(process.env.A8_CORE20_EXTERNAL_PHYSICAL_EPOCH),
+
+      physicalAnchorRaw:
+        String(process.env.A8_CORE20_EXTERNAL_PHYSICAL_ANCHOR),
+
+      coreAnchorRaw:
+        String(process.env.A8_CORE20_EXTERNAL_CORE_ANCHOR),
+
+      civilCoreAnchorRaw:
+        String(
+          process.env.A8_CORE20_EXTERNAL_CIVIL_CORE_ANCHOR ||
+          process.env.A8_CORE20_EXTERNAL_CORE_ANCHOR
+        ),
+
+      ratioCoreRawPerPhysicalEdge:
+        `${process.env.A8_CORE20_EXTERNAL_RATIO_NUMERATOR}/${process.env.A8_CORE20_EXTERNAL_RATIO_DENOMINATOR}`,
+
+      observedRatioLower:
+        null,
+
+      observedRatioUpper:
+        null,
+
+      inheritsPreviousCore20Pace:
+        false,
+
+      nativeAuthority:
+        false,
+
+      temporaryEmergency:
+        process.env.A8_CORE20_EXTERNAL_JOVIAN_QUALIFIED !== '1',
+
+      engineeredPhysicalSource:
+        true,
+
+      jovianQualified:
+        process.env.A8_CORE20_EXTERNAL_JOVIAN_QUALIFIED === '1',
+
+      rateBootstrapProvenance:
+        process.env.A8_CORE20_EXTERNAL_RATE_PROVENANCE || null,
+
+      phaseBootstrapProvenance:
+        process.env.A8_CORE20_EXTERNAL_PHASE_PROVENANCE || null,
+
+      usesUTC:
+        false,
+
+      usesHostTime:
+        false,
+
+      usesBrowserTime:
+        false,
+
+      usesNTP:
+        false,
+
+      usesGPS:
+        false,
+
+      ongoingUtcFeed:
+        false,
+
+      outageElapsedFromHostTime:
+        false,
+
+      definingPathTouched:
+        true,
+
+      sequence:
+        this.alignmentSeq,
+    };
+
+    this.civilRealignRecommended =
+      false;
+
+    return {
+      applied: true,
+      alignment: { ...this.alignment },
+      clock: this.clockSnapshot(),
+    };
+  }
+
   alignIfNeeded() {
     if (this.status !== 'RUNNING') {
       throw new Error(`Core20 runtime is not running: ${this.status}`);
@@ -445,6 +760,10 @@ class Core20ServerOwnedRuntime {
         clock: this.clockSnapshot(),
       };
     }
+
+    this._requireLegacyEmergencyReserve(
+      'momentary UTC alignment'
+    );
 
     const utcMs = utcMillisecondsSinceMidnight(this.utcNow());
     const targetPhase = (utcMs * DAY_STATES) / HOST_DAY_MS;
@@ -484,6 +803,10 @@ class Core20ServerOwnedRuntime {
    * - UTC cannot advance YEAR DAY
    */
   realignCivilPhase() {
+    this._requireLegacyEmergencyReserve(
+      'UTC civil re-alignment'
+    );
+
     if (this.status !== 'RUNNING') {
       throw new Error(
         `civil re-align requires RUNNING Core20; current=${this.status}`
@@ -620,7 +943,7 @@ class Core20ServerOwnedRuntime {
         sourceEpoch: epoch,
         currentSelectedRawPulse: String(this.getRaw()),
         recoveredRawPerSunReturn: this.getRecurrenceText(),
-        clockAuthority: 'RECOVERED_JOVIAN_MINTAKA_SOL_SUN_RETURN',
+        clockAuthority: 'CLOCK_AUTHORITY_UNESTABLISHED · ABSOLUTE_PHASE_UNALIGNED',
         runtime,
       };
     }
@@ -663,7 +986,12 @@ class Core20ServerOwnedRuntime {
       sourceEpoch: epoch,
       currentSelectedRawPulse: rawNow.toString(),
       recoveredRawPerSunReturn: this.getRecurrenceText(),
-      clockAuthority: 'RECOVERED_JOVIAN_MINTAKA_SOL_SUN_RETURN',
+      clockAuthority:
+        this.alignment &&
+        this.alignment.role ===
+          'TEMPORARY_EXTERNAL_PHYSICAL_HOLDOVER'
+          ? 'TEMPORARY_EXTERNAL_PHYSICAL_HOLDOVER · NATIVE_AUTHORITY_FALSE'
+          : 'RECOVERED_JOVIAN_MINTAKA_SOL_SUN_RETURN',
       alignment: { ...this.alignment },
       elapsedRawSinceAlignment: elapsedRaw.toString(),
       dayCount: dayCount.toString(),
@@ -690,7 +1018,16 @@ class Core20ServerOwnedRuntime {
         usesNTP: false,
         usesGPS: false,
         usesLegacySeconds: false,
-        source: 'RECOVERED RAW / SUN-RETURN SCALE ONLY',
+        source:
+        this.alignment &&
+        this.alignment.role ===
+          'QUALIFIED_EXTERNAL_PHYSICAL_PRIMARY'
+          ? 'EXTERNAL PHYSICAL RAW · RECOVERED NATURAL RATE · MERIDIAN-0 PHASE'
+          : this.alignment &&
+            this.alignment.role ===
+              'TEMPORARY_EXTERNAL_PHYSICAL_HOLDOVER'
+            ? 'EXTERNAL PHYSICAL RAW · TEMPORARY MAPPED HOLDOVER'
+            : 'RECOVERED RAW / SUN-RETURN SCALE ONLY',
       },
       runtime,
     };
@@ -704,11 +1041,45 @@ class Core20ServerOwnedRuntime {
       intervalMs: this.intervalMs,
       edgeObserverIntervalMs: this.intervalMs,
       clockEdgePublisher: 'NODE_SERVER_AUTHORITATIVE_DAY_PHASE17_EDGE',
-      pulseGeneratorOwner: 'NODE_SERVER',
+      pulseGeneratorOwner:
+        this.externalPhysicalPrimary
+          ? 'EXTERNAL_PHYSICAL_SOURCE'
+          : this.legacyEmergencyEnabled
+            ? 'LEGACY_HOST_MONOTONIC_RESERVE'
+            : 'NONE_FAIL_CLOSED',
+
+      pathStatus: {
+        primary:
+          this.externalPhysicalPrimary
+            ? 'ACTIVE'
+            : 'INACTIVE',
+
+        ghost:
+          'STANDBY_NOT_BUILT',
+
+        legacyEmergency:
+          this.legacyEmergencyEnabled
+            ? 'ACTIVE_BREAK_GLASS'
+            : 'STANDBY_DISCONNECTED',
+      },
+
+      externalPhysicalPrimary:
+        this.externalPhysicalPrimary,
+
+      legacyEmergencyEnabled:
+        this.legacyEmergencyEnabled,
+
       browserPulseGenerator: false,
       browserVisibilityAffectsClock: false,
       browserPacketTimingAffectsClock: false,
-      monotonicExecutionPace: 'SERVER_PROCESS_HRTIME_ONLY',
+
+      monotonicExecutionPace:
+        this.externalPhysicalPrimary
+          ? 'EXTERNAL_PHYSICAL_RAW_DELTA_ONLY'
+          : this.legacyEmergencyEnabled
+            ? 'LEGACY_SERVER_PROCESS_HRTIME_BREAK_GLASS'
+            : 'NONE_FAIL_CLOSED',
+
       recoveredRawPerSunReturn:
         this.rawPerDayNumerator === null
           ? null

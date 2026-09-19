@@ -562,6 +562,30 @@ class A8Core20CalendarAnchor {
       this.checkpointMigration ??
       null;
 
+    /*
+     * TEMPORARY EMERGENCY 555 HOLDOVER
+     *
+     * Native calendar persistence owns the integer
+     * calendar position only.
+     *
+     * During emergency physical holdover, DAY_PHASE17
+     * and rawPulse are deliberately NOT persisted as
+     * native calendar evidence.
+     */
+    const emergencyHoldover =
+      process.env.A8_CORE20_EXTERNAL_PHYSICAL ===
+      '1';
+
+    const persistedObservedDayPhase17 =
+      emergencyHoldover
+        ? null
+        : observedDayPhase17;
+
+    const persistedObservedRawPulse =
+      emergencyHoldover
+        ? null
+        : observedRawPulse;
+
     return {
       schema:
         'A8-CORE20-CALENDAR-CHECKPOINT-V2',
@@ -603,19 +627,19 @@ class A8Core20CalendarAnchor {
         ),
 
       observedDayPhase17:
-        observedDayPhase17 === null ||
-        observedDayPhase17 === undefined
+        persistedObservedDayPhase17 === null ||
+        persistedObservedDayPhase17 === undefined
           ? null
           : String(
-              observedDayPhase17
+              persistedObservedDayPhase17
             ),
 
       observedRawPulse:
-        observedRawPulse === null ||
-        observedRawPulse === undefined
+        persistedObservedRawPulse === null ||
+        persistedObservedRawPulse === undefined
           ? null
           : String(
-              observedRawPulse
+              persistedObservedRawPulse
             ),
 
       checkpointMigration:
@@ -626,6 +650,27 @@ class A8Core20CalendarAnchor {
 
       authority:
         'PERSISTED_NATIVE_A8_INTEGER_CALENDAR_STATE',
+
+      authorityScope:
+        'INTEGER_CALENDAR_POSITION_ONLY',
+
+      observedPhaseProvenance:
+        emergencyHoldover
+          ? 'WITHHELD_TEMPORARY_EXTERNAL_PHYSICAL_HOLDOVER'
+          : 'CORE20_CLOCK_EDGE_OBSERVATION',
+
+      nativePhasePersisted:
+        emergencyHoldover
+          ? false
+          : true,
+
+      temporaryEmergencyHoldover:
+        emergencyHoldover,
+
+      emergencyExternalPhysicalSourceEpoch:
+        emergencyHoldover
+          ? '4'
+          : null,
 
       runningAdvance:
         'CORE20_INTEGER_CIVIL_DAY_COUNT_ONLY',

@@ -1,0 +1,25 @@
+===== CORE20 =====
+MainPID=1566697
+NRestarts=0
+ExecStart={ path=/usr/bin/node ; argv[]=/usr/bin/node /usr/local/lib/a8-core20-service.js ; ignore_errors=no ; start_time=[Fri 2026-09-18 07:21:14 CST] ; stop_time=[n/a] ; pid=1566697 ; code=(null) ; status=0/0 }
+EnvironmentFiles=/etc/a8-core20/external-physical.env (ignore_errors=no)
+ActiveState=active
+SubState=running
+FragmentPath=/etc/systemd/system/a8-core20.service
+
+===== EXTERNAL PHYSICAL =====
+MainPID=1566702
+NRestarts=0
+ExecStart={ path=/usr/local/sbin/a8-core20-external-physical-feed.py ; argv[]=/usr/local/sbin/a8-core20-external-physical-feed.py ; ignore_errors=no ; start_time=[Fri 2026-09-18 07:21:14 CST] ; stop_time=[n/a] ; pid=1566702 ; code=(null) ; status=0/0 }
+EnvironmentFiles=/etc/a8-core20/external-physical.env (ignore_errors=no)
+ActiveState=active
+SubState=running
+FragmentPath=/etc/systemd/system/a8-core20-external-physical.service
+
+===== AUTORECOVER =====
+MainPID=0
+NRestarts=0
+ExecStart={ path=/usr/local/sbin/a8-core20-autorecover ; argv[]=/usr/local/sbin/a8-core20-autorecover ; ignore_errors=no ; start_time=[Fri 2026-09-18 07:21:14 CST] ; stop_time=[Fri 2026-09-18 07:21:23 CST] ; pid=1566699 ; code=exited ; status=0 }
+ActiveState=active
+SubState=exited
+FragmentPath=/etc/systemd/system/a8-core20-autorecover.service

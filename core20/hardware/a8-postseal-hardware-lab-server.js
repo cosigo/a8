@@ -37,6 +37,12 @@ const {
 } = require('./a8-core20-recovery-input-bridge');
 
 const {
+  SAMPLE_SCHEMA: PHYSICAL_JOVIAN_SAMPLE_SCHEMA,
+  SAMPLE_SOURCE: PHYSICAL_JOVIAN_SAMPLE_SOURCE,
+  ExternalPulseRigObserver,
+} = require('./a8-external-pulse-rig-contract');
+
+const {
   Core20JovianRecoveryWrapper,
 } = require('./a8-jovian-recovery-wrapper');
 
@@ -880,6 +886,1047 @@ function createHardwareLabServer({
     return jovianTimekeeper.snapshot();
   };
 
+  /*
+   * PHYSICAL JOVIAN LANE
+   *
+   * Epoch-N physical carrier RAW enters here independently of the
+   * historical VIRTUAL_RIG_A qualification fixture.
+   *
+   * THIS LANE DOES NOT DRIVE CORE20 YET.
+   *
+   * Real Jupiter witnesses are stamped against the latest accepted
+   * physical carrier RAW. A carrier replacement creates a fresh
+   * physical source epoch and automatically re-arms recovery.
+   */
+  const physicalJovianRecoveryBridge =
+    new Core20RecoveryInputBridge();
+
+  const physicalJovianRecovery =
+    new Core20JovianRecoveryWrapper();
+
+  const physicalJovianTimekeeper =
+    new JovianPhaseTimekeeper();
+
+  let physicalJovianSourceEpoch = null;
+  let physicalJovianRig = null;
+  let physicalJovianObserver =
+    new ExternalPulseRigObserver();
+
+  let physicalJovianLastReportSequence = null;
+  let physicalJovianEpochChanges = 0;
+
+  /*
+   * ACTUAL JUPITER FEED
+   *
+   * Continuous carrier RAW and observational evidence are deliberately
+   * separate lanes.
+   *
+   * CONTINUOUS:
+   *   Epoch-N physical RAW -> current carrier coordinate / timekeeper
+   *
+   * EVIDENCE:
+   *   server-side frame capture -> Jupiter-relative x -> 3-frame turn
+   *   detector -> exact middle-frame physical RAW -> Jovian recovery
+   *
+   * No model/display value is accepted here.
+   * No caller may supply rawPulse.
+   * No turn is accepted from a caller.
+   */
+  const physicalJovianEvidenceBridge =
+    new Core20RecoveryInputBridge();
+
+  let physicalJovianEvidenceObserver =
+    new ExternalPulseRigObserver();
+
+  let physicalJovianFrameSequence = 0;
+  let physicalJovianLastProcessedFrameRaw = null;
+  let physicalJovianLastFrame = null;
+
+  const physicalJovianFrameCaptures =
+    new Map();
+
+  const physicalJovianFrameHistory = {
+    io: [],
+    europa: [],
+    ganymede: [],
+  };
+
+  const PHYSICAL_JOVIAN_FRAME_LIMIT = 4096;
+  const PHYSICAL_JOVIAN_TURN_EPS = 1e-10;
+
+  const physicalJovianSelectorSnapshot = () => {
+    if (physicalJovianSourceEpoch === null) {
+      return null;
+    }
+
+    const gate6a =
+      physicalJovianObserver.snapshot();
+
+    return {
+      schema:
+        'A8-PULSE-SOURCE-EPOCH-SELECTOR-V1',
+
+      role:
+        'PHYSICAL_JOVIAN_CARRIER_EPOCH_ADAPTER',
+
+      mode:
+        'REAL',
+
+      sourceEpoch:
+        physicalJovianSourceEpoch,
+
+      activeRig:
+        gate6a.rig,
+
+      gate6a,
+
+      virtualRig:
+        null,
+
+      lastSwitch: {
+        from:
+          null,
+
+        to:
+          'REAL',
+
+        epoch:
+          physicalJovianSourceEpoch,
+
+        baselineCleared:
+          true,
+
+        counterContinuityCarried:
+          false,
+      },
+
+      counterContinuityAcrossSourceSwitch:
+        false,
+
+      phaseContinuityManufacturedAcrossSourceSwitch:
+        false,
+
+      switchRequiresFreshRawBaseline:
+        true,
+
+      definingPayload:
+        'EPOCH-N PHYSICAL RAW + REAL JOVIAN TURN WITNESS',
+
+      writesA8Core:
+        false,
+
+      writesClock:
+        false,
+
+      writesPhase:
+        false,
+
+      writesOscillator:
+        false,
+
+      writesDivider:
+        false,
+
+      writesAuthority:
+        false,
+
+      usesHostTime:
+        false,
+
+      usesLegacyTime:
+        false,
+
+      usesFrequencyHz:
+        false,
+
+      acceptsTimestamp:
+        false,
+    };
+  };
+
+  const physicalJovianEvidenceSelectorSnapshot = () => {
+    if (physicalJovianSourceEpoch === null) {
+      return null;
+    }
+
+    const gate6a =
+      physicalJovianEvidenceObserver.snapshot();
+
+    return {
+      schema:
+        'A8-PULSE-SOURCE-EPOCH-SELECTOR-V1',
+
+      role:
+        'PHYSICAL_JOVIAN_EVIDENCE_EPOCH_ADAPTER',
+
+      mode:
+        'REAL',
+
+      sourceEpoch:
+        physicalJovianSourceEpoch,
+
+      activeRig:
+        gate6a.rig,
+
+      gate6a,
+
+      virtualRig:
+        null,
+
+      lastSwitch: {
+        from:
+          null,
+
+        to:
+          'REAL',
+
+        epoch:
+          physicalJovianSourceEpoch,
+
+        baselineCleared:
+          true,
+
+        counterContinuityCarried:
+          false,
+      },
+
+      counterContinuityAcrossSourceSwitch:
+        false,
+
+      phaseContinuityManufacturedAcrossSourceSwitch:
+        false,
+
+      switchRequiresFreshRawBaseline:
+        true,
+
+      definingPayload:
+        'SERVER-CAPTURED PHYSICAL RAW + JUPITER-RELATIVE X TURN EVIDENCE',
+
+      writesA8Core:
+        false,
+
+      writesClock:
+        false,
+
+      writesPhase:
+        false,
+
+      writesOscillator:
+        false,
+
+      writesDivider:
+        false,
+
+      writesAuthority:
+        false,
+
+      usesHostTime:
+        false,
+
+      usesLegacyTime:
+        false,
+
+      usesFrequencyHz:
+        false,
+
+      acceptsTimestamp:
+        false,
+    };
+  };
+
+
+  const syncPhysicalJovian = () => {
+    const selectorSnapshot =
+      physicalJovianSelectorSnapshot();
+
+    const evidenceSelectorSnapshot =
+      physicalJovianEvidenceSelectorSnapshot();
+
+    if (
+      selectorSnapshot === null ||
+      evidenceSelectorSnapshot === null
+    ) {
+      return null;
+    }
+
+    const bridge =
+      physicalJovianRecoveryBridge.sync(
+        selectorSnapshot
+      );
+
+    const evidenceBridge =
+      physicalJovianEvidenceBridge.sync(
+        evidenceSelectorSnapshot
+      );
+
+    physicalJovianRecovery.syncRecoveryInput(
+      evidenceBridge
+    );
+
+    const jovian =
+      physicalJovianRecovery.snapshot(
+        bridge.lastRawPulse
+      );
+
+    physicalJovianTimekeeper.sync(
+      bridge,
+      jovian
+    );
+
+    return bridge;
+  };
+
+  const currentPhysicalJovian = () => {
+    const bridge =
+      physicalJovianRecoveryBridge.snapshot();
+
+    const raw =
+      bridge.lastRawPulse;
+
+    return {
+      schema:
+        'A8-PHYSICAL-JOVIAN-LANE-V1',
+
+      role:
+        'REAL_JUPITER_OBSERVATION_OVER_REPLACEABLE_PHYSICAL_CARRIER',
+
+      status:
+        physicalJovianSourceEpoch === null
+          ? 'WAITING_FOR_PHYSICAL_CARRIER'
+          : 'PHYSICAL_CARRIER_ACTIVE',
+
+      physicalSourceEpoch:
+        physicalJovianSourceEpoch,
+
+      rig:
+        physicalJovianRig,
+
+      lastReportSequence:
+        physicalJovianLastReportSequence,
+
+      carrierEpochChanges:
+        physicalJovianEpochChanges,
+
+      recoveryInput:
+        bridge,
+
+      evidenceInput:
+        physicalJovianEvidenceBridge.snapshot(),
+
+      actualFeed: {
+        status:
+          physicalJovianSourceEpoch === null
+            ? 'WAITING_FOR_PHYSICAL_CARRIER'
+            : 'READY_FOR_REAL_FRAME_CAPTURE',
+
+        frameRawPolicy:
+          'SERVER_CAPTURED_PHYSICAL_RAW_ONLY',
+
+        measurementReduction:
+          'x = moonX - jupiterX',
+
+        turnDetector:
+          'THREE_FRAME_STRICT_LOCAL_EXTREMUM',
+
+        turnRawPolicy:
+          'MIDDLE_FRAME_CAPTURE_RAW',
+
+        callerSuppliedRawAccepted:
+          false,
+
+        callerSuppliedTurnAccepted:
+          false,
+
+        modelFeedbackAccepted:
+          false,
+
+        lastProcessedFrameRaw:
+          physicalJovianLastProcessedFrameRaw,
+
+        lastFrame:
+          physicalJovianLastFrame,
+      },
+
+      jovian:
+        physicalJovianRecovery.snapshot(
+          raw
+        ),
+
+      timekeeper:
+        physicalJovianTimekeeper.snapshot(),
+
+      actuatorConnected:
+        false,
+
+      writesCore20:
+        false,
+
+      writesClock:
+        false,
+
+      changesCivilPhase:
+        false,
+
+      usesVirtualFixture:
+        false,
+
+      usesHostTime:
+        false,
+
+      usesUTC:
+        false,
+    };
+  };
+
+  const notePhysicalJovianSample = ({
+    SOURCE_EPOCH,
+    RAW_COUNT,
+    REPORT_SEQUENCE = null,
+    STATUS,
+  }) => {
+    if (STATUS !== 'ACTIVE') {
+      throw new Error(
+        'physical Jovian carrier sample is not ACTIVE'
+      );
+    }
+
+    const epochText =
+      String(SOURCE_EPOCH ?? '');
+
+    if (!/^[1-9][0-9]*$/.test(epochText)) {
+      throw new Error(
+        'physical Jovian SOURCE_EPOCH invalid'
+      );
+    }
+
+    const epochBig =
+      BigInt(epochText);
+
+    if (
+      epochBig >
+      BigInt(Number.MAX_SAFE_INTEGER)
+    ) {
+      throw new Error(
+        'physical Jovian SOURCE_EPOCH exceeds safe integer'
+      );
+    }
+
+    const epoch =
+      Number(epochBig);
+
+    const rawText =
+      String(RAW_COUNT ?? '');
+
+    if (!/^(0|[1-9][0-9]*)$/.test(rawText)) {
+      throw new Error(
+        'physical Jovian RAW_COUNT invalid'
+      );
+    }
+
+    if (
+      physicalJovianSourceEpoch === null ||
+      physicalJovianSourceEpoch !== epoch
+    ) {
+      if (physicalJovianSourceEpoch !== null) {
+        physicalJovianEpochChanges += 1;
+      }
+
+      physicalJovianSourceEpoch =
+        epoch;
+
+      physicalJovianRig =
+        `ARDUINO_PHYSICAL_EPOCH_${epoch}`;
+
+      physicalJovianObserver =
+        new ExternalPulseRigObserver();
+
+      physicalJovianEvidenceObserver =
+        new ExternalPulseRigObserver();
+
+      physicalJovianFrameSequence = 0;
+      physicalJovianLastProcessedFrameRaw = null;
+      physicalJovianLastFrame = null;
+
+      physicalJovianFrameCaptures.clear();
+
+      for (
+        const history of
+        Object.values(
+          physicalJovianFrameHistory
+        )
+      ) {
+        history.length = 0;
+      }
+    }
+
+    const prior =
+      physicalJovianObserver
+        .snapshot()
+        .lastRawPulse;
+
+    if (
+      prior !== null &&
+      BigInt(rawText) < BigInt(prior)
+    ) {
+      throw new Error(
+        'physical Jovian RAW regressed inside carrier epoch'
+      );
+    }
+
+    if (
+      prior === null ||
+      BigInt(rawText) > BigInt(prior)
+    ) {
+      physicalJovianObserver.observe({
+        schema:
+          PHYSICAL_JOVIAN_SAMPLE_SCHEMA,
+
+        source:
+          PHYSICAL_JOVIAN_SAMPLE_SOURCE,
+
+        rig:
+          physicalJovianRig,
+
+        rawPulse:
+          rawText,
+      });
+    }
+
+    const evidencePrior =
+      physicalJovianEvidenceObserver
+        .snapshot()
+        .lastRawPulse;
+
+    if (evidencePrior === null) {
+      physicalJovianEvidenceObserver.observe({
+        schema:
+          PHYSICAL_JOVIAN_SAMPLE_SCHEMA,
+
+        source:
+          PHYSICAL_JOVIAN_SAMPLE_SOURCE,
+
+        rig:
+          physicalJovianRig,
+
+        rawPulse:
+          rawText,
+      });
+    }
+
+    physicalJovianLastReportSequence =
+      REPORT_SEQUENCE === null ||
+      REPORT_SEQUENCE === undefined
+        ? null
+        : String(REPORT_SEQUENCE);
+
+    syncPhysicalJovian();
+
+    return currentPhysicalJovian();
+  };
+
+  const notePhysicalJovianTurnAtRaw = ({
+    moon,
+    turn,
+    rawPulse,
+  }) => {
+    const rawText =
+      String(rawPulse ?? '');
+
+    if (!/^(0|[1-9][0-9]*)$/.test(rawText)) {
+      throw new Error(
+        'detected Jovian turn RAW invalid'
+      );
+    }
+
+    const prior =
+      physicalJovianEvidenceObserver
+        .snapshot()
+        .lastRawPulse;
+
+    if (
+      prior !== null &&
+      BigInt(rawText) < BigInt(prior)
+    ) {
+      throw new Error(
+        'detected Jovian turn RAW regressed'
+      );
+    }
+
+    if (
+      prior === null ||
+      BigInt(rawText) > BigInt(prior)
+    ) {
+      physicalJovianEvidenceObserver.observe({
+        schema:
+          PHYSICAL_JOVIAN_SAMPLE_SCHEMA,
+
+        source:
+          PHYSICAL_JOVIAN_SAMPLE_SOURCE,
+
+        rig:
+          physicalJovianRig,
+
+        rawPulse:
+          rawText,
+      });
+    }
+
+    const evidenceBridge =
+      physicalJovianEvidenceBridge.sync(
+        physicalJovianEvidenceSelectorSnapshot()
+      );
+
+    physicalJovianRecovery.syncRecoveryInput(
+      evidenceBridge
+    );
+
+    physicalJovianRecovery.observe(
+      evidenceBridge,
+      {
+        moon,
+        turn,
+      }
+    );
+
+    const continuousBridge =
+      physicalJovianRecoveryBridge.snapshot();
+
+    const jovianNow =
+      physicalJovianRecovery.snapshot(
+        continuousBridge.lastRawPulse
+      );
+
+    physicalJovianTimekeeper.sync(
+      continuousBridge,
+      jovianNow
+    );
+
+    return currentPhysicalJovian();
+  };
+
+  const capturePhysicalJovianFrame = () => {
+    const bridge =
+      syncPhysicalJovian();
+
+    if (
+      bridge === null ||
+      bridge.lastRawPulse === null ||
+      physicalJovianSourceEpoch === null
+    ) {
+      throw new Error(
+        'physical Jovian frame capture requires active physical carrier'
+      );
+    }
+
+    physicalJovianFrameSequence += 1;
+
+    const captureId =
+      `E${physicalJovianSourceEpoch}-F` +
+      String(
+        physicalJovianFrameSequence
+      ).padStart(8, '0');
+
+    const capture = {
+      schema:
+        'A8-PHYSICAL-JOVIAN-FRAME-CAPTURE-V1',
+
+      captureId,
+
+      sourceEpoch:
+        physicalJovianSourceEpoch,
+
+      rawPulse:
+        bridge.lastRawPulse,
+
+      reportSequence:
+        physicalJovianLastReportSequence,
+
+      processed:
+        false,
+    };
+
+    physicalJovianFrameCaptures.set(
+      captureId,
+      capture
+    );
+
+    while (
+      physicalJovianFrameCaptures.size >
+      PHYSICAL_JOVIAN_FRAME_LIMIT
+    ) {
+      const firstKey =
+        physicalJovianFrameCaptures
+          .keys()
+          .next()
+          .value;
+
+      physicalJovianFrameCaptures.delete(
+        firstKey
+      );
+    }
+
+    return {
+      ...capture,
+    };
+  };
+
+  const ingestPhysicalJovianFrame = body => {
+    if (
+      !body ||
+      typeof body !== 'object' ||
+      Array.isArray(body)
+    ) {
+      throw new Error(
+        'physical Jovian frame body must be an object'
+      );
+    }
+
+    const allowedTop =
+      new Set([
+        'captureId',
+        'jupiterX',
+        'moons',
+      ]);
+
+    for (
+      const key of
+      Object.keys(body)
+    ) {
+      if (!allowedTop.has(key)) {
+        throw new Error(
+          `unsupported physical Jovian frame field: ${key}`
+        );
+      }
+    }
+
+    const captureId =
+      String(body.captureId ?? '');
+
+    const capture =
+      physicalJovianFrameCaptures.get(
+        captureId
+      );
+
+    if (!capture) {
+      throw new Error(
+        'unknown or expired physical Jovian captureId'
+      );
+    }
+
+    if (capture.processed) {
+      throw new Error(
+        'physical Jovian capture already processed'
+      );
+    }
+
+    if (
+      capture.sourceEpoch !==
+      physicalJovianSourceEpoch
+    ) {
+      throw new Error(
+        'physical Jovian capture belongs to stale carrier epoch'
+      );
+    }
+
+    const raw =
+      BigInt(capture.rawPulse);
+
+    if (
+      physicalJovianLastProcessedFrameRaw !==
+        null &&
+      raw <=
+        BigInt(
+          physicalJovianLastProcessedFrameRaw
+        )
+    ) {
+      throw new Error(
+        'physical Jovian frame RAW must strictly advance'
+      );
+    }
+
+    const jupiterX =
+      Number(body.jupiterX);
+
+    if (!Number.isFinite(jupiterX)) {
+      throw new Error(
+        'physical Jovian jupiterX must be finite'
+      );
+    }
+
+    if (
+      !body.moons ||
+      typeof body.moons !== 'object' ||
+      Array.isArray(body.moons)
+    ) {
+      throw new Error(
+        'physical Jovian moons must be an object'
+      );
+    }
+
+    const allowedMoons =
+      new Set([
+        'io',
+        'europa',
+        'ganymede',
+      ]);
+
+    for (
+      const key of
+      Object.keys(body.moons)
+    ) {
+      if (!allowedMoons.has(key)) {
+        throw new Error(
+          `unsupported physical Jovian moon: ${key}`
+        );
+      }
+    }
+
+    const observations = [];
+    const turns = [];
+
+    for (
+      const moon of
+      ['io', 'europa', 'ganymede']
+    ) {
+      const rec =
+        body.moons[moon];
+
+      const history =
+        physicalJovianFrameHistory[
+          moon
+        ];
+
+      /*
+       * Missing moon measurement means blocked/missing observation.
+       * It is NOT x=0 and it clears the three-frame detector window.
+       */
+      if (
+        !rec ||
+        rec.visible === false
+      ) {
+        history.length = 0;
+
+        observations.push({
+          moon,
+          visible:
+            false,
+          rawPulse:
+            capture.rawPulse,
+          x:
+            null,
+        });
+
+        continue;
+      }
+
+      if (
+        typeof rec !== 'object' ||
+        Array.isArray(rec)
+      ) {
+        throw new Error(
+          `${moon} measurement must be an object`
+        );
+      }
+
+      const allowedMeasurement =
+        new Set([
+          'moonX',
+          'visible',
+          'uncertaintyX',
+        ]);
+
+      for (
+        const key of
+        Object.keys(rec)
+      ) {
+        if (
+          !allowedMeasurement.has(key)
+        ) {
+          throw new Error(
+            `unsupported ${moon} measurement field: ${key}`
+          );
+        }
+      }
+
+      const moonX =
+        Number(rec.moonX);
+
+      if (!Number.isFinite(moonX)) {
+        throw new Error(
+          `${moon} moonX must be finite when visible`
+        );
+      }
+
+      const uncertaintyX =
+        rec.uncertaintyX === undefined ||
+        rec.uncertaintyX === null
+          ? null
+          : Number(rec.uncertaintyX);
+
+      if (
+        uncertaintyX !== null &&
+        (
+          !Number.isFinite(
+            uncertaintyX
+          ) ||
+          uncertaintyX < 0
+        )
+      ) {
+        throw new Error(
+          `${moon} uncertaintyX must be finite and non-negative`
+        );
+      }
+
+      const x =
+        moonX -
+        jupiterX;
+
+      const sample = {
+        captureId,
+        rawPulse:
+          capture.rawPulse,
+        x,
+        uncertaintyX,
+      };
+
+      history.push(
+        sample
+      );
+
+      while (
+        history.length > 3
+      ) {
+        history.shift();
+      }
+
+      observations.push({
+        moon,
+        visible:
+          true,
+        rawPulse:
+          capture.rawPulse,
+        x,
+        uncertaintyX,
+      });
+
+      if (history.length === 3) {
+        const [a, b, c] =
+          history;
+
+        const east =
+          b.x >
+            a.x +
+              PHYSICAL_JOVIAN_TURN_EPS &&
+          b.x >
+            c.x +
+              PHYSICAL_JOVIAN_TURN_EPS;
+
+        const west =
+          b.x <
+            a.x -
+              PHYSICAL_JOVIAN_TURN_EPS &&
+          b.x <
+            c.x -
+              PHYSICAL_JOVIAN_TURN_EPS;
+
+        if (east || west) {
+          turns.push({
+            moon,
+            turn:
+              east
+                ? 'EAST'
+                : 'WEST',
+            rawPulse:
+              b.rawPulse,
+            captureId:
+              b.captureId,
+            x:
+              b.x,
+          });
+        }
+      }
+    }
+
+    turns.sort((a, b) => {
+      const ar =
+        BigInt(a.rawPulse);
+
+      const br =
+        BigInt(b.rawPulse);
+
+      if (ar < br)
+        return -1;
+
+      if (ar > br)
+        return 1;
+
+      return a.moon.localeCompare(
+        b.moon
+      );
+    });
+
+    const evidencePrior =
+      physicalJovianEvidenceObserver
+        .snapshot()
+        .lastRawPulse;
+
+    for (const turn of turns) {
+      if (
+        evidencePrior !== null &&
+        BigInt(turn.rawPulse) <
+          BigInt(evidencePrior)
+      ) {
+        throw new Error(
+          'detected turn precedes accepted Jovian evidence RAW'
+        );
+      }
+    }
+
+    for (const turn of turns) {
+      notePhysicalJovianTurnAtRaw(
+        turn
+      );
+    }
+
+    capture.processed =
+      true;
+
+    physicalJovianLastProcessedFrameRaw =
+      capture.rawPulse;
+
+    physicalJovianLastFrame = {
+      schema:
+        'A8-PHYSICAL-JOVIAN-FRAME-RESULT-V1',
+
+      captureId,
+
+      sourceEpoch:
+        capture.sourceEpoch,
+
+      rawPulse:
+        capture.rawPulse,
+
+      jupiterX,
+
+      observations,
+
+      turns,
+    };
+
+    physicalJovianFrameCaptures.delete(
+      captureId
+    );
+
+    return {
+      frame:
+        physicalJovianLastFrame,
+
+      physicalJovian:
+        currentPhysicalJovian(),
+    };
+  };
+
+
   const currentEarthObservers = () => {
     earthObservationBridge.sync(
       recoveryBridge.snapshot()
@@ -1514,6 +2561,91 @@ function createHardwareLabServer({
     return raw === null || raw === undefined ? 0n : BigInt(raw);
   };
 
+  /*
+   * QUALIFIED PHYSICAL RAW -> CORE RAW
+   *
+   * Same affine mapping and integer-floor semantics used by
+   * the live external-physical ingest lane.
+   *
+   * Read-only coordinate translation.
+   * Does not advance Core20.
+   */
+  const mapPhysicalRawToCoreRaw = physicalRawValue => {
+    const physicalRaw =
+      BigInt(
+        physicalRawValue
+      );
+
+    const physicalAnchor =
+      BigInt(
+        process.env
+          .A8_CORE20_EXTERNAL_PHYSICAL_ANCHOR
+      );
+
+    const coreAnchor =
+      BigInt(
+        process.env
+          .A8_CORE20_EXTERNAL_CORE_ANCHOR
+      );
+
+    const ratioNumerator =
+      BigInt(
+        process.env
+          .A8_CORE20_EXTERNAL_RATIO_NUMERATOR
+      );
+
+    const ratioDenominator =
+      BigInt(
+        process.env
+          .A8_CORE20_EXTERNAL_RATIO_DENOMINATOR
+      );
+
+    if (
+      ratioDenominator <=
+      0n
+    ) {
+      throw new Error(
+        'external physical/Core ratio denominator must be positive'
+      );
+    }
+
+    if (
+      physicalRaw <
+      physicalAnchor
+    ) {
+      throw new Error(
+        'physical raw regressed behind configured external anchor'
+      );
+    }
+
+    const physicalDelta =
+      physicalRaw -
+      physicalAnchor;
+
+    const externalCoreAdvance =
+      (
+        physicalDelta *
+        ratioNumerator
+      ) /
+      ratioDenominator;
+
+    const coreRaw =
+      coreAnchor +
+      externalCoreAdvance;
+
+    return {
+      physicalRaw,
+      physicalAnchor,
+      coreAnchor,
+      ratioNumerator,
+      ratioDenominator,
+      physicalDelta,
+      externalCoreAdvance,
+      coreRaw,
+    };
+  };
+
+
   const advanceVirtualRawDirect = amount => {
     const n = BigInt(amount);
     if (n <= 0n) return;
@@ -1694,7 +2826,8 @@ function createHardwareLabServer({
 
     /*
      * Execution/observer resolution only.
-     * Exact hrtime remainder accumulation preserves the virtual raw pace.
+     * Under PRIMARY physical mode this scheduler never advances RAW.
+     * Host-monotonic pacing is reserved for explicit LEGACY emergency use.
      */
     intervalMs: 2,
 
@@ -1705,8 +2838,11 @@ function createHardwareLabServer({
      */
     qualificationPresentationMs: 750,
 
-    externalPaceOnly:
+    externalPhysicalPrimary:
       process.env.A8_CORE20_EXTERNAL_PHYSICAL === '1',
+
+    legacyEmergencyEnabled:
+      process.env.A8_CORE20_LEGACY_EMERGENCY === '1',
   });
 
   /*
@@ -2365,7 +3501,7 @@ function createHardwareLabServer({
         }
 
         /*
-         * TEMPORARY EXTERNAL PHYSICAL HOLDOVER
+         * QUALIFIED EXTERNAL PHYSICAL PRIMARY
          *
          * Loopback service input only.
          *
@@ -2486,6 +3622,12 @@ function createHardwareLabServer({
                 process.env.A8_CORE20_EXTERNAL_CORE_ANCHOR
               );
 
+            const CIVIL_CORE_ANCHOR =
+              BigInt(
+                process.env.A8_CORE20_EXTERNAL_CIVIL_CORE_ANCHOR ||
+                process.env.A8_CORE20_EXTERNAL_CORE_ANCHOR
+              );
+
             const RATIO_NUMERATOR =
               BigInt(
                 process.env.A8_CORE20_EXTERNAL_RATIO_NUMERATOR
@@ -2521,6 +3663,21 @@ function createHardwareLabServer({
                   body.STATUS,
               });
 
+            notePhysicalJovianSample({
+              SOURCE_EPOCH:
+                body.SOURCE_EPOCH,
+
+              RAW_COUNT:
+                rawText,
+
+              REPORT_SEQUENCE:
+                body.REPORT_SEQUENCE ??
+                null,
+
+              STATUS:
+                body.STATUS,
+            });
+
             await ensureCore20RuntimeRunning();
 
             const physicalDelta =
@@ -2540,7 +3697,7 @@ function createHardwareLabServer({
 
             const advanced =
               core20Runtime
-                .advanceEmergencyToTarget(
+                .advanceExternalPhysicalToTarget(
                   targetCoreRaw.toString()
                 );
 
@@ -2553,9 +3710,9 @@ function createHardwareLabServer({
               'CORE20_CLOCK_RUNNING'
             ) {
               core20Runtime
-                .installExternalPhysicalHoldoverAlignment({
+                .installExternalPhysicalAlignment({
                   anchorRawPulse:
-                    CORE_ANCHOR.toString(),
+                    CIVIL_CORE_ANCHOR.toString(),
 
                   targetDayCount:
                     String(
@@ -2581,9 +3738,14 @@ function createHardwareLabServer({
             const alignment =
               clock.alignment || {};
 
+            const expectedExternalRole =
+              process.env.A8_CORE20_EXTERNAL_JOVIAN_QUALIFIED === '1'
+                ? 'QUALIFIED_EXTERNAL_PHYSICAL_PRIMARY'
+                : 'TEMPORARY_EXTERNAL_PHYSICAL_HOLDOVER';
+
             if (
               alignment.role !==
-              'TEMPORARY_EXTERNAL_PHYSICAL_HOLDOVER' ||
+              expectedExternalRole ||
               alignment
                 .externalPhysicalSourceEpoch !==
               String(
@@ -2591,7 +3753,7 @@ function createHardwareLabServer({
               )
             ) {
               throw new Error(
-                'emergency alignment identity mismatch'
+                'external physical alignment identity mismatch'
               );
             }
 
@@ -2602,10 +3764,13 @@ function createHardwareLabServer({
                 ok: true,
 
                 mode:
-                  'TEMPORARY_EXTERNAL_PHYSICAL_HOLDOVER',
+                  expectedExternalRole,
 
                 authority:
-                  'NONE · ENGINEERED PHYSICAL PACE · LEGACY RATE/PHASE BOOTSTRAP · JOVIAN QUALIFICATION PENDING',
+                  expectedExternalRole ===
+                    'QUALIFIED_EXTERNAL_PHYSICAL_PRIMARY'
+                    ? 'ENGINEERED PHYSICAL PACE · RECOVERED JOVIAN/MINTAKA/SOL RATE · MERIDIAN-0 PHASE · PREDICTIVE SYSTEM'
+                    : 'NONE · ENGINEERED PHYSICAL PACE · TEMPORARY MAPPED HOLDOVER',
 
                 physical: {
                   sourceEpoch:
@@ -2867,6 +4032,232 @@ function createHardwareLabServer({
             );
           }
         }
+
+        if (
+          req.method === 'POST' &&
+          url.pathname ===
+            '/api/core20/year-angle/align-native-sol'
+        ) {
+          try {
+            const body =
+              await readJsonBody(req);
+
+            if (
+              process.env
+                .A8_CORE20_EXTERNAL_PHYSICAL !==
+              '1'
+            ) {
+              throw new Error(
+                'native Sol year-angle alignment requires PRIMARY external physical mode'
+              );
+            }
+
+            if (
+              core20Runtime.status !==
+              'RUNNING'
+            ) {
+              throw new Error(
+                'native Sol year-angle alignment requires RUNNING Core20'
+              );
+            }
+
+            /*
+             * Preserve one-shot behavior without creating
+             * another physical evidence record.
+             */
+            const existing =
+              yearAngleBridge
+                .snapshot();
+
+            if (
+              existing.aligned ===
+              true
+            ) {
+              return sendJson(
+                res,
+                200,
+                {
+                  ok: true,
+
+                  alignmentApplied:
+                    false,
+
+                  physicalEvidenceRecorded:
+                    false,
+
+                  alignment:
+                    existing.alignment,
+
+                  yearAngle:
+                    existing,
+                }
+              );
+            }
+
+            /*
+             * The external observation supplies ONLY:
+             *
+             *   type
+             *   witness
+             *   exact native angle512
+             *
+             * The physical ledger itself stamps the currently
+             * selected Epoch-5 physical RAW sample.
+             */
+            /*
+             * Reject an invalid/non-PHASE27-native angle
+             * before the evidence ledger writes anything.
+             */
+            yearAngleBridge
+              .validateNativeSolAngle512(
+                body.angle512
+              );
+
+            const physicalEvidence =
+              physicalEarthEvidenceLedger
+                .recordSol(
+                  body
+                );
+
+            const mapped =
+              mapPhysicalRawToCoreRaw(
+                physicalEvidence
+                  .physicalRawCount
+              );
+
+            const currentCoreRaw =
+              selectedRawBigInt();
+
+            if (
+              mapped.coreRaw >
+              currentCoreRaw
+            ) {
+              throw new Error(
+                'native Sol mapped Core RAW is ahead of current selected RAW'
+              );
+            }
+
+            const result =
+              yearAngleBridge
+                .alignNativeSol({
+                  rawAtYearAlign:
+                    mapped
+                      .coreRaw
+                      .toString(),
+
+                  angle512:
+                    physicalEvidence
+                      .angle512,
+
+                  physicalSourceEpoch:
+                    physicalEvidence
+                      .physicalSourceEpoch,
+
+                  physicalRawCount:
+                    physicalEvidence
+                      .physicalRawCount,
+
+                  physicalReportSequence:
+                    physicalEvidence
+                      .physicalReportSequence,
+
+                  rawAuthority:
+                    physicalEvidence
+                      .rawAuthority,
+
+                  coreMapping: {
+                    method:
+                      'QUALIFIED_EXTERNAL_PHYSICAL_TO_CORE_INTEGER_FLOOR',
+
+                    physicalAnchorRaw:
+                      mapped
+                        .physicalAnchor
+                        .toString(),
+
+                    coreAnchorRaw:
+                      mapped
+                        .coreAnchor
+                        .toString(),
+
+                    ratioCoreRawPerPhysicalEdge:
+                      mapped
+                        .ratioNumerator
+                        .toString() +
+                      '/' +
+                      mapped
+                        .ratioDenominator
+                        .toString(),
+
+                    physicalDelta:
+                      mapped
+                        .physicalDelta
+                        .toString(),
+
+                    mappedCoreAdvance:
+                      mapped
+                        .externalCoreAdvance
+                        .toString(),
+
+                    mappedCoreRaw:
+                      mapped
+                        .coreRaw
+                        .toString(),
+                  },
+                });
+
+            return sendJson(
+              res,
+              200,
+              {
+                ok: true,
+
+                alignmentApplied:
+                  result.applied,
+
+                physicalEvidenceRecorded:
+                  true,
+
+                physicalEvidence,
+
+                alignment:
+                  result.alignment,
+
+                yearAngle:
+                  result.yearAngle,
+
+                orientationAuthority:
+                  'NATIVE_SOL_CELESTIAL_DIRECTION',
+
+                ongoingAuthority:
+                  'SELECTED_RAW_PLUS_RECOVERED_SOL_ANGLE_PER_RAW',
+
+                usesJpl:
+                  false,
+
+                usesUtc:
+                  false,
+
+                usesHostTime:
+                  false,
+              }
+            );
+          } catch (err) {
+            return sendJson(
+              res,
+              400,
+              {
+                ok: false,
+
+                error:
+                  err &&
+                  err.message
+                    ? err.message
+                    : String(err),
+              }
+            );
+          }
+        }
+
 
         if (
           req.method === 'POST' &&
@@ -3942,6 +5333,126 @@ function createHardwareLabServer({
         if (
           req.method === 'GET' &&
           url.pathname ===
+            '/api/hardware/jovian-physical'
+        ) {
+          return sendJson(
+            res,
+            200,
+            {
+              ok: true,
+              physicalJovian:
+                currentPhysicalJovian(),
+            }
+          );
+        }
+
+        if (
+          req.method === 'POST' &&
+          url.pathname ===
+            '/api/hardware/jovian-physical/frame/capture'
+        ) {
+          try {
+            const body =
+              await readJsonBody(req);
+
+            if (
+              body &&
+              Object.keys(body).length !== 0
+            ) {
+              throw new Error(
+                'frame capture accepts no caller timing or measurement fields'
+              );
+            }
+
+            return sendJson(
+              res,
+              200,
+              {
+                ok: true,
+                capture:
+                  capturePhysicalJovianFrame(),
+              }
+            );
+          } catch (err) {
+            return sendJson(
+              res,
+              400,
+              {
+                ok: false,
+                error:
+                  err &&
+                  err.message
+                    ? err.message
+                    : String(err),
+              }
+            );
+          }
+        }
+
+        if (
+          req.method === 'POST' &&
+          url.pathname ===
+            '/api/hardware/jovian-physical/frame/measure'
+        ) {
+          try {
+            const body =
+              await readJsonBody(req);
+
+            return sendJson(
+              res,
+              200,
+              {
+                ok: true,
+                ...ingestPhysicalJovianFrame(
+                  body
+                ),
+              }
+            );
+          } catch (err) {
+            return sendJson(
+              res,
+              400,
+              {
+                ok: false,
+                error:
+                  err &&
+                  err.message
+                    ? err.message
+                    : String(err),
+              }
+            );
+          }
+        }
+
+        if (
+          req.method === 'POST' &&
+          url.pathname ===
+            '/api/hardware/jovian-physical/observe'
+        ) {
+          return sendJson(
+            res,
+            410,
+            {
+              ok: false,
+              error:
+                'MANUAL_TURN_INGRESS_DISABLED',
+
+              requiredPath:
+                'frame/capture -> real Jupiter/moon measurement -> frame/measure',
+
+              acceptsCallerRaw:
+                false,
+
+              acceptsCallerTurn:
+                false,
+            }
+          );
+        }
+
+
+        if (
+          req.method === 'GET' &&
+          url.pathname ===
             '/api/hardware/jovian'
         ) {
           syncRecoveryInput();
@@ -4266,6 +5777,14 @@ function createHardwareLabServer({
     jovianRecovery,
     jovianFixture,
     jovianTimekeeper,
+    physicalJovianRecoveryBridge,
+    physicalJovianRecovery,
+    physicalJovianTimekeeper,
+    physicalJovianEvidenceBridge,
+    currentPhysicalJovian,
+    notePhysicalJovianSample,
+    capturePhysicalJovianFrame,
+    ingestPhysicalJovianFrame,
     earthObservationBridge,
     core20Runtime,
     nativeDittyBridge,

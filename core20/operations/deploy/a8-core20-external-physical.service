@@ -1,0 +1,16 @@
+[Unit]
+Description=A8 Core20 External Physical Pace Feeder
+Requires=a8-core20.service
+After=a8-core20.service
+PartOf=a8-core20.service
+
+[Service]
+Type=simple
+User=root
+Group=root
+EnvironmentFile=/etc/a8-core20/external-physical.env
+ExecStart=/usr/local/sbin/a8-core20-external-physical-feed.py
+Restart=no
+
+[Install]
+WantedBy=a8-core20.service

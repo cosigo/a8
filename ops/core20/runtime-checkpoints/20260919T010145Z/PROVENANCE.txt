@@ -1,0 +1,24 @@
+A8 CURRENT RUNTIME CHECKPOINT
+UTC STAMP · 20260919T010145Z
+GIT PARENT · 4db6715be4e5a98ba9132fa9c7283f2d1a4d1822
+
+ROLE · OPERATIONAL STATE / PROVENANCE
+AUTHORITY · NONE
+DO NOT TREAT THIS DIRECTORY AS A GENERIC DEPLOYMENT TEMPLATE
+
+CORE20 EXECUTION
+ENTRYPOINT · /usr/local/lib/a8-core20-service.js
+WORKING DIRECTORY · /srv/apps/a8_time_lab_v5_4_20_postseal_hw
+
+PHYSICAL PACE
+FEEDER · /usr/local/sbin/a8-core20-external-physical-feed.py
+ENVIRONMENT · /etc/a8-core20/external-physical.env
+
+EPOCH DOMAIN
+CORE20 INTERNAL · 3
+CURRENT PHYSICAL · 7
+
+IMPORTANT
+The saved external-physical.env contains the exact current
+Epoch-7 anchors, Trim-1 rate, and phase provenance.
+It is captured as state evidence, not as timeless configuration.
