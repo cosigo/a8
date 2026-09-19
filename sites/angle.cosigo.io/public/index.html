@@ -1,0 +1,1023 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>A8 Angle | 512-State Angular Ruler | Auspicious 8</title>
+<meta name="description" content="Explore the Auspicious 8 angular ruler: one full turn in 512 native states, with decimal and octal representation and legacy degrees retained for comparison.">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+<link rel="canonical" href="https://angle.cosigo.io/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Auspicious 8">
+<meta property="og:title" content="A8 Angle | 512-State Angular Ruler">
+<meta property="og:description" content="Explore the Auspicious 8 angular ruler: one full turn in 512 native states, with decimal and octal representation and legacy degrees retained for comparison.">
+<meta property="og:url" content="https://angle.cosigo.io/">
+<meta property="og:image" content="https://a8.cosigo.io/assets/cosigo_master_512.png">
+<meta property="og:image:alt" content="Angle instrument for Auspicious 8">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="A8 Angle | 512-State Angular Ruler">
+<meta name="twitter:description" content="Explore the Auspicious 8 angular ruler: one full turn in 512 native states, with decimal and octal representation and legacy degrees retained for comparison.">
+<meta name="twitter:image" content="https://a8.cosigo.io/assets/cosigo_master_512.png">
+<meta name="twitter:image:alt" content="Angle instrument for Auspicious 8">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"A8 Angle | 512-State Angular Ruler | Auspicious 8","url":"https://angle.cosigo.io/","description":"Explore the Auspicious 8 angular ruler: one full turn in 512 native states, with decimal and octal representation and legacy degrees retained for comparison.","inLanguage":"en","isPartOf":{"@type":"WebSite","name":"Auspicious 8","alternateName":"A8","url":"https://a8.cosigo.io/"},"publisher":{"@type":"Organization","name":"COSIGO Labs","url":"https://cosigo.io/"},"about":[{"@type":"Thing","name":"Auspicious 8"},{"@type":"Thing","name":"A8 Angle"},{"@type":"Thing","name":"512-state angular ruler"},{"@type":"Thing","name":"octal angle"},{"@type":"Thing","name":"binary angle"}]}</script>
+<link rel="stylesheet" href="style.css">
+<style>
+  .wall{display:grid;grid-template-columns:1fr auto 1fr;gap:14px;align-items:stretch}
+  .wall .side{border:1px solid var(--line);border-radius:14px;padding:14px;background:var(--panel)}
+  .wall .arrow{display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:800}
+  .primary-native{border-left:4px solid #6d9cff}
+  .legacy-side{opacity:.78}
+  .mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+  .bigout{font-size:1.7rem;font-weight:800;overflow-wrap:anywhere}
+  .examples{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+  .example{border:1px solid var(--line);border-radius:12px;padding:10px}
+  .exact{font-weight:750}
+  .muted-card{opacity:.75}
+  @media(max-width:700px){.wall{grid-template-columns:1fr}.wall .arrow{transform:rotate(90deg)}}
+
+/* A8 ANTIQUE ANGLE BACKGROUND v1 */
+body{
+  background:
+    linear-gradient(rgba(8,10,13,.58), rgba(8,10,13,.72)),
+    url("/assets/a8_angle_antique_bg.png")
+      center center / cover fixed no-repeat !important;
+}
+
+</style>
+<link rel="stylesheet" href="/site-shell.css">
+<meta name="author" content="COSIGO Labs">
+<style id="ANGLE-PRESENTATION-REFIT-V1">
+/*
+ * ANGLE · NATIVE-FIRST PRESENTATION REFIT
+ *
+ * A8 remains primary.
+ * Legacy material is visibly subordinate.
+ * This block is presentation only.
+ */
+
+.panel {
+  background: rgba(7,11,16,.30) !important;
+  backdrop-filter: blur(.75px);
+  -webkit-backdrop-filter: blur(.75px);
+}
+
+.wall {
+  background: transparent !important;
+}
+
+.side {
+  background: rgba(7,11,16,.24) !important;
+  backdrop-filter: blur(.5px);
+  -webkit-backdrop-filter: blur(.5px);
+}
+
+.a8-angle-instrument {
+  border-color: rgba(224,189,114,.46);
+}
+
+.a8-angle-instrument .primary-native {
+  background: rgba(8,20,24,.44) !important;
+}
+
+.a8-angle-legacy-bridge {
+  border-color: rgba(146,165,184,.34);
+}
+
+.a8-angle-legacy-bridge .primary-native {
+  background: rgba(8,20,24,.34) !important;
+}
+
+.a8-angle-legacy-bridge .legacy-side {
+  background: rgba(7,11,16,.21) !important;
+}
+
+.a8-angle-intro {
+  max-width: 900px;
+}
+
+.a8-angle-input-label {
+  font-size: .8rem;
+}
+
+#a8ReverseInput,
+#deg,
+#digits {
+  min-height: 48px;
+  padding: 11px 13px;
+  font-size: 1.06rem;
+  color: #eef5f8;
+}
+
+#a8ReverseInput {
+  min-width: 12rem;
+}
+
+#deg {
+  min-width: 14rem;
+}
+
+#digits {
+  width: 7rem;
+}
+
+#convert {
+  min-height: 48px;
+  padding: 11px 16px;
+}
+
+.a8-angle-legacy-controls {
+  display: flex;
+  align-items: end;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+.a8-angle-legacy-controls label {
+  min-width: 0;
+}
+
+.a8-angle-secondary-note {
+  margin-top: 12px;
+}
+
+@media (max-width:760px) {
+  .panel {
+    background: rgba(7,11,16,.36) !important;
+  }
+
+  .side {
+    background: rgba(7,11,16,.30) !important;
+  }
+
+  #a8ReverseInput,
+  #deg {
+    width: 100%;
+    min-width: 0;
+  }
+}
+</style>
+
+
+<style id="a8-angle-dark-foreground-v1">
+/*
+ * ANGLE · DARK PRESENTATION FOREGROUND
+ *
+ * Root presentation inheritance only.
+ * Existing component/accent colors remain authoritative.
+ */
+html{
+  color-scheme:dark;
+}
+
+body{
+  color:#eef5f8;
+}
+</style>
+
+
+  <!-- COSIGO-CANONICAL-FAVICON-BEGIN -->
+  <link rel="icon" href="https://cosigo.io/favicon.ico">
+  <link rel="icon" type="image/svg+xml" href="https://cosigo.io/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://cosigo.io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://cosigo.io/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://cosigo.io/apple-touch-icon.png">
+  <!-- COSIGO-CANONICAL-FAVICON-END -->
+</head>
+<body>
+<style id="a8-topside-coherence-02-style">
+/* A8-ANGLE-FILM-EXPOSURE-FINAL */
+#a8-topside-coherence-02{
+  display:block;
+  margin:0;
+  padding:10px 14px;
+  border-bottom:1px solid rgba(255,255,255,.14);
+  background:rgba(7,11,16,.14);
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+}
+#a8-topside-coherence-02 .a8-topline{
+  max-width:1440px;
+  margin:0 auto;
+  display:flex;
+  gap:12px;
+  align-items:center;
+  flex-wrap:wrap;
+}
+#a8-topside-coherence-02 .cosigo-global-brand{
+  display:flex;
+  gap:8px;
+  align-items:center;
+  text-decoration:none;
+}
+#a8-topside-coherence-02 .cosigo-global-brand img{
+  width:34px;
+  height:34px;
+  object-fit:contain;
+}
+#a8-topside-coherence-02 .cosigo-global-brand span{
+  font-weight:900;
+  letter-spacing:.06em;
+}
+#a8-topside-coherence-02 .cosigo-global-brand small{
+  display:block;
+  opacity:.72;
+  font-size:.62rem;
+}
+#a8-topside-coherence-02 a{text-decoration:none}
+#a8-topside-coherence-02 .a8-menu{
+  position:relative;
+  margin-left:auto;
+}
+#a8-topside-coherence-02 .a8-menu summary{
+  list-style:none;
+  cursor:pointer;
+  padding:8px 11px;
+  border:1px solid #425467;
+  border-radius:8px;
+  background:rgba(17,24,32,.18);
+  color:#e0bd72;
+  font-size:.76rem;
+  font-weight:900;
+  letter-spacing:.07em;
+  user-select:none;
+}
+#a8-topside-coherence-02 .a8-menu summary::-webkit-details-marker{
+  display:none;
+}
+#a8-topside-coherence-02 .a8-menu summary::after{
+  content:" ▾";
+  color:#92a5b8;
+}
+#a8-topside-coherence-02 .a8-menu[open] summary::after{
+  content:" ▴";
+}
+#a8-topside-coherence-02 .a8-menu-panel{
+  position:absolute;
+  z-index:1000;
+  right:0;
+  top:calc(100% + 7px);
+  min-width:180px;
+  padding:7px;
+  border:1px solid #425467;
+  border-radius:9px;
+  background:rgba(13,20,27,.12);
+  box-shadow:0 12px 28px rgba(0,0,0,.38);
+}
+#a8-topside-coherence-02 .a8-menu-panel a{
+  display:block;
+  padding:9px 10px;
+  border-radius:6px;
+  color:#c8ddf5;
+  font-size:.78rem;
+  font-weight:800;
+  white-space:nowrap;
+}
+#a8-topside-coherence-02 .a8-menu-panel a:hover,
+#a8-topside-coherence-02 .a8-menu-panel a:focus,
+#a8-topside-coherence-02 .a8-menu-panel a[aria-current="page"]{
+  background:rgba(24,36,49,.24);
+  color:#fff;
+}
+@media(max-width:760px){
+  #a8-topside-coherence-02 .a8-menu-panel{
+    min-width:170px;
+  }
+}
+</style>
+
+<nav id="a8-topside-coherence-02"
+     class="cosigo-global-nav"
+     aria-label="A8 Time Lab navigation">
+
+  <div class="a8-topline">
+
+    <a class="cosigo-global-brand"
+       href="https://cosigo.io/"
+       aria-label="COSIGO home">
+      <img src="/assets/cosigo_master_512.gif" alt="COSIGO">
+      <span>COSIGO<small>LABS · AUSPICIOUS 8</small></span>
+    </a>
+
+    <details class="a8-menu">
+      <summary>MENU</summary>
+
+      <div class="a8-menu-panel">
+        <a href="https://lab.cosigo.io/">LAB HOME</a>
+        <a href="https://clock.cosigo.io/">CLOCK</a>
+        <a href="https://calendar.cosigo.io/">CALENDAR</a>
+        <a href="https://moons.cosigo.io/">MOONS</a>
+        <a href="https://mintaka.cosigo.io/">MINTAKA</a>
+        <a href="https://sol.cosigo.io/">SOL</a>
+        <a href="https://ship.cosigo.io/">EARTHSHIP</a>
+        <a href="https://map.cosigo.io/">MAP · CLOCK · COMPASS</a>
+        <a href="https://sea.cosigo.io/">NAVIGATION</a>
+        <a href="https://stars.cosigo.io/">CELESTIAL</a>
+        <a href="https://audio.cosigo.io/">AUDIO</a>
+        <a href="https://quartz.cosigo.io/">QUARTZ</a>
+        <a href="https://a8.cosigo.io/">A8 PUBLIC</a>
+        <a href="https://about.cosigo.io/">ABOUT</a>
+        <a href="https://contestant.cosigo.io/">FUN</a>
+        <a href="https://cosigo.io/">COSIGO HOME</a>
+        <a href="https://github.com/cosigo/a8">GITHUB</a>
+      </div>
+
+    </details>
+
+  </div>
+</nav>
+
+<main>
+<header>
+  <div>
+    <div class="eyebrow">AUSPICIOUS 8 · NATIVE ANGLE RULER</div>
+    <h1>Same circle. Native A8 angle first.</h1>
+    <p class="muted a8-angle-intro">
+      One complete turn is 512 A8 units = 1000₈.
+      Native A8 is the working ruler here. Legacy degrees remain available
+      below as a source-reference and translation bridge.
+    </p>
+  </div>
+</header>
+
+<section class="panel controls"><div class="row">
+  <a class="button-link" href="https://lab.cosigo.io/">ENGINEERING LAB</a>
+  <a class="button-link" href="https://data.cosigo.io/">OBSERVATION ARCHIVE</a>
+  <a class="button-link" href="https://audio.cosigo.io/">A8 FREQUENCY TRAINER</a>
+  <a class="button-link" href="https://clock.cosigo.io/">A8 CLOCK</a>
+  <a class="button-link" href="https://quartz.cosigo.io/">QUARTZ / LENGTH EXPERIMENT</a>
+</div></section>
+
+<section class="panel a8-angle-instrument">
+  <h2>Native A8 angle</h2>
+
+  <p class="muted a8-angle-intro">
+    Start on the native ruler. Stored whole-turn phase states run
+    from 0–511 decimal, or 000₈–777₈. The next state completes the
+    recurrence at 1000₈ and returns to 000₈.
+  </p>
+
+  <div class="wall">
+
+    <div class="side primary-native">
+      <div class="k">PRIMARY / NATIVE A8</div>
+      <h3>512-state full-turn ruler</h3>
+
+      <label class="a8-angle-input-label">
+        A8 state · decimal
+        <input id="a8ReverseInput"
+               type="number"
+               min="0"
+               max="511"
+               step="1"
+               value="1">
+      </label>
+
+      <div id="a8ReverseOctal"
+           class="bigout mono"
+           style="margin-top:12px">001₈</div>
+
+      <div class="small mono">
+        000₈–777₈ · next state completes 1000₈ and wraps to 000₈
+      </div>
+    </div>
+
+    <div class="arrow">→</div>
+
+    <div class="side legacy-side">
+      <div class="k">COMPARISON / LEGACY</div>
+      <h3>360-degree ruler</h3>
+
+      <div id="a8ReverseDegrees"
+           class="bigout mono">0.703125°</div>
+
+      <div id="a8ReverseExact"
+           class="small mono">exact: 45/64°</div>
+
+      <p class="small">
+        This value is the legacy translation of the native A8 state.
+        It does not define the A8 ruler.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<script>
+(() => {
+  const input = document.getElementById('a8ReverseInput');
+  const octal = document.getElementById('a8ReverseOctal');
+  const degrees = document.getElementById('a8ReverseDegrees');
+  const exact = document.getElementById('a8ReverseExact');
+
+  function gcd(a,b){
+    while(b){
+      const x = b;
+      b = a % b;
+      a = x;
+    }
+    return a;
+  }
+
+  function renderReverseAngle(){
+    const n = Number(input.value);
+
+    if(!Number.isInteger(n) || n < 0 || n > 511){
+      degrees.textContent = 'VALID RANGE 0–511';
+      exact.textContent = 'stored 9-bit A8 phase state';
+      octal.textContent = '—';
+      return;
+    }
+
+    octal.textContent =
+      n.toString(8).padStart(3,'0') + '₈';
+
+    const numerator = n * 45;
+    const denominator = 64;
+
+    const g =
+      numerator === 0
+        ? denominator
+        : gcd(numerator, denominator);
+
+    const exactNum = numerator / g;
+    const exactDen = denominator / g;
+    const value = numerator / denominator;
+
+    degrees.textContent =
+      value.toFixed(6).replace(/\.?0+$/,'') + '°';
+
+    exact.textContent =
+      exactDen === 1
+        ? `exact: ${exactNum}°`
+        : `exact: ${exactNum}/${exactDen}°`;
+  }
+
+  input.addEventListener(
+    'input',
+    renderReverseAngle
+  );
+
+  renderReverseAngle();
+})();
+</script>
+
+
+<section class="panel a8-angle-legacy-bridge">
+  <h2>Legacy source → native A8</h2>
+
+  <p class="muted a8-angle-intro">
+    Use this bridge when an observation, archive or familiar reference
+    arrives in conventional degrees. The source value is translated
+    exactly by the fixed ruler relationship; no server conversion
+    service is required.
+  </p>
+
+  <div class="wall">
+
+    <div class="side legacy-side">
+      <div class="k">SECONDARY / LEGACY SOURCE</div>
+      <h3>360-degree ruler</h3>
+
+      <div class="a8-angle-legacy-controls">
+
+        <label class="a8-angle-input-label">
+          Legacy degrees
+          <input id="deg"
+                 type="number"
+                 step="any"
+                 value="1">
+        </label>
+
+        <label class="a8-angle-input-label">
+          Fractional octal digits
+          <input id="digits"
+                 type="number"
+                 min="0"
+                 max="18"
+                 step="1"
+                 value="9">
+        </label>
+
+        <button id="convert"
+                type="button">TRANSLATE TO A8</button>
+
+      </div>
+
+      <p class="small a8-angle-secondary-note">
+        Compatibility input only. Conventional source records may use
+        degrees and other legacy angular encodings before translation.
+      </p>
+    </div>
+
+    <div class="arrow">→</div>
+
+    <div class="side primary-native">
+      <div class="k">PRIMARY RESULT / NATIVE A8</div>
+      <h3>512-unit full turn</h3>
+
+      <div id="oct"
+           class="bigout mono">—</div>
+
+      <div id="dec"
+           class="small mono">—</div>
+
+      <div id="a8ExactNative"
+           class="small mono"
+           style="margin-top:6px">—</div>
+
+      <p class="small">
+        <b>Octal is primary.</b>
+        Fractional octal digits preserve precision below one whole
+        A8 angular unit. The 512-unit turn is not a 512-position
+        precision limit.
+      </p>
+    </div>
+
+  </div>
+
+  <p class="mono">
+    A8 angle = legacy degrees × <b>64/45</b>
+  </p>
+
+  <p class="muted">
+    Legacy degrees = A8 angle × 45/64.
+  </p>
+</section>
+
+<section class="panel">
+  <h2>A8 ruler landmarks</h2>
+  <div class="examples" id="landmarks"></div>
+</section>
+
+<section class="panel">
+  <h2>Exact translation relationship</h2>
+  <p>This relationship emerged independently from the selected A8 circle and A8 day subdivisions:</p>
+  <div class="examples">
+    <div class="example">
+      <div class="k">ANGLE</div>
+      <div class="exact">1 A8 angle unit</div>
+      <div class="mono">= 45/64 legacy degree</div>
+    </div>
+    <div class="example">
+      <div class="k">TIME</div>
+      <div class="exact">1 A8 minute</div>
+      <div class="mono">= 45/64 legacy minute</div>
+    </div>
+    <div class="example">
+      <div class="k">A8 HOUR</div>
+      <div class="exact">1 A8 hour</div>
+      <div class="mono">= 45 legacy minutes</div>
+    </div>
+  </div>
+  <p class="small"><b>Interpretation:</b> this is an architectural consequence of 512 angle units/turn and 32×64 minutes/day. It is worth documenting, but it is not evidence that Nature itself uses our numeral system.</p>
+</section>
+
+<section class="panel">
+  <h2>Legacy translation examples</h2>
+  <p class="muted">Some conventional angles translate cleanly because the two rulers share factors. Others become deliberately awkward. We preserve both; no cherry-picking.</p>
+  <div class="examples" id="wallflowers"></div>
+</section>
+
+
+<section class="panel">
+  <h2>Geometry · π is unchanged</h2>
+  <p><b>π is not defined by degrees.</b> It is the dimensionless ratio of circumference to diameter:</p>
+  <p class="mono bigout">π = C / D</p>
+  <p>Changing the angular ruler from a 360-part turn to a 512-part turn changes neither the circle nor this ratio.</p>
+  <div class="examples">
+    <div class="example legacy-side">
+      <div class="k">DECIMAL SPELLING</div>
+      <div class="exact mono">π ≈ 3.141592653589793…</div>
+      <div class="small">Same constant written in base 10.</div>
+    </div>
+    <div class="example primary-native">
+      <div class="k">OCTAL SPELLING</div>
+      <div class="exact mono">π ≈ 3.11037552421026430215…₈</div>
+      <div class="small">Same constant written in base 8.</div>
+    </div>
+  </div>
+  <p class="small"><b>A8 does not create a new π.</b> The geometry stays fixed; only the angular ruler and numeral notation change.</p>
+</section>
+
+<section class="panel">
+  <h2>Geometry · radius and arc relationships</h2>
+  <p>Let <span class="mono">θ</span> be an A8 angular amount on a full turn of <span class="mono">1000₈ = 512</span> A8 units.</p>
+  <div class="example" style="margin-bottom:10px">
+    <div class="k">GENERAL ARC LENGTH</div>
+    <div class="exact mono">s = (θ / 512) · 2πr</div>
+  </div>
+  <div class="example" style="margin-bottom:10px">
+    <div class="k">SOLVE FOR RADIUS</div>
+    <div class="exact mono">r = (512·s)/(2πθ) = (256·s)/(πθ)</div>
+  </div>
+  <div class="examples">
+    <div class="example primary-native">
+      <div class="k">FULL TURN · 1000₈ = 512</div>
+      <div class="exact mono">C = 2πr</div>
+      <div class="exact mono">r = C / (2π)</div>
+    </div>
+    <div class="example primary-native">
+      <div class="k">HALF TURN · 400₈ = 256</div>
+      <div class="exact mono">s = πr</div>
+      <div class="exact mono">r = s / π</div>
+    </div>
+    <div class="example primary-native">
+      <div class="k">QUARTER TURN · 200₈ = 128</div>
+      <div class="exact mono">s = πr / 2</div>
+      <div class="exact mono">r = 2s / π</div>
+    </div>
+  </div>
+</section>
+
+<section class="panel">
+  <h2>Geometry · circle invariants</h2>
+  <div class="examples">
+    <div class="example"><div class="k">CIRCUMFERENCE</div><div class="exact mono">C = 2πr</div></div>
+    <div class="example"><div class="k">DIAMETER</div><div class="exact mono">D = 2r</div></div>
+    <div class="example"><div class="k">AREA</div><div class="exact mono">A = πr²</div></div>
+  </div>
+  <p class="small">A8 changes angular labels, not Euclidean circle geometry, trigonometry, or π.</p>
+</section>
+
+<section class="panel">
+  <h2>Observatory translation boundary</h2>
+  <p>When a future astrometry adapter encounters a standard angular quantity, it will keep the original source value intact, cross this translation wall with the exact 64/45 scale, and retain enough fractional octal precision for the observation.</p>
+  <pre>SOURCE RECORD
+degrees / arcseconds / RA-Dec
+        ↓
+verified reduction
+        ↓
+exact angle scale ×64/45
+        ↓
+native A8 angular value
+fractional octal precision
+        ↓
+Jupiter-relative observation
+        ↓
+A8 recovery input</pre>
+  <p class="small">No source angle is rounded to 0–511 before recovery.</p>
+</section>
+
+<script>
+const $ = id => document.getElementById(id);
+
+function gcdBig(a,b){
+  a = a < 0n ? -a : a;
+  b = b < 0n ? -b : b;
+
+  while(b){
+    const x = b;
+    b = a % b;
+    a = x;
+  }
+
+  return a;
+}
+
+function reduceFraction(n,d){
+  if(d === 0n){
+    throw new Error('division by zero');
+  }
+
+  if(d < 0n){
+    n = -n;
+    d = -d;
+  }
+
+  const g = gcdBig(n,d);
+
+  return {
+    n: n / g,
+    d: d / g
+  };
+}
+
+function parseDecimalFraction(raw){
+  const s = String(raw).trim();
+
+  const m = s.match(
+    /^([+-]?)(\d+)(?:\.(\d*))?(?:[eE]([+-]?\d+))?$/
+  );
+
+  if(!m){
+    throw new Error('ENTER A VALID LEGACY DEGREE VALUE');
+  }
+
+  const sign =
+    m[1] === '-'
+      ? -1n
+      : 1n;
+
+  const whole = m[2];
+  const frac = m[3] || '';
+
+  let n =
+    BigInt(whole + frac) *
+    sign;
+
+  let d =
+    10n ** BigInt(frac.length);
+
+  const exponent =
+    Number(m[4] || 0);
+
+  if(
+    !Number.isInteger(exponent) ||
+    Math.abs(exponent) > 1000
+  ){
+    throw new Error('LEGACY DEGREE EXPONENT OUT OF RANGE');
+  }
+
+  if(exponent > 0){
+    n *=
+      10n ** BigInt(exponent);
+  }
+
+  if(exponent < 0){
+    d *=
+      10n ** BigInt(-exponent);
+  }
+
+  return reduceFraction(n,d);
+}
+
+function legacyDegreesToA8(raw){
+  const source =
+    parseDecimalFraction(raw);
+
+  return reduceFraction(
+    source.n * 64n,
+    source.d * 45n
+  );
+}
+
+function withinTurnFraction(f){
+  const modulus =
+    f.d * 512n;
+
+  let r =
+    f.n % modulus;
+
+  if(r < 0n){
+    r += modulus;
+  }
+
+  return reduceFraction(
+    r,
+    f.d
+  );
+}
+
+function fractionToNumber(f){
+  return (
+    Number(f.n) /
+    Number(f.d)
+  );
+}
+
+function fmtDec(v){
+  if(!Number.isFinite(v)){
+    return 'outside decimal reference range';
+  }
+
+  return Number(v)
+    .toFixed(12)
+    .replace(/0+$/,'')
+    .replace(/\.$/,'');
+}
+
+function fractionText(f){
+  if(f.d === 1n){
+    return String(f.n);
+  }
+
+  return `${f.n}/${f.d}`;
+}
+
+function fractionToOctal(f,digits){
+  digits =
+    Math.max(
+      0,
+      Math.min(
+        18,
+        Number(digits)
+      )
+    );
+
+  let n = f.n;
+  const d = f.d;
+
+  const sign =
+    n < 0n
+      ? '-'
+      : '';
+
+  if(n < 0n){
+    n = -n;
+  }
+
+  const whole =
+    n / d;
+
+  let remainder =
+    n % d;
+
+  let out =
+    whole
+      .toString(8)
+      .padStart(3,'0');
+
+  if(
+    digits > 0 &&
+    remainder !== 0n
+  ){
+    let fraction = '';
+
+    for(
+      let i = 0;
+      i < digits;
+      i++
+    ){
+      remainder *= 8n;
+
+      const digit =
+        remainder / d;
+
+      remainder =
+        remainder % d;
+
+      fraction +=
+        digit.toString();
+
+      if(remainder === 0n){
+        break;
+      }
+    }
+
+    out += '.' + fraction;
+  }
+
+  return sign + out + '₈';
+}
+
+function convertLegacy(raw,digits){
+  const a8 =
+    legacyDegreesToA8(raw);
+
+  const within =
+    withinTurnFraction(a8);
+
+  return {
+    a8,
+    within,
+    a8Octal:
+      fractionToOctal(
+        a8,
+        digits
+      )
+  };
+}
+
+function renderCurrent(){
+  try{
+    const digits =
+      Number($('digits').value);
+
+    if(
+      !Number.isInteger(digits) ||
+      digits < 0 ||
+      digits > 18
+    ){
+      throw new Error(
+        'FRACTIONAL OCTAL DIGITS MUST BE 0–18'
+      );
+    }
+
+    const result =
+      convertLegacy(
+        $('deg').value,
+        digits
+      );
+
+    $('oct').textContent =
+      result.a8Octal;
+
+    $('dec').textContent =
+      `decimal reference: ${
+        fmtDec(
+          fractionToNumber(
+            result.a8
+          )
+        )
+      } A8 angle units · within turn ${
+        fmtDec(
+          fractionToNumber(
+            result.within
+          )
+        )
+      }`;
+
+    $('a8ExactNative').textContent =
+      `exact native ratio: ${
+        fractionText(
+          result.a8
+        )
+      } A8 angle units`;
+
+  }catch(e){
+    $('oct').textContent = '—';
+    $('dec').textContent = e.message;
+    $('a8ExactNative').textContent = '—';
+  }
+}
+
+function card(deg,label){
+  const result =
+    convertLegacy(
+      String(deg),
+      9
+    );
+
+  return `
+    <div class="example">
+      <div class="k">${label}</div>
+      <div class="exact">
+        ${result.a8Octal}
+      </div>
+      <div class="small mono">
+        legacy source ${deg}°
+      </div>
+    </div>
+  `;
+}
+
+function init(){
+  const landmarkData = [
+    [0,'START'],
+    [45,'EIGHTH TURN'],
+    [90,'QUARTER TURN'],
+    [180,'HALF TURN'],
+    [270,'THREE-QUARTER'],
+    [360,'WHOLE TURN']
+  ];
+
+  $('landmarks').innerHTML =
+    landmarkData
+      .map(x => card(...x))
+      .join('');
+
+  const wallData = [
+    [1,'1 LEGACY DEGREE'],
+    [10,'10°'],
+    [30,'30°'],
+    [60,'60°'],
+    [72,'72°'],
+    [123.456,'123.456°']
+  ];
+
+  $('wallflowers').innerHTML =
+    wallData
+      .map(x => card(...x))
+      .join('');
+
+  renderCurrent();
+}
+
+$('convert').addEventListener(
+  'click',
+  renderCurrent
+);
+
+$('deg').addEventListener(
+  'keydown',
+  e => {
+    if(e.key === 'Enter'){
+      renderCurrent();
+    }
+  }
+);
+
+$('digits').addEventListener(
+  'change',
+  renderCurrent
+);
+
+init();
+</script>
+</main><footer class="cosigo-site-footer">
+  <strong>COSIGO Labs · Auspicious 8 experimental laboratory</strong>
+  <p class="cosigo-disclaimer">Research / engineering notice: A8 pages may contain provisional models, simulations, comparison values, hypotheses and unreplicated experiment designs. Unless a page explicitly states otherwise, material shown here is not a certified metrology standard, accredited measurement result, or final Foundation definition. Legacy / SI values are comparison coordinates where identified, not native A8 authority.</p>
+  <p class="cosigo-disclaimer">COSIGO is primarily an educational and experimental project. Nothing in this laboratory is an investment offering, promise of financial return, or financial, investment, legal or tax advice. See the project-status notice for the current public description.</p>
+  <div class="cosigo-footer-links">
+    <a href="https://cosigo.io/">COSIGO Home</a>
+    <a href="https://a8.cosigo.io/">A8 Public Instrument</a>
+    <a href="https://lab.cosigo.io/">A8 Engineering Lab</a>
+    <a href="https://contact.cosigo.io/">Contact</a>
+    <a href="https://docs.cosigo.io/">COSIGO Docs / WP</a>
+    <a href="https://github.com/cosigo">COSIGO GitHub</a>
+    <a href="https://github.com/cosigo/cosigo.io">Main-site source</a>
+    <a href="https://cosigo.io/project-status.html">Educational Purpose / Project Status</a>
+  </div>
+  <p>© 2026 COSIGO. COSIGO™ rights and trademark notices remain governed by the official COSIGO site.</p>
+</footer>
+</body></html>
