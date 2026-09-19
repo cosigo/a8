@@ -25,9 +25,7 @@
   <meta name="author" content="COSIGO Labs">
   <meta name="theme-color" content="#0a0d10">
 
-  <link rel="icon" href="https://a8.cosigo.io/assets/cosigo_master_512.png">
-
-  <style>
+<style>
     :root{
       --bg:#0a0d10;--panel:#11171d;--panel2:#161e26;--line:#2b3742;
       --text:#edf3f6;--muted:#9eacb7;--gold:#d8b76c;--blue:#8eb9ff;
@@ -2434,6 +2432,124 @@
 </style>
 
 
+
+  <!-- COSIGO-CANONICAL-FAVICON-BEGIN -->
+  <link rel="icon" href="https://cosigo.io/favicon.ico">
+  <link rel="icon" type="image/svg+xml" href="https://cosigo.io/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://cosigo.io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://cosigo.io/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://cosigo.io/apple-touch-icon.png">
+  <!-- COSIGO-CANONICAL-FAVICON-END -->
+
+
+<style id="a8-about-menu-v1-style">
+/*
+ * ABOUT · A8 STANDARD SINGLE MENU
+ * Native <details> control.
+ * No JavaScript required.
+ */
+
+.topbar .a8-menu{
+  position:relative;
+  margin-left:auto;
+  flex:0 0 auto;
+}
+
+.topbar .a8-menu summary{
+  list-style:none;
+  cursor:pointer;
+  padding:9px 12px;
+  border:1px solid rgba(210,184,109,.42);
+  border-radius:8px;
+  background:#111820;
+  color:#e0bd72;
+  font-size:.76rem;
+  font-weight:900;
+  letter-spacing:.07em;
+  user-select:none;
+}
+
+.topbar .a8-menu summary::-webkit-details-marker{
+  display:none;
+}
+
+.topbar .a8-menu summary::after{
+  content:" ▾";
+  opacity:.72;
+}
+
+.topbar .a8-menu[open] summary::after{
+  content:" ▴";
+}
+
+.topbar .a8-menu-panel{
+  position:absolute;
+  z-index:1000;
+  right:0;
+  top:calc(100% + 7px);
+
+  width:max-content;
+  min-width:210px;
+  max-width:min(88vw,340px);
+  max-height:min(72vh,620px);
+  overflow-y:auto;
+
+  padding:7px;
+
+  border:1px solid #425467;
+  border-radius:9px;
+
+  background:#0d141b;
+  box-shadow:0 12px 28px rgba(0,0,0,.42);
+}
+
+.topbar .a8-menu-panel a{
+  display:block;
+  padding:10px 11px;
+  border-radius:6px;
+
+  color:#c8ddf5;
+  text-decoration:none;
+
+  font-size:.78rem;
+  font-weight:800;
+  white-space:nowrap;
+}
+
+.topbar .a8-menu-panel a:hover,
+.topbar .a8-menu-panel a:focus,
+.topbar .a8-menu-panel a[aria-current="page"]{
+  background:#182431;
+  color:#fff;
+}
+
+@media(max-width:720px){
+  .topbar{
+    align-items:center;
+  }
+
+  .topbar .a8-menu{
+    margin-left:auto;
+  }
+
+  .topbar .a8-menu-panel{
+    position:fixed;
+    top:72px;
+    right:12px;
+    left:12px;
+
+    width:auto;
+    max-width:none;
+    max-height:calc(100vh - 90px);
+  }
+
+  .topbar .a8-menu-panel a{
+    padding:12px;
+    font-size:.82rem;
+  }
+}
+</style>
+
 </head>
 <body>
 <div class="shell">
@@ -2443,11 +2559,30 @@
       <img src="https://a8.cosigo.io/assets/cosigo_master_512.png" alt="COSIGO">
       <span><strong>COSIGO LABS</strong><small>Auspicious 8 research</small></span>
     </a>
-    <div class="toplinks">
-      <a href="https://a8.cosigo.io/">A8 Public</a>
-      <a href="https://lab.cosigo.io/">Engineering Lab</a>
-      <a href="https://contact.cosigo.io/">Contact</a>
-    </div>
+        <details class="a8-menu" id="a8-about-menu">
+      <summary>MENU</summary>
+
+      <div class="a8-menu-panel">
+        <a href="https://lab.cosigo.io/">LAB HOME</a>
+        <a href="https://clock.cosigo.io/">CLOCK</a>
+        <a href="https://calendar.cosigo.io/">CALENDAR</a>
+        <a href="https://moons.cosigo.io/">MOONS</a>
+        <a href="https://mintaka.cosigo.io/">MINTAKA</a>
+        <a href="https://sol.cosigo.io/">SOL</a>
+        <a href="https://ship.cosigo.io/">SHIP</a>
+        <a href="https://map.cosigo.io/">MAP · CLOCK · COMPASS</a>
+        <a href="https://sea.cosigo.io/">NAVIGATION</a>
+        <a href="https://stars.cosigo.io/">CELESTIAL</a>
+        <a href="https://audio.cosigo.io/">AUDIO</a>
+        <a href="https://composer.cosigo.io/">COMPOSER</a>
+        <a href="https://quartz.cosigo.io/">QUARTZ</a>
+        <a href="https://about.cosigo.io/" aria-current="page">ABOUT</a>
+        <a href="https://contestant.cosigo.io/">FUN</a>
+        <a href="https://a8.cosigo.io/">A8 PUBLIC</a>
+        <a href="https://cosigo.io/">COSIGO HOME</a>
+        <a href="https://github.com/cosigo/a8">GITHUB</a>
+      </div>
+    </details>
   </nav>
 
   <main class="a8-front-door">

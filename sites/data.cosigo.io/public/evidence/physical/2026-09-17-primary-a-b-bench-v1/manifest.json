@@ -1,0 +1,51 @@
+{
+  "schema": "A8-PHYSICAL-RIG-PHOTO-WITNESS-V2",
+  "date_label": "2026-09-17",
+  "role": "PRIMARY_A_TO_B_PHYSICAL_RIG_WITNESS",
+  "unique_source_photos": 7,
+  "duplicate_followup": {
+    "file": "20260917_182816(1).jpg",
+    "duplicate_of": "20260917_182816.jpg",
+    "sha256": "5bfee60ab1c4300a976c3ac6b18f5b7650812529d026cc9adf9a65aeedb70e2b"
+  },
+  "backup_battery_shown": false,
+  "remote_ghost_hardware_shown": false,
+  "shadow_remote_ghost_status_visible": true,
+  "sources": [
+    {
+      "file": "20260917_182744.jpg",
+      "sha256": "9b9c95004a53c5cc6f94d7d5085ef83f94750fbc83df5bab1055eeb88b4c10bf",
+      "caption": "Wider view of the Primary physical rig showing the two Arduino-class boards, breadboard/interface area, Raspberry Pi host, cabling and network connection."
+    },
+    {
+      "file": "20260917_182816.jpg",
+      "sha256": "5bfee60ab1c4300a976c3ac6b18f5b7650812529d026cc9adf9a65aeedb70e2b",
+      "caption": "Two Arduino-class boards forming the Primary A\u2192B physical carrier chain with the Raspberry Pi reporter/transport host."
+    },
+    {
+      "file": "20260917_182941.jpg",
+      "sha256": "a50b698c327e49b6807f3e7f930303a168a215bf8282acf014f682e71a7a9593",
+      "caption": "A8 32-hour clock operating during the physical-rig session."
+    },
+    {
+      "file": "20260917_183058.jpg",
+      "sha256": "07f0dd71c439e104474ba11911b18ba9d5ceb94ac61636dc321267331698f36b",
+      "caption": "Shadow page showing Core20, Primary physical A\u2192B, and the remote Ghost read-only witness together."
+    },
+    {
+      "file": "20260917_183336.jpg",
+      "sha256": "771ec0af5627c0b0e09f923ecf68239ab89f53e72e1d048c73ce694352a63de0",
+      "caption": "Arduino-class physical-carrier board close-up."
+    },
+    {
+      "file": "20260917_183358.jpg",
+      "sha256": "0814e5d6da9731bb0a05ee58ba0b80be95404942369d6f5f1cd1fc74e6fc924f",
+      "caption": "Second Arduino-class physical-carrier board close-up."
+    },
+    {
+      "file": "20260917_183424.jpg",
+      "sha256": "ae86acf9eb497b9f37d081c5b14368d303a773c29246027a57cf5c3c8d13150a",
+      "caption": "Raspberry Pi reporter/transport host close-up."
+    }
+  ]
+}

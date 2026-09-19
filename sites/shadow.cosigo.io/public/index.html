@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>A8 Shadow Core20 · Physical Clock Test</title>
+<title>A8 Shadow · Physical Witnesses</title>
 <style>
 :root{
   color-scheme:dark;
@@ -180,57 +180,69 @@ footer{
 </head>
 <body>
 <main>
-  <div class="kicker">AUSPICIOUS 8 · PHYSICAL CLOCK EXPERIMENT</div>
-  <h1>SHADOW CORE20</h1>
-  <div class="sub">Same organism · different heartbeat · refining in progress</div>
+  <div class="kicker">AUSPICIOUS 8 · PHYSICAL WITNESS SYSTEM</div>
+  <h1>SHADOW · PHYSICAL WITNESSES</h1>
+  <div class="sub">Primary A → B · Remote Ghost C → D · qualified standby · read-only observation</div>
 
   <section class="clocks">
     <article class="card">
-      <h2>CORE20 · CURRENT AUTHORITY</h2>
+      <h2>CORE20 · CURRENT STATE</h2>
       <div class="clock good" id="coreClock">—:—:—</div>
       <div class="rows">
         <div>DAY_PHASE17 · <b id="corePhase">—</b></div>
         <div>SOURCE EPOCH · <b id="coreEpoch">—</b></div>
-        <div>AUTHORITY · <b>CORE20</b></div>
+        <div>STATE · <b id="coreState">—</b></div>
       </div>
     </article>
 
     <article class="card">
-      <h2>SHADOW CORE20 · PHYSICAL</h2>
-      <div class="clock warn" id="shadowClock">BABY ALIVE</div>
+      <h2>PRIMARY PHYSICAL · A → B</h2>
+      <div class="clock good" id="primaryRaw">—</div>
       <div class="rows">
-        <div>CLOCK · <b>NOT YET RECOVERED</b></div>
-        <div>PHYSICAL EPOCH · <b id="shadowEpoch">—</b></div>
-        <div>RAW COUNT · <b id="shadowRaw">—</b></div>
-        <div>AUTHORITY · <b>NOT YET</b></div>
+        <div>SOURCE EPOCH · <b id="primaryEpoch">—</b></div>
+        <div>STATUS · <b id="primaryStatus">—</b></div>
+        <div>CHAIN · <b>ARDUINO A → ARDUINO B</b></div>
+        <div>ROLE · <b>PHYSICAL CARRIER</b></div>
+      </div>
+    </article>
+
+    <article class="card">
+      <h2>REMOTE GHOST · C → D</h2>
+      <div class="clock warn" id="ghostRaw">—</div>
+      <div class="rows">
+        <div>SEQUENCE · <b id="ghostSequence">—</b></div>
+        <div>LINK · <b id="ghostLink">WAITING</b></div>
+        <div>POWER · <b id="ghostPower">—</b></div>
+        <div>CHAIN · <b>ARDUINO P → ARDUINO C</b></div>
+        <div>ROLE · <b>QUALIFIED STANDBY CARRIER / PHYSICAL WITNESS</b></div>
+        <div>AUTHORITY · <b>NONE UNTIL CONTROLLED HANDOFF</b></div>
       </div>
     </article>
   </section>
 
   <section class="card divergence">
-    <div class="kicker">DIVERGENCE · SHADOW − CORE20</div>
+    <div class="kicker">SHADOW ROLE</div>
     <div class="value warn" id="divergence">
-      WAITING FOR SHADOW DAY_PHASE17
+      PARALLEL PHYSICAL OBSERVATION · NO CORE20 CONTROL
     </div>
   </section>
-
-  <section class="card rig">
-    <div class="kicker">MINIMI · LIVE CRIB RIG</div>
-    <img
-      src="/assets/crib-rig.png"
-      alt="A8 Physical Shadow Clock live bench setup"
-      loading="lazy">
-    <div class="rig-note">
-      ORIGINAL BENCH PHOTOGRAPHS · NO REWIRING · LABELS ONLY
-    </div>
-  </section>
-
 
   <details class="card chronicle">
     <summary>
-      MINIMI’S MINIMI · BIRTH RECORD
-      <span>OPEN FAMILY ALBUM</span>
+      A8 MUSEUM · RETIRED 555 / ORIGINAL SHADOW PROTOTYPE
+      <span>OPEN BEHIND GLASS</span>
     </summary>
+
+    <section class="rig">
+      <div class="kicker">RETIRED 555 / PULSE BOX BENCH RIG</div>
+      <img
+        src="/assets/crib-rig.png"
+        alt="Original retired A8 555 and Pulse Box Shadow prototype"
+        loading="lazy">
+      <div class="rig-note">
+        RETIRED · HISTORICAL ARTIFACT · ORIGINAL QUALIFICATION RIG · NOT CURRENT HARDWARE
+      </div>
+    </section>
 
     <article>
       <h2>The Birth of the A8 Physical Shadow Core20</h2>
@@ -251,12 +263,12 @@ footer{
       <p>
         The existing Core20 already runs the A8 clock from its recovered
         natural chain. The Shadow experiment takes the same timing organism,
-        denies it Dad’s pace, gives it an independent physical heartbeat from
-        the 555 Pulse Box, and requires Nature to rebuild the clock around it.
+        denied it Dad’s pace, gave it an independent physical heartbeat from
+        the 555 Pulse Box, and required Nature to rebuild the clock around it.
       </p>
 
       <p class="chain">
-        555 physical oscillator →
+        HISTORICAL PATH · 555 physical oscillator →
         Arduino / Pulse Box raw counter →
         Jovian recurrence recovery →
         Mintaka Earth rotation →
@@ -343,7 +355,7 @@ drivesCore20: false</pre>
 
       <p>
         Pulses alone do not grant authority. Any idiot can count pulses.
-        The 555 may drift, wander with temperature, or behave like a drunk
+        The 555 could drift, wander with temperature, or behave like a drunk
         uncle at a wedding. That is allowed.
       </p>
 
@@ -525,7 +537,7 @@ drivesCore20: false</pre>
       <p>
         Minimi’s Minimi is alive.
         Shadow Core20 is isolated.
-        The physical 555/Pulse Box is running independently.
+        The physical 555/Pulse Box ran independently during the original Shadow experiment.
         The recorder is preserving the physical run.
         Core20 remains untouched and authoritative.
         Shadow has no timing authority yet.
@@ -559,55 +571,152 @@ drivesCore20: false</pre>
   </details>
 
   <footer>
-    Physical oscillator: 555 · Shadow drives Core20: NO ·
-    Core20 comparison is read-only.
+    Primary physical: Arduino A → B · Remote Ghost: Arduino C → D ·
+    Shadow observation is read-only · Core20 control: NO
   </footer>
 </main>
 
 <script>
+async function getJson(url){
+  const r = await fetch(url, { cache:'no-store' });
+  if(!r.ok) throw new Error('HTTP '+r.status);
+  return r.json();
+}
+
 async function update(){
+  let primaryActive = false;
+
+  /*
+    PRIMARY PHYSICAL
+    Independent of Core20 availability.
+  */
   try{
-    const r = await fetch('/api/shadow/comparison', {
-      cache:'no-store'
-    });
+    const d =
+      await getJson('/api/shadow/jovian');
 
-    if(!r.ok) throw new Error('HTTP '+r.status);
+    const p =
+      d.physical || {};
 
-    const d = await r.json();
+    document.getElementById('primaryEpoch').textContent =
+      p.sourceEpoch ?? '—';
+
+    document.getElementById('primaryRaw').textContent =
+      p.rawCount ?? '—';
+
+    document.getElementById('primaryStatus').textContent =
+      p.status ?? '—';
+
+    primaryActive =
+      String(p.status || '') === 'ACTIVE';
+
+  }catch(err){
+    document.getElementById('primaryEpoch').textContent =
+      '—';
+
+    document.getElementById('primaryRaw').textContent =
+      '—';
+
+    document.getElementById('primaryStatus').textContent =
+      'FEED UNAVAILABLE';
+  }
+
+  /*
+    CORE20
+    Comparison-only. Core20 being offline must never make the
+    Primary physical card appear offline.
+  */
+  try{
+    const d =
+      await getJson('/api/shadow/comparison');
+
+    const c =
+      d.core20 || {};
 
     document.getElementById('corePhase').textContent =
-      d.core20?.dayPhase17 ?? '—';
+      c.dayPhase17 ?? '—';
 
     document.getElementById('coreEpoch').textContent =
-      d.core20?.sourceEpoch ?? '—';
+      c.sourceEpoch ?? '—';
 
-    document.getElementById('shadowEpoch').textContent =
-      d.physical555?.sourceEpoch ?? '—';
+    document.getElementById('coreState').textContent =
+      'ONLINE';
 
-    document.getElementById('shadowRaw').textContent =
-      d.physical555?.rawCount ?? '—';
+    const phase =
+      Number(c.dayPhase17);
 
-    /*
-      We deliberately do NOT manufacture a Shadow clock.
-      Until Shadow owns DAY_PHASE17, this stays explicit.
-    */
+    if(Number.isFinite(phase)){
+      const h =
+        Math.floor(phase / 4096);
 
-    const p = Number(d.core20?.dayPhase17);
+      const rem =
+        phase % 4096;
 
-    if(Number.isFinite(p)){
-      const h = Math.floor(p / 4096);
-      const rem = p % 4096;
-      const m = Math.floor(rem / 64);
-      const s = rem % 64;
+      const m =
+        Math.floor(rem / 64);
+
+      const sec =
+        rem % 64;
 
       document.getElementById('coreClock').textContent =
         String(h).padStart(2,'0') + ':' +
         String(m).padStart(2,'0') + ':' +
-        String(s).padStart(2,'0');
+        String(sec).padStart(2,'0');
+
+    }else{
+      document.getElementById('coreClock').textContent =
+        '—:—:—';
     }
-  }catch(err){
+
     document.getElementById('divergence').textContent =
-      'SHADOW FEED UNAVAILABLE';
+      primaryActive
+        ? 'PARALLEL PHYSICAL OBSERVATION · NO CORE20 CONTROL'
+        : 'PRIMARY PHYSICAL FEED UNAVAILABLE';
+
+  }catch(err){
+    document.getElementById('coreClock').textContent =
+      'OFFLINE';
+
+    document.getElementById('corePhase').textContent =
+      '—';
+
+    document.getElementById('coreEpoch').textContent =
+      '—';
+
+    document.getElementById('coreState').textContent =
+      'OFFLINE · RECOVERY HOLD';
+
+    document.getElementById('divergence').textContent =
+      primaryActive
+        ? 'PRIMARY PHYSICAL ACTIVE · CORE20 OFFLINE / RECOVERY HOLD'
+        : 'PRIMARY PHYSICAL FEED UNAVAILABLE · CORE20 OFFLINE';
+  }
+
+  /*
+    REMOTE GHOST
+    Independent third lane.
+  */
+  try{
+    const d =
+      await getJson('/api/shadow/ghost');
+
+    const g =
+      d.ghost || {};
+
+    document.getElementById('ghostRaw').textContent =
+      g.rawCount ?? '—';
+
+    document.getElementById('ghostSequence').textContent =
+      g.sequence ?? '—';
+
+    document.getElementById('ghostLink').textContent =
+      g.linkStatus ?? '—';
+
+    document.getElementById('ghostPower').textContent =
+      g.powerQualification ?? '—';
+
+  }catch(err){
+    document.getElementById('ghostLink').textContent =
+      'UNAVAILABLE';
   }
 }
 

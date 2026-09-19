@@ -295,6 +295,14 @@ pre{
   nav{margin-left:0;width:100%}
 }
 </style>
+
+  <!-- COSIGO-CANONICAL-FAVICON-BEGIN -->
+  <link rel="icon" href="https://cosigo.io/favicon.ico">
+  <link rel="icon" type="image/svg+xml" href="https://cosigo.io/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://cosigo.io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://cosigo.io/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://cosigo.io/apple-touch-icon.png">
+  <!-- COSIGO-CANONICAL-FAVICON-END -->
 </head>
 
 <body>
@@ -676,13 +684,15 @@ pre{
     CORE20 · OPERATING PATH
   </div>
 
-  <h2>A / B PATH CONTROL</h2>
+  <h2>A / B / C PATH MAP</h2>
 
   <p class="note">
-    Path A is the normal A8 autonomous operating route.
+    Path A is the current running A8 natural / physical route.
     Path B preserves the original functional recovery and qualification
-    machinery as an emergency fallback. Nothing in Path B is automatically
-    invoked by this panel.
+    machinery as a deliberate emergency fallback; no Path-B takeover is
+    automatic from this panel. Path C is the preserved research, proof and
+    development workspace for future investigation when needed. Path C is
+    not part of current Core20 operation.
   </p>
 
   <div
@@ -701,7 +711,9 @@ pre{
         padding:16px;
       "
     >
-      <div class="kicker">PATH A</div>
+      <div class="kicker">
+        PATH A · CURRENT NATURAL / PHYSICAL PATH
+      </div>
 
       <div
         style="
@@ -710,12 +722,83 @@ pre{
           margin-top:4px;
         "
       >
-        A8 PRIMARY
+        A8 PRIMARY · NATURE → EPOCH-5 PHYSICAL RAW → CORE20
       </div>
 
+      <pre style="
+        white-space:pre-wrap;
+        overflow:auto;
+        margin:16px 0;
+        line-height:1.45;
+      ">                           NATURE
+                           │
+          ┌────────────────┼────────────────┐
+          │                │                │
+       JUPITER          MINTAKA            SOL
+   Io/Eu/Ga turns    stellar crossing   solar direction
+          │                │                │
+          │                │                │
+          └──── DIRECT EPOCH-5 PHYSICAL RAW ┘
+                           │
+                     EVIDENCE LAYER
+                           │
+          ┌────────────────┼────────────────┐
+          │                │                │
+   Jovian recurrence   Earth rotation    orbital advance
+     / time ruler        witness          / Year Angle
+          │                │                │
+          └────────────────┼────────────────┘
+                           │
+                    A8 NATURAL FRAME
+                           │
+             replaceable RAW carrier(s)
+                           │
+                        CORE20
+                  ┌────────┴────────┐
+               CALENDAR           SHIP</pre>
+
       <p class="note">
-        Normal autonomous operating path.
-        Current A8 source, recovery, qualification and restart sequence.
+        <b>JUPITER</b> · actual frame → server-captured Epoch-5 RAW
+        → Jupiter-relative moon position → natural turns / recurrence evidence.
+      </p>
+
+      <p class="note">
+        <b>MINTAKA</b> · actual telescope field → identified Mintaka +
+        companion geometry → server-captured Epoch-5 RAW → Earth-axial-rotation
+        evidence. Mintaka is an upstream Nature witness, not downstream
+        decoration.
+      </p>
+
+      <p class="note">
+        <b>SOL</b> · actual telescope observation → server-captured Epoch-5 RAW
+        → orbital-direction / Year-Angle evidence.
+      </p>
+
+      <p class="note">
+        <b>PHYSICAL EVIDENCE BOUNDARY</b> · Arduino-B / Epoch-5 RAW →
+        Jupiter / Mintaka / Sol observation → sealed evidence. Mapped Core RAW
+        and host time are excluded from defining that evidence.
+      </p>
+
+      <p class="note">
+        <b>PHYSICAL CARRIER</b> · Epoch-5 RAW now; dual qualified carriers
+        may exist later. Carrier is transport only.
+      </p>
+
+      <p class="note">
+        <b>CORE20</b> · common A8 progression.
+        Physical SOURCE_EPOCH 5 and Core20 internal sourceEpoch 3 remain
+        distinct domains.
+      </p>
+
+      <p class="note">
+        <b>CALENDAR</b> · native YEAR DAY from Core20 integer day progression.
+        Year Angle is a read-only seasonal / orbital coordinate.
+      </p>
+
+      <p class="note">
+        <b>SHIP</b> · Mintaka Earth rotation ↔ Sol orbital advance.
+        Downstream relationship / slip only.
       </p>
 
       <a
@@ -1110,15 +1193,16 @@ pre{
 
 <details class="panel" id="a8-ce-path-c">
   <summary>
-    PATH C · PROOF / DEVELOPMENT / REGRESSION
+    PATH C · RESEARCH / PROOF / DEVELOPMENT · NOT CURRENT CORE20
   </summary>
 
   <div class="inside">
 
     <p class="note">
-      Qualification, regression, diagnostic and development machinery.
-      Path C is not normal Core20 operation and does not define the
-      current Path-A operating source.
+      Preserved research, proof, regression, diagnostic and development
+      machinery. These benches remain available for future investigation
+      if needed. They are not part of current Core20 operation, do not
+      supply the current physical pace and do not define Path A.
     </p>
 
 <section class="panel">
@@ -1183,8 +1267,11 @@ pre{
     <p class="note">
       Deliberate operator access only.
       Opening this cabinet does not execute any action.
-      MASTER power, requalification, diagnostic hold/resume and
-      calendar-anchor controls are kept here to prevent accidental clicks.
+      CLEAN STOP remains available while Core20 is online. CE MASTER START
+      is intentionally locked while Core20 is offline until the physical
+      Path-A fresh-start backend is separately qualified. Requalification,
+      diagnostic hold/resume and calendar-anchor controls remain preserved
+      here as deliberate plant-changing actions.
     </p>
 
 <section class="panel" id="a8-ce-core20-master-power">
@@ -1227,12 +1314,13 @@ pre{
     CORE20 · MACHINE POWER
   </div>
 
-  <h2>MASTER START / STOP</h2>
+  <h2>MASTER POWER · CLEAN STOP / START LOCKED</h2>
 
   <p class="note">
-    START runs the complete systemd and automatic Core20 recovery
-    sequence. STOP performs the normal clean Core20 shutdown and
-    waits until the service is fully offline.
+    STOP performs the normal clean Core20 shutdown and waits until the
+    service is fully offline. START from this CE page is deliberately locked.
+    The existing machine-level fresh-start backend is preserved for inspection
+    but is not authorized here as the physical Path-A restart sequence.
   </p>
 
   <div class="power-grid">
@@ -1265,12 +1353,12 @@ pre{
   <h2>DANGER ZONE · PLANT-CHANGING ACTIONS</h2>
 
   <p class="note">
-    These controls are not part of ordinary reboot operation.
+    These controls are not part of ordinary Path-A operation. Requalification is preserved Path-B fallback machinery.
   </p>
 
   <div class="controls">
     <button id="requalify" class="danger">
-      REQUALIFY · NEW SOURCE EPOCH
+      B FALLBACK · REQUALIFY · NEW SOURCE EPOCH
     </button>
 
     <button id="hold" class="danger">
@@ -2903,10 +2991,10 @@ pre{
     }
 
     if (machine === 'OFFLINE') {
-      button.disabled = false;
-      button.className = 'primary';
+      button.disabled = true;
+      button.className = 'warn';
       button.textContent =
-        'START CORE20 · FULL SEQUENCE';
+        'START LOCKED · PATH-A RESTART NOT QUALIFIED';
       return;
     }
 
@@ -2951,36 +3039,37 @@ pre{
     async () => {
       if (busy || !control) return;
 
-      const starting =
-        control.state === 'OFFLINE';
+      /*
+       * CE MASTER START LOCK
+       *
+       * The current backend fresh-start chain is retained untouched,
+       * but this browser must not invoke it until the physical Path-A
+       * restart sequence is separately qualified.
+       */
+      if (control.state !== 'ONLINE') {
+        alert(
+          'NO ACTION SENT\n\n' +
+          'CE MASTER START is locked until the physical ' +
+          'Path-A restart sequence is separately qualified.'
+        );
+        return;
+      }
 
       const question =
-        starting
-          ? (
-              'START CORE20?\n\n' +
-              'This runs the complete systemd + ' +
-              'autorecovery sequence.'
-            )
-          : (
-              'STOP CORE20 CLEANLY?\n\n' +
-              'Core20 will receive its normal ' +
-              'clean shutdown signal.'
-            );
+        'STOP CORE20 CLEANLY?\n\n' +
+        'Core20 will receive its normal clean shutdown signal.';
 
       if (!confirm(question)) return;
 
       busy = true;
       button.disabled = true;
-
       button.textContent =
-        starting
-          ? 'STARTING · QUALIFYING…'
-          : 'STOPPING · SEALING…';
+        'STOPPING · SEALING…';
 
       try {
         const payload =
           await api(
-            starting ? '/start' : '/stop',
+            '/stop',
             {
               method: 'POST',
               headers: {

@@ -1,0 +1,2 @@
+dffeec1f8dad127ab347c34fc0a9a9a94fa05d4a30a64e355d349adbacc78042  /srv/sites/moons.cosigo.io/public/moons.html
+9e68d679b814a9c082bca3a8bcd401cbc6d50293ef16e35b411a12ba5aa8b119  /srv/sites/moons.cosigo.io/public/assets/a8-moons-continuous-v2.json

@@ -1,0 +1,761 @@
+{
+  "status": "Exploratory candidate peaks; individual moon periods not established by this scan.",
+  "source": {
+    "file": "satsatd.dat",
+    "sha256": "b29f6b7dd61a20ee426cf83f0f4947da90cb3b0e9095e34e7ae0c4f232ef6223"
+  },
+  "script_sha256": "b2a51d9a14addf2f267be931316669f3e6b793304515fa8531cce0e96c05d93c",
+  "requirements_sha256": "5a81cde5d4f409222788b0a0da88fff0acdb160f45ab8839d9661cff6aa10424",
+  "versions": {
+    "numpy": "1.26.4",
+    "scipy": "1.13.1"
+  },
+  "method": {
+    "coordinates": "Published dRAs and dDEs in arcseconds; O-C columns unused.",
+    "time": "Recorded calendar-date differences in days; no time-scale or A8 conversion.",
+    "model": "One trial frequency; separate offset, cosine and sine coefficients for each coordinate.",
+    "weights": "Each pair/calendar date has total weight 1 in full data; retained weights unchanged in sensitivity run.",
+    "score": "1 minus weighted two-coordinate residual sum of squares / constant-model sum of squares.",
+    "sampling_window": "Squared modulus of weighted mean exp(2*pi*i*f*t).",
+    "candidate_spacing": "At least 1/(pair time span) cycles/day.",
+    "search_period_days": [
+      0.5,
+      40.0
+    ],
+    "frequency_grid_points": 2721,
+    "frequency_step": 0.0007261029411764694,
+    "supplied_orbital_periods": [],
+    "reference": "https://arxiv.org/abs/1703.09824"
+  },
+  "scope": "Independent archive analysis; no Core20 authority input.",
+  "flagged_record": {
+    "line": 640,
+    "pair": "24",
+    "date": "2018/05/05.90303",
+    "tick": 73681990303,
+    "xy": [
+      8.63,
+      45.456
+    ]
+  },
+  "full": {
+    "records": 671,
+    "pairs": {
+      "12": {
+        "records": 101,
+        "calendar_dates": 20,
+        "span_days": 114.72561,
+        "first": "2018/01/16.19757",
+        "last": "2018/05/10.92318",
+        "candidates": [
+          {
+            "frequency": 0.2808880530519636,
+            "period_days": 3.5601371761261857,
+            "score": 0.7147433492689981,
+            "search_boundary": false
+          },
+          {
+            "frequency": 1.2836705294876374,
+            "period_days": 0.7790160925476249,
+            "score": 0.7091676708275996,
+            "search_boundary": false
+          },
+          {
+            "frequency": 0.7218529171116966,
+            "period_days": 1.3853237637401747,
+            "score": 0.7073816127117192,
+            "search_boundary": false
+          },
+          {
+            "frequency": 1.7245591750710545,
+            "period_days": 0.5798583281195895,
+            "score": 0.6874194817058505,
+            "search_boundary": false
+          },
+          {
+            "frequency": 0.7653402861748274,
+            "period_days": 1.3066083388841354,
+            "score": 0.6383490295774685,
+            "search_boundary": false
+          }
+        ],
+        "sampling_peaks": [
+          {
+            "frequency": 1.0030606617647058,
+            "period_days": 0.9969486773020078,
+            "score": 0.9783708482761548,
+            "search_boundary": false
+          },
+          {
+            "frequency": 1.933924632352941,
+            "period_days": 0.5170832323405146,
+            "score": 0.4224308020409398,
+            "search_boundary": false
+          },
+          {
+            "frequency": 0.9311764705882353,
+            "period_days": 1.0739102969046115,
+            "score": 0.42024730052363796,
+            "search_boundary": false
+          }
+        ]
+      },
+      "13": {
+        "records": 121,
+        "calendar_dates": 20,
+        "span_days": 114.70478,
+        "first": "2018/01/16.21840",
+        "last": "2018/05/10.92318",
+        "candidates": [
+          {
+            "frequency": 0.8627328095335538,
+            "period_days": 1.1591074188318644,
+            "score": 0.8671333512331678,
+            "search_boundary": false
+          },
+          {
+            "frequency": 0.1401064448642073,
+            "period_days": 7.137430408495561,
+            "score": 0.8605824830367874,
+            "search_boundary": false
+          },
+          {
+            "frequency": 1.8655781408121892,
+            "period_days": 0.5360268638035418,
+            "score": 0.8387842006611304,
+            "search_boundary": false
+          },
+          {
+            "frequency": 1.1429435709106024,
+            "period_days": 0.8749338335253797,
+            "score": 0.8232064598876827,
+            "search_boundary": false
+          },
+          {
+            "frequency": 0.0693112847174017,
+            "period_days": 14.42766504873245,
+            "score": 0.4254371607879667,
+            "search_boundary": false
+          }
+        ],
+        "sampling_peaks": [
+          {
+            "frequency": 1.0030606617647058,
+            "period_days": 0.9969486773020078,
+            "score": 0.9812514994887779,
+            "search_boundary": false
+          },
+          {
+            "frequency": 2.0,
+            "period_days": 0.5,
+            "score": 0.29495648703319355,
+            "search_boundary": true
+          },
+          {
+            "frequency": 0.9311764705882353,
+            "period_days": 1.0739102969046115,
+            "score": 0.2790451955482593,
+            "search_boundary": false
+          }
+        ]
+      },
+      "14": {
+        "records": 99,
+        "calendar_dates": 20,
+        "span_days": 110.69461,
+        "first": "2018/01/16.18368",
+        "last": "2018/05/06.87829",
+        "candidates": [
+          {
+            "frequency": 0.05984629305311798,
+            "period_days": 16.709472700546826,
+            "score": 0.935777726787113,
+            "search_boundary": false
+          },
+          {
+            "frequency": 0.9431499954221324,
+            "period_days": 1.0602767373734894,
+            "score": 0.931227249411323,
+            "search_boundary": false
+          },
+          {
+            "frequency": 1.0628831761394224,
+            "period_days": 0.9408371704895875,
+            "score": 0.8957282303748437,
+            "search_boundary": false
+          },
+          {
+            "frequency": 1.9461547959460834,
+            "period_days": 0.5138337413257358,
+            "score": 0.8805948656158004,
+            "search_boundary": false
+          },
+          {
+            "frequency": 1.0204717899040265,
+            "period_days": 0.9799388967862092,
+            "score": 0.36572320015903714,
+            "search_boundary": false
+          }
+        ],
+        "sampling_peaks": [
+          {
+            "frequency": 1.0030606617647058,
+            "period_days": 0.9969486773020078,
+            "score": 0.9736063382738827,
+            "search_boundary": false
+          },
+          {
+            "frequency": 2.0,
+            "period_days": 0.5,
+            "score": 0.26322537176044236,
+            "search_boundary": true
+          },
+          {
+            "frequency": 1.1294025735294118,
+            "period_days": 0.8854238722645855,
+            "score": 0.20790540911154595,
+            "search_boundary": false
+          }
+        ]
+      },
+      "23": {
+        "records": 128,
+        "calendar_dates": 21,
+        "span_days": 70.83728,
+        "first": "2018/03/01.08590",
+        "last": "2018/05/10.92318",
+        "candidates": [
+          {
+            "frequency": 0.8615631576992606,
+            "period_days": 1.1606810145763713,
+            "score": 0.6892037888203197,
+            "search_boundary": false
+          },
+          {
+            "frequency": 0.1414187060613566,
+            "period_days": 7.071200323146326,
+            "score": 0.6866417478799438,
+            "search_boundary": false
+          },
+          {
+            "frequency": 1.8644648456602955,
+            "period_days": 0.5363469321116926,
+            "score": 0.6620562248130852,
+            "search_boundary": false
+          },
+          {
+            "frequency": 1.1445440897876893,
+            "period_days": 0.8737103349033046,
+            "score": 0.6595228339380725,
+            "search_boundary": false
+          },
+          {
+            "frequency": 0.7916242146303719,
+            "period_days": 1.2632256334742409,
+            "score": 0.4320383365225049,
+            "search_boundary": false
+          }
+        ],
+        "sampling_peaks": [
+          {
+            "frequency": 1.0030606617647058,
+            "period_days": 0.9969486773020078,
+            "score": 0.975311731239705,
+            "search_boundary": false
+          },
+          {
+            "frequency": 2.0,
+            "period_days": 0.5,
+            "score": 0.4144370274135515,
+            "search_boundary": true
+          },
+          {
+            "frequency": 1.9331985294117646,
+            "period_days": 0.5172774470836582,
+            "score": 0.3141285577683915,
+            "search_boundary": false
+          }
+        ]
+      },
+      "24": {
+        "records": 111,
+        "calendar_dates": 24,
+        "span_days": 114.7395,
+        "first": "2018/01/16.18368",
+        "last": "2018/05/10.92318",
+        "candidates": [
+          {
+            "frequency": 0.9428922159560027,
+            "period_days": 1.0605666088632362,
+            "score": 0.9139864274019103,
+            "search_boundary": false
+          },
+          {
+            "frequency": 0.06002363821853719,
+            "period_days": 16.66010308070877,
+            "score": 0.9125001371529371,
+            "search_boundary": false
+          },
+          {
+            "frequency": 1.0630068136823867,
+            "period_days": 0.9407277424082322,
+            "score": 0.8631447285841893,
+            "search_boundary": false
+          },
+          {
+            "frequency": 1.9457670578371624,
+            "period_days": 0.5139361343240955,
+            "score": 0.8626580034042188,
+            "search_boundary": false
+          },
+          {
+            "frequency": 1.2833738667677932,
+            "period_days": 0.7791961687037645,
+            "score": 0.422574616366439,
+            "search_boundary": false
+          }
+        ],
+        "sampling_peaks": [
+          {
+            "frequency": 1.0030606617647058,
+            "period_days": 0.9969486773020078,
+            "score": 0.97512879050235,
+            "search_boundary": false
+          },
+          {
+            "frequency": 2.0,
+            "period_days": 0.5,
+            "score": 0.32532148734875943,
+            "search_boundary": true
+          },
+          {
+            "frequency": 1.9331985294117646,
+            "period_days": 0.5172774470836582,
+            "score": 0.24565585831069084,
+            "search_boundary": false
+          }
+        ]
+      },
+      "34": {
+        "records": 111,
+        "calendar_dates": 23,
+        "span_days": 70.83728,
+        "first": "2018/03/01.08590",
+        "last": "2018/05/10.92318",
+        "candidates": [
+          {
+            "frequency": 0.9423783756889994,
+            "period_days": 1.0611448923250937,
+            "score": 0.8421655820592495,
+            "search_boundary": false
+          },
+          {
+            "frequency": 0.060877473071909806,
+            "period_days": 16.426437392018194,
+            "score": 0.8214900630398918,
+            "search_boundary": false
+          },
+          {
+            "frequency": 1.9456299522021703,
+            "period_days": 0.5139723506354049,
+            "score": 0.8177696237925465,
+            "search_boundary": false
+          },
+          {
+            "frequency": 1.0641181301601117,
+            "period_days": 0.9397452892279317,
+            "score": 0.7642787492552121,
+            "search_boundary": false
+          },
+          {
+            "frequency": 0.8686012156158438,
+            "period_days": 1.1512763072648864,
+            "score": 0.524131439473637,
+            "search_boundary": false
+          }
+        ],
+        "sampling_peaks": [
+          {
+            "frequency": 1.0030606617647058,
+            "period_days": 0.9969486773020078,
+            "score": 0.9759450469954929,
+            "search_boundary": false
+          },
+          {
+            "frequency": 2.0,
+            "period_days": 0.5,
+            "score": 0.3911264883074483,
+            "search_boundary": true
+          },
+          {
+            "frequency": 1.9324724264705881,
+            "period_days": 0.5174718077744432,
+            "score": 0.2169574655069736,
+            "search_boundary": false
+          }
+        ]
+      }
+    }
+  },
+  "omit_line640": {
+    "records": 670,
+    "pairs": {
+      "12": {
+        "records": 101,
+        "calendar_dates": 20,
+        "span_days": 114.72561,
+        "first": "2018/01/16.19757",
+        "last": "2018/05/10.92318",
+        "candidates": [
+          {
+            "frequency": 0.2808880530519636,
+            "period_days": 3.5601371761261857,
+            "score": 0.7147433492689981,
+            "search_boundary": false
+          },
+          {
+            "frequency": 1.2836705294876374,
+            "period_days": 0.7790160925476249,
+            "score": 0.7091676708275996,
+            "search_boundary": false
+          },
+          {
+            "frequency": 0.7218529171116966,
+            "period_days": 1.3853237637401747,
+            "score": 0.7073816127117192,
+            "search_boundary": false
+          },
+          {
+            "frequency": 1.7245591750710545,
+            "period_days": 0.5798583281195895,
+            "score": 0.6874194817058505,
+            "search_boundary": false
+          },
+          {
+            "frequency": 0.7653402861748274,
+            "period_days": 1.3066083388841354,
+            "score": 0.6383490295774685,
+            "search_boundary": false
+          }
+        ],
+        "sampling_peaks": [
+          {
+            "frequency": 1.0030606617647058,
+            "period_days": 0.9969486773020078,
+            "score": 0.9783708482761548,
+            "search_boundary": false
+          },
+          {
+            "frequency": 1.933924632352941,
+            "period_days": 0.5170832323405146,
+            "score": 0.4224308020409398,
+            "search_boundary": false
+          },
+          {
+            "frequency": 0.9311764705882353,
+            "period_days": 1.0739102969046115,
+            "score": 0.42024730052363796,
+            "search_boundary": false
+          }
+        ]
+      },
+      "13": {
+        "records": 121,
+        "calendar_dates": 20,
+        "span_days": 114.70478,
+        "first": "2018/01/16.21840",
+        "last": "2018/05/10.92318",
+        "candidates": [
+          {
+            "frequency": 0.8627328095335538,
+            "period_days": 1.1591074188318644,
+            "score": 0.8671333512331678,
+            "search_boundary": false
+          },
+          {
+            "frequency": 0.1401064448642073,
+            "period_days": 7.137430408495561,
+            "score": 0.8605824830367874,
+            "search_boundary": false
+          },
+          {
+            "frequency": 1.8655781408121892,
+            "period_days": 0.5360268638035418,
+            "score": 0.8387842006611304,
+            "search_boundary": false
+          },
+          {
+            "frequency": 1.1429435709106024,
+            "period_days": 0.8749338335253797,
+            "score": 0.8232064598876827,
+            "search_boundary": false
+          },
+          {
+            "frequency": 0.0693112847174017,
+            "period_days": 14.42766504873245,
+            "score": 0.4254371607879667,
+            "search_boundary": false
+          }
+        ],
+        "sampling_peaks": [
+          {
+            "frequency": 1.0030606617647058,
+            "period_days": 0.9969486773020078,
+            "score": 0.9812514994887779,
+            "search_boundary": false
+          },
+          {
+            "frequency": 2.0,
+            "period_days": 0.5,
+            "score": 0.29495648703319355,
+            "search_boundary": true
+          },
+          {
+            "frequency": 0.9311764705882353,
+            "period_days": 1.0739102969046115,
+            "score": 0.2790451955482593,
+            "search_boundary": false
+          }
+        ]
+      },
+      "14": {
+        "records": 99,
+        "calendar_dates": 20,
+        "span_days": 110.69461,
+        "first": "2018/01/16.18368",
+        "last": "2018/05/06.87829",
+        "candidates": [
+          {
+            "frequency": 0.05984629305311798,
+            "period_days": 16.709472700546826,
+            "score": 0.935777726787113,
+            "search_boundary": false
+          },
+          {
+            "frequency": 0.9431499954221324,
+            "period_days": 1.0602767373734894,
+            "score": 0.931227249411323,
+            "search_boundary": false
+          },
+          {
+            "frequency": 1.0628831761394224,
+            "period_days": 0.9408371704895875,
+            "score": 0.8957282303748437,
+            "search_boundary": false
+          },
+          {
+            "frequency": 1.9461547959460834,
+            "period_days": 0.5138337413257358,
+            "score": 0.8805948656158004,
+            "search_boundary": false
+          },
+          {
+            "frequency": 1.0204717899040265,
+            "period_days": 0.9799388967862092,
+            "score": 0.36572320015903714,
+            "search_boundary": false
+          }
+        ],
+        "sampling_peaks": [
+          {
+            "frequency": 1.0030606617647058,
+            "period_days": 0.9969486773020078,
+            "score": 0.9736063382738827,
+            "search_boundary": false
+          },
+          {
+            "frequency": 2.0,
+            "period_days": 0.5,
+            "score": 0.26322537176044236,
+            "search_boundary": true
+          },
+          {
+            "frequency": 1.1294025735294118,
+            "period_days": 0.8854238722645855,
+            "score": 0.20790540911154595,
+            "search_boundary": false
+          }
+        ]
+      },
+      "23": {
+        "records": 128,
+        "calendar_dates": 21,
+        "span_days": 70.83728,
+        "first": "2018/03/01.08590",
+        "last": "2018/05/10.92318",
+        "candidates": [
+          {
+            "frequency": 0.8615631576992606,
+            "period_days": 1.1606810145763713,
+            "score": 0.6892037888203197,
+            "search_boundary": false
+          },
+          {
+            "frequency": 0.1414187060613566,
+            "period_days": 7.071200323146326,
+            "score": 0.6866417478799438,
+            "search_boundary": false
+          },
+          {
+            "frequency": 1.8644648456602955,
+            "period_days": 0.5363469321116926,
+            "score": 0.6620562248130852,
+            "search_boundary": false
+          },
+          {
+            "frequency": 1.1445440897876893,
+            "period_days": 0.8737103349033046,
+            "score": 0.6595228339380725,
+            "search_boundary": false
+          },
+          {
+            "frequency": 0.7916242146303719,
+            "period_days": 1.2632256334742409,
+            "score": 0.4320383365225049,
+            "search_boundary": false
+          }
+        ],
+        "sampling_peaks": [
+          {
+            "frequency": 1.0030606617647058,
+            "period_days": 0.9969486773020078,
+            "score": 0.975311731239705,
+            "search_boundary": false
+          },
+          {
+            "frequency": 2.0,
+            "period_days": 0.5,
+            "score": 0.4144370274135515,
+            "search_boundary": true
+          },
+          {
+            "frequency": 1.9331985294117646,
+            "period_days": 0.5172774470836582,
+            "score": 0.3141285577683915,
+            "search_boundary": false
+          }
+        ]
+      },
+      "24": {
+        "records": 110,
+        "calendar_dates": 23,
+        "span_days": 114.7395,
+        "first": "2018/01/16.18368",
+        "last": "2018/05/10.92318",
+        "candidates": [
+          {
+            "frequency": 0.942889679720136,
+            "period_days": 1.0605694616328978,
+            "score": 0.9140162091535966,
+            "search_boundary": false
+          },
+          {
+            "frequency": 0.06000841986828219,
+            "period_days": 16.66432814253381,
+            "score": 0.9126088318926185,
+            "search_boundary": false
+          },
+          {
+            "frequency": 1.0629779439612745,
+            "period_days": 0.940753291901258,
+            "score": 0.8633897331815376,
+            "search_boundary": false
+          },
+          {
+            "frequency": 1.9457367353488944,
+            "period_days": 0.5139441435383537,
+            "score": 0.8630041030271736,
+            "search_boundary": false
+          },
+          {
+            "frequency": 1.0125884806809693,
+            "period_days": 0.9875680190707843,
+            "score": 0.4310891539424416,
+            "search_boundary": false
+          }
+        ],
+        "sampling_peaks": [
+          {
+            "frequency": 1.0030606617647058,
+            "period_days": 0.9969486773020078,
+            "score": 0.9740551956095586,
+            "search_boundary": false
+          },
+          {
+            "frequency": 2.0,
+            "period_days": 0.5,
+            "score": 0.3315928793005867,
+            "search_boundary": true
+          },
+          {
+            "frequency": 1.933924632352941,
+            "period_days": 0.5170832323405146,
+            "score": 0.254893444260371,
+            "search_boundary": false
+          }
+        ]
+      },
+      "34": {
+        "records": 111,
+        "calendar_dates": 23,
+        "span_days": 70.83728,
+        "first": "2018/03/01.08590",
+        "last": "2018/05/10.92318",
+        "candidates": [
+          {
+            "frequency": 0.9423783756889994,
+            "period_days": 1.0611448923250937,
+            "score": 0.8421655820592495,
+            "search_boundary": false
+          },
+          {
+            "frequency": 0.060877473071909806,
+            "period_days": 16.426437392018194,
+            "score": 0.8214900630398918,
+            "search_boundary": false
+          },
+          {
+            "frequency": 1.9456299522021703,
+            "period_days": 0.5139723506354049,
+            "score": 0.8177696237925465,
+            "search_boundary": false
+          },
+          {
+            "frequency": 1.0641181301601117,
+            "period_days": 0.9397452892279317,
+            "score": 0.7642787492552121,
+            "search_boundary": false
+          },
+          {
+            "frequency": 0.8686012156158438,
+            "period_days": 1.1512763072648864,
+            "score": 0.524131439473637,
+            "search_boundary": false
+          }
+        ],
+        "sampling_peaks": [
+          {
+            "frequency": 1.0030606617647058,
+            "period_days": 0.9969486773020078,
+            "score": 0.9759450469954929,
+            "search_boundary": false
+          },
+          {
+            "frequency": 2.0,
+            "period_days": 0.5,
+            "score": 0.3911264883074483,
+            "search_boundary": true
+          },
+          {
+            "frequency": 1.9324724264705881,
+            "period_days": 0.5174718077744432,
+            "score": 0.2169574655069736,
+            "search_boundary": false
+          }
+        ]
+      }
+    },
+    "note": "Only pair 24 changes; five identical scans reused."
+  },
+  "curves_sha256": "5806a4fabe497eb91bb253c13b1de0cb30d58540f28bcbfc164b009d5fec7937"
+}

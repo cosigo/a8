@@ -1,0 +1,27 @@
+/* A8 STARS EVENT COORDINATE v1 */
+
+.a8-event-coordinate-notice{
+  margin:0 0 8px;
+  padding:8px 10px;
+  border:1px solid var(--accent,#d8c47a);
+  border-radius:7px;
+  color:var(--accent,#d8c47a);
+  font:800 11px/1.4 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+
+.a8-event-coordinate-ring{
+  fill:none;
+  stroke:var(--accent,#d8c47a);
+  stroke-width:2.4;
+  vector-effect:non-scaling-stroke;
+}
+
+.a8-event-coordinate-cross{
+  stroke:var(--accent,#d8c47a);
+  stroke-width:1.4;
+  vector-effect:non-scaling-stroke;
+}
+
+.a8-event-coordinate-core{
+  fill:var(--accent,#d8c47a);
+}

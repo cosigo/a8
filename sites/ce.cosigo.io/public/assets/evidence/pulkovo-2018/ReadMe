@@ -1,0 +1,166 @@
+J/other/SoSyR/53.368  Observations of the Galilean moons     (Narizhnaya+, 2019)
+================================================================================
+Observations of the Galilean Moons of Jupiter at Pulkovo in 2018.
+    Narizhnaya N.V., Khovrichev M.Yu., Bikulova D.A.
+    <Solar System Res., 53, 368 (2019)>
+    =2019SoSyR..53..368N    (SIMBAD/NED BibCode)
+================================================================================
+ADC_Keywords: Solar system ; Planets ; Positional data
+Keywords: Galilean moons of Jupiter - precise positions - planetary theories -
+          satellite motion theories - CCD observations
+
+Abstract:
+    Results of observations of the Galilean moons of Jupiter were carried
+    out at the Normal Astrograph of the Pulkovo Observatory in 2018. We
+    obtained 452 positions of the Galilean moons of Jupiter in the Gaia
+    DR1 catalog system (ICRF, J2000.0) and 671 differential coordinates of
+    the satellites relative to each other. The obtained mean errors in the
+    satellites normal positions on the right ascension and declination,
+    which demonstrate the intrinsic convergence of the observational
+    results, are (eps)RA=0.003" and (eps)DE= 0.003", respectively, for the
+    entire observational period. The errors of one difference are
+    (sigm)RA=0.070", and (sigm)DE=0.067",respectively. The equatorial
+    coordinates of the moons were compared to eight motion theories of
+    planets and satellites. On average, the (O.C) residuals in the both
+    coordinates relative to the motion theories are 0.014". The best
+    agreement with observations is achieved by combination of all four
+    motion theories of satellites with the planetary theory EPM2017, which
+    yields average (O-C) residuals of approximately 0.01" for each of
+    them. The new results were compared to those of the 2016-2017
+    observational season. As in the past, peculiarities in the behavior of
+    the (O-C) residuals for Io and Ganymede have been noticed.
+
+Description:
+    Our observations were carried out with the Normal Astrograph
+    (D/F=330mm/ 3467mm) at Pulkovo (code is 084). The CCD camera (SBIG
+    ST-L-11K 3 CCD Camera with the 35'x25' field of view and the
+    0.530"/pixel scale) was used as a radiation detector. In total, for
+    the observational season, we obtained and processed 2590 CCD frames
+    containing the images of the Galilean moons. The observations were
+    made with exposures of 10s, which allowed direct measurements of the
+    equatorial coordinates of these objects in each of the frames. The
+    number of the Gaia DR1 reference stars (Arenou et al.,
+    2017A&A...599A..50A) within a frame ranged from 17 to 46. The duration
+    of observations within one night reached several hours; consequently,
+    to calculate the normal places of objects, the positions obtained for
+    the objects were divided into groups by time intervals of 10 min.
+
+    To make the measurements of a large body of frames automatic, we
+    developed the JSA software package that allows the WCS parameters (a
+    set of constants to convert unambiguously from the pixel coordinates
+    to the equatorial ones and back) to be determined and introduced into
+    a metadata block for each of the frames. This method of image analysis
+    was considered in a series of papers by A. Refregier and his coauthors
+    (Refregier, 2003MNRAS.338...35R; Refregier and Bacon,
+    2003MNRAS.338...48R; Massey and Refregier, 2005MNRAS.363..197M).
+
+    Astrometric reduction algorithm is based on Turner's method with using
+    Gaia DR1 catalog as reference one. Ephemerides for comparison are
+    given by web- server "Natural Satellites Ephemeride Server MULTI-SAT"
+    developed by N.V. Emelyanov
+    (http://lnfm1.sai.msu.ru/neb/nss/nssephmr.htm). Two catalogue are
+    presented: 452 normal positions of Galilean satellites, 671
+    differential mutual coordinates of Galilean satellites.
+
+
+File Summary:
+--------------------------------------------------------------------------------
+ FileName      Lrecl  Records   Explanations
+--------------------------------------------------------------------------------
+ReadMe            80        .   This file
+satsdat.dat       72      452   Positions of Galilean satellites
+                                 (1-Io, 2- Europa, 3-Ganymede, 4-Callisto)
+satsatd.dat       63      671   Differential mutual coordinates of
+                                 Galilean satellites
+--------------------------------------------------------------------------------
+
+See also:
+ J/other/SoSyR/45.523 : Saturnian satellites CCD observations (Grosheva+, 2011)
+ J/other/SoSyR/49.383 : Galilean satellites + Jupiter positions
+                                                           (Narizhnaya, 2015)
+ J/other/SoSyR/50.344 : Galilean moons + Jupiter positions (Narizhnaya, 2016)
+ J/other/SoSyR/52.312 : Galilean moons positions (Narizhnaya+, 2018)
+
+Byte-by-byte Description of file: satsdat.dat
+--------------------------------------------------------------------------------
+   Bytes Format Units    Label     Explanations
+--------------------------------------------------------------------------------
+       1  I1    ---      SatNo     [1/4] Identification number of galilean
+                                    satellite (1)
+   3- 18  A16   "date"   Obs.Date  Mean observation date (YYYY/MM/DD.ddddd)
+  20- 21  I2    h        RAh       Right ascension (J2000.0) (2)
+  23- 24  I2    min      RAm       Right ascension (J2000.0) (2)
+  26- 31  F6.3  s        RAs       Right ascension (J2000.0) (2)
+      33  A1    ---      DE-       Declination sign (J2000.0) (2)
+  34- 35  I2    deg      DEd       Declination (J2000.0) (2)
+  37- 38  I2    arcmin   DEm       Declination (J2000.0) (2)
+  40- 44  F5.2  arcsec   DEs       Declination (J2000.0) (2)
+  46- 52  F7.4  arcsec   (O-C)RA   (O-C) residual in right ascension (3)
+  54- 60  F7.4  arcsec   (O-C)DE   (O-C) residual in declination (3)
+  62- 66  F5.3  arcsec e_(O-C)RA   Error of mean O-C in right ascension
+  68- 72  F5.3  arcsec e_(O-C)DE   Error of mean O-C in declination
+--------------------------------------------------------------------------------
+Note (1): Satellite number as follows:
+           1 = Io
+           2 = Europa
+           3 = Ganymede
+           4 = Callisto
+Note (2): topocentric equatorial coordinates of Galilean satellites, J2000.0.
+Note (3): "Observed-Calculated" residuals by web-sever "MULTI-SAT", calculated
+  from ephemerides within the EPM2017 and V.Lainey-V.2.0|V1.1 theories
+--------------------------------------------------------------------------------
+
+Byte-by-byte Description of file: satsatd.dat
+--------------------------------------------------------------------------------
+   Bytes Format Units    Label     Explanations
+--------------------------------------------------------------------------------
+   1-  2  I2    ---      Sats      [12/34] Idenficiation numbers of galilean
+                                    satellites (1)
+   4- 19  A16   "date"   Obs.Date  Mean observation date (YYYY/MM/DD.ddddd)
+  21- 28  F8.3  arcsec   dRAs      Differential Right ascension (J2000.0) (2)
+  30- 37  F8.3  arcsec   dDEs      Differential Declination (J2000.0) (2)
+  39- 44  F6.3  arcsec   (O-C)RA   (O-C) residual in right ascension (3)
+  46- 51  F6.3  arcsec   (O-C)DE   (O-C) residual in declination (3)
+  53- 57  F5.3  arcsec e_(O-C)RA   Error of mean O-C in right ascension
+  59- 63  F5.3  arcsec e_(O-C)DE   Error of mean O-C in declination
+--------------------------------------------------------------------------------
+Note (1): Identification numbers of satellites which observations were used for
+  deriving differential mutual satellites coordinates relative to each other.
+Note (2): Differential coordinates of Galilean satellites (J2000.0) relative
+  each other.
+Note (3): "Observed-Calculated" residuals by web-sever "MULTI-SAT", calculated
+  from ephemerides within the EPM2017 and V.Lainey-V.2.0|V1.1 theories.
+--------------------------------------------------------------------------------
+
+Acknowledgements:
+    Natalia Narizhnaya, Narizhnaya.nat(at)yandex.ru
+
+References:
+ Arenou F., Luri X., Babusiaux C., Fabricius C., Helmi A., Robin A.C.,
+  Vallenari A., Blanco- Cuaresma S., Cantataudin T., Findeisen K., Reyle C.,
+  Ruiz-Dern L., Sordo R., Turon C., Walton, N.A. et al., Gaia Data
+  Release 1: Catalogue validation, Astron. Astrophys., 2017, vol. 599,
+  no. 50, pp. 1-50, 2017A&A...599A..50A
+ Refregier A., Shapelets-I. A method for image analysis, Mon. Not. R. Astron.
+  Soc., 2003, vol. 338, no. 1, pp. 35-47, 2003MNRAS.338...35R
+ Refregier A. and Bacon D., Shapelets-II. A method for weak lensing
+  measurements, Mon. Not. R. Astron. Soc., 2003, vol. 338, no. 1, pp. 48-56,
+  2003MNRAS.338...48R
+ Massey R. and Refregier A., Polar shapelets, Mon. Not. R. Astron. Soc.,
+  2005, vol. 363, no. 1, pp. 197-210, 2005MNRAS.363..197M
+ Morgado B.,Vieira-Martins R., Assafin M., Machado D.I., Camargo J.I.B.,
+  Sfair R., Malacarne M., Braga-Ribas F., Robert V., Bassallo T., Benedetti-
+  Rossi G., Boldrin L.A., Borderes-Motta G., Camargo B.C.B., Crispim A.,
+  Dias-Oliveira A., Gomes-Junior A.R., Lainey V., Miranda J.O., Moura T.S.,
+  Ribeiro F.K., Santana T., Santos-Filho S., Trabuco L.L., Winter O.C.,
+  Yamashita T.A.R.  APPROX - mutual approximations between the Galilean
+  moons: the 2016-2018 observational campaign // Mon. Not. Roy. Astron. Soc.,
+  2019. V. 482. Issue 4. p. 5190-5200, 2019MNRAS.482.5190M
+ Narizhnaya N.V., Khovrichev M.Yu., Apetyan A.A., Bikulova D.A., Ershova A.P.,
+  Balyaev I.A., Kulikova A.M., O'Skina K.I., and Maksimova L.A.,
+  Astrometric observations of the Galilean Moons of Jupiter at the Pulkovo
+  normal astrograph in 2016.2017, Sol. Syst. Res., 2018, vol. 52, no. 4,
+  pp. 312-319, 2018SoSyR..52..312N, Cat. J/other/SoSyR/52.312
+
+================================================================================
+(End)  Natalia Narizhnaya [GAO, Russia], Patricia Vannier [CDS]      26-Nov-2019

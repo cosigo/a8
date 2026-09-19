@@ -1,0 +1,122 @@
+{
+  "schema": "A8-SOL-DETECTOR-ANGLE-EVIDENCE-V1",
+  "a8_stamp": {
+    "year": 2026,
+    "direction": "WEST",
+    "direction_range": "6\u20138",
+    "planet": "MERCURY",
+    "element": "WATER"
+  },
+  "sources": [
+    {
+      "name": "Kooha-2026-09-18-12-14-07.mkv",
+      "duration_seconds": 128.8,
+      "sha256": "89d8e9142043f144710f1cde0ff6d75899c782581221c670ae6fa849811acbd2"
+    },
+    {
+      "name": "Kooha-2026-09-18-12-17-06.mkv",
+      "duration_seconds": 47.366666,
+      "sha256": "3f0ebfc7c6716da92d067630de74f5e08e95a9d67012b2eba25325b172b1dacf"
+    }
+  ],
+  "primary_fit": {
+    "fit_interval_seconds": [
+      8.0,
+      104.0
+    ],
+    "accepted_limb_frames": 193,
+    "accepted_edge_points": 15440,
+    "vx_pixels_per_second": 23.86101115048434,
+    "vy_pixels_per_second_screen_down": 1.0949584618853747,
+    "track_speed_pixels_per_second": 23.886121224610587,
+    "track_angle_degrees_screen_down_from_right": 2.627404047581844,
+    "fitted_solar_radius_pixels": 1527.583125185096,
+    "median_limb_fit_residual_pixels": 1.1136813441943332,
+    "p90_limb_fit_residual_pixels": 2.896434189268234
+  },
+  "independent_windows": [
+    {
+      "seconds": "8\u201332",
+      "vx_px_s": 23.64997638487883,
+      "vy_px_s": 1.0487236721308466,
+      "angle_deg": 2.539034348650824
+    },
+    {
+      "seconds": "32\u201356",
+      "vx_px_s": 24.429123885120074,
+      "vy_px_s": 1.3179495656075715,
+      "angle_deg": 3.0881096355716617
+    },
+    {
+      "seconds": "56\u201380",
+      "vx_px_s": 24.399494262335917,
+      "vy_px_s": 1.0741319134225598,
+      "angle_deg": 2.52068808790427
+    },
+    {
+      "seconds": "80\u2013104",
+      "vx_px_s": 24.581470872510298,
+      "vy_px_s": 0.8760013260057329,
+      "angle_deg": 2.040966065457617
+    }
+  ],
+  "representative_physical_states": [
+    {
+      "clip": "Kooha-2026-09-18-12-14-07.mkv",
+      "video_second": 16,
+      "a8_clock_visible": "24:21:46",
+      "primary_epoch": 7,
+      "primary_raw": 2517613,
+      "primary_report_sequence": 233932,
+      "ghost_raw": 2508027,
+      "ghost_sequence": 505418
+    },
+    {
+      "clip": "Kooha-2026-09-18-12-14-07.mkv",
+      "video_second": 56,
+      "a8_clock_visible": "24:22:43",
+      "primary_epoch": 7,
+      "primary_raw": 2518851,
+      "primary_report_sequence": 234047,
+      "ghost_raw": 2509265,
+      "ghost_sequence": 505799
+    },
+    {
+      "clip": "Kooha-2026-09-18-12-14-07.mkv",
+      "video_second": 104,
+      "a8_clock_visible": "24:23:52",
+      "primary_epoch": 7,
+      "primary_raw": 2520315,
+      "primary_report_sequence": 234183,
+      "ghost_raw": 2510728,
+      "ghost_sequence": 506249
+    },
+    {
+      "clip": "Kooha-2026-09-18-12-17-06.mkv",
+      "video_second": 24,
+      "a8_clock_visible": "24:26:11",
+      "primary_epoch": 7,
+      "primary_raw": 2523307,
+      "primary_report_sequence": 234461,
+      "ghost_raw": 2513735,
+      "ghost_sequence": 507174
+    }
+  ],
+  "second_clip_role": {
+    "status": "CLOUD_LIMITED_SUPPORTING_WITNESS",
+    "note": "Retained as supporting physical evidence; cloud interference makes its vertical component too unstable to move the primary detector-angle fit."
+  },
+  "semantics": {
+    "result": "DETECTOR_SPACE_ORIENTATION_EVIDENCE",
+    "not_yet": [
+      "YEAR_ANGLE",
+      "MERIDIAN_0"
+    ],
+    "no_retune": [
+      "Core20",
+      "physical carrier rate",
+      "Jovian ruler",
+      "civil phase"
+    ]
+  }
+}

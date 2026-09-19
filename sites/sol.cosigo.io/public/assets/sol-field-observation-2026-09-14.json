@@ -1,0 +1,48 @@
+{
+  "schema": "A8-SOL-FIELD-OBSERVATION-V1",
+  "id": "sol-limb-center-line-2026-09-14-001",
+  "status": "OBSERVED_RAW_BRACKET",
+  "observationDate": "2026-09-14",
+
+  "event": {
+    "type": "SOL_LIMB_DETECTOR_CENTER_LINE_CROSSING",
+    "detectorReference": "camera pane geometric center line",
+    "approxVideoOffsetSeconds": 16.7,
+    "sourceEpoch": 5,
+    "rawBracket": {
+      "before": 853149723,
+      "after": 853149734,
+      "widthCounts": 11
+    }
+  },
+
+  "sourceVideo": {
+    "originalFilename": "2ebe9e8a-b001-467c-8c72-9352ab0a9c46(1).mkv",
+    "sha256": "1bda35dd6e915ebc9045872ca4bf1f69431c8d6aa7c3bb5667826bc1da394310",
+    "durationSeconds": 37.833333,
+    "widthPixels": 1280,
+    "heightPixels": 800,
+    "frameRate": "30/1",
+    "codec": "h264",
+    "sizeBytes": 8936384
+  },
+
+  "rawContext": {
+    "approxNearBeginning": 853149217,
+    "approxAround35Seconds": 853150283,
+    "note": "Context values are approximate visual readings. The center-line event itself is preserved as the explicit 11-count RAW bracket."
+  },
+
+  "observation": {
+    "description": "The visible solar limb moves across a fixed detector reference while the direct Epoch-5 physical counter advances.",
+    "detectorArtifact": "A detector-fixed dirt or polarizer mark remains fixed relative to the camera field and is excluded from celestial interpretation."
+  },
+
+  "boundaries": {
+    "instantaneousRawClaim": false,
+    "freeDriftRateClaim": false,
+    "predictionResidualComputed": false,
+    "authorityWrite": false,
+    "note": "This record preserves a visible geometric event bracketed by physical Epoch-5 RAW. It does not invent an instantaneous exposure pulse or a prediction residual."
+  }
+}

@@ -1098,6 +1098,14 @@ section.card:has(> #liveState){
 </style>
 
 
+
+  <!-- COSIGO-CANONICAL-FAVICON-BEGIN -->
+  <link rel="icon" href="https://cosigo.io/favicon.ico">
+  <link rel="icon" type="image/svg+xml" href="https://cosigo.io/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://cosigo.io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://cosigo.io/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://cosigo.io/apple-touch-icon.png">
+  <!-- COSIGO-CANONICAL-FAVICON-END -->
 </head>
 <body>
 
@@ -1426,8 +1434,8 @@ section.card:has(> #liveState){
           </div>
 
           <div>
-            <span>SOURCE</span>
-            <strong id="a8OppSource">—</strong>
+            <span>CURRENT DRIVE</span>
+            <strong id="a8OppSource">PHYSICAL · CONNECTING</strong>
           </div>
         </div>
 
@@ -3211,20 +3219,13 @@ setInterval(refresh,1000);
           : `${i.selectedRawPulse || '—'} · CHECK`;
     }
 
-    if ($('a8OppSource')) {
-      const source =
-        [
-          i.sourceMode,
-          i.rig
-        ].filter(Boolean);
-
-      if (i.sourceMode === 'VIRTUAL') {
-        source.push('QUALIFICATION');
-      }
-
-      $('a8OppSource').textContent =
-        source.join(' · ') || '—';
-    }
+    /*
+     * CURRENT DRIVE is owned by updatePulseBox().
+     *
+     * i.sourceMode / i.rig belong to the historical opposing-clock
+     * qualification lineage (VIRTUAL_RIG_A).  They must never be
+     * presented as the current physical source.
+     */
 
     if ($('a8OppPrimary')) {
       $('a8OppPrimary').textContent =
@@ -3402,10 +3403,20 @@ setInterval(refresh,1000);
           `EPOCH ${p.SOURCE_EPOCH ?? '—'} · RAW ${p.RAW_COUNT ?? '—'} · SEQ ${p.REPORT_SEQUENCE ?? '—'}`;
       }
 
+      if ($('a8OppSource')) {
+        $('a8OppSource').textContent =
+          `PHYSICAL · EPOCH ${p.SOURCE_EPOCH ?? '—'} · CORE-MAPPED`;
+      }
+
     } catch (_) {
       if ($('a8PhysicalPulseState')) {
         $('a8PhysicalPulseState').textContent =
           'UNREACHABLE · CORE20 UNAFFECTED';
+      }
+
+      if ($('a8OppSource')) {
+        $('a8OppSource').textContent =
+          'PHYSICAL SOURCE · UNREACHABLE';
       }
 
       if ($('a8PhysicalPulseDetail')) {
