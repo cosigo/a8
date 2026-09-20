@@ -1,0 +1,167 @@
+{
+  "architecture": {
+    "engines": [
+      "PRIMARY_ARDUINO_A_B",
+      "GHOST_ARDUINO_C_D"
+    ],
+    "enginesDefineRuler": false,
+    "fresh842Required": false,
+    "governor": "WHOLE_WHEEL_RATCHET",
+    "governorDrivesEngine": false,
+    "ruler": "JUPITER_IO_EUROPA_GANYMEDE_1_2_4"
+  },
+  "authorityBoundary": {
+    "changesCivilPhase": false,
+    "changesCoreRate": false,
+    "usesGPS": false,
+    "usesHostTime": false,
+    "usesLegacyTime": false,
+    "usesNTP": false,
+    "usesUTC": false,
+    "writesArduino": false,
+    "writesCarrier": false,
+    "writesClock": false,
+    "writesCore20": false,
+    "writesPhase": false
+  },
+  "carrier": {
+    "currentRaw": "7229815",
+    "rawSinceEntry011Anchor": "5376086"
+  },
+  "carriers": {
+    "ghostCD": {
+      "alignment": {
+        "ghostAnchorRaw": "252690",
+        "initialBracketHalfWidthRaw": "5",
+        "primaryBracketHighRaw": "5729581",
+        "primaryBracketLowRaw": "5729571",
+        "primaryEquivalentMidpointRaw": "5729576",
+        "role": "ODOMETER_ALIGNMENT_NOT_RULER"
+      },
+      "authority": "NONE",
+      "comparisonToPrimary": {
+        "absoluteMappedDifferenceRawExact": {
+          "denominator": "112357430762055",
+          "numerator": "-5724281664325897",
+          "text": "-5724281664325897/112357430762055"
+        },
+        "liveComparison": "READ_ONLY_SEQUENTIAL_SAMPLES",
+        "shortestWheelPositionDifferenceRawExact": {
+          "denominator": "112357430762055",
+          "numerator": "-5724281664325897",
+          "text": "-5724281664325897/112357430762055"
+        }
+      },
+      "currentRaw": "1758634",
+      "linkStatus": "RECEIVING",
+      "primaryEquivalentRawExact": {
+        "denominator": "112357430762055",
+        "numerator": "812317714003302343928",
+        "text": "812317714003302343928/112357430762055"
+      },
+      "ratchet": {
+        "automaticActuation": false,
+        "phaseInvariant": true,
+        "policy": "INTEGER_WHOLE_JOVIAN_WHEELS_ONLY",
+        "quantumRaw": "18719532",
+        "recommendation": "HOLD",
+        "wholeWheelAdjustment": 0
+      },
+      "rawSinceAnchor": "1505944",
+      "role": "SECOND_REPLACEABLE_PHYSICAL_CARRIER",
+      "runId": "bc562a83-8293-4e0c-b6bf-79e9687b7aea",
+      "sealedPrimaryPerGhost": {
+        "denominator": "112357430762055",
+        "numerator": "111927983568692",
+        "text": "111927983568692/112357430762055"
+      },
+      "status": "GHOST_PLOTTED_ON_JOVIAN_WHEEL",
+      "wheel": {
+        "completedWholeWheels": "46",
+        "mappedRawExact": {
+          "denominator": "112357430762055",
+          "numerator": "97547039627539809099668",
+          "text": "97547039627539809099668/112357430762055"
+        },
+        "phase9": 193,
+        "phase9Octal": "301\u2088",
+        "position512Exact": {
+          "denominator": "525819630147018239565",
+          "numerator": "101917143102521986522624",
+          "text": "101917143102521986522624/525819630147018239565"
+        },
+        "positionRawExact": {
+          "denominator": "112357430762055",
+          "numerator": "796227680488453019708",
+          "text": "796227680488453019708/112357430762055"
+        }
+      },
+      "writesArduino": false,
+      "writesCarrier": false,
+      "writesCore20": false
+    },
+    "primaryAB": {
+      "authority": "NONE",
+      "currentRaw": "7229815",
+      "sourceEpoch": 7,
+      "status": "PRIMARY_PLOTTED_ON_JOVIAN_WHEEL",
+      "wheel": {
+        "completedWholeWheels": "46",
+        "mappedRawExact": {
+          "denominator": "1",
+          "numerator": "868185083",
+          "text": "868185083"
+        },
+        "phase9": 193,
+        "phase9Octal": "301\u2088",
+        "position512Exact": {
+          "denominator": "4679883",
+          "numerator": "907086208",
+          "text": "907086208/4679883"
+        },
+        "positionRawExact": {
+          "denominator": "1",
+          "numerator": "7086611",
+          "text": "7086611"
+        }
+      },
+      "writesCarrier": false,
+      "writesCore20": false
+    }
+  },
+  "entry011Anchor": {
+    "modelRaw": "862808997",
+    "physicalRaw": "1853729",
+    "physicalToModelRatio": "1/1",
+    "provenance": "ENTRY011_EPOCH7_JOVIAN_TELESCOPE_REACQUISITION"
+  },
+  "jovian": {
+    "exactRatio": "1:2:4",
+    "operationalLock": true,
+    "rulerRawPerWheel": "18719532",
+    "sourceEpoch": 7
+  },
+  "ok": true,
+  "ratchet": {
+    "automaticActuation": false,
+    "currentRecommendation": "HOLD",
+    "phaseInvariant": true,
+    "policy": "INTEGER_WHOLE_JOVIAN_WHEELS_ONLY",
+    "quantumRaw": "18719532"
+  },
+  "role": "JOVIAN_RULER_DISCIPLINES_REPLACEABLE_CARRIERS",
+  "schema": "A8-JOVIAN-CARRIER-GOVERNOR-V2",
+  "status": "GOVERNOR_MONITORING",
+  "wheel": {
+    "completedWholeWheels": "46",
+    "mappedRaw": "868185083",
+    "phase9": 193,
+    "phase9Octal": "301\u2088",
+    "position512Exact": {
+      "denominator": "4679883",
+      "numerator": "907086208",
+      "text": "907086208/4679883"
+    },
+    "positionRaw": "7086611"
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "schema": "A8-JOVIAN-GHOST-CARRIER-ANCHOR-V1",
+  "role": "ONE_TIME_CARRIER_ODOMETER_ALIGNMENT_NOT_RULER",
+  "authority": "NONE",
+
+  "jovianRulerRawPerWheel": "18719532",
+
+  "ghost": {
+    "runId": "bc562a83-8293-4e0c-b6bf-79e9687b7aea",
+    "anchorRaw": "252690"
+  },
+
+  "primaryBracketAtGhostAnchor": {
+    "lowRaw": "5729571",
+    "highRaw": "5729581",
+    "midpointRaw": "5729576",
+    "halfWidthRaw": "5"
+  },
+
+  "sealedPrimaryPerGhost": {
+    "numerator": "111927983568692",
+    "denominator": "112357430762055"
+  },
+
+  "policy": {
+    "freshJovianTurnsRequired": false,
+    "wholeWheelRatchetOnly": true,
+    "automaticActuation": false,
+    "newGhostRunRequiresNewOdometerAlignment": true
+  },
+
+  "safety": {
+    "writesCore20": false,
+    "writesArduino": false,
+    "writesCarrier": false,
+    "usesUTC": false,
+    "usesHostTime": false,
+    "usesNTP": false,
+    "usesGPS": false
+  }
+}

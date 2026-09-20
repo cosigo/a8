@@ -1,0 +1,42 @@
+============================================================
+SERVICE · a8-jovian-live-period.service
+============================================================
+● a8-jovian-live-period.service - A8 Live Jovian Period Driver
+     Loaded: loaded (/etc/systemd/system/a8-jovian-live-period.service; enabled; preset: enabled)
+     Active: active (running) since Sat 2026-09-19 17:22:55 CST; 13h ago
+   Main PID: 1808490 (node)
+      Tasks: 10 (limit: 7012)
+     Memory: 24.6M (peak: 26.1M)
+        CPU: 5min 56.835s
+     CGroup: /system.slice/a8-jovian-live-period.service
+             └─1808490 /usr/bin/node /opt/a8-jovian-live/live-jovian.js
+
+Sep 20 06:50:36 trade node[1808490]: A8 JOVIAN PULSE · {"body":"EUROPA","event":"PHASE_STATE","sourceEpoch":7,"phase9":388,"phase9Octal":"604₈","predictedCrossingRaw":"7180571","natureObservation":false}
+Sep 20 06:50:36 trade node[1808490]: A8 JOVIAN PULSE · {"body":"GANYMEDE","event":"PHASE_STATE","sourceEpoch":7,"phase9":194,"phase9Octal":"302₈","predictedCrossingRaw":"7180571","natureObservation":false}
+Sep 20 06:55:37 trade node[1808490]: A8 JOVIAN PULSE · {"body":"IO","event":"PHASE_STATE","sourceEpoch":7,"phase9":265,"phase9Octal":"411₈","predictedCrossingRaw":"7189712","natureObservation":false}
+Sep 20 07:00:37 trade node[1808490]: A8 JOVIAN PULSE · {"body":"IO","event":"PHASE_STATE","sourceEpoch":7,"phase9":266,"phase9Octal":"412₈","predictedCrossingRaw":"7198852","natureObservation":false}
+Sep 20 07:00:37 trade node[1808490]: A8 JOVIAN PULSE · {"body":"EUROPA","event":"PHASE_STATE","sourceEpoch":7,"phase9":389,"phase9Octal":"605₈","predictedCrossingRaw":"7198852","natureObservation":false}
+Sep 20 07:05:38 trade node[1808490]: A8 JOVIAN PULSE · {"body":"IO","event":"PHASE_STATE","sourceEpoch":7,"phase9":267,"phase9Octal":"413₈","predictedCrossingRaw":"7207992","natureObservation":false}
+Sep 20 07:10:39 trade node[1808490]: A8 JOVIAN PULSE · {"body":"IO","event":"PHASE_STATE","sourceEpoch":7,"phase9":268,"phase9Octal":"414₈","predictedCrossingRaw":"7217133","natureObservation":false}
+Sep 20 07:10:39 trade node[1808490]: A8 JOVIAN PULSE · {"body":"EUROPA","event":"PHASE_STATE","sourceEpoch":7,"phase9":390,"phase9Octal":"606₈","predictedCrossingRaw":"7217133","natureObservation":false}
+Sep 20 07:10:39 trade node[1808490]: A8 JOVIAN PULSE · {"body":"GANYMEDE","event":"PHASE_STATE","sourceEpoch":7,"phase9":195,"phase9Octal":"303₈","predictedCrossingRaw":"7217133","natureObservation":false}
+Sep 20 07:15:39 trade node[1808490]: A8 JOVIAN PULSE · {"body":"IO","event":"PHASE_STATE","sourceEpoch":7,"phase9":269,"phase9Octal":"415₈","predictedCrossingRaw":"7226273","natureObservation":false}
+
+===== UNIT =====
+# /etc/systemd/system/a8-jovian-live-period.service
+[Unit]
+Description=A8 Live Jovian Period Driver
+After=network.target
+
+[Service]
+Type=simple
+User=greg
+Group=greg
+ExecStart=/usr/bin/node /opt/a8-jovian-live/live-jovian.js
+Restart=on-failure
+RestartSec=2
+NoNewPrivileges=true
+
+[Install]
+WantedBy=multi-user.target
+

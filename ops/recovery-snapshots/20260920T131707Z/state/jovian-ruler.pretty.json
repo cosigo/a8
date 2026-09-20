@@ -1,0 +1,118 @@
+{
+    "ok": true,
+    "schema": "A8-LIVE-JOVIAN-PERIOD-DRIVER-V1",
+    "status": "JOVIAN_PERIOD_LIVE",
+    "role": "JUPITER_LIVE_PERIOD_DRIVER",
+    "driverConnection": "OPERATIONAL_JOVIAN_RULER_NO_CORE_WRITE",
+    "qualification": {
+        "periodModel": "ESTABLISHED_A8_JOVIAN_RULER",
+        "observationallyReacquired": false,
+        "absoluteMoonPhaseQualified": false,
+        "orientationRole": "NONE",
+        "predictedTurnsCountAsNatureEvidence": false,
+        "operationallyQualified": true,
+        "operationalRulerLocked": true,
+        "operationalRulerRaw": "18719532",
+        "newTurnWindowRequiredForOperation": false,
+        "newTurnWindowRole": "INDEPENDENT_VALIDATION_ONLY",
+        "contradictionPolicy": "FLAG_ONLY_NO_SILENT_RETUNE",
+        "recovery842Role": "PRESERVED_PROOF_RECOVERY_PATH_NOT_OPERATIONAL_GATE"
+    },
+    "physical": {
+        "sourceEpoch": 7,
+        "baselineRaw": "87623",
+        "currentRaw": "7229815",
+        "epochRawAdvance": "7142192",
+        "reportSequence": 671718,
+        "progression": "PHYSICAL_RAW_DELTA_ONLY"
+    },
+    "resonance": {
+        "normalization": "IO\u00d74 \u00b7 EUROPA\u00d72 \u00b7 GANYMEDE\u00d71",
+        "exactRatio": "1:2:4",
+        "normalizedRulerRaw": "18719532",
+        "normalizedRulerRawPer512State": "18719532/512",
+        "bootstrapEstimator": "ARITHMETIC_MEAN_OF_NORMALIZED_IO4_EUROPA2_GANYMEDE1",
+        "phaseOrigin": "CURRENT_SOURCE_EPOCH_BASELINE_ONLY",
+        "outageElapsedInferred": false
+    },
+    "lanes": {
+        "io": {
+            "body": "IO",
+            "exactResonanceMultiplier": "4",
+            "seedFullOrbitRaw": "4650745",
+            "seedNormalizedRaw": "18602980",
+            "normalizedResidualRaw": "-116552",
+            "liveDriverFullOrbitRaw": "4679883",
+            "rawPerPhaseStateExact": "18719532/2048",
+            "statePulseTotal": "781",
+            "phase9": 269,
+            "phase9Octal": "415\u2088",
+            "phaseQ32": "1157010710172",
+            "phase512Exact": {
+                "numerator": "5042808832",
+                "denominator": "18719532"
+            }
+        },
+        "europa": {
+            "body": "EUROPA",
+            "exactResonanceMultiplier": "2",
+            "seedFullOrbitRaw": "9344598",
+            "seedNormalizedRaw": "18689196",
+            "normalizedResidualRaw": "-30336",
+            "liveDriverFullOrbitRaw": "9359766",
+            "rawPerPhaseStateExact": "18719532/1024",
+            "statePulseTotal": "390",
+            "phase9": 390,
+            "phase9Octal": "606\u2088",
+            "phaseQ32": "1678016982862",
+            "phase512Exact": {
+                "numerator": "7313604608",
+                "denominator": "18719532"
+            }
+        },
+        "ganymede": {
+            "body": "GANYMEDE",
+            "exactResonanceMultiplier": "1",
+            "seedFullOrbitRaw": "18866420",
+            "seedNormalizedRaw": "18866420",
+            "normalizedResidualRaw": "146888",
+            "liveDriverFullOrbitRaw": "18719532",
+            "rawPerPhaseStateExact": "18719532/512",
+            "statePulseTotal": "195",
+            "phase9": 195,
+            "phase9Octal": "303\u2088",
+            "phaseQ32": "839008491431",
+            "phase512Exact": {
+                "numerator": "3656802304",
+                "denominator": "18719532"
+            }
+        }
+    },
+    "pulse": {
+        "type": "A8_1_OF_512_PHASE_STATE_CROSSING",
+        "lastPulse": {
+            "body": "IO",
+            "event": "PHASE_STATE",
+            "sourceEpoch": 7,
+            "phase9": 269,
+            "phase9Octal": "415\u2088",
+            "predictedCrossingRaw": "7226273",
+            "natureObservation": false
+        }
+    },
+    "safety": {
+        "writesCore20": false,
+        "writesArduino": false,
+        "writesShadowWitnessRecorder": false,
+        "usesUTCForProgression": false,
+        "usesHostTimeForProgression": false,
+        "hostSchedulerAffectsPhase": false,
+        "sourceEpochChangeForcesRearm": true,
+        "crossEpochRawContinuity": false
+    },
+    "provenance": {
+        "sourceModelSha256": "9e68d679b814a9c082bca3a8bcd401cbc6d50293ef16e35b411a12ba5aa8b119",
+        "sourceModelEpoch": 5
+    },
+    "lastError": null
+}

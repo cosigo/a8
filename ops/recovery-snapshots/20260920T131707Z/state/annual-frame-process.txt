@@ -1,0 +1,2 @@
+UID          PID    PPID  C STIME TTY          TIME CMD
+root     1876763       1  0 06:32 ?        00:00:00 /usr/bin/python3 /opt/a8-annual-frame/server.py

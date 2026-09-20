@@ -1,0 +1,31 @@
+============================================================
+SERVICE · a8-jovian-governor.service
+============================================================
+● a8-jovian-governor.service - A8 Jovian Carrier Governor
+     Loaded: loaded (/etc/systemd/system/a8-jovian-governor.service; enabled; preset: enabled)
+     Active: active (running) since Sat 2026-09-19 17:40:57 CST; 13h ago
+   Main PID: 1810354 (python3)
+      Tasks: 1 (limit: 7012)
+     Memory: 11.3M (peak: 12.0M)
+        CPU: 6.392s
+     CGroup: /system.slice/a8-jovian-governor.service
+             └─1810354 /usr/bin/python3 /opt/a8-jovian-governor/server.py
+
+Sep 19 17:40:57 trade systemd[1]: Started a8-jovian-governor.service - A8 Jovian Carrier Governor.
+
+===== UNIT =====
+# /etc/systemd/system/a8-jovian-governor.service
+[Unit]
+Description=A8 Jovian Carrier Governor
+After=network.target a8-jovian-live-period.service
+Requires=a8-jovian-live-period.service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /opt/a8-jovian-governor/server.py
+Restart=on-failure
+RestartSec=2
+
+[Install]
+WantedBy=multi-user.target
+

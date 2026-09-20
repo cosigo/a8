@@ -1,0 +1,15 @@
+{
+    "ok": true,
+    "yearAngle": {
+        "schema": "A8-YEAR-PHASE27-V1",
+        "status": "YEAR_ANGLE_AWAITING_ONE_SHOT_JPL_ALIGN",
+        "sourceEpoch": "3",
+        "aligned": false,
+        "yearZero": "VERNAL_EQUINOX",
+        "range": "000\u2088\u2013777\u2088",
+        "ongoingAuthority": "RECOVERED_SOL_ORBITAL_ADVANCE_ONLY",
+        "usesJplAfterAlignment": false,
+        "usesUtcAfterAlignment": false,
+        "usesNetworkCadence": false
+    }
+}

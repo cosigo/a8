@@ -1,0 +1,38 @@
+============================================================
+SERVICE · a8-annual-frame.service
+============================================================
+● a8-annual-frame.service - A8 Annual Frame V1 Read-Only Sidecar
+     Loaded: loaded (/etc/systemd/system/a8-annual-frame.service; enabled; preset: enabled)
+     Active: active (running) since Sun 2026-09-20 06:32:26 CST; 45min ago
+   Main PID: 1876763 (python3)
+      Tasks: 1 (limit: 7012)
+     Memory: 11.4M (peak: 12.2M)
+        CPU: 515ms
+     CGroup: /system.slice/a8-annual-frame.service
+             └─1876763 /usr/bin/python3 /opt/a8-annual-frame/server.py
+
+Sep 20 06:32:26 trade systemd[1]: Started a8-annual-frame.service - A8 Annual Frame V1 Read-Only Sidecar.
+
+===== UNIT =====
+# /etc/systemd/system/a8-annual-frame.service
+[Unit]
+Description=A8 Annual Frame V1 Read-Only Sidecar
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /opt/a8-annual-frame/server.py
+Restart=on-failure
+RestartSec=2
+User=root
+Group=root
+
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadOnlyPaths=/opt/a8-annual-frame
+
+[Install]
+WantedBy=multi-user.target
+

@@ -1,0 +1,3103 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chief Engineer · Core20 | Auspicious 8</title>
+
+<style>
+:root{
+  color-scheme:dark;
+  --bg:#080d12;
+  --panel:rgba(16,24,32,.80);
+  --panel2:rgba(12,19,26,.80);
+  --line:#293844;
+  --text:#e9f1f7;
+  --muted:#8fa4b5;
+  --good:#7fdaa0;
+  --warn:#e0bd72;
+  --bad:#ff8a80;
+  --blue:#79b7ff;
+  --cyan:#70e5f3;
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  background-color:var(--bg);
+  background-image:url('/assets/ce_controls.png');
+  background-position:center top;
+  background-size:cover;
+  background-repeat:no-repeat;
+  background-attachment:fixed;
+  color:var(--text);
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+}
+
+header{
+  border-bottom:1px solid var(--line);
+  background:rgba(7,11,15,.80);
+  padding:18px 22px;
+}
+
+.header-inner,
+main{
+  max-width:1500px;
+  margin:auto;
+}
+
+.topline{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  flex-wrap:wrap;
+}
+
+h1{
+  margin:0;
+  font-size:clamp(1.6rem,4vw,2.8rem);
+}
+
+.kicker{
+  color:var(--warn);
+  font-weight:900;
+  letter-spacing:.10em;
+  font-size:.72rem;
+}
+
+.subtitle{
+  margin:8px 0 0;
+  color:var(--muted);
+  line-height:1.5;
+}
+
+nav{
+  margin-left:auto;
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
+
+a.button,
+button{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:40px;
+  padding:9px 13px;
+  border-radius:9px;
+  border:1px solid #496174;
+  background:rgba(17,28,37,.80);
+  color:var(--text);
+  font:inherit;
+  font-weight:850;
+  text-decoration:none;
+  cursor:pointer;
+}
+
+button:hover,
+a.button:hover{
+  border-color:#7aa5c5;
+}
+
+button:disabled{
+  opacity:.38;
+  cursor:not-allowed;
+}
+
+button.primary{
+  border-color:#558ed4;
+  background:rgba(16,35,58,.80);
+}
+
+button.warn{
+  border-color:#b68a38;
+  background:rgba(43,33,16,.80);
+}
+
+button.danger{
+  border-color:#a54e48;
+  background:rgba(48,22,20,.80);
+}
+
+main{
+  padding:20px 18px 72px;
+}
+
+.panel{
+  border:1px solid var(--line);
+  border-radius:14px;
+  background:var(--panel);
+  padding:16px;
+  margin-bottom:16px;
+}
+
+.panel h2{
+  margin:0 0 12px;
+  font-size:1.08rem;
+}
+
+.note{
+  color:var(--muted);
+  line-height:1.55;
+  font-size:.82rem;
+}
+
+.good{color:var(--good)}
+.warn-text{color:var(--warn)}
+.bad{color:var(--bad)}
+.blue{color:var(--blue)}
+.cyan{color:var(--cyan)}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:10px;
+}
+
+.stat{
+  min-width:0;
+  padding:11px;
+  border:1px solid var(--line);
+  border-radius:10px;
+  background:var(--panel2);
+}
+
+.stat .k{
+  display:block;
+  color:var(--muted);
+  font-size:.66rem;
+  letter-spacing:.08em;
+}
+
+.stat .v{
+  display:block;
+  margin-top:5px;
+  font-weight:900;
+  overflow-wrap:anywhere;
+}
+
+.controls{
+  display:flex;
+  flex-wrap:wrap;
+  gap:9px;
+  align-items:center;
+}
+
+input,
+select{
+  min-height:40px;
+  padding:8px 10px;
+  border:1px solid #496174;
+  border-radius:8px;
+  background:rgba(9,16,23,.80);
+  color:var(--text);
+  font:inherit;
+}
+
+.workflow{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:8px;
+}
+
+.step{
+  padding:12px;
+  border:1px solid var(--line);
+  border-radius:10px;
+  background:rgba(13,21,28,.80);
+}
+
+.step b{
+  display:block;
+  margin-bottom:6px;
+  color:var(--cyan);
+}
+
+details{
+  border:1px solid var(--line);
+  border-radius:10px;
+  margin-top:12px;
+  overflow:hidden;
+}
+
+summary{
+  cursor:pointer;
+  padding:11px 13px;
+  font-weight:900;
+}
+
+details > .inside{
+  padding:0 13px 13px;
+}
+
+pre{
+  white-space:pre-wrap;
+  overflow-wrap:anywhere;
+  overflow:auto;
+  margin:0;
+  padding:12px;
+  border:1px solid #263640;
+  border-radius:8px;
+  background:rgba(6,11,15,.80);
+  line-height:1.45;
+  font-size:.76rem;
+  max-height:540px;
+}
+
+#recorderLog{
+  min-height:280px;
+}
+
+.recorder-toolbar{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-bottom:10px;
+}
+
+.filter.active{
+  border-color:var(--cyan);
+  color:var(--cyan);
+}
+
+.danger-zone{
+  border-color:#7e3a35;
+  background:rgba(27,14,13,.80);
+}
+
+.danger-zone h2{
+  color:#ff9c92;
+}
+
+.statusline{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:12px;
+}
+
+.pill{
+  padding:6px 9px;
+  border:1px solid var(--line);
+  border-radius:999px;
+  font-size:.72rem;
+  font-weight:900;
+}
+
+@media(max-width:1050px){
+  .grid,.workflow{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+
+@media(max-width:620px){
+  .grid,.workflow{grid-template-columns:1fr}
+  nav{margin-left:0;width:100%}
+}
+</style>
+
+  <!-- COSIGO-CANONICAL-FAVICON-BEGIN -->
+  <link rel="icon" href="https://cosigo.io/favicon.ico">
+  <link rel="icon" type="image/svg+xml" href="https://cosigo.io/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://cosigo.io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://cosigo.io/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://cosigo.io/apple-touch-icon.png">
+  <!-- COSIGO-CANONICAL-FAVICON-END -->
+</head>
+
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="topline">
+      <div>
+        <div class="kicker">AUSPICIOUS 8 · CORE20</div>
+        <h1>CHIEF ENGINEER</h1>
+      </div>
+
+      <nav>
+        <a class="button" href="/">PUBLIC LAB</a>
+        <a class="button" href="/pulse">PULSE SOURCE</a>
+        <a class="button" href="/hardware-source.html">SOURCE SELECTOR</a>
+        <a class="button" href="/music-review.html">MUSIC REVIEW</a>
+        <a class="button" href="https://trade.cosigo.io/admin.html">TOKEN</a>
+        <a class="button" href="https://admin.bcnode.io">BCNODE</a>
+      </nav>
+    </div>
+
+    <p class="subtitle">
+      Authenticated machine room · operate, diagnose, record and recover.
+      Public visitors do not enter this surface.
+    </p>
+  </div>
+</header>
+
+<main>
+
+<section class="panel">
+  <h2>NORMAL AFTER SERVER REBOOT</h2>
+
+  <div class="workflow">
+    <div class="step">
+      <b>1 · AUTO START</b>
+      a8-core20.service starts Core20. No manual START is normally required.
+    </div>
+
+    <div class="step">
+      <b>2 · PATH A PHYSICAL SOURCE</b>
+      Core20 uses the qualified Epoch-7 external physical RAW source as its
+      normal pace input.
+    </div>
+
+    <div class="step">
+      <b>3 · CALENDAR</b>
+      Native YEAR DAY restores from its checkpoint and advances from Core20
+      integer civil dayCount.
+    </div>
+
+    <div class="step">
+      <b>4 · YEAR ANGLE</b>
+      Native A8 year orientation resumes through the qualified Path-A state.
+      UTC and JPL controls remain Path-B fallback tools.
+    </div>
+  </div>
+
+  <p class="note">
+    Normal Path-A operation requires no UTC or JPL action.
+  </p>
+
+  <div class="statusline">
+    <span id="overallStatus" class="pill">LOADING</span>
+    <span id="refreshState" class="pill">LIVE REFRESH</span>
+  </div>
+</section>
+
+<section class="panel">
+  <h2>CORE20 OPERATING STATE</h2>
+
+  <div class="grid">
+    <div class="stat">
+      <span class="k">RUNTIME</span>
+      <span id="runtimeStatus" class="v">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">CLOCK STATUS</span>
+      <span id="clockStatus" class="v">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">CORE20 CONTINUITY EPOCH</span>
+      <span id="sourceEpoch" class="v">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">CORE20 RAW</span>
+      <span id="rawPulse" class="v">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">DAY_PHASE17</span>
+      <span id="dayPhase17" class="v cyan">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">A8 CLOCK</span>
+      <span id="a8Clock" class="v cyan">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">CLOCK AUTHORITY</span>
+      <span id="clockAuthority" class="v">—</span>
+    </div>
+
+  </div>
+
+  <div class="controls" style="margin-top:12px">
+    <button id="refresh">REFRESH NOW</button>
+  </div>
+
+  <p class="note">
+    Emergency UTC civil-alignment controls are retained under
+    PATH B · ORIGINAL FALLBACK.
+  </p>
+</section>
+
+<section class="panel">
+  <h2>NATIVE CALENDAR / PERSISTENCE</h2>
+
+  <div class="grid">
+    <div class="stat">
+      <span class="k">CALENDAR STATUS</span>
+      <span id="calendarStatus" class="v">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">YEAR DAY</span>
+      <span id="yearDay" class="v cyan">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">YEAR DAY · OCTAL</span>
+      <span id="yearDayOctal" class="v cyan">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">CORE DAY COUNT</span>
+      <span id="coreDayCount" class="v">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">CHECKPOINT</span>
+      <span id="checkpointStatus" class="v">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">RESTORATION</span>
+      <span id="restorationStatus" class="v">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">CHECKPOINT EPOCH</span>
+      <span id="checkpointEpoch" class="v">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">ADVANCE AUTHORITY</span>
+      <span id="calendarAuthority" class="v">—</span>
+    </div>
+  </div>
+
+  <p class="note">
+    Native YEAR DAY advances only from Core20 integer civil dayCount.
+    Outage elapsed time is not inferred.
+  </p>
+</section>
+
+<section class="panel">
+  <h2>YEAR ORIENTATION</h2>
+
+  <div class="grid">
+    <div class="stat">
+      <span class="k">STATUS</span>
+      <span id="yearStatus" class="v">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">PHASE9</span>
+      <span id="yearPhase9" class="v cyan">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">PHASE27</span>
+      <span id="yearPhase27" class="v">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">ONGOING AUTHORITY</span>
+      <span id="yearAuthority" class="v">—</span>
+    </div>
+  </div>
+
+  <p class="note">
+    Current Year Angle status remains visible here.
+    The preserved external/JPL orientation control is retained under
+    PATH B · ORIGINAL FALLBACK for emergency use or cross-comparison.
+  </p>
+</section>
+
+<section class="panel">
+  <h2>FLIGHT RECORDER</h2>
+
+  <div class="recorder-toolbar">
+    <button id="pauseRecorder">PAUSE DISPLAY</button>
+    <button id="copyRecorder">COPY</button>
+    <button id="copyForensic" class="primary">COPY FORENSIC SNAPSHOT</button>
+    <button id="clearRecorder" class="danger">CLEAR RECORDER</button>
+  </div>
+
+  <div class="recorder-toolbar" id="filters">
+    <button class="filter active" data-filter="ALL">ALL</button>
+    <button class="filter" data-filter="CORE">CORE</button>
+    <button class="filter" data-filter="CLOCK">CLOCK</button>
+    <button class="filter" data-filter="CALENDAR">CALENDAR</button>
+    <button class="filter" data-filter="SOURCE">SOURCE</button>
+    <button class="filter" data-filter="JOVIAN">JOVIAN</button>
+    <button class="filter" data-filter="AUDIO">AUDIO</button>
+    <button class="filter" data-filter="CE">CE</button>
+  </div>
+
+  <div class="grid" style="margin-bottom:10px">
+    <div class="stat">
+      <span class="k">RECORDER STATUS</span>
+      <span id="recorderStatus" class="v">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">SEQUENCE</span>
+      <span id="recorderSequence" class="v">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">EVENT COUNT</span>
+      <span id="recorderCount" class="v">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">AUTHORITY</span>
+      <span id="recorderAuthority" class="v">—</span>
+    </div>
+  </div>
+
+  <pre id="recorderLog">Loading recorder…</pre>
+
+  <p class="note">
+    PAUSE DISPLAY freezes only this browser view. The server-side recorder
+    continues observing Core20.
+  </p>
+</section>
+
+<section class="panel" id="physicalPulseBoxConsole">
+  <h2>PATH A · PHYSICAL SOURCE</h2>
+
+  <div class="statusline">
+    <span id="pulseBoxStatus" class="pill">CONNECTING</span>
+    <span class="pill">QUALIFIED EXTERNAL PHYSICAL SOURCE</span>
+  </div>
+
+  <div class="grid" style="margin-top:12px">
+    <div class="stat">
+      <span class="k">PATH A · PHYSICAL SOURCE EPOCH</span>
+      <span id="pulseBoxEpoch" class="v cyan">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">PHYSICAL RAW COUNT</span>
+      <span id="pulseBoxRaw" class="v cyan">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">REPORT SEQUENCE</span>
+      <span id="pulseBoxSequence" class="v">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">PRESENTATION MOTION CHECK</span>
+      <span id="pulseBoxMotion" class="v">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">REPORTER STATUS</span>
+      <span id="pulseBoxReporterStatus" class="v">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">PATH A ROLE</span>
+      <span class="v">QUALIFIED PHYSICAL PACE SOURCE</span>
+    </div>
+  </div>
+
+  <p class="note">
+    Epoch-7 physical chain: Arduino A Timer2/D11 → Arduino B Timer1/D5
+    → Pi reporter. Core20 maps this physical RAW through the qualified
+    Path-A physical-to-Core relationship. Browser polling cadence and
+    network arrival time are presentation only and do not pace Core20.
+  </p>
+
+  <details>
+    <summary>PHYSICAL PULSE BOX · RAW JSON</summary>
+    <div class="inside">
+      <pre id="pulseBoxJson">—</pre>
+    </div>
+  </details>
+</section>
+
+<section class="panel" id="shipRecoveryPanel">
+  <h2>SHIP PRESENTATION RECOVERY</h2>
+
+  <p class="note">
+    One-shot recovery of the public Terra Ship Slip presentation only.
+    This control does not touch Core20, Caddy, lifetime state or Git history.
+  </p>
+
+  <div class="grid">
+    <div>
+      <div class="kicker">RECOVERY STATUS</div>
+      <div id="shipRecoveryState">CHECKING…</div>
+    </div>
+
+    <div>
+      <div class="kicker">PINNED RECOVERY</div>
+      <div id="shipRecoveryTag">—</div>
+    </div>
+
+    <div>
+      <div class="kicker">PINNED COMMIT</div>
+      <div id="shipRecoveryCommit">—</div>
+    </div>
+
+    <div>
+      <div class="kicker">LIVE SHA-256</div>
+      <div id="shipRecoveryLiveHash"
+           style="overflow-wrap:anywhere">—</div>
+    </div>
+
+    <div>
+      <div class="kicker">PINNED SHA-256</div>
+      <div id="shipRecoveryPinnedHash"
+           style="overflow-wrap:anywhere">—</div>
+    </div>
+
+    <div>
+      <div class="kicker">ONE-SHOT PERMIT</div>
+      <div id="shipRecoveryPermit">NOT ARMED</div>
+    </div>
+  </div>
+
+  <div class="controls" style="margin-top:16px">
+    <button id="shipRecoveryRefresh">
+      REFRESH RECOVERY STATUS
+    </button>
+
+    <button id="shipRecoveryArm" class="warn" disabled>
+      ARM ONE-SHOT SHIP RESTORE
+    </button>
+
+    <button id="shipRecoveryApply" class="danger" disabled>
+      APPLY ARMED SHIP RESTORE
+    </button>
+  </div>
+
+  <details style="margin-top:16px">
+    <summary>SHIP RECOVERY HISTORY</summary>
+    <div class="inside">
+      <pre id="shipRecoveryHistory">—</pre>
+    </div>
+  </details>
+</section>
+
+
+
+<section class="panel" id="a8-ce-operating-paths">
+
+  <div class="kicker">
+    CORE20 · OPERATING PATH
+  </div>
+
+  <h2>A / B / C PATH MAP</h2>
+
+  <p class="note">
+    Path A is the current running A8 natural / physical route.
+    Path B preserves the original functional recovery and qualification
+    machinery as a deliberate emergency fallback; no Path-B takeover is
+    automatic from this panel. Path C is the preserved research, proof and
+    development workspace for future investigation when needed. Path C is
+    not part of current Core20 operation.
+  </p>
+
+  <div
+    style="
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:16px;
+      margin-top:16px;
+    "
+  >
+
+    <div
+      style="
+        border:1px solid rgba(135,211,155,.45);
+        border-radius:12px;
+        padding:16px;
+      "
+    >
+      <div class="kicker">
+        PATH A · CURRENT NATURAL / PHYSICAL PATH
+      </div>
+
+      <div
+        style="
+          font-size:1.25rem;
+          font-weight:900;
+          margin-top:4px;
+        "
+      >
+        A8 PRIMARY · NATURE → EPOCH-7 PHYSICAL RAW → CORE20
+      </div>
+
+      <pre style="
+        white-space:pre-wrap;
+        overflow:auto;
+        margin:16px 0;
+        line-height:1.45;
+      ">                           NATURE
+                           │
+          ┌────────────────┼────────────────┐
+          │                │                │
+       JUPITER          MINTAKA            SOL
+   Io/Eu/Ga turns    stellar crossing   solar direction
+          │                │                │
+          │                │                │
+          └──── DIRECT EPOCH-7 PHYSICAL RAW ┘
+                           │
+                     EVIDENCE LAYER
+                           │
+          ┌────────────────┼────────────────┐
+          │                │                │
+   Jovian recurrence   Earth rotation    orbital advance
+     / time ruler        witness          / Year Angle
+          │                │                │
+          └────────────────┼────────────────┘
+                           │
+                    A8 NATURAL FRAME
+                           │
+             replaceable RAW carrier(s)
+                           │
+                        CORE20
+                  ┌────────┴────────┐
+               CALENDAR           SHIP</pre>
+
+      <p class="note">
+        <b>JUPITER</b> · actual frame → server-captured Epoch-7 RAW
+        → Jupiter-relative moon position → natural turns / recurrence evidence.
+      </p>
+
+      <p class="note">
+        <b>MINTAKA</b> · actual telescope field → identified Mintaka +
+        companion geometry → server-captured Epoch-7 RAW → Earth-axial-rotation
+        evidence. Mintaka is an upstream Nature witness, not downstream
+        decoration.
+      </p>
+
+      <p class="note">
+        <b>SOL</b> · actual telescope observation → server-captured Epoch-7 RAW
+        → orbital-direction / Year-Angle evidence.
+      </p>
+
+      <p class="note">
+        <b>PHYSICAL EVIDENCE BOUNDARY</b> · Arduino-B / Epoch-7 RAW →
+        Jupiter / Mintaka / Sol observation → sealed evidence. Mapped Core RAW
+        and host time are excluded from defining that evidence.
+      </p>
+
+      <p class="note">
+        <b>PHYSICAL CARRIER</b> · Epoch-7 RAW now; dual qualified carriers
+        may exist later. Carrier is transport only.
+      </p>
+
+      <p class="note">
+        <b>CORE20</b> · common A8 progression.
+        Physical SOURCE_EPOCH 7 and Core20 internal sourceEpoch 3 remain
+        distinct domains.
+      </p>
+
+      <p class="note">
+        <b>CALENDAR</b> · native YEAR DAY from Core20 integer day progression.
+        Year Angle is a read-only seasonal / orbital coordinate.
+      </p>
+
+      <p class="note">
+        <b>SHIP</b> · Mintaka Earth rotation ↔ Sol orbital advance.
+        Downstream relationship / slip only.
+      </p>
+
+      <a
+        class="button"
+        href="#a8-ce-critical-controls"
+      >
+        A · CRITICAL CONTROLS
+      </a>
+    </div>
+
+    <details
+      id="a8-ce-original-fallback"
+      style="
+        border:1px solid rgba(224,189,114,.45);
+        border-radius:12px;
+        padding:16px;
+      "
+    >
+      <summary
+        style="
+          cursor:pointer;
+          font-weight:900;
+          letter-spacing:.06em;
+        "
+      >
+        PATH B · ORIGINAL FALLBACK · TAKEOVER DORMANT
+      </summary>
+
+      <div style="margin-top:14px">
+
+        <div class="kicker">
+          EMERGENCY / PRESERVED MACHINERY
+        </div>
+
+        <p class="note">
+          Original functional machinery retained for emergency recovery,
+          diagnostics, qualification and independent cross-comparison.
+          Dormant does not mean disabled or dismantled.
+        </p>
+
+        <p class="note">
+          Path B remains manually deliberate. This panel does not yet
+          perform an automatic source takeover.
+        </p>
+
+        <div
+          style="
+            display:flex;
+            flex-wrap:wrap;
+            gap:8px;
+            margin-top:12px;
+          "
+        >
+
+          <a
+            class="button"
+            href="/hardware-source.html"
+          >
+            B · SOURCE SELECTOR
+          </a>
+
+          <div
+            style="
+              width:100%;
+              margin-top:8px;
+              padding-top:12px;
+              border-top:1px solid rgba(255,255,255,.12);
+            "
+          >
+            <div class="kicker">
+              B · UTC CIVIL ALIGNMENT BRIDGE
+            </div>
+
+            <div
+              class="controls"
+              style="margin-top:8px"
+            >
+              <button id="connect" class="primary">
+                B FALLBACK · CIVIL ALIGN · UTC
+              </button>
+
+              <button id="realignCivil" class="warn">
+                CIVIL RE-ALIGN · NOT REQUIRED
+              </button>
+            </div>
+
+            <p class="note">
+              CONNECT performs the preserved empty-body momentary
+              civil alignment only. It does not start Core20 and does
+              not provide ongoing timing.
+            </p>
+          </div>
+
+          <div
+            style="
+              width:100%;
+              margin-top:8px;
+              padding-top:12px;
+              border-top:1px solid rgba(255,255,255,.12);
+            "
+          >
+            <div class="kicker">
+              B · EXTERNAL YEAR ORIENTATION BRIDGE
+            </div>
+
+            <div
+              class="controls"
+              style="margin-top:8px"
+            >
+              <button id="alignJpl" class="primary">
+                B FALLBACK · YEAR ORIENTATION · JPL
+              </button>
+            </div>
+
+            <p class="note">
+              JPL places absolute year orientation once.
+              It does not advance YEAR DAY and does not provide the
+              ongoing orbital rate.
+            </p>
+          </div>
+
+          <a
+            class="button"
+            href="#requalify"
+          >
+            B · REQUALIFICATION
+          </a>
+
+          <a
+            class="button"
+            href="#hold"
+          >
+            B · DIAGNOSTIC HOLD
+          </a>
+
+          <a
+            class="button"
+            href="#resume"
+          >
+            B · DIAGNOSTIC RESUME
+          </a>
+
+        </div>
+
+        <div
+          style="
+            margin-top:16px;
+            padding-top:16px;
+            border-top:1px solid rgba(255,255,255,.12);
+          "
+        >
+
+          <div class="kicker">
+            PATH B · SOURCE DOMAIN / QUALIFICATION
+          </div>
+
+          <p class="note">
+            Preserved Epoch-3 / VIRTUAL_RIG_A machinery lives here.
+            Supporting B instruments may remain active read-only while
+            Path-B takeover itself remains dormant.
+          </p>
+
+<details class="panel" id="a8-ce-b-source-hardware">
+  <summary>PATH B · ORIGINAL SOURCE / HARDWARE</summary>
+
+  <div class="inside">
+    <h2>ORIGINAL SOURCE / HARDWARE</h2>
+
+    <p class="note">
+      Preserved Path-B source machinery. The selected fallback rig may
+      remain active in its own non-authority domain for qualification,
+      diagnostics and cross-comparison. This does not mean Path-B
+      takeover is active.
+    </p>
+
+    <div class="grid" style="margin-top:12px">
+      <div class="stat">
+        <span class="k">PATH B · SOURCE SUMMARY</span>
+        <span id="jovianStatus" class="v">—</span>
+      </div>
+    </div>
+
+  <div class="controls">
+    <a class="button" href="/pulse">B · PULSE SOURCE</a>
+    <a class="button" href="/hardware-source.html">B · VIRTUAL / REAL SOURCE · GATE 6E</a>
+    <a class="button" href="/hardware-interface.html">B · EXTERNAL PULSE RIG · GATE 6A</a>
+    <a class="button" href="/receive-only-transport.html">B · RECEIVE-ONLY TRANSPORT · GATE 6B</a>
+    <a class="button" href="/local-device-reader.html">B · LOCAL DEVICE READER · GATE 6C</a>
+  </div>
+
+  <details>
+    <summary>LIVE SOURCE JSON</summary>
+    <div class="inside">
+      <pre id="sourceJson">—</pre>
+    </div>
+  </details>
+
+  </div>
+</details>
+
+<details class="panel" id="opposingClockConsole">
+  <summary>
+    PATH B · STELLAR / SOL CLOCK OPPOSITION · QUALIFICATION
+  </summary>
+
+  <div class="inside">
+    <h2>STELLAR / SOL CLOCK OPPOSITION</h2>
+
+    <p class="note">
+      Preserved Path-B comparison instrument. It may remain active
+      read-only against its selected fallback source domain while
+      having no Core20 authority.
+    </p>
+
+  <div class="statusline">
+    <span id="oppositionStatus" class="pill">LOADING</span>
+    <span id="oppositionBoundary" class="pill">BOUNDARY CHECK</span>
+  </div>
+
+  <div class="grid" style="margin-top:12px">
+    <div class="stat">
+      <span class="k">MINTAKA CLOCK</span>
+      <span id="oppMintakaClock" class="v cyan">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">CIVIL / SOL-RETURN CLOCK</span>
+      <span id="oppCivilClock" class="v cyan">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">MINTAKA_PHASE17</span>
+      <span id="oppMintakaPhase17" class="v cyan">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">DAY_PHASE17</span>
+      <span id="oppCivilPhase17" class="v cyan">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">PATH B · SOURCE EPOCH</span>
+      <span id="oppSourceEpoch" class="v">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">PATH B · SOURCE / RIG</span>
+      <span id="oppSourceMode" class="v">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">COMMON RAW ANCHOR</span>
+      <span id="oppAnchorRaw" class="v">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">CURRENT SELECTED RAW</span>
+      <span id="oppSelectedRaw" class="v">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">ELAPSED RAW SINCE COMMON ANCHOR</span>
+      <span id="oppElapsedRaw" class="v">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">RAW SAMPLE AUDIT</span>
+      <span id="oppRawAudit" class="v">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">RATE LEADER</span>
+      <span id="oppRateLeader" class="v">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">CURRENT LEADER</span>
+      <span id="oppCurrentLeader" class="v">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">GEOMETRIC LEG</span>
+      <span id="oppGeometricLeg" class="v cyan">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">COMPLETED RELATIVE BEATS / CARRY</span>
+      <span id="oppCompletedBeats" class="v cyan">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">UNWRAPPED SLIP · ROTATIONS</span>
+      <span id="oppUnwrappedRotations" class="v">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">UNWRAPPED SLIP · PHASE17</span>
+      <span id="oppUnwrappedPhase17" class="v">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">UNWRAPPED SLIP · ANGLE512</span>
+      <span id="oppUnwrappedAngle512" class="v">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">FOLDED SEPARATION · ROTATIONS</span>
+      <span id="oppSeparationRotations" class="v">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">FOLDED SEPARATION · PHASE17</span>
+      <span id="oppSeparationPhase17" class="v">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">FOLDED SEPARATION · ANGLE512</span>
+      <span id="oppSeparationAngle512" class="v">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">LOCKED MINTAKA RAW / ROTATION</span>
+      <span id="oppMintakaRecurrence" class="v">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">LOCKED SOL-RETURN RAW / RETURN</span>
+      <span id="oppCivilRecurrence" class="v">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">RECURRENCE CHANGE · MINTAKA</span>
+      <span id="oppMintakaChanged" class="v">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">RECURRENCE CHANGE · CIVIL</span>
+      <span id="oppCivilChanged" class="v">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">RELATIVE BEAT</span>
+      <span id="oppBeatRatio" class="v cyan">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">RELATIVE BEAT · RAW SPAN</span>
+      <span id="oppBeatRaw" class="v">—</span>
+    </div>
+  </div>
+
+  <p class="note">
+    Both clock faces are shown independently. Drift is accumulated only from
+    their shared native selected-raw comparison anchor; unlike clock-face
+    subtraction, this preserves the independently established natural zeros.
+  </p>
+
+  <details>
+    <summary>OPPOSING CLOCK INSTRUMENT · RAW JSON</summary>
+    <div class="inside">
+      <pre id="oppositionJson">—</pre>
+    </div>
+  </details>
+
+  <details>
+    <summary>MINTAKA STELLAR CLOCK · RAW JSON</summary>
+    <div class="inside">
+      <pre id="mintakaClockJson">—</pre>
+    </div>
+  </details>
+
+  </div>
+</details>
+
+        </div>
+
+        <p
+          class="note"
+          style="margin-top:14px;margin-bottom:0"
+        >
+          Future B MASTER orchestration will use only a separately
+          verified fallback sequence. No unverified source-switch logic
+          is assumed here.
+        </p>
+
+      </div>
+    </details>
+
+  </div>
+
+</section>
+
+<details class="panel" id="a8-ce-path-c">
+  <summary>
+    PATH C · RESEARCH / PROOF / DEVELOPMENT · NOT CURRENT CORE20
+  </summary>
+
+  <div class="inside">
+
+    <p class="note">
+      Preserved research, proof, regression, diagnostic and development
+      machinery. These benches remain available for future investigation
+      if needed. They are not part of current Core20 operation, do not
+      supply the current physical pace and do not define Path A.
+    </p>
+
+<section class="panel">
+  <h2>RAW DIAGNOSTIC SNAPSHOTS</h2>
+
+  <details>
+    <summary>RUNTIME / CLOCK</summary>
+    <div class="inside"><pre id="clockJson">—</pre></div>
+  </details>
+
+  <details>
+    <summary>CALENDAR</summary>
+    <div class="inside"><pre id="calendarJson">—</pre></div>
+  </details>
+
+  <details>
+    <summary>YEAR ANGLE</summary>
+    <div class="inside"><pre id="yearJson">—</pre></div>
+  </details>
+</section>
+
+<section class="panel">
+  <h2>PROOF / REGRESSION · NOT NORMAL OPERATION</h2>
+
+  <details>
+    <summary>OPEN PROVEN BENCHES</summary>
+    <div class="inside">
+      <div class="controls">
+        <a class="button" href="/pseudo-terminal-link.html">GATE 6D · ONE-WAY PTY</a>
+        <a class="button" href="/discipline.html">SLOW DISCIPLINE</a>
+        <a class="button" href="/rate-slew.html">RATE SLEW</a>
+        <a class="button" href="/rate-continuity.html">RATE CONTINUITY</a>
+        <a class="button" href="/disturbance-recovery.html">DISTURBANCE / RECOVERY</a>
+        <a class="button" href="/multi-window-recovery.html">MULTI-WINDOW RECOVERY</a>
+        <a class="button" href="/holdover-reacquisition.html">HOLDOVER / REACQUISITION</a>
+        <a class="button" href="/repeated-holdover.html">REPEATED HOLDOVER</a>
+        <a class="button" href="/discipline-harness.html">DISCIPLINE HARNESS</a>
+        <a class="button" href="/discipline-runner.html">DISCIPLINE RUNNER</a>
+        <a class="button" href="/pre-actuator-seal.html">PRE-ACTUATOR SEAL</a>
+      </div>
+    </div>
+  </details>
+</section>
+
+  </div>
+</details>
+
+
+<details class="panel" id="a8-ce-critical-controls">
+  <summary
+    style="
+      cursor:pointer;
+      font-weight:900;
+      letter-spacing:.06em;
+    "
+  >
+    CRITICAL CONTROLS · CLOSED BY DEFAULT
+  </summary>
+
+  <div class="inside">
+
+    <p class="note">
+      Deliberate operator access only.
+      Opening this cabinet does not execute any action.
+      CLEAN STOP remains available while Core20 is online. CE MASTER START
+      is intentionally locked while Core20 is offline until the physical
+      Path-A fresh-start backend is separately qualified. Requalification,
+      diagnostic hold/resume and calendar-anchor controls remain preserved
+      here as deliberate plant-changing actions.
+    </p>
+
+<section class="panel" id="a8-ce-core20-master-power">
+
+  <style>
+    #a8-ce-core20-master-power .power-grid{
+      display:grid;
+      grid-template-columns:minmax(0,1fr) auto;
+      gap:16px;
+      align-items:center;
+    }
+
+    #a8-ce-core20-master-power .power-state{
+      font-weight:900;
+      letter-spacing:.08em;
+    }
+
+    #a8-ce-core20-master-power .power-detail{
+      margin-top:6px;
+      opacity:.8;
+      font-size:.9rem;
+    }
+
+    #a8-ce-core20-master-power button{
+      min-width:270px;
+    }
+
+    @media(max-width:700px){
+      #a8-ce-core20-master-power .power-grid{
+        grid-template-columns:1fr;
+      }
+
+      #a8-ce-core20-master-power button{
+        width:100%;
+      }
+    }
+  </style>
+
+  <div class="kicker">
+    CORE20 · MACHINE POWER
+  </div>
+
+  <h2>MASTER POWER · CLEAN STOP / START LOCKED</h2>
+
+  <p class="note">
+    STOP performs the normal clean Core20 shutdown and waits until the
+    service is fully offline. START from this CE page is deliberately locked.
+    The existing machine-level fresh-start backend is preserved for inspection
+    but is not authorized here as the physical Path-A restart sequence.
+  </p>
+
+  <div class="power-grid">
+
+    <div>
+      <div
+        id="core20MachineState"
+        class="power-state"
+      >CHECKING…</div>
+
+      <div
+        id="core20MachineDetail"
+        class="power-detail"
+      >—</div>
+    </div>
+
+    <button
+      id="core20MachinePower"
+      type="button"
+      disabled
+    >
+      CHECKING CORE20…
+    </button>
+
+  </div>
+
+</section>
+
+<section class="panel danger-zone">
+  <h2>DANGER ZONE · PLANT-CHANGING ACTIONS</h2>
+
+  <p class="note">
+    These controls are not part of ordinary Path-A operation. Requalification is preserved Path-B fallback machinery.
+  </p>
+
+  <div class="controls">
+    <button id="requalify" class="danger">
+      B FALLBACK · REQUALIFY · NEW SOURCE EPOCH
+    </button>
+
+    <button id="hold" class="danger">
+      DIAGNOSTIC HOLD
+    </button>
+
+    <button id="resume" class="warn">
+      DIAGNOSTIC RESUME · LOST ELAPSED TIME REMAINS LOST
+    </button>
+  </div>
+
+  <div style="margin-top:16px">
+    <div class="kicker">NATIVE CALENDAR ANCHOR</div>
+
+    <div class="controls" style="margin-top:8px">
+      <input
+        id="anchorYearDay"
+        inputmode="numeric"
+        placeholder="YEAR DAY integer"
+        aria-label="YEAR DAY integer"
+      >
+      <button id="anchorCalendar" class="danger">
+        ESTABLISH NATIVE YEAR DAY ANCHOR
+      </button>
+    </div>
+  </div>
+</section>
+
+  </div>
+</details>
+
+</main>
+
+<script>
+(() => {
+  'use strict';
+
+  const $ = id => document.getElementById(id);
+
+  let latest = {
+    runtime: null,
+    clock: null,
+    calendar: null,
+    year: null,
+    source: null,
+    recorder: null,
+    mintakaClock: null,
+    opposing: null,
+  };
+
+  let recorderPaused = false;
+  let recorderFilter = 'ALL';
+  let refreshBusy = false;
+  let pulseBoxPrevious = null;
+  let pulseBoxBusy = false;
+
+  function text(id, value) {
+    const el = $(id);
+    if (!el) return;
+
+    el.textContent =
+      value === undefined ||
+      value === null ||
+      value === ''
+        ? '—'
+        : String(value);
+  }
+
+  function pretty(obj) {
+    return JSON.stringify(obj, null, 2);
+  }
+
+  async function api(path, options = {}) {
+    const res =
+      await fetch(
+        path,
+        {
+          cache: 'no-store',
+          credentials: 'same-origin',
+          ...options,
+          headers: {
+            'Content-Type': 'application/json',
+            ...(options.headers || {}),
+          },
+        }
+      );
+
+    const raw = await res.text();
+
+    let body = null;
+
+    try {
+      body = raw ? JSON.parse(raw) : {};
+    } catch (_) {
+      body = { raw };
+    }
+
+    if (!res.ok) {
+      throw new Error(
+        body && body.error
+          ? body.error
+          : `HTTP ${res.status}`
+      );
+    }
+
+    return body;
+  }
+
+  function post(path, body = {}) {
+    return api(
+      path,
+      {
+        method: 'POST',
+        body: JSON.stringify(body),
+      }
+    );
+  }
+
+  function sourceSummary(payload) {
+    const source =
+      payload && payload.source
+        ? payload.source
+        : {};
+
+    const bridge =
+      payload && payload.recoveryInput
+        ? payload.recoveryInput
+        : {};
+
+    const jovian =
+      payload && payload.jovian
+        ? payload.jovian
+        : {};
+
+    return (
+      source.mode ||
+      source.status ||
+      bridge.status ||
+      jovian.status ||
+      'AVAILABLE'
+    );
+  }
+
+  function recorderMatches(event) {
+    if (recorderFilter === 'ALL') return true;
+
+    const haystack =
+      [
+        event.type,
+        event.message,
+        event.calendarStatus,
+        event.clockStatus,
+      ]
+        .filter(Boolean)
+        .join(' ')
+        .toUpperCase();
+
+    if (
+      recorderFilter === 'CORE' &&
+      (
+        haystack.includes('CORE') ||
+        haystack.includes('RECORDER')
+      )
+    ) {
+      return true;
+    }
+
+    return haystack.includes(
+      recorderFilter
+    );
+  }
+
+  function formatRecorder(recorder) {
+    const events =
+      Array.isArray(recorder.events)
+        ? recorder.events.filter(recorderMatches)
+        : [];
+
+    if (!events.length) {
+      return 'No matching recorder events.';
+    }
+
+    return events.map(event => {
+      const bits = [
+        `#${event.sequence}`,
+        event.type,
+        `epoch=${event.sourceEpoch ?? '—'}`,
+        `raw=${event.rawPulse ?? '—'}`,
+        `phase17=${event.dayPhase17 ?? '—'}`,
+        `dayCount=${event.dayCount ?? '—'}`,
+        `yearDay=${event.yearDay ?? '—'}`,
+        `:: ${event.message || ''}`,
+      ];
+
+      if (event.details) {
+        bits.push(
+          `details=${JSON.stringify(event.details)}`
+        );
+      }
+
+      return bits.join(' ');
+    }).join('\n');
+  }
+
+  function renderRecorder(recorder) {
+    if (!recorder || recorderPaused) return;
+
+    text('recorderStatus', recorder.status);
+    text('recorderSequence', recorder.latestSequence);
+    text('recorderCount', `${recorder.count} / ${recorder.maxEvents}`);
+    text('recorderAuthority', recorder.authority);
+
+    $('recorderLog').textContent =
+      formatRecorder(recorder);
+  }
+
+  function render() {
+    const runtime =
+      latest.runtime &&
+      latest.runtime.runtime
+        ? latest.runtime.runtime
+        : {};
+
+    const clock =
+      latest.clock &&
+      latest.clock.clock
+        ? latest.clock.clock
+        : {};
+
+    const calendar =
+      latest.calendar &&
+      latest.calendar.calendar
+        ? latest.calendar.calendar
+        : {};
+
+    const persistence =
+      calendar.persistence || {};
+
+    const independentMintaka =
+      latest.mintakaClock &&
+      latest.mintakaClock.clock
+        ? latest.mintakaClock.clock
+        : {};
+
+    const opposing =
+      latest.opposing &&
+      latest.opposing.instrument
+        ? latest.opposing.instrument
+        : {};
+
+    const opposingMintaka =
+      opposing.mintakaClock || {};
+
+    const opposingCivil =
+      opposing.civilClock || {};
+
+    const discrepancy =
+      opposing.discrepancy || {};
+
+    const accumulated =
+      discrepancy.accumulated || {};
+
+    const beat =
+      discrepancy.relativeBeat || {};
+
+    const rates =
+      discrepancy.rates || {};
+
+    const locked =
+      discrepancy.lockedRecurrences || {};
+
+    const changed =
+      discrepancy.observedRecurrenceChanged || {};
+
+    const audit =
+      opposing.rawSampleAudit || {};
+
+    const boundary =
+      opposing.authorityBoundary || {};
+
+    const year =
+      latest.year &&
+      latest.year.yearAngle
+        ? latest.year.yearAngle
+        : {};
+
+    text('runtimeStatus', runtime.status);
+    text('clockStatus', clock.status);
+
+    text(
+      'sourceEpoch',
+      clock.sourceEpoch ??
+      calendar.sourceEpoch ??
+      year.sourceEpoch
+    );
+
+    text(
+      'rawPulse',
+      clock.currentSelectedRawPulse
+    );
+
+    text('dayPhase17', clock.dayPhase17);
+
+    text(
+      'a8Clock',
+      clock.clock
+        ? (
+            clock.clock.octal ||
+            clock.clock.decimal
+          )
+        : null
+    );
+
+    text(
+      'clockAuthority',
+      clock.clockAuthority
+    );
+
+    text(
+      'jovianStatus',
+      sourceSummary(latest.source)
+    );
+
+    text('calendarStatus', calendar.status);
+    text('yearDay', calendar.yearDay);
+    text('yearDayOctal', calendar.yearDayOctal);
+    text('coreDayCount', calendar.coreDayCount);
+
+    text(
+      'checkpointStatus',
+      persistence.checkpointLoaded === true
+        ? 'LOADED'
+        : persistence.checkpointLoaded === false
+          ? 'NOT LOADED'
+          : '—'
+    );
+
+    text(
+      'restorationStatus',
+      persistence.restorationStatus
+    );
+
+    text(
+      'checkpointEpoch',
+      persistence.checkpointSourceEpoch
+    );
+
+    text(
+      'calendarAuthority',
+      calendar.runningAdvance
+    );
+
+    text('yearStatus', year.status);
+    text(
+      'yearPhase9',
+      year.phase9Octal || year.phase9
+    );
+    text(
+      'yearPhase27',
+      year.phase27Octal || year.phase27
+    );
+    text(
+      'yearAuthority',
+      year.ongoingAuthority
+    );
+
+    text(
+      'oppositionStatus',
+      opposing.status
+    );
+
+    text(
+      'oppMintakaClock',
+      opposingMintaka.clock
+        ? opposingMintaka.clock.textOctal
+        : null
+    );
+
+    text(
+      'oppCivilClock',
+      opposingCivil.clock
+        ? opposingCivil.clock.textOctal
+        : null
+    );
+
+    text(
+      'oppMintakaPhase17',
+      opposingMintaka.mintakaPhase17Octal ||
+      opposingMintaka.mintakaPhase17
+    );
+
+    text(
+      'oppCivilPhase17',
+      opposingCivil.dayPhase17Octal ||
+      opposingCivil.dayPhase17
+    );
+
+    text(
+      'oppSourceEpoch',
+      opposing.sourceEpoch
+    );
+
+    text(
+      'oppSourceMode',
+      [
+        opposing.sourceMode,
+        opposing.rig
+      ].filter(Boolean).join(' · ')
+    );
+
+    text(
+      'oppAnchorRaw',
+      discrepancy.anchorRawPulse
+    );
+
+    text(
+      'oppSelectedRaw',
+      opposing.selectedRawPulse
+    );
+
+    text(
+      'oppElapsedRaw',
+      discrepancy.elapsedRawPulse
+    );
+
+    text(
+      'oppRawAudit',
+      opposing.sameSelectedRawPulse === true
+        ? `${audit.bridge} = bridge = Mintaka = civil`
+        : `MISMATCH · bridge=${audit.bridge ?? '—'} · Mintaka=${audit.mintakaClock ?? '—'} · civil=${audit.civilClock ?? '—'}`
+    );
+
+    text(
+      'oppRateLeader',
+      rates.rateLeader
+    );
+
+    text(
+      'oppCurrentLeader',
+      accumulated.currentLeader
+    );
+
+    text(
+      'oppGeometricLeg',
+      beat.geometricLeg
+    );
+
+    text(
+      'oppCompletedBeats',
+      beat.completedBeats
+    );
+
+    text(
+      'oppUnwrappedRotations',
+      accumulated.unwrappedDiscrepancyRotations
+        ? accumulated.unwrappedDiscrepancyRotations.text
+        : null
+    );
+
+    text(
+      'oppUnwrappedPhase17',
+      accumulated.unwrappedDiscrepancyPhase17
+        ? accumulated.unwrappedDiscrepancyPhase17.text
+        : null
+    );
+
+    text(
+      'oppUnwrappedAngle512',
+      accumulated.unwrappedDiscrepancyAngle512
+        ? accumulated.unwrappedDiscrepancyAngle512.text
+        : null
+    );
+
+    text(
+      'oppSeparationRotations',
+      beat.geometricSeparationRotations
+        ? beat.geometricSeparationRotations.text
+        : null
+    );
+
+    text(
+      'oppSeparationPhase17',
+      beat.geometricSeparationPhase17
+        ? beat.geometricSeparationPhase17.text
+        : null
+    );
+
+    text(
+      'oppSeparationAngle512',
+      beat.geometricSeparationAngle512
+        ? beat.geometricSeparationAngle512.text
+        : null
+    );
+
+    text(
+      'oppMintakaRecurrence',
+      locked.mintakaRawPerEarthAxialRotation
+        ? locked.mintakaRawPerEarthAxialRotation.text
+        : null
+    );
+
+    text(
+      'oppCivilRecurrence',
+      locked.civilRawPerSunReturn
+        ? locked.civilRawPerSunReturn.text
+        : null
+    );
+
+    text(
+      'oppMintakaChanged',
+      changed.mintaka === true
+        ? 'CHANGED · LOCK PRESERVED'
+        : changed.mintaka === false
+          ? 'NO'
+          : null
+    );
+
+    text(
+      'oppCivilChanged',
+      changed.civil === true
+        ? 'CHANGED · LOCK PRESERVED'
+        : changed.civil === false
+          ? 'NO'
+          : null
+    );
+
+    text(
+      'oppBeatRatio',
+      beat.exists === true
+        ? `${
+            beat.mintakaRotationsPerBeat
+              ? beat.mintakaRotationsPerBeat.text
+              : '—'
+          } Mintaka ↔ ${
+            beat.civilReturnsPerBeat
+              ? beat.civilReturnsPerBeat.text
+              : '—'
+          } civil`
+        : 'NO RELATIVE BEAT'
+    );
+
+    text(
+      'oppBeatRaw',
+      beat.rawPulseSpan
+        ? beat.rawPulseSpan.text
+        : null
+    );
+
+    const boundaryKeys = [
+      'writesA8Core',
+      'writesMintakaObserver',
+      'writesSolObserver',
+      'writesTerraShipSlip',
+      'writesCivilClock',
+      'writesCalendar',
+      'changesAuthority',
+      'usesLegacyTime',
+      'usesHostTime',
+      'usesBrowserTime',
+      'usesFrequencyHz',
+      'usesUTC',
+      'usesNTP',
+      'usesGPS',
+    ];
+
+    const boundaryPass =
+      discrepancy.nativeOnly === true &&
+      opposing.ready === true &&
+      opposing.sameSelectedRawPulse === true &&
+      boundaryKeys.every(
+        key => boundary[key] === false
+      );
+
+    text(
+      'oppositionBoundary',
+      boundaryPass
+        ? 'PASS · NATIVE ONLY · READ ONLY'
+        : 'BOUNDARY CHECK REQUIRED'
+    );
+
+    $('oppositionJson').textContent =
+      pretty(latest.opposing);
+
+    $('mintakaClockJson').textContent =
+      pretty(latest.mintakaClock);
+
+    $('clockJson').textContent =
+      pretty(latest.clock);
+
+    $('calendarJson').textContent =
+      pretty(latest.calendar);
+
+    $('yearJson').textContent =
+      pretty(latest.year);
+
+    $('sourceJson').textContent =
+      pretty(latest.source);
+
+    renderRecorder(
+      latest.recorder &&
+      latest.recorder.recorder
+        ? latest.recorder.recorder
+        : null
+    );
+
+    const running =
+      runtime.status === 'RUNNING';
+
+    const clockRunning =
+      clock.status === 'CORE20_CLOCK_RUNNING';
+
+    $('connect').disabled =
+      !running || clockRunning;
+
+    $('connect').textContent =
+      clockRunning
+        ? 'CIVIL TIME ALIGNED · UTC BRIDGE INACTIVE'
+        : 'B FALLBACK · CIVIL ALIGN · UTC';
+
+    const realignRecommended =
+      runtime.civilRealignRecommended ===
+        true;
+
+    $('realignCivil').disabled =
+      !running ||
+      !clockRunning ||
+      !realignRecommended;
+
+    $('realignCivil').textContent =
+      realignRecommended
+        ? 'B FALLBACK · RE-ALIGN CIVIL TIME AFTER HOLD · UTC'
+        : 'CIVIL RE-ALIGN · NOT REQUIRED';
+
+    $('hold').disabled =
+      !running;
+
+    $('resume').disabled =
+      runtime.status !== 'STOPPED';
+
+    $('requalify').disabled =
+      runtime.status === 'QUALIFYING';
+
+    $('alignJpl').disabled =
+      !running ||
+      year.status ===
+        'YEAR_ANGLE_RUNNING_FROM_RECOVERED_SOL';
+
+    text(
+      'overallStatus',
+      running
+        ? (
+            clockRunning
+              ? 'CORE20 RUNNING · CLOCK ALIGNED'
+              : 'CORE20 RUNNING · CLOCK AWAITS CONNECT'
+          )
+        : `CORE20 ${runtime.status || 'UNKNOWN'}`
+    );
+  }
+
+
+  function pulseBoxMotion(sample) {
+    if (
+      !sample ||
+      sample.SOURCE_EPOCH == null ||
+      sample.RAW_COUNT == null ||
+      sample.REPORT_SEQUENCE == null
+    ) {
+      return 'CHECK · INCOMPLETE REPORT';
+    }
+
+    const epoch =
+      String(sample.SOURCE_EPOCH);
+
+    let raw;
+    let sequence;
+
+    try {
+      raw =
+        BigInt(String(sample.RAW_COUNT));
+
+      sequence =
+        BigInt(String(sample.REPORT_SEQUENCE));
+    } catch (_) {
+      return 'CHECK · INVALID REPORT';
+    }
+
+    if (!pulseBoxPrevious) {
+      pulseBoxPrevious = {
+        epoch,
+        raw,
+        sequence,
+        lastAdvance: null
+      };
+
+      return 'BASELINE';
+    }
+
+    if (epoch !== pulseBoxPrevious.epoch) {
+      pulseBoxPrevious = {
+        epoch,
+        raw,
+        sequence,
+        lastAdvance: null
+      };
+
+      return 'NEW PHYSICAL EPOCH · BASELINE';
+    }
+
+    if (sequence < pulseBoxPrevious.sequence) {
+      return 'CHECK · REPORT SEQUENCE REGRESSION';
+    }
+
+    if (raw < pulseBoxPrevious.raw) {
+      return 'CHECK · RAW REGRESSION';
+    }
+
+    if (raw > pulseBoxPrevious.raw) {
+      const delta =
+        raw - pulseBoxPrevious.raw;
+
+      pulseBoxPrevious = {
+        epoch,
+        raw,
+        sequence,
+        lastAdvance: delta
+      };
+
+      return (
+        'ADVANCE OBSERVED · LATEST RAW +' +
+        delta
+      );
+    }
+
+    const lastAdvance =
+      pulseBoxPrevious.lastAdvance;
+
+    pulseBoxPrevious = {
+      epoch,
+      raw,
+      sequence,
+      lastAdvance
+    };
+
+    return lastAdvance === null
+      ? 'BASELINE · SAME RAW'
+      : (
+          'ADVANCE OBSERVED · LATEST RAW +' +
+          lastAdvance
+        );
+  }
+
+  async function refreshPulseBox() {
+    if (pulseBoxBusy) return;
+
+    pulseBoxBusy = true;
+
+    try {
+      const payload =
+        await api('/api/pulse-box/snapshot');
+
+      text(
+        'pulseBoxStatus',
+        payload.STATUS === 'ACTIVE'
+          ? 'PATH A · PHYSICAL · ACTIVE'
+          : `PATH A · PHYSICAL · ${payload.STATUS || 'CHECK'}`
+      );
+
+      text(
+        'pulseBoxEpoch',
+        payload.SOURCE_EPOCH
+      );
+
+      text(
+        'pulseBoxRaw',
+        payload.RAW_COUNT
+      );
+
+      text(
+        'pulseBoxSequence',
+        payload.REPORT_SEQUENCE
+      );
+
+      text(
+        'pulseBoxReporterStatus',
+        payload.STATUS
+      );
+
+      text(
+        'pulseBoxMotion',
+        pulseBoxMotion(payload)
+      );
+
+      $('pulseBoxJson').textContent =
+        pretty(payload);
+
+    } catch (err) {
+      text(
+        'pulseBoxStatus',
+        'PATH A · PHYSICAL · UNREACHABLE'
+      );
+
+      text(
+        'pulseBoxReporterStatus',
+        'UNREACHABLE'
+      );
+
+      text(
+        'pulseBoxMotion',
+        'NO CURRENT REPORT'
+      );
+
+      $('pulseBoxJson').textContent =
+        `UNREACHABLE · ${err.message}`;
+    } finally {
+      pulseBoxBusy = false;
+    }
+  }
+
+  async function refreshAll() {
+    if (refreshBusy) return;
+    refreshBusy = true;
+    refreshPulseBox();
+
+    try {
+      const [
+        runtime,
+        clock,
+        calendar,
+        year,
+        source,
+        recorder,
+        mintakaClock,
+        opposing,
+      ] =
+        await Promise.all([
+          api('/api/core20/runtime'),
+          api('/api/core20/clock'),
+          api('/api/core20/calendar'),
+          api('/api/core20/year-angle'),
+          api('/api/hardware/source'),
+          api('/api/core20/flight-recorder'),
+          api('/api/mintaka/clock'),
+          api('/api/opposing-clocks'),
+        ]);
+
+      latest = {
+        runtime,
+        clock,
+        calendar,
+        year,
+        source,
+        recorder,
+        mintakaClock,
+        opposing,
+      };
+
+      render();
+      $('refreshState').textContent = 'LIVE REFRESH';
+    } catch (err) {
+      $('refreshState').textContent =
+        `REFRESH FAIL · ${err.message}`;
+    } finally {
+      refreshBusy = false;
+    }
+  }
+
+  async function copyText(value) {
+    try {
+      await navigator.clipboard.writeText(value);
+      return;
+    } catch (_) {}
+
+    const area =
+      document.createElement('textarea');
+
+    area.value = value;
+    area.style.position = 'fixed';
+    area.style.opacity = '0';
+
+    document.body.appendChild(area);
+    area.select();
+    document.execCommand('copy');
+    area.remove();
+  }
+
+  $('refresh').addEventListener(
+    'click',
+    refreshAll
+  );
+
+  $('connect').addEventListener(
+    'click',
+    async () => {
+      try {
+        await post(
+          '/api/core20/connect',
+          {}
+        );
+
+        await refreshAll();
+      } catch (err) {
+        alert(`CONNECT FAIL · ${err.message}`);
+      }
+    }
+  );
+
+  $('realignCivil').addEventListener(
+    'click',
+    async () => {
+      if (
+        !confirm(
+          'RE-ALIGN CIVIL TIME AFTER DIAGNOSTIC HOLD?\n\n' +
+          'UTC is sampled once for within-day DAY_PHASE17 only.\n' +
+          'Current native integer dayCount is preserved.\n' +
+          'YEAR DAY is not selected or incremented by UTC.'
+        )
+      ) {
+        return;
+      }
+
+      try {
+        await post(
+          '/api/core20/civil-realign',
+          {}
+        );
+
+        await refreshAll();
+      } catch (err) {
+        alert(
+          `CIVIL RE-ALIGN FAIL · ${err.message}`
+        );
+      }
+    }
+  );
+
+  $('alignJpl').addEventListener(
+    'click',
+    async () => {
+      try {
+        await post(
+          '/api/core20/year-angle/align-jpl',
+          {}
+        );
+
+        await refreshAll();
+      } catch (err) {
+        alert(
+          `YEAR ALIGN FAIL · ${err.message}`
+        );
+      }
+    }
+  );
+
+  $('requalify').addEventListener(
+    'click',
+    async () => {
+      if (
+        !confirm(
+          'REQUALIFY CORE20 AND CREATE A FRESH SOURCE EPOCH?\n\n' +
+          'This is NOT normal reboot operation.'
+        )
+      ) {
+        return;
+      }
+
+      try {
+        await post(
+          '/api/core20/runtime/start',
+          { restart: true }
+        );
+
+        await post(
+          '/api/core20/connect',
+          {}
+        );
+
+        await refreshAll();
+      } catch (err) {
+        alert(
+          `REQUALIFY FAIL · ${err.message}`
+        );
+      }
+    }
+  );
+
+  $('hold').addEventListener(
+    'click',
+    async () => {
+      if (
+        !confirm(
+          'PLACE CORE20 IN DIAGNOSTIC HOLD?\n\n' +
+          'Elapsed time during the hold will not be recovered.'
+        )
+      ) {
+        return;
+      }
+
+      try {
+        await post(
+          '/api/core20/runtime/stop',
+          {}
+        );
+
+        await refreshAll();
+      } catch (err) {
+        alert(`HOLD FAIL · ${err.message}`);
+      }
+    }
+  );
+
+  $('resume').addEventListener(
+    'click',
+    async () => {
+      if (
+        !confirm(
+          'DIAGNOSTIC RESUME?\n\n' +
+          'Held elapsed time remains lost. No CONNECT or UTC resampling occurs.'
+        )
+      ) {
+        return;
+      }
+
+      try {
+        await post(
+          '/api/core20/runtime/resume-diagnostic',
+          {}
+        );
+
+        await refreshAll();
+      } catch (err) {
+        alert(
+          `RESUME FAIL · ${err.message}`
+        );
+      }
+    }
+  );
+
+  $('anchorCalendar').addEventListener(
+    'click',
+    async () => {
+      const raw =
+        $('anchorYearDay').value.trim();
+
+      if (!/^-?\d+$/.test(raw)) {
+        alert('YEAR DAY must be an integer.');
+        return;
+      }
+
+      const yearDay = Number(raw);
+
+      if (
+        !confirm(
+          `ESTABLISH NATIVE YEAR DAY ${yearDay}?\n\n` +
+          'This writes the calendar anchor.'
+        )
+      ) {
+        return;
+      }
+
+      try {
+        await post(
+          '/api/core20/calendar/anchor',
+          { yearDay }
+        );
+
+        $('anchorYearDay').value = '';
+        await refreshAll();
+      } catch (err) {
+        alert(
+          `CALENDAR ANCHOR FAIL · ${err.message}`
+        );
+      }
+    }
+  );
+
+  $('pauseRecorder').addEventListener(
+    'click',
+    () => {
+      recorderPaused =
+        !recorderPaused;
+
+      $('pauseRecorder').textContent =
+        recorderPaused
+          ? 'RESUME DISPLAY'
+          : 'PAUSE DISPLAY';
+
+      $('refreshState').textContent =
+        recorderPaused
+          ? 'RECORDER DISPLAY PAUSED · SERVER STILL RECORDING'
+          : 'LIVE REFRESH';
+
+      if (!recorderPaused) {
+        renderRecorder(
+          latest.recorder &&
+          latest.recorder.recorder
+            ? latest.recorder.recorder
+            : null
+        );
+      }
+    }
+  );
+
+  $('copyRecorder').addEventListener(
+    'click',
+    async () => {
+      const recorder =
+        latest.recorder &&
+        latest.recorder.recorder
+          ? latest.recorder.recorder
+          : null;
+
+      if (!recorder) return;
+
+      await copyText(
+        formatRecorder(recorder)
+      );
+
+      $('copyRecorder').textContent =
+        'COPIED';
+
+      setTimeout(
+        () => {
+          $('copyRecorder').textContent =
+            'COPY';
+        },
+        1200
+      );
+    }
+  );
+
+  $('copyForensic').addEventListener(
+    'click',
+    async () => {
+      try {
+        await refreshAll();
+
+        const recorder =
+          latest.recorder &&
+          latest.recorder.recorder
+            ? latest.recorder.recorder
+            : {};
+
+        const snapshot = {
+          schema:
+            'A8-CORE20-CE-FORENSIC-SNAPSHOT-V1',
+
+          conventionalTimestamp:
+            null,
+
+          orderingAuthority:
+            'FLIGHT_RECORDER_SEQUENCE_AND_CORE20_RAW_ONLY',
+
+          recorderLatestSequence:
+            recorder.latestSequence || null,
+
+          runtime:
+            latest.runtime,
+
+          clock:
+            latest.clock,
+
+          calendar:
+            latest.calendar,
+
+          yearAngle:
+            latest.year,
+
+          source:
+            latest.source,
+
+          mintakaStellarClock:
+            latest.mintakaClock,
+
+          opposingClockInstrument:
+            latest.opposing,
+
+          flightRecorder:
+            latest.recorder,
+        };
+
+        await copyText(
+          pretty(snapshot)
+        );
+
+        $('copyForensic').textContent =
+          'FORENSIC SNAPSHOT COPIED';
+
+        setTimeout(
+          () => {
+            $('copyForensic').textContent =
+              'COPY FORENSIC SNAPSHOT';
+          },
+          1600
+        );
+      } catch (err) {
+        alert(
+          `FORENSIC COPY FAIL · ${err.message}`
+        );
+      }
+    }
+  );
+
+  $('clearRecorder').addEventListener(
+    'click',
+    async () => {
+      if (
+        !confirm(
+          'CLEAR THE CURRENT FLIGHT RECORDER BUFFER?'
+        )
+      ) {
+        return;
+      }
+
+      try {
+        await post(
+          '/api/core20/flight-recorder/clear',
+          {}
+        );
+
+        await refreshAll();
+      } catch (err) {
+        alert(
+          `RECORDER CLEAR FAIL · ${err.message}`
+        );
+      }
+    }
+  );
+
+  document
+    .querySelectorAll('.filter')
+    .forEach(button => {
+      button.addEventListener(
+        'click',
+        () => {
+          recorderFilter =
+            button.dataset.filter || 'ALL';
+
+          document
+            .querySelectorAll('.filter')
+            .forEach(b =>
+              b.classList.toggle(
+                'active',
+                b === button
+              )
+            );
+
+          if (!recorderPaused) {
+            renderRecorder(
+              latest.recorder &&
+              latest.recorder.recorder
+                ? latest.recorder.recorder
+                : null
+            );
+          }
+        }
+      );
+    });
+
+  let shipRecoveryPermitToken = null;
+
+  async function shipRecoveryRequest(
+    path,
+    method = 'GET',
+    body = null
+  ) {
+    const options = {
+      method,
+      headers: {
+        'accept': 'application/json'
+      }
+    };
+
+    if (body !== null) {
+      options.headers['content-type'] =
+        'application/json';
+
+      options.body =
+        JSON.stringify(body);
+    }
+
+    const response =
+      await fetch(path, options);
+
+    let payload = null;
+
+    try {
+      payload =
+        await response.json();
+    } catch (_) {
+      payload = {
+        ok: false,
+        error:
+          `HTTP_${response.status}`
+      };
+    }
+
+    if (!response.ok) {
+      const err =
+        new Error(
+          payload &&
+          payload.error
+            ? payload.error
+            : `HTTP_${response.status}`
+        );
+
+      err.status =
+        response.status;
+
+      err.payload =
+        payload;
+
+      throw err;
+    }
+
+    return payload;
+  }
+
+  function renderShipRecoveryHistory(payload) {
+    const records =
+      payload &&
+      Array.isArray(payload.records)
+        ? payload.records
+        : [];
+
+    $('shipRecoveryHistory').textContent =
+      records.length
+        ? JSON.stringify(
+            records,
+            null,
+            2
+          )
+        : 'NO RECOVERY HISTORY';
+  }
+
+  async function refreshShipRecovery() {
+    try {
+      const [
+        status,
+        history
+      ] =
+        await Promise.all([
+          shipRecoveryRequest(
+            '/api/ship-recovery/status'
+          ),
+
+          shipRecoveryRequest(
+            '/api/ship-recovery/history'
+          )
+        ]);
+
+      const recovery =
+        status.recovery || {};
+
+      const live =
+        status.live || {};
+
+      $('shipRecoveryTag').textContent =
+        recovery.tag || '—';
+
+      $('shipRecoveryCommit').textContent =
+        recovery.commit || '—';
+
+      $('shipRecoveryLiveHash').textContent =
+        live.sha256 || '—';
+
+      $('shipRecoveryPinnedHash').textContent =
+        recovery.expectedSha256 || '—';
+
+      if (
+        live.matchesPinnedRecovery === true
+      ) {
+        $('shipRecoveryState').textContent =
+          'HEALTHY · LIVE MATCHES PINNED RECOVERY';
+      } else if (
+        status.recoveryNeeded === true
+      ) {
+        $('shipRecoveryState').textContent =
+          'RECOVERY AVAILABLE · LIVE DIFFERS';
+      } else {
+        $('shipRecoveryState').textContent =
+          'RECOVERY NOT AVAILABLE';
+      }
+
+      if (status.permit) {
+        $('shipRecoveryPermit').textContent =
+          `ARMED · ${status.permit.id} · EXPIRES ${status.permit.expiresAt}`;
+      } else if (shipRecoveryPermitToken) {
+        $('shipRecoveryPermit').textContent =
+          'ARMED IN THIS CE SESSION';
+      } else {
+        $('shipRecoveryPermit').textContent =
+          'NOT ARMED';
+      }
+
+      $('shipRecoveryArm').disabled =
+        status.armAllowed !== true;
+
+      $('shipRecoveryApply').disabled =
+        !shipRecoveryPermitToken;
+
+      renderShipRecoveryHistory(
+        history
+      );
+
+    } catch (err) {
+      $('shipRecoveryState').textContent =
+        `RECOVERY STATUS FAIL · ${err.message}`;
+
+      $('shipRecoveryArm').disabled =
+        true;
+
+      $('shipRecoveryApply').disabled =
+        true;
+    }
+  }
+
+  $('shipRecoveryRefresh').addEventListener(
+    'click',
+    async () => {
+      await refreshShipRecovery();
+    }
+  );
+
+  $('shipRecoveryArm').addEventListener(
+    'click',
+    async () => {
+      if (
+        !confirm(
+          'ARM ONE-SHOT SHIP PRESENTATION RESTORE?\n\n' +
+          'This does not restore yet. It creates a short-lived permit bound to the current live Ship hash.'
+        )
+      ) {
+        return;
+      }
+
+      try {
+        const payload =
+          await shipRecoveryRequest(
+            '/api/ship-recovery/arm',
+            'POST',
+            {
+              confirm:
+                'ARM ONE-SHOT SHIP RESTORE'
+            }
+          );
+
+        shipRecoveryPermitToken =
+          payload &&
+          payload.permit
+            ? payload.permit.token
+            : null;
+
+        if (!shipRecoveryPermitToken) {
+          throw new Error(
+            'PERMIT_TOKEN_MISSING'
+          );
+        }
+
+        $('shipRecoveryPermit').textContent =
+          `ARMED · ${payload.permit.id} · EXPIRES ${payload.permit.expiresAt}`;
+
+        $('shipRecoveryApply').disabled =
+          false;
+
+        await refreshShipRecovery();
+
+      } catch (err) {
+        shipRecoveryPermitToken =
+          null;
+
+        $('shipRecoveryApply').disabled =
+          true;
+
+        alert(
+          `SHIP RECOVERY ARM FAIL · ${err.message}`
+        );
+
+        await refreshShipRecovery();
+      }
+    }
+  );
+
+  $('shipRecoveryApply').addEventListener(
+    'click',
+    async () => {
+      if (!shipRecoveryPermitToken) {
+        alert(
+          'NO ACTIVE SHIP RECOVERY PERMIT'
+        );
+
+        return;
+      }
+
+      if (
+        !confirm(
+          'APPLY THE ARMED ONE-SHOT SHIP RESTORE?\n\n' +
+          'The current Ship presentation will first be backed up, then replaced by the pinned recovered presentation if every hash gate still passes.'
+        )
+      ) {
+        return;
+      }
+
+      const token =
+        shipRecoveryPermitToken;
+
+      /*
+       * Browser copy is one-shot too.
+       * Once APPLY is attempted, require ARM again.
+       */
+      shipRecoveryPermitToken =
+        null;
+
+      $('shipRecoveryApply').disabled =
+        true;
+
+      try {
+        const payload =
+          await shipRecoveryRequest(
+            '/api/ship-recovery/apply',
+            'POST',
+            {
+              confirm:
+                'APPLY ONE-SHOT SHIP RESTORE',
+
+              token
+            }
+          );
+
+        alert(
+          'SHIP PRESENTATION RESTORED\n\n' +
+          `OLD · ${payload.oldLiveSha256}\n` +
+          `NEW · ${payload.newLiveSha256}\n` +
+          `BACKUP · ${payload.backupPath}`
+        );
+
+      } catch (err) {
+        alert(
+          `SHIP RECOVERY APPLY FAIL · ${err.message}\n\n` +
+          'Permit consumed. Re-arm after reviewing status.'
+        );
+      }
+
+      await refreshShipRecovery();
+    }
+  );
+
+  refreshShipRecovery();
+
+  setInterval(
+    refreshShipRecovery,
+    5000
+  );
+
+  refreshAll();
+
+  setInterval(
+    refreshAll,
+    1000
+  );
+})();
+</script>
+
+
+<script id="a8-ce-core20-master-power-script">
+(() => {
+  'use strict';
+
+  const base = '/api/ce/core20-service';
+
+  const state =
+    document.getElementById('core20MachineState');
+
+  const detail =
+    document.getElementById('core20MachineDetail');
+
+  const button =
+    document.getElementById('core20MachinePower');
+
+  let control = null;
+  let busy = false;
+
+  async function api(path, options = {}) {
+    const response =
+      await fetch(
+        base + path,
+        {
+          cache: 'no-store',
+          ...options
+        }
+      );
+
+    const payload =
+      await response.json();
+
+    if (!response.ok) {
+      throw new Error(
+        payload.error ||
+        (
+          payload.control &&
+          payload.control.state
+        ) ||
+        `HTTP ${response.status}`
+      );
+    }
+
+    return payload;
+  }
+
+  function paint(c) {
+    control = c;
+
+    const machine =
+      c && c.state
+        ? c.state
+        : 'UNKNOWN';
+
+    state.textContent =
+      `CORE20 · ${machine}`;
+
+    detail.textContent =
+      [
+        `service=${c.core20Service ?? '—'}`,
+        `pid=${c.core20MainPID ?? '—'}`,
+        `autorecovery=${c.autorecoveryService ?? '—'}`
+      ].join(' · ');
+
+    if (busy) {
+      button.disabled = true;
+      return;
+    }
+
+    if (machine === 'OFFLINE') {
+      button.disabled = true;
+      button.className = 'warn';
+      button.textContent =
+        'START LOCKED · PATH-A RESTART NOT QUALIFIED';
+      return;
+    }
+
+    if (machine === 'ONLINE') {
+      button.disabled = false;
+      button.className = 'danger';
+      button.textContent =
+        'STOP CORE20 · CLEAN SHUTDOWN';
+      return;
+    }
+
+    button.disabled = true;
+    button.className = 'warn';
+
+    button.textContent =
+      machine === 'FAILED'
+        ? 'CORE20 FAILED · INSPECT'
+        : 'CORE20 TRANSITIONING…';
+  }
+
+  async function refresh() {
+    if (busy) return;
+
+    try {
+      const payload =
+        await api('/status');
+
+      paint(payload.control);
+    } catch (err) {
+      state.textContent =
+        'CORE20 · CONTROL UNAVAILABLE';
+
+      detail.textContent =
+        err.message;
+
+      button.disabled = true;
+    }
+  }
+
+  button.addEventListener(
+    'click',
+    async () => {
+      if (busy || !control) return;
+
+      /*
+       * CE MASTER START LOCK
+       *
+       * The current backend fresh-start chain is retained untouched,
+       * but this browser must not invoke it until the physical Path-A
+       * restart sequence is separately qualified.
+       */
+      if (control.state !== 'ONLINE') {
+        alert(
+          'NO ACTION SENT\n\n' +
+          'CE MASTER START is locked until the physical ' +
+          'Path-A restart sequence is separately qualified.'
+        );
+        return;
+      }
+
+      const question =
+        'STOP CORE20 CLEANLY?\n\n' +
+        'Core20 will receive its normal clean shutdown signal.';
+
+      if (!confirm(question)) return;
+
+      busy = true;
+      button.disabled = true;
+      button.textContent =
+        'STOPPING · SEALING…';
+
+      try {
+        const payload =
+          await api(
+            '/stop',
+            {
+              method: 'POST',
+              headers: {
+                'Content-Type':
+                  'application/json'
+              },
+              body: '{}'
+            }
+          );
+
+        paint(payload.control);
+      } catch (err) {
+        state.textContent =
+          'CORE20 · POWER OPERATION FAILED';
+
+        detail.textContent =
+          err.message;
+      } finally {
+        busy = false;
+        await refresh();
+      }
+    }
+  );
+
+  refresh();
+  setInterval(refresh, 2000);
+})();
+</script>
+
+</body>
+</html>

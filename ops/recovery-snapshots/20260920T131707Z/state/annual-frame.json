@@ -1,0 +1,307 @@
+{
+  "schema": "A8-ANNUAL-FRAME-SIDECAR-V1",
+  "status": "FRAME_OFFSET_DEFINED_WAITING_FOR_PHYSICAL_ANCHOR",
+  "authorityBoundary": {
+    "writesCore20": false,
+    "writesCarrier": false,
+    "writesCalendar": false,
+    "writesEvidence": false,
+    "usesHostClockForProgression": false,
+    "usesUTCForProgression": false,
+    "usesNetworkTimeForProgression": false
+  },
+  "contract": {
+    "schema": "A8-ANNUAL-FRAME-V1",
+    "status": "FRAME_OFFSET_DEFINED_WAITING_FOR_PHYSICAL_ANCHOR",
+    "purpose": "Native A8 annual orbital coordinate frame",
+    "fullTurn": {
+      "decimalStates": 512,
+      "octalRecurrence": "1000₈",
+      "register": "000₈–777₈"
+    },
+    "zero": {
+      "label": "000₈",
+      "definition": "EXISTING_A8_NEW_YEAR_SEAM",
+      "calendarMoved": false,
+      "natureMoved": false,
+      "physicalEventsMoved": false
+    },
+    "frameRule": "NATURE_POINTS_FIXED_RULER_RATCHETS_UNDERNEATH",
+    "annualFrame": {
+      "name": "A8 ANNUAL FRAME V1",
+      "zeroMeaning": "A8 NEW YEAR",
+      "orientationStatus": "FRAME_OFFSET_DEFINED_WAITING_FOR_EPOCH7_PHYSICAL_RAW_ANCHOR"
+    },
+    "celestialFrame": {
+      "separateFromAnnualFrame": true,
+      "zeroMeaning": "PRESENT_ERA_VERNAL_EQUINOCTIAL_SEAM",
+      "publicName": "A8 FIRST POINT OF PISCES",
+      "rotatedByThisChange": false
+    },
+    "geographicFrame": {
+      "zeroMeaning": "RETAINED_LONDON_MERIDIAN",
+      "rotatedByThisChange": false
+    },
+    "calendar": {
+      "existingYearDayPathPreserved": true,
+      "newYearDateMoved": false,
+      "monthsMoved": false,
+      "wilsonsWeekMoved": false,
+      "leapRulesMoved": false
+    },
+    "legacyAnnualFrame": {
+      "preserved": true,
+      "zeroMeaning": "VERNAL_EQUINOX",
+      "role": "HISTORICAL_AND_COMPARISON_FRAME_ONLY",
+      "liveSource": "http://127.0.0.1:18020/api/core20/year-angle",
+      "usedToDefineAnnualV1": false
+    },
+    "physicalAnchor": {
+      "event": "SOL_EQUATOR_CROSSING",
+      "status": "NOT_YET_SEALED",
+      "primaryRaw": null,
+      "primaryRawLow": null,
+      "primaryRawHigh": null,
+      "annualAngle512": null,
+      "annualAngleOctal": null,
+      "role": "Tie observed Epoch-7 physical RAW to A8 Annual Frame V1 and test the running physical relationship. It does not choose the frame zero."
+    },
+    "preObservationPrediction": {
+      "status": "SUPERSEDED_AS_NATURE_PREDICTION",
+      "calendarEventYearDay": 277,
+      "simple365DayRegionOctal": "approximately 603₈–604₈",
+      "note": "YEAR DAY is a day bin, not an instantaneous Nature angle. Do not silently retune this field after observing the physical crossing.",
+      "preservedForProvenance": true,
+      "correction": "The approximately 603₈–604₈ region is a linear CALENDAR-year fraction for YEAR DAY 277. It is not the Nature/ecliptic September-equinox angle."
+    },
+    "policy": {
+      "natureEventDefinesObservation": true,
+      "coordinateSeamIsConvention": true,
+      "measureFirstCompareSecond": true,
+      "preserveDisagreement": true,
+      "silentRetuneAllowed": false,
+      "coreWriteAllowed": false,
+      "carrierWriteAllowed": false,
+      "calendarWriteAllowed": false
+    },
+    "coordinateTransform": {
+      "status": "SEALED_FROM_EXISTING_CALENDAR_SEAM_RELATIONSHIP",
+      "sourceRelationship": "Existing calendar implementation states absolute Sol phase 600₈ = North / Day 1 / A8 New Year seam.",
+      "legacyFrameZero": "VERNAL_EQUINOX",
+      "legacyNewYearAngleOctal": "600₈",
+      "legacyNewYearAngleDecimal": 384,
+      "annualV1NewYearAngleOctal": "000₈",
+      "annualV1NewYearAngleDecimal": 0,
+      "transformDecimal": "new = (old - 384) mod 512",
+      "equivalentTransformOctal": "new = (old + 200₈) mod 1000₈",
+      "physicalAnchorRequiredToDefineOffset": false,
+      "physicalAnchorRequiredToTieLiveEpoch7RAWToFrame": true
+    },
+    "natureQuarterPoints": {
+      "frame": "A8 ANNUAL FRAME V1",
+      "basis": "RATCHETED_SEASONAL_ANGLE_FRAME",
+      "newYear_seam": "000₈",
+      "march_equinox": "200₈",
+      "june_solstice": "400₈",
+      "september_equinox": "600₈",
+      "december_solstice": "000₈ / 1000₈ recurrence",
+      "note": "These are angular-frame quarter points after rotating the previous vernal-zero frame. They are not calendar-day fractions."
+    },
+    "calendarComparison": {
+      "frame": "A8 CALENDAR YEAR FRACTION",
+      "role": "COMPARISON_AND_RESIDUAL_ONLY",
+      "yearLengthDays": 365,
+      "yearDay": 277,
+      "dayBinConvention": "YEAR DAY 1 begins at calendar annual angle 000₈",
+      "approximateDay277Span": "603.12₈ → 604.43₈",
+      "natureSeptemberEquinoxReference": "600₈",
+      "interpretation": "The separation between the calendar fraction and Nature annual angle is the residual to preserve and display, not an error to hide."
+    }
+  },
+  "liveInputs": {
+    "calendar": {
+      "available": true,
+      "payload": {
+        "ok": true,
+        "calendar": {
+          "schema": "A8-CORE20-CALENDAR-V2",
+          "status": "CALENDAR_RUNNING_FROM_CORE20_COUNT",
+          "anchored": true,
+          "sourceEpoch": "3",
+          "yearDay": 274,
+          "yearDayOctal": "422₈",
+          "yearCycle4": 1,
+          "yearCycleLabel": "B",
+          "yearLength": 365,
+          "isLeapYear": false,
+          "calendarRegion": "STRUCTURED",
+          "wilsonDay": null,
+          "coreDayCount": "8",
+          "countedDaysSinceAnchor": "1",
+          "anchor": {
+            "schema": "A8-CORE20-CALENDAR-ANCHOR-V2",
+            "sourceEpoch": "3",
+            "yearDay": 273,
+            "yearDayOctal": "421₈",
+            "yearCycle4": 1,
+            "yearCycleLabel": "B",
+            "yearLength": 365,
+            "isLeapYear": false,
+            "anchorCoreDayCount": "7",
+            "yearAnglePhase27AtAnchor": null,
+            "yearAnglePhase27OctalAtAnchor": null,
+            "authority": "RESTORED_NATIVE_A8_INTEGER_CALENDAR_CHECKPOINT",
+            "runningAdvance": "CORE20_INTEGER_CIVIL_DAY_COUNT_ONLY",
+            "restoredFromCheckpoint": true,
+            "checkpointMigration": "LEGACY_V1_CURRENT_2026_A8_YEAR_SEEDED_CYCLE_B_INDEX_1",
+            "lostElapsedTimeRecovered": false,
+            "outageDayInference": false,
+            "angleMayAdvanceCalendarDay": false,
+            "jplMayAdvanceCalendarDay": false,
+            "utcMayAdvanceCalendarDay": false,
+            "browserMayAdvanceCalendarDay": false
+          },
+          "authority": "NATIVE_A8_ANCHOR_PLUS_CORE20_INTEGER_CIVIL_DAY_COUNT",
+          "runningAdvance": "CORE20_INTEGER_CIVIL_DAY_COUNT_ONLY",
+          "leapAdvance": "NATIVE_A8_YEAR_CYCLE4_ONLY_AT_YEAR_ROLLOVER",
+          "yearAngleRole": "READ_ONLY_ORIENTATION_AND_SEASONAL_DIAGNOSTIC",
+          "persistence": {
+            "schema": "A8-CORE20-CALENDAR-PERSISTENCE-V2",
+            "mode": "DEBUG_RESTART_LAST_KNOWN_INTEGER_CALENDAR_POSITION",
+            "checkpointLoaded": true,
+            "checkpointStorageSchema": "A8-CORE20-CALENDAR-CHECKPOINT-V2",
+            "checkpointSourceEpoch": "3",
+            "checkpointYearDay": 274,
+            "checkpointYearDayOctal": "422₈",
+            "checkpointYearCycle4": 1,
+            "checkpointYearCycleLabel": "B",
+            "checkpointYearLength": 365,
+            "checkpointIsLeapYear": false,
+            "checkpointCalendarRegion": "STRUCTURED",
+            "checkpointWilsonDay": null,
+            "checkpointObservedCoreDayCount": "8",
+            "checkpointObservedDayPhase17": null,
+            "checkpointReason": "CORE20_INTEGER_DAYCOUNT_CHANGED",
+            "checkpointMigration": "LEGACY_V1_CURRENT_2026_A8_YEAR_SEEDED_CYCLE_B_INDEX_1",
+            "restorationStatus": "CALENDAR_RESTORED_FROM_NATIVE_CHECKPOINT",
+            "lastWriteReason": "CORE20_INTEGER_DAYCOUNT_CHANGED",
+            "lastPersistenceError": null,
+            "lostElapsedTimeRecovered": false,
+            "outageDayInference": false,
+            "usesUTC": false,
+            "usesJPL": false,
+            "usesYearAngle": false,
+            "usesBrowserTime": false,
+            "usesHostTime": false,
+            "usesLegacySeconds": false,
+            "usesNetworkCadence": false
+          },
+          "angleMayAdvanceCalendarDay": false,
+          "jplMayAdvanceCalendarDay": false,
+          "utcMayAdvanceCalendarDay": false,
+          "browserMayAdvanceCalendarDay": false
+        }
+      }
+    },
+    "preservedLegacyYearAngle": {
+      "role": "COMPARISON_ONLY_NOT_ANNUAL_V1_AUTHORITY",
+      "available": true,
+      "payload": {
+        "ok": true,
+        "yearAngle": {
+          "schema": "A8-YEAR-PHASE27-V1",
+          "status": "YEAR_ANGLE_AWAITING_ONE_SHOT_JPL_ALIGN",
+          "sourceEpoch": "3",
+          "aligned": false,
+          "yearZero": "VERNAL_EQUINOX",
+          "range": "000₈–777₈",
+          "ongoingAuthority": "RECOVERED_SOL_ORBITAL_ADVANCE_ONLY",
+          "usesJplAfterAlignment": false,
+          "usesUtcAfterAlignment": false,
+          "usesNetworkCadence": false
+        }
+      }
+    }
+  },
+  "annualV1Output": {
+    "frame": "A8 ANNUAL FRAME V1",
+    "frameOffsetDefined": true,
+    "orientationStatus": "FRAME_OFFSET_DEFINED_WAITING_FOR_EPOCH7_PHYSICAL_RAW_ANCHOR",
+    "coordinateTransform": {
+      "status": "SEALED_FROM_EXISTING_CALENDAR_SEAM_RELATIONSHIP",
+      "sourceRelationship": "Existing calendar implementation states absolute Sol phase 600₈ = North / Day 1 / A8 New Year seam.",
+      "legacyFrameZero": "VERNAL_EQUINOX",
+      "legacyNewYearAngleOctal": "600₈",
+      "legacyNewYearAngleDecimal": 384,
+      "annualV1NewYearAngleOctal": "000₈",
+      "annualV1NewYearAngleDecimal": 0,
+      "transformDecimal": "new = (old - 384) mod 512",
+      "equivalentTransformOctal": "new = (old + 200₈) mod 1000₈",
+      "physicalAnchorRequiredToDefineOffset": false,
+      "physicalAnchorRequiredToTieLiveEpoch7RAWToFrame": true
+    },
+    "natureQuarterPoints": {
+      "frame": "A8 ANNUAL FRAME V1",
+      "basis": "RATCHETED_SEASONAL_ANGLE_FRAME",
+      "newYear_seam": "000₈",
+      "march_equinox": "200₈",
+      "june_solstice": "400₈",
+      "september_equinox": "600₈",
+      "december_solstice": "000₈ / 1000₈ recurrence",
+      "note": "These are angular-frame quarter points after rotating the previous vernal-zero frame. They are not calendar-day fractions."
+    },
+    "physicalRawAnchorSealed": false,
+    "natureAnnualAngle512": null,
+    "natureAnnualAngleOctal": null,
+    "reason": "Annual Frame V1 coordinate offset is defined. The live Epoch-7 physical Sol/RAW anchor is not yet sealed."
+  },
+  "calendarComparisonLive": {
+    "status": "AVAILABLE_DIAGNOSTIC_ONLY",
+    "role": "DIAGNOSTIC_ONLY_NOT_AN_A8_TEST",
+    "frame": "A8 CALENDAR YEAR FRACTION",
+    "yearDay": 274,
+    "yearLength": 365,
+    "angle512Start": {
+      "numerator": 139776,
+      "denominator": 365,
+      "exact": "139776/365",
+      "decimalApprox": 382.947945205
+    },
+    "angle512End": {
+      "numerator": 140288,
+      "denominator": 365,
+      "exact": "140288/365",
+      "decimalApprox": 384.350684932
+    },
+    "instantaneousAngleAvailable": false,
+    "usedForNatureCorrection": false,
+    "usedForCarrierCorrection": false,
+    "usedForCoreCorrection": false,
+    "interpretation": "Preserved mathematical calendar diagnostic only. A8 does not continuously subtract this value from Nature."
+  },
+  "natureVsCalendarResidual": {
+    "status": "DISABLED_BY_DESIGN",
+    "role": "REJECTED_CONTINUOUS_SUBTRACTION_EXPERIMENT",
+    "preservedForProvenance": true,
+    "usedForA8Correction": false,
+    "reason": "A8 does not continuously add/subtract calendar phase against Nature and then use the result to retune the system."
+  },
+  "annualSeamResidual": {
+    "role": "PRIMARY_LONG_TERM_TEST",
+    "status": "WAITING_FOR_INITIAL_EPOCH7_PHYSICAL_ANCHOR",
+    "natureSeam": "000₈ / 1000₈",
+    "measurement": "CALENDAR_POSITION_WHEN_NATURE_RETURNS_TO_ANNUAL_SEAM",
+    "currentResidual": null,
+    "automaticCorrection": false,
+    "automaticRetune": false,
+    "calendarRetune": false,
+    "coreRetune": false,
+    "carrierRetune": false,
+    "checkpoints": [
+      "3_MONTH_OBSERVATION",
+      "6_MONTH_OBSERVATION",
+      "12_MONTH_ANNUAL_RETURN"
+    ],
+    "note": "First tie the observed Epoch-7 Sol/RAW position to A8 Annual Frame V1. After that, leave the system running until the next physical annual return."
+  }
+}

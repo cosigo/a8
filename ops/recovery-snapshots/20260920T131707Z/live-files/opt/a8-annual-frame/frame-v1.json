@@ -1,0 +1,108 @@
+{
+  "schema": "A8-ANNUAL-FRAME-V1",
+  "status": "FRAME_OFFSET_DEFINED_WAITING_FOR_PHYSICAL_ANCHOR",
+  "purpose": "Native A8 annual orbital coordinate frame",
+  "fullTurn": {
+    "decimalStates": 512,
+    "octalRecurrence": "1000₈",
+    "register": "000₈–777₈"
+  },
+  "zero": {
+    "label": "000₈",
+    "definition": "EXISTING_A8_NEW_YEAR_SEAM",
+    "calendarMoved": false,
+    "natureMoved": false,
+    "physicalEventsMoved": false
+  },
+  "frameRule": "NATURE_POINTS_FIXED_RULER_RATCHETS_UNDERNEATH",
+  "annualFrame": {
+    "name": "A8 ANNUAL FRAME V1",
+    "zeroMeaning": "A8 NEW YEAR",
+    "orientationStatus": "FRAME_OFFSET_DEFINED_WAITING_FOR_EPOCH7_PHYSICAL_RAW_ANCHOR"
+  },
+  "celestialFrame": {
+    "separateFromAnnualFrame": true,
+    "zeroMeaning": "PRESENT_ERA_VERNAL_EQUINOCTIAL_SEAM",
+    "publicName": "A8 FIRST POINT OF PISCES",
+    "rotatedByThisChange": false
+  },
+  "geographicFrame": {
+    "zeroMeaning": "RETAINED_LONDON_MERIDIAN",
+    "rotatedByThisChange": false
+  },
+  "calendar": {
+    "existingYearDayPathPreserved": true,
+    "newYearDateMoved": false,
+    "monthsMoved": false,
+    "wilsonsWeekMoved": false,
+    "leapRulesMoved": false
+  },
+  "legacyAnnualFrame": {
+    "preserved": true,
+    "zeroMeaning": "VERNAL_EQUINOX",
+    "role": "HISTORICAL_AND_COMPARISON_FRAME_ONLY",
+    "liveSource": "http://127.0.0.1:18020/api/core20/year-angle",
+    "usedToDefineAnnualV1": false
+  },
+  "physicalAnchor": {
+    "event": "SOL_EQUATOR_CROSSING",
+    "status": "NOT_YET_SEALED",
+    "primaryRaw": null,
+    "primaryRawLow": null,
+    "primaryRawHigh": null,
+    "annualAngle512": null,
+    "annualAngleOctal": null,
+    "role": "Tie observed Epoch-7 physical RAW to A8 Annual Frame V1 and test the running physical relationship. It does not choose the frame zero."
+  },
+  "preObservationPrediction": {
+    "status": "SUPERSEDED_AS_NATURE_PREDICTION",
+    "calendarEventYearDay": 277,
+    "simple365DayRegionOctal": "approximately 603₈–604₈",
+    "note": "YEAR DAY is a day bin, not an instantaneous Nature angle. Do not silently retune this field after observing the physical crossing.",
+    "preservedForProvenance": true,
+    "correction": "The approximately 603₈–604₈ region is a linear CALENDAR-year fraction for YEAR DAY 277. It is not the Nature/ecliptic September-equinox angle."
+  },
+  "policy": {
+    "natureEventDefinesObservation": true,
+    "coordinateSeamIsConvention": true,
+    "measureFirstCompareSecond": true,
+    "preserveDisagreement": true,
+    "silentRetuneAllowed": false,
+    "coreWriteAllowed": false,
+    "carrierWriteAllowed": false,
+    "calendarWriteAllowed": false
+  },
+  "coordinateTransform": {
+    "status": "SEALED_FROM_EXISTING_CALENDAR_SEAM_RELATIONSHIP",
+    "sourceRelationship": "Existing calendar implementation states absolute Sol phase 600₈ = North / Day 1 / A8 New Year seam.",
+    "legacyFrameZero": "VERNAL_EQUINOX",
+    "legacyNewYearAngleOctal": "600₈",
+    "legacyNewYearAngleDecimal": 384,
+    "annualV1NewYearAngleOctal": "000₈",
+    "annualV1NewYearAngleDecimal": 0,
+    "transformDecimal": "new = (old - 384) mod 512",
+    "equivalentTransformOctal": "new = (old + 200₈) mod 1000₈",
+    "physicalAnchorRequiredToDefineOffset": false,
+    "physicalAnchorRequiredToTieLiveEpoch7RAWToFrame": true
+  },
+  "natureQuarterPoints": {
+    "frame": "A8 ANNUAL FRAME V1",
+    "basis": "RATCHETED_SEASONAL_ANGLE_FRAME",
+    "newYear_seam": "000₈",
+    "march_equinox": "200₈",
+    "june_solstice": "400₈",
+    "september_equinox": "600₈",
+    "december_solstice": "000₈ / 1000₈ recurrence",
+    "note": "These are angular-frame quarter points after rotating the previous vernal-zero frame. They are not calendar-day fractions."
+  },
+  "calendarComparison": {
+    "frame": "A8 CALENDAR YEAR FRACTION",
+    "role": "COMPARISON_AND_RESIDUAL_ONLY",
+    "yearLengthDays": 365,
+    "yearDay": 277,
+    "dayBinConvention": "YEAR DAY 1 begins at calendar annual angle 000₈",
+    "approximateDay277Span": "603.12₈ → 604.43₈",
+    "natureSeptemberEquinoxReference": "600₈",
+    "interpretation": "The separation between the calendar fraction and Nature annual angle is the residual to preserve and display, not an error to hide."
+  }
+}

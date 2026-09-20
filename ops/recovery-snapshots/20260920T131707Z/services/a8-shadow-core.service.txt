@@ -1,0 +1,51 @@
+============================================================
+SERVICE · a8-shadow-core.service
+============================================================
+● a8-shadow-core.service - A8 Physical Shadow Core
+     Loaded: loaded (/etc/systemd/system/a8-shadow-core.service; enabled; preset: enabled)
+     Active: active (running) since Fri 2026-09-11 14:39:46 CST; 1 week 1 day ago
+   Main PID: 678880 (node)
+      Tasks: 10 (limit: 7012)
+     Memory: 33.9M (peak: 48.5M swap: 5.8M swap peak: 5.8M)
+        CPU: 45min 32.955s
+     CGroup: /system.slice/a8-shadow-core.service
+             └─678880 /usr/bin/node /opt/a8-shadow-core/server.js
+
+Sep 11 14:39:46 trade systemd[1]: Started a8-shadow-core.service - A8 Physical Shadow Core.
+Sep 11 14:39:46 trade node[678880]: A8 SHADOW BABY · 127.0.0.1:18024
+Sep 11 14:39:46 trade node[678880]: A8 SHADOW JOVIAN ORGAN · E4 · SEEKING_JOVIAN_TURNS
+
+===== UNIT =====
+# /etc/systemd/system/a8-shadow-core.service
+[Unit]
+Description=A8 Physical Shadow Core
+After=network.target
+
+[Service]
+Type=simple
+User=greg
+Group=greg
+
+ExecStart=/usr/bin/node /opt/a8-shadow-core/server.js
+
+Restart=on-failure
+RestartSec=2
+
+NoNewPrivileges=true
+PrivateTmp=true
+PrivateDevices=true
+ProtectSystem=strict
+ProtectHome=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictSUIDSGID=true
+RestrictNamespaces=true
+LockPersonality=true
+CapabilityBoundingSet=
+AmbientCapabilities=
+RestrictAddressFamilies=AF_UNIX AF_INET
+
+[Install]
+WantedBy=multi-user.target
+

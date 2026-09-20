@@ -1,0 +1,45 @@
+============================================================
+SERVICE · a8-core20.service
+============================================================
+● a8-core20.service - Auspicious 8 Core20 Time Laboratory
+     Loaded: loaded (/etc/systemd/system/a8-core20.service; enabled; preset: enabled)
+    Drop-In: /etc/systemd/system/a8-core20.service.d
+             └─external-physical.conf
+     Active: active (running) since Sat 2026-09-19 12:27:42 CST; 18h ago
+   Main PID: 1763816 (node)
+      Tasks: 10 (limit: 7012)
+     Memory: 62.3M (peak: 64.7M)
+        CPU: 46min 58.044s
+     CGroup: /system.slice/a8-core20.service
+             └─1763816 /usr/bin/node /usr/local/lib/a8-core20-service.js
+
+Sep 19 12:27:42 trade systemd[1]: Started a8-core20.service - Auspicious 8 Core20 Time Laboratory.
+Sep 19 12:27:42 trade node[1763816]: A8 v5.4.20 CORE20 · systemd service · 127.0.0.1:18020
+Sep 19 12:27:49 trade node[1763816]: CORE20 RUNTIME · NODE OWNS VIRTUAL PULSE GENERATOR
+Sep 19 12:27:49 trade node[1763816]: CORE20 CLOCK · AWAITING MOMENTARY CONNECT ALIGNMENT
+
+===== UNIT =====
+# /etc/systemd/system/a8-core20.service
+[Unit]
+Description=Auspicious 8 Core20 Time Laboratory
+After=network.target
+
+[Service]
+Type=simple
+User=greg
+Group=greg
+WorkingDirectory=/srv/apps/a8_time_lab_v5_4_20_postseal_hw
+ExecStart=/usr/bin/node /usr/local/lib/a8-core20-service.js
+Restart=on-failure
+RestartSec=2
+KillSignal=SIGTERM
+TimeoutStopSec=8
+
+[Install]
+WantedBy=multi-user.target
+
+# /etc/systemd/system/a8-core20.service.d/external-physical.conf
+[Service]
+Environment=A8_CORE20_EXTERNAL_PHYSICAL=1
+EnvironmentFile=/etc/a8-core20/external-physical.env
+

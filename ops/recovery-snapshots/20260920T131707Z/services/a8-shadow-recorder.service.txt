@@ -1,0 +1,61 @@
+============================================================
+SERVICE · a8-shadow-recorder.service
+============================================================
+● a8-shadow-recorder.service - A8 Shadow Physical Heartbeat Recorder
+     Loaded: loaded (/etc/systemd/system/a8-shadow-recorder.service; enabled; preset: enabled)
+     Active: active (running) since Fri 2026-09-11 15:04:09 CST; 1 week 1 day ago
+   Main PID: 681117 (node)
+      Tasks: 10 (limit: 7012)
+     Memory: 27.6M (peak: 89.4M swap: 4.3M swap peak: 4.3M)
+        CPU: 6min 48.010s
+     CGroup: /system.slice/a8-shadow-recorder.service
+             └─681117 /usr/bin/node /opt/a8-shadow-recorder/recorder.js
+
+Sep 11 15:04:09 trade systemd[1]: Started a8-shadow-recorder.service - A8 Shadow Physical Heartbeat Recorder.
+Sep 11 15:04:09 trade node[681117]: A8 SHADOW RECORDER · WAITING FOR PHYSICAL SOURCE
+Sep 11 15:04:09 trade node[681117]: A8 SHADOW JOVIAN WITNESS CAMERA · 127.0.0.1:18026
+Sep 11 15:04:09 trade node[681117]: RECORDER START · /var/lib/a8-shadow-recorder/epoch-4-20260911T210409Z-pid-681117.open.ndjson
+Sep 12 15:00:32 trade node[681117]: RECORDER SEALED · /var/lib/a8-shadow-recorder/epoch-4-20260911T210409Z-pid-681117.sealed.ndjson
+Sep 12 15:00:32 trade node[681117]: RECORDER START · /var/lib/a8-shadow-recorder/epoch-5-20260912T210032Z-pid-681117.open.ndjson
+Sep 17 13:09:16 trade node[681117]: RECORDER SEALED · /var/lib/a8-shadow-recorder/epoch-5-20260912T210032Z-pid-681117.sealed.ndjson
+Sep 17 13:09:16 trade node[681117]: RECORDER START · /var/lib/a8-shadow-recorder/epoch-6-20260917T190916Z-pid-681117.open.ndjson
+Sep 17 13:14:26 trade node[681117]: RECORDER SEALED · /var/lib/a8-shadow-recorder/epoch-6-20260917T190916Z-pid-681117.sealed.ndjson
+Sep 17 13:14:26 trade node[681117]: RECORDER START · /var/lib/a8-shadow-recorder/epoch-7-20260917T191426Z-pid-681117.open.ndjson
+
+===== UNIT =====
+# /etc/systemd/system/a8-shadow-recorder.service
+[Unit]
+Description=A8 Shadow Physical Heartbeat Recorder
+After=network.target a8-shadow-core.service
+
+[Service]
+Type=simple
+User=greg
+Group=greg
+
+ExecStart=/usr/bin/node /opt/a8-shadow-recorder/recorder.js
+
+Restart=on-failure
+RestartSec=3
+TimeoutStopSec=10
+
+NoNewPrivileges=true
+PrivateTmp=true
+PrivateDevices=true
+ProtectSystem=strict
+ProtectHome=yes
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictSUIDSGID=true
+RestrictNamespaces=true
+LockPersonality=true
+CapabilityBoundingSet=
+AmbientCapabilities=
+RestrictAddressFamilies=AF_UNIX AF_INET
+
+ReadWritePaths=/var/lib/a8-shadow-recorder
+
+[Install]
+WantedBy=multi-user.target
+

@@ -1,0 +1,2 @@
+UID          PID    PPID  C STIME TTY          TIME CMD
+greg     1763816       1  4 Sep19 ?        00:46:58 /usr/bin/node /usr/local/lib/a8-core20-service.js
