@@ -477,7 +477,7 @@ body{
   <div class="speed-warning" id="viewModeBanner">
     SKY NOW · LIVE A8 PREDICTION
     <small id="viewModeDetail">
-      1× is anchored to fresh physical Epoch-5 RAW.
+      1× is anchored to fresh physical Epoch-7 RAW.
       Any other viewing rate is simulation and is not the current sky.
     </small>
   </div>
@@ -516,17 +516,17 @@ body{
   <p id="a8-sw-status" class="small">Ready</p>
   <p id="a8-sw-independence" class="small">
     Stopwatch reads Core20 elapsed time.
-    Changing moon viewing speed does not change the stopwatch’s rate. Display smoothed between Core20 readings.
+    Changing moon viewing speed does not change the stopwatch’s rate. Stopwatch is an independent Core20 state-edge witness.
   </p>
   <p class="small">
-    Elapsed time from sampled Core20 counts, not animation phase.
-    Whole A8 seconds shown. Start and Stop use server samples;
-    request delay and manual click timing limit comparison precision.
+    Elapsed time from Core20 state-edge coordinates, not moon animation phase.
+    Whole A8 seconds shown. Human selection of the visual tangent
+    and button timing limit comparison precision.
   </p>
 </section>
 
 <section class="panel" id="a8-native-viewing-rate-note">
-  <h2>Prediction / Simulation Rate · Epoch-5 RAW</h2>
+  <h2>Prediction / Simulation Rate · MODEL EPOCH-5</h2>
 
   <p>
     Current mode:
@@ -558,7 +558,7 @@ body{
   </ul>
 
   <p>
-    <b>1× is special:</b> it follows fresh Epoch-5 physical RAW
+    <b>1× is special:</b> it follows fresh Epoch-7 physical RAW
     and represents A8's current SKY NOW prediction.
     Selecting any other rate detaches the display from the current sky
     and enters simulation.
@@ -566,7 +566,7 @@ body{
 
   <p>
     Returning to 1× discards the simulated position and fetches
-    a fresh physical Epoch-5 snapshot before SKY NOW resumes.
+    a fresh physical Epoch-7 snapshot before SKY NOW resumes.
   </p>
 </section>
 
@@ -592,7 +592,7 @@ body{
     </div>
 
     <div class="read primary">
-      <div class="k">Epoch-5 RAW</div>
+      <div class="k">LIVE EPOCH-7 RAW</div>
       <div id="edgeRaw" class="v">—</div>
     </div>
 
@@ -614,7 +614,7 @@ body{
 
   <p class="small">
     At 1× the four moon positions are anchored to the current
-    physical Epoch-5 RAW counter. Browser interpolation only smooths
+    physical Epoch-7 RAW counter. Browser interpolation only smooths
     movement between snapshots. Simulation rates never write to,
     discipline, or retune the physical source or Core20.
   </p>
@@ -664,7 +664,7 @@ body{
 
 <section class="panel">
   <div id="pageStatus" class="status warn">
-    CONNECTING · EPOCH-5
+    CONNECTING · LIVE EPOCH-7
   </div>
 
   <h1>Four-moon predictive observer</h1>
@@ -718,7 +718,7 @@ const MODEL_URL =
   '/assets/a8-moons-continuous-v2.json';
 
 const HANDOFF_URL =
-  '/assets/a8-moons-epoch7-handoff-v1.json';
+  '/assets/a8-moons-active-handoff-v1.json';
 
 const Q16 = 65536;
 const DAY_STATES = 131072;
@@ -741,11 +741,17 @@ const state = {
   ganymedeFull:null
 };
 
+let stopwatchEdgeStream=null;
+
 const stopwatch = {
   running:false,
-  startRaw:null,
-  rawPerA8State:null,
-  stoppedTotal:0
+  connected:false,
+  mode:'CONNECTING',
+  sourceEpoch:null,
+  lastSequence:null,
+  latestTotalState:null,
+  startTotalState:null,
+  stoppedTotal:0n
 };
 
 async function fetchJSON(url){
@@ -895,9 +901,131 @@ function phaseAtRaw(m, raw){
   return mod(p,512);
 }
 
+/*
+ * CURRENT LOCKED NATURAL ORBIT RECURRENCES.
+ *
+ * Each Jovian moon preserves its own natural recurrence.
+ * No normalization. No averaging. No synthetic period.
+ *
+ *   Io         4,650,745 RAW
+ *   Europa     9,344,598 RAW
+ *   Ganymede  18,866,420 RAW
+ *   Callisto  44,245,909 RAW
+ */
+const NATURAL_ORBIT_RAW = Object.freeze({
+  Io:        4650745,
+  Europa:    9344598,
+  Ganymede: 18866420,
+  Callisto: 44245909
+});
+
+function naturalOrbitRaw(m){
+  if (
+    Object.prototype.hasOwnProperty.call(
+      NATURAL_ORBIT_RAW,
+      m.name
+    )
+  ){
+    return NATURAL_ORBIT_RAW[m.name];
+  }
+
+  return Number(m.fullOrbit);
+}
+
+/*
+ * If live/model RAW has advanced beyond the sealed
+ * X/Y coordinate recording, subtract WHOLE natural
+ * orbital periods until the same orbital point lies
+ * inside the already-recorded coordinate interval.
+ *
+ * No new X/Y is generated.
+ * No period is estimated.
+ * No count is rounded.
+ */
+function recurrentCoordinateRaw(m, raw){
+  const r=Number(raw);
+  const samples=m.samples;
+
+  if (
+    !Number.isFinite(r) ||
+    !Array.isArray(samples) ||
+    samples.length < 2
+  ){
+    throw new Error(
+      `${m.name}: invalid recurrence input`
+    );
+  }
+
+  const first=
+    Number(samples[0].rawQ16) / Q16;
+
+  const last=
+    Number(
+      samples[samples.length-1].rawQ16
+    ) / Q16;
+
+  if (
+    r >= first &&
+    r <= last
+  ){
+    return r;
+  }
+
+  const orbit=naturalOrbitRaw(m);
+
+  if (
+    !Number.isInteger(orbit) ||
+    orbit <= 0
+  ){
+    throw new Error(
+      `${m.name}: invalid natural orbit RAW`
+    );
+  }
+
+  let candidate=r;
+
+  if (candidate > last){
+    const turns=
+      Math.ceil(
+        (candidate-last) / orbit
+      );
+
+    candidate -=
+      turns * orbit;
+  }
+
+  if (candidate < first){
+    const turns=
+      Math.ceil(
+        (first-candidate) / orbit
+      );
+
+    candidate +=
+      turns * orbit;
+  }
+
+  if (
+    candidate < first ||
+    candidate > last
+  ){
+    throw new Error(
+      `${m.name}: equivalent natural RAW not in sealed X/Y`
+    );
+  }
+
+  return candidate;
+}
+
 function nativeAtRaw(m, raw){
   const samples=m.samples;
-  const target=Number(raw) * Q16;
+
+  const sourceRaw=
+    recurrentCoordinateRaw(
+      m,
+      raw
+    );
+
+  const target=sourceRaw * Q16;
 
   if (
     target < samples[0].rawQ16 ||
@@ -930,6 +1058,7 @@ function nativeAtRaw(m, raw){
     const b=samples[i+1];
 
     return {
+      sourceRaw,
       x:a.xQ16 / Q16,
       y:a.yQ16 / Q16,
       direction:
@@ -950,6 +1079,8 @@ function nativeAtRaw(m, raw){
     (b.rawQ16-a.rawQ16);
 
   return {
+    sourceRaw,
+
     x:
       (
         a.xQ16 +
@@ -1092,14 +1223,14 @@ function buildMoonCard(m){
       <div class="read">
         <div class="k">Phase rate / Ganymede</div>
         <div class="v">
-          ${(state.ganymedeFull / m.fullOrbit).toFixed(6)}×
+          ${(state.ganymedeFull / naturalOrbitRaw(m)).toFixed(6)}×
         </div>
       </div>
 
       <div class="read">
         <div class="k">Period / Ganymede</div>
         <div class="v">
-          ${(m.fullOrbit / state.ganymedeFull).toFixed(6)}×
+          ${(naturalOrbitRaw(m) / state.ganymedeFull).toFixed(6)}×
         </div>
       </div>
 
@@ -1149,7 +1280,15 @@ function renderMoon(m, raw){
    * It does NOT determine observer depth.
    */
   const pos=nativeAtRaw(m,raw);
-  const phase=phaseAtRaw(m,raw);
+
+  /*
+   * The recurrent source RAW is the same natural
+   * orbital point in the sealed coordinate recording.
+   */
+  const phase=phaseAtRaw(
+    m,
+    pos.sourceRaw
+  );
 
   /*
    * Historical nativeAtRaw direction token:
@@ -1255,7 +1394,7 @@ function modelDeltaFromPhysical(delta){
 
   if (!h)
     throw new Error(
-      'Epoch-7 moon handoff unavailable'
+      'Active physical moon handoff unavailable'
     );
 
   return (
@@ -1270,7 +1409,7 @@ function modelRawFromPhysical(physicalRaw){
 
   if (!h)
     throw new Error(
-      'Epoch-7 moon handoff unavailable'
+      'Active physical moon handoff unavailable'
     );
 
   return (
@@ -1315,12 +1454,12 @@ function setModeText(){
 
   $('viewModeDetail').textContent =
     live
-      ? '1× uses the qualified Epoch-7 physical → Epoch-5 model handoff. Any other viewing rate is simulation and is not the current sky.'
-      : 'This display is detached from current sky position. Return to 1× to discard simulation and fetch fresh Epoch-5 RAW.';
+      ? '1× uses the qualified active physical → Epoch-5 model handoff. Any other viewing rate is simulation and is not the current sky.'
+      : 'This display is detached from current sky position. Return to 1× to discard simulation and fetch fresh physical RAW.';
 
   $('anchorPolicy').textContent =
     live
-      ? 'FRESH EPOCH-7 RAW · SKY NOW'
+      ? 'FRESH PHYSICAL RAW · SKY NOW'
       : 'SIMULATION DETACHED';
 
   $('a8-native-selected-rate').textContent =
@@ -1350,7 +1489,7 @@ function setModeText(){
 
   for (const m of state.moons){
     $(ids[m.name]).textContent =
-      fmt(m.fullOrbit / state.rate,3);
+      fmt(naturalOrbitRaw(m) / state.rate,3);
   }
 }
 
@@ -1367,7 +1506,7 @@ async function refreshPhysical(){
     )
   ){
     throw new Error(
-      'Physical Epoch-7 snapshot invalid'
+      'Physical carrier snapshot invalid'
     );
   }
 
@@ -1434,13 +1573,6 @@ async function refreshPhysical(){
   $('edgeRole').textContent =
     'READ ONLY';
 
-  if (stopwatch.running){
-    refreshStopwatchSample()
-      .catch(err=>{
-        $('a8-sw-status').textContent =
-          `SAMPLE ERROR · ${err.message}`;
-      });
-  }
 
   return p;
 }
@@ -1514,16 +1646,6 @@ function parseFraction(value){
   };
 }
 
-async function coreClock(){
-  const payload =
-    await fetchJSON('/api/core20/clock');
-
-  if (!payload?.ok || !payload?.clock)
-    throw new Error('Core20 clock unavailable');
-
-  return payload.clock;
-}
-
 async function refreshComparison(){
   try{
     const [jp,cp] =
@@ -1575,14 +1697,30 @@ async function refreshComparison(){
 }
 
 function renderStopwatch(total){
-  const whole =
-    Math.max(0,Math.floor(total));
+  let whole;
+
+  if (typeof total === 'bigint'){
+    whole =
+      total >= 0n
+        ? total
+        : 0n;
+  } else {
+    whole =
+      BigInt(
+        Math.max(
+          0,
+          Math.floor(
+            Number(total) || 0
+          )
+        )
+      );
+  }
 
   const minutes =
-    Math.floor(whole / 64);
+    whole / 64n;
 
   const seconds =
-    whole % 64;
+    whole % 64n;
 
   $('a8-sw-display').textContent =
     `${String(minutes).padStart(2,'0')}:` +
@@ -1592,104 +1730,358 @@ function renderStopwatch(total){
     whole.toLocaleString();
 }
 
-function stopwatchNow(){
-  return stopwatch.stoppedTotal;
+
+/*
+ * Transport loss is not an A8 discontinuity.
+ *
+ * Freeze the last valid display and preserve the native
+ * start coordinate. EventSource may reconnect. The next
+ * same-epoch absolute totalState recovers the observation.
+ */
+function stopwatchTransportLost(
+  message='WAITING · Core20 state witness'
+){
+  stopwatch.connected=false;
+
+  $('a8-sw-start').disabled=true;
+  $('a8-sw-stop').disabled=true;
+
+  $('a8-sw-status').textContent =
+    message;
 }
 
-async function refreshStopwatchSample(){
-  if (!stopwatch.running)
+
+/*
+ * A native-coordinate contradiction is different from
+ * ordinary transport loss. Stop the active observation,
+ * preserve the last valid elapsed result, and require a
+ * later valid edge before another START.
+ */
+function stopwatchHardFail(message){
+  stopwatch.running=false;
+  stopwatch.connected=false;
+  stopwatch.mode='ERROR';
+  stopwatch.startTotalState=null;
+
+  $('a8-sw-start').disabled=true;
+  $('a8-sw-stop').disabled=true;
+
+  $('a8-sw-status').textContent =
+    message;
+}
+
+
+function processStopwatchEdge(edge){
+  /*
+   * Independent cross-check witness only.
+   *
+   * No moon-model state is read or written here.
+   */
+  if (
+    !edge ||
+    edge.schema !==
+      'A8-CORE20-CLOCK-EDGE-V1' ||
+    edge.browserTimingAuthority !== false
+  ){
     return;
+  }
 
-  const clk=await coreClock();
+  const epoch =
+    String(edge.sourceEpoch);
 
-  const nowRaw=
-    Number(
-      clk.currentSelectedRawPulse
+  const sequence =
+    Number(edge.sequence);
+
+  const totalText =
+    String(
+      edge.totalState ?? ''
     );
 
-  stopwatch.stoppedTotal =
-    Math.max(
-      0,
-      (
-        nowRaw -
-        stopwatch.startRaw
-      ) /
-      stopwatch.rawPerA8State
+  if (
+    !Number.isSafeInteger(sequence) ||
+    !/^[0-9]+$/.test(totalText)
+  ){
+    return;
+  }
+
+  const totalState =
+    BigInt(totalText);
+
+  let runningEpochReset=false;
+
+  /*
+   * A real Core20 source-epoch transition is a genuine
+   * continuity boundary.
+   *
+   * If an observation is RUNNING, kill/reset it.
+   *
+   * If the stopwatch is already stopped, preserve that
+   * completed human observation; only prepare the witness
+   * coordinate for the new epoch.
+   */
+  if (
+    stopwatch.sourceEpoch !== null &&
+    stopwatch.sourceEpoch !== epoch
+  ){
+    stopwatch.lastSequence=null;
+    stopwatch.latestTotalState=null;
+
+    if (stopwatch.running){
+      stopwatch.running=false;
+      stopwatch.mode='RESET';
+      stopwatch.startTotalState=null;
+      stopwatch.stoppedTotal=0n;
+
+      renderStopwatch(0n);
+
+      $('a8-sw-status').textContent =
+        'RESET · Core20 source epoch changed';
+
+      runningEpochReset=true;
+    }
+  }
+
+  stopwatch.sourceEpoch =
+    epoch;
+
+  /*
+   * Duplicate / out-of-order transport events do not
+   * become stopwatch states.
+   */
+  if (
+    stopwatch.lastSequence !== null &&
+    sequence <= stopwatch.lastSequence
+  ){
+    return;
+  }
+
+  /*
+   * Absolute totalState must remain monotonic inside an
+   * unchanged source epoch.
+   */
+  if (
+    stopwatch.latestTotalState !== null &&
+    totalState <
+      stopwatch.latestTotalState
+  ){
+    stopwatchHardFail(
+      'ERROR · Core20 state coordinate regressed'
     );
-}
 
-async function startStopwatch(){
-  try{
-    const clk=await coreClock();
+    return;
+  }
 
-    const sun=
-      parseFraction(
-        clk.recoveredRawPerSunReturn
+  stopwatch.lastSequence =
+    sequence;
+
+  stopwatch.latestTotalState =
+    totalState;
+
+  stopwatch.connected=true;
+
+  if (stopwatch.running){
+    const elapsed =
+      totalState -
+      stopwatch.startTotalState;
+
+    if (elapsed < 0n){
+      stopwatchHardFail(
+        'ERROR · stopwatch coordinate regressed'
       );
 
-    stopwatch.rawPerA8State =
-      (sun.n / sun.d) /
-      DAY_STATES;
+      return;
+    }
 
-    stopwatch.startRaw =
-      Number(
-        clk.currentSelectedRawPulse
-      );
+    stopwatch.stoppedTotal =
+      elapsed;
 
-    stopwatch.stoppedTotal=0;
-    stopwatch.running=true;
+    stopwatch.mode='RUNNING';
 
     $('a8-sw-start').disabled=true;
     $('a8-sw-stop').disabled=false;
 
     $('a8-sw-status').textContent =
-      'Running · native Core20 counts';
+      'Running · independent Core20 state witness';
 
-  } catch(err){
-    $('a8-sw-status').textContent =
-      `START ERROR · ${err.message}`;
+    renderStopwatch(
+      elapsed
+    );
+
+    return;
   }
+
+  $('a8-sw-start').disabled=false;
+  $('a8-sw-stop').disabled=true;
+
+  /*
+   * Do not erase a completed STOP result merely because
+   * another Core20 edge arrives.
+   */
+  if (stopwatch.mode === 'STOPPED'){
+    $('a8-sw-status').textContent =
+      'Stopped · independent Core20 state witness';
+
+    return;
+  }
+
+  if (runningEpochReset){
+    return;
+  }
+
+  stopwatch.mode='READY';
+
+  $('a8-sw-status').textContent =
+    'Ready · independent Core20 state witness';
 }
 
-async function stopStopwatch(){
+
+function startStopwatchEdgeStream(){
+  if (stopwatchEdgeStream){
+    stopwatchEdgeStream.close();
+  }
+
+  stopwatch.running=false;
+  stopwatch.connected=false;
+  stopwatch.mode='CONNECTING';
+
+  stopwatch.sourceEpoch=null;
+  stopwatch.lastSequence=null;
+  stopwatch.latestTotalState=null;
+  stopwatch.startTotalState=null;
+  stopwatch.stoppedTotal=0n;
+
+  $('a8-sw-start').disabled=true;
+  $('a8-sw-stop').disabled=true;
+
+  $('a8-sw-status').textContent =
+    'CONNECTING · independent Core20 state witness';
+
+  renderStopwatch(0n);
+
+  stopwatchEdgeStream =
+    new EventSource(
+      '/api/core20/edges'
+    );
+
+  stopwatchEdgeStream.addEventListener(
+    'a8-edge',
+    event => {
+      try{
+        processStopwatchEdge(
+          JSON.parse(
+            event.data
+          )
+        );
+      } catch(_){
+        /*
+         * Malformed witness transport cannot affect
+         * Core20 or Jovian geometry.
+         */
+      }
+    }
+  );
+
+  stopwatchEdgeStream.onerror =
+    ()=>{
+      stopwatchTransportLost();
+    };
+}
+
+
+function startStopwatch(){
+  if (
+    !stopwatch.connected ||
+    stopwatch.latestTotalState === null
+  ){
+    $('a8-sw-status').textContent =
+      'START WAIT · awaiting Core20 state edge';
+
+    return;
+  }
+
+  stopwatch.startTotalState =
+    stopwatch.latestTotalState;
+
+  stopwatch.stoppedTotal=0n;
+  stopwatch.running=true;
+  stopwatch.mode='RUNNING';
+
+  $('a8-sw-start').disabled=true;
+  $('a8-sw-stop').disabled=false;
+
+  $('a8-sw-status').textContent =
+    'Running · independent Core20 state witness';
+
+  renderStopwatch(0n);
+}
+
+
+function stopStopwatch(){
   if (!stopwatch.running)
     return;
 
-  try{
-    await refreshStopwatchSample();
-
-    stopwatch.running=false;
-
-    $('a8-sw-start').disabled=false;
-    $('a8-sw-stop').disabled=true;
-
-    $('a8-sw-status').textContent =
-      'Stopped · native Core20 counts';
-
-    renderStopwatch(
-      stopwatch.stoppedTotal
-    );
-
-  } catch(err){
-    $('a8-sw-status').textContent =
-      `STOP ERROR · ${err.message}`;
+  if (
+    !stopwatch.connected ||
+    stopwatch.latestTotalState === null ||
+    stopwatch.startTotalState === null
+  ){
+    stopwatchTransportLost();
+    return;
   }
-}
 
-function resetStopwatch(){
+  const elapsed =
+    stopwatch.latestTotalState -
+    stopwatch.startTotalState;
+
+  if (elapsed < 0n){
+    stopwatchHardFail(
+      'ERROR · stopwatch coordinate regressed'
+    );
+    return;
+  }
+
+  stopwatch.stoppedTotal =
+    elapsed;
+
   stopwatch.running=false;
-  stopwatch.startRaw=null;
-  stopwatch.rawPerA8State=null;
-  stopwatch.stoppedTotal=0;
+  stopwatch.mode='STOPPED';
+  stopwatch.startTotalState=null;
 
   $('a8-sw-start').disabled=false;
   $('a8-sw-stop').disabled=true;
 
   $('a8-sw-status').textContent =
-    'Ready';
+    'Stopped · independent Core20 state witness';
 
-  renderStopwatch(0);
+  renderStopwatch(
+    stopwatch.stoppedTotal
+  );
 }
+
+
+function resetStopwatch(){
+  stopwatch.running=false;
+  stopwatch.startTotalState=null;
+  stopwatch.stoppedTotal=0n;
+
+  stopwatch.mode =
+    stopwatch.connected
+      ? 'READY'
+      : 'WAITING';
+
+  $('a8-sw-start').disabled =
+    !stopwatch.connected;
+
+  $('a8-sw-stop').disabled=true;
+
+  $('a8-sw-status').textContent =
+    stopwatch.connected
+      ? 'Ready · independent Core20 state witness'
+      : 'WAITING · Core20 state witness';
+
+  renderStopwatch(0n);
+}
+
 
 function showError(err){
   console.error(err);
@@ -1712,16 +2104,12 @@ function frame(){
     }
   }
 
-  renderStopwatch(
-    stopwatchNow()
-  );
-
   requestAnimationFrame(frame);
 }
 
 async function bootstrap(){
   $('pageStatus').textContent =
-    'CONNECTING · MODEL EPOCH-5 / LIVE EPOCH-7';
+    'CONNECTING · MODEL EPOCH-5 / LIVE PHYSICAL CARRIER';
 
   $('pageStatus').className =
     'status warn';
@@ -1747,30 +2135,49 @@ async function bootstrap(){
   state.sourceEpoch=
     String(cfg.sourceEpoch);
 
+  const handoffLiveEpoch =
+    Number(
+      handoff?.livePhysical?.sourceEpoch
+    );
+
+  const handoffLiveAnchor =
+    Number(
+      handoff?.livePhysical?.anchorRaw
+    );
+
+  const handoffModelAnchor =
+    Number(
+      handoff?.modelAnchor
+        ?.rawEquivalentAtPhysicalAnchor
+    );
+
+  const handoffRatioN =
+    Number(
+      handoff?.physicalToModelRatio
+        ?.numerator
+    );
+
+  const handoffRatioD =
+    Number(
+      handoff?.physicalToModelRatio
+        ?.denominator
+    );
+
   if (
     handoff.schema !==
       'A8-MOONS-PHYSICAL-MODEL-HANDOFF-V1' ||
     handoff.status !== 'QUALIFIED' ||
     String(handoff.model.sourceEpoch) !==
       String(cfg.sourceEpoch) ||
-    String(handoff.livePhysical.sourceEpoch) !==
-      '7' ||
-    Number(
-      handoff.modelAnchor
-        .rawEquivalentAtPhysicalAnchor
-    ) !== 862808997 ||
-    Number(
-      handoff.livePhysical.anchorRaw
-    ) !== 1853729 ||
-    Number(
-      handoff.physicalToModelRatio.numerator
-    ) !== 1 ||
-    Number(
-      handoff.physicalToModelRatio.denominator
-    ) !== 1
+    !Number.isSafeInteger(handoffLiveEpoch) ||
+    handoffLiveEpoch < 1 ||
+    !Number.isFinite(handoffLiveAnchor) ||
+    !Number.isFinite(handoffModelAnchor) ||
+    handoffRatioN !== 1 ||
+    handoffRatioD !== 1
   ){
     throw new Error(
-      'Epoch-7 moon handoff invalid'
+      'Active physical moon handoff invalid'
     );
   }
 
@@ -1789,9 +2196,7 @@ async function bootstrap(){
   ];
 
   state.ganymedeFull =
-    Number(
-      cfg.bodies.GANYMEDE.fullOrbit
-    );
+    NATURAL_ORBIT_RAW.Ganymede;
 
   state.moons =
     defs.map(
@@ -1902,6 +2307,8 @@ setInterval(
   refreshComparison,
   15000
 );
+
+startStopwatchEdgeStream();
 
 requestAnimationFrame(frame);
 

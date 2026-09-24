@@ -1,0 +1,4 @@
+role,source,container_start_utc_evidence_only,fit_center_video_s,centerline_limb_span_s,full_field_pass_fit_s,a8_clock_at_center_witness,primary_raw_low,primary_raw_high,primary_raw_representative
+PRE,Kooha-2026-09-22-17-24-35(1).mkv,2026-09-22T23:24:36.175922Z,89.666040,127.432552,160.412165,31:18:27..31:18:29,13593173,13593205,13593205
+CROSSING_WINDOW,Kooha-2026-09-22-18-04-34(1).mkv,2026-09-23T00:04:35.132736Z,83.795056,128.160283,162.346809,00:11:10,13665935,13665968,13665968
+POST,Kooha-2026-09-22-18-08-22.mkv,2026-09-23T00:08:22.664294Z,86.288133,128.090143,162.513508,00:16:39,13672911,13672954,13672954

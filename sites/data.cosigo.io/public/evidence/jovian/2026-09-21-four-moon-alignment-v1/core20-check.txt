@@ -1,0 +1,44 @@
+A8 · JOVIAN FOUR-MOON WITNESS · CORE20 ALIGNMENT CHECK
+2026-09-21
+
+NO CORE20 ACTION
+NO SERVICE ACTION
+NO PHASE RE-ANCHOR
+NO RATE RETUNE
+
+Existing alignment constants
+----------------------------
+PHYSICAL ANCHOR RAW : 1982885
+CORE ANCHOR RAW     : 5827373232
+CIVIL CORE ANCHOR   : 5320548703
+TARGET DAY          : 5
+TARGET PHASE17      : 122660
+CORE/PHYSICAL RATIO : 696240371506508163006955635571019774400000000/2241158246297961225114074824516769512591423
+RAW / SUN RETURN    : 636088547642572800000000/779619935531279
+
+Witness A
+---------
+PHYSICAL EPOCH 7 RAW : 9,636,120
+DISPLAYED CORE       : EPOCH 3 · DAY 9 · PHASE 61,742
+PREDICTED CORE RAW   : 8,204,934,561
+PREDICTED CIVIL      : DAY 9 · PHASE 61,742
+RESULT               : EXACT MATCH
+
+Witness B
+---------
+PHYSICAL EPOCH 7 RAW : 9,676,599
+DISPLAYED CORE       : EPOCH 3 · DAY 9 · PHASE 63,762
+PREDICTED CORE RAW   : 8,217,509,806
+PREDICTED CIVIL      : DAY 9 · PHASE 63,762
+RESULT               : EXACT MATCH
+
+CONCLUSION
+----------
+The existing physical-RAW -> Core20 civil mapping lands exactly on both
+screen-recorded Core20 phases. This observation does not justify or require
+a Core20 phase correction, rate correction, restart, or re-anchor.
+
+Authority status is not promoted by this result. The Sep-20 read-only trace
+still described Core20 as TEMPORARY_EXTERNAL_PHYSICAL_HOLDOVER with
+nativeAuthority=false / jovianQualified=false, while the operational Jovian
+period driver was OPERATIONAL_JOVIAN_RULER_NO_CORE_WRITE.

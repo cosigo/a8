@@ -1290,6 +1290,141 @@
 </style>
 
 
+
+
+<style id="a8-about-temp-check-style-v2">
+.a8-temp-legacy-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(80px,.28fr);
+  gap:8px;
+}
+
+.a8-temp-legacy-grid select{
+  box-sizing:border-box;
+  width:100%;
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:9px;
+  background:rgba(5,9,13,.52);
+  color:#fff;
+  padding:11px 12px;
+  font:800 1rem ui-monospace,SFMono-Regular,Consolas,monospace;
+}
+
+.a8-temp-example-grid{
+  display:grid;
+  grid-template-columns:repeat(5,minmax(0,1fr));
+  gap:8px;
+  margin-top:16px;
+}
+
+.a8-temp-example-grid > div{
+  min-width:0;
+  display:grid;
+  gap:4px;
+  padding:10px;
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:9px;
+  background:rgba(7,11,16,.20);
+}
+
+.a8-temp-example-grid strong{
+  color:var(--gold);
+  font:900 1rem ui-monospace,SFMono-Regular,Consolas,monospace;
+}
+
+.a8-temp-example-grid span{
+  font-size:.69rem;
+  font-weight:900;
+  letter-spacing:.05em;
+}
+
+.a8-temp-example-grid small{
+  opacity:.66;
+  line-height:1.35;
+}
+
+.a8-temp-science{
+  margin-top:14px;
+  padding:10px 12px;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:9px;
+  background:rgba(255,255,255,.025);
+}
+
+.a8-temp-science summary{
+  cursor:pointer;
+  color:var(--gold);
+  font-size:.72rem;
+  font-weight:900;
+  letter-spacing:.06em;
+}
+
+.a8-temp-science p{
+  margin:.7rem 0 0;
+  opacity:.72;
+}
+
+@media(max-width:900px){
+  .a8-temp-example-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+}
+
+@media(max-width:560px){
+  .a8-temp-legacy-grid,
+  .a8-temp-example-grid{
+    grid-template-columns:1fr;
+  }
+}
+</style>
+
+
+<style id="a8-about-pressure-check-style-v1">
+.a8-pressure-rung-row{
+  display:grid;
+  grid-template-columns:minmax(180px,320px);
+  gap:.75rem;
+  margin:1rem 0;
+}
+
+.a8-pressure-rung-row label{
+  display:flex;
+  flex-direction:column;
+  gap:.35rem;
+}
+
+.a8-pressure-rung-row label > span{
+  font-size:.72rem;
+  letter-spacing:.08em;
+  opacity:.72;
+}
+
+.a8-pressure-rung-row input,
+.a8-pressure-legacy-grid select{
+  box-sizing:border-box;
+  width:100%;
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:9px;
+  background:rgba(5,9,13,.52);
+  color:#fff;
+  padding:11px 12px;
+  font:800 1rem ui-monospace,SFMono-Regular,Consolas,monospace;
+}
+
+.a8-pressure-legacy-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(90px,.32fr);
+  gap:8px;
+}
+
+@media(max-width:560px){
+  .a8-pressure-legacy-grid{
+    grid-template-columns:1fr;
+  }
+}
+</style>
+
+
 <style id="a8-nav-orb-clock-rate-style">
 .a8-rate-box {
   margin-top: 1.2rem;
@@ -2647,6 +2782,8 @@
           <span><small>A8 HOUR</small><strong>2¹² A8 SECOND</strong></span>
           <span><small>DAY</small><strong>2¹⁷ A8 SECOND</strong></span>
           <span><small>LENGTH</small><strong>×2 / RUNG</strong></span>
+          <span><small>TEMP</small><strong>FREEZE PIVOT · BINARY</strong></span>
+          <span><small>PRESSURE</small><strong>×2 / RUNG</strong></span>
           <span><small>OCTAVE</small><strong>×2 FREQUENCY</strong></span>
         </div>
 
@@ -2656,6 +2793,8 @@
             <option value="angle" selected>ANGLE</option>
             <option value="time">TIME</option>
             <option value="length">LENGTH / DISTANCE</option>
+            <option value="temperature">TEMPERATURE</option>
+            <option value="pressure">PRESSURE</option>
             <option value="nav">A8 NAV · DISTANCE + SPEED</option>
             <option value="pitch">PITCH / FREQUENCY</option>
             <option value="rhythm">RHYTHM / TIMING</option>
@@ -3191,6 +3330,227 @@
             <a href="https://quartz.cosigo.io/">QUARTZ</a>
             <a href="https://data.cosigo.io/">EVIDENCE</a>
           </div>
+        </div>
+
+
+
+        <!-- A8 ABOUT TEMP CHECK v2 -->
+        <div class="a8-scalar-check" id="a8-temp-check" hidden>
+
+          <div class="eyebrow">A8 TEMP · HUMAN BINARY TEMPERATURE RULER</div>
+
+          <div class="a8-angle-benchmarks">
+            <button type="button" data-a8-temp-rung="21">/21 DEEP COLD</button>
+            <button type="button" data-a8-temp-rung="24">/24 FROST</button>
+            <button type="button" data-a8-temp-rung="26">/26 FREEZE</button>
+            <button type="button" data-a8-temp-rung="27">/27 JACKET</button>
+            <button type="button" data-a8-temp-rung="30">/30 COOL</button>
+            <button type="button" data-a8-temp-rung="31">/31 COMFORT</button>
+            <button type="button" data-a8-temp-rung="33">/33 BOIL</button>
+            <button type="button" data-a8-temp-rung="34">/34 OVEN</button>
+            <button type="button" data-a8-temp-rung="36">/36 INDUSTRIAL</button>
+          </div>
+
+          <div class="a8-angle-inputs">
+
+            <label>
+              <span>NATIVE A8 TEMP RUNG</span>
+              <input id="a8-temp-rung"
+                     type="number"
+                     step="any"
+                     value="31">
+            </label>
+
+            <div class="a8-angle-swap">⇄</div>
+
+            <label class="a8-legacy-side">
+              <span>LEGACY TEMPERATURE · COMPARISON</span>
+
+              <div class="a8-temp-legacy-grid">
+                <input id="a8-temp-legacy"
+                       type="number"
+                       step="any"
+                       value="24.4094">
+
+                <select id="a8-temp-unit"
+                        aria-label="Legacy temperature comparison unit">
+                  <option value="C" selected>°C</option>
+                  <option value="K">K</option>
+                </select>
+              </div>
+            </label>
+
+          </div>
+
+          <div class="a8-angle-results">
+
+            <div>
+              <small>A8 TEMP</small>
+              <strong id="a8-temp-out-rung">A8 TEMP /31</strong>
+            </div>
+
+            <div>
+              <small>PUBLIC LANDMARK</small>
+              <strong id="a8-temp-out-landmark">HUMAN REALM · COMFORT</strong>
+            </div>
+
+            <div>
+              <small>BINARY POSITION FROM FREEZE</small>
+              <strong id="a8-temp-out-parts">+31 PARTS</strong>
+            </div>
+
+            <div class="a8-legacy-side">
+              <small>CELSIUS COMPARISON</small>
+              <strong id="a8-temp-out-c">24.4094 °C</strong>
+            </div>
+
+            <div class="a8-legacy-side">
+              <small>KELVIN COMPARISON</small>
+              <strong id="a8-temp-out-k">297.5594 K</strong>
+            </div>
+
+          </div>
+
+          <div class="a8-angle-verdict" id="a8-temp-verdict">
+            ✓ /26 FREEZE PIVOT · BINARY INTERVALS MIRROR COLDER + HOTTER
+          </div>
+
+          <div class="a8-angle-note">
+            A8 TEMP /26 is the freeze pivot. Moving away from freeze,
+            each successive interval doubles. The same binary construction
+            runs colder below /26 and hotter above /26.
+          </div>
+
+          <div class="a8-temp-example-grid">
+
+            <div><strong>/21</strong><span>DEEP COLD</span><small>≈ −24.4094 °C</small></div>
+            <div><strong>/22</strong><span>WINTER</span><small>≈ −11.8110 °C</small></div>
+            <div><strong>/23</strong><span>COLD</span><small>≈ −5.5118 °C</small></div>
+            <div><strong>/24</strong><span>FROST</span><small>≈ −2.3622 °C</small></div>
+            <div><strong>/25</strong><span>NEAR FREEZE</span><small>≈ −0.7874 °C</small></div>
+
+            <div><strong>/26</strong><span>FREEZE</span><small>0.0000 °C</small></div>
+            <div><strong>/27</strong><span>JACKET</span><small>≈ 0.7874 °C</small></div>
+            <div><strong>/30</strong><span>COOL</span><small>≈ 11.8110 °C</small></div>
+            <div><strong>/31</strong><span>HUMAN REALM</span><small>≈ 24.4094 °C</small></div>
+            <div><strong>/32</strong><span>VERY HOT</span><small>≈ 49.6063 °C</small></div>
+
+            <div><strong>/33</strong><span>BOIL</span><small>100.0000 °C · @ PRESS /31</small></div>
+            <div><strong>/34</strong><span>OVEN</span><small>≈ 200.7874 °C</small></div>
+            <div><strong>/35</strong><span>INDUSTRIAL</span><small>≈ 402.3622 °C</small></div>
+            <div><strong>/36</strong><span>HIGH INDUSTRIAL</span><small>≈ 805.5118 °C</small></div>
+            <div><strong>/37</strong><span>EXTREME HEAT</span><small>≈ 1611.8110 °C</small></div>
+
+          </div>
+
+          <details class="a8-temp-science">
+            <summary>SCIENTIFIC EDGE · ABSOLUTE ZERO</summary>
+            <p>
+              On this practical freeze-pivot ruler, absolute zero
+              (−273.15 °C · 0 K) falls at approximately
+              <strong>A8 TEMP /17.5575</strong>.
+              Temperatures below that boundary are physically invalid.
+            </p>
+          </details>
+
+        </div>
+
+        <!-- A8 ABOUT PRESSURE CHECK v1 -->
+        <div class="a8-scalar-check" id="a8-pressure-check" hidden>
+
+          <div class="eyebrow">A8 PRESS · ABSOLUTE PRESSURE CONVERTER</div>
+
+          <div class="a8-angle-benchmarks">
+            <button type="button" data-a8-pressure-vacuum="1">0 A8 PRESS · PERFECT VACUUM</button>
+            <button type="button" data-a8-pressure-rung="0">1 A8 PRESS /0 · TINY PRESSURE</button>
+            <button type="button" data-a8-pressure-rung="30">A8 PRESS /30</button>
+            <button type="button" data-a8-pressure-rung="31">A8 PRESS /31 = 1</button>
+            <button type="button" data-a8-pressure-rung="32">A8 PRESS /32</button>
+            <button type="button" data-a8-pressure-rung="33">A8 PRESS /33</button>
+          </div>
+
+          <div class="a8-pressure-rung-row">
+            <label>
+              <span>NATIVE RUNG · SIGNED INTEGER</span>
+              <input id="a8-pressure-rung"
+                     type="number"
+                     step="1"
+                     value="31"
+                     inputmode="numeric">
+            </label>
+          </div>
+
+          <div class="a8-angle-inputs">
+            <label>
+              <span>NATIVE A8 PRESS AMOUNT</span>
+              <input id="a8-pressure-native"
+                     type="number"
+                     min="0"
+                     step="any"
+                     value="1">
+            </label>
+
+            <div class="a8-angle-swap">⇄</div>
+
+            <label class="a8-legacy-side">
+              <span>LEGACY ABSOLUTE PRESSURE · COMPARISON</span>
+              <div class="a8-pressure-legacy-grid">
+                <input id="a8-pressure-legacy"
+                       type="number"
+                       min="0"
+                       step="any"
+                       value="101.325">
+
+                <select id="a8-pressure-unit"
+                        aria-label="Legacy pressure comparison unit">
+                  <option value="Pa">Pa</option>
+                  <option value="kPa" selected>kPa</option>
+                  <option value="bar">bar</option>
+                  <option value="psi">psi</option>
+                  <option value="atm">atm</option>
+                </select>
+              </div>
+            </label>
+          </div>
+
+          <div class="a8-angle-results">
+            <div>
+              <small>NATIVE PRESSURE</small>
+              <strong id="a8-pressure-out-native">1 A8 PRESS /31</strong>
+            </div>
+
+            <div>
+              <small>UNIT FACTOR FROM /31</small>
+              <strong id="a8-pressure-out-factor">2⁰</strong>
+            </div>
+
+            <div>
+              <small>NEAREST-ONE VIEW</small>
+              <strong id="a8-pressure-out-nearest">1 A8 PRESS /31</strong>
+            </div>
+
+            <div class="a8-legacy-side">
+              <small>LEGACY COMPARISON</small>
+              <strong id="a8-pressure-out-legacy">101.325 kPa</strong>
+            </div>
+
+            <div>
+              <small>PRESSURE STATE</small>
+              <strong id="a8-pressure-out-state">HUMAN ATMOSPHERE · /31 = 1</strong>
+            </div>
+          </div>
+
+          <div class="a8-angle-verdict" id="a8-pressure-verdict">
+            ✓ ABSOLUTE PRESSURE · EACH RUNG ×2 UP / ÷2 DOWN
+          </div>
+
+          <div class="a8-angle-note">
+            A8 PRESS /31 = 1 is the human atmospheric reference.
+            0 A8 PRESS is perfect vacuum and has no binary rung.
+            1 A8 PRESS /0 is a tiny but positive pressure — it is NOT vacuum.
+            Signed rungs below /0 continue the same positive binary ladder.
+          </div>
+
         </div>
 
         <div class="a8-scalar-check" id="a8-nav-check" hidden>
@@ -4023,13 +4383,13 @@
       <article class="a8-future-card a8-future-open">
         <small>SET · TEMPERATURE</small>
         <strong>A8 TEMP</strong>
-        <span>A8/26 = FREEZE · A8/31 = 1 HUMAN REALM · A8/33 = BOIL. Seven binary steps from freeze to boil. Legacy comparison only: 0.0000 °C · 24.4094 °C · 100.0000 °C.</span>
+        <span>A8 TEMP /26 = FREEZE · /31 = HUMAN REALM · /33 = BOIL · /34 = OVEN. /26 is the practical freeze pivot; binary intervals mirror colder and hotter and double with each rung away from freeze. Legacy comparison only: /25 ≈ −0.7874 °C · /31 ≈ 24.4094 °C · /33 = 100.0000 °C · /34 ≈ 200.7874 °C.</span>
       </article>
 
       <article class="a8-future-card a8-future-open">
         <small>SET · PRESSURE</small>
         <strong>A8 PRESS</strong>
-        <span>A8/31 = 1 human atmospheric reference. At A8 PRESS /31 = 1, pure water boils at A8 TEMP /33. Legacy comparison only: 14.6959 psi · 1.0133 bar · 101.3250 kPa.</span>
+        <span>A8 PRESS /31 = 1 human atmosphere · absolute pressure. 0 A8 PRESS = PERFECT VACUUM · NOT A8 PRESS /0. Zero has no rung. Every higher rung doubles pressure and every lower rung halves it. Signed scientific rungs continue below /0 for extremely low nonzero pressure. At A8 PRESS /31 = 1, pure water boils at A8 TEMP /33. Legacy comparison only: 101.3250 kPa · 1.0133 bar · 14.6959 psi.</span>
       </article>
 
       <article class="a8-future-card a8-future-open">
@@ -6154,6 +6514,8 @@ document.querySelectorAll('.a8-question-dialog').forEach(dialog => {
     angle: $('a8-angle-check'),
     time: $('a8-time-check'),
     length: $('a8-length-check'),
+    temperature: $('a8-temp-check'),
+    pressure: $('a8-pressure-check'),
     nav: $('a8-nav-check'),
     pitch: $('a8-music-check'),
     rhythm: $('a8-music-check')
@@ -7107,6 +7469,517 @@ document.querySelectorAll('.a8-question-dialog').forEach(dialog => {
       shut();
     }
   });
+})();
+</script>
+
+
+
+
+<script id="a8-about-temp-check-v2">
+(() => {
+  'use strict';
+
+  const $ = id => document.getElementById(id);
+
+  const rung   = $('a8-temp-rung');
+  const legacy = $('a8-temp-legacy');
+  const unit   = $('a8-temp-unit');
+  const verdict = $('a8-temp-verdict');
+
+  if (!rung || !legacy || !unit || !verdict) return;
+
+  const FREEZE_RUNG = 26;
+  const BASE_STEP_C = 100 / 127;
+  const ABS_ZERO_C = -273.15;
+
+  let lastC = 100 * 31 / 127;
+
+  function fmt(v,digits=4){
+    v = Number(v);
+
+    if (!Number.isFinite(v)) return '—';
+    if (Math.abs(v) < 1e-12) v = 0;
+
+    if (
+      v !== 0 &&
+      (Math.abs(v) >= 1e7 || Math.abs(v) < 1e-5)
+    ){
+      return v.toExponential(digits).replace('e+','e');
+    }
+
+    return Number(v.toFixed(digits)).toString();
+  }
+
+  function valid(el){
+    return (
+      el.value.trim() !== '' &&
+      Number.isFinite(Number(el.value))
+    );
+  }
+
+  function partsFromRung(r){
+    const d = r - FREEZE_RUNG;
+
+    if (d === 0) return 0;
+
+    return (
+      Math.sign(d) *
+      (Math.pow(2,Math.abs(d)) - 1)
+    );
+  }
+
+  function cFromRung(r){
+    return partsFromRung(r) * BASE_STEP_C;
+  }
+
+  function rungFromC(c){
+    if (c === 0) return FREEZE_RUNG;
+
+    const parts = Math.abs(c) / BASE_STEP_C;
+
+    return (
+      FREEZE_RUNG +
+      Math.sign(c) *
+      Math.log2(parts + 1)
+    );
+  }
+
+  function landmark(c,r){
+
+    if (Math.abs(c) < 0.00005)
+      return 'FREEZE · WATER';
+
+    if (c >= 22 && c <= 26)
+      return 'HUMAN REALM · COMFORT';
+
+    if (Math.abs(c - 100) < 0.01)
+      return 'BOIL · WATER @ PRESS /31';
+
+    if (c >= 180 && c <= 220)
+      return 'OVEN';
+
+    if (c >= 450 && c <= 650)
+      return 'STEAM GENERATION / INDUSTRIAL';
+
+    if (c >= 5000 && c <= 6000)
+      return 'SOL PHOTOSPHERE NEIGHBORHOOD';
+
+    const nearest = Math.round(r);
+
+    const labels = {
+      21:'DEEP COLD',
+      22:'WINTER',
+      23:'COLD',
+      24:'FROST',
+      25:'NEAR FREEZE',
+      27:'JACKET',
+      28:'COLD / COOL',
+      29:'CHILLY',
+      30:'COOL',
+      31:'HUMAN REALM',
+      32:'VERY HOT',
+      33:'BOIL',
+      34:'OVEN',
+      35:'INDUSTRIAL HEAT',
+      36:'HIGH INDUSTRIAL HEAT',
+      37:'EXTREME HEAT',
+      38:'SCIENTIFIC HEAT',
+      39:'SOL-SURFACE SCALE'
+    };
+
+    if (
+      Math.abs(r-nearest) < 0.00005 &&
+      labels[nearest]
+    ){
+      return labels[nearest];
+    }
+
+    return `A8 TEMP /${fmt(r)} · DECIMAL POSITION`;
+  }
+
+  function render(r,c){
+
+    const parts = partsFromRung(r);
+    const k = c + 273.15;
+
+    $('a8-temp-out-rung').textContent =
+      `A8 TEMP /${fmt(r)}`;
+
+    $('a8-temp-out-landmark').textContent =
+      landmark(c,r);
+
+    $('a8-temp-out-parts').textContent =
+      `${parts >= 0 ? '+' : ''}${fmt(parts)} PARTS`;
+
+    $('a8-temp-out-c').textContent =
+      `${fmt(c)} °C`;
+
+    $('a8-temp-out-k').textContent =
+      `${fmt(k)} K`;
+
+    verdict.textContent =
+      '✓ /26 FREEZE PIVOT · BINARY INTERVALS MIRROR COLDER + HOTTER';
+
+    lastC = c;
+  }
+
+  function invalid(message){
+    $('a8-temp-out-rung').textContent = '—';
+    $('a8-temp-out-landmark').textContent = '—';
+    $('a8-temp-out-parts').textContent = '—';
+    $('a8-temp-out-c').textContent = '—';
+    $('a8-temp-out-k').textContent = '—';
+    verdict.textContent = `✕ ${message}`;
+  }
+
+  function fromNative(){
+
+    if (!valid(rung)){
+      invalid('ENTER AN A8 TEMP RUNG');
+      return;
+    }
+
+    const r = Number(rung.value);
+    const c = cFromRung(r);
+
+    if (!Number.isFinite(c)){
+      invalid('VALUE OUTSIDE BROWSER NUMERIC RANGE');
+      return;
+    }
+
+    if (c < ABS_ZERO_C){
+      invalid(
+        'BELOW ABSOLUTE ZERO · PHYSICALLY INVALID'
+      );
+      return;
+    }
+
+    legacy.value =
+      fmt(
+        unit.value === 'K'
+          ? c + 273.15
+          : c,
+        6
+      );
+
+    render(r,c);
+  }
+
+  function fromLegacy(){
+
+    if (!valid(legacy)){
+      invalid('ENTER A CELSIUS OR KELVIN TEMPERATURE');
+      return;
+    }
+
+    const entered = Number(legacy.value);
+
+    let c =
+      unit.value === 'K'
+        ? entered - 273.15
+        : entered;
+
+    if (
+      unit.value === 'K' &&
+      entered < 0
+    ){
+      invalid('KELVIN CANNOT BE BELOW ZERO');
+      return;
+    }
+
+    if (c < ABS_ZERO_C){
+      invalid('BELOW ABSOLUTE ZERO · PHYSICALLY INVALID');
+      return;
+    }
+
+    const r = rungFromC(c);
+
+    if (!Number.isFinite(r)){
+      invalid('VALUE OUTSIDE BROWSER NUMERIC RANGE');
+      return;
+    }
+
+    rung.value = fmt(r,6);
+
+    render(r,c);
+  }
+
+  rung.addEventListener('input',fromNative);
+  legacy.addEventListener('input',fromLegacy);
+
+  unit.addEventListener('change',() => {
+    legacy.value =
+      fmt(
+        unit.value === 'K'
+          ? lastC + 273.15
+          : lastC,
+        6
+      );
+
+    fromLegacy();
+  });
+
+  document
+    .querySelectorAll('[data-a8-temp-rung]')
+    .forEach(button => {
+      button.addEventListener('click',() => {
+        rung.value = button.dataset.a8TempRung;
+        fromNative();
+      });
+    });
+
+  fromNative();
+})();
+</script>
+
+
+<script id="a8-about-pressure-check-v1">
+(() => {
+  'use strict';
+
+  const $ = id => document.getElementById(id);
+
+  const rung    = $('a8-pressure-rung');
+  const native  = $('a8-pressure-native');
+  const legacy  = $('a8-pressure-legacy');
+  const unit    = $('a8-pressure-unit');
+  const verdict = $('a8-pressure-verdict');
+
+  if (!rung || !native || !legacy || !unit || !verdict) return;
+
+  const ATM_PA = 101325;
+
+  const UNIT_PA = {
+    Pa: 1,
+    kPa: 1000,
+    bar: 100000,
+    psi: 6894.757293168,
+    atm: ATM_PA
+  };
+
+  const supers = {
+    '-':'⁻','0':'⁰','1':'¹','2':'²','3':'³','4':'⁴',
+    '5':'⁵','6':'⁶','7':'⁷','8':'⁸','9':'⁹'
+  };
+
+  let lastPa = ATM_PA;
+
+  function sup(n){
+    return String(n)
+      .split('')
+      .map(c => supers[c] || c)
+      .join('');
+  }
+
+  function fmt(v, digits=4){
+    v = Number(v);
+
+    if (!Number.isFinite(v)) return '—';
+    if (v === 0) return '0';
+
+    const a = Math.abs(v);
+
+    if (a >= 1e7 || a < 1e-4)
+      return v.toExponential(digits).replace('e+','e');
+
+    return Number(v.toFixed(digits)).toString();
+  }
+
+  function valid(el){
+    return el.value.trim() !== '' &&
+           Number.isFinite(Number(el.value));
+  }
+
+  function unitPa(r){
+    return ATM_PA * Math.pow(2, r - 31);
+  }
+
+  function legacySummary(pa){
+    return [
+      `${fmt(pa)} Pa`,
+      `${fmt(pa/1000)} kPa`,
+      `${fmt(pa/100000)} bar`,
+      `${fmt(pa/UNIT_PA.psi)} psi`,
+      `${fmt(pa/ATM_PA)} atm`
+    ].join(' · ');
+  }
+
+  function bad(message){
+    $('a8-pressure-out-native').textContent = '—';
+    $('a8-pressure-out-factor').textContent = '—';
+    $('a8-pressure-out-nearest').textContent = '—';
+    $('a8-pressure-out-legacy').textContent = '—';
+    $('a8-pressure-out-state').textContent = '—';
+    verdict.textContent = `✕ ${message}`;
+  }
+
+  function render(pa, amount, r){
+
+    if (pa === 0){
+      $('a8-pressure-out-native').textContent =
+        '0 A8 PRESS';
+
+      $('a8-pressure-out-factor').textContent =
+        '— ZERO HAS NO RUNG —';
+
+      $('a8-pressure-out-nearest').textContent =
+        '0 A8 PRESS · PERFECT VACUUM';
+
+      $('a8-pressure-out-legacy').textContent =
+        '0 Pa · 0 kPa · 0 bar · 0 psi · 0 atm';
+
+      $('a8-pressure-out-state').textContent =
+        'PERFECT VACUUM';
+
+      verdict.textContent =
+        '✓ 0 A8 PRESS = PERFECT VACUUM · A8 PRESS /0 REMAINS POSITIVE';
+
+      return;
+    }
+
+    const atm = pa / ATM_PA;
+
+    const nearestRung =
+      31 + Math.round(Math.log2(atm));
+
+    const nearestAmount =
+      atm / Math.pow(2, nearestRung - 31);
+
+    $('a8-pressure-out-native').textContent =
+      `${fmt(amount)} A8 PRESS /${r}`;
+
+    $('a8-pressure-out-factor').textContent =
+      `2${sup(r - 31)}`;
+
+    $('a8-pressure-out-nearest').textContent =
+      `${fmt(nearestAmount)} A8 PRESS /${nearestRung}`;
+
+    $('a8-pressure-out-legacy').textContent =
+      legacySummary(pa);
+
+    $('a8-pressure-out-state').textContent =
+      Math.abs(atm - 1) < 1e-12
+        ? 'HUMAN ATMOSPHERE · /31 = 1'
+        : 'NONZERO ABSOLUTE PRESSURE';
+
+    verdict.textContent =
+      '✓ ABSOLUTE PRESSURE · EACH RUNG ×2 UP / ÷2 DOWN · NEAREST-ONE VIEW ACTIVE';
+  }
+
+  function fromNative(){
+
+    if (!valid(rung) ||
+        !Number.isInteger(Number(rung.value))){
+      bad('NATIVE RUNG MUST BE A SIGNED INTEGER');
+      return;
+    }
+
+    if (!valid(native)){
+      bad('ENTER A NATIVE A8 PRESS AMOUNT');
+      return;
+    }
+
+    const r = Number(rung.value);
+    const amount = Number(native.value);
+
+    if (amount < 0){
+      bad('ABSOLUTE PRESSURE CANNOT BE NEGATIVE');
+      return;
+    }
+
+    const uPa = unitPa(r);
+    const pa = amount === 0 ? 0 : amount * uPa;
+
+    if (!Number.isFinite(uPa) ||
+        !Number.isFinite(pa) ||
+        (amount > 0 && pa === 0)){
+      bad('VALUE IS OUTSIDE THIS BROWSER NUMERIC RANGE');
+      return;
+    }
+
+    lastPa = pa;
+
+    legacy.value =
+      fmt(pa / UNIT_PA[unit.value], 8);
+
+    render(pa, amount, r);
+  }
+
+  function fromLegacy(){
+
+    if (!valid(rung) ||
+        !Number.isInteger(Number(rung.value))){
+      bad('NATIVE RUNG MUST BE A SIGNED INTEGER');
+      return;
+    }
+
+    if (!valid(legacy)){
+      bad('ENTER AN ABSOLUTE LEGACY PRESSURE');
+      return;
+    }
+
+    const entered = Number(legacy.value);
+
+    if (entered < 0){
+      bad('ABSOLUTE PRESSURE CANNOT BE NEGATIVE');
+      return;
+    }
+
+    const pa = entered * UNIT_PA[unit.value];
+    const r = Number(rung.value);
+    const uPa = unitPa(r);
+
+    if (!Number.isFinite(pa) ||
+        !Number.isFinite(uPa) ||
+        uPa === 0){
+      bad('VALUE IS OUTSIDE THIS BROWSER NUMERIC RANGE');
+      return;
+    }
+
+    const amount = pa === 0 ? 0 : pa/uPa;
+
+    if (!Number.isFinite(amount)){
+      bad('VALUE IS OUTSIDE THIS BROWSER NUMERIC RANGE');
+      return;
+    }
+
+    lastPa = pa;
+    native.value = fmt(amount, 8);
+    render(pa, amount, r);
+  }
+
+  native.addEventListener('input', fromNative);
+  rung.addEventListener('input', fromNative);
+  rung.addEventListener('change', fromNative);
+  legacy.addEventListener('input', fromLegacy);
+
+  unit.addEventListener('change', () => {
+    legacy.value =
+      fmt(lastPa / UNIT_PA[unit.value], 8);
+
+    fromLegacy();
+  });
+
+  document
+    .querySelectorAll('[data-a8-pressure-rung]')
+    .forEach(button => {
+      button.addEventListener('click', () => {
+        rung.value = button.dataset.a8PressureRung;
+        native.value = '1';
+        fromNative();
+      });
+    });
+
+  document
+    .querySelectorAll('[data-a8-pressure-vacuum]')
+    .forEach(button => {
+      button.addEventListener('click', () => {
+        native.value = '0';
+        fromNative();
+      });
+    });
+
+  fromNative();
 })();
 </script>
 

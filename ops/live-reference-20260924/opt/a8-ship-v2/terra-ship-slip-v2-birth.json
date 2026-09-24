@@ -1,0 +1,86 @@
+{
+  "schema": "A8-TERRA-SHIP-SLIP-BIRTH-V2",
+  "status": "SEALED_RETROACTIVE_EQUINOX_BIRTH",
+  "generation": 2,
+  "role": "TERRA_SHIP_SLIP_V2_NATIVE_REFERENCE_BIRTH",
+  "effectiveEvent": {
+    "witness": "SOL",
+    "event": "SEPTEMBER_EQUINOX_EQUATOR_CROSSING",
+    "annualFrame": "A8_ANNUAL_FRAME_V1",
+    "annualAngle512": {
+      "numerator": 384,
+      "denominator": 1,
+      "octal": "600\u2088"
+    }
+  },
+  "physicalBirthEvidence": {
+    "sourceEpoch": 7,
+    "rawBracketLow": 13665935,
+    "rawBracketHigh": 13665968,
+    "representativeRaw": 13665968,
+    "role": "IMMUTABLE_SEP22_PHYSICAL_SOL_WITNESS"
+  },
+  "coreBirthCoordinate": {
+    "raw": "9456851008",
+    "derivation": "EPOCH7_PHYSICAL_RAW_MAPPED_TO_CONTINUING_CORE_COORDINATE",
+    "epoch7PhysicalAnchor": "1982885",
+    "epoch7CoreAnchor": "5827373232",
+    "physicalToCoreRatio": {
+      "numerator": "696240371506508163006955635571019774400000000",
+      "denominator": "2241158246297961225114074824516769512591423"
+    },
+    "outageElapsedInferred": false,
+    "crossEpochPhysicalRawContinuity": false,
+    "coreCoordinateContinuity": true
+  },
+  "zeroState": {
+    "terraShipSlip512": {
+      "numerator": "0",
+      "denominator": "1",
+      "text": "0/1"
+    },
+    "relativeTurnsCarry": "0",
+    "foldedPhase17": {
+      "numerator": "0",
+      "denominator": "1",
+      "text": "0/1"
+    },
+    "foldedProgressPercent": "0"
+  },
+  "relationshipAtBirth": {
+    "terraShipSlipAdvancePerCoreRaw512": {
+      "numerator": "2653529",
+      "denominator": "1563456986718750",
+      "text": "2653529/1563456986718750"
+    },
+    "policy": "LOCKED_FOR_V2_UNTIL_EXPLICIT_QUALIFIED_RATE_HANDOFF"
+  },
+  "geometry": {
+    "alignmentAnnualAngleOctal": "600\u2088",
+    "oppositionAnnualAngleOctal": "200\u2088",
+    "returnAlignmentAnnualAngleOctal": "600\u2088"
+  },
+  "liveContinuation": {
+    "initialExternalPhysicalSourceEpoch": 8,
+    "carrierRole": "QUALIFIED_EXTERNAL_PHYSICAL_PRIMARY",
+    "physicalRawIdentityCarriedAcrossBirth": false,
+    "continuationCoordinate": "CORE_RAW"
+  },
+  "v1Disposition": {
+    "status": "RETIRED_FROM_LIVE_PUBLIC_LINEAGE",
+    "role": "HISTORICAL_EVIDENCE",
+    "rewritten": false,
+    "deleted": false
+  },
+  "authorityBoundary": {
+    "writesCore20": false,
+    "writesAnnualFrame": false,
+    "writesPhysicalCarrier": false,
+    "usesUTC": false,
+    "usesHostTime": false,
+    "usesBrowserTime": false,
+    "usesNetworkCadenceAsTime": false,
+    "infersOutageElapsedTime": false,
+    "manufacturesRawContinuity": false
+  }
+}

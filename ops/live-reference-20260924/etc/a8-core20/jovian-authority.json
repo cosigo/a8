@@ -1,0 +1,22 @@
+{
+  "actuatesFeeder": false,
+  "callistoRole": "WITNESS_ONLY",
+  "disciplineState": "LIVE_NATURAL_AUTHORITY",
+  "periodModel": "INDEPENDENT_NATURAL_RECURRENCES",
+  "normalization": "NONE",
+  "schema": "A8-JOVIAN-AUTHORITY-SELECTION-V1",
+  "selectableAuthorities": [
+    "IO",
+    "EUROPA",
+    "GANYMEDE"
+  ],
+  "selectedAuthority": "EUROPA",
+  "selectedPeriodRaw": 9344598,
+  "witnesses": [
+    "IO",
+    "GANYMEDE",
+    "CALLISTO"
+  ],
+  "writesArduino": false,
+  "writesCore20": false
+}

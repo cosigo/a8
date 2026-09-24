@@ -2646,6 +2646,120 @@ function createHardwareLabServer({
   };
 
 
+  /*
+   * EUROPA NATURAL/MODEL RAW CLOCK LANE
+   *
+   * Arduino RAW is a replaceable carrier coordinate.
+   * This adapter projects it onto the qualified Entry011
+   * natural/model RAW axis used by the civil clock.
+   *
+   * It does not alter the legacy physical->Core projection.
+   */
+  const mapPhysicalRawToNaturalClockRaw =
+    physicalRawValue => {
+      const physicalRaw =
+        BigInt(physicalRawValue);
+
+      const physicalAnchor =
+        BigInt(
+          process.env
+            .A8_CLOCK_NATURAL_PHYSICAL_ANCHOR
+        );
+
+      const naturalAnchor =
+        BigInt(
+          process.env
+            .A8_CLOCK_NATURAL_MODEL_ANCHOR
+        );
+
+      const ratioNumerator =
+        BigInt(
+          process.env
+            .A8_CLOCK_NATURAL_RATIO_NUMERATOR
+        );
+
+      const ratioDenominator =
+        BigInt(
+          process.env
+            .A8_CLOCK_NATURAL_RATIO_DENOMINATOR
+        );
+
+      if (ratioDenominator <= 0n) {
+        throw new Error(
+          'natural clock carrier ratio denominator must be positive'
+        );
+      }
+
+      if (physicalRaw < physicalAnchor) {
+        throw new Error(
+          'physical RAW regressed behind natural clock carrier anchor'
+        );
+      }
+
+      const physicalDelta =
+        physicalRaw -
+        physicalAnchor;
+
+      const naturalAdvance =
+        (
+          physicalDelta *
+          ratioNumerator
+        ) /
+        ratioDenominator;
+
+      return {
+        physicalRaw,
+        physicalAnchor,
+        naturalAnchor,
+        ratioNumerator,
+        ratioDenominator,
+        physicalDelta,
+        naturalAdvance,
+        naturalRaw:
+          naturalAnchor +
+          naturalAdvance,
+      };
+    };
+
+  /*
+   * MINTAKA + SOL SUN-RETURN RELATIONSHIP
+   *
+   * This is a DOWNSTREAM clock relationship expressed on
+   * the Europa natural/model RAW axis.
+   *
+   * It may later be refined by new Mintaka/Sol evidence
+   * without changing Europa, the natural axis, or carrier
+   * authority.
+   */
+  const naturalRawPerSunReturnText = () => {
+    const numerator =
+      String(
+        process.env
+          .A8_CLOCK_NATURAL_SUN_RETURN_NUMERATOR ||
+        ''
+      );
+
+    const denominator =
+      String(
+        process.env
+          .A8_CLOCK_NATURAL_SUN_RETURN_DENOMINATOR ||
+        ''
+      );
+
+    if (
+      !/^[0-9]+$/.test(numerator) ||
+      !/^[0-9]+$/.test(denominator) ||
+      denominator === '0'
+    ) {
+      throw new Error(
+        'natural RAW/Sun-return configuration invalid'
+      );
+    }
+
+    return `${numerator}/${denominator}`;
+  };
+
+
   const advanceVirtualRawDirect = amount => {
     const n = BigInt(amount);
     if (n <= 0n) return;
@@ -2814,8 +2928,15 @@ function createHardwareLabServer({
 
       return result;
     },
-    getRaw: () => selectedRawBigInt(),
-    getSourceEpoch: () => recoveryBridge.snapshot().sourceEpoch,
+    getRaw:
+      () => selectedRawBigInt(),
+
+    getSourceEpoch:
+      () =>
+        recoveryBridge
+          .snapshot()
+          .sourceEpoch,
+
     getRecurrenceText: () => {
       const recurrence = currentSunReturnRecurrence();
       if (!recurrence || !recurrence.rawPerSunReturnRecurrence) {
@@ -2823,6 +2944,9 @@ function createHardwareLabServer({
       }
       return recurrence.rawPerSunReturnRecurrence.text;
     },
+
+    getNaturalRecurrenceText:
+      () => naturalRawPerSunReturnText(),
 
     /*
      * Execution/observer resolution only.
@@ -3680,6 +3804,11 @@ function createHardwareLabServer({
 
             await ensureCore20RuntimeRunning();
 
+            const naturalClockMapping =
+              mapPhysicalRawToNaturalClockRaw(
+                physicalRaw
+              );
+
             const physicalDelta =
               physicalRaw -
               PHYSICAL_ANCHOR;
@@ -3698,7 +3827,10 @@ function createHardwareLabServer({
             const advanced =
               core20Runtime
                 .advanceExternalPhysicalToTarget(
-                  targetCoreRaw.toString()
+                  targetCoreRaw.toString(),
+                  naturalClockMapping
+                    .naturalRaw
+                    .toString()
                 );
 
             let clock =
@@ -3713,6 +3845,12 @@ function createHardwareLabServer({
                 .installExternalPhysicalAlignment({
                   anchorRawPulse:
                     CIVIL_CORE_ANCHOR.toString(),
+
+                  clockAnchorRawPulse:
+                    String(
+                      process.env
+                        .A8_CLOCK_NATURAL_MODEL_ANCHOR
+                    ),
 
                   targetDayCount:
                     String(
@@ -3814,6 +3952,30 @@ function createHardwareLabServer({
 
                   targetCoreRaw:
                     targetCoreRaw.toString(),
+
+                  naturalClock: {
+                    domain:
+                      'EUROPA_NATURAL_MODEL_RAW',
+
+                    physicalAnchorRaw:
+                      naturalClockMapping
+                        .physicalAnchor
+                        .toString(),
+
+                    naturalAnchorRaw:
+                      naturalClockMapping
+                        .naturalAnchor
+                        .toString(),
+
+                    carrierRatio:
+                      `${naturalClockMapping.ratioNumerator}/` +
+                      `${naturalClockMapping.ratioDenominator}`,
+
+                    naturalRaw:
+                      naturalClockMapping
+                        .naturalRaw
+                        .toString(),
+                  },
 
                   advancedThisSample:
                     advanced.toString(),

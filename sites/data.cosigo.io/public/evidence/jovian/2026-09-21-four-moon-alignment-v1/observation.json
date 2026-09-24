@@ -1,0 +1,299 @@
+{
+  "schema": "A8-JOVIAN-FOUR-MOON-OBSERVATION-V1",
+  "status": "PHYSICAL_TELESCOPE_WITNESS_ANALYZED",
+  "date": "2026-09-21",
+  "identificationLeftToRight": [
+    "GANYMEDE",
+    "IO",
+    "JUPITER",
+    "EUROPA",
+    "CALLISTO"
+  ],
+  "userObservedMotion": "ALL FOUR MOONS SCREEN-RIGHT",
+  "measurementMethod": {
+    "witnessFrameOffsetSeconds": 10.0,
+    "jupiterCenter": "thresholded saturated disk bounding midpoint",
+    "moonCenter": "local intensity-weighted centroid",
+    "comparison": "one common detector scale, Jupiter-relative; no per-moon offset, no phase fit, no retune",
+    "screenConvention": "A8 celestial EAST renders screen-left; therefore screenPixelOffset is proportional to -A8_X"
+  },
+  "modelAssetSha256": "9e68d679b814a9c082bca3a8bcd401cbc6d50293ef16e35b411a12ba5aa8b119",
+  "handoff": {
+    "modelEpoch": 5,
+    "physicalEpoch": 7,
+    "modelRawEquivalentAtPhysicalAnchor": 862808997,
+    "physicalAnchorRaw": 1853729,
+    "physicalToModelRatio": "1/1"
+  },
+  "core20Alignment": {
+    "physicalAnchorRaw": 1982885,
+    "coreAnchorRaw": 5827373232,
+    "civilCoreAnchorRaw": 5320548703,
+    "targetDayCount": 5,
+    "targetDayPhase17": 122660,
+    "ratioCoreRawPerPhysicalEdge": "696240371506508163006955635571019774400000000/2241158246297961225114074824516769512591423",
+    "recoveredRawPerSunReturn": "636088547642572800000000/779619935531279"
+  },
+  "operationalJovianRuler": {
+    "normalizedRaw": 18719532,
+    "exactRatio": "1:2:4",
+    "fullOrbitRaw": {
+      "IO": 4679883,
+      "EUROPA": 9359766,
+      "GANYMEDE": 18719532
+    },
+    "absoluteMoonPhaseQualifiedInSep20Trace": false,
+    "driverConnectionInSep20Trace": "OPERATIONAL_JOVIAN_RULER_NO_CORE_WRITE"
+  },
+  "sealedCoordinatePeriods": {
+    "IO": 4650745,
+    "EUROPA": 9344598,
+    "GANYMEDE": 18866420,
+    "CALLISTO": 44245909
+  },
+  "observations": {
+    "early": {
+      "video": "Kooha-2026-09-21-05-16-36.mkv",
+      "videoCreationTimeUTC": "2026-09-21T11:16:37.253515Z",
+      "witnessFrameOffsetSeconds": 10.0,
+      "witnessFrameTimeUTC": "2026-09-21T11:16:47.253515Z",
+      "physical": {
+        "sourceEpoch": 7,
+        "raw": 9636120,
+        "reportSequence": 895261
+      },
+      "coreDisplayed": {
+        "sourceEpoch": 3,
+        "dayCount": 9,
+        "dayPhase17": 61742
+      },
+      "modelRaw": 870591388,
+      "jupiterCenterPixelX": 336.0,
+      "moonPixelXAbsolute": {
+        "GANYMEDE": 75.426375,
+        "IO": 281.740632,
+        "EUROPA": 448.675023,
+        "CALLISTO": 900.845735
+      },
+      "moonPixelXRelativeToJupiter": {
+        "GANYMEDE": -260.573625,
+        "IO": -54.259368,
+        "EUROPA": 112.675023,
+        "CALLISTO": 564.845735
+      },
+      "sealedCoordinateModelX": {
+        "GANYMEDE": 92.182867,
+        "IO": 18.916285,
+        "EUROPA": -41.152515,
+        "CALLISTO": -202.01296
+      },
+      "sep20NaturalPeriodFoldModelX": {
+        "GANYMEDE": 86.848852,
+        "IO": 20.970851,
+        "EUROPA": -40.345113,
+        "CALLISTO": -202.01296
+      },
+      "corePredictedFromExistingMapping": {
+        "coreRaw": 8204934561,
+        "dayCount": 9,
+        "dayPhase17": 61742
+      },
+      "corePredictionExactMatch": true
+    },
+    "later": {
+      "video": "Kooha-2026-09-21-05-38-48.mkv",
+      "videoCreationTimeUTC": "2026-09-21T11:38:48.384734Z",
+      "witnessFrameOffsetSeconds": 10.0,
+      "witnessFrameTimeUTC": "2026-09-21T11:38:58.384734Z",
+      "physical": {
+        "sourceEpoch": 7,
+        "raw": 9676599,
+        "reportSequence": 899021
+      },
+      "coreDisplayed": {
+        "sourceEpoch": 3,
+        "dayCount": 9,
+        "dayPhase17": 63762
+      },
+      "modelRaw": 870631867,
+      "jupiterCenterPixelX": 345.0,
+      "moonPixelXAbsolute": {
+        "GANYMEDE": 89.228326,
+        "IO": 298.986639,
+        "EUROPA": 465.207921,
+        "CALLISTO": 911.426316
+      },
+      "moonPixelXRelativeToJupiter": {
+        "GANYMEDE": -255.771674,
+        "IO": -46.013361,
+        "EUROPA": 120.207921,
+        "CALLISTO": 566.426316
+      },
+      "sealedCoordinateModelX": {
+        "GANYMEDE": 90.734457,
+        "IO": 16.011835,
+        "EUROPA": -43.286207,
+        "CALLISTO": -202.864951
+      },
+      "sep20NaturalPeriodFoldModelX": {
+        "GANYMEDE": 85.341778,
+        "IO": 18.107067,
+        "EUROPA": -42.490064,
+        "CALLISTO": -202.864951
+      },
+      "corePredictedFromExistingMapping": {
+        "coreRaw": 8217509806,
+        "dayCount": 9,
+        "dayPhase17": 63762
+      },
+      "corePredictionExactMatch": true
+    }
+  },
+  "motionComparison": {
+    "GANYMEDE": {
+      "observedScreenDeltaPixels": 4.801951,
+      "observedDirection": "RIGHT",
+      "sealedCoordinatePredictionDeltaPixels": 4.052655,
+      "sealedCoordinatePredictionDirection": "RIGHT",
+      "sep20NaturalPeriodFoldPredictionDeltaPixels": 4.254502,
+      "sep20NaturalPeriodFoldPredictionDirection": "RIGHT"
+    },
+    "IO": {
+      "observedScreenDeltaPixels": 8.246007,
+      "observedDirection": "RIGHT",
+      "sealedCoordinatePredictionDeltaPixels": 8.126658,
+      "sealedCoordinatePredictionDirection": "RIGHT",
+      "sep20NaturalPeriodFoldPredictionDeltaPixels": 8.084522,
+      "sep20NaturalPeriodFoldPredictionDirection": "RIGHT"
+    },
+    "EUROPA": {
+      "observedScreenDeltaPixels": 7.532898,
+      "observedDirection": "RIGHT",
+      "sealedCoordinatePredictionDeltaPixels": 5.970076,
+      "sealedCoordinatePredictionDirection": "RIGHT",
+      "sep20NaturalPeriodFoldPredictionDeltaPixels": 6.055242,
+      "sep20NaturalPeriodFoldPredictionDirection": "RIGHT"
+    },
+    "CALLISTO": {
+      "observedScreenDeltaPixels": 1.580581,
+      "observedDirection": "RIGHT",
+      "sealedCoordinatePredictionDeltaPixels": 2.383873,
+      "sealedCoordinatePredictionDirection": "RIGHT",
+      "sep20NaturalPeriodFoldPredictionDeltaPixels": 2.405189,
+      "sep20NaturalPeriodFoldPredictionDirection": "RIGHT"
+    }
+  },
+  "fits": {
+    "sealedCoordinateRecurrence": {
+      "detectorScalePixelsPerA8X": 2.79800251,
+      "rmsResidualPixels": 1.670634,
+      "maxAbsResidualPixels": 2.645732,
+      "residuals": {
+        "early": {
+          "GANYMEDE": {
+            "observedPixelOffset": -260.573625,
+            "predictedPixelOffset": -257.927893,
+            "residualPixels": -2.645732
+          },
+          "IO": {
+            "observedPixelOffset": -54.259368,
+            "predictedPixelOffset": -52.927813,
+            "residualPixels": -1.331555
+          },
+          "EUROPA": {
+            "observedPixelOffset": 112.675023,
+            "predictedPixelOffset": 115.14484,
+            "residualPixels": -2.469817
+          },
+          "CALLISTO": {
+            "observedPixelOffset": 564.845735,
+            "predictedPixelOffset": 565.232769,
+            "residualPixels": -0.387034
+          }
+        },
+        "later": {
+          "GANYMEDE": {
+            "observedPixelOffset": -255.771674,
+            "predictedPixelOffset": -253.875238,
+            "residualPixels": -1.896436
+          },
+          "IO": {
+            "observedPixelOffset": -46.013361,
+            "predictedPixelOffset": -44.801155,
+            "residualPixels": -1.212206
+          },
+          "EUROPA": {
+            "observedPixelOffset": 120.207921,
+            "predictedPixelOffset": 121.114916,
+            "residualPixels": -0.906995
+          },
+          "CALLISTO": {
+            "observedPixelOffset": 566.426316,
+            "predictedPixelOffset": 567.616642,
+            "residualPixels": -1.190326
+          }
+        }
+      }
+    },
+    "sep20NaturalPeriodCoordinateFold": {
+      "detectorScalePixelsPerA8X": 2.823021027,
+      "rmsResidualPixels": 8.503606,
+      "maxAbsResidualPixels": 15.39749,
+      "residuals": {
+        "early": {
+          "GANYMEDE": {
+            "observedPixelOffset": -260.573625,
+            "predictedPixelOffset": -245.176135,
+            "residualPixels": -15.39749
+          },
+          "IO": {
+            "observedPixelOffset": -54.259368,
+            "predictedPixelOffset": -59.201153,
+            "residualPixels": 4.941785
+          },
+          "EUROPA": {
+            "observedPixelOffset": 112.675023,
+            "predictedPixelOffset": 113.895102,
+            "residualPixels": -1.220079
+          },
+          "CALLISTO": {
+            "observedPixelOffset": 564.845735,
+            "predictedPixelOffset": 570.286834,
+            "residualPixels": -5.441099
+          }
+        },
+        "later": {
+          "GANYMEDE": {
+            "observedPixelOffset": -255.771674,
+            "predictedPixelOffset": -240.921634,
+            "residualPixels": -14.85004
+          },
+          "IO": {
+            "observedPixelOffset": -46.013361,
+            "predictedPixelOffset": -51.116631,
+            "residualPixels": 5.10327
+          },
+          "EUROPA": {
+            "observedPixelOffset": 120.207921,
+            "predictedPixelOffset": 119.950344,
+            "residualPixels": 0.257577
+          },
+          "CALLISTO": {
+            "observedPixelOffset": 566.426316,
+            "predictedPixelOffset": 572.692022,
+            "residualPixels": -6.265706
+          }
+        }
+      }
+    }
+  },
+  "result": {
+    "core20PhysicalToCivilAlignment": "PASS_EXACT_BOTH_WITNESSES",
+    "physicalToModelHandoff": "CONSISTENT_WITH_OBSERVED_SKY_GEOMETRY",
+    "sealedCoordinateGeometry": "STRONG_MATCH",
+    "sep20NaturalPeriodCoordinateFold": "RESIDUAL_FLAG_COORDINATE_LOOKUP_LAYER",
+    "core20RetuneRequired": false,
+    "jovianRulerRetuneRequired": false,
+    "recommendedChange": "Do not use the operational 1:2:4 period ruler as an absolute-position lookup key into the sealed coordinate sample RAW axis unless absolute moon phase is qualified and the coordinate grid is reparameterized. Keep Core20 and the natural period ruler unchanged."
+  }
+}

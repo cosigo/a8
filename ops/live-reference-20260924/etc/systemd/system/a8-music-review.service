@@ -1,0 +1,34 @@
+[Unit]
+Description=A8 Music Curated Review Service
+After=network.target
+Wants=network.target
+
+[Service]
+Type=simple
+
+ExecStart=/usr/bin/node /opt/a8-music-review/server.js
+
+Environment=PORT=18021
+Environment=DATA_DIR=/var/lib/a8-music-review
+
+DynamicUser=yes
+StateDirectory=a8-music-review
+StateDirectoryMode=0750
+
+Restart=on-failure
+RestartSec=2
+
+NoNewPrivileges=yes
+PrivateTmp=yes
+PrivateDevices=yes
+ProtectSystem=strict
+ProtectHome=yes
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectControlGroups=yes
+RestrictSUIDSGID=yes
+LockPersonality=yes
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+
+[Install]
+WantedBy=multi-user.target

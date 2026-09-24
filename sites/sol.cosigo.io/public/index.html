@@ -133,6 +133,131 @@ body {
   <link rel="icon" type="image/png" sizes="16x16" href="https://cosigo.io/favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="https://cosigo.io/apple-touch-icon.png">
   <!-- COSIGO-CANONICAL-FAVICON-END -->
+
+<style id="a8-annual-return-wheel-v2-style">
+#a8-annual-return-wheel-v2{
+  margin:1rem 0 1.25rem;
+  padding:1rem;
+  border:1px solid rgba(255,255,255,.16);
+  border-radius:14px;
+  background:rgba(0,0,0,.18);
+}
+#a8-annual-return-wheel-v2 .a8-wheel-head{
+  display:flex;
+  gap:.75rem;
+  align-items:baseline;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  margin-bottom:.8rem;
+}
+#a8-annual-return-wheel-v2 .a8-wheel-title{
+  font-weight:800;
+  letter-spacing:.06em;
+}
+#a8-annual-return-wheel-v2 .a8-wheel-state{
+  font-size:.78rem;
+  opacity:.82;
+  letter-spacing:.05em;
+}
+#a8-annual-return-wheel-v2 .a8-orbit-face{
+  position:relative;
+  height:74px;
+  margin:.45rem 0;
+  border-radius:12px;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.14);
+}
+#a8-annual-return-wheel-v2 .a8-orbit-face.front{
+  background:linear-gradient(90deg,
+    rgba(255,255,255,.08),
+    rgba(255,255,255,.035));
+}
+#a8-annual-return-wheel-v2 .a8-orbit-face.back{
+  background:
+    linear-gradient(90deg,
+      rgba(0,0,0,.58),
+      rgba(0,0,0,.30)),
+    repeating-linear-gradient(
+      -45deg,
+      rgba(255,255,255,.035) 0 8px,
+      rgba(255,255,255,.01) 8px 16px
+    );
+}
+#a8-annual-return-wheel-v2 .a8-face-name{
+  position:absolute;
+  top:8px;
+  left:50%;
+  transform:translateX(-50%);
+  font-size:.72rem;
+  letter-spacing:.11em;
+  opacity:.72;
+  white-space:nowrap;
+}
+#a8-annual-return-wheel-v2 .a8-face-arrow{
+  position:absolute;
+  top:31px;
+  left:50%;
+  transform:translateX(-50%);
+  font-size:.82rem;
+  letter-spacing:.08em;
+  opacity:.84;
+  white-space:nowrap;
+}
+#a8-annual-return-wheel-v2 .a8-end{
+  position:absolute;
+  bottom:8px;
+  font-size:.78rem;
+  font-weight:700;
+}
+#a8-annual-return-wheel-v2 .a8-end.left{left:10px}
+#a8-annual-return-wheel-v2 .a8-end.right{right:10px}
+#a8-annual-return-wheel-v2 .a8-mid{
+  position:absolute;
+  bottom:8px;
+  left:50%;
+  transform:translateX(-50%);
+  font-size:.78rem;
+  font-weight:700;
+}
+#a8-annual-return-wheel-v2 .a8-sol-marker{
+  position:absolute;
+  bottom:5px;
+  transform:translateX(-50%);
+  min-width:74px;
+  padding:.34rem .46rem;
+  border-radius:999px;
+  text-align:center;
+  font-weight:900;
+  font-size:.82rem;
+  background:rgba(255,255,255,.92);
+  color:#111;
+  box-shadow:0 3px 16px rgba(0,0,0,.35);
+  z-index:3;
+}
+#a8-annual-return-wheel-v2 .a8-sol-marker.is-hidden{
+  display:none;
+}
+#a8-annual-return-wheel-v2 .a8-sol-marker::before{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:-13px;
+  transform:translateX(-50%);
+  width:2px;
+  height:13px;
+  background:rgba(255,255,255,.9);
+}
+#a8-annual-return-wheel-v2 .a8-wheel-proof{
+  margin-top:.7rem;
+  font-size:.8rem;
+  line-height:1.55;
+  opacity:.86;
+}
+#a8-annual-return-wheel-v2 .a8-wheel-proof code{
+  white-space:nowrap;
+}
+</style>
+
 </head>
 <body>
 
@@ -274,7 +399,7 @@ body {
     <h1 class="sol">SOL</h1>
     <p><b>EARTH ORBITAL-DIRECTION WITNESS · PHYSICAL + PREDICTIVE PROGRAM</b></p>
     <p class="muted">
-      Epoch-5 physical RAW supplies the designated running pace through the
+      Epoch-7 physical RAW supplies the designated running pace through the
       Core20 mapped domain. The recovered Sol-return rate advances that mapping;
       the A8 Year Angle is a separate orientation instrument. Real sky observation
       remains the field-evidence path.
@@ -284,7 +409,7 @@ body {
   <section class="grid" id="a8-sol-live-instruments">
 
     <div class="card">
-      <span class="k">PHYSICAL PACE SOURCE · EPOCH-5</span>
+      <span class="k">PHYSICAL PACE SOURCE · EPOCH-7</span>
       <span id="a8SolPhysicalPulseState" class="v">CONNECTING</span>
       <p
         id="a8SolPhysicalPulseDetail"
@@ -316,24 +441,23 @@ body {
     </div>
 
     <div class="card">
-      <span class="k">A8 YEAR ANGLE · 9 BIT · 000₈–777₈</span>
-      <span id="absoluteSolAngle" class="v">—</span>
+      <span class="k">A8 ANNUAL FRAME V1 · 9 BIT · 000₈–777₈</span>
+      <span id="absoluteSolAngle" class="v">AWAITING EPOCH-7 PHYSICAL ANCHOR</span>
       <span
         id="absoluteSolDecimal"
         class="muted"
         style="display:block;margin-top:6px"
-      >—</span>
+      >FRAME OFFSET DEFINED · LIVE NATURE ANGLE NOT YET SEALED</span>
       <p class="muted">
-        Live year-wheel position once A8 year orientation is qualified.
-        Year orientation remains provisional until an A8-derived method is
-        physically and observationally qualified.
-        Selected raw + recovered Sol-return rate continue the motion afterward.
-        No external ephemeris is designated as the Year Angle orientation source.
+        000₈ is the existing A8 New Year seam.
+        The annual ruler has been ratcheted; no celestial event was moved.
+        The running physical angle remains unset until the Epoch-7 Sol/RAW
+        relationship is physically anchored.
       </p>
     </div>
 
     <div class="card">
-      <span class="k">A8 YEAR ANGLE · PHASE27 · 9 BIT | 18 BIT</span>
+      <span class="k">A8 ANNUAL FRAME V1 · PHYSICAL ANCHOR</span>
       <span id="livePhase27" class="v">—</span>
 
       <span
@@ -350,7 +474,7 @@ body {
     </div>
 
     <div class="card">
-      <span class="k">LIVE SOL / YEAR-ANGLE MAPPING STATUS</span>
+      <span class="k">A8 ANNUAL FRAME V1 · STATUS</span>
       <span id="liveSolStatus" class="v">CONNECTING</span>
     </div>
 
@@ -359,7 +483,49 @@ body {
       class="card"
       style="grid-column:1/-1"
     >
-      <span class="k">A8 YEAR ANGLE REFERENCE · 9 BIT</span>
+
+<div id="a8-annual-return-wheel-v2">
+  <div class="a8-wheel-head">
+    <div class="a8-wheel-title">A8 ANNUAL FRAME V1 · SOL / NATURE</div>
+    <div class="a8-wheel-state" id="a8AnnualReturnState">
+      PHYSICAL WITNESS · RETURN / BACKSIDE · ADVANCE ←
+    </div>
+  </div>
+
+  <div class="a8-orbit-face front"
+       aria-label="Front half of the A8 annual orbit, 000 octal through 400 octal">
+    <span class="a8-face-name">FRONT · 256 STATES</span>
+    <span class="a8-face-arrow">OUTBOUND · 000₈ → 200₈ → 400₈ · →</span>
+    <span class="a8-end left">000₈</span>
+    <span class="a8-mid">200₈</span>
+    <span class="a8-end right">400₈</span>
+    <span class="a8-sol-marker is-hidden"
+          id="a8AnnualSolMarkerFront"
+          style="left:0%">SOL · 000₈</span>
+  </div>
+
+  <div class="a8-orbit-face back"
+       aria-label="Shaded backside return half of the A8 annual orbit, 400 octal through 600 octal to the 000 octal recurrence">
+    <span class="a8-face-name">BACKSIDE / RETURN · 256 STATES · SHADED</span>
+    <span class="a8-face-arrow">RETURN · 400₈ → 600₈ → 000₈ · ←</span>
+    <span class="a8-end left">000₈</span>
+    <span class="a8-mid">600₈</span>
+    <span class="a8-end right">400₈</span>
+    <span class="a8-sol-marker"
+          id="a8AnnualSolMarkerBack"
+          style="left:50%">SOL · 600₈</span>
+  </div>
+
+  <div class="a8-wheel-proof" id="a8AnnualReturnProof">
+    Epoch-7 physical witness · RAW
+    <code>13,665,935 .. 13,665,968</code> · representative
+    <code>13,665,968</code> · September equinox
+    <code>384 = 600₈</code> exact.
+    Calendar / leap residual remains separate and is not added to Sol.
+  </div>
+</div>
+
+      <span class="k">A8 ANNUAL FRAME V1 · REFERENCE · 9 BIT</span>
 
       <div
         style="
@@ -372,17 +538,20 @@ body {
           line-height:1.45;
         "
       >
-        <span><b>000₈</b> · VERNAL EQUINOX</span>
-        <span><b>200₈</b> · JUNE SOLSTICE</span>
-        <span><b>400₈</b> · SEPTEMBER EQUINOX</span>
-        <span><b>600₈</b> · DECEMBER SOLSTICE</span>
+        <span><b>000₈</b> · A8 NEW YEAR / DECEMBER SOLSTICE SEAM</span>
+        <span><b>200₈</b> · MARCH EQUINOX</span>
+        <span><b>400₈</b> · JUNE SOLSTICE</span>
+        <span><b>600₈</b> · SEPTEMBER EQUINOX</span>
         <span><b>777₈</b> · LAST STORED STATE</span>
-        <span><b>1000₈ → 000₈</b> · RECURRENCE</span>
+        <span><b>1000₈ → 000₈</b> · ANNUAL RECURRENCE</span>
       </div>
 
       <p class="muted" style="margin-bottom:0">
         Operating register: 000₈–777₈.
-        1000₈ is the full-turn recurrence boundary, not a stored year state.
+        Old annual 600₈ maps to Annual Frame V1 000₈.
+        Nature was not moved; only the annual coordinate seam was ratcheted.
+        The separate celestial seam remains the present-era equinox /
+        A8 First Point of Pisces.
       </p>
     </div>
 
@@ -407,10 +576,48 @@ body {
     <p class="muted" style="margin-top:12px">
       Retained for qualification, recovery, diagnostics, emergency use and
       independent comparison. These instruments remain functional but dormant.
-      They do not define the normal A8 Year Angle path or the Epoch-5 running pace.
+      They do not define the normal A8 Annual Frame V1 path or the Epoch-7 running pace.
     </p>
 
     <div class="grid" style="margin-top:14px">
+
+      <div
+        id="a8-legacy-annual-frame"
+        class="card"
+        style="grid-column:1/-1"
+      >
+        <span class="k">PRESERVED PRE-V1 ANNUAL FRAME · COMPARISON ONLY</span>
+
+        <div
+          style="
+            display:flex;
+            flex-wrap:wrap;
+            gap:8px 18px;
+            align-items:center;
+            margin-top:9px;
+            font-weight:800;
+            line-height:1.45;
+          "
+        >
+          <span><b>000₈</b> · VERNAL EQUINOX</span>
+          <span><b>200₈</b> · JUNE SOLSTICE</span>
+          <span><b>400₈</b> · SEPTEMBER EQUINOX</span>
+          <span><b>600₈</b> · DECEMBER SOLSTICE</span>
+        </div>
+
+        <p class="muted">
+          Preserved historical/comparison frame.
+          The read-only backend remains
+          <code>/api/core20/year-angle</code>.
+          It does not define or feed A8 Annual Frame V1.
+        </p>
+
+        <span
+          id="a8LegacyAnnualBackendStatus"
+          class="muted"
+          style="display:block;margin-top:6px"
+        >BACKEND STATUS · —</span>
+      </div>
 
       <div class="card">
         <span class="k">CORE20 INTERNAL DOMAIN · DIAGNOSTIC</span>
@@ -1280,6 +1487,359 @@ setInterval(refresh,1000);
   }
 
   adapt();
+})();
+</script>
+
+
+<script id="a8-annual-frame-v1-presentation" data-patch="a8-annual-return-wheel-v2">
+(() => {
+  'use strict';
+
+  /*
+   * A8 ANNUAL FRAME V1 · PRESENTATION ONLY
+   *
+   * Source:
+   *   /api/annual-frame -> local read-only sidecar :18030
+   *
+   * The old /api/core20/year-angle feed remains available behind glass.
+   * This script does not write Core20, carrier state, Calendar, evidence,
+   * or the Annual Frame contract.
+   */
+
+  const front =
+    document.getElementById('absoluteSolAngle');
+
+  const frontDecimal =
+    document.getElementById('absoluteSolDecimal');
+
+  const anchorState =
+    document.getElementById('livePhase27');
+
+  const anchorDetail =
+    document.getElementById('yearFineFraction');
+
+  const seamTest =
+    document.getElementById('yearFineDecimal');
+
+  const mappingStatus =
+    document.getElementById('liveSolStatus');
+
+  const legacyStatus =
+    document.getElementById('a8LegacyAnnualBackendStatus');
+
+  const externalFallback =
+    document.getElementById('a8ExternalOrientationRawStatus');
+
+  const annualReturnState =
+    document.getElementById('a8AnnualReturnState');
+
+  const annualSolMarkerFront =
+    document.getElementById('a8AnnualSolMarkerFront');
+
+  const annualSolMarkerBack =
+    document.getElementById('a8AnnualSolMarkerBack');
+
+  const PHYSICAL_WITNESS_ANGLE512 = 384;
+
+  let latest = null;
+  let rendering = false;
+
+  function setText(el, value) {
+    if (!el) return;
+
+    const next = String(value ?? '—');
+
+    if (el.textContent !== next) {
+      el.textContent = next;
+    }
+  }
+
+  function norm512(value) {
+    const n = Number(value);
+
+    if (!Number.isFinite(n)) {
+      return PHYSICAL_WITNESS_ANGLE512;
+    }
+
+    return ((n % 512) + 512) % 512;
+  }
+
+  function oct3(value) {
+    /*
+     * Public display is the 9-bit state register.
+     * The 1000₈ recurrence displays cleanly as 000₈.
+     */
+    const whole =
+      Math.floor(norm512(value)) & 511;
+
+    return whole
+      .toString(8)
+      .padStart(3, '0') + '₈';
+  }
+
+  function renderAnnualWheel(angle512) {
+    const angle =
+      norm512(angle512);
+
+    const angleOctal =
+      oct3(angle);
+
+    const onFront =
+      angle < 256;
+
+    if (annualSolMarkerFront) {
+      annualSolMarkerFront
+        .classList
+        .toggle('is-hidden', !onFront);
+
+      if (onFront) {
+        annualSolMarkerFront.style.left =
+          ((angle / 256) * 100) + '%';
+
+        setText(
+          annualSolMarkerFront,
+          'SOL · ' + angleOctal
+        );
+      }
+    }
+
+    if (annualSolMarkerBack) {
+      annualSolMarkerBack
+        .classList
+        .toggle('is-hidden', onFront);
+
+      if (!onFront) {
+        /*
+         * Backside display is intentionally reversed:
+         * 400₈ at right, 600₈ center, 000₈ at left.
+         */
+        const pct =
+          100 *
+          (
+            1 -
+            ((angle - 256) / 256)
+          );
+
+        annualSolMarkerBack.style.left =
+          Math.max(
+            0,
+            Math.min(100, pct)
+          ) + '%';
+
+        setText(
+          annualSolMarkerBack,
+          'SOL · ' + angleOctal
+        );
+      }
+    }
+
+    setText(
+      annualReturnState,
+      onFront
+        ? 'FRONT / OUTBOUND · ADVANCE →'
+        : 'RETURN / BACKSIDE · ADVANCE ←'
+    );
+
+    return {
+      angle,
+      angleOctal,
+      onFront
+    };
+  }
+
+  function render() {
+    if (!latest || rendering) return;
+
+    rendering = true;
+
+    try {
+      const annual =
+        latest.annualV1Output || {};
+
+      const annualContinuous =
+        Number(
+          annual.natureAnnualAngle512Continuous
+        );
+
+      const seam =
+        latest.annualSeamResidual || {};
+
+      const legacy =
+        latest.liveInputs?.preservedLegacyYearAngle?.payload?.yearAngle || {};
+
+      const hasLiveNatureAngle =
+        annual.physicalRawAnchorSealed === true &&
+        annual.natureAnnualAngle512 != null &&
+        Number.isFinite(
+          Number(
+            annual.natureAnnualAngle512
+          )
+        );
+
+      const displayedAngle =
+        hasLiveNatureAngle
+          ? norm512(
+              annual.natureAnnualAngle512
+            )
+          : PHYSICAL_WITNESS_ANGLE512;
+
+      const wheel =
+        renderAnnualWheel(
+          displayedAngle
+        );
+
+      setText(
+        front,
+        wheel.angleOctal +
+        (
+          hasLiveNatureAngle
+            ? ' · LIVE'
+            : ' · PHYSICAL WITNESS'
+        )
+      );
+
+      setText(
+        frontDecimal,
+        (
+          Number.isFinite(annualContinuous)
+            ? annualContinuous.toFixed(4)
+            : String(wheel.angle)
+        ) +
+        ' A8 · ANNUAL FRAME V1'
+      );
+
+      setText(
+        anchorState,
+        annual.physicalRawAnchorSealed
+          ? 'PHYSICAL RAW ANCHOR · SEALED'
+          : 'EPOCH-7 RAW · 13,665,935 .. 13,665,968'
+      );
+
+      setText(
+        anchorDetail,
+        hasLiveNatureAngle
+          ? (
+              'ZERO · A8 NEW YEAR · ' +
+              'RUNNING FROM SEALED PHYSICAL ANCHOR'
+            )
+          : (
+              'ZERO · A8 NEW YEAR · ' +
+              'REPRESENTATIVE RAW 13,665,968'
+            )
+      );
+
+      setText(
+        seamTest,
+        (
+          wheel.onFront
+            ? (
+                'FRONT / OUTBOUND · ' +
+                '000₈ → 200₈ → 400₈ · ADVANCE →'
+              )
+            : (
+                'RETURN / BACKSIDE · ' +
+                '400₈ → 600₈ → 000₈ · ADVANCE ←'
+              )
+        ) +
+        ' · SEAM ' +
+        (seam.status || '—')
+      );
+
+      setText(
+        mappingStatus,
+        hasLiveNatureAngle
+          ? (
+              'ANNUAL FRAME V1 · ' +
+              'LIVE FROM PHYSICAL ANCHOR'
+            )
+          : (
+              'ANNUAL FRAME V1 · ' +
+              'PHYSICAL 600₈ WITNESS SEALED · ' +
+              'LIVE ADVANCE PENDING'
+            )
+      );
+
+      const legacyText =
+        'BACKEND STATUS · ' +
+        (legacy.status || '—') +
+        (
+          legacy.yearZero
+            ? ' · ZERO ' + legacy.yearZero
+            : ''
+        );
+
+      setText(
+        legacyStatus,
+        legacyText
+      );
+
+      if (externalFallback) {
+        setText(
+          externalFallback,
+          legacyText
+        );
+      }
+
+    } finally {
+      rendering = false;
+    }
+  }
+
+  async function refreshAnnualFrameV1() {
+    try {
+      const response =
+        await fetch(
+          '/api/annual-frame',
+          {cache:'no-store'}
+        );
+
+      if (!response.ok) {
+        throw new Error(
+          `ANNUAL FRAME HTTP ${response.status}`
+        );
+      }
+
+      latest =
+        await response.json();
+
+      render();
+
+    } catch (err) {
+      setText(
+        mappingStatus,
+        `ANNUAL FRAME DISCONNECTED · ${err.message}`
+      );
+    }
+  }
+
+  const observer =
+    new MutationObserver(() => {
+      render();
+    });
+
+  for (const el of [
+    front,
+    frontDecimal,
+    anchorState,
+    anchorDetail,
+    seamTest,
+    mappingStatus
+  ]) {
+    if (!el) continue;
+
+    observer.observe(el, {
+      childList:true,
+      characterData:true,
+      subtree:true
+    });
+  }
+
+  refreshAnnualFrameV1();
+
+  setInterval(
+    refreshAnnualFrameV1,
+    1000
+  );
 })();
 </script>
 

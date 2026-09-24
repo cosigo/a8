@@ -1,0 +1,13 @@
+[Unit]
+Description=A8 Jovian Carrier Governor
+After=network.target a8-jovian-live-period.service
+Requires=a8-jovian-live-period.service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /opt/a8-jovian-governor/server.py
+Restart=on-failure
+RestartSec=2
+
+[Install]
+WantedBy=multi-user.target

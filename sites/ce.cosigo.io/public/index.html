@@ -317,8 +317,6 @@ pre{
 
       <nav>
         <a class="button" href="/">PUBLIC LAB</a>
-        <a class="button" href="/pulse">PULSE SOURCE</a>
-        <a class="button" href="/hardware-source.html">SOURCE SELECTOR</a>
         <a class="button" href="/music-review.html">MUSIC REVIEW</a>
         <a class="button" href="https://trade.cosigo.io/admin.html">TOKEN</a>
         <a class="button" href="https://admin.bcnode.io">BCNODE</a>
@@ -345,7 +343,7 @@ pre{
 
     <div class="step">
       <b>2 · PATH A PHYSICAL SOURCE</b>
-      Core20 uses the qualified Epoch-5 external physical RAW source as its
+      Core20 uses the qualified Epoch-7 external physical RAW source as its
       normal pace input.
     </div>
 
@@ -356,9 +354,10 @@ pre{
     </div>
 
     <div class="step">
-      <b>4 · YEAR ANGLE</b>
-      Native A8 year orientation resumes through the qualified Path-A state.
-      UTC and JPL controls remain Path-B fallback tools.
+      <b>4 · ANNUAL FRAME V1</b>
+      Annual Frame V1 is physically anchored at the Sep-22 Sol crossing:
+      Epoch-7 RAW 13,665,968 = 600₈. Live position advances from physical RAW.
+      Nature defines the recurrence; CE operates and replaces machinery only.
     </div>
   </div>
 
@@ -370,6 +369,81 @@ pre{
     <span id="overallStatus" class="pill">LOADING</span>
     <span id="refreshState" class="pill">LIVE REFRESH</span>
   </div>
+</section>
+
+<section class="panel" id="a8-ce-canonical-operating-map">
+  <div class="kicker">A8 · CANONICAL OPERATING MAP</div>
+  <h2>CURRENT CONNECTED SYSTEM</h2>
+
+  <p class="note">
+    CE identifies the machinery actually connected to current A8 operation.
+    STANDBY means the hardware or evidence is not yet available.
+    No substitute operating mechanics are created by this panel.
+  </p>
+
+  <div class="grid">
+
+    <div class="stat">
+      <span class="k">JOVIAN NATURAL RULER</span>
+      <span id="canonicalJovian" class="v cyan">CHECKING…</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">JOVIAN WHEEL</span>
+      <span id="canonicalWheel" class="v">CHECKING…</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">ARDUINO A/B · PRIMARY</span>
+      <span id="canonicalAB" class="v cyan">CHECKING…</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">ARDUINO C/D · GHOST</span>
+      <span id="canonicalCD" class="v cyan">CHECKING…</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">JOVIAN GOVERNOR</span>
+      <span id="canonicalGovernor" class="v">CHECKING…</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">ANNUAL FRAME V1</span>
+      <span id="canonicalAnnual" class="v">CHECKING…</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">SOL / RAW ANCHOR</span>
+      <span id="canonicalAnnualAnchor" class="v warn-text">
+        CHECKING…
+      </span>
+    </div>
+
+    <div class="stat">
+      <span class="k">REPLACEMENT RESERVE</span>
+      <span class="v warn-text">
+        ARDUINO E/F · STANDBY · HARDWARE NOT PRESENT
+      </span>
+    </div>
+
+  </div>
+
+  <div class="controls" style="margin-top:12px">
+    <button id="standbySquirrelE" disabled>
+      E · STANDBY REPLACEMENT
+    </button>
+
+    <button id="standbySquirrelF" disabled>
+      F · STANDBY REPLACEMENT
+    </button>
+  </div>
+
+  <p class="note">
+    E and F are reserved replacement hardware for a failed active
+    A/B/C/D Arduino. They have no switching, assignment or handoff
+    handler until the hardware exists and that procedure is established.
+  </p>
 </section>
 
 <section class="panel">
@@ -475,7 +549,7 @@ pre{
 </section>
 
 <section class="panel">
-  <h2>YEAR ORIENTATION</h2>
+  <h2>PRESERVED LEGACY YEAR ORIENTATION · COMPARISON ONLY</h2>
 
   <div class="grid">
     <div class="stat">
@@ -598,7 +672,7 @@ pre{
   </div>
 
   <p class="note">
-    Epoch-5 physical chain: Arduino A Timer2/D11 → Arduino B Timer1/D5
+    Epoch-7 physical chain: Arduino A Timer2/D11 → Arduino B Timer1/D5
     → Pi reporter. Core20 maps this physical RAW through the qualified
     Path-A physical-to-Core relationship. Browser polling cadence and
     network arrival time are presentation only and do not pace Core20.
@@ -722,7 +796,7 @@ pre{
           margin-top:4px;
         "
       >
-        A8 PRIMARY · NATURE → EPOCH-5 PHYSICAL RAW → CORE20
+        A8 PRIMARY · NATURE → EPOCH-7 PHYSICAL RAW → CORE20
       </div>
 
       <pre style="
@@ -738,7 +812,7 @@ pre{
    Io/Eu/Ga turns    stellar crossing   solar direction
           │                │                │
           │                │                │
-          └──── DIRECT EPOCH-5 PHYSICAL RAW ┘
+          └──── DIRECT EPOCH-7 PHYSICAL RAW ┘
                            │
                      EVIDENCE LAYER
                            │
@@ -758,36 +832,38 @@ pre{
                CALENDAR           SHIP</pre>
 
       <p class="note">
-        <b>JUPITER</b> · actual frame → server-captured Epoch-5 RAW
+        <b>JUPITER</b> · actual frame → server-captured Epoch-7 RAW
         → Jupiter-relative moon position → natural turns / recurrence evidence.
       </p>
 
       <p class="note">
         <b>MINTAKA</b> · actual telescope field → identified Mintaka +
-        companion geometry → server-captured Epoch-5 RAW → Earth-axial-rotation
+        companion geometry → server-captured Epoch-7 RAW → Earth-axial-rotation
         evidence. Mintaka is an upstream Nature witness, not downstream
         decoration.
       </p>
 
       <p class="note">
-        <b>SOL</b> · actual telescope observation → server-captured Epoch-5 RAW
+        <b>SOL</b> · actual telescope observation → server-captured Epoch-7 RAW
         → orbital-direction / Year-Angle evidence.
       </p>
 
       <p class="note">
-        <b>PHYSICAL EVIDENCE BOUNDARY</b> · Arduino-B / Epoch-5 RAW →
+        <b>PHYSICAL EVIDENCE BOUNDARY</b> · Arduino-B / Epoch-7 RAW →
         Jupiter / Mintaka / Sol observation → sealed evidence. Mapped Core RAW
         and host time are excluded from defining that evidence.
       </p>
 
       <p class="note">
-        <b>PHYSICAL CARRIER</b> · Epoch-5 RAW now; dual qualified carriers
-        may exist later. Carrier is transport only.
+        <b>PHYSICAL CARRIERS</b> · Arduino A/B is the current Primary
+        carrier and Arduino C/D is the current Ghost carrier. Both are
+        plotted on the same Jovian wheel. Carrier hardware is replaceable
+        transport; it does not define the Jovian ruler.
       </p>
 
       <p class="note">
         <b>CORE20</b> · common A8 progression.
-        Physical SOURCE_EPOCH 5 and Core20 internal sourceEpoch 3 remain
+        Physical SOURCE_EPOCH 7 and Core20 internal sourceEpoch 3 remain
         distinct domains.
       </p>
 
@@ -824,109 +900,80 @@ pre{
           letter-spacing:.06em;
         "
       >
-        PATH B · ORIGINAL FALLBACK · TAKEOVER DORMANT
+        PATH B · BREAK-GLASS FALLBACK · MANUAL ONLY
       </summary>
 
       <div style="margin-top:14px">
 
-        <div class="kicker">
-          EMERGENCY / PRESERVED MACHINERY
-        </div>
-
         <p class="note">
-          Original functional machinery retained for emergency recovery,
-          diagnostics, qualification and independent cross-comparison.
-          Dormant does not mean disabled or dismantled.
-        </p>
-
-        <p class="note">
-          Path B remains manually deliberate. This panel does not yet
-          perform an automatic source takeover.
+          Path B is not the running source path and performs no automatic
+          takeover. Only the retained break-glass controls with a current
+          identified recovery or comparison role remain here.
         </p>
 
         <div
           style="
-            display:flex;
-            flex-wrap:wrap;
-            gap:8px;
+            width:100%;
             margin-top:12px;
+            padding-top:12px;
+            border-top:1px solid rgba(255,255,255,.12);
           "
         >
-
-          <a
-            class="button"
-            href="/hardware-source.html"
-          >
-            B · SOURCE SELECTOR
-          </a>
-
-          <div
-            style="
-              width:100%;
-              margin-top:8px;
-              padding-top:12px;
-              border-top:1px solid rgba(255,255,255,.12);
-            "
-          >
-            <div class="kicker">
-              B · UTC CIVIL ALIGNMENT BRIDGE
-            </div>
-
-            <div
-              class="controls"
-              style="margin-top:8px"
-            >
-              <button id="connect" class="primary">
-                B FALLBACK · CIVIL ALIGN · UTC
-              </button>
-
-              <button id="realignCivil" class="warn">
-                CIVIL RE-ALIGN · NOT REQUIRED
-              </button>
-            </div>
-
-            <p class="note">
-              CONNECT performs the preserved empty-body momentary
-              civil alignment only. It does not start Core20 and does
-              not provide ongoing timing.
-            </p>
+          <div class="kicker">
+            B · UTC CIVIL ALIGNMENT BRIDGE
           </div>
 
           <div
-            style="
-              width:100%;
-              margin-top:8px;
-              padding-top:12px;
-              border-top:1px solid rgba(255,255,255,.12);
-            "
+            class="controls"
+            style="margin-top:8px"
           >
-            <div class="kicker">
-              B · EXTERNAL YEAR ORIENTATION BRIDGE
-            </div>
+            <button id="connect" class="primary">
+              B FALLBACK · CIVIL ALIGN · UTC
+            </button>
 
-            <div
-              class="controls"
-              style="margin-top:8px"
-            >
-              <button id="alignJpl" class="primary">
-                B FALLBACK · YEAR ORIENTATION · JPL
-              </button>
-            </div>
-
-            <p class="note">
-              JPL places absolute year orientation once.
-              It does not advance YEAR DAY and does not provide the
-              ongoing orbital rate.
-            </p>
+            <button id="realignCivil" class="warn">
+              CIVIL RE-ALIGN · NOT REQUIRED
+            </button>
           </div>
 
-          <a
-            class="button"
-            href="#requalify"
-          >
-            B · REQUALIFICATION
-          </a>
+          <p class="note">
+            Momentary civil-alignment fallback only.
+            It does not provide ongoing A8 timing.
+          </p>
+        </div>
 
+        <div
+          style="
+            width:100%;
+            margin-top:12px;
+            padding-top:12px;
+            border-top:1px solid rgba(255,255,255,.12);
+          "
+        >
+          <div class="kicker">
+            B · EXTERNAL YEAR ORIENTATION BRIDGE
+          </div>
+
+          <div
+            class="controls"
+            style="margin-top:8px"
+          >
+            <button id="alignJpl" class="primary">
+              B FALLBACK · YEAR ORIENTATION · JPL
+            </button>
+          </div>
+
+          <p class="note">
+            Preserved external comparison / emergency orientation control.
+            It does not advance YEAR DAY and does not provide ongoing
+            orbital progression.
+          </p>
+        </div>
+
+        <div
+          class="controls"
+          style="margin-top:14px"
+        >
           <a
             class="button"
             href="#hold"
@@ -940,249 +987,7 @@ pre{
           >
             B · DIAGNOSTIC RESUME
           </a>
-
         </div>
-
-        <div
-          style="
-            margin-top:16px;
-            padding-top:16px;
-            border-top:1px solid rgba(255,255,255,.12);
-          "
-        >
-
-          <div class="kicker">
-            PATH B · SOURCE DOMAIN / QUALIFICATION
-          </div>
-
-          <p class="note">
-            Preserved Epoch-3 / VIRTUAL_RIG_A machinery lives here.
-            Supporting B instruments may remain active read-only while
-            Path-B takeover itself remains dormant.
-          </p>
-
-<details class="panel" id="a8-ce-b-source-hardware">
-  <summary>PATH B · ORIGINAL SOURCE / HARDWARE</summary>
-
-  <div class="inside">
-    <h2>ORIGINAL SOURCE / HARDWARE</h2>
-
-    <p class="note">
-      Preserved Path-B source machinery. The selected fallback rig may
-      remain active in its own non-authority domain for qualification,
-      diagnostics and cross-comparison. This does not mean Path-B
-      takeover is active.
-    </p>
-
-    <div class="grid" style="margin-top:12px">
-      <div class="stat">
-        <span class="k">PATH B · SOURCE SUMMARY</span>
-        <span id="jovianStatus" class="v">—</span>
-      </div>
-    </div>
-
-  <div class="controls">
-    <a class="button" href="/pulse">B · PULSE SOURCE</a>
-    <a class="button" href="/hardware-source.html">B · VIRTUAL / REAL SOURCE · GATE 6E</a>
-    <a class="button" href="/hardware-interface.html">B · EXTERNAL PULSE RIG · GATE 6A</a>
-    <a class="button" href="/receive-only-transport.html">B · RECEIVE-ONLY TRANSPORT · GATE 6B</a>
-    <a class="button" href="/local-device-reader.html">B · LOCAL DEVICE READER · GATE 6C</a>
-  </div>
-
-  <details>
-    <summary>LIVE SOURCE JSON</summary>
-    <div class="inside">
-      <pre id="sourceJson">—</pre>
-    </div>
-  </details>
-
-  </div>
-</details>
-
-<details class="panel" id="opposingClockConsole">
-  <summary>
-    PATH B · STELLAR / SOL CLOCK OPPOSITION · QUALIFICATION
-  </summary>
-
-  <div class="inside">
-    <h2>STELLAR / SOL CLOCK OPPOSITION</h2>
-
-    <p class="note">
-      Preserved Path-B comparison instrument. It may remain active
-      read-only against its selected fallback source domain while
-      having no Core20 authority.
-    </p>
-
-  <div class="statusline">
-    <span id="oppositionStatus" class="pill">LOADING</span>
-    <span id="oppositionBoundary" class="pill">BOUNDARY CHECK</span>
-  </div>
-
-  <div class="grid" style="margin-top:12px">
-    <div class="stat">
-      <span class="k">MINTAKA CLOCK</span>
-      <span id="oppMintakaClock" class="v cyan">—</span>
-    </div>
-
-    <div class="stat">
-      <span class="k">CIVIL / SOL-RETURN CLOCK</span>
-      <span id="oppCivilClock" class="v cyan">—</span>
-    </div>
-
-    <div class="stat">
-      <span class="k">MINTAKA_PHASE17</span>
-      <span id="oppMintakaPhase17" class="v cyan">—</span>
-    </div>
-
-    <div class="stat">
-      <span class="k">DAY_PHASE17</span>
-      <span id="oppCivilPhase17" class="v cyan">—</span>
-    </div>
-
-    <div class="stat">
-      <span class="k">PATH B · SOURCE EPOCH</span>
-      <span id="oppSourceEpoch" class="v">—</span>
-    </div>
-
-    <div class="stat">
-      <span class="k">PATH B · SOURCE / RIG</span>
-      <span id="oppSourceMode" class="v">—</span>
-    </div>
-
-    <div class="stat">
-      <span class="k">COMMON RAW ANCHOR</span>
-      <span id="oppAnchorRaw" class="v">—</span>
-    </div>
-
-    <div class="stat">
-      <span class="k">CURRENT SELECTED RAW</span>
-      <span id="oppSelectedRaw" class="v">—</span>
-    </div>
-
-    <div class="stat">
-      <span class="k">ELAPSED RAW SINCE COMMON ANCHOR</span>
-      <span id="oppElapsedRaw" class="v">—</span>
-    </div>
-
-    <div class="stat">
-      <span class="k">RAW SAMPLE AUDIT</span>
-      <span id="oppRawAudit" class="v">—</span>
-    </div>
-
-    <div class="stat">
-      <span class="k">RATE LEADER</span>
-      <span id="oppRateLeader" class="v">—</span>
-    </div>
-
-    <div class="stat">
-      <span class="k">CURRENT LEADER</span>
-      <span id="oppCurrentLeader" class="v">—</span>
-    </div>
-
-    <div class="stat">
-      <span class="k">GEOMETRIC LEG</span>
-      <span id="oppGeometricLeg" class="v cyan">—</span>
-    </div>
-
-    <div class="stat">
-      <span class="k">COMPLETED RELATIVE BEATS / CARRY</span>
-      <span id="oppCompletedBeats" class="v cyan">—</span>
-    </div>
-
-    <div class="stat">
-      <span class="k">UNWRAPPED SLIP · ROTATIONS</span>
-      <span id="oppUnwrappedRotations" class="v">—</span>
-    </div>
-
-    <div class="stat">
-      <span class="k">UNWRAPPED SLIP · PHASE17</span>
-      <span id="oppUnwrappedPhase17" class="v">—</span>
-    </div>
-
-    <div class="stat">
-      <span class="k">UNWRAPPED SLIP · ANGLE512</span>
-      <span id="oppUnwrappedAngle512" class="v">—</span>
-    </div>
-
-    <div class="stat">
-      <span class="k">FOLDED SEPARATION · ROTATIONS</span>
-      <span id="oppSeparationRotations" class="v">—</span>
-    </div>
-
-    <div class="stat">
-      <span class="k">FOLDED SEPARATION · PHASE17</span>
-      <span id="oppSeparationPhase17" class="v">—</span>
-    </div>
-
-    <div class="stat">
-      <span class="k">FOLDED SEPARATION · ANGLE512</span>
-      <span id="oppSeparationAngle512" class="v">—</span>
-    </div>
-
-    <div class="stat">
-      <span class="k">LOCKED MINTAKA RAW / ROTATION</span>
-      <span id="oppMintakaRecurrence" class="v">—</span>
-    </div>
-
-    <div class="stat">
-      <span class="k">LOCKED SOL-RETURN RAW / RETURN</span>
-      <span id="oppCivilRecurrence" class="v">—</span>
-    </div>
-
-    <div class="stat">
-      <span class="k">RECURRENCE CHANGE · MINTAKA</span>
-      <span id="oppMintakaChanged" class="v">—</span>
-    </div>
-
-    <div class="stat">
-      <span class="k">RECURRENCE CHANGE · CIVIL</span>
-      <span id="oppCivilChanged" class="v">—</span>
-    </div>
-
-    <div class="stat">
-      <span class="k">RELATIVE BEAT</span>
-      <span id="oppBeatRatio" class="v cyan">—</span>
-    </div>
-
-    <div class="stat">
-      <span class="k">RELATIVE BEAT · RAW SPAN</span>
-      <span id="oppBeatRaw" class="v">—</span>
-    </div>
-  </div>
-
-  <p class="note">
-    Both clock faces are shown independently. Drift is accumulated only from
-    their shared native selected-raw comparison anchor; unlike clock-face
-    subtraction, this preserves the independently established natural zeros.
-  </p>
-
-  <details>
-    <summary>OPPOSING CLOCK INSTRUMENT · RAW JSON</summary>
-    <div class="inside">
-      <pre id="oppositionJson">—</pre>
-    </div>
-  </details>
-
-  <details>
-    <summary>MINTAKA STELLAR CLOCK · RAW JSON</summary>
-    <div class="inside">
-      <pre id="mintakaClockJson">—</pre>
-    </div>
-  </details>
-
-  </div>
-</details>
-
-        </div>
-
-        <p
-          class="note"
-          style="margin-top:14px;margin-bottom:0"
-        >
-          Future B MASTER orchestration will use only a separately
-          verified fallback sequence. No unverified source-switch logic
-          is assumed here.
-        </p>
 
       </div>
     </details>
@@ -1191,64 +996,38 @@ pre{
 
 </section>
 
-<details class="panel" id="a8-ce-path-c">
-  <summary>
-    PATH C · RESEARCH / PROOF / DEVELOPMENT · NOT CURRENT CORE20
-  </summary>
+<section
+  class="panel"
+  id="a8-ce-current-diagnostic-snapshots"
+>
+  <h2>CURRENT RAW DIAGNOSTIC SNAPSHOTS</h2>
 
-  <div class="inside">
-
-    <p class="note">
-      Preserved research, proof, regression, diagnostic and development
-      machinery. These benches remain available for future investigation
-      if needed. They are not part of current Core20 operation, do not
-      supply the current physical pace and do not define Path A.
-    </p>
-
-<section class="panel">
-  <h2>RAW DIAGNOSTIC SNAPSHOTS</h2>
+  <p class="note">
+    Read-only snapshots of current Core20 / Calendar state and the
+    preserved Year-Angle comparison feed.
+  </p>
 
   <details>
     <summary>RUNTIME / CLOCK</summary>
-    <div class="inside"><pre id="clockJson">—</pre></div>
+    <div class="inside">
+      <pre id="clockJson">—</pre>
+    </div>
   </details>
 
   <details>
     <summary>CALENDAR</summary>
-    <div class="inside"><pre id="calendarJson">—</pre></div>
-  </details>
-
-  <details>
-    <summary>YEAR ANGLE</summary>
-    <div class="inside"><pre id="yearJson">—</pre></div>
-  </details>
-</section>
-
-<section class="panel">
-  <h2>PROOF / REGRESSION · NOT NORMAL OPERATION</h2>
-
-  <details>
-    <summary>OPEN PROVEN BENCHES</summary>
     <div class="inside">
-      <div class="controls">
-        <a class="button" href="/pseudo-terminal-link.html">GATE 6D · ONE-WAY PTY</a>
-        <a class="button" href="/discipline.html">SLOW DISCIPLINE</a>
-        <a class="button" href="/rate-slew.html">RATE SLEW</a>
-        <a class="button" href="/rate-continuity.html">RATE CONTINUITY</a>
-        <a class="button" href="/disturbance-recovery.html">DISTURBANCE / RECOVERY</a>
-        <a class="button" href="/multi-window-recovery.html">MULTI-WINDOW RECOVERY</a>
-        <a class="button" href="/holdover-reacquisition.html">HOLDOVER / REACQUISITION</a>
-        <a class="button" href="/repeated-holdover.html">REPEATED HOLDOVER</a>
-        <a class="button" href="/discipline-harness.html">DISCIPLINE HARNESS</a>
-        <a class="button" href="/discipline-runner.html">DISCIPLINE RUNNER</a>
-        <a class="button" href="/pre-actuator-seal.html">PRE-ACTUATOR SEAL</a>
-      </div>
+      <pre id="calendarJson">—</pre>
+    </div>
+  </details>
+
+  <details>
+    <summary>PRESERVED YEAR ANGLE</summary>
+    <div class="inside">
+      <pre id="yearJson">—</pre>
     </div>
   </details>
 </section>
-
-  </div>
-</details>
 
 
 <details class="panel" id="a8-ce-critical-controls">
@@ -1269,10 +1048,114 @@ pre{
       Opening this cabinet does not execute any action.
       CLEAN STOP remains available while Core20 is online. CE MASTER START
       is intentionally locked while Core20 is offline until the physical
-      Path-A fresh-start backend is separately qualified. Requalification,
-      diagnostic hold/resume and calendar-anchor controls remain preserved
-      here as deliberate plant-changing actions.
+      Path-A fresh-start backend is separately qualified. Diagnostic
+      hold/resume and calendar-anchor controls remain here as deliberate
+      plant-changing actions.
     </p>
+
+
+<!-- A8-CE-JOVIAN-AUTHORITY-BEGIN -->
+<section
+  class="panel"
+  id="a8-ce-jovian-authority-selector"
+>
+  <div class="kicker">
+    JOVIAN AUTHORITY
+  </div>
+
+  <h2>Natural recurrence authority selector</h2>
+
+  <p class="note">
+    CE selects one resonant inner moon as authority.
+    The other moons remain witnesses.
+    Callisto is witness-only.
+  </p>
+
+  <div class="grid">
+    <div class="stat">
+      <span class="k">SELECTED AUTHORITY</span>
+      <span
+        id="jovianAuthoritySelected"
+        class="v cyan"
+      >CHECKING…</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">NATURAL RECURRENCE</span>
+      <span
+        id="jovianAuthorityPeriod"
+        class="v"
+      >—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">DISCIPLINE STATE</span>
+      <span
+        id="jovianAuthorityTransition"
+        class="v"
+      >—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">CURRENT LIVE DEVELOPMENT RULER</span>
+      <span
+        id="jovianAuthorityCurrent"
+        class="v"
+      >9,344,598 RAW · EUROPA</span>
+    </div>
+  </div>
+
+  <div
+    style="
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:14px
+    "
+  >
+    <button
+      type="button"
+      class="filter"
+      data-a8-jovian-authority="IO"
+    >
+      IO · 4,650,745
+    </button>
+
+    <button
+      type="button"
+      class="filter"
+      data-a8-jovian-authority="EUROPA"
+    >
+      EUROPA · 9,344,598
+    </button>
+
+    <button
+      type="button"
+      class="filter"
+      data-a8-jovian-authority="GANYMEDE"
+    >
+      GANYMEDE · 18,866,420
+    </button>
+  </div>
+
+  <p
+    id="jovianAuthorityWitnesses"
+    class="note"
+    style="margin-top:12px"
+  >
+    WITNESSES · CHECKING…
+  </p>
+
+  <p
+    id="jovianAuthorityControlStatus"
+    class="note"
+    style="margin-top:8px"
+  >
+    Selector changes authority state only.
+    Carrier-rate transition remains separate.
+  </p>
+</section>
+<!-- A8-CE-JOVIAN-AUTHORITY-END -->
 
 <section class="panel" id="a8-ce-core20-master-power">
 
@@ -1353,13 +1236,11 @@ pre{
   <h2>DANGER ZONE · PLANT-CHANGING ACTIONS</h2>
 
   <p class="note">
-    These controls are not part of ordinary Path-A operation. Requalification is preserved Path-B fallback machinery.
+    These controls are deliberate plant-changing actions outside ordinary Path-A operation.
   </p>
 
   <div class="controls">
-    <button id="requalify" class="danger">
-      B FALLBACK · REQUALIFY · NEW SOURCE EPOCH
-    </button>
+    
 
     <button id="hold" class="danger">
       DIAGNOSTIC HOLD
@@ -1403,10 +1284,7 @@ pre{
     clock: null,
     calendar: null,
     year: null,
-    source: null,
     recorder: null,
-    mintakaClock: null,
-    opposing: null,
   };
 
   let recorderPaused = false;
@@ -1474,31 +1352,6 @@ pre{
         method: 'POST',
         body: JSON.stringify(body),
       }
-    );
-  }
-
-  function sourceSummary(payload) {
-    const source =
-      payload && payload.source
-        ? payload.source
-        : {};
-
-    const bridge =
-      payload && payload.recoveryInput
-        ? payload.recoveryInput
-        : {};
-
-    const jovian =
-      payload && payload.jovian
-        ? payload.jovian
-        : {};
-
-    return (
-      source.mode ||
-      source.status ||
-      bridge.status ||
-      jovian.status ||
-      'AVAILABLE'
     );
   }
 
@@ -1597,48 +1450,6 @@ pre{
     const persistence =
       calendar.persistence || {};
 
-    const independentMintaka =
-      latest.mintakaClock &&
-      latest.mintakaClock.clock
-        ? latest.mintakaClock.clock
-        : {};
-
-    const opposing =
-      latest.opposing &&
-      latest.opposing.instrument
-        ? latest.opposing.instrument
-        : {};
-
-    const opposingMintaka =
-      opposing.mintakaClock || {};
-
-    const opposingCivil =
-      opposing.civilClock || {};
-
-    const discrepancy =
-      opposing.discrepancy || {};
-
-    const accumulated =
-      discrepancy.accumulated || {};
-
-    const beat =
-      discrepancy.relativeBeat || {};
-
-    const rates =
-      discrepancy.rates || {};
-
-    const locked =
-      discrepancy.lockedRecurrences || {};
-
-    const changed =
-      discrepancy.observedRecurrenceChanged || {};
-
-    const audit =
-      opposing.rawSampleAudit || {};
-
-    const boundary =
-      opposing.authorityBoundary || {};
-
     const year =
       latest.year &&
       latest.year.yearAngle
@@ -1675,11 +1486,6 @@ pre{
     text(
       'clockAuthority',
       clock.clockAuthority
-    );
-
-    text(
-      'jovianStatus',
-      sourceSummary(latest.source)
     );
 
     text('calendarStatus', calendar.status);
@@ -1725,226 +1531,6 @@ pre{
       year.ongoingAuthority
     );
 
-    text(
-      'oppositionStatus',
-      opposing.status
-    );
-
-    text(
-      'oppMintakaClock',
-      opposingMintaka.clock
-        ? opposingMintaka.clock.textOctal
-        : null
-    );
-
-    text(
-      'oppCivilClock',
-      opposingCivil.clock
-        ? opposingCivil.clock.textOctal
-        : null
-    );
-
-    text(
-      'oppMintakaPhase17',
-      opposingMintaka.mintakaPhase17Octal ||
-      opposingMintaka.mintakaPhase17
-    );
-
-    text(
-      'oppCivilPhase17',
-      opposingCivil.dayPhase17Octal ||
-      opposingCivil.dayPhase17
-    );
-
-    text(
-      'oppSourceEpoch',
-      opposing.sourceEpoch
-    );
-
-    text(
-      'oppSourceMode',
-      [
-        opposing.sourceMode,
-        opposing.rig
-      ].filter(Boolean).join(' · ')
-    );
-
-    text(
-      'oppAnchorRaw',
-      discrepancy.anchorRawPulse
-    );
-
-    text(
-      'oppSelectedRaw',
-      opposing.selectedRawPulse
-    );
-
-    text(
-      'oppElapsedRaw',
-      discrepancy.elapsedRawPulse
-    );
-
-    text(
-      'oppRawAudit',
-      opposing.sameSelectedRawPulse === true
-        ? `${audit.bridge} = bridge = Mintaka = civil`
-        : `MISMATCH · bridge=${audit.bridge ?? '—'} · Mintaka=${audit.mintakaClock ?? '—'} · civil=${audit.civilClock ?? '—'}`
-    );
-
-    text(
-      'oppRateLeader',
-      rates.rateLeader
-    );
-
-    text(
-      'oppCurrentLeader',
-      accumulated.currentLeader
-    );
-
-    text(
-      'oppGeometricLeg',
-      beat.geometricLeg
-    );
-
-    text(
-      'oppCompletedBeats',
-      beat.completedBeats
-    );
-
-    text(
-      'oppUnwrappedRotations',
-      accumulated.unwrappedDiscrepancyRotations
-        ? accumulated.unwrappedDiscrepancyRotations.text
-        : null
-    );
-
-    text(
-      'oppUnwrappedPhase17',
-      accumulated.unwrappedDiscrepancyPhase17
-        ? accumulated.unwrappedDiscrepancyPhase17.text
-        : null
-    );
-
-    text(
-      'oppUnwrappedAngle512',
-      accumulated.unwrappedDiscrepancyAngle512
-        ? accumulated.unwrappedDiscrepancyAngle512.text
-        : null
-    );
-
-    text(
-      'oppSeparationRotations',
-      beat.geometricSeparationRotations
-        ? beat.geometricSeparationRotations.text
-        : null
-    );
-
-    text(
-      'oppSeparationPhase17',
-      beat.geometricSeparationPhase17
-        ? beat.geometricSeparationPhase17.text
-        : null
-    );
-
-    text(
-      'oppSeparationAngle512',
-      beat.geometricSeparationAngle512
-        ? beat.geometricSeparationAngle512.text
-        : null
-    );
-
-    text(
-      'oppMintakaRecurrence',
-      locked.mintakaRawPerEarthAxialRotation
-        ? locked.mintakaRawPerEarthAxialRotation.text
-        : null
-    );
-
-    text(
-      'oppCivilRecurrence',
-      locked.civilRawPerSunReturn
-        ? locked.civilRawPerSunReturn.text
-        : null
-    );
-
-    text(
-      'oppMintakaChanged',
-      changed.mintaka === true
-        ? 'CHANGED · LOCK PRESERVED'
-        : changed.mintaka === false
-          ? 'NO'
-          : null
-    );
-
-    text(
-      'oppCivilChanged',
-      changed.civil === true
-        ? 'CHANGED · LOCK PRESERVED'
-        : changed.civil === false
-          ? 'NO'
-          : null
-    );
-
-    text(
-      'oppBeatRatio',
-      beat.exists === true
-        ? `${
-            beat.mintakaRotationsPerBeat
-              ? beat.mintakaRotationsPerBeat.text
-              : '—'
-          } Mintaka ↔ ${
-            beat.civilReturnsPerBeat
-              ? beat.civilReturnsPerBeat.text
-              : '—'
-          } civil`
-        : 'NO RELATIVE BEAT'
-    );
-
-    text(
-      'oppBeatRaw',
-      beat.rawPulseSpan
-        ? beat.rawPulseSpan.text
-        : null
-    );
-
-    const boundaryKeys = [
-      'writesA8Core',
-      'writesMintakaObserver',
-      'writesSolObserver',
-      'writesTerraShipSlip',
-      'writesCivilClock',
-      'writesCalendar',
-      'changesAuthority',
-      'usesLegacyTime',
-      'usesHostTime',
-      'usesBrowserTime',
-      'usesFrequencyHz',
-      'usesUTC',
-      'usesNTP',
-      'usesGPS',
-    ];
-
-    const boundaryPass =
-      discrepancy.nativeOnly === true &&
-      opposing.ready === true &&
-      opposing.sameSelectedRawPulse === true &&
-      boundaryKeys.every(
-        key => boundary[key] === false
-      );
-
-    text(
-      'oppositionBoundary',
-      boundaryPass
-        ? 'PASS · NATIVE ONLY · READ ONLY'
-        : 'BOUNDARY CHECK REQUIRED'
-    );
-
-    $('oppositionJson').textContent =
-      pretty(latest.opposing);
-
-    $('mintakaClockJson').textContent =
-      pretty(latest.mintakaClock);
-
     $('clockJson').textContent =
       pretty(latest.clock);
 
@@ -1953,9 +1539,6 @@ pre{
 
     $('yearJson').textContent =
       pretty(latest.year);
-
-    $('sourceJson').textContent =
-      pretty(latest.source);
 
     renderRecorder(
       latest.recorder &&
@@ -1997,9 +1580,6 @@ pre{
 
     $('resume').disabled =
       runtime.status !== 'STOPPED';
-
-    $('requalify').disabled =
-      runtime.status === 'QUALIFYING';
 
     $('alignJpl').disabled =
       !running ||
@@ -2188,20 +1768,14 @@ pre{
         clock,
         calendar,
         year,
-        source,
         recorder,
-        mintakaClock,
-        opposing,
       ] =
         await Promise.all([
           api('/api/core20/runtime'),
           api('/api/core20/clock'),
           api('/api/core20/calendar'),
           api('/api/core20/year-angle'),
-          api('/api/hardware/source'),
           api('/api/core20/flight-recorder'),
-          api('/api/mintaka/clock'),
-          api('/api/opposing-clocks'),
         ]);
 
       latest = {
@@ -2209,10 +1783,7 @@ pre{
         clock,
         calendar,
         year,
-        source,
         recorder,
-        mintakaClock,
-        opposing,
       };
 
       render();
@@ -2307,38 +1878,6 @@ pre{
       } catch (err) {
         alert(
           `YEAR ALIGN FAIL · ${err.message}`
-        );
-      }
-    }
-  );
-
-  $('requalify').addEventListener(
-    'click',
-    async () => {
-      if (
-        !confirm(
-          'REQUALIFY CORE20 AND CREATE A FRESH SOURCE EPOCH?\n\n' +
-          'This is NOT normal reboot operation.'
-        )
-      ) {
-        return;
-      }
-
-      try {
-        await post(
-          '/api/core20/runtime/start',
-          { restart: true }
-        );
-
-        await post(
-          '/api/core20/connect',
-          {}
-        );
-
-        await refreshAll();
-      } catch (err) {
-        alert(
-          `REQUALIFY FAIL · ${err.message}`
         );
       }
     }
@@ -2525,15 +2064,6 @@ pre{
 
           yearAngle:
             latest.year,
-
-          source:
-            latest.source,
-
-          mintakaStellarClock:
-            latest.mintakaClock,
-
-          opposingClockInstrument:
-            latest.opposing,
 
           flightRecorder:
             latest.recorder,
@@ -2922,11 +2452,393 @@ pre{
 </script>
 
 
+<script id="a8-ce-canonical-map-script">
+(() => {
+  'use strict';
+
+  let busy = false;
+
+  const put = (id, value) => {
+    const el = document.getElementById(id);
+
+    if (!el) return;
+
+    el.textContent =
+      value === undefined ||
+      value === null ||
+      value === ''
+        ? '—'
+        : String(value);
+  };
+
+
+  async function getJson(path) {
+    const response =
+      await fetch(
+        path,
+        {
+          method: 'GET',
+          cache: 'no-store',
+          credentials: 'same-origin',
+          headers: {
+            'Accept': 'application/json'
+          }
+        }
+      );
+
+    const raw =
+      await response.text();
+
+    let body = {};
+
+    try {
+      body =
+        raw
+          ? JSON.parse(raw)
+          : {};
+    } catch (_) {
+      body = { raw };
+    }
+
+    if (!response.ok) {
+      throw new Error(
+        body.error ||
+        `HTTP ${response.status}`
+      );
+    }
+
+    return body;
+  }
+
+
+  async function refreshCanonical() {
+    if (busy) return;
+
+    busy = true;
+
+    try {
+      const [
+        rulerResult,
+        governorResult,
+        annualResult
+      ] =
+        await Promise.allSettled([
+          getJson('/api/ce/jovian-ruler'),
+          getJson('/api/ce/jovian-governor'),
+          getJson('/api/ce/annual-frame')
+        ]);
+
+
+      if (
+        rulerResult.status ===
+        'fulfilled'
+      ) {
+        const ruler =
+          rulerResult.value;
+
+        put(
+          'canonicalJovian',
+          ruler.status
+        );
+
+        put(
+          'canonicalWheel',
+          `${ruler.authority.selectedBody} · ` +
+          `${Number(ruler.authority.selectedPeriodRaw).toLocaleString()} RAW`
+        );
+
+      } else {
+
+        put(
+          'canonicalJovian',
+          `READ FAIL · ${rulerResult.reason.message}`
+        );
+
+        put(
+          'canonicalWheel',
+          'NO CURRENT READ'
+        );
+      }
+
+
+      if (
+        governorResult.status ===
+        'fulfilled'
+      ) {
+        const governor =
+          governorResult.value;
+
+        const ab =
+          governor.carriers.primaryAB;
+
+        const cd =
+          governor.carriers.ghostCD;
+
+        put(
+          'canonicalAB',
+          `${ab.status} · ` +
+          `EPOCH ${ab.sourceEpoch} · ` +
+          `RAW ${ab.currentRaw}`
+        );
+
+        put(
+          'canonicalCD',
+          `${cd.status} · ` +
+          `${cd.linkStatus} · ` +
+          `RAW ${cd.currentRaw}`
+        );
+
+        put(
+          'canonicalGovernor',
+          `${governor.status} · ` +
+          `${governor.ratchet.currentRecommendation} · ` +
+          `AUTO ACTUATION ` +
+          `${governor.ratchet.automaticActuation ? 'ON' : 'OFF'}`
+        );
+
+      } else {
+
+        const reason =
+          governorResult.reason.message;
+
+        put(
+          'canonicalAB',
+          `READ FAIL · ${reason}`
+        );
+
+        put(
+          'canonicalCD',
+          `READ FAIL · ${reason}`
+        );
+
+        put(
+          'canonicalGovernor',
+          `READ FAIL · ${reason}`
+        );
+      }
+
+
+      if (
+        annualResult.status ===
+        'fulfilled'
+      ) {
+        const annual =
+          annualResult.value;
+
+        const out =
+          annual.annualV1Output;
+
+        put(
+          'canonicalAnnual',
+          `${annual.status} · ` +
+          `OFFSET ` +
+          `${out.frameOffsetDefined ? 'DEFINED' : 'NOT DEFINED'}`
+        );
+
+        put(
+          'canonicalAnnualAnchor',
+          out.physicalRawAnchorSealed
+            ? 'LIVE · EPOCH-7 PHYSICAL RAW ANCHOR SEALED'
+            : `STANDBY · EQUINOX · ${out.orientationStatus}`
+        );
+
+      } else {
+
+        const reason =
+          annualResult.reason.message;
+
+        put(
+          'canonicalAnnual',
+          `READ FAIL · ${reason}`
+        );
+
+        put(
+          'canonicalAnnualAnchor',
+          `STANDBY · READ FAIL · ${reason}`
+        );
+      }
+
+    } finally {
+
+      busy = false;
+    }
+  }
+
+
+  refreshCanonical();
+
+  setInterval(
+    refreshCanonical,
+    2000
+  );
+})();
+</script>
+
+
 <script id="a8-ce-core20-master-power-script">
 (() => {
   'use strict';
 
-  const base = '/api/ce/core20-service';
+  
+const jovianAuthorityBase =
+  '/api/ce/jovian-authority';
+
+async function refreshJovianAuthority() {
+  const selected =
+    document.getElementById(
+      'jovianAuthoritySelected'
+    );
+
+  if (!selected) return;
+
+  try {
+    const r = await fetch(
+      jovianAuthorityBase + '/status',
+      {
+        cache: 'no-store'
+      }
+    );
+
+    const x = await r.json();
+
+    if (!r.ok || x.ok !== true) {
+      throw new Error(
+        x.error || `HTTP ${r.status}`
+      );
+    }
+
+    const a = x.authority || {};
+
+    selected.textContent =
+      a.selectedAuthority || '—';
+
+    document.getElementById(
+      'jovianAuthorityPeriod'
+    ).textContent =
+      Number(
+        a.selectedPeriodRaw
+      ).toLocaleString() +
+      ' RAW';
+
+    document.getElementById(
+      'jovianAuthorityTransition'
+    ).textContent =
+      a.disciplineState || '—';
+
+    document.getElementById(
+      'jovianAuthorityCurrent'
+    ).textContent =
+      Number(
+        a.selectedPeriodRaw
+      ).toLocaleString() +
+      ' RAW · AVERAGE';
+
+    document.getElementById(
+      'jovianAuthorityWitnesses'
+    ).textContent =
+      'WITNESSES · ' +
+      (a.witnesses || []).join(' / ');
+
+    document.querySelectorAll(
+      '[data-a8-jovian-authority]'
+    ).forEach(btn => {
+      const active =
+        btn.dataset.a8JovianAuthority ===
+        a.selectedAuthority;
+
+      btn.setAttribute(
+        'aria-pressed',
+        active ? 'true' : 'false'
+      );
+
+      btn.style.outline =
+        active
+          ? '2px solid currentColor'
+          : '';
+    });
+
+    document.getElementById(
+      'jovianAuthorityControlStatus'
+    ).textContent =
+      a.actuatesFeeder
+        ? 'LIVE DISCIPLINE ACTUATION'
+        : 'SELECTED AUTHORITY · ' +
+          'RATE TRANSITION NOT YET ACTUATED';
+
+  } catch (err) {
+    selected.textContent =
+      'READ FAIL';
+
+    document.getElementById(
+      'jovianAuthorityControlStatus'
+    ).textContent =
+      String(err.message || err);
+  }
+}
+
+async function selectJovianAuthority(body) {
+  const status =
+    document.getElementById(
+      'jovianAuthorityControlStatus'
+    );
+
+  status.textContent =
+    `SELECTING ${body}…`;
+
+  try {
+    const r = await fetch(
+      jovianAuthorityBase + '/select',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type':
+            'application/json'
+        },
+        body: JSON.stringify({
+          body
+        })
+      }
+    );
+
+    const x = await r.json();
+
+    if (!r.ok || x.ok !== true) {
+      throw new Error(
+        x.error || `HTTP ${r.status}`
+      );
+    }
+
+    await refreshJovianAuthority();
+
+  } catch (err) {
+    status.textContent =
+      'SELECT FAIL · ' +
+      String(err.message || err);
+  }
+}
+
+document.querySelectorAll(
+  '[data-a8-jovian-authority]'
+).forEach(btn => {
+  btn.addEventListener(
+    'click',
+    () => {
+      selectJovianAuthority(
+        btn.dataset.a8JovianAuthority
+      );
+    }
+  );
+});
+
+refreshJovianAuthority();
+
+setInterval(
+  refreshJovianAuthority,
+  5000
+);
+
+
+const base = '/api/ce/core20-service';
 
   const state =
     document.getElementById('core20MachineState');
@@ -3096,6 +3008,79 @@ pre{
 
   refresh();
   setInterval(refresh, 2000);
+})();
+</script>
+
+
+<script id="a8-ce-annual-frame-canonical-live-v1">
+(() => {
+  'use strict';
+
+  const $ =
+    id => document.getElementById(id);
+
+  async function refreshCanonicalAnnual() {
+    try {
+      const r =
+        await fetch(
+          '/api/ce/annual-frame',
+          {cache:'no-store'}
+        );
+
+      if (!r.ok) {
+        throw new Error(
+          `HTTP ${r.status}`
+        );
+      }
+
+      const payload=await r.json();
+      const a=payload.annualV1Output || {};
+      const c=payload.contract || {};
+      const anchor=c.physicalAnchor || {};
+
+      const angle=
+        Number(
+          a.natureAnnualAngle512Continuous
+        );
+
+      if ($('canonicalAnnual')) {
+        $('canonicalAnnual').textContent =
+          Number.isFinite(angle)
+            ? (
+                `${a.natureAnnualAngleOctal || '—'} · ` +
+                `${angle.toFixed(4)} A8 · ` +
+                `${a.progressionStatus || '—'}`
+              )
+            : (
+                a.progressionStatus ||
+                'ANNUAL FRAME UNAVAILABLE'
+              );
+      }
+
+      if ($('canonicalAnnualAnchor')) {
+        $('canonicalAnnualAnchor').textContent =
+          (
+            `EPOCH-${anchor.sourceEpoch ?? '—'} · ` +
+            `RAW ${anchor.primaryRaw ?? '—'} ↔ ` +
+            `${anchor.annualAngleOctal || '—'} · ` +
+            `LIVE RAW ${a.currentPhysicalRaw ?? '—'}`
+          );
+      }
+
+    } catch (err) {
+      if ($('canonicalAnnual')) {
+        $('canonicalAnnual').textContent =
+          `ANNUAL FRAME DISCONNECTED · ${err.message}`;
+      }
+    }
+  }
+
+  refreshCanonicalAnnual();
+
+  setInterval(
+    refreshCanonicalAnnual,
+    5000
+  );
 })();
 </script>
 

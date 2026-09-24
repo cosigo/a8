@@ -1,0 +1,129 @@
+{
+  "schema": "A8-SOL-SEPTEMBER-EQUINOX-NATIVE-REDUCTION-V2",
+  "status": "DETECTOR_CENTERLINE_PHYSICAL_WITNESS_SEALED_EQUATOR_ANCHOR_LINK_CONDITIONAL_CLOCK_RESIDUAL_DOCUMENTED",
+  "annual_frame": {
+    "name": "A8 ANNUAL FRAME V1",
+    "september_equinox_angle_decimal": 384,
+    "september_equinox_angle_octal": "600₈",
+    "angle_status": "EXACT_FRAME_QUARTER_POINT"
+  },
+  "sources": [
+    {
+      "file": "Kooha-2026-09-22-17-24-35(1).mkv",
+      "sha256": "e06ada71e5be9bac5a3ad60c20f4e28af1b29b795a07f1121026aa11ee5a670b",
+      "duration_s": 170.933333,
+      "container_creation_utc_evidence_only": "2026-09-22T23:24:36.175922Z"
+    },
+    {
+      "file": "Kooha-2026-09-22-18-04-34(1).mkv",
+      "sha256": "99a3d3a63d432a37347be54ac519ad46b4cfde68bf0085a947200fb04449a580",
+      "duration_s": 165.899999,
+      "container_creation_utc_evidence_only": "2026-09-23T00:04:35.132736Z"
+    },
+    {
+      "file": "Kooha-2026-09-22-18-08-22.mkv",
+      "sha256": "7891a783b5a4fea04dacf0f762bfa42e8eabc4535288bcb9b95c95d77e531b24",
+      "duration_s": 170.133333,
+      "container_creation_utc_evidence_only": "2026-09-23T00:08:22.664294Z"
+    }
+  ],
+  "fit": {
+    "method": "Repeated solar-limb drift fit against one fixed detector reference; leading and trailing limb fits independently determine disk-center crossing.",
+    "detector_reference_x_px": 505,
+    "crop_for_fit_px": {
+      "x0": 70,
+      "x1": 940,
+      "y0": 90,
+      "y1": 710
+    },
+    "centerline_limb_span_mean_s": 127.894326,
+    "centerline_limb_span_range_s": 0.727732,
+    "full_field_pass_fit_mean_s": 161.757494,
+    "full_field_pass_fit_range_s": 2.101343,
+    "note": "These fitted values supersede the rough ~175 s / 2:55 visual estimate for this exact recorded detector field."
+  },
+  "passes": [
+    {
+      "role": "PRE",
+      "fit_center_video_s": 89.66604,
+      "centerline_limb_span_s": 127.432552,
+      "full_field_pass_fit_s": 160.412165,
+      "a8_clock_at_center_witness": "31:18:27..31:18:29",
+      "primary_raw_bracket": [
+        13593173,
+        13593205
+      ],
+      "primary_raw_representative": 13593205
+    },
+    {
+      "role": "CROSSING_WINDOW",
+      "fit_center_video_s": 83.795056,
+      "centerline_limb_span_s": 128.160283,
+      "full_field_pass_fit_s": 162.346809,
+      "a8_clock_at_center_witness": "00:11:10",
+      "primary_raw_bracket": [
+        13665935,
+        13665968
+      ],
+      "primary_raw_representative": 13665968,
+      "candidate_annual_frame_anchor": {
+        "event": "SOL_EQUATOR_CROSSING",
+        "annual_angle_decimal": 384,
+        "annual_angle_octal": "600₈",
+        "promotion_status": "CONDITIONAL_ON_PRESERVED_SEP19_FIXED_FRAME_EQUATOR_GEOMETRY"
+      }
+    },
+    {
+      "role": "POST",
+      "fit_center_video_s": 86.288133,
+      "centerline_limb_span_s": 128.090143,
+      "full_field_pass_fit_s": 162.513508,
+      "a8_clock_at_center_witness": "00:16:39",
+      "primary_raw_bracket": [
+        13672911,
+        13672954
+      ],
+      "primary_raw_representative": 13672954
+    }
+  ],
+  "comparison_only": {
+    "external_0005_raw": 13664159,
+    "operator_rough_000530_center_raw": 13665074,
+    "status": "NOT_ANNUAL_V1_AUTHORITY",
+    "note": "Retained only to explain earlier rough estimates. The direct three-pass detector fit places the middle detector-center crossing at RAW 13,665,935..13,665,968."
+  },
+  "authority_boundary": {
+    "nasa_used": false,
+    "jpl_used": false,
+    "external_clock_defines_angle": false,
+    "host_timestamp_defines_anchor": false,
+    "annual_angle_600_octal_source": "A8_ANNUAL_FRAME_V1",
+    "physical_raw_source": "EPOCH7_PRIMARY_VISIBLE_IN_SOURCE_VIDEO",
+    "unresolved_link": "The Sep-19 packet describes the Sol/Mintaka fixed-frame relation conditionally on unchanged geometry; the Sep-22 videos alone do not independently prove detector centerline equals the celestial equator.",
+    "clock_residual_defines_anchor": false,
+    "clock_residual_applied_to_raw": false,
+    "clock_residual_applied_to_angle": false
+  },
+  "provenance": {
+    "supersedes_packet": "a8-sol-equinox-native-reduction-v1.tar.gz",
+    "parent_packet_sha256": "91765d92a4fcdbe6a75d685e7a29b6725c5723318eeab4d08bd935e8efebda68",
+    "revision_reason": "Document known +173 A8-second clock-discipline residual without changing physical RAW, detector geometry, or Annual Frame angle."
+  },
+  "clock_discipline_context": {
+    "status": "KNOWN_IN_PROGRESS_CLOCK_DISCIPLINE_RESIDUAL",
+    "reported_residual_a8_seconds": 173,
+    "direction": "A8_CLOCK_AHEAD",
+    "legacy_seconds_comparison_exact": 114.0380859375,
+    "legacy_conversion_basis": "173 × (675/1024 legacy second per A8 second)",
+    "source": "OPERATOR_REPORTED_SESSION_CONTEXT",
+    "treatment": {
+      "back_correct_visible_a8_clock_readouts": false,
+      "modify_primary_raw": false,
+      "modify_detector_geometry": false,
+      "modify_annual_angle_600_octal": false,
+      "retune_core20": false,
+      "retune_physical_carrier": false
+    },
+    "note": "Residual is preserved as contemporaneous instrument context while clock discipline remains under active refinement. Visible A8 clock values in the source videos remain recorded exactly as observed."
+  }
+}

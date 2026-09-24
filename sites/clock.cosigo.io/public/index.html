@@ -834,7 +834,7 @@ footer{font-size:12px;color:var(--muted);text-align:center;margin:16px 0}
     <a href="https://cosigo.io/">COSIGO Home</a>
     <a href="https://a8.cosigo.io/">A8 Public Instrument</a>
     <a href="/">A8 Engineering Lab</a>
-    <a href="/chief-engineer.html" title="Chief Engineer" style="opacity:.32;font-size:.72em">CE</a>
+    <a href="https://ce.cosigo.io/" title="Chief Engineer" style="opacity:.32;font-size:.72em">CE</a>
     <a href="https://contact.cosigo.io/">Contact</a>
     <a href="https://docs.cosigo.io/">COSIGO Docs / WP</a>
     <a href="https://github.com/cosigo">COSIGO GitHub</a>
@@ -971,17 +971,18 @@ function serverContinuousTotal(st) {
   );
 }
 
-function observerContinuousTotal(nowPerf = performance.now()) {
+function observerContinuousTotal() {
+  /*
+   * Integer civil cadence is Core20-edge authoritative.
+   *
+   * Browser elapsed time is not permitted to manufacture
+   * DAY_PHASE17 states between server edges.
+   */
   if (!observerReady) {
     return day * DAY + nodePhase;
   }
 
-  const elapsedStates =
-    observerRunning
-      ? (nowPerf - observerAnchorPerf) / A8_STATE_MS
-      : 0;
-
-  return observerAnchorTotal + elapsedStates;
+  return observerAnchorTotal;
 }
 
 function reanchorObserver(st, force = false) {
@@ -1483,8 +1484,62 @@ function processAuthoritativeCoreEdge(edge) {
     sequence;
 
   /*
+   * CORE EDGE OWNS THE VISIBLE INTEGER CLOCK.
+   *
+   * dayCount + dayPhase17 arrive on the same authoritative
+   * A8-CORE20-CLOCK-EDGE-V1 event. Browser timers do not
+   * infer an integer state or day rollover.
+   */
+  const currentDay =
+    Number(edge.dayCount);
+
+  if (
+    !Number.isSafeInteger(currentDay)
+  ) {
+    return;
+  }
+
+  const visualChanged =
+    currentPhase !== phase ||
+    currentDay !== day;
+
+  previousPhase =
+    phase;
+
+  nodePhase =
+    currentPhase;
+
+  phase =
+    currentPhase;
+
+  day =
+    currentDay;
+
+  observerAnchorTotal =
+    currentDay * DAY +
+    currentPhase;
+
+  observerAnchorPerf =
+    performance.now();
+
+  observerEpoch =
+    epoch;
+
+  observerReady =
+    true;
+
+  observerRunning =
+    true;
+
+  if (visualChanged) {
+    renderClock();
+  }
+
+  /*
    * Exactly one completed Core20 A8 state edge may make one sound.
-   * A missed multi-state jump rebases silently: no catch-up burst.
+   *
+   * A missed multi-state jump still rebases the visible clock
+   * above, but it produces no catch-up tick/gong/alarm burst.
    */
   if (delta !== 1) {
     return;
@@ -1497,7 +1552,7 @@ function processAuthoritativeCoreEdge(edge) {
     tickTone();
   }
 
-  const previousPhase =
+  const previousEdgePhase =
     (
       currentPhase -
       1 +
@@ -1507,7 +1562,7 @@ function processAuthoritativeCoreEdge(edge) {
 
   const previousLocal =
     localA8CivilState(
-      previousPhase
+      previousEdgePhase
     ).localPhase;
 
   const currentLocal =
@@ -2286,6 +2341,12 @@ function applyClockPayload(payload, forceObserverSync = false) {
     );
   }
 
+  /*
+   * Latest server engineering snapshot.
+   *
+   * During ordinary running this does not advance the visible
+   * clock. processAuthoritativeCoreEdge() owns that cadence.
+   */
   nodePhase = nextPhase;
 
   reanchorObserver(
@@ -2339,39 +2400,15 @@ function applyClockPayload(payload, forceObserverSync = false) {
 }
 
 function observerFrame() {
-  if (clockLoaded && observerReady) {
-    const total =
-      Math.floor(
-        observerContinuousTotal()
-      );
-
-    const nextDay =
-      Math.floor(total / DAY);
-
-    const nextPhase =
-      ((total % DAY) + DAY) % DAY;
-
-    if (
-      nextPhase !== phase ||
-      nextDay !== day
-    ) {
-      previousPhase =
-        phase;
-
-      phase =
-        nextPhase;
-
-      day =
-        nextDay;
-
-      /*
-       * Visual interpolation only.
-       * No audible event may originate from observerFrame().
-       */
-      renderClock();
-    }
-  }
-
+  /*
+   * Rendering loop only.
+   *
+   * Integer A8 civil state changes are delivered exclusively
+   * by processAuthoritativeCoreEdge().
+   *
+   * No performance.now() extrapolation may cross an A8-second
+   * boundary.
+   */
   requestAnimationFrame(
     observerFrame
   );
@@ -2411,8 +2448,20 @@ async function pollClock() {
 
 function pollLoop() {
   if (!clockLoaded) return;
+
+  /*
+   * Health / engineering refresh only.
+   * Core20 SSE edges own civil cadence.
+   */
   pollClock();
-  pollTimer = setTimeout(pollLoop, document.hidden ? 1000 : 100);
+
+  pollTimer =
+    setTimeout(
+      pollLoop,
+      document.hidden
+        ? 10000
+        : 5000
+    );
 }
 
 async function connectToCore() {

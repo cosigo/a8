@@ -48,6 +48,7 @@ class Core20ServerOwnedRuntime {
     getRaw,
     getSourceEpoch,
     getRecurrenceText,
+    getNaturalRecurrenceText = null,
     monotonicNowNs = () => process.hrtime.bigint(),
     utcNow = () => new Date(),
     setIntervalFn = setInterval,
@@ -69,6 +70,19 @@ class Core20ServerOwnedRuntime {
     this.getRaw = getRaw;
     this.getSourceEpoch = getSourceEpoch;
     this.getRecurrenceText = getRecurrenceText;
+
+    if (
+      getNaturalRecurrenceText !== null &&
+      typeof getNaturalRecurrenceText !== 'function'
+    ) {
+      throw new Error(
+        'getNaturalRecurrenceText must be a function when supplied'
+      );
+    }
+
+    this.getNaturalRecurrenceText =
+      getNaturalRecurrenceText;
+
     this.monotonicNowNs = monotonicNowNs;
     this.utcNow = utcNow;
     this.setIntervalFn = setIntervalFn;
@@ -83,6 +97,15 @@ class Core20ServerOwnedRuntime {
     this.timer = null;
     this.lastPaceNs = 0n;
     this.paceRemainder = 0n;
+
+    /*
+     * Defining civil-clock coordinate while PRIMARY physical
+     * mode is active.
+     *
+     * This is Europa-disciplined natural/model RAW.
+     * It is deliberately separate from selected Core RAW.
+     */
+    this.externalClockRaw = null;
 
     /*
      * PRIMARY EXTERNAL PHYSICAL PACE
@@ -187,7 +210,19 @@ class Core20ServerOwnedRuntime {
           () => this._qualificationPresentationPause(),
       });
 
-      const q = parsePositiveRationalText(this.getRecurrenceText());
+      const recurrenceText =
+        (
+          this.externalPhysicalPrimary &&
+          this.getNaturalRecurrenceText
+        )
+          ? this.getNaturalRecurrenceText()
+          : this.getRecurrenceText();
+
+      const q =
+        parsePositiveRationalText(
+          recurrenceText
+        );
+
       this.rawPerDayNumerator = q.numerator;
       this.rawPerDayDenominator = q.denominator;
       this.paceRemainder = 0n;
@@ -346,6 +381,63 @@ class Core20ServerOwnedRuntime {
     };
   }
 
+  _clockRawNow() {
+    if (
+      this.externalPhysicalPrimary &&
+      this.getNaturalRecurrenceText
+    ) {
+      return this.externalClockRaw;
+    }
+
+    return BigInt(this.getRaw());
+  }
+
+  _activeRecurrenceText() {
+    if (
+      this.rawPerDayNumerator === null ||
+      this.rawPerDayDenominator === null
+    ) {
+      return null;
+    }
+
+    return (
+      `${this.rawPerDayNumerator}/` +
+      `${this.rawPerDayDenominator}`
+    );
+  }
+
+  /*
+   * Historical / museum recurrence.
+   *
+   * Compatibility output only. Legacy recurrence machinery may
+   * temporarily be unavailable. Its absence must never stop the
+   * PRIMARY Europa-natural clock.
+   */
+  _historicalRecurrenceText() {
+    try {
+      const text =
+        this.getRecurrenceText();
+
+      return (
+        text === null ||
+        text === undefined
+      )
+        ? null
+        : String(text);
+    } catch (_) {
+      return null;
+    }
+  }
+
+  _clockRawDomain() {
+    return (
+      this.externalPhysicalPrimary &&
+      this.getNaturalRecurrenceText
+    )
+      ? 'EUROPA_NATURAL_MODEL_RAW'
+      : 'SELECTED_CORE_RAW';
+  }
+
   _clockCoordinate() {
     if (this.status !== 'RUNNING') return null;
 
@@ -358,9 +450,18 @@ class Core20ServerOwnedRuntime {
       return null;
     }
 
-    const rawNow = BigInt(this.getRaw());
+    const rawNow =
+      this._clockRawNow();
+
+    if (rawNow === null) {
+      return null;
+    }
+
     const rawAtAlign =
-      BigInt(this.alignment.serverStampedRawPulse);
+      BigInt(
+        this.alignment.clockAnchorRawPulse ??
+        this.alignment.serverStampedRawPulse
+      );
 
     if (rawNow < rawAtAlign) {
       throw new Error(
@@ -400,7 +501,17 @@ class Core20ServerOwnedRuntime {
 
     return {
       sourceEpoch: epoch,
-      rawPulse: rawNow,
+
+      /*
+       * Preserve historical rawPulse semantics for downstream
+       * consumers: this remains selected Core RAW.
+       */
+      rawPulse:
+        BigInt(this.getRaw()),
+
+      clockRawPulse:
+        rawNow,
+
       totalState: total,
       dayCount: total / DAY_STATES,
       dayPhase17: total % DAY_STATES,
@@ -430,7 +541,15 @@ class Core20ServerOwnedRuntime {
       sequence: this.clockEdgeSeq,
       sourceEpoch: after.sourceEpoch,
       deltaStates: delta.toString(),
-      rawPulse: after.rawPulse.toString(),
+      rawPulse:
+        after.rawPulse.toString(),
+
+      clockRawPulse:
+        after.clockRawPulse.toString(),
+
+      clockRawDomain:
+        this._clockRawDomain(),
+
       totalState: after.totalState.toString(),
       dayCount: after.dayCount.toString(),
       dayPhase17: after.dayPhase17.toString(),
@@ -512,7 +631,10 @@ class Core20ServerOwnedRuntime {
     return due;
   }
 
-  advanceExternalPhysicalToTarget(targetRawPulse) {
+  advanceExternalPhysicalToTarget(
+    targetRawPulse,
+    targetClockRawPulse = null
+  ) {
     if (!this.externalPhysicalPrimary) {
       throw new Error(
         'external physical RAW advance requires PRIMARY physical mode'
@@ -537,17 +659,57 @@ class Core20ServerOwnedRuntime {
       );
     }
 
+    const naturalClockActive =
+      this.getNaturalRecurrenceText !== null;
+
+    let clockTarget = null;
+
+    if (naturalClockActive) {
+      if (
+        targetClockRawPulse === null ||
+        targetClockRawPulse === undefined
+      ) {
+        throw new Error(
+          'natural clock target required while PRIMARY natural clock lane is active'
+        );
+      }
+
+      clockTarget =
+        BigInt(targetClockRawPulse);
+
+      if (
+        this.externalClockRaw !== null &&
+        clockTarget < this.externalClockRaw
+      ) {
+        throw new Error(
+          `natural clock RAW target regressed: target=${clockTarget} current=${this.externalClockRaw}`
+        );
+      }
+    }
+
     const due =
       target - current;
-
-    if (due === 0n) {
-      return 0n;
-    }
 
     const before =
       this._clockCoordinate();
 
-    this.advanceRaw(due);
+    /*
+     * Legacy/internal Core coordinate remains alive.
+     * It is no longer the defining civil-clock coordinate.
+     */
+    if (due > 0n) {
+      this.advanceRaw(due);
+    }
+
+    /*
+     * Advance the defining natural clock coordinate inside
+     * the same transaction so before/after edge publication
+     * observes the genuine natural RAW movement.
+     */
+    if (naturalClockActive) {
+      this.externalClockRaw =
+        clockTarget;
+    }
 
     const after =
       this._clockCoordinate();
@@ -564,6 +726,7 @@ class Core20ServerOwnedRuntime {
 
   installExternalPhysicalAlignment({
     anchorRawPulse,
+    clockAnchorRawPulse = null,
     targetDayPhase17,
     targetDayCount = '0',
     externalPhysicalSourceEpoch,
@@ -586,6 +749,29 @@ class Core20ServerOwnedRuntime {
     const anchorRaw =
       BigInt(anchorRawPulse);
 
+    const naturalClockActive =
+      (
+        this.externalPhysicalPrimary &&
+        this.getNaturalRecurrenceText
+      );
+
+    const clockRawNow =
+      this._clockRawNow();
+
+    if (
+      naturalClockActive &&
+      clockRawNow === null
+    ) {
+      throw new Error(
+        'natural clock RAW unavailable at external alignment'
+      );
+    }
+
+    const clockAnchorRaw =
+      naturalClockActive
+        ? BigInt(clockAnchorRawPulse)
+        : anchorRaw;
+
     const phase =
       BigInt(targetDayPhase17);
 
@@ -598,6 +784,15 @@ class Core20ServerOwnedRuntime {
     if (anchorRaw > rawNow) {
       throw new Error(
         'external physical historical RAW anchor is ahead of current RAW'
+      );
+    }
+
+    if (
+      naturalClockActive &&
+      clockAnchorRaw > clockRawNow
+    ) {
+      throw new Error(
+        'natural clock historical RAW anchor is ahead of current natural RAW'
       );
     }
 
@@ -656,6 +851,17 @@ class Core20ServerOwnedRuntime {
 
       serverStampedRawPulse:
         anchorRaw.toString(),
+
+      /*
+       * Defining civil-clock anchor.
+       * serverStampedRawPulse above remains the historical
+       * Core coordinate for legacy/internal provenance.
+       */
+      clockAnchorRawPulse:
+        clockAnchorRaw.toString(),
+
+      clockRawDomain:
+        this._clockRawDomain(),
 
       targetDayCount:
         dayCount.toString(),
@@ -941,20 +1147,80 @@ class Core20ServerOwnedRuntime {
         schema: 'A8-CORE20-SERVER-CLOCK-V1',
         status: 'AWAITING_MOMENTARY_CONNECT_ALIGNMENT',
         sourceEpoch: epoch,
-        currentSelectedRawPulse: String(this.getRaw()),
-        recoveredRawPerSunReturn: this.getRecurrenceText(),
+        currentSelectedRawPulse:
+          String(this.getRaw()),
+
+        currentClockRawPulse:
+          this._clockRawNow() === null
+            ? null
+            : this._clockRawNow().toString(),
+
+        clockRawDomain:
+          this._clockRawDomain(),
+
+        recoveredRawPerSunReturn:
+          this._historicalRecurrenceText(),
+
+        naturalRawPerSunReturn:
+          (
+            this.externalPhysicalPrimary &&
+            this.getNaturalRecurrenceText
+          )
+            ? this._activeRecurrenceText()
+            : null,
+
         clockAuthority: 'CLOCK_AUTHORITY_UNESTABLISHED · ABSOLUTE_PHASE_UNALIGNED',
         runtime,
       };
     }
 
-    const rawNow = BigInt(this.getRaw());
-    const rawAtAlign = BigInt(this.alignment.serverStampedRawPulse);
-    if (rawNow < rawAtAlign) throw new Error('selected raw count regressed after alignment');
+    const selectedRawNow =
+      BigInt(this.getRaw());
 
-    const elapsedRaw = rawNow - rawAtAlign;
+    const selectedRawAtAlign =
+      BigInt(
+        this.alignment.serverStampedRawPulse
+      );
+
+    if (selectedRawNow < selectedRawAtAlign) {
+      throw new Error(
+        'selected Core RAW count regressed after alignment'
+      );
+    }
+
+    const rawNow =
+      this._clockRawNow();
+
+    if (rawNow === null) {
+      throw new Error(
+        'defining clock RAW unavailable after alignment'
+      );
+    }
+
+    const rawAtAlign =
+      BigInt(
+        this.alignment.clockAnchorRawPulse ??
+        this.alignment.serverStampedRawPulse
+      );
+
+    if (rawNow < rawAtAlign) {
+      throw new Error(
+        'defining clock RAW count regressed after alignment'
+      );
+    }
+
+    const elapsedSelectedRaw =
+      selectedRawNow -
+      selectedRawAtAlign;
+
+    const elapsedRaw =
+      rawNow -
+      rawAtAlign;
+
     const exactNumerator =
-      elapsedRaw * this.rawPerDayDenominator * DAY_STATES;
+      elapsedRaw *
+      this.rawPerDayDenominator *
+      DAY_STATES;
     const exactDenominator = this.rawPerDayNumerator;
     const completedStates = exactNumerator / exactDenominator;
     const substateNumerator = exactNumerator % exactDenominator;
@@ -984,8 +1250,34 @@ class Core20ServerOwnedRuntime {
       schema: 'A8-CORE20-SERVER-CLOCK-V1',
       status: 'CORE20_CLOCK_RUNNING',
       sourceEpoch: epoch,
-      currentSelectedRawPulse: rawNow.toString(),
-      recoveredRawPerSunReturn: this.getRecurrenceText(),
+      currentSelectedRawPulse:
+        selectedRawNow.toString(),
+
+      currentClockRawPulse:
+        rawNow.toString(),
+
+      clockRawDomain:
+        this._clockRawDomain(),
+
+      /*
+       * Historical compatibility field.
+       * Units remain selected Core RAW / Sun return.
+       */
+      recoveredRawPerSunReturn:
+        this._historicalRecurrenceText(),
+
+      /*
+       * PRIMARY defining clock relationship.
+       * Units are Europa natural/model RAW / Sun return.
+       */
+      naturalRawPerSunReturn:
+        (
+          this.externalPhysicalPrimary &&
+          this.getNaturalRecurrenceText
+        )
+          ? this._activeRecurrenceText()
+          : null,
+
       clockAuthority:
         this.alignment &&
         this.alignment.role ===
@@ -993,7 +1285,18 @@ class Core20ServerOwnedRuntime {
           ? 'TEMPORARY_EXTERNAL_PHYSICAL_HOLDOVER · NATIVE_AUTHORITY_FALSE'
           : 'RECOVERED_JOVIAN_MINTAKA_SOL_SUN_RETURN',
       alignment: { ...this.alignment },
-      elapsedRawSinceAlignment: elapsedRaw.toString(),
+      /*
+       * Historical field preserved in historical Core RAW.
+       */
+      elapsedRawSinceAlignment:
+        elapsedSelectedRaw.toString(),
+
+      /*
+       * Defining clock elapsed coordinate.
+       */
+      elapsedClockRawSinceAlignment:
+        elapsedRaw.toString(),
+
       dayCount: dayCount.toString(),
       dayPhase17: phase.toString(),
       dayPhase17Binary: fields.binary17,
@@ -1080,10 +1383,29 @@ class Core20ServerOwnedRuntime {
             ? 'LEGACY_SERVER_PROCESS_HRTIME_BREAK_GLASS'
             : 'NONE_FAIL_CLOSED',
 
+      /*
+       * Historical Core-domain recurrence retained for
+       * museum / compatibility consumers.
+       */
       recoveredRawPerSunReturn:
-        this.rawPerDayNumerator === null
-          ? null
-          : `${this.rawPerDayNumerator}/${this.rawPerDayDenominator}`,
+        this._historicalRecurrenceText(),
+
+      /*
+       * PRIMARY Europa-natural recurrence used by the
+       * defining civil clock.
+       */
+      naturalRawPerSunReturn:
+        (
+          this.externalPhysicalPrimary &&
+          this.getNaturalRecurrenceText &&
+          this.rawPerDayNumerator !== null
+        )
+          ? `${this.rawPerDayNumerator}/${this.rawPerDayDenominator}`
+          : null,
+
+      recurrenceRawDomain:
+        this._clockRawDomain(),
+
       alignmentEstablished:
         !!this.alignment,
 

@@ -212,7 +212,7 @@ footer{
       <div class="rows">
         <div>SEQUENCE · <b id="ghostSequence">—</b></div>
         <div>LINK · <b id="ghostLink">WAITING</b></div>
-        <div>POWER · <b id="ghostPower">—</b></div>
+        <div>STANDBY QUALIFICATION · <b id="ghostPower">—</b></div>
         <div>CHAIN · <b>ARDUINO P → ARDUINO C</b></div>
         <div>ROLE · <b>QUALIFIED STANDBY CARRIER / PHYSICAL WITNESS</b></div>
         <div>AUTHORITY · <b>NONE UNTIL CONTROLLED HANDOFF</b></div>
@@ -712,7 +712,9 @@ async function update(){
       g.linkStatus ?? '—';
 
     document.getElementById('ghostPower').textContent =
-      g.powerQualification ?? '—';
+      g.powerQualification === 'QUALIFIED_STANDBY'
+        ? 'QUALIFIED · COMMISSIONED STANDBY'
+        : (g.powerQualification ?? '—');
 
   }catch(err){
     document.getElementById('ghostLink').textContent =

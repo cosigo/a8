@@ -1,0 +1,3 @@
+LIVE_PATH	SOURCE_SHA256	REPO_TARGET	ACTION
+/etc/a8-shadow-ghost.env	4abef9e5b8c92fbdd70cbdd656ff59e2fa05dfb0d3dc03cfd43e62e5fb14c62a	ops/live-reference-20260924/etc/a8-shadow-ghost.env.example	SENSITIVE_VALUES_REDACTED
+/etc/caddy/Caddyfile	3f8b13435ee6e729bf55f6f1960382018f42137ed68074741ea2cbf2f23842e8	ops/live-reference-20260924/etc/caddy/Caddyfile.redacted	AUTH_CREDENTIALS_REDACTED

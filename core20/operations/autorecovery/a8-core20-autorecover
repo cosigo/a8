@@ -58,7 +58,6 @@ for attempt in $(seq 1 120); do
     STATUS=$(
       python3 - <<'PY'
 import json
-import os
 
 with open('/tmp/a8-autorecover-clock.json') as f:
     x = json.load(f)
@@ -91,111 +90,9 @@ log 'PASS · CORE20 RUNTIME RUNNING'
 
 
 # ------------------------------------------------------------
-# QUALIFIED EXTERNAL PHYSICAL PRIMARY BOOTSTRAP
+# 2. MOMENTARY CIVIL CONNECT
 #
-# Physical raw count only.
-# No timestamp / seconds / Hz / UTC / host elapsed time.
-# ------------------------------------------------------------
-
-if [ -f /etc/a8-core20/external-physical-enabled ]; then
-  set -a
-  . /etc/a8-core20/external-physical.env
-  set +a
-
-  log "EXTERNAL PHYSICAL · REQUESTING SOURCE_EPOCH ${A8_CORE20_EXTERNAL_PHYSICAL_EPOCH:-UNKNOWN} PHYSICAL SAMPLE"
-
-  curl     --fail     --silent     --show-error     --max-time 10     http://127.0.0.1:28788/snapshot     >/tmp/a8-autorecover-external-physical-source.json
-
-  python3 - <<'PYPHYSA'
-import json
-import os
-
-with open(
-    '/tmp/a8-autorecover-external-physical-source.json'
-) as f:
-    x=json.load(f)
-
-assert str(x.get('SOURCE_EPOCH')) == \
-    os.environ['A8_CORE20_EXTERNAL_PHYSICAL_EPOCH']
-assert x.get('STATUS') == 'ACTIVE'
-assert int(x.get('RAW_COUNT')) >= \
-    int(os.environ['A8_CORE20_EXTERNAL_PHYSICAL_ANCHOR'])
-PYPHYSA
-
-  curl     --fail     --silent     --show-error     --max-time 30     -X POST     -H 'Content-Type: application/json'     -H 'X-A8-External-Physical: 1'     --data-binary       @/tmp/a8-autorecover-external-physical-source.json     "$BASE/api/core20/external-physical/sample"     >/tmp/a8-autorecover-external-physical-core.json
-
-  python3 - <<'YPHYSB'
-import json
-import os
-
-with open(
-    '/tmp/a8-autorecover-external-physical-core.json'
-) as f:
-    x=json.load(f)
-
-qualified = (
-    os.environ.get(
-        'A8_CORE20_EXTERNAL_JOVIAN_QUALIFIED'
-    ) == '1'
-)
-
-expected_role = (
-    'QUALIFIED_EXTERNAL_PHYSICAL_PRIMARY'
-    if qualified
-    else
-    'TEMPORARY_EXTERNAL_PHYSICAL_HOLDOVER'
-)
-
-assert x.get('ok') is True
-assert x.get('mode') == expected_role
-
-c=x.get('clock') or {}
-a=c.get('alignment') or {}
-
-assert c.get('status') ==     'CORE20_CLOCK_RUNNING'
-
-assert a.get('role') == expected_role
-
-assert a.get(
-    'externalPhysicalSourceEpoch'
-) == os.environ['A8_CORE20_EXTERNAL_PHYSICAL_EPOCH']
-
-assert a.get('usesUTC') is False
-assert a.get('usesHostTime') is False
-assert a.get('nativeAuthority') is False
-
-assert a.get('jovianQualified') is qualified
-assert a.get('temporaryEmergency') is (not qualified)
-
-if qualified:
-    assert a.get(
-        'rateBootstrapProvenance'
-    ) == os.environ.get(
-        'A8_CORE20_EXTERNAL_RATE_PROVENANCE'
-    )
-
-print(
-    'A8-AUTORECOVER · EXTERNAL PHYSICAL · CLOCK',
-    (c.get('clock') or {}).get('octal')
-)
-
-print(
-    'A8-AUTORECOVER · EXTERNAL PHYSICAL · PHASE17',
-    c.get('dayPhase17')
-)
-YPHYSB
-
-  log 'PASS · EXTERNAL PHYSICAL PATH APPLIED'
-fi
-
-
-# ------------------------------------------------------------
-# 2. NATIVE CIVIL PHASE RECOVERY
-#
-# NORMAL CE START MAY NOT USE UTC / HOST / BROWSER TIME.
-#
-# If Core20 has no already-qualified native phase, fail closed.
-# Physical outage elapsed time is never invented.
+# Only apply if the clock says it needs one.
 # ------------------------------------------------------------
 
 get \
@@ -203,29 +100,49 @@ get \
   /tmp/a8-autorecover-clock.json
 
 CLOCK_STATUS=$(
-  python3 - <<'PY2'
+  python3 - <<'PY'
 import json
-import os
+
 with open('/tmp/a8-autorecover-clock.json') as f:
-    x=json.load(f)
-print((x.get('clock') or {}).get('status',''))
-PY2
+    x = json.load(f)
+
+print(
+    (x.get('clock') or {}).get('status', '')
+)
+PY
 )
 
 case "$CLOCK_STATUS" in
+
   CORE20_CLOCK_RUNNING)
-    if [ -f /etc/a8-core20/external-physical-enabled ]; then
-      log "PHASE · ESTABLISHED · ${A8_CORE20_EXTERNAL_PHASE_PROVENANCE:-UNKNOWN_EXTERNAL_BOOTSTRAP} · EXTERNAL PHYSICAL · NO ACTION"
-    else
-      log 'NATIVE PHASE · ALREADY QUALIFIED · NO ACTION'
-    fi
+    log 'CONNECT · ALREADY VALID · NO ACTION'
     ;;
 
   AWAITING_MOMENTARY_CONNECT_ALIGNMENT)
-    log 'FAIL · WAITING FOR NATIVE ABSOLUTE DAY_PHASE17'
-    log 'FAIL · UTC CONNECT FORBIDDEN'
-    log 'FAIL · OUTAGE ELAPSED TIME NOT INFERRED'
-    exit 42
+    log 'CONNECT · APPLYING ONE-SHOT EMPTY CONNECT'
+
+    post_empty \
+      /api/core20/connect \
+      /tmp/a8-autorecover-connect.json
+
+    python3 - <<'PY'
+import json
+
+with open('/tmp/a8-autorecover-connect.json') as f:
+    x = json.load(f)
+
+assert x.get('ok') is True
+
+a = x.get('alignment') or {}
+
+assert a.get('role') == \
+    'MOMENTARY_CONNECT_ALIGNMENT_ONLY'
+
+assert a.get('definingPathTouched') is False
+assert a.get('ongoingUtcFeed') is False
+PY
+
+    log 'PASS · MOMENTARY CONNECT APPLIED'
     ;;
 
   *)
@@ -246,7 +163,6 @@ for attempt in $(seq 1 80); do
   CLOCK_STATUS=$(
     python3 - <<'PY'
 import json
-import os
 
 with open('/tmp/a8-autorecover-clock.json') as f:
     x = json.load(f)
@@ -289,7 +205,6 @@ for attempt in $(seq 1 80); do
   then
     if python3 - <<'PY'
 import json
-import os
 import sys
 
 with open('/tmp/a8-autorecover-calendar.json') as f:
@@ -325,7 +240,6 @@ fi
 
 python3 - <<'PY'
 import json
-import os
 
 with open('/tmp/a8-autorecover-calendar.json') as f:
     x = json.load(f)
@@ -353,66 +267,26 @@ log 'PASS · NATIVE CALENDAR RUNNING'
 
 
 # ------------------------------------------------------------
-# 4. YEAR ORIENTATION · RECOVERY ONLY
+# 4. ONE-SHOT JPL YEAR ORIENTATION
 #
-# NORMAL:
-#   Existing qualified recovered Year state is required.
-#
-# EXTERNAL PHYSICAL:
-#   Civil clock + native calendar may run while Year Angle
-#   remains explicitly UNALIGNED.
-#
-# NO JPL / NASA / UTC / NETWORK ASTRONOMY IS CALLED HERE.
+# Only call JPL if recovered-Sol year angle is not already valid.
+# Calendar YEAR DAY is NOT changed by this.
 # ------------------------------------------------------------
 
-get \
-  /api/core20/year-angle \
-  /tmp/a8-autorecover-year.json
+YEAR_OK=0
 
-if [ -f /etc/a8-core20/external-physical-enabled ]; then
+for attempt in $(seq 1 10); do
 
-  python3 - <<'PY2'
+  if get \
+    /api/core20/year-angle \
+    /tmp/a8-autorecover-year.json \
+    2>/dev/null
+  then
+    if python3 - <<'PY'
 import json
-import os
-
-with open(
-    '/tmp/a8-autorecover-year.json'
-) as f:
-    x = json.load(f)
-
-y = x.get('yearAngle') or {}
-
-assert y.get('status') == \
-    'YEAR_ANGLE_AWAITING_ONE_SHOT_JPL_ALIGN'
-
-assert y.get('aligned') is False
-
-assert y.get('ongoingAuthority') == \
-    'RECOVERED_SOL_ORBITAL_ADVANCE_ONLY'
-
-assert y.get('usesJplAfterAlignment') is False
-assert y.get('usesUtcAfterAlignment') is False
-assert y.get('usesNetworkCadence') is False
-
-print(
-    'A8-AUTORECOVER · YEAR ANGLE · '
-    'HOLD · UNALIGNED'
-)
-PY2
-
-  log 'HOLD · YEAR ORIENTATION UNALIGNED BY DESIGN'
-  log 'PASS · NO EXTERNAL YEAR BRIDGE REQUESTED'
-
-else
-
-  python3 - <<'PY2'
-import json
-import os
 import sys
 
-with open(
-    '/tmp/a8-autorecover-year.json'
-) as f:
+with open('/tmp/a8-autorecover-year.json') as f:
     x = json.load(f)
 
 y = x.get('yearAngle') or {}
@@ -431,26 +305,65 @@ ok = (
     y.get('usesUtcAfterAlignment') is False
 )
 
-if not ok:
-    print(
-        'FAIL · YEAR ORIENTATION NOT RECOVERABLE '
-        'WITHOUT EXTERNAL BRIDGE'
-    )
-    sys.exit(43)
+sys.exit(0 if ok else 1)
+PY
+    then
+      YEAR_OK=1
+      log 'JPL · YEAR ORIENTATION ALREADY VALID · NO ACTION'
+      break
+    fi
+  fi
+
+  log "JPL · ONE-SHOT ALIGN ATTEMPT $attempt / 10"
+
+  if post_empty \
+    /api/core20/year-angle/align-jpl \
+    /tmp/a8-autorecover-jpl.json
+  then
+    log 'JPL · REQUEST ACCEPTED'
+  else
+    log 'JPL · REQUEST FAILED · WILL RETRY'
+  fi
+
+  sleep 15
+done
+
+
+# Final verification even if last POST succeeded.
+get \
+  /api/core20/year-angle \
+  /tmp/a8-autorecover-year.json
+
+python3 - <<'PY'
+import json
+
+with open('/tmp/a8-autorecover-year.json') as f:
+    x = json.load(f)
+
+y = x['yearAngle']
+
+assert y['status'] == \
+    'YEAR_ANGLE_RUNNING_FROM_RECOVERED_SOL'
+
+assert y['aligned'] is True
+
+assert y['ongoingAuthority'] == \
+    'SELECTED_RAW_PLUS_RECOVERED_SOL_ANGLE_PER_RAW'
+
+assert y['usesJplAfterAlignment'] is False
+assert y['usesUtcAfterAlignment'] is False
 
 print(
     'A8-AUTORECOVER · YEAR PHASE ·',
     y.get('phase27Octal')
 )
-PY2
+PY
 
-  log 'PASS · YEAR ANGLE RECOVERED · NO EXTERNAL REQUEST'
-
-fi
+log 'PASS · YEAR ANGLE RUNNING FROM RECOVERED SOL'
 
 
 # ------------------------------------------------------------
-# 5. CROSS-CHECK FINAL OPERATING STATE
+# 5. CROSS-CHECK SOURCE EPOCHS + FINAL AUTHORITY
 # ------------------------------------------------------------
 
 get \
@@ -467,16 +380,10 @@ get \
 
 python3 - <<'PY'
 import json
-import os
-from pathlib import Path
 
 def load(path):
     with open(path) as f:
         return json.load(f)
-
-external_physical = Path(
-    '/etc/a8-core20/external-physical-enabled'
-).exists()
 
 clock = load(
     '/tmp/a8-autorecover-clock.json'
@@ -490,11 +397,19 @@ year = load(
     '/tmp/a8-autorecover-year.json'
 )['yearAngle']
 
-assert clock['status'] ==     'CORE20_CLOCK_RUNNING'
+assert clock['status'] == \
+    'CORE20_CLOCK_RUNNING'
 
-assert cal['status'] ==     'CALENDAR_RUNNING_FROM_CORE20_COUNT'
+assert clock['clockAuthority'] == \
+    'RECOVERED_JOVIAN_MINTAKA_SOL_SUN_RETURN'
+
+assert cal['status'] == \
+    'CALENDAR_RUNNING_FROM_CORE20_COUNT'
 
 assert cal['anchored'] is True
+
+assert year['status'] == \
+    'YEAR_ANGLE_RUNNING_FROM_RECOVERED_SOL'
 
 assert (
     str(clock['sourceEpoch']) ==
@@ -514,115 +429,11 @@ assert cal['utcMayAdvanceCalendarDay'] is False
 assert cal['jplMayAdvanceCalendarDay'] is False
 assert cal['browserMayAdvanceCalendarDay'] is False
 
-if external_physical:
-    a = clock.get('alignment') or {}
-    runtime = clock.get('runtime') or {}
-    paths = runtime.get('pathStatus') or {}
-
-    qualified = (
-        os.environ.get(
-            'A8_CORE20_EXTERNAL_JOVIAN_QUALIFIED'
-        ) == '1'
-    )
-
-    expected_role = (
-        'QUALIFIED_EXTERNAL_PHYSICAL_PRIMARY'
-        if qualified
-        else
-        'TEMPORARY_EXTERNAL_PHYSICAL_HOLDOVER'
-    )
-
-    assert a.get('role') == expected_role
-
-    assert a.get(
-        'externalPhysicalSourceEpoch'
-    ) == os.environ[
-        'A8_CORE20_EXTERNAL_PHYSICAL_EPOCH'
-    ]
-
-    assert a.get('nativeAuthority') is False
-    assert a.get('usesUTC') is False
-    assert a.get('usesHostTime') is False
-    assert a.get('jovianQualified') is qualified
-    assert a.get('temporaryEmergency') is (not qualified)
-
-    assert runtime.get(
-        'monotonicExecutionPace'
-    ) == 'EXTERNAL_PHYSICAL_RAW_DELTA_ONLY'
-
-    assert runtime.get(
-        'externalPhysicalPrimary'
-    ) is True
-
-    assert runtime.get(
-        'legacyEmergencyEnabled'
-    ) is False
-
-    assert paths.get('primary') == 'ACTIVE'
-
-    assert paths.get(
-        'legacyEmergency'
-    ) == 'STANDBY_DISCONNECTED'
-
-    assert year['status'] ==         'YEAR_ANGLE_AWAITING_ONE_SHOT_JPL_ALIGN'
-
-    assert year['aligned'] is False
-
-    if qualified:
-        assert clock['clockAuthority'] ==             'RECOVERED_JOVIAN_MINTAKA_SOL_SUN_RETURN'
-
-        assert a.get(
-            'rateBootstrapProvenance'
-        ) == os.environ.get(
-            'A8_CORE20_EXTERNAL_RATE_PROVENANCE'
-        )
-
-        print(
-            'A8-AUTORECOVER · FINAL PASS · '
-            'QUALIFIED EXTERNAL PHYSICAL PRIMARY'
-        )
-
-    else:
-        print(
-            'A8-AUTORECOVER · FINAL PASS · '
-            'TEMPORARY EXTERNAL PHYSICAL HOLDOVER'
-        )
-
-else:
-    assert clock['clockAuthority'] ==         'RECOVERED_JOVIAN_MINTAKA_SOL_SUN_RETURN'
-
-    assert year['status'] ==         'YEAR_ANGLE_RUNNING_FROM_RECOVERED_SOL'
-
-    assert year['aligned'] is True
-
-    print(
-        'A8-AUTORECOVER · FINAL PASS · NORMAL'
-    )
-
-print(
-    'SOURCE EPOCH ·',
-    clock['sourceEpoch']
-)
-
-print(
-    'CLOCK        ·',
-    clock['clock']['octal']
-)
-
-print(
-    'YEAR DAY     ·',
-    cal['yearDay']
-)
-
-if external_physical:
-    print(
-        'YEAR PHASE27 · HOLD · UNALIGNED'
-    )
-else:
-    print(
-        'YEAR PHASE27 ·',
-        year['phase27Octal']
-    )
+print('A8-AUTORECOVER · FINAL PASS')
+print('SOURCE EPOCH ·', clock['sourceEpoch'])
+print('CLOCK        ·', clock['clock']['octal'])
+print('YEAR DAY     ·', cal['yearDay'])
+print('YEAR PHASE27 ·', year['phase27Octal'])
 PY
 
 log 'COMPLETE'

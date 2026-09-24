@@ -1851,12 +1851,12 @@
         <div class="today-printout" aria-live="polite">
           <div class="print-row"><span>MONTH COMPASS ANCHOR</span><strong id="todayMonthAnchor">—</strong></div>
           <div class="print-row phase-line"><span>LIVE CALENDAR YEAR PHASE</span><strong id="todayPhase">— A8 · —₈</strong></div>
-          <div class="print-row phase-line"><span>LIVE ABSOLUTE SOL PHASE</span><strong id="todayAbsolutePhase">— A8 · —₈</strong></div>
+          <div class="print-row phase-line"><span>LIVE SOL · ANNUAL FRAME V1</span><strong id="todayAbsolutePhase">— A8 · —₈</strong></div>
         </div>
 
         <div class="core-status-strip core-status-strip-compact" aria-label="Core20 calendar connection state">
           <div class="core-status" id="coreFeedStatus">CORE20 FEED<strong>NOT CONNECTED</strong></div>
-          <div class="core-status" id="solOrbitStatus">ABSOLUTE YEAR PHASE27<strong>WAITING</strong></div>
+          <div class="core-status" id="solOrbitStatus">ANNUAL FRAME · PHASE27<strong>WAITING</strong></div>
         </div>
 
         <!-- Existing runtime paint targets retained but no longer public furniture. -->
@@ -1982,37 +1982,37 @@
 
         <div class="wilson-day-grid" id="wilsonDayGrid">
           <div class="wilson-day" data-wilson-day="1">
-            <span class="wd-num">GOLD 1</span>
+            <span class="wd-num">卍001</span>
             <span class="wilson-element-label day-label"><span class="day-formal">🜂</span><strong>Fire</strong><span class="day-drawing">🔥</span></span>
             <small>Protected</small>
           </div>
 
           <div class="wilson-day" data-wilson-day="2">
-            <span class="wd-num">GOLD 2</span>
+            <span class="wd-num">卍010</span>
             <span class="wilson-element-label day-label"><span class="day-formal">🜄</span><strong>Water</strong><span class="day-drawing">🌊</span></span>
             <small>Protected</small>
           </div>
 
           <div class="wilson-day" data-wilson-day="3">
-            <span class="wd-num">GOLD 3</span>
+            <span class="wd-num">卍011</span>
             <span class="wilson-element-label day-label"><span class="day-formal">🜃</span><strong>Earth</strong><span class="day-drawing"><svg class="day-art" viewBox="0 0 32 20" aria-hidden="true"><path d="M2 17 L8 10 L12 13 L19 5 L30 17"/><path d="M2 17 H30"/></svg></span></span>
             <small>Protected</small>
           </div>
 
           <div class="wilson-day" data-wilson-day="4">
-            <span class="wd-num">GOLD 4</span>
+            <span class="wd-num">卍100</span>
             <span class="wilson-element-label day-label"><span class="day-formal">🜁</span><strong>Air</strong><span class="day-drawing"><svg class="day-art" viewBox="0 0 32 20" aria-hidden="true"><path d="M2 5 C6 2 10 8 14 5 S22 2 30 5"/><path d="M2 10 C6 7 10 13 14 10 S22 7 30 10"/><path d="M2 15 C6 12 10 18 14 15 S22 12 30 15"/></svg></span></span>
             <small>Protected</small>
           </div>
 
           <div class="wilson-day" data-wilson-day="5">
-            <span class="wd-num">GOLD 5</span>
+            <span class="wd-num">卍101</span>
             <span class="wilson-element-label day-label"><span class="day-formal">✦</span><strong>Aether</strong><span class="day-drawing">✦</span></span>
             <small>Protected</small>
           </div>
 
           <div class="wilson-day leap" data-wilson-day="6">
-            <span class="wd-num">LEAP GOLD 6</span>
+            <span class="wd-num">卍110 · LEAP</span>
             <span class="wd-icon">✹</span>
             <strong>Leap Gold Day</strong>
             <small>Only when required</small>
@@ -2381,7 +2381,7 @@
    * -------------------------
    * Inputs:
    *   /api/core20/calendar   → REQUIRED server-owned native integer YEAR DAY
-   *   /api/core20/year-angle → OPTIONAL absolute YEAR PHASE27 orbital orientation
+   *   /api/annual-frame      → OPTIONAL live A8 Annual Frame orbital position
    *
    * YEAR DAY is anchored separately from orbital angle. After the native anchor
    * is locked, only Core20 integer dayCount advances the date.
@@ -2747,6 +2747,12 @@
   let wilsonImpactTimer=null;
   let wilsonLastImpactKey='';
 
+  function wilsonDayMark(day) {
+    const d=Number(day);
+    if(!Number.isInteger(d) || d<1 || d>6) return '卍---';
+    return `卍${d.toString(2).padStart(3,'0')}`;
+  }
+
   function calendarIdentity(
     yearDay,
     calendarState={}
@@ -2851,6 +2857,7 @@
       kind:'WILSON',
       wilsonDay,
       leapExtension,
+      elementIndex:leapExtension ? null : wilsonDay-1,
       element:
         leapExtension
           ? 'Leap Gold Day'
@@ -2953,8 +2960,8 @@
         : 'LIVE YEAR-END INTERVAL';
 
       state.textContent=identity.leapExtension
-        ? `LEAP GOLD DAY · GOLD DAY 6 OF 6 · YEAR DAY ${yearDay}`
-        : `GOLD DAY ${identity.wilsonDay} OF ${wilsonLength} · ${identity.element.toUpperCase()}`;
+        ? `${wilsonDayMark(identity.wilsonDay)} · LEAP · YEAR DAY ${yearDay}`
+        : `${wilsonDayMark(identity.wilsonDay)} · ${identity.element.toUpperCase()}`;
 
       message.textContent=
         `360 DAYS OF DIRECTION · ${wilsonLength} DAYS TO CHOOSE YOUR OWN`;
@@ -3375,7 +3382,7 @@
      * Missing year-angle precision must never stop the calendar date.
      */
     const phaseAvailable=(
-      y.status==='YEAR_ANGLE_RUNNING_FROM_RECOVERED_SOL' &&
+      y.status==='ANNUAL_FRAME_V1_PHYSICAL_PREDICTION_ACTIVE' &&
       y.aligned===true &&
       y.phase27!==undefined &&
       y.phase27!==null
@@ -3388,10 +3395,7 @@
 
     const calendarPhase=
       phaseAvailable
-        ? modBig(
-            absolute-CALENDAR_NORTH_ABSOLUTE,
-            YEAR_PHASE27_STATES
-          )
+        ? absolute
         : null;
 
     const counted=countedYearDay(calendarPayload);
@@ -3434,7 +3438,7 @@
       'A8 CALENDAR',
       identity.kind==='MONTH'
         ? `${months[identity.monthIndex].name.toUpperCase()} · DAY ${identity.monthDay}`
-        : `WILSON'S WEEK · DAY ${identity.wilsonDay}`,
+        : `WILSON'S WEEK · ${wilsonDayMark(identity.wilsonDay)}`,
       'good'
     );
 
@@ -3539,7 +3543,7 @@
       if(!userExploringMonth){renderMonth(identity.monthIndex);markTodayCell(identity);}
     } else {
       document.getElementById('todayRegister').textContent=`OUTSIDE 000–111 · WILSON'S WEEK`;
-      document.getElementById('todayTitle').innerHTML=`${identity.element.toUpperCase()} DAY · <span class="day-number">GOLD DAY ${identity.wilsonDay}</span>`;
+      document.getElementById('todayTitle').innerHTML=`${identity.element.toUpperCase()} DAY · <span class="day-number">${wilsonDayMark(identity.wilsonDay)}</span>`;
       document.getElementById('todayPosition').textContent=`WILSON'S WEEK · YEAR DAY ${yearDay}/${counted.yearLength}`;
       document.getElementById('todayWeek').textContent='NO PLANETARY WEEK · YEAR-END CELEBRATION';
       document.getElementById('todayElement').textContent=identity.element.toUpperCase();
@@ -3549,8 +3553,8 @@
 
       document.getElementById('todaySymbolic').textContent=
         Number.isInteger(identity.elementIndex)
-          ? `GOLD ${identity.wilsonDay} · ${liveElementGlyph[identity.elementIndex]}`
-          : `GOLD ${identity.wilsonDay}`;
+          ? `${wilsonDayMark(identity.wilsonDay)} · ${liveElementGlyph[identity.elementIndex]}`
+          : `${wilsonDayMark(identity.wilsonDay)}`;
 
       document.getElementById('todayMeta').textContent=
         `YEAR DAY ${yearDay}/${counted.yearLength} · ${identity.status}`;
@@ -3590,17 +3594,63 @@
        */
       const [angleResult,runtimeResult]=
         await Promise.allSettled([
-          api('/api/core20/year-angle'),
+          api('/api/annual-frame'),
           api('/api/core20/runtime')
         ]);
 
-      const anglePayload=
+      const annualPayload=
         angleResult.status==='fulfilled'
           ? angleResult.value
+          : null;
+
+      const annual=
+        annualPayload &&
+        annualPayload.annualV1Output
+          ? annualPayload.annualV1Output
+          : {};
+
+      const annualContinuous=
+        Number(
+          annual.natureAnnualAngle512Continuous
+        );
+
+      const annualPhase27=
+        Number.isFinite(annualContinuous)
+          ? Math.floor(
+              (
+                (
+                  annualContinuous % 512
+                  + 512
+                ) % 512
+              ) * Number(FINE_PER_A8_ANGLE)
+            )
+          : null;
+
+      const anglePayload=
+        annualPhase27!==null
+          ? {
+              yearAngle:{
+                status:
+                  'ANNUAL_FRAME_V1_PHYSICAL_PREDICTION_ACTIVE',
+
+                aligned:true,
+
+                phase27:
+                  annualPhase27,
+
+                phase9Octal:
+                  annual.natureAnnualAngleOctal,
+
+                currentSelectedRawPulse:
+                  annual.currentPhysicalRaw,
+
+                annualFrameV1:true
+              }
+            }
           : {
               yearAngle:{
                 status:
-                  'OPTIONAL_YEAR_ANGLE_UNAVAILABLE'
+                  'OPTIONAL_ANNUAL_FRAME_UNAVAILABLE'
               }
             };
 

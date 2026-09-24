@@ -515,7 +515,7 @@ main .panel{
       <div class="a8-lab-title-block">
         <div class="eyebrow">AUSPICIOUS 8 · OPERATING LABORATORY</div>
         <h1>A8 Laboratory · Physical Core &amp; Predictive System</h1>
-        <p class="muted">Epoch-7 physical RAW is the designated primary path. Core20, predictive instruments, and the recovery machinery already built remain available. Your browser is an observer.</p>
+        <p class="muted">Epoch-8 physical RAW is the designated primary path. Core20, predictive instruments, and the recovery machinery already built remain available. Your browser is an observer.</p>
       </div>
       <a
         class="a8-lab-whitepaper"
@@ -713,7 +713,7 @@ main .panel{
         >—</span>
 
         <span class="c20v-k" style="margin-top:8px">
-          A8 YEAR ANGLE · ABSOLUTE PHASE9
+          A8 ANNUAL FRAME · PHASE9
         </span>
 
         <span
@@ -740,7 +740,7 @@ main .panel{
       </span>
 
       <span class="c20v-v">
-        JUPITER · MINTAKA · SOL ↔ SERVER-CAPTURED EPOCH-7 RAW
+        JUPITER · MINTAKA · SOL ↔ SERVER-CAPTURED EPOCH-8 RAW
       </span>
 
       <p class="muted" style="margin:8px 0 0">
@@ -889,7 +889,7 @@ main .panel{
         <h2>Jovian recovery engine · under the hood</h2>
 
         <p class="muted">
-          Running A8 machinery. Physical Epoch-7 supplies the current
+          Running A8 machinery. Physical Epoch-8 supplies the current
           drive through the Core-mapped domain. Core20 carries the
           Jovian recurrence machinery below. This is a live read-only
           view of the engine, not a historical exhibit.
@@ -900,6 +900,94 @@ main .panel{
         ENGINE · LIVE
       </div>
     </div>
+
+
+    <!-- A8-LAB-JOVIAN-AUTHORITY-MIRROR-BEGIN -->
+    <div
+      id="a8-lab-jovian-authority"
+      style="
+        margin-top:14px;
+        padding:14px;
+        border:1px solid #45576a;
+        border-radius:12px;
+      "
+    >
+      <div class="c20v-kicker">
+        JOVIAN AUTHORITY · CE SELECTION · READ ONLY
+      </div>
+
+      <div
+        style="
+          display:grid;
+          grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+          gap:10px;
+          margin-top:12px;
+        "
+      >
+        <div class="c20v-stat">
+          <span class="c20v-k">SELECTED AUTHORITY</span>
+          <span
+            id="a8LabJovianAuthority"
+            class="c20v-v"
+          >CHECKING…</span>
+        </div>
+
+        <div class="c20v-stat">
+          <span class="c20v-k">NATURAL RECURRENCE</span>
+          <span
+            id="a8LabJovianAuthorityPeriod"
+            class="c20v-v"
+          >—</span>
+        </div>
+
+        <div class="c20v-stat">
+          <span class="c20v-k">RESONANT AUTHORITY SET</span>
+          <span class="c20v-v">
+            IO / EUROPA / GANYMEDE
+          </span>
+        </div>
+
+        <div class="c20v-stat">
+          <span class="c20v-k">DISCIPLINE STATE</span>
+          <span
+            id="a8LabJovianDisciplineState"
+            class="c20v-v"
+          >—</span>
+        </div>
+
+        <div class="c20v-stat">
+          <span class="c20v-k">CURRENT LIVE RULER</span>
+          <span
+            id="a8LabJovianLiveRuler"
+            class="c20v-v"
+          >—</span>
+        </div>
+
+        <div class="c20v-stat">
+          <span class="c20v-k">CALLISTO</span>
+          <span class="c20v-v">
+            WITNESS ONLY
+          </span>
+        </div>
+      </div>
+
+      <p
+        id="a8LabJovianWitnesses"
+        class="muted"
+        style="margin:10px 0 0"
+      >
+        WITNESSES · CHECKING…
+      </p>
+
+      <p
+        class="muted"
+        style="margin:6px 0 0"
+      >
+        Selection is controlled in CE.
+        Lab has no authority-selection or feeder-write path.
+      </p>
+    </div>
+    <!-- A8-LAB-JOVIAN-AUTHORITY-MIRROR-END -->
 
     <div id="a8-live-engine-host" style="margin-top:14px">
       <p
@@ -929,7 +1017,7 @@ main .panel{
     ">
 
       <div class="c20v-stat">
-        <span class="c20v-k">CLOCK</span>
+        <span class="c20v-k">TIME · MERIDIAN 0</span>
         <span
           id="a8ConsumerClock"
           class="c20v-v c20v-clock"
@@ -941,27 +1029,113 @@ main .panel{
 
       <div class="c20v-stat">
         <span class="c20v-k">CALENDAR</span>
-        <span class="c20v-v">CORE20 DEPENDENT</span>
+        <span
+          id="a8ConsumerCalendar"
+          class="c20v-v"
+        >—</span>
       </div>
 
       <div class="c20v-stat">
         <span class="c20v-k">SHIP</span>
-        <span class="c20v-v">CORE20 DEPENDENT</span>
+        <span id="a8ConsumerShipAngle"
+              class="c20v-v c20v-clock">—</span>
+        <span id="a8ConsumerShipSide"
+              class="c20v-k"
+              style="margin-top:7px">—</span>
+        <span id="a8ConsumerShipSlip"
+              class="c20v-k"
+              style="margin-top:5px">V2 SLIP · —</span>
       </div>
 
       <div class="c20v-stat">
         <span class="c20v-k">AUDIO</span>
-        <span class="c20v-v">CORE20 DEPENDENT</span>
+
+        <div style="
+          display:grid;
+          grid-template-columns:repeat(2,minmax(0,1fr));
+          gap:5px;
+          margin-top:8px
+        ">
+          <button type="button"
+                  onclick="a8LabTone(128)"
+                  title="200₈ cycles per A8 second"
+                  style="padding:6px 3px">200₈</button>
+
+          <button type="button"
+                  onclick="a8LabTone(256)"
+                  title="400₈ cycles per A8 second"
+                  style="padding:6px 3px">400₈</button>
+
+          <button type="button"
+                  onclick="a8LabTone(512)"
+                  title="1000₈ cycles per A8 second"
+                  style="padding:6px 3px">1000₈</button>
+
+          <button type="button"
+                  onclick="a8LabTone(1024)"
+                  title="2000₈ cycles per A8 second"
+                  style="padding:6px 3px">2000₈</button>
+        </div>
+
+        <span class="c20v-k" style="margin-top:7px">
+          TAP · A8 FREQUENCY
+        </span>
       </div>
 
       <div class="c20v-stat">
         <span class="c20v-k">COMPOSER</span>
-        <span class="c20v-v">CORE20 DEPENDENT</span>
+
+        <a href="https://composer.cosigo.io/"
+           aria-label="Open A8 Composer"
+           title="Open Composer"
+           style="
+             display:block;
+             margin-top:5px;
+             text-align:center;
+             font-size:2.2rem;
+             line-height:1.2;
+             text-decoration:none
+           ">♫</a>
       </div>
 
       <div class="c20v-stat">
         <span class="c20v-k">STOPWATCH</span>
-        <span class="c20v-v">CORE20 DEPENDENT</span>
+
+        <span
+          id="a8ConsumerStopwatch"
+          class="c20v-v c20v-clock"
+        >00:00</span>
+
+        <div style="
+          display:flex;
+          gap:6px;
+          flex-wrap:wrap;
+          margin-top:8px
+        ">
+          <button
+            type="button"
+            id="a8ConsumerStopwatchStart"
+            disabled
+          >START</button>
+
+          <button
+            type="button"
+            id="a8ConsumerStopwatchStop"
+            disabled
+          >STOP</button>
+
+          <button
+            type="button"
+            id="a8ConsumerStopwatchReset"
+            disabled
+          >RESET</button>
+        </div>
+
+        <span
+          id="a8ConsumerStopwatchStatus"
+          class="c20v-k"
+          style="margin-top:7px"
+        >DISCONNECTED</span>
       </div>
 
     </div>
@@ -1022,7 +1196,7 @@ main .panel{
 
     <div class="a8-path-card">
       <span class="a8-path-label">DESIGNATED PRIMARY</span>
-      <span class="a8-path-state">EPOCH-5 PHYSICAL RAW</span>
+      <span class="a8-path-state">EPOCH-7 PHYSICAL RAW</span>
       <span class="a8-path-note">
         Arduino A → Arduino B → Pi → physical RAW → Core20.
         Actual live state is shown by the observer below.
@@ -1076,7 +1250,7 @@ main .panel{
         <div class="c20v-kicker">PRIMARY SOURCE OBSERVER · PHYSICAL RAW → CORE20</div>
         <h2>Physical source observer</h2>
         <p class="muted">
-          Observe the source Core20 is actually consuming. Epoch-5 physical RAW is
+          Observe the source Core20 is actually consuming. Epoch-7 physical RAW is
           the designated primary path; Jovian recovery remains visible here while
           alternate source, holdover and emergency mechanisms remain in standby.
         </p>
@@ -1140,7 +1314,7 @@ main .panel{
       class="muted"
       style="margin:11px 0 0;font-size:.78rem;line-height:1.45"
     >
-      EPOCH-5 is the external physical counter supplying the running pace.
+      EPOCH-7 is the external physical counter supplying the running pace.
       The Epoch-3 value shown above is Core20's retained internal mapped
       coordinate. JOVIAN LOCKED means recurrence/comparator qualification;
       it does not mean the virtual source is pacing the clock.
@@ -1324,7 +1498,7 @@ main .panel{
         >
           <b>PRIMARY PHYSICAL PATH</b>
           <span>→</span>
-          <span>EPOCH-5 RAW CONTINUES</span>
+          <span>EPOCH-7 RAW CONTINUES</span>
           <span>→</span>
           <span>RECOVERY TOOLS RETAINED</span>
           <span>→</span>
@@ -1367,7 +1541,7 @@ main .panel{
         <b>ARCHITECTURE BOUNDARY</b>
 
         <span>→</span>
-        <span>EPOCH-5 PHYSICAL RAW · PRIMARY</span>
+        <span>EPOCH-7 PHYSICAL RAW · PRIMARY</span>
 
         <span>→</span>
         <span>IO / EUROPA / GANYMEDE RECOVERY</span>
@@ -1660,26 +1834,10 @@ main .panel{
           rawText(sourceId)
         );
       }
-
-      put(
-        'a8NatureYearPhase9',
-        currentYear(
-          rawText('c20vYearPhase9')
-        )
-      );
-
-      put(
-        'a8NatureYearStatus',
-        currentYear(
-          rawText('c20vYearAlignStatus')
-        )
-      );
     }
 
     const sourceIds = [
-      ...pairs.map(pair => pair[0]),
-      'c20vYearPhase9',
-      'c20vYearAlignStatus'
+      ...pairs.map(pair => pair[0])
     ];
 
     const sources =
@@ -2050,47 +2208,18 @@ main .panel{
           'SOL ORBITAL SCALE UNAVAILABLE'
         );
 
-        const hasRawAnchor =
-          observer.lastRawPulse !== null &&
-          observer.lastRawPulse !== undefined;
-
-        const hasAngleAnchor =
-          observer.lastAngle512 !== null &&
-          observer.lastAngle512 !== undefined;
-
-        if (
-          hasRawAnchor &&
-          hasAngleAnchor
-        ) {
-          const register =
-            rawText(
-              'c20vSolRegisterOct'
-            );
-
-          put(
-            'a8NatureSolRegister',
-            register &&
-            register !== '—'
-              ? register
-              : 'ANCHOR PRESENT · POSITION STARTING'
-          );
-
-        } else {
-          put(
-            'a8NatureSolRegister',
-            'AWAITING SOL DIRECTION ANCHOR'
-          );
-        }
+        /*
+         * POSITION / PHASE9 / Annual Frame status are owned by
+         * the live /api/annual-frame presentation below.
+         *
+         * This canonical witness refresher retains only the
+         * recovered Sol orbital-scale status.
+         */
 
       } catch (_) {
         put(
           'a8NatureSol',
           'SOL ORBITAL SCALE UNAVAILABLE'
-        );
-
-        put(
-          'a8NatureSolRegister',
-          'SOL POSITION UNAVAILABLE'
         );
       }
     }
@@ -2298,6 +2427,123 @@ function c20Value(id, value) {
       ? '—'
       : String(value);
 }
+
+/*
+ * LAB CALENDAR CONSUMER
+ * ---------------------
+ * Presentation only.
+ *
+ * /api/core20/calendar owns YEAR DAY and calendar region.
+ * Lab does not read browser/host time and does not advance the date.
+ * This merely renders the same compact symbolic identity used by Calendar.
+ */
+const C20_CALENDAR_MONTH_OCTAL =
+  ['0₈','1₈','2₈','3₈','4₈','5₈','6₈','7₈'];
+
+const C20_CALENDAR_PLANET_GLYPH =
+  ['☿','♀','⊕','♂','♃','♄','♅','♆','♇'];
+
+const C20_CALENDAR_ELEMENT_GLYPH =
+  ['🜂','🜄','🜃','🜁','✦'];
+
+function c20CalendarWilsonMark(day) {
+  const d = Number(day);
+
+  if (
+    !Number.isInteger(d) ||
+    d < 1 ||
+    d > 6
+  ) {
+    throw new Error(
+      'invalid Wilson day · ' + String(day)
+    );
+  }
+
+  return '卍' + d.toString(2).padStart(3, '0');
+}
+
+function c20CalendarTeaser(calendar) {
+  if (!calendar || typeof calendar !== 'object') {
+    throw new Error('missing Core20 calendar');
+  }
+
+  const yearDay = Number(calendar.yearDay);
+  const yearLength = Number(calendar.yearLength);
+  const region =
+    String(calendar.calendarRegion || '').toUpperCase();
+
+  if (
+    !Number.isInteger(yearDay) ||
+    !Number.isInteger(yearLength) ||
+    yearDay < 1 ||
+    yearDay > yearLength
+  ) {
+    throw new Error(
+      'invalid Core20 YEAR DAY · ' +
+      String(calendar.yearDay)
+    );
+  }
+
+  if (yearDay <= 360) {
+    if (
+      region !== 'STRUCTURED' ||
+      calendar.wilsonDay !== null
+    ) {
+      throw new Error(
+        'incoherent structured calendar state'
+      );
+    }
+
+    const zero = yearDay - 1;
+    const monthIndex = Math.floor(zero / 45);
+    const monthDay = (zero % 45) + 1;
+    const weekIndex =
+      Math.floor((monthDay - 1) / 5);
+    const elementIndex =
+      (monthDay - 1) % 5;
+
+    return (
+      C20_CALENDAR_MONTH_OCTAL[monthIndex] +
+      ' · ' +
+      C20_CALENDAR_PLANET_GLYPH[weekIndex] +
+      ' · ' +
+      C20_CALENDAR_ELEMENT_GLYPH[elementIndex]
+    );
+  }
+
+  const wilsonDay = Number(calendar.wilsonDay);
+  const maxWilsonDay =
+    calendar.isLeapYear === true ? 6 : 5;
+
+  if (
+    region !== 'WILSON' ||
+    !Number.isInteger(wilsonDay) ||
+    wilsonDay < 1 ||
+    wilsonDay > maxWilsonDay ||
+    wilsonDay !== yearDay - 360
+  ) {
+    throw new Error(
+      'incoherent Wilson calendar state'
+    );
+  }
+
+  if (wilsonDay === 6) {
+    return '卍110 · LEAP';
+  }
+
+  return (
+    c20CalendarWilsonMark(wilsonDay) +
+    ' · ' +
+    C20_CALENDAR_ELEMENT_GLYPH[wilsonDay - 1]
+  );
+}
+
+/*
+ * Calendar is refreshed by the existing Core20 observer only when
+ * Core20 dayCount changes. dayCount is a refresh trigger only;
+ * /api/core20/calendar remains the sole owner of the displayed date.
+ */
+let c20CalendarObservedDayCount = null;
 
 function c20RationalNumber(value) {
   if (value === null || value === undefined) return NaN;
@@ -2538,6 +2784,12 @@ function c20RenderSmoothPhase() {
 function c20PhaseFrame() {
   c20RenderSmoothPhase();
 
+  /*
+   * Same existing presentation frame smooths the local stopwatch.
+   * Core20 samples remain the stopwatch anchors.
+   */
+  c20StopwatchRenderSmooth();
+
   requestAnimationFrame(
     c20PhaseFrame
   );
@@ -2565,6 +2817,99 @@ function c20EngineValue(id, value) {
       ? '—'
       : String(value);
 }
+
+
+async function a8LabRefreshJovianAuthority() {
+  const authority =
+    document.getElementById(
+      'a8LabJovianAuthority'
+    );
+
+  if (!authority) return;
+
+  try {
+    const response = await fetch(
+      '/assets/jovian-authority.json',
+      {
+        cache: 'no-store'
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(
+        `HTTP ${response.status}`
+      );
+    }
+
+    const a = await response.json();
+
+    authority.textContent =
+      a.selectedAuthority || '—';
+
+    document.getElementById(
+      'a8LabJovianAuthorityPeriod'
+    ).textContent =
+      Number(
+        a.selectedPeriodRaw
+      ).toLocaleString() +
+      ' RAW';
+
+    document.getElementById(
+      'a8LabJovianDisciplineState'
+    ).textContent =
+      a.disciplineState || '—';
+
+    document.getElementById(
+      'a8LabJovianLiveRuler'
+    ).textContent =
+      Number(
+        a.selectedPeriodRaw
+      ).toLocaleString() +
+      ' RAW · ' +
+      (
+        a.liveDevelopmentRulerRole ||
+        '—'
+      );
+
+    document.getElementById(
+      'a8LabJovianWitnesses'
+    ).textContent =
+      'WITNESSES · ' +
+      (a.witnesses || []).join(' / ');
+
+  } catch (err) {
+    authority.textContent =
+      'READ FAIL';
+
+    document.getElementById(
+      'a8LabJovianWitnesses'
+    ).textContent =
+      'AUTHORITY MIRROR FAIL · ' +
+      String(err.message || err);
+  }
+}
+
+function a8LabStartJovianAuthorityMirror() {
+  a8LabRefreshJovianAuthority();
+
+  setInterval(
+    a8LabRefreshJovianAuthority,
+    5000
+  );
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener(
+    'DOMContentLoaded',
+    a8LabStartJovianAuthorityMirror,
+    {
+      once: true
+    }
+  );
+} else {
+  a8LabStartJovianAuthorityMirror();
+}
+
 
 function c20InstallJovianEnginePanel() {
   if (c20ById('c20-jovian-engine-visible')) {
@@ -3444,6 +3789,629 @@ function c20Render(payload, clockPayload) {
   }
 }
 
+/*
+ * LAB LOCAL CORE20 STOPWATCH
+ * --------------------------
+ * Ephemeral browser UI only.
+ *
+ * - no server-side stopwatch state
+ * - no persistence
+ * - no control of any other page
+ * - no independent polling
+ * - no browser clock defines elapsed A8 time
+ *
+ * The existing Lab Core20 observer supplies currentSelectedRawPulse
+ * and recoveredRawPerSunReturn. RAW delta is converted to completed
+ * A8 states using the same Core20 scale used by the Moons stopwatch.
+ *
+ * If the Core20 observer connection fails, this instrument dies:
+ * local state is cleared, display returns to 00:00, controls disable.
+ */
+const c20StopwatchState = {
+  connected: false,
+  running: false,
+  phase: 'DISCONNECTED',
+
+  latestClock: null,
+
+  startRaw: null,
+  scaleNumerator: null,
+  scaleDenominator: null,
+
+  elapsedStates: 0n,
+
+  /*
+   * OUTPUT-ONLY smoothing anchor.
+   * Core20 RAW remains the measurement source.
+   */
+  smoothAnchorWhole: 0n,
+  smoothAnchorFraction: 0,
+  smoothAnchorPerf: null,
+
+  /*
+   * Visible whole-second guard only.
+   * Prevents packet-arrival jitter from flashing the display backward.
+   */
+  presentedWhole: 0n,
+};
+
+function c20StopwatchParseScale(value) {
+  const text = String(value || '').trim();
+
+  if (!/^[0-9]+(?:\/[0-9]+)?$/.test(text)) {
+    throw new Error(
+      'invalid Core20 recovered RAW scale'
+    );
+  }
+
+  const parts = text.split('/');
+
+  const numerator =
+    BigInt(parts[0]);
+
+  const denominator =
+    BigInt(parts[1] || '1');
+
+  if (
+    numerator <= 0n ||
+    denominator <= 0n
+  ) {
+    throw new Error(
+      'invalid Core20 recovered RAW scale'
+    );
+  }
+
+  return {
+    numerator,
+    denominator,
+  };
+}
+
+function c20StopwatchClockRaw(clock) {
+  if (
+    !clock ||
+    clock.status !== 'CORE20_CLOCK_RUNNING' ||
+    clock.currentSelectedRawPulse === undefined ||
+    clock.currentSelectedRawPulse === null
+  ) {
+    throw new Error(
+      'Core20 clock unavailable'
+    );
+  }
+
+  const rawText =
+    String(clock.currentSelectedRawPulse);
+
+  if (!/^[0-9]+$/.test(rawText)) {
+    throw new Error(
+      'invalid Core20 RAW coordinate'
+    );
+  }
+
+  return BigInt(rawText);
+}
+
+function c20StopwatchDisplayWhole(
+  nowPerf = performance.now()
+) {
+  const authoritativeWhole =
+    c20StopwatchState.elapsedStates >= 0n
+      ? c20StopwatchState.elapsedStates
+      : 0n;
+
+  if (!c20StopwatchState.running) {
+    return (
+      c20StopwatchState.phase === 'STOPPED'
+        ? c20StopwatchState.presentedWhole
+        : authoritativeWhole
+    );
+  }
+
+  if (
+    c20StopwatchState.smoothAnchorPerf === null
+  ) {
+    return authoritativeWhole;
+  }
+
+  /*
+   * Output interpolation only.
+   *
+   * Each observer sample provides a fresh exact Core20-derived
+   * whole + fractional A8-state anchor. performance.now() merely
+   * carries the visible display between those anchors.
+   */
+  const sinceAnchorStates =
+    (
+      nowPerf -
+      c20StopwatchState.smoothAnchorPerf
+    ) /
+    C20_A8_STATE_MS;
+
+  const fractionalProgress =
+    c20StopwatchState.smoothAnchorFraction +
+    sinceAnchorStates;
+
+  if (!Number.isFinite(fractionalProgress)) {
+    return authoritativeWhole;
+  }
+
+  const extraWhole =
+    Math.max(
+      0,
+      Math.floor(fractionalProgress)
+    );
+
+  const candidate =
+    c20StopwatchState.smoothAnchorWhole +
+    BigInt(extraWhole);
+
+  if (
+    candidate <
+    c20StopwatchState.presentedWhole
+  ) {
+    return c20StopwatchState.presentedWhole;
+  }
+
+  c20StopwatchState.presentedWhole =
+    candidate;
+
+  return candidate;
+}
+
+function c20StopwatchRenderDisplay(
+  nowPerf = performance.now()
+) {
+  const display =
+    c20ById('a8ConsumerStopwatch');
+
+  if (!display) return;
+
+  const whole =
+    c20StopwatchDisplayWhole(nowPerf);
+
+  const minutes =
+    whole / 64n;
+
+  const seconds =
+    whole % 64n;
+
+  display.textContent =
+    minutes.toString().padStart(2, '0') +
+    ':' +
+    seconds.toString().padStart(2, '0');
+}
+
+function c20StopwatchRender() {
+  const status =
+    c20ById('a8ConsumerStopwatchStatus');
+
+  const start =
+    c20ById('a8ConsumerStopwatchStart');
+
+  const stop =
+    c20ById('a8ConsumerStopwatchStop');
+
+  const reset =
+    c20ById('a8ConsumerStopwatchReset');
+
+  c20StopwatchRenderDisplay();
+
+  if (status) {
+    status.textContent =
+      c20StopwatchState.phase;
+  }
+
+  if (start) {
+    start.disabled =
+      !c20StopwatchState.connected ||
+      c20StopwatchState.running;
+  }
+
+  if (stop) {
+    stop.disabled =
+      !c20StopwatchState.connected ||
+      !c20StopwatchState.running;
+  }
+
+  if (reset) {
+    reset.disabled =
+      !c20StopwatchState.connected;
+  }
+}
+
+function c20StopwatchRenderSmooth() {
+  if (
+    !c20StopwatchState.connected ||
+    !c20StopwatchState.running
+  ) {
+    return;
+  }
+
+  c20StopwatchRenderDisplay(
+    performance.now()
+  );
+}
+
+function c20StopwatchDisconnect() {
+  c20StopwatchState.connected = false;
+  c20StopwatchState.running = false;
+  c20StopwatchState.phase = 'DISCONNECTED';
+
+  c20StopwatchState.latestClock = null;
+
+  c20StopwatchState.startRaw = null;
+  c20StopwatchState.scaleNumerator = null;
+  c20StopwatchState.scaleDenominator = null;
+
+  c20StopwatchState.elapsedStates = 0n;
+
+  c20StopwatchState.smoothAnchorWhole = 0n;
+  c20StopwatchState.smoothAnchorFraction = 0;
+  c20StopwatchState.smoothAnchorPerf = null;
+  c20StopwatchState.presentedWhole = 0n;
+
+  c20StopwatchRender();
+}
+
+function c20StopwatchObserve(clock) {
+  try {
+    const raw =
+      c20StopwatchClockRaw(clock);
+
+    c20StopwatchState.latestClock =
+      clock;
+
+    if (!c20StopwatchState.connected) {
+      c20StopwatchState.connected = true;
+
+      if (!c20StopwatchState.running) {
+        c20StopwatchState.phase = 'READY';
+      }
+    }
+
+    if (c20StopwatchState.running) {
+      const delta =
+        raw -
+        c20StopwatchState.startRaw;
+
+      if (delta < 0n) {
+        throw new Error(
+          'Core20 RAW coordinate regressed'
+        );
+      }
+
+      const elapsedNumerator =
+        delta *
+        c20StopwatchState.scaleDenominator *
+        BigInt(C20_DAY_STATES);
+
+      const elapsedDenominator =
+        c20StopwatchState.scaleNumerator;
+
+      const whole =
+        elapsedNumerator /
+        elapsedDenominator;
+
+      const remainder =
+        elapsedNumerator %
+        elapsedDenominator;
+
+      c20StopwatchState.elapsedStates =
+        whole;
+
+      /*
+       * Re-anchor visible interpolation to this authoritative
+       * Core20 RAW sample, including its fractional A8 state.
+       */
+      c20StopwatchState.smoothAnchorWhole =
+        whole;
+
+      c20StopwatchState.smoothAnchorFraction =
+        Number(remainder) /
+        Number(elapsedDenominator);
+
+      c20StopwatchState.smoothAnchorPerf =
+        performance.now();
+    }
+
+    c20StopwatchRender();
+
+  } catch (err) {
+    c20StopwatchDisconnect();
+  }
+}
+
+function c20StopwatchStart() {
+  try {
+    if (
+      !c20StopwatchState.connected ||
+      !c20StopwatchState.latestClock
+    ) {
+      throw new Error(
+        'Core20 observer disconnected'
+      );
+    }
+
+    const clock =
+      c20StopwatchState.latestClock;
+
+    const raw =
+      c20StopwatchClockRaw(clock);
+
+    const scale =
+      c20StopwatchParseScale(
+        clock.recoveredRawPerSunReturn
+      );
+
+    c20StopwatchState.startRaw =
+      raw;
+
+    c20StopwatchState.scaleNumerator =
+      scale.numerator;
+
+    c20StopwatchState.scaleDenominator =
+      scale.denominator;
+
+    c20StopwatchState.elapsedStates =
+      0n;
+
+    c20StopwatchState.smoothAnchorWhole =
+      0n;
+
+    c20StopwatchState.smoothAnchorFraction =
+      0;
+
+    c20StopwatchState.smoothAnchorPerf =
+      performance.now();
+
+    c20StopwatchState.presentedWhole =
+      0n;
+
+    c20StopwatchState.running =
+      true;
+
+    c20StopwatchState.phase =
+      'RUNNING';
+
+    c20StopwatchRender();
+
+  } catch (err) {
+    c20StopwatchDisconnect();
+  }
+}
+
+function c20StopwatchStop() {
+  if (!c20StopwatchState.running) {
+    return;
+  }
+
+  /*
+   * latestClock was supplied by the same existing Core20 observer.
+   * Refresh once from that latest coordinate before freezing.
+   */
+  c20StopwatchObserve(
+    c20StopwatchState.latestClock
+  );
+
+  if (!c20StopwatchState.connected) {
+    return;
+  }
+
+  /*
+   * Freeze whatever the Core20-anchored smooth display currently shows.
+   * Measurement state remains separate in elapsedStates.
+   */
+  c20StopwatchState.presentedWhole =
+    c20StopwatchDisplayWhole(
+      performance.now()
+    );
+
+  c20StopwatchState.running =
+    false;
+
+  c20StopwatchState.phase =
+    'STOPPED';
+
+  c20StopwatchRender();
+}
+
+function c20StopwatchReset() {
+  if (!c20StopwatchState.connected) {
+    c20StopwatchDisconnect();
+    return;
+  }
+
+  c20StopwatchState.running =
+    false;
+
+  c20StopwatchState.startRaw =
+    null;
+
+  c20StopwatchState.scaleNumerator =
+    null;
+
+  c20StopwatchState.scaleDenominator =
+    null;
+
+  c20StopwatchState.elapsedStates =
+    0n;
+
+  c20StopwatchState.smoothAnchorWhole =
+    0n;
+
+  c20StopwatchState.smoothAnchorFraction =
+    0;
+
+  c20StopwatchState.smoothAnchorPerf =
+    null;
+
+  c20StopwatchState.presentedWhole =
+    0n;
+
+  c20StopwatchState.phase =
+    'READY';
+
+  c20StopwatchRender();
+}
+
+const c20StopwatchStartButton =
+  c20ById('a8ConsumerStopwatchStart');
+
+const c20StopwatchStopButton =
+  c20ById('a8ConsumerStopwatchStop');
+
+const c20StopwatchResetButton =
+  c20ById('a8ConsumerStopwatchReset');
+
+if (c20StopwatchStartButton) {
+  c20StopwatchStartButton.addEventListener(
+    'click',
+    c20StopwatchStart
+  );
+}
+
+if (c20StopwatchStopButton) {
+  c20StopwatchStopButton.addEventListener(
+    'click',
+    c20StopwatchStop
+  );
+}
+
+if (c20StopwatchResetButton) {
+  c20StopwatchResetButton.addEventListener(
+    'click',
+    c20StopwatchReset
+  );
+}
+
+c20StopwatchRender();
+
+
+
+let c20ShipV2Busy = false;
+let c20ShipV2Last = -Infinity;
+
+async function c20RefreshShipV2() {
+  if (
+    c20ShipV2Busy ||
+    performance.now() - c20ShipV2Last < 2000
+  ) return;
+
+  c20ShipV2Busy = true;
+  c20ShipV2Last = performance.now();
+
+  try {
+    const payload =
+      await c20Api('/api/terra-ship-slip/v2');
+
+    const v = payload.v2;
+    const a = v.absoluteAnnualPosition;
+
+    if (
+      v.schema !== 'A8-TERRA-SHIP-SLIP-V2' ||
+      v.status !== 'V2_LIVE_FROM_SEP22_EQUINOX'
+    ) throw new Error('SHIP_V2_INVALID');
+
+    const angle =
+      Number(a.natureAnnualAngle512Continuous);
+
+    const r =
+      v.lifetimeTerraShipSlip512;
+
+    const slip =
+      Number(r.numerator) /
+      Number(r.denominator);
+
+    c20Value(
+      'a8ConsumerShipAngle',
+      a.natureAnnualAngleOctal
+    );
+
+    c20Value(
+      'a8ConsumerShipSide',
+      angle < 256
+        ? 'FRONT · →'
+        : 'BACKSIDE · ←'
+    );
+
+    c20Value(
+      'a8ConsumerShipSlip',
+      'V2 SLIP · ' +
+      slip.toFixed(4) +
+      ' A8'
+    );
+
+  } catch (_) {
+    c20Value('a8ConsumerShipAngle','—');
+    c20Value('a8ConsumerShipSide','V2 UNAVAILABLE');
+    c20Value('a8ConsumerShipSlip','V2 SLIP · —');
+
+  } finally {
+    c20ShipV2Busy = false;
+  }
+}
+
+
+/*
+ * LAB AUDIO · LOCAL A8 FREQUENCY PREVIEW
+ *
+ * A8 second = 675/1024 legacy seconds.
+ * Physical Hz = cycles/A8s × 1024/675.
+ *
+ * Browser audio is downstream sound output only.
+ */
+let a8LabAudioContext = null;
+
+function a8LabTone(a8Frequency) {
+  const AudioCtor =
+    window.AudioContext ||
+    window.webkitAudioContext;
+
+  if (!AudioCtor) return;
+
+  if (!a8LabAudioContext) {
+    a8LabAudioContext =
+      new AudioCtor();
+  }
+
+  const ctx=a8LabAudioContext;
+
+  if (ctx.state === 'suspended') {
+    ctx.resume();
+  }
+
+  const osc=ctx.createOscillator();
+  const gain=ctx.createGain();
+
+  const hz=
+    a8Frequency * 1024 / 675;
+
+  const duration=
+    (675 / 1024) / 4;
+
+  const now=ctx.currentTime;
+
+  osc.type='sine';
+  osc.frequency.setValueAtTime(hz,now);
+
+  gain.gain.setValueAtTime(0.0001,now);
+  gain.gain.exponentialRampToValueAtTime(
+    0.12,
+    now + 0.015
+  );
+  gain.gain.exponentialRampToValueAtTime(
+    0.0001,
+    now + duration
+  );
+
+  osc.connect(gain);
+  gain.connect(ctx.destination);
+
+  osc.start(now);
+  osc.stop(now + duration + 0.02);
+}
+
+
 let c20ObserverBusy = false;
 let c20ObserverStopped = false;
 
@@ -3471,8 +4439,67 @@ async function c20ObserverPass() {
       clockPayload
     );
 
+    /*
+     * Same existing observer feed powers the local stopwatch.
+     * No extra request and no second timer.
+     */
+    c20StopwatchObserve(
+      clockPayload.clock
+    );
+
+    /*
+     * Calendar changes only on a counted Core20 day boundary.
+     * Use clock dayCount only to notice that boundary, then ask the
+     * authoritative Calendar endpoint for the actual calendar state.
+     */
+    const calendarTriggerDayCount =
+      clockPayload &&
+      clockPayload.clock &&
+      clockPayload.clock.dayCount !== undefined &&
+      clockPayload.clock.dayCount !== null
+        ? String(clockPayload.clock.dayCount)
+        : '';
+
+    if (
+      calendarTriggerDayCount &&
+      calendarTriggerDayCount !==
+        c20CalendarObservedDayCount
+    ) {
+      try {
+        const calendarPayload =
+          await c20Api('/api/core20/calendar');
+
+        c20Value(
+          'a8ConsumerCalendar',
+          c20CalendarTeaser(
+            calendarPayload.calendar
+          )
+        );
+
+        c20CalendarObservedDayCount =
+          calendarTriggerDayCount;
+      } catch (calendarErr) {
+        /*
+         * Leave the Calendar visibly unavailable and retry on the
+         * next observer pass. Do not mark Core20 itself disconnected.
+         */
+        c20Value(
+          'a8ConsumerCalendar',
+          '—'
+        );
+      }
+    }
+
+    c20RefreshShipV2();
+
     c20StartPhaseFrame();
   } catch (err) {
+    /*
+     * Stopwatch is session-local and has no holdover.
+     * If Lab loses Core20, the stopwatch dies with the connection.
+     */
+    c20StopwatchDisconnect();
+
     const connection =
       c20ById('connection');
 
@@ -3535,6 +4562,79 @@ c20ObserverLoop();
 </script>
 
 <script src="/core20-virtual-run.js" defer></script>
+
+
+<script id="a8-lab-annual-frame-live-v1">
+(() => {
+  'use strict';
+
+  const $ =
+    id => document.getElementById(id);
+
+  function put(id,value) {
+    const el=$(id);
+    if (el) el.textContent=value ?? '—';
+  }
+
+  async function refreshAnnualFrame() {
+    try {
+      const r =
+        await fetch(
+          '/api/annual-frame',
+          {cache:'no-store'}
+        );
+
+      if (!r.ok) {
+        throw new Error(
+          `HTTP ${r.status}`
+        );
+      }
+
+      const payload=await r.json();
+      const a=payload.annualV1Output || {};
+
+      const angle=
+        Number(
+          a.natureAnnualAngle512Continuous
+        );
+
+      put(
+        'a8NatureSolRegister',
+        Number.isFinite(angle)
+          ? `${angle.toFixed(4)} A8`
+          : '—'
+      );
+
+      put(
+        'a8NatureYearPhase9',
+        a.natureAnnualAngleOctal || '—'
+      );
+
+      put(
+        'a8NatureYearStatus',
+        [
+          a.progressionStatus,
+          a.annualHalf,
+          a.displayDirection
+        ].filter(Boolean).join(' · ')
+      );
+
+    } catch (err) {
+      put(
+        'a8NatureYearStatus',
+        `ANNUAL FRAME DISCONNECTED · ${err.message}`
+      );
+    }
+  }
+
+  refreshAnnualFrame();
+
+  setInterval(
+    refreshAnnualFrame,
+    5000
+  );
+})();
+</script>
 
 </body>
 </html>

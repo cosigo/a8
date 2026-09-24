@@ -477,7 +477,7 @@ body{
   <div class="speed-warning" id="viewModeBanner">
     SKY NOW · LIVE A8 PREDICTION
     <small id="viewModeDetail">
-      1× is anchored to fresh physical Epoch-5 RAW.
+      1× is anchored to fresh physical Epoch-7 RAW.
       Any other viewing rate is simulation and is not the current sky.
     </small>
   </div>
@@ -516,17 +516,17 @@ body{
   <p id="a8-sw-status" class="small">Ready</p>
   <p id="a8-sw-independence" class="small">
     Stopwatch reads Core20 elapsed time.
-    Changing moon viewing speed does not change the stopwatch’s rate. Display smoothed between Core20 readings.
+    Changing moon viewing speed does not change the stopwatch’s rate. Display follows the continuous Core20 civil observer.
   </p>
   <p class="small">
-    Elapsed time from sampled Core20 counts, not animation phase.
-    Whole A8 seconds shown. Start and Stop use server samples;
-    request delay and manual click timing limit comparison precision.
+    Elapsed time is the difference between coordinates from the Core20 civil observer.
+    Browser interpolation is output-only between authoritative Core20 snapshots.
+    Whole A8 seconds shown.
   </p>
 </section>
 
 <section class="panel" id="a8-native-viewing-rate-note">
-  <h2>Prediction / Simulation Rate · Epoch-5 RAW</h2>
+  <h2>Prediction / Simulation Rate · MODEL EPOCH-5</h2>
 
   <p>
     Current mode:
@@ -558,7 +558,7 @@ body{
   </ul>
 
   <p>
-    <b>1× is special:</b> it follows fresh Epoch-5 physical RAW
+    <b>1× is special:</b> it follows fresh Epoch-7 physical RAW
     and represents A8's current SKY NOW prediction.
     Selecting any other rate detaches the display from the current sky
     and enters simulation.
@@ -566,7 +566,7 @@ body{
 
   <p>
     Returning to 1× discards the simulated position and fetches
-    a fresh physical Epoch-5 snapshot before SKY NOW resumes.
+    a fresh physical Epoch-7 snapshot before SKY NOW resumes.
   </p>
 </section>
 
@@ -592,7 +592,7 @@ body{
     </div>
 
     <div class="read primary">
-      <div class="k">Epoch-5 RAW</div>
+      <div class="k">LIVE EPOCH-7 RAW</div>
       <div id="edgeRaw" class="v">—</div>
     </div>
 
@@ -614,7 +614,7 @@ body{
 
   <p class="small">
     At 1× the four moon positions are anchored to the current
-    physical Epoch-5 RAW counter. Browser interpolation only smooths
+    physical Epoch-7 RAW counter. Browser interpolation only smooths
     movement between snapshots. Simulation rates never write to,
     discipline, or retune the physical source or Core20.
   </p>
@@ -664,7 +664,7 @@ body{
 
 <section class="panel">
   <div id="pageStatus" class="status warn">
-    CONNECTING · EPOCH-5
+    CONNECTING · LIVE EPOCH-7
   </div>
 
   <h1>Four-moon predictive observer</h1>
@@ -711,6 +711,7 @@ body{
 
 </main>
 
+<script src="/assets/a8-core20-clock-observer.js?v=1da8c6f3c4264a6d"></script>
 <script>
 'use strict';
 
@@ -718,7 +719,7 @@ const MODEL_URL =
   '/assets/a8-moons-continuous-v2.json';
 
 const HANDOFF_URL =
-  '/assets/a8-moons-epoch7-handoff-v1.json';
+  '/assets/a8-moons-active-handoff-v1.json';
 
 const Q16 = 65536;
 const DAY_STATES = 131072;
@@ -741,11 +742,27 @@ const state = {
   ganymedeFull:null
 };
 
+const clockObserverApi =
+  window.A8Core20ClockObserver;
+
+if (
+  !clockObserverApi ||
+  clockObserverApi.schema !==
+    'A8-CORE20-CIVIL-OBSERVER-V1'
+){
+  throw new Error(
+    'canonical A8 Core20 clock observer unavailable'
+  );
+}
+
+const clockObserver =
+  clockObserverApi.create();
+
 const stopwatch = {
   running:false,
-  startRaw:null,
-  rawPerA8State:null,
-  stoppedTotal:0
+  startTotal:null,
+  stoppedTotal:0,
+  sourceEpoch:null
 };
 
 async function fetchJSON(url){
@@ -1255,7 +1272,7 @@ function modelDeltaFromPhysical(delta){
 
   if (!h)
     throw new Error(
-      'Epoch-7 moon handoff unavailable'
+      'Active physical moon handoff unavailable'
     );
 
   return (
@@ -1270,7 +1287,7 @@ function modelRawFromPhysical(physicalRaw){
 
   if (!h)
     throw new Error(
-      'Epoch-7 moon handoff unavailable'
+      'Active physical moon handoff unavailable'
     );
 
   return (
@@ -1315,12 +1332,12 @@ function setModeText(){
 
   $('viewModeDetail').textContent =
     live
-      ? '1× uses the qualified Epoch-7 physical → Epoch-5 model handoff. Any other viewing rate is simulation and is not the current sky.'
-      : 'This display is detached from current sky position. Return to 1× to discard simulation and fetch fresh Epoch-5 RAW.';
+      ? '1× uses the qualified active physical → Epoch-5 model handoff. Any other viewing rate is simulation and is not the current sky.'
+      : 'This display is detached from current sky position. Return to 1× to discard simulation and fetch fresh physical RAW.';
 
   $('anchorPolicy').textContent =
     live
-      ? 'FRESH EPOCH-7 RAW · SKY NOW'
+      ? 'FRESH PHYSICAL RAW · SKY NOW'
       : 'SIMULATION DETACHED';
 
   $('a8-native-selected-rate').textContent =
@@ -1367,7 +1384,7 @@ async function refreshPhysical(){
     )
   ){
     throw new Error(
-      'Physical Epoch-7 snapshot invalid'
+      'Physical carrier snapshot invalid'
     );
   }
 
@@ -1434,13 +1451,10 @@ async function refreshPhysical(){
   $('edgeRole').textContent =
     'READ ONLY';
 
-  if (stopwatch.running){
-    refreshStopwatchSample()
-      .catch(err=>{
-        $('a8-sw-status').textContent =
-          `SAMPLE ERROR · ${err.message}`;
-      });
-  }
+  /*
+   * Stopwatch progression is rendered from the canonical continuous
+   * Core20 civil observer. Physical snapshot arrival is not its beat.
+   */
 
   return p;
 }
@@ -1536,6 +1550,10 @@ async function refreshComparison(){
     const jov = jp?.jovian;
     const clk = cp?.clock;
 
+    moonsObserveClock(
+      clk
+    );
+
     $('jStatus').textContent =
       jov?.status || '—';
 
@@ -1567,6 +1585,14 @@ async function refreshComparison(){
     }
 
   } catch(err){
+    clockObserver.disconnect();
+
+    if (stopwatch.running){
+      stopwatchObserverLost(
+        'DISCONNECTED · Core20 comparison unavailable'
+      );
+    }
+
     console.warn(
       'Core20 comparison telemetry unavailable',
       err
@@ -1592,95 +1618,231 @@ function renderStopwatch(total){
     whole.toLocaleString();
 }
 
-function stopwatchNow(){
-  return stopwatch.stoppedTotal;
+function stopwatchObserverLost(
+  message='DISCONNECTED · Core20 observer unavailable'
+){
+  stopwatch.running=false;
+  stopwatch.startTotal=null;
+  stopwatch.stoppedTotal=0;
+  stopwatch.sourceEpoch=null;
+
+  $('a8-sw-start').disabled=false;
+  $('a8-sw-stop').disabled=true;
+
+  $('a8-sw-status').textContent =
+    message;
+
+  renderStopwatch(0);
 }
 
-async function refreshStopwatchSample(){
-  if (!stopwatch.running)
-    return;
 
-  const clk=await coreClock();
-
-  const nowRaw=
-    Number(
-      clk.currentSelectedRawPulse
+function moonsObserveClock(
+  clk,
+  force=false
+){
+  const accepted =
+    clockObserver.observe(
+      clk,
+      {force}
     );
+
+  const observerState =
+    clockObserver.state();
+
+  if (
+    !accepted ||
+    !observerState.ready ||
+    !observerState.connected ||
+    !observerState.running
+  ){
+    if (stopwatch.running){
+      stopwatchObserverLost(
+        'DISCONNECTED · Core20 clock unavailable'
+      );
+    }
+
+    return false;
+  }
+
+  if (
+    stopwatch.running &&
+    stopwatch.sourceEpoch !== null &&
+    String(observerState.sourceEpoch) !==
+      stopwatch.sourceEpoch
+  ){
+    stopwatchObserverLost(
+      'DISCONNECTED · Core20 source epoch changed'
+    );
+
+    return false;
+  }
+
+  return true;
+}
+
+
+function stopwatchNow(){
+  if (!stopwatch.running)
+    return stopwatch.stoppedTotal;
+
+  const observerState =
+    clockObserver.state();
+
+  if (
+    !observerState.ready ||
+    !observerState.connected ||
+    !observerState.running
+  ){
+    stopwatchObserverLost();
+
+    return 0;
+  }
+
+  if (
+    stopwatch.sourceEpoch !== null &&
+    String(observerState.sourceEpoch) !==
+      stopwatch.sourceEpoch
+  ){
+    stopwatchObserverLost(
+      'DISCONNECTED · Core20 source epoch changed'
+    );
+
+    return 0;
+  }
+
+  const now =
+    clockObserver.currentTotal();
+
+  if (
+    !Number.isFinite(now) ||
+    !Number.isFinite(stopwatch.startTotal)
+  ){
+    stopwatchObserverLost(
+      'DISCONNECTED · Core20 coordinate unavailable'
+    );
+
+    return 0;
+  }
+
+  const elapsed =
+    now -
+    stopwatch.startTotal;
+
+  if (
+    !Number.isFinite(elapsed) ||
+    elapsed < 0
+  ){
+    stopwatchObserverLost(
+      'DISCONNECTED · Core20 coordinate regressed'
+    );
+
+    return 0;
+  }
 
   stopwatch.stoppedTotal =
-    Math.max(
-      0,
-      (
-        nowRaw -
-        stopwatch.startRaw
-      ) /
-      stopwatch.rawPerA8State
-    );
+    elapsed;
+
+  return elapsed;
 }
+
 
 async function startStopwatch(){
   try{
-    const clk=await coreClock();
+    /*
+     * START already used one direct Core20 clock request before this
+     * migration. Keep that same user-triggered request, but use it
+     * only to establish/confirm the canonical civil observer.
+     */
+    const clk =
+      await coreClock();
 
-    const sun=
-      parseFraction(
-        clk.recoveredRawPerSunReturn
+    if (
+      !moonsObserveClock(
+        clk
+      )
+    ){
+      throw new Error(
+        'Core20 observer unavailable'
       );
+    }
 
-    stopwatch.rawPerA8State =
-      (sun.n / sun.d) /
-      DAY_STATES;
+    const observerState =
+      clockObserver.state();
 
-    stopwatch.startRaw =
-      Number(
-        clk.currentSelectedRawPulse
+    const now =
+      clockObserver.currentTotal();
+
+    if (!Number.isFinite(now)){
+      throw new Error(
+        'Core20 coordinate unavailable'
       );
+    }
+
+    stopwatch.startTotal =
+      now;
 
     stopwatch.stoppedTotal=0;
+
+    stopwatch.sourceEpoch =
+      String(
+        observerState.sourceEpoch
+      );
+
     stopwatch.running=true;
 
     $('a8-sw-start').disabled=true;
     $('a8-sw-stop').disabled=false;
 
     $('a8-sw-status').textContent =
-      'Running · native Core20 counts';
+      'Running · canonical Core20 civil observer';
+
+    renderStopwatch(0);
 
   } catch(err){
-    $('a8-sw-status').textContent =
-      `START ERROR · ${err.message}`;
+    stopwatchObserverLost(
+      `START ERROR · ${err.message}`
+    );
   }
 }
 
-async function stopStopwatch(){
+
+function stopStopwatch(){
   if (!stopwatch.running)
     return;
 
-  try{
-    await refreshStopwatchSample();
+  const total =
+    stopwatchNow();
 
-    stopwatch.running=false;
+  /*
+   * stopwatchNow() fails closed if the observer died.
+   */
+  if (!stopwatch.running)
+    return;
 
-    $('a8-sw-start').disabled=false;
-    $('a8-sw-stop').disabled=true;
+  stopwatch.stoppedTotal =
+    total;
 
-    $('a8-sw-status').textContent =
-      'Stopped · native Core20 counts';
+  stopwatch.running=false;
+  stopwatch.startTotal=null;
+  stopwatch.sourceEpoch=null;
 
-    renderStopwatch(
-      stopwatch.stoppedTotal
-    );
+  $('a8-sw-start').disabled=false;
+  $('a8-sw-stop').disabled=true;
 
-  } catch(err){
-    $('a8-sw-status').textContent =
-      `STOP ERROR · ${err.message}`;
-  }
+  $('a8-sw-status').textContent =
+    'Stopped · canonical Core20 civil observer';
+
+  renderStopwatch(
+    stopwatch.stoppedTotal
+  );
 }
+
 
 function resetStopwatch(){
   stopwatch.running=false;
-  stopwatch.startRaw=null;
-  stopwatch.rawPerA8State=null;
+  stopwatch.startTotal=null;
   stopwatch.stoppedTotal=0;
+  stopwatch.sourceEpoch=null;
 
   $('a8-sw-start').disabled=false;
   $('a8-sw-stop').disabled=true;
@@ -1690,6 +1852,7 @@ function resetStopwatch(){
 
   renderStopwatch(0);
 }
+
 
 function showError(err){
   console.error(err);
@@ -1721,7 +1884,7 @@ function frame(){
 
 async function bootstrap(){
   $('pageStatus').textContent =
-    'CONNECTING · MODEL EPOCH-5 / LIVE EPOCH-7';
+    'CONNECTING · MODEL EPOCH-5 / LIVE PHYSICAL CARRIER';
 
   $('pageStatus').className =
     'status warn';
@@ -1747,30 +1910,49 @@ async function bootstrap(){
   state.sourceEpoch=
     String(cfg.sourceEpoch);
 
+  const handoffLiveEpoch =
+    Number(
+      handoff?.livePhysical?.sourceEpoch
+    );
+
+  const handoffLiveAnchor =
+    Number(
+      handoff?.livePhysical?.anchorRaw
+    );
+
+  const handoffModelAnchor =
+    Number(
+      handoff?.modelAnchor
+        ?.rawEquivalentAtPhysicalAnchor
+    );
+
+  const handoffRatioN =
+    Number(
+      handoff?.physicalToModelRatio
+        ?.numerator
+    );
+
+  const handoffRatioD =
+    Number(
+      handoff?.physicalToModelRatio
+        ?.denominator
+    );
+
   if (
     handoff.schema !==
       'A8-MOONS-PHYSICAL-MODEL-HANDOFF-V1' ||
     handoff.status !== 'QUALIFIED' ||
     String(handoff.model.sourceEpoch) !==
       String(cfg.sourceEpoch) ||
-    String(handoff.livePhysical.sourceEpoch) !==
-      '7' ||
-    Number(
-      handoff.modelAnchor
-        .rawEquivalentAtPhysicalAnchor
-    ) !== 862808997 ||
-    Number(
-      handoff.livePhysical.anchorRaw
-    ) !== 1853729 ||
-    Number(
-      handoff.physicalToModelRatio.numerator
-    ) !== 1 ||
-    Number(
-      handoff.physicalToModelRatio.denominator
-    ) !== 1
+    !Number.isSafeInteger(handoffLiveEpoch) ||
+    handoffLiveEpoch < 1 ||
+    !Number.isFinite(handoffLiveAnchor) ||
+    !Number.isFinite(handoffModelAnchor) ||
+    handoffRatioN !== 1 ||
+    handoffRatioD !== 1
   ){
     throw new Error(
-      'Epoch-7 moon handoff invalid'
+      'Active physical moon handoff invalid'
     );
   }
 
@@ -1916,7 +2098,7 @@ bootstrap()
     <a href="https://cosigo.io/">COSIGO Home</a>
     <a href="https://a8.cosigo.io/">A8 Public Instrument</a>
     <a href="/">A8 Engineering Lab</a>
-    <a href="/chief-engineer.html" title="Chief Engineer" style="opacity:.32;font-size:.72em">CE</a>
+    <a href="https://ce.cosigo.io/" title="Chief Engineer" style="opacity:.32;font-size:.72em">CE</a>
     <a href="https://contact.cosigo.io/">Contact</a>
     <a href="https://github.com/cosigo">COSIGO GitHub</a>
   </div>

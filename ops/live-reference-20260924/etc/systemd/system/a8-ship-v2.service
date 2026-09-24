@@ -1,0 +1,18 @@
+[Unit]
+Description=A8 Terra Ship Slip V2
+After=network.target a8-core20.service a8-annual-frame.service
+
+[Service]
+Type=simple
+User=greg
+Group=greg
+Environment=A8_SHIP_V2_PORT=18031
+Environment=A8_SHIP_V2_BIRTH=/opt/a8-ship-v2/terra-ship-slip-v2-birth.json
+ExecStart=/usr/bin/python3 /opt/a8-ship-v2/server.py
+Restart=on-failure
+RestartSec=2
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
