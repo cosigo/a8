@@ -505,12 +505,12 @@ main .panel{
   <section class="panel" id="core20-upstream-operator">
     <div class="c20v-head">
       <div>
-        <div class="c20v-kicker">UPSTREAM OBSERVER · RAW SOURCE → JOVIAN TIME BASE</div>
-        <h2>Upstream timekeeping observer</h2>
+        <div class="c20v-kicker">RETAINED CORE20 OBSERVER · RECOVERY / DIAGNOSTIC</div>
+        <h2>Core20 recovery observer</h2>
         <p class="muted">
-          Observe the currently selected raw source. The three moon channels below
-          recover independently; this panel shows the selected raw counter and
-          the normalized Jovian ruler that emerges from them.
+          Observe the retained Core20 recovery state. Current Jovian natural-ruler
+          selection is controlled in CE and mirrored in Lab; this standalone
+          Core20 page does not bind or select that authority.
         </p>
       </div>
       <div id="c20vStatus" class="pill warn">READY</div>
@@ -531,12 +531,12 @@ main .panel{
       </div>
 
       <div class="c20v-stat">
-        <span class="c20v-k">IO / EUROPA / GANYMEDE</span>
+        <span class="c20v-k">RETAINED JOVIAN RECOVERY STATE</span>
         <span id="c20vJovian" class="c20v-v">—</span>
       </div>
 
       <div class="c20v-stat">
-        <span class="c20v-k">NORMALIZED JOVIAN RULER · RAW</span>
+        <span class="c20v-k">HISTORICAL NORMALIZED RULER · RAW</span>
         <span id="c20vRuler" class="c20v-v">—</span>
       </div>
 
@@ -553,8 +553,8 @@ main .panel{
         <div class="c20v-kicker">DOWNSTREAM OBSERVER · EARTH / SOL → CIVIL CLOCK</div>
         <h2>Recovered A8 civil clock</h2>
         <p class="muted">
-          The normalized Jovian ruler continues downstream through Mintaka
-          Earth axial rotation, Sol orbital advance, recovered Sun return,
+          This retained Core20 recovery chain shows the historical downstream
+          relationship through Mintaka, Sol, recovered Sun return,
           exact 2^17 DAY_PHASE17, and native 32 × 64 × 64.
         </p>
       </div>
@@ -577,7 +577,7 @@ main .panel{
             style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace">—</span>
 
           <span class="c20v-k" style="margin-top:10px">
-            ABSOLUTE YEAR PHASE9 · 000₈–777₈
+            PRESERVED PRE-V1 YEAR PHASE9 · 000₈–777₈
           </span>
           <span id="c20vYearPhase9"
             class="c20v-v"
@@ -586,14 +586,14 @@ main .panel{
           </span>
 
           <span class="c20v-k" style="margin-top:8px">
-            ABSOLUTE YEAR PHASE27
+            PRESERVED PRE-V1 YEAR PHASE27
           </span>
           <span id="c20vYearPhase27"
             class="c20v-v"
             style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace">—</span>
 
           <span class="c20v-k" style="margin-top:8px">
-            LAST ONE-SHOT JPL VERIFICATION
+            PRESERVED PRE-V1 JPL VERIFICATION
           </span>
           <span id="c20vYearJpl"
             class="c20v-v">—</span>
@@ -610,8 +610,9 @@ main .panel{
             class="muted"
             style="display:block;margin-top:8px;font-size:.78rem;line-height:1.45"
           >
-            READ ONLY · JPL verifies absolute year-wheel orientation once.
-            It never drives the running orbital rate.
+            LEGACY / FALLBACK · JPL supplied one-shot orientation to this
+            retained pre-V1 coordinate frame. It does not define Annual Frame V1
+            and never drives the running orbital rate.
           </span>
         </div>
       </div>
@@ -677,11 +678,11 @@ main .panel{
             font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
           "
         >
-          <b>IO ×4 · EUROPA ×2 · GANYMEDE ×1</b>
+          <b>HISTORICAL IO ×4 · EUROPA ×2 · GANYMEDE ×1</b>
           <span>→</span>
-          <span>EXACT 1:2:4 AGREEMENT</span>
+          <span>NORMALIZED 1:2:4 COMPARATOR</span>
           <span>→</span>
-          <b>RECOVERED NATURAL TIME RULER</b>
+          <b>RETAINED CORE20 RECOVERY RULER</b>
           <span>→</span>
           <span>MINTAKA · EARTH ROTATION</span>
           <span>→</span>
@@ -701,7 +702,7 @@ main .panel{
         style="padding:14px 16px"
       >
         <span class="c20v-k">
-          ABSOLUTE YEAR ORIENTATION · ONE-SHOT VERIFICATION
+          PRESERVED PRE-V1 YEAR ORIENTATION · FALLBACK / DIAGNOSTIC
         </span>
 
         <div
@@ -717,17 +718,17 @@ main .panel{
             font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
           "
         >
-          <b>MOON-DRIVEN CORE ALREADY RUNNING</b>
+          <b>HISTORICAL PRE-V1 FLOW</b>
           <span>→</span>
           <span>CAPTURE RAW + ONE UTC INSTANT</span>
           <span>→</span>
           <span>JPL HORIZONS · VERIFY ONCE</span>
           <span>→</span>
-          <b>PLACE YEAR WHEEL · 000₈–777₈</b>
+          <b>PLACE PRE-V1 YEAR WHEEL · 000₈–777₈</b>
           <span>→</span>
           <b>JPL OUT · UTC OUT · NETWORK OUT</b>
           <span>→</span>
-          <span>RAW + RECOVERED SOL RATE CONTINUE</span>
+          <span>RETAINED RECOVERED SOL FRAME CONTINUES</span>
         </div>
 
         <p
@@ -741,8 +742,9 @@ main .panel{
         >
           The comparison instant has fraction-of-a-second resolution.
           Network response time has no timing authority.
-          JPL establishes position once; Io / Europa / Ganymede remain
-          underneath the running system.
+          Historical comparison flow only. JPL established the pre-V1
+          position once; this retained block does not define Annual Frame V1
+          or the current Europa natural ruler.
         </p>
       </div>
 
@@ -1386,10 +1388,10 @@ function c20InstallJovianEnginePanel() {
     <div class="c20-engine-heading">
       <div>
         <div class="c20-engine-title">
-          JOVIAN RECOVERY ENGINE · UNDER THE HOOD
+          HISTORICAL NORMALIZED 1:2:4 RECOVERY ENGINE · DIAGNOSTIC
         </div>
         <div class="c20-engine-sub">
-          ONE RAW COUNTER · THREE INDEPENDENT RECURRENCES ·
+          RETAINED RECOVERY / COMPARATOR VIEW ·
           Io ×4 · Europa ×2 · Ganymede ×1
         </div>
         <div class="c20-engine-live">
@@ -1428,7 +1430,7 @@ function c20InstallJovianEnginePanel() {
         <div class="c20-engine-row"><span>LIVE PHASE18 BINARY</span><strong id="c20EngineIoLive18Bin">—</strong></div>
         <div class="c20-engine-row"><span>LIVE PHASE18 OCTAL</span><strong id="c20EngineIoLive18Oct">—</strong></div>
         <div class="c20-engine-row"><span>NATIVE RAW</span><strong id="c20EngineIoNative">—</strong></div>
-        <div class="c20-engine-row"><span>NORMALIZED RAW</span><strong id="c20EngineIoNorm">—</strong></div>
+        <div class="c20-engine-row"><span>HISTORICAL NORMALIZED RAW</span><strong id="c20EngineIoNorm">—</strong></div>
         <div class="c20-engine-row"><span>STATE</span><strong id="c20EngineIoState">SEEKING</strong></div>
       </article>
 
@@ -1447,7 +1449,7 @@ function c20InstallJovianEnginePanel() {
         <div class="c20-engine-row"><span>LIVE PHASE18 BINARY</span><strong id="c20EngineEuLive18Bin">—</strong></div>
         <div class="c20-engine-row"><span>LIVE PHASE18 OCTAL</span><strong id="c20EngineEuLive18Oct">—</strong></div>
         <div class="c20-engine-row"><span>NATIVE RAW</span><strong id="c20EngineEuNative">—</strong></div>
-        <div class="c20-engine-row"><span>NORMALIZED RAW</span><strong id="c20EngineEuNorm">—</strong></div>
+        <div class="c20-engine-row"><span>HISTORICAL NORMALIZED RAW</span><strong id="c20EngineEuNorm">—</strong></div>
         <div class="c20-engine-row"><span>STATE</span><strong id="c20EngineEuState">SEEKING</strong></div>
       </article>
 
@@ -1466,7 +1468,7 @@ function c20InstallJovianEnginePanel() {
         <div class="c20-engine-row"><span>LIVE PHASE18 BINARY</span><strong id="c20EngineGaLive18Bin">—</strong></div>
         <div class="c20-engine-row"><span>LIVE PHASE18 OCTAL</span><strong id="c20EngineGaLive18Oct">—</strong></div>
         <div class="c20-engine-row"><span>NATIVE RAW</span><strong id="c20EngineGaNative">—</strong></div>
-        <div class="c20-engine-row"><span>NORMALIZED RAW</span><strong id="c20EngineGaNorm">—</strong></div>
+        <div class="c20-engine-row"><span>HISTORICAL NORMALIZED RAW</span><strong id="c20EngineGaNorm">—</strong></div>
         <div class="c20-engine-row"><span>STATE</span><strong id="c20EngineGaState">SEEKING</strong></div>
       </article>
 
@@ -1477,7 +1479,7 @@ function c20InstallJovianEnginePanel() {
         BUILDING IO 8 · EUROPA 4 · GANYMEDE 2
       </div>
       <div id="c20EngineComparatorDetail" class="c20-comparator-detail">
-        Waiting for independent normalized recurrence agreement.
+        Historical comparator awaiting normalized recurrence agreement.
       </div>
     </div>
   `;
@@ -1954,7 +1956,7 @@ function c20RenderJovianEngine(jovian, timekeeper) {
   c20EngineValue(
     'c20EngineComparatorDetail',
     detail ||
-      'Waiting for independent normalized recurrence agreement.'
+      'Historical comparator awaiting normalized recurrence agreement.'
   );
 }
 
@@ -2015,7 +2017,7 @@ function c20Render(payload, clockPayload) {
     subEl.textContent = String(exact);
     subEl.dataset.serverExact = String(exact);
     subEl.title =
-      'SERVER-EXACT Jovian subphase from Core20 raw-derived recovery; no browser interpolation.';
+      'Retained Core20 recovery subphase · diagnostic only · no browser interpolation.';
   }
 
   c20ReanchorPhase(

@@ -337,8 +337,9 @@ body {
       >—</span>
       <p class="muted">
         Primary live year-wheel position.
-        JPL establishes absolute orientation once per source epoch;
-        selected raw + recovered Sol rate continue the motion.
+        Preserved pre-V1 path: JPL established absolute orientation once per
+        source epoch; selected raw + recovered Sol rate continued that
+        historical coordinate frame.
       </p>
     </div>
 
@@ -364,7 +365,7 @@ body {
       class="card"
       style="grid-column:1/-1"
     >
-      <span class="k">A8 YEAR ANGLE REFERENCE · 9 BIT</span>
+      <span class="k">PRESERVED PRE-V1 YEAR ANGLE REFERENCE · DIAGNOSTIC · 9 BIT</span>
 
       <div
         style="
@@ -388,6 +389,9 @@ body {
       <p class="muted" style="margin-bottom:0">
         Operating register: 000₈–777₈.
         1000₈ is the full-turn recurrence boundary, not a stored year state.
+        This block preserves the pre-V1 coordinate frame for comparison only:
+        its 600₈ December-solstice position maps to Annual Frame V1 000₈.
+        It does not define or feed Annual Frame V1.
       </p>
     </div>
 
@@ -456,11 +460,13 @@ CORE RAW STATE       MUST NOT MOVE</pre>
   <section class="card" style="margin-top:16px">
     <h2>Current Core20 Sol role</h2>
 
-    <pre>Jupiter / Io · Europa · Ganymede
+    <pre>JUPITER
         │
         ▼
-RECOVERED NATURAL ELAPSED-TIME RULER
+EUROPA · 9,344,598 RAW / ORBIT
+SELECTED NATURAL ELAPSED-TIME RULER
         │
+        ├──────────────► Io · Ganymede · Callisto · recurrence witnesses
         ├──────────────► Mintaka · Earth axial-rotation witness
         │
         └──────────────► Sol · orbital-direction witness

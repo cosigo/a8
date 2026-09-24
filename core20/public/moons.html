@@ -6,19 +6,19 @@
 <title>A8 Time | Jupiter Moons | Io Europa Ganymede Callisto</title>
 <meta name="twitter:image:alt" content="Jupiter moons Io Europa Ganymede and Callisto in the A8 Time system">
 <meta name="twitter:image" content="https://a8.cosigo.io/assets/cosigo_master_512.png">
-<meta name="twitter:description" content="Explore Io, Europa, Ganymede and Callisto and the natural Jupiter moon recurrence behind A8 Time.">
+<meta name="twitter:description" content="Inspect the preserved Core20 recovered-motion observer and historical Io Europa Ganymede 1:2:4 diagnostic model.">
 <meta name="twitter:title" content="A8 Time | Jupiter Moons">
 <meta name="twitter:card" content="summary_large_image">
 <meta property="og:image:alt" content="Jupiter moons Io Europa Ganymede and Callisto in the A8 Time system">
 <meta property="og:image" content="https://a8.cosigo.io/assets/cosigo_master_512.png">
-<meta property="og:description" content="Explore Io, Europa, Ganymede and Callisto and the natural Jupiter moon recurrence behind A8 Time.">
+<meta property="og:description" content="Inspect the preserved Core20 recovered-motion observer and historical Io Europa Ganymede 1:2:4 diagnostic model.">
 <meta property="og:title" content="A8 Time | Jupiter Moons">
 <meta property="og:url" content="https://moons.cosigo.io/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Auspicious 8">
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
 <link rel="canonical" href="https://moons.cosigo.io/">
-<meta name="description" content="Explore A8 Time through Jupiter&#x27;s moons Io, Europa, Ganymede and Callisto. See the Io Europa Ganymede 1:2:4 recurrence behind the natural time ruler.">
+<meta name="description" content="Preserved Core20 diagnostic observer for the historical recovered Io Europa Ganymede 1:2:4 model and Callisto example orbit.">
 <link rel="stylesheet" href="/site-shell.css">
 <style>
 :root{
@@ -554,7 +554,7 @@ body{
     </div>
 
 <div class="panel">
-      <h2>Recovered Jovian ruler</h2>
+      <h2>Preserved recovered Jovian ruler · diagnostic</h2>
       <div class="reads">
         <div class="read"><div class="k">Jovian status</div><div id="jStatus" class="v">—</div></div>
         <div class="read"><div class="k">Source epoch</div><div id="sourceEpoch" class="v">—</div></div>
@@ -568,8 +568,8 @@ body{
 
 <section class="panel">
     <div id="pageStatus" class="status warn">CONNECTING · v5.4.20</div>
-    <h1>Galilean recovered-motion + Callisto example-orbit observer</h1>
-    <p>Io, Europa and Ganymede are drawn from the <b>recovered Jovian raw ruler</b>. Core20 remains authoritative. Callisto is restored as a <b>display-only orbital-period outlier</b> so its non-resonant rate can be seen beside the recovered 1:2:4 moons. Following the proven Core18 observer behavior, the page can accelerate <b>visible motion only</b>.</p>
+    <h1>Historical recovered-motion observer · diagnostic</h1>
+    <p>This standalone Core20 page preserves the historical recovered <b>1:2:4</b> observer model. It does not select the current Jovian natural authority. The current natural ruler is Europa at <b>9,344,598 RAW / orbit</b>; Io, Ganymede and Callisto retain their own natural recurrences as witnesses. No normalization or averaging defines the current ruler. The page can still accelerate <b>visible motion only</b>.</p>
     <div class="legend small">
       <span class="swatch"><b style="background:var(--front)"></b> front half</span>
       <span class="swatch"><b style="background:var(--back)"></b> back half</span>
@@ -577,7 +577,7 @@ body{
       <span class="swatch"><span class="status warn">OUTPUT ONLY</span> `performance.now()` between anchors</span>
     </div>
     <div class="note small" style="margin-top:10px">
-      <b>Geometry convention:</b> the recovered common lock pulse is the WEST anchor. Ganymede advances ×1, Europa ×2 and Io ×4 from that recovered ruler. Callisto advances at <b>0.428725508× Ganymede phase rate</b>, derived only for display from the published 7.155 : 16.689 orbital-period comparison. Callisto does not qualify, discipline, retune or write the Jovian ruler. No published moon period enters the defining 1:2:4 recovery path.
+      <b>Historical geometry convention:</b> the recovered common lock pulse is the WEST anchor. This retained model advances Ganymede ×1, Europa ×2 and Io ×4 from that recovered ruler. Callisto advances at <b>0.428725508× Ganymede phase rate</b>, derived only for display from the published 7.155 : 16.689 orbital-period comparison. These mechanics are preserved for diagnostic comparison only and do not define, discipline, retune or write the current natural authority.
     </div>
   </section>
 
@@ -630,10 +630,10 @@ function parseFraction(s){
 function buildMoonCard(m){
   const segs = Array.from({length:8},(_,i)=>`<span>${i}</span>`).join('');
   const subtitle = m.recovered
-    ? `Recovered normalized relationship ${m.ratio}`
+    ? `Historical normalized relationship ${m.ratio}`
     : `Example orbit only · non-resonant ratio ${m.ratio} of Ganymede`;
   const stateClass = m.recovered ? 'good' : 'warn';
-  const stateText = m.recovered ? 'RUNNING' : 'EXAMPLE ORBIT · NON-RESONANT · NOT AUTHORITY';
+  const stateText = m.recovered ? 'DIAGNOSTIC · RUNNING' : 'EXAMPLE ORBIT · NON-RESONANT · NOT AUTHORITY';
   const phaseLabel = m.recovered ? 'A8 PHASE9' : 'DISPLAY PHASE9';
   return `
   <section class="panel moon-card" id="card-${m.id}">
@@ -659,9 +659,9 @@ function buildMoonCard(m){
       <div class="read"><div class="k">Continuous phase</div><div id="${m.id}-phaseFloat" class="v">—</div></div>
       <div class="read"><div class="k">Phase rate / Ganymede</div><div id="${m.id}-ratio" class="v">${m.ratio}</div></div>
       <div class="read"><div class="k">Period / Ganymede</div><div class="v">${m.periodVsGanymede}</div></div>
-      <div class="read"><div class="k">Authority role</div><div class="v">${m.recovered ? 'RECOVERED 1:2:4' : 'DISPLAY ONLY'}</div></div>
+      <div class="read"><div class="k">Role</div><div class="v">${m.recovered ? 'HISTORICAL RECOVERED 1:2:4' : 'DISPLAY ONLY'}</div></div>
     </div>
-    ${m.recovered ? '' : '<p class="small" style="margin-top:10px"><span class="status warn">EXAMPLE ORBIT · NON-RESONANT RATIO</span> Callisto is shown only to illustrate an orbit outside the defining Io–Europa–Ganymede 1:2:4 relationship. Its displayed rate is relative-reference only and does not participate in recovery or authority.</p>'}
+    ${m.recovered ? '' : '<p class="small" style="margin-top:10px"><span class="status warn">EXAMPLE ORBIT · NON-RESONANT RATIO</span> Callisto is shown here only as part of the retained historical recovered-motion observer. Its displayed rate is relative-reference only and does not participate in current natural authority.</p>'}
   </section>`;
 }
 
@@ -824,7 +824,7 @@ async function bootstrap(reason='INITIAL'){
   $('edgeRaw').textContent = Number(clk.currentSelectedRawPulse).toLocaleString();
 
   setViewMultiplier(model.viewMultiplier);
-  $('pageStatus').textContent = 'RUNNING · RECOVERED 1:2:4 + CALLISTO EXAMPLE ORBIT · OBSERVER VIEW RATE · v5.4.20';
+  $('pageStatus').textContent = 'RUNNING · HISTORICAL RECOVERED 1:2:4 DIAGNOSTIC + CALLISTO EXAMPLE ORBIT · OBSERVER VIEW RATE · v5.4.20';
   $('pageStatus').className = 'status good';
 }
 

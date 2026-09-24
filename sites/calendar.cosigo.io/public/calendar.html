@@ -2388,11 +2388,10 @@
    * Year-angle orientation must be established upstream from native A8 evidence.
    * Browser current date/time is never read and polling is display only.
    *
-   * Calendar seam: absolute Sol phase 600₈ (270°) = North / Day 1.
+   * Annual Frame V1 seam: 000₈ = North / A8 New Year / December solstice / Day 1.
    */
   const YEAR_PHASE27_STATES = 1n << 27n;
   const FINE_PER_A8_ANGLE = 1n << 18n;
-  const CALENDAR_NORTH_ABSOLUTE = 384n * FINE_PER_A8_ANGLE; // 600₈ absolute
 
   let liveToday = null;
   let userExploringMonth = false;

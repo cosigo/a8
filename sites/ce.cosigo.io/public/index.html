@@ -343,7 +343,7 @@ pre{
 
     <div class="step">
       <b>2 · PATH A PHYSICAL SOURCE</b>
-      Core20 uses the qualified Epoch-7 external physical RAW source as its
+      Core20 uses the qualified Epoch-8 external physical RAW source as its
       normal pace input.
     </div>
 
@@ -672,7 +672,7 @@ pre{
   </div>
 
   <p class="note">
-    Epoch-7 physical chain: Arduino A Timer2/D11 → Arduino B Timer1/D5
+    Epoch-8 physical chain: Arduino A Timer2/D11 → Arduino B Timer1/D5
     → Pi reporter. Core20 maps this physical RAW through the qualified
     Path-A physical-to-Core relationship. Browser polling cadence and
     network arrival time are presentation only and do not pace Core20.
@@ -796,7 +796,7 @@ pre{
           margin-top:4px;
         "
       >
-        A8 PRIMARY · NATURE → EPOCH-7 PHYSICAL RAW → CORE20
+        A8 PRIMARY · NATURE → EPOCH-8 PHYSICAL RAW → CORE20
       </div>
 
       <pre style="
@@ -812,7 +812,7 @@ pre{
    Io/Eu/Ga turns    stellar crossing   solar direction
           │                │                │
           │                │                │
-          └──── DIRECT EPOCH-7 PHYSICAL RAW ┘
+          └──── DIRECT EPOCH-8 PHYSICAL RAW ┘
                            │
                      EVIDENCE LAYER
                            │
@@ -863,7 +863,7 @@ pre{
 
       <p class="note">
         <b>CORE20</b> · common A8 progression.
-        Physical SOURCE_EPOCH 7 and Core20 internal sourceEpoch 3 remain
+        Physical SOURCE_EPOCH 8 and Core20 internal sourceEpoch 3 remain
         distinct domains.
       </p>
 
@@ -2638,7 +2638,7 @@ pre{
         put(
           'canonicalAnnualAnchor',
           out.physicalRawAnchorSealed
-            ? 'LIVE · EPOCH-7 PHYSICAL RAW ANCHOR SEALED'
+            ? 'LIVE · EPOCH-8 PHYSICAL RAW ANCHOR SEALED'
             : `STANDBY · EQUINOX · ${out.orientationStatus}`
         );
 
