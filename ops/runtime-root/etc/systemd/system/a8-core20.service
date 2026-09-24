@@ -1,0 +1,17 @@
+[Unit]
+Description=Auspicious 8 Core20 Time Laboratory
+After=network.target
+
+[Service]
+Type=simple
+User=greg
+Group=greg
+WorkingDirectory=/srv/apps/a8_time_lab_v5_4_20_postseal_hw
+ExecStart=/usr/bin/node /usr/local/lib/a8-core20-service.js
+Restart=on-failure
+RestartSec=2
+KillSignal=SIGTERM
+TimeoutStopSec=8
+
+[Install]
+WantedBy=multi-user.target

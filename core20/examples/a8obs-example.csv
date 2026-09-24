@@ -1,0 +1,8 @@
+rawPulse,moon,x,visible,uncertaintyX
+0,io,12.4,true,0.2
+25,io,4.0,true,0.2
+50,io,-5.2,true,0.2
+75,io,-12.1,true,0.2
+100,io,-15.0,true,0.2
+125,io,-12.0,true,0.2
+150,io,-5.0,true,0.2

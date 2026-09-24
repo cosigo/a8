@@ -1,0 +1,65 @@
+{
+  "schema": "A8-LIVE-JOVIAN-PERIOD-SEED-V1",
+  "status": "READY",
+  "role": "JUPITER_LIVE_PERIOD_DRIVER_BOOTSTRAP",
+  "sourceModel": {
+    "schema": "A8-MOONS-CONTINUOUS-COORDINATES-V2",
+    "sourceEpoch": 5,
+    "sha256": "9e68d679b814a9c082bca3a8bcd401cbc6d50293ef16e35b411a12ba5aa8b119",
+    "ongoingExternalFeed": false
+  },
+  "bootstrapEstimator": {
+    "method": "ARITHMETIC_MEAN_OF_NORMALIZED_IO4_EUROPA2_GANYMEDE1",
+    "normalizedSeedRaw": [
+      18602980,
+      18689196,
+      18866420
+    ],
+    "consensusRawPerGanymedeOrbit": 18719532,
+    "exact124": true
+  },
+  "lanes": {
+    "io": {
+      "body": "IO",
+      "multiplier": 4,
+      "seedFullOrbitRaw": 4650745,
+      "seedEastToWestRaw": 2323549,
+      "seedWestToEastRaw": 2327196,
+      "seedNormalizedRaw": 18602980,
+      "liveDriverFullOrbitRaw": 4679883,
+      "normalizedResidualRaw": -116552
+    },
+    "europa": {
+      "body": "EUROPA",
+      "multiplier": 2,
+      "seedFullOrbitRaw": 9344598,
+      "seedEastToWestRaw": 4674200,
+      "seedWestToEastRaw": 4669713,
+      "seedNormalizedRaw": 18689196,
+      "liveDriverFullOrbitRaw": 9359766,
+      "normalizedResidualRaw": -30336
+    },
+    "ganymede": {
+      "body": "GANYMEDE",
+      "multiplier": 1,
+      "seedFullOrbitRaw": 18866420,
+      "seedEastToWestRaw": 9414972,
+      "seedWestToEastRaw": 9451448,
+      "seedNormalizedRaw": 18866420,
+      "liveDriverFullOrbitRaw": 18719532,
+      "normalizedResidualRaw": 146888
+    }
+  },
+  "policy": {
+    "absoluteMoonPhaseQualified": false,
+    "periodProgression": "LIVE_FROM_PHYSICAL_RAW_ONLY",
+    "sourceEpochChange": "REARM_WITH_FRESH_RAW_BASELINE",
+    "crossEpochRawContinuity": false,
+    "manufactureOutageElapsedTime": false,
+    "predictedTurnsAreNatureObservations": false,
+    "writesCore20": false,
+    "writesArduino": false,
+    "usesUTCForProgression": false,
+    "usesHostTimeForProgression": false
+  }
+}

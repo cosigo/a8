@@ -1,0 +1,2911 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>A8 Time Lab v5.4.20 | COSIGO Labs</title>
+<meta name="description" content="Auspicious 8 engineering laboratory: raw oscillator recovery, independent Jovian channels, comparator, qualification, replay, clock, angle, quartz, and integrated map-clock-compass instruments.">
+<meta name="author" content="COSIGO Labs">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+<meta name="theme-color" content="#0b0f14">
+<link rel="canonical" href="https://lab.a8.cosigo.io/">
+<link rel="icon" href="https://a8.cosigo.io/assets/cosigo_master_512.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="COSIGO Labs — Auspicious 8">
+<meta property="og:title" content="A8 Time Laboratory v5.4.20 | COSIGO Labs">
+<meta property="og:description" content="Engineering laboratory for A8 Jovian recovery, replay, clock, angle, quartz and integrated navigation instruments.">
+<meta property="og:url" content="https://lab.a8.cosigo.io/">
+<meta property="og:image" content="https://a8.cosigo.io/assets/cosigo_master_512.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="A8 Time Laboratory v5.4.20 | COSIGO Labs">
+<meta name="twitter:description" content="Auspicious 8 engineering laboratory. Nature first; ruler second.">
+<meta name="twitter:image" content="https://a8.cosigo.io/assets/cosigo_master_512.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"A8 Time Laboratory v5.4.20","url":"https://lab.a8.cosigo.io/","dateModified":"2026-08-16","isPartOf":{"@type":"WebSite","name":"COSIGO Labs — Auspicious 8","url":"https://a8.cosigo.io/"}}</script>
+<link id="a8-lab-background-preload-01" rel="preload" as="image" href="/assets/a8_lab_front_bg.png" type="image/png" fetchpriority="high">\n<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="/site-shell.css">
+
+<style>
+/* A8 LAB ANTIQUE INSTRUMENT BACKGROUND v1 */
+body{
+  background:
+    linear-gradient(rgba(7,10,14,.64), rgba(7,10,14,.76)),
+    url("/assets/a8_lab_front_bg.png")
+      center center / cover fixed no-repeat !important;
+}
+</style>
+
+
+<!-- A8-CORE-AUTHENTIC-MUSIC-V1 -->
+<style>
+
+.a8-core-music {
+  margin: 18px 0;
+  padding: 16px;
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 14px;
+  background: rgba(8,12,18,.68);
+}
+
+.a8-core-music h3 {
+  margin-top: 0;
+}
+
+.a8-core-music .a8-music-authority {
+  margin: 8px 0 14px;
+  font-size: .82rem;
+  line-height: 1.45;
+  opacity: .86;
+}
+
+.a8-core-music .a8-music-status {
+  margin: 12px 0;
+  padding: 10px 12px;
+  border-radius: 9px;
+  background: rgba(0,0,0,.23);
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Consolas,
+    monospace;
+  font-size: .82rem;
+  line-height: 1.55;
+}
+
+.a8-core-music .a8-music-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.a8-core-music button {
+  cursor: pointer;
+}
+
+.a8-core-music .a8-native-readout {
+  margin-top: 10px;
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Consolas,
+    monospace;
+  font-size: .78rem;
+  opacity: .88;
+}
+
+</style>
+
+
+<style id="a8-g6g-r3-facing-cleanup">
+  #lab-modules .core20-primary{
+    border-color:#6d9cff;
+    font-weight:900;
+  }
+  #lab-modules .chief-engineer-links{
+    margin-top:14px;
+    border:1px solid #6b5940;
+    border-radius:10px;
+    padding:10px 12px;
+    background:rgba(93,69,34,.10);
+  }
+  #lab-modules .chief-engineer-links > summary{
+    cursor:pointer;
+    font-weight:900;
+    letter-spacing:.04em;
+    color:#e0bd72;
+  }
+  #lab-modules .chief-engineer-grid{
+    margin-top:12px;
+  }
+</style>
+
+
+
+
+
+<style id="a8-chief-engineer-standalone-style">
+  #a8-chief-engineer-standalone-panel{
+    margin:18px 0;
+    border:1px solid rgba(255,176,80,.52);
+    box-shadow:0 10px 34px rgba(0,0,0,.18);
+  }
+
+  #a8-chief-engineer-standalone-panel .a8-chief-engineer-panel-head{
+    display:flex;
+    gap:18px;
+    align-items:flex-start;
+    justify-content:space-between;
+    flex-wrap:wrap;
+  }
+
+  #a8-chief-engineer-standalone-panel h2{
+    margin:.15rem 0 .35rem;
+  }
+
+  #a8-engineering-do-not-touch-drawer{
+    margin-top:12px;
+    border:1px solid rgba(255,176,80,.48);
+    border-radius:10px;
+    overflow:hidden;
+    background:rgba(86,48,10,.12);
+  }
+
+  #a8-engineering-do-not-touch-drawer > summary{
+    cursor:pointer;
+    list-style:none;
+    padding:12px 14px;
+    font-weight:950;
+    letter-spacing:.075em;
+    user-select:none;
+  }
+
+  #a8-engineering-do-not-touch-drawer > summary::-webkit-details-marker{
+    display:none;
+  }
+
+  #a8-engineering-do-not-touch-drawer > summary::before{
+    content:"▸ ";
+  }
+
+  #a8-engineering-do-not-touch-drawer[open] > summary::before{
+    content:"▾ ";
+  }
+
+  #a8-engineering-lock-note{
+    margin:0;
+    padding:0 14px 12px;
+    font-size:.8rem;
+    opacity:.86;
+  }
+
+  #a8-engineering-do-not-touch-drawer .a8-engineering-body{
+    border-top:1px solid rgba(255,176,80,.28);
+    padding:12px;
+  }
+
+  body.a8-public-host
+  #a8-engineering-do-not-touch-drawer .a8-engineering-body
+  :is(button,input,select,textarea,a,[role="button"]){
+    opacity:.56;
+    filter:saturate(.55);
+    cursor:not-allowed !important;
+  }
+
+  #a8-engineering-lock-toast{
+    position:fixed;
+    left:50%;
+    bottom:24px;
+    transform:translate(-50%,18px);
+    z-index:99999;
+    min-width:min(300px,calc(100vw - 32px));
+    max-width:min(520px,calc(100vw - 32px));
+    padding:13px 16px;
+    border:1px solid rgba(255,176,168,.72);
+    border-radius:12px;
+    background:rgba(24,10,10,.96);
+    color:#ffd7d1;
+    box-shadow:0 16px 48px rgba(0,0,0,.46);
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .16s ease, transform .16s ease;
+    text-align:center;
+  }
+
+  #a8-engineering-lock-toast.a8-show{
+    opacity:1;
+    transform:translate(-50%,0);
+  }
+
+  #a8-engineering-lock-toast .a8-lock-title{
+    display:block;
+    font-weight:950;
+    letter-spacing:.07em;
+  }
+
+  #a8-engineering-lock-toast .a8-lock-sub{
+    display:block;
+    margin-top:3px;
+    font-size:.78rem;
+    opacity:.84;
+  }
+</style>
+
+
+<style id="a8-chief-engineer-layout-polish-01">
+  /* ----------------------------------------------------------
+     CHIEF ENGINEER · layout polish 01
+     Presentation only. Existing DOM IDs and handlers untouched.
+     ---------------------------------------------------------- */
+
+  #a8-chief-engineer-standalone-panel{
+    padding:18px;
+  }
+
+  #a8-chief-engineer-standalone-panel .a8-chief-engineer-panel-head{
+    padding:2px 2px 14px;
+    margin-bottom:2px;
+  }
+
+  #a8-chief-engineer-standalone-panel .a8-chief-engineer-panel-head > div:first-child{
+    max-width:780px;
+  }
+
+  #a8-chief-engineer-standalone-panel .a8-chief-engineer-panel-head .muted{
+    max-width:70ch;
+    line-height:1.55;
+  }
+
+  #a8-chief-engineer-standalone-panel #a8ChiefEngineerHostMode{
+    flex:0 0 auto;
+    margin-top:2px;
+  }
+
+  #a8-engineering-do-not-touch-drawer{
+    margin-top:4px;
+  }
+
+  #a8-engineering-do-not-touch-drawer > summary{
+    min-height:48px;
+    display:flex;
+    align-items:center;
+    gap:6px;
+  }
+
+  #a8-engineering-lock-note{
+    line-height:1.5;
+    padding:0 16px 14px;
+  }
+
+  #a8-engineering-do-not-touch-drawer .a8-engineering-body{
+    padding:16px;
+    display:grid;
+    grid-template-columns:minmax(0,1fr);
+    gap:16px;
+  }
+
+  /* Each direct engineering block reads as a distinct console group. */
+  #a8-engineering-do-not-touch-drawer .a8-engineering-body > *{
+    min-width:0;
+  }
+
+  #a8-engineering-do-not-touch-drawer .a8-engineering-body > * + *{
+    margin-top:0 !important;
+  }
+
+  /* Simulator/source controls get a clear first-class section. */
+  #a8-engineering-do-not-touch-drawer .a8-engineering-control-group{
+    padding:14px;
+    border:1px solid rgba(255,176,80,.28);
+    border-radius:10px;
+    background:rgba(255,176,80,.045);
+  }
+
+  #a8-engineering-do-not-touch-drawer .a8-engineering-control-group .c20v-kicker{
+    margin:0 0 10px;
+    font-size:.76rem;
+    font-weight:900;
+    letter-spacing:.08em;
+    opacity:.86;
+  }
+
+  #a8-engineering-do-not-touch-drawer .c20v-controls{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:10px;
+    align-items:stretch;
+  }
+
+  #a8-engineering-do-not-touch-drawer .c20v-controls > *{
+    width:100%;
+    min-height:42px;
+    margin:0 !important;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    box-sizing:border-box;
+  }
+
+  /* Give raw engineering rows a consistent rhythm without changing markup. */
+  #a8-engineering-do-not-touch-drawer .a8-engineering-body
+  :is(.row,.grid,.controls,.control-row,.button-row,.toolbar){
+    gap:10px;
+  }
+
+  #a8-engineering-do-not-touch-drawer .a8-engineering-body
+  :is(label,.label,.eyebrow,.kicker){
+    line-height:1.35;
+  }
+
+  #a8-engineering-do-not-touch-drawer .a8-engineering-body
+  :is(input,select,textarea,button,.button-link,a[role="button"]){
+    box-sizing:border-box;
+  }
+
+  #a8-engineering-do-not-touch-drawer .a8-engineering-body
+  :is(input,select,textarea){
+    min-height:38px;
+  }
+
+  /* Existing cards/panels inside CE get coherent inset spacing. */
+  #a8-engineering-do-not-touch-drawer .a8-engineering-body
+  :is(.card,.panel,.observer,.module,.block){
+    margin:0 !important;
+    padding:14px;
+    border-radius:10px;
+  }
+
+  #a8-engineering-do-not-touch-drawer .a8-engineering-body
+  :is(h2,h3,h4){
+    margin-top:0;
+    margin-bottom:8px;
+    line-height:1.25;
+  }
+
+  #a8-engineering-do-not-touch-drawer .a8-engineering-body p{
+    line-height:1.5;
+  }
+
+  #a8-engineering-do-not-touch-drawer .a8-engineering-body pre{
+    margin:10px 0 0;
+    padding:12px;
+    overflow:auto;
+    border-radius:8px;
+  }
+
+  #a8-engineering-do-not-touch-drawer .a8-engineering-body table{
+    width:100%;
+    border-collapse:collapse;
+  }
+
+  #a8-engineering-do-not-touch-drawer .a8-engineering-body th,
+  #a8-engineering-do-not-touch-drawer .a8-engineering-body td{
+    padding:8px 10px;
+    vertical-align:top;
+  }
+
+  /* Fine separators for un-carded consecutive engineering blocks. */
+  #a8-engineering-do-not-touch-drawer .a8-engineering-body > :not(.a8-engineering-control-group)
+  + :not(.a8-engineering-control-group){
+    padding-top:14px;
+    border-top:1px solid rgba(255,255,255,.08);
+  }
+
+  @media (max-width:900px){
+    #a8-engineering-do-not-touch-drawer .c20v-controls{
+      grid-template-columns:1fr;
+    }
+
+    #a8-chief-engineer-standalone-panel{
+      padding:14px;
+    }
+
+    #a8-engineering-do-not-touch-drawer .a8-engineering-body{
+      padding:12px;
+      gap:12px;
+    }
+  }
+</style>
+
+
+<style id="a8-ce-core-status-io-dedupe-r3-style">
+  #a8-ce-drawer-status-row{
+    display:flex;
+    align-items:center;
+    justify-content:flex-start;
+    gap:10px;
+    flex-wrap:wrap;
+    padding:10px 14px 12px;
+    border-bottom:1px solid rgba(255,176,80,.22);
+  }
+
+  #a8-ce-drawer-status-row #connection{
+    margin:0;
+  }
+
+  @media (max-width:720px){
+    #a8-ce-drawer-status-row{
+      padding:10px 12px;
+    }
+  }
+</style>
+
+
+<style id="a8-ce-core20-state-card-style">
+  #a8-ce-core20-state-card{
+    margin:0;
+    padding:14px;
+    box-sizing:border-box;
+  }
+</style>
+
+</head>
+<body>
+
+<style id="a8-topside-coherence-02-style">
+#a8-topside-coherence-02{
+  display:block;
+  margin:0;
+  padding:10px 14px;
+  border-bottom:1px solid rgba(255,255,255,.14);
+  background:rgba(7,11,16,.96);
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+}
+#a8-topside-coherence-02 .a8-topline{
+  max-width:1440px;
+  margin:0 auto;
+  display:flex;
+  gap:12px;
+  align-items:center;
+  flex-wrap:wrap;
+}
+#a8-topside-coherence-02 .cosigo-global-brand{
+  display:flex;
+  gap:8px;
+  align-items:center;
+  text-decoration:none;
+}
+#a8-topside-coherence-02 .cosigo-global-brand img{
+  width:34px;height:34px;object-fit:contain;
+}
+#a8-topside-coherence-02 .cosigo-global-brand span{
+  font-weight:900;letter-spacing:.06em;
+}
+#a8-topside-coherence-02 .cosigo-global-brand small{
+  display:block;opacity:.72;font-size:.62rem;
+}
+#a8-topside-coherence-02 .a8-location{
+  margin-left:auto;
+  font-size:.76rem;
+  font-weight:900;
+  letter-spacing:.07em;
+  color:#e0bd72;
+}
+#a8-topside-coherence-02 .a8-system-links,
+#a8-topside-coherence-02 .a8-utility-links{
+  max-width:1440px;
+  margin:8px auto 0;
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+  align-items:center;
+}
+#a8-topside-coherence-02 a{text-decoration:none}
+#a8-topside-coherence-02 .a8-system-links a{
+  padding:7px 9px;
+  border:1px solid #425467;
+  border-radius:8px;
+  background:#111820;
+  color:#c8ddf5;
+  font-size:.80rem;
+  font-weight:850;
+}
+#a8-topside-coherence-02 .a8-system-links a[data-current="true"]{
+  border-color:#6d9cff;color:#fff;
+}
+#a8-topside-coherence-02 .a8-utility-links{
+  padding-top:7px;
+  border-top:1px solid rgba(255,255,255,.08);
+}
+#a8-topside-coherence-02 .a8-utility-links a{
+  color:#92a5b8;
+  font-size:.70rem;
+  font-weight:700;
+}
+#a8-topside-coherence-02 .a8-utility-label{
+  color:#617487;
+  font-size:.68rem;
+  font-weight:900;
+  letter-spacing:.05em;
+}
+@media(max-width:760px){
+  #a8-topside-coherence-02 .a8-location{
+    width:100%;margin-left:0;
+  }
+}
+</style>
+<nav id="a8-topside-coherence-02" class="cosigo-global-nav" aria-label="A8 Time Lab navigation">
+
+
+
+  <div class="a8-topline">
+    <a class="cosigo-global-brand" href="https://cosigo.io/" aria-label="COSIGO home">
+      <img src="/assets/cosigo_master_512.gif" alt="COSIGO">
+      <span>COSIGO<small>LABS · AUSPICIOUS 8</small></span>
+    </a>
+    <div class="a8-location">YOU ARE HERE · MAIN LAB</div>
+  </div>
+  
+  <div class="a8-utility-links">
+    <span class="a8-utility-label">UTILITY ·</span>
+    <a href="/map-clock-compass.html">MAP · CLOCK · COMPASS</a>
+    <a href="/navigation.html">NAVIGATION</a>
+    <a href="/celestial.html">CELESTIAL</a>
+    <a href="https://a8.cosigo.io/canonical.html">CANONICAL</a>
+    <a href="https://a8.cosigo.io/open-research.html">OPEN RESEARCH</a>
+    <a href="https://a8.cosigo.io/">A8 PUBLIC</a>
+    <a href="https://lab.a8.cosigo.io/">LIVE LAB</a>
+    <a href="https://cosigo.io/">COSIGO HOME</a>
+    <a href="https://contact.cosigo.io/">CONTACT</a>
+    <a href="https://github.com/cosigo">GITHUB</a>
+  </div>
+</nav>
+<main>
+
+<header>
+  <div class="panel" style="margin:0;flex:1">
+    <div class="eyebrow">AUSPICIOUS 8 · UNIFIED NODE CORE</div>
+    <h1>A8 Time Laboratory v5.4.20</h1>
+    <p class="muted">One raw counter · three independent Jovian recoveries · comparator · qualification · divider · 17-bit clock. The browser is an observer.</p>
+    <p class="muted"><b>Moon rate fault:</b> affects only the adjusted moon. <b>Δ drift:</b> changes the common oscillator, so all three channels recalibrate.</p>
+    <p class="muted"><b>Site Integration 01:</b> Map · Clock · Compass and reference-library links are observer surfaces only. Recovery core, replay path, comparator, normalization and clock authority are unchanged.</p>
+  </div>
+  
+</header>
+
+<section class="panel instruments" id="lab-modules">
+  <div class="instrument-head">
+    <div>
+      <div class="section-kicker">LAB MODULES / INSTRUMENTS</div>
+      <h2>Observer surfaces & companion benches</h2>
+      <p class="muted">Navigation links are separated from live core controls. These pages observe, translate, visualize or extend the laboratory without becoming recovery authority.</p>
+    </div>
+    <div class="pill">LINKS ONLY</div>
+  </div>
+
+  <div class="launcher-grid">
+    <a class="button-link" href="/clock.html">ORIGINAL CLOCK</a>
+    <a class="button-link core20-primary" href="/moons.html">4-MOON VIEW</a>
+    <a class="button-link" href="/mintaka.html">MINTAKA · EARTH ROTATION WITNESS</a>
+    <a class="button-link" href="/sol.html">SOL · ORBITAL ADVANCE</a>
+    <a class="button-link" href="/relationship.html">TERRA SHIP SLIP · ROTATION / ORBIT</a>
+    <a class="button-link" href="/celestial.html">CELESTIAL MAP · SKY WALKABOUT</a>
+    <a class="button-link" href="/map-clock-compass.html">MAP · CLOCK · COMPASS</a>
+    <a class="button-link" href="/navigation.html">NAVIGATION · POSITION & TRAVEL</a>
+    <a class="button-link" href="/data.html">OBSERVATION DATA BRIDGE</a>
+    <a class="button-link" href="/telescope.html">TELESCOPE EMULATOR</a>
+    <a class="button-link" href="/audio.html">AUDIO FREQUENCY BENCH</a>
+    <a class="button-link" href="/angle.html">A8 ANGLE TRANSLATOR</a>
+    <a class="button-link" href="/quartz.html">QUARTZ / LENGTH EXPERIMENT</a>
+  </div>
+
+  
+</section>
+
+
+<!-- A8-CORE20-MAIN-INTEGRATION-01-BEGIN -->
+<style id="a8-core20-main-integration-style">
+#core20-jovian{
+  border-color:#6d9cff;
+}
+#core20-jovian .c20-head{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  flex-wrap:wrap;
+  align-items:flex-start;
+}
+#core20-jovian .c20-kicker{
+  font-size:.76rem;
+  letter-spacing:.12em;
+  color:#e2bb68;
+  font-weight:900;
+}
+#core20-jovian .c20-controls{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin:12px 0;
+}
+#core20-jovian .c20-grid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:10px;
+  margin-top:10px;
+}
+#core20-jovian .c20-stat{
+  border:1px solid #2a3744;
+  border-radius:10px;
+  padding:10px;
+  background:rgba(11,18,25,.82);
+  min-width:0;
+}
+#core20-jovian .c20-k{
+  display:block;
+  font-size:.66rem;
+  letter-spacing:.08em;
+  opacity:.68;
+}
+#core20-jovian .c20-v{
+  display:block;
+  margin-top:4px;
+  font-weight:900;
+  overflow-wrap:anywhere;
+}
+#core20-jovian .c20-phase{
+  font-size:1.55rem;
+  color:#6fe8ff;
+}
+#core20-jovian .c20-wait{
+  color:#e2bb68;
+}
+#core20-jovian .c20-boundary{
+  margin-top:12px;
+  padding:10px 12px;
+  border-left:4px solid #e2bb68;
+  background:rgba(50,42,20,.35);
+}
+@media(max-width:1000px){
+  #core20-jovian .c20-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+}
+@media(max-width:600px){
+  #core20-jovian .c20-grid{
+    grid-template-columns:1fr;
+  }
+}
+</style>
+
+
+<!-- A8-CORE20-OPERATOR-STACK-01-BEGIN -->
+
+<section id="a8-chief-engineer-standalone-panel" class="panel a8-chief-engineer-panel">
+  <div class="a8-chief-engineer-panel-head">
+    <div>
+      <div class="eyebrow">CHIEF ENGINEER</div>
+      <h2>LOCAL OPERATIONS &amp; ENGINEERING</h2>
+      <p class="muted">
+        One standalone engineering station. Local loopback may operate it;
+        public visitors may inspect it but cannot activate its controls.
+      </p>
+    </div>
+    <div id="a8ChiefEngineerHostMode" class="pill warn">CHECKING HOST</div>
+  </div>
+
+  <details id="a8-engineering-do-not-touch-drawer">
+    <summary>CHIEF ENGINEER · DO NOT TOUCH</summary>
+    <div id="a8-ce-drawer-status-row" class="a8-ce-drawer-status-row">
+      <div id="connection" class="pill warn">CONNECTING</div>
+    </div>
+
+
+    <p id="a8-engineering-lock-note">
+      LOCALHOST / 127.0.0.1 · controls live for Chief Engineer.
+      PUBLIC HOST · controls are show-only.
+    </p>
+
+    <div class="a8-engineering-body">
+<p class="muted">The links below remain available for engineering, provenance, hardware integration and regression work. They are laboratory plumbing, not the facing A8 instrument.</p>
+    <div class="launcher-grid chief-engineer-grid">
+      
+      
+      <a class="button-link" href="/hardware-interface.html">HARDWARE · EXTERNAL PULSE RIG · GATE 6A</a>
+      <a class="button-link" href="/receive-only-transport.html">HARDWARE · RECEIVE-ONLY TRANSPORT · GATE 6B</a>
+      <a class="button-link" href="/local-device-reader.html">HARDWARE · LOCAL READ-ONLY DEVICE · GATE 6C</a>
+      <a class="button-link" href="/pseudo-terminal-link.html">HARDWARE · PSEUDO-TERMINAL ONE-WAY · GATE 6D</a>
+      <a class="button-link" href="/hardware-source.html">HARDWARE · VIRTUAL / REAL SOURCE · GATE 6E</a>
+      <a class="button-link" href="/discipline.html">SLOW DISCIPLINE · JOVIAN RATE CANDIDATE</a>
+      <a class="button-link" href="/rate-slew.html">RATE SLEW · DISCONNECTED SIMULATOR</a>
+      <a class="button-link" href="/rate-continuity.html">RATE CONTINUITY · SYNTHETIC PLANT</a>
+      <a class="button-link" href="/disturbance-recovery.html">DISTURBANCE / RECOVERY · SYNTHETIC</a>
+      <a class="button-link" href="/multi-window-recovery.html">MULTI-WINDOW RECOVERY · SYNTHETIC</a>
+      <a class="button-link" href="/holdover-reacquisition.html">HOLDOVER / REACQUISITION · SYNTHETIC</a>
+      <a class="button-link" href="/repeated-holdover.html">REPEATED HOLDOVER · SYNTHETIC</a>
+      <a class="button-link" href="/discipline-harness.html">DISCIPLINE HARNESS · SYNTHETIC STATE MACHINE</a>
+      <a class="button-link" href="/discipline-runner.html">DISCIPLINE RUNNER · READ-ONLY LOCAL LAB</a>
+      <a class="button-link" href="/pre-actuator-seal.html">PRE-ACTUATOR SEAL · GATE 5J</a>
+    </div>
+
+<p class="a8-engineering-warning">
+      Normal operation does not require anything inside this drawer.
+      Open only for Chief Engineer diagnostics, controlled faults, calibration,
+      replay, or recovery experiments.
+    </p>
+
+    <div class="a8-engineering-body">
+      <div class="a8-engineering-control-group">
+        <div class="c20v-kicker">SIMULATOR / SOURCE CONTROLS · ENGINEERING ONLY</div>
+<div class="c20v-controls">
+      <button id="c20vStart" class="primary">RESET / START HIGH-RES VIRTUAL</button>
+      <button id="c20vStop" class="danger" disabled>STOP / HOLD VIRTUAL</button>
+      <a class="button-link" href="/pulse">CHIEF ENGINEER · PULSE SOURCE</a>
+    </div>
+      </div>
+
+
+      <p class="muted">
+        This is the post-seal Core-20 state integrated into the original A8 Time Lab.
+        The original three-moon recovery/comparator laboratory below remains the
+        engineering instrument; this panel adds the selected-source and continuous
+        recovered-time state without duplicating that laboratory.
+      </p>
+    </div>
+    
+  </div>
+
+  
+  <section id="a8-ce-core20-state-card" class="panel a8-ce-core20-state-card">
+<div class="c20-controls">
+    <button id="c20RunFixture" class="primary">RUN CORE · VIRTUAL QUALIFICATION</button>
+    <button id="c20Step">+ STEP</button>
+    <button id="c20Forget" class="danger">FORGET RECOVERY</button>
+    <button class="c20RawAdvance" data-raw="1">+1 RAW</button>
+    <button class="c20RawAdvance" data-raw="8">+8 RAW</button>
+    <button class="c20RawAdvance" data-raw="64">+64 RAW</button>
+
+    
+
+  </div>
+
+  <div class="c20-grid">
+    <div class="c20-stat"><span class="c20-k">SELECTED SOURCE</span><span id="c20Source" class="c20-v">—</span></div>
+    <div class="c20-stat"><span class="c20-k">SOURCE EPOCH</span><span id="c20Epoch" class="c20-v">—</span></div>
+    <div class="c20-stat"><span class="c20-k">ACTIVE RIG</span><span id="c20Rig" class="c20-v">—</span></div>
+    <div class="c20-stat"><span class="c20-k">RAW COUNT</span><span id="c20Raw" class="c20-v">—</span></div>
+
+    <div class="c20-stat"><span class="c20-k">GATE-6F CORE INPUT</span><span id="c20Input" class="c20-v">—</span></div>
+    <div class="c20-stat"><span class="c20-k">IO / EUROPA / GANYMEDE RECOVERY</span><span id="c20Recovery" class="c20-v">—</span></div>
+    <div class="c20-stat"><span class="c20-k">RECOVERED RAW RULER</span><span id="c20Ruler" class="c20-v">—</span></div>
+    <div class="c20-stat"><span class="c20-k">8:4:2 QUALIFICATION</span><span id="c20Qualified" class="c20-v">—</span></div>
+
+    <div class="c20-stat"><span class="c20-k">IO / EUROPA / GANYMEDE TIMEKEEPER</span><span id="c20TkStatus" class="c20-v">—</span></div>
+    <div class="c20-stat"><span class="c20-k">JOVIAN A8 PHASE9</span><span id="c20Phase9" class="c20-v c20-phase">—</span></div>
+    <div class="c20-stat"><span class="c20-k">COMPLETED RECURRENCES</span><span id="c20Cycles" class="c20-v">—</span></div>
+    <div class="c20-stat"><span class="c20-k">EXACT SUBPHASE</span><span id="c20Subphase" class="c20-v">—</span></div>
+  </div>
+
+  <div class="c20-boundary">
+    <b>Earth-day boundary:</b>
+    <span class="c20-wait">GATE 6M R2 AVAILABLE · DAY_PHASE17 is driven only after recovered Sun return plus the established zero-meridian solar phase anchor.</span>
+    PHASE20 remains disconnected.
+  </div>
+  </section>
+
+    </div>
+
+<div class="chief-body">
+
+    <div class="eyebrow" style="margin-bottom:8px">ENGINEERING CONTROL · PRIVATE TUNNEL ONLY</div>
+<section class="panel controls">
+  <div class="row">
+    <button data-action="run" class="primary">RUN CORE</button>
+    <button data-action="pause">PAUSE</button>
+    <button data-action="step">+ STEP</button>
+    <button data-action="reset" class="danger">RESET ENTIRE LAB</button>
+    <button data-action="forget">FORGET RECOVERY</button>
+    <button id="alignNow" class="primary">ALIGN SHARED CLOCK → 0 MERIDIAN · SERVER UTC</button>
+  </div>
+  <div class="control-grid">
+    <label>Arbitrary oscillator
+      <input id="oscillator" type="number" min="1" value="73">
+    </label>
+    <label>Drift Δ / 512
+      <input id="drift" type="number" min="-256" max="256" value="0">
+    </label>
+    <label>Plant steps / scheduler pass
+      <select id="benchSteps">
+        <option>1</option>
+        <option>2</option>
+        <option>4</option>
+        <option selected>8</option>
+      </select>
+    </label>
+    <label>Calibration authority
+      <select id="authority">
+        <option value="io">IO</option>
+        <option value="eu">EUROPA</option>
+        <option value="ga" selected>GANYMEDE</option>
+      </select>
+    </label>
+    <label>Provisional Earth-day raw span
+      <input id="earthSpan" type="number" min="1" value="131072">
+    </label>
+    <label>Jovian observation
+      <button id="observationBtn" type="button">BLOCK OBSERVATION</button>
+    </label>
+    <label>Recalibration mode · LAB ONLY
+      <select id="recalibrationMode">
+        <option value="AUTO" selected>AUTO</option>
+        <option value="MANUAL">MANUAL</option>
+      </select>
+    </label>
+    <label>Manual recalibration · LAB ONLY
+      <button id="armManualCalibration" type="button">ARM MANUAL RECALIBRATION</button>
+    </label>
+  </div>
+</section>
+
+<section class="panel">
+  <div class="section-head">
+    <div>
+      <div class="eyebrow">FAULT INJECTION · ENGINEERING ONLY</div>
+      <h2>Moon perturbation tools</h2>
+    </div>
+    <button data-action="clearFaults">CLEAR ALL FAULTS</button>
+  </div>
+
+  <p class="muted">
+    Private engineering actuators. The public observer continues to see
+    recovery state, deviation, calibration and comparator consequences,
+    but cannot command these controls through the public web.
+  </p>
+
+  <div class="control-grid">
+<label>Io rate fault injection (%)
+        <input id="fault_io" type="range" min="-1" max="1" step="0.01" value="0">
+        <output id="fault_io_out">0.00%</output>
+      </label>
+<label>Europa rate fault injection (%)
+        <input id="fault_eu" type="range" min="-1" max="1" step="0.01" value="0">
+        <output id="fault_eu_out">0.00%</output>
+      </label>
+<label>Ganymede rate fault injection (%)
+        <input id="fault_ga" type="range" min="-1" max="1" step="0.01" value="0">
+        <output id="fault_ga_out">0.00%</output>
+      </label>
+  </div>
+</section>
+
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">SIMULATED PLANT INTEGRITY · RESTORED v0.6.20 INSTRUMENT</div>
+        <h2>Chief Engineer’s Dial — Io perturbation</h2>
+      </div>
+      
+    </div>
+
+    <div class="metrics two">
+      <div>
+        <span class="k">INNER LAPLACE RESIDUAL · CUMULATIVE</span>
+        <strong id="laplaceResidual">0.00e+0 cycles</strong>
+      </div>
+      <div>
+        <span class="k">CALLISTO ENVELOPE DIAGNOSTIC</span>
+        <strong id="callistoPsi">0.000000</strong>
+      </div>
+    </div>
+
+    <label hidden aria-hidden="true" data-a8-duplicate-suppressed="chiefIoFault" class="chief-dial">Io orbital-rate fault injection
+      <input id="chiefIoFault" type="range" min="-1" max="1" step="0.01" value="0">
+      <output id="chiefIoFaultOut">0.00% · RATE COMMAND NORMAL</output>
+    </label>
+
+    <label class="chief-dial">Callisto secondary detuning · outside defining path
+      <input id="chiefCallistoDetune" type="range" min="-1" max="1" step="0.01" value="0">
+      <output id="chiefCallistoDetuneOut">0.00% · IDEAL SECONDARY RATE</output>
+    </label>
+
+    <p id="plantIntegrityNote" class="muted">
+      <b>Anchor check:</b> the inner Io–Europa–Ganymede relationship is nominal.
+      This diagnostic is outside the recovery path; it checks the simulated plant
+      rather than defining the clock.
+    </p>
+    <p class="muted">
+      <b>Chief Engineer’s Dial:</b> leave at <b>0.00%</b> for normal operation.
+      Moving it intentionally perturbs Io’s future rate without moving Io instantaneously.
+      Returning the dial to 0 stops adding rate error but does not erase phase displacement
+      already accumulated; <b>RESET ENTIRE LAB</b> restores the nominal plant.
+      <b>Callisto detuning</b> is a separate secondary-only lab perturbation and never enters the primary Io–Europa–Ganymede authority path.
+    </p>
+  </div>
+    </div>
+  </details>
+</section>
+
+<div id="core20-virtual-operating-surface">
+
+  <section class="panel" id="core20-upstream-operator">
+    <div class="c20v-head">
+      <div>
+        <div class="c20v-kicker">UPSTREAM OPERATOR · RAW SOURCE → JOVIAN TIME BASE</div>
+        <h2>Upstream timekeeping operator</h2>
+        <p class="muted">
+          Select and run the virtual raw source. The three moon channels below
+          recover independently; this panel shows the selected raw counter and
+          the normalized Jovian ruler that emerges from them.
+        </p>
+      </div>
+      <div id="c20vStatus" class="pill warn">READY</div>
+      
+    </div>
+
+    
+
+    <div class="c20v-grid">
+      <div class="c20v-stat">
+        <span class="c20v-k">SOURCE · EPOCH</span>
+        <span class="c20v-v"><span id="c20vSource">—</span> · <span id="c20vEpoch">—</span></span>
+      </div>
+
+      <div class="c20v-stat">
+        <span class="c20v-k">SELECTED RAW COUNT</span>
+        <span id="c20vRaw" class="c20v-v">—</span>
+      </div>
+
+      <div class="c20v-stat">
+        <span class="c20v-k">IO / EUROPA / GANYMEDE</span>
+        <span id="c20vJovian" class="c20v-v">—</span>
+      </div>
+
+      <div class="c20v-stat">
+        <span class="c20v-k">NORMALIZED JOVIAN RULER · RAW</span>
+        <span id="c20vRuler" class="c20v-v">—</span>
+      </div>
+
+      <div class="c20v-stat">
+        <span class="c20v-k">NATIVE FIXTURE SPANS · RAW</span>
+        <span class="c20v-v">
+          Io <span id="c20vIoSpan">—</span> ·
+          Europa <span id="c20vEuropaSpan">—</span> ·
+          Ganymede <span id="c20vGanymedeSpan">—</span>
+        </span>
+      </div>
+
+      <div class="c20v-stat">
+        <span class="c20v-k">SIMULATOR PACE</span>
+        <span id="c20vPace" class="c20v-v">—</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel" id="core20-jovian">
+  <div class="c20-head">
+    <div>
+      <div class="c20-kicker">THREE INDEPENDENT MOON RECOVERY CHANNELS</div>
+      <h2>Io / Europa / Ganymede · independent recovery</h2>
+  <p class="muted"><b>RECOVERY MIDDLE LAYER ·</b> Io, Europa, and Ganymede recover independently from their own observation spans, then meet only at the exact 1:2:4 normalization: Io ×4 · Europa ×2 · Ganymede ×1.</p>
+  <style id="a8-engineering-do-not-touch-style">
+    #a8-engineering-do-not-touch-drawer{
+      margin-top:12px;
+      border:1px solid rgba(220,95,95,.55);
+      border-radius:10px;
+      background:rgba(70,18,18,.18);
+      overflow:hidden;
+    }
+    #a8-engineering-do-not-touch-drawer > summary{
+      cursor:pointer;
+      list-style:none;
+      padding:11px 13px;
+      font-weight:900;
+      letter-spacing:.08em;
+      color:#ffb0a8;
+      user-select:none;
+    }
+    #a8-engineering-do-not-touch-drawer > summary::-webkit-details-marker{
+      display:none;
+    }
+    #a8-engineering-do-not-touch-drawer > summary::before{
+      content:"▸ ";
+    }
+    #a8-engineering-do-not-touch-drawer[open] > summary::before{
+      content:"▾ ";
+    }
+    #a8-engineering-do-not-touch-drawer .a8-engineering-warning{
+      margin:0;
+      padding:0 13px 11px;
+      color:#ffcabf;
+      font-size:.82rem;
+    }
+    #a8-engineering-do-not-touch-drawer .a8-engineering-body{
+      border-top:1px solid rgba(220,95,95,.35);
+      padding-top:10px;
+    }
+  </style>
+
+  
+</section>
+
+  <section class="panel" id="core20-downstream-operator">
+    <div class="c20v-head">
+      <div>
+        <div class="c20v-kicker">DOWNSTREAM OPERATOR · EARTH / SOL → CIVIL CLOCK</div>
+        <h2>Recovered A8 civil clock</h2>
+        <p class="muted">
+          The normalized Jovian ruler continues downstream through Mintaka
+          Earth axial rotation, Sol orbital advance, recovered Sun return,
+          exact 2^17 DAY_PHASE17, and native 32 × 64 × 64.
+        </p>
+      </div>
+    </div>
+
+    <div class="c20v-grid">
+      <div class="c20v-stat">
+        <span class="c20v-k">MINTAKA · EARTH AXIAL ROTATION</span>
+        <span id="c20vMintaka" class="c20v-v">—</span>
+      </div>
+
+      <div class="c20v-stat">
+        <span class="c20v-k">SOL · ORBITAL ADVANCE</span>
+        <span id="c20vSol" class="c20v-v">—</span>
+      </div>
+
+      <div class="c20v-stat">
+        <span class="c20v-k">RECOVERED SUN RETURN · RAW</span>
+        <span id="c20vSun" class="c20v-v">—</span>
+      </div>
+
+      <div class="c20v-stat">
+        <span class="c20v-k">CIVIL CLOCK STATUS</span>
+        <span id="c20vCivilStatus" class="c20v-v">—</span>
+      </div>
+
+      <div class="c20v-stat">
+        <span class="c20v-k">DAY_PHASE17</span>
+        <span id="c20vPhase" class="c20v-v">—</span>
+      </div>
+
+      <div class="c20v-stat">
+        <span class="c20v-k">A8 CLOCK · 32 × 64 × 64</span>
+        <span id="c20vClock" class="c20v-v c20v-clock">—</span>
+      </div>
+    </div>
+
+    <div class="c20v-boundary">
+      <b>SIMULATOR BOUNDARY ·</b>
+      Fixture astronomy only; this clock is not yet naturally aligned to
+      current Greenwich phase. Browser monotonic time paces the fake raw
+      oscillator only; the recovered relationships and DAY_PHASE17 remain
+      server-derived.
+    </div>
+  </section>
+
+</div>
+<!-- A8-CORE20-OPERATOR-STACK-01-END -->
+
+<!-- A8-CORE20-MAIN-INTEGRATION-01-END -->
+
+
+<!-- A8-CORE20-VIRTUAL-OPERATING-SURFACE-01-BEGIN -->
+<style id="a8-core20-virtual-operating-style">
+#core20-virtual-operating-surface{
+  border-color:#4e9368;
+}
+#core20-virtual-operating-surface .c20v-head{
+  display:flex;
+  gap:12px;
+  justify-content:space-between;
+  align-items:flex-start;
+  flex-wrap:wrap;
+}
+#core20-virtual-operating-surface .c20v-kicker{
+  font-size:.76rem;
+  letter-spacing:.12em;
+  color:#6fe8ff;
+  font-weight:900;
+}
+#core20-virtual-operating-surface .c20v-clock{
+  font-size:2.35rem;
+  line-height:1;
+  color:#8ef0b1;
+  font-weight:900;
+  letter-spacing:.04em;
+}
+#core20-virtual-operating-surface .c20v-controls{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin:12px 0;
+}
+#core20-virtual-operating-surface .c20v-grid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:10px;
+}
+#core20-virtual-operating-surface .c20v-stat{
+  border:1px solid #2a3744;
+  border-radius:10px;
+  padding:10px;
+  background:rgba(11,18,25,.82);
+  min-width:0;
+}
+#core20-virtual-operating-surface .c20v-k{
+  display:block;
+  font-size:.66rem;
+  letter-spacing:.08em;
+  opacity:.68;
+}
+#core20-virtual-operating-surface .c20v-v{
+  display:block;
+  margin-top:4px;
+  font-weight:900;
+  overflow-wrap:anywhere;
+}
+#core20-virtual-operating-surface .c20v-boundary{
+  margin-top:12px;
+  padding:10px 12px;
+  border-left:4px solid #e2bb68;
+  background:rgba(50,42,20,.35);
+}
+@media(max-width:1000px){
+  #core20-virtual-operating-surface .c20v-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+}
+@media(max-width:600px){
+  #core20-virtual-operating-surface .c20v-grid{
+    grid-template-columns:1fr;
+  }
+}
+</style>
+
+
+<!-- A8-CORE20-VIRTUAL-OPERATING-SURFACE-01-END -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="panel">
+  <div class="section-head"><h2>One raw oscillator / counter</h2><span id="runState" class="pill">PAUSED</span></div>
+  <div class="metrics five">
+    <div><span class="k">RAW COUNT</span><strong id="rawCount">0</strong></div>
+    <div><span class="k">OSCILLATOR</span><strong id="rawOsc">73</strong></div>
+    <div><span class="k">DRIFT</span><strong id="rawDrift">0 / 512</strong></div>
+    <div><span class="k">PLANT STEP</span><strong id="naturalStep">0</strong></div>
+    <div><span class="k">BENCH ADVANCE</span><strong id="benchAdvance">8 plant steps / pass</strong></div>
+    <div><span class="k">BENCH RATE REF</span><strong id="benchRate">—</strong></div>
+    <div><span class="k">OBSERVER RESOLUTION</span><strong>1 plant step</strong></div>
+    <div><span class="k">OBSERVATION</span><strong id="obsState">ACTIVE</strong></div>
+    <div><span class="k">OSCILLATOR EPOCH</span><strong id="oscEpoch">0</strong></div>
+    <div><span class="k">RECALIBRATION MODE</span><strong id="recalModeRead">AUTO</strong></div>
+  </div>
+  <p class="muted"><b>Bench-rate reference only:</b> the ×N readout restores the legacy simulator perspective. It describes display acceleration, not a native A8 definition; turn detection still samples internally at one plant step.</p>
+</section>
+
+<section>
+  
+  <p class="muted representation-rule"><b>A8 representation hierarchy:</b> PHASE9 <b>000₈–777₈</b> is the primary visible Jovian phase ruler. Continuous normalized φ and decimal cycle errors remain secondary engineering references only.</p>
+  <div class="moon-grid">
+    <article class="panel moon" id="moon_io">
+      <div class="section-head"><h3>IO <small>×4</small></h3><span id="ioAuthority" class="pill ghost">WITNESS</span></div>
+      <div id="ioRecovery" class="big status warn">SEEKING</div>
+      <div class="metrics two compact">
+        <div><span class="k">NATIVE SPAN</span><strong id="ioSpan">—</strong></div>
+        <div><span class="k">G-EQUIVALENT</span><strong id="ioNorm">—</strong></div>
+        <div><span class="k">QUALITY</span><strong id="ioQuality">SEEKING</strong></div>
+        <div><span class="k">CALIBRATION</span><strong id="ioFresh">SEEKING</strong></div>
+        <div><span class="k">A8 RECOVERED PHASE9</span><strong id="ioPhase">---</strong></div>
+      </div>
+
+      <details><summary>Engineering detail</summary><pre id="ioDetail"></pre></details>
+    </article>
+
+    <article class="panel moon" id="moon_eu">
+      <div class="section-head"><h3>EUROPA <small>×2</small></h3><span id="euAuthority" class="pill ghost">WITNESS</span></div>
+      <div id="euRecovery" class="big status warn">SEEKING</div>
+      <div class="metrics two compact">
+        <div><span class="k">NATIVE SPAN</span><strong id="euSpan">—</strong></div>
+        <div><span class="k">G-EQUIVALENT</span><strong id="euNorm">—</strong></div>
+        <div><span class="k">QUALITY</span><strong id="euQuality">SEEKING</strong></div>
+        <div><span class="k">CALIBRATION</span><strong id="euFresh">SEEKING</strong></div>
+        <div><span class="k">A8 RECOVERED PHASE9</span><strong id="euPhase">---</strong></div>
+      </div>
+
+      <details><summary>Engineering detail</summary><pre id="euDetail"></pre></details>
+    </article>
+
+    <article class="panel moon" id="moon_ga">
+      <div class="section-head"><h3>GANYMEDE <small>×1</small></h3><span id="gaAuthority" class="pill primary">AUTHORITY</span></div>
+      <div id="gaRecovery" class="big status warn">SEEKING</div>
+      <div class="metrics two compact">
+        <div><span class="k">NATIVE SPAN</span><strong id="gaSpan">—</strong></div>
+        <div><span class="k">G-EQUIVALENT</span><strong id="gaNorm">—</strong></div>
+        <div><span class="k">QUALITY</span><strong id="gaQuality">SEEKING</strong></div>
+        <div><span class="k">CALIBRATION</span><strong id="gaFresh">SEEKING</strong></div>
+        <div><span class="k">A8 RECOVERED PHASE9</span><strong id="gaPhase">---</strong></div>
+      </div>
+
+      <details><summary>Engineering detail</summary><pre id="gaDetail"></pre></details>
+    </article>
+  </div>
+</section>
+
+
+
+<section class="panel">
+  <div class="section-head"><h2>Comparator</h2><span id="compVerdict" class="pill warn">WAITING</span></div>
+  <div class="metrics four">
+    <div><span class="k">LOCKED CHANNELS</span><strong id="lockedCount">0 / 3</strong></div>
+    <div><span class="k">CURRENT EPOCH CHANNELS</span><strong id="currentCount">0 / 3</strong></div>
+    <div><span class="k">FULL 8:4:2 CHANNELS</span><strong id="fullCount">0 / 3</strong></div>
+    <div><span class="k">OSCILLATOR EPOCH</span><strong id="compEpoch">0</strong></div>
+    <div><span class="k">QUALIFIED EPOCH BASELINE</span><strong id="epochRef">—</strong></div>
+    <div><span class="k">LIVE MEDIAN</span><strong id="liveMedian">—</strong></div>
+    <div><span class="k">REFERENCE MODE</span><strong id="refMode">NONE</strong></div>
+    <div><span class="k">SPREAD</span><strong id="compSpread">—</strong></div>
+    <div><span class="k">TOLERANCE</span><strong>1 / 512</strong></div>
+  </div>
+  <p class="muted">The comparator compares only current-epoch evidence. One clean recurrence makes a channel EARLY usable. The epoch baseline is frozen only after the equal-duration evidence window completes: Io 8 WEST→WEST spans, Europa 4, Ganymede 2, and all three agree. A later 2-of-3 majority cannot redefine truth. If no qualified baseline exists, a split remains UNRESOLVED.</p>
+</section>
+
+<section class="split">
+  <article class="panel">
+    <div class="section-head"><h2>Divider / qualification</h2><span id="dividerCalibration" class="pill warn">UNQUALIFIED</span></div>
+    <div class="metrics two">
+      <div><span class="k">RAW INPUT</span><strong id="dividerRaw">ACTIVE</strong></div>
+      <div><span class="k">AUTHORITY</span><strong id="dividerAuthority">GANYMEDE</strong></div>
+      <div><span class="k">AUTHORITY QUALITY</span><strong id="dividerQuality">SEEKING</strong></div>
+      <div><span class="k">FRESH AUTHORITIES AVAILABLE</span><strong id="availableAuthorities">—</strong></div>
+      <div><span class="k">CLOCK OUTPUT</span><strong id="dividerOutput">LAB BRIDGE</strong></div>
+      <div><span class="k">DIVIDER REMAINDER</span><strong id="dividerRem">0</strong></div>
+      <div><span class="k">RAW-DIVIDER TEST TICKS</span><strong id="dividerTicks">0</strong></div>
+      <div><span class="k">VISIBLE CLOCK PACE</span><strong id="clockPace">NORMAL DEMO PACE</strong></div>
+    </div>
+    <p class="muted">Recovery remains staged, not all-or-none. One clean WEST→WEST span makes a selected channel usable; two or three early channels may corroborate. FULL verification is stricter: Io must complete 8 spans, Europa 4, and Ganymede 2—approximately the same physical observation duration—before a new epoch baseline can freeze. The system never silently switches authority.</p>
+  </article>
+
+  <article class="panel clock">
+    <div class="section-head"><h2>17-bit A8 clock</h2><span class="pill">32 / 64 / 64</span></div>
+    <div id="clockDecimal" class="clock-main">00:00:00</div>
+    <div id="clockOctal" class="clock-octal">00:00:00₈</div>
+    <div id="clockBinary" class="clock-binary">00000000000000000</div>
+    <div class="metrics two compact">
+      <div><span class="k">DAY_PHASE17</span><strong id="clockPhase">0</strong></div>
+      <div><span class="k">DAY_COUNT</span><strong id="dayCount">0</strong></div>
+      <div><span class="k">LAST ALIGN</span><strong id="lastAlign">NONE</strong></div>
+    </div>
+  </article>
+</section>
+
+<section class="panel">
+  <div class="section-head">
+    <div>
+      <h2>Flight recorder</h2>
+      <p class="muted">Newest first · raw count + plant step + oscillator epoch. Captures transient conflicts and control changes without conventional timestamps.</p>
+    </div>
+    <div class="row">
+      <button id="copyRecorder">COPY RECORDER</button>
+      <button id="clearRecorder">CLEAR RECORDER</button>
+    </div>
+  </div>
+  <pre id="eventLog" class="event-log">No events yet.</pre>
+</section>
+
+
+
+<section class="card a8-core-music" id="a8-core-chime-panel">
+
+  <h3>A8 CORE CHIME</h3>
+
+  <div class="a8-music-authority">
+    TIME AUTHORITY: A8 RECOVERY CORE<br>
+    Hour boundary = 4096 native A8 seconds.<br>
+    Browser audio is downstream realization only.
+  </div>
+
+  <div class="a8-music-controls">
+    <button type="button" id="a8-chime-arm">
+      ARM A8 HOUR CHIME
+    </button>
+
+    <button type="button" id="a8-chime-test">
+      TEST ON NEXT A8 SECOND
+    </button>
+  </div>
+
+  <div class="a8-music-status" id="a8-chime-status">
+    CORE: ACQUIRING<br>
+    CHIME: DISARMED
+  </div>
+
+  <div class="a8-native-readout" id="a8-chime-note">
+    PITCH: —<br>
+    BEAT: —
+  </div>
+
+</section>
+
+
+
+<section id="a8-architecture-bottom-reference" class="a8-architecture-bottom-reference">
+  <div class="eyebrow">REFERENCE · DEFINING HIERARCHY</div>
+<section class="panel">
+  <h2>Architecture boundary</h2>
+  <pre class="diagram">ONE RAW OSCILLATOR / COUNTER
+          │
+    ┌─────┼─────┐
+    │     │     │
+   IO   EUROPA GANYMEDE
+    │     │     │
+   ×4    ×2     ×1
+    │     │     │
+    └─────┼─────┘
+          │
+    1:2:4 QUALIFIER
+          │
+   RECOVERED JOVIAN
+      TIME RULER
+          │
+          ├──────────► COMPARATOR
+          │             evidence only
+          │
+          ▼
+       MINTAKA
+  Earth axial rotation
+          │
+          ▼
+         SOL
+ orbital advance against
+ same Jovian/celestial frame
+          │
+          ▼
+ RECOVERED SUN RETURN
+          │
+          ▼
+   EXACT 2^17 DIVIDER
+          │
+          ▼
+     DAY_PHASE17
+          │
+          ▼
+  32 × 64 × 64 CLOCK
+
+Browser = observer/control panel only.
+It may simulate observations and display recovered state, but it does not define
+the raw count, Jovian ruler, Earth rotation, Sun return, divider, or A8 clock.</pre>
+  <p class="muted">Callisto remains present only as a secondary slow-envelope diagnostic in the core. It does not enter primary 1:2:4 recovery.</p>
+</section>
+</section>
+</main>
+<script src="app.js"></script>
+
+
+
+
+
+
+<footer class="cosigo-site-footer">
+  <strong>COSIGO Labs · Auspicious 8 experimental laboratory</strong>
+  <p class="cosigo-disclaimer">Research / engineering notice: A8 pages may contain provisional models, simulations, comparison values, hypotheses and unreplicated experiment designs. Unless a page explicitly states otherwise, material shown here is not a certified metrology standard, accredited measurement result, or final Foundation definition. Legacy / SI values are comparison coordinates where identified, not native A8 authority.</p>
+  <p class="cosigo-disclaimer">COSIGO is primarily an educational and experimental project. Nothing in this laboratory is an investment offering, promise of financial return, or financial, investment, legal or tax advice. See the project-status notice for the current public description.</p>
+  <div class="cosigo-footer-links">
+    <a href="https://cosigo.io/">COSIGO Home</a>
+    <a href="https://a8.cosigo.io/">A8 Public Instrument</a>
+    <a href="/">A8 Engineering Lab</a>
+    <a href="/map-clock-compass.html">Map · Clock · Compass</a>
+    <a href="https://a8.cosigo.io/canonical.html">Canonical Reference</a>
+    <a href="https://a8.cosigo.io/open-research.html">Open Research</a>
+    <a href="https://a8.cosigo.io/about.html">About A8</a>
+    <a href="https://contact.cosigo.io/">Contact</a>
+    <a href="https://docs.cosigo.io/">COSIGO Docs / WP</a>
+    <a href="https://github.com/cosigo">COSIGO GitHub</a>
+    <a href="https://github.com/cosigo/cosigo.io">Main-site source</a>
+    <a href="https://cosigo.io/project-status.html">Educational Purpose / Project Status</a>
+  </div>
+  <p>© 2026 COSIGO. COSIGO™ rights and trademark notices remain governed by the official COSIGO site.</p>
+</footer>
+
+<script>
+(() => {
+  "use strict";
+
+  const PAGE_MODE = "clock";
+
+  const CORE_URL = "/api/state";
+
+  const DAY_STATES = 131072;     // 32 * 64 * 64
+  const A8_SECONDS_PER_HOUR = 4096; // 64 * 64
+
+  const Q = 1 / 4;
+  const H = 1 / 2;
+  const W = 1;
+  const D = 2;
+
+  // ----------------------------------------------------------
+  // NATIVE A8 PITCHES
+  //
+  // All values are cycles / A8 second.
+  // No Hz exists in the musical definition.
+  // ----------------------------------------------------------
+
+  const P = {
+    ONE:   256,
+    TWO:   288,          // 256 * 9/8
+    THREE: 320,          // 256 * 5/4
+    FOUR:  256 * 4/3,
+    FIVE:  384,          // 256 * 3/2
+    SIX:   256 * 5/3,
+    SEVEN: 480,          // 256 * 15/8
+    EIGHT: 512
+  };
+
+
+  // ----------------------------------------------------------
+  // CLOCK CHIME
+  // Distinct short descending signature.
+  // ----------------------------------------------------------
+
+  const CLOCK_CHIME = [
+
+    // ODE TO JOY — recognizable A8 hour chime
+    //
+    // Deliberately uses whole / double A8-second durations.
+    // The present core-observer path can therefore reproduce
+    // every transition directly from native core advancement.
+    //
+    // NO browser timer fills in missing musical events.
+
+    [P.THREE, W],
+    [P.THREE, W],
+    [P.FOUR,  W],
+    [P.FIVE,  W],
+
+    [P.FIVE,  W],
+    [P.FOUR,  W],
+    [P.THREE, W],
+    [P.TWO,   W],
+
+    [P.ONE,   W],
+    [P.ONE,   W],
+    [P.TWO,   W],
+    [P.THREE, W],
+
+    [P.THREE, W],
+    [P.TWO,   W],
+    [P.TWO,   D]
+
+  ];
+
+
+  // ----------------------------------------------------------
+  // AUDIO PAGE TUNE
+  //
+  // MICRO climbs.
+  // MACRO descends.
+  // The final phrase converges.
+  // ----------------------------------------------------------
+
+  const THREE_WITNESSES = [
+
+    // MICRO — bottom up
+    [P.ONE,   Q],
+    [P.TWO,   Q],
+    [P.THREE, H],
+    [P.FIVE,  W],
+
+    [0, Q],
+
+    // MACRO — top down
+    [P.EIGHT, Q],
+    [P.SEVEN, Q],
+    [P.SIX,   H],
+    [P.FIVE,  W],
+
+    [0, Q],
+
+    // WHERE · HOW FAR · WHEN
+    [P.ONE,   Q],
+    [P.THREE, Q],
+    [P.FIVE,  H],
+
+    [P.TWO,   Q],
+    [P.FOUR,  Q],
+    [P.SIX,   H],
+
+    [P.THREE, Q],
+    [P.FIVE,  Q],
+    [P.EIGHT, W],
+
+    [0, H],
+
+    // MEET
+    [P.EIGHT, Q],
+    [P.SIX,   Q],
+    [P.FIVE,  H],
+    [P.THREE, H],
+    [P.TWO,   H],
+    [P.ONE,   D]
+  ];
+
+
+  // ----------------------------------------------------------
+  // STATE
+  // ----------------------------------------------------------
+
+  let audio = null;
+  let oscillator = null;
+  let gain = null;
+
+  let previous = null;
+
+  let ticksPerA8Second = null;
+  let audioSecondsPerTick = null;
+  let audioSecondsPerA8Second = null;
+
+  let currentCore = null;
+
+  let player = null;
+
+  let chimeArmed = false;
+  let chimeTestPending = false;
+  let previousHour = null;
+  let previousPhase = null;
+
+  let tuneStartRequested = false;
+
+  let requestBusy = false;
+  let frameCounter = 0;
+
+
+  // ----------------------------------------------------------
+  // PAGE ELEMENTS
+  // ----------------------------------------------------------
+
+  function el(id) {
+    return document.getElementById(id);
+  }
+
+
+  // ----------------------------------------------------------
+  // RECURSIVE CORE FIELD LOOKUP
+  // ----------------------------------------------------------
+
+  function findExactKey(root, wanted) {
+
+    if (!root || typeof root !== "object") {
+      return undefined;
+    }
+
+    const target = wanted.toLowerCase();
+
+    const stack = [root];
+
+    while (stack.length) {
+
+      const obj = stack.pop();
+
+      if (!obj || typeof obj !== "object") continue;
+
+      for (const [key, value] of Object.entries(obj)) {
+
+        if (key.toLowerCase() === target) {
+          return value;
+        }
+
+        if (value && typeof value === "object") {
+          stack.push(value);
+        }
+      }
+    }
+
+    return undefined;
+  }
+
+
+  function firstValue(root, names) {
+
+    for (const name of names) {
+
+      const value = findExactKey(root, name);
+
+      if (value !== undefined && value !== null) {
+        return value;
+      }
+    }
+
+    return undefined;
+  }
+
+
+  function asNumber(value) {
+
+    if (
+      typeof value === "number" &&
+      Number.isFinite(value)
+    ) {
+      return value;
+    }
+
+    if (typeof value === "string") {
+
+      const n = Number(value);
+
+      if (Number.isFinite(n)) {
+        return n;
+      }
+    }
+
+    return null;
+  }
+
+
+  function corePhase(state) {
+
+    return asNumber(
+      firstValue(state, [
+        "dayPhase17",
+        "day_phase17",
+        "DAY_PHASE17",
+        "clockPhase17",
+        "a8DayPhase17",
+        "dayPhase"
+      ])
+    );
+  }
+
+
+  function coreRawTicks(state) {
+
+    return asNumber(
+      firstValue(state, [
+        "rawTicks",
+        "raw_ticks",
+        "RAW_TICKS",
+        "rawPulseCount",
+        "raw_pulse_count",
+        "pulseCount",
+        "pulse_count",
+        "pulseCounter",
+        "edgeCount",
+        "rawEdges",
+        "oscillatorCount",
+        "tickCount",
+        "plantStep",
+        "plantSteps"
+      ])
+    );
+  }
+
+
+  function coreRunning(state) {
+
+    const stopped = firstValue(state, [
+      "stopped",
+      "clockStopped",
+      "clock_stopped",
+      "isStopped"
+    ]);
+
+    if (stopped === true) {
+      return false;
+    }
+
+    const value = firstValue(state, [
+      "running",
+      "clockRunning",
+      "clock_running",
+      "isRunning",
+      "runState",
+      "clockState"
+    ]);
+
+    if (typeof value === "boolean") {
+      return value;
+    }
+
+    if (typeof value === "number") {
+      return value !== 0;
+    }
+
+    if (typeof value === "string") {
+
+      const x = value.trim().toUpperCase();
+
+      if (
+        x.includes("STOP") ||
+        x.includes("PAUSE") ||
+        x === "OFF"
+      ) {
+        return false;
+      }
+
+      if (
+        x.includes("RUN") ||
+        x.includes("ACTIVE") ||
+        x.includes("HOLDOVER") ||
+        x.includes("LOCK") ||
+        x.includes("QUALIFIED")
+      ) {
+        return true;
+      }
+    }
+
+    // If the endpoint supplied valid native counters but no
+    // explicit run flag, treat the core state as observable.
+    return true;
+  }
+
+
+  // ----------------------------------------------------------
+  // AUDIO DEVICE
+  //
+  // This is downstream only.
+  // It does not establish A8 time.
+  // ----------------------------------------------------------
+
+  function ensureAudio() {
+
+    if (!audio) {
+
+      audio = new (
+        window.AudioContext ||
+        window.webkitAudioContext
+      )();
+    }
+
+    if (audio.state === "suspended") {
+      audio.resume();
+    }
+
+    return audio;
+  }
+
+
+  function killTone() {
+
+    if (oscillator) {
+
+      try {
+        oscillator.stop();
+      } catch {}
+
+      try {
+        oscillator.disconnect();
+      } catch {}
+    }
+
+    if (gain) {
+
+      try {
+        gain.disconnect();
+      } catch {}
+    }
+
+    oscillator = null;
+    gain = null;
+  }
+
+
+  // ----------------------------------------------------------
+  // TRANSLATE NATIVE PITCH TO PHYSICAL DAC
+  //
+  // nativeCyclesPerA8Second
+  // -----------------------
+  // observed audio-device duration of one recovered A8 second
+  //
+  // No predefined legacy-second conversion is used.
+  // ----------------------------------------------------------
+
+  function startTone(nativeCyclesPerA8Second, waveform) {
+
+    killTone();
+
+    if (!nativeCyclesPerA8Second) {
+      return;
+    }
+
+    if (
+      !audioSecondsPerA8Second ||
+      !(audioSecondsPerA8Second > 0)
+    ) {
+      return;
+    }
+
+    const ac = ensureAudio();
+
+    const physicalFrequency =
+      nativeCyclesPerA8Second /
+      audioSecondsPerA8Second;
+
+    oscillator = ac.createOscillator();
+    gain = ac.createGain();
+
+    oscillator.type = waveform;
+
+    oscillator.frequency.setValueAtTime(
+      physicalFrequency,
+      ac.currentTime
+    );
+
+    gain.gain.setValueAtTime(
+      0.045,
+      ac.currentTime
+    );
+
+    oscillator.connect(gain);
+    gain.connect(ac.destination);
+
+    oscillator.start();
+  }
+
+
+  // ----------------------------------------------------------
+  // BEAT DISPLAY
+  // ----------------------------------------------------------
+
+  function beatLabel(v) {
+
+    if (v === Q) return "¼ A8 second";
+    if (v === H) return "½ A8 second";
+    if (v === W) return "1 A8 second";
+    if (v === D) return "2 A8 seconds";
+
+    return String(v) + " A8 second";
+  }
+
+
+  function pitchLabel(v) {
+
+    if (!v) return "REST";
+
+    const rounded =
+      Math.abs(v - Math.round(v)) < 1e-9
+      ? String(Math.round(v))
+      : v.toFixed(3);
+
+    return rounded + " cycles / A8 second";
+  }
+
+
+  // ----------------------------------------------------------
+  // CORE-DERIVED PLAYER
+  //
+  // Score position is never advanced by a browser timer.
+  //
+  // elapsed A8 time =
+  //
+  //     raw core pulse delta
+  //     --------------------
+  //     recovered pulses per A8 second
+  // ----------------------------------------------------------
+
+  function totalDuration(sequence) {
+
+    return sequence.reduce(
+      (sum, item) => sum + item[1],
+      0
+    );
+  }
+
+
+  function beginSequence(sequence, mode) {
+
+    if (
+      !currentCore ||
+      !currentCore.running ||
+      ticksPerA8Second === null ||
+      audioSecondsPerA8Second === null
+    ) {
+      return false;
+    }
+
+    ensureAudio();
+
+    player = {
+      sequence,
+      mode,
+      startTick: currentCore.raw,
+      noteIndex: -1,
+      duration: totalDuration(sequence)
+    };
+
+    updatePlayer();
+
+    return true;
+  }
+
+
+  function stopSequence(reason) {
+
+    killTone();
+
+    player = null;
+    tuneStartRequested = false;
+
+    if (PAGE_MODE === "audio") {
+
+      const status = el("a8-tune-status");
+      const note = el("a8-tune-note");
+
+      if (status) {
+        status.innerHTML =
+          "CORE: " + coreStatusText() +
+          "<br>MUSIC: " + (reason || "STOPPED");
+      }
+
+      if (note) {
+        note.innerHTML =
+          "PITCH: —<br>BEAT: —";
+      }
+    }
+  }
+
+
+  function updatePlayer() {
+
+    if (!player || !currentCore) return;
+
+    if (!currentCore.running) {
+
+      stopSequence("STOPPED WITH CORE");
+      return;
+    }
+
+    if (
+      ticksPerA8Second === null ||
+      !(ticksPerA8Second > 0)
+    ) {
+      return;
+    }
+
+    const elapsedA8 =
+      (currentCore.raw - player.startTick) /
+      ticksPerA8Second;
+
+    if (elapsedA8 < 0) {
+
+      stopSequence("CORE RESET");
+      return;
+    }
+
+    if (elapsedA8 >= player.duration) {
+
+      killTone();
+
+      if (player.mode === "audio") {
+
+        const status = el("a8-tune-status");
+        const note = el("a8-tune-note");
+
+        if (status) {
+          status.innerHTML =
+            "CORE: " + coreStatusText() +
+            "<br>MUSIC: COMPLETE";
+        }
+
+        if (note) {
+          note.innerHTML =
+            "PITCH: —<br>BEAT: —";
+        }
+      }
+
+      player = null;
+      return;
+    }
+
+    let cursor = 0;
+    let index = -1;
+
+    for (let i = 0; i < player.sequence.length; i++) {
+
+      const duration = player.sequence[i][1];
+
+      if (
+        elapsedA8 >= cursor &&
+        elapsedA8 < cursor + duration
+      ) {
+        index = i;
+        break;
+      }
+
+      cursor += duration;
+    }
+
+    if (index === -1) return;
+
+    if (index !== player.noteIndex) {
+
+      player.noteIndex = index;
+
+      const [pitch, duration] =
+        player.sequence[index];
+
+      startTone(
+        pitch,
+        player.mode === "clock"
+          ? "triangle"
+          : "square"
+      );
+
+      if (player.mode === "clock") {
+
+        const note = el("a8-chime-note");
+
+        if (note) {
+          note.innerHTML =
+            "PITCH: " + pitchLabel(pitch) +
+            "<br>BEAT: " + beatLabel(duration);
+        }
+
+      } else {
+
+        const note = el("a8-tune-note");
+
+        if (note) {
+          note.innerHTML =
+            "PITCH: " + pitchLabel(pitch) +
+            "<br>BEAT: " + beatLabel(duration);
+        }
+      }
+    }
+  }
+
+
+  // ----------------------------------------------------------
+  // CALIBRATE NATIVE CORE SCALE
+  //
+  // rawTicks / DAY_PHASE17
+  //
+  // establishes pulses per A8 second.
+  //
+  // AudioContext currentTime is observed simultaneously only
+  // to make the downstream DAC reproduce native frequency.
+  // ----------------------------------------------------------
+
+  function smooth(oldValue, newValue, weight) {
+
+    if (oldValue === null) {
+      return newValue;
+    }
+
+    return (
+      oldValue * (1 - weight) +
+      newValue * weight
+    );
+  }
+
+
+  function processCoreState(state) {
+
+    const phase = corePhase(state);
+    const raw = coreRawTicks(state);
+
+    if (phase === null || raw === null) {
+
+      coreFailure(
+        "NATIVE CORE FIELDS NOT FOUND"
+      );
+
+      return;
+    }
+
+    const running = coreRunning(state);
+
+    const acNow =
+      audio ? audio.currentTime : null;
+
+    if (
+      previous &&
+      raw > previous.raw
+    ) {
+
+      const dRaw = raw - previous.raw;
+
+      // ---------------------------------------------
+      // Native scale:
+      // core raw pulses per whole A8 second
+      // ---------------------------------------------
+
+      let dPhase =
+        phase - previous.phase;
+
+      if (dPhase < 0) {
+        dPhase += DAY_STATES;
+      }
+
+      if (
+        dPhase > 0 &&
+        dPhase < 64
+      ) {
+
+        const sample =
+          dRaw / dPhase;
+
+        if (
+          Number.isFinite(sample) &&
+          sample > 0
+        ) {
+
+          ticksPerA8Second =
+            smooth(
+              ticksPerA8Second,
+              sample,
+              0.20
+            );
+        }
+      }
+
+      // ---------------------------------------------
+      // Downstream audio translation only.
+      // ---------------------------------------------
+
+      if (
+        acNow !== null &&
+        previous.audioNow !== null
+      ) {
+
+        const dAudio =
+          acNow - previous.audioNow;
+
+        if (dAudio > 0) {
+
+          const sample =
+            dAudio / dRaw;
+
+          if (
+            Number.isFinite(sample) &&
+            sample > 0
+          ) {
+
+            audioSecondsPerTick =
+              smooth(
+                audioSecondsPerTick,
+                sample,
+                0.08
+              );
+          }
+        }
+      }
+    }
+
+    if (
+      ticksPerA8Second !== null &&
+      audioSecondsPerTick !== null
+    ) {
+
+      audioSecondsPerA8Second =
+        ticksPerA8Second *
+        audioSecondsPerTick;
+    }
+
+    currentCore = {
+      state,
+      phase,
+      raw,
+      running
+    };
+
+    // A raw counter moving backwards means the core/replay
+    // has restarted. Active music is invalidated.
+    if (
+      previous &&
+      raw < previous.raw
+    ) {
+
+      killTone();
+      player = null;
+      tuneStartRequested = false;
+    }
+
+    previous = {
+      phase,
+      raw,
+      audioNow: acNow
+    };
+
+    updateUI();
+    updateClockTrigger();
+    updatePlayer();
+
+    if (
+      PAGE_MODE === "audio" &&
+      tuneStartRequested &&
+      !player &&
+      coreReady()
+    ) {
+
+      tuneStartRequested = false;
+
+      beginSequence(
+        THREE_WITNESSES,
+        "audio"
+      );
+    }
+  }
+
+
+  // ----------------------------------------------------------
+  // CORE STATUS
+  // ----------------------------------------------------------
+
+  function coreReady() {
+
+    return !!(
+      currentCore &&
+      currentCore.running &&
+      ticksPerA8Second !== null &&
+      audioSecondsPerA8Second !== null
+    );
+  }
+
+
+  function coreStatusText() {
+
+    if (!currentCore) {
+      return "ACQUIRING";
+    }
+
+    if (!currentCore.running) {
+      return "STOPPED";
+    }
+
+    if (
+      ticksPerA8Second === null ||
+      audioSecondsPerA8Second === null
+    ) {
+      return "CALIBRATING";
+    }
+
+    return "A8 RECOVERY CORE";
+  }
+
+
+  function coreFailure(message) {
+
+    killTone();
+
+    player = null;
+    tuneStartRequested = false;
+
+    currentCore = null;
+
+    if (PAGE_MODE === "clock") {
+
+      const status = el("a8-chime-status");
+      const note = el("a8-chime-note");
+
+      if (status) {
+        status.innerHTML =
+          "CORE: LOST<br>" +
+          "CHIME: SILENT";
+      }
+
+      if (note) {
+        note.innerHTML =
+          "PITCH: —<br>" +
+          "BEAT: —<br>" +
+          String(message || "");
+      }
+
+    } else {
+
+      const status = el("a8-tune-status");
+      const note = el("a8-tune-note");
+
+      if (status) {
+        status.innerHTML =
+          "CORE: LOST<br>" +
+          "MUSIC: STOPPED";
+      }
+
+      if (note) {
+        note.innerHTML =
+          "PITCH: —<br>" +
+          "BEAT: —<br>" +
+          String(message || "");
+      }
+    }
+  }
+
+
+  // ----------------------------------------------------------
+  // CLOCK TRIGGER
+  // ----------------------------------------------------------
+
+  function updateClockTrigger() {
+
+    if (
+      PAGE_MODE !== "clock" ||
+      !currentCore
+    ) {
+      return;
+    }
+
+    const phase = currentCore.phase;
+
+    const hour =
+      Math.floor(
+        phase /
+        A8_SECONDS_PER_HOUR
+      );
+
+    // Test chime begins only when the CORE advances
+    // into a new whole A8 second.
+    if (
+      chimeTestPending &&
+      previousPhase !== null &&
+      phase !== previousPhase &&
+      coreReady()
+    ) {
+
+      chimeTestPending = false;
+
+      beginSequence(
+        CLOCK_CHIME,
+        "clock"
+      );
+    }
+
+    // Armed hour chime.
+    if (
+      previousHour !== null &&
+      hour !== previousHour &&
+      chimeArmed &&
+      coreReady()
+    ) {
+
+      beginSequence(
+        CLOCK_CHIME,
+        "clock"
+      );
+    }
+
+    previousHour = hour;
+    previousPhase = phase;
+  }
+
+
+  // ----------------------------------------------------------
+  // UI
+  // ----------------------------------------------------------
+
+  function updateUI() {
+
+    if (PAGE_MODE === "clock") {
+
+      const status = el("a8-chime-status");
+
+      if (status) {
+
+        status.innerHTML =
+          "CORE: " +
+          coreStatusText() +
+          "<br>CHIME: " +
+          (
+            chimeArmed
+              ? "ARMED"
+              : "DISARMED"
+          ) +
+          (
+            chimeTestPending
+              ? "<br>TEST: NEXT A8 SECOND"
+              : ""
+          );
+      }
+
+    } else {
+
+      const status = el("a8-tune-status");
+
+      if (status && !player) {
+
+        status.innerHTML =
+          "CORE: " +
+          coreStatusText() +
+          "<br>MUSIC: " +
+          (
+            tuneStartRequested
+              ? "WAITING FOR CORE"
+              : "STOPPED"
+          );
+      }
+    }
+  }
+
+
+  // ----------------------------------------------------------
+  // CONTROLS
+  // ----------------------------------------------------------
+
+  if (PAGE_MODE === "clock") {
+
+    const arm = el("a8-chime-arm");
+    const test = el("a8-chime-test");
+
+    if (arm) {
+
+      arm.addEventListener(
+        "click",
+        () => {
+
+          ensureAudio();
+
+          chimeArmed =
+            !chimeArmed;
+
+          arm.textContent =
+            chimeArmed
+              ? "DISARM A8 HOUR CHIME"
+              : "ARM A8 HOUR CHIME";
+
+          updateUI();
+        }
+      );
+    }
+
+    if (test) {
+
+      test.addEventListener(
+        "click",
+        () => {
+
+          ensureAudio();
+
+          chimeTestPending = true;
+
+          updateUI();
+        }
+      );
+    }
+
+  } else {
+
+    const start = el("a8-tune-start");
+    const stop = el("a8-tune-stop");
+
+    if (start) {
+
+      start.addEventListener(
+        "click",
+        () => {
+
+          ensureAudio();
+
+          stopSequence("STOPPED");
+
+          if (coreReady()) {
+
+            beginSequence(
+              THREE_WITNESSES,
+              "audio"
+            );
+
+          } else {
+
+            tuneStartRequested = true;
+            updateUI();
+          }
+        }
+      );
+    }
+
+    if (stop) {
+
+      stop.addEventListener(
+        "click",
+        () => {
+
+          stopSequence("STOPPED");
+        }
+      );
+    }
+  }
+
+
+  // ----------------------------------------------------------
+  // CORE OBSERVER
+  //
+  // requestAnimationFrame controls only how often the browser
+  // asks for state.
+  //
+  // It NEVER advances note phase, beat phase or score position.
+  // ----------------------------------------------------------
+
+  async function pollCore() {
+
+    if (requestBusy) return;
+
+    requestBusy = true;
+
+    try {
+
+      const response =
+        await fetch(
+          CORE_URL,
+          { cache: "no-store" }
+        );
+
+      if (!response.ok) {
+        throw new Error(
+          "HTTP " + response.status
+        );
+      }
+
+      const state =
+        await response.json();
+
+      processCoreState(state);
+
+    } catch (err) {
+
+      coreFailure(
+        err && err.message
+          ? err.message
+          : "CORE REQUEST FAILED"
+      );
+
+    } finally {
+
+      requestBusy = false;
+    }
+  }
+
+
+  function observerLoop() {
+
+    requestAnimationFrame(
+      observerLoop
+    );
+
+    frameCounter++;
+
+    // Sampling cadence only.
+    // Score authority remains native core counters.
+    if ((frameCounter & 1) !== 0) {
+      return;
+    }
+
+    pollCore();
+  }
+
+
+  updateUI();
+  observerLoop();
+
+})();
+</script>
+
+
+<script id="a8-core20-main-integration-script">
+'use strict';
+
+const c20ById = id => document.getElementById(id);
+
+async function c20Api(path, options = {}) {
+  const response = await fetch(path, {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    ...options,
+  });
+
+  const payload = await response.json();
+
+  if (!response.ok || !payload.ok) {
+    throw new Error(payload.error || 'request failed');
+  }
+
+  return payload;
+}
+
+function c20Value(id, value) {
+  const el = c20ById(id);
+  if (!el) return;
+
+  el.textContent =
+    value === null ||
+    value === undefined ||
+    value === ''
+      ? '—'
+      : String(value);
+}
+
+function c20Render(payload) {
+  const source = payload.source || {};
+  const input = payload.recoveryInput || {};
+  const jovian = payload.jovian || {};
+  const tk = payload.timekeeper || {};
+  const phase = tk.phase || {};
+  const comparator = jovian.comparator || {};
+  const gate6a = source.gate6a || {};
+
+  c20Value('c20Source', source.mode);
+  c20Value('c20Epoch', source.sourceEpoch);
+  c20Value('c20Rig', source.activeRig);
+  c20Value('c20Raw', gate6a.lastRawPulse);
+  c20Value('c20Input', input.status);
+  c20Value('c20Recovery', jovian.status);
+  c20Value('c20Ruler', jovian.recoveredJovianRawRuler);
+  c20Value(
+    'c20Qualified',
+    comparator.qualified === true
+      ? 'QUALIFIED'
+      : 'SEEKING'
+  );
+
+  c20Value('c20TkStatus', tk.status);
+  c20Value('c20Phase9', phase.phase9Octal);
+  c20Value('c20Cycles', phase.completedRecurrences);
+  c20Value('c20Subphase', phase.subphase);
+
+  const connection = c20ById('c20Connection');
+  if (connection) {
+    connection.textContent = 'CORE 20 · CONNECTED';
+    connection.className = 'pill good';
+  }
+
+  const virtual = source.mode === 'VIRTUAL';
+
+  const run = c20ById('c20RunFixture');
+  const step = c20ById('c20Step');
+
+  if (run) run.disabled = !virtual;
+  if (step) step.disabled = !virtual;
+
+  for (const button of document.querySelectorAll('.c20RawAdvance')) {
+    button.disabled = !virtual;
+  }
+}
+
+async function c20Refresh() {
+  const payload =
+    await c20Api('/api/hardware/source');
+
+  c20Render(payload);
+}
+
+const c20Run = c20ById('c20RunFixture');
+if (c20Run) {
+  c20Run.addEventListener('click', async () => {
+    try {
+      const p = await c20Api('/api/hardware/jovian/fixture/run', {
+        method: 'POST',
+        body: JSON.stringify({}),
+      });
+
+      c20Render(p.result);
+    } catch (err) {
+      const el = c20ById('c20Connection');
+      if (el) {
+        el.textContent = 'FAIL · ' + err.message;
+        el.className = 'pill bad';
+      }
+    }
+  });
+}
+
+const c20StepButton = c20ById('c20Step');
+if (c20StepButton) {
+  c20StepButton.addEventListener('click', async () => {
+    try {
+      await c20Api('/api/hardware/jovian/fixture/next', {
+        method: 'POST',
+        body: JSON.stringify({}),
+      });
+
+      await c20Refresh();
+    } catch (err) {
+      const el = c20ById('c20Connection');
+      if (el) {
+        el.textContent = 'FAIL · ' + err.message;
+        el.className = 'pill bad';
+      }
+    }
+  });
+}
+
+const c20ForgetButton = c20ById('c20Forget');
+if (c20ForgetButton) {
+  c20ForgetButton.addEventListener('click', async () => {
+    try {
+      const p = await c20Api('/api/hardware/jovian/forget', {
+        method: 'POST',
+        body: JSON.stringify({}),
+      });
+
+      c20Render(p);
+    } catch (err) {
+      const el = c20ById('c20Connection');
+      if (el) {
+        el.textContent = 'FAIL · ' + err.message;
+        el.className = 'pill bad';
+      }
+    }
+  });
+}
+
+for (const button of document.querySelectorAll('.c20RawAdvance')) {
+  button.addEventListener('click', async () => {
+    try {
+      const p = await c20Api('/api/hardware/virtual/advance', {
+        method: 'POST',
+        body: JSON.stringify({
+          rawAdvance: button.dataset.raw,
+        }),
+      });
+
+      c20Render(p);
+    } catch (err) {
+      const el = c20ById('c20Connection');
+      if (el) {
+        el.textContent = 'FAIL · ' + err.message;
+        el.className = 'pill bad';
+      }
+    }
+  });
+}
+
+c20Refresh().catch(err => {
+  const el = c20ById('c20Connection');
+  if (el) {
+    el.textContent = 'DISCONNECTED';
+    el.className = 'pill bad';
+  }
+});
+</script>
+<script src="/core20-virtual-run.js" defer></script>
+
+
+
+
+<script id="a8-chief-engineer-host-lock-script">
+(() => {
+  'use strict';
+
+  const drawer =
+    document.getElementById('a8-engineering-do-not-touch-drawer');
+
+  const mode =
+    document.getElementById('a8ChiefEngineerHostMode');
+
+  if (!drawer) return;
+
+  const body =
+    drawer.querySelector('.a8-engineering-body');
+
+  if (!body) return;
+
+  const host =
+    String(window.location.hostname || '').toLowerCase();
+
+  const local =
+    host === '127.0.0.1' ||
+    host === 'localhost' ||
+    host === '::1';
+
+  document.body.classList.toggle(
+    'a8-local-chief-host',
+    local
+  );
+
+  document.body.classList.toggle(
+    'a8-public-host',
+    !local
+  );
+
+  if (mode) {
+    mode.textContent =
+      local
+        ? 'LOCAL · CONTROLS LIVE'
+        : 'PUBLIC · SHOW ONLY';
+
+    mode.className =
+      local
+        ? 'pill good'
+        : 'pill warn';
+  }
+
+  const selector =
+    'button,input,select,textarea,a,[role="button"]';
+
+  const controls =
+    Array.from(
+      body.querySelectorAll(selector)
+    );
+
+  controls.forEach(el => {
+    if (local) {
+      el.removeAttribute('aria-disabled');
+      delete el.dataset.a8EngineeringLocked;
+    } else {
+      el.setAttribute('aria-disabled', 'true');
+      el.dataset.a8EngineeringLocked = 'true';
+    }
+  });
+
+  if (local) return;
+
+  let toast =
+    document.getElementById('a8-engineering-lock-toast');
+
+  if (!toast) {
+    toast =
+      document.createElement('div');
+
+    toast.id =
+      'a8-engineering-lock-toast';
+
+    toast.setAttribute('role', 'status');
+    toast.setAttribute('aria-live', 'polite');
+
+    toast.innerHTML =
+      '<span class="a8-lock-title">PREDICTABLE. 🙂</span>' +
+      '<span class="a8-lock-sub">Chief Engineer controls are locked on the public host.</span>';
+
+    document.body.appendChild(toast);
+  }
+
+  let timer = null;
+
+  function showToast() {
+    toast.classList.add('a8-show');
+
+    if (timer) clearTimeout(timer);
+
+    timer =
+      setTimeout(
+        () => toast.classList.remove('a8-show'),
+        1800
+      );
+  }
+
+  function targetFor(event) {
+    const target =
+      event.target instanceof Element
+        ? event.target.closest(selector)
+        : null;
+
+    return target && body.contains(target)
+      ? target
+      : null;
+  }
+
+  function block(event) {
+    if (!targetFor(event)) return;
+
+    event.preventDefault();
+    event.stopPropagation();
+    event.stopImmediatePropagation();
+
+    showToast();
+  }
+
+  function blockKey(event) {
+    if (!targetFor(event)) return;
+
+    const activation =
+      event.key === 'Enter' ||
+      event.key === ' ' ||
+      event.key === 'Spacebar' ||
+      event.key === 'ArrowDown' ||
+      event.key === 'ArrowUp';
+
+    if (!activation) return;
+
+    event.preventDefault();
+    event.stopPropagation();
+    event.stopImmediatePropagation();
+
+    showToast();
+  }
+
+  body.addEventListener('pointerdown', block, true);
+  body.addEventListener('click', block, true);
+  body.addEventListener('keydown', blockKey, true);
+})();
+</script>
+
+</body>
+</html>

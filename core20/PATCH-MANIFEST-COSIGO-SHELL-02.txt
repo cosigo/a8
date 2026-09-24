@@ -1,0 +1,32 @@
+A8 Time Lab v5.4.18 — COSIGO Global Navigation / Disclaimer Static Patch 02
+Date: 2026-08-16
+
+PURPOSE
+- Stop lab pages from becoming a navigation rabbit hole.
+- Add COSIGO icon + global top navigation to every public lab page.
+- Add consistent research / educational disclaimer footers and public links.
+
+ADDED
+- public/site-shell.css
+- public/assets/cosigo_master_512.gif
+
+UPDATED STATIC HTML ONLY
+- public/index.html
+- public/clock.html
+- public/moons.html
+- public/audio.html
+- public/data.html
+- public/telescope.html
+- public/angle.html
+- public/quartz.html
+- README.txt
+
+UNTOUCHED CORE/RUNTIME
+- core/a8-core.js
+- server.js
+- package.json
+- tests/run-tests.js
+- lib/*
+- tools/*
+
+Core/API version remains 5.4.18. No service restart is required for static files.

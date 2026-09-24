@@ -1,0 +1,14 @@
+[Unit]
+Description=A8 Core20 automatic post-start civil/year recovery
+After=a8-core20.service network-online.target
+Wants=network-online.target
+PartOf=a8-core20.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/a8-core20-autorecover
+RemainAfterExit=yes
+TimeoutStartSec=240
+
+[Install]
+WantedBy=a8-core20.service

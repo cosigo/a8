@@ -1,0 +1,28 @@
+{
+    "name": "COSIGO CIGO Token List",
+    "timestamp": "2026-07-09T00:00:00Z",
+    "version": {
+        "major": 1,
+        "minor": 0,
+        "patch": 0
+    },
+    "keywords": [
+        "cigo",
+        "cosigo",
+        "bnb",
+        "bsc",
+        "bnb smart chain",
+        "pancakeswap"
+    ],
+    "logoURI": "https://market.cosigo.io/shared/assets/icons/cigo_256.png",
+    "tokens": [
+        {
+            "chainId": 56,
+            "address": "0x3a38e963f524E0dDFB75dFa1752b4Cd1364F5560",
+            "name": "CIGO",
+            "symbol": "CIGO",
+            "decimals": 18,
+            "logoURI": "https://market.cosigo.io/shared/assets/icons/cigo_256.png"
+        }
+    ]
+}

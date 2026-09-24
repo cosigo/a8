@@ -1,0 +1,23 @@
+{
+  "schema": "A8-ANNUAL-ACTIVE-CARRIER-V1",
+  "status": "ACTIVE",
+  "sourceEpoch": 8,
+  "physicalRawAnchor": 15452411,
+  "annualAngle512Exact": {
+    "numerator": 5907328021679,
+    "denominator": 15345666096
+  },
+  "origin": "EPOCH7_TO_EPOCH8_PHYSICAL_CARRIER_HANDOFF",
+  "role": "LIVE_CARRIER_CONTINUATION_ANCHOR",
+  "sealedNatureEvidenceRewritten": false,
+  "crossEpochRawContinuity": false,
+  "outageElapsedInferred": false,
+  "continuation": {
+    "fromSourceEpoch": 7,
+    "fromPhysicalRaw": 15447628,
+    "toSourceEpoch": 8,
+    "toPhysicalRaw": 15452411,
+    "coordinatePreserved": "ANNUAL_ANGLE_512_EXACT",
+    "elapsedTimeInferred": false
+  }
+}

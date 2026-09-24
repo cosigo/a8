@@ -1,0 +1,155 @@
+/* CIGO_MESSAGE_NUGGET_V1 */
+:root {
+  --cigo-message-gold: #d6af61;
+  --cigo-message-gold-soft: #f5dda0;
+  --cigo-message-ink: #080b0f;
+}
+
+.cigo-message-nav {
+  gap: 0.36rem !important;
+  border-color: rgba(214, 175, 97, 0.52) !important;
+  background: linear-gradient(135deg, rgba(214, 175, 97, 0.16), rgba(111, 49, 140, 0.13)) !important;
+  color: var(--cigo-message-gold-soft) !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 238, 184, 0.03), 0 0 18px rgba(214, 175, 97, 0.07);
+}
+
+.cigo-message-nav:hover,
+.cigo-message-nav:focus-visible {
+  border-color: rgba(245, 221, 160, 0.88) !important;
+  background: linear-gradient(135deg, rgba(214, 175, 97, 0.26), rgba(111, 49, 140, 0.21)) !important;
+  color: #fff8e7 !important;
+}
+
+.cigo-message-nav-icon {
+  width: 1rem;
+  height: 1rem;
+  flex: 0 0 auto;
+  color: currentColor;
+}
+
+.cigo-message-nugget-wrap {
+  width: min(calc(100% - 1.75rem), 1160px);
+  margin: 0.9rem auto 0;
+}
+
+.cigo-message-nugget {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 0.9rem;
+  align-items: center;
+  overflow: hidden;
+  padding: 0.85rem 1rem;
+  border: 1px solid rgba(214, 175, 97, 0.42);
+  border-radius: 18px;
+  background:
+    radial-gradient(circle at 12% 20%, rgba(214, 175, 97, 0.22), transparent 13rem),
+    linear-gradient(120deg, rgba(29, 22, 14, 0.95), rgba(15, 17, 25, 0.96) 58%, rgba(40, 16, 48, 0.92));
+  color: #f7f2e8;
+  text-decoration: none !important;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.22), inset 0 1px 0 rgba(255, 244, 205, 0.05);
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.cigo-message-nugget::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(105deg, transparent 20%, rgba(255, 238, 184, 0.08) 42%, transparent 62%);
+  transform: translateX(-110%);
+  transition: transform 520ms ease;
+}
+
+.cigo-message-nugget:hover,
+.cigo-message-nugget:focus-visible {
+  transform: translateY(-1px);
+  border-color: rgba(245, 221, 160, 0.75);
+  box-shadow: 0 20px 42px rgba(0, 0, 0, 0.3), 0 0 28px rgba(214, 175, 97, 0.08);
+  outline: none;
+}
+
+.cigo-message-nugget:hover::after,
+.cigo-message-nugget:focus-visible::after {
+  transform: translateX(110%);
+}
+
+.cigo-message-chest {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 1px solid rgba(245, 221, 160, 0.42);
+  border-radius: 14px;
+  background: rgba(214, 175, 97, 0.11);
+  color: var(--cigo-message-gold-soft);
+}
+
+.cigo-message-chest svg {
+  width: 1.75rem;
+  height: 1.75rem;
+}
+
+.cigo-message-copy {
+  min-width: 0;
+}
+
+.cigo-message-kicker,
+.cigo-message-copy strong,
+.cigo-message-copy small {
+  display: block;
+}
+
+.cigo-message-kicker {
+  margin-bottom: 0.08rem;
+  color: var(--cigo-message-gold);
+  font-size: 0.63rem;
+  font-weight: 850;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.cigo-message-copy strong {
+  color: #fffaf0;
+  font-size: 0.95rem;
+  line-height: 1.25;
+}
+
+.cigo-message-copy small {
+  margin-top: 0.16rem;
+  color: rgba(235, 232, 225, 0.72);
+  font-size: 0.76rem;
+  line-height: 1.35;
+}
+
+.cigo-message-action {
+  position: relative;
+  z-index: 1;
+  padding: 0.48rem 0.7rem;
+  border: 1px solid rgba(214, 175, 97, 0.42);
+  border-radius: 999px;
+  color: var(--cigo-message-gold-soft);
+  font-size: 0.72rem;
+  font-weight: 800;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+@media (max-width: 680px) {
+  .cigo-message-nugget {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .cigo-message-action {
+    grid-column: 1 / -1;
+    justify-self: stretch;
+    text-align: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cigo-message-nugget,
+  .cigo-message-nugget::after {
+    transition: none;
+  }
+}

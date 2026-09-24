@@ -1,0 +1,162 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+
+ROOT=/var/lib/a8-core20/recovery-snapshots
+STAMP="$(TZ=America/Mexico_City date '+%Y%m%d-%H%M%S-%Z')"
+DEST="$ROOT/$STAMP"
+
+mkdir -p "$DEST"
+
+python3 - "$DEST/archive-meta.json" <<'PY'
+import datetime
+import json
+import os
+import sys
+from zoneinfo import ZoneInfo
+
+out=sys.argv[1]
+now=datetime.datetime.now(
+    ZoneInfo("America/Mexico_City")
+)
+
+x={
+    "schema":
+        "A8-CORE20-RECOVERY-SNAPSHOT-V1",
+
+    "role":
+        "NON_AUTHORITATIVE_RECOVERY_EVIDENCE",
+
+    "archiveIndexTime":
+        now.isoformat(),
+
+    "archiveIndexTimeRole":
+        "FILE_CAPTURE_CADENCE_ONLY",
+
+    "definesA8Time":
+        False,
+
+    "definesRawContinuity":
+        False,
+
+    "infersOutageElapsedTime":
+        False,
+
+    "mayReplayOldRawPulse":
+        False,
+}
+
+with open(out,"w") as f:
+    json.dump(x,f,indent=2)
+    f.write("\n")
+PY
+
+copy_if_present() {
+  local src="$1"
+  local name="$2"
+
+  if [ -f "$src" ]; then
+    cp -a "$src" "$DEST/$name"
+  fi
+}
+
+copy_if_present \
+  /var/lib/a8-core20/sol-rate-holdover.json \
+  sol-rate-holdover.json
+
+copy_if_present \
+  /var/lib/a8-core20/calendar-checkpoint.json \
+  calendar-checkpoint.json
+
+copy_if_present \
+  /var/lib/a8-core20/source-run-generation.json \
+  source-run-generation.json
+
+copy_if_present \
+  /var/lib/a8-core20/terra-ship-slip/lifetime-ledger.json \
+  terra-ship-slip-lifetime-ledger.json
+
+copy_if_present \
+  /var/lib/a8-core20/terra-ship-slip/run-1-epoch-3-inception.json \
+  terra-ship-slip-inception.json
+
+copy_if_present \
+  /var/lib/a8-core20/terra-ship-slip/sol-contamination-correction-v1.json \
+  sol-contamination-correction-v1.json
+
+{
+  echo "CORE20=$(systemctl is-active a8-core20.service || true)"
+  echo "AUTORECOVERY=$(systemctl is-active a8-core20-autorecover.service || true)"
+  echo "SHADOW_CORE=$(systemctl is-active a8-shadow-core.service || true)"
+  echo "SHADOW_RECORDER=$(systemctl is-active a8-shadow-recorder.service || true)"
+} > "$DEST/services.txt"
+
+if systemctl is-active --quiet a8-core20.service; then
+  BASE=http://127.0.0.1:18020
+
+  capture() {
+    local path="$1"
+    local file="$2"
+
+    if ! curl -fsS \
+      --max-time 10 \
+      "$BASE$path" \
+      > "$DEST/$file"
+    then
+      rm -f "$DEST/$file"
+      printf '%s\n' \
+        "FAILED · $path" \
+        >> "$DEST/live-api-errors.txt"
+    fi
+  }
+
+  capture /api/core20/clock \
+    core20-clock.json
+
+  capture /api/core20/calendar \
+    core20-calendar.json
+
+  capture /api/core20/year-angle \
+    core20-year-angle.json
+
+  capture /api/hardware/jovian-timekeeper \
+    jovian-timekeeper.json
+
+  capture /api/hardware/earth-observers \
+    earth-observers.json
+
+  capture /api/hardware/earth-rotation-scale \
+    earth-rotation-scale.json
+
+  capture /api/hardware/sol-orbital-scale \
+    sol-orbital-scale.json
+
+  capture /api/hardware/sun-return-recurrence \
+    sun-return-recurrence.json
+
+  capture /api/terra-ship-slip \
+    terra-ship-slip.json
+
+  capture /api/terra-ship-slip/lifetime \
+    terra-ship-slip-lifetime-live.json
+else
+  echo "CORE20 OFFLINE · PERSISTENT RECOVERY STATE ONLY" \
+    > "$DEST/core20-offline.txt"
+fi
+
+(
+  cd "$DEST"
+
+  find . \
+    -type f \
+    ! -name SHA256SUMS \
+    -print0 |
+  sort -z |
+  xargs -0 sha256sum \
+    > SHA256SUMS
+)
+
+ln -sfn \
+  "$STAMP" \
+  "$ROOT/latest"
+
+echo "SNAPSHOT · $DEST"

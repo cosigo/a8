@@ -1,0 +1,39 @@
+# Normalize ordinary source/document text.
+* text=auto
+
+*.html text eol=lf
+*.css  text eol=lf
+*.js   text eol=lf
+*.json text eol=lf
+*.md   text eol=lf
+*.txt  text eol=lf
+*.sh   text eol=lf
+*.py   text eol=lf
+*.yml  text eol=lf
+*.yaml text eol=lf
+*.toml text eol=lf
+*.svg  text eol=lf
+
+# Binary public assets / evidence.
+*.png  -text
+*.jpg  -text
+*.jpeg -text
+*.gif  -text
+*.webp -text
+*.ico  -text
+*.mp4  -text
+*.mkv  -text
+*.mov  -text
+*.wav  -text
+*.mp3  -text
+*.ogg  -text
+*.flac -text
+*.pdf  -text
+*.zip  -text
+*.gz   -text
+*.7z   -text
+
+# Evidence CSVs retain exact captured bytes.
+
+# Evidence/data CSVs preserve captured bytes exactly.
+*.csv binary

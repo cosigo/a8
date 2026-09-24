@@ -1,0 +1,439 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+BASE=http://127.0.0.1:18020
+TAG='A8-AUTORECOVER'
+
+log() {
+  echo "$TAG · $*"
+}
+
+get() {
+  local path="$1"
+  local out="$2"
+
+  curl \
+    --fail \
+    --silent \
+    --show-error \
+    --max-time 10 \
+    "$BASE$path" \
+    >"$out"
+}
+
+post_empty() {
+  local path="$1"
+  local out="$2"
+
+  curl \
+    --fail \
+    --silent \
+    --show-error \
+    --max-time 60 \
+    -X POST \
+    -H 'Content-Type: application/json' \
+    --data '{}' \
+    "$BASE$path" \
+    >"$out"
+}
+
+
+log 'START'
+
+
+# ------------------------------------------------------------
+# 1. WAIT FOR RECOVERED CORE20 RUNTIME
+# ------------------------------------------------------------
+
+READY=0
+
+for attempt in $(seq 1 120); do
+  if get \
+    /api/core20/clock \
+    /tmp/a8-autorecover-clock.json \
+    2>/dev/null
+  then
+    STATUS=$(
+      python3 - <<'PY'
+import json
+
+with open('/tmp/a8-autorecover-clock.json') as f:
+    x = json.load(f)
+
+runtime = (
+    x.get('runtime') or
+    (x.get('clock') or {}).get('runtime') or
+    {}
+)
+
+print(runtime.get('status', ''))
+PY
+    )
+
+    if [ "$STATUS" = RUNNING ]; then
+      READY=1
+      break
+    fi
+  fi
+
+  sleep 0.25
+done
+
+if [ "$READY" != 1 ]; then
+  log 'FAIL · CORE20 RUNTIME DID NOT REACH RUNNING'
+  exit 1
+fi
+
+log 'PASS · CORE20 RUNTIME RUNNING'
+
+
+# ------------------------------------------------------------
+# 2. MOMENTARY CIVIL CONNECT
+#
+# Only apply if the clock says it needs one.
+# ------------------------------------------------------------
+
+get \
+  /api/core20/clock \
+  /tmp/a8-autorecover-clock.json
+
+CLOCK_STATUS=$(
+  python3 - <<'PY'
+import json
+
+with open('/tmp/a8-autorecover-clock.json') as f:
+    x = json.load(f)
+
+print(
+    (x.get('clock') or {}).get('status', '')
+)
+PY
+)
+
+case "$CLOCK_STATUS" in
+
+  CORE20_CLOCK_RUNNING)
+    log 'CONNECT · ALREADY VALID · NO ACTION'
+    ;;
+
+  AWAITING_MOMENTARY_CONNECT_ALIGNMENT)
+    log 'CONNECT · APPLYING ONE-SHOT EMPTY CONNECT'
+
+    post_empty \
+      /api/core20/connect \
+      /tmp/a8-autorecover-connect.json
+
+    python3 - <<'PY'
+import json
+
+with open('/tmp/a8-autorecover-connect.json') as f:
+    x = json.load(f)
+
+assert x.get('ok') is True
+
+a = x.get('alignment') or {}
+
+assert a.get('role') == \
+    'MOMENTARY_CONNECT_ALIGNMENT_ONLY'
+
+assert a.get('definingPathTouched') is False
+assert a.get('ongoingUtcFeed') is False
+PY
+
+    log 'PASS · MOMENTARY CONNECT APPLIED'
+    ;;
+
+  *)
+    log "FAIL · UNEXPECTED CLOCK STATUS · $CLOCK_STATUS"
+    exit 1
+    ;;
+esac
+
+
+# Wait for running clock.
+CLOCK_READY=0
+
+for attempt in $(seq 1 80); do
+  get \
+    /api/core20/clock \
+    /tmp/a8-autorecover-clock.json
+
+  CLOCK_STATUS=$(
+    python3 - <<'PY'
+import json
+
+with open('/tmp/a8-autorecover-clock.json') as f:
+    x = json.load(f)
+
+print(
+    (x.get('clock') or {}).get('status', '')
+)
+PY
+  )
+
+  if [ "$CLOCK_STATUS" = CORE20_CLOCK_RUNNING ]; then
+    CLOCK_READY=1
+    break
+  fi
+
+  sleep 0.25
+done
+
+if [ "$CLOCK_READY" != 1 ]; then
+  log 'FAIL · CLOCK DID NOT REACH CORE20_CLOCK_RUNNING'
+  exit 1
+fi
+
+log 'PASS · CORE20 CLOCK RUNNING'
+
+
+# ------------------------------------------------------------
+# 3. NATIVE CALENDAR MUST RESTORE ITSELF
+#
+# NEVER invent or POST a YEAR DAY here.
+# ------------------------------------------------------------
+
+CAL_READY=0
+
+for attempt in $(seq 1 80); do
+  if get \
+    /api/core20/calendar \
+    /tmp/a8-autorecover-calendar.json \
+    2>/dev/null
+  then
+    if python3 - <<'PY'
+import json
+import sys
+
+with open('/tmp/a8-autorecover-calendar.json') as f:
+    x = json.load(f)
+
+c = x.get('calendar') or {}
+
+ok = (
+    c.get('status') ==
+        'CALENDAR_RUNNING_FROM_CORE20_COUNT'
+    and
+    c.get('anchored') is True
+    and
+    c.get('yearDay') is not None
+)
+
+sys.exit(0 if ok else 1)
+PY
+    then
+      CAL_READY=1
+      break
+    fi
+  fi
+
+  sleep 0.25
+done
+
+if [ "$CAL_READY" != 1 ]; then
+  log 'FAIL · NATIVE CALENDAR CHECKPOINT DID NOT RESTORE'
+  log 'FAIL · REFUSING TO INVENT OR AUTO-ANCHOR YEAR DAY'
+  exit 1
+fi
+
+python3 - <<'PY'
+import json
+
+with open('/tmp/a8-autorecover-calendar.json') as f:
+    x = json.load(f)
+
+c = x['calendar']
+p = c.get('persistence') or {}
+
+print(
+    'A8-AUTORECOVER · CALENDAR · YEAR DAY',
+    c.get('yearDay')
+)
+
+print(
+    'A8-AUTORECOVER · CALENDAR · AUTHORITY',
+    c.get('authority')
+)
+
+print(
+    'A8-AUTORECOVER · CALENDAR · RESTORE',
+    p.get('restorationStatus')
+)
+PY
+
+log 'PASS · NATIVE CALENDAR RUNNING'
+
+
+# ------------------------------------------------------------
+# 4. ONE-SHOT JPL YEAR ORIENTATION
+#
+# Only call JPL if recovered-Sol year angle is not already valid.
+# Calendar YEAR DAY is NOT changed by this.
+# ------------------------------------------------------------
+
+YEAR_OK=0
+
+for attempt in $(seq 1 10); do
+
+  if get \
+    /api/core20/year-angle \
+    /tmp/a8-autorecover-year.json \
+    2>/dev/null
+  then
+    if python3 - <<'PY'
+import json
+import sys
+
+with open('/tmp/a8-autorecover-year.json') as f:
+    x = json.load(f)
+
+y = x.get('yearAngle') or {}
+
+ok = (
+    y.get('status') ==
+        'YEAR_ANGLE_RUNNING_FROM_RECOVERED_SOL'
+    and
+    y.get('aligned') is True
+    and
+    y.get('ongoingAuthority') ==
+        'SELECTED_RAW_PLUS_RECOVERED_SOL_ANGLE_PER_RAW'
+    and
+    y.get('usesJplAfterAlignment') is False
+    and
+    y.get('usesUtcAfterAlignment') is False
+)
+
+sys.exit(0 if ok else 1)
+PY
+    then
+      YEAR_OK=1
+      log 'JPL · YEAR ORIENTATION ALREADY VALID · NO ACTION'
+      break
+    fi
+  fi
+
+  log "JPL · ONE-SHOT ALIGN ATTEMPT $attempt / 10"
+
+  if post_empty \
+    /api/core20/year-angle/align-jpl \
+    /tmp/a8-autorecover-jpl.json
+  then
+    log 'JPL · REQUEST ACCEPTED'
+  else
+    log 'JPL · REQUEST FAILED · WILL RETRY'
+  fi
+
+  sleep 15
+done
+
+
+# Final verification even if last POST succeeded.
+get \
+  /api/core20/year-angle \
+  /tmp/a8-autorecover-year.json
+
+python3 - <<'PY'
+import json
+
+with open('/tmp/a8-autorecover-year.json') as f:
+    x = json.load(f)
+
+y = x['yearAngle']
+
+assert y['status'] == \
+    'YEAR_ANGLE_RUNNING_FROM_RECOVERED_SOL'
+
+assert y['aligned'] is True
+
+assert y['ongoingAuthority'] == \
+    'SELECTED_RAW_PLUS_RECOVERED_SOL_ANGLE_PER_RAW'
+
+assert y['usesJplAfterAlignment'] is False
+assert y['usesUtcAfterAlignment'] is False
+
+print(
+    'A8-AUTORECOVER · YEAR PHASE ·',
+    y.get('phase27Octal')
+)
+PY
+
+log 'PASS · YEAR ANGLE RUNNING FROM RECOVERED SOL'
+
+
+# ------------------------------------------------------------
+# 5. CROSS-CHECK SOURCE EPOCHS + FINAL AUTHORITY
+# ------------------------------------------------------------
+
+get \
+  /api/core20/clock \
+  /tmp/a8-autorecover-clock.json
+
+get \
+  /api/core20/calendar \
+  /tmp/a8-autorecover-calendar.json
+
+get \
+  /api/core20/year-angle \
+  /tmp/a8-autorecover-year.json
+
+python3 - <<'PY'
+import json
+
+def load(path):
+    with open(path) as f:
+        return json.load(f)
+
+clock = load(
+    '/tmp/a8-autorecover-clock.json'
+)['clock']
+
+cal = load(
+    '/tmp/a8-autorecover-calendar.json'
+)['calendar']
+
+year = load(
+    '/tmp/a8-autorecover-year.json'
+)['yearAngle']
+
+assert clock['status'] == \
+    'CORE20_CLOCK_RUNNING'
+
+assert clock['clockAuthority'] == \
+    'RECOVERED_JOVIAN_MINTAKA_SOL_SUN_RETURN'
+
+assert cal['status'] == \
+    'CALENDAR_RUNNING_FROM_CORE20_COUNT'
+
+assert cal['anchored'] is True
+
+assert year['status'] == \
+    'YEAR_ANGLE_RUNNING_FROM_RECOVERED_SOL'
+
+assert (
+    str(clock['sourceEpoch']) ==
+    str(cal['sourceEpoch']) ==
+    str(year['sourceEpoch'])
+)
+
+ongoing = clock['ongoingReference']
+
+assert ongoing['usesUTC'] is False
+assert ongoing['usesBrowserTime'] is False
+assert ongoing['usesNTP'] is False
+assert ongoing['usesGPS'] is False
+assert ongoing['usesLegacySeconds'] is False
+
+assert cal['utcMayAdvanceCalendarDay'] is False
+assert cal['jplMayAdvanceCalendarDay'] is False
+assert cal['browserMayAdvanceCalendarDay'] is False
+
+print('A8-AUTORECOVER · FINAL PASS')
+print('SOURCE EPOCH ·', clock['sourceEpoch'])
+print('CLOCK        ·', clock['clock']['octal'])
+print('YEAR DAY     ·', cal['yearDay'])
+print('YEAR PHASE27 ·', year['phase27Octal'])
+PY
+
+log 'COMPLETE'

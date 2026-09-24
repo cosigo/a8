@@ -1,0 +1,16 @@
+[Unit]
+Description=A8 Chief Engineer Core20 machine controller
+After=network.target
+
+[Service]
+Type=simple
+User=root
+Group=root
+ExecStart=/usr/bin/python3 /usr/local/sbin/a8-ce-core20-control.py
+Restart=on-failure
+RestartSec=2
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

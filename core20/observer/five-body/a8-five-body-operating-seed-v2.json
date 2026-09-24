@@ -1,0 +1,2140 @@
+{
+  "anchor": {
+    "dayPhase17": "84791",
+    "physicalSourceEpoch": 5,
+    "raw": 850032359,
+    "yearCycle4": 1,
+    "yearDay": 267
+  },
+  "authority": {
+    "changesCore20Authority": false,
+    "nativeAuthority": false,
+    "predictionModel": true,
+    "writesClock": false,
+    "writesCore20": false
+  },
+  "bodies": {
+    "EUROPA": {
+      "afterSchedule": "CONTINUE_FROM_A8_RECURRENCE_AND_ACCUMULATED_RESIDUALS",
+      "nextMarker": {
+        "event": "WEST",
+        "raw": 853555631
+      },
+      "phase512Approx": 63.070973946,
+      "phase512Q32": 270887770426,
+      "predictionSchedule": [
+        {
+          "event": "WEST",
+          "phase512": 256,
+          "raw": 853555631
+        },
+        {
+          "event": "EAST",
+          "phase512": 0,
+          "raw": 858224073
+        },
+        {
+          "event": "WEST",
+          "phase512": 256,
+          "raw": 862900268
+        },
+        {
+          "event": "EAST",
+          "phase512": 0,
+          "raw": 867567553
+        }
+      ],
+      "predictionScheduleRole": "ONE_SHOT_SOURCE_CONVERTED_TO_EPOCH5_RAW",
+      "recurrenceRaw": {
+        "eastToWest": 4674200,
+        "fullOrbit": 9344598,
+        "westToEast": 4669713
+      },
+      "sourceExtremaCount": 9
+    },
+    "GANYMEDE": {
+      "afterSchedule": "CONTINUE_FROM_A8_RECURRENCE_AND_ACCUMULATED_RESIDUALS",
+      "nextMarker": {
+        "event": "WEST",
+        "raw": 858558704
+      },
+      "phase512Approx": 24.162398221,
+      "phase512Q32": 103776710152,
+      "predictionSchedule": [
+        {
+          "event": "WEST",
+          "phase512": 256,
+          "raw": 858558704
+        },
+        {
+          "event": "EAST",
+          "phase512": 0,
+          "raw": 868010152
+        }
+      ],
+      "predictionScheduleRole": "ONE_SHOT_SOURCE_CONVERTED_TO_EPOCH5_RAW",
+      "recurrenceRaw": {
+        "eastToWest": 9414972,
+        "fullOrbit": 18866420,
+        "westToEast": 9451448
+      },
+      "sourceExtremaCount": 5
+    },
+    "IO": {
+      "afterSchedule": "CONTINUE_FROM_A8_RECURRENCE_AND_ACCUMULATED_RESIDUALS",
+      "nextMarker": {
+        "event": "EAST",
+        "raw": 851072746
+      },
+      "phase512Approx": 397.553617959,
+      "phase512Q32": 1707479787542,
+      "predictionSchedule": [
+        {
+          "event": "EAST",
+          "phase512": 0,
+          "raw": 851072746
+        },
+        {
+          "event": "WEST",
+          "phase512": 256,
+          "raw": 853396295
+        },
+        {
+          "event": "EAST",
+          "phase512": 0,
+          "raw": 855723675
+        },
+        {
+          "event": "WEST",
+          "phase512": 256,
+          "raw": 858047021
+        },
+        {
+          "event": "EAST",
+          "phase512": 0,
+          "raw": 860374267
+        },
+        {
+          "event": "WEST",
+          "phase512": 256,
+          "raw": 862697453
+        },
+        {
+          "event": "EAST",
+          "phase512": 0,
+          "raw": 865024980
+        },
+        {
+          "event": "WEST",
+          "phase512": 256,
+          "raw": 867347866
+        },
+        {
+          "event": "EAST",
+          "phase512": 0,
+          "raw": 869675572
+        }
+      ],
+      "predictionScheduleRole": "ONE_SHOT_SOURCE_CONVERTED_TO_EPOCH5_RAW",
+      "recurrenceRaw": {
+        "eastToWest": 2323549,
+        "fullOrbit": 4650745,
+        "westToEast": 2327196
+      },
+      "sourceExtremaCount": 18
+    },
+    "MINTAKA": {
+      "nextMarker": {
+        "event": "MERIDIAN_0",
+        "phase512": 0,
+        "raw": 851617392
+      },
+      "phase512Approx": 202.150474943,
+      "phase512Q32": 868229678750,
+      "recurrenceRaw": {
+        "stellarRotation": 2619132
+      }
+    },
+    "SOL": {
+      "afterSchedule": "REPEAT_A8_PHASE_DEPENDENT_ORBIT_MODEL_AND_APPLY_ACCUMULATED_RESIDUALS",
+      "gridStepRawByPhase": [
+        1858802,
+        1859576,
+        1860345,
+        1861111,
+        1861876,
+        1862642,
+        1863409,
+        1864179,
+        1864951,
+        1865724,
+        1866496,
+        1867266,
+        1868031,
+        1868792,
+        1869545,
+        1870292,
+        1871608,
+        1872376,
+        1873125,
+        1873856,
+        1874572,
+        1875275,
+        1875968,
+        1876653,
+        1877332,
+        1878007,
+        1878679,
+        1879349,
+        1880020,
+        1880692,
+        1881366,
+        1882043,
+        1882723,
+        1883407,
+        1884096,
+        1884789,
+        1885488,
+        1886193,
+        1886905,
+        1887630,
+        1888369,
+        1889128,
+        1889910,
+        1890716,
+        1891546,
+        1892396,
+        1893261,
+        1894134,
+        1895009,
+        1895878,
+        1896738,
+        1897582,
+        1898406,
+        1899210,
+        1899990,
+        1900747,
+        1901481,
+        1902192,
+        1902883,
+        1903554,
+        1904207,
+        1904845,
+        1905468,
+        1906079,
+        1906678,
+        1907267,
+        1907845,
+        1908415,
+        1908976,
+        1909529,
+        1910073,
+        1910610,
+        1911140,
+        1911662,
+        1912178,
+        1912690,
+        1913200,
+        1913712,
+        1914234,
+        1914772,
+        1915334,
+        1915923,
+        1916542,
+        1917188,
+        1917854,
+        1918534,
+        1919218,
+        1919899,
+        1920569,
+        1921224,
+        1921860,
+        1922474,
+        1923066,
+        1923634,
+        1924178,
+        1924700,
+        1925199,
+        1925678,
+        1926135,
+        1926573,
+        1926992,
+        1927393,
+        1927777,
+        1928143,
+        1928492,
+        1928825,
+        1929139,
+        1929437,
+        1929717,
+        1929978,
+        1930222,
+        1930447,
+        1930656,
+        1930851,
+        1931035,
+        1931214,
+        1931397,
+        1931591,
+        1931807,
+        1932050,
+        1932324,
+        1932628,
+        1932955,
+        1933298,
+        1933648,
+        1933996,
+        1934335,
+        1934660,
+        1934969,
+        1935258,
+        1935528,
+        1935777,
+        1936006,
+        1936215,
+        1936404,
+        1936574,
+        1936723,
+        1936854,
+        1936965,
+        1937057,
+        1937129,
+        1937180,
+        1937210,
+        1937218,
+        1937202,
+        1937162,
+        1937097,
+        1937006,
+        1936889,
+        1936748,
+        1936583,
+        1936399,
+        1936199,
+        1935991,
+        1935782,
+        1935583,
+        1935402,
+        1935245,
+        1935117,
+        1935015,
+        1934936,
+        1934873,
+        1934818,
+        1934764,
+        1934705,
+        1934638,
+        1934559,
+        1934468,
+        1934364,
+        1934246,
+        1934115,
+        1933969,
+        1933810,
+        1933636,
+        1933447,
+        1933243,
+        1933023,
+        1932785,
+        1932529,
+        1932252,
+        1931954,
+        1931632,
+        1931283,
+        1930907,
+        1930501,
+        1930065,
+        1929600,
+        1929107,
+        1928589,
+        1928050,
+        1927494,
+        1926930,
+        1926366,
+        1925808,
+        1925264,
+        1924739,
+        1924237,
+        1923756,
+        1923295,
+        1922848,
+        1922411,
+        1921978,
+        1921548,
+        1921116,
+        1920682,
+        1920245,
+        1919804,
+        1919360,
+        1918911,
+        1918457,
+        1917998,
+        1917533,
+        1917060,
+        1916579,
+        1916089,
+        1915586,
+        1915072,
+        1914541,
+        1913993,
+        1913423,
+        1912829,
+        1912207,
+        1911557,
+        1910877,
+        1910166,
+        1909427,
+        1908663,
+        1907879,
+        1907079,
+        1906273,
+        1905463,
+        1904659,
+        1903865,
+        1903083,
+        1902318,
+        1901568,
+        1900833,
+        1900110,
+        1899399,
+        1898696,
+        1898000,
+        1897311,
+        1896628,
+        1895952,
+        1895282,
+        1894619,
+        1893963,
+        1893311,
+        1892665,
+        1892022,
+        1891382,
+        1890743,
+        1890104,
+        1889463,
+        1888818,
+        1888166,
+        1887505,
+        1886832,
+        1886141,
+        1885431,
+        1884697,
+        1883938,
+        1883149,
+        1882335,
+        1881496,
+        1880637,
+        1879763,
+        1878878,
+        1877990,
+        1877104,
+        1876223,
+        1875351,
+        1874488,
+        1873636,
+        1872794,
+        1871962,
+        1871139,
+        1870327,
+        1869524,
+        1868731,
+        1867950,
+        1867182,
+        1866428,
+        1865688,
+        1864964,
+        1864254,
+        1863559,
+        1862878,
+        1862209,
+        1861552,
+        1860905,
+        1860267,
+        1859635,
+        1859008,
+        1858384,
+        1857759,
+        1857130,
+        1856494,
+        1855847,
+        1855185,
+        1854504,
+        1853803,
+        1853080,
+        1852337,
+        1851576,
+        1850803,
+        1850022,
+        1849237,
+        1848454,
+        1847673,
+        1846897,
+        1846127,
+        1845362,
+        1844603,
+        1843851,
+        1843106,
+        1842369,
+        1841641,
+        1840926,
+        1840223,
+        1839536,
+        1838866,
+        1838215,
+        1837584,
+        1836973,
+        1836384,
+        1835815,
+        1835267,
+        1834737,
+        1834226,
+        1833731,
+        1833251,
+        1832785,
+        1832329,
+        1831883,
+        1831442,
+        1831006,
+        1830570,
+        1830131,
+        1829685,
+        1829230,
+        1828763,
+        1828283,
+        1827791,
+        1827287,
+        1826776,
+        1826261,
+        1825744,
+        1825227,
+        1824710,
+        1824194,
+        1823679,
+        1823163,
+        1822649,
+        1822137,
+        1821629,
+        1821129,
+        1820636,
+        1820156,
+        1819689,
+        1819239,
+        1818807,
+        1818396,
+        1818006,
+        1817640,
+        1817297,
+        1816978,
+        1816682,
+        1816410,
+        1816161,
+        1815932,
+        1815723,
+        1815532,
+        1815357,
+        1815196,
+        1815048,
+        1814910,
+        1814779,
+        1814654,
+        1814531,
+        1814408,
+        1814284,
+        1814156,
+        1814024,
+        1813889,
+        1813752,
+        1813614,
+        1813474,
+        1813334,
+        1813192,
+        1813045,
+        1812893,
+        1812733,
+        1812568,
+        1812399,
+        1812228,
+        1812058,
+        1811895,
+        1811739,
+        1811596,
+        1811467,
+        1811354,
+        1811261,
+        1811188,
+        1811136,
+        1811108,
+        1811103,
+        1811122,
+        1811165,
+        1811231,
+        1811320,
+        1811431,
+        1811563,
+        1811713,
+        1811881,
+        1812065,
+        1812263,
+        1812473,
+        1812693,
+        1812922,
+        1813159,
+        1813402,
+        1813649,
+        1813902,
+        1814159,
+        1814420,
+        1814687,
+        1814955,
+        1815226,
+        1815493,
+        1815753,
+        1816004,
+        1816240,
+        1816463,
+        1816672,
+        1816871,
+        1817064,
+        1817254,
+        1817447,
+        1817647,
+        1817856,
+        1818077,
+        1818313,
+        1818565,
+        1818835,
+        1819124,
+        1819433,
+        1819763,
+        1820113,
+        1820485,
+        1820878,
+        1821291,
+        1821724,
+        1822176,
+        1822645,
+        1823131,
+        1823631,
+        1824146,
+        1824674,
+        1825213,
+        1825765,
+        1826327,
+        1826900,
+        1827484,
+        1828079,
+        1828684,
+        1829299,
+        1829920,
+        1830545,
+        1831168,
+        1831783,
+        1832386,
+        1832971,
+        1833535,
+        1834079,
+        1834604,
+        1835113,
+        1835612,
+        1836105,
+        1836598,
+        1837165,
+        1837773,
+        1838386,
+        1839004,
+        1839622,
+        1840244,
+        1840864,
+        1841483,
+        1842102,
+        1842718,
+        1843336,
+        1843954,
+        1844574,
+        1845200,
+        1845828,
+        1846464,
+        1847107,
+        1847757,
+        1848416,
+        1849085,
+        1849766,
+        1850458,
+        1851164,
+        1851883,
+        1852616,
+        1853364,
+        1854124,
+        1854894,
+        1855673,
+        1856456,
+        1857241,
+        1858024
+      ],
+      "nextMarker": {
+        "event": "A8_ORBITAL_GRID",
+        "phase512": 244,
+        "raw": 851905738
+      },
+      "orbitalRateModel": "A8_512_PHASE_DEPENDENT_RAW_STEPS",
+      "phase512Approx": 243.011903636,
+      "phase512Q32": 1043728178656,
+      "predictionSchedule": [
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 244,
+          "raw": 851905738
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 245,
+          "raw": 853801020
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 246,
+          "raw": 855695640
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 247,
+          "raw": 857589602
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 248,
+          "raw": 859482913
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 249,
+          "raw": 861375578
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 250,
+          "raw": 863267600
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 251,
+          "raw": 865158982
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 252,
+          "raw": 867049725
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 253,
+          "raw": 868939829
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 254,
+          "raw": 870829292
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 255,
+          "raw": 872718109
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 256,
+          "raw": 874606275
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 257,
+          "raw": 876493781
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 258,
+          "raw": 878380613
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 259,
+          "raw": 880266754
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 260,
+          "raw": 882152185
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 261,
+          "raw": 884036882
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 262,
+          "raw": 885920819
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 263,
+          "raw": 887803969
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 264,
+          "raw": 889686304
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 265,
+          "raw": 891567800
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 266,
+          "raw": 893448437
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 267,
+          "raw": 895328200
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 268,
+          "raw": 897207078
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 269,
+          "raw": 899085069
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 270,
+          "raw": 900962173
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 271,
+          "raw": 902838396
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 272,
+          "raw": 904713747
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 273,
+          "raw": 906588235
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 274,
+          "raw": 908461871
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 275,
+          "raw": 910334664
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 276,
+          "raw": 912206626
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 277,
+          "raw": 914077765
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 278,
+          "raw": 915948092
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 279,
+          "raw": 917817615
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 280,
+          "raw": 919686346
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 281,
+          "raw": 921554297
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 282,
+          "raw": 923421479
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 283,
+          "raw": 925287907
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 284,
+          "raw": 927153595
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 285,
+          "raw": 929018559
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 286,
+          "raw": 930882813
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 287,
+          "raw": 932746371
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 288,
+          "raw": 934609249
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 289,
+          "raw": 936471458
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 290,
+          "raw": 938333010
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 291,
+          "raw": 940193915
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 292,
+          "raw": 942054182
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 293,
+          "raw": 943913818
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 294,
+          "raw": 945772826
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 295,
+          "raw": 947631210
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 296,
+          "raw": 949488969
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 297,
+          "raw": 951346099
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 298,
+          "raw": 953202593
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 299,
+          "raw": 955058440
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 300,
+          "raw": 956913625
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 301,
+          "raw": 958768129
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 302,
+          "raw": 960621932
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 303,
+          "raw": 962475011
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 304,
+          "raw": 964327348
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 305,
+          "raw": 966178924
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 306,
+          "raw": 968029727
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 307,
+          "raw": 969879749
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 308,
+          "raw": 971728986
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 309,
+          "raw": 973577440
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 310,
+          "raw": 975425113
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 311,
+          "raw": 977272010
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 312,
+          "raw": 979118136
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 313,
+          "raw": 980963498
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 314,
+          "raw": 982808102
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 315,
+          "raw": 984651953
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 316,
+          "raw": 986495059
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 317,
+          "raw": 988337428
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 318,
+          "raw": 990179069
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 319,
+          "raw": 992019995
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 320,
+          "raw": 993860218
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 321,
+          "raw": 995699754
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 322,
+          "raw": 997538621
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 323,
+          "raw": 999376835
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 324,
+          "raw": 1001214419
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 325,
+          "raw": 1003051392
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 326,
+          "raw": 1004887776
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 327,
+          "raw": 1006723591
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 328,
+          "raw": 1008558858
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 329,
+          "raw": 1010393595
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 330,
+          "raw": 1012227821
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 331,
+          "raw": 1014061553
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 332,
+          "raw": 1015894804
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 333,
+          "raw": 1017727589
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 334,
+          "raw": 1019559918
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 335,
+          "raw": 1021391800
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 336,
+          "raw": 1023223243
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 337,
+          "raw": 1025054249
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 338,
+          "raw": 1026884819
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 339,
+          "raw": 1028714949
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 340,
+          "raw": 1030544634
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 341,
+          "raw": 1032373865
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 342,
+          "raw": 1034202628
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 343,
+          "raw": 1036030911
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 344,
+          "raw": 1037858702
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 345,
+          "raw": 1039685989
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 346,
+          "raw": 1041512766
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 347,
+          "raw": 1043339027
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 348,
+          "raw": 1045164771
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 349,
+          "raw": 1046989998
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 350,
+          "raw": 1048814708
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 351,
+          "raw": 1050638903
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 352,
+          "raw": 1052462581
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 353,
+          "raw": 1054285744
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 354,
+          "raw": 1056108393
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 355,
+          "raw": 1057930531
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 356,
+          "raw": 1059752160
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 357,
+          "raw": 1061573289
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 358,
+          "raw": 1063393925
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 359,
+          "raw": 1065214081
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 360,
+          "raw": 1067033770
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 361,
+          "raw": 1068853008
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 362,
+          "raw": 1070671816
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 363,
+          "raw": 1072490211
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 364,
+          "raw": 1074308217
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 365,
+          "raw": 1076125857
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 366,
+          "raw": 1077943153
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 367,
+          "raw": 1079760131
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 368,
+          "raw": 1081576813
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 369,
+          "raw": 1083393224
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 370,
+          "raw": 1085209384
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 371,
+          "raw": 1087025316
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 372,
+          "raw": 1088841039
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 373,
+          "raw": 1090656570
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 374,
+          "raw": 1092471927
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 375,
+          "raw": 1094287123
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 376,
+          "raw": 1096102171
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 377,
+          "raw": 1097917081
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 378,
+          "raw": 1099731861
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 379,
+          "raw": 1101546515
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 380,
+          "raw": 1103361046
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 381,
+          "raw": 1105175455
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 382,
+          "raw": 1106989738
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 383,
+          "raw": 1108803894
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 384,
+          "raw": 1110617918
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 385,
+          "raw": 1112431807
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 386,
+          "raw": 1114245559
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 387,
+          "raw": 1116059172
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 388,
+          "raw": 1117872646
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 389,
+          "raw": 1119685981
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 390,
+          "raw": 1121499172
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 391,
+          "raw": 1123312218
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 392,
+          "raw": 1125125110
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 393,
+          "raw": 1126937844
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 394,
+          "raw": 1128750412
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 395,
+          "raw": 1130562811
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 396,
+          "raw": 1132375039
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 397,
+          "raw": 1134187097
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 398,
+          "raw": 1135998992
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 399,
+          "raw": 1137810731
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 400,
+          "raw": 1139622327
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 401,
+          "raw": 1141433794
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 402,
+          "raw": 1143245148
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 403,
+          "raw": 1145056409
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 404,
+          "raw": 1146867597
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 405,
+          "raw": 1148678733
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 406,
+          "raw": 1150489842
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 407,
+          "raw": 1152300945
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 408,
+          "raw": 1154112067
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 409,
+          "raw": 1155923232
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 410,
+          "raw": 1157734463
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 411,
+          "raw": 1159545784
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 412,
+          "raw": 1161357215
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 413,
+          "raw": 1163168778
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 414,
+          "raw": 1164980491
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 415,
+          "raw": 1166792372
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 416,
+          "raw": 1168604437
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 417,
+          "raw": 1170416699
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 418,
+          "raw": 1172229172
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 419,
+          "raw": 1174041865
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 420,
+          "raw": 1175854787
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 421,
+          "raw": 1177667946
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 422,
+          "raw": 1179481348
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 423,
+          "raw": 1181294997
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 424,
+          "raw": 1183108899
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 425,
+          "raw": 1184923058
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 426,
+          "raw": 1186737478
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 427,
+          "raw": 1188552165
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 428,
+          "raw": 1190367120
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 429,
+          "raw": 1192182346
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 430,
+          "raw": 1193997839
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 431,
+          "raw": 1195813592
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 432,
+          "raw": 1197629596
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 433,
+          "raw": 1199445836
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 434,
+          "raw": 1201262299
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 435,
+          "raw": 1203078971
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 436,
+          "raw": 1204895842
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 437,
+          "raw": 1206712906
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 438,
+          "raw": 1208530160
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 439,
+          "raw": 1210347607
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 440,
+          "raw": 1212165254
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 441,
+          "raw": 1213983110
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 442,
+          "raw": 1215801187
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 443,
+          "raw": 1217619499
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 444,
+          "raw": 1219438064
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 445,
+          "raw": 1221256899
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 446,
+          "raw": 1223076024
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 447,
+          "raw": 1224895457
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 448,
+          "raw": 1226715220
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 449,
+          "raw": 1228535333
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 450,
+          "raw": 1230355819
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 451,
+          "raw": 1232176697
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 452,
+          "raw": 1233997988
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 453,
+          "raw": 1235819712
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 454,
+          "raw": 1237641888
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 455,
+          "raw": 1239464533
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 456,
+          "raw": 1241287663
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 457,
+          "raw": 1243111294
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 458,
+          "raw": 1244935440
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 459,
+          "raw": 1246760114
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 460,
+          "raw": 1248585327
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 461,
+          "raw": 1250411092
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 462,
+          "raw": 1252237419
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 463,
+          "raw": 1254064319
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 464,
+          "raw": 1255891804
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 465,
+          "raw": 1257719883
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 466,
+          "raw": 1259548567
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 467,
+          "raw": 1261377866
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 468,
+          "raw": 1263207787
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 469,
+          "raw": 1265038331
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 470,
+          "raw": 1266869499
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 471,
+          "raw": 1268701282
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 472,
+          "raw": 1270533668
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 473,
+          "raw": 1272366639
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 474,
+          "raw": 1274200174
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 475,
+          "raw": 1276034253
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 476,
+          "raw": 1277868856
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 477,
+          "raw": 1279703970
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 478,
+          "raw": 1281539582
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 479,
+          "raw": 1283375687
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 480,
+          "raw": 1285212285
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 481,
+          "raw": 1287049378
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 482,
+          "raw": 1288886970
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 483,
+          "raw": 1290725071
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 484,
+          "raw": 1292563691
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 485,
+          "raw": 1294402841
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 486,
+          "raw": 1296242535
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 487,
+          "raw": 1298082785
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 488,
+          "raw": 1299923606
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 489,
+          "raw": 1301765014
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 490,
+          "raw": 1303607023
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 491,
+          "raw": 1305449649
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 492,
+          "raw": 1307292908
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 493,
+          "raw": 1309136814
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 494,
+          "raw": 1310981383
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 495,
+          "raw": 1312826628
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 496,
+          "raw": 1314672564
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 497,
+          "raw": 1316519203
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 498,
+          "raw": 1318366560
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 499,
+          "raw": 1320214647
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 500,
+          "raw": 1322063479
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 501,
+          "raw": 1323913068
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 502,
+          "raw": 1325763430
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 503,
+          "raw": 1327614580
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 504,
+          "raw": 1329466534
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 505,
+          "raw": 1331319306
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 506,
+          "raw": 1333172910
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 507,
+          "raw": 1335027357
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 508,
+          "raw": 1336882654
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 509,
+          "raw": 1338738803
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 510,
+          "raw": 1340595799
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 511,
+          "raw": 1342453631
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 0,
+          "raw": 1344312282
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 1,
+          "raw": 1346171731
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 2,
+          "raw": 1348031952
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 3,
+          "raw": 1349892921
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 4,
+          "raw": 1351754613
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 5,
+          "raw": 1353617007
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 6,
+          "raw": 1355480088
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 7,
+          "raw": 1357343842
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 8,
+          "raw": 1359208262
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 9,
+          "raw": 1361073344
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 10,
+          "raw": 1362939085
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 11,
+          "raw": 1364805487
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 12,
+          "raw": 1366672552
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 13,
+          "raw": 1368540283
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 14,
+          "raw": 1370408686
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 15,
+          "raw": 1372277766
+        },
+        {
+          "event": "A8_ORBITAL_GRID",
+          "phase512": 16,
+          "raw": 1374147528
+        }
+      ],
+      "recurrenceRaw": {
+        "fullOrbit": 959218334
+      }
+    }
+  },
+  "derivedFrom": {
+    "externalNetworkUsedDuringV2": false,
+    "schema": "A8-FIVE-BODY-OPERATING-SEED-V1",
+    "sha256": "f915ced5c6519cbfc86acffea4c6d48fbbef540a0fa62d2b01e434f1f5a146ba"
+  },
+  "operatingRule": {
+    "externalEphemerisRequired": false,
+    "externalTimeRequired": false,
+    "futureWitnessMayAdjustModel": true,
+    "pastPredictionMayBeRewritten": false,
+    "predictionsPublishedBeforeWitness": true,
+    "usesEpoch5Raw": true
+  },
+  "schema": "A8-FIVE-BODY-OPERATING-SEED-V2",
+  "sourcePacket": {
+    "externalFeedRequiredAfterSeed": false,
+    "role": "SEALED_ONE_SHOT_EXTERNAL_PREPARATION",
+    "sealSha256": "47649f287ff2e1aacaceb6ab52461cda8fd48b03ab9ba3aeb97a14571651c25a"
+  },
+  "status": "READY_FOR_READ_ONLY_MARKER_ENGINE",
+  "witnessPolicy": {
+    "observationMayCorrectFutureModel": true,
+    "observationMayRewritePastPrediction": false,
+    "predictionFirst": true,
+    "residualBasis": "WITNESSED_RAW_MINUS_PREDICTED_RAW"
+  }
+}

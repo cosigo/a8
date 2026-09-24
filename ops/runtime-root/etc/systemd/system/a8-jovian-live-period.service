@@ -1,0 +1,15 @@
+[Unit]
+Description=A8 Live Jovian Period Driver
+After=network.target
+
+[Service]
+Type=simple
+User=greg
+Group=greg
+ExecStart=/usr/bin/node /opt/a8-jovian-live/live-jovian.js
+Restart=on-failure
+RestartSec=2
+NoNewPrivileges=true
+
+[Install]
+WantedBy=multi-user.target

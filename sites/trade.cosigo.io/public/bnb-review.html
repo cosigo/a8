@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>CIGO Route Review — Official Swap and DEX Screener Note</title>
+  <meta name="description" content="CIGO route review for BNB Smart Chain: official trade.cosigo.io swap path, PancakeSwap V2 router, DEX Screener chart-only note, and wallet approval guidance.">
+  <link rel="canonical" href="https://trade.cosigo.io/bnb-review.html">
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #120b07;
+      --panel: rgba(37, 22, 14, 0.9);
+      --panel2: rgba(23, 14, 9, 0.9);
+      --line: rgba(255, 205, 145, 0.22);
+      --text: #fff7e8;
+      --muted: #d9b889;
+      --gold: #f6b84b;
+      --warn: #ffdc8a;
+      --bad: #ff8f7c;
+      --good: #92e6a7;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(246, 184, 75, 0.16), transparent 34rem),
+        linear-gradient(135deg, #100804, #231208 58%, #100804);
+      color: var(--text);
+      line-height: 1.55;
+    }
+
+    main {
+      width: min(980px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 34px 0 48px;
+    }
+
+    .topnav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+
+    a {
+      color: var(--gold);
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    a:hover,
+    a:focus {
+      text-decoration: underline;
+    }
+
+    .topnav a {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 8px 13px;
+      background: rgba(255, 255, 255, 0.045);
+    }
+
+    .hero,
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: var(--panel);
+      box-shadow: 0 18px 55px rgba(0, 0, 0, 0.28);
+    }
+
+    .hero {
+      padding: 28px;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: clamp(2rem, 6vw, 4rem);
+      line-height: 1;
+      letter-spacing: -0.04em;
+    }
+
+    h2 {
+      margin: 0 0 12px;
+      color: var(--warn);
+      letter-spacing: -0.015em;
+    }
+
+    p { margin: 0 0 12px; }
+
+    .muted { color: var(--muted); }
+
+    .grid {
+      display: grid;
+      gap: 16px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      margin: 18px 0;
+    }
+
+    .card {
+      padding: 20px;
+      background: var(--panel2);
+      margin-bottom: 16px;
+    }
+
+    .status-good { color: var(--good); font-weight: 800; }
+    .status-bad { color: var(--bad); font-weight: 800; }
+
+    code {
+      display: inline-block;
+      max-width: 100%;
+      overflow-wrap: anywhere;
+      padding: 2px 6px;
+      border-radius: 8px;
+      background: rgba(0, 0, 0, 0.26);
+      color: #ffe1a3;
+      font-size: 0.92em;
+    }
+
+    ul {
+      padding-left: 1.2rem;
+      margin: 0;
+    }
+
+    li { margin: 8px 0; }
+
+    .warning {
+      border-color: rgba(255, 143, 124, 0.42);
+      background: rgba(80, 25, 19, 0.6);
+    }
+
+    footer {
+      margin-top: 24px;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <nav class="topnav" aria-label="Official CIGO links">
+      <a href="https://trade.cosigo.io/">official swap</a>
+      <a href="https://trade.cosigo.io/rabby.html">Rabby guide</a>
+      <a href="https://market.cosigo.io/">market notice</a>
+      <a href="https://quote.cosigo.io/">quote</a>
+      <a href="https://contact.cosigo.io/">contact</a>
+    </nav>
+
+    <section class="hero">
+      <p class="muted">CIGO / BSC-USD route review</p>
+      <h1>Official swap route and DEX Screener widget note.</h1>
+      <p>
+        This page separates the working official CIGO swap path from third-party chart and embedded trade widgets.
+        It helps users review wallet confirmations before signing.
+      </p>
+    </section>
+
+    <section class="grid">
+      <article class="card">
+        <h2>Official swap route</h2>
+        <p class="status-good">Use trade.cosigo.io for swaps.</p>
+        <p>
+          The official CIGO swap interface is designed to route directly through PancakeSwap V2 and does not use a wallet swap aggregator.
+        </p>
+        <p>Expected PancakeSwap V2 router:</p>
+        <p><code>0x10ED43C718714eb63d5aA57B78B54704E256024E</code></p>
+      </article>
+
+      <article class="card warning">
+        <h2>DEX Screener Buy/Sell widget</h2>
+        <p class="status-bad">Chart/reference only for now.</p>
+        <p>
+          The DEX Screener chart page may display useful market information, but a test of its embedded Buy widget routed through a different contract and failed.
+        </p>
+        <p>Observed DEX Screener widget route:</p>
+        <p><code>0x84D88856a62ce42165d3F196124D5bd50f17C2BB</code></p>
+      </article>
+    </section>
+
+    <section class="card">
+      <h2>Observed failed test transaction</h2>
+      <p>
+        A DEX Screener Buy-widget test transaction failed here:
+      </p>
+      <p>
+        <a href="https://bscscan.com/tx/0x6072e4fe775b5b7acd2b46238d9eb5482605ad3fb7766e337eaca33f231448cb" target="_blank" rel="noopener">
+          View failed DEX Screener widget test transaction on BscScan ↗
+        </a>
+      </p>
+      <p>
+        The failed widget transaction does not show that CIGO itself is untradeable. It shows that the embedded third-party Buy/Sell widget route needs review.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>Wallet confirmation rule</h2>
+      <ul>
+        <li>Use <a href="https://trade.cosigo.io/">trade.cosigo.io</a> for the official live swap path.</li>
+        <li>In Rabby, review the spender before approving.</li>
+        <li>For official direct swaps, the expected spender is PancakeSwap V2 Router <code>0x10ED43...56024E</code>.</li>
+        <li>Cancel if a third-party page shows an unfamiliar spender, wrong token, wrong chain, unlimited approval, or unexpected route.</li>
+        <li>Treat DEX Screener as <strong>chart/reference only</strong> until its Buy/Sell widget routing is corrected or hidden.</li>
+      </ul>
+    </section>
+
+
+
+    <section class="card" id="token-profile-assets">
+      <h2>Token profile and logo assets</h2>
+      <p>
+        Use these official CIGO references for token-profile updates, wallet metadata, explorer profile updates,
+        and support requests.
+      </p>
+      <ul>
+        <li><strong>Token name:</strong> CIGO</li>
+        <li><strong>Chain:</strong> BNB Smart Chain</li>
+        <li><strong>Symbol:</strong> CIGO</li>
+        <li><strong>Decimals:</strong> 18</li>
+        <li><strong>Contract:</strong> <code>0x3a38e963f524E0dDFB75dFa1752b4Cd1364F5560</code></li>
+        <li><strong>Official market / token notice:</strong> <a href="https://market.cosigo.io/">https://market.cosigo.io/</a></li>
+        <li><strong>Official swap:</strong> <a href="https://trade.cosigo.io/">https://trade.cosigo.io/</a></li>
+        <li><strong>Official quote:</strong> <a href="https://quote.cosigo.io/">https://quote.cosigo.io/</a></li>
+        <li><strong>Contact:</strong> <a href="https://contact.cosigo.io/">https://contact.cosigo.io/</a></li>
+        <li><strong>Official CIGO logo PNG:</strong> <a href="https://market.cosigo.io/shared/assets/icons/cigo_256.png" target="_blank" rel="noopener">cigo_256.png ↗</a></li>
+        <li><strong>Official CIGO logo URL:</strong> <code>https://market.cosigo.io/shared/assets/icons/cigo_256.png</code></li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Reference links</h2>
+      <p>
+        <a href="https://dexscreener.com/bsc/0xded1e63b6262c0328876b7774f65c08505dd559a" target="_blank" rel="noopener">
+          DEX Screener chart only ↗
+        </a>
+      </p>
+      <p>
+        <a href="https://bscscan.com/token/0x3a38e963f524E0dDFB75dFa1752b4Cd1364F5560" target="_blank" rel="noopener">
+          CIGO token on BscScan ↗
+        </a>
+      </p>
+      <p>
+        <a href="https://pancakeswap.finance/swap?chain=bsc&outputCurrency=0x3a38e963f524E0dDFB75dFa1752b4Cd1364F5560" target="_blank" rel="noopener">
+          PancakeSwap token route ↗
+        </a>
+      </p>
+    </section>
+
+    <footer>
+      <p>Updated route review. This page is informational and does not replace wallet confirmation review.</p>
+    </footer>
+  </main>
+</body>
+</html>

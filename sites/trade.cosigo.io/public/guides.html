@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>COSIGO / CIGO user guides</title>
+  <meta name="description" content="One-page user guides for CIGO swap, discount desk, and liquidity pool actions." />
+    <meta name="author" content="COSIGO">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://trade.cosigo.io/guides.html">
+
+  <link rel="icon" type="image/png" sizes="256x256" href="/shared/assets/icons/cigo_256.png?v=20260613">
+  <link rel="apple-touch-icon" sizes="256x256" href="/shared/assets/icons/cigo_256.png?v=20260613">
+
+  <meta property="og:title" content="COSIGO / CIGO User Guides">
+  <meta property="og:description" content="One-page COSIGO / CIGO user guides for live swap, discount desk, liquidity pool, and Rabby wallet safety.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="COSIGO">
+  <meta property="og:url" content="https://trade.cosigo.io/guides.html">
+  <meta property="og:image" content="https://trade.cosigo.io/shared/assets/icons/cigo_256.png">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="COSIGO / CIGO User Guides">
+  <meta name="twitter:description" content="One-page COSIGO / CIGO user guides for live swap, discount desk, liquidity pool, and Rabby wallet safety.">
+  <meta name="twitter:image" content="https://trade.cosigo.io/shared/assets/icons/cigo_256.png">
+<link rel="stylesheet" href="/shared/assets/trade.css?v=20260627-222300">
+  <link rel="stylesheet" href="/shared/assets/cigo-footer.css?v=20260627-222708">
+  <link rel="stylesheet" href="/shared/assets/guides.css?v=20260708-193604Z">
+  <script src="/shared/assets/mobile-nav.js?v=20260613-160904" defer></script>
+  <script src="/shared/assets/guides-checklist.js?v=20260614" defer></script>
+<style id="cigo-market-pill-inline-css">
+  .cigo-market-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 3px 10px 3px 5px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 226, 150, 0.50);
+    background: rgba(0,0,0,0.24);
+    box-shadow: 0 0 12px rgba(214, 174, 94, 0.18);
+  }
+  .cigo-market-pill img {
+    width: 18px;
+    height: 18px;
+    border-radius: 999px;
+    display: block;
+  }
+</style>
+</head>
+
+<body class="guides-topbar-page">
+
+  <header class="guides-phone-topbar" aria-label="Guides mobile navigation">
+    <div class="guides-phone-head">
+      <a class="guides-phone-brand" href="/guides.html">
+        <img src="/shared/assets/icons/cigo_256.png" alt="CIGO token icon">
+        <span>guides</span>
+      </a>
+
+      <button class="guides-phone-menu-toggle" type="button" aria-expanded="false" aria-label="Open navigation">menu</button>
+    </div>
+
+    <nav class="guides-phone-nav" aria-label="Guides mobile menu">
+      <a href="https://cosigo.io/">home</a>
+      <a href="https://trade.cosigo.io/">CIGO swap</a>
+      <a href="https://trade.cosigo.io/request.html">discount desk</a>
+      <a href="https://trade.cosigo.io/pool.html">pool</a>
+      <a href="https://quote.cosigo.io/">pre-quote</a>
+      <a class="cigo-market-pill" href="https://market.cosigo.io/" title="CIGO market notice">
+        <img src="/shared/assets/icons/cigo_256.png" alt="CIGO">
+        <span>market</span>
+      </a>
+      <a href="https://bscscan.com/token/0x3a38e963f524E0dDFB75dFa1752b4Cd1364F5560" target="_blank" rel="noopener">token</a>
+</nav>
+  </header>
+<header class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="brand" href="https://trade.cosigo.io/">
+        <img src="/shared/assets/icons/cosigo_master_256.png" alt="COSIGO token icon" class="brand-icon">
+        <img src="/shared/assets/icons/cigo_256.png" alt="CIGO token icon" class="brand-icon">
+        <span>
+          COSIGO / CIGO Guides
+          <small>swap · request · pool</small>
+        </span>
+      </a>
+
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Open navigation">menu</button>
+
+      <nav class="nav" aria-label="Primary">
+        <a href="https://cosigo.io/">home</a>
+        <a href="https://trade.cosigo.io/">CIGO swap</a>
+        <a href="https://trade.cosigo.io/pool.html">pool status</a>
+        <a href="https://quote.cosigo.io/">pre-quote</a>
+        <a class="cigo-market-pill" href="https://market.cosigo.io/" title="CIGO market notice">
+    <img src="/shared/assets/icons/cigo_256.png" alt="CIGO">
+    <span>market</span>
+  </a>
+  <a href="https://bscscan.com/token/0x3a38e963f524E0dDFB75dFa1752b4Cd1364F5560" target="_blank" rel="noopener">token</a>
+  <a href="https://trade.cosigo.io/request.html">discount desk</a>
+</nav>
+    </div>
+  </header>
+
+  <main class="guides-page">
+    <section class="hero wrap">
+      <div class="card guide-hero-card">
+        <div class="eyebrow"><span>one-page guide center</span></div>
+        <h1>CIGO user guides.</h1>
+        <p class="lead">
+          Use this page beside the live tools. The gold checklist buttons are only local safety markers.
+          They do not move funds, approve tokens, submit requests, or control the swap/pool engine.
+        </p>
+
+        <div class="guide-tabs" aria-label="Guide sections">
+          <a class="btn btn-secondary" href="#trade">CIGO swap guide</a>
+          <a class="btn btn-primary" href="/guides/cigo-to-usdt.html">GUI instructions: CIGO → USDT beginner guide</a>
+          <a class="btn btn-primary" href="/guides/import-paper-wallet.html">Import Paper Wallet</a>
+          <a class="btn btn-secondary" href="#request">discount desk guide</a>
+          <a class="btn btn-secondary" href="#pool">pool guide</a>
+          <a class="btn btn-secondary" href="https://trade.cosigo.io/rabby.html">Rabby wallet guide ↗</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section wrap guide-section" id="trade">
+      <article class="guide-checklist guide-card" data-guide-key="trade">
+        <div class="guide-head">
+          <div>
+            <h2>CIGO swap guide</h2>
+            <p>Use this with the main CIGO swap/trade page.</p>
+          </div>
+          <div class="guide-actions">
+            <a class="btn btn-primary" href="https://trade.cosigo.io/" target="_blank" rel="noopener">open trade page ↗</a>
+            <button class="guide-reset" type="button">reset checklist</button>
+          </div>
+        </div>
+
+        <div class="guide-list">
+          <div class="guide-row" data-guide-step="1">
+            <div class="guide-num">1</div>
+            <div class="guide-copy"><strong>Connect wallet</strong><span>Use Rabby on BNB Smart Chain. Connecting only lets the page read your wallet.</span></div>
+            <button class="guide-done" type="button">mark done</button>
+          </div>
+          <div class="guide-row" data-guide-step="2">
+            <div class="guide-num">2</div>
+            <div class="guide-copy"><strong>Choose direction</strong><span>Select the token you are sending and the token you want to receive.</span></div>
+            <button class="guide-done" type="button">mark done</button>
+          </div>
+          <div class="guide-row" data-guide-step="3">
+            <div class="guide-num">3</div>
+            <div class="guide-copy"><strong>Enter amount</strong><span>Start small. Check your CIGO / BSC-USD balance before continuing.</span></div>
+            <button class="guide-done" type="button">mark done</button>
+          </div>
+          <div class="guide-row" data-guide-step="4">
+            <div class="guide-num">4</div>
+            <div class="guide-copy"><strong>Get quote</strong><span>Review estimated output, tax notes, slippage, route, and price impact.</span></div>
+            <button class="guide-done" type="button">mark done</button>
+          </div>
+          <div class="guide-row" data-guide-step="5">
+            <div class="guide-num">5</div>
+            <div class="guide-copy"><strong>Approve exact token only if asked</strong><span>Rabby should show the token, exact amount, and PancakeSwap Router v2 spender <strong>0x10ED43...56024E</strong>. Cancel wrong chain, wrong token, unlimited approval, or unfamiliar spender.</span></div>
+            <button class="guide-done" type="button">mark done</button>
+          </div>
+          <div class="guide-row" data-guide-step="6">
+            <div class="guide-num">6</div>
+            <div class="guide-copy"><strong>Execute swap</strong><span>Rabby should show a PancakeSwap transaction. Review minimum received, gas, and price impact before signing.</span></div>
+            <button class="guide-done" type="button">mark done</button>
+          </div>
+          <div class="guide-row" data-guide-step="7">
+            <div class="guide-num">7</div>
+            <div class="guide-copy"><strong>Confirm result</strong><span>After success, check wallet balance and BscScan. Reset before starting another swap.</span></div>
+            <button class="guide-done" type="button">mark done</button>
+          </div>
+        </div>
+
+        <div class="guide-warning">
+          Wallet confirmation is final. CIGO may include buy/sell tax, and PancakeSwap has its own pool fee.
+        </div>
+      </article>
+    </section>
+
+    <section class="section wrap guide-section" id="request">
+      <article class="guide-checklist guide-card" data-guide-key="request">
+        <div class="guide-head">
+          <div>
+            <h2>Discount Desk guide</h2>
+            <p>Use this when creating a reviewed request instead of relying on an instant wallet-only swap.</p>
+          </div>
+          <div class="guide-actions">
+            <a class="btn btn-primary" href="https://trade.cosigo.io/request.html" target="_blank" rel="noopener">open discount desk page ↗</a>
+            <button class="guide-reset" type="button">reset checklist</button>
+          </div>
+        </div>
+
+        <div class="guide-list">
+          <div class="guide-row" data-guide-step="1">
+            <div class="guide-num">1</div>
+            <div class="guide-copy"><strong>Prepare wallet</strong><span>Use the correct wallet and BNB Smart Chain. Confirm your receiving address before submitting.</span></div>
+            <button class="guide-done" type="button">mark done</button>
+          </div>
+          <div class="guide-row" data-guide-step="2">
+            <div class="guide-num">2</div>
+            <div class="guide-copy"><strong>Select from / to tokens</strong><span>Choose CIGO, BSC-USD, or COSIGO according to the request you want reviewed.</span></div>
+            <button class="guide-done" type="button">mark done</button>
+          </div>
+          <div class="guide-row" data-guide-step="3">
+            <div class="guide-num">3</div>
+            <div class="guide-copy"><strong>Enter amount</strong><span>Start small if new. Review quote policy, caps, and any displayed limits.</span></div>
+            <button class="guide-done" type="button">mark done</button>
+          </div>
+          <div class="guide-row" data-guide-step="4">
+            <div class="guide-num">4</div>
+            <div class="guide-copy"><strong>Review request preview</strong><span>Check amount, direction, wallet address, settlement notes, and expected output.</span></div>
+            <button class="guide-done" type="button">mark done</button>
+          </div>
+          <div class="guide-row" data-guide-step="5">
+            <div class="guide-num">5</div>
+            <div class="guide-copy"><strong>Submit request</strong><span>Submitting creates a reviewable request. It is not the same as sending funds.</span></div>
+            <button class="guide-done" type="button">mark done</button>
+          </div>
+          <div class="guide-row" data-guide-step="6">
+            <div class="guide-num">6</div>
+            <div class="guide-copy"><strong>Wait for reviewed instructions</strong><span>Do not send funds until the request is reviewed and settlement instructions are visible.</span></div>
+            <button class="guide-done" type="button">mark done</button>
+          </div>
+          <div class="guide-row" data-guide-step="7">
+            <div class="guide-num">7</div>
+            <div class="guide-copy"><strong>Complete only after review</strong><span>Follow the reviewed instructions exactly and keep the request record for confirmation.</span></div>
+            <button class="guide-done" type="button">mark done</button>
+          </div>
+        </div>
+
+        <div class="guide-warning">
+          Do not send tokens or funds to any address unless that address appears inside the reviewed request flow.
+        </div>
+      </article>
+    </section>
+
+    <section class="section wrap guide-section" id="pool">
+      <article class="guide-checklist guide-card" data-guide-key="pool">
+        <div class="guide-head">
+          <div>
+            <h2>Liquidity pool guide</h2>
+            <p>Use this with the CIGO / BSC-USD pool tool. Adding liquidity is not staking and is not a fixed yield program.</p>
+          </div>
+          <div class="guide-actions">
+            <a class="btn btn-primary" href="https://trade.cosigo.io/pool.html" target="_blank" rel="noopener">open pool page ↗</a>
+            <button class="guide-reset" type="button">reset checklist</button>
+          </div>
+        </div>
+
+        <div class="guide-list">
+          <div class="guide-row" data-guide-step="1">
+            <div class="guide-num">1</div>
+            <div class="guide-copy"><strong>Connect wallet</strong><span>Use Rabby on BNB Smart Chain. Confirm you are on the correct wallet before estimating.</span></div>
+            <button class="guide-done" type="button">mark done</button>
+          </div>
+          <div class="guide-row" data-guide-step="2">
+            <div class="guide-num">2</div>
+            <div class="guide-copy"><strong>Estimate amounts</strong><span>Enter one side and let the tool estimate the matching CIGO / BSC-USD amount.</span></div>
+            <button class="guide-done" type="button">mark done</button>
+          </div>
+          <div class="guide-row" data-guide-step="3">
+            <div class="guide-num">3</div>
+            <div class="guide-copy"><strong>Review tax and pool notes</strong><span>CIGO transfer tax may reduce what reaches the pool. Review slippage and estimated deposit amounts.</span></div>
+            <button class="guide-done" type="button">mark done</button>
+          </div>
+          <div class="guide-row" data-guide-step="4">
+            <div class="guide-num">4</div>
+            <div class="guide-copy"><strong>Approve exact CIGO</strong><span>Rabby should show exact CIGO approval to PancakeSwap Router v2. Cancel unlimited approval or wrong spender.</span></div>
+            <button class="guide-done" type="button">mark done</button>
+          </div>
+          <div class="guide-row" data-guide-step="5">
+            <div class="guide-num">5</div>
+            <div class="guide-copy"><strong>Approve exact BSC-USD</strong><span>Rabby should show exact BSC-USD / USDT approval to PancakeSwap Router v2.</span></div>
+            <button class="guide-done" type="button">mark done</button>
+          </div>
+          <div class="guide-row" data-guide-step="6">
+            <div class="guide-num">6</div>
+            <div class="guide-copy"><strong>Add liquidity</strong><span>Review final Rabby transaction before signing. Confirm amounts, gas, router, and chain.</span></div>
+            <button class="guide-done" type="button">mark done</button>
+          </div>
+          <div class="guide-row" data-guide-step="7">
+            <div class="guide-num">7</div>
+            <div class="guide-copy"><strong>Confirm LP tokens</strong><span>After success, confirm LP tokens and BscScan transaction. LP tokens represent pool share only.</span></div>
+            <button class="guide-done" type="button">mark done</button>
+          </div>
+        </div>
+
+        <div class="guide-warning">
+          Liquidity has risk: price movement, impermanent loss, slippage, taxes, pool imbalance, and failed/changed wallet confirmations.
+        </div>
+      </article>
+    </section>
+</main>
+  <footer class="cigo-system-footer">
+    <div class="cigo-footer-inner">
+      <div class="cigo-footer-info">
+        <strong>CIGO market-access pages are published by the COSIGO&trade; system.</strong><br>
+        CIGO is a separate speculative market-access token for trading, liquidity, and public market activity.
+        It is not the COSIGO&trade; silver-referenced Ethereum token, is not silver-backed, and is not a claim on
+        COSIGO reserves or redemption inventory.<br>
+        COSIGO&trade; is a trademark claimed by Wendall Gregory Wilson. U.S. trademark application pending.
+      </div>
+
+      <div class="cigo-footer-links">
+        <a href="https://cosigo.io/">COSIGO official</a>
+        <a href="https://market.cosigo.io/">CIGO market notice</a>
+        <a href="/appendix.html">site appendix / quick reference</a>
+        <a href="https://github.com/cosigo" target="_blank" rel="noopener">GitHub ↗</a>
+        <a href="https://www.geckoterminal.com/bsc/pools/0xded1e63b6262c0328876b7774f65c08505dd559a"
+          target="_blank" rel="noopener">
+          <img src="/shared/assets/geckoterminal-favicon.png" width="20" height="20"
+            alt="" aria-hidden="true"
+            style="display:inline-block;vertical-align:middle;margin-right:5px;">
+          GeckoTerminal market data ↗
+        </a>
+        <small>(third-party market data; use trade.cosigo.io for swaps)</small>
+      </div>
+    </div>
+  </footer>
+
+  <script id="guides-phone-menu-js">
+    (() => {
+      const bar = document.querySelector(".guides-phone-topbar");
+      const btn = document.querySelector(".guides-phone-menu-toggle");
+      const nav = document.querySelector(".guides-phone-nav");
+      if (!bar || !btn || !nav) return;
+
+      const close = () => {
+        bar.classList.remove("is-open");
+        btn.setAttribute("aria-expanded", "false");
+      };
+
+      btn.addEventListener("click", () => {
+        const open = !bar.classList.contains("is-open");
+        bar.classList.toggle("is-open", open);
+        btn.setAttribute("aria-expanded", open ? "true" : "false");
+      });
+
+      nav.addEventListener("click", (event) => {
+        if (event.target.closest("a")) close();
+      });
+
+      document.addEventListener("click", (event) => {
+        if (!bar.classList.contains("is-open")) return;
+        if (bar.contains(event.target)) return;
+        close();
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") close();
+      });
+    })();
+  </script>
+
+</body>
+</html>

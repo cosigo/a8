@@ -1,0 +1,506 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>A8 Hangout · Storybook</title>
+<meta name="description" content="A playful A8 storybook about doubling, rulers, water, motion and Nature.">
+<link rel="canonical" href="https://hangout.cosigo.io/">
+
+<style>
+*{box-sizing:border-box}
+:root{
+  --ink:#162238;
+  --paper:#fffaf0;
+  --sky:#bfeaff;
+  --grass:#8dd17e;
+  --sun:#ffd84c;
+  --water:#5bc4f5;
+  --soft:#edf8ff;
+}
+html,body{margin:0;width:100%;height:100%;overflow:hidden}
+body{
+  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  color:var(--ink);
+  background:var(--paper);
+}
+button{font:inherit}
+.book{width:100%;height:100%}
+.page{
+  position:absolute;
+  inset:0;
+  padding:4.5rem 1rem 5.5rem;
+  display:grid;
+  place-items:center;
+  opacity:0;
+  transform:translateX(8%);
+  pointer-events:none;
+  transition:.35s ease;
+  overflow:auto;
+}
+.page.active{
+  opacity:1;
+  transform:none;
+  pointer-events:auto;
+}
+.page.before{transform:translateX(-8%)}
+.inner{
+  width:min(950px,94vw);
+  margin:auto;
+  text-align:center;
+}
+h1,h2{
+  margin:.2rem 0 .8rem;
+  line-height:.95;
+}
+h1{font-size:clamp(3rem,10vw,7rem)}
+h2{font-size:clamp(2.4rem,8vw,5rem)}
+p{
+  font-size:clamp(1.1rem,3vw,1.55rem);
+  line-height:1.45;
+  max-width:720px;
+  margin:1rem auto;
+}
+.big{
+  font-size:clamp(2rem,7vw,4.5rem);
+  font-weight:1000;
+}
+.small{
+  font-size:.9rem;
+  opacity:.7;
+}
+.sky{
+  background:linear-gradient(var(--sky) 0 68%,var(--grass) 68%);
+}
+.night{
+  color:white;
+  background:
+    radial-gradient(circle at 15% 20%,white 0 2px,transparent 3px),
+    radial-gradient(circle at 72% 30%,white 0 1px,transparent 2px),
+    radial-gradient(circle at 35% 70%,white 0 1px,transparent 2px),
+    #10182f;
+  background-size:150px 150px,190px 190px,230px 230px,auto;
+}
+.water-page{background:linear-gradient(#daf4ff,#fff)}
+.warm{background:linear-gradient(#ffe9a8,#fff8e7)}
+.controls{
+  position:fixed;
+  left:0;right:0;bottom:0;
+  z-index:20;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:1rem;
+  padding:.8rem 1rem;
+  background:rgba(255,255,255,.92);
+  border-top:1px solid rgba(0,0,0,.08);
+}
+.controls button{
+  border:0;
+  border-radius:999px;
+  padding:.75rem 1.25rem;
+  background:var(--ink);
+  color:white;
+  font-weight:900;
+  cursor:pointer;
+}
+.controls button:disabled{opacity:.25}
+.counter{font-weight:900;min-width:70px;text-align:center}
+.home{
+  position:fixed;
+  top:.7rem;
+  left:.8rem;
+  z-index:30;
+  text-decoration:none;
+  font-weight:900;
+  background:rgba(255,255,255,.9);
+  padding:.55rem .8rem;
+  border-radius:999px;
+}
+.rulers{
+  margin:2rem auto;
+  width:min(850px,92vw);
+  display:grid;
+  gap:1rem;
+}
+.ruler{
+  height:60px;
+  border:4px solid var(--ink);
+  border-radius:5px;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      transparent 0 11.5%,
+      var(--ink) 11.5% 12.5%
+    ),
+    #ffe17f;
+}
+.r29{width:25%;min-width:130px}
+.r30{width:50%;min-width:210px}
+.r31{width:100%}
+.label{text-align:left;font-weight:1000;margin-bottom:.3rem}
+.ballrow{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:12px;
+  margin:2rem auto;
+  min-height:85px;
+}
+.ball{
+  width:72px;height:72px;border-radius:50%;
+  border:4px solid white;
+  box-shadow:0 4px 12px #0003;
+  background:conic-gradient(
+    #ff5e62 0 45deg,
+    #ffd84c 45deg 90deg,
+    #57bfff 90deg 135deg,
+    #7edc8b 135deg 180deg,
+    #ff5e62 180deg 225deg,
+    #ffd84c 225deg 270deg,
+    #57bfff 270deg 315deg,
+    #7edc8b 315deg 360deg
+  );
+}
+.action{
+  border:0;
+  border-radius:999px;
+  padding:1rem 1.5rem;
+  background:var(--ink);
+  color:white;
+  font-size:1.15rem;
+  font-weight:1000;
+  cursor:pointer;
+}
+.cup{
+  position:relative;
+  width:170px;height:190px;
+  margin:2rem auto;
+  border:7px solid var(--ink);
+  border-top:0;
+  border-radius:0 0 32px 32px;
+  overflow:hidden;
+}
+.cup:after{
+  content:"";
+  position:absolute;
+  left:0;right:0;bottom:0;
+  height:74%;
+  background:var(--water);
+}
+.cup span{
+  position:absolute;inset:0;
+  display:grid;place-items:center;
+  z-index:2;
+  font-weight:1000;
+  font-size:1.3rem;
+}
+.chain{
+  font-size:clamp(1.2rem,4vw,2rem);
+  font-weight:1000;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:.6rem;
+  margin-top:1.5rem;
+}
+.chain b{
+  padding:.6rem .8rem;
+  border-radius:16px;
+  background:white;
+  border:2px solid #0001;
+}
+.sun{
+  width:110px;height:110px;
+  margin:auto;
+  border-radius:50%;
+  background:var(--sun);
+  box-shadow:0 0 70px #ffd84c99;
+}
+.orbit{
+  position:relative;
+  width:300px;height:300px;
+  max-width:78vw;max-height:78vw;
+  margin:1rem auto;
+  border:2px dashed #ffffff66;
+  border-radius:50%;
+  animation:spin 8s linear infinite;
+}
+.earth{
+  position:absolute;
+  width:48px;height:48px;
+  top:-24px;
+  left:calc(50% - 24px);
+  border-radius:50%;
+  background:
+    radial-gradient(circle at 30% 32%,#70cf78 0 22%,transparent 23%),
+    radial-gradient(circle at 70% 65%,#70cf78 0 18%,transparent 19%),
+    #4ca8ff;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+.planet-scene{
+  position:relative;
+  height:260px;
+  width:min(700px,90vw);
+  margin:auto;
+}
+.jupiter{
+  position:absolute;
+  width:130px;height:130px;
+  left:50%;top:50%;
+  transform:translate(-50%,-50%);
+  border-radius:50%;
+  background:
+    repeating-linear-gradient(
+      #d7aa74 0 13px,
+      #f5d2a2 13px 24px,
+      #b77c51 24px 33px
+    );
+}
+.moon{
+  position:absolute;
+  width:22px;height:22px;
+  border-radius:50%;
+  background:#eee;
+}
+.m1{left:8%;top:48%}
+.m2{left:25%;top:23%}
+.m3{right:20%;top:65%}
+.m4{right:4%;top:35%}
+.endmark{
+  font-size:clamp(5rem,20vw,11rem);
+  font-weight:1000;
+  letter-spacing:-.15em;
+}
+@media(max-width:600px){
+  .page{padding-top:4rem}
+  .ruler{height:48px}
+  .ball{width:56px;height:56px}
+}
+</style>
+</head>
+
+<body>
+
+<a class="home" href="https://a8.cosigo.io/">A8 HOME</a>
+
+<main class="book">
+
+<section class="page active sky">
+<div class="inner">
+  <h1>COME PLAY</h1>
+  <p>Mini-Me found something in the sand.</p>
+  <div class="big">A LITTLE RULER!</div>
+  <p>Turn the page.</p>
+</div>
+</section>
+
+<section class="page warm">
+<div class="inner">
+  <h2>Mini-Me's ruler</h2>
+  <p>This little ruler is <strong>/29 L</strong>.</p>
+  <div class="rulers">
+    <div>
+      <div class="label">/29 L</div>
+      <div class="ruler r29"></div>
+    </div>
+  </div>
+  <p>What happens if we find another one?</p>
+</div>
+</section>
+
+<section class="page sky">
+<div class="inner">
+  <h2>DOUBLE IT!</h2>
+  <p>Two little rulers make one kids' ruler.</p>
+  <div class="rulers">
+    <div>
+      <div class="label">/29 + /29</div>
+      <div class="ruler r29"></div>
+      <div class="ruler r29" style="margin-top:6px"></div>
+    </div>
+    <div>
+      <div class="label">= /30 L</div>
+      <div class="ruler r30"></div>
+    </div>
+  </div>
+  <div class="big">2 × /29 = /30</div>
+</div>
+</section>
+
+<section class="page warm">
+<div class="inner">
+  <h2>Dad's ruler</h2>
+  <p>Double the kids' ruler one more time.</p>
+  <div class="rulers">
+    <div>
+      <div class="label">Mini-Me · /29</div>
+      <div class="ruler r29"></div>
+    </div>
+    <div>
+      <div class="label">Kids · /30</div>
+      <div class="ruler r30"></div>
+    </div>
+    <div>
+      <div class="label">Big ruler · /31</div>
+      <div class="ruler r31"></div>
+    </div>
+  </div>
+  <div class="big">2 × /30 = /31</div>
+</div>
+</section>
+
+<section class="page sky">
+<div class="inner">
+  <h2>Beach-ball math</h2>
+  <p>Don't count harder. Just double.</p>
+  <div id="ballrow" class="ballrow"></div>
+  <button id="double" class="action">DOUBLE IT!</button>
+  <div id="ballcount" class="big" style="margin-top:1rem">1</div>
+  <p>1 → 2 → 4 → 8</p>
+</div>
+</section>
+
+<section class="page water-page">
+<div class="inner">
+  <h2>Water teaches A8</h2>
+  <div class="cup"><span>A8 CUP</span></div>
+  <p>Fill the cup with pure water.</p>
+  <div class="chain">
+    <b>/31 T</b>
+    <b>/31 P</b>
+    <b>/31 V</b>
+    <b>/31 M</b>
+  </div>
+  <p>Temperature. Pressure. Volume. Mass.<br>One ordinary cup of water connects them.</p>
+  <details>
+    <summary>Grown-up check</summary>
+    <p>A8 cup ≈ 207.4385 mL. Water mass ≈ 206.8572 g.</p>
+  </details>
+</div>
+</section>
+
+<section class="page night">
+<div class="inner">
+  <h2>Your playground is flying</h2>
+  <p>Earth is our spaceship.</p>
+  <div class="orbit">
+    <div class="earth"></div>
+    <div class="sun" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%)"></div>
+  </div>
+  <p>Even when you stand still, Earth keeps moving around Sol.</p>
+</div>
+</section>
+
+<section class="page night">
+<div class="inner">
+  <h2>Nature keeps time</h2>
+  <div class="planet-scene">
+    <div class="jupiter"></div>
+    <div class="moon m1"></div>
+    <div class="moon m2"></div>
+    <div class="moon m3"></div>
+    <div class="moon m4"></div>
+  </div>
+  <p>Jupiter's moons move in repeating patterns.</p>
+  <div class="big">LOOK · WATCH · REPEAT</div>
+</div>
+</section>
+
+<section class="page sky">
+<div class="inner">
+  <h2>You found the pattern</h2>
+  <div class="big">1 → 2 → 4 → 8</div>
+  <p>Measure something. Double something. Look at the sky.</p>
+  <p>Nature has patterns everywhere.</p>
+  <button class="action" id="again">READ IT AGAIN</button>
+</div>
+</section>
+
+</main>
+
+<div class="controls">
+  <button id="prev">← PREVIOUS</button>
+  <span class="counter" id="counter">1 / 9</span>
+  <button id="next">NEXT →</button>
+</div>
+
+<script>
+(() => {
+  const pages=[...document.querySelectorAll(".page")];
+  const prev=document.getElementById("prev");
+  const next=document.getElementById("next");
+  const counter=document.getElementById("counter");
+  let current=0;
+
+  function show(n){
+    current=Math.max(0,Math.min(pages.length-1,n));
+
+    pages.forEach((p,i)=>{
+      p.classList.toggle("active",i===current);
+      p.classList.toggle("before",i<current);
+    });
+
+    counter.textContent=(current+1)+" / "+pages.length;
+    prev.disabled=current===0;
+    next.disabled=current===pages.length-1;
+  }
+
+  prev.onclick=()=>show(current-1);
+  next.onclick=()=>show(current+1);
+
+  document.getElementById("again").onclick=()=>show(0);
+
+  document.addEventListener("keydown",e=>{
+    if(e.key==="ArrowRight") show(current+1);
+    if(e.key==="ArrowLeft") show(current-1);
+  });
+
+  let startX=null;
+
+  document.addEventListener("touchstart",e=>{
+    startX=e.changedTouches[0].clientX;
+  },{passive:true});
+
+  document.addEventListener("touchend",e=>{
+    if(startX===null) return;
+    const dx=e.changedTouches[0].clientX-startX;
+
+    if(dx < -55) show(current+1);
+    if(dx > 55) show(current-1);
+
+    startX=null;
+  },{passive:true});
+
+  const stages=[1,2,4,8];
+  let ballStage=0;
+  const row=document.getElementById("ballrow");
+  const count=document.getElementById("ballcount");
+  const dbl=document.getElementById("double");
+
+  function balls(){
+    const n=stages[ballStage];
+    row.innerHTML="";
+
+    for(let i=0;i<n;i++){
+      const b=document.createElement("div");
+      b.className="ball";
+      row.appendChild(b);
+    }
+
+    count.textContent=n;
+    dbl.textContent=n===8 ? "START AGAIN" : "DOUBLE IT!";
+  }
+
+  dbl.onclick=()=>{
+    ballStage=(ballStage+1)%stages.length;
+    balls();
+  };
+
+  balls();
+  show(0);
+})();
+</script>
+
+</body>
+</html>

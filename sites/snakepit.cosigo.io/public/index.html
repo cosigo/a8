@@ -1,0 +1,1800 @@
+
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>COSIGO Snakepit — CIGO Wallet and Market Warnings</title>
+  <meta name="description" content="COSIGO Snakepit documents CIGO wallet safety warnings, market interface notes, security notices, and official COSIGO trade, quote, and project links.">
+  <meta name="author" content="COSIGO">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://snakepit.cosigo.io/">
+  <meta name="keywords" content="CIGO, COSIGO, Snakepit, wallet safety, security notice, BNB Smart Chain, PancakeSwap, MetaMask, Rabby">
+
+  <link rel="icon" type="image/png" sizes="256x256" href="/shared/assets/icons/cigo_256.png?v=20260613">
+  <link rel="apple-touch-icon" sizes="256x256" href="/shared/assets/icons/cigo_256.png?v=20260613">
+
+  <meta property="og:title" content="COSIGO Snakepit — CIGO Wallet and Market Warnings">
+  <meta property="og:description" content="CIGO wallet safety warnings, market interface notes, security notices, and official COSIGO trade, quote, and project links.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="COSIGO Snakepit">
+  <meta property="og:url" content="https://snakepit.cosigo.io/">
+  <meta property="og:image" content="https://snakepit.cosigo.io/shared/assets/icons/cigo_256.png">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="COSIGO Snakepit — CIGO Wallet and Market Warnings">
+  <meta name="twitter:description" content="CIGO wallet safety warnings, market interface notes, security notices, and official COSIGO links.">
+  <meta name="twitter:image" content="https://snakepit.cosigo.io/shared/assets/icons/cigo_256.png">
+
+<meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+    :root {
+      --bg: #0b0f19;
+      --panel: #121827;
+      --panel-2: #182033;
+      --text: #eef2ff;
+      --muted: #a7b0c4;
+      --line: rgba(255, 255, 255, 0.14);
+      --danger: #ff5c5c;
+      --warn: #ffcc66;
+      --ok: #7ee787;
+      --link: #8ab4ff;
+      --link-hover: #c6d7ff;
+      --shadow: 0 18px 60px rgba(0, 0, 0, 0.35);
+      --radius: 18px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--sans);
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(255, 92, 92, 0.18), transparent 35%),
+        radial-gradient(circle at top right, rgba(138, 180, 255, 0.14), transparent 30%),
+        var(--bg);
+      line-height: 1.65;
+    }
+
+    a {
+      color: var(--link);
+      text-decoration: none;
+      word-break: break-word;
+    }
+
+    a:hover {
+      color: var(--link-hover);
+      text-decoration: underline;
+    }
+
+    .wrap {
+      width: min(1180px, calc(100% - 36px));
+      margin: 0 auto;
+    }
+
+    .hero {
+      padding: 48px 0 26px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 7px 12px;
+      border: 1px solid rgba(255, 92, 92, 0.45);
+      border-radius: 999px;
+      color: #ffd1d1;
+      background: rgba(255, 92, 92, 0.10);
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-size: 0.78rem;
+    }
+
+    h1 {
+      margin: 20px 0 14px;
+      font-size: clamp(2rem, 4vw, 4rem);
+      line-height: 1.03;
+      letter-spacing: -0.04em;
+    }
+
+    h2 {
+      margin: 0 0 14px;
+      font-size: clamp(1.35rem, 2.5vw, 2rem);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+    }
+
+    h3 {
+      margin: 26px 0 10px;
+      font-size: 1.15rem;
+      color: #fff;
+    }
+
+    p {
+      margin: 0 0 16px;
+    }
+
+    .lead {
+      max-width: 980px;
+      color: #dfe6ff;
+      font-size: 1.12rem;
+    }
+
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin: 26px 0 0;
+    }
+
+    .meta-card,
+    .card,
+    .notice,
+    .toc,
+    .link-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(18, 24, 39, 0.88);
+      box-shadow: var(--shadow);
+    }
+
+    .meta-card {
+      padding: 16px;
+      min-width: 0;
+    }
+
+    .label {
+      color: var(--muted);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+
+    .value {
+      font-family: var(--mono);
+      font-size: 0.92rem;
+      overflow-wrap: anywhere;
+    }
+
+    .notice {
+      margin: 24px 0;
+      padding: 18px;
+      border-color: rgba(255, 204, 102, 0.35);
+      background: rgba(255, 204, 102, 0.08);
+    }
+
+    .notice.danger {
+      border-color: rgba(255, 92, 92, 0.45);
+      background: rgba(255, 92, 92, 0.10);
+    }
+
+
+
+    main {
+      padding: 26px 0 64px;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 300px minmax(0, 1fr);
+      gap: 24px;
+      align-items: start;
+    }
+
+    .toc {
+      position: sticky;
+      top: 16px;
+      padding: 16px;
+      max-height: calc(100vh - 32px);
+      overflow: auto;
+    }
+
+    .toc h2 {
+      font-size: 1rem;
+      margin: 0 0 10px;
+    }
+
+    .toc a {
+      display: block;
+      padding: 7px 0;
+      color: var(--muted);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      font-size: 0.92rem;
+    }
+
+    .toc a:hover {
+      color: var(--link-hover);
+    }
+
+    section.card {
+      padding: 24px;
+      margin-bottom: 18px;
+    }
+
+    ul,
+    ol {
+      margin: 8px 0 16px 22px;
+      padding: 0;
+    }
+
+    li {
+      margin: 6px 0;
+    }
+
+    .plain-list {
+      list-style: none;
+      margin-left: 0;
+    }
+
+    .plain-list li {
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .code,
+    code {
+      font-family: var(--mono);
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      border-radius: 8px;
+      padding: 2px 6px;
+      color: #fff;
+    }
+
+    .chain {
+      font-family: var(--mono);
+      padding: 16px;
+      border-radius: 14px;
+      background: #0f1524;
+      border: 1px solid var(--line);
+      overflow-x: auto;
+      white-space: pre-wrap;
+      line-height: 1.55;
+    }
+
+    .link-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .link-card {
+      padding: 14px;
+      background: rgba(24, 32, 51, 0.72);
+      box-shadow: none;
+    }
+
+    .link-title {
+      font-weight: 800;
+      margin-bottom: 5px;
+    }
+
+    .addr {
+      display: block;
+      font-family: var(--mono);
+      font-size: 0.86rem;
+      overflow-wrap: anywhere;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--muted);
+      font-size: 0.75rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-left: 6px;
+    }
+
+    .badge.red {
+      color: #ffd1d1;
+      border-color: rgba(255, 92, 92, 0.35);
+      background: rgba(255, 92, 92, 0.08);
+    }
+
+    .badge.yellow {
+      color: #ffe6a3;
+      border-color: rgba(255, 204, 102, 0.35);
+      background: rgba(255, 204, 102, 0.08);
+    }
+
+    .badge.green {
+      color: #b7ffd0;
+      border-color: rgba(126, 231, 135, 0.35);
+      background: rgba(126, 231, 135, 0.08);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+      overflow: hidden;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      display: block;
+      overflow-x: auto;
+    }
+
+    th,
+    td {
+      padding: 12px;
+      vertical-align: top;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      min-width: 220px;
+    }
+
+    th {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.07);
+      text-align: left;
+      font-size: 0.84rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    td {
+      color: #dfe6ff;
+    }
+
+    .warning-line {
+      border-left: 4px solid var(--danger);
+      padding: 12px 14px;
+      background: rgba(255, 92, 92, 0.08);
+      border-radius: 12px;
+      margin: 16px 0;
+    }
+
+    .footer {
+      padding: 28px 0;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 900px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      .toc {
+        position: static;
+        max-height: none;
+      }
+
+      .meta-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .link-grid {
+        grid-template-columns: 1fr;
+      }
+
+      section.card {
+        padding: 18px;
+      }
+    }
+
+    @media print {
+      body {
+        background: #fff;
+        color: #111;
+      }
+
+      .toc {
+        display: none;
+      }
+
+      .layout {
+        display: block;
+      }
+
+      .card,
+      .notice,
+      .meta-card,
+      .link-card {
+        box-shadow: none;
+        background: #fff;
+        color: #111;
+        border-color: #bbb;
+      }
+
+      a {
+        color: #0645ad;
+        text-decoration: underline;
+      }
+
+      .hero {
+        border-bottom-color: #bbb;
+      }
+
+      .footer {
+        border-top-color: #bbb;
+      }
+    }
+  </style>
+<style id="site-appendix-footer-style">
+.site-appendix-footer {
+  margin: 28px auto 0;
+  padding: 18px 16px 26px;
+  text-align: center;
+  font-size: 0.88rem;
+  opacity: 0.78;
+}
+.site-appendix-footer a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px dotted currentColor;
+}
+.site-appendix-footer a:hover,
+.site-appendix-footer a:focus-visible {
+  opacity: 1;
+  border-bottom-style: solid;
+}
+</style>
+<style id="snakepit-mobile-card-normalize-css">
+  @media (max-width: 760px) {
+    html,
+    body {
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+
+    .wrap,
+    .topbar-inner {
+      width: min(1180px, calc(100% - 20px));
+    }
+
+    .hero {
+      padding: 34px 0 22px;
+    }
+
+    .eyebrow {
+      max-width: 100%;
+      align-items: flex-start;
+      white-space: normal;
+      border-radius: 14px;
+      line-height: 1.25;
+    }
+
+    h1 {
+      font-size: clamp(1.85rem, 10vw, 2.75rem);
+      letter-spacing: -0.03em;
+    }
+
+    h2 {
+      font-size: clamp(1.22rem, 6vw, 1.55rem);
+    }
+
+    h3 {
+      margin-top: 20px;
+    }
+
+    .lead {
+      font-size: 1rem;
+      line-height: 1.55;
+    }
+
+    main {
+      padding: 18px 0 46px;
+    }
+
+    .layout {
+      display: block;
+    }
+
+    .toc,
+    section.card,
+    .notice,
+    .meta-card,
+    .link-card {
+      width: 100%;
+      max-width: 100%;
+      border-radius: 14px;
+    }
+
+    .toc {
+      margin: 0 0 14px;
+      padding: 14px;
+    }
+
+    .toc h2 {
+      margin-bottom: 8px;
+    }
+
+    .toc a {
+      padding: 9px 0;
+      font-size: 0.9rem;
+    }
+
+    section.card {
+      padding: 16px;
+      margin-bottom: 14px;
+    }
+
+    .notice {
+      margin: 18px 0;
+      padding: 15px;
+    }
+
+    .meta-grid,
+    .link-grid {
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .meta-card,
+    .link-card {
+      min-width: 0;
+      padding: 12px;
+      box-shadow: none;
+    }
+
+    .link-title {
+      font-size: 0.95rem;
+      line-height: 1.25;
+    }
+
+    .value,
+    .addr,
+    .chain,
+    .warning-line,
+    table,
+    th,
+    td,
+    code,
+    .code,
+    a {
+      max-width: 100%;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    .addr {
+      font-size: 0.78rem;
+      line-height: 1.45;
+    }
+
+    .chain {
+      padding: 12px;
+      font-size: 0.78rem;
+      line-height: 1.5;
+      white-space: pre-wrap;
+      overflow-x: hidden;
+    }
+
+    .warning-line {
+      padding: 11px 12px;
+      border-radius: 12px;
+    }
+
+    ul,
+    ol {
+      margin-left: 18px;
+    }
+
+    li {
+      margin: 7px 0;
+    }
+
+    table {
+      display: block;
+      width: 100%;
+      overflow-x: auto;
+      border-radius: 12px;
+    }
+
+    th,
+    td {
+      min-width: 150px;
+      padding: 10px;
+      font-size: 0.86rem;
+    }
+
+    .badge {
+      margin: 4px 4px 0 0;
+    }
+  }
+
+  @media (max-width: 420px) {
+    section.card {
+      padding: 14px;
+    }
+
+    .meta-card,
+    .link-card,
+    .notice,
+    .toc {
+      padding: 12px;
+    }
+
+    .addr,
+    .chain {
+      font-size: 0.74rem;
+    }
+  }
+</style>
+
+
+
+<style id="snakepit-single-topbar-css">
+  .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+    background: rgba(11, 15, 25, 0.92);
+    backdrop-filter: blur(12px);
+  }
+
+  .topbar-inner.market-topbar-inner {
+    width: min(1180px, calc(100% - 36px));
+    margin: 0 auto;
+    min-height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .market-title {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+    flex: 0 0 auto;
+    color: #ffffff;
+    text-decoration: none;
+  }
+
+  .brand-icon {
+    width: 40px;
+    height: 40px;
+    display: block;
+    object-fit: contain;
+    border-radius: 10px;
+    flex: 0 0 auto;
+    box-shadow: 0 0 18px rgba(255, 184, 77, 0.16);
+  }
+
+  .brand-text {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  .brand-title {
+    display: block;
+    color: #ffffff;
+    font-weight: 900;
+    line-height: 1.05;
+  }
+
+  .brand-text small {
+    display: block;
+    margin-top: 3px;
+    color: rgba(226, 232, 240, 0.72);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .market-header-nav {
+    display: flex;
+    flex: 1 1 auto;
+    width: auto;
+    margin-left: auto;
+    padding: 0;
+    gap: 8px;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+    overflow: visible;
+  }
+
+  .market-header-nav .menu-label {
+    color: rgba(238, 214, 151, 0.96);
+    font-size: 0.78rem;
+    font-weight: 850;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-right: 2px;
+    white-space: nowrap;
+  }
+
+  .market-header-nav a,
+  .market-nav-toggle {
+    min-height: 36px;
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(245, 232, 197, 0.96);
+    font: inherit;
+    font-size: 0.86rem;
+    font-weight: 850;
+    line-height: 1;
+    padding: 8px 10px;
+    border-radius: 999px;
+    border: 1px solid rgba(214, 174, 94, 0.34);
+    background: linear-gradient(135deg, rgba(55, 34, 16, 0.78), rgba(118, 72, 31, 0.30));
+    box-shadow: 0 0 10px rgba(214, 174, 94, 0.08);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .market-header-nav a:hover,
+  .market-header-nav a:focus-visible,
+  .market-nav-toggle:hover,
+  .market-nav-toggle:focus-visible {
+    color: #fff6dc;
+    border-color: rgba(236, 197, 112, 0.68);
+    background: linear-gradient(135deg, rgba(92, 54, 22, 0.90), rgba(154, 98, 43, 0.50), rgba(74, 42, 88, 0.34));
+    outline: none;
+    text-decoration: none;
+  }
+
+  .market-nav-toggle {
+    display: none;
+    appearance: none;
+    cursor: pointer;
+    letter-spacing: 0.04em;
+  }
+
+  .market-header-nav .cigo-market-pill {
+    gap: 6px;
+  }
+
+  .market-header-nav .cigo-market-pill img {
+    width: 18px;
+    height: 18px;
+    border-radius: 999px;
+    display: block;
+    flex: 0 0 auto;
+  }
+
+  @media (max-width: 760px) {
+    .topbar-inner.market-topbar-inner {
+      width: min(calc(100% - 20px), 1180px);
+      min-height: auto;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 0;
+    }
+
+    .market-title {
+      max-width: calc(100% - 96px);
+    }
+
+    .brand-icon {
+      width: 36px;
+      height: 36px;
+    }
+
+    .market-nav-toggle {
+      display: inline-flex;
+      margin-left: auto;
+    }
+
+    .market-header-nav {
+      display: none;
+      flex: 0 0 100%;
+      width: 100%;
+      margin-left: 0;
+      padding: 10px;
+      flex-direction: column;
+      align-items: stretch;
+      justify-content: flex-start;
+      gap: 8px;
+      border: 1px solid rgba(236, 197, 112, 0.22);
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(15, 12, 9, 0.96), rgba(8, 9, 12, 0.94));
+      box-shadow: 0 16px 34px rgba(0, 0, 0, 0.34);
+      max-height: calc(100vh - 92px);
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+
+    .market-header-nav.is-open {
+      display: flex;
+    }
+
+    .market-header-nav .menu-label {
+      display: none;
+    }
+
+    .market-header-nav a {
+      width: 100%;
+      justify-content: flex-start;
+      white-space: normal;
+      min-height: 40px;
+      overflow-wrap: anywhere;
+    }
+  }
+</style>
+
+
+<style id="security-footer-card-style">
+footer.security-footer {
+    max-width: 1180px;
+    margin: 32px auto 0;
+    padding: 0 20px 48px;
+    border-top: 0;
+    color: inherit;
+}
+
+.security-footer-card {
+    padding: 24px;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.035);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.18);
+}
+
+.security-footer-copy {
+    color: var(--muted);
+    line-height: 1.65;
+}
+
+.security-footer-copy strong {
+    display: block;
+    margin-bottom: 4px;
+    color: inherit;
+    font-size: 1rem;
+}
+
+.security-footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 18px;
+}
+
+.security-footer-links a {
+    display: inline-flex;
+    align-items: center;
+    padding: 9px 12px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    color: inherit;
+    text-decoration: none;
+    background: rgba(255, 255, 255, 0.035);
+    transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.security-footer-links a:hover,
+.security-footer-links a:focus-visible {
+    border-color: currentColor;
+    background: rgba(255, 255, 255, 0.075);
+}
+
+.security-footer-note {
+    margin: 16px 0 0;
+    color: var(--muted);
+    font-size: 0.88rem;
+    line-height: 1.55;
+}
+
+@media (max-width: 640px) {
+    footer.security-footer {
+        padding-right: 14px;
+        padding-left: 14px;
+    }
+
+    .security-footer-card {
+        padding: 19px;
+    }
+
+    .security-footer-links {
+        display: grid;
+    }
+
+    .security-footer-links a {
+        justify-content: center;
+        text-align: center;
+    }
+}
+</style>
+
+</head>
+
+<body>
+  <header class="topbar market-header">
+    <div class="topbar-inner market-topbar-inner">
+      <a class="brand market-title" href="https://snakepit.cosigo.io/" aria-label="snakepit home">
+        <img src="/shared/assets/icons/cigo_256.png" alt="CIGO token icon" class="brand-icon">
+        <span class="brand-text">
+          <span class="brand-title">snakepit</span>
+          <small>security record</small>
+        </span>
+      </a>
+
+      <button class="market-nav-toggle" type="button" aria-expanded="false" aria-controls="snakepitHeaderNav">menu</button>
+
+      <nav id="snakepitHeaderNav" class="cosigo-escape-menu market-header-nav" aria-label="COSIGO site navigation">
+        <span class="menu-label">COSIGO:</span>
+        <a href="https://cosigo.io/">home</a>
+        <a href="https://trade.cosigo.io/">trade</a>
+        <a class="cigo-market-pill" href="https://market.cosigo.io/" title="CIGO market notice">
+          <img src="/shared/assets/icons/cigo_256.png" alt="CIGO">
+          <span>market</span>
+        </a>
+        <a href="https://trade.cosigo.io/pool.html">pool</a>
+        <a href="https://trade.cosigo.io/request.html">discount desk</a>
+        <a href="https://trade.cosigo.io/guides.html">guides</a>
+        <a href="https://pancakeswap.finance/swap?chain=bsc&outputCurrency=0x3a38e963f524E0dDFB75dFa1752b4Cd1364F5560" target="_blank" rel="noopener">pancake</a>
+        <a href="https://quote.cosigo.io/">quote</a>
+        <a href="https://snakepit.cosigo.io/security_notice.html#summary">security</a>
+      
+          <a href="https://labels.cosigo.io/" data-cosigo-bridge="true">evidence labels</a>
+      </nav>
+    </div>
+  </header>
+  <header class="hero">
+    <div class="wrap">
+      <div class="eyebrow">SEVERE ALERT — PUBLIC NOTICE - CRYPTO SNAKEPIT</div>
+      <h1>CIGO Incident Preservation Demand</h1>
+      <p class="lead">
+        Public notice and pre-litigation preservation demand concerning CIGO malicious labeling, BNB paper-wallet
+        compromise,
+        mass wallet drains, exchange-linked funding chains, liquidity attacks, and post-notice conduct that appears
+        retaliatory in nature. <strong>Malicious actors playground</strong> <a href="https://snakepit.cosigo.io/security_notice.html" target="_blank"
+              rel="noopener">https://snakepit.cosigo.io/security_notice.html</a>
+      </p>
+
+      <div class="meta-grid" aria-label="Project details">
+        <div class="meta-card">
+          <div class="label">Token</div>
+          <div class="value">cosigo market — CIGO</div>
+        </div>
+        <div class="meta-card">
+          <div class="label">Network</div>
+          <div class="value">BNB Smart Chain</div>
+        </div>
+        <div class="meta-card">
+          <div class="label">CIGO Contract</div>
+          <div class="value"><a href="https://bscscan.com/token/0x3a38e963f524E0dDFB75dFa1752b4Cd1364F5560"
+              target="_blank" rel="noopener">0x3a38e963f524E0dDFB75dFa1752b4Cd1364F5560</a></div>
+        </div>
+      </div>
+
+      <div class="notice danger">
+        <strong>Core warning:</strong> The warning system labeled the victim and failed to stop the theft path. CIGO was
+        treated as the danger while actual malicious activity involving compromised private keys, stolen funds, mass
+        wallet collection, stolen-token liquidation, routing infrastructure, and liquidity damage continued through the
+        ecosystem.
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="layout">
+      <aside class="toc" aria-label="Table of contents">
+        <h2>Contents</h2>
+        <a href="#addressevidence">Evidence link index</a>
+        <a href="#notice">Formal notice</a>
+        <a href="#major-finding">Major finding</a>
+        <a href="#metamask">MetaMask / Consensys</a>
+        <a href="#hashdit">HashDit-style risk feeds</a>
+        <a href="#paperwallet">BNB paper-wallet generator</a>
+        <a href="#first-path">First liquidation path</a>
+        <a href="#second-path">Second liquidation path</a>
+        <a href="#two-chains">Why two funding chains matter</a>
+        <a href="#mitigation">Post-incident mitigation</a>
+        <a href="#silence">Notice, silence, post-notice conduct</a>
+        <a href="#failure">Warning system failure</a>
+        <a href="#coordination">Coordination hypothesis</a>
+        <a href="#preservation">Required preservation</a>
+        <a href="#response">Required response</a>
+        <a href="#nowaiver">No waiver</a>
+      </aside>
+
+      <article>
+        <section id="addressevidence" class="card">
+          <h2>Evidence link index</h2>
+          <p>All known full addresses and transaction hashes below are hyperlinked for direct review. Shortened
+            addresses are marked as needing the full address before final publication.</p>
+
+          <h3>Official CIGO records</h3>
+          <div class="link-grid">
+            <div class="link-card">
+              <div class="link-title">CIGO token contract</div>
+              <a class="addr" href="https://bscscan.com/token/0x3a38e963f524E0dDFB75dFa1752b4Cd1364F5560"
+                target="_blank" rel="noopener">0x3a38e963f524E0dDFB75dFa1752b4Cd1364F5560</a>
+            </div>
+            <div class="link-card">
+              <div class="link-title">Official market site</div>
+              <a class="addr" href="https://market.cosigo.io" target="_blank"
+                rel="noopener">https://market.cosigo.io</a>
+            </div>
+            <div class="link-card">
+              <div class="link-title">Official project site</div>
+              <a class="addr" href="https://cosigo.io" target="_blank" rel="noopener">https://cosigo.io</a>
+            </div>
+            <div class="link-card">
+              <div class="link-title">Official contact site</div>
+              <a class="addr" href="https://contact.cosigo.io" target="_blank"
+                rel="noopener">https://contact.cosigo.io</a>
+            </div>
+          </div>
+
+          <h3>Relevant CIGO pools</h3>
+          <div class="link-grid">
+            <div class="link-card">
+              <div class="link-title">CIGO / WBNB V2 pool</div>
+              <a class="addr" href="https://bscscan.com/address/0x88DAB085d2b4dc31f8Cf990896d9042EE47C3e19"
+                target="_blank" rel="noopener">0x88DAB085d2b4dc31f8Cf990896d9042EE47C3e19</a>
+            </div>
+            <div class="link-card">
+              <div class="link-title">CIGO / BSC-USD V2 pool</div>
+              <a class="addr" href="https://bscscan.com/address/0xDed1e63B6262C0328876b7774f65c08505dd559A"
+                target="_blank" rel="noopener">0xDed1e63B6262C0328876b7774f65c08505dd559A</a>
+            </div>
+          </div>
+
+          <h3>Paper-wallet generator evidence</h3>
+          <div class="link-grid">
+            <div class="link-card">
+              <div class="link-title">BNB paper-wallet generator</div>
+              <a class="addr" href="https://bnbpaperwallet.com/" target="_blank"
+                rel="noopener">https://bnbpaperwallet.com/</a>
+            </div>
+            <div class="link-card">
+              <div class="link-title">Listed BNB donation address</div>
+              <a class="addr" href="https://bscscan.com/address/0x8388c2A8Ab0bCff5BcB973DccFa1e434160Ab10f"
+                target="_blank" rel="noopener">0x8388c2A8Ab0bCff5BcB973DccFa1e434160Ab10f</a>
+            </div>
+          </div>
+
+          <h3>Known drained / compromised source wallets</h3>
+          <div class="link-grid">
+            <div class="link-card"><a class="addr"
+                href="https://bscscan.com/address/0x71f299277B2f78d3e87621e8473DDf47e4fcc202" target="_blank"
+                rel="noopener">0x71f299277B2f78d3e87621e8473DDf47e4fcc202</a></div>
+            <div class="link-card"><a class="addr"
+                href="https://bscscan.com/address/0xfB110B713C364b195C080EF3B501fe0fFC096360" target="_blank"
+                rel="noopener">0xfB110B713C364b195C080EF3B501fe0fFC096360</a></div>
+            <div class="link-card"><a class="addr"
+                href="https://bscscan.com/address/0xCe7F450B2c9B0e61c62249EF8324Cd7a4E2Ca1D8" target="_blank"
+                rel="noopener">0xCe7F450B2c9B0e61c62249EF8324Cd7a4E2Ca1D8</a></div>
+            <div class="link-card"><a class="addr"
+                href="https://bscscan.com/address/0x11385E6ad2ca9483b6A215712aFEab1606304dDA" target="_blank"
+                rel="noopener">0x11385E6ad2ca9483b6A215712aFEab1606304dDA</a></div>
+            <div class="link-card"><a class="addr"
+                href="https://bscscan.com/address/0xa5F2b22C7693033A3629390D70c5021CfD0B2E3C" target="_blank"
+                rel="noopener">0xa5F2b22C7693033A3629390D70c5021CfD0B2E3C</a></div>
+          </div>
+
+          <h3>First liquidation path</h3>
+          <div class="link-grid">
+            <div class="link-card">
+              <div class="link-title">Crypto.com 5 / exchange-labeled wallet</div>
+              <a class="addr" href="https://bscscan.com/address/0x625b02b687Ec38f3085Af5B108Dda410775fA76a"
+                target="_blank" rel="noopener">0x625b02b687Ec38f3085Af5B108Dda410775fA76a</a>
+            </div>
+            <div class="link-card">
+              <div class="link-title">Intermediate wallet</div>
+              <a class="addr" href="https://bscscan.com/address/0xA9E5f58E2cff358C7adEE2C6533BdbE1d88ECAc7"
+                target="_blank" rel="noopener">0xA9E5f58E2cff358C7adEE2C6533BdbE1d88ECAc7</a>
+            </div>
+            <div class="link-card">
+              <div class="link-title">First suspected CIGO liquidation wallet</div>
+              <a class="addr" href="https://bscscan.com/address/0x7796067D1786A9572E4db38BfAD682C01b19D512"
+                target="_blank" rel="noopener">0x7796067D1786A9572E4db38BfAD682C01b19D512</a>
+            </div>
+            <div class="link-card">
+              <div class="link-title">BNB transfer-out recipient</div>
+              <a class="addr" href="https://bscscan.com/address/0x075D4045fFF169F37e56A81723697bf0aE1B67B8"
+                target="_blank" rel="noopener">0x075D4045fFF169F37e56A81723697bf0aE1B67B8</a>
+            </div>
+          </div>
+
+          <h3>Second liquidation path</h3>
+          <div class="link-grid">
+            <div class="link-card">
+              <div class="link-title">High-volume upstream funding wallet</div>
+              <a class="addr" href="https://bscscan.com/address/0x64391af2Cdc949013accF8E6e4c2BE12465eeE13"
+                target="_blank" rel="noopener">0x64391af2Cdc949013accF8E6e4c2BE12465eeE13</a>
+            </div>
+            <div class="link-card">
+              <div class="link-title">Intermediate funded wallet</div>
+              <a class="addr" href="https://bscscan.com/address/0xc176A4F2da744B2854B8DBfB0d28d19029C3caF9"
+                target="_blank" rel="noopener">0xc176A4F2da744B2854B8DBfB0d28d19029C3caF9</a>
+            </div>
+            <div class="link-card">
+              <div class="link-title">Intermediate funder to collector wallet</div>
+              <a class="addr" href="https://bscscan.com/address/0xA783bbeFd1F8Bc064387Aac3EebD46873D05d04E"
+                target="_blank" rel="noopener">0xA783bbeFd1F8Bc064387Aac3EebD46873D05d04E</a>
+            </div>
+            <div class="link-card">
+              <div class="link-title">Second CIGO collector / liquidation wallet</div>
+              <a class="addr" href="https://bscscan.com/address/0x3f046d25b658fC29a78f45F4788FdCaf440914bA"
+                target="_blank" rel="noopener">0x3f046d25b658fC29a78f45F4788FdCaf440914bA</a>
+            </div>
+            <div class="link-card">
+              <div class="link-title">Outbound BNB recipient after liquidation</div>
+              <a class="addr" href="https://bscscan.com/address/0x102359f5D1Dfe8041f94f602DDBE4F46D2CAdE29"
+                target="_blank" rel="noopener">0x102359f5D1Dfe8041f94f602DDBE4F46D2CAdE29</a>
+            </div>
+          </div>
+
+          <h3>Other addresses requiring review</h3>
+          <div class="link-grid">
+            <div class="link-card">
+              <div class="link-title">BscScan-labeled ghostswap-exchange.bnb</div>
+              <a class="addr" href="https://bscscan.com/address/0x828Ed2532C62Cd738360A44846DA540C59201FBB"
+                target="_blank" rel="noopener">0x828Ed2532C62Cd738360A44846DA540C59201FBB</a>
+            </div>
+            <div class="link-card">
+              <div class="link-title">PancakeSwap Infinity Vault</div>
+              <a class="addr" href="https://bscscan.com/address/0x238a358808379702088667322f80aC48bAd5e6c4"
+                target="_blank" rel="noopener">0x238a358808379702088667322f80aC48bAd5e6c4</a>
+            </div>
+            <div class="link-card">
+              <div class="link-title">Router / trade contract observed in prior activity</div>
+              <a class="addr" href="https://bscscan.com/address/0x40A1Fe393A7F566F27dF6acE18e6773be844dAfc"
+                target="_blank" rel="noopener">0x40A1Fe393A7F566F27dF6acE18e6773be844dAfc</a>
+            </div>
+            <div class="link-card">
+              <div class="link-title">Suspicious multichain gas-funder / sweeper-pattern address requiring review</div>
+              <a class="addr" href="https://bscscan.com/address/0xB01caEa8c6C47bbf4F4b4c5080Ca642043359C2E"
+                target="_blank" rel="noopener">0xB01caEa8c6C47bbf4F4b4c5080Ca642043359C2E</a>
+            </div>
+          </div>
+
+          <h3>Key transactions</h3>
+          <div class="link-grid">
+            <div class="link-card">
+              <div class="link-title">Unlimited CIGO approval</div>
+              <a class="addr"
+                href="https://bscscan.com/tx/0x467da51304f2304630320a529532c65675bf968414fdb40c51473fca3d80c510"
+                target="_blank" rel="noopener">0x467da51304f2304630320a529532c65675bf968414fdb40c51473fca3d80c510</a>
+            </div>
+            <div class="link-card">
+              <div class="link-title">First main CIGO sale / liquidity extraction</div>
+              <a class="addr"
+                href="https://bscscan.com/tx/0xf674ca013c8b19b17d88044fafafff1b90c24555109c23aa6df9b24843f2599d"
+                target="_blank" rel="noopener">0xf674ca013c8b19b17d88044fafafff1b90c24555109c23aa6df9b24843f2599d</a>
+            </div>
+            <div class="link-card">
+              <div class="link-title">ChangeNOW hot-wallet path</div>
+              <a class="addr"
+                href="https://bscscan.com/tx/0x78e14de34fb4c49c6b002bf8246524d1af8ca76b01edb7fcc154a6d86ae9838f"
+                target="_blank" rel="noopener">0x78e14de34fb4c49c6b002bf8246524d1af8ca76b01edb7fcc154a6d86ae9838f</a>
+            </div>
+            <div class="link-card">
+              <div class="link-title">BNB transferred out</div>
+              <a class="addr"
+                href="https://bscscan.com/tx/0x3a69095a7199074a7e9119e286859e04a4441e07de6022959ffb2dce678182e0"
+                target="_blank" rel="noopener">0x3a69095a7199074a7e9119e286859e04a4441e07de6022959ffb2dce678182e0</a>
+            </div>
+            <div class="link-card">
+              <div class="link-title">Funding transaction into first liquidation wallet</div>
+              <a class="addr"
+                href="https://bscscan.com/tx/0x6feb8349307c63c43cc6faaed1ace63ea5c1ebe362b6562d281d996a0b86c597"
+                target="_blank" rel="noopener">0x6feb8349307c63c43cc6faaed1ace63ea5c1ebe362b6562d281d996a0b86c597</a>
+            </div>
+            <div class="link-card">
+              <div class="link-title">Earlier Crypto.com 5 funding transaction into intermediate wallet</div>
+              <a class="addr"
+                href="https://bscscan.com/tx/0x7ae5bcaacdb62d2098aafdddf37c616646bb20b0a61cc38c04983548a6e4616f"
+                target="_blank" rel="noopener">0x7ae5bcaacdb62d2098aafdddf37c616646bb20b0a61cc38c04983548a6e4616f</a>
+            </div>
+            <div class="link-card">
+              <div class="link-title">Second mass-collection / liquidation transaction</div>
+              <a class="addr"
+                href="https://bscscan.com/tx/0x131706716798bfc8b7d9088ef22925e3a72973c33360439627acda048f5b40fc"
+                target="_blank" rel="noopener">0x131706716798bfc8b7d9088ef22925e3a72973c33360439627acda048f5b40fc</a>
+            </div>
+          </div>
+        </section>
+
+        <section id="notice" class="card">
+          <h2>SEVERE ALERT — Pre-litigation preservation demand, public notice, and escalation request</h2>
+          <p><strong>To MetaMask / Consensys, BNB Chain ecosystem risk systems, HashDit-style scanner providers,
+              Blockaid, GoPlus, CertiK, BNB DappBay, PancakeSwap risk systems, wallet interfaces, swap routers,
+              risk-feed vendors, token-listing entities, exchanges, compliance departments, and all related
+              parties:</strong></p>
+          <p>This is a formal public notice, pre-litigation preservation demand, correction demand, escalation request,
+            and record of continuing harm involving CIGO on BNB Smart Chain.</p>
+          <p>Please escalate this immediately beyond front-line support to legal, compliance, risk, product safety,
+            executive review, and any third-party scanner, wallet-security, risk-feed, routing, exchange, or interface
+            partners involved in labeling, warning, restricting, routing, displaying, suppressing, or otherwise
+            impairing CIGO.</p>
+          <p>This is not an ordinary customer-support issue.</p>
+          <p>This matter now involves:</p>
+          <ul>
+            <li>MetaMask / Consensys-style hostile wallet treatment toward CIGO</li>
+            <li>HashDit-style or third-party scanner / risk-feed influence</li>
+            <li>severe token warnings or malicious / high-risk treatment</li>
+            <li>lack of a clear remediation path</li>
+            <li>online BNB paper-wallet generation</li>
+            <li>approximately 200 paper-wallet-generated wallets drained or implicated</li>
+            <li>approximately 195 non-imported paper-wallet-generated wallets drained or implicated</li>
+            <li>stolen USDT / BSC-USD and CIGO</li>
+            <li>mass collection of CIGO from multiple wallets</li>
+            <li>stolen-token liquidation into public CIGO pools</li>
+            <li>direct CIGO liquidity damage</li>
+            <li>subsequent attacks through different collector wallets</li>
+            <li>two separate CIGO liquidation wallets tied within short funding chains to major upstream wallets,
+              including exchange-labeled or exchange-funded sources</li>
+            <li>post-notice silence from relevant gatekeepers</li>
+            <li>malicious activity escalating after notice, reporting, and public posting</li>
+            <li>conduct that appears retaliatory in nature</li>
+          </ul>
+          <p>This requires preservation, disclosure, correction, compliance review, and legal review.</p>
+        </section>
+
+        <section class="card">
+          <h2>I. Token and project details</h2>
+          <p><strong>Token name:</strong> cosigo market<br>
+            <strong>Symbol:</strong> CIGO<br>
+            <strong>Network:</strong> BNB Smart Chain<br>
+            <strong>CIGO contract:</strong> <a
+              href="https://bscscan.com/token/0x3a38e963f524E0dDFB75dFa1752b4Cd1364F5560" target="_blank"
+              rel="noopener">0x3a38e963f524E0dDFB75dFa1752b4Cd1364F5560</a><br>
+            <strong>Official market site:</strong> <a href="https://market.cosigo.io" target="_blank"
+              rel="noopener">https://market.cosigo.io</a><br>
+            <strong>Official project site:</strong> <a href="https://cosigo.io" target="_blank"
+              rel="noopener">https://cosigo.io</a><br>
+            <strong>Contact site:</strong> <a href="https://contact.cosigo.io" target="_blank"
+              rel="noopener">https://contact.cosigo.io</a>
+          </p>
+          <p>CIGO is a source-verified BNB Chain token with public documentation, official project channels, active
+            project ownership, and an identifiable founder.</p>
+          <p>Despite this, CIGO has been treated by MetaMask / Consensys and/or related third-party risk systems as
+            dangerous, malicious, high-risk, restricted, or otherwise impaired.</p>
+          <p>Repeated attempts to obtain correction, explanation, or a clear remediation path have not produced a
+            specific actionable basis.</p>
+        </section>
+
+        <section class="card">
+          <h2>II. Core public warning</h2>
+          <p>The warning system labeled the victim and failed to stop the theft path.</p>
+          <p>CIGO was treated as the danger while actual malicious activity involving compromised private keys, stolen
+            funds, mass wallet collection, stolen-token liquidation, routing infrastructure, and liquidity damage
+            continued through the ecosystem.</p>
+          <p>The “malicious / high-risk” treatment did not stop the actual malicious actors. It did not protect the
+            victim project. It did not prevent compromised-wallet liquidation. It did not stop stolen CIGO from being
+            sold into public liquidity.</p>
+          <p>Instead, the burden landed on ordinary users, the founder, project reputation, wallet-interface access,
+            liquidity confidence, and market credibility.</p>
+          <div class="warning-line"><strong>That is not user protection. That is a broken gatekeeper system.</strong>
+          </div>
+        </section>
+
+        <section id="major-finding" class="card">
+          <h2>III. Major finding: two CIGO liquidation wallets trace within four or fewer funding layers to large
+            upstream wallets</h2>
+          <p>This is no longer adequately described as random wallet theft, isolated retail activity, or a single
+            compromised user.</p>
+          <p>Two separate CIGO collector / liquidation wallets now trace within a short number of funding layers to
+            large upstream funding sources.</p>
+
+          <h3>First liquidation path</h3>
+          <div class="chain">Crypto.com 5 / exchange-labeled wallet
+            <a href="https://bscscan.com/address/0x625b02b687Ec38f3085Af5B108Dda410775fA76a" target="_blank"
+              rel="noopener">0x625b02b687Ec38f3085Af5B108Dda410775fA76a</a>
+            → intermediate wallet
+            <a href="https://bscscan.com/address/0xA9E5f58E2cff358C7adEE2C6533BdbE1d88ECAc7" target="_blank"
+              rel="noopener">0xA9E5f58E2cff358C7adEE2C6533BdbE1d88ECAc7</a>
+            → first CIGO liquidation wallet
+            <a href="https://bscscan.com/address/0x7796067D1786A9572E4db38BfAD682C01b19D512" target="_blank"
+              rel="noopener">0x7796067D1786A9572E4db38BfAD682C01b19D512</a>
+            → CIGO liquidation into public pools
+          </div>
+
+          <h3>Second liquidation path</h3>
+          <div class="chain">High-volume upstream funding wallet
+            <a href="https://bscscan.com/address/0x64391af2Cdc949013accF8E6e4c2BE12465eeE13" target="_blank"
+              rel="noopener">0x64391af2Cdc949013accF8E6e4c2BE12465eeE13</a>
+            → intermediate wallet
+            <a href="https://bscscan.com/address/0xc176A4F2da744B2854B8DBfB0d28d19029C3caF9" target="_blank"
+              rel="noopener">0xc176A4F2da744B2854B8DBfB0d28d19029C3caF9</a>
+            → intermediate funder
+            <a href="https://bscscan.com/address/0xA783bbeFd1F8Bc064387Aac3EebD46873D05d04E" target="_blank"
+              rel="noopener">0xA783bbeFd1F8Bc064387Aac3EebD46873D05d04E</a>
+            → second CIGO collector / liquidation wallet
+            <a href="https://bscscan.com/address/0x3f046d25b658fC29a78f45F4788FdCaf440914bA" target="_blank"
+              rel="noopener">0x3f046d25b658fC29a78f45F4788FdCaf440914bA</a>
+            → CIGO liquidation into public pools
+          </div>
+
+          <p>BscScan currently shows the second upstream wallet, <a
+              href="https://bscscan.com/address/0x64391af2Cdc949013accF8E6e4c2BE12465eeE13" target="_blank"
+              rel="noopener">0x64391af2Cdc949013accF8E6e4c2BE12465eeE13</a>, as “Funded By: Kraken 186.” If prior
+            screenshots or historical labels show this same address as formerly associated with “Kraken 77,” that label
+            history is also being preserved and should be reviewed.</p>
+          <p>This does not by itself prove that Crypto.com, Kraken, BNB Chain, or any exchange operator committed the
+            theft. But it absolutely creates a major preservation, compliance, and discovery issue.</p>
+          <p>The CIGO liquidation wallets were not isolated, unfunded, random addresses operating in a vacuum. They were
+            funded through short upstream chains connected to very large wallets or exchange-labeled / exchange-funded
+            sources.</p>
+          <div class="warning-line">That is material. It requires preservation, compliance review, discovery, and
+            explanation. Calling this coincidence is no longer adequate.</div>
+        </section>
+
+        <section id="metamask" class="card">
+          <h2>IV. MetaMask / Consensys and hostile CIGO treatment</h2>
+          <p>CIGO has been subjected to severe wallet warnings, risk labels, restrictions, suppression, or hostile
+            interface behavior involving MetaMask / Consensys and/or their risk-feed partners.</p>
+          <p>The problem is not merely that a warning appeared. The problem is that the warning and related conduct
+            caused market-access harm while no clear, specific, verifiable remediation path was provided.</p>
+          <p>Questions requiring preservation and response:</p>
+          <ol>
+            <li>Who or what generated the CIGO risk label?</li>
+            <li>Was the label generated by MetaMask, Consensys, Blockaid, HashDit, GoPlus, CertiK, BNB DappBay,
+              PancakeSwap risk feeds, another vendor, user reports, automated heuristics, or a combination?</li>
+            <li>Was there any human review?</li>
+            <li>Was the review based on verified facts or automated scanner assumptions?</li>
+            <li>Was CIGO given a meaningful opportunity to correct or respond?</li>
+            <li>Why was no specific remediation path provided?</li>
+            <li>Why did the label fail to deter actual malicious actors while impairing the victim project?</li>
+            <li>Were theft-related addresses, collector wallets, routing paths, and liquidation wallets flagged with
+              comparable severity?</li>
+          </ol>
+          <p>If MetaMask / Consensys relied on any third-party risk feed, scanner, or vendor, identify that source and
+            preserve all records.</p>
+        </section>
+
+        <section id="hashdit" class="card">
+          <h2>V. HashDit-style scanner and third-party risk-feed involvement</h2>
+          <p>HashDit and similar token-risk systems appear to influence wallet warnings, token-risk visibility, scanner
+            classifications, and interface behavior in the BNB Chain ecosystem.</p>
+          <p>To the extent HashDit, HashDit-style scoring, or any similar scanner/risk-feed provider contributed to CIGO
+            being labeled, warned against, hidden, restricted, suppressed, or treated as malicious, those records must
+            be preserved.</p>
+          <p>This includes risk-score outputs, scanner findings, token-profile records, API responses, manual review
+            notes, user reports, automated risk flags, blacklist or blocklist entries, partner-feed transmissions,
+            records sent to MetaMask / Consensys, records sent to wallet providers, records sent to swap interfaces, and
+            records sent to BNB Chain-related systems.</p>
+          <p>If HashDit or any similar provider did not contribute to the CIGO label, state that clearly in writing.</p>
+        </section>
+
+        <section id="paperwallet" class="card">
+          <h2>VI. BNB paper-wallet generator and corrected wallet-compromise finding</h2>
+          <p>Wallets were reportedly generated through the online BNB paper-wallet generator:</p>
+          <p><a href="https://bnbpaperwallet.com/" target="_blank" rel="noopener">https://bnbpaperwallet.com/</a></p>
+          <p>The site publicly lists the following BNB donation address:</p>
+          <p><a href="https://bscscan.com/address/0x8388c2A8Ab0bCff5BcB973DccFa1e434160Ab10f" target="_blank"
+              rel="noopener">0x8388c2A8Ab0bCff5BcB973DccFa1e434160Ab10f</a></p>
+          <p>At this stage, I am not stating that the site operator or donation address is conclusively proven to be the
+            theft wallet. However, the site, donation address, and related transaction history are materially relevant
+            because wallets generated through that source later appear to have been compromised.</p>
+          <p>Any wallet generated through that online paper-wallet generator must now be treated as unsafe.</p>
+          <p>Earlier evidence suggested that the affected wallets might be limited to imported private-key wallets. That
+            is no longer accurate.</p>
+          <p>Updated evidence now shows that approximately 200 wallets generated through the online BNB paper-wallet
+            generator were drained or implicated, including approximately 195 wallets that had not been imported into
+            Rabby / MetaMask.</p>
+          <p>That materially changes the analysis.</p>
+          <p>The compromise is no longer reasonably explained only by wallet import, clipboard exposure,
+            browser-extension exposure during import, or local wallet-software handling. The larger pattern now points
+            much more directly to the wallet-generation source itself, or to private keys being exposed at or near the
+            point of generation, display, QR rendering, printing, source-code execution, entropy creation, domain
+            operation, repository compromise, malicious script injection, or related infrastructure.</p>
+          <p>The corrected pattern is:</p>
+          <ul>
+            <li>Paper-wallet-generated wallets: drained / implicated</li>
+            <li>Imported paper-wallet-generated wallets: drained</li>
+            <li>Non-imported paper-wallet-generated wallets: also drained / implicated</li>
+            <li>Seed-derived wallets not generated through that site: separate category, not part of this specific
+              finding</li>
+          </ul>
+          <p>This correction is important because it supports a wallet-generation compromise theory, not merely an
+            import-exposure theory.</p>
+          <p>Additional wallet lists and transaction evidence are being preserved separately because the affected set is
+            now approximately 200 paper-wallet-generated wallets.</p>
+          <p>Known direct crypto damage is now approximately $1,000 and still being documented. This includes stolen
+            USDT / BSC-USD, stolen CIGO, and related liquidity damage.</p>
+          <p>The immediate amount is not the central issue. The central issue is that the system labeled the victim
+            project while actual wallet-drain and liquidation activity continued.</p>
+        </section>
+
+        <section id="first-path" class="card">
+          <h2>VII–VIII. First CIGO liquidation path and upstream funding chain</h2>
+          <p><strong>First suspected CIGO liquidation wallet:</strong> <a
+              href="https://bscscan.com/address/0x7796067D1786A9572E4db38BfAD682C01b19D512" target="_blank"
+              rel="noopener">0x7796067D1786A9572E4db38BfAD682C01b19D512</a></p>
+          <p>The first main liquidation transaction appears to have sold approximately 26,581 CIGO through routing and
+            affected both CIGO pools. The observed activity included CIGO being sent into the CIGO/WBNB and CIGO/BSC-USD
+            pools while WBNB and BSC-USD value was extracted.</p>
+          <p>This damaged CIGO liquidity and market behavior. This was not voluntary project selling. It was not
+            ordinary liquidity management. It appears to be theft-related liquidation from compromised
+            paper-wallet-generated wallets.</p>
+          <p>A funding chain has been identified upstream of the first CIGO liquidation wallet.</p>
+          <div class="chain">Crypto.com 5 / exchange-labeled wallet
+            <a href="https://bscscan.com/address/0x625b02b687Ec38f3085Af5B108Dda410775fA76a" target="_blank"
+              rel="noopener">0x625b02b687Ec38f3085Af5B108Dda410775fA76a</a>
+            → intermediate wallet
+            <a href="https://bscscan.com/address/0xA9E5f58E2cff358C7adEE2C6533BdbE1d88ECAc7" target="_blank"
+              rel="noopener">0xA9E5f58E2cff358C7adEE2C6533BdbE1d88ECAc7</a>
+            → first suspected CIGO liquidation wallet
+            <a href="https://bscscan.com/address/0x7796067D1786A9572E4db38BfAD682C01b19D512" target="_blank"
+              rel="noopener">0x7796067D1786A9572E4db38BfAD682C01b19D512</a>
+          </div>
+          <p>This does not by itself prove Crypto.com wrongdoing. But it creates a major centralized-exchange funding
+            touchpoint that must be preserved and reviewed.</p>
+        </section>
+
+        <section id="second-path" class="card">
+          <h2>IX–XI. Second mass-collection attack and upstream funding chain</h2>
+          <p>After initial mitigation and blacklisting of known addresses, additional activity was observed.</p>
+          <p>A later pattern shows many source wallets sending CIGO to a new collector / liquidation wallet:</p>
+          <p><a href="https://bscscan.com/address/0x3f046d25b658fC29a78f45F4788FdCaf440914bA" target="_blank"
+              rel="noopener">0x3f046d25b658fC29a78f45F4788FdCaf440914bA</a></p>
+          <p>The key transaction is <a
+              href="https://bscscan.com/tx/0x131706716798bfc8b7d9088ef22925e3a72973c33360439627acda048f5b40fc"
+              target="_blank" rel="noopener">0x131706716798bfc8b7d9088ef22925e3a72973c33360439627acda048f5b40fc</a>.</p>
+          <table>
+            <thead>
+              <tr>
+                <th>Observed item</th>
+                <th>Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>CIGO routed into CIGO / BSC-USD pool</td>
+                <td>18,489.950215928376206222 CIGO</td>
+              </tr>
+              <tr>
+                <td>CIGO routed into CIGO / WBNB pool</td>
+                <td>44,839.70773823929888598 CIGO</td>
+              </tr>
+              <tr>
+                <td>Additional CIGO transfer</td>
+                <td>130.342045832324907798 CIGO to <a
+                    href="https://bscscan.com/address/0x2B1B5E58C096d4ab402FEfBaa65f2b1Ddc399399" target="_blank"
+                    rel="noopener">0x2B1B5E58C096d4ab402FEfBaa65f2b1Ddc399399</a></td>
+              </tr>
+              <tr>
+                <td>Total visible CIGO sent in the transaction</td>
+                <td>63,460 CIGO</td>
+              </tr>
+            </tbody>
+          </table>
+          <p>This looked like mass collection followed by liquidation.</p>
+          <div class="chain">Many source wallets
+            → one collector wallet
+            → large CIGO dump
+            → both public CIGO pools impacted
+            → WBNB / BSC-USD extracted
+            → BNB proceeds moved onward</div>
+          <p>A second upstream funding chain has been identified:</p>
+          <div class="chain">High-volume upstream funding wallet
+            <a href="https://bscscan.com/address/0x64391af2Cdc949013accF8E6e4c2BE12465eeE13" target="_blank"
+              rel="noopener">0x64391af2Cdc949013accF8E6e4c2BE12465eeE13</a>
+            → intermediate funded wallet
+            <a href="https://bscscan.com/address/0xc176A4F2da744B2854B8DBfB0d28d19029C3caF9" target="_blank"
+              rel="noopener">0xc176A4F2da744B2854B8DBfB0d28d19029C3caF9</a>
+            → intermediate funder to collector wallet
+            <a href="https://bscscan.com/address/0xA783bbeFd1F8Bc064387Aac3EebD46873D05d04E" target="_blank"
+              rel="noopener">0xA783bbeFd1F8Bc064387Aac3EebD46873D05d04E</a>
+            → second CIGO collector / liquidation wallet
+            <a href="https://bscscan.com/address/0x3f046d25b658fC29a78f45F4788FdCaf440914bA" target="_blank"
+              rel="noopener">0x3f046d25b658fC29a78f45F4788FdCaf440914bA</a>
+          </div>
+          <p>BscScan currently shows the high-volume upstream wallet as funded by Kraken 186. If historical evidence
+            shows the same address previously associated with Kraken 77, that label history should also be preserved and
+            reviewed.</p>
+          <p>This does not by itself prove Kraken wrongdoing. But it creates a second major exchange-related upstream
+            funding touchpoint requiring preservation and compliance review.</p>
+          <h3>Layering concern</h3>
+          <p>The second CIGO liquidation path does not begin from a small isolated wallet. It traces through several
+            funding layers to a high-volume BNB wallet currently shown by BscScan as funded by Kraken 186.</p>
+          <p>The existence of multiple intermediary wallets does not eliminate relevance. It increases the need to
+            review whether this was innocent customer funding, automated distribution, laundering-style layering,
+            coordinated funding infrastructure, or knowing use of exchange-linked funding paths.</p>
+          <p>The fact pattern now requires preservation of exchange records, funding records, KYC-linked account records
+            where legally available, API logs, withdrawal records, deposit records, internal risk flags, and all
+            compliance records connected to the upstream wallet and downstream liquidation path.</p>
+        </section>
+
+        <section id="two-chains" class="card">
+          <h2>XII. Why the two funding chains are significant</h2>
+          <p>There are now two separate CIGO liquidation paths with upstream funding links to large exchange-related or
+            high-volume funding sources within a short number of wallet layers.</p>
+          <table>
+            <thead>
+              <tr>
+                <th>Path</th>
+                <th>Observed chain</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>First path</td>
+                <td>Crypto.com 5 → 0xA9E5f58E2cff358C7adEE2C6533BdbE1d88ECAc7 →
+                  0x7796067D1786A9572E4db38BfAD682C01b19D512 → CIGO liquidation into public pools</td>
+              </tr>
+              <tr>
+                <td>Second path</td>
+                <td>0x64391af2Cdc949013accF8E6e4c2BE12465eeE13 → 0xc176A4F2da744B2854B8DBfB0d28d19029C3caF9 →
+                  0xA783bbeFd1F8Bc064387Aac3EebD46873D05d04E → 0x3f046d25b658fC29a78f45F4788FdCaf440914bA → CIGO
+                  liquidation into public pools</td>
+              </tr>
+            </tbody>
+          </table>
+          <p>This is no longer adequately described as one random wallet theft.</p>
+          <p>The evidence now supports the conclusion that CIGO suffered repeated funded wallet collection and
+            liquidation activity, using different wallets, different paths, and collector/liquidation addresses that
+            were not far removed from large upstream funding sources.</p>
+          <p>This must be treated as a serious investigation issue.</p>
+        </section>
+
+        <section id="mitigation" class="card">
+          <h2>XIII. Post-incident mitigation</h2>
+          <p>After the first identified liquidation event, the following addresses were blacklisted as emergency
+            mitigation:</p>
+          <ul class="plain-list">
+            <li><a href="https://bscscan.com/address/0x7796067D1786A9572E4db38BfAD682C01b19D512" target="_blank"
+                rel="noopener">0x7796067D1786A9572E4db38BfAD682C01b19D512</a></li>
+            <li><a href="https://bscscan.com/address/0x828Ed2532C62Cd738360A44846DA540C59201FBB" target="_blank"
+                rel="noopener">0x828Ed2532C62Cd738360A44846DA540C59201FBB</a></li>
+          </ul>
+          <p>After those actions, the pool appeared temporarily stable. Subsequent activity suggests that the attacker
+            or attackers may be rotating through additional wallets or collector addresses.</p>
+          <p><strong>Important:</strong> no legitimate pool, router, or ordinary trading infrastructure should be
+            blacklisted without careful review. Mitigation is directed at suspected theft-related wallets and
+            collector/liquidation addresses, not normal market participants.</p>
+        </section>
+
+        <section id="silence" class="card">
+          <h2>XIV. Notice, silence, and post-notice conduct</h2>
+          <p>Notice was given.</p>
+          <p>Addresses were identified. Transactions were identified. Drained wallets were identified. CIGO pools were
+            identified. Risk-labeling harm was identified. Paper-wallet generator evidence was identified. Funding
+            chains were identified. Preservation was requested. Correction was requested. Escalation was requested. The
+            issue was posted publicly.</p>
+          <p>Crypto gatekeepers did not meaningfully respond.</p>
+          <p>No clear explanation was provided. No clear correction path was provided. No preservation confirmation was
+            provided. No meaningful accountability was provided.</p>
+          <p>After notice was given, after malicious-label reporting occurred, and after the issue was posted publicly,
+            additional wallet-drain, collection, and liquidity-attack activity was observed.</p>
+          <p>That timing is material. This timing is not being treated as coincidence.</p>
+          <div class="warning-line">The post-notice and post-publication activity appears retaliatory in nature. At
+            minimum, it supports investigation into whether the activity was coordinated, knowingly enabled,
+            functionally coordinated through shared infrastructure, or carried out by actors with knowledge of the
+            public reporting and preservation demands.</div>
+          <p>Once notice was given and the evidence trail was identified, the attacks did not stop. They escalated. That
+            is now part of the record.</p>
+        </section>
+
+        <section id="failure" class="card">
+          <h2>XV. The warning system failed its stated purpose</h2>
+          <p>The severe CIGO warnings did not stop the actual malicious actors.</p>
+          <p>The malicious / high-risk label did not deter the drainers. It did not prevent compromised wallets from
+            being emptied. It did not prevent mass collection of CIGO. It did not prevent stolen CIGO from being sold
+            into liquidity pools. It did not protect CIGO, users, liquidity, or the founder.</p>
+          <p>The actors with compromised keys used direct transactions, scripts, routers, collectors, funding chains,
+            and liquidity pools. A warning label does not deter someone already operating with stolen private keys.</p>
+          <p>Instead, the warning burden appears to have landed on ordinary users, the founder, project reputation,
+            liquidity confidence, wallet-interface access, token visibility, and market credibility.</p>
+          <p>This raises a serious question: did the risk-labeling system protect users, or did it function as a
+            market-access impairment against the victim project while actual theft-related activity continued?</p>
+        </section>
+
+        <section id="coordination" class="card">
+          <h2>XVI. Interconnected harm and coordination hypothesis requiring discovery</h2>
+          <p>This matter presents a substantial contradiction requiring immediate review.</p>
+          <p>CIGO was treated as dangerous, malicious, high-risk, or impaired by wallet/interface/scanner systems. Yet
+            the actual harm arose from compromised private keys, unauthorized wallet draining, mass wallet collection,
+            stolen-token liquidation, upstream funding chains, and movement through routing/swap infrastructure.</p>
+          <p>The apparent result:</p>
+          <ul>
+            <li>CIGO was labeled or restricted.</li>
+            <li>The founder and project suffered reputational and operational harm.</li>
+            <li>Approximately 200 paper-wallet-generated wallets were drained or implicated.</li>
+            <li>Approximately 195 non-imported paper-wallet-generated wallets were drained or implicated.</li>
+            <li>Stolen CIGO and USDT / BSC-USD were taken.</li>
+            <li>Stolen or unauthorized CIGO was sold into public liquidity.</li>
+            <li>CIGO liquidity and price behavior were damaged.</li>
+            <li>Additional collector wallets appeared after initial mitigation.</li>
+            <li>Two liquidation paths now trace within a short number of wallet layers to large upstream funding
+              sources.</li>
+            <li>The actual theft path appears to have remained operational.</li>
+            <li>The affected project received warnings and friction while theft-related activity appears not to have
+              received comparable visible enforcement.</li>
+          </ul>
+          <p>Based on the timeline, wallet-labeling behavior, scanner/risk-feed influence, liquidity placement, funding
+            paths, post-notice silence, post-publication escalation, and subsequent wallet-drain/liquidity-attack
+            activity, the evidence supports a serious coordination hypothesis.</p>
+          <p>This is not being presented as a final legal conclusion before discovery. It is being presented as a
+            preservation and investigation demand.</p>
+          <p>There are only a few plausible explanations:</p>
+          <ol>
+            <li>Direct coordination between wallet, scanner, risk-feed, exchange, and ecosystem actors.</li>
+            <li>Functional coordination through shared third-party feeds, scanner APIs, blocklists, automated models,
+              funding infrastructure, or token-risk databases.</li>
+            <li>Negligent or reckless reliance on defective scanner data that materially impaired CIGO.</li>
+            <li>Selective enforcement, where CIGO was labeled and impaired while actual theft-related wallets and
+              liquidation paths remained operational.</li>
+            <li>Post-notice failure to preserve, correct, review, or meaningfully respond despite identified addresses,
+              transactions, pools, drained wallets, funding chains, and ongoing harm.</li>
+            <li>Retaliatory post-notice and post-publication activity against the affected project.</li>
+          </ol>
+          <p>That sequence requires discovery.</p>
+        </section>
+
+        <section id="preservation" class="card">
+          <h2>XVII–XVIII. Required preservation and address review</h2>
+          <p>You are hereby requested to preserve all documents, data, logs, communications, records, and electronically
+            stored information relating to CIGO, COSIGO, the CIGO contract, project websites, CIGO risk scores, scanner
+            results, wallet warnings, token-list decisions, routing restrictions, swap-interface treatment, third-party
+            scanner inputs, HashDit or HashDit-style records, MetaMask / Consensys internal review records, Blockaid
+            records, GoPlus records, CertiK records, BNB DappBay records, PancakeSwap risk-feed records,
+            Crypto.com-related funding records, Kraken-related funding records, support tickets and chat transcripts,
+            manual review notes, API responses, wallet-warning triggers, blacklist / blocklist / allowlist records,
+            routing decisions, suppression, hiding, blocking, warning, or restriction decisions, drained source wallets,
+            approximately 200 paper-wallet-generated wallets now drained or implicated, suspected liquidation wallets,
+            collector wallets, upstream funding wallets, exchange-labeled wallets, BNB transfer-out recipients,
+            GhostSwap-labeled addresses, ChangeNOW-related paths, bnbpaperwallet.com, the bnbpaperwallet.com donation
+            address, the first liquidation transaction, the second mass-collection transaction, and all records relating
+            to post-notice or post-publication activity involving CIGO.</p>
+          <p>This preservation demand includes temporary logs, automated scoring outputs, risk-feed records, internal
+            communications, third-party vendor communications, audit trails, decision records, customer-support records,
+            compliance records, exchange funding records, KYC-linked records where legally available, and any records
+            otherwise subject to deletion, rotation, expiration, or overwriting.</p>
+          <p>Destruction, alteration, non-preservation, or failure to suspend routine deletion after notice may give
+            rise to spoliation issues.</p>
+        </section>
+
+        <section id="response" class="card">
+          <h2>XIX–XX. Required response and requested corrective action</h2>
+          <p>Please provide a written response addressing:</p>
+          <ol>
+            <li>Whether CIGO is or was labeled, warned against, suppressed, restricted, hidden, blocked, or otherwise
+              impaired by your system.</li>
+            <li>The exact basis for any such label, warning, restriction, suppression, or impairment.</li>
+            <li>Whether the label was generated manually, automatically, or through a third-party feed.</li>
+            <li>Whether HashDit, Blockaid, GoPlus, CertiK, BNB DappBay, PancakeSwap risk systems, or any other
+              third-party vendor contributed to the label.</li>
+            <li>Whether MetaMask / Consensys relied on any third-party risk feed, scanner, automated model, or vendor.
+            </li>
+            <li>Whether the drained wallets, suspected liquidation wallets, collector wallets, exchange-funded paths,
+              GhostSwap-labeled address, ChangeNOW-related path, suspicious gas-funder address, or paper-wallet donation
+              address were flagged with comparable severity.</li>
+            <li>Whether any human reviewed the CIGO label before or after correction requests were made.</li>
+            <li>Why no specific remediation path has been provided.</li>
+            <li>Whether records have been preserved.</li>
+            <li>What corrective action will be taken.</li>
+            <li>Who is responsible for follow-up at the legal, compliance, risk, exchange, or executive level.</li>
+          </ol>
+          <p>I request that all relevant parties preserve records immediately, correct any false or unsupported CIGO
+            risk label, identify the exact source of the CIGO label, explain third-party scanner/risk-feed reliance,
+            explain why the actual theft path was not visibly restricted with comparable severity, distinguish
+            theft-related liquidation from legitimate CIGO project activity, review bnbpaperwallet.com and its listed
+            donation address, review all drained source wallets, review the approximately 200 paper-wallet-generated
+            wallets now drained or implicated, review all known collector and liquidation wallets, review the two
+            upstream funding chains now identified, review the mass-collection pattern involving hundreds of
+            transactions, review post-notice and post-publication activity for retaliatory character, provide a real
+            remediation path for CIGO, and confirm whether prior support communications, chats, and internal notes have
+            been preserved.</p>
+        </section>
+
+        <section id="nowaiver" class="card">
+          <h2>XXI. No waiver</h2>
+          <p>Nothing in this notice constitutes a waiver of rights, remedies, claims, privileges, or future legal
+            action.</p>
+          <p>I reserve all rights relating to business disparagement, tortious interference, negligence, unfair or
+            deceptive practices, defective risk classification, failure to correct known false or misleading statements,
+            market-access interference, selective enforcement, coordinated or functionally coordinated harm,
+            retaliation, and any related causes of action that may become apparent through investigation, preservation,
+            subpoena, discovery, exchange review, or regulatory review.</p>
+          <p>The immediate financial loss is not the only issue. The broader issue is whether powerful wallet, scanner,
+            exchange, routing, and risk-labeling infrastructure can damage a lawful, source-verified token project while
+            failing to provide comparable protection against actual theft-related activity.</p>
+          <p>Please treat this matter with urgency.</p>
+          <p>Silence, generic responses, refusal to provide the basis for the label, or failure to preserve records will
+            be preserved as part of the record.</p>
+          <p><strong>Sincerely,</strong><br>
+            Wendall Gregory Wilson<br>
+            Founder / Owner, COSIGO<br>
+            <a href="https://cosigo.io" target="_blank" rel="noopener">https://cosigo.io</a><br>
+            <a href="https://market.cosigo.io" target="_blank" rel="noopener">https://market.cosigo.io</a><br>
+            <a href="https://contact.cosigo.io" target="_blank" rel="noopener">https://contact.cosigo.io</a>
+          </p>
+        </section>
+      </article>
+    </div>
+  </main>
+
+    <footer class="security-footer">
+        <div class="security-footer-card">
+            <div class="security-footer-copy">
+                <strong>Publication note</strong>
+                This page contains a public notice and preservation demand.
+                It distinguishes observable on-chain records from allegations requiring discovery.
+            </div>
+
+            <nav class="security-footer-links" aria-label="Official COSIGO and CIGO links">
+                <a href="https://cosigo.io/">COSIGO official</a>
+                <a href="https://market.cosigo.io/">CIGO market notice</a>
+                <a href="https://trade.cosigo.io/">CIGO swaps</a>
+                <a href="https://token.cosigo.io/">CIGO token</a>
+                <a href="https://contact.cosigo.io/">Contact</a>
+                <a href="https://labels.cosigo.io/">Public labels</a>
+                <a href="https://trade.cosigo.io/appendix.html">site appendix / quick reference</a>
+                <a href="https://dexscreener.com/bsc/0xded1e63b6262c0328876b7774f65c08505dd559a"
+                   target="_blank" rel="noopener">DEX Screener chart only ↗</a>
+                <a href="https://github.com/cosigo"
+                   target="_blank" rel="noopener">GitHub ↗</a>
+            </nav>
+
+            <p class="security-footer-note">
+                DEX Screener is provided for chart and reference purposes only.
+                Use trade.cosigo.io for swaps.
+            </p>
+        </div>
+    </footer>
+
+
+<script id="snakepit-single-topbar-js">
+  (() => {
+    const ready = (fn) => {
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", fn);
+      } else {
+        fn();
+      }
+    };
+
+    ready(() => {
+      const menuButton = document.querySelector(".market-nav-toggle");
+      const menuNav = document.querySelector(".market-header-nav");
+
+      if (!menuButton || !menuNav) return;
+
+      menuButton.addEventListener("click", () => {
+        const open = menuNav.classList.toggle("is-open");
+        menuButton.setAttribute("aria-expanded", open ? "true" : "false");
+      });
+
+      document.addEventListener("click", (event) => {
+        if (!menuNav.classList.contains("is-open")) return;
+        if (menuButton.contains(event.target) || menuNav.contains(event.target)) return;
+
+        menuNav.classList.remove("is-open");
+        menuButton.setAttribute("aria-expanded", "false");
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key !== "Escape") return;
+
+        menuNav.classList.remove("is-open");
+        menuButton.setAttribute("aria-expanded", "false");
+      });
+    });
+  })();
+</script>
+
+</body>
+
+</html>

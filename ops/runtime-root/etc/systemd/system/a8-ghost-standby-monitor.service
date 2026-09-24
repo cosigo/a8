@@ -1,0 +1,31 @@
+[Unit]
+Description=A8 Ghost Read-Only Hot Standby Mapping Monitor
+After=a8-shadow-ghost.service a8-core20.service
+Requires=a8-shadow-ghost.service
+
+[Service]
+Type=simple
+User=greg
+Group=greg
+
+ExecStart=/usr/bin/python3 /usr/local/sbin/a8-ghost-standby-monitor.py
+
+Restart=no
+
+NoNewPrivileges=true
+PrivateTmp=true
+PrivateDevices=true
+ProtectSystem=strict
+ProtectHome=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictSUIDSGID=true
+RestrictNamespaces=true
+LockPersonality=true
+CapabilityBoundingSet=
+AmbientCapabilities=
+RestrictAddressFamilies=AF_INET
+
+[Install]
+WantedBy=multi-user.target

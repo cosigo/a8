@@ -1,0 +1,284 @@
+#!/usr/bin/env bash
+set -u
+
+MANIFEST=/etc/a8-web-tombstones.tsv
+CADDY=/etc/caddy/Caddyfile
+FAIL=0
+REPO=""
+
+if [ "${1:-}" = "--repo" ]; then
+    REPO="${2:-}"
+
+    if [ -z "$REPO" ] || [ ! -d "$REPO" ]; then
+        echo "FAIL · --repo requires an existing directory"
+        exit 2
+    fi
+fi
+
+pass() {
+    echo "PASS · $*"
+}
+
+fail() {
+    echo "FAIL · $*"
+    FAIL=1
+}
+
+echo "===== A8 WEB TOMBSTONE GUARD ====="
+
+while IFS='|' read -r KIND A B C D EXTRA; do
+    [ -n "${KIND:-}" ] || continue
+
+    case "$KIND" in
+        \#*)
+            continue
+            ;;
+
+        FORBID_FILE)
+            if [ -e "$A" ]; then
+                fail "forbidden retired-web artifact exists: $A"
+            else
+                pass "buried: $A"
+            fi
+            ;;
+
+        CANONICAL_FILE)
+            if [ -f "$A" ]; then
+                pass "canonical exists: $A"
+            else
+                fail "canonical missing: $A"
+            fi
+            ;;
+
+        PROTECT_FILE)
+            if [ -f "$A" ]; then
+                pass "protected exception exists: $A"
+            else
+                fail "protected exception missing: $A"
+            fi
+            ;;
+
+        REPO_FORBID)
+            if [ -n "$REPO" ]; then
+                if [ -e "$REPO/$A" ]; then
+                    fail "Git retired-web artifact exists: $A"
+                else
+                    pass "Git retired-web artifact absent: $A"
+                fi
+            fi
+            ;;
+
+        REPO_REQUIRE)
+            if [ -n "$REPO" ]; then
+                if [ -f "$REPO/$A" ]; then
+                    pass "Git canonical exists: $A"
+                else
+                    fail "Git canonical missing: $A"
+                fi
+            fi
+            ;;
+
+        TOMBSTONE)
+            HDR="$(mktemp)"
+
+            if ! curl -k -sS \
+                --resolve "$A:443:127.0.0.1" \
+                -o /dev/null \
+                -D "$HDR" \
+                "https://$A$B"
+            then
+                fail "origin request failed: $A$B"
+                rm -f "$HDR"
+                continue
+            fi
+
+            CODE="$(
+                awk '
+                  /^HTTP\// { code=$2 }
+                  END { print code }
+                ' "$HDR"
+            )"
+
+            LOC="$(
+                awk '
+                  BEGIN { IGNORECASE=1 }
+                  /^location:/ {
+                    sub(/\r$/, "")
+                    sub(/^[^:]*:[[:space:]]*/, "")
+                    print
+                    exit
+                  }
+                ' "$HDR"
+            )"
+
+            rm -f "$HDR"
+
+            if [ "$CODE" != "$D" ]; then
+                fail "$A$B expected HTTP $D, got $CODE"
+                continue
+            fi
+
+            if [ "$C" = "/" ]; then
+                if [ "$LOC" != "/" ] &&
+                   [ "$LOC" != "https://$A/" ]; then
+                    fail "$A$B wrong Location: ${LOC:-NONE}"
+                    continue
+                fi
+            else
+                if [ "$LOC" != "$C" ]; then
+                    fail "$A$B wrong Location: ${LOC:-NONE}"
+                    continue
+                fi
+            fi
+
+            pass "$A$B -> $C [$D]"
+            ;;
+    esac
+done < "$MANIFEST"
+
+echo
+echo "===== DEAD ABOUT LINK SCAN ====="
+
+if grep -RInE \
+    --include='*.html' \
+    'https?://a8\.cosigo\.io/about\.html' \
+    /srv/sites 2>/dev/null
+then
+    fail "absolute dead A8 About reference returned"
+else
+    pass "absolute dead A8 About references = 0"
+fi
+
+if python3 - <<'PY'
+from pathlib import Path
+import re, sys
+
+root = Path("/srv/sites/a8.cosigo.io/public")
+rx = re.compile(
+    r'''href=["'](?:\./)?about\.html(?:[?#][^"']*)?["']''',
+    re.I
+)
+
+bad = []
+
+if root.exists():
+    for p in root.rglob("*.html"):
+        try:
+            s = p.read_text(errors="replace")
+        except Exception:
+            continue
+
+        if rx.search(s):
+            bad.append(str(p))
+
+if bad:
+    for p in bad:
+        print(p)
+    sys.exit(1)
+PY
+then
+    pass "relative A8 About ghost links = 0"
+else
+    fail "relative A8 About ghost links returned"
+fi
+
+echo
+echo "===== PROTECTED ARCHITECTURE ====="
+
+if python3 - "$CADDY" <<'PY'
+from pathlib import Path
+import re, sys
+
+s = Path(sys.argv[1]).read_text()
+
+def block(host):
+    m = re.search(
+        rf"(?m)^{re.escape(host)} \{{$",
+        s
+    )
+
+    if not m:
+        raise SystemExit(f"missing host block: {host}")
+
+    depth = 0
+
+    for i in range(m.start(), len(s)):
+        if s[i] == "{":
+            depth += 1
+        elif s[i] == "}":
+            depth -= 1
+            if depth == 0:
+                return s[m.start():i+1]
+
+    raise SystemExit(f"unterminated host block: {host}")
+
+ce = block("ce.cosigo.io")
+tel = block("telescope.cosigo.io")
+
+if "basic_auth" not in ce:
+    raise SystemExit("CE basic_auth missing")
+
+if "rewrite * /chief-engineer.html" not in ce:
+    raise SystemExit("CE landing contract changed")
+
+if (
+    "root * /srv/apps/a8_time_lab_v5_4_20_postseal_hw/public"
+    not in tel
+):
+    raise SystemExit("Telescope active /srv/apps root changed")
+
+if "rewrite * /telescope.html" not in tel:
+    raise SystemExit("Telescope active landing contract changed")
+
+print("CE protected contract present")
+print("Telescope protected contract present")
+PY
+then
+    pass "CE + Telescope protected contracts intact"
+else
+    fail "protected architecture changed"
+fi
+
+echo
+echo "===== CANONICAL ROOT HEALTH ====="
+
+for HOST in \
+    a8.cosigo.io \
+    about.cosigo.io \
+    angle.cosigo.io \
+    audio.cosigo.io \
+    calendar.cosigo.io \
+    clock.cosigo.io \
+    composer.cosigo.io \
+    data.cosigo.io \
+    mintaka.cosigo.io \
+    moons.cosigo.io \
+    quartz.cosigo.io \
+    sol.cosigo.io
+do
+    CODE="$(
+        curl -k -sS \
+          --resolve "$HOST:443:127.0.0.1" \
+          -o /dev/null \
+          -w '%{http_code}' \
+          "https://$HOST/" \
+          2>/dev/null
+    )"
+
+    if [ "$CODE" = 200 ]; then
+        pass "$HOST root = 200"
+    else
+        fail "$HOST root = $CODE"
+    fi
+done
+
+echo
+echo "===== RESULT ====="
+
+if [ "$FAIL" -eq 0 ]; then
+    echo "A8_WEB_TOMBSTONE_GUARD=PASS"
+    exit 0
+fi
+
+echo "A8_WEB_TOMBSTONE_GUARD=FAIL"
+exit 1

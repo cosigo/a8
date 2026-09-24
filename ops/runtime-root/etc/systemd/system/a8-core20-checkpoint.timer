@@ -1,0 +1,10 @@
+[Unit]
+Description=A8 Core20 Hourly Operating Checkpoint
+
+[Timer]
+OnCalendar=hourly
+Persistent=true
+Unit=a8-core20-checkpoint.service
+
+[Install]
+WantedBy=timers.target

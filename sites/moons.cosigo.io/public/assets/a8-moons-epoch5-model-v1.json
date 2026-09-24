@@ -1,0 +1,61 @@
+{
+  "schema": "A8-MOONS-EPOCH5-MODEL-V1",
+  "status": "READY",
+  "sourceEpoch": 5,
+  "phaseConvention": {
+    "EAST": 0,
+    "WEST": 256,
+    "WRAP": 512
+  },
+  "browserInterpolationRawPerSecond": 30.397024704602362,
+  "browserInterpolationRole": "DISPLAY_SMOOTHING_ONLY_NOT_AUTHORITY",
+  "modeContract": {
+    "oneX": "SKY_NOW_LIVE_PREDICTION",
+    "nonOneX": "SIMULATION_NOT_CURRENT_SKY",
+    "returnToOneX": "DISCARD_SIMULATION_AND_FETCH_FRESH_EPOCH5_RAW"
+  },
+  "authority": {
+    "readOnly": true,
+    "writesCore20": false,
+    "writesPhysicalCounter": false,
+    "ongoingExternalAstronomy": false
+  },
+  "sourceHashes": {
+    "fiveBodyV2": "77eb2c5029886ed5bd5261746fe02b95f16580b76b5fef9c3d645d2dc0bb08ad",
+    "callisto": "670176e15d9177db3a320e87fc6a9b892d43072c48f4f94e8847c5baf5f27b4a"
+  },
+  "bodies": {
+    "IO": {
+      "anchorRaw": 850032359,
+      "anchorPhaseQ32": 1707479787542,
+      "eastToWest": 2323549,
+      "westToEast": 2327196,
+      "fullOrbit": 4650745,
+      "role": "SEALED_JUPITER_RELATIVE_PREDICTION"
+    },
+    "EUROPA": {
+      "anchorRaw": 850032359,
+      "anchorPhaseQ32": 270887770426,
+      "eastToWest": 4674200,
+      "westToEast": 4669713,
+      "fullOrbit": 9344598,
+      "role": "SEALED_JUPITER_RELATIVE_PREDICTION"
+    },
+    "GANYMEDE": {
+      "anchorRaw": 850032359,
+      "anchorPhaseQ32": 103776710152,
+      "eastToWest": 9414972,
+      "westToEast": 9451448,
+      "fullOrbit": 18866420,
+      "role": "SEALED_JUPITER_RELATIVE_PREDICTION"
+    },
+    "CALLISTO": {
+      "anchorRaw": 850775379,
+      "anchorPhase": 487.0138153619266,
+      "eastToWest": 22040883,
+      "westToEast": 22205027,
+      "fullOrbit": 44245909,
+      "role": "SLOW_CALIBRATION_OFFSET_WITNESS"
+    }
+  }
+}

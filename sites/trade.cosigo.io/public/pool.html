@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <title>CIGO Pool Status — COSIGO</title>
+  <meta name="description"
+    content="Official CIGO pool status page showing live CIGO pool liquidity, reserve information, and public COSIGO trade links.">
+  <meta name="author" content="COSIGO">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://trade.cosigo.io/pool.html">
+  <meta name="keywords"
+    content="CIGO, COSIGO, pool status, BNB Smart Chain, PancakeSwap, CIGO liquidity, BSC-USD, USDT">
+
+  <link rel="icon" type="image/png" sizes="256x256" href="/shared/assets/icons/cigo_256.png?v=20260613">
+  <link rel="apple-touch-icon" sizes="256x256" href="/shared/assets/icons/cigo_256.png?v=20260613">
+
+  <meta property="og:title" content="CIGO Pool Status — COSIGO">
+  <meta property="og:description"
+    content="Official CIGO pool status page showing live CIGO pool liquidity, reserve information, and public COSIGO trade links.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="COSIGO">
+  <meta property="og:url" content="https://trade.cosigo.io/pool.html">
+  <meta property="og:image" content="https://trade.cosigo.io/shared/assets/icons/cigo_256.png">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="CIGO Pool Status — COSIGO">
+  <meta name="twitter:description"
+    content="Official CIGO pool status page showing live CIGO liquidity and reserve information.">
+  <meta name="twitter:image" content="https://trade.cosigo.io/shared/assets/icons/cigo_256.png">
+
+  <link rel="stylesheet" href="/shared/assets/trade.css?v=20260627-222300">
+  <link rel="stylesheet" href="/shared/assets/cigo-footer.css?v=20260627-222708">
+  <link rel="stylesheet" href="/shared/assets/pool.css?v=20260708-193404Z">
+  <script src="/shared/assets/pool-status.js?v=20260614-081931" defer></script>
+  <script src="/shared/assets/cigo-pool-price.js?v=20260717-spot1" defer></script>
+  <script src="/shared/assets/mobile-nav.js?v=20260614-081931" defer></script>
+
+  <script src="/shared/assets/wallet-connect-lite.js?v=20260614-081931" defer></script>
+  <script src="/shared/assets/pool-liquidity.js?v=20260614-081931" defer></script>
+  <style id="cigo-market-pill-inline-css">
+    .cigo-market-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 3px 10px 3px 5px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 226, 150, 0.50);
+      background: rgba(0, 0, 0, 0.24);
+      box-shadow: 0 0 12px rgba(214, 174, 94, 0.18);
+    }
+
+    .cigo-market-pill img {
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      display: block;
+    }
+  </style>
+  <!-- CIGO_MESSAGE_NUGGET_STYLE_V1 -->
+  <link rel="stylesheet" href="/cigo-message-nugget.css?v=20260718-1">
+</head>
+
+<body class="pool-page">
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="brand" href="/">
+        <img src="/shared/assets/icons/cigo_256.png" alt="CIGO token icon" class="brand-icon">
+        <span>
+          CIGO Pool
+          <small>liquidity · reserves · LP tools</small>
+        </span>
+      </a>
+
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Open navigation">menu</button>
+
+      <nav class="nav" aria-label="Primary">
+        <a href="https://cosigo.io/">home</a>
+        <a href="https://trade.cosigo.io/">CIGO swap</a>
+        <a href="https://trade.cosigo.io/request.html">discount desk</a>
+        <a href="https://trade.cosigo.io/guides.html">guides</a>
+        <a href="https://quote.cosigo.io/">pre-quote</a>
+        <a class="cigo-market-pill" href="https://market.cosigo.io/" title="CIGO market notice">
+          <img src="/shared/assets/icons/cigo_256.png" alt="CIGO">
+          <span>market</span>
+        </a>
+        <a href="https://bscscan.com/token/0x3a38e963f524E0dDFB75dFa1752b4Cd1364F5560" target="_blank"
+          rel="noopener">token</a>
+        <!-- CIGO_MESSAGE_NUGGET_NAV_V1 -->
+        <a class="cigo-message-nav" href="https://message.cosigo.io/" title="Reveal the deterministic message associated with a confirmed CIGO transaction hash">
+          <span class="cigo-message-nav-icon"><svg viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+  <path d="M10 27h44v27H10z" fill="currentColor" opacity=".2"/>
+  <path d="M10 27h44v27H10zM8 34h48M32 27v27" fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M15 27v-5c0-9 7-15 17-15s17 6 17 15v5" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+  <path d="M27 34h10v10H27z" fill="currentColor"/>
+</svg></span>
+          <span>message</span>
+        </a>
+</nav>
+    </div>
+  </header>
+
+
+
+  <main>
+    <section class="hero wrap">
+      <div class="hero-grid">
+        <div class="card">
+          <div class="eyebrow">
+            <span>pool tools</span>
+          </div>
+
+          <h1>CIGO / BSC-USD (USDT)<br>liquidity pool.</h1>
+
+          <p class="lead">
+            View live pool information and prepare liquidity tools for the active
+            <strong>CIGO / BSC-USD (USDT)</strong> pool on <strong>BNB Smart Chain</strong>.
+          </p>
+
+          <div class="token-meta-box" id="instantPoolBox" style="margin-top:14px;">
+            <div class="token-meta-row">
+              <span>live CIGO pool spot price</span>
+              <strong data-cigo-pool-price aria-live="polite">loading...</strong>
+            </div>
+            <div class="token-meta-row">
+              <span>CIGO in BSC-USD pool</span>
+              <strong id="poolCigoUsdt">loading...</strong>
+            </div>
+            <div class="token-meta-row">
+              <span>CIGO in WBNB pool</span>
+              <strong id="poolCigoWbnb">loading...</strong>
+            </div>
+            <div class="token-meta-row">
+              <span>total pool CIGO</span>
+              <strong id="poolCigoTotal">loading...</strong>
+            </div>
+            <div class="token-meta-row">
+              <span>custodian + treasury</span>
+              <strong id="poolReserveTotal">loading...</strong>
+            </div>
+            <div class="token-meta-row">
+              <span>pool data</span>
+              <strong id="poolUpdatedAt">loading...</strong>
+            </div>
+          </div>
+
+          <div class="swap-box" style="margin-top:18px;">
+            <div class="swap-row">
+              <h3>add liquidity shell</h3>
+              <div class="swap-note one-field-instruction">
+                <strong>Input only one field.</strong>
+                Enter either a CIGO amount or a BSC-USD amount, then click
+                <strong>estimate amounts</strong>. The other field is calculated from the live pool ratio.
+                Do not try to manually fill both fields.
+              </div>
+              <label for="cigoAmount">CIGO amount</label>
+              <input id="cigoAmount" class="swap-input" type="text" inputmode="decimal" placeholder="0.00">
+            </div>
+
+            <div class="swap-row">
+              <label for="usdtAmount">BSC-USD (USDT) amount</label>
+              <input id="usdtAmount" class="swap-input" type="text" inputmode="decimal" placeholder="0.00">
+            </div>
+            <div class="swap-row">
+              <label for="lpSlippageBps">slippage tolerance</label>
+              <select id="lpSlippageBps" class="swap-select">
+                <option value="50">0.5%</option>
+                <option value="100" selected>1.0%</option>
+                <option value="200">2.0%</option>
+              </select>
+            </div>
+
+            <div class="cta-row">
+              <button id="connectPoolWalletBtn" data-wallet-connect class="btn btn-primary btn-step" type="button">1
+                connect wallet</button>
+              <button id="estimateLiquidityBtn" class="btn btn-secondary btn-step" type="button">2 estimate
+                amounts</button>
+              <button id="approveCigoLiquidityBtn" class="btn btn-secondary btn-step" type="button" disabled>3 approve
+                exact CIGO</button>
+              <button id="approveUsdtLiquidityBtn" class="btn btn-secondary btn-step" type="button" disabled>4 approve
+                exact BSC-USD</button>
+              <button id="addLiquidityBtn" class="btn btn-secondary btn-step" type="button" disabled>5 add
+                liquidity</button>
+              <button id="resetLiquidityBtn" class="btn btn-secondary btn-step" type="button">reset form</button>
+            </div>
+
+            <div id="liquidityStatus" class="swap-note lp-status">
+              Enter either CIGO or BSC-USD amount, then click estimate amounts.
+            </div>
+
+
+  <!-- CIGO_MESSAGE_NUGGET_BANNER_V1 -->
+  <aside class="cigo-message-nugget-wrap" aria-label="CIGO transfer message">
+    <a class="cigo-message-nugget" href="https://message.cosigo.io/" title="Paste a confirmed BSC transaction hash to reveal its CIGO message">
+      <span class="cigo-message-chest" aria-hidden="true"><svg viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+  <path d="M10 27h44v27H10z" fill="currentColor" opacity=".2"/>
+  <path d="M10 27h44v27H10zM8 34h48M32 27v27" fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M15 27v-5c0-9 7-15 17-15s17 6 17 15v5" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+  <path d="M27 34h10v10H27z" fill="currentColor"/>
+</svg></span>
+      <span class="cigo-message-copy">
+        <span class="cigo-message-kicker">Treasure in the hash</span>
+        <strong>Every confirmed CIGO transfer unlocks a message.</strong>
+        <small>Paste the BSC transaction hash to reveal its deterministic selection.</small>
+      </span>
+      <span class="cigo-message-action">reveal message ↗</span>
+    </a>
+  </aside>
+
+<div class="swap-note wallet-status-note">
+              <div id="walletBalanceMount" class="wallet-balance-mount"></div>
+            </div>
+
+          </div>
+        </div>
+
+        <aside class="card">
+          <div class="eyebrow">
+            <span>LP notes</span>
+          </div>
+
+          <div class="liquidity-guide-box">
+            <h2>liquidity steps</h2>
+            <ol class="liquidity-steps">
+              <li>
+                <strong>Connect wallet.</strong>
+                Rabby should connect on <strong>BNB Chain</strong>. The button should change to a connected wallet
+                address and wallet balances should appear below the buttons.
+              </li>
+              <li>
+                <strong>Estimate amounts.</strong>
+                Enter <strong>one field only</strong>: either CIGO or BSC-USD. The estimate button fills the other field
+                from the live pool ratio. This step does not ask Rabby for a signature.
+              </li>
+              <li>
+                <strong>Approve exact CIGO.</strong>
+                Rabby should show a token approval for <strong>CIGO</strong>, the exact CIGO amount shown on this page,
+                and spender <strong>0x10ED43...56024E</strong> / PancakeSwap. Cancel if the token, amount, or spender is
+                wrong.
+              </li>
+              <li>
+                <strong>Approve exact BSC-USD.</strong>
+                Rabby should show a token approval for <strong>BSC-USD / USDT</strong>, the exact BSC-USD amount shown
+                on this page, and the same PancakeSwap router spender. Cancel if it shows CIGO again, unlimited
+                approval, or a different spender.
+              </li>
+              <li>
+                <strong>Add liquidity.</strong>
+                Only after both exact approvals are complete, Rabby should show an add-liquidity transaction to
+                PancakeSwap. Review both token amounts, slippage/minimums, gas, and LP result before signing. CIGO
+                transfer tax may reduce the amount of CIGO that actually reaches the pool. This is not staking and no
+                reward program is active. Start tiny.
+              </li>
+            </ol>
+
+            <div class="notice warning">
+              Wallet confirmation is final. Do not sign if Rabby does not match the numbered step you clicked.
+            </div>
+          </div>
+
+          <div class="notice warning liquidity-tax-warning">
+            <strong>Liquidity note:</strong>
+            Providing CIGO / BSC-USD liquidity helps create a working market with lower slippage and clearer price
+            discovery.
+            LP providers may earn pool trading fees, but they also accept pool exposure, price movement, impermanent
+            loss,
+            and inventory risk.
+
+            <br><br>
+
+            Adding liquidity is not a swap, staking, or fixed-yield deposit. CIGO may apply transfer tax when sent into
+            the pool,
+            so the approved or sent amount may be higher than the amount that reaches the pool. LP tokens represent your
+            share
+            of the pool only. No CIGO staking or reward program is active. Estimate first, approve exact amounts only,
+            review
+            Rabby carefully, and start with a tiny test.
+          </div>
+
+          <div class="contract-wrap" style="margin-top:14px;">
+            <code>CIGO / BSC-USD (USDT) pool</code>
+          </div>
+
+          <div class="cta-row" style="margin-top:14px;">
+            <a class="btn btn-secondary" href="/">live swap</a>
+            <a class="btn btn-secondary" href="https://bscscan.com/address/0xDed1e63B6262C0328876b7774f65c08505dd559A"
+              target="_blank" rel="noopener">view pool</a>
+          </div>
+
+          <div class="notice">
+            For normal buyers, use <a href="/"><strong>Live Swap</strong></a>.
+            For reviewed settlement or COSIGO conversion, use
+            <a href="/request.html"><strong>Request Trade</strong></a>.
+          </div>
+
+        </aside>
+      </div>
+    </section>
+  </main>
+  <footer class="cigo-system-footer">
+    <div class="cigo-footer-inner">
+      <div class="cigo-footer-info">
+        <strong>CIGO market-access pages are published by the COSIGO&trade; system.</strong><br>
+        CIGO is a separate speculative market-access token for trading, liquidity, and public market activity.
+        It is not the COSIGO&trade; silver-referenced Ethereum token, is not silver-backed, and is not a claim on
+        COSIGO reserves or redemption inventory.<br>
+        COSIGO&trade; is a trademark claimed by Wendall Gregory Wilson. U.S. trademark application pending.
+      </div>
+
+      <div class="cigo-footer-links">
+        <a href="https://cosigo.io/">COSIGO official</a>
+        <a href="/appendix.html">site appendix / quick reference</a>
+        <a href="https://github.com/cosigo" target="_blank" rel="noopener">GitHub ↗</a>
+        <a href="https://www.geckoterminal.com/bsc/pools/0xded1e63b6262c0328876b7774f65c08505dd559a"
+          target="_blank" rel="noopener">
+          <img src="/shared/assets/geckoterminal-favicon.png" width="20" height="20"
+            alt="" aria-hidden="true"
+            style="display:inline-block;vertical-align:middle;margin-right:5px;">
+          GeckoTerminal market data ↗
+        </a>
+        <small>(third-party market data; use trade.cosigo.io for swaps)</small>
+        <a href="https://market.cosigo.io/">CIGO market notice</a>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

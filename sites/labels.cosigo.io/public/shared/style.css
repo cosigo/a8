@@ -1,0 +1,24 @@
+
+/* === labeler context note v1 === */
+.labeler-context-note {
+  margin-top: 16px;
+  padding: 16px;
+  border-radius: 18px;
+  border: 1px solid rgba(236, 197, 112, 0.24);
+  background:
+    linear-gradient(180deg, rgba(255, 184, 77, 0.08), rgba(167, 139, 250, 0.045));
+}
+
+.labeler-context-note h3 {
+  margin: 0 0 10px;
+}
+
+.labeler-context-note p {
+  margin: 10px 0 0;
+  line-height: 1.6;
+}
+
+.labeler-context-note strong {
+  color: #fff3cf;
+}
+/* === end labeler context note v1 === */

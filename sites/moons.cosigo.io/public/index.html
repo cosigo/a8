@@ -1,0 +1,2333 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>A8 Time | Jupiter Moons | Io Europa Ganymede Callisto</title><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"A8 Time | Jupiter Moons | Io Europa Ganymede Callisto","url":"https://moons.cosigo.io/","description":"Explore A8 Time through Jupiter's moons Io, Europa, Ganymede and Callisto. See the Io Europa Ganymede 1:2:4 recurrence behind the natural time ruler.","inLanguage":"en","isPartOf":{"@type":"WebSite","name":"Auspicious 8","alternateName":"A8","url":"https://a8.cosigo.io/"},"publisher":{"@type":"Organization","name":"COSIGO Labs","url":"https://cosigo.io/"},"about":[{"@type":"Thing","name":"A8 Time"},{"@type":"Thing","name":"Jupiter"},{"@type":"Thing","name":"Io"},{"@type":"Thing","name":"Europa"},{"@type":"Thing","name":"Ganymede"},{"@type":"Thing","name":"Callisto"},{"@type":"Thing","name":"Io Europa Ganymede 1:2:4 recurrence"},{"@type":"Thing","name":"Natural time ruler"}]}</script>
+<meta name="twitter:image:alt" content="Jupiter moons Io Europa Ganymede and Callisto in the A8 Time system">
+<meta property="og:image:alt" content="Jupiter moons Io Europa Ganymede and Callisto in the A8 Time system">
+<meta name="twitter:image" content="https://a8.cosigo.io/assets/cosigo_master_512.png">
+<meta name="twitter:description" content="Explore Io, Europa, Ganymede and Callisto and the natural Jupiter moon recurrence behind A8 Time.">
+<meta name="twitter:title" content="A8 Time | Jupiter Moons">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image" content="https://a8.cosigo.io/assets/cosigo_master_512.png">
+<meta property="og:description" content="Explore Io, Europa, Ganymede and Callisto and the natural Jupiter moon recurrence behind A8 Time.">
+<meta property="og:title" content="A8 Time | Jupiter Moons">
+<meta property="og:url" content="https://moons.cosigo.io/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Auspicious 8">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+<link rel="canonical" href="https://moons.cosigo.io/">
+<meta name="description" content="Explore A8 Time through Jupiter&#x27;s moons Io, Europa, Ganymede and Callisto. See the Io Europa Ganymede 1:2:4 recurrence behind the natural time ruler.">
+<link rel="stylesheet" href="/site-shell.css">
+<style>
+:root{
+  color-scheme:dark;
+  --bg:#0b0f14;--panel:#111821;--panel2:#151f2b;--line:#2b3848;
+  --text:#e6edf3;--muted:#9db0c8;--accent:#6ea8ff;--good:#72d6aa;
+  --warn:#e5bb68;--bad:#ff8e8e;--front:#8fc7ff;--back:#355f9e;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;color:var(--text);font:15px/1.45 system-ui,sans-serif;
+  background:
+    linear-gradient(rgba(6,10,16,.58),rgba(6,10,16,.72)),
+    url("/assets/a8_jovian_moons_bg.png") center center/cover fixed no-repeat,
+    var(--bg);
+}
+main{max-width:1120px;margin:auto;padding:18px}
+h1{font-size:1.45rem;margin:0 0 6px} h2{font-size:1.02rem;margin:0 0 8px}
+p{margin:.45rem 0}.small{font-size:.9rem;color:var(--muted)}
+.panel{background:rgba(17,24,33,.94);border:1px solid var(--line);border-radius:16px;padding:14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}
+.status{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:2px 8px;font-size:.82rem}
+.good{color:var(--good)}.warn{color:var(--warn)}.bad{color:var(--bad)}
+.reads{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:8px;margin-top:10px}
+.read{border:1px solid var(--line);border-radius:10px;padding:8px;background:var(--panel2)}
+.read .k{font-size:.76rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+.read .v{font:600 .90rem ui-monospace,SFMono-Regular,Menlo,monospace;overflow-wrap:normal;word-break:normal}
+.read.primary{border-width:2px}.read.primary .v{font-size:1.28rem;color:var(--text)}
+.note{border-left:3px solid var(--accent);padding:10px 12px;background:var(--panel2);border-radius:8px}
+.moon-card{margin-top:12px}
+.track{position:relative;height:58px;margin-top:10px}
+.orbit-span{position:absolute;left:50%;top:0;height:58px;transform:translateX(-50%)}
+/* A8 PROPORTIONAL RACETRACKS V1 */
+.axis{position:absolute;left:50%;right:auto;top:23px;height:10px;width:var(--rail-pct,100%);transform:translateX(-50%);border:1px solid var(--line);border-radius:999px;background:linear-gradient(90deg,rgba(255,255,255,.02),rgba(255,255,255,.07),rgba(255,255,255,.02))}
+.center{position:absolute;left:50%;top:12px;bottom:10px;width:1px;background:var(--line)}
+.turnlabel{position:absolute;top:0;font-size:.72rem;color:var(--muted)}
+.turnlabel.w{right:var(--rail-edge,0)}.turnlabel.e{left:var(--rail-edge,0)}
+.jupiter{position:absolute;left:50%;top:9px;width:48px;height:38px;transform:translateX(-50%);border-radius:50%;z-index:2;pointer-events:none;overflow:hidden;border:1px solid rgba(255,220,160,.55);background:radial-gradient(ellipse at 67% 63%,rgba(183,78,48,.95) 0 7%,rgba(183,78,48,.25) 8% 12%,transparent 13%),linear-gradient(to bottom,#d7b78d 0 10%,#9d7156 10% 18%,#e0c29a 18% 31%,#b77d59 31% 39%,#e9cda5 39% 53%,#966249 53% 61%,#d9b68a 61% 74%,#aa7354 74% 82%,#e0bf94 82% 100%);box-shadow:0 0 0 1px rgba(255,255,255,.06),0 0 14px rgba(218,166,105,.18)}
+.jupiter::after{content:"";position:absolute;inset:0;border-radius:50%;background:radial-gradient(ellipse at 35% 32%,rgba(255,255,255,.17),transparent 38%),radial-gradient(ellipse at 50% 50%,transparent 55%,rgba(0,0,0,.22) 100%)}
+.dot{position:absolute;top:18px;width:20px;height:20px;border-radius:50%;transform:translateX(-10px);will-change:left;transition:background-color .12s ease,opacity .12s ease,box-shadow .12s ease}
+.dot.front{z-index:3;background:var(--front);opacity:1;box-shadow:0 0 0 2px rgba(143,199,255,.18),0 0 20px rgba(143,199,255,.18)}
+.dot.back{z-index:1;background:var(--back);opacity:.92;box-shadow:0 0 0 2px rgba(53,95,158,.18)}
+.dot.position-only{
+  z-index:3;
+  background:var(--accent);
+  opacity:1;
+  box-shadow:none;
+}
+
+/* A8 POSITION ONLY · DEPTH QUALIFYING */
+.dot.disabled{z-index:1;background:transparent;border:1px dashed #65788b;opacity:.5}
+.ruler{display:grid;grid-template-columns:repeat(8,1fr);gap:0;margin-top:2px;color:var(--muted);font-size:.68rem}
+.ruler span{text-align:center;border-left:1px solid var(--line)}.ruler span:last-child{border-right:1px solid var(--line)}
+.legend{display:flex;gap:12px;flex-wrap:wrap}.swatch{display:inline-flex;align-items:center;gap:6px}.swatch b{display:inline-block;width:12px;height:12px;border-radius:50%}
+.speedbar{display:grid;grid-template-columns:1fr auto auto;gap:12px;align-items:center;margin-top:12px;border:1px solid #7b5a21;background:rgba(23,19,12,.96)}
+.speed-warning{color:#ffd48a;font-weight:900;letter-spacing:.05em}.speed-warning small{display:block;color:var(--muted);font-weight:600;letter-spacing:0;margin-top:4px}.speedbar label{font-size:12px;color:var(--muted)}.speedbar select{background:#0d1117;color:var(--text);border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-weight:800}.speed-rate{text-align:right;font-family:ui-monospace,monospace;font-weight:800;color:#ffd48a}
+/* A8 SINGLE DROPDOWN NAV · SITE STANDARD */
+#a8-topside-coherence-02{
+  display:block;
+  margin:0;
+  padding:10px 14px;
+  border-bottom:1px solid rgba(255,255,255,.14);
+  background:rgba(7,11,16,.96);
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+}
+
+#a8-topside-coherence-02 .a8-topline{
+  max-width:1440px;
+  margin:0 auto;
+  display:flex;
+  gap:12px;
+  align-items:center;
+  flex-wrap:wrap;
+}
+
+#a8-topside-coherence-02 .cosigo-global-brand{
+  display:flex;
+  gap:8px;
+  align-items:center;
+  text-decoration:none;
+}
+
+#a8-topside-coherence-02 .cosigo-global-brand img{
+  width:34px;
+  height:34px;
+  object-fit:contain;
+}
+
+#a8-topside-coherence-02 .cosigo-global-brand span{
+  font-weight:900;
+  letter-spacing:.06em;
+}
+
+#a8-topside-coherence-02 .cosigo-global-brand small{
+  display:block;
+  opacity:.72;
+  font-size:.62rem;
+}
+
+#a8-topside-coherence-02 a{
+  text-decoration:none;
+}
+
+#a8-topside-coherence-02 .a8-menu{
+  position:relative;
+  margin-left:auto;
+}
+
+#a8-topside-coherence-02 .a8-menu summary{
+  list-style:none;
+  cursor:pointer;
+  padding:8px 11px;
+  border:1px solid #425467;
+  border-radius:8px;
+  background:#111820;
+  color:#e0bd72;
+  font-size:.76rem;
+  font-weight:900;
+  letter-spacing:.07em;
+  user-select:none;
+}
+
+#a8-topside-coherence-02 .a8-menu summary::-webkit-details-marker{
+  display:none;
+}
+
+#a8-topside-coherence-02 .a8-menu summary::after{
+  content:" ▾";
+  color:#92a5b8;
+}
+
+#a8-topside-coherence-02 .a8-menu[open] summary::after{
+  content:" ▴";
+}
+
+#a8-topside-coherence-02 .a8-menu-panel{
+  position:absolute;
+  z-index:1000;
+  right:0;
+  top:calc(100% + 7px);
+  min-width:180px;
+  padding:7px;
+  border:1px solid #425467;
+  border-radius:9px;
+  background:#0d141b;
+  box-shadow:0 12px 28px rgba(0,0,0,.38);
+}
+
+#a8-topside-coherence-02 .a8-menu-panel a{
+  display:block;
+  padding:9px 10px;
+  border-radius:6px;
+  color:#c8ddf5;
+  font-size:.78rem;
+  font-weight:800;
+  white-space:nowrap;
+}
+
+#a8-topside-coherence-02 .a8-menu-panel a:hover,
+#a8-topside-coherence-02 .a8-menu-panel a:focus,
+#a8-topside-coherence-02 .a8-menu-panel a[aria-current="page"]{
+  background:#182431;
+  color:#fff;
+}
+
+@media(max-width:760px){
+  #a8-topside-coherence-02 .a8-menu-panel{
+    min-width:170px;
+  }
+}
+
+@media(max-width:760px){
+  .speedbar{grid-template-columns:1fr}
+  .speed-rate{text-align:left}
+}
+</style>
+
+<style id="a8-moons-readout-containment-fix">
+/* MOONS · BOTTOM READOUT CONTAINMENT
+   Preserve exact evidence strings while preventing intrinsic-width escape. */
+
+#bottomReadouts,
+#bottomReadouts .panel,
+#bottomReadouts .reads,
+#bottomReadouts .read{
+  min-width:0;
+  max-width:100%;
+  box-sizing:border-box;
+}
+
+#bottomReadouts .read .v{
+  min-width:0;
+  max-width:100%;
+  overflow-wrap:anywhere;
+  word-break:break-word;
+}
+
+/* Exact machine/evidence values remain fully visible rather than truncated. */
+#civilSubstate,
+#qualification,
+#jStatus,
+#rulerRaw,
+#lockRaw{
+  white-space:normal;
+  overflow-wrap:anywhere;
+  word-break:break-word;
+}
+</style>
+
+
+
+<style id="a8-stopwatch-dock-style">
+#a8-stopwatch{
+  position:fixed;
+  inset:auto 0 0 0;
+  z-index:1000;
+  width:100%;
+  max-width:none;
+  max-height:40vh;
+  overflow:auto;
+  box-sizing:border-box;
+  margin:0;
+  padding:8px 12px calc(8px + env(safe-area-inset-bottom, 0px));
+  display:grid;
+  grid-template-columns:auto auto auto auto;
+  justify-content:center;
+  align-items:center;
+  gap:4px 16px;
+  background:#101722;
+  border:0;
+  border-top:1px solid #7b5a21;
+  border-radius:0;
+  box-shadow:0 -3px 12px rgba(0,0,0,.3);
+}
+#a8-stopwatch h2{display:none}
+#a8-sw-display{
+  grid-column:1;
+  grid-row:1;
+  font-size:1.6rem !important;
+  line-height:1;
+  white-space:nowrap;
+}
+#a8-sw-display::before{
+  content:"A8 MM:SS ";
+  font-size:.65rem;
+  font-weight:600;
+}
+#a8-stopwatch > p:not(.small){
+  grid-column:2;
+  grid-row:1;
+  margin:0;
+  font-size:.8rem;
+}
+#a8-stopwatch > div:not(#a8-sw-display){
+  grid-column:3;
+  grid-row:1;
+  display:flex;
+  gap:6px !important;
+  flex-wrap:nowrap !important;
+}
+#a8-stopwatch p.small{display:none}
+#a8-stopwatch #a8-sw-status{
+  display:block;
+  grid-column:4;
+  grid-row:1;
+  margin:0;
+  max-width:220px;
+  font-size:.7rem;
+  overflow-wrap:anywhere;
+}
+#a8-stopwatch button{
+  min-width:44px;
+  min-height:44px;
+  padding:6px 10px;
+  font-size:.75rem;
+}
+body{
+  padding-bottom:calc(100px + env(safe-area-inset-bottom, 0px));
+}
+@media(max-width:760px){
+  #a8-stopwatch{
+    grid-template-columns:minmax(0,1fr) auto;
+    justify-content:stretch;
+    gap:4px 8px;
+    padding-left:8px;
+    padding-right:8px;
+  }
+  #a8-sw-display{
+    grid-column:1;
+    grid-row:1;
+    font-size:1.3rem !important;
+  }
+  #a8-stopwatch > div:not(#a8-sw-display){
+    grid-column:2;
+    grid-row:1;
+  }
+  #a8-stopwatch > p:not(.small){
+    grid-column:1;
+    grid-row:2;
+    font-size:.7rem;
+  }
+  #a8-stopwatch #a8-sw-status{
+    grid-column:2;
+    grid-row:2;
+    max-width:190px;
+    font-size:.65rem;
+  }
+  #a8-stopwatch button{padding:5px 7px}
+  #a8-sw-display::before{
+    display:block;
+    margin-bottom:3px;
+  }
+  body{
+    padding-bottom:calc(140px + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+#a8-stopwatch #a8-sw-independence{
+  display:block;
+  grid-column:1 / -1;
+  grid-row:2;
+  margin:2px 0 0;
+  font-size:.7rem;
+  line-height:1.35;
+  color:var(--muted,#b7c4d1);
+}
+@media(max-width:760px){
+  #a8-stopwatch #a8-sw-independence{
+    grid-row:3;
+    font-size:.65rem;
+  }
+}
+</style>
+
+
+
+<style id="a8-moons-glass-cards-final">
+  /*
+   * MOONS · GLASS PRESENTATION
+   * Visual only. No Core20/Jovian authority changes.
+   */
+
+  /* Main page cards */
+  .panel{
+    background:rgba(7,11,16,.28) !important;
+    backdrop-filter:blur(1px);
+    -webkit-backdrop-filter:blur(1px);
+  }
+
+  /* Individual numerical readouts */
+  .read{
+    background:rgba(8,14,21,.18) !important;
+  }
+
+  /* Explanatory notes */
+  .note{
+    background:rgba(8,14,21,.18) !important;
+  }
+
+  /* Viewing-rate control keeps its amber identity */
+  .panel.speedbar{
+    background:rgba(23,19,12,.30) !important;
+  }
+
+  /* Fixed stopwatch dock */
+  #a8-stopwatch{
+    background:rgba(7,11,16,.78) !important;
+    backdrop-filter:blur(1px);
+    -webkit-backdrop-filter:blur(1px);
+  }
+
+  /* Keep form control itself readable */
+  .speedbar select{
+    background:rgba(13,17,23,.72) !important;
+  }
+
+  @media(max-width:760px){
+    .panel{
+      background:rgba(7,11,16,.44) !important;
+      backdrop-filter:none;
+      -webkit-backdrop-filter:none;
+    }
+
+    .read,
+    .note{
+      background:rgba(8,14,21,.30) !important;
+    }
+
+    .panel.speedbar{
+      background:rgba(12,14,17,.48) !important;
+    }
+
+    #a8-stopwatch{
+      background:rgba(12,14,17,.78) !important;
+    }
+  }
+</style>
+
+
+  <!-- COSIGO-CANONICAL-FAVICON-BEGIN -->
+  <link rel="icon" href="https://cosigo.io/favicon.ico">
+  <link rel="icon" type="image/svg+xml" href="https://cosigo.io/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://cosigo.io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://cosigo.io/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://cosigo.io/apple-touch-icon.png">
+  <!-- COSIGO-CANONICAL-FAVICON-END -->
+</head>
+<body>
+<nav id="a8-topside-coherence-02"
+     class="cosigo-global-nav"
+     aria-label="A8 Time Lab navigation">
+
+  <div class="a8-topline">
+
+    <a class="cosigo-global-brand"
+       href="https://cosigo.io/"
+       aria-label="COSIGO home">
+      <img src="/assets/cosigo_master_512.gif" alt="COSIGO">
+      <span>COSIGO<small>LABS · AUSPICIOUS 8</small></span>
+    </a>
+
+    <details class="a8-menu">
+      <summary>MENU</summary>
+
+      <div class="a8-menu-panel">
+        <a href="https://lab.cosigo.io/">LAB HOME</a>
+        <a href="https://clock.cosigo.io/">CLOCK</a>
+        <a href="https://calendar.cosigo.io/">CALENDAR</a>
+        <a href="https://moons.cosigo.io/" aria-current="page">MOONS</a>
+        <a href="https://mintaka.cosigo.io/">MINTAKA</a>
+        <a href="https://sol.cosigo.io/">SOL</a>
+        <a href="https://ship.cosigo.io/">EARTHSHIP</a>
+        <a href="https://map.cosigo.io/">MAP · CLOCK · COMPASS</a>
+        <a href="https://sea.cosigo.io/">NAVIGATION</a>
+        <a href="https://stars.cosigo.io/">CELESTIAL</a>
+        <a href="https://audio.cosigo.io/">AUDIO</a>
+        <a href="https://quartz.cosigo.io/">QUARTZ</a>
+        <a href="https://a8.cosigo.io/">A8 PUBLIC</a>
+        <a href="https://about.cosigo.io/">ABOUT</a>
+        <a href="https://contestant.cosigo.io/">FUN</a>
+        <a href="https://cosigo.io/">COSIGO HOME</a>
+        <a href="https://github.com/cosigo/a8">GITHUB</a>
+      </div>
+
+    </details>
+
+  </div>
+</nav>
+
+<main>
+
+  <!-- ENGINE FIRST · four Jovian moon observers -->
+  <section id="moonCards"></section>
+
+  <section class="panel speedbar" aria-label="Jovian observer viewing rate">
+  <div class="speed-warning" id="viewModeBanner">
+    SKY NOW · LIVE A8 PREDICTION
+    <small id="viewModeDetail">
+      1× is anchored to fresh physical Epoch-7 RAW.
+      Any other viewing rate is simulation and is not the current sky.
+    </small>
+  </div>
+
+  <label>Viewing rate
+    <select id="viewMultiplier"
+            aria-label="Jovian predictive viewing multiplier">
+      <option value="1">1× · SKY NOW</option>
+      <option value="100">100× · SIMULATION</option>
+      <option value="500">500× · SIMULATION</option>
+      <option value="1000">1000× · SIMULATION</option>
+      <option value="2000">2000× · SIMULATION</option>
+    </select>
+  </label>
+
+  <div class="speed-rate">
+    <span id="viewMultiplierLabel">1× SKY NOW</span><br>
+    <span id="viewModeShort">LIVE PREDICTION</span>
+  </div>
+</section>
+
+
+<section class="panel" id="a8-stopwatch">
+  <h2>A8 Stopwatch · MM:SS</h2>
+  <div id="a8-sw-display"
+       style="font-family:monospace;font-size:2.8rem;font-weight:900">
+    00:00
+  </div>
+  <p class="small">MINUTES : SECONDS · 64 A8 seconds per minute</p>
+  <p><b>Total: <span id="a8-sw-total">0</span> A8 seconds</b></p>
+  <div style="display:flex;gap:10px;flex-wrap:wrap">
+    <button type="button" id="a8-sw-start">START</button>
+    <button type="button" id="a8-sw-stop" disabled>STOP</button>
+    <button type="button" id="a8-sw-reset">RESET</button>
+  </div>
+  <p id="a8-sw-status" class="small">Ready</p>
+  <p id="a8-sw-independence" class="small">
+    Stopwatch reads Core20 elapsed time.
+    Changing moon viewing speed does not change the stopwatch’s rate. Stopwatch is an independent Core20 state-edge witness.
+  </p>
+  <p class="small">
+    Elapsed time from Core20 state-edge coordinates, not moon animation phase.
+    Whole A8 seconds shown. Human selection of the visual tangent
+    and button timing limit comparison precision.
+  </p>
+</section>
+
+<section class="panel" id="a8-native-viewing-rate-note">
+  <h2>Prediction / Simulation Rate · MODEL EPOCH-5</h2>
+
+  <p>
+    Current mode:
+    <b><span id="a8-native-selected-rate">1× SKY NOW</span></b>.
+    Physical source epoch:
+    <span id="a8-native-source-epoch">—</span>.
+  </p>
+
+  <p>
+    Sealed Ganymede full-orbit recurrence:
+    <b><span id="a8-native-base-period">—</span> RAW</b>.
+  </p>
+
+  <p>
+    <span id="a8-native-period-equation">
+      Awaiting Epoch-5 model.
+    </span>
+  </p>
+
+  <ul>
+    <li><b>Io:</b>
+      <span id="a8-native-io-period">—</span> RAW per displayed orbit.</li>
+    <li><b>Europa:</b>
+      <span id="a8-native-europa-period">—</span> RAW per displayed orbit.</li>
+    <li><b>Ganymede:</b>
+      <span id="a8-native-ganymede-period">—</span> RAW per displayed orbit.</li>
+    <li><b>Callisto:</b>
+      <span id="a8-native-callisto-period">—</span> RAW per displayed orbit.</li>
+  </ul>
+
+  <p>
+    <b>1× is special:</b> it follows fresh Epoch-7 physical RAW
+    and represents A8's current SKY NOW prediction.
+    Selecting any other rate detaches the display from the current sky
+    and enters simulation.
+  </p>
+
+  <p>
+    Returning to 1× discards the simulated position and fetches
+    a fresh physical Epoch-7 snapshot before SKY NOW resumes.
+  </p>
+</section>
+
+
+    
+<section
+  id="bottomReadouts"
+  class="grid"
+  style="margin-top:12px;grid-template-columns:1fr"
+>
+<section class="panel">
+  <h2>Physical prediction feed</h2>
+
+  <div class="reads">
+    <div class="read">
+      <div class="k">Physical snapshot</div>
+      <div id="edgeStatus" class="v">—</div>
+    </div>
+
+    <div class="read">
+      <div class="k">Report sequence</div>
+      <div id="edgeSequence" class="v">—</div>
+    </div>
+
+    <div class="read primary">
+      <div class="k">LIVE EPOCH-7 RAW</div>
+      <div id="edgeRaw" class="v">—</div>
+    </div>
+
+    <div class="read">
+      <div class="k">Snapshot role</div>
+      <div id="edgeRole" class="v">READ ONLY</div>
+    </div>
+
+    <div class="read">
+      <div class="k">Prediction policy</div>
+      <div id="anchorPolicy" class="v">FRESH RAW AT 1×</div>
+    </div>
+
+    <div class="read">
+      <div class="k">Core20 civil substate</div>
+      <div id="civilSubstate" class="v">—</div>
+    </div>
+  </div>
+
+  <p class="small">
+    At 1× the four moon positions are anchored to the current
+    physical Epoch-7 RAW counter. Browser interpolation only smooths
+    movement between snapshots. Simulation rates never write to,
+    discipline, or retune the physical source or Core20.
+  </p>
+</section>
+<section class="panel">
+  <h2>Core20 comparison telemetry</h2>
+
+  <div class="reads">
+    <div class="read">
+      <div class="k">Jovian status</div>
+      <div id="jStatus" class="v">—</div>
+    </div>
+
+    <div class="read">
+      <div class="k">Core20 source epoch</div>
+      <div id="sourceEpoch" class="v">—</div>
+    </div>
+
+    <div class="read">
+      <div class="k">Recovered raw / 512</div>
+      <div id="rulerRaw" class="v">—</div>
+    </div>
+
+    <div class="read">
+      <div class="k">Recovered WEST lock raw</div>
+      <div id="lockRaw" class="v">—</div>
+    </div>
+
+    <div class="read">
+      <div class="k">Qualification</div>
+      <div id="qualification" class="v">—</div>
+    </div>
+
+    <div class="read">
+      <div class="k">Mode</div>
+      <div id="mode" class="v">—</div>
+    </div>
+  </div>
+
+  <p class="small">
+    Comparison telemetry only. It does not drive the four-moon
+    Epoch-5 predictive geometry.
+  </p>
+</section>
+</section>
+
+
+<section class="panel">
+  <div id="pageStatus" class="status warn">
+    CONNECTING · LIVE EPOCH-7
+  </div>
+
+  <h1>Four-moon predictive observer</h1>
+
+  <p>
+    Io, Europa, Ganymede and Callisto are projected from sealed
+    Jupiter-relative Epoch-5 model driven by the live physical Epoch-7 counter through the qualified Entry 011 handoff.
+    <b>1× SKY NOW</b> is the current A8 prediction.
+    Every other viewing rate is simulation.
+  </p>
+
+  <div class="legend small">
+    <span class="swatch">
+      <span class="status good">SKY NOW</span>
+      qualified Epoch-7 physical anchor
+    </span>
+
+    <span class="swatch">
+      <span class="status warn">SIMULATION</span>
+      detached from current sky
+    </span>
+  </div>
+
+  <div class="note small" style="margin-top:10px">
+    <b>Phase convention:</b>
+    EAST = 000₈; WEST = 400₈.
+    Each moon advances independently through its sealed
+    EAST→WEST and WEST→EAST recurrence.
+    Callisto remains a slow calibration / offset witness,
+    not authority.
+    <b>Orbital leg:</b>
+    EAST → WEST / screen LEFT → RIGHT = FRONT · TRANSIT LEG.
+    WEST → EAST / screen RIGHT → LEFT = BACK · OCCULTATION LEG.
+    The light / dark indicator changes only at the orbital turning points.
+    No shadow input is used. Transit / occultation leg identifies the
+    orbital half-cycle; actual Jupiter-disk overlap remains a position event.
+  </div>
+
+  <p class="small">
+    <b>A8 makes predictions. Nature settles the bets.</b>
+  </p>
+</section>
+
+
+</main>
+
+<script>
+'use strict';
+
+const MODEL_URL =
+  '/assets/a8-moons-continuous-v2.json';
+
+const HANDOFF_URL =
+  '/assets/a8-moons-active-handoff-v1.json';
+
+const Q16 = 65536;
+const DAY_STATES = 131072;
+
+const $ = id => document.getElementById(id);
+const mod = (n,m) => ((n % m) + m) % m;
+
+const state = {
+  ready:false,
+  cfg:null,
+  moons:[],
+  sourceEpoch:null,
+
+  physicalRaw:null,
+  physicalSequence:null,
+
+  rate:1,
+  simRaw:null,
+
+  ganymedeFull:null
+};
+
+let stopwatchEdgeStream=null;
+
+const stopwatch = {
+  running:false,
+  connected:false,
+  mode:'CONNECTING',
+  sourceEpoch:null,
+  lastSequence:null,
+  latestTotalState:null,
+  startTotalState:null,
+  stoppedTotal:0n
+};
+
+async function fetchJSON(url){
+  const r = await fetch(url,{cache:'no-store'});
+
+  if (!r.ok)
+    throw new Error(`${url} · HTTP ${r.status}`);
+
+  return r.json();
+}
+
+function fmt(n, digits=3){
+  return Number(n).toLocaleString(
+    undefined,
+    {maximumFractionDigits:digits}
+  );
+}
+
+function phase9Octal(phase){
+  return mod(Math.floor(phase),512)
+    .toString(8)
+    .padStart(3,'0') + '₈';
+}
+
+function phaseAtRaw(m, raw){
+  const r=Number(raw);
+
+  if (
+    !Number.isFinite(r) ||
+    r < Number(m.anchorRaw)
+  ){
+    throw new Error(
+      `${m.name}: RAW precedes native anchor`
+    );
+  }
+
+  let phase=
+    Number(m.anchorPhaseQ16) / Q16;
+
+  const controls=[{
+    raw:Number(m.anchorRaw),
+    phase
+  }];
+
+  for (const marker of m.markers){
+    let p=Number(marker.phase512);
+
+    while (p <= phase)
+      p += 512;
+
+    phase=p;
+
+    controls.push({
+      raw:Number(marker.raw),
+      phase:p
+    });
+  }
+
+  for (let i=0;i<controls.length-1;i++){
+    const a=controls[i];
+    const b=controls[i+1];
+
+    if (r <= b.raw){
+      const f=
+        (r-a.raw) /
+        (b.raw-a.raw);
+
+      return mod(
+        a.phase +
+        f*(b.phase-a.phase),
+        512
+      );
+    }
+  }
+
+  /*
+   * Beyond the explicitly sealed marker schedule,
+   * phase continues from native recurrence only.
+   */
+  const last=controls[controls.length-1];
+
+  let p=last.phase;
+  let dr=r-last.raw;
+
+  const rec=m.recurrenceRaw;
+
+  const scale=
+    Number(rec.fullOrbit) /
+    (
+      Number(rec.eastToWest) +
+      Number(rec.westToEast)
+    );
+
+  const eastToWest=
+    Number(rec.eastToWest) * scale;
+
+  const westToEast=
+    Number(rec.westToEast) * scale;
+
+  if (dr >= Number(rec.fullOrbit)){
+    const cycles=
+      Math.floor(
+        dr / Number(rec.fullOrbit)
+      );
+
+    p += cycles * 512;
+    dr -= cycles * Number(rec.fullOrbit);
+  }
+
+  for (let guard=0;guard<3 && dr>0;guard++){
+    const pm=mod(p,512);
+
+    if (pm < 256){
+      const remainingPhase=256-pm;
+      const remainingRaw=
+        remainingPhase / 256 *
+        eastToWest;
+
+      if (dr < remainingRaw){
+        p +=
+          dr / eastToWest *
+          256;
+        dr=0;
+      } else {
+        dr -= remainingRaw;
+        p += remainingPhase;
+      }
+
+    } else {
+      const remainingPhase=512-pm;
+      const remainingRaw=
+        remainingPhase / 256 *
+        westToEast;
+
+      if (dr < remainingRaw){
+        p +=
+          dr / westToEast *
+          256;
+        dr=0;
+      } else {
+        dr -= remainingRaw;
+        p += remainingPhase;
+      }
+    }
+  }
+
+  return mod(p,512);
+}
+
+/*
+ * CURRENT LOCKED NATURAL ORBIT RECURRENCES.
+ *
+ * Each Jovian moon preserves its own natural recurrence.
+ * No normalization. No averaging. No synthetic period.
+ *
+ *   Io         4,650,745 RAW
+ *   Europa     9,344,598 RAW
+ *   Ganymede  18,866,420 RAW
+ *   Callisto  44,245,909 RAW
+ */
+const NATURAL_ORBIT_RAW = Object.freeze({
+  Io:        4650745,
+  Europa:    9344598,
+  Ganymede: 18866420,
+  Callisto: 44245909
+});
+
+function naturalOrbitRaw(m){
+  if (
+    Object.prototype.hasOwnProperty.call(
+      NATURAL_ORBIT_RAW,
+      m.name
+    )
+  ){
+    return NATURAL_ORBIT_RAW[m.name];
+  }
+
+  return Number(m.fullOrbit);
+}
+
+/*
+ * If live/model RAW has advanced beyond the sealed
+ * X/Y coordinate recording, subtract WHOLE natural
+ * orbital periods until the same orbital point lies
+ * inside the already-recorded coordinate interval.
+ *
+ * No new X/Y is generated.
+ * No period is estimated.
+ * No count is rounded.
+ */
+function recurrentCoordinateRaw(m, raw){
+  const r=Number(raw);
+  const samples=m.samples;
+
+  if (
+    !Number.isFinite(r) ||
+    !Array.isArray(samples) ||
+    samples.length < 2
+  ){
+    throw new Error(
+      `${m.name}: invalid recurrence input`
+    );
+  }
+
+  const first=
+    Number(samples[0].rawQ16) / Q16;
+
+  const last=
+    Number(
+      samples[samples.length-1].rawQ16
+    ) / Q16;
+
+  if (
+    r >= first &&
+    r <= last
+  ){
+    return r;
+  }
+
+  const orbit=naturalOrbitRaw(m);
+
+  if (
+    !Number.isInteger(orbit) ||
+    orbit <= 0
+  ){
+    throw new Error(
+      `${m.name}: invalid natural orbit RAW`
+    );
+  }
+
+  let candidate=r;
+
+  if (candidate > last){
+    const turns=
+      Math.ceil(
+        (candidate-last) / orbit
+      );
+
+    candidate -=
+      turns * orbit;
+  }
+
+  if (candidate < first){
+    const turns=
+      Math.ceil(
+        (first-candidate) / orbit
+      );
+
+    candidate +=
+      turns * orbit;
+  }
+
+  if (
+    candidate < first ||
+    candidate > last
+  ){
+    throw new Error(
+      `${m.name}: equivalent natural RAW not in sealed X/Y`
+    );
+  }
+
+  return candidate;
+}
+
+function nativeAtRaw(m, raw){
+  const samples=m.samples;
+
+  const sourceRaw=
+    recurrentCoordinateRaw(
+      m,
+      raw
+    );
+
+  const target=sourceRaw * Q16;
+
+  if (
+    target < samples[0].rawQ16 ||
+    target > samples[samples.length-1].rawQ16
+  ){
+    throw new Error(
+      `${m.name}: RAW outside sealed coordinate range`
+    );
+  }
+
+  let lo=0;
+  let hi=samples.length;
+
+  while (lo < hi){
+    const mid=(lo+hi)>>1;
+
+    if (samples[mid].rawQ16 <= target)
+      lo=mid+1;
+    else
+      hi=mid;
+  }
+
+  let i=Math.max(0,lo-1);
+
+  if (
+    samples[i].rawQ16 === target &&
+    i < samples.length-1
+  ){
+    const a=samples[i];
+    const b=samples[i+1];
+
+    return {
+      sourceRaw,
+      x:a.xQ16 / Q16,
+      y:a.yQ16 / Q16,
+      direction:
+        b.xQ16 >= a.xQ16
+          ? 'LEFT → RIGHT'
+          : 'RIGHT → LEFT'
+    };
+  }
+
+  if (i >= samples.length-1)
+    i=samples.length-2;
+
+  const a=samples[i];
+  const b=samples[i+1];
+
+  const f=
+    (target-a.rawQ16) /
+    (b.rawQ16-a.rawQ16);
+
+  return {
+    sourceRaw,
+
+    x:
+      (
+        a.xQ16 +
+        f*(b.xQ16-a.xQ16)
+      ) / Q16,
+
+    y:
+      (
+        a.yQ16 +
+        f*(b.yQ16-a.yQ16)
+      ) / Q16,
+
+    direction:
+      b.xQ16 >= a.xQ16
+        ? 'LEFT → RIGHT'
+        : 'RIGHT → LEFT'
+  };
+}
+
+function coordText(v){
+  const n=Number(v);
+  const sign=n < 0 ? '-' : '+';
+  const whole=Math.floor(Math.abs(n));
+
+  return (
+    `${n >= 0 ? '+' : ''}${n.toFixed(4)} A8 · ` +
+    `${sign}${whole.toString(8)}₈ whole`
+  );
+}
+
+function buildMoonCard(m){
+  /*
+   * Visual orbit span only.
+   *
+   * Coordinate math remains on the full common
+   * Jupiter-centered -256 … +256 A8 plane.
+   *
+   * 5% headroom prevents the moon from visually
+   * touching the end of its racetrack.
+   */
+  const maxAbsX =
+    Math.max(
+      ...m.samples.map(
+        sample =>
+          Math.abs(Number(sample.xQ16)) / Q16
+      )
+    );
+
+  const railPct =
+    Math.min(
+      100,
+      (maxAbsX / 256) * 100 * 1.05
+    );
+
+  const railEdge =
+    (100 - railPct) / 2;
+
+  const segs =
+    Array.from({length:8},(_,i)=>`<span>${i}</span>`).join('');
+
+  const witness =
+    m.role === 'SLOW_CALIBRATION_OFFSET_WITNESS';
+
+  const subtitle = witness
+    ? 'Epoch-5 prediction · slow calibration / offset witness'
+    : 'Epoch-5 prediction · sealed Jupiter-relative recurrence';
+
+  const status = witness
+    ? 'SLOW WITNESS · READ ONLY'
+    : 'PREDICTING · READ ONLY';
+
+  return `
+  <section class="panel moon-card" id="card-${m.id}">
+    <div style="display:flex;justify-content:space-between;
+                gap:10px;align-items:baseline;flex-wrap:wrap">
+
+      <div>
+        <h2 style="margin:0">${m.name}</h2>
+        <div class="small">${subtitle}</div>
+      </div>
+
+      <div class="status ${witness ? 'warn' : 'good'}"
+           id="${m.id}-state">
+        ${status}
+      </div>
+    </div>
+
+    <div class="track">
+      <div class="center"></div>
+
+      <div class="orbit-span" style="width:100%;--rail-pct:${railPct.toFixed(3)}%;--rail-edge:${railEdge.toFixed(3)}%">
+        <div class="turnlabel w">WEST</div>
+        <div class="turnlabel e">EAST</div>
+        <div class="axis"></div>
+        <div class="jupiter" aria-label="Jupiter"></div>
+        <div id="${m.id}-dot"
+             class="dot position-only"
+             style="left:0%"></div>
+      </div>
+    </div>
+
+    <div class="ruler">${segs}</div>
+
+    <div class="reads">
+      <div class="read">
+        <div class="k">Orbital leg</div>
+        <div id="${m.id}-face" class="v">—</div>
+      </div>
+
+      <div class="read">
+        <div class="k">Side</div>
+        <div id="${m.id}-side" class="v">—</div>
+      </div>
+
+      <div class="read primary">
+        <div class="k">A8 PHASE9</div>
+        <div id="${m.id}-phase9" class="v">—</div>
+      </div>
+
+      <div class="read">
+        <div class="k">PHASE9 · N OF 512</div>
+        <div id="${m.id}-phaseDec" class="v">—</div>
+      </div>
+
+      <div class="read">
+          <div class="k">A8 X</div>
+          <div id="${m.id}-x" class="v">—</div>
+        </div>
+
+        <div class="read">
+          <div class="k">A8 Y</div>
+          <div id="${m.id}-y" class="v">—</div>
+        </div>
+
+        <div class="read">
+          <div class="k">Motion</div>
+          <div id="${m.id}-motion" class="v">—</div>
+        </div>
+
+      <div class="read">
+        <div class="k">Phase rate / Ganymede</div>
+        <div class="v">
+          ${(state.ganymedeFull / naturalOrbitRaw(m)).toFixed(6)}×
+        </div>
+      </div>
+
+      <div class="read">
+        <div class="k">Period / Ganymede</div>
+        <div class="v">
+          ${(naturalOrbitRaw(m) / state.ganymedeFull).toFixed(6)}×
+        </div>
+      </div>
+
+      <div class="read">
+        <div class="k">Role</div>
+        <div class="v">
+          ${witness ? 'CALIBRATION WITNESS' : 'PREDICTION ONLY'}
+        </div>
+      </div>
+    </div>
+
+    ${witness ? `
+      <p class="small" style="margin-top:10px">
+        <span class="status warn">SLOW CALIBRATION WITNESS</span>
+        Callisto can expose shared phase or rate offsets.
+        It does not discipline or retune the physical source.
+      </p>
+    ` : ''}
+  </section>`;
+}
+
+function renderMoon(m, raw){
+  /*
+   * A8 ORBITAL HALF-CYCLE STATE
+   *
+   * Epoch-5 sealed recurrence supplies:
+   *   projected X/Y
+   *   orbital phase
+   *   apparent screen motion
+   *
+   * Current sealed phase origin:
+   *
+   *   phase 000₈ = EAST maximum
+   *   phase 400₈ = WEST maximum
+   *
+   * Observer-depth half-cycle:
+   *
+   *   000₈ → 400₈ = BACK / FAR SIDE
+   *   400₈ → 1000₈ = FRONT / NEAR SIDE
+   *
+   * Transit / occultation requires Jupiter-disk overlap:
+   *
+   *   FRONT + overlap = TRANSIT
+   *   BACK  + overlap = OCCULTATION
+   *
+   * Apparent horizontal direction is presentation only.
+   * It does NOT determine observer depth.
+   */
+  const pos=nativeAtRaw(m,raw);
+
+  /*
+   * The recurrent source RAW is the same natural
+   * orbital point in the sealed coordinate recording.
+   */
+  const phase=phaseAtRaw(
+    m,
+    pos.sourceRaw
+  );
+
+  /*
+   * Historical nativeAtRaw direction token:
+   * LEFT → RIGHT = native X increasing.
+   *
+   * Direct View reverses native X onto the screen:
+   * EAST = screen LEFT
+   * WEST = screen RIGHT
+   */
+  const xIncreasing =
+    pos.direction === 'LEFT → RIGHT';
+
+  const left=
+    Math.max(
+      0,
+      Math.min(
+        100,
+        (256 - pos.x) /
+        512 *
+        100
+      )
+    );
+
+  const east=
+    pos.x >= 0;
+
+  const screenLeftToRight =
+    !xIncreasing;
+
+  /*
+   * A8 SIMPLE ORBIT WHEEL · LOCKED
+   *
+   * One orbital phase. One recurrence. No second depth clock.
+   *
+   *   000₈ · EAST elongation
+   *   200₈ · FRONT conjunction
+   *   400₈ · WEST elongation
+   *   600₈ · BACK conjunction
+   *  1000₈ · EAST recurrence
+   *
+   * Therefore:
+   *
+   *   000₈ → 400₈ = FRONT half
+   *   EAST → WEST
+   *   screen LEFT → RIGHT
+   *
+   *   400₈ → 1000₈ = BACK half
+   *   WEST → EAST
+   *   screen RIGHT → LEFT
+   *
+   * This binary observer-side state is derived from the same
+   * orbital phase that drives the cartoon position.
+   *
+   * It does NOT modify fullOrbit, recurrenceRaw, RAW pace,
+   * physical source, Core20, or the A8 clock frequency.
+   */
+  const frontLeg =
+    mod(phase,512) < 256;
+
+  const dot=$(`${m.id}-dot`);
+
+  dot.style.left=`${left}%`;
+
+  dot.className =
+    frontLeg
+      ? 'dot front'
+      : 'dot back';
+
+  $(`${m.id}-face`).textContent =
+    frontLeg
+      ? 'FRONT · TRANSIT LEG'
+      : 'BACK · OCCULTATION LEG';
+
+  $(`${m.id}-side`).textContent =
+    east
+      ? 'EAST · LEFT'
+      : 'WEST · RIGHT';
+
+  $(`${m.id}-phase9`).textContent =
+    phase9Octal(phase);
+
+  $(`${m.id}-phaseDec`).textContent =
+    `${mod(Math.floor(phase),512)} of 512`;
+
+  $(`${m.id}-x`).textContent =
+    coordText(pos.x);
+
+  $(`${m.id}-y`).textContent =
+    coordText(pos.y);
+
+  $(`${m.id}-motion`).textContent =
+    screenLeftToRight
+      ? 'SCREEN · LEFT → RIGHT'
+      : 'SCREEN · RIGHT → LEFT';
+}
+
+function physicalRawNow(){
+  return state.physicalRaw;
+}
+
+function modelDeltaFromPhysical(delta){
+  const h=state.handoff;
+
+  if (!h)
+    throw new Error(
+      'Active physical moon handoff unavailable'
+    );
+
+  return (
+    Number(delta) *
+    Number(h.physicalToModelRatio.numerator) /
+    Number(h.physicalToModelRatio.denominator)
+  );
+}
+
+function modelRawFromPhysical(physicalRaw){
+  const h=state.handoff;
+
+  if (!h)
+    throw new Error(
+      'Active physical moon handoff unavailable'
+    );
+
+  return (
+    Number(
+      h.modelAnchor.rawEquivalentAtPhysicalAnchor
+    ) +
+    modelDeltaFromPhysical(
+      Number(physicalRaw) -
+      Number(h.livePhysical.anchorRaw)
+    )
+  );
+}
+
+function displayRawNow(){
+  return state.rate === 1
+    ? modelRawFromPhysical(
+        state.physicalRaw
+      )
+    : state.simRaw;
+}
+
+function setModeText(){
+  const live = state.rate === 1;
+
+  $('viewMultiplier').value =
+    String(state.rate);
+
+  $('viewMultiplierLabel').textContent =
+    live
+      ? '1× SKY NOW'
+      : `${fmt(state.rate,0)}× SIMULATION`;
+
+  $('viewModeShort').textContent =
+    live
+      ? 'LIVE PREDICTION'
+      : 'NOT CURRENT SKY';
+
+  $('viewModeBanner').firstChild.textContent =
+    live
+      ? 'SKY NOW · LIVE A8 PREDICTION '
+      : `SIMULATION · ${fmt(state.rate,0)}× · NOT CURRENT SKY `;
+
+  $('viewModeDetail').textContent =
+    live
+      ? '1× uses the qualified active physical → Epoch-5 model handoff. Any other viewing rate is simulation and is not the current sky.'
+      : 'This display is detached from current sky position. Return to 1× to discard simulation and fetch fresh physical RAW.';
+
+  $('anchorPolicy').textContent =
+    live
+      ? 'FRESH PHYSICAL RAW · SKY NOW'
+      : 'SIMULATION DETACHED';
+
+  $('a8-native-selected-rate').textContent =
+    live
+      ? '1× SKY NOW'
+      : `${fmt(state.rate,0)}× SIMULATION`;
+
+  $('a8-native-source-epoch').textContent =
+    `${state.sourceEpoch} MODEL · ` +
+    `${state.livePhysicalSourceEpoch} LIVE`;
+
+  $('a8-native-base-period').textContent =
+    fmt(state.ganymedeFull,3);
+
+  $('a8-native-period-equation').textContent =
+    live
+      ? '1× uses the live physical RAW progression.'
+      : `${fmt(state.ganymedeFull,3)} ÷ ${fmt(state.rate,0)} = ` +
+        `${fmt(state.ganymedeFull / state.rate,3)} RAW per displayed Ganymede orbit.`;
+
+  const ids = {
+    Io:'a8-native-io-period',
+    Europa:'a8-native-europa-period',
+    Ganymede:'a8-native-ganymede-period',
+    Callisto:'a8-native-callisto-period'
+  };
+
+  for (const m of state.moons){
+    $(ids[m.name]).textContent =
+      fmt(naturalOrbitRaw(m) / state.rate,3);
+  }
+}
+
+async function refreshPhysical(){
+  const p=
+    await fetchJSON(
+      '/api/pulse-box/snapshot'
+    );
+
+  if (
+    p.STATUS !== 'ACTIVE' ||
+    !Number.isFinite(
+      Number(p.RAW_COUNT)
+    )
+  ){
+    throw new Error(
+      'Physical carrier snapshot invalid'
+    );
+  }
+
+  if (
+    String(p.SOURCE_EPOCH) !==
+    String(state.livePhysicalSourceEpoch)
+  ){
+    throw new Error(
+      `SOURCE_EPOCH changed: expected ${state.livePhysicalSourceEpoch}, ` +
+      `got ${p.SOURCE_EPOCH}`
+    );
+  }
+
+  const nextRaw=
+    Number(p.RAW_COUNT);
+
+  if (
+    state.physicalRaw != null &&
+    nextRaw < state.physicalRaw
+  ){
+    throw new Error(
+      'Physical RAW moved backward'
+    );
+  }
+
+  const previousRaw=
+    state.physicalRaw;
+
+  /*
+   * Simulation receives only measured ΔRAW
+   * multiplied by the selected native rate.
+   */
+  if (
+    state.rate !== 1 &&
+    state.simRaw != null &&
+    previousRaw != null
+  ){
+    state.simRaw +=
+      modelDeltaFromPhysical(
+        nextRaw-previousRaw
+      ) *
+      state.rate;
+  }
+
+  state.physicalRaw=nextRaw;
+
+  state.physicalSequence=
+    Number(p.REPORT_SEQUENCE);
+
+  $('edgeStatus').textContent=
+    p.STATUS;
+
+  $('edgeStatus').className=
+    'v good';
+
+  $('edgeSequence').textContent =
+    Number(
+      p.REPORT_SEQUENCE
+    ).toLocaleString();
+
+  $('edgeRaw').textContent =
+    nextRaw.toLocaleString();
+
+  $('edgeRole').textContent =
+    'READ ONLY';
+
+
+  return p;
+}
+
+async function reanchorSkyNow(reason='USER'){
+  $('pageStatus').textContent =
+    `RE-ANCHORING SKY NOW · ${reason}`;
+
+  $('pageStatus').className =
+    'status warn';
+
+  state.simRaw=null;
+
+  await refreshPhysical();
+
+  state.rate=1;
+
+  setModeText();
+
+  $('pageStatus').textContent =
+    '1× SKY NOW · POSITION PREDICTION';
+
+  $('pageStatus').className =
+    'status good';
+}
+
+function enterSimulation(rate){
+  const current=displayRawNow();
+
+  if (!Number.isFinite(current))
+    throw new Error(
+      'No current RAW available for simulation'
+    );
+
+  state.simRaw=current;
+  state.rate=rate;
+
+  setModeText();
+
+  $('pageStatus').textContent =
+    `${fmt(rate,0)}× SIMULATION · NOT CURRENT SKY`;
+
+  $('pageStatus').className =
+    'status warn';
+}
+
+async function changeRate(value){
+  const rate = Number(value);
+
+  if (![1,100,500,1000,2000].includes(rate))
+    return;
+
+  try{
+    if (rate === 1){
+      await reanchorSkyNow('RETURN FROM SIMULATION');
+    } else {
+      enterSimulation(rate);
+    }
+  } catch(err){
+    showError(err);
+  }
+}
+
+function parseFraction(value){
+  const [a,b='1'] =
+    String(value).split('/');
+
+  return {
+    n:Number(a),
+    d:Number(b)
+  };
+}
+
+async function refreshComparison(){
+  try{
+    const [jp,cp] =
+      await Promise.all([
+        fetchJSON('/api/hardware/jovian-timekeeper'),
+        fetchJSON('/api/core20/clock')
+      ]);
+
+    const tk = jp?.timekeeper;
+    const jov = jp?.jovian;
+    const clk = cp?.clock;
+
+    $('jStatus').textContent =
+      jov?.status || '—';
+
+    $('sourceEpoch').textContent =
+      tk?.sourceEpoch != null
+        ? String(tk.sourceEpoch)
+        : '—';
+
+    $('rulerRaw').textContent =
+      Number.isFinite(Number(tk?.lockedRulerRawPer512))
+        ? Number(tk.lockedRulerRawPer512).toLocaleString()
+        : '—';
+
+    $('lockRaw').textContent =
+      Number.isFinite(Number(tk?.lockRawPulse))
+        ? Number(tk.lockRawPulse).toLocaleString()
+        : '—';
+
+    $('qualification').textContent =
+      jov?.comparator?.reason || '—';
+
+    $('mode').textContent =
+      tk?.mode || jov?.mode || '—';
+
+    if (clk?.exactSubstate){
+      $('civilSubstate').textContent =
+        `${clk.exactSubstate.numerator}/` +
+        `${clk.exactSubstate.denominator}`;
+    }
+
+  } catch(err){
+    console.warn(
+      'Core20 comparison telemetry unavailable',
+      err
+    );
+  }
+}
+
+function renderStopwatch(total){
+  let whole;
+
+  if (typeof total === 'bigint'){
+    whole =
+      total >= 0n
+        ? total
+        : 0n;
+  } else {
+    whole =
+      BigInt(
+        Math.max(
+          0,
+          Math.floor(
+            Number(total) || 0
+          )
+        )
+      );
+  }
+
+  const minutes =
+    whole / 64n;
+
+  const seconds =
+    whole % 64n;
+
+  $('a8-sw-display').textContent =
+    `${String(minutes).padStart(2,'0')}:` +
+    `${String(seconds).padStart(2,'0')}`;
+
+  $('a8-sw-total').textContent =
+    whole.toLocaleString();
+}
+
+
+/*
+ * Transport loss is not an A8 discontinuity.
+ *
+ * Freeze the last valid display and preserve the native
+ * start coordinate. EventSource may reconnect. The next
+ * same-epoch absolute totalState recovers the observation.
+ */
+function stopwatchTransportLost(
+  message='WAITING · Core20 state witness'
+){
+  stopwatch.connected=false;
+
+  $('a8-sw-start').disabled=true;
+  $('a8-sw-stop').disabled=true;
+
+  $('a8-sw-status').textContent =
+    message;
+}
+
+
+/*
+ * A native-coordinate contradiction is different from
+ * ordinary transport loss. Stop the active observation,
+ * preserve the last valid elapsed result, and require a
+ * later valid edge before another START.
+ */
+function stopwatchHardFail(message){
+  stopwatch.running=false;
+  stopwatch.connected=false;
+  stopwatch.mode='ERROR';
+  stopwatch.startTotalState=null;
+
+  $('a8-sw-start').disabled=true;
+  $('a8-sw-stop').disabled=true;
+
+  $('a8-sw-status').textContent =
+    message;
+}
+
+
+function processStopwatchEdge(edge){
+  /*
+   * Independent cross-check witness only.
+   *
+   * No moon-model state is read or written here.
+   */
+  if (
+    !edge ||
+    edge.schema !==
+      'A8-CORE20-CLOCK-EDGE-V1' ||
+    edge.browserTimingAuthority !== false
+  ){
+    return;
+  }
+
+  const epoch =
+    String(edge.sourceEpoch);
+
+  const sequence =
+    Number(edge.sequence);
+
+  const totalText =
+    String(
+      edge.totalState ?? ''
+    );
+
+  if (
+    !Number.isSafeInteger(sequence) ||
+    !/^[0-9]+$/.test(totalText)
+  ){
+    return;
+  }
+
+  const totalState =
+    BigInt(totalText);
+
+  let runningEpochReset=false;
+
+  /*
+   * A real Core20 source-epoch transition is a genuine
+   * continuity boundary.
+   *
+   * If an observation is RUNNING, kill/reset it.
+   *
+   * If the stopwatch is already stopped, preserve that
+   * completed human observation; only prepare the witness
+   * coordinate for the new epoch.
+   */
+  if (
+    stopwatch.sourceEpoch !== null &&
+    stopwatch.sourceEpoch !== epoch
+  ){
+    stopwatch.lastSequence=null;
+    stopwatch.latestTotalState=null;
+
+    if (stopwatch.running){
+      stopwatch.running=false;
+      stopwatch.mode='RESET';
+      stopwatch.startTotalState=null;
+      stopwatch.stoppedTotal=0n;
+
+      renderStopwatch(0n);
+
+      $('a8-sw-status').textContent =
+        'RESET · Core20 source epoch changed';
+
+      runningEpochReset=true;
+    }
+  }
+
+  stopwatch.sourceEpoch =
+    epoch;
+
+  /*
+   * Duplicate / out-of-order transport events do not
+   * become stopwatch states.
+   */
+  if (
+    stopwatch.lastSequence !== null &&
+    sequence <= stopwatch.lastSequence
+  ){
+    return;
+  }
+
+  /*
+   * Absolute totalState must remain monotonic inside an
+   * unchanged source epoch.
+   */
+  if (
+    stopwatch.latestTotalState !== null &&
+    totalState <
+      stopwatch.latestTotalState
+  ){
+    stopwatchHardFail(
+      'ERROR · Core20 state coordinate regressed'
+    );
+
+    return;
+  }
+
+  stopwatch.lastSequence =
+    sequence;
+
+  stopwatch.latestTotalState =
+    totalState;
+
+  stopwatch.connected=true;
+
+  if (stopwatch.running){
+    const elapsed =
+      totalState -
+      stopwatch.startTotalState;
+
+    if (elapsed < 0n){
+      stopwatchHardFail(
+        'ERROR · stopwatch coordinate regressed'
+      );
+
+      return;
+    }
+
+    stopwatch.stoppedTotal =
+      elapsed;
+
+    stopwatch.mode='RUNNING';
+
+    $('a8-sw-start').disabled=true;
+    $('a8-sw-stop').disabled=false;
+
+    $('a8-sw-status').textContent =
+      'Running · independent Core20 state witness';
+
+    renderStopwatch(
+      elapsed
+    );
+
+    return;
+  }
+
+  $('a8-sw-start').disabled=false;
+  $('a8-sw-stop').disabled=true;
+
+  /*
+   * Do not erase a completed STOP result merely because
+   * another Core20 edge arrives.
+   */
+  if (stopwatch.mode === 'STOPPED'){
+    $('a8-sw-status').textContent =
+      'Stopped · independent Core20 state witness';
+
+    return;
+  }
+
+  if (runningEpochReset){
+    return;
+  }
+
+  stopwatch.mode='READY';
+
+  $('a8-sw-status').textContent =
+    'Ready · independent Core20 state witness';
+}
+
+
+function startStopwatchEdgeStream(){
+  if (stopwatchEdgeStream){
+    stopwatchEdgeStream.close();
+  }
+
+  stopwatch.running=false;
+  stopwatch.connected=false;
+  stopwatch.mode='CONNECTING';
+
+  stopwatch.sourceEpoch=null;
+  stopwatch.lastSequence=null;
+  stopwatch.latestTotalState=null;
+  stopwatch.startTotalState=null;
+  stopwatch.stoppedTotal=0n;
+
+  $('a8-sw-start').disabled=true;
+  $('a8-sw-stop').disabled=true;
+
+  $('a8-sw-status').textContent =
+    'CONNECTING · independent Core20 state witness';
+
+  renderStopwatch(0n);
+
+  stopwatchEdgeStream =
+    new EventSource(
+      '/api/core20/edges'
+    );
+
+  stopwatchEdgeStream.addEventListener(
+    'a8-edge',
+    event => {
+      try{
+        processStopwatchEdge(
+          JSON.parse(
+            event.data
+          )
+        );
+      } catch(_){
+        /*
+         * Malformed witness transport cannot affect
+         * Core20 or Jovian geometry.
+         */
+      }
+    }
+  );
+
+  stopwatchEdgeStream.onerror =
+    ()=>{
+      stopwatchTransportLost();
+    };
+}
+
+
+function startStopwatch(){
+  if (
+    !stopwatch.connected ||
+    stopwatch.latestTotalState === null
+  ){
+    $('a8-sw-status').textContent =
+      'START WAIT · awaiting Core20 state edge';
+
+    return;
+  }
+
+  stopwatch.startTotalState =
+    stopwatch.latestTotalState;
+
+  stopwatch.stoppedTotal=0n;
+  stopwatch.running=true;
+  stopwatch.mode='RUNNING';
+
+  $('a8-sw-start').disabled=true;
+  $('a8-sw-stop').disabled=false;
+
+  $('a8-sw-status').textContent =
+    'Running · independent Core20 state witness';
+
+  renderStopwatch(0n);
+}
+
+
+function stopStopwatch(){
+  if (!stopwatch.running)
+    return;
+
+  if (
+    !stopwatch.connected ||
+    stopwatch.latestTotalState === null ||
+    stopwatch.startTotalState === null
+  ){
+    stopwatchTransportLost();
+    return;
+  }
+
+  const elapsed =
+    stopwatch.latestTotalState -
+    stopwatch.startTotalState;
+
+  if (elapsed < 0n){
+    stopwatchHardFail(
+      'ERROR · stopwatch coordinate regressed'
+    );
+    return;
+  }
+
+  stopwatch.stoppedTotal =
+    elapsed;
+
+  stopwatch.running=false;
+  stopwatch.mode='STOPPED';
+  stopwatch.startTotalState=null;
+
+  $('a8-sw-start').disabled=false;
+  $('a8-sw-stop').disabled=true;
+
+  $('a8-sw-status').textContent =
+    'Stopped · independent Core20 state witness';
+
+  renderStopwatch(
+    stopwatch.stoppedTotal
+  );
+}
+
+
+function resetStopwatch(){
+  stopwatch.running=false;
+  stopwatch.startTotalState=null;
+  stopwatch.stoppedTotal=0n;
+
+  stopwatch.mode =
+    stopwatch.connected
+      ? 'READY'
+      : 'WAITING';
+
+  $('a8-sw-start').disabled =
+    !stopwatch.connected;
+
+  $('a8-sw-stop').disabled=true;
+
+  $('a8-sw-status').textContent =
+    stopwatch.connected
+      ? 'Ready · independent Core20 state witness'
+      : 'WAITING · Core20 state witness';
+
+  renderStopwatch(0n);
+}
+
+
+function showError(err){
+  console.error(err);
+
+  $('pageStatus').textContent =
+    'PREDICTION ERROR · ' +
+    (err?.message || String(err));
+
+  $('pageStatus').className =
+    'status bad';
+}
+
+function frame(){
+  if (state.ready){
+    const raw = displayRawNow();
+
+    if (Number.isFinite(raw)){
+      for (const m of state.moons)
+        renderMoon(m,raw);
+    }
+  }
+
+  requestAnimationFrame(frame);
+}
+
+async function bootstrap(){
+  $('pageStatus').textContent =
+    'CONNECTING · MODEL EPOCH-5 / LIVE PHYSICAL CARRIER';
+
+  $('pageStatus').className =
+    'status warn';
+
+  const [cfg,handoff]=
+    await Promise.all([
+      fetchJSON(MODEL_URL),
+      fetchJSON(HANDOFF_URL)
+    ]);
+
+  if (
+    cfg.schema !==
+      'A8-MOONS-CONTINUOUS-COORDINATES-V2' ||
+    cfg.status !== 'READY'
+  ){
+    throw new Error(
+      'Continuous Epoch-5 moon model invalid'
+    );
+  }
+
+  state.cfg=cfg;
+
+  state.sourceEpoch=
+    String(cfg.sourceEpoch);
+
+  const handoffLiveEpoch =
+    Number(
+      handoff?.livePhysical?.sourceEpoch
+    );
+
+  const handoffLiveAnchor =
+    Number(
+      handoff?.livePhysical?.anchorRaw
+    );
+
+  const handoffModelAnchor =
+    Number(
+      handoff?.modelAnchor
+        ?.rawEquivalentAtPhysicalAnchor
+    );
+
+  const handoffRatioN =
+    Number(
+      handoff?.physicalToModelRatio
+        ?.numerator
+    );
+
+  const handoffRatioD =
+    Number(
+      handoff?.physicalToModelRatio
+        ?.denominator
+    );
+
+  if (
+    handoff.schema !==
+      'A8-MOONS-PHYSICAL-MODEL-HANDOFF-V1' ||
+    handoff.status !== 'QUALIFIED' ||
+    String(handoff.model.sourceEpoch) !==
+      String(cfg.sourceEpoch) ||
+    !Number.isSafeInteger(handoffLiveEpoch) ||
+    handoffLiveEpoch < 1 ||
+    !Number.isFinite(handoffLiveAnchor) ||
+    !Number.isFinite(handoffModelAnchor) ||
+    handoffRatioN !== 1 ||
+    handoffRatioD !== 1
+  ){
+    throw new Error(
+      'Active physical moon handoff invalid'
+    );
+  }
+
+  state.handoff=handoff;
+
+  state.livePhysicalSourceEpoch=
+    String(
+      handoff.livePhysical.sourceEpoch
+    );
+
+  const defs=[
+    ['IO','io','Io'],
+    ['EUROPA','eu','Europa'],
+    ['GANYMEDE','ga','Ganymede'],
+    ['CALLISTO','ca','Callisto']
+  ];
+
+  state.ganymedeFull =
+    NATURAL_ORBIT_RAW.Ganymede;
+
+  state.moons =
+    defs.map(
+      ([key,id,name]) => ({
+        id,
+        name,
+        ...cfg.bodies[key]
+      })
+    );
+
+  $('moonCards').innerHTML =
+    state.moons
+      .map(buildMoonCard)
+      .join('');
+
+  state.rate=1;
+
+  await refreshPhysical();
+
+  /*
+   * Fail closed if any moon is outside
+   * its sealed continuous coordinate range.
+   */
+  for (const moon of state.moons)
+    nativeAtRaw(
+      moon,
+      modelRawFromPhysical(
+        state.physicalRaw
+      )
+    );
+
+  state.ready=true;
+
+  setModeText();
+
+  $('pageStatus').textContent =
+    '1× SKY NOW · POSITION PREDICTION';
+
+  $('pageStatus').className =
+    'status good';
+
+  await refreshComparison();
+}
+
+$('viewMultiplier').addEventListener(
+  'change',
+  e => changeRate(e.target.value)
+);
+
+$('a8-sw-start').addEventListener(
+  'click',
+  startStopwatch
+);
+
+$('a8-sw-stop').addEventListener(
+  'click',
+  stopStopwatch
+);
+
+$('a8-sw-reset').addEventListener(
+  'click',
+  resetStopwatch
+);
+
+document.addEventListener(
+  'visibilitychange',
+  ()=>{
+    if (
+      !document.hidden &&
+      state.ready &&
+      state.rate === 1
+    ){
+      reanchorSkyNow('VISIBILITY RETURN')
+        .catch(showError);
+    }
+  }
+);
+
+/*
+ * Physical snapshots continue in the background even during
+ * simulation, but they do NOT re-anchor simulation geometry.
+ */
+setInterval(
+  ()=>{
+    if (!state.ready)
+      return;
+
+    refreshPhysical()
+      .catch(err=>{
+        console.warn(
+          'Physical snapshot retry',
+          err
+        );
+
+        if (state.rate === 1){
+          $('pageStatus').textContent =
+            'SKY NOW · PHYSICAL SNAPSHOT RETRY';
+
+          $('pageStatus').className =
+            'status warn';
+        }
+      });
+  },
+  1000
+);
+
+setInterval(
+  refreshComparison,
+  15000
+);
+
+startStopwatchEdgeStream();
+
+requestAnimationFrame(frame);
+
+bootstrap()
+  .catch(showError);
+</script>
+
+<footer class="cosigo-site-footer">
+  <strong>COSIGO Labs · Auspicious 8 experimental laboratory</strong>
+  <p class="cosigo-disclaimer">Research / engineering notice: A8 pages may contain provisional models, simulations, hypotheses and unreplicated experiment designs. Unless a page explicitly states otherwise, material shown here is not a certified metrology standard, accredited measurement result, or final Foundation definition.</p>
+  <div class="cosigo-footer-links">
+    <a href="https://cosigo.io/">COSIGO Home</a>
+    <a href="https://a8.cosigo.io/">A8 Public Instrument</a>
+    <a href="/">A8 Engineering Lab</a>
+    <a href="/chief-engineer.html" title="Chief Engineer" style="opacity:.32;font-size:.72em">CE</a>
+    <a href="https://contact.cosigo.io/">Contact</a>
+    <a href="https://github.com/cosigo">COSIGO GitHub</a>
+  </div>
+  <p>© 2026 COSIGO.</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,64 @@
+{
+  "schema": "A8-MOONS-PHYSICAL-MODEL-HANDOFF-V1",
+  "status": "QUALIFIED",
+
+  "model": {
+    "sourceEpoch": 5,
+    "schema": "A8-MOONS-CONTINUOUS-COORDINATES-V2",
+    "sha256": "9e68d679b814a9c082bca3a8bcd401cbc6d50293ef16e35b411a12ba5aa8b119"
+  },
+
+  "livePhysical": {
+    "sourceEpoch": 7,
+    "anchorRaw": 1853729,
+    "reportSequence": 172252
+  },
+
+  "modelAnchor": {
+    "rawEquivalentAtPhysicalAnchor": 862808997
+  },
+
+  "physicalToModelRatio": {
+    "numerator": 1,
+    "denominator": 1
+  },
+
+  "evidence": {
+    "entry": "011",
+    "clip": "Kooha-2026-09-18-06-10-06.mkv",
+    "ghostRaw": 1841616,
+
+    "observedAxisPixels": {
+      "CALLISTO": -128.43,
+      "IO": 164.39,
+      "EUROPA": 266.47
+    },
+
+    "modelMatch": {
+      "rmsPixels": 0.27541044471003023,
+      "pixelScale": 2.9762988499563288,
+
+      "observedAxisMirroredAgainstModelEastPositiveAxis": true,
+
+      "residualPixels": {
+        "CALLISTO": -0.15271405842437957,
+        "IO": -0.4140889146321456,
+        "EUROPA": 0.18100145387387556
+      },
+
+      "ganymedePredictionPixels": 64.90612605059563
+    }
+  },
+
+  "provenance": "ENTRY011_EPOCH7_JOVIAN_TELESCOPE_REACQUISITION",
+
+  "semantics": {
+    "modelEpochIsProvenance": true,
+    "liveEpochIsPhysicalCarrier": true,
+    "changesMoonPeriods": false,
+    "changesModelCoordinates": false,
+    "changesCore20": false,
+    "changesPhysicalCounter": false,
+    "screenAxisMirrorChangesModelOrientation": false
+  }
+}

@@ -1,0 +1,20 @@
+[Unit]
+Description=A8 Annual Frame V1 Read-Only Sidecar
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /opt/a8-annual-frame/server.py
+Restart=on-failure
+RestartSec=2
+User=root
+Group=root
+
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadOnlyPaths=/opt/a8-annual-frame
+
+[Install]
+WantedBy=multi-user.target

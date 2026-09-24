@@ -1,0 +1,56 @@
+AUSPICIOUS 8 · EPOCH-5 · MERIDIAN-0 ORIENTATION DERIVATION
+DATE · 2026-09-15
+
+STATUS
+DERIVED / QUALIFIED
+
+PHYSICAL WITNESS
+
+SOURCE_EPOCH        5
+WITNESS RAW         855447646
+
+EXTERNAL ONE-SHOT ORIENTATION WITNESS
+
+USNO OBJECT         Sun
+USNO GHA            76.209615000 degrees
+USNO DEC            2.827199000 degrees
+
+USNO JSON SHA-256
+7e2859c7a05542d065a6c885873265bd8f93e1485ef48028e21b29afea81bb78
+
+NATIVE RULERS USED
+
+STELLAR ROTATION    2619132 RAW
+SOL RETURN          2624257.502935421 RAW
+
+DERIVED ORIENTATION
+
+GREENWICH / MERIDIAN 0
+APPARENT SOLAR MIDNIGHT
+
+DERIVED RAW
+853579979.320866823
+
+NEAREST INTEGER RAW
+853579979
+
+EVIDENCE BOUNDARY
+
+The physical observation is WITNESS RAW 855447646.
+
+The Meridian-0 address is derived from that physical Epoch-5 observation
+using a one-shot external astronomical orientation witness.
+
+UTC / UT1 / USNO did not create the Epoch-5 ruler.
+They do not drive the physical counter.
+They do not remain a runtime timing source.
+
+This record does not retune:
+
+Core20
+Epoch-5
+stellar rotation
+Sol return
+
+The derived orientation remains testable against later independent
+Sol and Mintaka observations.

@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>CIGO Whitepaper — Market-Access Token</title>
+  <meta name="description" content="CIGO whitepaper for the BNB Smart Chain market-access token published by the COSIGO system.">
+  <link rel="canonical" href="https://market.cosigo.io/whitepaper.html">
+  <link rel="stylesheet" href="/shared/style.css?v=20260628-144354">
+
+  <link rel="stylesheet" href="/shared/assets/cigo-footer.css?v=20260708-225416Z"></head>
+
+<body>
+  <header class="topbar market-header">
+    <div class="wrap topbar-inner market-topbar-inner">
+      <a class="brand market-title" href="https://market.cosigo.io/" aria-label="CIGO market home">
+        <img src="/shared/assets/icons/cigo_256.png" alt="CIGO token icon" class="brand-icon">
+        <span class="brand-text">
+          <span class="brand-title">cigo market</span>
+          <small>whitepaper</small>
+        </span>
+      </a>
+
+      <nav class="cosigo-escape-nav market-header-nav" aria-label="COSIGO site navigation">
+        <span class="menu-label">CIGO:</span>
+        <a href="https://market.cosigo.io/">market notice</a>
+        <a href="https://trade.cosigo.io/">trade</a>
+        <a href="https://trade.cosigo.io/request.html">discount desk</a>
+        <a href="https://trade.cosigo.io/guides.html">guides</a>
+        <a href="https://trade.cosigo.io/pool.html">pool</a>
+        <a href="https://labels.cosigo.io/">labels</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero-card">
+      <p class="eyebrow">CIGO market-access paper · public version 1.0 · July 2026</p>
+      <h1>CIGO Whitepaper</h1>
+
+      <p class="lead">
+        CIGO is a BNB Smart Chain market-access token published by the COSIGO system for public trading,
+        liquidity access, request-desk settlement, and CIGO-specific market infrastructure.
+      </p>
+
+      <p>
+        CIGO is separate from COSIGO&trade;. CIGO is not the COSIGO&trade; silver-referenced Ethereum token,
+        is not silver-backed, is not a share of COSIGO, is not a debt claim, is not a redemption certificate,
+        and is not a claim on COSIGO reserves or redemption inventory.
+      </p>
+
+      <p>
+        This paper documents the intended role of CIGO, the limits of its public market structure, the risks created by
+        decentralized exchange liquidity, the reason for administrative controls, and the distinction between visible
+        wallet value, pool quotes, and actual available fulfillment.
+      </p>
+    </section>
+
+    <section class="panel">
+      <h2>1. Current official CIGO contract</h2>
+      <p>
+        The following BNB Smart Chain contract is the current official CIGO contract for wallet import, market reference,
+        public disclosures, and current CIGO activity.
+      </p>
+
+      <p>
+        <code>0x3a38e963f524E0dDFB75dFa1752b4Cd1364F5560</code>
+      </p>
+
+      <p>
+        <a href="https://bscscan.com/token/0x3a38e963f524E0dDFB75dFa1752b4Cd1364F5560" target="_blank" rel="noopener">
+          View current CIGO contract on BscScan ↗
+        </a>
+      </p>
+
+      <p>
+        Older, retired, test, or mistaken contract references should be treated as historical unless this page and the
+        official market notice identify them as current.
+      </p>
+    </section>
+
+    <section class="panel">
+      <h2>2. Purpose and market-access role</h2>
+      <p>
+        CIGO is intended to create a public market-access layer around the COSIGO ecosystem without representing
+        ownership of COSIGO&trade; inventory, silver holdings, redemption reserves, or business assets.
+      </p>
+
+      <p>
+        Its purpose is limited and practical:
+      </p>
+
+      <ul>
+        <li>provide a public BNB Smart Chain token for CIGO-specific market activity;</li>
+        <li>support live DEX liquidity and request-desk settlement paths;</li>
+        <li>give users a visible token for CIGO trading, quoting, wallet import, and market reference;</li>
+        <li>separate speculative public-market activity from COSIGO&trade; silver-reference disclosures;</li>
+        <li>publish risks openly rather than presenting thin liquidity as guaranteed exit value.</li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <h2>3. Difference between CIGO and COSIGO&trade;</h2>
+
+      <p>
+        CIGO and COSIGO&trade; are intentionally separated.
+      </p>
+
+      <ul>
+        <li><strong>CIGO</strong> is a BNB Smart Chain market-access token for trading, liquidity, and public market activity.</li>
+        <li><strong>COSIGO&trade;</strong> refers to the separate COSIGO system and silver-referenced COSIGO&trade; disclosures.</li>
+        <li>CIGO is not silver-backed and does not grant a right to redeem silver.</li>
+        <li>CIGO does not represent equity, profit share, voting ownership, or a claim on COSIGO reserves.</li>
+        <li>CIGO market prices may move independently from any COSIGO&trade; reference, inventory, or disclosure.</li>
+      </ul>
+
+      <p>
+        This separation exists to reduce confusion. A public-market token can trade sharply above or below any reference
+        idea. Users should not treat CIGO wallet balance, DEX price, or chart value as proof of collateral backing.
+      </p>
+    </section>
+
+    <section class="panel">
+      <h2>4. Liquidity structure and fake-liquidity risk</h2>
+
+      <p>
+        CIGO uses public liquidity through the active CIGO / BSC-USD PancakeSwap V2 pool and a separate reviewed/manual
+        request flow. These are different paths.
+      </p>
+
+      <ul>
+        <li><strong>Public swap:</strong> direct market swap through the active pool, subject to pool depth, slippage, tax, gas, and price movement.</li>
+        <li><strong>Request desk:</strong> reviewed/manual settlement flow with published quote logic, wallet caps, and available-fulfillment limits.</li>
+        <li><strong>Reference quote:</strong> a comparison aid, not a guarantee that a large trade can clear at one flat price.</li>
+      </ul>
+
+      <p>
+        Thin pools can create misleading wallet values. A token can display a price while the paired USDT/BNB depth is
+        too small to support large exits. Volume can also be distorted by bots, related wallets, or repeated small
+        trades. For that reason, COSIGO should not present CIGO liquidity as stronger than the actual available pool
+        depth or request-desk fulfillment capacity.
+      </p>
+    </section>
+
+    <section class="panel">
+      <h2>5. Pool curves and trade impact</h2>
+
+      <p>
+        CIGO pool trades do not clear against a flat shelf price. A larger buy or sell walks through the pool curve,
+        changing the average execution price as the trade size grows.
+      </p>
+
+      <p>
+        This means a visible small-quote price, wallet display, or chart value may differ sharply from the result of a
+        larger trade. Public CIGO interfaces should therefore continue to show live pool status, request-desk estimates,
+        slippage warnings, and clear explanations of pool-curve behavior.
+      </p>
+
+      <p>
+        For current pool references, see
+        <a href="https://trade.cosigo.io/pool.html" target="_blank" rel="noopener">trade.cosigo.io/pool.html ↗</a>.
+      </p>
+    </section>
+
+    <section class="panel">
+      <h2>6. Fees, taxes, gas, and interface limits</h2>
+
+      <p>
+        A CIGO trade may include several cost layers. Depending on route and direction, a user may experience CIGO
+        contract tax, PancakeSwap V2 pool fee, BNB network gas, slippage, and current pool movement.
+      </p>
+
+      <p>
+        The official live swap interface does not add a separate trade.cosigo.io interface fee. The request desk may
+        include published manual quote assumptions, caps, or safety buffers depending on the route and available
+        fulfillment. These should be disclosed in the interface before a user acts.
+      </p>
+
+      <p>
+        Public swap size limits are used to reduce accidental large approvals, user error, and unexpected pool impact.
+        Such limits are protective controls, not guarantees of value, liquidity, or outcome.
+      </p>
+    </section>
+
+    <section class="panel">
+      <h2>7. Administrative controls and governance risk</h2>
+
+      <p>
+        CIGO was designed with administrative controls intended to reduce bot pressure, whale concentration, early-market
+        abuse, and liquidity extraction. Protective controls can be useful during early market formation, but they also
+        create centralization and trust risks.
+      </p>
+
+      <p>
+        Users, reviewers, wallets, and labelers should evaluate these controls openly. Administrative powers can affect
+        transfer behavior, market access, wallet limits, taxes, blacklist or restriction behavior where supported, and
+        future operating policy. Any such control should be understood as a risk as well as a protective measure.
+      </p>
+
+      <p>
+        COSIGO does not regard the existence of early-market controls as evidence of fraud or malicious design. At the
+        same time, COSIGO recognizes that centralized controls require clear disclosure and user caution.
+      </p>
+    </section>
+
+    <section class="panel">
+      <h2>8. Request-desk settlement model</h2>
+
+      <p>
+        The CIGO request desk provides a reviewed/manual flow separate from direct public swap execution. It is intended
+        to help users compare routes, avoid unnecessary large swap impact, and settle only after a request is generated,
+        reviewed, and clearly instructed.
+      </p>
+
+      <p>
+        A request-desk quote is not the same thing as a guaranteed public pool exit. The quote can be capped by available
+        fulfillment, wallet limits, manual desk rules, pool depth, and route-specific assumptions.
+      </p>
+
+      <p>
+        Current request flow:
+        <a href="https://trade.cosigo.io/request.html" target="_blank" rel="noopener">trade.cosigo.io/request.html ↗</a>.
+      </p>
+    </section>
+
+    <section class="panel">
+      <h2>9. Wallet, scanner, and label risk</h2>
+
+      <p>
+        CIGO may trigger warnings, labels, or caution messages from third-party wallets, scanners, DEX frontends, browser
+        tools, and security systems. These systems may be delayed, inconsistent, incomplete, discretionary, or based on
+        low-popularity assumptions rather than confirmed misconduct.
+      </p>
+
+      <p>
+        COSIGO disputes broad labels that impair CIGO access without identifying a specific abusive function or confirmed
+        misconduct. Users should still read warnings carefully, verify the contract address, review public disclosures,
+        and avoid relying on any single wallet or scanner as the complete source of truth.
+      </p>
+
+      <p>
+        Public label notes:
+        <a href="https://labels.cosigo.io/" target="_blank" rel="noopener">labels.cosigo.io ↗</a>.
+      </p>
+    </section>
+
+    <section class="panel">
+      <h2>10. Chain, DEX, and infrastructure dependencies</h2>
+
+      <p>
+        CIGO depends on BNB Smart Chain for the current token contract, wallet balances, transfers, and public pool
+        activity. It also depends on external infrastructure such as wallets, RPC providers, block explorers, DEX
+        frontends, and PancakeSwap pool contracts for normal public market access.
+      </p>
+
+      <p>
+        If PancakeSwap frontends fail but BNB Smart Chain and the pool contracts remain usable, CIGO may still be
+        accessible through other interfaces, direct contract interaction, alternate DEX routing, or manual settlement
+        paths. If BNB Smart Chain itself becomes permanently unusable, CIGO faces existential chain risk and would require
+        a public holder-snapshot and migration process if recovery is possible.
+      </p>
+    </section>
+
+    <section class="panel">
+      <h2>11. Emergency migration policy</h2>
+
+      <p>
+        If a contract, chain, DEX, wallet-access, or infrastructure failure creates a serious continuity problem, COSIGO
+        should publish a migration notice before asking users to act.
+      </p>
+
+      <p>
+        A responsible migration process should include:
+      </p>
+
+      <ul>
+        <li>the reason for migration;</li>
+        <li>the old and new contract addresses;</li>
+        <li>a holder snapshot method and timestamp if relevant;</li>
+        <li>how custodian, treasury, and pool balances are treated;</li>
+        <li>what users must do and what users should avoid;</li>
+        <li>public links to official pages and block explorer records.</li>
+      </ul>
+
+      <p>
+        Users should ignore unofficial migration messages, direct messages, seed-phrase requests, and wallet-drain
+        links. COSIGO will never need a user seed phrase to migrate or verify a wallet balance.
+      </p>
+    </section>
+
+    <section class="panel">
+      <h2>12. User risk summary</h2>
+
+      <ul>
+        <li>CIGO is speculative and may lose value.</li>
+        <li>CIGO is not silver-backed and is not a redemption claim.</li>
+        <li>Thin liquidity can make displayed values misleading.</li>
+        <li>Large trades can move pool price sharply.</li>
+        <li>Wallets and scanners may show warnings or inconsistent labels.</li>
+        <li>Administrative controls create centralization risk.</li>
+        <li>BNB Smart Chain, PancakeSwap, wallets, RPC providers, and public frontends are external dependencies.</li>
+        <li>Users are responsible for verifying contract addresses before signing transactions.</li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <h2>13. Related official CIGO pages</h2>
+      <ul>
+        <li><a href="https://market.cosigo.io/">CIGO market notice</a></li>
+        <li><a href="https://trade.cosigo.io/">CIGO live swap interface</a></li>
+        <li><a href="https://trade.cosigo.io/request.html">CIGO discount desk / request flow</a></li>
+        <li><a href="https://trade.cosigo.io/guides.html">CIGO guides</a></li>
+        <li><a href="https://trade.cosigo.io/pool.html">CIGO pool page</a></li>
+        <li><a href="https://quote.cosigo.io/">CIGO quote reference</a></li>
+        <li><a href="https://labels.cosigo.io/">Public label record</a></li>
+      </ul>
+    </section>
+  </main>
+  <footer class="cigo-system-footer">
+    <div class="cigo-footer-inner">
+      <div class="cigo-footer-info">
+        <strong>CIGO market-access pages are published by the COSIGO&trade; system.</strong><br>
+        CIGO is a separate speculative market-access token for trading, liquidity, and public market activity.
+        It is not the COSIGO&trade; silver-referenced Ethereum token, is not silver-backed, and is not a claim on
+        COSIGO reserves or redemption inventory.<br>
+        COSIGO&trade; is a trademark claimed by Wendall Gregory Wilson. U.S. trademark application pending.
+      </div>
+
+      <div class="cigo-footer-links">
+        <a href="https://market.cosigo.io/">CIGO market notice</a>
+        <a href="https://market.cosigo.io/whitepaper.html">CIGO whitepaper</a>
+        <a href="https://trade.cosigo.io/">CIGO live swap</a>
+        <a href="https://trade.cosigo.io/request.html">discount desk</a>
+        <a href="https://quote.cosigo.io/">quote reference</a>
+        <a href="https://labels.cosigo.io/">public label record</a>
+        <a href="https://github.com/cosigo" target="_blank" rel="noopener">GitHub ↗</a>
+        <a href="https://dexscreener.com/bsc/0xded1e63b6262c0328876b7774f65c08505dd559a" target="_blank" rel="noopener">DEX Screener chart only</a> <small>(chart/reference only; use trade.cosigo.io for swaps)</small>
+        <a href="https://contact.cosigo.io/" target="_blank" rel="noopener">contact</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

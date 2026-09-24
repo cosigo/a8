@@ -1,0 +1,34 @@
+[Unit]
+Description=A8 Shadow Physical Heartbeat Recorder
+After=network.target a8-shadow-core.service
+
+[Service]
+Type=simple
+User=greg
+Group=greg
+
+ExecStart=/usr/bin/node /opt/a8-shadow-recorder/recorder.js
+
+Restart=on-failure
+RestartSec=3
+TimeoutStopSec=10
+
+NoNewPrivileges=true
+PrivateTmp=true
+PrivateDevices=true
+ProtectSystem=strict
+ProtectHome=yes
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictSUIDSGID=true
+RestrictNamespaces=true
+LockPersonality=true
+CapabilityBoundingSet=
+AmbientCapabilities=
+RestrictAddressFamilies=AF_UNIX AF_INET
+
+ReadWritePaths=/var/lib/a8-shadow-recorder
+
+[Install]
+WantedBy=multi-user.target

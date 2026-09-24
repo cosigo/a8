@@ -1,0 +1,8 @@
+[Unit]
+Description=A8 Core20 Sealed Operating Checkpoint
+
+[Service]
+Type=oneshot
+User=root
+Group=root
+ExecStart=/usr/local/sbin/a8-core20-checkpoint

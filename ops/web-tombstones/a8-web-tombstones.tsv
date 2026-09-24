@@ -1,0 +1,100 @@
+# TERMINOLOGY SAFETY
+#
+# "TOMBSTONE" HERE MEANS RETIRED WEB FILE / URL ONLY.
+#
+# A8 hardware named Ghost, including Arduino / Shadow witness hardware,
+# is ACTIVE HARDWARE IDENTITY and is NEVER selected by this policy.
+#
+# No rule may infer retirement from the words:
+#   ghost
+#   shadow
+#   arduino
+#   squirrel
+#
+# Retirement requires an explicit FORBID_FILE, REPO_FORBID,
+# or TOMBSTONE record below.
+#
+# A8 PERMANENT GHOST TOMBSTONES
+#
+# These paths are retired landing-page copies.
+# They must remain absent from live /srv/sites and from canonical Git.
+#
+# CE and active Telescope are explicit exceptions and MUST NOT be
+# interpreted as ghosts by this manifest.
+
+FORBID_FILE|/srv/sites/a8.cosigo.io/public/about.html
+FORBID_FILE|/srv/sites/a8.cosigo.io/public/about-bg-a.html
+FORBID_FILE|/srv/sites/a8.cosigo.io/public/about-bg-b.html
+
+FORBID_FILE|/srv/sites/about.cosigo.io/public/about.html
+FORBID_FILE|/srv/sites/angle.cosigo.io/public/angle.html
+FORBID_FILE|/srv/sites/audio.cosigo.io/public/audio.html
+FORBID_FILE|/srv/sites/calendar.cosigo.io/public/calendar.html
+FORBID_FILE|/srv/sites/clock.cosigo.io/public/clock.html
+FORBID_FILE|/srv/sites/composer.cosigo.io/public/composer.html
+FORBID_FILE|/srv/sites/data.cosigo.io/public/data.html
+FORBID_FILE|/srv/sites/mintaka.cosigo.io/public/mintaka.html
+FORBID_FILE|/srv/sites/moons.cosigo.io/public/moons.html
+FORBID_FILE|/srv/sites/quartz.cosigo.io/public/quartz.html
+FORBID_FILE|/srv/sites/sol.cosigo.io/public/sol.html
+
+CANONICAL_FILE|/srv/sites/a8.cosigo.io/public/index.html
+CANONICAL_FILE|/srv/sites/about.cosigo.io/public/index.html
+CANONICAL_FILE|/srv/sites/angle.cosigo.io/public/index.html
+CANONICAL_FILE|/srv/sites/audio.cosigo.io/public/index.html
+CANONICAL_FILE|/srv/sites/calendar.cosigo.io/public/index.html
+CANONICAL_FILE|/srv/sites/clock.cosigo.io/public/index.html
+CANONICAL_FILE|/srv/sites/composer.cosigo.io/public/index.html
+CANONICAL_FILE|/srv/sites/data.cosigo.io/public/index.html
+CANONICAL_FILE|/srv/sites/mintaka.cosigo.io/public/index.html
+CANONICAL_FILE|/srv/sites/moons.cosigo.io/public/index.html
+CANONICAL_FILE|/srv/sites/quartz.cosigo.io/public/index.html
+CANONICAL_FILE|/srv/sites/sol.cosigo.io/public/index.html
+
+PROTECT_FILE|/srv/sites/ce.cosigo.io/public/index.html
+PROTECT_FILE|/srv/sites/ce.cosigo.io/public/chief-engineer.html
+PROTECT_FILE|/srv/apps/a8_time_lab_v5_4_20_postseal_hw/public/telescope.html
+
+TOMBSTONE|a8.cosigo.io|/about.html|https://about.cosigo.io/|308
+TOMBSTONE|a8.cosigo.io|/about-bg-a.html|https://about.cosigo.io/|308
+TOMBSTONE|a8.cosigo.io|/about-bg-b.html|https://about.cosigo.io/|308
+
+TOMBSTONE|about.cosigo.io|/about.html|/|308
+TOMBSTONE|angle.cosigo.io|/angle.html|/|308
+TOMBSTONE|audio.cosigo.io|/audio.html|/|308
+TOMBSTONE|calendar.cosigo.io|/calendar.html|/|308
+TOMBSTONE|clock.cosigo.io|/clock.html|/|308
+TOMBSTONE|composer.cosigo.io|/composer.html|/|308
+TOMBSTONE|data.cosigo.io|/data.html|/|308
+TOMBSTONE|mintaka.cosigo.io|/mintaka.html|/|308
+TOMBSTONE|moons.cosigo.io|/moons.html|/|308
+TOMBSTONE|quartz.cosigo.io|/quartz.html|/|308
+TOMBSTONE|sol.cosigo.io|/sol.html|/|308
+
+REPO_FORBID|sites/a8.cosigo.io/public/about.html
+REPO_FORBID|sites/a8.cosigo.io/public/about-bg-a.html
+REPO_FORBID|sites/a8.cosigo.io/public/about-bg-b.html
+REPO_FORBID|sites/about.cosigo.io/public/about.html
+REPO_FORBID|sites/angle.cosigo.io/public/angle.html
+REPO_FORBID|sites/audio.cosigo.io/public/audio.html
+REPO_FORBID|sites/calendar.cosigo.io/public/calendar.html
+REPO_FORBID|sites/clock.cosigo.io/public/clock.html
+REPO_FORBID|sites/composer.cosigo.io/public/composer.html
+REPO_FORBID|sites/data.cosigo.io/public/data.html
+REPO_FORBID|sites/mintaka.cosigo.io/public/mintaka.html
+REPO_FORBID|sites/moons.cosigo.io/public/moons.html
+REPO_FORBID|sites/quartz.cosigo.io/public/quartz.html
+REPO_FORBID|sites/sol.cosigo.io/public/sol.html
+
+REPO_REQUIRE|sites/a8.cosigo.io/public/index.html
+REPO_REQUIRE|sites/about.cosigo.io/public/index.html
+REPO_REQUIRE|sites/angle.cosigo.io/public/index.html
+REPO_REQUIRE|sites/audio.cosigo.io/public/index.html
+REPO_REQUIRE|sites/calendar.cosigo.io/public/index.html
+REPO_REQUIRE|sites/clock.cosigo.io/public/index.html
+REPO_REQUIRE|sites/composer.cosigo.io/public/index.html
+REPO_REQUIRE|sites/data.cosigo.io/public/index.html
+REPO_REQUIRE|sites/mintaka.cosigo.io/public/index.html
+REPO_REQUIRE|sites/moons.cosigo.io/public/index.html
+REPO_REQUIRE|sites/quartz.cosigo.io/public/index.html
+REPO_REQUIRE|sites/sol.cosigo.io/public/index.html

@@ -1,0 +1,91 @@
+{
+  "schema": "A8-MINTAKA-SEP19-ANGLE-REPEAT-EVIDENCE-V1",
+  "date": "2026-09-19",
+  "classification": "PHYSICAL_TELESCOPE_REPEAT_ORIENTATION_EVIDENCE",
+  "sources": [
+    {
+      "name": "Kooha-2026-09-19-04-55-19.mkv",
+      "duration_seconds": 50.133333,
+      "sha256": "24be23d2787af47f2dbf3a2e28057c4d9dbeb61365a3969d0f78394e7b0224ba",
+      "track_vx_px_s": 26.244187506800873,
+      "track_vy_px_s_screen_down": 1.8263603514027391,
+      "track_speed_px_s": 26.307659911616977,
+      "track_angle_deg_screen_down_from_right": 3.980854957253914,
+      "companion_dx_px": -5.2513494138793675,
+      "companion_dy_px": 91.67713529546597,
+      "companion_sep_px": 91.82741315451408,
+      "companion_angle_deg_screen_down_from_right": 93.2783717625914,
+      "companion_vs_track_deg": 89.2975168053375,
+      "representative_video_second": 28.483,
+      "a8_clock_visible": "14:38:11",
+      "primary_epoch": 7,
+      "primary_raw": 4344303,
+      "primary_report_sequence": 403646,
+      "primary_state": "ACTIVE",
+      "ghost_raw_visible": 0,
+      "ghost_report_sequence_visible": 378287,
+      "ghost_state_visible": "ACTIVE"
+    },
+    {
+      "name": "Kooha-2026-09-19-05-00-03.mkv",
+      "duration_seconds": 49.299999,
+      "sha256": "d508e4d5e208635407fdb8b1a0312a33124c1c8c2062b6f4060f2cab6b590b82",
+      "track_vx_px_s": 26.297408887811706,
+      "track_vy_px_s_screen_down": 1.8630182251275784,
+      "track_speed_px_s": 26.36331828734607,
+      "track_angle_deg_screen_down_from_right": 4.052301891588566,
+      "companion_dx_px": -5.280283821147009,
+      "companion_dy_px": 91.34824350309788,
+      "companion_sep_px": 91.50072670931706,
+      "companion_angle_deg_screen_down_from_right": 93.30823762153979,
+      "companion_vs_track_deg": 89.25593572995122,
+      "representative_video_second": 28.651,
+      "a8_clock_visible": "14:44:58",
+      "primary_epoch": 7,
+      "primary_raw": 4352957,
+      "primary_report_sequence": 404450,
+      "primary_state": "ACTIVE",
+      "ghost_raw_visible": 0,
+      "ghost_report_sequence_visible": 380972,
+      "ghost_state_visible": "ACTIVE"
+    }
+  ],
+  "sep18_reference": {
+    "companion_separation_px": 90.59,
+    "companion_separation_uncertainty_px": 0.14,
+    "track_speed_px_s": 26.0191,
+    "track_angle_deg": -5.9173,
+    "companion_angle_deg": 84.16,
+    "companion_vs_track_deg": 90.085
+  },
+  "sep19_mean": {
+    "track_angle_deg_screen_down_from_right": 4.0165784244212395,
+    "track_speed_px_s": 26.33548909948152,
+    "companion_angle_deg_screen_down_from_right": 93.29330469206559,
+    "companion_separation_px": 91.66406993191558,
+    "companion_vs_track_deg": 89.27672626764436
+  },
+  "cross_day_comparison": {
+    "track_detector_rotation_deg": 9.93387842442124,
+    "companion_detector_rotation_deg": 9.133304692065593,
+    "speed_scale_ratio_sep19_over_sep18": 1.0121598786845631,
+    "companion_scale_ratio_sep19_over_sep18": 1.0118563851629934,
+    "scale_ratio_difference_ppm": 303.4935215697754,
+    "interpretation": "Pixel drift speed and companion separation changed by nearly the same factor (~1.2%), supporting an optical/detector image-scale change rather than a change in the physical sky relationship."
+  },
+  "semantics": {
+    "nature_is_reference": true,
+    "result": "DETECTOR_ORIENTATION_REPEAT_WITNESS",
+    "not_yet": [
+      "MERIDIAN_0",
+      "FINISHED_YEAR_ANGLE"
+    ],
+    "no_retune": [
+      "Core20",
+      "Jovian ruler",
+      "physical carrier rate",
+      "civil phase"
+    ],
+    "ghost_note": "The on-screen Ghost RAW field reads 0 in both representative frames while Ghost sequence/state continue. That display is preserved as observed but is not used as a physical RAW witness in this evidence packet."
+  }
+}

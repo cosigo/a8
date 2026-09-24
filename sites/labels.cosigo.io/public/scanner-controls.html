@@ -1,0 +1,302 @@
+
+<!doctype html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+
+    <title>Scanner Controls | COSIGO Labels Record</title>
+    <meta name="description"
+        content="Review of scanner-based token warnings, contract-control interpretations, and how third-party risk labels can affect visibility and access to CIGO.">
+    <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="COSIGO">
+    <link rel="canonical" href="https://labels.cosigo.io/scanner-controls.html">
+
+    <meta property="og:title" content="Scanner Controls | COSIGO Labels Record">
+    <meta property="og:description"
+        content="Review of scanner-based token warnings, contract-control interpretations, and how third-party risk labels can affect visibility and access to CIGO.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://labels.cosigo.io/scanner-controls.html">
+    <meta property="og:site_name" content="COSIGO Labels Record">
+    <meta property="og:image" content="https://labels.cosigo.io/shared/assets/cosigo_master/cosigo_master_512.png">
+    <meta property="og:image:alt" content="COSIGO scanner controls and token warning analysis">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Scanner Controls | COSIGO Labels Record">
+    <meta name="twitter:description"
+        content="Review of scanner-based token warnings, contract-control interpretations, and how third-party risk labels can affect visibility and access to CIGO.">
+    <meta name="twitter:image" content="https://labels.cosigo.io/shared/assets/cosigo_master/cosigo_master_512.png">
+
+    <!-- Favicons -->
+    <link rel="icon" href="/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+
+    <link rel="stylesheet" href="/shared/labels.css?v=20260704-mobile-menu">
+<style id="site-appendix-footer-style">
+.site-appendix-footer {
+  margin: 28px auto 0;
+  padding: 18px 16px 26px;
+  text-align: center;
+  font-size: 0.88rem;
+  opacity: 0.78;
+}
+.site-appendix-footer a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px dotted currentColor;
+}
+.site-appendix-footer a:hover,
+.site-appendix-footer a:focus-visible {
+  opacity: 1;
+  border-bottom-style: solid;
+}
+</style>
+
+</head>
+
+<body>
+<header class="labels-mobile-menu-bar">
+  <div class="labels-mobile-menu-inner">
+    <a class="labels-mobile-brand" href="https://labels.cosigo.io/" aria-label="COSIGO evidence labels home">
+      <img src="/shared/assets/icons/cigo_256.png" alt="CIGO token icon">
+      <span>
+        <strong>evidence labels</strong>
+        <small>COSIGO public record</small>
+      </span>
+    </a>
+
+    <button class="labels-mobile-menu-toggle" type="button" aria-expanded="false" aria-controls="labelsMobileMenuNav">menu</button>
+<nav id="labelsMobileMenuNav" class="cosigo-simple-top-menu labels-mobile-nav" aria-label="COSIGO site navigation">
+  <span class="menu-label">COSIGO:</span>
+  <a href="https://cosigo.io/">home</a>
+  <a href="https://trade.cosigo.io/">trade</a>
+  <a href="https://market.cosigo.io/">market</a>
+  <a href="https://pancakeswap.finance/swap?chain=bsc&outputCurrency=0x3a38e963f524E0dDFB75dFa1752b4Cd1364F5560">pancake</a>
+  <a href="https://quote.cosigo.io/">quote</a>
+</nav>
+  </div>
+</header>
+
+
+        <header class="site-header">
+<div class="wrap recordbar">
+                <div class="record-title">
+                    <div class="record-kicker">COSIGO Public Record</div>
+                    <div class="mini">Scanner findings and control-based warnings</div>
+                </div>
+</div>
+
+            <div class="wrap">
+                <div class="notice">
+                    Independent COSIGO public record. No affiliation with MetaMask, Consensys, Blockaid, CertiK,
+                    PancakeSwap, BscScan, BNB Chain, or any third-party scanner, wallet, exchange, or data provider.
+                    This page documents COSIGO’s position, observations, and evidence requests.
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <section class="hero wrap">
+                <div class="card">
+                    <h1>Scanner findings and control logic</h1>
+                    <p class="lead">
+                        Centralization warnings, owner controls, and market-integrity controls are not automatically
+                        proof
+                        of malicious behavior. If a label is serious, the technical basis should be specific.
+                    </p>
+
+                    <div class="button-row">
+                        <a class="button secondary" href="/index.html">Back to overview</a>
+                        <a class="button secondary" href="/evidence.html">Evidence log</a>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section wrap">
+                <div class="split">
+                    <div class="card">
+                        <h2>Centralization warnings are not malicious behavior</h2>
+                        <p>
+                            Scanner systems may identify centralization, owner-control, or market-control warnings.
+                            Those
+                            warnings may provide useful information. But they are not automatically proof of malicious
+                            behavior.
+                        </p>
+                        <p>
+                            CIGO does not dispute that visible administrative controls exist where they appear in
+                            verified
+                            source code. Question is whether a specific control is actually malicious, excessive, or
+                            unsafe
+                            — and if so, which one.
+                        </p>
+                        <p>
+                            Comparable administrative and market-integrity controls exist across many major token
+                            ecosystems
+                            and protocols people trade daily: emergency pause powers, allowlist or denylist logic, fee
+                            parameters, anti-abuse limits, treasury reserves, and other protective mechanisms. Existence
+                            of
+                            a control is not proof of malice. What matters is whether each control is disclosed,
+                            bounded,
+                            and used responsibly.
+                        </p>
+                        <p>
+                            Calling a token malicious without identifying exact function, permission, rule, data source,
+                            transaction behavior, or remediation path converts risk review into opaque accusation.
+                        </p>
+                    </div>
+
+                    <div class="card">
+                        <h2>What CIGO asks reviewers to identify</h2>
+                        <ul>
+                            <li>Specific source-code function being flagged.</li>
+                            <li>Specific owner/admin permission considered unsafe.</li>
+                            <li>Scanner rule or third-party data source behind warning.</li>
+                            <li>Transaction behavior or liquidity condition being relied upon.</li>
+                            <li>Exact remediation path required for reconsideration.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section wrap">
+                <div class="card">
+                    <h2>CertiK-style findings: warning categories versus malicious findings</h2>
+                    <p class="muted">
+                        CIGO’s position is that scanner-identified controls should be disclosed and reviewed
+                        specifically,
+                        not automatically converted into a malicious designation.
+                    </p>
+
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Reported warning or finding</th>
+                                    <th>Meaning</th>
+                                    <th>CIGO position</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Modifiable tax settings</td>
+                                    <td>Privileged roles may modify token tax settings.</td>
+                                    <td>Disclose limits and purpose. A modifiable setting is a control; it is not
+                                        automatically malicious.</td>
+                                </tr>
+                                <tr>
+                                    <td>Blacklist capability</td>
+                                    <td>Privileged roles may block addresses.</td>
+                                    <td>Review scope and governance. A defensive blacklist should be evaluated by use
+                                        case, not assumed to be fraud.</td>
+                                </tr>
+                                <tr>
+                                    <td>Transfer pause capability</td>
+                                    <td>Privileged roles may pause transfers.</td>
+                                    <td>Emergency controls can protect holders during abuse or attack. If excessive,
+                                        identify specific risk.</td>
+                                </tr>
+                                <tr>
+                                    <td>Anti-whale mechanisms</td>
+                                    <td>Token has limits designed to restrict oversized activity.</td>
+                                    <td>Anti-whale controls are defensive market-integrity tools, especially during
+                                        early liquidity formation.</td>
+                                </tr>
+                                <tr>
+                                    <td>Ownership not renounced</td>
+                                    <td>Owner/admin privileges remain active.</td>
+                                    <td>Non-renounced ownership is a centralization issue to disclose. It is not by
+                                        itself proof of malicious behavior.</td>
+                                </tr>
+                                <tr>
+                                    <td>Major holder concentration</td>
+                                    <td>A large percentage of supply is held by major wallets.</td>
+                                    <td>Holder concentration should be disclosed and explained, especially treasury and
+                                        distribution reserves.</td>
+                                </tr>
+                                <tr>
+                                    <td>Honeypot risk not found</td>
+                                    <td>Scanner did not identify honeypot behavior.</td>
+                                    <td>This is directly relevant when a wallet applies a malicious label without
+                                        specific explanation.</td>
+                                </tr>
+                                <tr>
+                                    <td>Token is open source</td>
+                                    <td>Source code is publicly available for review.</td>
+                                    <td>A verified public contract can be inspected. An unexplained malicious label
+                                        cannot.</td>
+                                </tr>
+                                <tr>
+                                    <td>Mintable function not found</td>
+                                    <td>No detected mint function.</td>
+                                    <td>This weakens any vague claim that supply can be secretly inflated.</td>
+                                </tr>
+                                <tr>
+                                    <td>Hidden owner not found</td>
+                                    <td>No detected hidden owner pattern.</td>
+                                    <td>This matters because hidden authority is a common malicious-contract concern.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Self-destruct function not found</td>
+                                    <td>No detected self-destruct function.</td>
+                                    <td>This should be distinguished from actual rug-pull mechanics.</td>
+                                </tr>
+                                <tr>
+                                    <td>Cannot modify balances</td>
+                                    <td>Privileged roles cannot directly modify token balances.</td>
+                                    <td>This is a material safety finding and should not be buried beneath vague
+                                        warnings.</td>
+                                </tr>
+                                <tr>
+                                    <td>No withdrawal functions found</td>
+                                    <td>No detected function for privileged token withdrawal.</td>
+                                    <td>This should be part of any fair review of malicious-risk claims.</td>
+                                </tr>
+                                <tr>
+                                    <td>Buy tax 0% / Sell tax 0%</td>
+                                    <td>Reported transaction taxes are zero.</td>
+                                    <td>Zero current taxes should be distinguished from modifiable emergency settings.
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="callout red">
+                        If a project is going to be labeled malicious, the reviewer should identify the exact function,
+                        permission, rule, data source, behavior, or threshold being relied upon — not simply collapse
+                        all
+                        visible controls into one reputational verdict.
+                    </div>
+                </div>
+            </section>
+        </main>
+        <footer class="footer">
+            <div class="wrap">
+                <p>
+                    This page is an independent COSIGO public record and opinion statement based on observed labels,
+                    support correspondence, scanner outputs, and public on-chain information. It is not investment
+                    advice, legal advice, or a claim of affiliation with any named third party.
+                </p>
+                <p>
+                    COSIGO supports transparent review. If any named third party believes this record is inaccurate or
+                    incomplete, COSIGO requests specific technical basis, source, rule, evidence path, and remediation
+                    requirement so record can be updated accurately.
+                </p>
+            </div>
+        </footer>
+
+  <footer class="site-appendix-footer">
+    <a href="https://trade.cosigo.io/appendix.html">site appendix / quick reference</a>
+  </footer>
+
+<script src="/shared/labels-menu.js?v=20260704-mobile-menu" defer></script>
+</body>
+
+</html>

@@ -1,0 +1,2040 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>A8 Mintaka | Earth Rotation Observer | Auspicious 8</title>
+<meta name="description" content="Explore Mintaka as an A8 Earth-rotation witness using Epoch-7 physical RAW, predictive markers and real telescope observation alongside retained simulation tools.">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+<link rel="canonical" href="https://mintaka.cosigo.io/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Auspicious 8">
+<meta property="og:title" content="A8 Mintaka | Earth Rotation Observer">
+<meta property="og:description" content="Explore Mintaka as an A8 Earth-rotation witness using Epoch-7 physical RAW, predictive markers and real telescope observation alongside retained simulation tools.">
+<meta property="og:url" content="https://mintaka.cosigo.io/">
+<meta property="og:image" content="https://a8.cosigo.io/assets/cosigo_master_512.png">
+<meta property="og:image:alt" content="Mintaka instrument for Auspicious 8">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="A8 Mintaka | Earth Rotation Observer">
+<meta name="twitter:description" content="Explore Mintaka as an A8 Earth-rotation witness using Epoch-7 physical RAW, predictive markers and real telescope observation alongside retained simulation tools.">
+<meta name="twitter:image" content="https://a8.cosigo.io/assets/cosigo_master_512.png">
+<meta name="twitter:image:alt" content="Mintaka instrument for Auspicious 8">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"A8 Mintaka | Earth Rotation Observer | Auspicious 8","url":"https://mintaka.cosigo.io/","description":"Explore Mintaka as an A8 Earth-rotation witness using Epoch-7 physical RAW, predictive markers and real telescope observation alongside retained simulation tools.","inLanguage":"en","isPartOf":{"@type":"WebSite","name":"Auspicious 8","alternateName":"A8","url":"https://a8.cosigo.io/"},"publisher":{"@type":"Organization","name":"COSIGO Labs","url":"https://cosigo.io/"},"about":[{"@type":"Thing","name":"Auspicious 8"},{"@type":"Thing","name":"Mintaka"},{"@type":"Thing","name":"Earth rotation"},{"@type":"Thing","name":"Jupiter moon recurrence"},{"@type":"Thing","name":"A8 Time"}]}</script>
+<meta name="author" content="COSIGO Labs">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/site-shell.css">
+<style>
+  main{max-width:1180px;margin:auto;padding:28px 20px 72px}
+  .hero{border:1px solid var(--line,#2a3744);border-radius:16px;padding:22px;background:var(--panel,#111820);margin-bottom:16px}
+  .mintaka{font-size:clamp(2.5rem,8vw,6.7rem);line-height:.88;letter-spacing:-.06em;margin:.15em 0}
+  .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+  .card{border:1px solid var(--line,#2a3744);border-radius:14px;padding:16px;background:var(--panel,#111820)}
+  .k{display:block;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;opacity:.68}
+  .v{display:block;font-size:1.15rem;font-weight:800;margin-top:4px;overflow-wrap:anywhere}
+  .good{color:#87d39b}.warn{color:#e0bd72}
+  pre{white-space:pre-wrap;overflow-wrap:anywhere}
+  @media(max-width:800px){.grid{grid-template-columns:1fr}}
+</style>
+
+<style id="a8-mintaka-orion-background">
+
+/*
+ * PRESENTATION ONLY
+ *
+ * Orion / Mintaka background.
+ * No observer, raw-counter, timing,
+ * recovery, authority or Core20 path.
+ */
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  background-color: #02050b !important;
+
+  background-image:
+    linear-gradient(
+      90deg,
+      rgba(2,5,11,0.62) 0%,
+      rgba(2,5,11,0.50) 42%,
+      rgba(2,5,11,0.40) 68%,
+      rgba(2,5,11,0.50) 100%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(2,5,11,0.18) 0%,
+      rgba(2,5,11,0.30) 100%
+    ),
+    url('/assets/orion_constellation_mintaka_highlighted.png')
+    !important;
+
+  background-size:
+    cover,
+    cover,
+    cover
+    !important;
+
+  background-position:
+    center top,
+    center top,
+    center top
+    !important;
+
+  background-repeat:
+    no-repeat,
+    no-repeat,
+    no-repeat
+    !important;
+
+  background-attachment:
+    fixed,
+    fixed,
+    fixed
+    !important;
+}
+
+
+/*
+ * Let Orion remain visible through the
+ * laboratory cards while preserving
+ * readable instrument text.
+ */
+
+.hero {
+  background:
+    rgba(5, 10, 18, 0.24)
+    !important;
+
+  backdrop-filter:
+    blur(1px);
+
+  -webkit-backdrop-filter:
+    blur(1px);
+}
+
+.card {
+  background:
+    rgba(5, 10, 18, 0.18)
+    !important;
+
+  border:
+    1px solid rgba(160, 210, 255, 0.14)
+    !important;
+
+  backdrop-filter:
+    blur(1px);
+
+  -webkit-backdrop-filter:
+    blur(1px);
+}
+
+
+/*
+ * Keep code / readouts crisp against
+ * the photographic background.
+ */
+
+pre,
+code {
+  text-shadow:
+    0 1px 3px rgba(0,0,0,0.9);
+}
+
+
+/*
+ * Small screens:
+ * keep Mintaka / Orion composition useful
+ * without horizontal page movement.
+ */
+
+@media (max-width: 760px) {
+  body {
+    background-position:
+      center top,
+      center top,
+      58% top
+      !important;
+  }
+}
+
+</style>
+
+
+<style id="a8-mintaka-stellar-console-style">
+
+#a8-mintaka-stellar-console{
+  margin:0 0 16px;
+  padding:18px;
+  border:1px solid rgba(160,210,255,.18);
+  border-radius:16px;
+  background:rgba(5,10,18,.20);
+  backdrop-filter:blur(1px);
+  -webkit-backdrop-filter:blur(1px);
+}
+
+.a8-mintaka-console-head{
+  display:flex;
+  gap:12px;
+  align-items:flex-start;
+  justify-content:space-between;
+  flex-wrap:wrap;
+}
+
+.a8-mintaka-console-head h2{
+  margin:4px 0 0;
+}
+
+.a8-mintaka-console-kicker{
+  display:block;
+  font-size:.68rem;
+  font-weight:900;
+  letter-spacing:.11em;
+  opacity:.66;
+}
+
+#a8MintakaClockStatus{
+  font-size:.72rem;
+  font-weight:900;
+  letter-spacing:.08em;
+}
+
+.a8-mintaka-clock-face{
+  margin-top:16px;
+  padding:20px;
+  border:1px solid rgba(160,210,255,.18);
+  border-radius:14px;
+  text-align:center;
+  background:rgba(5,12,21,.18);
+}
+
+#a8MintakaClockFace{
+  display:block;
+  font-size:clamp(2.4rem,8vw,5.4rem);
+  font-weight:900;
+  letter-spacing:-.04em;
+  overflow-wrap:anywhere;
+}
+
+#a8MintakaPhase17{
+  display:block;
+  margin-top:8px;
+  font-size:.92rem;
+  font-weight:800;
+  opacity:.76;
+}
+
+.a8-mintaka-console-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:10px;
+  margin-top:14px;
+}
+
+.a8-mintaka-console-stat{
+  min-width:0;
+  padding:12px;
+  border:1px solid rgba(160,210,255,.13);
+  border-radius:11px;
+  background:rgba(5,12,21,.24);
+}
+
+.a8-mintaka-console-stat span{
+  display:block;
+  font-size:.64rem;
+  font-weight:900;
+  letter-spacing:.08em;
+  opacity:.62;
+}
+
+.a8-mintaka-console-stat strong{
+  display:block;
+  margin-top:6px;
+  overflow-wrap:anywhere;
+}
+
+.a8-mintaka-view-controls{
+  display:flex;
+  justify-content:center;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:16px;
+}
+
+.a8-mintaka-view-controls button{
+  padding:8px 12px;
+  border:1px solid rgba(160,210,255,.22);
+  border-radius:999px;
+  color:inherit;
+  font:inherit;
+  font-size:.72rem;
+  font-weight:900;
+  letter-spacing:.06em;
+  cursor:pointer;
+}
+
+.a8-mintaka-view-controls button.active{
+  border-color:currentColor;
+}
+
+#a8MintakaShipCompare{
+  margin-top:14px;
+  padding:14px;
+  border:1px solid rgba(160,210,255,.13);
+  border-radius:12px;
+  background:rgba(5,12,21,.20);
+}
+
+#a8MintakaShipCompare[hidden]{
+  display:none;
+}
+
+.a8-mintaka-compare-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:10px;
+  margin-top:10px;
+}
+
+.a8-mintaka-compare-grid > div{
+  padding:11px;
+  border:1px solid rgba(160,210,255,.11);
+  border-radius:10px;
+}
+
+.a8-mintaka-compare-grid span{
+  display:block;
+  font-size:.64rem;
+  font-weight:900;
+  letter-spacing:.08em;
+  opacity:.62;
+}
+
+.a8-mintaka-compare-grid strong{
+  display:block;
+  margin-top:6px;
+  overflow-wrap:anywhere;
+}
+
+#a8MintakaBoundary{
+  margin-top:14px;
+  font-size:.72rem;
+  font-weight:900;
+  letter-spacing:.07em;
+  opacity:.8;
+}
+
+@media(max-width:760px){
+  .a8-mintaka-console-grid{
+    grid-template-columns:1fr;
+  }
+
+  .a8-mintaka-compare-grid{
+    grid-template-columns:1fr;
+  }
+}
+
+</style>
+
+
+<style id="a8-slip-public-priority-style">
+.a8-slip-public-hero{
+  margin:16px 0;
+  padding:20px 18px;
+  border:1px solid rgba(255,255,255,.20);
+  border-radius:14px;
+  background:rgba(8,14,21,.38);
+  text-align:center;
+}
+
+.a8-slip-public-hero .a8-slip-public-label{
+  display:block;
+  font-size:.72rem;
+  font-weight:900;
+  letter-spacing:.11em;
+  opacity:.72;
+}
+
+.a8-slip-public-hero strong{
+  display:block;
+  margin-top:8px;
+  font-size:clamp(2rem,7vw,4.2rem);
+  line-height:1.05;
+  overflow-wrap:anywhere;
+}
+
+.a8-slip-public-hero small{
+  display:block;
+  margin-top:9px;
+  font-weight:800;
+  letter-spacing:.05em;
+  opacity:.78;
+}
+
+.a8-slip-public-hero p{
+  margin:12px auto 0;
+  max-width:760px;
+  opacity:.82;
+}
+
+.a8-opp-reference-clocks{
+  grid-template-columns:repeat(3,minmax(0,1fr));
+}
+
+.a8-public-local-note{
+  display:block;
+  margin-top:6px;
+  font-size:.72rem;
+  opacity:.72;
+}
+
+.a8-mintaka-local-clock-hidden{
+  display:none !important;
+}
+
+.a8-mintaka-phase-note{
+  margin:10px auto 0;
+  max-width:760px;
+  text-align:center;
+  font-size:.74rem;
+  line-height:1.55;
+  opacity:.76;
+}
+
+.a8-mintaka-phase-note strong,
+.a8-mintaka-phase-note span{
+  display:block;
+}
+
+.a8-mintaka-phase-note strong{
+  margin-bottom:4px;
+  letter-spacing:.08em;
+}
+
+#a8MintakaShipCompare .a8-mintaka-compare-grid{
+  margin-top:14px;
+}
+
+@media(max-width:820px){
+  .a8-opp-reference-clocks{
+    grid-template-columns:1fr;
+  }
+}
+</style>
+
+
+<style id="a8-mintaka-room-reorg-style">
+/*
+ * MINTAKA ROOM ORGANIZATION · PRESENTATION ONLY
+ *
+ * Current physical / stellar witness remains on the open surface.
+ * Retained simulation and isolation machinery stays behind glass.
+ * No API, observer, Core20, RAW, recovery or authority change.
+ */
+
+#a8-mintaka-engineering-cabinet{
+  margin-top:16px;
+  border:1px solid var(--line,#2a3744);
+  border-radius:14px;
+  background:var(--panel,#111820);
+  overflow:hidden;
+}
+
+#a8-mintaka-engineering-cabinet > summary{
+  padding:16px;
+  cursor:pointer;
+  font-size:.78rem;
+  font-weight:900;
+  letter-spacing:.09em;
+  user-select:none;
+}
+
+#a8-mintaka-engineering-cabinet > summary::after{
+  content:"  ▾";
+}
+
+#a8-mintaka-engineering-cabinet[open] > summary::after{
+  content:"  ▴";
+}
+
+#a8-mintaka-engineering-cabinet-body{
+  padding:0 16px 16px;
+}
+
+#a8-mintaka-engineering-cabinet-body > section:first-child{
+  margin-top:0 !important;
+}
+</style>
+
+
+  <!-- COSIGO-CANONICAL-FAVICON-BEGIN -->
+  <link rel="icon" href="https://cosigo.io/favicon.ico">
+  <link rel="icon" type="image/svg+xml" href="https://cosigo.io/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://cosigo.io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://cosigo.io/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://cosigo.io/apple-touch-icon.png">
+  <!-- COSIGO-CANONICAL-FAVICON-END -->
+</head>
+<body>
+
+<style id="a8-topside-coherence-02-style">
+#a8-topside-coherence-02{
+  display:block;
+  margin:0;
+  padding:10px 14px;
+  border-bottom:1px solid rgba(255,255,255,.14);
+  background:rgba(7,11,16,.96);
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+}
+#a8-topside-coherence-02 .a8-topline{
+  max-width:1440px;
+  margin:0 auto;
+  display:flex;
+  gap:12px;
+  align-items:center;
+  flex-wrap:wrap;
+}
+#a8-topside-coherence-02 .cosigo-global-brand{
+  display:flex;
+  gap:8px;
+  align-items:center;
+  text-decoration:none;
+}
+#a8-topside-coherence-02 .cosigo-global-brand img{
+  width:34px;height:34px;object-fit:contain;
+}
+#a8-topside-coherence-02 .cosigo-global-brand span{
+  font-weight:900;letter-spacing:.06em;
+}
+#a8-topside-coherence-02 .cosigo-global-brand small{
+  display:block;opacity:.72;font-size:.62rem;
+}
+#a8-topside-coherence-02 a{text-decoration:none}
+#a8-topside-coherence-02 .a8-menu{
+  position:relative;
+  margin-left:auto;
+}
+#a8-topside-coherence-02 .a8-menu summary{
+  list-style:none;
+  cursor:pointer;
+  padding:8px 11px;
+  border:1px solid #425467;
+  border-radius:8px;
+  background:#111820;
+  color:#e0bd72;
+  font-size:.76rem;
+  font-weight:900;
+  letter-spacing:.07em;
+  user-select:none;
+}
+#a8-topside-coherence-02 .a8-menu summary::-webkit-details-marker{
+  display:none;
+}
+#a8-topside-coherence-02 .a8-menu summary::after{
+  content:" ▾";
+  color:#92a5b8;
+}
+#a8-topside-coherence-02 .a8-menu[open] summary::after{
+  content:" ▴";
+}
+#a8-topside-coherence-02 .a8-menu-panel{
+  position:absolute;
+  z-index:1000;
+  right:0;
+  top:calc(100% + 7px);
+  min-width:180px;
+  padding:7px;
+  border:1px solid #425467;
+  border-radius:9px;
+  background:#0d141b;
+  box-shadow:0 12px 28px rgba(0,0,0,.38);
+}
+#a8-topside-coherence-02 .a8-menu-panel a{
+  display:block;
+  padding:9px 10px;
+  border-radius:6px;
+  color:#c8ddf5;
+  font-size:.78rem;
+  font-weight:800;
+  white-space:nowrap;
+}
+#a8-topside-coherence-02 .a8-menu-panel a:hover,
+#a8-topside-coherence-02 .a8-menu-panel a:focus,
+#a8-topside-coherence-02 .a8-menu-panel a[aria-current="page"]{
+  background:#182431;
+  color:#fff;
+}
+@media(max-width:760px){
+  #a8-topside-coherence-02 .a8-menu-panel{
+    min-width:170px;
+  }
+}
+</style>
+
+<nav id="a8-topside-coherence-02"
+     class="cosigo-global-nav"
+     aria-label="A8 Time Lab navigation">
+
+  <div class="a8-topline">
+    <a class="cosigo-global-brand"
+       href="https://cosigo.io/"
+       aria-label="COSIGO home">
+      <img src="/assets/cosigo_master_512.gif" alt="COSIGO">
+      <span>COSIGO<small>LABS · AUSPICIOUS 8</small></span>
+    </a>
+
+    <details class="a8-menu">
+      <summary>MENU</summary>
+      <div class="a8-menu-panel">
+        <a href="https://lab.cosigo.io/">LAB HOME</a>
+        <a href="https://clock.cosigo.io/">CLOCK</a>
+        <a href="https://calendar.cosigo.io/">CALENDAR</a>
+        <a href="https://moons.cosigo.io/">MOONS</a>
+        <a href="https://mintaka.cosigo.io/" aria-current="page">MINTAKA</a>
+        <a href="https://sol.cosigo.io/">SOL</a>
+        <a href="https://ship.cosigo.io/">EARTHSHIP</a>
+        <a href="https://map.cosigo.io/">MAP · CLOCK · COMPASS</a>
+        <a href="https://sea.cosigo.io/">NAVIGATION</a>
+        <a href="https://stars.cosigo.io/">CELESTIAL</a>
+        <a href="https://audio.cosigo.io/">AUDIO</a>
+        <a href="https://quartz.cosigo.io/">QUARTZ</a>
+        <a href="https://a8.cosigo.io/">A8 PUBLIC</a>
+        <a href="https://about.cosigo.io/">ABOUT</a>
+        <a href="https://contestant.cosigo.io/">FUN</a>
+        <a href="https://cosigo.io/">COSIGO HOME</a>
+        <a href="https://github.com/cosigo/a8">GITHUB</a>
+      </div>
+    </details>
+  </div>
+</nav>
+
+<main>
+
+<section class="hero">
+    <div class="eyebrow">AUSPICIOUS 8 · MINTAKA FIELD OBSERVATORY</div>
+    <h1 class="mintaka">MINTAKA</h1>
+    <p><b>EARTH AXIAL ROTATION WITNESS · PHYSICAL OBSERVATION PROGRAM ACTIVE</b></p>
+    <p class="muted">
+      Epoch-7 physical RAW supplies the designated running pace while Mintaka
+      provides a distant stellar direction for Earth-rotation observation and prediction.
+      Real telescope evidence is now the primary field path; the simulated adapter remains
+      installed as a standby engineering and isolation tool.
+    </p>
+
+  </section>
+
+  <section
+    id="a8-mintaka-stellar-console"
+    aria-label="Mintaka rotation phase counter"
+  >
+    <div class="a8-mintaka-console-head">
+      <div>
+        <span class="a8-mintaka-console-kicker">
+          EARTH ROTATION · STELLAR WITNESS · READ ONLY
+        </span>
+        <h2>MINTAKA ROTATION PHASE COUNTER</h2>
+      </div>
+
+      <span id="a8MintakaClockStatus">CONNECTING</span>
+    </div>
+
+    <div class="a8-mintaka-clock-face">
+      <strong id="a8MintakaClockFace">—</strong>
+      <span id="a8MintakaPhase17">
+        MINTAKA_PHASE17 · —
+      </span>
+    </div>
+
+    <div class="a8-mintaka-phase-note">
+      <strong>PHASE COUNTER · NOT LOCAL TIME</strong>
+      <span>
+        The phase origin is fixed only as a comparison reference.
+        This counter advances with recovered Mintaka rotation.
+      </span>
+    </div>
+
+    <div class="a8-mintaka-console-grid">
+      <div class="a8-mintaka-console-stat">
+        <span>LOCKED RAW / EARTH AXIAL ROTATION</span>
+        <strong id="a8MintakaLockedRecurrence">—</strong>
+      </div>
+
+      <div class="a8-mintaka-console-stat">
+        <span>OBSERVED RECURRENCE CHANGE</span>
+        <strong id="a8MintakaRecurrenceChanged">—</strong>
+      </div>
+
+      <div class="a8-mintaka-console-stat">
+        <span>COMPLETED MINTAKA ROTATIONS</span>
+        <strong id="a8MintakaCompletedRotations">—</strong>
+      </div>
+    </div>
+
+    <div class="a8-mintaka-view-controls">
+      <button
+        type="button"
+        class="active"
+        data-a8-mintaka-view="stellar"
+        aria-pressed="true"
+      >
+        PHASE COUNTER
+      </button>
+
+      <button
+        type="button"
+        data-a8-mintaka-view="ship"
+        aria-pressed="false"
+      >
+        COMPARE PHASES
+      </button>
+    </div>
+
+    <div id="a8MintakaShipCompare" hidden>
+      <span class="a8-mintaka-console-kicker">
+        DOWNSTREAM PHASE COMPARISON · MINTAKA DOES NOT CAUSE SHIP SLIP
+      </span>
+
+      <div class="a8-slip-public-hero">
+        <span class="a8-slip-public-label">
+          TERRA SHIP SLIP · DOWNSTREAM REFERENCE
+        </span>
+
+        <strong>CANONICAL LIFETIME VALUE · SHIP CONSOLE</strong>
+
+        <small>
+          THIS MINTAKA VIEW COMPARES PHASES · IT DOES NOT REDEFINE ACCUMULATED SHIP SLIP
+        </small>
+
+        <p>
+          Mintaka shows the stellar rotation phase beside the recovered
+          Sun-return phase for comparison. The accumulated lifetime
+          Terra Ship Slip value is published by the Ship instrument.
+        </p>
+      </div>
+
+      <div class="a8-mintaka-compare-grid">
+        <div>
+          <span>MINTAKA ROTATION PHASE COUNTER</span>
+          <strong id="a8MintakaCompareClock">—</strong>
+        </div>
+
+        <div>
+          <span>SOL-RETURN PHASE COUNTER</span>
+          <strong id="a8MintakaCompareCivil">—</strong>
+        </div>
+
+        <div
+          class="a8-mintaka-local-clock-hidden"
+          aria-hidden="true"
+        >
+          <span>YOUR LOCAL A8 CLOCK</span>
+          <strong id="a8MintakaLocalClock">—</strong>
+          <small
+            id="a8MintakaLocalBridge"
+            class="a8-public-local-note"
+          >
+            CONNECTING TO CORE20
+          </small>
+          <small
+            id="a8MintakaLocalDay"
+            class="a8-public-local-note"
+          ></small>
+        </div>
+
+        <div>
+          <span>CURRENT RELATION</span>
+          <strong id="a8MintakaCompareLeader">—</strong>
+        </div>
+
+        <div>
+          <span>SHIP SLIP GEOMETRY</span>
+          <strong id="a8MintakaCompareGeometry">—</strong>
+        </div>
+
+        <div>
+          <span>COMPARISON RAW SAMPLE</span>
+          <strong id="a8MintakaCompareRaw">—</strong>
+        </div>
+
+        <div>
+          <span>SHIP CONSOLE</span>
+          <strong>
+            <a href="https://ship.cosigo.io/">
+              OPEN SPACESHIP EARTH
+            </a>
+          </strong>
+        </div>
+      </div>
+    </div>
+
+    <div id="a8MintakaBoundary">
+      VERIFYING PHASE-COUNTER BOUNDARY
+    </div>
+  </section>
+
+  <section class="grid">
+    <div class="card">
+      <span class="k">JOVIAN CORE</span>
+      <span id="coreVersion" class="v">CONNECTING</span>
+      <p class="muted">Read by this presentation from <code>/api/state</code>.</p>
+    </div>
+    <div class="card">
+      <span class="k">SHARED RAW COUNTER</span>
+      <span id="rawCount" class="v">—</span>
+      <p class="muted">Context display only.</p>
+    </div>
+    <div class="card">
+      <span class="k">PHYSICAL PACE SOURCE · EPOCH-7</span>
+      <span id="a8MintakaPhysicalPulseState" class="v">CONNECTING</span>
+      <p
+        id="a8MintakaPhysicalPulseDetail"
+        class="muted"
+      >
+        EPOCH — · RAW — · SEQ —
+      </p>
+      <p class="muted">
+        Direct Arduino A → Arduino B → Pi physical RAW observation.
+        This is the designated physical pace path for the running system.
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="k">MINTAKA OBSERVER</span>
+      <span id="observerStatus" class="v">CONNECTING</span>
+      <p class="muted">Read from <code>/api/mintaka</code>.</p>
+    </div>
+
+    <div class="card">
+      <span class="k">OBSERVED EVENTS</span>
+      <span id="eventCount" class="v">0</span>
+    </div>
+    <div class="card">
+      <span class="k">LATEST RAW SPAN</span>
+      <span id="latestSpan" class="v">—</span>
+    </div>
+    <div class="card">
+      <span class="k">EXACT MULTI-CYCLE RECURRENCE</span>
+      <span id="recurrence" class="v">—</span>
+    </div>
+  </section>
+
+  <section class="card" style="margin-top:16px" id="a8-mintaka-field-observation">
+    <h2>Physical field observation</h2>
+
+    <p class="good">
+      <b>VIEW 1 · RECORDED AGAINST EPOCH-5 RAW</b>
+    </p>
+
+    <p>
+      A real telescope recording captured Mintaka in the detector field while the
+      Epoch-5 physical counter was visible in the same screen recording. Tracking-on
+      residual motion and the later untracked natural drift can therefore be compared
+      directly against physical RAW progression.
+    </p>
+
+    <div class="grid" style="margin-top:12px">
+      <div class="card">
+        <span class="k">OBSERVATION 1</span>
+        <span class="v">RECORDED</span>
+        <p class="muted">
+          Real sky · telescope · Epoch-5 RAW · tracking transition captured.
+        </p>
+      </div>
+
+      <div class="card">
+        <span class="k">OBSERVATION 2</span>
+        <span class="v">NEXT CLEAR OPPORTUNITY</span>
+        <p class="muted">
+          Re-acquired detector geometry is acceptable. Repeat drift direction,
+          rate and RAW relationship without pretending the old pixels are unchanged.
+        </p>
+      </div>
+
+      <div class="card">
+        <span class="k">PREDICTIVE PURPOSE</span>
+        <span class="v">A8 PREDICTS · NATURE ANSWERS</span>
+        <p class="muted">
+          Freeze a prediction first, observe later, then preserve the residual.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="card" style="margin-top:16px">
+    <h2>Mintaka operating boundary</h2>
+    <p class="muted">
+      Mintaka remains an Earth axial-rotation witness, not the timekeeper and
+      not a clock authority. Epoch-7 physical RAW supplies the designated running
+      pace. The read-only
+      MINTAKA_PHASE17 model, physical Pulse Box status and field-observation evidence
+      remain separate layers. Simulation and injection tools remain retained engineering machinery;
+      this public field page exposes no authority-changing POST control.
+    </p>
+  </section>
+
+
+<details
+  id="a8-mintaka-engineering-cabinet"
+  class="a8-mintaka-engineering-cabinet"
+>
+  <summary>
+    ENGINEERING / SIMULATION · CLOSED BY DEFAULT
+  </summary>
+
+  <div class="a8-mintaka-engineering-cabinet-body">
+<section class="card" style="margin-top:16px">
+    <h2>Simulated observation adapter · STANDBY</h2>
+    <pre>tools/fake-mintaka-observer.js
+        │
+        │ STELLAR_MERIDIAN + rawPulse + MINTAKA
+        ▼
+POST /api/mintaka/observe
+        │
+        ▼
+MintakaRotationObserver</pre>
+    <p>
+      Retained engineering bench. The simulator recurrence is an explicit
+      laboratory input to the adapter and remains useful for isolation, regression
+      and emergency testing. It is not the current physical Mintaka observation path
+      and it does not become a timing authority.
+    </p>
+  </section>
+
+<section class="card" style="margin-top:16px">
+    <h2>Simulation isolation proof · retained</h2>
+    <p class="good"><b>OBSERVER ACCELERATION ≠ CLOCK ACCELERATION</b></p>
+    <p class="muted">
+      The earlier Gate 2C accelerated-event test remains preserved as proof that
+      simulated Mintaka observations can be exercised without accelerating or rewriting
+      the running clock. This is retained test machinery, not the normal field source.
+    </p>
+  </section>
+  </div>
+</details>
+</main>
+
+<script>
+function exactRecurrence(r){
+  if(!r) return '—';
+  if(r.reducedDenominator === '1') return `${r.reducedNumerator} raw pulses`;
+  return `${r.reducedNumerator}/${r.reducedDenominator} raw pulses`;
+}
+
+
+let a8MintakaPulseBoxPrevious = null;
+let a8MintakaPulseBoxBusy = false;
+
+function a8MintakaPulseBoxMotion(sample) {
+  if (
+    !sample ||
+    sample.SOURCE_EPOCH == null ||
+    sample.RAW_COUNT == null ||
+    sample.REPORT_SEQUENCE == null
+  ) {
+    return 'CHECK · INCOMPLETE REPORT';
+  }
+
+  const epoch =
+    String(sample.SOURCE_EPOCH);
+
+  let raw;
+  let sequence;
+
+  try {
+    raw =
+      BigInt(String(sample.RAW_COUNT));
+
+    sequence =
+      BigInt(String(sample.REPORT_SEQUENCE));
+  } catch (_) {
+    return 'CHECK · INVALID REPORT';
+  }
+
+  if (!a8MintakaPulseBoxPrevious) {
+    a8MintakaPulseBoxPrevious = {
+      epoch,
+      raw,
+      sequence,
+      lastAdvance: null
+    };
+
+    return 'BASELINE';
+  }
+
+  if (epoch !== a8MintakaPulseBoxPrevious.epoch) {
+    a8MintakaPulseBoxPrevious = {
+      epoch,
+      raw,
+      sequence,
+      lastAdvance: null
+    };
+
+    return 'NEW PHYSICAL EPOCH · BASELINE';
+  }
+
+  if (sequence < a8MintakaPulseBoxPrevious.sequence) {
+    return 'CHECK · REPORT SEQUENCE REGRESSION';
+  }
+
+  if (raw < a8MintakaPulseBoxPrevious.raw) {
+    return 'CHECK · RAW REGRESSION';
+  }
+
+  if (raw > a8MintakaPulseBoxPrevious.raw) {
+    const delta =
+      raw - a8MintakaPulseBoxPrevious.raw;
+
+    a8MintakaPulseBoxPrevious = {
+      epoch,
+      raw,
+      sequence,
+      lastAdvance: delta
+    };
+
+    return (
+      'ADVANCE OBSERVED · LATEST RAW +' +
+      delta
+    );
+  }
+
+  const lastAdvance =
+    a8MintakaPulseBoxPrevious.lastAdvance;
+
+  a8MintakaPulseBoxPrevious = {
+    epoch,
+    raw,
+    sequence,
+    lastAdvance
+  };
+
+  return lastAdvance === null
+    ? 'BASELINE · SAME RAW'
+    : (
+        'ADVANCE OBSERVED · LATEST RAW +' +
+        lastAdvance
+      );
+}
+
+async function refreshMintakaPulseBox(){
+  if (a8MintakaPulseBoxBusy) return;
+
+  a8MintakaPulseBoxBusy = true;
+
+  try {
+    const response =
+      await fetch(
+        '/api/pulse-box/snapshot',
+        {cache:'no-store'}
+      );
+
+    if (!response.ok) {
+      throw new Error(
+        `HTTP ${response.status}`
+      );
+    }
+
+    const p =
+      await response.json();
+
+    const motion =
+      a8MintakaPulseBoxMotion(p);
+
+    document
+      .getElementById(
+        'a8MintakaPhysicalPulseState'
+      )
+      .textContent =
+        `${p.STATUS || 'CHECK'} · ${motion}`;
+
+    document
+      .getElementById(
+        'a8MintakaPhysicalPulseDetail'
+      )
+      .textContent =
+        `EPOCH ${p.SOURCE_EPOCH ?? '—'} · RAW ${p.RAW_COUNT ?? '—'} · SEQ ${p.REPORT_SEQUENCE ?? '—'}`;
+
+  } catch (_) {
+    document
+      .getElementById(
+        'a8MintakaPhysicalPulseState'
+      )
+      .textContent =
+        'UNREACHABLE · CORE20 UNAFFECTED';
+
+    document
+      .getElementById(
+        'a8MintakaPhysicalPulseDetail'
+      )
+      .textContent =
+        'PHYSICAL REPORT UNAVAILABLE';
+  } finally {
+    a8MintakaPulseBoxBusy = false;
+  }
+}
+
+async function refresh(){
+  refreshMintakaPulseBox();
+
+  try{
+    const [
+      coreResponse,
+      mintakaResponse
+    ]=await Promise.all([
+      fetch('/api/state',{cache:'no-store'}),
+      fetch('/api/mintaka',{cache:'no-store'})
+    ]);
+
+    const core=await coreResponse.json();
+    const mintakaPayload=await mintakaResponse.json();
+
+    const [
+      stellarResult,
+      opposingResult
+    ]=await Promise.allSettled([
+      fetch(
+        '/api/mintaka/clock',
+        {cache:'no-store'}
+      ).then(
+        r => r.ok ? r.json() : {}
+      ),
+
+      fetch(
+        '/api/opposing-clocks',
+        {cache:'no-store'}
+      ).then(
+        r => r.ok ? r.json() : {}
+      )
+    ]);
+
+    const stellarPayload =
+      stellarResult.status === 'fulfilled'
+        ? stellarResult.value
+        : {};
+
+    const opposingPayload =
+      opposingResult.status === 'fulfilled'
+        ? opposingResult.value
+        : {};
+
+    const m=mintakaPayload.observer || {};
+    const stellar=stellarPayload.clock || {};
+    const opposing=opposingPayload.instrument || {};
+
+    document.getElementById('coreVersion').textContent =
+      core.version ? `A8 v${core.version}` : 'A8 CORE';
+
+    const raw =
+      core.rawCount ??
+      core.rawTicks ??
+      (core.raw && core.raw.count) ??
+      (core.recorder && core.recorder.events && core.recorder.events[0] && core.recorder.events[0].rawCount) ??
+      '—';
+
+    document.getElementById('rawCount').textContent=String(raw);
+    document.getElementById('observerStatus').textContent=m.status || '—';
+    document.getElementById('eventCount').textContent=String(m.eventCount ?? 0);
+    document.getElementById('latestSpan').textContent=m.latestSpanRaw || '—';
+    document.getElementById('recurrence').textContent=exactRecurrence(m.recurrence);
+
+    document.getElementById('a8MintakaClockStatus').textContent =
+      stellar.status ===
+        'MINTAKA_PHASE17_STELLAR_CLOCK_ACTIVE'
+          ? 'PHASE COUNTER · ACTIVE'
+          : stellar.status || 'NOT READY';
+
+    const a8MintakaSmoother =
+      window.a8MintakaPhaseCounterSmoother ||
+      null;
+
+    if (a8MintakaSmoother) {
+      a8MintakaSmoother.ingest(
+        stellar,
+        opposing
+      );
+    }
+
+    /*
+     * Before the visual observer has a valid native
+     * anchor, retain the ordinary sampled fallback.
+     * Once active, requestAnimationFrame owns only
+     * these two visible phase-counter fields.
+     */
+    if (
+      !a8MintakaSmoother ||
+      !a8MintakaSmoother.active()
+    ) {
+      document.getElementById('a8MintakaClockFace').textContent =
+        stellar.clock && stellar.clock.textOctal
+          ? stellar.clock.textOctal
+              .split(':')
+              .join('·')
+          : '—';
+
+      document.getElementById('a8MintakaPhase17').textContent =
+        `MINTAKA_PHASE17 · ${
+          stellar.mintakaPhase17Octal ||
+          stellar.mintakaPhase17 ||
+          '—'
+        }`;
+    }
+
+    document.getElementById('a8MintakaLockedRecurrence').textContent =
+      stellar.lockedRawPerEarthAxialRotation
+        ? stellar.lockedRawPerEarthAxialRotation.text
+        : '—';
+
+    document.getElementById('a8MintakaRecurrenceChanged').textContent =
+      stellar.observedRecurrenceChanged === true
+        ? 'CHANGED · LOCK PRESERVED'
+        : stellar.observedRecurrenceChanged === false
+          ? 'NO'
+          : '—';
+
+    document.getElementById('a8MintakaCompletedRotations').textContent =
+      stellar.completedMintakaRotations ?? '—';
+
+    const embeddedMintaka =
+      opposing.mintakaClock || {};
+
+    const embeddedCivil =
+      opposing.civilClock || {};
+
+    const discrepancy =
+      opposing.discrepancy || {};
+
+    document.getElementById('a8MintakaCompareClock').textContent =
+      embeddedMintaka.clock &&
+      embeddedMintaka.clock.textOctal
+        ? embeddedMintaka.clock.textOctal
+            .split(':')
+            .join('·')
+        : '—';
+
+    document.getElementById('a8MintakaCompareCivil').textContent =
+      embeddedCivil.clock &&
+      embeddedCivil.clock.textOctal
+        ? embeddedCivil.clock.textOctal
+            .split(':')
+            .join('·')
+        : '—';
+
+    document.getElementById('a8MintakaCompareLeader').textContent =
+      discrepancy.accumulated &&
+      discrepancy.accumulated.currentLeader
+        ? discrepancy.accumulated.currentLeader
+        : '—';
+
+    document.getElementById('a8MintakaCompareGeometry').textContent =
+      discrepancy.relativeBeat &&
+      discrepancy.relativeBeat.geometricLeg
+        ? discrepancy.relativeBeat.geometricLeg
+        : '—';
+
+    document.getElementById('a8MintakaCompareRaw').textContent =
+      opposing.sameSelectedRawPulse === true
+        ? `${opposing.selectedRawPulse} · VERIFIED`
+        : opposing.selectedRawPulse || '—';
+
+    const boundaryKeys = [
+      'writesA8Core',
+      'writesJovianTimekeeper',
+      'writesMintakaObserver',
+      'writesSolObserver',
+      'writesTerraShipSlip',
+      'writesCivilClock',
+      'writesCalendar',
+      'changesAuthority',
+      'usesHostTime',
+      'usesLegacyTime',
+      'usesFrequencyHz',
+      'usesUTC',
+      'usesNTP',
+      'usesGPS'
+    ];
+
+    const stellarBoundaryPass =
+      stellar.status ===
+        'MINTAKA_PHASE17_STELLAR_CLOCK_ACTIVE' &&
+      boundaryKeys.every(
+        key => stellar[key] === false
+      );
+
+    document.getElementById('a8MintakaBoundary').textContent =
+      stellarBoundaryPass
+        ? 'PASS · MINTAKA PHASE COUNTER · NATIVE · READ ONLY'
+        : 'BOUNDARY CHECK REQUIRED';
+  }catch(err){
+    document.getElementById('coreVersion').textContent='CORE UNAVAILABLE';
+    document.getElementById('observerStatus').textContent='OBSERVER UNAVAILABLE';
+  }
+}
+
+document
+  .querySelectorAll('[data-a8-mintaka-view]')
+  .forEach(button => {
+    button.addEventListener(
+      'click',
+      () => {
+        const view =
+          button.dataset.a8MintakaView === 'ship'
+            ? 'ship'
+            : 'stellar';
+
+        document
+          .querySelectorAll('[data-a8-mintaka-view]')
+          .forEach(b => {
+            const active =
+              b.dataset.a8MintakaView === view;
+
+            b.classList.toggle(
+              'active',
+              active
+            );
+
+            b.setAttribute(
+              'aria-pressed',
+              active ? 'true' : 'false'
+            );
+          });
+
+        const compare =
+          document.getElementById(
+            'a8MintakaShipCompare'
+          );
+
+        if (compare) {
+          compare.hidden =
+            view !== 'ship';
+        }
+      }
+    );
+  });
+
+refresh();
+setInterval(refresh,1000);
+</script>
+
+<script id="a8-local-civil-display-script">
+(() => {
+  'use strict';
+
+  const DAY = 131072;
+
+  function localCivilState(basePhase) {
+    /*
+     * Exact Clock-page compatibility/display bridge.
+     * Browser timezone affects presentation only.
+     * It NEVER enters Core20 or the slip calculation.
+     */
+    const offsetMinutes =
+      -new Date().getTimezoneOffset();
+
+    const shiftStates =
+      offsetMinutes * DAY / 1440;
+
+    const raw =
+      Number(basePhase) + shiftStates;
+
+    const localPhase =
+      ((Math.floor(raw) % DAY) + DAY) % DAY;
+
+    return {
+      offsetMinutes,
+      a8OffsetHours: offsetMinutes / 45,
+      shiftStates,
+      raw,
+      localPhase
+    };
+  }
+
+  function fieldsFromPhase(p) {
+    return {
+      h: Math.floor(p / 4096),
+      m: Math.floor((p % 4096) / 64),
+      s: p % 64
+    };
+  }
+
+  function dec2(v) {
+    return String(v).padStart(2, '0');
+  }
+
+  function oct(v) {
+    return Number(v).toString(8).padStart(2, '0');
+  }
+
+  function targets() {
+    return [
+      {
+        time: document.getElementById('a8OppLocalClock'),
+        bridge: document.getElementById('a8OppLocalBridge'),
+        day: document.getElementById('a8OppLocalDay')
+      },
+      {
+        time: document.getElementById('a8MintakaLocalClock'),
+        bridge: document.getElementById('a8MintakaLocalBridge'),
+        day: document.getElementById('a8MintakaLocalDay')
+      }
+    ].filter(t => t.time);
+  }
+
+  async function refreshLocalCivil() {
+    const out = targets();
+    if (!out.length) return;
+
+    try {
+      const response =
+        await fetch(
+          '/api/core20/clock',
+          {cache:'no-store'}
+        );
+
+      if (!response.ok) {
+        throw new Error(
+          `HTTP ${response.status}`
+        );
+      }
+
+      const payload =
+        await response.json();
+
+      const c =
+        payload.clock || {};
+
+      const basePhase =
+        Number(c.dayPhase17);
+
+      if (
+        !Number.isInteger(basePhase) ||
+        basePhase < 0 ||
+        basePhase >= DAY
+      ) {
+        throw new Error(
+          'invalid DAY_PHASE17'
+        );
+      }
+
+      const local =
+        localCivilState(basePhase);
+
+      const f =
+        fieldsFromPhase(
+          local.localPhase
+        );
+
+      const text =
+        `${dec2(f.h)}:${dec2(f.m)}:${dec2(f.s)} · ` +
+        `${oct(f.h)}:${oct(f.m)}:${oct(f.s)}₈`;
+
+      const h =
+        local.a8OffsetHours;
+
+      const bridge =
+        `LOCAL CIVIL ZONE · ` +
+        `${h >= 0 ? '+' : ''}${h} A8 HOUR · DISPLAY ONLY`;
+
+      const day =
+        local.raw < 0
+          ? 'LOCAL DAY PHASE · PREVIOUS'
+          : local.raw >= DAY
+            ? 'LOCAL DAY PHASE · NEXT'
+            : 'LOCAL DAY PHASE · SAME';
+
+      out.forEach(t => {
+        t.time.textContent = text;
+
+        if (t.bridge) {
+          t.bridge.textContent =
+            bridge;
+        }
+
+        if (t.day) {
+          t.day.textContent =
+            day;
+        }
+      });
+
+    } catch (_) {
+      out.forEach(t => {
+        t.time.textContent =
+          'LOCAL CIVIL DISPLAY UNAVAILABLE';
+
+        if (t.bridge) {
+          t.bridge.textContent =
+            'CORE20 UNAFFECTED';
+        }
+
+        if (t.day) {
+          t.day.textContent = '';
+        }
+      });
+    }
+  }
+
+  refreshLocalCivil();
+  setInterval(
+    refreshLocalCivil,
+    1000
+  );
+})();
+</script>
+
+
+<script id="a8-slip-hero-readout-script">
+(() => {
+  'use strict';
+
+  function rationalText(r) {
+    if (
+      r === null ||
+      r === undefined
+    ) {
+      return '—';
+    }
+
+    if (
+      typeof r === 'string' ||
+      typeof r === 'number'
+    ) {
+      return String(r);
+    }
+
+    if (
+      r.text !== undefined &&
+      r.text !== null
+    ) {
+      return String(r.text);
+    }
+
+    if (
+      r.numerator !== undefined &&
+      r.denominator !== undefined
+    ) {
+      return String(r.denominator) === '1'
+        ? String(r.numerator)
+        : `${r.numerator}/${r.denominator}`;
+    }
+
+    return '—';
+  }
+
+  /*
+   * Human-facing approximation only.
+   * Core20 exact rational remains untouched.
+   */
+  function rationalNumber(r) {
+    if (
+      r === null ||
+      r === undefined
+    ) {
+      return null;
+    }
+
+    if (typeof r === 'number') {
+      return Number.isFinite(r)
+        ? r
+        : null;
+    }
+
+    if (typeof r === 'string') {
+      const s = r.trim();
+
+      const fraction =
+        s.match(
+          /^([+-]?\d+(?:\.\d+)?)\/([+-]?\d+(?:\.\d+)?)$/
+        );
+
+      if (fraction) {
+        const n = Number(fraction[1]);
+        const d = Number(fraction[2]);
+
+        return (
+          Number.isFinite(n) &&
+          Number.isFinite(d) &&
+          d !== 0
+        )
+          ? n / d
+          : null;
+      }
+
+      const n = Number(s);
+
+      return Number.isFinite(n)
+        ? n
+        : null;
+    }
+
+    if (
+      r.numerator !== undefined &&
+      r.denominator !== undefined
+    ) {
+      const n = Number(r.numerator);
+      const d = Number(r.denominator);
+
+      return (
+        Number.isFinite(n) &&
+        Number.isFinite(d) &&
+        d !== 0
+      )
+        ? n / d
+        : null;
+    }
+
+    if (
+      r.text !== undefined &&
+      r.text !== null
+    ) {
+      return rationalNumber(
+        String(r.text)
+      );
+    }
+
+    return null;
+  }
+
+  function heroTargets() {
+    return [
+      {
+        value:
+          document.getElementById(
+            'a8SlipHeroValue'
+          ),
+        detail:
+          document.getElementById(
+            'a8SlipHeroDetail'
+          )
+      },
+      {
+        value:
+          document.getElementById(
+            'a8MintakaSlipHeroValue'
+          ),
+        detail:
+          document.getElementById(
+            'a8MintakaSlipHeroDetail'
+          )
+      }
+    ].filter(t => t.value);
+  }
+
+  async function refreshSlipHero() {
+    const out =
+      heroTargets();
+
+    if (!out.length) return;
+
+    try {
+      const response =
+        await fetch(
+          '/api/opposing-clocks',
+          {cache:'no-store'}
+        );
+
+      if (!response.ok) {
+        throw new Error(
+          `HTTP ${response.status}`
+        );
+      }
+
+      const payload =
+        await response.json();
+
+      const i =
+        payload.instrument || {};
+
+      if (!i.ready) {
+        throw new Error(
+          'instrument not ready'
+        );
+      }
+
+      const d =
+        i.discrepancy || {};
+
+      const a =
+        d.accumulated || {};
+
+      const angleNumber =
+        rationalNumber(
+          a.unwrappedDiscrepancyAngle512
+        );
+
+      const angle =
+        angleNumber === null
+          ? '—'
+          : angleNumber.toFixed(3);
+
+      /*
+       * Keep the exact rational quietly underneath.
+       */
+      const rotations =
+        rationalText(
+          a.unwrappedDiscrepancyRotations
+        );
+
+      const leader =
+        a.currentLeader || '—';
+
+      out.forEach(t => {
+        const bigText =
+          angle === '—'
+            ? '—'
+            : `≈ ${angle} A8`;
+
+        /*
+         * Do not repaint the big human number
+         * unless its visible decimal changes.
+         */
+        if (
+          t.value.textContent !==
+          bigText
+        ) {
+          t.value.textContent =
+            bigText;
+        }
+
+        if (t.detail) {
+          t.detail.textContent =
+            `UNWRAPPED DIFFERENCE · ` +
+            `${rotations} ROTATION · ` +
+            `${leader}`;
+        }
+      });
+
+    } catch (_) {
+      out.forEach(t => {
+        t.value.textContent =
+          'SLIP INSTRUMENT UNAVAILABLE';
+
+        if (t.detail) {
+          t.detail.textContent =
+            'READ ONLY · CORE20 UNAFFECTED';
+        }
+      });
+    }
+  }
+
+  refreshSlipHero();
+  setInterval(
+    refreshSlipHero,
+    1000
+  );
+})();
+</script>
+
+
+<script id="a8-mintaka-phase-counter-smoother-script">
+(() => {
+  'use strict';
+
+  /*
+   * MINTAKA PHASE COUNTER · VISUAL OBSERVER ONLY
+   *
+   * Native authority:
+   *   /api/mintaka/clock
+   *     -> exact MINTAKA_PHASE17
+   *     -> locked recovered Mintaka recurrence
+   *
+   * Display-rate comparison:
+   *   /api/opposing-clocks
+   *     -> locked Mintaka recurrence
+   *     -> locked Sun-return recurrence
+   *
+   * performance.now() and requestAnimationFrame()
+   * paint intervening states only.
+   *
+   * They do NOT:
+   *   - create raw pulses
+   *   - create Mintaka events
+   *   - retune recurrence
+   *   - alter phase zero
+   *   - write Core20
+   *   - write Terra Ship Slip
+   *   - define elapsed-time authority
+   */
+
+  const DAY = 131072;
+
+  /*
+   * Same proven Clock-page visual pacing.
+   * Conventional duration exists ONLY in browser
+   * presentation and never enters native authority.
+   */
+  const A8_STATE_MS =
+    (86400 * 1000) / DAY;
+
+  let anchorPhase = null;
+  let anchorPerf = 0;
+  let sourceEpoch = null;
+  let stateMs = null;
+  let running = false;
+  let frameStarted = false;
+  let forceReanchor = false;
+
+  function fractionNumber(value) {
+    if (
+      !value ||
+      value.numerator === undefined ||
+      value.denominator === undefined
+    ) {
+      return null;
+    }
+
+    try {
+      const n =
+        BigInt(String(value.numerator));
+
+      const d =
+        BigInt(String(value.denominator));
+
+      if (d <= 0n) {
+        return null;
+      }
+
+      const out =
+        Number(n) / Number(d);
+
+      return Number.isFinite(out)
+        ? out
+        : null;
+
+    } catch (_) {
+      return null;
+    }
+  }
+
+  function recoveredMintakaStateMs(
+    opposing
+  ) {
+    const d =
+      opposing &&
+      opposing.discrepancy;
+
+    const locked =
+      d &&
+      d.lockedRecurrences;
+
+    if (!locked) {
+      return null;
+    }
+
+    const mintaka =
+      fractionNumber(
+        locked
+          .mintakaRawPerEarthAxialRotation
+      );
+
+    const civil =
+      fractionNumber(
+        locked
+          .civilRawPerSunReturn
+      );
+
+    if (
+      !Number.isFinite(mintaka) ||
+      !Number.isFinite(civil) ||
+      mintaka <= 0 ||
+      civil <= 0
+    ) {
+      return null;
+    }
+
+    /*
+     * Recovered native recurrence ratio determines
+     * relative visual rate.
+     *
+     * No expected astronomical period is imported.
+     */
+    return (
+      A8_STATE_MS *
+      (mintaka / civil)
+    );
+  }
+
+  function fieldsFromPhase(phase) {
+    const p =
+      ((Math.floor(phase) % DAY) + DAY) %
+      DAY;
+
+    return {
+      phase: p,
+      h: Math.floor(
+        p / 4096
+      ),
+      m: Math.floor(
+        (p % 4096) / 64
+      ),
+      s: p % 64
+    };
+  }
+
+  function oct2(value) {
+    return Number(value)
+      .toString(8)
+      .padStart(2, '0');
+  }
+
+  function oct6(value) {
+    return Number(value)
+      .toString(8)
+      .padStart(6, '0');
+  }
+
+  function render(now) {
+    if (
+      running &&
+      anchorPhase !== null &&
+      Number.isFinite(stateMs) &&
+      stateMs > 0
+    ) {
+      const elapsedStates =
+        (now - anchorPerf) /
+        stateMs;
+
+      const continuous =
+        anchorPhase +
+        elapsedStates;
+
+      const f =
+        fieldsFromPhase(
+          continuous
+        );
+
+      const face =
+        document.getElementById(
+          'a8MintakaClockFace'
+        );
+
+      const phase =
+        document.getElementById(
+          'a8MintakaPhase17'
+        );
+
+      if (face) {
+        face.textContent =
+          `${oct2(f.h)}·` +
+          `${oct2(f.m)}·` +
+          `${oct2(f.s)}₈`;
+      }
+
+      if (phase) {
+        phase.textContent =
+          `MINTAKA_PHASE17 · ` +
+          `${oct6(f.phase)}₈`;
+      }
+    }
+
+    requestAnimationFrame(
+      render
+    );
+  }
+
+  function ingest(
+    stellar,
+    opposing
+  ) {
+    if (
+      !stellar ||
+      stellar.status !==
+        'MINTAKA_PHASE17_STELLAR_CLOCK_ACTIVE'
+    ) {
+      running = false;
+      return;
+    }
+
+    const exact =
+      fractionNumber(
+        stellar.mintakaPhase17Exact
+      );
+
+    const nextStateMs =
+      recoveredMintakaStateMs(
+        opposing
+      );
+
+    const epoch =
+      stellar.sourceEpoch === undefined ||
+      stellar.sourceEpoch === null
+        ? null
+        : String(
+            stellar.sourceEpoch
+          );
+
+    const opposingEpoch =
+      opposing &&
+      opposing.sourceEpoch !== undefined &&
+      opposing.sourceEpoch !== null
+        ? String(
+            opposing.sourceEpoch
+          )
+        : null;
+
+    if (
+      exact === null ||
+      !Number.isFinite(nextStateMs) ||
+      nextStateMs <= 0 ||
+      epoch === null ||
+      opposingEpoch === null ||
+      epoch !== opposingEpoch
+    ) {
+      running = false;
+      return;
+    }
+
+    /*
+     * Hard visual anchor only:
+     *   - bootstrap
+     *   - sourceEpoch change
+     *   - return from hidden tab
+     *
+     * Ordinary 1-second polling checks the native
+     * source but does not jerk the visible counter.
+     */
+    if (
+      !running ||
+      sourceEpoch !== epoch ||
+      forceReanchor
+    ) {
+      anchorPhase = exact;
+      anchorPerf =
+        performance.now();
+
+      sourceEpoch = epoch;
+      stateMs = nextStateMs;
+      forceReanchor = false;
+    }
+
+    running = true;
+
+    if (!frameStarted) {
+      frameStarted = true;
+
+      requestAnimationFrame(
+        render
+      );
+    }
+  }
+
+  function active() {
+    return running;
+  }
+
+  document.addEventListener(
+    'visibilitychange',
+    () => {
+      if (!document.hidden) {
+        forceReanchor = true;
+      }
+    }
+  );
+
+  window.a8MintakaPhaseCounterSmoother = {
+    ingest,
+    active
+  };
+})();
+</script>
+
+</body>
+</html>

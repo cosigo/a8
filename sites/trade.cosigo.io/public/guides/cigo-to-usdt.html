@@ -1,0 +1,553 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Move CIGO to USDT on your phone · COSIGO</title>
+  <meta name="description" content="A beginner-friendly, picture-by-picture guide for exchanging CIGO for USDT with Rabby on BNB Smart Chain, checking the public receipt, and revealing the CIGO Message Nugget.">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://trade.cosigo.io/guides/cigo-to-usdt.html">
+  <link rel="icon" type="image/png" href="/shared/assets/guides/cigo-to-usdt/cigo.png">
+  <link rel="apple-touch-icon" href="/shared/assets/guides/cigo-to-usdt/cigo.png">
+  <style>
+    :root {
+      --bg: #08090c;
+      --panel: #12151b;
+      --panel-2: #171b22;
+      --ink: #f7f2e8;
+      --muted: #b8b9bd;
+      --line: rgba(229, 187, 89, .24);
+      --gold: #e0b95f;
+      --gold-2: #f4d58a;
+      --copper: #b86f32;
+      --safe: #79d0a5;
+      --danger: #ffb4a9;
+      --shadow: 0 22px 70px rgba(0,0,0,.35);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(900px 520px at 12% 0%, rgba(184,111,50,.18), transparent 64%),
+        radial-gradient(800px 500px at 92% 8%, rgba(112,50,133,.16), transparent 65%),
+        var(--bg);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.62;
+    }
+
+    a { color: var(--gold-2); }
+    img { max-width: 100%; }
+    .wrap { width: min(1120px, calc(100% - 32px)); margin-inline: auto; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      background: rgba(8,9,12,.88);
+      backdrop-filter: blur(14px);
+    }
+
+    .topbar-inner {
+      min-height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: 800;
+      letter-spacing: .03em;
+    }
+
+    .brand img { width: 38px; height: 38px; border-radius: 50%; }
+    .nav { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; }
+
+    .pill, .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 9px 15px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--ink);
+      background: rgba(255,255,255,.035);
+      text-decoration: none;
+      font-weight: 750;
+      font-size: .91rem;
+    }
+
+    .button-primary {
+      color: #171208;
+      background: linear-gradient(135deg, var(--gold-2), var(--gold));
+      border-color: transparent;
+      box-shadow: 0 9px 30px rgba(224,185,95,.18);
+    }
+
+    .hero { padding: 74px 0 34px; }
+    .hero-grid { display: grid; grid-template-columns: 1.3fr .7fr; gap: 28px; align-items: center; }
+    .eyebrow { color: var(--gold-2); font-size: .76rem; font-weight: 850; letter-spacing: .18em; text-transform: uppercase; }
+    h1, h2, h3 { font-family: Georgia, "Times New Roman", serif; line-height: 1.08; }
+    h1 { max-width: 780px; margin: 12px 0 18px; font-size: clamp(2.7rem, 7vw, 5.6rem); letter-spacing: -.045em; }
+    h2 { margin: 0 0 12px; font-size: clamp(2rem, 4vw, 3.25rem); }
+    h3 { margin: 0; font-size: 1.65rem; }
+    .lead { max-width: 720px; margin: 0; color: #d6d2ca; font-size: clamp(1.08rem, 2vw, 1.3rem); }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
+
+    .promise {
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: linear-gradient(160deg, rgba(224,185,95,.10), rgba(255,255,255,.025));
+      box-shadow: var(--shadow);
+    }
+    .promise strong { display: block; margin-bottom: 5px; color: var(--gold-2); }
+
+    .section { padding: 34px 0; }
+    .section-head { max-width: 800px; margin-bottom: 22px; }
+    .section-head p { color: var(--muted); font-size: 1.06rem; }
+
+    .before-grid, .word-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .info-card {
+      padding: 20px;
+      border: 1px solid rgba(255,255,255,.09);
+      border-radius: 18px;
+      background: rgba(255,255,255,.035);
+    }
+    .info-card strong { display: block; margin-bottom: 5px; color: var(--gold-2); }
+
+    details {
+      border: 1px solid rgba(255,255,255,.09);
+      border-radius: 18px;
+      background: rgba(255,255,255,.025);
+      overflow: hidden;
+    }
+    summary { cursor: pointer; padding: 18px 20px; color: var(--gold-2); font-weight: 850; }
+    details .details-body { padding: 0 20px 20px; }
+
+    .steps { display: grid; gap: 22px; }
+    .step {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(280px, 430px);
+      gap: 28px;
+      align-items: center;
+      padding: 26px;
+      border: 1px solid rgba(255,255,255,.09);
+      border-radius: 24px;
+      background: linear-gradient(150deg, rgba(255,255,255,.045), rgba(255,255,255,.018));
+      box-shadow: var(--shadow);
+    }
+    .step:nth-child(even) .step-copy { order: 2; }
+    .step:nth-child(even) figure { order: 1; }
+    .step-number {
+      display: inline-grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      margin-bottom: 14px;
+      border-radius: 50%;
+      color: #171208;
+      background: var(--gold);
+      font-weight: 900;
+    }
+    .instruction { margin: 14px 0 0; padding: 14px 16px; border-left: 3px solid var(--gold); background: rgba(224,185,95,.07); }
+    .instruction strong, .result strong, .stop strong { display: block; }
+    .result { margin: 12px 0 0; color: #d7f4e5; }
+    .stop { margin: 12px 0 0; color: var(--danger); }
+
+    figure { margin: 0; text-align: center; }
+    figure img {
+      display: block;
+      width: min(100%, 451px);
+      margin-inline: auto;
+      border: 1px solid rgba(255,255,255,.13);
+      border-radius: 20px;
+      background: #0a0b0e;
+      box-shadow: 0 18px 55px rgba(0,0,0,.5);
+    }
+    figcaption { margin-top: 10px; color: var(--muted); font-size: .86rem; }
+
+    .receipt {
+      padding: 24px;
+      border: 1px solid rgba(121,208,165,.3);
+      border-radius: 20px;
+      background: rgba(121,208,165,.065);
+    }
+    .receipt code { overflow-wrap: anywhere; color: #dff8ea; }
+
+    .footer { padding: 42px 0 56px; color: var(--muted); text-align: center; font-size: .9rem; }
+
+    @media (max-width: 820px) {
+      .topbar-inner { min-height: 62px; }
+      .nav .optional { display: none; }
+      .hero { padding-top: 48px; }
+      .hero-grid, .step { grid-template-columns: 1fr; }
+      .promise { margin-top: 8px; }
+      .before-grid, .word-grid { grid-template-columns: 1fr; }
+      .step, .step:nth-child(even) .step-copy, .step:nth-child(even) figure { order: initial; }
+      .step { padding: 20px; }
+      figure { order: 2; }
+      .step-copy { order: 1; }
+    }
+
+    @media (max-width: 480px) {
+      .wrap { width: min(100% - 22px, 1120px); }
+      .brand span { font-size: .88rem; }
+      .pill, .button { padding-inline: 12px; font-size: .84rem; }
+      .hero { padding-top: 36px; }
+      .step { border-radius: 18px; padding: 15px; }
+      figure img { border-radius: 15px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="brand" href="#top"><img src="/shared/assets/guides/cigo-to-usdt/cigo.png" alt="CIGO"><span>CIGO phone guide</span></a>
+      <nav class="nav" aria-label="Guide links">
+        <a class="pill optional" href="https://cosigo.io/">COSIGO</a>
+        <a class="pill" href="https://trade.cosigo.io/">Open swap</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <p class="eyebrow">One phone · one wallet · one real example</p>
+          <h1>Move CIGO to USDT on your phone.</h1>
+          <p class="lead">You do not need to understand cryptocurrency before starting. Complete one small step at a time. This guide uses a real 100 CIGO example from beginning to final public receipt.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#before">Start the guide</a>
+            <a class="button" href="https://rabby.io/">Install Rabby</a>
+          </div>
+        </div>
+        <aside class="promise">
+          <strong>What this guide does</strong>
+          It exchanges CIGO for USDT. USDT means digital dollars. The example starts with 100 CIGO and finishes with about 2.76 USDT.
+          <br><br>
+          <strong>What this guide never asks for</strong>
+          Your recovery words, private key, password, or control of your wallet.
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="before">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">Before you begin</p>
+          <h2>Three things are needed.</h2>
+        </div>
+        <div class="before-grid">
+          <div class="info-card"><strong>Rabby wallet</strong>A wallet is an app that holds your digital money and asks you before anything is sent.</div>
+          <div class="info-card"><strong>CIGO</strong>This is what you are exchanging. Begin with a small amount while learning.</div>
+          <div class="info-card"><strong>A little BNB</strong>BNB pays the network processing fee. Think of it as postage needed to deliver your request.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <details>
+          <summary>What do the unfamiliar words mean?</summary>
+          <div class="details-body word-grid">
+            <div class="info-card"><strong>BNB Smart Chain</strong>The digital network carrying the request between your wallet and the exchange.</div>
+            <div class="info-card"><strong>Connect</strong>Lets the page see your public wallet address and balances. It does not spend anything.</div>
+            <div class="info-card"><strong>Approve exact CIGO</strong>Gives permission to use only the CIGO amount shown. It does not perform the exchange.</div>
+            <div class="info-card"><strong>Swap</strong>Exchanges one digital asset for another. Here it exchanges CIGO for USDT.</div>
+            <div class="info-card"><strong>Transaction hash</strong>The long receipt number created after the network accepts the exchange.</div>
+            <div class="info-card"><strong>BscScan</strong>A public receipt checker for activity on BNB Smart Chain.</div>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">Part 1</p>
+          <h2>Open the CIGO swap inside Rabby.</h2>
+          <p>Use the official Rabby app. Never install a wallet from an advertisement, message, or stranger’s link.</p>
+        </div>
+        <div class="steps">
+          <article class="step">
+            <div class="step-copy">
+              <span class="step-number">1</span>
+              <h3>Install Rabby from the official page.</h3>
+              <p>Rabby is the wallet app recommended for this CIGO guide. Open <a href="https://rabby.io/">rabby.io</a> and use its official app-store button.</p>
+              <p class="instruction"><strong>Press this</strong>Download for your phone.</p>
+              <p class="stop"><strong>Stop if</strong>Any website asks you to type or send your recovery words.</p>
+            </div>
+            <figure><img src="/shared/assets/guides/cigo-to-usdt/steps/01-install-rabby.png" alt="Official Rabby download page on a phone" loading="lazy"><figcaption>Official Rabby download page.</figcaption></figure>
+          </article>
+
+          <article class="step">
+            <div class="step-copy">
+              <span class="step-number">2</span>
+              <h3>Open the swap page inside Rabby.</h3>
+              <p>In Rabby, open <strong>Sites web</strong>. Enter the official address exactly:</p>
+              <p class="instruction"><strong>Type this</strong>https://trade.cosigo.io/</p>
+              <p class="result"><strong>What should happen</strong>The CIGO live swap page opens inside Rabby.</p>
+              <p class="stop"><strong>Stop if</strong>The address does not end in <strong>cosigo.io</strong>.</p>
+            </div>
+            <figure><img src="/shared/assets/guides/cigo-to-usdt/steps/02-open-trade-in-rabby.png" alt="Entering cosigo.io in Rabby Sites web" loading="lazy"><figcaption>Enter the official address in Rabby’s website box.</figcaption></figure>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">Part 2</p>
+          <h2>Connect the correct wallet.</h2>
+          <p>Connecting only displays the public address and balances. Rabby still asks before any permission or exchange.</p>
+        </div>
+        <div class="steps">
+          <article class="step">
+            <div class="step-copy">
+              <span class="step-number">3</span>
+              <h3>Select the wallet holding your CIGO.</h3>
+              <p>If Rabby contains more than one wallet, select the one that holds the CIGO you want to exchange.</p>
+              <p class="instruction"><strong>Press this</strong>The correct wallet name.</p>
+              <p class="stop"><strong>Stop if</strong>You do not recognize the wallet or its balance.</p>
+            </div>
+            <figure><img src="/shared/assets/guides/cigo-to-usdt/steps/03-select-wallet.png" alt="Selecting a wallet in Rabby" loading="lazy"><figcaption>This example Rabby contains several wallets.</figcaption></figure>
+          </article>
+
+          <article class="step">
+            <div class="step-copy">
+              <span class="step-number">4</span>
+              <h3>Check the wallet before continuing.</h3>
+              <p>The page should say <strong>wallet connected</strong>. Confirm the network says <strong>BNB Smart Chain</strong>. Check that BNB and CIGO balances appear.</p>
+              <p class="result"><strong>What should happen</strong>Your public wallet details appear. Nothing has been spent.</p>
+            </div>
+            <figure><img src="/shared/assets/guides/cigo-to-usdt/steps/04-check-wallet.png" alt="Connected CIGO wallet with BNB Smart Chain and balances" loading="lazy"><figcaption>Connected wallet, correct network, and visible balances.</figcaption></figure>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">Part 3</p>
+          <h2>Choose CIGO, USDT, and a small amount.</h2>
+          <p>The page calls USDT <strong>BSC-USD (USDT)</strong>. It means the digital dollars you will receive.</p>
+        </div>
+        <div class="steps">
+          <article class="step">
+            <div class="step-copy">
+              <span class="step-number">5</span>
+              <h3>Choose the direction.</h3>
+              <p>Under <strong>From</strong>, choose CIGO. Under <strong>To</strong>, choose BSC-USD (USDT).</p>
+              <p class="instruction"><strong>Check this</strong>CIGO → BSC-USD (USDT)</p>
+            </div>
+            <figure><img src="/shared/assets/guides/cigo-to-usdt/steps/05-choose-cigo-usdt.png" alt="Selecting CIGO to BSC-USD USDT" loading="lazy"><figcaption>CIGO leaves the wallet; USDT enters it.</figcaption></figure>
+          </article>
+
+          <article class="step">
+            <div class="step-copy">
+              <span class="step-number">6</span>
+              <h3>Enter the CIGO amount.</h3>
+              <p>This real example uses 100 CIGO. A beginner should always start with a small test.</p>
+              <p class="instruction"><strong>Type this example</strong>100</p>
+            </div>
+            <figure><img src="/shared/assets/guides/cigo-to-usdt/steps/06-enter-cigo.png" alt="Entering 100 CIGO as the swap amount" loading="lazy"><figcaption>Real example: exchanging 100 CIGO.</figcaption></figure>
+          </article>
+
+          <article class="step">
+            <div class="step-copy">
+              <span class="step-number">7</span>
+              <h3>Ask for an estimate.</h3>
+              <p>An estimate shows approximately how much USDT the pool can return at that moment. It is not final until the network accepts the exchange.</p>
+              <p class="instruction"><strong>Press this</strong>Estimate</p>
+              <p class="result"><strong>What should happen</strong>The example estimates about 2.79 USDT and displays a lower safety minimum.</p>
+            </div>
+            <figure><img src="/shared/assets/guides/cigo-to-usdt/steps/07-estimate.png" alt="CIGO swap estimate showing expected USDT" loading="lazy"><figcaption>Review the estimate before giving permission.</figcaption></figure>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">Part 4</p>
+          <h2>Give permission for exactly 100 CIGO.</h2>
+          <p>A first exchange usually needs a separate permission. Nothing is exchanged during this permission step.</p>
+        </div>
+        <div class="steps">
+          <article class="step">
+            <div class="step-copy">
+              <span class="step-number">8</span>
+              <h3>Review Rabby’s permission request.</h3>
+              <p>Rabby should show CIGO, the exact amount, BNB Chain, and PancakeSwap. This example permits exactly 100 CIGO.</p>
+              <p class="instruction"><strong>Press this</strong>Confirmar only after every item is correct.</p>
+              <p class="stop"><strong>Stop if</strong>The amount is unlimited, the token is wrong, or the website is unfamiliar.</p>
+            </div>
+            <figure><img src="/shared/assets/guides/cigo-to-usdt/steps/08-approve-exact-cigo.png" alt="Rabby exact 100 CIGO approval confirmation" loading="lazy"><figcaption>Exact 100 CIGO permission in Rabby.</figcaption></figure>
+          </article>
+
+          <article class="step">
+            <div class="step-copy">
+              <span class="step-number">9</span>
+              <h3>Wait, then estimate again.</h3>
+              <p>After the permission finishes, return to the CIGO page. Press <strong>Estimate</strong> again. The Swap button becomes available.</p>
+              <p class="result"><strong>What should happen</strong>The page says 100 CIGO is permitted and shows the Swap button.</p>
+            </div>
+            <figure><img src="/shared/assets/guides/cigo-to-usdt/steps/09-approval-finished.png" alt="CIGO permission completed and swap button ready" loading="lazy"><figcaption>Permission completed; the exchange itself has not happened yet.</figcaption></figure>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">Part 5</p>
+          <h2>Complete the exchange.</h2>
+          <p>This is the moment CIGO is exchanged for USDT. Rabby shows the result before you confirm it.</p>
+        </div>
+        <div class="steps">
+          <article class="step">
+            <div class="step-copy">
+              <span class="step-number">10</span>
+              <h3>Review the exchange in Rabby.</h3>
+              <p>Rabby’s preview should show CIGO leaving and USDT arriving. Check the amounts and PancakeSwap before confirming.</p>
+              <p class="instruction"><strong>Press this</strong>Confirmar</p>
+              <p class="stop"><strong>Stop if</strong>CIGO is not leaving, USDT is not arriving, or the amounts are very different from the estimate.</p>
+            </div>
+            <figure><img src="/shared/assets/guides/cigo-to-usdt/steps/10-confirm-swap.png" alt="Rabby simulation of the CIGO to USDT swap" loading="lazy"><figcaption>Rabby previews the exchange before it happens.</figcaption></figure>
+          </article>
+
+          <article class="step">
+            <div class="step-copy">
+              <span class="step-number">11</span>
+              <h3>Copy the completed exchange receipt number.</h3>
+              <p>The long number beginning with <strong>0x</strong> is the public receipt number. Its technical name is a transaction hash.</p>
+              <p class="instruction"><strong>Press this</strong>The abbreviated hash beside Copy.</p>
+              <p class="result"><strong>What should happen</strong>The full receipt number is copied to the phone.</p>
+            </div>
+            <figure><img src="/shared/assets/guides/cigo-to-usdt/steps/11-copy-swap-hash.png" alt="CIGO swap submitted with copyable transaction hash" loading="lazy"><figcaption>Copy the swap receipt—not the earlier permission receipt.</figcaption></figure>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">Part 6</p>
+          <h2>Check the result twice.</h2>
+          <p>First check Rabby. Then use BscScan, the public BNB Smart Chain receipt checker.</p>
+        </div>
+        <div class="steps">
+          <article class="step">
+            <div class="step-copy">
+              <span class="step-number">12</span>
+              <h3>Check Rabby’s history.</h3>
+              <p>The completed exchange should show 100 CIGO leaving and approximately 2.7628 USDT entering. The status should say <strong>Correcto</strong>.</p>
+              <p class="result"><strong>What should happen</strong>Rabby shows a successful exchange on BNB Chain.</p>
+            </div>
+            <figure><img src="/shared/assets/guides/cigo-to-usdt/steps/12-rabby-history.png" alt="Rabby successful CIGO to USDT transaction details" loading="lazy"><figcaption>Rabby’s completed exchange details.</figcaption></figure>
+          </article>
+
+          <article class="step">
+            <div class="step-copy">
+              <span class="step-number">13</span>
+              <h3>Check the public receipt in Chrome.</h3>
+              <p>Copy the hash, open <a href="https://bscscan.com/">BscScan in Chrome</a>, and paste it into the search box. Choosing Chrome prevents another wallet app from catching the history link.</p>
+              <p class="instruction"><strong>Look for this</strong>Status: Success</p>
+              <p class="result"><strong>Real example</strong><a href="https://bscscan.com/tx/0x18a9ab9fe5a9197e981e1731239f55b456fd7830b26bb42d256d7224b5947f0a">Open this completed receipt on BscScan.</a></p>
+            </div>
+            <figure><img src="/shared/assets/guides/cigo-to-usdt/steps/13-bscscan-success.png" alt="BscScan public receipt showing successful CIGO to USDT swap" loading="lazy"><figcaption>BscScan confirms the public receipt succeeded.</figcaption></figure>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">Part 7</p>
+          <h2>Reveal the Message Nugget.</h2>
+          <p>Every confirmed CIGO transfer can be matched to one permanent message. The viewer reads the public receipt. It never connects to the wallet and never asks for permission.</p>
+        </div>
+        <div class="steps">
+          <article class="step">
+            <div class="step-copy">
+              <span class="step-number">14</span>
+              <h3>Open the message page.</h3>
+              <p>Return to the CIGO page and press <strong>Reveal message</strong>, or open <a href="https://message.cosigo.io/">message.cosigo.io</a>.</p>
+              <p class="instruction"><strong>Press this</strong>Reveal message</p>
+            </div>
+            <figure><img src="/shared/assets/guides/cigo-to-usdt/steps/14-open-message.png" alt="Reveal message button on the CIGO swap page" loading="lazy"><figcaption>The Message Nugget follows the completed exchange.</figcaption></figure>
+          </article>
+
+          <article class="step">
+            <div class="step-copy">
+              <span class="step-number">15</span>
+              <h3>Paste the swap receipt number.</h3>
+              <p>Paste the hash copied from the completed swap. Do not paste the earlier permission receipt.</p>
+              <p class="instruction"><strong>Press this</strong>Reveal message</p>
+            </div>
+            <figure><img src="/shared/assets/guides/cigo-to-usdt/steps/15-paste-hash.png" alt="Correct swap hash entered in the CIGO Message Viewer" loading="lazy"><figcaption>The correct completed-swap hash is entered.</figcaption></figure>
+          </article>
+
+          <article class="step">
+            <div class="step-copy">
+              <span class="step-number">16</span>
+              <h3>Receive the permanent message.</h3>
+              <p>This real exchange reveals:</p>
+              <p class="instruction"><strong>“Quality is not an act; it is a habit.”</strong>Attributed to Aristotle</p>
+              <p class="result"><strong>What should happen</strong>The same public receipt always returns the same Message Nugget.</p>
+            </div>
+            <figure><img src="/shared/assets/guides/cigo-to-usdt/steps/16-quality-message.png" alt="CIGO Message Nugget saying Quality is not an act it is a habit attributed to Aristotle" loading="lazy"><figcaption>The real Message Nugget from this completed exchange.</figcaption></figure>
+          </article>
+
+          <article class="step">
+            <div class="step-copy">
+              <span class="step-number">17</span>
+              <h3>Understand the 100 CIGO example.</h3>
+              <p>The receipt shows 99 CIGO as the net exchange amount and 1 CIGO as the operational tax. Together they equal the original 100 CIGO.</p>
+              <p class="result"><strong>Final result</strong>100 CIGO left the wallet and approximately 2.7628 USDT arrived.</p>
+            </div>
+            <figure><img src="/shared/assets/guides/cigo-to-usdt/steps/17-transfer-details.png" alt="CIGO message proof showing 99 net CIGO and 1 CIGO operational tax" loading="lazy"><figcaption>99 net CIGO plus 1 CIGO operational tax.</figcaption></figure>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="receipt">
+          <p class="eyebrow">The real completed example</p>
+          <h2>One exchange. One public receipt. One message.</h2>
+          <p><strong>Receipt number:</strong><br><code>0x18a9ab9fe5a9197e981e1731239f55b456fd7830b26bb42d256d7224b5947f0a</code></p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="https://trade.cosigo.io/">Open CIGO swap</a>
+            <a class="button" href="https://bscscan.com/tx/0x18a9ab9fe5a9197e981e1731239f55b456fd7830b26bb42d256d7224b5947f0a">Check receipt</a>
+            <a class="button" href="https://message.cosigo.io/tx/0x18a9ab9fe5a9197e981e1731239f55b456fd7830b26bb42d256d7224b5947f0a">Open Message Nugget</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">COSIGO beginner guide · Real phone example · Never share recovery words or private keys.</div>
+  </footer>
+</body>
+</html>

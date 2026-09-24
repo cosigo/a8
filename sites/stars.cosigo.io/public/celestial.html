@@ -1,0 +1,1157 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>A8 Stars | Celestial Map &amp; Sky Geometry | Auspicious 8</title>
+<meta name="description" content="Explore the Auspicious 8 celestial map, star coordinates and sky geometry using the native A8 angular ruler in a permanent celestial reference instrument.">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+<link rel="canonical" href="https://stars.cosigo.io/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Auspicious 8">
+<meta property="og:title" content="A8 Stars | Celestial Map &amp; Sky Geometry">
+<meta property="og:description" content="Explore the Auspicious 8 celestial map, star coordinates and sky geometry using the native A8 angular ruler in a permanent celestial reference instrument.">
+<meta property="og:url" content="https://stars.cosigo.io/">
+<meta property="og:image" content="https://a8.cosigo.io/assets/cosigo_master_512.png">
+<meta property="og:image:alt" content="Stars instrument for Auspicious 8">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="A8 Stars | Celestial Map &amp; Sky Geometry">
+<meta name="twitter:description" content="Explore the Auspicious 8 celestial map, star coordinates and sky geometry using the native A8 angular ruler in a permanent celestial reference instrument.">
+<meta name="twitter:image" content="https://a8.cosigo.io/assets/cosigo_master_512.png">
+<meta name="twitter:image:alt" content="Stars instrument for Auspicious 8">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"A8 Stars | Celestial Map & Sky Geometry | Auspicious 8","url":"https://stars.cosigo.io/","description":"Explore the Auspicious 8 celestial map, star coordinates and sky geometry using the native A8 angular ruler in a permanent celestial reference instrument.","inLanguage":"en","isPartOf":{"@type":"WebSite","name":"Auspicious 8","alternateName":"A8","url":"https://a8.cosigo.io/"},"publisher":{"@type":"Organization","name":"COSIGO Labs","url":"https://cosigo.io/"},"about":[{"@type":"Thing","name":"Auspicious 8"},{"@type":"Thing","name":"A8 Stars"},{"@type":"Thing","name":"celestial map"},{"@type":"Thing","name":"star coordinates"},{"@type":"Thing","name":"sky geometry"},{"@type":"Thing","name":"A8 angle"}]}</script>
+<meta name="author" content="COSIGO Labs">
+<style>
+    :root{
+      --bg:#071019;--panel:#0b1722;--ink:#e9f2f7;--muted:#8fa8b7;--line:#1f3a4b;
+      --accent:#d8c47a;--cyan:#6fe8ff;--soft:#122331;--good:#72e0ac;--warn:#ffbf72;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:radial-gradient(circle at 50% 0%, #0d1723 0, #071019 42%, #050b12 100%);color:var(--ink);font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;line-height:1.5}
+    a{color:#cbe7ff}
+    .page-shell{max-width:1440px;margin:0 auto;padding:18px}
+    .site-header,.site-footer,.panel{background:rgba(10,18,28,.18);border:1px solid var(--line);border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,.22)}
+    .site-header{padding:16px 18px;margin-bottom:14px}
+    .brand-row{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;flex-wrap:wrap}
+    .brand-lockup{display:flex;gap:14px;align-items:center}
+    .brand-lockup img{width:52px;height:52px;border-radius:50%;background:#0d1620;border:1px solid #30495b}
+    .eyebrow{font-size:12px;letter-spacing:.12em;color:var(--accent)}
+    h1{margin:2px 0 4px;font-size:clamp(24px,3vw,36px)}
+    .tagline,.subtle{color:var(--muted);font-size:12px}
+    .header-actions,.escape-hatch{display:flex;gap:8px;flex-wrap:wrap}
+    .ghost-button{display:inline-block;padding:8px 12px;border-radius:999px;border:1px solid #314a5d;background:rgba(13,22,32,.16);color:var(--ink);text-decoration:none;font-size:12px}
+    .ghost-button:hover{border-color:#65839a}
+    .escape-wrap{margin-top:12px;padding-top:12px;border-top:1px solid #1b2c3b}
+    .escape-title{font-size:11px;color:var(--accent);letter-spacing:.14em;margin-bottom:8px}
+    .hero-copy{display:grid;grid-template-columns:1.2fr .8fr;gap:14px;margin-bottom:14px}
+    .panel{padding:14px}
+    .hero-copy .panel p{margin:.55em 0}
+    .badge-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+    .badge{border:1px solid #30485a;border-radius:999px;padding:6px 10px;font-size:12px;background:rgba(13,22,32,.12);color:#dceaf4}
+    .badge b{color:var(--cyan)}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .module-title{display:flex;justify-content:space-between;gap:8px;align-items:flex-start;flex-wrap:wrap}
+    .module-title h2{margin:0;font-size:16px;letter-spacing:.04em}
+    .module-title .mini{font-size:11px;color:var(--muted)}
+    iframe{display:block;width:100%;height:860px;border:0;border-radius:0;background:transparent;overflow:hidden}
+    .notes{font-size:13px;color:#d6e3ed}
+    .notes ul{margin:.4em 0 .2em 1.3em}
+    .placard{border-left:3px solid var(--accent);padding:10px 12px;background:rgba(12,21,32,.12);border-radius:10px;margin-top:10px;color:#e6eef5}
+    .placard b{color:#fff}
+    .callout{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+    .site-footer{padding:14px 16px;margin-top:14px}
+    .footer-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .footer-head{font-size:12px;letter-spacing:.12em;color:var(--accent);margin-bottom:8px}
+    .mono{white-space:pre-wrap}
+    @media (max-width:1000px){
+      .grid,.hero-copy,.callout,.footer-grid{grid-template-columns:1fr}
+
+      /* A8 STARS MOBILE CARD WIDTH NORMALIZATION v1
+         Long deployment filenames must wrap inside the mobile
+         LAB NOTES cards instead of widening the page. */
+      #notes > .panel{
+        min-width:0;
+        max-width:100%;
+      }
+
+      #notes .mono{
+        overflow-wrap:anywhere;
+        word-break:break-word;
+      }
+
+      iframe{width:100%}
+    }
+  
+/* A8 CELESTIAL ANTIQUE ATLAS BACKGROUND v1 */
+body{
+  background:
+    linear-gradient(rgba(5,9,14,.62), rgba(5,9,14,.76)),
+    url("/assets/a8_celestial_atlas_bg.png")
+      center center / cover fixed no-repeat !important;
+}
+
+
+/* A8 STARS MOBILE SHELL STABILITY v1
+   Phone rendering stabilization only.
+   Desktop presentation remains unchanged. */
+@media(max-width:700px){
+  body{
+    background-attachment:scroll,scroll !important;
+  }
+
+  #atlas iframe,
+  #atlas .auto-frame{
+    background:#050b12 !important;
+  }
+}
+
+</style>
+
+<style>
+/* A8-STARS-FILM-GLASS-FINAL
+   Thin-film presentation: antique atlas remains visible. */
+
+.site-header,
+.site-footer,
+.panel {
+  background: rgba(10,18,28,.18);
+  backdrop-filter: blur(.6px);
+  -webkit-backdrop-filter: blur(.6px);
+}
+
+.placard {
+  background: rgba(12,21,32,.12);
+  backdrop-filter: blur(.4px);
+  -webkit-backdrop-filter: blur(.4px);
+}
+
+.badge {
+  background: rgba(13,22,32,.12);
+}
+
+.ghost-button {
+  background: rgba(13,22,32,.16);
+}
+
+@media (max-width:760px) {
+  .site-header,
+  .site-footer,
+  .panel {
+    background: rgba(10,18,28,.26);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .placard {
+    background: rgba(12,21,32,.18);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+</style>
+
+
+<style id="a8-symmetry-style-v1">
+.a8-symmetry-launch{
+  margin:10px 0 12px;
+}
+
+#a8SymmetryDialog{
+  width:min(980px,calc(100vw - 24px));
+  max-height:88vh;
+  padding:0;
+  border:1px solid #415b70;
+  border-radius:16px;
+  background:#08121c;
+  color:var(--ink);
+  box-shadow:0 24px 80px rgba(0,0,0,.72);
+}
+
+#a8SymmetryDialog::backdrop{
+  background:rgba(0,0,0,.74);
+}
+
+.a8-symmetry-shell{
+  padding:18px;
+}
+
+.a8-symmetry-head{
+  display:flex;
+  justify-content:space-between;
+  gap:14px;
+  align-items:flex-start;
+  position:sticky;
+  top:0;
+  z-index:2;
+  margin:-18px -18px 14px;
+  padding:16px 18px;
+  background:rgba(8,18,28,.98);
+  border-bottom:1px solid var(--line);
+}
+
+.a8-symmetry-head h2{
+  margin:3px 0 0;
+  font-size:20px;
+}
+
+.a8-symmetry-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin:14px 0;
+}
+
+.a8-symmetry-card{
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:12px;
+  background:rgba(12,22,33,.55);
+}
+
+.a8-symmetry-card h3,
+.a8-symmetry-section h3{
+  margin:0 0 7px;
+  color:var(--accent);
+  font-size:13px;
+}
+
+.a8-symmetry-math{
+  margin:7px 0;
+  font-family:ui-monospace,SFMono-Regular,Consolas,monospace;
+  font-size:15px;
+  font-weight:800;
+  line-height:1.55;
+}
+
+.a8-symmetry-section{
+  margin-top:15px;
+  padding-top:13px;
+  border-top:1px solid var(--line);
+}
+
+.a8-symmetry-section p,
+.a8-symmetry-section li{
+  line-height:1.55;
+}
+
+.a8-symmetry-equation{
+  margin:9px 0;
+  padding:10px 12px;
+  border-left:3px solid var(--accent);
+  border-radius:8px;
+  background:rgba(12,21,32,.74);
+  font-family:ui-monospace,SFMono-Regular,Consolas,monospace;
+  line-height:1.65;
+  overflow-wrap:anywhere;
+}
+
+.a8-symmetry-rule{
+  margin-top:15px;
+  padding:12px;
+  border:1px solid var(--accent);
+  border-radius:12px;
+  background:rgba(216,196,122,.08);
+  line-height:1.6;
+}
+
+.a8-rung-table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:10px;
+  font-family:ui-monospace,SFMono-Regular,Consolas,monospace;
+  font-size:12px;
+}
+
+.a8-rung-table th,
+.a8-rung-table td{
+  padding:7px 8px;
+  border-bottom:1px solid var(--line);
+  text-align:left;
+}
+
+.a8-rung-table th{
+  color:var(--accent);
+}
+
+.a8-symmetry-exercise{
+  margin-top:14px;
+  padding:13px;
+  border:1px solid #46657c;
+  border-radius:12px;
+  background:rgba(10,25,37,.78);
+}
+
+.a8-symmetry-exercise summary{
+  cursor:pointer;
+  color:var(--accent);
+  font-weight:800;
+}
+
+.a8-symmetry-bottom{
+  display:flex;
+  justify-content:flex-end;
+  margin-top:16px;
+}
+
+@media(max-width:700px){
+  .a8-symmetry-grid{
+    grid-template-columns:1fr;
+  }
+
+  .a8-symmetry-shell{
+    padding:12px;
+  }
+
+  .a8-symmetry-head{
+    margin:-12px -12px 12px;
+    padding:12px;
+  }
+
+  .a8-rung-table{
+    font-size:10px;
+  }
+}
+</style>
+
+
+  <!-- COSIGO-CANONICAL-FAVICON-BEGIN -->
+  <link rel="icon" href="https://cosigo.io/favicon.ico">
+  <link rel="icon" type="image/svg+xml" href="https://cosigo.io/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://cosigo.io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://cosigo.io/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://cosigo.io/apple-touch-icon.png">
+  <!-- COSIGO-CANONICAL-FAVICON-END -->
+</head>
+<body>
+<style id="a8-topside-coherence-02-style">
+/* A8 SINGLE DROPDOWN NAV · SITE STANDARD */
+#a8-topside-coherence-02{
+  display:block;
+  margin:0;
+  padding:10px 14px;
+  border-bottom:1px solid rgba(255,255,255,.14);
+  background:rgba(7,11,16,.96);
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+}
+#a8-topside-coherence-02 .a8-topline{
+  max-width:1440px;
+  margin:0 auto;
+  display:flex;
+  gap:12px;
+  align-items:center;
+  flex-wrap:wrap;
+}
+#a8-topside-coherence-02 .cosigo-global-brand{
+  display:flex;
+  gap:8px;
+  align-items:center;
+  text-decoration:none;
+}
+#a8-topside-coherence-02 .cosigo-global-brand img{
+  width:34px;
+  height:34px;
+  object-fit:contain;
+}
+#a8-topside-coherence-02 .cosigo-global-brand span{
+  font-weight:900;
+  letter-spacing:.06em;
+}
+#a8-topside-coherence-02 .cosigo-global-brand small{
+  display:block;
+  opacity:.72;
+  font-size:.62rem;
+}
+#a8-topside-coherence-02 a{
+  text-decoration:none;
+}
+#a8-topside-coherence-02 .a8-menu{
+  position:relative;
+  margin-left:auto;
+}
+#a8-topside-coherence-02 .a8-menu summary{
+  list-style:none;
+  cursor:pointer;
+  padding:8px 11px;
+  border:1px solid #425467;
+  border-radius:8px;
+  background:#111820;
+  color:#e0bd72;
+  font-size:.76rem;
+  font-weight:900;
+  letter-spacing:.07em;
+  user-select:none;
+}
+#a8-topside-coherence-02 .a8-menu summary::-webkit-details-marker{
+  display:none;
+}
+#a8-topside-coherence-02 .a8-menu summary::after{
+  content:" ▾";
+  color:#92a5b8;
+}
+#a8-topside-coherence-02 .a8-menu[open] summary::after{
+  content:" ▴";
+}
+#a8-topside-coherence-02 .a8-menu-panel{
+  position:absolute;
+  z-index:1000;
+  right:0;
+  top:calc(100% + 7px);
+  min-width:180px;
+  padding:7px;
+  border:1px solid #425467;
+  border-radius:9px;
+  background:#0d141b;
+  box-shadow:0 12px 28px rgba(0,0,0,.38);
+}
+#a8-topside-coherence-02 .a8-menu-panel a{
+  display:block;
+  padding:9px 10px;
+  border-radius:6px;
+  color:#c8ddf5;
+  font-size:.78rem;
+  font-weight:800;
+  white-space:nowrap;
+}
+#a8-topside-coherence-02 .a8-menu-panel a:hover,
+#a8-topside-coherence-02 .a8-menu-panel a:focus,
+#a8-topside-coherence-02 .a8-menu-panel a[aria-current="page"]{
+  background:#182431;
+  color:#fff;
+}
+@media(max-width:760px){
+  #a8-topside-coherence-02 .a8-menu-panel{
+    min-width:170px;
+  }
+}
+</style>
+
+<nav id="a8-topside-coherence-02"
+     class="cosigo-global-nav"
+     aria-label="A8 Time Lab navigation">
+
+  <div class="a8-topline">
+
+    <a class="cosigo-global-brand"
+       href="https://cosigo.io/"
+       aria-label="COSIGO home">
+      <img src="/assets/cosigo_master_512.gif" alt="COSIGO">
+      <span>COSIGO<small>LABS · AUSPICIOUS 8</small></span>
+    </a>
+
+    <details class="a8-menu">
+      <summary>MENU</summary>
+
+      <div class="a8-menu-panel">
+        <a href="https://lab.cosigo.io/">LAB HOME</a>
+        <a href="https://clock.cosigo.io/">CLOCK</a>
+        <a href="https://calendar.cosigo.io/">CALENDAR</a>
+        <a href="https://moons.cosigo.io/">MOONS</a>
+        <a href="https://mintaka.cosigo.io/">MINTAKA</a>
+        <a href="https://sol.cosigo.io/">SOL</a>
+        <a href="https://ship.cosigo.io/">EARTHSHIP</a>
+        <a href="https://map.cosigo.io/">MAP · CLOCK · COMPASS</a>
+        <a href="https://sea.cosigo.io/">NAVIGATION</a>
+        <a href="https://stars.cosigo.io/" aria-current="page">CELESTIAL</a>
+        <a href="https://audio.cosigo.io/">AUDIO</a>
+        <a href="https://quartz.cosigo.io/">QUARTZ</a>
+        <a href="https://a8.cosigo.io/">A8 PUBLIC</a>
+        <a href="https://about.cosigo.io/">ABOUT</a>
+        <a href="https://contestant.cosigo.io/">FUN</a>
+        <a href="https://cosigo.io/">COSIGO HOME</a>
+        <a href="https://github.com/cosigo/a8">GITHUB</a>
+      </div>
+
+    </details>
+
+  </div>
+</nav>
+
+  <div class="page-shell">
+    <header class="site-header">
+      <div class="brand-row">
+        <div class="brand-lockup">
+          <img class="cosigo-mark" src="https://a8.cosigo.io/assets/cosigo_master_512.png" alt="COSIGO">
+          <div>
+            <div class="eyebrow">COSIGO LABS</div>
+            <h1>AUSPICIOUS 8 — CELESTIAL MAP, SKY GEOMETRY & WALKABOUT LAB</h1>
+            <div class="tagline">Nature first → A8 ruler second → legacy conversion last</div>
+            <div class="subtle">Same sky. Same geometry. Native A8 angular ruler.</div>
+          </div>
+        </div>
+        
+      </div>
+      <div class="escape-wrap">
+        <div class="escape-title">ESCAPE HATCH / QUICK NAVIGATION</div>
+        <nav class="escape-hatch">
+          <a class="ghost-button" href="#purpose">PURPOSE</a>
+          <a class="ghost-button" href="#atlas">CELESTIAL ATLAS</a>
+          <a class="ghost-button" href="#walkabout">WALKABOUT PROTOTYPE</a>
+          <a class="ghost-button" href="https://stars.cosigo.io/celestial-octal.html">HARD OCTAL</a>
+          <a class="ghost-button" href="#notes">LAB NOTES</a>
+          <a class="ghost-button" href="#footer">FOOTER / STATUS</a>
+        </nav>
+      </div>
+    </header>
+
+    <section id="purpose" class="hero-copy">
+      <div class="panel">
+        <div class="module-title"><h2>LAB PURPOSE</h2><div class="mini">ENGINEERING PACKAGE v1.0</div></div>
+        <p>This page packages the first A8 celestial tools into one deployment-ready lab entry: a mathematically plotted celestial atlas plus the stopped-clock walkabout demonstration.</p>
+        <p>The goal is not to change astronomy, spherical geometry, or the sky. The goal is to show that the <b>512-state A8 angular architecture</b> is workable for Earth coordinates, celestial coordinates, and observer-perspective transformations.</p>
+        <div class="badge-row">
+          <div class="badge"><b>A8 FULL TURN:</b> 512</div>
+          <div class="badge"><b>A8 LAT:</b> 0 → 128 → 256</div>
+          <div class="badge"><b>32 HOUR-SECTORS:</b> 16 A8 UNITS EACH</div>
+          <div class="badge"><b>SEAM:</b> CURRENT-ERA EQUINOX / PISCES</div>
+        </div>
+      </div>
+      <div class="panel notes">
+        <div class="module-title"><h2>LOCKED CONTENT</h2><div class="mini">CURRENT DEPLOYMENT SCOPE</div></div>
+        <ul>
+          <li>Separate Decimal Comfort experience for the atlas.</li>
+          <li>Stopped-clock walkabout thought experiment with day spin off.</li>
+          <li>Dummy fixed upright; Earth rolls beneath along meridian 64 ↔ 320.</li>
+          <li>A8 latitude pendulum is shown natively as <b>0 → 128 → 256 → 128 → 0</b>.</li>
+          <li>Whole-sky dot field transforms together; Orion is only a recognizable reference marker.</li>
+          <li>No signed latitude required for the pole-to-pole traverse.</li>
+        </ul>
+        <div class="placard"><b>Why this matters:</b> someone traveling from New York to Santiago can finally see why Orion looks “weird” without blaming the stars. The observer frame changed; the sky did not.</div>
+      </div>
+    </section>
+
+    <section id="atlas" class="panel" style="margin-bottom:14px;">
+      <div class="module-title"><h2>1 · A8 CELESTIAL ATLAS — DECIMAL COMFORT</h2><div class="mini">CLICK / HOVER VECTOR REVIEW</div></div>
+      <div class="a8-symmetry-launch">
+        <button
+          class="ghost-button"
+          id="showA8Symmetry"
+          type="button">
+          WHY 131,072? · CLOCK ↔ EARTH ↔ SKY
+        </button>
+      </div>
+      <p class="subtle">Same internal starfield geometry as the approved review file. Outside axes moved clear of the starfield. Hover labels use A8 HOUR / A8 LON / A8 LAT.</p>
+      <iframe class="auto-frame" scrolling="no" src="a8_celestial_atlas_decimal_review_v0_2.html?v=20260908-angle16-rungs1" title="A8 Celestial Atlas — Decimal Comfort Review v0.2"></iframe>
+      <div class="placard"><b>Polar Projection Warning:</b> this is a flat equirectangular projection of spherical celestial geometry. Near the poles, horizontal distortion becomes extreme. Polaris can look surprising on the flat sheet while still being mathematically correct.</div>
+    </section>
+
+    <section id="walkabout" class="panel">
+      <div class="module-title"><h2 id="decimalWalkaboutTitle">2 · STOPPED-CLOCK WALKABOUT — ORION / DECIMAL COMFORT</h2><div class="mini">DUMMY PERSPECTIVE / NORTH-TO-SOUTH TRAVERSE</div></div>
+      <p class="subtle">The ordinary east-west daily rotation is removed. Night is all around. The observer walks the meridian great circle while the whole visible sky changes orientation with the observer’s local vertical.</p>
+      <div class="header-actions" style="margin:10px 0 12px;">
+        <button class="ghost-button" id="showDecimalOrion" type="button">ORION</button>
+        <button class="ghost-button" id="showDecimalScorpius" type="button">SCORPIUS</button>
+      </div>
+
+      <!-- A8 STARS WALKABOUT CACHE BUST v1 -->
+<iframe
+        id="decimalWalkabout"
+        class="auto-frame"
+        scrolling="no"
+        src="a8_walkabout_geometry_poc_v0_1b.html?v=20260905-3264"
+        title="A8 Walkabout — Orion · Decimal Comfort" loading="lazy">
+      </iframe>
+      <div class="callout">
+        <div class="placard"><b>A8 latitude pendulum:</b><br>North Pole 0 → Equator 128 → South Pole 256 → Equator 128 → North Pole 0.<br><br>The opposite side is carried by longitude, not by inventing a second set of latitudes.</div>
+        <div class="placard"><b>Observer insight:</b><br>this isolates why constellations look upside down, sideways, or unfamiliar across hemispheres. The stars are fixed. The observer’s local frame rotates as travel proceeds across the spherical Earth.</div>
+      </div>
+      <div class="placard"><b>WHAT YOU’RE SEEING</b><br>This is a frozen-sky, frozen-Earth experiment. The stars are fixed and the Earth is not rotating. The only motion is the dummy observer walking around the curved surface of the Earth. As the observer changes position, the local horizon changes with the curvature of the Earth, so some stars move below that horizon. Those hidden stars turn grey so the underlying geometry remains visible. <br><br><b>STARS: FIXED · EARTH: FROZEN · OBSERVER: WALKING · GREY = BELOW LOCAL HORIZON</b><br><br>Scorpius lies well into the southern celestial sky, so from northern latitudes it naturally stays below the local horizon for more of this stopped-clock route. Earth’s ordinary daily spin would make stars rise and set with time, but it does not erase this north/south geometry.</div>
+    </section>
+
+    <section id="notes" class="callout">
+      <div class="panel notes">
+        <div class="module-title"><h2>LAB NOTES / FAQ</h2><div class="mini">SHORT ANSWERS UP FRONT</div></div>
+        <div class="placard"><b>Why is Polaris “over there” on the flat map?</b><br>Because the map is distorted near the pole. Polaris is very close to the pole, but not exactly on it, so it keeps a real coordinate while the rectangular sheet stretches the entire polar zone.</div>
+        <div class="placard"><b>Why does Orion look upside down in the Southern Hemisphere?</b><br>Because the observer moved around a spherical Earth. The constellation did not flip in space; the observer’s local “up” rotated with location.</div>
+        <div class="placard"><b>Why no +90 / 0 / −90 latitude here?</b><br>Because A8 uses a physical pole-to-pole ruler: North 0, Equator 128, South 256. Returning around the same meridian great circle naturally gives 128 and 0 again.</div>
+      </div>
+      <div class="panel notes">
+        <div class="module-title"><h2>DEPLOYMENT NOTES</h2><div class="mini">SEPARATE NODE / TRADE SERVER FRIENDLY</div></div>
+        <ul>
+          <li>This page is designed as a parent shell that links the two current standalone lab artifacts.</li>
+          <li>Keep the child files in the same directory as this package page so the two iframes resolve by relative path.</li>
+          <li>Hard Octal is the sibling notation view. Same sky. Same geometry. Native A8 angular ruler.</li>
+          <li>Preserve the current walkabout prototype motion baseline; skin it later, do not redesign the motion.</li>
+        </ul>
+        <div class="placard"><b>Current child files expected beside this page:</b><br><span class="mono">a8_celestial_atlas_decimal_review_v0_2.html
+ a8_walkabout_geometry_poc_v0_1b.html</span></div>
+      </div>
+    </section>
+
+    <footer id="footer" class="site-footer">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-head">COSIGO LABS / STATUS</div>
+          <div class="subtle">Auspicious 8 engineering-lab package for celestial coordinates, local-sky geometry, and observer-perspective demonstration. This package is for laboratory, educational, and metrology-exploration use.</div>
+        </div>
+        <div>
+          <div class="footer-head">GOVERNING PRINCIPLE</div>
+          <div class="subtle">Nature first. Ruler second. Legacy conversion last. Natural phenomena and mathematical facts are not claimed as proprietary. What is presented here is the A8 representation, instrument packaging, and explanatory laboratory structure.</div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+<script>
+(() => {
+  /* A8 STARS NONDESTRUCTIVE IFRAME FIT v1
+     Measure natural child content without collapsing the live
+     iframe. This prevents page-position jumps on desktop and mobile. */
+  function fitFrame(frame) {
+    try {
+      const doc = frame.contentDocument;
+      if (!doc || !doc.body) return;
+
+      /*
+       * Child pages may use min-height:100vh.
+       * Neutralize that inside the embedded copy so natural content
+       * height can be measured without viewport feedback.
+       */
+      if (doc.documentElement) {
+        doc.documentElement.style.minHeight = '0';
+        doc.documentElement.style.overflow = 'hidden';
+      }
+
+      doc.body.style.minHeight = '0';
+      doc.body.style.overflow = 'hidden';
+
+      /*
+       * getBoundingClientRect().height measures the body's natural
+       * laid-out content without first changing the iframe viewport.
+       */
+      const h = Math.ceil(
+        doc.body.getBoundingClientRect().height
+      );
+
+      if (h <= 0) return;
+
+      const current = frame.getBoundingClientRect().height;
+
+      /*
+       * Avoid needless layout writes for tiny rounding differences.
+       */
+      if (Math.abs(current - h) > 2) {
+        frame.style.height = h + 'px';
+      }
+
+    } catch (_) {}
+  }
+
+  const frames = [...document.querySelectorAll('iframe.auto-frame')];
+
+  frames.forEach(frame => {
+    frame.addEventListener('load', () => {
+      fitFrame(frame);
+      setTimeout(() => fitFrame(frame), 150);
+    });
+  });
+
+  /* A8 STARS MOBILE IFRAME RESIZE GUARD v1
+     Mobile browser chrome frequently changes viewport HEIGHT
+     while the user taps controls. The iframe layout only needs
+     remeasurement when the available WIDTH actually changes. */
+  let resizeTimer;
+  let lastLayoutWidth = window.innerWidth;
+
+  window.addEventListener('resize', () => {
+    const nextLayoutWidth = window.innerWidth;
+
+    if (Math.abs(nextLayoutWidth - lastLayoutWidth) < 2) {
+      return;
+    }
+
+    lastLayoutWidth = nextLayoutWidth;
+
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      frames.forEach(fitFrame);
+    }, 120);
+  });
+})();
+</script>
+
+
+  <script>
+  (() => {
+    const frame = document.getElementById('decimalWalkabout');
+    const title = document.getElementById('decimalWalkaboutTitle');
+    const orion = document.getElementById('showDecimalOrion');
+    const scorpius = document.getElementById('showDecimalScorpius');
+
+    orion.addEventListener('click', () => {
+      frame.src = 'a8_walkabout_geometry_poc_v0_1b.html?v=20260905-3264';
+      frame.title = 'A8 Walkabout — Orion · Decimal Comfort';
+      title.textContent =
+        '2 · STOPPED-CLOCK WALKABOUT — ORION / DECIMAL COMFORT';
+    });
+
+    scorpius.addEventListener('click', () => {
+      frame.src = 'a8_walkabout_scorpius_decimal_v0_1.html?v=20260905-3264';
+      frame.title = 'A8 Walkabout — Scorpius · Decimal Comfort';
+      title.textContent =
+        '2 · STOPPED-CLOCK WALKABOUT — SCORPIUS / DECIMAL COMFORT';
+    });
+  })();
+  </script>
+
+
+<dialog id="a8SymmetryDialog" aria-labelledby="a8SymmetryTitle">
+  <div class="a8-symmetry-shell">
+
+    <div class="a8-symmetry-head">
+      <div>
+        <div class="eyebrow">AUSPICIOUS 8 · RULER SYMMETRY</div>
+        <h2 id="a8SymmetryTitle">
+          WHY 131,072? · CLOCK ↔ EARTH ↔ SKY
+        </h2>
+      </div>
+
+      <button class="ghost-button" id="closeA8Symmetry" type="button">
+        CLOSE
+      </button>
+    </div>
+
+    <p>
+      A8 uses distinct rulers to describe the same physical Earth rotation.
+      The physical motion does not change.
+      One ruler expresses its elapsed time; the other expresses its angular displacement.
+      Because one complete Earth day and one complete turn are two descriptions
+      of the same recurrence, both rulers use
+      <b>131,072 = 2^17</b> terminal graduations.
+    </p>
+
+    <div class="a8-symmetry-grid">
+
+      <div class="a8-symmetry-card">
+        <h3>A8 TIME · ONE EARTH DAY</h3>
+        <div class="a8-symmetry-math">
+          32 × 64 × 64<br>
+          = 131,072<br>
+          = 2^17
+        </div>
+        HOUR · MINUTE · SECOND
+      </div>
+
+      <div class="a8-symmetry-card">
+        <h3>A8 ANGLE · ONE FULL TURN</h3>
+        <div class="a8-symmetry-math">
+          512 × 16 × 16<br>
+          = 131,072<br>
+          = 2^17
+        </div>
+        ANGLE · ARC MINUTE · ARC SECOND
+      </div>
+
+    </div>
+
+    <div class="a8-symmetry-rule">
+      <b>KEEP THE DIMENSIONS STRAIGHT</b><br>
+      A8 SECOND = elapsed time.<br>
+      A8 ARC SECOND = angular displacement.<br><br>
+
+      Matching graduation counts do not make time and angle
+      the same quantity. They make translation across Earth's
+      one-day / one-turn relationship structurally simple.
+    </div>
+
+    <section class="a8-symmetry-section">
+      <h3>1 · START WITH THE CLOCK</h3>
+
+      <p>
+        One A8 civil day is divided into 32 A8 hours.
+        Each hour contains 64 A8 minutes.
+        Each minute contains 64 A8 seconds.
+      </p>
+
+      <div class="a8-symmetry-equation">
+        32 × 64 × 64<br>
+        = 131,072 A8 TIME STATES<br>
+        = 2^17
+      </div>
+    </section>
+
+    <section class="a8-symmetry-section">
+      <h3>2 · NOW TAKE THE SAME EARTH ROTATION AS ANGLE</h3>
+
+      <p>
+        One complete turn contains 512 A8 angle units.
+        Each A8 angle contains 16 A8 arc minutes.
+        Each A8 arc minute contains 16 A8 arc seconds.
+      </p>
+
+      <div class="a8-symmetry-equation">
+        512 × 16 × 16<br>
+        = 131,072 A8 ANGULAR STATES<br>
+        = 2^17
+      </div>
+
+      <p>
+        The A8 arc second is therefore the terminal graduation
+        of the general A8 angular ruler.
+      </p>
+    </section>
+
+    <section class="a8-symmetry-section">
+      <h3>3 · SAME COUNT · DIFFERENT PHYSICAL RULERS</h3>
+
+      <div class="a8-symmetry-equation">
+        FULL EARTH DAY<br>
+        = 131,072 TIME STATES<br><br>
+
+        FULL TURN<br>
+        = 131,072 ANGULAR STATES
+      </div>
+
+      <p>
+        One physical recurrence is being described from two
+        viewpoints: elapsed time and angular rotation.
+      </p>
+    </section>
+
+    <section class="a8-symmetry-section">
+      <h3>4 · HOUR-SECTOR SYMMETRY</h3>
+
+      <div class="a8-symmetry-equation">
+        512 ÷ 32<br>
+        = 16 A8 ANGLE UNITS PER HOUR-SECTOR
+      </div>
+
+      <p>
+        One A8 hour contains 4,096 A8 time seconds.
+        Sixteen A8 angle units contain 4,096 A8 arc seconds.
+      </p>
+
+      <div class="a8-symmetry-equation">
+        1 A8 HOUR<br>
+        = 4,096 A8 TIME SECONDS<br><br>
+
+        EARTH ROTATION DURING THAT HOUR<br>
+        = 4,096 A8 ARC SECONDS
+      </div>
+    </section>
+
+    <section class="a8-symmetry-section">
+      <h3>5 · MINUTE SYMMETRY</h3>
+
+      <div class="a8-symmetry-equation">
+        16 A8 ANGLES ÷ 64 A8 MINUTES<br>
+        = 1/4 A8 ANGLE PER A8 MINUTE
+      </div>
+
+      <p>
+        One quarter A8 angle equals 4 A8 arc minutes.
+        Four A8 arc minutes equal 64 A8 arc seconds.
+      </p>
+
+      <div class="a8-symmetry-equation">
+        1 A8 MINUTE<br>
+        = 64 A8 TIME SECONDS<br><br>
+
+        EARTH ROTATION DURING THAT MINUTE<br>
+        = 64 A8 ARC SECONDS
+      </div>
+    </section>
+
+    <section class="a8-symmetry-section">
+      <h3>6 · TERMINAL GRADUATION</h3>
+
+      <div class="a8-symmetry-equation">
+        1 A8 TIME SECOND<br>
+        ↔ EARTH ROTATES THROUGH<br>
+        1 A8 ARC SECOND
+      </div>
+
+      <p>
+        Different dimensions.
+        One-for-one terminal graduation on Earth's
+        day / turn relationship.
+      </p>
+    </section>
+
+    <section class="a8-symmetry-section">
+      <h3>7 · READING A STAR-TO-STAR ARC</h3>
+
+      <p>
+        Example shortest spherical separation:
+      </p>
+
+      <div class="a8-symmetry-equation">
+        7.643081673 A8 ANGLE
+      </div>
+
+      <p>
+        Keep the 7 whole angle units.
+        Convert the remaining fraction:
+      </p>
+
+      <div class="a8-symmetry-equation">
+        0.643081673 × 16<br>
+        = 10.289306768 A8 ARC MINUTES
+      </div>
+
+      <p>
+        Keep 10 whole arc minutes.
+        Convert the remaining fraction:
+      </p>
+
+      <div class="a8-symmetry-equation">
+        0.289306768 × 16<br>
+        = 4.628908288 A8 ARC SECONDS
+      </div>
+
+      <div class="a8-symmetry-equation">
+        7 · 10 · 4.629<br>
+        A8 ANGLE · A8 ARC MINUTE · A8 ARC SECOND
+      </div>
+
+      <p>
+        The same arc entirely in terminal angular graduations:
+      </p>
+
+      <div class="a8-symmetry-equation">
+        7.643081673 × 256<br>
+        = 1,956.628908288 A8 ARC SECONDS
+      </div>
+    </section>
+
+    <section class="a8-symmetry-section">
+      <h3>8 · PRECISION IS A RUNG SHIFT</h3>
+
+      <p>
+        The general angular ruler is the reference:
+      </p>
+
+      <div class="a8-symmetry-equation">
+        GENERAL ANGLE<br>
+        2^17 STATES / FULL TURN
+      </div>
+
+      <p>
+        Celestial precision does not require different geometry.
+        Move down the same binary ladder.
+      </p>
+
+      <table class="a8-rung-table">
+        <thead>
+          <tr>
+            <th>FROM GENERAL ANGLE</th>
+            <th>MULTIPLIER</th>
+            <th>FULL TURN</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>reference</td><td>×1</td><td>2^17</td></tr>
+          <tr><td>+1 rung</td><td>×2</td><td>2^18</td></tr>
+          <tr><td>+2 rungs</td><td>×4</td><td>2^19</td></tr>
+          <tr><td>+3 rungs</td><td>×8</td><td>2^20</td></tr>
+          <tr><td>+4 rungs</td><td>×16</td><td>2^21</td></tr>
+          <tr><td>+5 rungs</td><td>×32</td><td>2^22</td></tr>
+          <tr><td>+6 rungs</td><td>×64</td><td>2^23</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="a8-symmetry-section">
+      <h3>9 · A8/CEL · CELESTIAL PRECISION FAMILY</h3>
+
+      <p>
+        For this celestial instrument, A8/CEL uses a selected
+        base precision rung four binary steps finer than the
+        general angular ruler.
+      </p>
+
+      <div class="a8-symmetry-equation">
+        A8/CEL BASE<br>
+        GENERAL ANGLE +4 RUNGS<br>
+        = 2^21 STATES / FULL TURN<br>
+        = 2,097,152
+      </div>
+
+      <p>
+        One ordinary A8 arc second therefore spans
+        16 A8/CEL base states.
+      </p>
+
+      <div class="a8-symmetry-equation">
+        1 A8 ARC SECOND<br>
+        = 16 A8/CEL BASE STATES
+      </div>
+
+      <p>
+        Finer or coarser celestial work remains A8/CEL.
+        Only the selected precision rung changes.
+      </p>
+    </section>
+
+    <section class="a8-symmetry-section">
+      <h3>10 · WHY 31,306 IS NOT 31,306 ARC SECONDS</h3>
+
+      <p>
+        Our example arc contains:
+      </p>
+
+      <div class="a8-symmetry-equation">
+        GENERAL ANGULAR RULER<br>
+        1,956.628908288 A8 ARC SECONDS
+      </div>
+
+      <p>
+        At the A8/CEL base precision rung:
+      </p>
+
+      <div class="a8-symmetry-equation">
+        1,956.628908288 × 16<br>
+        = 31,306.062532608<br>
+        A8/CEL FINE ANGULAR STATES
+      </div>
+
+      <p>
+        Same physical arc.
+        Finer ruler.
+        The 31,306 value must never be labeled
+        A8 arc seconds.
+      </p>
+    </section>
+
+    <section class="a8-symmetry-section">
+      <h3>11 · A8/NAV IS A DIFFERENT PHYSICAL DOMAIN</h3>
+
+      <p>
+        A8/NAV is reserved for the Earth-anchored
+        <b>distance</b> ruler used in navigation.
+        It is not the name of this angular ruler.
+      </p>
+
+      <p>
+        Navigation therefore uses two different physical domains:
+        A8 angle for direction and angular observation,
+        and A8/NAV for Earth-derived distance.
+      </p>
+
+      <div class="a8-symmetry-equation">
+        DIRECTION / CELESTIAL POSITION → A8 ANGLE<br>
+        EARTH NAVIGATION DISTANCE → A8/NAV
+      </div>
+
+      <p>
+        A8/NAV is exactly the A8/41 length rung.
+        It remains physically distinct from A8 ANGLE:
+        angle tells which way; NAV tells how far.
+      </p>
+    </section>
+
+    <details class="a8-symmetry-exercise">
+      <summary>BEAVIS EXERCISE · ANGULAR CONVERSION</summary>
+
+      <p>
+        A star pair is separated by exactly
+        <b>12.5 A8 angle units</b>.
+      </p>
+
+      <div class="a8-symmetry-equation">
+        WHOLE ANGLE = 12<br><br>
+        0.5 × 16 = 8 ARC MINUTES<br><br>
+        REMAINDER = 0<br>
+        ARC SECONDS = 0
+      </div>
+
+      <div class="a8-symmetry-equation">
+        ANSWER<br>
+        12 · 8 · 0
+      </div>
+
+      <div class="a8-symmetry-equation">
+        CHECK<br>
+        12 + 8/16 + 0/256 = 12.5
+      </div>
+
+      <p><b>PASS.</b></p>
+    </details>
+
+    <details class="a8-symmetry-exercise">
+      <summary>BEAVIS EXERCISE · SHIFT THE PRECISION RUNG</summary>
+
+      <p>
+        Start with one ordinary A8 arc second.
+        Move four binary rungs finer.
+      </p>
+
+      <div class="a8-symmetry-equation">
+        1 × 2^4 = 16
+      </div>
+
+      <p>
+        Therefore one A8 arc second spans
+        16 states at the A8/CEL base precision rung.
+      </p>
+
+      <p>
+        Move two more rungs finer:
+      </p>
+
+      <div class="a8-symmetry-equation">
+        16 × 2^2 = 64
+      </div>
+
+      <p>
+        Same angle. Sixty-four fine states at
+        six rungs below the general angular ruler.
+      </p>
+    </details>
+
+    <div class="a8-symmetry-bottom">
+      <button
+        class="ghost-button"
+        id="closeA8SymmetryBottom"
+        type="button">
+        CLOSE
+      </button>
+    </div>
+
+  </div>
+</dialog>
+
+<script id="a8-symmetry-dialog-v1">
+(() => {
+  const openButton =
+    document.getElementById('showA8Symmetry');
+
+  const dialog =
+    document.getElementById('a8SymmetryDialog');
+
+  const closeTop =
+    document.getElementById('closeA8Symmetry');
+
+  const closeBottom =
+    document.getElementById('closeA8SymmetryBottom');
+
+  function openDialog(){
+    if(typeof dialog.showModal === 'function'){
+      dialog.showModal();
+    }else{
+      dialog.setAttribute('open','');
+    }
+  }
+
+  function closeDialog(){
+    if(typeof dialog.close === 'function'){
+      dialog.close();
+    }else{
+      dialog.removeAttribute('open');
+    }
+  }
+
+  openButton.addEventListener('click', openDialog);
+  closeTop.addEventListener('click', closeDialog);
+  closeBottom.addEventListener('click', closeDialog);
+
+  dialog.addEventListener('click', event => {
+    if(event.target === dialog){
+      closeDialog();
+    }
+  });
+})();
+</script>
+
+</body>
+</html>

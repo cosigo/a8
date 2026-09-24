@@ -1,0 +1,4640 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>A8 Laboratory | Physical Source, Core20 & Predictive System</title>
+<meta name="twitter:image:alt" content="A8 Laboratory showing the physical Epoch-7 source, Core20, predictive system and retained fallback paths">
+<meta property="og:image:alt" content="A8 Laboratory showing the physical Epoch-7 source, Core20, predictive system and retained fallback paths">
+<meta name="description" content="Explore the A8 operating laboratory: Epoch-7 physical RAW, Core20, predictive astronomy, and clearly labeled standby and recovery paths.">
+<meta name="author" content="COSIGO Labs">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+<meta name="theme-color" content="#0b0f14">
+<link rel="canonical" href="https://lab.cosigo.io/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Auspicious 8">
+<meta property="og:title" content="A8 Laboratory | Physical Source, Core20 & Predictive System">
+<meta property="og:description" content="See the current A8 physical source, Core20 operating state, predictive work, and retained standby recovery architecture.">
+<meta property="og:url" content="https://lab.cosigo.io/">
+<meta property="og:image" content="https://a8.cosigo.io/assets/cosigo_master_512.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="A8 Laboratory | Physical Source, Core20 & Predictive System">
+<meta name="twitter:description" content="See the current A8 physical source, Core20 operating state, predictive work, and retained standby recovery architecture.">
+<meta name="twitter:image" content="https://a8.cosigo.io/assets/cosigo_master_512.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"A8 Laboratory | Physical Source, Core20 & Predictive System","url":"https://lab.cosigo.io/","description":"Explore the A8 operating laboratory: Epoch-7 physical RAW, Core20, predictive astronomy, and clearly labeled standby and recovery paths.","inLanguage":"en","isPartOf":{"@type":"WebSite","name":"Auspicious 8","alternateName":"A8","url":"https://a8.cosigo.io/"},"publisher":{"@type":"Organization","name":"COSIGO Labs","url":"https://cosigo.io/"},"about":[{"@type":"Thing","name":"A8 Time"},{"@type":"Thing","name":"32 Hour Clock"},{"@type":"Thing","name":"Jupiter"},{"@type":"Thing","name":"Io"},{"@type":"Thing","name":"Europa"},{"@type":"Thing","name":"Ganymede"},{"@type":"Thing","name":"Callisto"},{"@type":"Thing","name":"Jupiter moon recurrence"},{"@type":"Thing","name":"Natural time ruler"}]}</script>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="/site-shell.css">
+
+<style>
+/* A8 LAB ANTIQUE INSTRUMENT BACKGROUND v1 */
+body{
+  background:
+    linear-gradient(rgba(7,10,14,.64), rgba(7,10,14,.76)),
+    url("/assets/a8_lab_front_bg.png")
+      center center / cover scroll no-repeat !important;
+}
+</style>
+
+<style id="a8-lab-card-transparency-v1">
+/*
+  A8 LAB CARD TRANSPARENCY v1
+  Restrained: preserve existing --panel color, expose 20% background.
+  Readability / borders / text remain unchanged.
+*/
+main .panel{
+  background:color-mix(in srgb,var(--panel) 80%,transparent);
+}
+</style>
+
+
+<!-- A8-CORE-AUTHENTIC-MUSIC-V1 -->
+<style>
+
+.a8-core-music {
+  margin: 18px 0;
+  padding: 16px;
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 14px;
+  background: rgba(8,12,18,.68);
+}
+
+.a8-core-music h3 {
+  margin-top: 0;
+}
+
+.a8-core-music .a8-music-authority {
+  margin: 8px 0 14px;
+  font-size: .82rem;
+  line-height: 1.45;
+  opacity: .86;
+}
+
+.a8-core-music .a8-music-status {
+  margin: 12px 0;
+  padding: 10px 12px;
+  border-radius: 9px;
+  background: rgba(0,0,0,.23);
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Consolas,
+    monospace;
+  font-size: .82rem;
+  line-height: 1.55;
+}
+
+.a8-core-music .a8-music-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.a8-core-music button {
+  cursor: pointer;
+}
+
+.a8-core-music .a8-native-readout {
+  margin-top: 10px;
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Consolas,
+    monospace;
+  font-size: .78rem;
+  opacity: .88;
+}
+
+</style>
+
+
+<style id="a8-g6g-r3-facing-cleanup">
+  #lab-modules .core20-primary{
+    border-color:#6d9cff;
+    font-weight:900;
+  }
+</style>
+
+
+<style id="a8-downstream-feng-shui-01">
+#core20-downstream-operator .c20v-downstream-layout{
+  display:grid;
+  grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);
+  gap:12px;
+  align-items:stretch;
+}
+
+#core20-downstream-operator .c20v-downstream-left,
+#core20-downstream-operator .c20v-downstream-right{
+  display:grid;
+  gap:12px;
+  min-width:0;
+}
+
+#core20-downstream-operator .c20v-downstream-left{
+  height:100%;
+}
+
+#core20-downstream-operator .c20v-downstream-left > .c20v-stat{
+  height:100%;
+  box-sizing:border-box;
+}
+
+#core20-downstream-operator .c20v-downstream-right > .c20v-stat{
+  min-width:0;
+}
+
+@media(max-width:760px){
+  #core20-downstream-operator .c20v-downstream-layout{
+    grid-template-columns:1fr;
+  }
+
+  #core20-downstream-operator .c20v-downstream-left > .c20v-stat{
+    height:auto;
+  }
+}
+</style>
+
+
+  <!-- COSIGO-CANONICAL-FAVICON-BEGIN -->
+  <link rel="icon" href="https://cosigo.io/favicon.ico">
+  <link rel="icon" type="image/svg+xml" href="https://cosigo.io/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://cosigo.io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://cosigo.io/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://cosigo.io/apple-touch-icon.png">
+  <!-- COSIGO-CANONICAL-FAVICON-END -->
+</head>
+<body>
+
+<style id="a8-lab-header-menu-style">
+.a8-lab-header-row{
+  display:flex;
+  gap:12px;
+  align-items:flex-start;
+  justify-content:space-between;
+  flex-wrap:wrap;
+}
+
+.a8-lab-title-block{
+  min-width:0;
+  flex:1 1 620px;
+}
+
+.a8-lab-header-row .a8-menu{
+  position:relative;
+  margin-left:auto;
+  flex:0 0 auto;
+}
+
+.a8-lab-header-row .a8-menu summary{
+  list-style:none;
+  cursor:pointer;
+  padding:8px 11px;
+  border:1px solid #425467;
+  border-radius:8px;
+  background:#111820;
+  color:#e0bd72;
+  font-size:.76rem;
+  font-weight:900;
+  letter-spacing:.07em;
+  user-select:none;
+}
+
+.a8-lab-header-row .a8-menu summary::-webkit-details-marker{
+  display:none;
+}
+
+.a8-lab-header-row .a8-menu summary::after{
+  content:" ▾";
+  color:#92a5b8;
+}
+
+.a8-lab-header-row .a8-menu[open] summary::after{
+  content:" ▴";
+}
+
+.a8-lab-header-row .a8-menu-panel{
+  position:absolute;
+  z-index:1000;
+  right:0;
+  top:calc(100% + 7px);
+  min-width:180px;
+  padding:7px;
+  border:1px solid #425467;
+  border-radius:9px;
+  background:#0d141b;
+  box-shadow:0 12px 28px rgba(0,0,0,.38);
+}
+
+.a8-lab-header-row .a8-menu-panel a{
+  display:block;
+  padding:9px 10px;
+  border-radius:6px;
+  color:#c8ddf5;
+  font-size:.78rem;
+  font-weight:800;
+  white-space:nowrap;
+  text-decoration:none;
+}
+
+.a8-lab-header-row .a8-menu-panel a:hover,
+.a8-lab-header-row .a8-menu-panel a:focus{
+  background:#182431;
+  color:#fff;
+}
+
+@media(max-width:760px){
+  .a8-lab-header-row .a8-menu{
+    margin-left:0;
+  }
+
+  .a8-lab-header-row .a8-menu-panel{
+    left:0;
+    right:auto;
+    min-width:170px;
+  }
+}
+
+
+.a8-lab-whitepaper{
+  flex:0 0 auto;
+  align-self:flex-start;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:8px 11px;
+  border:1px solid #425467;
+  border-radius:8px;
+  background:#111820;
+  color:#e0bd72;
+  font-size:.76rem;
+  font-weight:900;
+  letter-spacing:.07em;
+  text-decoration:none;
+  white-space:nowrap;
+}
+
+.a8-lab-whitepaper:hover,
+.a8-lab-whitepaper:focus{
+  background:#182431;
+  color:#fff;
+}
+</style>
+
+
+
+<style id="a8-lab-global-topbar-style-v1">
+/*
+ * A8-LAB-GLOBAL-TOPBAR-v1
+ * COSIGO identity left · existing Lab MENU right
+ */
+
+#a8-lab-global-topbar{
+  display:block;
+  margin:0;
+  padding:10px 14px;
+
+  border-bottom:
+    1px solid rgba(255,255,255,.14);
+
+  background:
+    rgba(7,11,16,.96);
+
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Consolas,
+    "Liberation Mono",
+    monospace;
+}
+
+#a8-lab-global-topbar .a8-topline{
+  max-width:1440px;
+  margin:0 auto;
+
+  display:flex;
+  gap:12px;
+  align-items:center;
+
+  flex-wrap:nowrap;
+}
+
+#a8-lab-global-topbar .cosigo-global-brand{
+  display:flex;
+  gap:8px;
+  align-items:center;
+
+  color:#eef5f8;
+  text-decoration:none;
+}
+
+#a8-lab-global-topbar .cosigo-global-brand img{
+  width:34px;
+  height:34px;
+  object-fit:contain;
+}
+
+#a8-lab-global-topbar .cosigo-global-brand span{
+  font-weight:900;
+  letter-spacing:.06em;
+}
+
+#a8-lab-global-topbar .cosigo-global-brand small{
+  display:block;
+
+  color:#9eafbc;
+
+  font-size:.62rem;
+  font-weight:700;
+  letter-spacing:.12em;
+}
+
+#a8-lab-global-topbar .a8-menu{
+  position:relative;
+  margin-left:auto;
+
+  flex:0 0 auto;
+}
+
+#a8-lab-global-topbar .a8-menu summary{
+  list-style:none;
+  cursor:pointer;
+
+  padding:8px 11px;
+
+  border:
+    1px solid #425467;
+
+  border-radius:8px;
+
+  background:#111820;
+  color:#e0bd72;
+
+  font-size:.76rem;
+  font-weight:900;
+  letter-spacing:.07em;
+
+  user-select:none;
+}
+
+#a8-lab-global-topbar
+.a8-menu summary::-webkit-details-marker{
+  display:none;
+}
+
+#a8-lab-global-topbar
+.a8-menu summary::after{
+  content:" ▾";
+  color:#92a5b8;
+}
+
+#a8-lab-global-topbar
+.a8-menu[open] summary::after{
+  content:" ▴";
+}
+
+#a8-lab-global-topbar .a8-menu-panel{
+  position:absolute;
+  z-index:1000;
+
+  right:0;
+  top:calc(100% + 7px);
+
+  min-width:180px;
+  padding:7px;
+
+  border:
+    1px solid #425467;
+
+  border-radius:9px;
+
+  background:#0d141b;
+
+  box-shadow:
+    0 12px 28px rgba(0,0,0,.38);
+}
+
+#a8-lab-global-topbar .a8-menu-panel a{
+  display:block;
+
+  padding:9px 10px;
+  border-radius:6px;
+
+  color:#c8ddf5;
+  text-decoration:none;
+
+  font-size:.78rem;
+  font-weight:800;
+
+  white-space:nowrap;
+}
+
+#a8-lab-global-topbar .a8-menu-panel a:hover,
+#a8-lab-global-topbar .a8-menu-panel a:focus{
+  background:#182431;
+  color:#fff;
+}
+
+@media(max-width:760px){
+
+  #a8-lab-global-topbar{
+    padding:8px 10px;
+  }
+
+  #a8-lab-global-topbar .a8-menu{
+    margin-left:auto;
+  }
+
+  #a8-lab-global-topbar .a8-menu-panel{
+    right:0;
+    left:auto;
+    min-width:170px;
+  }
+}
+</style>
+
+
+<nav
+  id="a8-lab-global-topbar"
+  class="cosigo-global-nav"
+  aria-label="A8 Time Lab navigation"
+>
+
+  <div class="a8-topline">
+
+    <a
+      class="cosigo-global-brand"
+      href="https://cosigo.io/"
+      aria-label="COSIGO home"
+    >
+      <img
+        src="/assets/cosigo_master_512.gif"
+        alt="COSIGO"
+      >
+
+      <span>
+        COSIGO
+        <small>LABS · AUSPICIOUS 8</small>
+      </span>
+    </a>
+
+<details class="a8-menu">
+      <summary>MENU</summary>
+      <div class="a8-menu-panel">
+        <a href="https://clock.cosigo.io/">CLOCK</a>
+        <a href="https://calendar.cosigo.io/">CALENDAR</a>
+        <a href="https://moons.cosigo.io/">MOONS</a>
+        <a href="https://mintaka.cosigo.io/">MINTAKA</a>
+        <a href="https://sol.cosigo.io/">SOL</a>
+        <a href="https://ship.cosigo.io/">EARTHSHIP</a>
+        <a href="https://map.cosigo.io/">MAP · CLOCK · COMPASS</a>
+        <a href="https://sea.cosigo.io/">NAVIGATION</a>
+        <a href="https://stars.cosigo.io/">CELESTIAL</a>
+        <a href="https://audio.cosigo.io/">AUDIO</a>
+        <a href="https://quartz.cosigo.io/">QUARTZ</a>
+        <a href="https://a8.cosigo.io/">A8 PUBLIC</a>
+        <a href="https://about.cosigo.io/">ABOUT</a>
+        <a href="https://contestant.cosigo.io/">FUN</a>
+        <a href="https://cosigo.io/">COSIGO HOME</a>
+        <a href="https://github.com/cosigo/a8">GITHUB</a>
+      </div>
+    </details>
+
+  </div>
+
+</nav>
+
+<main>
+
+<header>
+  <div class="panel" style="margin:0;flex:1">
+    <div class="a8-lab-header-row">
+
+      <div class="a8-lab-title-block">
+        <div class="eyebrow">AUSPICIOUS 8 · OPERATING LABORATORY</div>
+        <h1>A8 Laboratory · Physical Core &amp; Predictive System</h1>
+        <p class="muted">Epoch-8 physical RAW is the designated primary path. Core20, predictive instruments, and the recovery machinery already built remain available. Your browser is an observer.</p>
+      </div>
+      <a
+        class="a8-lab-whitepaper"
+        href="https://a8.cosigo.io/whitepaper.html"
+        title="Read the Auspicious 8 Technical Whitepaper"
+      >TECHNICAL WHITEPAPER</a>
+
+      
+
+    </div>
+  </div>
+  
+</header>
+
+<style id="a8-primary-standby-policy-style">
+#a8-primary-standby-policy .a8-path-grid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:10px;
+  margin-top:12px;
+}
+#a8-primary-standby-policy .a8-path-card{
+  border:1px solid #2a3744;
+  border-radius:10px;
+  padding:12px;
+  background:rgba(11,18,25,.82);
+  min-width:0;
+}
+#a8-primary-standby-policy .a8-path-label{
+  display:block;
+  font-size:.66rem;
+  letter-spacing:.09em;
+  opacity:.68;
+}
+#a8-primary-standby-policy .a8-path-state{
+  display:block;
+  margin-top:5px;
+  font-weight:900;
+  line-height:1.3;
+}
+#a8-primary-standby-policy .a8-path-note{
+  display:block;
+  margin-top:7px;
+  font-size:.78rem;
+  line-height:1.45;
+  opacity:.78;
+}
+@media(max-width:900px){
+  #a8-primary-standby-policy .a8-path-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+}
+@media(max-width:560px){
+  #a8-primary-standby-policy .a8-path-grid{
+    grid-template-columns:1fr;
+  }
+}
+</style>
+
+
+
+<!-- A8-CORE20-MAIN-INTEGRATION-01-BEGIN -->
+
+<!-- A8-CORE20-OPERATOR-STACK-01-BEGIN -->
+
+<div id="core20-virtual-operating-surface">
+
+
+  <!-- A8-LAB-CANONICAL-VISIBLE-ORDER-BEGIN -->
+
+  <section class="panel" id="a8-lab-nature-evidence">
+    <div class="c20v-head">
+      <div>
+        <div class="c20v-kicker">
+          1 · NATURE / DIRECT EVIDENCE
+        </div>
+
+        <h2>Nature keeps the rulers running</h2>
+
+        <p class="muted">
+          Jupiter, Mintaka and Sol are parallel Nature witnesses.
+          Their observations are bound to Epoch-7 physical RAW evidence
+          before Core20. Nature continues whether the carrier or clock
+          is running or not.
+        </p>
+      </div>
+
+      <div class="pill good">
+        CURRENT · PATH A
+      </div>
+    </div>
+
+    <div style="
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:12px;
+      margin-top:14px
+    ">
+
+      <div class="c20v-stat">
+        <span class="c20v-k">
+          JUPITER · NATURAL RECURRENCE
+        </span>
+
+        <span id="a8NatureJovian" class="c20v-v">—</span>
+
+        <span class="c20v-k" style="margin-top:8px">
+          IO / EUROPA / GANYMEDE · 1:2:4
+        </span>
+
+        <span
+          id="a8NatureJovianRuler"
+          class="c20v-v"
+        >—</span>
+
+        <p class="muted" style="margin:8px 0 0">
+          The moons keep turning independently of A8 machinery.
+        </p>
+
+        <div
+          id="a8NatureMoonMachinery"
+          style="
+            margin-top:12px;
+            display:grid;
+            gap:8px;
+          "
+        >
+          <span class="c20v-k">
+            LIVE JOVIAN MACHINERY · PRESERVED INDICATORS
+          </span>
+
+          <div
+            id="a8NatureMoonMachineryRows"
+            style="
+              display:grid;
+              gap:8px;
+            "
+          >
+            —
+          </div>
+        </div>
+      </div>
+
+
+      <div class="c20v-stat">
+        <span class="c20v-k">
+          MINTAKA · EARTH AXIAL ROTATION
+        </span>
+
+        <span
+          id="a8NatureMintaka"
+          class="c20v-v"
+        >—</span>
+
+        <span class="c20v-k" style="margin-top:8px">
+          MINTAKA CLOCK · 32 × 64 × 64
+        </span>
+
+        <span
+          id="a8NatureMintakaClock"
+          class="c20v-v"
+          style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace"
+        >—</span>
+
+        <span class="c20v-k" style="margin-top:8px">
+          MINTAKA_PHASE17 · 17 BIT
+        </span>
+
+        <span
+          id="a8NatureMintakaRegister"
+          class="c20v-v"
+          style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace"
+        >—</span>
+      </div>
+
+
+      <div class="c20v-stat">
+        <span class="c20v-k">
+          SOL · ORBITAL ADVANCE
+        </span>
+
+        <span
+          id="a8NatureSol"
+          class="c20v-v"
+        >—</span>
+
+        <span class="c20v-k" style="margin-top:8px">
+          POSITION
+        </span>
+
+        <span
+          id="a8NatureSolRegister"
+          class="c20v-v"
+          style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace"
+        >—</span>
+
+        <span class="c20v-k" style="margin-top:8px">
+          A8 ANNUAL FRAME · PHASE9
+        </span>
+
+        <span
+          id="a8NatureYearPhase9"
+          class="c20v-v"
+          style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace"
+        >—</span>
+
+        <span
+          id="a8NatureYearStatus"
+          class="c20v-k"
+          style="margin-top:7px"
+        >—</span>
+      </div>
+
+    </div>
+
+    <div
+      class="c20v-stat"
+      style="margin-top:14px;text-align:center"
+    >
+      <span class="c20v-k">
+        DIRECT PHYSICAL EVIDENCE DOMAIN
+      </span>
+
+      <span class="c20v-v">
+        JUPITER · MINTAKA · SOL ↔ SERVER-CAPTURED EPOCH-8 RAW
+      </span>
+
+      <p class="muted" style="margin:8px 0 0">
+        Mapped Core RAW and host time do not define the observations.
+      </p>
+    </div>
+  </section>
+
+
+  <section class="panel" id="a8-lab-natural-frame">
+    <div class="c20v-kicker">
+      2 · A8 NATURAL FRAME
+    </div>
+
+    <h2>
+      Evidence establishes the measurement relationships
+    </h2>
+
+    <div style="
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      align-items:center;
+      gap:8px;
+      margin-top:14px;
+      text-align:center;
+      font-family:ui-monospace,SFMono-Regular,Menlo,monospace
+    ">
+      <b>JUPITER · RECURRENCE</b>
+      <span>+</span>
+      <b>MINTAKA · EARTH ROTATION</b>
+      <span>+</span>
+      <b>SOL · ORBITAL ADVANCE</b>
+      <span>→</span>
+      <b>A8 NATURAL FRAME</b>
+    </div>
+
+    <p
+      class="muted"
+      style="margin:12px 0 0;text-align:center"
+    >
+      The carrier transports the frame.
+      The carrier does not define Nature.
+    </p>
+  </section>
+
+
+  <section class="panel" id="a8-lab-current-carrier">
+    <div class="c20v-head">
+      <div>
+        <div class="c20v-kicker">
+          3 · CURRENT PHYSICAL CARRIER
+        </div>
+
+        <h2>CURRENT DRIVE · PHYSICAL · EPOCH 7 · CORE-MAPPED</h2>
+
+        <p class="muted">
+          Arduino A → Arduino B → Pi → Epoch-7 physical RAW.
+          This is the current replaceable continuity / transport
+          carrier into Core20, not the defining Nature authority.
+        </p>
+      </div>
+
+      <div class="pill good">
+        CARRIER · ACTIVE
+      </div>
+    </div>
+
+    <div class="c20v-grid">
+
+      <div class="c20v-stat">
+        <span class="c20v-k">PHYSICAL SOURCE</span>
+        <span id="a8CarrierSource" class="c20v-v">—</span>
+      </div>
+
+      <div class="c20v-stat">
+        <span class="c20v-k">SOURCE EPOCH</span>
+        <span id="a8CarrierEpoch" class="c20v-v">—</span>
+      </div>
+
+      <div class="c20v-stat">
+        <span class="c20v-k">PHYSICAL STATE</span>
+        <span id="a8CarrierState" class="c20v-v">—</span>
+      </div>
+
+      <div class="c20v-stat">
+        <span class="c20v-k">PACE / MODE</span>
+        <span id="a8CarrierPace" class="c20v-v">—</span>
+      </div>
+
+    </div>
+  </section>
+
+
+  <section class="panel" id="a8-lab-current-core20">
+    <div class="c20v-kicker">
+      4 · CORE20
+    </div>
+
+    <h2>Common A8 progression</h2>
+
+    <p class="muted">
+      Core20 consumes the qualified carrier and maintains common
+      A8 progression. Physical SOURCE_EPOCH and Core20 internal
+      sourceEpoch remain separate domains.
+    </p>
+
+    <div class="c20v-grid">
+
+      <div class="c20v-stat">
+        <span class="c20v-k">
+          CORE20 INTERNAL SOURCE
+        </span>
+        <span id="a8CoreSource" class="c20v-v">—</span>
+      </div>
+
+      <div class="c20v-stat">
+        <span class="c20v-k">
+          CORE20 INTERNAL EPOCH
+        </span>
+        <span id="a8CoreEpoch" class="c20v-v">—</span>
+      </div>
+
+      <div class="c20v-stat">
+        <span class="c20v-k">CIVIL STATE</span>
+        <span id="a8CoreCivil" class="c20v-v">—</span>
+      </div>
+
+      <div class="c20v-stat">
+        <span class="c20v-k">DAY_PHASE17</span>
+        <span id="a8CorePhase" class="c20v-v">—</span>
+      </div>
+
+    </div>
+  </section>
+
+
+    <!-- A8-LAB-LIVE-ENGINE-ROOM-BEGIN -->
+  <section class="panel" id="a8-lab-live-engine-room">
+    <div class="c20v-head">
+      <div>
+        <div class="c20v-kicker">
+          4A · LIVE ENGINE ROOM
+        </div>
+
+        <h2>Jovian recovery engine · under the hood</h2>
+
+        <p class="muted">
+          Running A8 machinery. Physical Epoch-8 supplies the current
+          drive through the Core-mapped domain. Core20 carries the
+          Jovian recurrence machinery below. This is a live read-only
+          view of the engine, not a historical exhibit.
+        </p>
+      </div>
+
+      <div class="pill good">
+        ENGINE · LIVE
+      </div>
+    </div>
+
+
+    <!-- A8-LAB-JOVIAN-AUTHORITY-MIRROR-BEGIN -->
+    <div
+      id="a8-lab-jovian-authority"
+      style="
+        margin-top:14px;
+        padding:14px;
+        border:1px solid #45576a;
+        border-radius:12px;
+      "
+    >
+      <div class="c20v-kicker">
+        JOVIAN AUTHORITY · CE SELECTION · READ ONLY
+      </div>
+
+      <div
+        style="
+          display:grid;
+          grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+          gap:10px;
+          margin-top:12px;
+        "
+      >
+        <div class="c20v-stat">
+          <span class="c20v-k">SELECTED AUTHORITY</span>
+          <span
+            id="a8LabJovianAuthority"
+            class="c20v-v"
+          >CHECKING…</span>
+        </div>
+
+        <div class="c20v-stat">
+          <span class="c20v-k">NATURAL RECURRENCE</span>
+          <span
+            id="a8LabJovianAuthorityPeriod"
+            class="c20v-v"
+          >—</span>
+        </div>
+
+        <div class="c20v-stat">
+          <span class="c20v-k">RESONANT AUTHORITY SET</span>
+          <span class="c20v-v">
+            IO / EUROPA / GANYMEDE
+          </span>
+        </div>
+
+        <div class="c20v-stat">
+          <span class="c20v-k">DISCIPLINE STATE</span>
+          <span
+            id="a8LabJovianDisciplineState"
+            class="c20v-v"
+          >—</span>
+        </div>
+
+        <div class="c20v-stat">
+          <span class="c20v-k">CURRENT LIVE RULER</span>
+          <span
+            id="a8LabJovianLiveRuler"
+            class="c20v-v"
+          >—</span>
+        </div>
+
+        <div class="c20v-stat">
+          <span class="c20v-k">CALLISTO</span>
+          <span class="c20v-v">
+            WITNESS ONLY
+          </span>
+        </div>
+      </div>
+
+      <p
+        id="a8LabJovianWitnesses"
+        class="muted"
+        style="margin:10px 0 0"
+      >
+        WITNESSES · CHECKING…
+      </p>
+
+      <p
+        class="muted"
+        style="margin:6px 0 0"
+      >
+        Selection is controlled in CE.
+        Lab has no authority-selection or feeder-write path.
+      </p>
+    </div>
+    <!-- A8-LAB-JOVIAN-AUTHORITY-MIRROR-END -->
+
+    <div id="a8-live-engine-host" style="margin-top:14px">
+      <p
+        id="a8-live-engine-await"
+        class="muted"
+        style="margin:0"
+      >
+        Connecting to live Jovian engine…
+      </p>
+    </div>
+  </section>
+  <!-- A8-LAB-LIVE-ENGINE-ROOM-END -->
+
+
+<section class="panel" id="a8-lab-core20-consumers">
+    <div class="c20v-kicker">
+      5 · CORE20 CONSUMERS
+    </div>
+
+    <h2>What runs from Core20 progression</h2>
+
+    <div style="
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+      gap:12px;
+      margin-top:14px
+    ">
+
+      <div class="c20v-stat">
+        <span class="c20v-k">TIME · MERIDIAN 0</span>
+        <span
+          id="a8ConsumerClock"
+          class="c20v-v c20v-clock"
+        >—</span>
+        <span class="c20v-k" style="margin-top:7px">
+          32 × 64 × 64
+        </span>
+      </div>
+
+      <div class="c20v-stat">
+        <span class="c20v-k">CALENDAR</span>
+        <span
+          id="a8ConsumerCalendar"
+          class="c20v-v"
+        >—</span>
+      </div>
+
+      <div class="c20v-stat">
+        <span class="c20v-k">SHIP</span>
+        <span id="a8ConsumerShipAngle"
+              class="c20v-v c20v-clock">—</span>
+        <span id="a8ConsumerShipSide"
+              class="c20v-k"
+              style="margin-top:7px">—</span>
+        <span id="a8ConsumerShipSlip"
+              class="c20v-k"
+              style="margin-top:5px">V2 SLIP · —</span>
+      </div>
+
+      <div class="c20v-stat">
+        <span class="c20v-k">AUDIO</span>
+
+        <div style="
+          display:grid;
+          grid-template-columns:repeat(2,minmax(0,1fr));
+          gap:5px;
+          margin-top:8px
+        ">
+          <button type="button"
+                  onclick="a8LabTone(128)"
+                  title="200₈ cycles per A8 second"
+                  style="padding:6px 3px">200₈</button>
+
+          <button type="button"
+                  onclick="a8LabTone(256)"
+                  title="400₈ cycles per A8 second"
+                  style="padding:6px 3px">400₈</button>
+
+          <button type="button"
+                  onclick="a8LabTone(512)"
+                  title="1000₈ cycles per A8 second"
+                  style="padding:6px 3px">1000₈</button>
+
+          <button type="button"
+                  onclick="a8LabTone(1024)"
+                  title="2000₈ cycles per A8 second"
+                  style="padding:6px 3px">2000₈</button>
+        </div>
+
+        <span class="c20v-k" style="margin-top:7px">
+          TAP · A8 FREQUENCY
+        </span>
+      </div>
+
+      <div class="c20v-stat">
+        <span class="c20v-k">COMPOSER</span>
+
+        <a href="https://composer.cosigo.io/"
+           aria-label="Open A8 Composer"
+           title="Open Composer"
+           style="
+             display:block;
+             margin-top:5px;
+             text-align:center;
+             font-size:2.2rem;
+             line-height:1.2;
+             text-decoration:none
+           ">♫</a>
+      </div>
+
+      <div class="c20v-stat">
+        <span class="c20v-k">STOPWATCH</span>
+
+        <span
+          id="a8ConsumerStopwatch"
+          class="c20v-v c20v-clock"
+        >00:00</span>
+
+        <div style="
+          display:flex;
+          gap:6px;
+          flex-wrap:wrap;
+          margin-top:8px
+        ">
+          <button
+            type="button"
+            id="a8ConsumerStopwatchStart"
+            disabled
+          >START</button>
+
+          <button
+            type="button"
+            id="a8ConsumerStopwatchStop"
+            disabled
+          >STOP</button>
+
+          <button
+            type="button"
+            id="a8ConsumerStopwatchReset"
+            disabled
+          >RESET</button>
+        </div>
+
+        <span
+          id="a8ConsumerStopwatchStatus"
+          class="c20v-k"
+          style="margin-top:7px"
+        >DISCONNECTED</span>
+      </div>
+
+    </div>
+
+    <p class="muted" style="margin:12px 0 0">
+      Any other instrument requiring Core20 progression belongs
+      below this same boundary.
+    </p>
+  </section>
+
+
+  <section class="panel" id="a8-lab-predictive-output">
+    <div class="c20v-kicker">
+      6 · PREDICTIVE OUTPUT
+    </div>
+
+    <h2>A8 predicts · Nature answers</h2>
+
+    <p class="muted">
+      Predictions are preserved first. Later observation records
+      what Nature actually did and the residual between prediction
+      and result.
+    </p>
+  </section>
+
+  <!-- A8-LAB-CURRENT-CANONICAL-FRONT-END -->
+
+  <!-- A8-LAB-DEVELOPMENT-MUSEUM-BEGIN -->
+  <details
+    class="panel"
+    id="a8-lab-development-museum"
+    style="margin-top:16px"
+  >
+    <summary style="
+      cursor:pointer;
+      font-weight:900;
+      letter-spacing:.06em;
+      line-height:1.4
+    ">
+      A8 DEVELOPMENT MUSEUM
+    </summary>
+
+    <p class="muted" style="margin-top:12px">
+      Original operating surfaces preserved as evidence.
+      Their wording, IDs, renderer targets, historical architecture
+      and fallback semantics remain intact.
+    </p>
+
+    <div class="c20v-kicker" style="margin-top:18px">
+      ORIGINAL SOURCE-POLICY SURFACE
+    </div>
+
+<section class="panel" id="a8-primary-standby-policy">
+  <div class="section-kicker">SOURCE POLICY · PRIMARY + STANDBY</div>
+  <h2>Keep the physical path running. Keep the spare machinery ready.</h2>
+
+  <div class="a8-path-grid">
+
+    <div class="a8-path-card">
+      <span class="a8-path-label">DESIGNATED PRIMARY</span>
+      <span class="a8-path-state">EPOCH-7 PHYSICAL RAW</span>
+      <span class="a8-path-note">
+        Arduino A → Arduino B → Pi → physical RAW → Core20.
+        Actual live state is shown by the observer below.
+      </span>
+    </div>
+
+    <div class="a8-path-card">
+      <span class="a8-path-label">FALLBACK / HOLDOVER</span>
+      <span class="a8-path-state">STANDBY</span>
+      <span class="a8-path-note">
+        Existing continuity and holdover mechanisms remain installed.
+        They are intentionally inactive while the primary path is healthy.
+      </span>
+    </div>
+
+    <div class="a8-path-card">
+      <span class="a8-path-label">EMERGENCY / LEGACY RECOVERY</span>
+      <span class="a8-path-state">OFFLINE</span>
+      <span class="a8-path-note">
+        Virtual and legacy-contaminated recovery tools are retained.
+        If activated, A8 labels the fallback openly.
+      </span>
+    </div>
+
+    <div class="a8-path-card">
+      <span class="a8-path-label">PREDICTIVE SYSTEM</span>
+      <span class="a8-path-state">A8 PREDICTS · NATURE ANSWERS</span>
+      <span class="a8-path-note">
+        Predictions are preserved before observation; later evidence
+        records the witnessed result and residual.
+      </span>
+    </div>
+
+  </div>
+
+  <p class="muted" style="margin:12px 0 0">
+    Standby does not mean discarded. Recovery mechanisms remain available
+    for Ardilla failure, power trouble, source transitions and engineering
+    diagnostics without being silently promoted to physical authority.
+  </p>
+</section>
+
+
+    <div class="c20v-kicker" style="margin-top:24px">
+      ORIGINAL PHYSICAL-SOURCE OBSERVER
+    </div>
+
+  <section class="panel" id="core20-upstream-operator">
+    <div class="c20v-head">
+      <div>
+        <div class="c20v-kicker">PRIMARY SOURCE OBSERVER · PHYSICAL RAW → CORE20</div>
+        <h2>Physical source observer</h2>
+        <p class="muted">
+          Observe the source Core20 is actually consuming. Epoch-7 physical RAW is
+          the designated primary path; Jovian recovery remains visible here while
+          alternate source, holdover and emergency mechanisms remain in standby.
+        </p>
+      </div>
+      <div id="c20vStatus" class="pill warn">READY</div>
+      
+    </div>
+
+    
+
+    <div class="c20v-grid">
+      <div class="c20v-stat">
+        <span class="c20v-k">PHYSICAL PACE SOURCE · EPOCH</span>
+        <span class="c20v-v">
+          <span id="c20vPhysicalSource">ARDUINO A/B + PI</span>
+          ·
+          <span id="c20vPhysicalEpoch">—</span>
+        </span>
+        <span
+          id="c20vPhysicalState"
+          class="c20v-k"
+          style="margin-top:7px"
+        >CHECKING PHYSICAL SOURCE</span>
+      </div>
+
+      <div class="c20v-stat">
+        <span class="c20v-k">CORE20 INTERNAL DOMAIN · EPOCH</span>
+        <span class="c20v-v">
+          <span id="c20vSource">—</span>
+          ·
+          <span id="c20vEpoch">—</span>
+        </span>
+        <span
+          class="c20v-k"
+          style="margin-top:7px"
+        >TEMPORARY MAPPED / HOLDOVER DOMAIN</span>
+      </div>
+
+      <div class="c20v-stat">
+        <span class="c20v-k">SELECTED RAW COUNT</span>
+        <span id="c20vRaw" class="c20v-v">—</span>
+      </div>
+
+      <div class="c20v-stat">
+        <span class="c20v-k">IO / EUROPA / GANYMEDE</span>
+        <span id="c20vJovian" class="c20v-v">—</span>
+      </div>
+
+      <div class="c20v-stat">
+        <span class="c20v-k">NORMALIZED JOVIAN RULER · RAW</span>
+        <span id="c20vRuler" class="c20v-v">—</span>
+      </div>
+
+      <div class="c20v-stat">
+        <span class="c20v-k">SOURCE PACE / MODE</span>
+        <span id="c20vPace" class="c20v-v">—</span>
+      </div>
+    </div>
+
+    <p
+      class="muted"
+      style="margin:11px 0 0;font-size:.78rem;line-height:1.45"
+    >
+      EPOCH-7 is the external physical counter supplying the running pace.
+      The Epoch-3 value shown above is Core20's retained internal mapped
+      coordinate. JOVIAN LOCKED means recurrence/comparator qualification;
+      it does not mean the virtual source is pacing the clock.
+    </p>
+  </section>
+
+
+    <div class="c20v-kicker" style="margin-top:24px">
+      ORIGINAL CORE20 / RECOVERY OBSERVER
+    </div>
+
+  <section class="panel" id="core20-downstream-operator">
+    <div class="c20v-head">
+      <div>
+        <div class="c20v-kicker">CORE20 OBSERVER · PHYSICAL RAW → CIVIL / PREDICTIVE STATE</div>
+        <h2>Core20 running state</h2>
+        <p class="muted">
+          Core20 continues from the selected source through the retained Jovian,
+          Mintaka, Sol, Sun-return and DAY_PHASE17 machinery. Current bootstrap
+          limitations remain visible rather than being hidden or rewritten.
+        </p>
+      </div>
+    </div>
+
+    <div class="c20v-downstream-layout">
+      <div class="c20v-downstream-left">
+        <div class="c20v-stat">
+          <span class="c20v-k">SOL · ORBITAL ADVANCE</span>
+          <span id="c20vSol" class="c20v-v">—</span>
+
+          <span class="c20v-k" style="margin-top:8px">
+            LIVE ORBIT REGISTER · 27 BIT
+          </span>
+          <span id="c20vSolRegisterBin"
+            class="c20v-v"
+            style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace">—</span>
+          <span id="c20vSolRegisterOct"
+            class="c20v-v"
+            style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace">—</span>
+
+          <span class="c20v-k" style="margin-top:10px">
+            ABSOLUTE YEAR PHASE9 · 000₈–777₈
+          </span>
+          <span id="c20vYearPhase9"
+            class="c20v-v"
+            style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace">
+            AWAITING ONE-SHOT ALIGN
+          </span>
+
+          <span class="c20v-k" style="margin-top:8px">
+            ABSOLUTE YEAR PHASE27
+          </span>
+          <span id="c20vYearPhase27"
+            class="c20v-v"
+            style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace">—</span>
+
+          <span class="c20v-k" style="margin-top:8px">
+            LAST ONE-SHOT JPL VERIFICATION
+          </span>
+          <span id="c20vYearJpl"
+            class="c20v-v">—</span>
+
+          <span
+            id="c20vYearAlignStatus"
+            class="c20v-k"
+            style="margin-top:8px"
+          >
+            YEAR ANGLE AWAITS VERIFICATION
+          </span>
+
+          <span
+            class="muted"
+            style="display:block;margin-top:8px;font-size:.78rem;line-height:1.45"
+          >
+            READ ONLY · JPL verifies absolute year-wheel orientation once.
+            It never drives the running orbital rate.
+          </span>
+        </div>
+      </div>
+
+      <div class="c20v-downstream-right">
+        <div class="c20v-stat">
+          <span class="c20v-k">MINTAKA · EARTH AXIAL ROTATION</span>
+          <span id="c20vMintaka" class="c20v-v">—</span>
+          <span class="c20v-k" style="margin-top:8px">LIVE ROTATION REGISTER · 18 BIT</span>
+          <span id="c20vMintakaRegisterBin" class="c20v-v" style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace">—</span>
+          <span id="c20vMintakaRegisterOct" class="c20v-v" style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace">—</span>
+        </div>
+
+        <div class="c20v-stat">
+          <span class="c20v-k">RECOVERED SUN RETURN · RAW</span>
+          <span id="c20vSun" class="c20v-v">—</span>
+        </div>
+
+        <div class="c20v-stat">
+          <span class="c20v-k">CIVIL CLOCK STATUS</span>
+          <span id="c20vCivilStatus" class="c20v-v">—</span>
+        </div>
+
+        <div class="c20v-stat">
+          <span class="c20v-k">DAY_PHASE17</span>
+          <span id="c20vPhase" class="c20v-v">—</span>
+        </div>
+
+        <div class="c20v-stat">
+          <span class="c20v-k">A8 CLOCK · 32 × 64 × 64</span>
+          <span id="c20vClock" class="c20v-v c20v-clock">—</span>
+          <span class="c20v-k" style="margin-top:8px">REFERENCE MERIDIAN · 000₈ · LONDON</span>
+        </div>
+      </div>
+    </div>
+
+        <div
+      id="c20v-natural-year-flows"
+      style="
+        margin-top:16px;
+        margin-bottom:14px;
+        display:grid;
+        gap:10px;
+      "
+    >
+
+      <div
+        class="c20v-stat"
+        style="padding:14px 16px"
+      >
+        <span class="c20v-k">RECOVERED RUNNING PATH</span>
+
+        <div
+          style="
+            margin-top:10px;
+            display:flex;
+            flex-wrap:wrap;
+            align-items:center;
+            justify-content:center;
+            gap:7px;
+            line-height:1.35;
+            text-align:center;
+            font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+          "
+        >
+          <b>IO ×4 · EUROPA ×2 · GANYMEDE ×1</b>
+          <span>→</span>
+          <span>EXACT 1:2:4 AGREEMENT</span>
+          <span>→</span>
+          <b>RECOVERED NATURAL TIME RULER</b>
+          <span>→</span>
+          <span>MINTAKA · EARTH ROTATION</span>
+          <span>→</span>
+          <span>SOL · ORBITAL ADVANCE</span>
+          <span>→</span>
+          <span>SUN RETURN</span>
+          <span>→</span>
+          <span>2<sup>17</sup> DAY_PHASE17</span>
+          <span>→</span>
+          <b>32 × 64 × 64 A8 CLOCK</b>
+        </div>
+      </div>
+
+
+      <div
+        class="c20v-stat"
+        style="padding:14px 16px"
+      >
+        <span class="c20v-k">
+          LEGACY / RECOVERY ORIENTATION · STANDBY TOOL
+        </span>
+
+        <div
+          style="
+            margin-top:10px;
+            display:flex;
+            flex-wrap:wrap;
+            align-items:center;
+            justify-content:center;
+            gap:7px;
+            line-height:1.35;
+            text-align:center;
+            font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+          "
+        >
+          <b>PRIMARY PHYSICAL PATH</b>
+          <span>→</span>
+          <span>EPOCH-7 RAW CONTINUES</span>
+          <span>→</span>
+          <span>RECOVERY TOOLS RETAINED</span>
+          <span>→</span>
+          <b>ONE-SHOT ORIENTATION ONLY IF REQUIRED</b>
+          <span>→</span>
+          <b>NORMAL RUNNING PATH · NO UTC / NTP / GPS</b>
+          <span>→</span>
+          <span>FALLBACK IS LABELED IF ACTIVATED</span>
+        </div>
+
+        <p
+          class="muted"
+          style="
+            margin:9px 0 0;
+            text-align:center;
+            line-height:1.35;
+            font-size:.78rem;
+          "
+        >
+          Legacy and external one-shot recovery mechanisms remain available
+          for exceptional engineering use. They do not supply the normal running
+          pace and are not silently promoted when the physical path is healthy.
+        </p>
+      </div>
+
+    </div>
+
+    <div class="c20v-boundary">
+      <div
+        style="
+          display:flex;
+          flex-wrap:wrap;
+          align-items:center;
+          justify-content:center;
+          gap:7px;
+          line-height:1.35;
+          text-align:center;
+        "
+      >
+        <b>ARCHITECTURE BOUNDARY</b>
+
+        <span>→</span>
+        <span>EPOCH-7 PHYSICAL RAW · PRIMARY</span>
+
+        <span>→</span>
+        <span>IO / EUROPA / GANYMEDE RECOVERY</span>
+
+        <span>→</span>
+        <span>SERVER-OWNED CORE20</span>
+
+        <span>→</span>
+        <span>BROWSER · OBSERVER ONLY</span>
+
+        <span>→</span>
+        <span>NO UTC / NTP / GPS / NETWORK TIMING AUTHORITY</span>
+
+        <span>→</span>
+        <span>FALLBACK / HOLDOVER / LEGACY PATHS RETAINED · STANDBY UNTIL REQUIRED</span>
+      </div>
+    </div>
+  </section>
+
+
+  </details>
+  <!-- A8-LAB-DEVELOPMENT-MUSEUM-END -->
+
+  <script id="a8-lab-canonical-order-presentation-adapter">
+  (() => {
+    'use strict';
+
+    /*
+     * READ PRESERVED MUSEUM DOM.
+     * WRITE CURRENT PRESENTATION DOM ONLY.
+     *
+     * No fetch.
+     * No POST.
+     * No Core20 changes.
+     * No source-node mutation.
+     */
+
+    const byId =
+      id => document.getElementById(id);
+
+    function rawText(id) {
+      const el = byId(id);
+
+      return el
+        ? String(el.textContent || '').trim()
+        : '';
+    }
+
+    function put(id, value) {
+      const el = byId(id);
+
+      if (!el) return;
+
+      el.textContent =
+        value === ''
+          ? '—'
+          : value;
+    }
+
+    const legacyOrientationStates =
+      new Set([
+        'YEAR_ANGLE_AWAITING_ONE_SHOT_JPL_ALIGN',
+        'AWAITING ONE-SHOT YEAR ORIENTATION',
+        'AWAITING ONE-SHOT ALIGN',
+        'AWAITING ONE-SHOT JPL ALIGN',
+        'YEAR ANGLE AWAITS VERIFICATION'
+      ]);
+
+    function currentYear(raw) {
+      const value =
+        String(raw || '').trim();
+
+      if (!value) {
+        return '—';
+      }
+
+      if (legacyOrientationStates.has(value)) {
+        return 'AWAITING A8 YEAR ORIENTATION';
+      }
+
+      const upper =
+        value.toUpperCase();
+
+      if (
+        upper.includes('JPL') ||
+        upper.includes('ONE-SHOT')
+      ) {
+        return 'FALLBACK ORIENTATION STATUS · SEE A8 DEVELOPMENT MUSEUM';
+      }
+
+      return value;
+    }
+
+    const pairs = [
+      ['c20vJovian', 'a8NatureJovian'],
+      ['c20vRuler', 'a8NatureJovianRuler'],
+
+      ['c20vSol', 'a8NatureSol'],
+
+      ['c20vPhysicalSource', 'a8CarrierSource'],
+      ['c20vPhysicalEpoch', 'a8CarrierEpoch'],
+      ['c20vPhysicalState', 'a8CarrierState'],
+      ['c20vPace', 'a8CarrierPace'],
+
+      ['c20vSource', 'a8CoreSource'],
+      ['c20vEpoch', 'a8CoreEpoch'],
+      ['c20vCivilStatus', 'a8CoreCivil'],
+      ['c20vPhase', 'a8CorePhase'],
+
+      ['c20vClock', 'a8ConsumerClock']
+    ];
+
+
+    const moonNames =
+      ['IO', 'EUROPA', 'GANYMEDE', 'CALLISTO'];
+
+    function moonWordMatch(text, moon) {
+      const value =
+        String(text || '').toUpperCase();
+
+      const pattern =
+        new RegExp(
+          '(^|[^A-Z0-9])' +
+          moon +
+          '([^A-Z0-9]|$)'
+        );
+
+      return pattern.test(value);
+    }
+
+    function moonIdMatch(root, moon) {
+      const value =
+        moon.toLowerCase();
+
+      return Array.from(
+        root.querySelectorAll('[id]')
+      ).find(el =>
+        String(el.id || '')
+          .toLowerCase()
+          .includes(value)
+      ) || null;
+    }
+
+    function indicatorContainer(node, root) {
+      if (!node) return null;
+
+      return (
+        node.closest('.c20v-stat') ||
+        node.closest('.a8-path-card') ||
+        node.closest('tr') ||
+        node.closest('li') ||
+        (
+          node.parentElement !== root
+            ? node.parentElement
+            : node
+        )
+      );
+    }
+
+    function sanitizeMirror(root) {
+      const nodes =
+        [root, ...root.querySelectorAll('*')];
+
+      for (const el of nodes) {
+        el.removeAttribute('id');
+        el.removeAttribute('name');
+        el.removeAttribute('for');
+
+        for (const attr of [...el.attributes]) {
+          if (
+            attr.name.toLowerCase().startsWith('on')
+          ) {
+            el.removeAttribute(attr.name);
+          }
+        }
+
+        if (el.matches('a[href]')) {
+          el.removeAttribute('href');
+        }
+
+        if (
+          el.matches(
+            'button,input,select,textarea'
+          )
+        ) {
+          el.setAttribute('disabled', '');
+          el.setAttribute(
+            'aria-disabled',
+            'true'
+          );
+        }
+      }
+
+      root.setAttribute(
+        'data-a8-presentation-mirror',
+        'moon-indicator'
+      );
+
+      return root;
+    }
+
+    function findMoonIndicatorRows() {
+      const source =
+        byId('core20-upstream-operator');
+
+      if (!source) {
+        return [];
+      }
+
+      const preferredRows =
+        Array.from(
+          source.querySelectorAll(
+            '.c20v-stat, .a8-path-card, tr, li'
+          )
+        );
+
+      const found = [];
+      const seen = new Set();
+
+      for (const moon of moonNames) {
+        let row =
+          preferredRows.find(candidate =>
+            moonWordMatch(
+              candidate.textContent,
+              moon
+            )
+          );
+
+        if (!row) {
+          const idNode =
+            moonIdMatch(source, moon);
+
+          row =
+            indicatorContainer(
+              idNode,
+              source
+            );
+        }
+
+        if (
+          row &&
+          !seen.has(row)
+        ) {
+          seen.add(row);
+          found.push(row);
+        }
+      }
+
+      return found;
+    }
+
+    function syncMoonMachinery() {
+      const target =
+        byId('a8NatureMoonMachineryRows');
+
+      if (!target) {
+        return;
+      }
+
+      const rows =
+        findMoonIndicatorRows();
+
+      if (!rows.length) {
+        target.textContent =
+          'AWAITING PRESERVED MOON INDICATORS';
+        return;
+      }
+
+      const fragment =
+        document.createDocumentFragment();
+
+      for (const sourceRow of rows) {
+        const clone =
+          sanitizeMirror(
+            sourceRow.cloneNode(true)
+          );
+
+        fragment.appendChild(clone);
+      }
+
+      target.replaceChildren(fragment);
+    }
+
+    function render() {
+      syncMoonMachinery();
+
+      for (const [sourceId, targetId] of pairs) {
+        put(
+          targetId,
+          rawText(sourceId)
+        );
+      }
+    }
+
+    const sourceIds = [
+      ...pairs.map(pair => pair[0])
+    ];
+
+    const sources =
+      sourceIds
+        .map(byId)
+        .filter(Boolean);
+
+    const preservedMoonSource =
+      byId('core20-upstream-operator');
+
+    if (
+      preservedMoonSource &&
+      !sources.includes(preservedMoonSource)
+    ) {
+      sources.push(preservedMoonSource);
+    }
+
+    const observer =
+      new MutationObserver(render);
+
+    for (const source of sources) {
+      observer.observe(
+        source,
+        {
+          childList:true,
+          characterData:true,
+          subtree:true
+        }
+      );
+    }
+
+    render();
+  
+
+    /*
+     * A8 CANONICAL NATURE WITNESS REFRESH
+     *
+     * READ ONLY.
+     *
+     * Mintaka front-room values come from the same canonical
+     * /api/mintaka/clock instrument used by the Mintaka page.
+     *
+     * Sol rate and Sol position are separate facts.
+     * A recovered orbital-advance scale does not manufacture a
+     * position.  Position requires an actual Sol direction anchor.
+     */
+
+    async function a8CanonicalGet(path) {
+      const response =
+        await fetch(
+          path,
+          {
+            cache: 'no-store',
+            headers: {
+              'Accept': 'application/json'
+            }
+          }
+        );
+
+      if (!response.ok) {
+        throw new Error(
+          `${path} · HTTP ${response.status}`
+        );
+      }
+
+      return response.json();
+    }
+
+
+    function a8PositiveMod(value, modulus) {
+      const r = value % modulus;
+      return r < 0n ? r + modulus : r;
+    }
+
+
+    function a8Rational(value) {
+      if (!value) return null;
+
+      try {
+        if (
+          value.numerator !== undefined &&
+          value.denominator !== undefined
+        ) {
+          const numerator =
+            BigInt(String(value.numerator));
+
+          const denominator =
+            BigInt(String(value.denominator));
+
+          if (
+            numerator <= 0n ||
+            denominator <= 0n
+          ) {
+            return null;
+          }
+
+          return {
+            numerator,
+            denominator
+          };
+        }
+
+        if (value.integer !== undefined &&
+            value.integer !== null) {
+          const numerator =
+            BigInt(String(value.integer));
+
+          if (numerator <= 0n) return null;
+
+          return {
+            numerator,
+            denominator: 1n
+          };
+        }
+
+        if (value.text) {
+          const text=String(value.text);
+          const slash=text.indexOf('/');
+
+          if (slash >= 0) {
+            const numerator =
+              BigInt(text.slice(0,slash));
+
+            const denominator =
+              BigInt(text.slice(slash+1));
+
+            if (
+              numerator <= 0n ||
+              denominator <= 0n
+            ) {
+              return null;
+            }
+
+            return {
+              numerator,
+              denominator
+            };
+          }
+
+          const numerator=BigInt(text);
+
+          if (numerator <= 0n) return null;
+
+          return {
+            numerator,
+            denominator: 1n
+          };
+        }
+
+      } catch (_) {
+        return null;
+      }
+
+      return null;
+    }
+
+
+    function a8MintakaPhase17(
+      selectedRaw,
+      observer,
+      scale
+    ) {
+      try {
+        if (
+          selectedRaw === null ||
+          selectedRaw === undefined ||
+          !observer ||
+          observer.lastRawPulse === null ||
+          observer.lastRawPulse === undefined
+        ) {
+          return null;
+        }
+
+        const recurrence =
+          a8Rational(
+            scale &&
+            scale.mintakaRawPerEarthAxialRotation
+          );
+
+        if (!recurrence) return null;
+
+        const raw=
+          BigInt(String(selectedRaw));
+
+        const anchor=
+          BigInt(String(observer.lastRawPulse));
+
+        /*
+         * recurrence =
+         *   numerator / denominator RAW per rotation
+         *
+         * fraction =
+         *   delta * denominator / numerator
+         *
+         * 2^17 native states per stellar rotation.
+         */
+        const rotationNumerator =
+          a8PositiveMod(
+            (raw-anchor) *
+              recurrence.denominator,
+            recurrence.numerator
+          );
+
+        return (
+          rotationNumerator *
+          131072n
+        ) / recurrence.numerator;
+
+      } catch (_) {
+        return null;
+      }
+    }
+
+
+    function a8Oct(value,width) {
+      return value
+        .toString(8)
+        .padStart(width,'0');
+    }
+
+
+    function a8MintakaClockText(phase17) {
+      const hour=
+        phase17 / 4096n;
+
+      const remainder=
+        phase17 % 4096n;
+
+      const minute=
+        remainder / 64n;
+
+      const second=
+        remainder % 64n;
+
+      return (
+        a8Oct(hour,2) + '·' +
+        a8Oct(minute,2) + '·' +
+        a8Oct(second,2) + '₈'
+      );
+    }
+
+
+    async function a8RefreshCanonicalNatureWitnesses() {
+
+      /*
+       * MINTAKA
+       *
+       * Lab already exposes:
+       *   /api/hardware/earth-rotation-scale
+       *
+       * Derive the canonical 2^17 stellar phase from the
+       * same accepted Mintaka meridian anchor and recovered
+       * recurrence.  No UTC, host clock or browser timer
+       * enters this calculation.
+       */
+      try {
+        const payload =
+          await a8CanonicalGet(
+            '/api/hardware/earth-rotation-scale'
+          );
+
+        const scale =
+          payload.scale || {};
+
+        const observers =
+          payload.earthObservers || {};
+
+        const observer =
+          observers.mintaka || {};
+
+        const phase17 =
+          a8MintakaPhase17(
+            observers.selectedRawPulse,
+            observer,
+            scale
+          );
+
+        if (
+          observer.status === 'RECOVERED' &&
+          phase17 !== null
+        ) {
+          put(
+            'a8NatureMintaka',
+            'MINTAKA_PHASE17_STELLAR_CLOCK_ACTIVE'
+          );
+
+          put(
+            'a8NatureMintakaClock',
+            a8MintakaClockText(
+              phase17
+            )
+          );
+
+          put(
+            'a8NatureMintakaRegister',
+            a8Oct(
+              phase17,
+              6
+            ) + '₈'
+          );
+
+        } else {
+          put(
+            'a8NatureMintaka',
+            scale.status ||
+            observer.status ||
+            'MINTAKA PHASE UNAVAILABLE'
+          );
+
+          put(
+            'a8NatureMintakaClock',
+            '—'
+          );
+
+          put(
+            'a8NatureMintakaRegister',
+            '—'
+          );
+        }
+
+      } catch (_) {
+        put(
+          'a8NatureMintaka',
+          'MINTAKA PHASE UNAVAILABLE'
+        );
+
+        put(
+          'a8NatureMintakaClock',
+          '—'
+        );
+
+        put(
+          'a8NatureMintakaRegister',
+          '—'
+        );
+      }
+
+
+      /*
+       * SOL
+       *
+       * Lab already exposes:
+       *   /api/hardware/sol-orbital-scale
+       *
+       * Recovered rate != recovered position.
+       * Require an actual Sol RAW + angle512 anchor before
+       * allowing the retained engineering position register
+       * into the current front room.
+       */
+      try {
+        const payload =
+          await a8CanonicalGet(
+            '/api/hardware/sol-orbital-scale'
+          );
+
+        const scale =
+          payload.scale || {};
+
+        const observers =
+          payload.earthObservers || {};
+
+        const observer =
+          observers.sol || {};
+
+        put(
+          'a8NatureSol',
+          scale.status ||
+          'SOL ORBITAL SCALE UNAVAILABLE'
+        );
+
+        /*
+         * POSITION / PHASE9 / Annual Frame status are owned by
+         * the live /api/annual-frame presentation below.
+         *
+         * This canonical witness refresher retains only the
+         * recovered Sol orbital-scale status.
+         */
+
+      } catch (_) {
+        put(
+          'a8NatureSol',
+          'SOL ORBITAL SCALE UNAVAILABLE'
+        );
+      }
+    }
+
+
+    a8RefreshCanonicalNatureWitnesses();
+
+    setInterval(
+      a8RefreshCanonicalNatureWitnesses,
+      1000
+    );
+
+})();
+  </script>
+
+  <!-- A8-LAB-CANONICAL-VISIBLE-ORDER-END -->
+
+
+  
+  
+  
+
+</div>
+<!-- A8-CORE20-OPERATOR-STACK-01-END -->
+
+<!-- A8-CORE20-MAIN-INTEGRATION-01-END -->
+
+
+<!-- A8-CORE20-VIRTUAL-OPERATING-SURFACE-01-BEGIN -->
+<style id="a8-core20-virtual-operating-style">
+#core20-virtual-operating-surface{
+  border-color:#4e9368;
+}
+#core20-virtual-operating-surface .c20v-head{
+  display:flex;
+  gap:12px;
+  justify-content:space-between;
+  align-items:flex-start;
+  flex-wrap:wrap;
+}
+#core20-virtual-operating-surface .c20v-kicker{
+  font-size:.76rem;
+  letter-spacing:.12em;
+  color:#6fe8ff;
+  font-weight:900;
+}
+#core20-virtual-operating-surface .c20v-clock{
+  font-size:2.35rem;
+  line-height:1;
+  color:#8ef0b1;
+  font-weight:900;
+  letter-spacing:.04em;
+}
+#core20-virtual-operating-surface .c20v-controls{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin:12px 0;
+}
+#core20-virtual-operating-surface .c20v-grid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:10px;
+}
+#core20-virtual-operating-surface .c20v-stat{
+  border:1px solid #2a3744;
+  border-radius:10px;
+  padding:10px;
+  background:rgba(11,18,25,.82);
+  min-width:0;
+}
+#core20-virtual-operating-surface .c20v-k{
+  display:block;
+  font-size:.66rem;
+  letter-spacing:.08em;
+  opacity:.68;
+}
+#core20-virtual-operating-surface .c20v-v{
+  display:block;
+  margin-top:4px;
+  font-weight:900;
+  overflow-wrap:anywhere;
+}
+#core20-virtual-operating-surface .c20v-boundary{
+  margin-top:12px;
+  padding:10px 12px;
+  border-left:4px solid #e2bb68;
+  background:rgba(50,42,20,.35);
+}
+@media(max-width:1000px){
+  #core20-virtual-operating-surface .c20v-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+}
+@media(max-width:600px){
+  #core20-virtual-operating-surface .c20v-grid{
+    grid-template-columns:1fr;
+  }
+}
+</style>
+
+
+<!-- A8-CORE20-VIRTUAL-OPERATING-SURFACE-01-END -->
+
+
+<!-- A8-OLD-EMBEDDED-SIMULATOR-REMOVED-CE-CONSOLE-CLEAN-01 -->
+
+<section class="panel instruments" id="lab-modules">
+  <div class="instrument-head">
+    <div>
+      <div class="section-kicker">LAB MODULES / INSTRUMENTS</div>
+      <h2>Observer surfaces & companion benches</h2>
+      <p class="muted">These pages observe, translate, visualize or extend the laboratory. Recovery and fallback benches may intentionally show STANDBY, EMERGENCY MODE or OFFLINE while the Epoch-7 physical path is healthy.</p>
+    </div>
+    <div class="pill">LINKS ONLY</div>
+  </div>
+
+  <div class="launcher-grid">
+    <a class="button-link" href="https://clock.cosigo.io/">A8 CLOCK</a>
+            <a class="button-link" href="https://calendar.cosigo.io/">CALENDAR · A8 CIVIL CALENDAR</a>
+    <a class="button-link core20-primary" href="https://moons.cosigo.io/">4-MOON VIEW</a>
+    <a class="button-link" href="https://mintaka.cosigo.io/">MINTAKA · EARTH ROTATION WITNESS</a>
+    <a class="button-link" href="https://sol.cosigo.io/">SOL · ORBITAL ADVANCE</a>
+    <a class="button-link" href="https://ship.cosigo.io/">TERRA SHIP SLIP · ROTATION / ORBIT</a>
+    <a class="button-link" href="https://stars.cosigo.io/">CELESTIAL MAP · SKY WALKABOUT</a>
+    <a class="button-link" href="https://map.cosigo.io/">MAP · CLOCK · COMPASS</a>
+    <a class="button-link" href="https://sea.cosigo.io/">NAVIGATION · POSITION & TRAVEL</a>
+    <a class="button-link" href="https://data.cosigo.io/">DATA · EVIDENCE</a>
+    <a class="button-link" href="https://data.cosigo.io/physical-clock-evidence.html">EMPIRICAL EVIDENCE · PHYSICAL CLOCK</a>
+    <a class="button-link" href="https://telescope.cosigo.io/">TELESCOPE EMULATOR</a>
+    <a class="button-link" href="https://audio.cosigo.io/">AUDIO FREQUENCY BENCH</a>
+    <a class="button-link" href="https://angle.cosigo.io/">A8 ANGLE TRANSLATOR</a>
+    <a class="button-link" href="https://quartz.cosigo.io/">QUARTZ / LENGTH EXPERIMENT</a>
+  </div>
+
+  
+</section>
+
+</main>
+<!-- A8-OLD-APPJS-NOT-LOADED-ON-CORE20-MAIN-CE-CONSOLE-CLEAN-01 -->
+
+
+<footer class="cosigo-site-footer">
+  <strong>COSIGO Labs · Auspicious 8 experimental laboratory</strong>
+  <p class="cosigo-disclaimer">Research / engineering notice: A8 pages may contain provisional models, simulations, comparison values, hypotheses and unreplicated experiment designs. Unless a page explicitly states otherwise, material shown here is not a certified metrology standard, accredited measurement result, or final Foundation definition. Legacy / SI values are comparison coordinates where identified, not native A8 authority.</p>
+  <p class="cosigo-disclaimer">COSIGO is primarily an educational and experimental project. Nothing in this laboratory is an investment offering, promise of financial return, or financial, investment, legal or tax advice. See the project-status notice for the current public description.</p>
+  <div class="cosigo-footer-links">
+    <a href="https://cosigo.io/">COSIGO Home</a>
+    <a href="https://a8.cosigo.io/">A8 Public Instrument</a>
+    <a href="https://lab.cosigo.io/">A8 Engineering Lab</a>
+    <a href="https://map.cosigo.io/">Map · Clock · Compass</a>
+    <a href="https://a8.cosigo.io/canonical.html">Canonical Reference</a>
+    <a href="https://a8.cosigo.io/open-research.html">Open Research</a>
+    <a href="https://about.cosigo.io/">About A8</a>
+    <a href="https://contact.cosigo.io/">Contact</a>
+    <a href="https://docs.cosigo.io/">COSIGO Docs / WP</a>
+    <a href="https://github.com/cosigo">COSIGO GitHub</a>
+    <a href="https://github.com/cosigo/cosigo.io">Main-site source</a>
+    <a href="https://cosigo.io/project-status.html">Educational Purpose / Project Status</a>
+  </div>
+  <p>© 2026 COSIGO. COSIGO™ rights and trademark notices remain governed by the official COSIGO site.</p>
+</footer>
+
+<!-- A8-OLD-MAIN-CHIME-API-STATE-ENGINE-REMOVED-CE-CONSOLE-CLEAN-01 -->
+
+<script id="a8-core20-main-integration-script">
+'use strict';
+
+const c20ById = id => document.getElementById(id);
+
+const C20_DAY_STATES = 131072;
+const C20_JOVIAN_PHASE_STATES = 512;
+
+/*
+ * Same output-only interpolation bridge used by the proven clock observer.
+ * This conventional millisecond value never enters Core20 authority.
+ */
+const C20_A8_STATE_MS = 675000 / 1024;
+
+async function c20Api(path) {
+  const response = await fetch(path, {
+    cache: 'no-store',
+    headers: {
+      'Accept': 'application/json',
+    },
+  });
+
+  const payload = await response.json();
+
+  if (!response.ok || !payload.ok) {
+    throw new Error(payload.error || 'request failed');
+  }
+
+  return payload;
+}
+
+function c20Value(id, value) {
+  const el = c20ById(id);
+  if (!el) return;
+
+  el.textContent =
+    value === null ||
+    value === undefined ||
+    value === ''
+      ? '—'
+      : String(value);
+}
+
+/*
+ * LAB CALENDAR CONSUMER
+ * ---------------------
+ * Presentation only.
+ *
+ * /api/core20/calendar owns YEAR DAY and calendar region.
+ * Lab does not read browser/host time and does not advance the date.
+ * This merely renders the same compact symbolic identity used by Calendar.
+ */
+const C20_CALENDAR_MONTH_OCTAL =
+  ['0₈','1₈','2₈','3₈','4₈','5₈','6₈','7₈'];
+
+const C20_CALENDAR_PLANET_GLYPH =
+  ['☿','♀','⊕','♂','♃','♄','♅','♆','♇'];
+
+const C20_CALENDAR_ELEMENT_GLYPH =
+  ['🜂','🜄','🜃','🜁','✦'];
+
+function c20CalendarWilsonMark(day) {
+  const d = Number(day);
+
+  if (
+    !Number.isInteger(d) ||
+    d < 1 ||
+    d > 6
+  ) {
+    throw new Error(
+      'invalid Wilson day · ' + String(day)
+    );
+  }
+
+  return '卍' + d.toString(2).padStart(3, '0');
+}
+
+function c20CalendarTeaser(calendar) {
+  if (!calendar || typeof calendar !== 'object') {
+    throw new Error('missing Core20 calendar');
+  }
+
+  const yearDay = Number(calendar.yearDay);
+  const yearLength = Number(calendar.yearLength);
+  const region =
+    String(calendar.calendarRegion || '').toUpperCase();
+
+  if (
+    !Number.isInteger(yearDay) ||
+    !Number.isInteger(yearLength) ||
+    yearDay < 1 ||
+    yearDay > yearLength
+  ) {
+    throw new Error(
+      'invalid Core20 YEAR DAY · ' +
+      String(calendar.yearDay)
+    );
+  }
+
+  if (yearDay <= 360) {
+    if (
+      region !== 'STRUCTURED' ||
+      calendar.wilsonDay !== null
+    ) {
+      throw new Error(
+        'incoherent structured calendar state'
+      );
+    }
+
+    const zero = yearDay - 1;
+    const monthIndex = Math.floor(zero / 45);
+    const monthDay = (zero % 45) + 1;
+    const weekIndex =
+      Math.floor((monthDay - 1) / 5);
+    const elementIndex =
+      (monthDay - 1) % 5;
+
+    return (
+      C20_CALENDAR_MONTH_OCTAL[monthIndex] +
+      ' · ' +
+      C20_CALENDAR_PLANET_GLYPH[weekIndex] +
+      ' · ' +
+      C20_CALENDAR_ELEMENT_GLYPH[elementIndex]
+    );
+  }
+
+  const wilsonDay = Number(calendar.wilsonDay);
+  const maxWilsonDay =
+    calendar.isLeapYear === true ? 6 : 5;
+
+  if (
+    region !== 'WILSON' ||
+    !Number.isInteger(wilsonDay) ||
+    wilsonDay < 1 ||
+    wilsonDay > maxWilsonDay ||
+    wilsonDay !== yearDay - 360
+  ) {
+    throw new Error(
+      'incoherent Wilson calendar state'
+    );
+  }
+
+  if (wilsonDay === 6) {
+    return '卍110 · LEAP';
+  }
+
+  return (
+    c20CalendarWilsonMark(wilsonDay) +
+    ' · ' +
+    C20_CALENDAR_ELEMENT_GLYPH[wilsonDay - 1]
+  );
+}
+
+/*
+ * Calendar is refreshed by the existing Core20 observer only when
+ * Core20 dayCount changes. dayCount is a refresh trigger only;
+ * /api/core20/calendar remains the sole owner of the displayed date.
+ */
+let c20CalendarObservedDayCount = null;
+
+function c20RationalNumber(value) {
+  if (value === null || value === undefined) return NaN;
+
+  const s = String(value).trim();
+  const slash = s.indexOf('/');
+
+  if (slash < 0) {
+    return Number(s);
+  }
+
+  const n = Number(s.slice(0, slash));
+  const d = Number(s.slice(slash + 1));
+
+  return Number.isFinite(n) &&
+         Number.isFinite(d) &&
+         d !== 0
+    ? n / d
+    : NaN;
+}
+
+function c20ServerJovianTotal(phase) {
+  const exact = c20RationalNumber(
+    phase && phase.exactTotalPhase
+  );
+
+  if (Number.isFinite(exact)) {
+    return exact;
+  }
+
+  const whole = Number(
+    phase && phase.wholePhaseStates
+  );
+
+  const sub = c20RationalNumber(
+    phase && phase.subphase
+  );
+
+  if (!Number.isFinite(whole)) {
+    return NaN;
+  }
+
+  return whole + (
+    Number.isFinite(sub) ? sub : 0
+  );
+}
+
+function c20JovianRatePerMs(jovian, clockPayload) {
+  const rulerRawPer512 =
+    Number(jovian && jovian.recoveredJovianRawRuler);
+
+  const sunReturnRaw =
+    c20RationalNumber(
+      clockPayload &&
+      clockPayload.clock &&
+      clockPayload.clock.recoveredRawPerSunReturn
+    );
+
+  if (
+    !Number.isFinite(rulerRawPer512) ||
+    rulerRawPer512 <= 0 ||
+    !Number.isFinite(sunReturnRaw) ||
+    sunReturnRaw <= 0
+  ) {
+    return NaN;
+  }
+
+  const rawPerCivilState =
+    sunReturnRaw / C20_DAY_STATES;
+
+  const rawPerJovianPhaseState =
+    rulerRawPer512 / C20_JOVIAN_PHASE_STATES;
+
+  return (
+    rawPerCivilState /
+    rawPerJovianPhaseState /
+    C20_A8_STATE_MS
+  );
+}
+
+/*
+ * CORE18-STYLE READ-ONLY DISPLAY OBSERVER
+ *
+ * Server state owns phase.
+ * performance.now() fills visual motion between authoritative anchors only.
+ * Ordinary packet arrival is NOT the beat source.
+ */
+let c20PhaseObserverReady = false;
+let c20PhaseAnchorTotal = 0;
+let c20PhaseAnchorPerf = performance.now();
+let c20PhaseRatePerMs = 0;
+let c20PhaseSourceEpoch = null;
+let c20PhaseFrameStarted = false;
+
+function c20PhaseContinuousTotal(
+  nowPerf = performance.now()
+) {
+  if (!c20PhaseObserverReady) {
+    return NaN;
+  }
+
+  return (
+    c20PhaseAnchorTotal +
+    (nowPerf - c20PhaseAnchorPerf) *
+      c20PhaseRatePerMs
+  );
+}
+
+function c20ReanchorPhase(
+  payload,
+  clockPayload,
+  force = false
+) {
+  const source = payload.source || {};
+  const jovian = payload.jovian || {};
+  const tk = payload.timekeeper || {};
+  const phase = tk.phase || {};
+
+  const serverTotal =
+    c20ServerJovianTotal(phase);
+
+  const nextRate =
+    c20JovianRatePerMs(jovian, clockPayload);
+
+  const nextEpoch =
+    String(
+      tk.sourceEpoch ??
+      jovian.sourceEpoch ??
+      source.sourceEpoch ??
+      ''
+    );
+
+  const runtimeStatus =
+    String(
+      clockPayload?.clock?.runtime?.status ??
+      clockPayload?.runtime?.status ??
+      ''
+    );
+
+  const now = performance.now();
+
+  /*
+   * HOLD / STOP truth boundary.
+   *
+   * Browser interpolation is output-only. If the authoritative
+   * Core20 runtime is not RUNNING, the observer is pinned to the
+   * latest exact server Jovian coordinate with ZERO visual rate.
+   */
+  if (runtimeStatus !== 'RUNNING') {
+    if (Number.isFinite(serverTotal)) {
+      c20PhaseAnchorTotal = serverTotal;
+      c20PhaseAnchorPerf = now;
+      c20PhaseRatePerMs = 0;
+      c20PhaseSourceEpoch = nextEpoch;
+      c20PhaseObserverReady = true;
+    }
+    return;
+  }
+
+  if (
+    !Number.isFinite(serverTotal) ||
+    !Number.isFinite(nextRate) ||
+    nextRate <= 0
+  ) {
+    return;
+  }
+
+  if (
+    !c20PhaseObserverReady ||
+    force ||
+    nextEpoch !== c20PhaseSourceEpoch
+  ) {
+    c20PhaseAnchorTotal = serverTotal;
+    c20PhaseAnchorPerf = now;
+    c20PhaseRatePerMs = nextRate;
+    c20PhaseSourceEpoch = nextEpoch;
+    c20PhaseObserverReady = true;
+    return;
+  }
+
+  const predicted =
+    c20PhaseContinuousTotal(now);
+
+  c20PhaseAnchorTotal = predicted;
+  c20PhaseAnchorPerf = now;
+  c20PhaseRatePerMs = nextRate;
+
+  /*
+   * UNIVERSAL DISPLAY-OBSERVER RULE:
+   *
+   * Ordinary transport refresh is evidence/status only.
+   * Packet arrival is never a phase-comparison instant and
+   * therefore never snaps visible phase to serverTotal.
+   *
+   * The continuity anchor above may roll forward to predicted
+   * and accept a recovered display-rate update. Hard display
+   * anchors occur only at legitimate observer lifecycle
+   * boundaries such as bootstrap, sourceEpoch change or
+   * visibility return.
+   */
+  c20PhaseSourceEpoch = nextEpoch;
+}
+
+function c20RenderSmoothPhase() {
+  if (!c20PhaseObserverReady) return;
+
+  const total =
+    c20PhaseContinuousTotal();
+
+  if (!Number.isFinite(total)) return;
+
+  const whole = Math.floor(total);
+
+  const wrapped =
+    ((whole % C20_JOVIAN_PHASE_STATES) +
+      C20_JOVIAN_PHASE_STATES) %
+    C20_JOVIAN_PHASE_STATES;
+
+  const frac =
+    total - Math.floor(total);
+
+  const phaseEl = c20ById('c20Phase9');
+
+  if (phaseEl) {
+    phaseEl.textContent =
+      wrapped.toString(8).padStart(3, '0') + '₈';
+  }
+
+  /*
+   * IMPORTANT:
+   * c20Subphase is SERVER-EXACT and is never written here.
+   * Smooth browser interpolation may move presentation geometry,
+   * but it cannot overwrite an exact engineering field.
+   */
+  void frac;
+}
+
+function c20PhaseFrame() {
+  c20RenderSmoothPhase();
+
+  /*
+   * Same existing presentation frame smooths the local stopwatch.
+   * Core20 samples remain the stopwatch anchors.
+   */
+  c20StopwatchRenderSmooth();
+
+  requestAnimationFrame(
+    c20PhaseFrame
+  );
+}
+
+function c20StartPhaseFrame() {
+  if (c20PhaseFrameStarted) return;
+
+  c20PhaseFrameStarted = true;
+
+  requestAnimationFrame(
+    c20PhaseFrame
+  );
+}
+
+
+function c20EngineValue(id, value) {
+  const el = c20ById(id);
+  if (!el) return;
+
+  el.textContent =
+    value === null ||
+    value === undefined ||
+    value === ''
+      ? '—'
+      : String(value);
+}
+
+
+async function a8LabRefreshJovianAuthority() {
+  const authority =
+    document.getElementById(
+      'a8LabJovianAuthority'
+    );
+
+  if (!authority) return;
+
+  try {
+    const response = await fetch(
+      '/assets/jovian-authority.json',
+      {
+        cache: 'no-store'
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(
+        `HTTP ${response.status}`
+      );
+    }
+
+    const a = await response.json();
+
+    authority.textContent =
+      a.selectedAuthority || '—';
+
+    document.getElementById(
+      'a8LabJovianAuthorityPeriod'
+    ).textContent =
+      Number(
+        a.selectedPeriodRaw
+      ).toLocaleString() +
+      ' RAW';
+
+    document.getElementById(
+      'a8LabJovianDisciplineState'
+    ).textContent =
+      a.disciplineState || '—';
+
+    document.getElementById(
+      'a8LabJovianLiveRuler'
+    ).textContent =
+      Number(
+        a.selectedPeriodRaw
+      ).toLocaleString() +
+      ' RAW · ' +
+      (
+        a.liveDevelopmentRulerRole ||
+        '—'
+      );
+
+    document.getElementById(
+      'a8LabJovianWitnesses'
+    ).textContent =
+      'WITNESSES · ' +
+      (a.witnesses || []).join(' / ');
+
+  } catch (err) {
+    authority.textContent =
+      'READ FAIL';
+
+    document.getElementById(
+      'a8LabJovianWitnesses'
+    ).textContent =
+      'AUTHORITY MIRROR FAIL · ' +
+      String(err.message || err);
+  }
+}
+
+function a8LabStartJovianAuthorityMirror() {
+  a8LabRefreshJovianAuthority();
+
+  setInterval(
+    a8LabRefreshJovianAuthority,
+    5000
+  );
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener(
+    'DOMContentLoaded',
+    a8LabStartJovianAuthorityMirror,
+    {
+      once: true
+    }
+  );
+} else {
+  a8LabStartJovianAuthorityMirror();
+}
+
+
+function c20InstallJovianEnginePanel() {
+  if (c20ById('c20-jovian-engine-visible')) {
+    return;
+  }
+
+  const host =
+    c20ById('core20-upstream-operator');
+
+  if (!host) return;
+
+  if (!c20ById('c20-jovian-engine-visible-style')) {
+    const style =
+      document.createElement('style');
+
+    style.id =
+      'c20-jovian-engine-visible-style';
+
+    style.textContent = `
+      #c20-jovian-engine-visible{
+        margin:16px 0;
+        padding:14px;
+        border:1px solid #45576a;
+        border-radius:12px;
+        background:rgba(7,12,18,.92);
+      }
+
+      #c20-jovian-engine-visible .c20-engine-heading{
+        display:flex;
+        justify-content:space-between;
+        align-items:flex-start;
+        gap:12px;
+        flex-wrap:wrap;
+        margin-bottom:12px;
+      }
+
+      #c20-jovian-engine-visible .c20-engine-title{
+        font-weight:900;
+        letter-spacing:.08em;
+      }
+
+      #c20-jovian-engine-visible .c20-engine-sub{
+        color:#9aa9b8;
+        font-size:.82rem;
+        margin-top:4px;
+      }
+
+      #c20-jovian-engine-visible .c20-engine-live{
+        margin-top:7px;
+        font-size:.82rem;
+        color:#8ef0b1;
+        font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+      }
+
+      #c20-jovian-engine-visible .c20-engine-grid{
+        display:grid;
+        grid-template-columns:repeat(3,minmax(0,1fr));
+        gap:10px;
+      }
+
+      #c20-jovian-engine-visible .c20-moon{
+        border:1px solid #2d4052;
+        border-radius:10px;
+        padding:12px;
+        background:#0b1219;
+      }
+
+      #c20-jovian-engine-visible .c20-moon-name{
+        display:flex;
+        justify-content:space-between;
+        gap:10px;
+        font-weight:900;
+        margin-bottom:10px;
+      }
+
+      #c20-jovian-engine-visible .c20-lock{
+        font-size:.75rem;
+        letter-spacing:.06em;
+      }
+
+      #c20-jovian-engine-visible .c20-engine-row{
+        display:flex;
+        justify-content:space-between;
+        gap:14px;
+        padding:3px 0;
+        border-bottom:1px solid rgba(255,255,255,.045);
+        font-size:.82rem;
+      }
+
+      #c20-jovian-engine-visible .c20-engine-row span:first-child{
+        color:#8494a4;
+      }
+
+      #c20-jovian-engine-visible .c20-engine-row strong{
+        text-align:right;
+        word-break:break-all;
+      }
+
+      #c20-jovian-engine-visible .c20-progress{
+        height:7px;
+        margin:9px 0;
+        border-radius:999px;
+        overflow:hidden;
+        background:#18232d;
+      }
+
+      #c20-jovian-engine-visible .c20-progress > span{
+        display:block;
+        height:100%;
+        width:0;
+        background:currentColor;
+      }
+
+      #c20-jovian-engine-visible .c20-comparator{
+        margin-top:12px;
+        padding:12px;
+        border:1px solid #3c5368;
+        border-radius:10px;
+      }
+
+      #c20-jovian-engine-visible .c20-comparator-main{
+        font-weight:900;
+        letter-spacing:.07em;
+      }
+
+      #c20-jovian-engine-visible .c20-comparator-detail{
+        margin-top:6px;
+        color:#aab7c4;
+        font-size:.82rem;
+      }
+
+      @media(max-width:900px){
+        #c20-jovian-engine-visible .c20-engine-grid{
+          grid-template-columns:1fr;
+        }
+      }
+    `;
+
+    document.head.appendChild(style);
+  }
+
+  const panel =
+    document.createElement('section');
+
+  panel.id =
+    'c20-jovian-engine-visible';
+
+  panel.innerHTML = `
+    <div class="c20-engine-heading">
+      <div>
+        <div class="c20-engine-title">
+          JOVIAN RECOVERY ENGINE · UNDER THE HOOD
+        </div>
+        <div class="c20-engine-sub">
+          ONE RAW COUNTER · THREE INDEPENDENT RECURRENCES ·
+          Io ×4 · Europa ×2 · Ganymede ×1
+        </div>
+        <div class="c20-engine-live">
+          LIVE RAW <strong id="c20EngineLiveRaw">—</strong>
+          · OBS <strong id="c20EngineObservations">—</strong>
+          · COARSE RUN PHASE9
+          <strong id="c20EngineRunBin">—</strong>
+          /
+          <strong id="c20EngineRunOct">—</strong>
+          <br>
+          LIVE RAW-DERIVED PHASE18
+          <strong id="c20EngineRun18Bin">—</strong>
+          /
+          <strong id="c20EngineRun18Oct">—</strong>
+        </div>
+      </div>
+      <div id="c20EngineOverall">
+        ACQUIRING
+      </div>
+    </div>
+
+    <div class="c20-engine-grid">
+
+      <article class="c20-moon">
+        <div class="c20-moon-name">
+          <span>IO · ×4</span>
+          <span id="c20EngineIoLock" class="c20-lock">SEEKING</span>
+        </div>
+        <div class="c20-progress">
+          <span id="c20EngineIoBar"></span>
+        </div>
+        <div class="c20-engine-row"><span>ACQUISITION</span><strong id="c20EngineIoAcquire">0 / 8</strong></div>
+        <div class="c20-engine-row"><span>WEST EVENTS</span><strong id="c20EngineIoWest">0</strong></div>
+        <div class="c20-engine-row"><span>LAST OBSERVED PHASE9 BINARY</span><strong id="c20EngineIoBin">—</strong></div>
+        <div class="c20-engine-row"><span>LAST OBSERVED PHASE9 OCTAL</span><strong id="c20EngineIoOct">—</strong></div>
+        <div class="c20-engine-row"><span>LIVE PHASE18 BINARY</span><strong id="c20EngineIoLive18Bin">—</strong></div>
+        <div class="c20-engine-row"><span>LIVE PHASE18 OCTAL</span><strong id="c20EngineIoLive18Oct">—</strong></div>
+        <div class="c20-engine-row"><span>NATIVE RAW</span><strong id="c20EngineIoNative">—</strong></div>
+        <div class="c20-engine-row"><span>NORMALIZED RAW</span><strong id="c20EngineIoNorm">—</strong></div>
+        <div class="c20-engine-row"><span>STATE</span><strong id="c20EngineIoState">SEEKING</strong></div>
+      </article>
+
+      <article class="c20-moon">
+        <div class="c20-moon-name">
+          <span>EUROPA · ×2</span>
+          <span id="c20EngineEuLock" class="c20-lock">SEEKING</span>
+        </div>
+        <div class="c20-progress">
+          <span id="c20EngineEuBar"></span>
+        </div>
+        <div class="c20-engine-row"><span>ACQUISITION</span><strong id="c20EngineEuAcquire">0 / 4</strong></div>
+        <div class="c20-engine-row"><span>WEST EVENTS</span><strong id="c20EngineEuWest">0</strong></div>
+        <div class="c20-engine-row"><span>LAST OBSERVED PHASE9 BINARY</span><strong id="c20EngineEuBin">—</strong></div>
+        <div class="c20-engine-row"><span>LAST OBSERVED PHASE9 OCTAL</span><strong id="c20EngineEuOct">—</strong></div>
+        <div class="c20-engine-row"><span>LIVE PHASE18 BINARY</span><strong id="c20EngineEuLive18Bin">—</strong></div>
+        <div class="c20-engine-row"><span>LIVE PHASE18 OCTAL</span><strong id="c20EngineEuLive18Oct">—</strong></div>
+        <div class="c20-engine-row"><span>NATIVE RAW</span><strong id="c20EngineEuNative">—</strong></div>
+        <div class="c20-engine-row"><span>NORMALIZED RAW</span><strong id="c20EngineEuNorm">—</strong></div>
+        <div class="c20-engine-row"><span>STATE</span><strong id="c20EngineEuState">SEEKING</strong></div>
+      </article>
+
+      <article class="c20-moon">
+        <div class="c20-moon-name">
+          <span>GANYMEDE · ×1</span>
+          <span id="c20EngineGaLock" class="c20-lock">SEEKING</span>
+        </div>
+        <div class="c20-progress">
+          <span id="c20EngineGaBar"></span>
+        </div>
+        <div class="c20-engine-row"><span>ACQUISITION</span><strong id="c20EngineGaAcquire">0 / 2</strong></div>
+        <div class="c20-engine-row"><span>WEST EVENTS</span><strong id="c20EngineGaWest">0</strong></div>
+        <div class="c20-engine-row"><span>LAST OBSERVED PHASE9 BINARY</span><strong id="c20EngineGaBin">—</strong></div>
+        <div class="c20-engine-row"><span>LAST OBSERVED PHASE9 OCTAL</span><strong id="c20EngineGaOct">—</strong></div>
+        <div class="c20-engine-row"><span>LIVE PHASE18 BINARY</span><strong id="c20EngineGaLive18Bin">—</strong></div>
+        <div class="c20-engine-row"><span>LIVE PHASE18 OCTAL</span><strong id="c20EngineGaLive18Oct">—</strong></div>
+        <div class="c20-engine-row"><span>NATIVE RAW</span><strong id="c20EngineGaNative">—</strong></div>
+        <div class="c20-engine-row"><span>NORMALIZED RAW</span><strong id="c20EngineGaNorm">—</strong></div>
+        <div class="c20-engine-row"><span>STATE</span><strong id="c20EngineGaState">SEEKING</strong></div>
+      </article>
+
+    </div>
+
+    <div class="c20-comparator">
+      <div id="c20EngineComparator" class="c20-comparator-main">
+        BUILDING IO 8 · EUROPA 4 · GANYMEDE 2
+      </div>
+      <div id="c20EngineComparatorDetail" class="c20-comparator-detail">
+        Waiting for independent normalized recurrence agreement.
+      </div>
+    </div>
+  `;
+
+  const head =
+    host.querySelector('.c20v-head');
+
+  if (head) {
+    head.after(panel);
+  } else {
+    host.prepend(panel);
+  }
+}
+
+function c20RenderMoonChannel(prefix, channel) {
+  const ch = channel || {};
+
+  const spans =
+    Number(ch.spanCount ?? 0);
+
+  const target =
+    Number(ch.qualificationTarget ?? 0);
+
+  const complete =
+    target > 0 &&
+    spans >= target;
+
+  const phase9 =
+    Number(ch.phase9);
+
+  const binary =
+    Number.isInteger(phase9)
+      ? phase9
+          .toString(2)
+          .padStart(9, '0') + '₂'
+      : '—';
+
+  const octal =
+    ch.phase9Octal ??
+    (
+      Number.isInteger(phase9)
+        ? phase9
+            .toString(8)
+            .padStart(3, '0') + '₈'
+        : '—'
+    );
+
+  c20EngineValue(
+    `c20Engine${prefix}Acquire`,
+    `${spans} / ${target || '—'}`
+  );
+
+  c20EngineValue(
+    `c20Engine${prefix}West`,
+    ch.westEventCount
+  );
+
+  c20EngineValue(
+    `c20Engine${prefix}Bin`,
+    binary
+  );
+
+  c20EngineValue(
+    `c20Engine${prefix}Oct`,
+    octal
+  );
+
+  c20EngineValue(
+    `c20Engine${prefix}Native`,
+    ch.nativeAverageRaw ??
+    ch.latestNativeSpanRaw
+  );
+
+  c20EngineValue(
+    `c20Engine${prefix}Norm`,
+    ch.normalizedAverageRaw
+  );
+
+  c20EngineValue(
+    `c20Engine${prefix}State`,
+    ch.status ?? 'SEEKING'
+  );
+
+  c20EngineValue(
+    `c20Engine${prefix}Lock`,
+    complete
+      ? 'CHANNEL LOCK'
+      : 'ACQUIRING'
+  );
+
+  const bar =
+    c20ById(`c20Engine${prefix}Bar`);
+
+  if (bar) {
+    const fraction =
+      target > 0
+        ? Math.max(
+            0,
+            Math.min(1, spans / target)
+          )
+        : 0;
+
+    bar.style.width =
+      `${(fraction * 100).toFixed(1)}%`;
+  }
+}
+
+
+const C20_JOVIAN_PHASE18_STATES =
+  262144n;
+
+const C20_JOVIAN_PHASE18_MASK =
+  C20_JOVIAN_PHASE18_STATES - 1n;
+
+function c20ParseBigRational(value) {
+  if (
+    value === null ||
+    value === undefined
+  ) {
+    return null;
+  }
+
+  const text =
+    String(value).trim();
+
+  if (!text) return null;
+
+  const slash =
+    text.indexOf('/');
+
+  try {
+    if (slash < 0) {
+      return {
+        numerator: BigInt(text),
+        denominator: 1n,
+      };
+    }
+
+    const numerator =
+      BigInt(
+        text.slice(0, slash)
+      );
+
+    const denominator =
+      BigInt(
+        text.slice(slash + 1)
+      );
+
+    if (denominator <= 0n) {
+      return null;
+    }
+
+    return {
+      numerator,
+      denominator,
+    };
+  } catch (_) {
+    return null;
+  }
+}
+
+function c20RecoveredPhase18(phase) {
+  const ph =
+    phase || {};
+
+  /*
+   * Preferred path:
+   *
+   * exactTotalPhase is already an exact rational recovered
+   * from raw evidence by the Jovian timekeeper.
+   *
+   * It is expressed in 1/512-recurrence phase states.
+   * Multiplying by 512 adds nine exact binary subdivisions.
+   */
+  const exact =
+    c20ParseBigRational(
+      ph.exactTotalPhase
+    );
+
+  if (exact) {
+    const total18 =
+      (
+        exact.numerator *
+        512n
+      ) /
+      exact.denominator;
+
+    return (
+      (
+        total18 %
+        C20_JOVIAN_PHASE18_STATES
+      ) +
+      C20_JOVIAN_PHASE18_STATES
+    ) %
+    C20_JOVIAN_PHASE18_STATES;
+  }
+
+  /*
+   * Exact fallback using PHASE9 + rational subphase.
+   */
+  try {
+    const phase9 =
+      BigInt(ph.phase9);
+
+    const sub =
+      c20ParseBigRational(
+        ph.subphase
+      );
+
+    if (!sub) return null;
+
+    const sub9 =
+      (
+        sub.numerator *
+        512n
+      ) /
+      sub.denominator;
+
+    return (
+      (
+        (phase9 & 511n) << 9n
+      ) +
+      (sub9 & 511n)
+    ) &
+    C20_JOVIAN_PHASE18_MASK;
+  } catch (_) {
+    return null;
+  }
+}
+
+function c20Phase18Binary(value) {
+  if (value === null) {
+    return '—';
+  }
+
+  return (
+    value
+      .toString(2)
+      .padStart(18, '0') +
+    '₂'
+  );
+}
+
+function c20Phase18Octal(value) {
+  if (value === null) {
+    return '—';
+  }
+
+  return (
+    value
+      .toString(8)
+      .padStart(6, '0') +
+    '₈'
+  );
+}
+
+function c20MoonLivePhase18(
+  commonPhase18,
+  channel,
+  multiplier
+) {
+  if (commonPhase18 === null) {
+    return null;
+  }
+
+  const ch =
+    channel || {};
+
+  try {
+    /*
+     * Preserve the phase actually observed when the channel
+     * completed qualification.
+     *
+     * At the present qualified window this gives:
+     *
+     * Io       200₈ anchor
+     * Europa   400₈ anchor
+     * Ganymede 000₈ anchor
+     *
+     * Then advance from that anchor with the exact recovered
+     * 4 : 2 : 1 recurrence relationship.
+     */
+    const anchor9 =
+      BigInt(ch.phase9);
+
+    const anchor18 =
+      (anchor9 & 511n) << 9n;
+
+    return (
+      anchor18 +
+      commonPhase18 *
+        BigInt(multiplier)
+    ) &
+    C20_JOVIAN_PHASE18_MASK;
+  } catch (_) {
+    return null;
+  }
+}
+
+function c20RenderJovianEngine(jovian, timekeeper) {
+  c20InstallJovianEnginePanel();
+
+  /*
+   * A8 CURRENT LIVE ENGINE DOCK
+   *
+   * The existing installer creates the one genuine
+   * c20-jovian-engine-visible panel.
+   *
+   * Move that SAME live node to the current shop floor.
+   * Never clone it and never create duplicate gauge IDs.
+   */
+  const a8LiveEngineHost =
+    document.getElementById('a8-live-engine-host');
+
+  const a8LiveEnginePanel =
+    document.getElementById('c20-jovian-engine-visible');
+
+  if (
+    a8LiveEngineHost &&
+    a8LiveEnginePanel &&
+    a8LiveEnginePanel.parentElement !== a8LiveEngineHost
+  ) {
+    a8LiveEngineHost.appendChild(a8LiveEnginePanel);
+  }
+
+  const a8LiveEngineAwait =
+    document.getElementById('a8-live-engine-await');
+
+  if (
+    a8LiveEngineAwait &&
+    a8LiveEnginePanel
+  ) {
+    a8LiveEngineAwait.remove();
+  }
+
+
+  const j = jovian || {};
+  const tk = timekeeper || {};
+  const runPhase = tk.phase || {};
+  const channels = j.channels || {};
+  const comparator = j.comparator || {};
+
+  const runPhase9 =
+    Number(runPhase.phase9);
+
+  const runBinary =
+    Number.isInteger(runPhase9)
+      ? runPhase9
+          .toString(2)
+          .padStart(9, '0') + '₂'
+      : '—';
+
+  const runOctal =
+    runPhase.phase9Octal ??
+    (
+      Number.isInteger(runPhase9)
+        ? runPhase9
+            .toString(8)
+            .padStart(3, '0') + '₈'
+        : '—'
+    );
+
+  /*
+   * Genuine finer Jovian run coordinate.
+   *
+   * This is integer/rational arithmetic on Core20's
+   * server-returned recovered phase only.
+   */
+  const runPhase18 =
+    c20RecoveredPhase18(
+      runPhase
+    );
+
+  const ioPhase18 =
+    c20MoonLivePhase18(
+      runPhase18,
+      channels.io,
+      4
+    );
+
+  const euPhase18 =
+    c20MoonLivePhase18(
+      runPhase18,
+      channels.eu,
+      2
+    );
+
+  const gaPhase18 =
+    c20MoonLivePhase18(
+      runPhase18,
+      channels.ga,
+      1
+    );
+
+  c20EngineValue(
+    'c20EngineLiveRaw',
+    tk.lastRawPulse ??
+    j.currentRawPulse
+  );
+
+  c20EngineValue(
+    'c20EngineObservations',
+    j.observationCount
+  );
+
+  c20EngineValue(
+    'c20EngineRunBin',
+    runBinary
+  );
+
+  c20EngineValue(
+    'c20EngineRunOct',
+    runOctal
+  );
+
+  c20EngineValue(
+    'c20EngineRun18Bin',
+    c20Phase18Binary(
+      runPhase18
+    )
+  );
+
+  c20EngineValue(
+    'c20EngineRun18Oct',
+    c20Phase18Octal(
+      runPhase18
+    )
+  );
+
+  c20EngineValue(
+    'c20EngineIoLive18Bin',
+    c20Phase18Binary(
+      ioPhase18
+    )
+  );
+
+  c20EngineValue(
+    'c20EngineIoLive18Oct',
+    c20Phase18Octal(
+      ioPhase18
+    )
+  );
+
+  c20EngineValue(
+    'c20EngineEuLive18Bin',
+    c20Phase18Binary(
+      euPhase18
+    )
+  );
+
+  c20EngineValue(
+    'c20EngineEuLive18Oct',
+    c20Phase18Octal(
+      euPhase18
+    )
+  );
+
+  c20EngineValue(
+    'c20EngineGaLive18Bin',
+    c20Phase18Binary(
+      gaPhase18
+    )
+  );
+
+  c20EngineValue(
+    'c20EngineGaLive18Oct',
+    c20Phase18Octal(
+      gaPhase18
+    )
+  );
+
+  c20RenderMoonChannel(
+    'Io',
+    channels.io
+  );
+
+  c20RenderMoonChannel(
+    'Eu',
+    channels.eu
+  );
+
+  c20RenderMoonChannel(
+    'Ga',
+    channels.ga
+  );
+
+  c20EngineValue(
+    'c20EngineOverall',
+    comparator.qualified === true
+      ? 'LOCKED'
+      : 'ACQUIRING'
+  );
+
+  c20EngineValue(
+    'c20EngineComparator',
+    comparator.qualified === true
+      ? '✓ JOVIAN RULER QUALIFIED'
+      : 'BUILDING IO 8 · EUROPA 4 · GANYMEDE 2'
+  );
+
+  const detail = [
+    comparator.reason,
+    comparator.referenceNormalizedRaw
+      ? `COMMON RAW ${comparator.referenceNormalizedRaw}`
+      : null
+  ].filter(Boolean).join(' · ');
+
+  c20EngineValue(
+    'c20EngineComparatorDetail',
+    detail ||
+      'Waiting for independent normalized recurrence agreement.'
+  );
+}
+
+function c20Render(payload, clockPayload) {
+  const source = payload.source || {};
+  const input = payload.recoveryInput || {};
+  const jovian = payload.jovian || {};
+  const tk = payload.timekeeper || {};
+  const phase = tk.phase || {};
+  const comparator = jovian.comparator || {};
+  const gate6a = source.gate6a || {};
+
+  /*
+   * DISPLAY-ONLY SOURCE LAYER SEPARATION
+   *
+   * Epoch-7 = external physical Arduino/Pi source.
+   * Epoch-3 = retained Core20 internal mapped domain.
+   *
+   * No pacing, mapping, alignment or authority value is changed here.
+   */
+  const clockRuntime =
+    clockPayload?.clock?.runtime ??
+    clockPayload?.runtime ??
+    {};
+
+  const clockAlignment =
+    clockPayload?.clock?.alignment ??
+    clockRuntime?.alignment ??
+    {};
+
+  const physicalEpoch =
+    clockAlignment.externalPhysicalSourceEpoch ??
+    null;
+
+  const physicalActive =
+    clockRuntime.pulseGeneratorOwner ===
+      'EXTERNAL_PHYSICAL_SOURCE' &&
+    physicalEpoch !== null &&
+    physicalEpoch !== undefined &&
+    String(physicalEpoch) !== '';
+
+  c20Value(
+    'c20vPhysicalSource',
+    'ARDUINO A/B + PI'
+  );
+
+  c20Value(
+    'c20vPhysicalEpoch',
+    physicalEpoch ?? '—'
+  );
+
+  c20Value(
+    'c20vPhysicalState',
+    physicalActive
+      ? 'ACTIVE · EXTERNAL PHYSICAL RAW'
+      : 'STANDBY / OFFLINE'
+  );
+
+  c20RenderJovianEngine(
+    jovian,
+    tk
+  );
+
+  const selectedRaw =
+    input.lastRawPulse !== null &&
+    input.lastRawPulse !== undefined
+      ? input.lastRawPulse
+      : (
+          source.virtualRig &&
+          source.virtualRig.rawPulse !== null &&
+          source.virtualRig.rawPulse !== undefined
+            ? source.virtualRig.rawPulse
+            : gate6a.lastRawPulse
+        );
+
+  c20Value('c20Source', source.mode);
+  c20Value('c20Epoch', source.sourceEpoch);
+  c20Value('c20Rig', source.activeRig);
+  c20Value('c20Raw', selectedRaw);
+  c20Value('c20Input', input.status);
+  c20Value('c20Recovery', jovian.status);
+  c20Value(
+    'c20Ruler',
+    jovian.recoveredJovianRawRuler
+  );
+  c20Value(
+    'c20Qualified',
+    comparator.qualified === true
+      ? 'QUALIFIED'
+      : 'SEEKING'
+  );
+  c20Value('c20TkStatus', tk.status);
+
+  c20Value(
+    'c20Cycles',
+    phase.completedRecurrences
+  );
+
+  const subEl = c20ById('c20Subphase');
+  if (subEl) {
+    const exact =
+      phase.subphase ?? '—';
+
+    subEl.textContent = String(exact);
+    subEl.dataset.serverExact = String(exact);
+    subEl.title =
+      'SERVER-EXACT Jovian subphase from Core20 raw-derived recovery; no browser interpolation.';
+  }
+
+  c20ReanchorPhase(
+    payload,
+    clockPayload
+  );
+
+  const connection = c20ById('connection');
+
+  if (connection) {
+    connection.textContent =
+      'CORE20 · CONNECTED';
+
+    connection.className =
+      'pill good';
+  }
+}
+
+/*
+ * LAB LOCAL CORE20 STOPWATCH
+ * --------------------------
+ * Ephemeral browser UI only.
+ *
+ * - no server-side stopwatch state
+ * - no persistence
+ * - no control of any other page
+ * - no independent polling
+ * - no browser clock defines elapsed A8 time
+ *
+ * The existing Lab Core20 observer supplies currentSelectedRawPulse
+ * and recoveredRawPerSunReturn. RAW delta is converted to completed
+ * A8 states using the same Core20 scale used by the Moons stopwatch.
+ *
+ * If the Core20 observer connection fails, this instrument dies:
+ * local state is cleared, display returns to 00:00, controls disable.
+ */
+const c20StopwatchState = {
+  connected: false,
+  running: false,
+  phase: 'DISCONNECTED',
+
+  latestClock: null,
+
+  startRaw: null,
+  scaleNumerator: null,
+  scaleDenominator: null,
+
+  elapsedStates: 0n,
+
+  /*
+   * OUTPUT-ONLY smoothing anchor.
+   * Core20 RAW remains the measurement source.
+   */
+  smoothAnchorWhole: 0n,
+  smoothAnchorFraction: 0,
+  smoothAnchorPerf: null,
+
+  /*
+   * Visible whole-second guard only.
+   * Prevents packet-arrival jitter from flashing the display backward.
+   */
+  presentedWhole: 0n,
+};
+
+function c20StopwatchParseScale(value) {
+  const text = String(value || '').trim();
+
+  if (!/^[0-9]+(?:\/[0-9]+)?$/.test(text)) {
+    throw new Error(
+      'invalid Core20 recovered RAW scale'
+    );
+  }
+
+  const parts = text.split('/');
+
+  const numerator =
+    BigInt(parts[0]);
+
+  const denominator =
+    BigInt(parts[1] || '1');
+
+  if (
+    numerator <= 0n ||
+    denominator <= 0n
+  ) {
+    throw new Error(
+      'invalid Core20 recovered RAW scale'
+    );
+  }
+
+  return {
+    numerator,
+    denominator,
+  };
+}
+
+function c20StopwatchClockRaw(clock) {
+  if (
+    !clock ||
+    clock.status !== 'CORE20_CLOCK_RUNNING' ||
+    clock.currentSelectedRawPulse === undefined ||
+    clock.currentSelectedRawPulse === null
+  ) {
+    throw new Error(
+      'Core20 clock unavailable'
+    );
+  }
+
+  const rawText =
+    String(clock.currentSelectedRawPulse);
+
+  if (!/^[0-9]+$/.test(rawText)) {
+    throw new Error(
+      'invalid Core20 RAW coordinate'
+    );
+  }
+
+  return BigInt(rawText);
+}
+
+function c20StopwatchDisplayWhole(
+  nowPerf = performance.now()
+) {
+  const authoritativeWhole =
+    c20StopwatchState.elapsedStates >= 0n
+      ? c20StopwatchState.elapsedStates
+      : 0n;
+
+  if (!c20StopwatchState.running) {
+    return (
+      c20StopwatchState.phase === 'STOPPED'
+        ? c20StopwatchState.presentedWhole
+        : authoritativeWhole
+    );
+  }
+
+  if (
+    c20StopwatchState.smoothAnchorPerf === null
+  ) {
+    return authoritativeWhole;
+  }
+
+  /*
+   * Output interpolation only.
+   *
+   * Each observer sample provides a fresh exact Core20-derived
+   * whole + fractional A8-state anchor. performance.now() merely
+   * carries the visible display between those anchors.
+   */
+  const sinceAnchorStates =
+    (
+      nowPerf -
+      c20StopwatchState.smoothAnchorPerf
+    ) /
+    C20_A8_STATE_MS;
+
+  const fractionalProgress =
+    c20StopwatchState.smoothAnchorFraction +
+    sinceAnchorStates;
+
+  if (!Number.isFinite(fractionalProgress)) {
+    return authoritativeWhole;
+  }
+
+  const extraWhole =
+    Math.max(
+      0,
+      Math.floor(fractionalProgress)
+    );
+
+  const candidate =
+    c20StopwatchState.smoothAnchorWhole +
+    BigInt(extraWhole);
+
+  if (
+    candidate <
+    c20StopwatchState.presentedWhole
+  ) {
+    return c20StopwatchState.presentedWhole;
+  }
+
+  c20StopwatchState.presentedWhole =
+    candidate;
+
+  return candidate;
+}
+
+function c20StopwatchRenderDisplay(
+  nowPerf = performance.now()
+) {
+  const display =
+    c20ById('a8ConsumerStopwatch');
+
+  if (!display) return;
+
+  const whole =
+    c20StopwatchDisplayWhole(nowPerf);
+
+  const minutes =
+    whole / 64n;
+
+  const seconds =
+    whole % 64n;
+
+  display.textContent =
+    minutes.toString().padStart(2, '0') +
+    ':' +
+    seconds.toString().padStart(2, '0');
+}
+
+function c20StopwatchRender() {
+  const status =
+    c20ById('a8ConsumerStopwatchStatus');
+
+  const start =
+    c20ById('a8ConsumerStopwatchStart');
+
+  const stop =
+    c20ById('a8ConsumerStopwatchStop');
+
+  const reset =
+    c20ById('a8ConsumerStopwatchReset');
+
+  c20StopwatchRenderDisplay();
+
+  if (status) {
+    status.textContent =
+      c20StopwatchState.phase;
+  }
+
+  if (start) {
+    start.disabled =
+      !c20StopwatchState.connected ||
+      c20StopwatchState.running;
+  }
+
+  if (stop) {
+    stop.disabled =
+      !c20StopwatchState.connected ||
+      !c20StopwatchState.running;
+  }
+
+  if (reset) {
+    reset.disabled =
+      !c20StopwatchState.connected;
+  }
+}
+
+function c20StopwatchRenderSmooth() {
+  if (
+    !c20StopwatchState.connected ||
+    !c20StopwatchState.running
+  ) {
+    return;
+  }
+
+  c20StopwatchRenderDisplay(
+    performance.now()
+  );
+}
+
+function c20StopwatchDisconnect() {
+  c20StopwatchState.connected = false;
+  c20StopwatchState.running = false;
+  c20StopwatchState.phase = 'DISCONNECTED';
+
+  c20StopwatchState.latestClock = null;
+
+  c20StopwatchState.startRaw = null;
+  c20StopwatchState.scaleNumerator = null;
+  c20StopwatchState.scaleDenominator = null;
+
+  c20StopwatchState.elapsedStates = 0n;
+
+  c20StopwatchState.smoothAnchorWhole = 0n;
+  c20StopwatchState.smoothAnchorFraction = 0;
+  c20StopwatchState.smoothAnchorPerf = null;
+  c20StopwatchState.presentedWhole = 0n;
+
+  c20StopwatchRender();
+}
+
+function c20StopwatchObserve(clock) {
+  try {
+    const raw =
+      c20StopwatchClockRaw(clock);
+
+    c20StopwatchState.latestClock =
+      clock;
+
+    if (!c20StopwatchState.connected) {
+      c20StopwatchState.connected = true;
+
+      if (!c20StopwatchState.running) {
+        c20StopwatchState.phase = 'READY';
+      }
+    }
+
+    if (c20StopwatchState.running) {
+      const delta =
+        raw -
+        c20StopwatchState.startRaw;
+
+      if (delta < 0n) {
+        throw new Error(
+          'Core20 RAW coordinate regressed'
+        );
+      }
+
+      const elapsedNumerator =
+        delta *
+        c20StopwatchState.scaleDenominator *
+        BigInt(C20_DAY_STATES);
+
+      const elapsedDenominator =
+        c20StopwatchState.scaleNumerator;
+
+      const whole =
+        elapsedNumerator /
+        elapsedDenominator;
+
+      const remainder =
+        elapsedNumerator %
+        elapsedDenominator;
+
+      c20StopwatchState.elapsedStates =
+        whole;
+
+      /*
+       * Re-anchor visible interpolation to this authoritative
+       * Core20 RAW sample, including its fractional A8 state.
+       */
+      c20StopwatchState.smoothAnchorWhole =
+        whole;
+
+      c20StopwatchState.smoothAnchorFraction =
+        Number(remainder) /
+        Number(elapsedDenominator);
+
+      c20StopwatchState.smoothAnchorPerf =
+        performance.now();
+    }
+
+    c20StopwatchRender();
+
+  } catch (err) {
+    c20StopwatchDisconnect();
+  }
+}
+
+function c20StopwatchStart() {
+  try {
+    if (
+      !c20StopwatchState.connected ||
+      !c20StopwatchState.latestClock
+    ) {
+      throw new Error(
+        'Core20 observer disconnected'
+      );
+    }
+
+    const clock =
+      c20StopwatchState.latestClock;
+
+    const raw =
+      c20StopwatchClockRaw(clock);
+
+    const scale =
+      c20StopwatchParseScale(
+        clock.recoveredRawPerSunReturn
+      );
+
+    c20StopwatchState.startRaw =
+      raw;
+
+    c20StopwatchState.scaleNumerator =
+      scale.numerator;
+
+    c20StopwatchState.scaleDenominator =
+      scale.denominator;
+
+    c20StopwatchState.elapsedStates =
+      0n;
+
+    c20StopwatchState.smoothAnchorWhole =
+      0n;
+
+    c20StopwatchState.smoothAnchorFraction =
+      0;
+
+    c20StopwatchState.smoothAnchorPerf =
+      performance.now();
+
+    c20StopwatchState.presentedWhole =
+      0n;
+
+    c20StopwatchState.running =
+      true;
+
+    c20StopwatchState.phase =
+      'RUNNING';
+
+    c20StopwatchRender();
+
+  } catch (err) {
+    c20StopwatchDisconnect();
+  }
+}
+
+function c20StopwatchStop() {
+  if (!c20StopwatchState.running) {
+    return;
+  }
+
+  /*
+   * latestClock was supplied by the same existing Core20 observer.
+   * Refresh once from that latest coordinate before freezing.
+   */
+  c20StopwatchObserve(
+    c20StopwatchState.latestClock
+  );
+
+  if (!c20StopwatchState.connected) {
+    return;
+  }
+
+  /*
+   * Freeze whatever the Core20-anchored smooth display currently shows.
+   * Measurement state remains separate in elapsedStates.
+   */
+  c20StopwatchState.presentedWhole =
+    c20StopwatchDisplayWhole(
+      performance.now()
+    );
+
+  c20StopwatchState.running =
+    false;
+
+  c20StopwatchState.phase =
+    'STOPPED';
+
+  c20StopwatchRender();
+}
+
+function c20StopwatchReset() {
+  if (!c20StopwatchState.connected) {
+    c20StopwatchDisconnect();
+    return;
+  }
+
+  c20StopwatchState.running =
+    false;
+
+  c20StopwatchState.startRaw =
+    null;
+
+  c20StopwatchState.scaleNumerator =
+    null;
+
+  c20StopwatchState.scaleDenominator =
+    null;
+
+  c20StopwatchState.elapsedStates =
+    0n;
+
+  c20StopwatchState.smoothAnchorWhole =
+    0n;
+
+  c20StopwatchState.smoothAnchorFraction =
+    0;
+
+  c20StopwatchState.smoothAnchorPerf =
+    null;
+
+  c20StopwatchState.presentedWhole =
+    0n;
+
+  c20StopwatchState.phase =
+    'READY';
+
+  c20StopwatchRender();
+}
+
+const c20StopwatchStartButton =
+  c20ById('a8ConsumerStopwatchStart');
+
+const c20StopwatchStopButton =
+  c20ById('a8ConsumerStopwatchStop');
+
+const c20StopwatchResetButton =
+  c20ById('a8ConsumerStopwatchReset');
+
+if (c20StopwatchStartButton) {
+  c20StopwatchStartButton.addEventListener(
+    'click',
+    c20StopwatchStart
+  );
+}
+
+if (c20StopwatchStopButton) {
+  c20StopwatchStopButton.addEventListener(
+    'click',
+    c20StopwatchStop
+  );
+}
+
+if (c20StopwatchResetButton) {
+  c20StopwatchResetButton.addEventListener(
+    'click',
+    c20StopwatchReset
+  );
+}
+
+c20StopwatchRender();
+
+
+
+let c20ShipV2Busy = false;
+let c20ShipV2Last = -Infinity;
+
+async function c20RefreshShipV2() {
+  if (
+    c20ShipV2Busy ||
+    performance.now() - c20ShipV2Last < 2000
+  ) return;
+
+  c20ShipV2Busy = true;
+  c20ShipV2Last = performance.now();
+
+  try {
+    const payload =
+      await c20Api('/api/terra-ship-slip/v2');
+
+    const v = payload.v2;
+    const a = v.absoluteAnnualPosition;
+
+    if (
+      v.schema !== 'A8-TERRA-SHIP-SLIP-V2' ||
+      v.status !== 'V2_LIVE_FROM_SEP22_EQUINOX'
+    ) throw new Error('SHIP_V2_INVALID');
+
+    const angle =
+      Number(a.natureAnnualAngle512Continuous);
+
+    const r =
+      v.lifetimeTerraShipSlip512;
+
+    const slip =
+      Number(r.numerator) /
+      Number(r.denominator);
+
+    c20Value(
+      'a8ConsumerShipAngle',
+      a.natureAnnualAngleOctal
+    );
+
+    c20Value(
+      'a8ConsumerShipSide',
+      angle < 256
+        ? 'FRONT · →'
+        : 'BACKSIDE · ←'
+    );
+
+    c20Value(
+      'a8ConsumerShipSlip',
+      'V2 SLIP · ' +
+      slip.toFixed(4) +
+      ' A8'
+    );
+
+  } catch (_) {
+    c20Value('a8ConsumerShipAngle','—');
+    c20Value('a8ConsumerShipSide','V2 UNAVAILABLE');
+    c20Value('a8ConsumerShipSlip','V2 SLIP · —');
+
+  } finally {
+    c20ShipV2Busy = false;
+  }
+}
+
+
+/*
+ * LAB AUDIO · LOCAL A8 FREQUENCY PREVIEW
+ *
+ * A8 second = 675/1024 legacy seconds.
+ * Physical Hz = cycles/A8s × 1024/675.
+ *
+ * Browser audio is downstream sound output only.
+ */
+let a8LabAudioContext = null;
+
+function a8LabTone(a8Frequency) {
+  const AudioCtor =
+    window.AudioContext ||
+    window.webkitAudioContext;
+
+  if (!AudioCtor) return;
+
+  if (!a8LabAudioContext) {
+    a8LabAudioContext =
+      new AudioCtor();
+  }
+
+  const ctx=a8LabAudioContext;
+
+  if (ctx.state === 'suspended') {
+    ctx.resume();
+  }
+
+  const osc=ctx.createOscillator();
+  const gain=ctx.createGain();
+
+  const hz=
+    a8Frequency * 1024 / 675;
+
+  const duration=
+    (675 / 1024) / 4;
+
+  const now=ctx.currentTime;
+
+  osc.type='sine';
+  osc.frequency.setValueAtTime(hz,now);
+
+  gain.gain.setValueAtTime(0.0001,now);
+  gain.gain.exponentialRampToValueAtTime(
+    0.12,
+    now + 0.015
+  );
+  gain.gain.exponentialRampToValueAtTime(
+    0.0001,
+    now + duration
+  );
+
+  osc.connect(gain);
+  gain.connect(ctx.destination);
+
+  osc.start(now);
+  osc.stop(now + duration + 0.02);
+}
+
+
+let c20ObserverBusy = false;
+let c20ObserverStopped = false;
+
+async function c20ObserverPass() {
+  if (
+    c20ObserverStopped ||
+    c20ObserverBusy
+  ) {
+    return;
+  }
+
+  c20ObserverBusy = true;
+
+  try {
+    const [
+      payload,
+      clockPayload,
+    ] = await Promise.all([
+      c20Api('/api/hardware/source'),
+      c20Api('/api/core20/clock'),
+    ]);
+
+    c20Render(
+      payload,
+      clockPayload
+    );
+
+    /*
+     * Same existing observer feed powers the local stopwatch.
+     * No extra request and no second timer.
+     */
+    c20StopwatchObserve(
+      clockPayload.clock
+    );
+
+    /*
+     * Calendar changes only on a counted Core20 day boundary.
+     * Use clock dayCount only to notice that boundary, then ask the
+     * authoritative Calendar endpoint for the actual calendar state.
+     */
+    const calendarTriggerDayCount =
+      clockPayload &&
+      clockPayload.clock &&
+      clockPayload.clock.dayCount !== undefined &&
+      clockPayload.clock.dayCount !== null
+        ? String(clockPayload.clock.dayCount)
+        : '';
+
+    if (
+      calendarTriggerDayCount &&
+      calendarTriggerDayCount !==
+        c20CalendarObservedDayCount
+    ) {
+      try {
+        const calendarPayload =
+          await c20Api('/api/core20/calendar');
+
+        c20Value(
+          'a8ConsumerCalendar',
+          c20CalendarTeaser(
+            calendarPayload.calendar
+          )
+        );
+
+        c20CalendarObservedDayCount =
+          calendarTriggerDayCount;
+      } catch (calendarErr) {
+        /*
+         * Leave the Calendar visibly unavailable and retry on the
+         * next observer pass. Do not mark Core20 itself disconnected.
+         */
+        c20Value(
+          'a8ConsumerCalendar',
+          '—'
+        );
+      }
+    }
+
+    c20RefreshShipV2();
+
+    c20StartPhaseFrame();
+  } catch (err) {
+    /*
+     * Stopwatch is session-local and has no holdover.
+     * If Lab loses Core20, the stopwatch dies with the connection.
+     */
+    c20StopwatchDisconnect();
+
+    const connection =
+      c20ById('connection');
+
+    if (connection) {
+      connection.textContent =
+        'CORE20 · DISCONNECTED';
+
+      connection.className =
+        'pill bad';
+    }
+  } finally {
+    c20ObserverBusy = false;
+  }
+}
+
+function c20ObserverLoop() {
+  if (c20ObserverStopped) return;
+
+  /*
+   * READ-ONLY DISPLAY TRANSPORT.
+   * 250 ms polling refreshes engineering status only.
+   * It never supplies the visible beat.
+   */
+  c20ObserverPass();
+
+  window.setTimeout(
+    c20ObserverLoop,
+    document.hidden ? 1000 : 250
+  );
+}
+
+document.addEventListener(
+  'visibilitychange',
+  () => {
+    if (
+      !document.hidden &&
+      !c20ObserverStopped
+    ) {
+      /*
+       * Fresh presentation anchor after visibility return.
+       * Core20 supplies the coordinate; browser time supplies
+       * output interpolation only after this anchor.
+       */
+      c20PhaseObserverReady = false;
+      c20PhaseSourceEpoch = null;
+
+      c20ObserverPass();
+    }
+  }
+);
+
+window.addEventListener(
+  'pagehide',
+  () => {
+    c20ObserverStopped = true;
+  }
+);
+
+c20ObserverLoop();
+</script>
+
+<script src="/core20-virtual-run.js" defer></script>
+
+
+<script id="a8-lab-annual-frame-live-v1">
+(() => {
+  'use strict';
+
+  const $ =
+    id => document.getElementById(id);
+
+  function put(id,value) {
+    const el=$(id);
+    if (el) el.textContent=value ?? '—';
+  }
+
+  async function refreshAnnualFrame() {
+    try {
+      const r =
+        await fetch(
+          '/api/annual-frame',
+          {cache:'no-store'}
+        );
+
+      if (!r.ok) {
+        throw new Error(
+          `HTTP ${r.status}`
+        );
+      }
+
+      const payload=await r.json();
+      const a=payload.annualV1Output || {};
+
+      const angle=
+        Number(
+          a.natureAnnualAngle512Continuous
+        );
+
+      put(
+        'a8NatureSolRegister',
+        Number.isFinite(angle)
+          ? `${angle.toFixed(4)} A8`
+          : '—'
+      );
+
+      put(
+        'a8NatureYearPhase9',
+        a.natureAnnualAngleOctal || '—'
+      );
+
+      put(
+        'a8NatureYearStatus',
+        [
+          a.progressionStatus,
+          a.annualHalf,
+          a.displayDirection
+        ].filter(Boolean).join(' · ')
+      );
+
+    } catch (err) {
+      put(
+        'a8NatureYearStatus',
+        `ANNUAL FRAME DISCONNECTED · ${err.message}`
+      );
+    }
+  }
+
+  refreshAnnualFrame();
+
+  setInterval(
+    refreshAnnualFrame,
+    5000
+  );
+})();
+</script>
+
+</body>
+</html>

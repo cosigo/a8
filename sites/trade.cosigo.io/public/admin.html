@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>trade.cosigo.io admin</title>
+  <link rel="stylesheet" href="/shared/assets/cigo-footer.css?v=20260627-222708">
+
+  <link rel="stylesheet" href="/shared/assets/admin.css?v=20260708-193710Z"></head>
+
+<body>
+    <div class="wrap">
+        <div class="card">
+            <h1>trade admin queue</h1>
+            <div class="row">
+                <input id="adminKey" type="password" placeholder="Admin key" style="min-width:320px;">
+                <select id="statusFilter">
+                    <option value="submitted">submitted</option>
+                    <option value="reviewed">reviewed</option>
+                    <option value="cancelled">cancelled</option>
+                    <option value="">all</option>
+                </select>
+                <button id="loadBtn" type="button">Load queue</button>
+            </div>
+            <div class="msg" id="msg">Ready.</div>
+        </div>
+
+        <section class="section wrap" aria-labelledby="spot-ref-title" style="padding-top:0;">
+            <div class="card" style="margin-top:14px;">
+                <div class="hd">
+                    <div class="title" id="spot-ref-title">Live silver and currency reference</div>
+                    <div class="hint">
+                        → market ticker is 3rd party and COSIGO&trade; is not responsible for any error it may present.
+                    </div>
+                </div>
+
+                <div class="ticker-shell" style="margin-top:16px;">
+                    <iframe src="/assets/silver-ticker.html" loading="lazy" title="Live silver and currency ticker"
+                        class="ticker-frame">
+                    </iframe>
+                </div>
+
+            </div>
+        </section>
+
+        <div class="card" id="pricingControls">
+            <h2>Pricing controls</h2>
+            <p>Adjust live pricing inputs without editing code.</p>
+
+            <div class="form-grid">
+                <label>
+                    <span>Reference ounce basis (USD)</span>
+                    <input id="settingsOzUsdReference" type="number" step="0.0001" min="0" />
+                </label>
+
+                <label>
+                    <span>Digital exit fee rate</span>
+                    <input id="settingsDigitalExitFeeRate" type="number" step="0.0001" min="0" />
+                </label>
+
+                <label>
+                    <span>Physical redemption fee rate</span>
+                    <input id="settingsPhysicalRedemptionFeeRate" type="number" step="0.0001" min="0" />
+                </label>
+
+                <label>
+                    <span>CIGO reference (USD)</span>
+                    <input id="settingsCigoUsdReference" type="number" step="0.0001" min="0" />
+                </label>
+
+                <label>
+                    <span>CIGO inbound discount rate</span>
+                    <input id="settingsCigoInboundHaircutRate" type="number" step="0.0001" min="0" />
+                </label>
+
+                <label>
+                    <span>CIGO outbound premium rate</span>
+                    <input id="settingsCigoOutboundPremiumRate" type="number" step="0.0001" min="0" />
+                </label>
+
+                <label>
+                    <span>Quoted inventory (CIGO)</span>
+                    <input id="settingsInventoryCigo" type="number" step="0.1" min="0" />
+                </label>
+
+                <label>
+                    <span>Depth factor</span>
+                    <input id="settingsDepthFactor" type="number" step="0.0001" min="0" />
+                </label>
+
+                <label>
+                    <span>24-hour USDT wallet cap</span>
+                    <input id="settingsUsdtDailyWalletCap" type="number" min="0" step="1" value="1000" />
+                </label>
+
+            </div>
+
+            <div class="row" style="margin-top:12px;">
+                <div><strong>Version:</strong> <span id="settingsVersion">-</span></div>
+                <div><strong>Updated:</strong> <span id="settingsUpdatedAt">-</span></div>
+            </div>
+
+            <div class="row" style="margin-top:14px;">
+                <button type="button" id="loadSettingsBtn">Load settings</button>
+                <button type="button" id="saveSettingsBtn">Save settings</button>
+            </div>
+        </div>
+
+        <div id="list"></div>
+    </div>
+
+    <script>
+        const adminKeyEl = document.getElementById('adminKey');
+        const statusFilterEl = document.getElementById('statusFilter');
+        const loadBtn = document.getElementById('loadBtn');
+        const listEl = document.getElementById('list');
+        const msgEl = document.getElementById('msg');
+
+        const settingsOzUsdReferenceEl = document.getElementById('settingsOzUsdReference');
+        const settingsDigitalExitFeeRateEl = document.getElementById('settingsDigitalExitFeeRate');
+        const settingsPhysicalRedemptionFeeRateEl = document.getElementById('settingsPhysicalRedemptionFeeRate');
+        const settingsCigoUsdReferenceEl = document.getElementById('settingsCigoUsdReference');
+        const settingsCigoInboundHaircutRateEl = document.getElementById('settingsCigoInboundHaircutRate');
+        const settingsCigoOutboundPremiumRateEl = document.getElementById('settingsCigoOutboundPremiumRate');
+        const settingsVersionEl = document.getElementById('settingsVersion');
+        const settingsUpdatedAtEl = document.getElementById('settingsUpdatedAt');
+        const loadSettingsBtn = document.getElementById('loadSettingsBtn');
+        const saveSettingsBtn = document.getElementById('saveSettingsBtn');
+
+        const settingsInventoryCigoEl = document.getElementById('settingsInventoryCigo');
+        const settingsDepthFactorEl = document.getElementById('settingsDepthFactor');
+        const settingsUsdtDailyWalletCapEl = document.getElementById('settingsUsdtDailyWalletCap');
+
+        adminKeyEl.value = sessionStorage.getItem('trade.adminKey') || '';
+
+        function setMsg(text) {
+            msgEl.textContent = text;
+        }
+
+        function getStatusClass(status) {
+            if (status === 'submitted') return 'status status-submitted';
+            if (status === 'reviewed') return 'status status-reviewed';
+            if (status === 'completed') return 'status status-completed';
+            if (status === 'cancelled') return 'status status-cancelled';
+            if (status === 'draft') return 'status status-draft';
+            return 'status';
+        }
+
+        function getAdminKey() {
+            const key = adminKeyEl.value.trim();
+            sessionStorage.setItem('trade.adminKey', key);
+            return key;
+        }
+
+        async function apiJson(url, options = {}) {
+            const response = await fetch(url, {
+                ...options,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'x-trade-admin-key': getAdminKey(),
+                    ...(options.headers || {}),
+                },
+            });
+
+            const data = await response.json().catch(() => ({}));
+
+            if (!response.ok) {
+                throw new Error(data.error || `Request failed (${response.status})`);
+            }
+
+            return data;
+        }
+
+        async function loadAdminSettings() {
+            const data = await apiJson('/api/admin/settings');
+            const settings = data.settings || {};
+
+            if (settingsOzUsdReferenceEl) settingsOzUsdReferenceEl.value = settings.ozUsdReference ?? '';
+            if (settingsDigitalExitFeeRateEl) settingsDigitalExitFeeRateEl.value = settings.digitalExitFeeRate ?? '';
+            if (settingsPhysicalRedemptionFeeRateEl) settingsPhysicalRedemptionFeeRateEl.value = settings.physicalRedemptionFeeRate ?? '';
+            if (settingsCigoUsdReferenceEl) settingsCigoUsdReferenceEl.value = settings.cigoUsdReference ?? '';
+            if (settingsCigoInboundHaircutRateEl) settingsCigoInboundHaircutRateEl.value = settings.cigoInboundHaircutRate ?? '';
+            if (settingsCigoOutboundPremiumRateEl) settingsCigoOutboundPremiumRateEl.value = settings.cigoOutboundPremiumRate ?? '';
+
+            if (settingsVersionEl) settingsVersionEl.textContent = settings.version ?? '-';
+            if (settingsUpdatedAtEl) settingsUpdatedAtEl.textContent = settings.updatedAt || '-';
+
+            if (settingsInventoryCigoEl) settingsInventoryCigoEl.value = settings.inventoryCigo ?? '';
+            if (settingsDepthFactorEl) settingsDepthFactorEl.value = settings.depthFactor ?? '';
+            if (settingsUsdtDailyWalletCapEl) settingsUsdtDailyWalletCapEl.value = settings.usdtDailyWalletCap ?? '';
+
+            return settings;
+        }
+
+        async function saveAdminSettings() {
+            const payload = {
+                ozUsdReference: Number(settingsOzUsdReferenceEl?.value || 0),
+                digitalExitFeeRate: Number(settingsDigitalExitFeeRateEl?.value || 0),
+                physicalRedemptionFeeRate: Number(settingsPhysicalRedemptionFeeRateEl?.value || 0),
+                cigoUsdReference: Number(settingsCigoUsdReferenceEl?.value || 0),
+                cigoInboundHaircutRate: Number(settingsCigoInboundHaircutRateEl?.value || 0),
+                cigoOutboundPremiumRate: Number(settingsCigoOutboundPremiumRateEl?.value || 0),
+                inventoryCigo: Number(settingsInventoryCigoEl?.value || 0),
+                depthFactor: Number(settingsDepthFactorEl?.value || 0),
+                usdtDailyWalletCap: Number(settingsUsdtDailyWalletCapEl?.value || 0),
+            };
+
+            const data = await apiJson('/api/admin/settings', {
+                method: 'POST',
+                body: JSON.stringify(payload),
+            });
+
+            const settings = data.settings || {};
+
+            if (settingsVersionEl) settingsVersionEl.textContent = settings.version ?? '-';
+            if (settingsUpdatedAtEl) settingsUpdatedAtEl.textContent = settings.updatedAt || '-';
+
+            return settings;
+        }
+
+        function renderRequests(items) {
+            listEl.innerHTML = '';
+
+            if (!items.length) {
+                listEl.innerHTML = '<div class="card">No matching requests found.</div>';
+                return;
+            }
+
+            for (const r of items) {
+                const div = document.createElement('div');
+                div.className = 'item';
+
+                const actions = [];
+                if (r.status === 'submitted') {
+                    actions.push(`<button type="button" data-id="${r.id}" data-next="reviewed">Mark reviewed</button>`);
+                    actions.push(`<button type="button" data-id="${r.id}" data-next="cancelled">Cancel unpaid</button>`);
+                }
+                if (r.status === 'reviewed') {
+                    actions.push(`<button type="button" data-id="${r.id}" data-next="completed">Mark completed</button>`);
+                    actions.push(`<button type="button" data-id="${r.id}" data-next="cancelled">Cancel unpaid</button>`);
+                }
+                if (r.status === 'completed') {
+                    actions.push(`<button type="button" data-id="${r.id}" data-next="cancelled">Cancel / void completed</button>`);
+                }
+
+                div.innerHTML = `
+          <div class="row" style="justify-content:space-between;">
+            <strong>${r.route || `${r.fromAsset} → ${r.toAsset}`}</strong>
+            <span class="${getStatusClass(r.status)}">${r.status}</span>
+          </div>
+
+          <div class="grid">
+            <div class="label">request id</div><div class="mono">${r.id}</div>
+            <div class="label">created</div><div class="mono">${r.createdAt || '-'}</div>
+            <div class="label">submitted</div><div class="mono">${r.submittedAt || '-'}</div>
+            <div class="label">reviewed</div><div class="mono">${r.reviewedAt || '-'}</div>
+            <div class="label">completed</div><div class="mono">${r.completedAt || '-'}</div>
+            <div class="label">cancelled</div><div class="mono">${r.cancelledAt || '-'}</div>
+            <div class="label">wallet</div><div class="mono">${r.wallet || '-'}</div>
+            <div class="label">input</div><div class="mono">${r.inputAmount} ${r.fromAsset}</div>
+            <div class="label">output</div><div class="mono">${r.outputAmount} ${r.toAsset}</div>
+            <div class="label">basis</div><div class="mono">$${r.basisValue ?? 0}</div>
+            <div class="label">fee</div><div class="mono">$${r.feeAmount ?? 0}</div>
+          </div>
+
+          <div class="row" style="margin-top:14px;">
+            ${actions.join('')}
+          </div>
+        `;
+
+                listEl.appendChild(div);
+            }
+
+            listEl.querySelectorAll('button[data-id]').forEach((btn) => {
+                btn.addEventListener('click', async () => {
+                    const id = btn.getAttribute('data-id');
+                    const next = btn.getAttribute('data-next');
+
+                    try {
+                        const payload = {
+                            status: next,
+                            note: `Admin changed status to ${next}`
+                        };
+
+                        if (next === 'cancelled') {
+                            const cancelNote = window.prompt(
+                                'Cancellation note:',
+                                'Invoice cancelled: customer did not pay.'
+                            );
+
+                            if (cancelNote === null) {
+                                setMsg('Cancellation cancelled.');
+                                return;
+                            }
+
+                            payload.note = cancelNote.trim() || 'Invoice cancelled by admin.';
+                        }
+
+                        if (next === 'reviewed') {
+                            const settlementAddress = window.prompt('Settlement address (full 0x address):', '');
+
+                            if (!settlementAddress || !settlementAddress.trim()) {
+                                setMsg('Reviewed update cancelled: settlement address is required.');
+                                return;
+                            }
+
+                            const settlementAmount = window.prompt(
+                                'Settlement amount (leave blank to use request input amount):',
+                                ''
+                            );
+
+                            const settlementNetwork = window.prompt(
+                                'Settlement network:',
+                                'BNB Smart Chain'
+                            );
+
+                            const settlementNote = window.prompt(
+                                'Settlement note (optional):',
+                                'Send exact amount only'
+                            );
+
+                            payload.settlementAddress = settlementAddress.trim();
+
+                            if (settlementAmount && settlementAmount.trim()) {
+                                payload.settlementAmount = settlementAmount.trim();
+                            }
+
+                            if (settlementNetwork && settlementNetwork.trim()) {
+                                payload.settlementNetwork = settlementNetwork.trim();
+                            }
+
+                            if (settlementNote && settlementNote.trim()) {
+                                payload.settlementNote = settlementNote.trim();
+                            }
+                        }
+
+                        setMsg(`Updating ${id} to ${next}...`);
+
+                        await apiJson(`/api/requests/${encodeURIComponent(id)}/status`, {
+                            method: 'POST',
+                            body: JSON.stringify(payload),
+                        });
+
+                        await loadQueue();
+                        setMsg(`Updated ${id} to ${next}.`);
+                    } catch (err) {
+                        setMsg(`Update failed: ${err.message}`);
+                    }
+                });
+            });
+        }
+
+        async function loadQueue() {
+            try {
+                const status = statusFilterEl.value;
+                const q = status ? `?status=${encodeURIComponent(status)}&limit=200` : '?limit=200';
+                setMsg('Loading queue...');
+                const data = await apiJson(`/api/requests${q}`);
+                renderRequests(data.requests || []);
+                setMsg(`Loaded ${data.requests?.length || 0} request(s).`);
+            } catch (err) {
+                listEl.innerHTML = '';
+                setMsg(`Load failed: ${err.message}`);
+            }
+        }
+
+        loadSettingsBtn?.addEventListener('click', async () => {
+            try {
+                setMsg('Loading pricing settings...');
+                await loadAdminSettings();
+                setMsg('Pricing settings loaded.');
+            } catch (err) {
+                setMsg(`Load settings failed: ${err.message}`);
+            }
+        });
+
+        saveSettingsBtn?.addEventListener('click', async () => {
+            try {
+                setMsg('Saving pricing settings...');
+                await saveAdminSettings();
+                await loadAdminSettings();
+                setMsg('Pricing settings saved and reloaded.');
+            } catch (err) {
+                setMsg(`Save settings failed: ${err.message}`);
+            }
+        });
+
+        loadBtn.addEventListener('click', loadQueue);
+        loadAdminSettings().catch((err) => {
+            setMsg(`Initial settings load failed: ${err.message}`);
+        });
+
+    </script>
+</body>
+
+</html>

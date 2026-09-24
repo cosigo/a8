@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        :root {
+            --max: 1180px;
+            --line: rgba(255, 255, 255, 0.10);
+            --radius: 22px;
+            --shadow: 0 24px 64px rgba(0, 0, 0, 0.35);
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            background: transparent;
+            overflow: hidden;
+            min-height: 72px;
+        }
+
+        .wrap {
+            width: min(calc(100% - 28px), var(--max));
+            margin: 0 auto;
+            padding: 10px 0;
+        }
+
+        .ticker-card {
+            overflow: hidden;
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .tradingview-widget-container {
+            width: 100%;
+            height: 56px;
+            overflow: hidden;
+            background: transparent;
+            border: 0;
+        }
+
+        #tv-ticker {
+            width: 100%;
+            height: 56px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="ticker-card">
+            <div class="tradingview-widget-container">
+                <div id="tv-ticker"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const config = {
+            symbols: [
+                { proName: "OANDA:XAGUSD", title: "SILVER" },
+                { proName: "OANDA:XAUUSD", title: "GOLD" },
+                { proName: "BITSTAMP:BTCUSD", title: "BITCOIN" },
+                { proName: "BITSTAMP:LTCUSD", title: "LITECOIN" },
+                { proName: "BITSTAMP:BNBUSD", title: "BINANCE" },
+                { proName: "OANDA:USDMXN", title: "USD/MXN" },
+                { proName: "OANDA:USDJPY", title: "USD/JPY" },
+                { proName: "OANDA:EURUSD", title: "EUR/USD" },
+                { proName: "FX_IDC:USDCLP", title: "USD/CLP" },
+                { proName: "FX_IDC:USDCNY", title: "USD/CNY" }
+            ],
+            colorTheme: "dark",
+            displayMode: "regular",
+            showSymbolLogo: false,
+            isTransparent: true,
+            locale: "en"
+        };
+
+        const script = document.createElement("script");
+        script.src = "https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js";
+        script.async = true;
+        script.innerHTML = JSON.stringify(config);
+        document.getElementById("tv-ticker").appendChild(script);
+    </script>
+</body>
+
+</html>

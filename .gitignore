@@ -1,0 +1,36 @@
+# A8 canonical repository
+# Generated/editor debris only. Do not broadly ignore evidence or public assets.
+
+# Editor / OS
+*~
+*.swp
+*.swo
+.DS_Store
+
+# Runtime / transient
+*.log
+*.pid
+*.sock
+*.tmp
+*.temp
+__pycache__/
+*.pyc
+node_modules/
+
+# Local secrets
+.env
+.env.*
+*.pem
+*.key
+
+# Working backup copies
+*.bak
+*.old
+*.orig
+*.save
+*.before-*
+
+# Core20 machine-local repository/runtime debris
+core20/.git/
+core20/_diagnostics/
+*.pre-native-sol-*

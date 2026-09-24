@@ -1,0 +1,18 @@
+{
+  "schema": "A8-CLOCK-DISCIPLINE-CONTEXT-V1",
+  "status": "KNOWN_IN_PROGRESS_RESIDUAL",
+  "observed_residual": {
+    "a8_seconds": 173,
+    "direction": "AHEAD",
+    "legacy_seconds_comparison": 114.0380859375
+  },
+  "authority_boundary": {
+    "physical_raw_unchanged": true,
+    "sol_geometry_unchanged": true,
+    "annual_frame_angle_unchanged": true,
+    "core20_retune": false,
+    "carrier_retune": false,
+    "back_correction_applied": false
+  },
+  "note": "Clock discipline remains in process. Preserve residual openly; do not force the Sol observation or physical RAW to agree with legacy time."
+}

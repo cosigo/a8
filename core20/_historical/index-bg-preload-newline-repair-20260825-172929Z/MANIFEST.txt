@@ -1,0 +1,14 @@
+A8 HISTORICAL SPECIMEN
+
+Original:
+  public/index-before-bg-preload-newline-repair-20260825-172929Z.html
+
+Classification:
+  Historical pre-repair snapshot.
+
+Status:
+  NOT LIVE.
+  NOT AUTHORITY.
+  PRESERVED FOR DEVELOPMENT HISTORY.
+
+Canonical live public/index.html remains authoritative.

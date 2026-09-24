@@ -1,0 +1,16 @@
+[Unit]
+Description=A8 Core20 native 00 08 16 24 recovery snapshot observer
+After=network.target
+
+[Service]
+Type=simple
+User=greg
+Group=greg
+ExecStart=/usr/bin/python3 /usr/local/sbin/a8-core20-native-snapshot-listener.py
+Restart=always
+RestartSec=2
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

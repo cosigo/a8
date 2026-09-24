@@ -1,0 +1,14 @@
+[Unit]
+Description=A8 Core20 recovery snapshots at 00 08 16 Mexico City
+
+[Timer]
+OnCalendar=*-*-* 00:00:00 America/Mexico_City
+OnCalendar=*-*-* 08:00:00 America/Mexico_City
+OnCalendar=*-*-* 16:00:00 America/Mexico_City
+AccuracySec=1s
+RandomizedDelaySec=0
+Persistent=true
+Unit=a8-core20-recovery-snapshot.service
+
+[Install]
+WantedBy=timers.target

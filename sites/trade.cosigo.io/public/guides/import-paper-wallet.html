@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Import and verify a paper wallet on your phone · COSIGO</title>
+  <meta name="description" content="A picture-by-picture beginner guide for checking a paper wallet on BscScan and importing its private key into the official Rabby mobile wallet.">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://trade.cosigo.io/guides/import-paper-wallet.html">
+  <link rel="icon" type="image/png" href="/shared/assets/guides/import-paper-wallet/cigo.png">
+  <link rel="apple-touch-icon" href="/shared/assets/guides/import-paper-wallet/cigo.png">
+  <link rel="stylesheet" href="/shared/assets/guides/import-paper-wallet/styles.css?v=1.0.0">
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="brand" href="#top"><img src="/shared/assets/guides/import-paper-wallet/cigo.png" alt="CIGO"><span>CIGO beginner guide</span></a>
+      <nav class="nav" aria-label="Guide links">
+        <a class="pill optional" href="https://cosigo.io/">COSIGO</a>
+        <a class="pill" href="https://trade.cosigo.io/guides.html">All guides</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <p class="eyebrow">One phone · one paper wallet · one safe path</p>
+          <h1>Import and verify a paper wallet.</h1>
+          <p class="lead">First check the public address without touching the secret. Then import the private key into Rabby in complete privacy. Complete one small step at a time.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#quick">Show the quick path</a>
+            <a class="button" href="https://rabby.io/">Official Rabby site</a>
+          </div>
+        </div>
+        <aside class="promise">
+          <strong>Paper wallet</strong>
+          A printed wallet normally contains a public address and a private key. The public address receives money. The private key controls it.
+          <br><br>
+          <strong>This guide uses one private key</strong>
+          Choose <em>Import Private Key</em>. Do not choose <em>Import Seed Phrase</em> for this example.
+        </aside>
+      </div>
+    </section>
+
+    <section class="section compact">
+      <div class="wrap">
+        <div class="danger-banner">
+          <div class="danger-icon" aria-hidden="true">!</div>
+          <div><strong>Stop before photographing or recording the secret.</strong> Never photograph, scan into a website, email, upload, or send the private key or recovery words. Anyone who obtains either can control the wallet. COSIGO will never ask for them.</div>
+        </div>
+        <div class="trust-grid">
+          <div><strong>Use only an authorized wallet</strong>Import only a paper wallet you own or have been explicitly authorized to control.</div>
+          <div><strong>Assume copies may exist</strong>If another person created or printed the paper wallet, they may still have its private key. After importing, move the assets to a fresh wallet you created yourself.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="quick">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">Quick instructions</p>
+          <h2>The whole process in seven steps.</h2>
+          <p>Read this list once. The real pictures and detailed instructions follow underneath.</p>
+        </div>
+        <ol class="quick-grid">
+          <li><span>1</span><strong>Find the public address</strong>Use only the section marked Address. It is safe to share.</li>
+          <li><span>2</span><strong>Check it on BscScan</strong>BscScan is a public record page. Confirm the BNB, USDT, and CIGO balances before importing.</li>
+          <li><span>3</span><strong>Open Rabby</strong>Use the official Rabby mobile app. Open the wallet list and press Add Wallet.</li>
+          <li><span>4</span><strong>Choose Private Key</strong>Press Import Private Key. Do not select Seed Phrase for this type of paper wallet.</li>
+          <li><span>5</span><strong>Enter the secret privately</strong>Cover cameras and people nearby. Type or scan the private key only inside Rabby. This guide intentionally shows no secret-entry picture.</li>
+          <li><span>6</span><strong>Compare the result</strong>The first and last characters of the imported address and the balances should match BscScan.</li>
+          <li><span>7</span><strong>Protect the funds</strong>If anyone else has ever seen the private key, move everything to a fresh wallet and permanently retire the paper wallet.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">Before you begin</p>
+          <h2>Know what is safe to show.</h2>
+          <p>The training image below contains no working QR code, address, key, or recovery phrase.</p>
+        </div>
+        <div class="step feature-step">
+          <div class="step-copy">
+            <span class="step-number">1</span>
+            <h3>Separate public information from secrets.</h3>
+            <p><strong>Public address:</strong> the receiving location. Share it when someone needs to send assets to you.</p>
+            <p><strong>Public key:</strong> safe to reveal, but normally unnecessary for receiving.</p>
+            <p><strong>Private key:</strong> the secret that controls this one address.</p>
+            <p><strong>Recovery words:</strong> secret words that may control an entire wallet and many addresses.</p>
+            <p class="stop"><strong>Stop if</strong>someone asks you to send a private QR, private key, recovery words, or Rabby password.</p>
+          </div>
+          <figure>
+            <img src="/shared/assets/guides/import-paper-wallet/steps/01-paper-wallet-safe.png" alt="Sanitized training paper wallet showing which sections may be shared and which must never be exposed">
+            <figcaption>Sanitized training image. Every original code and credential was removed.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="details">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">Detailed instructions</p>
+          <h2>Verify first. Import second.</h2>
+          <p>Nothing in the first four steps controls or spends the wallet. They use only its public address.</p>
+        </div>
+
+        <div class="steps">
+          <article class="step">
+            <div class="step-copy">
+              <span class="step-number">2</span>
+              <h3>Scan only the Address QR.</h3>
+              <p>The demonstration begins with the QR marked <strong>Address</strong>. This is the public receiving address—not the private key QR.</p>
+              <p class="instruction"><strong>Press this</strong>Use a QR reader, or Rabby’s address scanner, and point it only at the Address square.</p>
+              <p class="result"><strong>What should happen</strong>The phone reads a long address beginning with <code>0x</code>.</p>
+              <p class="stop"><strong>Stop if</strong>the paper section says Private Key, Secret, Mnemonic, or Recovery Words.</p>
+            </div>
+            <figure>
+              <img src="/shared/assets/guides/import-paper-wallet/steps/02-scan-public-address.png" alt="Phone scanning the public Address QR on the retired training paper wallet">
+              <figcaption>The pictured QR is the public address of the retired demonstration wallet. Do not send funds to it.</figcaption>
+            </figure>
+          </article>
+
+          <article class="step">
+            <div class="step-copy">
+              <span class="step-number">3</span>
+              <h3>Copy the public address.</h3>
+              <p>The scanner displays the public address as ordinary text. Public means anyone may look it up; it does not allow spending.</p>
+              <p class="instruction"><strong>Press this</strong>Tap <em>Copiar</em>, which means Copy.</p>
+              <p class="result"><strong>What should happen</strong>The address is placed on the phone’s clipboard so it can be pasted into BscScan.</p>
+              <p class="stop"><strong>Stop if</strong>the scanned text does not begin with <code>0x</code>, or the first and last characters do not match the printed Address.</p>
+            </div>
+            <figure>
+              <img src="/shared/assets/guides/import-paper-wallet/steps/03-copy-public-address.png" alt="QR reader showing a copied public wallet address">
+              <figcaption>Only a public address is copied. Never copy a private key into a browser.</figcaption>
+            </figure>
+          </article>
+
+          <article class="step">
+            <div class="step-copy">
+              <span class="step-number">4</span>
+              <h3>Verify the balances on BscScan.</h3>
+              <p><a href="https://bscscan.com/">BscScan</a> is a public search page for BNB Smart Chain. It can show an address and its balances without connecting Rabby or asking for a signature.</p>
+              <p class="instruction"><strong>Press this</strong>Open BscScan, paste the public address into the search box, and open the matching Address result. Expand Token Holdings.</p>
+              <p class="result"><strong>What should happen</strong>You see the BNB balance and token list. This demonstration initially showed 100 CIGO, 1 USDT, and a small amount of BNB.</p>
+              <p class="stop"><strong>Stop if</strong>any site asks for the private key. BscScan needs only the public address for this check.</p>
+            </div>
+            <figure>
+              <img src="/shared/assets/guides/import-paper-wallet/steps/04-bscscan-before.png" alt="BscScan token holdings showing 100 CIGO, one USDT, and a small BNB balance">
+              <figcaption>Public verification before import: 100 CIGO, 1 USDT, and BNB for network processing fees.</figcaption>
+            </figure>
+          </article>
+
+          <article class="step optional-step">
+            <div class="step-copy">
+              <span class="step-number">Optional</span>
+              <h3>Prove the address with a small public transfer.</h3>
+              <p>This is not required for importing. During the demonstration, a different wallet sent 25 CIGO to the paper wallet’s public address. No secret was needed to receive it.</p>
+              <p class="instruction"><strong>Safer beginner rule</strong>Skip this step unless you already know how to send CIGO. Never test with an amount you cannot afford to lose.</p>
+              <p class="result"><strong>What happened here</strong>Rabby showed <em>Correcto</em>, meaning the 25 CIGO send completed. BscScan then changed from 100 to 125 CIGO.</p>
+            </div>
+            <div class="figure-pair">
+              <figure>
+                <img src="/shared/assets/guides/import-paper-wallet/steps/05-send-test-cigo.png" alt="Rabby prepared to send 25 CIGO to the retired training address">
+                <figcaption>Optional test: 25 CIGO addressed to the public wallet address.</figcaption>
+              </figure>
+              <figure>
+                <img src="/shared/assets/guides/import-paper-wallet/steps/06-test-send-complete.png" alt="Rabby showing a completed 25 CIGO transfer">
+                <figcaption><em>Correcto</em> confirms the transfer completed.</figcaption>
+              </figure>
+              <figure>
+                <img src="/shared/assets/guides/import-paper-wallet/steps/07-bscscan-after.png" alt="BscScan token holdings showing the increased 125 CIGO balance">
+                <figcaption>BscScan independently shows the new 125 CIGO balance.</figcaption>
+              </figure>
+            </div>
+          </article>
+
+          <article class="step">
+            <div class="step-copy">
+              <span class="step-number">5</span>
+              <h3>Open Rabby’s Add Wallet menu.</h3>
+              <p>Rabby is the wallet app. Importing gives Rabby control of the existing paper-wallet address; it does not create a network transfer.</p>
+              <p class="instruction"><strong>Press this</strong>In Rabby, open the wallet list. Scroll to the bottom, press <em>Añadir una Wallet</em> (Add Wallet), then press <em>Importar Clave Privada</em> (Import Private Key).</p>
+              <p class="result"><strong>What should happen</strong>Rabby opens its private-key import screen.</p>
+              <p class="stop"><strong>Stop if</strong>you downloaded Rabby from a message, advertisement, or unknown site. Start at <a href="https://rabby.io/">rabby.io</a>.</p>
+            </div>
+            <figure>
+              <img src="/shared/assets/guides/import-paper-wallet/steps/08-rabby-import-private-key.png" alt="Rabby Add Method page with Import Private Key highlighted by its orange key icon">
+              <figcaption>Choose <em>Importar Clave Privada</em>. The Seed Phrase option is a different import method.</figcaption>
+            </figure>
+          </article>
+
+          <article class="step secret-step">
+            <div class="step-copy">
+              <span class="step-number">6</span>
+              <h3>Enter the private key where nobody can see it.</h3>
+              <p>The private key is the control secret for this address. Type it or scan its private QR only inside the official Rabby app.</p>
+              <p class="instruction"><strong>Before continuing</strong>Turn off screen recording. Cover nearby cameras. Make sure nobody can see the screen or paper. Do not save the key to the clipboard, cloud photo backup, email, notes, or chat.</p>
+              <p class="result"><strong>What should happen</strong>Rabby accepts the key and asks for the app’s normal local confirmation.</p>
+              <p class="stop"><strong>Stop if</strong>the private key has already been photographed, recorded, uploaded, or seen by another person. Treat that wallet as compromised and move its funds to a fresh wallet.</p>
+            </div>
+            <div class="secret-placeholder" role="img" aria-label="Private key entry intentionally not recorded">
+              <div class="shield">⌁</div>
+              <strong>SECRET ENTERED PRIVATELY</strong>
+              <span>This screen was intentionally not recorded.</span>
+              <small>No private QR, private key, recovery words, or Rabby password appears in this guide.</small>
+            </div>
+          </article>
+
+          <article class="step">
+            <div class="step-copy">
+              <span class="step-number">7</span>
+              <h3>Confirm the imported address.</h3>
+              <p>Rabby abbreviates long addresses. Compare the visible beginning and ending with the paper’s public Address and the BscScan result.</p>
+              <p class="instruction"><strong>Press this</strong>Tap <em>Ver Monedero</em>, which means View Wallet.</p>
+              <p class="result"><strong>What should happen</strong>The address begins with <code>0x23ff28</code> and ends with <code>da1eeb</code> in this retired training example.</p>
+              <p class="stop"><strong>Stop if</strong>the first or last characters differ. Do not send anything until the mismatch is understood.</p>
+            </div>
+            <figure>
+              <img src="/shared/assets/guides/import-paper-wallet/steps/09-import-success.png" alt="Rabby confirming that the retired training wallet was imported">
+              <figcaption>Successful import. The shortened public address matches the verified training address.</figcaption>
+            </figure>
+          </article>
+
+          <article class="step">
+            <div class="step-copy">
+              <span class="step-number">8</span>
+              <h3>Compare the balances.</h3>
+              <p>Rabby should now show the same assets that BscScan showed. Small dollar estimates may change with market prices; compare the token quantities.</p>
+              <p class="instruction"><strong>Check these</strong>The demonstration shows 125 CIGO, 1 USDT, and 0.0001 BNB.</p>
+              <p class="result"><strong>What this proves</strong>The imported private key controls the same public address checked on BscScan.</p>
+              <p class="stop"><strong>Stop if</strong>the address matches but assets are missing. Confirm Rabby is displaying BNB Smart Chain and refresh before taking any action.</p>
+            </div>
+            <figure>
+              <img src="/shared/assets/guides/import-paper-wallet/steps/10-rabby-balances.png" alt="Imported Rabby wallet showing 125 CIGO, one USDT, and a small BNB balance">
+              <figcaption>The wallet’s token quantities match the public record.</figcaption>
+            </figure>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section retirement">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">End of the demonstration</p>
+          <h2>This training wallet was permanently retired.</h2>
+          <p>The retirement shown here is proof about this demonstration—not a step every user must perform. This wallet’s secret was exposed while creating training material, so it can never be trusted again.</p>
+        </div>
+        <div class="retirement-grid">
+          <figure>
+            <img src="/shared/assets/guides/import-paper-wallet/steps/11-training-cigo-returned.png" alt="Rabby showing that all 125 training CIGO was returned to COSIGO Treasury">
+            <figcaption>All 125 training CIGO was returned to COSIGO Treasury for safety.</figcaption>
+          </figure>
+          <div class="retirement-copy">
+            <h3>What was removed</h3>
+            <p>All CIGO and USDT were removed. Only approximately $0.02 of unusable BNB processing-fee dust remained.</p>
+            <p><strong>Do not send assets to the address shown in this guide.</strong> It will never be used again.</p>
+            <p>BNB dust means a tiny remainder too small to move economically because the network processing fee would consume as much or more.</p>
+          </div>
+          <figure>
+            <img src="/shared/assets/guides/import-paper-wallet/steps/12-retired-bnb-dust.png" alt="Retired training wallet containing only approximately two cents of BNB dust">
+            <figcaption>Final retired state: approximately $0.02 of BNB dust and no CIGO or USDT.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="next-card">
+          <div>
+            <p class="eyebrow">Important change after import</p>
+            <h2>The paper wallet is no longer offline.</h2>
+            <p>Once its private key is inside a phone wallet, treat it as a phone wallet. Keep Rabby locked, keep the paper secret, and never reuse this address if the secret may have been exposed.</p>
+          </div>
+          <div class="hero-actions">
+            <a class="button button-primary" href="https://rabby.io/">Get Rabby officially</a>
+            <a class="button" href="https://bscscan.com/">Open BscScan</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">
+      <p>Training guide based on a real, permanently retired demonstration wallet. Wallet screens can change; read each Rabby confirmation before continuing.</p>
+      <p><a href="https://cosigo.io/">COSIGO</a> · <a href="https://trade.cosigo.io/">Trade</a> · <a href="https://message.cosigo.io/">Message Nugget</a></p>
+    </div>
+  </footer>
+</body>
+</html>

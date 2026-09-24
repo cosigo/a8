@@ -1,0 +1,97 @@
+{
+  "schema": "A8-SOL-SEP19-YEAR-ANGLE-CONSTRAINT-V1",
+  "date": "2026-09-19",
+  "sources": [
+    {
+      "name": "Kooha-2026-09-19-10-53-55.mkv",
+      "duration_seconds": 188.366666,
+      "sha256": "63e23c9a31f2e7c5963fb23a8b5c69b3901352f00f39492892472c5ed9f04dc5",
+      "center_fit_video_second": 103.8114,
+      "center_a8_clock": "22:38:04",
+      "center_day_phase_visible": [
+        92548,
+        92549
+      ],
+      "center_primary_epoch": 7,
+      "center_primary_raw_bracket": [
+        5000741,
+        5000774
+      ],
+      "center_primary_raw_representative": 5000774,
+      "center_primary_sequence_representative": 464635,
+      "ghost_raw_visible": 2877108,
+      "ghost_sequence_visible": 1620,
+      "ghost_link_visible": "STALE",
+      "absolute_role": "PRIMARY_MINTAKA_TO_SOL_PHASE_ANCHOR"
+    },
+    {
+      "name": "Kooha-2026-09-19-11-07-24.mkv",
+      "duration_seconds": 191.133333,
+      "sha256": "d8f924ad062cde3cef6af87b7902be3095f8daf2e21d6d5a6ce83a7503b6f6f9",
+      "center_fit_video_second": 109.7211,
+      "center_a8_clock": "22:57:24",
+      "center_primary_epoch": 7,
+      "center_primary_raw_representative": 5025540,
+      "absolute_role": "REPEAT_GEOMETRY_AND_CARRIER_CHECK"
+    }
+  ],
+  "mintaka_reference": {
+    "source": "Kooha-2026-09-19-04-55-19.mkv",
+    "a8_clock": "14:38:11",
+    "primary_epoch": 7,
+    "primary_raw": 4344303,
+    "track_angle_deg_screen_down_from_right": 3.980854957253914,
+    "role": "FIRST_SEP19_MINTAKA_CENTER_WITNESS"
+  },
+  "operator_field_note": {
+    "declination_offset": "+1.4 A8 angle north of Mintaka fix",
+    "time_note": "operator stated approximately 3640 A8 seconds before an earlier Mintaka fix",
+    "handling": "The +1.4 A8 north offset is preserved as operator field geometry. The ~3640 A8-second note is not substituted for the direct Sep-19 video timestamps, because its referent is not established by these two files."
+  },
+  "joint_sol_limb_fit": {
+    "vx_px_s": 26.1430038,
+    "vy_px_s_screen_down": 0.842090024,
+    "speed_px_s": 26.156562528270697,
+    "track_angle_deg_screen_down_from_right": 1.844911493976959,
+    "shared_fitted_solar_radius_px": 1666.23973,
+    "median_abs_limb_residual_px": 2.338963,
+    "p90_abs_limb_residual_px": 6.0032308
+  },
+  "independent_sol_limb_fit_angles_deg": [
+    1.539782059109231,
+    2.298776782537705
+  ],
+  "native_relationships": {
+    "mintaka_to_first_sol_a8_seconds": 32761,
+    "mintaka_to_first_sol_angle512_states": 127.97265625,
+    "mintaka_to_first_sol_angle_octal_approx": "177.762\u2088",
+    "quarter_turn_angle512": 128,
+    "quarter_turn_octal": "200\u2088",
+    "offset_from_quarter_turn_a8_seconds": -7,
+    "mintaka_to_first_sol_primary_raw_delta": 656471,
+    "sol_repeat_a8_seconds": 1236,
+    "sol_repeat_primary_raw_delta": 24766,
+    "raw_per_a8_second_mintaka_to_sol": 20.038185647568756,
+    "raw_per_a8_second_sol_repeat": 20.037216828478964,
+    "raw_per_a8_second_ratio_difference_ppm": 48.350980981215486,
+    "mintaka_mean_detector_track_deg": 4.0165784244212395,
+    "sol_joint_detector_track_deg": 1.844911493976959,
+    "sol_minus_mintaka_detector_track_deg": -2.1716669304442804
+  },
+  "year_angle_status": {
+    "result": "STRONG_NATIVE_CONSTRAINT_NOT_YET_ABSOLUTE_ZERO",
+    "what_is_now_measured": [
+      "Mintaka-to-Sol native equatorial phase separation, conditional on unchanged RA fix for the first Sol pass",
+      "Sol declination offset from Mintaka fix as operator field geometry",
+      "Sol detector track on the same camera orientation",
+      "Epoch-7 RAW/A8 phase consistency across the physical interval"
+    ],
+    "remaining_bridge": "Absolute Year Angle is defined from the vernal-equinox/ecliptic zero. The current packet does not invent an exact native Mintaka-to-vernal-zero or equatorial-to-ecliptic bridge. The next physical equator crossing / sealed native bridge can close that final orientation step without importing JPL as live authority.",
+    "no_retune": [
+      "Core20",
+      "Jovian ruler",
+      "carrier rate",
+      "civil phase"
+    ]
+  }
+}

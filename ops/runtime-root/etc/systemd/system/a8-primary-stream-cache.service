@@ -1,0 +1,15 @@
+[Unit]
+Description=A8 Primary Persistent Physical RAW Stream Cache
+After=network.target
+
+[Service]
+Type=simple
+User=greg
+Group=greg
+ExecStart=/usr/bin/python3 /usr/local/sbin/a8-primary-stream-cache.py
+Restart=always
+RestartSec=2
+NoNewPrivileges=true
+
+[Install]
+WantedBy=multi-user.target

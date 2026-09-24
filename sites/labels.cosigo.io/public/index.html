@@ -1,0 +1,407 @@
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>COSIGO Labels Record | Public Record of Token Labeling and Market Access Issues</title>
+    <meta name="description"
+        content="Public record documenting token labeling, scanner controls, wallet warnings, and market access issues affecting CIGO on BNB Smart Chain.">
+    <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="COSIGO">
+    <link rel="canonical" href="https://labels.cosigo.io/">
+
+    <meta property="og:title" content="COSIGO Labels Record | Public Record of Token Labeling and Market Access Issues">
+    <meta property="og:description"
+        content="Public record documenting token labeling, scanner controls, wallet warnings, and market access issues affecting CIGO on BNB Smart Chain.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://labels.cosigo.io/">
+    <meta property="og:site_name" content="COSIGO Labels Record">
+    <meta property="og:image" content="https://labels.cosigo.io/shared/assets/cosigo_master/cosigo_master_512.png">
+    <meta property="og:image:alt" content="COSIGO public record on token labeling and market access">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title"
+        content="COSIGO Labels Record | Public Record of Token Labeling and Market Access Issues">
+    <meta name="twitter:description"
+        content="Public record documenting token labeling, scanner controls, wallet warnings, and market access issues affecting CIGO on BNB Smart Chain.">
+    <meta name="twitter:image" content="https://labels.cosigo.io/shared/assets/cosigo_master/cosigo_master_512.png">
+
+    <!-- Favicons -->
+    <link rel="icon" href="/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+
+    <link rel="stylesheet" href="/shared/labels.css?v=20260704-mobile-menu">
+<style id="rabby-hover-visible-style">
+/* Forced visible Rabby link style - page-local so external CSS cannot miss it */
+a.rabby-hover-link,
+a.rabby-hover-link:visited {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.22em !important;
+  padding: 0.08em 0.36em !important;
+  margin: 0 0.05em !important;
+  border-radius: 999px !important;
+  color: #fff1b8 !important;
+  font-weight: 950 !important;
+  letter-spacing: 0.01em !important;
+  text-decoration: none !important;
+  background:
+    linear-gradient(135deg, rgba(216,180,90,0.32), rgba(150,108,48,0.22)) !important;
+  border: 1px solid rgba(242,217,138,0.82) !important;
+  box-shadow:
+    0 0 0 2px rgba(216,180,90,0.13),
+    0 0 14px rgba(216,180,90,0.42) !important;
+  text-shadow:
+    0 0 7px rgba(242,217,138,0.72) !important;
+  transform-origin: center !important;
+  transition:
+    transform 150ms ease,
+    background 150ms ease,
+    box-shadow 150ms ease,
+    color 150ms ease,
+    border-color 150ms ease !important;
+}
+
+a.rabby-hover-link::after {
+  content: "↗" !important;
+  font-size: 0.84em !important;
+  opacity: 0.9 !important;
+}
+
+a.rabby-hover-link:hover,
+a.rabby-hover-link:focus-visible {
+  color: #ffffff !important;
+  background:
+    linear-gradient(135deg, rgba(242,217,138,0.52), rgba(185,128,48,0.34)) !important;
+  border-color: #fff1b8 !important;
+  transform: translateY(-1px) scale(1.04) !important;
+  box-shadow:
+    0 0 0 2px rgba(216,180,90,0.12),
+    0 0 12px rgba(242,217,138,0.42),
+    0 0 20px rgba(216,180,90,0.24) !important;
+  text-shadow:
+    0 0 5px rgba(255,241,184,0.62),
+    0 0 10px rgba(216,180,90,0.42) !important;
+  outline: none !important;
+}
+</style>
+
+
+<style id="site-appendix-footer-style">
+.site-appendix-footer {
+  margin: 28px auto 0;
+  padding: 18px 16px 26px;
+  text-align: center;
+  font-size: 0.88rem;
+  opacity: 0.78;
+}
+.site-appendix-footer a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px dotted currentColor;
+}
+.site-appendix-footer a:hover,
+.site-appendix-footer a:focus-visible {
+  opacity: 1;
+  border-bottom-style: solid;
+}
+</style>
+<link rel="stylesheet" href="/shared/style.css?v=20260628-labeler-note">
+
+<style id="security-footer-card-style">
+footer.security-footer {
+    max-width: 1180px;
+    margin: 32px auto 0;
+    padding: 0 20px 48px;
+    border-top: 0;
+    color: inherit;
+}
+
+.security-footer-card {
+    padding: 24px;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.035);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.18);
+}
+
+.security-footer-copy {
+    color: var(--muted);
+    line-height: 1.65;
+}
+
+.security-footer-copy strong {
+    display: block;
+    margin-bottom: 4px;
+    color: inherit;
+    font-size: 1rem;
+}
+
+.security-footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 18px;
+}
+
+.security-footer-links a {
+    display: inline-flex;
+    align-items: center;
+    padding: 9px 12px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    color: inherit;
+    text-decoration: none;
+    background: rgba(255, 255, 255, 0.035);
+    transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.security-footer-links a:hover,
+.security-footer-links a:focus-visible {
+    border-color: currentColor;
+    background: rgba(255, 255, 255, 0.075);
+}
+
+.security-footer-note {
+    margin: 16px 0 0;
+    color: var(--muted);
+    font-size: 0.88rem;
+    line-height: 1.55;
+}
+
+@media (max-width: 640px) {
+    footer.security-footer {
+        padding-right: 14px;
+        padding-left: 14px;
+    }
+
+    .security-footer-card {
+        padding: 19px;
+    }
+
+    .security-footer-links {
+        display: grid;
+    }
+
+    .security-footer-links a {
+        justify-content: center;
+        text-align: center;
+    }
+}
+</style>
+
+</head>
+
+<body>
+<header class="labels-mobile-menu-bar">
+  <div class="labels-mobile-menu-inner">
+    <a class="labels-mobile-brand" href="https://labels.cosigo.io/" aria-label="COSIGO evidence labels home">
+      <img src="/shared/assets/icons/cigo_256.png" alt="CIGO token icon">
+      <span>
+        <strong>evidence labels</strong>
+        <small>COSIGO public record</small>
+      </span>
+    </a>
+
+    <button class="labels-mobile-menu-toggle" type="button" aria-expanded="false" aria-controls="labelsMobileMenuNav">menu</button>
+<nav id="labelsMobileMenuNav" class="cosigo-simple-top-menu labels-mobile-nav" aria-label="COSIGO site navigation">
+  <span class="menu-label">COSIGO:</span>
+  <a href="https://cosigo.io/">home</a>
+  <a href="https://trade.cosigo.io/">trade</a>
+  <a href="https://trade.cosigo.io/pool.html">pool</a>
+  <a href="https://trade.cosigo.io/request.html">Discount Desk</a>
+  <a href="https://trade.cosigo.io/guides.html">guides</a>
+  <a class="cigo-market-pill" href="https://market.cosigo.io/" title="CIGO market notice">
+    <img src="/shared/assets/icons/cigo_256.png" alt="CIGO">
+    <span>market</span>
+  </a>
+  <a href="https://pancakeswap.finance/swap?chain=bsc&outputCurrency=0x3a38e963f524E0dDFB75dFa1752b4Cd1364F5560">pancake</a>
+  <a href="https://quote.cosigo.io/">quote</a>
+</nav>
+  </div>
+</header>
+
+
+        <header class="site-header">
+<div class="wrap recordbar">
+                <div class="record-title">
+                    <div class="record-kicker">COSIGO Public Record</div>
+                    <div class="mini">MetaMask, third-party labels, and token-market gatekeeping</div>
+                </div>
+</div>
+
+            <div class="wrap">
+                <div class="notice">
+                    Independent COSIGO public record. No affiliation with MetaMask, Consensys, Blockaid, CertiK,
+                    PancakeSwap, BscScan, BNB Chain, or any third-party scanner, wallet, exchange, or data provider.
+                    This page documents COSIGO’s position, observations, and evidence requests.
+                </div>
+            </div>
+        </header>
+        <main>
+            <section class="hero wrap">
+                <div class="hero-grid">
+                    <div>
+                        <h1>MetaMask and opaque token reputation layer</h1>
+
+                        <p class="lead">
+                            A verified public contract can be inspected line by line. A vague malicious MetaMask label
+                            cannot. Most systems have checks and balances, irony is there is no one calling out prejudicial
+                            gatekeepers until CIGO was reputationally ambushed.
+                        </p>
+
+                        <p class="lead">
+                            This page documents the hostile environment crypto participants can face, where opaque
+                            wallet labels, third-party scanner systems, and market-access controls can stigmatize,
+                            restrict, or impair otherwise functional tokens before users ever review a project directly.
+                        </p>
+
+                        <div class="tagrow" aria-label="Key themes">
+                            <span class="tag">verified contract</span>
+                            <span class="tag">opaque warning labels</span>
+                            <span class="tag">defensive controls</span>
+                            <span class="tag">liquidity extraction</span>
+                            <span class="tag">third-party gatekeeping</span>
+                            <span class="tag">public evidence log</span>
+                        </div>
+
+                        <div class="button-row">
+                            <a class="button secondary" href="/record.html">Read public record</a>
+                            <a class="button secondary" href="/evidence.html">Evidence log</a>
+                            <a class="button secondary" href="/club-effect.html">High probability rug pulls →</a>
+                            <a class="button secondary" href="/liquidity-trap.html">Naked token targets →</a>
+                            <a class="button" href="https://market.cosigo.io/">CIGO market notice →</a>
+                        </div>
+                    </div>
+
+                    <aside class="card quote-card">
+                        <p class="bigquote">
+                            Chain is public. <br />
+                            Contract is verified. <br />
+                            <span>Accusation is private.</span>
+                        </p>
+                        <div class="callout">
+                            CIGO supports legitimate security review. CIGO rejects unsupported reputational damage from
+                            vague third-party labels that do not identify a specific function, permission, transaction
+                            behavior, scanner rule, data source, or remediation path.
+                        </div>
+                    </aside>
+                </div>
+            </section>
+
+            <section class="section wrap">
+                <div class="card">
+                    <h2>Evidence snapshot</h2>
+                    <p class="muted">
+                        Quick view of core documented facts in this record.
+                    </p>
+
+        <div class="labeler-context-note">
+          <h3>Important notice for users, reviewers, and labelers</h3>
+          <p>
+            CIGO is presented by COSIGO as a controlled-risk, administratively managed market-access token with
+            protective features intended to limit bot pressure, whale concentration, and liquidity abuse during early
+            market formation. Those controls may raise centralization concerns and deserve open review, but COSIGO does
+            not regard them as evidence of fraud, exploit behavior, or malicious token design.
+          </p>
+          <p>
+            COSIGO has disputed third-party wallet and scanner labels that impair normal CIGO access without clearly
+            identifying a specific abusive function, confirmed misconduct, scanner rule, data source, or remediation path.
+            Holders should review public disclosures, understand that CIGO is not an unmanaged meme asset, and approach
+            trades carefully while adverse labels remain in place.
+          </p>
+          <p>
+            <strong>Wallet caution:</strong> MetaMask-related warning flows have been inconsistent in CIGO’s documented
+            experience. Verify wallet behavior before relying on it, and consider Rabby Wallet for normal CIGO access.
+          </p>
+        </div>
+
+
+                    <div class="facts-grid">
+                        <div class="fact">
+                            <div class="fact-label">Contract status</div>
+                            <div class="fact-value">Verified on BscScan</div>
+                        </div>
+
+                        <div class="fact">
+                            <div class="fact-label">CertiK scan</div>
+                            <div class="fact-value">No honeypot risk found</div>
+                        </div>
+
+                        <div class="fact">
+                            <div class="fact-label">MetaMask support</div>
+                            <div class="fact-value">Malicious label kept, no clear remediation path given</div>
+                        </div>
+
+                        <div class="fact">
+                            <div class="fact-label">Support outcome</div>
+                            <div class="fact-value">
+                                MetaMask’s conduct in this matter was not a neutral act of user protection. It imposed a
+                                harmful designation, restricted normal owner-wallet contract interaction, blocked
+                                further meaningful chat assistance, and failed to identify a specific abusive function
+                                or clear remediation path. Instead of providing transparent review, MetaMask left
+                                correction trapped inside an opaque and unaccountable process while its label continued
+                                to carry real reputational and commercial consequences. When the same contract remained
+                                operable through <a class="rabby-hover-link" href="https://rabby.io" target="_blank" rel="noopener">Rabby</a>, the practical conclusion became difficult to ignore: the
+                                impairment was not simply a contract-level failure, but a wallet-layer restriction
+                                imposed by MetaMask. That is not neutral risk guidance. It is discretionary gatekeeping
+                                with real market impact, and it deserves far more scrutiny than MetaMask has been
+                                willing to accept. Provide this info abundantly if you are victim of similar opaque
+                                dirty tricks and insider label tactics. COSIGO project welcomes any independant
+                                developer suffering similar abuses to share and publish their experience here.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="button-row">
+                        <span class="status-chip gold">Verified public contract</span>
+                        <span class="status-chip red">Opaque malicious designation</span>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+    <footer class="security-footer">
+        <div class="security-footer-card">
+            <div class="security-footer-copy">
+                <strong>COSIGO public record and opinion notice</strong>
+                This page is an independent COSIGO public record and opinion statement based on observed labels,
+                support correspondence, scanner outputs, and public on-chain information. It is not investment
+                advice, legal advice, or a claim of affiliation with any named third party.
+                <br><br>
+                COSIGO supports transparent review. If any named third party believes this record is inaccurate
+                or incomplete, COSIGO requests specific technical basis, source, rule, evidence path, and
+                remediation requirement so the record can be updated accurately.
+            </div>
+
+            <nav class="security-footer-links" aria-label="Official COSIGO and CIGO links">
+                <a href="https://cosigo.io/">COSIGO official</a>
+                <a href="https://market.cosigo.io/">CIGO market notice</a>
+                <a href="https://trade.cosigo.io/">CIGO swaps</a>
+                <a href="https://token.cosigo.io/">CIGO token</a>
+                <a href="https://contact.cosigo.io/">Contact</a>
+                <a href="https://trade.cosigo.io/appendix.html">site appendix / quick reference</a>
+                <a href="https://dexscreener.com/bsc/0xded1e63b6262c0328876b7774f65c08505dd559a"
+                   target="_blank" rel="noopener">DEX Screener chart only ↗</a>
+                <a href="https://github.com/cosigo"
+                   target="_blank" rel="noopener">GitHub ↗</a>
+            </nav>
+
+            <p class="security-footer-note">
+                DEX Screener is provided for chart and reference purposes only.
+                Use trade.cosigo.io for swaps.
+            </p>
+        </div>
+    </footer>
+
+<script src="/shared/labels-menu.js?v=20260704-mobile-menu" defer></script>
+</body>
+
+</html>

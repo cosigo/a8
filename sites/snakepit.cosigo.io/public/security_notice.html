@@ -1,0 +1,1783 @@
+
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>CIGO Security Notice — COSIGO Snakepit</title>
+  <meta name="description" content="CIGO security notice and wallet safety summary for COSIGO, including official CIGO trade, quote, market, and project links.">
+  <meta name="author" content="COSIGO">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://snakepit.cosigo.io/security_notice.html">
+  <meta name="keywords" content="CIGO, COSIGO, security notice, wallet safety, BNB Smart Chain, PancakeSwap, Red Alarm, HashDit">
+
+  <link rel="icon" type="image/png" sizes="256x256" href="/shared/assets/icons/cigo_256.png?v=20260613">
+  <link rel="apple-touch-icon" sizes="256x256" href="/shared/assets/icons/cigo_256.png?v=20260613">
+
+  <meta property="og:title" content="CIGO Security Notice — COSIGO Snakepit">
+  <meta property="og:description" content="CIGO security notice and wallet safety summary with official trade, quote, market, and COSIGO project links.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="COSIGO Snakepit">
+  <meta property="og:url" content="https://snakepit.cosigo.io/security_notice.html">
+  <meta property="og:image" content="https://snakepit.cosigo.io/shared/assets/icons/cigo_256.png">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="CIGO Security Notice — COSIGO Snakepit">
+  <meta name="twitter:description" content="CIGO security notice and wallet safety summary with official trade, quote, market, and COSIGO project links.">
+  <meta name="twitter:image" content="https://snakepit.cosigo.io/shared/assets/icons/cigo_256.png">
+
+<meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+
+
+<style>
+        :root {
+            --bg: #07111f;
+            --panel: #0d1b2e;
+            --panel2: #101f35;
+            --text: #e8eef8;
+            --muted: #aebbd0;
+            --line: rgba(255, 255, 255, .14);
+            --accent: #f6c86b;
+            --danger: #ff7b7b;
+            --good: #8ae6b2;
+            --link: #88c7ff;
+            --code: #13253d;
+            --max: 1120px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background:
+                radial-gradient(circle at top left, rgba(246, 200, 107, .13), transparent 36rem),
+                radial-gradient(circle at top right, rgba(136, 199, 255, .10), transparent 32rem),
+                var(--bg);
+            color: var(--text);
+            line-height: 1.62;
+        }
+
+        a {
+            color: var(--link);
+            text-decoration: none;
+            overflow-wrap: anywhere;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .wrap {
+            width: min(var(--max), calc(100% - 32px));
+            margin: 0 auto;
+        }
+
+        header {
+            padding: 28px 0 18px;
+            border-bottom: 1px solid var(--line);
+            background: rgba(7, 17, 31, .78);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 5;
+        }
+
+        .topline {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
+            flex-wrap: wrap;
+        }
+
+        .brand {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .brand strong {
+            font-size: 1rem;
+            letter-spacing: .06em;
+            text-transform: uppercase;
+            color: var(--accent);
+        }
+
+        .brand span {
+            color: var(--muted);
+            font-size: .94rem;
+        }
+
+        nav {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+            font-size: .94rem;
+        }
+
+        main {
+            padding: 42px 0 80px;
+        }
+
+        .hero {
+            padding: 34px;
+            border: 1px solid var(--line);
+            border-radius: 24px;
+            background: linear-gradient(145deg, rgba(13, 27, 46, .98), rgba(16, 31, 53, .86));
+            box-shadow: 0 24px 80px rgba(0, 0, 0, .25);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(90deg, rgba(7, 17, 31, .95), rgba(7, 17, 31, .72)),
+                url("https://snakepit.cosigo.io/shared/images/hi-defi-hack-overview-what-happe.avif");
+            background-position: right center;
+            background-repeat: no-repeat;
+            background-size: min(48%, 520px) auto;
+            opacity: .34;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .hero>* {
+            position: relative;
+            z-index: 1;
+        }
+
+        .visual-card {
+            margin: 22px 0;
+            border: 1px solid var(--line);
+            border-radius: 22px;
+            background: rgba(255, 255, 255, .045);
+            overflow: hidden;
+            box-shadow: 0 18px 50px rgba(0, 0, 0, .20);
+        }
+
+        .visual-card img {
+            display: block;
+            width: 100%;
+            height: auto;
+            opacity: .88;
+        }
+
+        .visual-card figcaption {
+            padding: 14px 16px;
+            color: var(--muted);
+            font-size: .94rem;
+            border-top: 1px solid var(--line);
+            background: rgba(7, 17, 31, .45);
+        }
+
+        .eyebrow {
+            color: var(--danger);
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: .12em;
+            font-size: .82rem;
+            margin-bottom: 12px;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: clamp(2rem, 5vw, 4rem);
+            line-height: 1.05;
+            letter-spacing: -0.04em;
+        }
+
+        .lede {
+            margin: 22px 0 0;
+            color: var(--muted);
+            font-size: clamp(1.05rem, 2vw, 1.28rem);
+            max-width: 880px;
+        }
+
+        .notice-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+            margin-top: 24px;
+        }
+
+        .card {
+            border: 1px solid var(--line);
+            border-radius: 18px;
+            background: rgba(255, 255, 255, .045);
+            padding: 18px;
+        }
+
+        .card h3 {
+            margin: 0 0 8px;
+            font-size: 1rem;
+            color: var(--accent);
+        }
+
+        .card p {
+            margin: 0;
+            color: var(--muted);
+        }
+
+        section {
+            margin-top: 30px;
+            padding: 28px;
+            border: 1px solid var(--line);
+            border-radius: 22px;
+            background: rgba(13, 27, 46, .80);
+        }
+
+        section h2 {
+            margin: 0 0 14px;
+            font-size: clamp(1.35rem, 2.6vw, 2rem);
+            line-height: 1.18;
+            letter-spacing: -0.025em;
+        }
+
+        section h3 {
+            margin: 24px 0 10px;
+            color: var(--accent);
+            font-size: 1.1rem;
+        }
+
+        p {
+            margin: 0 0 14px;
+        }
+
+        .muted {
+            color: var(--muted);
+        }
+
+        .hard {
+            padding: 18px;
+            border-left: 4px solid var(--danger);
+            background: rgba(255, 123, 123, .08);
+            border-radius: 14px;
+            margin: 18px 0;
+        }
+
+        .good {
+            padding: 18px;
+            border-left: 4px solid var(--good);
+            background: rgba(138, 230, 178, .08);
+            border-radius: 14px;
+            margin: 18px 0;
+        }
+
+        code,
+        .addr {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+            background: var(--code);
+            color: #f3f7ff;
+            padding: .16rem .36rem;
+            border-radius: 7px;
+            overflow-wrap: anywhere;
+            word-break: break-word;
+        }
+
+        .addr-block {
+            display: block;
+            padding: 12px;
+            margin: 10px 0 16px;
+            border-radius: 12px;
+            background: var(--code);
+            border: 1px solid var(--line);
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+            overflow-wrap: anywhere;
+            word-break: break-word;
+        }
+
+        ul,
+        ol {
+            margin: 12px 0 0;
+            padding-left: 1.25rem;
+        }
+
+        li {
+            margin: 8px 0;
+        }
+
+        .two-col {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        footer {
+            padding: 32px 0 48px;
+            color: var(--muted);
+            border-top: 1px solid var(--line);
+        }
+
+        .small {
+            font-size: .92rem;
+            color: var(--muted);
+        }
+
+        @media (max-width: 800px) {
+            header {
+                position: static;
+            }
+
+            .notice-grid,
+            .two-col {
+                grid-template-columns: 1fr;
+            }
+
+            .hero,
+            section {
+                padding: 22px;
+            }
+
+            .hero::after {
+                background-size: 110% auto;
+                background-position: center bottom;
+                opacity: .18;
+            }
+
+        }
+
+        @media print {
+            body {
+                background: white;
+                color: black;
+            }
+
+            header,
+            footer {
+                background: white;
+                color: black;
+            }
+
+            .hero,
+            section,
+            .card {
+                background: white;
+                color: black;
+                border-color: #bbb;
+                box-shadow: none;
+            }
+
+            a {
+                color: black;
+            }
+
+            .muted,
+            .brand span {
+                color: #333;
+            }
+
+            code,
+            .addr,
+            .addr-block {
+                background: #f1f1f1;
+                color: black;
+            }
+
+            .hero::after {
+                display: none;
+            }
+
+            .visual-card {
+                background: white;
+                border-color: #bbb;
+                box-shadow: none;
+            }
+
+            .visual-card figcaption {
+                background: #f5f5f5;
+                color: #333;
+            }
+
+        }
+    </style>
+<style id="site-appendix-footer-style">
+.site-appendix-footer {
+  margin: 28px auto 0;
+  padding: 18px 16px 26px;
+  text-align: center;
+  font-size: 0.88rem;
+  opacity: 0.78;
+}
+.site-appendix-footer a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px dotted currentColor;
+}
+.site-appendix-footer a:hover,
+.site-appendix-footer a:focus-visible {
+  opacity: 1;
+  border-bottom-style: solid;
+}
+</style>
+
+<style id="snakepit-security-mobile-normalize-css">
+  @media (max-width: 800px) {
+    html,
+    body {
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+
+    .wrap {
+      width: min(var(--max), calc(100% - 20px));
+    }
+
+    main {
+      padding: 20px 0 48px;
+    }
+
+    .hero,
+    section,
+    .card,
+    .hard,
+    .good,
+    .visual-card {
+      max-width: 100%;
+      border-radius: 16px;
+    }
+
+    .hero,
+    section {
+      padding: 16px;
+    }
+
+    .notice-grid,
+    .two-col {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .card,
+    .hard,
+    .good {
+      padding: 14px;
+    }
+
+    .visual-card {
+      margin: 16px 0;
+    }
+
+    .visual-card figcaption {
+      padding: 12px;
+      font-size: 0.88rem;
+    }
+
+    h1 {
+      font-size: clamp(1.85rem, 10vw, 2.75rem);
+      letter-spacing: -0.03em;
+    }
+
+    section h2 {
+      font-size: clamp(1.22rem, 6vw, 1.55rem);
+    }
+
+    .lede {
+      font-size: 1rem;
+      line-height: 1.55;
+    }
+
+    code,
+    .addr,
+    .addr-block,
+    a,
+    p,
+    li {
+      max-width: 100%;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    .addr-block {
+      padding: 10px;
+      font-size: 0.78rem;
+      line-height: 1.45;
+    }
+
+    ul,
+    ol {
+      padding-left: 1.1rem;
+    }
+  }
+
+  @media (max-width: 420px) {
+    .hero,
+    section {
+      padding: 14px;
+    }
+
+    .addr,
+    .addr-block {
+      font-size: 0.74rem;
+    }
+  }
+</style>
+
+<style id="snakepit-security-topbar-css">
+  .topbar.market-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    padding: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+    background: rgba(11, 15, 25, 0.92);
+    backdrop-filter: blur(12px);
+  }
+
+  .topbar-inner.market-topbar-inner {
+    width: min(var(--max), calc(100% - 32px));
+    margin: 0 auto;
+    min-height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .market-title {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+    flex: 0 0 auto;
+    color: #ffffff;
+    text-decoration: none;
+  }
+
+  .brand-icon {
+    width: 40px;
+    height: 40px;
+    display: block;
+    object-fit: contain;
+    border-radius: 10px;
+    flex: 0 0 auto;
+    box-shadow: 0 0 18px rgba(255, 184, 77, 0.16);
+  }
+
+  .brand-text {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  .brand-title {
+    display: block;
+    color: #ffffff;
+    font-weight: 900;
+    line-height: 1.05;
+  }
+
+  .brand-text small {
+    display: block;
+    margin-top: 3px;
+    color: rgba(226, 232, 240, 0.72);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .market-header-nav {
+    display: flex;
+    flex: 1 1 auto;
+    width: auto;
+    margin-left: auto;
+    padding: 0;
+    gap: 8px;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+    overflow: visible;
+  }
+
+  .market-header-nav .menu-label {
+    color: rgba(238, 214, 151, 0.96);
+    font-size: 0.78rem;
+    font-weight: 850;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-right: 2px;
+    white-space: nowrap;
+  }
+
+  .market-header-nav a,
+  .market-nav-toggle {
+    min-height: 36px;
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(245, 232, 197, 0.96);
+    font: inherit;
+    font-size: 0.86rem;
+    font-weight: 850;
+    line-height: 1;
+    padding: 8px 10px;
+    border-radius: 999px;
+    border: 1px solid rgba(214, 174, 94, 0.34);
+    background: linear-gradient(135deg, rgba(55, 34, 16, 0.78), rgba(118, 72, 31, 0.30));
+    box-shadow: 0 0 10px rgba(214, 174, 94, 0.08);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .market-header-nav a:hover,
+  .market-header-nav a:focus-visible,
+  .market-nav-toggle:hover,
+  .market-nav-toggle:focus-visible {
+    color: #fff6dc;
+    border-color: rgba(236, 197, 112, 0.68);
+    background: linear-gradient(135deg, rgba(92, 54, 22, 0.90), rgba(154, 98, 43, 0.50), rgba(74, 42, 88, 0.34));
+    outline: none;
+    text-decoration: none;
+  }
+
+  .market-nav-toggle {
+    display: none;
+    appearance: none;
+    cursor: pointer;
+    letter-spacing: 0.04em;
+  }
+
+  .market-header-nav .cigo-market-pill {
+    gap: 6px;
+  }
+
+  .market-header-nav .cigo-market-pill img {
+    width: 18px;
+    height: 18px;
+    border-radius: 999px;
+    display: block;
+    flex: 0 0 auto;
+  }
+
+  .page-header {
+    position: static;
+    top: auto;
+    z-index: auto;
+    padding: 22px 0 14px;
+  }
+
+  .page-header .topline {
+    align-items: flex-start;
+  }
+
+  .page-header nav {
+    justify-content: flex-end;
+    gap: 10px;
+  }
+
+  .page-header nav a {
+    display: inline-flex;
+    min-height: 34px;
+    align-items: center;
+    padding: 7px 10px;
+    border-radius: 999px;
+    border: 1px solid rgba(148, 163, 184, 0.26);
+    background: rgba(15, 23, 42, 0.38);
+  }
+
+  @media (max-width: 760px) {
+    .topbar-inner.market-topbar-inner {
+      width: min(calc(100% - 20px), var(--max));
+      min-height: auto;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 0;
+    }
+
+    .market-title {
+      max-width: calc(100% - 96px);
+    }
+
+    .brand-icon {
+      width: 36px;
+      height: 36px;
+    }
+
+    .market-nav-toggle {
+      display: inline-flex;
+      margin-left: auto;
+    }
+
+    .market-header-nav {
+      display: none;
+      flex: 0 0 100%;
+      width: 100%;
+      margin-left: 0;
+      padding: 10px;
+      flex-direction: column;
+      align-items: stretch;
+      justify-content: flex-start;
+      gap: 8px;
+      border: 1px solid rgba(236, 197, 112, 0.22);
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(15, 12, 9, 0.96), rgba(8, 9, 12, 0.94));
+      box-shadow: 0 16px 34px rgba(0, 0, 0, 0.34);
+      max-height: calc(100vh - 92px);
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+
+    .market-header-nav.is-open {
+      display: flex;
+    }
+
+    .market-header-nav .menu-label {
+      display: none;
+    }
+
+    .market-header-nav a {
+      width: 100%;
+      justify-content: flex-start;
+      white-space: normal;
+      min-height: 40px;
+      overflow-wrap: anywhere;
+    }
+
+    .page-header {
+      padding: 18px 0 10px;
+    }
+
+    .page-header .topline {
+      display: block;
+    }
+
+    .page-header .brand {
+      margin-bottom: 12px;
+    }
+
+    .page-header nav {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      flex-wrap: nowrap;
+      padding-bottom: 4px;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .page-header nav a {
+      flex: 0 0 auto;
+      font-size: 0.86rem;
+      white-space: nowrap;
+    }
+  }
+</style>
+
+
+<style id="security-footer-card-style">
+footer.security-footer {
+    max-width: 1180px;
+    margin: 32px auto 0;
+    padding: 0 20px 48px;
+    border-top: 0;
+    color: inherit;
+}
+
+.security-footer-card {
+    padding: 24px;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.035);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.18);
+}
+
+.security-footer-copy {
+    color: var(--muted);
+    line-height: 1.65;
+}
+
+.security-footer-copy strong {
+    display: block;
+    margin-bottom: 4px;
+    color: inherit;
+    font-size: 1rem;
+}
+
+.security-footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 18px;
+}
+
+.security-footer-links a {
+    display: inline-flex;
+    align-items: center;
+    padding: 9px 12px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    color: inherit;
+    text-decoration: none;
+    background: rgba(255, 255, 255, 0.035);
+    transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.security-footer-links a:hover,
+.security-footer-links a:focus-visible {
+    border-color: currentColor;
+    background: rgba(255, 255, 255, 0.075);
+}
+
+.security-footer-note {
+    margin: 16px 0 0;
+    color: var(--muted);
+    font-size: 0.88rem;
+    line-height: 1.55;
+}
+
+@media (max-width: 640px) {
+    footer.security-footer {
+        padding-right: 14px;
+        padding-left: 14px;
+    }
+
+    .security-footer-card {
+        padding: 19px;
+    }
+
+    .security-footer-links {
+        display: grid;
+    }
+
+    .security-footer-links a {
+        justify-content: center;
+        text-align: center;
+    }
+}
+</style>
+
+</head>
+
+<body>
+
+<header class="topbar market-header">
+    <div class="topbar-inner market-topbar-inner">
+      <a class="brand market-title" href="https://snakepit.cosigo.io/security_notice.html#summary" aria-label="CIGO public record">
+        <img src="/shared/assets/icons/cigo_256.png" alt="CIGO token icon" class="brand-icon">
+        <span class="brand-text">
+          <span class="brand-title">CIGO public record</span>
+          <small>security notice</small>
+        </span>
+      </a>
+
+      <button class="market-nav-toggle" type="button" aria-expanded="false" aria-controls="securityHeaderNav">menu</button>
+
+      <nav id="securityHeaderNav" class="cosigo-escape-menu market-header-nav" aria-label="COSIGO site navigation">
+        <span class="menu-label">COSIGO:</span>
+        <a href="https://cosigo.io/">home</a>
+        <a href="https://trade.cosigo.io/">trade</a>
+        <a class="cigo-market-pill" href="https://market.cosigo.io/" title="CIGO market notice">
+          <img src="/shared/assets/icons/cigo_256.png" alt="CIGO">
+          <span>market</span>
+        </a>
+        <a href="https://trade.cosigo.io/request.html">discount desk</a>
+        <a href="https://trade.cosigo.io/pool.html">pool</a>
+        <a href="https://trade.cosigo.io/guides.html">guides</a>
+        <a href="https://pancakeswap.finance/swap?chain=bsc&outputCurrency=0x3a38e963f524E0dDFB75dFa1752b4Cd1364F5560" target="_blank" rel="noopener">pancake</a>
+        <a href="https://quote.cosigo.io/">quote</a>
+        <a href="https://snakepit.cosigo.io/">snakepit</a>
+      
+          <a href="https://labels.cosigo.io/" data-cosigo-bridge="true">evidence labels</a>
+      </nav>
+    </div>
+  </header>
+
+
+
+
+
+
+
+
+
+
+
+<header class="page-header">
+        <div class="wrap topline">
+            <div class="brand">
+                <strong>CIGO Public Record</strong>
+                <span>COSIGO / cosigo market security notice</span>
+            </div>
+
+            <nav aria-label="Page navigation">
+                <a href="#summary">Summary</a>
+                <a href="#wallet-layer">Wallet layer</a>
+                <a href="#paper-wallets">Paper wallets</a>
+                <a href="#contracts">Contracts</a>
+                <a href="#evidence">Evidence</a>
+                <a href="#liquidity-extraction">Extraction</a>
+                <a href="#bnb-paths">BNB paths</a>
+                <a href="#warning">Warning</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="wrap">
+        <article>
+            <div class="hero" id="summary">
+                <div class="eyebrow">Public Security Notice</div>
+                <h1>CIGO wallet-drain cluster, liquidity-extraction record, paper-wallet warning, and wallet-layer
+                    market access report
+                </h1>
+
+                <p class="lede">
+                    COSIGO / CIGO is publishing this notice as a public warning to token deployers, small projects,
+                    and anyone considering entering crypto-token market. This notice concerns two related but
+                    distinct issues: wallet/scanner market-access interference, a later wallet-drain / liquidation
+                    cluster involving wallets generated through an online BNB paper-wallet source, and continuing
+                    automated liquidity-extraction behavior through routers, pools, bot/exchange-style wallets, and
+                    exchange-labeled funding paths.
+                </p>
+
+                <div class="notice-grid">
+                    <div class="card">
+                        <h3>Current active CIGO contract</h3>
+                        <p><span class="addr">0x3a38e963f524E0dDFB75dFa1752b4Cd1364F5560</span></p>
+                    </div>
+
+                    <div class="card">
+                        <h3>Retired historical contract</h3>
+                        <p><span class="addr">0xdafaf7b17A3C909e1153ce7A75f767cCCf9cf79d</span></p>
+                    </div>
+                </div>
+
+                <div class="hard">
+                    <p>
+                        <strong>Public warning:</strong> all wallets generated through
+                        <strong>bnbpaperwallet.com</strong> in identified CIGO wallet
+                        inventory have been compromised. Affected wallets were not distributed to normal
+                        customers. They have been isolated, retained as evidence, and treated as burned.
+                    </p>
+
+                    <figure class="visual-card" aria-label="DeFi hack overview visual warning">
+                        <img src="https://snakepit.cosigo.io/shared/images/hi-defi-hack-overview-what-happe.avif"
+                            alt="Visual overview of DeFi exploit and liquidity extraction risk" loading="eager"
+                            decoding="async" />
+                        <figcaption>
+                            Public-facing visual summary: warnings may frighten normal users, but technically capable
+                            actors can still route through wallets, pools, exchanges, aggregators, and liquidity paths.
+                        </figcaption>
+                    </figure>
+
+                </div>
+            </div>
+
+            <section class="notice-panel no-user-harm-note" id="no-user-harm">
+  <h2>No user funds were harmed</h2>
+  <p>
+    During early development and testing, no public user wallets or user funds were affected.
+    Any losses, exposure, or failed test paths were borne by the project owner during owner-funded testing
+    intended to identify weak points, hostile patterns, unsafe tooling assumptions, and interface risks
+    before broader public use.
+  </p>
+  <p>
+    The current official CIGO swap and pool pages have since been hardened with exact approvals,
+    visible wallet-confirmation steps, clear token/tax/liquidity disclosures, direct PancakeSwap routing,
+    and no hidden wallet aggregators.
+  </p>
+</section>
+
+<section id="wallet-layer">
+                <h2>Wallet-layer market access control</h2>
+
+                <p>
+                    This incident did not begin only with paper-wallet compromise. It followed an earlier and
+                    separate market-access problem involving wallet warnings, scanner labels, and ability of
+                    wallet software to interfere with normal contract interaction.
+                </p>
+
+                <p>
+                    CIGO was labeled or treated as high-risk / malicious in wallet and scanner environments despite
+                    contract source being verified and despite project attempting to obtain clear correction
+                    guidance.
+                </p>
+
+                <div class="hard">
+                    <p>
+                        A wallet interface is not just a neutral viewer. When a major wallet can label a token,
+                        interrupt
+                        signing, discourage interaction, block or degrade user flows, and provide no transparent
+                        correction
+                        path, it becomes a market-access gatekeeper. <a href="https://snakepit.cosigo.io/">See snakepit
+                            ops &angle;</a>
+                    </p>
+                </div>
+
+                <h3>Practical effects observed</h3>
+                <ul>
+                    <li>Users saw damaging warnings before ordinary market participation.</li>
+                    <li>Token reputation was harmed before revenue or fair price discovery.</li>
+                    <li>Contract interaction through certain wallet flows became unreliable or blocked.</li>
+                    <li>Owner / admin functions were affected through wallet-interface behavior.</li>
+                    <li>Comparable actions could succeed through other wallets, showing that contract itself
+                        remained operable.</li>
+                    <li>No clear technical remediation path was provided.</li>
+                </ul>
+
+                <h3>Pressure system</h3>
+                <p>
+                    Resulting incentive is dangerous for small deployers:
+                </p>
+
+                <div class="hard">
+                    <p>
+                        Add protections and token is labeled risky. Remove protections and token becomes easier
+                        prey for bots, whales, drainers, and liquidity extraction. Refuse hostile recommendations and
+                        market access can be degraded.
+                    </p>
+                </div>
+
+                <p>
+                    That is not neutral safety. It is a pressure system that punishes defensive design and rewards
+                    exposure.
+                </p>
+
+                <p>
+                    CIGO’s position is that a wallet/scanner environment created reputational and operational harm
+                    before wallet-drain events later . Paper-wallet compromise and liquidation activity
+                    occurred in a broader context where CIGO had already been damaged by opaque labeling, routing,
+                    and market-access controls.
+                </p>
+            </section>
+
+            <section id="paper-wallets">
+                <h2>Suspected compromised paper-wallet source</h2>
+
+                <p>
+                    All imported and unimorted wallets generated through online BNB paper-wallet generator identified as
+                    <strong>bnbpaperwallet.com / bnbpaperwallets.com</strong> were compromised and drained. Within CIGO
+                    wallet group generated through that source, compromise was complete: every identified
+                    wallet from that generator set showed compromised or hostile activity.
+                </p>
+
+                <p>
+                    These affected wallets were not distributed to normal CIGO customers, purchasers, or public
+                    participants. They were retained by project owner for controlled project use, monitoring,
+                    and evidence preservation. Several of affected wallets had not been knowingly imported into
+                    normal wallet software, which strongly supports conclusion that private keys were exposed
+                    at or near wallet-generation process.
+                </p>
+
+                <p>
+                    This means incident was contained to project-controlled wallet inventory generated from
+                    suspect paper-wallet source. It was not a customer-distribution failure. Compromised wallets
+                    have been isolated, retained as evidence, and treated as burned.
+                </p>
+
+                <p>
+                    This notice also serves as a public record that affected wallet group is under active review.
+                    Any further movement, consolidation, liquidation, or routing connected to those wallets will be
+                    treated as evidence of hostile activity.
+                </p>
+
+                <p>
+                    Based on observed patterns, paper-wallet generation source, its code, hosting, delivery
+                    chain, clone/fork, or operator-side access is primary suspected compromise vector.
+                </p>
+
+                <div class="hard">
+                    <p>
+                        Most serious fact is that many affected wallets were still in paper-wallet form and had not
+                        been knowingly imported into normal wallet software. That makes ordinary user error an
+                        insufficient explanation.
+                    </p>
+                </div>
+
+                <h3>Observed pattern</h3>
+                <ol>
+                    <li>Wallets generated through same BNB paper-wallet source.</li>
+                    <li>Wallets later accessed or drained in a short time window.</li>
+                    <li>CIGO approvals or direct CIGO transfers.</li>
+                    <li>Movement into collector / liquidation wallets.</li>
+                    <li>Liquidation through available CIGO liquidity pools.</li>
+                    <li>Conversion into BNB or stable assets.</li>
+                    <li>Onward transfer through common infrastructure or off-ramp paths.</li>
+                </ol>
+
+                <p>
+                    This pattern strongly indicates private-key exposure at or near paper-wallet generation process.
+                </p>
+            </section>
+
+            <section id="contracts">
+                <h2>Contract clarification</h2>
+
+                <div class="two-col">
+                    <div class="card">
+                        <h3>Current active CIGO contract</h3>
+                        <span class="addr-block">0x3a38e963f524E0dDFB75dFa1752b4Cd1364F5560</span>
+                        <p>
+                            This is current supported CIGO market contract going forward.
+                        </p>
+                        <p>
+                            Official project page:
+                            <a href="https://market.cosigo.io/">https://market.cosigo.io/</a>
+                        </p>
+                    </div>
+
+                    <div class="card">
+                        <h3>Retired historical contract</h3>
+                        <span class="addr-block">0xdafaf7b17A3C909e1153ce7A75f767cCCf9cf79d</span>
+                        <p>
+                            This contract is retired, unowned/relinquished, unsupported, and will not
+                            receive liquidity due to same malicious hostile pattern.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="good">
+                    <p>
+                        For clarity: <strong>0xdaf...</strong> is retired / historical / unsupported.
+                        <strong>0x3a...</strong> is current active CIGO contract.
+                    </p>
+                </div>
+
+                <p>
+                    Retired contract had historical wallet activity involving same compromised paper-wallet
+                    environment. Because contract is no longer controlled and cannot be responsibly managed,
+                    no liquidity will be provided to it.
+                </p>
+            </section>
+
+            <section id="evidence">
+                <h2>Primary evidence references</h2>
+
+                <h3>Primary suspected collector / liquidation wallet</h3>
+                <span class="addr-block">0x3f046d25b658fC29a78f45F4788FdCaf440914bA</span>
+
+                <h3>Primary mass-liquidation transaction</h3>
+                <span class="addr-block">0x131706716798bfc8b7d9088ef22925e3a72973c33360439627acda048f5b40fc</span>
+
+                <p>
+                    Observed behavior was not consistent with random unrelated wallet loss. Wallets followed
+                    a coordinated consolidation and liquidation pattern.
+                </p>
+
+                <h3>Evidence preservation status</h3>
+                <p>
+                    Affected wallets have been isolated and retained for evidence. CIGO now monitors for direct CIGO
+                    transfers, CIGO approvals, multiple wallets consolidating into one recipient, pool swaps, known
+                    collector / liquidation wallets, and suspicious liquidation routes.
+                </p>
+
+                <div class="hard">
+                    <p>
+                        Monitoring must exist before deployment, not after loss.
+                    </p>
+                </div>
+            </section>
+
+            <section>
+                <h2>Technical lesson: stolen keys do not need owner access</h2>
+
+                <p>
+                    Attacker does not need special owner access to a token contract if they have wallet keys.
+                    If a wallet owns CIGO, whoever controls that wallet’s private key can call normal public token
+                    functions:
+                </p>
+
+                <span class="addr-block">CIGO.transfer(...)</span>
+                <span class="addr-block">CIGO.approve(...)</span>
+
+                <p>
+                    That does not require ownership of CIGO contract. It only requires control of any wallet holding
+                    specified tokens.
+                </p>
+
+                <h3>Likely attack pattern</h3>
+                <ol>
+                    <li>Stolen wallet A sends CIGO directly to a collector.</li>
+                    <li>Stolen wallet B sends CIGO directly to same collector.</li>
+                    <li>Stolen wallet C sends CIGO directly to same collector.</li>
+                    <li>Collector wallet liquidates through available pools. Thus provking verticle price drop</li>
+                    <li>Value is extracted into BNB or stable assets.</li>
+                </ol>
+
+                <p>
+                    This is why direct wallet-to-wallet consolidation monitoring is necessary before any liquidity
+                    event.
+                </p>
+            </section>
+
+            <section>
+                <h2>Routers, aggregators, and infrastructure</h2>
+
+                <p>
+                    Some transactions used routers, aggregators, allowance holders, settlement contracts, and liquidity
+                    pools.
+                    These may include PancakeSwap, 0x, 1inch-style infrastructure, Rabby routes, MetaMask routes, and
+                    other
+                    settlement contracts.
+                </p>
+
+                <p>
+                    These contracts are generally classified as infrastructure, not necessarily hostile actors.
+                </p>
+
+                <div class="good">
+                    <p>
+                        Router / settler = road. Pool = marketplace / liquidity venue. Wallet = driver.
+                        Collector wallet = likely actor of concern.
+                    </p>
+                </div>
+
+                <p>
+                    Problem is not that public trading infrastructure exists. Problem is that a compromised
+                    wallet cluster can use that infrastructure to liquidate stolen balances.
+                </p>
+
+                <p>
+                    For that reason, this notice does not focus on blacklisting routers or pools. It focuses on wallet
+                    compromise, collector behavior, liquidation patterns, and evidence preservation.
+                </p>
+            </section>
+
+
+            <section id="liquidity-extraction">
+                <h2>How liquidity extraction works</h2>
+
+                <figure class="visual-card" aria-label="Liquidity extraction overview">
+                    <img src="https://snakepit.cosigo.io/shared/images/Hackers-eticos-que-son-y-como-trabajan-3.webp"
+                        alt="Diagram-style visual warning about DeFi hack, wallet compromise, routing, and liquidity extraction"
+                        loading="lazy" decoding="async" />
+                    <figcaption>
+                        The public often sees only a swap. The actual path can involve funded fresh wallets,
+                        approvals, routers, settlers, pools, arbitrage, and value exiting as BNB, WBNB, BSC-USD,
+                        or another liquid asset.
+                    </figcaption>
+                </figure>
+
+                <p>
+                    This is a part public rarely sees. A small token can have a verified contract, public pages,
+                    a known project owner, and real liquidity, but a practical market can still be shaped by routers,
+                    aggregators, settlement contracts, exchange-funded fresh wallets, bot wallets, and pool mechanics
+                    that normal users never understand.
+                </p>
+
+                <div class="hard">
+                    <p>
+                        CIGO’s position is that this is not healthy customer activity. In thin early liquidity,
+                        same route structure that is marketed as convenience can become a backdoor-like extraction
+                        machine: ordinary users see warnings and hesitate, while technically capable actors route
+                        around warning layer and extract value from pools.
+                    </p>
+                </div>
+
+                <h3>Step by step: basic extraction machine</h3>
+                <ol>
+                    <li>A wallet or bot receives BNB, WBNB, BSC-USD, or another asset from a service, exchange,
+                        hot-wallet, or prior route.</li>
+                    <li>Wallet calls a router, allowance holder, settler, aggregator, or exchange-style contract.</li>
+                    <li>Route checks available CIGO liquidity across separate pools, such as CIGO/BSC-USD and CIGO/WBNB.
+                    </li>
+                    <li>If both pools are not perfectly aligned, routing pushes value through one pool and pulls value
+                        from other.</li>
+                    <li>CIGO may move pool-to-pool, or CIGO may be bought in one leg and sold through another leg.</li>
+                    <li>Extracted value usually ends as BNB, WBNB, BSC-USD, or another liquid asset, not as long-term
+                        CIGO ownership.</li>
+                    <li>Bot repeats process whenever spread is large enough to beat pool fees, route fees, and gas.</li>
+                </ol>
+
+                <p>
+                    On paper, this may be called arbitrage. From a small deployer’s perspective, it can function as
+                    automated liquidity extraction. These actors do not support your project, they will not not become a
+                    normal
+                    customer, and will not be deterred by a malicious warning label. Actor only needs a route,
+                    liquidity, and a spread.
+                </p>
+
+                <h3>Why two thin pools become a feeding surface</h3>
+                <p>
+                    CIGO observed that separate pools can create a spread-harvesting surface. A CIGO/BSC-USD pool and
+                    a CIGO/WBNB pool do not automatically share one price. Each pool prices CIGO from its own reserves.
+                    If one pool is moved by a buy, sell, thin reserve balance, BNB/USD movement, fee, or prior bot
+                    route,
+                    second pool can temporarily show a different implied price.
+                </p>
+
+                <div class="hard">
+                    <p>
+                        Two thin pools can let a bot push one side, pull other side, harvest difference, and
+                        leave project liquidity worse off. That is why CIGO describes this behavior as
+                        liquidity-parasite activity.
+                    </p>
+                </div>
+
+                <h3>Pool-to-pool extraction pattern</h3>
+                <ol>
+                    <li>Bot starts with WBNB, BNB, or BSC-USD.</li>
+                    <li>Route sends value into one side of market.</li>
+                    <li>CIGO moves between CIGO pools, not to a normal retail holder.</li>
+                    <li>Second pool releases WBNB, BNB, or BSC-USD back toward bot.</li>
+                    <li>Bot keeps difference after fees and gas.</li>
+                </ol>
+
+                <p>
+                    This can look small in one transaction. Public mistake is to look at one transaction only.
+                    Real issue is repetition: same style of hot wallet, route, settler, funding source, or bot
+                    infrastructure can appear again and again, shaving value from thin liquidity over time.
+                </p>
+
+                <h3>Toxic arbitrage is different from a customer buy</h3>
+                <p>
+                    A normal buyer sends value and receives CIGO because they want exposure to CIGO. A toxic route
+                    uses CIGO only as an intermediate object in a spread-harvesting circuit. Parasitical actor does not
+                    care
+                    whether a project survives. Its goal is extraction, not participation.
+                </p>
+
+                <div class="good">
+                    <p>
+                        CIGO separates these events in monitoring: customer-like routed buys, routed sells, direct
+                        wallet transfers, collector-wallet consolidation, pool-to-pool arbitrage, and liquidity-vampire
+                        behavior are not same event class.
+                    </p>
+                </div>
+            </section>
+
+            <section>
+                <h2>Warnings do not stop malicious actors</h2>
+
+                <p>
+                    CIGO’s experience shows a serious flaw incurrent wallet/scanner warning environment:
+                    malicious labels and wallet warnings can damage normal user confidence while doing little to stop
+                    technically capable hostile actors.
+                </p>
+
+                <p>
+                    A normal customer may see a warning and leave. A malicious actor does not care about this warning.
+                    They understand routers, aggregators, fresh wallets, exchange-funded paths, pool mechanics,
+                    private-key compromise, and liquidation routes. They can continue operating while ordinary users
+                    are discouraged from participating.
+                </p>
+
+                <div class="hard">
+                    <p>
+                        A bestowed malicious label did not protect CIGO from malicious actors. It protected malicious
+                        actors
+                        from normal market competition by frightening legitimate users away first.
+                    </p>
+                </div>
+
+                <p>
+                    This is why a wallet/scanner layer matters. A warning layer can cripple public confidence and
+                    ordinary user access while sophisticated route actors continue through same market infrastructure.
+                </p>
+            </section>
+
+            <section>
+                <h2>Fresh-wallet clusters and hidden-whale behavior</h2>
+
+                <p>
+                    Not every fresh wallet is hostile. But a cluster of fresh wallets funded from similar sources,
+                    using similar routes, buying similar sizes, and later consolidating or dumping can act like a
+                    hidden whale while appearing to be many unrelated participants.
+                </p>
+
+                <h3>Worst-case cluster pattern</h3>
+                <ol>
+                    <li>Many fresh wallets are funded from same exchange, float, bridge, service, or hot-wallet path.
+                    </li>
+                    <li>Wallets buy CIGO in separate transactions, making activity look organic.</li>
+                    <li>Buys move price or change pool reserves.</li>
+                    <li>Other bots harvest resulting pool imbalance.</li>
+                    <li>Cluster later dumps, consolidates to one wallet, or routes through settlement infrastructure.
+                    </li>
+                    <li>Chart looks chaotic, and reputation systems can then point to suspicious market behavior.</li>
+                </ol>
+
+                <p>
+                    This is not ordinary support. It is coordinated market shaping if wallets are controlled by
+                    one operator or one related cluster.
+                </p>
+
+                <div class="hard">
+                    <p>
+                        CIGO treats repeat fresh-wallet behavior, same-funder patterns, quick dumps after buys,
+                        collector transfers, and service-funded routing proximity as evidence signals. A single buy is
+                        not enough. A repeated pattern is an obvious warning.
+                    </p>
+                </div>
+            </section>
+
+            <section id="bnb-paths">
+                <h2>BNB-chain backdoor-style routing and exchange-labeled infrastructure</h2>
+
+                <p>
+                    CIGO uses phrase <strong>BNB-chain backdoor-style operations</strong> to describe practical
+                    effect observed from project side: activity can enter through exchange-labeled funding paths,
+                    float services, high-volume route wallets, allowance holders, settlers, aggregators, and pools
+                    while normal users are blocked, frightened, or degraded by wallet warnings.
+                </p>
+
+                <p>
+                    This does not require one public blockchain transaction to prove who personally operated every
+                    downstream bot. Point is that public chain can still show material funding ancestry,
+                    route proximity, service labels, pool interaction, and extraction behavior. Those are preservation
+                    points.
+                </p>
+
+                <h3>Observed infrastructure categories</h3>
+                <ul>
+                    <li><strong>BNB / Binance-labeled hot-wallet ancestry:</strong> material where a downstream bot,
+                        route, or exchange-style wallet traces back to Binance-labeled funding infrastructure.</li>
+                    <li><strong>FixedFloat-labeled hot wallets:</strong> service-side funding paths that can obscure
+                        original user, order, API session, or source asset from public-chain observers.</li>
+                    <li><strong>GhostSwap-labeled infrastructure:</strong> high-volume exchange-style routing
+                        infrastructure appearing in suspicious environment around CIGO.</li>
+                    <li><strong>0x allowance holders and settler contracts:</strong> route machinery that can split
+                        trades across pools and make the final path difficult for normal users to read.</li>
+                    <li><strong>FEED-style bot/executor wallets:</strong> high-volume bot-like addresses that can call
+                        themselves or use delegated execution to perform pool-to-pool extraction.</li>
+                </ul>
+
+                <div class="hard">
+                    <p>
+                        From CIGO’s perspective, this is abusive part: same ecosystem can label a small token
+                        as dangerous for ordinary users, while exchange-funded, bot-like, and route-based actors still
+                        know exactly how to reach any liquidity.
+                    </p>
+                </div>
+
+                <h3>Why exchange-labeled ancestry matters</h3>
+                <p>
+                    When a route, bot, or high-volume wallet traces to exchange-labeled hot-wallet infrastructure,
+                    public chain may not identify any human operator, but it identifies a preservation point. Exchange
+                    records may hold account, withdrawal order, KYC profile, API key, device, IP/session, or
+                    internal relationship behind downstream activity.
+                </p>
+
+                <p>
+                    CIGO does not need to prove from public-chain data alone that a named exchange personally operated
+                    every downstream wallet. Public record is enough to show that exchange-labeled infrastructure
+                    appears in funding or routing ancestry and that those records are material to attribution.
+                </p>
+
+                <h3>Public should understand liquidity extraction machine</h3>
+                <ol>
+                    <li>Ordinary user sees a warning and leaves.</li>
+                    <li>Project loses fair market access and reputation.</li>
+                    <li>Compromised wallets or fresh wallets become route material.</li>
+                    <li>Exchange-labeled or service-labeled funding paths create an attribution gap.</li>
+                    <li>Routers and settlers split trades across available pools.</li>
+                    <li>Thin liquidity gets pushed, pulled, and harvested.</li>
+                    <li>Extracted value exits as BNB, WBNB, BSC-USD, or another liquid asset.</li>
+                    <li>Project is left with damage, confusing charts, and a public record most people cannot read.</li>
+                </ol>
+
+                <p>
+                    That is why this notice is written in plain language. Public needs to know that market abuse
+                    does not always look like a simple hack. It can look like a series of “normal” transactions routed
+                    through infrastructure that only specialists understand.
+                </p>
+            </section>
+
+            <section>
+                <h2>Controls and containment</h2>
+
+                <p>
+                    CIGO cannot stop every bot from existing. This project can make hostile activity slower, more
+                    visible, more expensive, and better documented.
+                </p>
+
+                <ul>
+                    <li>Reduce unnecessary secondary liquidity that creates pool-to-pool spread surfaces.</li>
+                    <li>Use one primary pool where possible until liquidity is deeper and monitoring is mature.</li>
+                    <li>Monitor CIGO transfers, approvals, pool events, pool drift, routed buys, routed sells, and
+                        consolidation.</li>
+                    <li>Track repeated executor wallets, fresh-wallet clusters, same-funder patterns, and
+                        service-infrastructure proximity.</li>
+                    <li>Do not blacklist pools or normal routers blindly, because that can break legitimate market
+                        access.</li>
+                    <li>Blacklist only documented hostile collector or liquidation wallets where action is technically
+                        effective and evidence-supported.</li>
+                    <li>Preserve transaction hashes, screenshots, labels, funding ancestry, route structure, and support
+                        correspondence.</li>
+                </ul>
+
+                <div class="good">
+                    <p>
+                        CIGO’s operating principle is simple: do not feed liquidity parasite bots, do not drown in
+                        noise, and do
+                        not let opaque infrastructure define public record unchallenged.
+                    </p>
+                </div>
+            </section>
+
+            <section>
+                <h2>MetaMask / wallet warning problem</h2>
+
+                <p>
+                    CIGO’s experience also shows that token risk is not determined only by smart-contract code.
+                    A token can be source-verified, publicly documented, and operational, yet still be harmed by
+                    wallet-layer
+                    warnings and scanner-fed labels.
+                </p>
+
+                <p>
+                    When those systems do not provide a precise technical correction path, project is placed in an
+                    impossible position.
+                </p>
+
+                <div class="hard">
+                    <p>
+                        Remove protections and become easier prey, or keep protections and be labeled dangerous.
+                    </p>
+                </div>
+
+                <p>
+                    That is not a fair safety model. It punishes defensive design and rewards exposure.
+                    In CIGO’s case, wallet-interface behavior materially affected market access and user confidence.
+                </p>
+
+                <p>
+                    Resulting damage did not require a court order, regulator, transparent process, or public technical
+                    finding tied to a specific exploit. Label and warning layer itself became punishment.
+                </p>
+
+                <p>
+                    This is why small deployers must understand that “decentralized” does not mean free from
+                    gatekeepers.
+                    Wallets, scanners, routers, aggregators, token lists, frontends, and reputation feeds can
+                    collectively control whether a token is usable in practice.
+                </p>
+            </section>
+
+            <section id="warning">
+                <h2>Warning to token deployers</h2>
+
+                <p>
+                    Do not launch a token casually. Before deployment or liquidity, assume token environment is hostile.
+                </p>
+
+                <ul>
+                    <li>Never use online paper-wallet generators.</li>
+                    <li>Never trust wallets generated by an unknown website.</li>
+                    <li>Never fund wallets before testing custody and monitoring.</li>
+                    <li>Never assume scanner labels are fair, correct, or accountable.</li>
+                    <li>Never assume wallet warnings have a clear correction path.</li>
+                    <li>Never assume MetaMask, token lists, scanners, routers, or aggregators will treat your project
+                        neutrally.</li>
+                    <li>Never assume routers shown in wallets are simple or transparent.</li>
+                    <li>Never approve unlimited token spending unless absolutely necessary.</li>
+                    <li>Revoke old approvals from wallets you control.</li>
+                    <li>Separate owner/admin wallets from liquidity wallets.</li>
+                    <li>Monitor token transfers, approvals, pool swaps, pool drift, and consolidation behavior.</li>
+                    <li>Do not create multiple thin pools unless you understand any arbitrage surface you are creating.
+                    </li>
+                    <li>Watch for pool-to-pool CIGO movement, because that is often not customer buying.</li>
+                    <li>Watch for fresh-wallet clusters funded from same exchange, float, bridge, or service path.</li>
+                    <li>Preserve screenshots, transaction hashes, support tickets, emails, labels, funding ancestry, and
+                        timestamps.</li>
+                    <li>Treat every unexplained wallet interaction as evidence until resolved.</li>
+                </ul>
+
+                <div class="hard">
+                    <p>
+                        If you cannot afford to lose money, time, liquidity, reputation, and most importantly sleep,
+                        do not enter this market casually.
+                    </p>
+                </div>
+            </section>
+
+            <section>
+                <h2>Public warning regarding BNB paper-wallet generator</h2>
+
+                <p>
+                    Wallets generated through <strong>bnbpaperwallet.com / bnbpaperwallets.com</strong> both offline and
+                    online wallets
+                    have been compromised.
+                </p>
+
+                <p>
+                    Based on observed pattern, wallets generated through that source should be treated as burned.
+                </p>
+
+                <h3>Anyone who used that generator should immediately:</h3>
+                <ol>
+                    <li>Stop using those wallets.</li>
+                    <li>Move any remaining assets to clean wallets generated offline from trusted software or hardware.
+                    </li>
+                    <li>Revoke token approvals where possible.</li>
+                    <li>Preserve transaction history.</li>
+                    <li>Assume private keys may be exposed.</li>
+                </ol>
+
+                <p>
+                    This notice is not asking public to accept unsupported attribution. It is warning that
+                    observed wallet-drain pattern strongly points to private-key exposure at or near wallet-generation
+                    process.
+                </p>
+            </section>
+
+            <section>
+                <h2>Statement of position</h2>
+
+                <p>
+                    COSIGO / CIGO does not claim that every infrastructure contract, router, scanner, wallet, or
+                    exchange
+                    involved in later transaction paths was original thief.
+                </p>
+
+                <p>
+                    However, observed facts support following:
+                </p>
+
+                <ul>
+                    <li>Wallets generated through same BNB paper-wallet source have been compromised.</li>
+                    <li>Compromise affected wallets that had not been knowingly imported elsewhere.</li>
+                    <li>Wallet activity occurred in a coordinated pattern.</li>
+                    <li>CIGO balances were consolidated and liquidated.</li>
+                    <li>Automated pool-to-pool and routed liquidity-extraction behavior appeared around CIGO liquidity.
+                    </li>
+                    <li>Exchange-labeled and service-labeled infrastructure appeared as material routing or funding
+                        ancestry points.</li>
+                    <li>Wallet/scanner market-access behavior had already damaged project’s ability to operate
+                        normally.</li>
+                    <li>Incident caused direct financial harm.</li>
+                    <li>Retired contract will not be supported.</li>
+                    <li>Only current active CIGO contract will be used going forward.</li>
+                    <li>New criminal evidence will be collected and documented in hostile crypto arena.</li>
+                </ul>
+
+                <div class="good">
+                    <p>
+                        This is a public warning born from direct loss. If this notice saves another person from funding
+                        compromised wallets, launching without monitoring, or trusting opaque crypto infrastructure
+                        without protection, then my loss has at least produced a warning others can use.
+                    </p>
+                </div>
+            </section>
+
+            <section>
+                <h2>Final public notice</h2>
+
+                <p>
+                    Crypto-token market is not a neutral playground for small deployers.
+                </p>
+
+                <p>
+                    It is an opaque, adversarial environment where reputation systems, wallet warnings, scanner labels,
+                    hidden routing layers, compromised tools, and liquidity extraction can damage a project before it
+                    earns a dollar.
+                </p>
+
+                <div class="hard">
+                    <p>
+                        CIGO’s experience shows that a small deployer can be damaged twice: first by opaque
+                        wallet/scanner
+                        market-access control, and then by direct wallet compromise and liquidity extraction.
+                    </p>
+                </div>
+
+                <h3>CIGO’s warning</h3>
+                <ul>
+                    <li>Do not deploy blindly.</li>
+                    <li>Do not trust online wallet generators.</li>
+                    <li>Do not fund paper wallets from unknown sources.</li>
+                    <li>Do not launch without monitoring.</li>
+                    <li>Do not assume crypto market is fair.</li>
+                    <li>Do not assume your verified contract will be treated fairly.</li>
+                    <li>Do not assume wallet warnings are neutral.</li>
+                    <li>Do not assume scanner labels are accountable.</li>
+                    <li>Do not assume exchange-labeled funding paths are irrelevant.</li>
+                    <li>Do not assume pool-to-pool activity is customer support.</li>
+                    <li>Do not assume anyone will help after unexplained loss.</li>
+                </ul>
+
+                <p>
+                    If you are considering entering this market, understand high risk before you become gatekeepers next
+                    lesson.
+                    Remember, they hold master keys, office shirt and tie by day, basement hoody by night. Crypto market
+                    is a
+                    veritable snakepit. COSIGO / CIGO - implementing due dilegance to expose actual MALICIOUS actors and
+                    activities.
+                    Anyone who has had similar experience and desire to share, contact is below.
+                </p>
+            </section>
+        </article>
+    </main>
+
+    <footer class="security-footer">
+        <div class="security-footer-card">
+            <div class="security-footer-copy">
+                <strong>COSIGO / cosigo market public security notice.</strong>
+                Official COSIGO and CIGO pages, market access, public references, and contact points.
+            </div>
+
+            <nav class="security-footer-links" aria-label="Official COSIGO and CIGO links">
+                <a href="https://cosigo.io/">COSIGO official</a>
+                <a href="https://market.cosigo.io/">CIGO market notice</a>
+                <a href="https://trade.cosigo.io/">CIGO swaps</a>
+                <a href="https://token.cosigo.io/">CIGO token</a>
+                <a href="https://contact.cosigo.io/">Contact</a>
+                <a href="https://labels.cosigo.io/">Public labels</a>
+                <a href="https://trade.cosigo.io/appendix.html">site appendix / quick reference</a>
+                <a href="https://dexscreener.com/bsc/0xded1e63b6262c0328876b7774f65c08505dd559a"
+                   target="_blank" rel="noopener">DEX Screener chart only ↗</a>
+                <a href="https://github.com/cosigo"
+                   target="_blank" rel="noopener">GitHub ↗</a>
+            </nav>
+
+            <p class="security-footer-note">
+                DEX Screener is provided for chart and reference purposes only.
+                Use trade.cosigo.io for swaps.
+            </p>
+        </div>
+    </footer>
+
+
+<script id="snakepit-security-topbar-js">
+  (() => {
+    const ready = (fn) => {
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", fn);
+      } else {
+        fn();
+      }
+    };
+
+    ready(() => {
+      const menuButton = document.querySelector(".market-nav-toggle");
+      const menuNav = document.querySelector(".market-header-nav");
+
+      if (!menuButton || !menuNav) return;
+
+      menuButton.addEventListener("click", () => {
+        const open = menuNav.classList.toggle("is-open");
+        menuButton.setAttribute("aria-expanded", open ? "true" : "false");
+      });
+
+      document.addEventListener("click", (event) => {
+        if (!menuNav.classList.contains("is-open")) return;
+        if (menuButton.contains(event.target) || menuNav.contains(event.target)) return;
+
+        menuNav.classList.remove("is-open");
+        menuButton.setAttribute("aria-expanded", "false");
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key !== "Escape") return;
+
+        menuNav.classList.remove("is-open");
+        menuButton.setAttribute("aria-expanded", "false");
+      });
+    });
+  })();
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,13 @@
+{
+  "name": "a8-time-lab-v5",
+  "version": "5.4.20",
+  "private": true,
+  "description": "Auspicious 8 unified Node core laboratory",
+  "scripts": {
+    "test": "node tests/run-tests.js",
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

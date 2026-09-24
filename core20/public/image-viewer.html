@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#06131d">
+
+<title>A8 Calendar Artwork Viewer</title>
+
+<style>
+:root{
+  color-scheme:dark;
+  --bg:#06131d;
+  --panel:#0b202b;
+  --line:#725d32;
+  --gold:#e1bd65;
+  --text:#eee2ca;
+  --muted:#9ca9ad;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html,body{
+  margin:0;
+  min-height:100%;
+  background:var(--bg);
+  color:var(--text);
+  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+
+body{
+  min-height:100vh;
+}
+
+.viewer-bar{
+  position:sticky;
+  top:0;
+  z-index:10;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:.65rem;
+  padding:.7rem;
+  background:#071923;
+  border-bottom:1px solid rgba(225,189,101,.28);
+}
+
+.viewer-button{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:44px;
+  padding:.65rem .85rem;
+  border:1px solid var(--line);
+  border-radius:9px;
+  background:#102a36;
+  color:#f3dda0;
+  font-weight:800;
+  font-size:.78rem;
+  letter-spacing:.045em;
+  text-decoration:none;
+}
+
+.viewer-button.secondary{
+  color:#d3dce0;
+  border-color:#375461;
+  background:#0a1d27;
+}
+
+.viewer-shell{
+  width:min(1200px,100%);
+  margin:0 auto;
+  padding:1rem;
+}
+
+.viewer-heading{
+  margin:0 0 .85rem;
+}
+
+.viewer-heading small{
+  display:block;
+  margin-bottom:.3rem;
+  color:var(--gold);
+  font-size:.68rem;
+  font-weight:900;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+}
+
+.viewer-heading h1{
+  margin:0;
+  color:#f2dfb9;
+  font:700 clamp(1.35rem,4vw,2.3rem)/1.08 Georgia,"Times New Roman",serif;
+}
+
+.viewer-stage{
+  display:flex;
+  justify-content:center;
+  width:100%;
+  padding:.65rem;
+  border:1px solid rgba(225,189,101,.30);
+  border-radius:14px;
+  background:#030b10;
+}
+
+.viewer-stage img{
+  display:block;
+  width:auto;
+  max-width:100%;
+  height:auto;
+  margin:0 auto;
+  border-radius:7px;
+}
+
+.viewer-note{
+  margin:.75rem 0 0;
+  color:var(--muted);
+  font-size:.76rem;
+  line-height:1.5;
+  text-align:center;
+}
+
+.viewer-error{
+  display:none;
+  padding:2rem 1rem;
+  border:1px solid #7c493e;
+  border-radius:12px;
+  background:#291713;
+  color:#f2b6a7;
+  text-align:center;
+}
+
+.viewer-footer{
+  display:flex;
+  justify-content:center;
+  gap:.8rem;
+  flex-wrap:wrap;
+  padding:1rem 1rem 2rem;
+  color:var(--muted);
+  font-size:.7rem;
+}
+
+.viewer-footer a{
+  color:#aebdc2;
+}
+
+@media(max-width:520px){
+  .viewer-bar{
+    padding:.55rem;
+  }
+
+  .viewer-button{
+    padding:.58rem .65rem;
+    font-size:.7rem;
+  }
+
+  .viewer-shell{
+    padding:.65rem;
+  }
+
+  .viewer-stage{
+    padding:.35rem;
+    border-radius:10px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header class="viewer-bar">
+  <a class="viewer-button" href="/calendar.html">← BACK TO CALENDAR</a>
+  <a class="viewer-button secondary" id="openOriginal" href="/calendar.html" target="_blank" rel="noopener">OPEN ORIGINAL</a>
+</header>
+
+<main class="viewer-shell">
+  <div class="viewer-heading">
+    <small>Auspicious 8 · Calendar artwork</small>
+    <h1 id="artTitle">Artwork viewer</h1>
+  </div>
+
+  <div class="viewer-stage" id="viewerStage">
+    <img id="artImage" alt="Auspicious 8 calendar artwork">
+  </div>
+
+  <div class="viewer-error" id="viewerError">
+    This artwork path is not available in the A8 viewer.
+  </div>
+
+  <p class="viewer-note">
+    Pinch or browser-zoom for detail. Use BACK TO CALENDAR when finished.
+  </p>
+</main>
+
+<footer class="viewer-footer">
+  <span>COSIGO Labs · Auspicious 8</span>
+  <a href="/">A8 Engineering Lab</a>
+</footer>
+
+<script>
+(() => {
+  'use strict';
+
+  const titles = {
+    'ausp8_north.png': '000 · 0₈ · N · North',
+    'ausp8_ne.png': '001 · 1₈ · NE · Northeast',
+    'ausp8_east.png': '010 · 2₈ · E · East',
+    'ausp8_se.png': '011 · 3₈ · SE · Southeast',
+    'ausp8_south.png': '100 · 4₈ · S · South',
+    'ausp8_sw.png': '101 · 5₈ · SW · Southwest',
+    'ausp8_west.png': '110 · 6₈ · W · West',
+    'ausp8_nw.png': '111 · 7₈ · NW · Northwest',
+    'ausp8_year_end.png': 'Wilson’s Week · Year-End',
+    'ausp8_example.png': 'Protected Days Example',
+    'ausp8_total.png': 'Auspicious 8 · One-Year Overview'
+  };
+
+  const image = document.getElementById('artImage');
+  const title = document.getElementById('artTitle');
+  const original = document.getElementById('openOriginal');
+  const stage = document.getElementById('viewerStage');
+  const error = document.getElementById('viewerError');
+
+  let raw = location.hash.slice(1);
+
+  try {
+    raw = decodeURIComponent(raw);
+  } catch (_) {
+    raw = '';
+  }
+
+  const valid =
+    /^\/assets\/[A-Za-z0-9._/-]+\.(?:png|jpg|jpeg|webp)$/i.test(raw) &&
+    !raw.includes('..');
+
+  if (!valid) {
+    stage.style.display = 'none';
+    original.style.display = 'none';
+    error.style.display = 'block';
+    title.textContent = 'Artwork unavailable';
+    return;
+  }
+
+  const filename = raw.split('/').pop();
+  const label = titles[filename] || filename;
+
+  image.src = raw;
+  image.alt = label + ' calendar artwork';
+  title.textContent = label;
+  original.href = raw;
+  document.title = label + ' · A8 Calendar Artwork';
+
+  image.addEventListener('error', () => {
+    stage.style.display = 'none';
+    original.style.display = 'none';
+    error.style.display = 'block';
+    title.textContent = 'Artwork unavailable';
+  });
+})();
+</script>
+
+</body>
+</html>

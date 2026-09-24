@@ -1,0 +1,8 @@
+[Unit]
+Description=A8 Core20 non-authoritative recovery snapshot
+
+[Service]
+Type=oneshot
+User=greg
+Group=greg
+ExecStart=/usr/local/sbin/a8-core20-recovery-snapshot

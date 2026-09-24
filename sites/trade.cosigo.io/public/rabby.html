@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <title>Rabby Wallet Guide — CIGO Swap</title>
+  <meta name="description" content="Rabby Wallet instructions for importing CIGO, opening the official CIGO swap interface, and reviewing approve and swap confirmations safely.">
+  <meta name="author" content="COSIGO">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://trade.cosigo.io/rabby.html">
+
+  <link rel="icon" type="image/png" sizes="256x256" href="/shared/assets/icons/cigo_256.png?v=20260613">
+  <link rel="apple-touch-icon" sizes="256x256" href="/shared/assets/icons/cigo_256.png?v=20260613">
+
+  <meta property="og:title" content="Rabby Wallet Guide — CIGO Swap">
+  <meta property="og:description" content="Safe Rabby Wallet instructions for CIGO import, approval, and live swap review.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="COSIGO">
+  <meta property="og:url" content="https://trade.cosigo.io/rabby.html">
+  <meta property="og:image" content="https://trade.cosigo.io/shared/assets/icons/cigo_256.png">
+
+  <link rel="stylesheet" href="/shared/assets/trade.css?v=20260627-222300">
+  <link rel="stylesheet" href="/shared/assets/cigo-footer.css?v=20260627-222708">
+  <script src="/shared/assets/mobile-nav.js?v=20260613-160904" defer></script>
+
+<style id="site-appendix-footer-style">
+.site-appendix-footer {
+  margin: 28px auto 0;
+  padding: 18px 16px 26px;
+  text-align: center;
+  font-size: 0.88rem;
+  opacity: 0.78;
+}
+.site-appendix-footer a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px dotted currentColor;
+}
+.site-appendix-footer a:hover,
+.site-appendix-footer a:focus-visible {
+  opacity: 1;
+  border-bottom-style: solid;
+}
+</style>
+
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="topbar-inner wrap">
+      <a class="brand" href="https://trade.cosigo.io/" aria-label="CIGO swap home">
+        <img class="brand-icon" src="/shared/assets/icons/cosigo_master_256.png" alt="">
+        <img class="brand-icon" src="/shared/assets/icons/cigo_256.png" alt="">
+        <strong>COSIGO / CIGO</strong>
+      </a>
+
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Open navigation">menu</button>
+
+      <nav class="nav" aria-label="Primary">
+        <a href="https://cosigo.io/">home</a>
+        <a href="https://trade.cosigo.io/">CIGO swap</a>
+        <a href="https://trade.cosigo.io/pool.html">pool status</a>
+                <a href="https://trade.cosigo.io/guides.html">guides</a>
+<a href="https://quote.cosigo.io/">pre-quote</a>
+        <a href="https://market.cosigo.io/">market</a>
+</nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <div class="hero-card">
+        <p class="eyebrow">Rabby Wallet / CIGO</p>
+        <h1>Use Rabby carefully with the official CIGO swap page.</h1>
+        <p class="lead">
+          This guide is for importing CIGO, opening the official trade interface, and checking approval and swap confirmations before signing.
+        </p>
+      </div>
+    </section>
+
+    <section class="grid">
+      <article class="card">
+        <h2>Official CIGO contract</h2>
+        <p>BNB Smart Chain CIGO token:</p>
+        <p><code>0x3a38e963f524E0dDFB75dFa1752b4Cd1364F5560</code></p>
+        <p>Only use this address for the current BNB Chain CIGO token.</p>
+      </article>
+
+      <article class="card">
+        <h2>1. Open Rabby on BNB Chain</h2>
+        <p>Open Rabby Wallet and make sure the selected network is <strong>BNB Smart Chain</strong>.</p>
+        <p>If Rabby is on Ethereum or another chain, switch to BNB Smart Chain before importing or trading CIGO.</p>
+      </article>
+
+      <article class="card">
+        <h2>2. Import CIGO manually</h2>
+        <p>In Rabby, import a custom token on BNB Smart Chain.</p>
+        <p>Paste the CIGO contract address:</p>
+        <p><code>0x3a38e963f524E0dDFB75dFa1752b4Cd1364F5560</code></p>
+        <p>Rabby should identify the token symbol as <strong>CIGO</strong> with <strong>18 decimals</strong>.</p>
+      </article>
+
+      <article class="card">
+        <h2>3. Open the official swap page</h2>
+        <p>Use the official CIGO swap interface:</p>
+        <p><a href="https://trade.cosigo.io/"><strong>https://trade.cosigo.io/</strong></a></p>
+        <p>The page uses a direct PancakeSwap V2 route. It does not use hidden wallet aggregation or automatic token movement.</p>
+      </article>
+
+      <article class="card">
+        <h2>4. Approve exact input first</h2>
+        <p>For BSC-USD (USDT) to CIGO, Rabby may ask for an approval before the swap.</p>
+        <p>Check that the token being approved is <strong>BSC-USD / USDT</strong>, the amount is close to the exact amount entered, and the spender is the PancakeSwap V2 router:</p>
+        <p><code>0x10ED43C718714eb63d5aA57B78B54704E256024E</code></p>
+        <p>Cancel if the approval looks unlimited, unrelated, or confusing.</p>
+      </article>
+
+      <article class="card">
+        <h2>5. Review the swap confirmation</h2>
+        <p>After approval, Rabby should show the swap transaction.</p>
+        <p>Review the from token, to token, amount, slippage, minimum received, gas fee, and route before signing.</p>
+        <p>The wallet confirmation is the final live execution review. Do not sign if the confirmation does not match what you intended.</p>
+      </article>
+
+      <article class="card notice warning">
+        <h2>Safety notes</h2>
+        <p>Never sign a transaction you do not understand.</p>
+        <p>Never approve unlimited token spending unless you intentionally choose to accept that risk.</p>
+        <p>Do not trust direct messages, fake support accounts, or unofficial links.</p>
+        <p>Official trade page: <a href="https://trade.cosigo.io/">trade.cosigo.io</a></p>
+      </article>
+    </section>
+  </main>
+  <footer class="cigo-system-footer">
+    <div class="cigo-footer-inner">
+      <div class="cigo-footer-info">
+        <strong>CIGO market-access pages are published by the COSIGO&trade; system.</strong><br>
+        CIGO is a separate speculative market-access token for trading, liquidity, and public market activity.
+        It is not the COSIGO&trade; silver-referenced Ethereum token, is not silver-backed, and is not a claim on
+        COSIGO reserves or redemption inventory.<br>
+        COSIGO&trade; is a trademark claimed by Wendall Gregory Wilson. U.S. trademark application pending.
+      </div>
+
+      <div class="cigo-footer-links">
+        <a href="/appendix.html">site appendix / quick reference</a>
+        <a href="https://cosigo.io/">COSIGO official</a>
+        <a href="https://market.cosigo.io/">CIGO market notice</a>
+<a href="https://github.com/cosigo" target="_blank" rel="noopener">GitHub ↗</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
