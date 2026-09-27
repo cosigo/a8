@@ -1,0 +1,5945 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>A8 Shadow · Jovian Carrier Inspection</title>
+
+<style>
+:root{
+  color-scheme:dark;
+  --bg:#090b0e;
+  --panel:#11151a;
+  --panel2:#0d1116;
+  --line:#29323b;
+  --text:#e7edf2;
+  --muted:#8d9aa5;
+  --good:#89d185;
+  --warn:#e5c76b;
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Consolas,
+    monospace;
+}
+
+main{
+  max-width:1100px;
+  margin:auto;
+  padding:32px 18px 60px;
+}
+
+a{
+  color:var(--text);
+}
+
+.return{
+  display:inline-block;
+  margin-bottom:24px;
+  padding:9px 13px;
+  border:1px solid var(--line);
+  border-radius:7px;
+  text-decoration:none;
+  background:var(--panel);
+}
+
+.return:hover{
+  border-color:var(--muted);
+}
+
+.kicker{
+  color:var(--muted);
+  font-size:.76rem;
+  letter-spacing:.16em;
+  margin-bottom:8px;
+}
+
+h1{
+  margin:0;
+  font-size:clamp(1.5rem,4vw,2.6rem);
+}
+
+.sub{
+  color:var(--muted);
+  margin-top:8px;
+  line-height:1.6;
+}
+
+.statusline{
+  margin-top:18px;
+  padding:12px 14px;
+  border:1px solid var(--line);
+  background:var(--panel2);
+  border-radius:8px;
+  font-weight:700;
+}
+
+.good{color:var(--good)}
+.warn{color:var(--warn)}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:14px;
+  margin-top:18px;
+}
+
+.card{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:9px;
+  padding:17px;
+  min-width:0;
+}
+
+.wide{
+  grid-column:1/-1;
+}
+
+h2{
+  margin:0 0 14px;
+  color:var(--muted);
+  font-size:.8rem;
+  letter-spacing:.1em;
+}
+
+.big{
+  font-size:clamp(1.35rem,4vw,2.2rem);
+  font-weight:800;
+  overflow-wrap:anywhere;
+}
+
+.rows{
+  margin-top:14px;
+  display:grid;
+  gap:8px;
+  font-size:.88rem;
+}
+
+.row{
+  display:flex;
+  justify-content:space-between;
+  gap:16px;
+  border-top:1px solid #1c232a;
+  padding-top:8px;
+}
+
+.row span:first-child{
+  color:var(--muted);
+}
+
+.row b{
+  text-align:right;
+  overflow-wrap:anywhere;
+}
+
+.residual{
+  font-size:clamp(2rem,7vw,4.5rem);
+  font-weight:900;
+  margin:8px 0 2px;
+}
+
+.exact{
+  color:var(--muted);
+}
+
+svg{
+  display:block;
+  width:100%;
+  height:150px;
+  margin-top:18px;
+  background:var(--panel2);
+  border:1px solid var(--line);
+  border-radius:7px;
+}
+
+#trendLine{
+  fill:none;
+  stroke:currentColor;
+  stroke-width:2;
+}
+
+
+
+.clockpair{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:14px;
+  margin-top:12px;
+}
+
+.clockbox{
+  background:var(--panel2);
+  border:1px solid var(--line);
+  border-radius:8px;
+  padding:15px;
+}
+
+.clocklabel{
+  color:var(--muted);
+  font-size:.74rem;
+  letter-spacing:.12em;
+  margin-bottom:8px;
+}
+
+.nativeclock{
+  font-size:clamp(1.7rem,5vw,3rem);
+  font-weight:900;
+  letter-spacing:.04em;
+}
+
+.alignbar{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:16px;
+}
+
+.alignbtn{
+  min-height:44px;
+  padding:10px 15px;
+  border:1px solid var(--line);
+  border-radius:7px;
+  background:var(--panel2);
+  color:var(--text);
+  font:inherit;
+  font-weight:800;
+  cursor:pointer;
+}
+
+.alignbtn:hover{
+  border-color:var(--muted);
+}
+
+.alignbtn:disabled{
+  opacity:.55;
+  cursor:default;
+}
+
+@media(max-width:700px){
+  .clockpair{
+    grid-template-columns:1fr;
+  }
+}
+
+footer{
+  color:var(--muted);
+  margin-top:28px;
+  font-size:.78rem;
+  line-height:1.6;
+}
+
+@media(max-width:700px){
+  .grid{
+    grid-template-columns:1fr;
+  }
+
+  .wide{
+    grid-column:auto;
+  }
+
+  .row{
+    display:block;
+  }
+
+  .row b{
+    display:block;
+    text-align:left;
+    margin-top:3px;
+  }
+}
+</style>
+</head>
+
+<body>
+<main>
+
+<a class="return" href="/">← RETURN TO SHADOW</a>
+
+<div class="kicker">
+AUSPICIOUS 8 · SHADOW TEST BENCH
+</div>
+
+<h1>JOVIAN CARRIER INSPECTION</h1>
+
+<div class="sub">
+Primary A → B and Remote Ghost C → D plotted on the same
+selected natural Jovian recurrence.
+</div>
+
+<div class="statusline">
+<span id="liveState" class="warn">CONNECTING</span>
+· READ ONLY
+· WRITES CORE20 = NO
+</div>
+
+<section class="grid">
+
+<article class="card wide">
+<h2>NATURAL AUTHORITY</h2>
+
+<div class="big good" id="authority">—</div>
+
+<div class="rows">
+  <div class="row">
+    <span>RECURRENCE RAW</span>
+    <b id="ruler">—</b>
+  </div>
+
+  <div class="row">
+    <span>NORMALIZATION</span>
+    <b id="normalization">—</b>
+  </div>
+
+  <div class="row">
+    <span>GOVERNOR</span>
+    <b id="governorMode">—</b>
+  </div>
+</div>
+</article>
+
+
+<article class="card">
+<h2>PRIMARY · A → B</h2>
+
+<div class="big good" id="abRaw">—</div>
+
+<div class="rows">
+  <div class="row">
+    <span>SOURCE EPOCH</span>
+    <b id="abEpoch">—</b>
+  </div>
+
+  <div class="row">
+    <span>WHEEL POSITION</span>
+    <b id="abPhase">—</b>
+  </div>
+
+  <div class="row">
+    <span>WHOLE WHEELS</span>
+    <b id="abWheels">—</b>
+  </div>
+
+  <div class="row">
+    <span>STATUS</span>
+    <b id="abStatus">—</b>
+  </div>
+</div>
+</article>
+
+
+<article class="card">
+<h2>REMOTE GHOST · C → D</h2>
+
+<div class="big warn" id="cdRaw">—</div>
+
+<div class="rows">
+  <div class="row">
+    <span>RUN ID</span>
+    <b id="cdRun">—</b>
+  </div>
+
+  <div class="row">
+    <span>WHEEL POSITION</span>
+    <b id="cdPhase">—</b>
+  </div>
+
+  <div class="row">
+    <span>LINK</span>
+    <b id="cdLink">—</b>
+  </div>
+
+  <div class="row">
+    <span>STATUS</span>
+    <b id="cdStatus">—</b>
+  </div>
+</div>
+</article>
+
+
+<article class="card wide">
+<h2>C/D → A/B CARRIER RELATION</h2>
+
+<div class="big" id="ratio">—</div>
+
+<div class="rows">
+  <div class="row">
+    <span>C/D ANCHOR RAW</span>
+    <b id="cdAnchor">—</b>
+  </div>
+
+  <div class="row">
+    <span>A/B EQUIVALENT ANCHOR</span>
+    <b id="abAnchor">—</b>
+  </div>
+
+  <div class="row">
+    <span>ROLE</span>
+    <b>ODOMETER ALIGNMENT · NOT RULER</b>
+  </div>
+</div>
+</article>
+
+
+<article class="card wide">
+<h2>LIVE WHEEL RESIDUAL</h2>
+
+<div class="residual" id="residual">—</div>
+
+<div class="exact" id="residualExact">
+exact · —
+</div>
+
+<svg
+  viewBox="0 0 800 150"
+  preserveAspectRatio="none"
+  aria-label="Recent wheel residual trend">
+  <line
+    x1="0" y1="75"
+    x2="800" y2="75"
+    stroke="#29323b"
+    stroke-width="1"/>
+  <polyline
+    id="trendLine"
+    points=""
+    vector-effect="non-scaling-stroke"/>
+</svg>
+
+<div class="rows">
+  <div class="row">
+    <span>ABSOLUTE MAPPED DIFFERENCE</span>
+    <b id="absoluteResidual">—</b>
+  </div>
+
+  <div class="row">
+    <span>LIVE COMPARISON</span>
+    <b id="comparisonMode">—</b>
+  </div>
+</div>
+</article>
+
+
+<article class="card wide">
+<h2>32 · 64 · 64 DRIFT EXPERIMENT</h2>
+
+<div class="clockpair">
+
+  <div class="clockbox">
+    <div class="clocklabel">
+      MAIN · CORE20
+    </div>
+
+    <div
+      class="nativeclock good"
+      id="mainDriftClock">
+      —:—:—
+    </div>
+
+    <div class="exact">
+      DAY <span id="mainDriftDay">—</span>
+    </div>
+  </div>
+
+  <div class="clockbox">
+    <div class="clocklabel">
+      SHADOW · C/D
+    </div>
+
+    <div
+      class="nativeclock warn"
+      id="shadowDriftClock">
+      —:—:—
+    </div>
+
+    <div class="exact">
+      DAY <span id="shadowDriftDay">—</span>
+    </div>
+  </div>
+
+</div>
+
+<div class="alignbar">
+
+  <button
+    type="button"
+    class="alignbtn"
+    id="alignDriftButton">
+    ALIGN / ZERO TO MAIN NOW
+  </button>
+
+  <button
+    type="button"
+    class="alignbtn"
+    id="clearDriftButton">
+    CLEAR BASELINE
+  </button>
+
+</div>
+
+<div
+  class="statusline warn"
+  id="driftAlignStatus">
+  NOT ALIGNED
+</div>
+
+<div class="kicker" style="margin-top:20px">
+ACCUMULATED DRIFT SINCE ALIGN
+</div>
+
+<div
+  class="residual"
+  id="driftAccumulator">
+  —
+</div>
+
+<div
+  class="exact"
+  id="driftAccumulatorExact">
+  exact · —
+</div>
+
+<div class="rows">
+
+  <div class="row">
+    <span>DIRECTION</span>
+    <b id="driftDirection">—</b>
+  </div>
+
+  <div class="row">
+    <span>RAW DRIFT SINCE ZERO</span>
+    <b id="driftRaw">—</b>
+  </div>
+
+  <div class="row">
+    <span>BASELINE RUN</span>
+    <b id="driftRun">—</b>
+  </div>
+
+  <div class="row">
+    <span>BASELINE ROLE</span>
+    <b>
+      ONE-SHOT COMPARISON · NOT AUTHORITY
+    </b>
+  </div>
+
+</div>
+</article>
+
+
+
+<article class="card wide" id="utcLabCard">
+
+<div class="kicker">
+UTC CONTAMINATION ZONE · EXTERNAL COMPARISON ONLY
+</div>
+
+<h2>UTC ↔ A8 · HOURLY RATE WITNESS</h2>
+
+<p class="sub">
+Browser-host UTC is permitted here only as an external
+legacy comparison witness. It does not define A8 phase,
+rate, ruler, carrier, Core20, or Jovian authority.
+</p>
+
+<div class="alignbar">
+
+  <button
+    type="button"
+    class="alignbtn"
+    id="alignUtcLabButton">
+    ALIGN UTC LAB NOW
+  </button>
+
+  <button
+    type="button"
+    class="alignbtn"
+    id="clearUtcLabButton">
+    CLEAR UTC LAB
+  </button>
+
+</div>
+
+<div
+  class="statusline warn"
+  id="utcLabStatus">
+  NOT ALIGNED
+</div>
+
+<div class="clockpair">
+
+  <div class="clockbox">
+    <div class="clocklabel">
+      MAIN A/B − UTC
+    </div>
+
+    <div
+      class="nativeclock good"
+      id="utcMainResidual">
+      —
+    </div>
+
+    <div class="exact" id="utcMainLegacy">
+      legacy equivalent · —
+    </div>
+  </div>
+
+  <div class="clockbox">
+    <div class="clocklabel">
+      SHADOW C/D − UTC
+    </div>
+
+    <div
+      class="nativeclock warn"
+      id="utcShadowResidual">
+      —
+    </div>
+
+    <div class="exact" id="utcShadowLegacy">
+      legacy equivalent · —
+    </div>
+  </div>
+
+</div>
+
+<div class="rows">
+
+  <div class="row">
+    <span>A/B − C/D</span>
+    <b id="utcAbCdResidual">—</b>
+  </div>
+
+  <div class="row">
+    <span>UTC ELAPSED · LEGACY SECONDS</span>
+    <b id="utcElapsedLegacy">—</b>
+  </div>
+
+  <div class="row">
+    <span>IDEAL A8 ELAPSED · UTC × 1024/675</span>
+    <b id="utcIdealA8">—</b>
+  </div>
+
+  <div class="row">
+    <span>MAIN A/B RATE ERROR</span>
+    <b id="utcMainPpm">—</b>
+  </div>
+
+  <div class="row">
+    <span>SHADOW C/D RATE ERROR</span>
+    <b id="utcShadowPpm">—</b>
+  </div>
+
+  <div class="row">
+    <span>MAIN PROJECTED DRIFT</span>
+    <b id="utcMainPerDay">—</b>
+  </div>
+
+  <div class="row">
+    <span>SHADOW PROJECTED DRIFT</span>
+    <b id="utcShadowPerDay">—</b>
+  </div>
+
+  <div class="row">
+    <span>BASELINE UTC</span>
+    <b id="utcBaselineIso">—</b>
+  </div>
+
+  <div class="row">
+    <span>LAST HOURLY SAMPLE</span>
+    <b id="utcLastIso">—</b>
+  </div>
+
+  <div class="row">
+    <span>NEXT SAMPLE</span>
+    <b id="utcNextSample">—</b>
+  </div>
+
+  <div class="row">
+    <span>SAMPLES</span>
+    <b id="utcSampleCount">0</b>
+  </div>
+
+  <div class="row">
+    <span>UTC SOURCE</span>
+    <b>BROWSER Date.now() · LEGACY WITNESS ONLY</b>
+  </div>
+
+  <div class="row">
+    <span>AUTHORITY</span>
+    <b>NONE · NEVER FED BACK INTO A8</b>
+  </div>
+
+</div>
+
+<div class="kicker" style="margin-top:20px">
+HOURLY ACCUMULATOR
+</div>
+
+<div
+  class="exact"
+  id="utcLabExact"
+  style="margin-top:8px;white-space:pre-wrap">
+  exact · —
+</div>
+
+<div
+  class="exact"
+  id="utcLabHistory"
+  style="
+    margin-top:14px;
+    white-space:pre;
+    overflow-x:auto;
+    line-height:1.65;
+  ">
+  NO SAMPLES
+</div>
+
+</article>
+
+
+<article class="card">
+<h2>RATCHET</h2>
+
+<div class="big good" id="ratchet">—</div>
+
+<div class="rows">
+  <div class="row">
+    <span>WHOLE-WHEEL ADJUSTMENT</span>
+    <b id="wheelAdjustment">—</b>
+  </div>
+
+  <div class="row">
+    <span>QUANTUM RAW</span>
+    <b id="quantum">—</b>
+  </div>
+
+  <div class="row">
+    <span>PHASE INVARIANT</span>
+    <b id="phaseInvariant">—</b>
+  </div>
+</div>
+</article>
+
+
+<article class="card">
+<h2>AUTHORITY BOUNDARY</h2>
+
+<div class="rows">
+  <div class="row">
+    <span>CORE20 WRITE</span>
+    <b id="writeCore">—</b>
+  </div>
+
+  <div class="row">
+    <span>CLOCK WRITE</span>
+    <b id="writeClock">—</b>
+  </div>
+
+  <div class="row">
+    <span>CARRIER WRITE</span>
+    <b id="writeCarrier">—</b>
+  </div>
+
+  <div class="row">
+    <span>ARDUINO WRITE</span>
+    <b id="writeArduino">—</b>
+  </div>
+
+  <div class="row">
+    <span>UTC PROGRESSION</span>
+    <b id="usesUtc">—</b>
+  </div>
+</div>
+</article>
+
+</section>
+
+<footer>
+SHADOW INSPECTION ONLY ·
+Natural ruler remains independent of either replaceable physical carrier ·
+No automatic actuation.
+</footer>
+
+</main>
+
+<script>
+const history = [];
+const MAX_HISTORY = 80;
+
+function el(id){
+  return document.getElementById(id);
+}
+
+function yesNo(v){
+  return v ? 'YES' : 'NO';
+}
+
+function exactText(o){
+  return o?.text ?? '—';
+}
+
+function decimal(o){
+  if(!o) return null;
+
+  const n = Number(o.numerator);
+  const d = Number(o.denominator);
+
+  if(!Number.isFinite(n) ||
+     !Number.isFinite(d) ||
+     d === 0){
+    return null;
+  }
+
+  return n/d;
+}
+
+function updateTrend(v){
+  if(!Number.isFinite(v)) return;
+
+  history.push(v);
+
+  if(history.length > MAX_HISTORY){
+    history.shift();
+  }
+
+  let min = Math.min(...history);
+  let max = Math.max(...history);
+
+  if(min === max){
+    min -= 1;
+    max += 1;
+  }
+
+  const pad = Math.max(
+    (max-min)*0.15,
+    1
+  );
+
+  min -= pad;
+  max += pad;
+
+  const pts = history.map((value,i)=>{
+    const x =
+      history.length === 1
+        ? 400
+        : i * 800/(history.length-1);
+
+    const y =
+      140 -
+      ((value-min)/(max-min))*130;
+
+    return `${x.toFixed(2)},${y.toFixed(2)}`;
+  });
+
+  el('trendLine').setAttribute(
+    'points',
+    pts.join(' ')
+  );
+}
+
+async function getJson(){
+  const r = await fetch(
+    '/api/shadow/governor',
+    {cache:'no-store'}
+  );
+
+  if(!r.ok){
+    throw new Error(
+      'HTTP '+r.status
+    );
+  }
+
+  return r.json();
+}
+
+
+const DAY_STATES = 131072n;
+
+/*
+ * Defining civil-clock recurrence on the
+ * EUROPA_NATURAL_MODEL_RAW axis.
+ *
+ * This is deliberately NOT the historical
+ * recoveredRawPerSunReturn compatibility field.
+ */
+const NATURAL_RAW_PER_SUN_RETURN =
+  rat(
+    17662037151309123889181355644928n,
+    6725008425933313745451187n
+  );
+
+const DRIFT_KEY =
+  'a8ShadowDriftBaselineV2';
+
+/*
+ * UTC COMPARISON LAB
+ *
+ * Browser-only external legacy witness.
+ *
+ * Nothing in this state is consumed by Core20,
+ * the governor, either physical carrier, or any
+ * A8 authority path.
+ */
+const UTC_LAB_KEY =
+  'a8InspectionUtcLabV1';
+
+const UTC_LAB_INTERVAL_MS =
+  60 * 60 * 1000;
+
+const UTC_LAB_MAX_SAMPLES =
+  49;
+
+let utcLabBusy = false;
+
+
+
+function bgcd(a,b){
+  a=a<0n ? -a : a;
+  b=b<0n ? -b : b;
+
+  while(b){
+    const t=a%b;
+    a=b;
+    b=t;
+  }
+
+  return a || 1n;
+}
+
+
+function rat(n,d=1n){
+  n=BigInt(n);
+  d=BigInt(d);
+
+  if(d === 0n){
+    throw new Error(
+      'zero rational denominator'
+    );
+  }
+
+  if(d < 0n){
+    n=-n;
+    d=-d;
+  }
+
+  const g=bgcd(n,d);
+
+  return {
+    n:n/g,
+    d:d/g
+  };
+}
+
+
+function ratObj(o){
+  return rat(
+    BigInt(o.numerator),
+    BigInt(o.denominator)
+  );
+}
+
+
+function ratText(t){
+  const s=String(t);
+
+  if(s.includes('/')){
+    const [a,b]=s.split('/');
+    return rat(
+      BigInt(a),
+      BigInt(b)
+    );
+  }
+
+  return rat(BigInt(s),1n);
+}
+
+
+function radd(a,b){
+  return rat(
+    a.n*b.d + b.n*a.d,
+    a.d*b.d
+  );
+}
+
+
+function rsub(a,b){
+  return rat(
+    a.n*b.d - b.n*a.d,
+    a.d*b.d
+  );
+}
+
+
+function rmul(a,b){
+  return rat(
+    a.n*b.n,
+    a.d*b.d
+  );
+}
+
+
+function rdiv(a,b){
+  return rat(
+    a.n*b.d,
+    a.d*b.n
+  );
+}
+
+
+function rmid(a,b){
+  return rdiv(
+    radd(a,b),
+    rat(2n)
+  );
+}
+
+
+function rfloor(a){
+  if(a.n >= 0n){
+    return a.n/a.d;
+  }
+
+  return -(
+    ((-a.n)+a.d-1n)/a.d
+  );
+}
+
+
+function rdecimal(a){
+  return Number(a.n) / Number(a.d);
+}
+
+
+function rstring(a){
+  return a.d === 1n
+    ? String(a.n)
+    : `${a.n}/${a.d}`;
+}
+
+
+function positiveMod(a,m){
+  const x=a%m;
+  return x < 0n ? x+m : x;
+}
+
+
+function clockFromTotalPhase(total){
+  const whole=rfloor(total);
+
+  const day=
+    whole >= 0n
+      ? whole / DAY_STATES
+      : -(
+          ((-whole)+DAY_STATES-1n)
+          / DAY_STATES
+        );
+
+  const phase=
+    positiveMod(
+      whole,
+      DAY_STATES
+    );
+
+  const hour =
+    phase / 4096n;
+
+  const rem =
+    phase % 4096n;
+
+  const minute =
+    rem / 64n;
+
+  const second =
+    rem % 64n;
+
+  return {
+    day:String(day),
+
+    clock:
+      String(hour).padStart(2,'0')
+      + ':' +
+      String(minute).padStart(2,'0')
+      + ':' +
+      String(second).padStart(2,'0')
+  };
+}
+
+
+function mainTotalPhase(c){
+  const day=
+    BigInt(c.dayCount);
+
+  const phase=
+    BigInt(c.dayPhase17);
+
+  const sub=
+    ratObj(
+      c.exactSubstate
+    );
+
+  return radd(
+    rat(
+      day*DAY_STATES + phase
+    ),
+    sub
+  );
+}
+
+
+function ghostMapped(g){
+  return ratObj(
+    g.wheel.mappedRawExact
+  );
+}
+
+
+function ghostResidual(g){
+  return ratObj(
+    g.comparisonToPrimary
+      .absoluteMappedDifferenceRawExact
+  );
+}
+
+
+function saveBaseline(b){
+  localStorage.setItem(
+    DRIFT_KEY,
+    JSON.stringify(b)
+  );
+}
+
+
+function loadBaseline(){
+  const raw=
+    localStorage.getItem(
+      DRIFT_KEY
+    );
+
+  if(!raw){
+    return null;
+  }
+
+  try{
+    return JSON.parse(raw);
+  }catch{
+    localStorage.removeItem(
+      DRIFT_KEY
+    );
+    return null;
+  }
+}
+
+
+function clearBaseline(){
+  localStorage.removeItem(
+    DRIFT_KEY
+  );
+}
+
+
+function baselineRat(b,prefix){
+  return rat(
+    BigInt(b[prefix+'N']),
+    BigInt(b[prefix+'D'])
+  );
+}
+
+
+async function getMainClock(){
+  const r=await fetch(
+    '/api/shadow/main-clock',
+    {cache:'no-store'}
+  );
+
+  if(!r.ok){
+    throw new Error(
+      'MAIN CLOCK HTTP '+r.status
+    );
+  }
+
+  return r.json();
+}
+
+
+async function getGovernorFresh(){
+  const r=await fetch(
+    '/api/shadow/governor',
+    {cache:'no-store'}
+  );
+
+  if(!r.ok){
+    throw new Error(
+      'GOVERNOR HTTP '+r.status
+    );
+  }
+
+  return r.json();
+}
+
+
+
+function utcPack(r){
+  return {
+    n:String(r.n),
+    d:String(r.d)
+  };
+}
+
+
+function utcUnpack(o){
+  return rat(
+    BigInt(o.n),
+    BigInt(o.d)
+  );
+}
+
+
+function utcSaveLab(x){
+  localStorage.setItem(
+    UTC_LAB_KEY,
+    JSON.stringify(x)
+  );
+}
+
+
+function utcLoadLab(){
+  const raw=
+    localStorage.getItem(
+      UTC_LAB_KEY
+    );
+
+  if(!raw) return null;
+
+  try{
+    return JSON.parse(raw);
+  }catch{
+    localStorage.removeItem(
+      UTC_LAB_KEY
+    );
+    return null;
+  }
+}
+
+
+function utcClearLab(){
+  localStorage.removeItem(
+    UTC_LAB_KEY
+  );
+
+  renderUtcLab();
+}
+
+
+function utcSigned(r,digits=6){
+  const v=rdecimal(r);
+
+  if(!Number.isFinite(v)){
+    return '—';
+  }
+
+  return (
+    (v >= 0 ? '+' : '') +
+    v.toFixed(digits)
+  );
+}
+
+
+function utcIso(msRat){
+  const ms=rdecimal(msRat);
+
+  if(!Number.isFinite(ms)){
+    return '—';
+  }
+
+  return new Date(ms)
+    .toISOString();
+}
+
+
+function utcPpm(drift,ideal){
+  if(ideal.n === 0n){
+    return null;
+  }
+
+  return rdecimal(
+    rmul(
+      rdiv(
+        drift,
+        ideal
+      ),
+      rat(1000000n)
+    )
+  );
+}
+
+
+function utcProjectedPerDay(
+  drift,
+  ideal
+){
+  if(ideal.n === 0n){
+    return null;
+  }
+
+  return rdecimal(
+    rmul(
+      rdiv(
+        drift,
+        ideal
+      ),
+      rat(DAY_STATES)
+    )
+  );
+}
+
+
+/*
+ * One UTC-lab observation.
+ *
+ * UTC brackets the full read.
+ * Main is bracketed between two governor samples.
+ *
+ * No data is written anywhere except browser localStorage.
+ */
+async function utcTakeSnapshot(){
+
+  const utcBefore=
+    rat(BigInt(Date.now()));
+
+  const g1=
+    await getGovernorFresh();
+
+  const m=
+    await getMainClock();
+
+  const g2=
+    await getGovernorFresh();
+
+  const utcAfter=
+    rat(BigInt(Date.now()));
+
+  const a1=
+    g1.carriers?.ghostCD;
+
+  const a2=
+    g2.carriers?.ghostCD;
+
+  if(
+    !a1 ||
+    !a2 ||
+    a1.status !==
+      'GHOST_PLOTTED_ON_JOVIAN_WHEEL' ||
+    a2.status !==
+      'GHOST_PLOTTED_ON_JOVIAN_WHEEL'
+  ){
+    throw new Error(
+      'C/D NOT PLOTTED'
+    );
+  }
+
+  if(a1.runId !== a2.runId){
+    throw new Error(
+      'C/D RUN CHANGED DURING SAMPLE'
+    );
+  }
+
+  if(
+    g1.jovian?.selectedAuthority !==
+      g2.jovian?.selectedAuthority
+  ){
+    throw new Error(
+      'AUTHORITY CHANGED DURING SAMPLE'
+    );
+  }
+
+  if(
+    g1.jovian?.rulerRawPerWheel !==
+      g2.jovian?.rulerRawPerWheel
+  ){
+    throw new Error(
+      'RULER CHANGED DURING SAMPLE'
+    );
+  }
+
+  const mapped=
+    rmid(
+      ghostMapped(a1),
+      ghostMapped(a2)
+    );
+
+  const mainTotal=
+    mainTotalPhase(
+      m.clock
+    );
+
+  return {
+    runId:a1.runId,
+
+    authority:
+      g1.jovian
+        ?.selectedAuthority,
+
+    ruler:
+      g1.jovian
+        ?.rulerRawPerWheel,
+
+    mapped,
+
+    mainTotal,
+
+    utcMid:
+      rmid(
+        utcBefore,
+        utcAfter
+      )
+  };
+}
+
+
+async function alignUtcLab(){
+
+  const button=
+    el('alignUtcLabButton');
+
+  if(utcLabBusy) return;
+
+  utcLabBusy=true;
+  button.disabled=true;
+
+  try{
+
+    const s=
+      await utcTakeSnapshot();
+
+    const zero=rat(0n);
+
+    const lab={
+      version:1,
+
+      role:
+        'EXTERNAL_UTC_COMPARISON_ONLY',
+
+      authority:
+        'NONE',
+
+      runId:s.runId,
+
+      jovianAuthority:
+        s.authority,
+
+      ruler:s.ruler,
+
+      baseMapped:
+        utcPack(s.mapped),
+
+      baseMain:
+        utcPack(s.mainTotal),
+
+      rawPerDay:
+        utcPack(
+          NATURAL_RAW_PER_SUN_RETURN
+        ),
+
+      baseUtcMs:
+        utcPack(s.utcMid),
+
+      baselineUtcIso:
+        utcIso(s.utcMid),
+
+      lastSampleUnixMs:
+        Date.now(),
+
+      nextIndex:1,
+
+      samples:[
+        {
+          index:0,
+
+          utcIso:
+            utcIso(s.utcMid),
+
+          elapsedHours:0,
+
+          elapsedLegacy:
+            utcPack(zero),
+
+          idealA8:
+            utcPack(zero),
+
+          mainUtc:
+            utcPack(zero),
+
+          shadowUtc:
+            utcPack(zero),
+
+          abCd:
+            utcPack(zero),
+
+          mainLegacy:
+            utcPack(zero),
+
+          shadowLegacy:
+            utcPack(zero),
+
+          mainPpm:null,
+          shadowPpm:null,
+
+          mainPerDay:null,
+          shadowPerDay:null
+        }
+      ]
+    };
+
+    utcSaveLab(lab);
+
+    renderUtcLab();
+
+    el('utcLabStatus')
+      .textContent =
+        'ALIGNED · H+0 SEALED · '
+        + 'HOURLY UTC WITNESS ARMED';
+
+    el('utcLabStatus')
+      .className =
+        'statusline good';
+
+  }catch(err){
+
+    el('utcLabStatus')
+      .textContent =
+        'ALIGN FAILED · ' +
+        err.message;
+
+    el('utcLabStatus')
+      .className =
+        'statusline warn';
+
+  }finally{
+
+    utcLabBusy=false;
+    button.disabled=false;
+  }
+}
+
+
+async function sampleUtcLab(){
+
+  if(utcLabBusy) return;
+
+  const lab=
+    utcLoadLab();
+
+  if(!lab) return;
+
+  utcLabBusy=true;
+
+  try{
+
+    const s=
+      await utcTakeSnapshot();
+
+    if(
+      s.runId !== lab.runId ||
+      s.authority !==
+        lab.jovianAuthority ||
+      s.ruler !== lab.ruler
+    ){
+      el('utcLabStatus')
+        .textContent =
+          'LAB HELD · RUN / AUTHORITY '
+          + 'CHANGED · HISTORY PRESERVED';
+
+      el('utcLabStatus')
+        .className =
+          'statusline warn';
+
+      return;
+    }
+
+    const baseMapped=
+      utcUnpack(
+        lab.baseMapped
+      );
+
+    const baseMain=
+      utcUnpack(
+        lab.baseMain
+      );
+
+    const baseUtcMs=
+      utcUnpack(
+        lab.baseUtcMs
+      );
+
+    const rawPerDay=
+      utcUnpack(
+        lab.rawPerDay
+      );
+
+    /*
+     * UTC elapsed in legacy seconds.
+     */
+    const elapsedLegacy=
+      rdiv(
+        rsub(
+          s.utcMid,
+          baseUtcMs
+        ),
+        rat(1000n)
+      );
+
+    /*
+     * Exact conversion:
+     *
+     * 1 A8 second =
+     * 675/1024 legacy second
+     *
+     * therefore:
+     *
+     * ideal A8 elapsed =
+     * legacy elapsed × 1024/675
+     */
+    const idealA8=
+      rmul(
+        elapsedLegacy,
+        rat(
+          1024n,
+          675n
+        )
+      );
+
+    /*
+     * Actual Main A/B clock advance.
+     */
+    const mainAdvance=
+      rsub(
+        s.mainTotal,
+        baseMain
+      );
+
+    /*
+     * C/D mapped RAW advance expressed
+     * through the existing natural day scale.
+     *
+     * NO experimental carrier correction yet.
+     */
+    const rawAdvance=
+      rsub(
+        s.mapped,
+        baseMapped
+      );
+
+    const shadowAdvance=
+      rdiv(
+        rmul(
+          rawAdvance,
+          rat(DAY_STATES)
+        ),
+        rawPerDay
+      );
+
+    /*
+     * Positive residual = carrier leads UTC.
+     * Negative residual = carrier lags UTC.
+     */
+    const mainUtc=
+      rsub(
+        mainAdvance,
+        idealA8
+      );
+
+    const shadowUtc=
+      rsub(
+        shadowAdvance,
+        idealA8
+      );
+
+    const abCd=
+      rsub(
+        mainAdvance,
+        shadowAdvance
+      );
+
+    const mainLegacy=
+      rmul(
+        mainUtc,
+        rat(
+          675n,
+          1024n
+        )
+      );
+
+    const shadowLegacy=
+      rmul(
+        shadowUtc,
+        rat(
+          675n,
+          1024n
+        )
+      );
+
+    const elapsedHours=
+      rdecimal(
+        rdiv(
+          elapsedLegacy,
+          rat(3600n)
+        )
+      );
+
+    const sample={
+      index:
+        Number(
+          lab.nextIndex || 1
+        ),
+
+      utcIso:
+        utcIso(s.utcMid),
+
+      elapsedHours,
+
+      elapsedLegacy:
+        utcPack(elapsedLegacy),
+
+      idealA8:
+        utcPack(idealA8),
+
+      mainUtc:
+        utcPack(mainUtc),
+
+      shadowUtc:
+        utcPack(shadowUtc),
+
+      abCd:
+        utcPack(abCd),
+
+      mainLegacy:
+        utcPack(mainLegacy),
+
+      shadowLegacy:
+        utcPack(shadowLegacy),
+
+      mainPpm:
+        utcPpm(
+          mainUtc,
+          idealA8
+        ),
+
+      shadowPpm:
+        utcPpm(
+          shadowUtc,
+          idealA8
+        ),
+
+      mainPerDay:
+        utcProjectedPerDay(
+          mainUtc,
+          idealA8
+        ),
+
+      shadowPerDay:
+        utcProjectedPerDay(
+          shadowUtc,
+          idealA8
+        )
+    };
+
+    lab.samples.push(sample);
+
+    if(
+      lab.samples.length >
+      UTC_LAB_MAX_SAMPLES
+    ){
+      lab.samples=
+        lab.samples.slice(
+          -UTC_LAB_MAX_SAMPLES
+        );
+    }
+
+    lab.nextIndex=
+      sample.index + 1;
+
+    lab.lastSampleUnixMs=
+      Date.now();
+
+    utcSaveLab(lab);
+
+    renderUtcLab();
+
+  }catch(err){
+
+    el('utcLabStatus')
+      .textContent =
+        'SAMPLE FAILED · ' +
+        err.message;
+
+    el('utcLabStatus')
+      .className =
+        'statusline warn';
+
+  }finally{
+
+    utcLabBusy=false;
+  }
+}
+
+
+function renderUtcLab(){
+
+  const lab=
+    utcLoadLab();
+
+  if(!lab){
+
+    el('utcLabStatus')
+      .textContent =
+        'NOT ALIGNED';
+
+    el('utcLabStatus')
+      .className =
+        'statusline warn';
+
+    el('utcMainResidual')
+      .textContent='—';
+
+    el('utcShadowResidual')
+      .textContent='—';
+
+    el('utcMainLegacy')
+      .textContent=
+        'legacy equivalent · —';
+
+    el('utcShadowLegacy')
+      .textContent=
+        'legacy equivalent · —';
+
+    el('utcAbCdResidual')
+      .textContent='—';
+
+    el('utcElapsedLegacy')
+      .textContent='—';
+
+    el('utcIdealA8')
+      .textContent='—';
+
+    el('utcMainPpm')
+      .textContent='—';
+
+    el('utcShadowPpm')
+      .textContent='—';
+
+    el('utcMainPerDay')
+      .textContent='—';
+
+    el('utcShadowPerDay')
+      .textContent='—';
+
+    el('utcBaselineIso')
+      .textContent='—';
+
+    el('utcLastIso')
+      .textContent='—';
+
+    el('utcNextSample')
+      .textContent='—';
+
+    el('utcSampleCount')
+      .textContent='0';
+
+    el('utcLabExact')
+      .textContent=
+        'exact · —';
+
+    el('utcLabHistory')
+      .textContent=
+        'NO SAMPLES';
+
+    return;
+  }
+
+  const samples=
+    lab.samples || [];
+
+  const last=
+    samples[
+      samples.length - 1
+    ];
+
+  if(!last) return;
+
+  const mainUtc=
+    utcUnpack(
+      last.mainUtc
+    );
+
+  const shadowUtc=
+    utcUnpack(
+      last.shadowUtc
+    );
+
+  const abCd=
+    utcUnpack(
+      last.abCd
+    );
+
+  const mainLegacy=
+    utcUnpack(
+      last.mainLegacy
+    );
+
+  const shadowLegacy=
+    utcUnpack(
+      last.shadowLegacy
+    );
+
+  const elapsedLegacy=
+    utcUnpack(
+      last.elapsedLegacy
+    );
+
+  const idealA8=
+    utcUnpack(
+      last.idealA8
+    );
+
+  el('utcMainResidual')
+    .textContent =
+      utcSigned(mainUtc) +
+      ' A8 s';
+
+  el('utcShadowResidual')
+    .textContent =
+      utcSigned(shadowUtc) +
+      ' A8 s';
+
+  el('utcMainLegacy')
+    .textContent =
+      'legacy equivalent · ' +
+      utcSigned(
+        mainLegacy
+      ) +
+      ' s';
+
+  el('utcShadowLegacy')
+    .textContent =
+      'legacy equivalent · ' +
+      utcSigned(
+        shadowLegacy
+      ) +
+      ' s';
+
+  el('utcAbCdResidual')
+    .textContent =
+      utcSigned(abCd) +
+      ' A8 s';
+
+  el('utcElapsedLegacy')
+    .textContent =
+      rdecimal(
+        elapsedLegacy
+      ).toFixed(3) +
+      ' s';
+
+  el('utcIdealA8')
+    .textContent =
+      rdecimal(
+        idealA8
+      ).toFixed(6) +
+      ' A8 s';
+
+  el('utcMainPpm')
+    .textContent =
+      last.mainPpm === null
+        ? '—'
+        : (
+            (last.mainPpm >= 0
+              ? '+'
+              : '') +
+            last.mainPpm
+              .toFixed(3) +
+            ' ppm'
+          );
+
+  el('utcShadowPpm')
+    .textContent =
+      last.shadowPpm === null
+        ? '—'
+        : (
+            (last.shadowPpm >= 0
+              ? '+'
+              : '') +
+            last.shadowPpm
+              .toFixed(3) +
+            ' ppm'
+          );
+
+  el('utcMainPerDay')
+    .textContent =
+      last.mainPerDay === null
+        ? '—'
+        : (
+            (last.mainPerDay >= 0
+              ? '+'
+              : '') +
+            last.mainPerDay
+              .toFixed(4) +
+            ' A8 s/day'
+          );
+
+  el('utcShadowPerDay')
+    .textContent =
+      last.shadowPerDay === null
+        ? '—'
+        : (
+            (last.shadowPerDay >= 0
+              ? '+'
+              : '') +
+            last.shadowPerDay
+              .toFixed(4) +
+            ' A8 s/day'
+          );
+
+  el('utcBaselineIso')
+    .textContent =
+      lab.baselineUtcIso ||
+      '—';
+
+  el('utcLastIso')
+    .textContent =
+      last.utcIso ||
+      '—';
+
+  el('utcSampleCount')
+    .textContent =
+      String(samples.length);
+
+  const remaining=
+    Math.max(
+      0,
+      UTC_LAB_INTERVAL_MS -
+      (
+        Date.now() -
+        Number(
+          lab.lastSampleUnixMs || 0
+        )
+      )
+    );
+
+  el('utcNextSample')
+    .textContent =
+      remaining === 0
+        ? 'DUE'
+        : (
+            Math.ceil(
+              remaining / 60000
+            ) +
+            ' min'
+          );
+
+  el('utcLabExact')
+    .textContent =
+      'MAIN−UTC exact · ' +
+      rstring(mainUtc) +
+      '\n' +
+      'C/D−UTC exact  · ' +
+      rstring(shadowUtc) +
+      '\n' +
+      'A/B−C/D exact  · ' +
+      rstring(abCd);
+
+  const lines=[
+    'HOURS       MAIN−UTC(A8s)   C/D−UTC(A8s)   A/B−C/D(A8s)'
+  ];
+
+  for(const x of samples){
+
+    const m=
+      utcUnpack(
+        x.mainUtc
+      );
+
+    const c=
+      utcUnpack(
+        x.shadowUtc
+      );
+
+    const d=
+      utcUnpack(
+        x.abCd
+      );
+
+    lines.push(
+      String(
+        Number(
+          x.elapsedHours || 0
+        ).toFixed(3)
+      ).padStart(7) +
+      '   ' +
+      utcSigned(m)
+        .padStart(14) +
+      '   ' +
+      utcSigned(c)
+        .padStart(13) +
+      '   ' +
+      utcSigned(d)
+        .padStart(13)
+    );
+  }
+
+  el('utcLabHistory')
+    .textContent =
+      lines.join('\n');
+
+  el('utcLabStatus')
+    .textContent =
+      'ALIGNED · HOURLY UTC WITNESS · '
+      + 'EXTERNAL ONLY';
+
+  el('utcLabStatus')
+    .className =
+      'statusline good';
+}
+
+
+async function maybeSampleUtcLab(){
+
+  const lab=
+    utcLoadLab();
+
+  renderUtcLab();
+
+  if(!lab || utcLabBusy){
+    return;
+  }
+
+  const elapsed=
+    Date.now() -
+    Number(
+      lab.lastSampleUnixMs || 0
+    );
+
+  if(
+    elapsed >=
+    UTC_LAB_INTERVAL_MS
+  ){
+    await sampleUtcLab();
+  }
+}
+
+
+
+/*
+ * C/D PI OSCILLATOR COMPENSATION · LIVE DISPLAY
+ *
+ * Display only.
+ *
+ * This reads the parallel disciplined coordinate published by
+ * the Ghost Pi. It does not write any timing state and does not
+ * alter the existing UTC lab, governor, Core20, physical RAW,
+ * or the sealed 254/255 carrier relationship.
+ */
+function ensureCdDisciplinePanel(){
+
+  if(el('cdPiDisciplinePanel')){
+    return;
+  }
+
+  const panel=
+    document.createElement('article');
+
+  panel.id='cdPiDisciplinePanel';
+  panel.className='card wide';
+
+  panel.innerHTML=`
+    <h2>C/D PI · OSCILLATOR COMPENSATION</h2>
+
+    <div
+      class="statusline warn"
+      id="cdPiDisciplineStatus">
+      WAITING FOR DISCIPLINED C/D
+    </div>
+
+    <div class="rows">
+
+      <div class="row">
+        <span>PHYSICAL C/D RAW</span>
+        <b id="cdPiPhysicalRaw">—</b>
+      </div>
+
+      <div class="row">
+        <span>DISCIPLINED C/D RAW · EXACT</span>
+        <b id="cdPiDisciplinedRaw">—</b>
+      </div>
+
+      <div class="row">
+        <span>DISCIPLINED C/D RAW · FLOOR</span>
+        <b id="cdPiDisciplinedFloor">—</b>
+      </div>
+
+      <div class="row">
+        <span>OSCILLATOR EXCESS CONSUMED</span>
+        <b id="cdPiConsumed">—</b>
+      </div>
+
+      <div class="row">
+        <span>FINE COMPENSATION</span>
+        <b id="cdPiRatio">—</b>
+      </div>
+
+      <div class="row">
+        <span>PHYSICAL DELTA SINCE TRIM ANCHOR</span>
+        <b id="cdPiPhysicalDelta">—</b>
+      </div>
+
+      <div class="row">
+        <span>ROLE</span>
+        <b>OSCILLATOR COMPENSATION ONLY</b>
+      </div>
+
+      <div class="row">
+        <span>AUTHORITY</span>
+        <b>NONE</b>
+      </div>
+
+    </div>
+
+    <div
+      class="exact"
+      id="cdPiExact">
+      exact · —
+    </div>
+  `;
+
+  const utcStatus=
+    el('utcLabStatus');
+
+  const utcCard=
+    utcStatus
+      ? utcStatus.closest('article')
+      : null;
+
+  if(utcCard){
+    utcCard.insertAdjacentElement(
+      'afterend',
+      panel
+    );
+  }else{
+    const main=
+      document.querySelector('main');
+
+    if(!main){
+      throw new Error(
+        'NO INSPECTION MAIN CONTAINER'
+      );
+    }
+
+    main.appendChild(panel);
+  }
+}
+
+
+async function updateCdDisciplinePanel(){
+
+  ensureCdDisciplinePanel();
+
+  const status=
+    el('cdPiDisciplineStatus');
+
+  try{
+
+    const r=
+      await fetch(
+        '/api/shadow/ghost',
+        {cache:'no-store'}
+      );
+
+    if(!r.ok){
+      throw new Error(
+        'GHOST HTTP '+r.status
+      );
+    }
+
+    const body=
+      await r.json();
+
+    const g=
+      body.ghost || {};
+
+    const d=
+      g.disciplinedRaw;
+
+    const c=
+      g.carrierDiscipline;
+
+    if(
+      !d ||
+      !c ||
+      d.status !== 'ACTIVE_TRIAL' ||
+      c.status !== 'ACTIVE_TRIAL'
+    ){
+      throw new Error(
+        'DISCIPLINED C/D NOT ACTIVE'
+      );
+    }
+
+    const physical=
+      BigInt(
+        String(g.rawCount)
+      );
+
+    const exact=
+      rat(
+        BigInt(d.numerator),
+        BigInt(d.denominator)
+      );
+
+    const physicalRat=
+      rat(physical);
+
+    const consumed=
+      rsub(
+        physicalRat,
+        exact
+      );
+
+    el('cdPiPhysicalRaw')
+      .textContent=
+        String(physical);
+
+    el('cdPiDisciplinedRaw')
+      .textContent=
+        rstring(exact);
+
+    el('cdPiDisciplinedFloor')
+      .textContent=
+        String(
+          d.floorRaw ?? '—'
+        );
+
+    el('cdPiConsumed')
+      .textContent=
+        rdecimal(consumed)
+          .toFixed(9)
+        + ' RAW';
+
+    el('cdPiRatio')
+      .textContent=
+        String(
+          c.ratio?.numerator ?? '—'
+        )
+        + '/'
+        + String(
+          c.ratio?.denominator ?? '—'
+        );
+
+    el('cdPiPhysicalDelta')
+      .textContent=
+        String(
+          d.physicalDelta ?? '—'
+        );
+
+    el('cdPiExact')
+      .textContent=
+        'physical exact · '
+        + String(physical)
+        + '\n'
+        + 'disciplined exact · '
+        + rstring(exact)
+        + '\n'
+        + 'consumed exact · '
+        + rstring(consumed)
+        + '\n'
+        + 'anchor physical · '
+        + String(
+            c.physicalAnchorRaw ?? '—'
+          )
+        + '\n'
+        + 'run · '
+        + String(
+            c.runId ?? '—'
+          );
+
+    status.textContent=
+      'ACTIVE TRIAL · PI SWEEPING OSCILLATOR EXCESS';
+
+    status.className=
+      'statusline good';
+
+  }catch(err){
+
+    status.textContent=
+      'DISCIPLINE DISPLAY UNAVAILABLE · '
+      + err.message;
+
+    status.className=
+      'statusline warn';
+  }
+}
+
+
+
+/*
+ * C/D POST-TRIM UTC WATCH
+ *
+ * Separate from the original UTC comparison lab.
+ *
+ * Physical C/D and disciplined C/D are measured from the same
+ * fresh browser UTC baseline.
+ *
+ * 254/255 is used here only as the existing sealed coarse
+ * C/D -> A/B-equivalent conversion for comparison math.
+ *
+ * Nothing here writes the governor, Core20, Arduino, Ghost Pi,
+ * recorder, or either carrier.
+ */
+
+const CD_TRIM_UTC_KEY =
+  'a8InspectionCdTrimUtcLabV1';
+
+const CD_TRIM_UTC_INTERVAL_MS =
+  60 * 60 * 1000;
+
+const CD_TRIM_UTC_MAX_SAMPLES =
+  49;
+
+const CD_COARSE_RATIO =
+  rat(254n,255n);
+
+let cdTrimUtcBusy=false;
+
+
+function cdTrimSaveLab(x){
+  localStorage.setItem(
+    CD_TRIM_UTC_KEY,
+    JSON.stringify(x)
+  );
+}
+
+
+function cdTrimLoadLab(){
+
+  const raw=
+    localStorage.getItem(
+      CD_TRIM_UTC_KEY
+    );
+
+  if(!raw){
+    return null;
+  }
+
+  try{
+    return JSON.parse(raw);
+  }catch{
+    localStorage.removeItem(
+      CD_TRIM_UTC_KEY
+    );
+    return null;
+  }
+}
+
+
+function ensureCdTrimUtcPanel(){
+
+  if(el('cdTrimUtcPanel')){
+    return;
+  }
+
+  ensureCdDisciplinePanel();
+
+  const panel=
+    document.createElement('article');
+
+  panel.id='cdTrimUtcPanel';
+  panel.className='card wide';
+
+  panel.innerHTML=`
+    <h2>C/D PI · POST-TRIM UTC WATCH</h2>
+
+    <div
+      class="statusline warn"
+      id="cdTrimUtcStatus">
+      NOT ALIGNED
+    </div>
+
+    <div class="alignbar">
+      <button
+        type="button"
+        class="alignbtn"
+        id="alignCdTrimUtcButton">
+        ALIGN POST-TRIM WATCH NOW
+      </button>
+    </div>
+
+    <div class="rows">
+
+      <div class="row">
+        <span>PHYSICAL C/D − UTC</span>
+        <b id="cdTrimPhysicalUtc">—</b>
+      </div>
+
+      <div class="row">
+        <span>DISCIPLINED C/D − UTC</span>
+        <b id="cdTrimDisciplinedUtc">—</b>
+      </div>
+
+      <div class="row">
+        <span>PI TRIM REMOVED</span>
+        <b id="cdTrimRemoved">—</b>
+      </div>
+
+      <div class="row">
+        <span>PHYSICAL RATE ERROR</span>
+        <b id="cdTrimPhysicalPpm">—</b>
+      </div>
+
+      <div class="row">
+        <span>DISCIPLINED RATE ERROR</span>
+        <b id="cdTrimDisciplinedPpm">—</b>
+      </div>
+
+      <div class="row">
+        <span>PHYSICAL PROJECTED DRIFT</span>
+        <b id="cdTrimPhysicalPerDay">—</b>
+      </div>
+
+      <div class="row">
+        <span>DISCIPLINED PROJECTED DRIFT</span>
+        <b id="cdTrimDisciplinedPerDay">—</b>
+      </div>
+
+      <div class="row">
+        <span>FINE PI COMPENSATION</span>
+        <b id="cdTrimFineRatio">16818/16819</b>
+      </div>
+
+      <div class="row">
+        <span>COARSE COMPARISON BRIDGE</span>
+        <b>254/255 · UNCHANGED</b>
+      </div>
+
+      <div class="row">
+        <span>BASELINE UTC</span>
+        <b id="cdTrimBaselineUtc">—</b>
+      </div>
+
+      <div class="row">
+        <span>LAST HOURLY SAMPLE</span>
+        <b id="cdTrimLastUtc">—</b>
+      </div>
+
+      <div class="row">
+        <span>NEXT SAMPLE</span>
+        <b id="cdTrimNextSample">—</b>
+      </div>
+
+      <div class="row">
+        <span>SAMPLES</span>
+        <b id="cdTrimSampleCount">0</b>
+      </div>
+
+      <div class="row">
+        <span>AUTHORITY</span>
+        <b>NONE · EXTERNAL COMPARISON ONLY</b>
+      </div>
+
+    </div>
+
+    <div
+      class="exact"
+      id="cdTrimUtcExact">
+      exact · —
+    </div>
+
+    <pre
+      class="exact"
+      id="cdTrimUtcHistory">NO SAMPLES</pre>
+  `;
+
+  const livePanel=
+    el('cdPiDisciplinePanel');
+
+  if(livePanel){
+    livePanel.insertAdjacentElement(
+      'afterend',
+      panel
+    );
+  }else{
+    document.querySelector('main')
+      ?.appendChild(panel);
+  }
+
+  el('alignCdTrimUtcButton')
+    .addEventListener(
+      'click',
+      alignCdTrimUtcLab
+    );
+}
+
+
+async function cdTrimTakeSnapshot(){
+
+  const utcBefore=
+    rat(BigInt(Date.now()));
+
+  const r=
+    await fetch(
+      '/api/shadow/ghost',
+      {cache:'no-store'}
+    );
+
+  if(!r.ok){
+    throw new Error(
+      'GHOST HTTP '+r.status
+    );
+  }
+
+  const body=
+    await r.json();
+
+  const utcAfter=
+    rat(BigInt(Date.now()));
+
+  const g=
+    body.ghost || {};
+
+  const d=
+    g.disciplinedRaw;
+
+  const c=
+    g.carrierDiscipline;
+
+  if(
+    !d ||
+    !c ||
+    d.status !== 'ACTIVE_TRIAL' ||
+    c.status !== 'ACTIVE_TRIAL'
+  ){
+    throw new Error(
+      'DISCIPLINED C/D NOT ACTIVE'
+    );
+  }
+
+  const physical=
+    rat(
+      BigInt(
+        String(g.rawCount)
+      )
+    );
+
+  const disciplined=
+    rat(
+      BigInt(d.numerator),
+      BigInt(d.denominator)
+    );
+
+  return {
+    runId:
+      String(g.runId),
+
+    physical,
+
+    disciplined,
+
+    fineNumerator:
+      String(
+        c.ratio?.numerator
+      ),
+
+    fineDenominator:
+      String(
+        c.ratio?.denominator
+      ),
+
+    anchor:
+      String(
+        c.physicalAnchorRaw
+      ),
+
+    utcMid:
+      rmid(
+        utcBefore,
+        utcAfter
+      )
+  };
+}
+
+
+async function alignCdTrimUtcLab(){
+
+  ensureCdTrimUtcPanel();
+
+  const button=
+    el('alignCdTrimUtcButton');
+
+  if(cdTrimUtcBusy){
+    return;
+  }
+
+  if(cdTrimLoadLab()){
+    el('cdTrimUtcStatus')
+      .textContent=
+        'ALREADY ALIGNED · BASELINE PRESERVED';
+
+    el('cdTrimUtcStatus')
+      .className=
+        'statusline good';
+
+    return;
+  }
+
+  cdTrimUtcBusy=true;
+  button.disabled=true;
+
+  try{
+
+    const s=
+      await cdTrimTakeSnapshot();
+
+    const zero=rat(0n);
+
+    const lab={
+      version:1,
+
+      watchState:
+        'RUNNING',
+
+      controlVersion:
+        1,
+
+      role:
+        'C_D_OSCILLATOR_COMPENSATION_VALIDATION',
+
+      authority:
+        'NONE',
+
+      runId:
+        s.runId,
+
+      fineNumerator:
+        s.fineNumerator,
+
+      fineDenominator:
+        s.fineDenominator,
+
+      physicalAnchor:
+        s.anchor,
+
+      coarseNumerator:
+        '254',
+
+      coarseDenominator:
+        '255',
+
+      basePhysical:
+        utcPack(
+          s.physical
+        ),
+
+      baseDisciplined:
+        utcPack(
+          s.disciplined
+        ),
+
+      baseUtcMs:
+        utcPack(
+          s.utcMid
+        ),
+
+      baselineUtcIso:
+        utcIso(
+          s.utcMid
+        ),
+
+      lastSampleUnixMs:
+        Date.now(),
+
+      nextIndex:1,
+
+      samples:[
+        {
+          index:0,
+
+          elapsedHours:0,
+
+          utcIso:
+            utcIso(
+              s.utcMid
+            ),
+
+          physicalUtc:
+            utcPack(zero),
+
+          disciplinedUtc:
+            utcPack(zero),
+
+          removed:
+            utcPack(zero),
+
+          physicalPpm:null,
+          disciplinedPpm:null,
+
+          physicalPerDay:null,
+          disciplinedPerDay:null
+        }
+      ]
+    };
+
+    cdTrimSaveLab(lab);
+
+    renderCdTrimUtcLab();
+
+    el('cdTrimUtcStatus')
+      .textContent=
+        'ALIGNED · H+0 SEALED · '
+        + 'POST-TRIM HOURLY WATCH ARMED';
+
+    el('cdTrimUtcStatus')
+      .className=
+        'statusline good';
+
+  }catch(err){
+
+    el('cdTrimUtcStatus')
+      .textContent=
+        'ALIGN FAILED · '
+        + err.message;
+
+    el('cdTrimUtcStatus')
+      .className=
+        'statusline warn';
+
+  }finally{
+
+    cdTrimUtcBusy=false;
+    button.disabled=false;
+  }
+}
+
+
+async function sampleCdTrimUtcLab(){
+
+  if(cdTrimUtcBusy){
+    return;
+  }
+
+  const lab=
+    cdTrimLoadLab();
+
+  if(!lab){
+    return;
+  }
+
+  if(
+    lab.watchState === 'STOPPED'
+  ){
+    cdTrimApplyWatchControlState();
+    return;
+  }
+
+  cdTrimUtcBusy=true;
+
+  try{
+
+    const s=
+      await cdTrimTakeSnapshot();
+
+    if(
+      s.runId !== lab.runId ||
+      s.fineNumerator !==
+        lab.fineNumerator ||
+      s.fineDenominator !==
+        lab.fineDenominator ||
+      s.anchor !==
+        lab.physicalAnchor
+    ){
+      el('cdTrimUtcStatus')
+        .textContent=
+          'LAB HELD · C/D RUN OR '
+          + 'DISCIPLINE CONTRACT CHANGED';
+
+      el('cdTrimUtcStatus')
+        .className=
+          'statusline warn';
+
+      return;
+    }
+
+    const basePhysical=
+      utcUnpack(
+        lab.basePhysical
+      );
+
+    const baseDisciplined=
+      utcUnpack(
+        lab.baseDisciplined
+      );
+
+    const baseUtc=
+      utcUnpack(
+        lab.baseUtcMs
+      );
+
+    const elapsedMs=
+      rsub(
+        s.utcMid,
+        baseUtc
+      );
+
+    const elapsedLegacy=
+      rdiv(
+        elapsedMs,
+        rat(1000n)
+      );
+
+    const idealA8=
+      rmul(
+        elapsedLegacy,
+        rat(
+          1024n,
+          675n
+        )
+      );
+
+    /*
+     * Translate each C/D delta through the existing
+     * sealed coarse relationship.
+     *
+     * This is calculation only.
+     * The governor itself remains untouched.
+     */
+    const physicalMappedAdvance=
+      rmul(
+        rsub(
+          s.physical,
+          basePhysical
+        ),
+        CD_COARSE_RATIO
+      );
+
+    const disciplinedMappedAdvance=
+      rmul(
+        rsub(
+          s.disciplined,
+          baseDisciplined
+        ),
+        CD_COARSE_RATIO
+      );
+
+    const physicalA8=
+      rdiv(
+        rmul(
+          physicalMappedAdvance,
+          rat(DAY_STATES)
+        ),
+        NATURAL_RAW_PER_SUN_RETURN
+      );
+
+    const disciplinedA8=
+      rdiv(
+        rmul(
+          disciplinedMappedAdvance,
+          rat(DAY_STATES)
+        ),
+        NATURAL_RAW_PER_SUN_RETURN
+      );
+
+    const physicalUtc=
+      rsub(
+        physicalA8,
+        idealA8
+      );
+
+    const disciplinedUtc=
+      rsub(
+        disciplinedA8,
+        idealA8
+      );
+
+    const removed=
+      rsub(
+        physicalA8,
+        disciplinedA8
+      );
+
+    const elapsedHours=
+      rdecimal(
+        rdiv(
+          elapsedLegacy,
+          rat(3600n)
+        )
+      );
+
+    const sample={
+      index:
+        Number(
+          lab.nextIndex || 1
+        ),
+
+      elapsedHours,
+
+      utcIso:
+        utcIso(
+          s.utcMid
+        ),
+
+      physicalUtc:
+        utcPack(
+          physicalUtc
+        ),
+
+      disciplinedUtc:
+        utcPack(
+          disciplinedUtc
+        ),
+
+      removed:
+        utcPack(
+          removed
+        ),
+
+      physicalPpm:
+        utcPpm(
+          physicalUtc,
+          idealA8
+        ),
+
+      disciplinedPpm:
+        utcPpm(
+          disciplinedUtc,
+          idealA8
+        ),
+
+      physicalPerDay:
+        utcProjectedPerDay(
+          physicalUtc,
+          idealA8
+        ),
+
+      disciplinedPerDay:
+        utcProjectedPerDay(
+          disciplinedUtc,
+          idealA8
+        )
+    };
+
+    lab.samples.push(sample);
+
+    if(
+      lab.samples.length >
+      CD_TRIM_UTC_MAX_SAMPLES
+    ){
+      lab.samples=
+        lab.samples.slice(
+          -CD_TRIM_UTC_MAX_SAMPLES
+        );
+    }
+
+    lab.nextIndex=
+      sample.index + 1;
+
+    lab.lastSampleUnixMs=
+      Date.now();
+
+    cdTrimSaveLab(lab);
+
+    renderCdTrimUtcLab();
+
+  }catch(err){
+
+    el('cdTrimUtcStatus')
+      .textContent=
+        'SAMPLE FAILED · '
+        + err.message;
+
+    el('cdTrimUtcStatus')
+      .className=
+        'statusline warn';
+
+  }finally{
+
+    cdTrimUtcBusy=false;
+  }
+}
+
+
+function renderCdTrimUtcLab(){
+
+  ensureCdTrimUtcPanel();
+
+  const lab=
+    cdTrimLoadLab();
+
+  if(!lab){
+
+    el('cdTrimUtcStatus')
+      .textContent=
+        'NOT ALIGNED';
+
+    el('cdTrimUtcStatus')
+      .className=
+        'statusline warn';
+
+    return;
+  }
+
+  const samples=
+    lab.samples || [];
+
+  const last=
+    samples[
+      samples.length - 1
+    ];
+
+  if(!last){
+    return;
+  }
+
+  const physicalUtc=
+    utcUnpack(
+      last.physicalUtc
+    );
+
+  const disciplinedUtc=
+    utcUnpack(
+      last.disciplinedUtc
+    );
+
+  const removed=
+    utcUnpack(
+      last.removed
+    );
+
+  el('cdTrimPhysicalUtc')
+    .textContent=
+      utcSigned(
+        physicalUtc
+      )
+      + ' A8 s';
+
+  el('cdTrimDisciplinedUtc')
+    .textContent=
+      utcSigned(
+        disciplinedUtc
+      )
+      + ' A8 s';
+
+  el('cdTrimRemoved')
+    .textContent=
+      utcSigned(
+        removed
+      )
+      + ' A8 s';
+
+  el('cdTrimPhysicalPpm')
+    .textContent=
+      last.physicalPpm === null
+        ? '—'
+        : (
+            (last.physicalPpm >= 0
+              ? '+'
+              : '')
+            + last.physicalPpm
+                .toFixed(3)
+            + ' ppm'
+          );
+
+  el('cdTrimDisciplinedPpm')
+    .textContent=
+      last.disciplinedPpm === null
+        ? '—'
+        : (
+            (last.disciplinedPpm >= 0
+              ? '+'
+              : '')
+            + last.disciplinedPpm
+                .toFixed(3)
+            + ' ppm'
+          );
+
+  el('cdTrimPhysicalPerDay')
+    .textContent=
+      last.physicalPerDay === null
+        ? '—'
+        : (
+            (last.physicalPerDay >= 0
+              ? '+'
+              : '')
+            + last.physicalPerDay
+                .toFixed(4)
+            + ' A8 s/day'
+          );
+
+  el('cdTrimDisciplinedPerDay')
+    .textContent=
+      last.disciplinedPerDay === null
+        ? '—'
+        : (
+            (last.disciplinedPerDay >= 0
+              ? '+'
+              : '')
+            + last.disciplinedPerDay
+                .toFixed(4)
+            + ' A8 s/day'
+          );
+
+  el('cdTrimFineRatio')
+    .textContent=
+      lab.fineNumerator
+      + '/'
+      + lab.fineDenominator;
+
+  el('cdTrimBaselineUtc')
+    .textContent=
+      lab.baselineUtcIso ||
+      '—';
+
+  el('cdTrimLastUtc')
+    .textContent=
+      last.utcIso ||
+      '—';
+
+  el('cdTrimSampleCount')
+    .textContent=
+      String(
+        samples.length
+      );
+
+  const remaining=
+    Math.max(
+      0,
+      CD_TRIM_UTC_INTERVAL_MS -
+      (
+        Date.now() -
+        Number(
+          lab.lastSampleUnixMs || 0
+        )
+      )
+    );
+
+  el('cdTrimNextSample')
+    .textContent=
+      remaining === 0
+        ? 'DUE'
+        : (
+            Math.ceil(
+              remaining / 60000
+            )
+            + ' min'
+          );
+
+  el('cdTrimUtcExact')
+    .textContent=
+      'physical−UTC exact · '
+      + rstring(
+          physicalUtc
+        )
+      + '\n'
+      + 'disciplined−UTC exact · '
+      + rstring(
+          disciplinedUtc
+        )
+      + '\n'
+      + 'trim removed exact · '
+      + rstring(
+          removed
+        );
+
+  const lines=[
+    'HOURS       PHYSICAL−UTC     DISCIPLINED−UTC   TRIM REMOVED'
+  ];
+
+  for(const x of samples){
+
+    const p=
+      utcUnpack(
+        x.physicalUtc
+      );
+
+    const d=
+      utcUnpack(
+        x.disciplinedUtc
+      );
+
+    const r=
+      utcUnpack(
+        x.removed
+      );
+
+    lines.push(
+      String(
+        Number(
+          x.elapsedHours || 0
+        ).toFixed(3)
+      ).padStart(7)
+      + '   '
+      + utcSigned(p)
+          .padStart(14)
+      + '   '
+      + utcSigned(d)
+          .padStart(16)
+      + '   '
+      + utcSigned(r)
+          .padStart(12)
+    );
+  }
+
+  el('cdTrimUtcHistory')
+    .textContent=
+      lines.join('\n');
+
+  el('cdTrimUtcStatus')
+    .textContent=
+      'ALIGNED · POST-TRIM HOURLY UTC WATCH';
+
+  el('cdTrimUtcStatus')
+    .className=
+      'statusline good';
+}
+
+
+async function maybeSampleCdTrimUtc(){
+
+  const lab=
+    cdTrimLoadLab();
+
+  renderCdTrimUtcLab();
+
+  if(
+    !lab ||
+    cdTrimUtcBusy
+  ){
+    return;
+  }
+
+  const elapsed=
+    Date.now() -
+    Number(
+      lab.lastSampleUnixMs || 0
+    );
+
+  if(
+    elapsed >=
+    CD_TRIM_UTC_INTERVAL_MS
+  ){
+    await sampleCdTrimUtcLab();
+  }
+}
+
+
+async function alignDrift(){
+  const button=
+    el('alignDriftButton');
+
+  button.disabled=true;
+
+  try{
+    /*
+     * Bracket the Main clock sample
+     * between two C/D governor reads.
+     */
+    const g1=
+      await getGovernorFresh();
+
+    const m=
+      await getMainClock();
+
+    const g2=
+      await getGovernorFresh();
+
+    const c=m.clock;
+
+    const a1=
+      g1.carriers?.ghostCD;
+
+    const a2=
+      g2.carriers?.ghostCD;
+
+    if(
+      !a1 ||
+      !a2 ||
+      a1.status !==
+        'GHOST_PLOTTED_ON_JOVIAN_WHEEL' ||
+      a2.status !==
+        'GHOST_PLOTTED_ON_JOVIAN_WHEEL'
+    ){
+      throw new Error(
+        'C/D NOT PLOTTED'
+      );
+    }
+
+    if(a1.runId !== a2.runId){
+      throw new Error(
+        'C/D RUN CHANGED DURING ALIGN'
+      );
+    }
+
+    if(
+      g1.jovian?.selectedAuthority !==
+      g2.jovian?.selectedAuthority
+    ){
+      throw new Error(
+        'AUTHORITY CHANGED DURING ALIGN'
+      );
+    }
+
+    const mapped=
+      rmid(
+        ghostMapped(a1),
+        ghostMapped(a2)
+      );
+
+    const residual=
+      rmid(
+        ghostResidual(a1),
+        ghostResidual(a2)
+      );
+
+    const mainTotal=
+      mainTotalPhase(c);
+
+    const rawPerDay=
+      NATURAL_RAW_PER_SUN_RETURN;
+
+    const baseline={
+      version:1,
+
+      runId:a1.runId,
+
+      authority:
+        g1.jovian
+          ?.selectedAuthority,
+
+      ruler:
+        g1.jovian
+          ?.rulerRawPerWheel,
+
+      ghostMappedN:
+        String(mapped.n),
+
+      ghostMappedD:
+        String(mapped.d),
+
+      residualN:
+        String(residual.n),
+
+      residualD:
+        String(residual.d),
+
+      mainTotalN:
+        String(mainTotal.n),
+
+      mainTotalD:
+        String(mainTotal.d),
+
+      rawPerDayN:
+        String(rawPerDay.n),
+
+      rawPerDayD:
+        String(rawPerDay.d),
+
+      mainClockAtAlign:
+        c.clock?.decimal || null
+    };
+
+    saveBaseline(
+      baseline
+    );
+
+    el('driftAlignStatus')
+      .textContent =
+        'ALIGNED · ACCUMULATOR ZEROED';
+
+    el('driftAlignStatus')
+      .className =
+        'statusline good';
+
+  }catch(err){
+
+    el('driftAlignStatus')
+      .textContent =
+        'ALIGN FAILED · ' +
+        err.message;
+
+    el('driftAlignStatus')
+      .className =
+        'statusline warn';
+
+  }finally{
+    button.disabled=false;
+  }
+}
+
+
+function updateDriftFromGovernor(d){
+  const b=loadBaseline();
+
+  const g=
+    d.carriers?.ghostCD;
+
+  if(!b){
+    el('shadowDriftClock')
+      .textContent='—:—:—';
+
+    el('shadowDriftDay')
+      .textContent='—';
+
+    el('driftAccumulator')
+      .textContent='—';
+
+    el('driftAccumulatorExact')
+      .textContent='exact · —';
+
+    el('driftDirection')
+      .textContent='—';
+
+    el('driftRaw')
+      .textContent='—';
+
+    el('driftRun')
+      .textContent='—';
+
+    return;
+  }
+
+  if(
+    !g ||
+    g.status !==
+      'GHOST_PLOTTED_ON_JOVIAN_WHEEL'
+  ){
+    el('driftAlignStatus')
+      .textContent =
+        'BASELINE HELD · C/D UNAVAILABLE';
+
+    el('driftAlignStatus')
+      .className =
+        'statusline warn';
+
+    return;
+  }
+
+  if(
+    g.runId !== b.runId ||
+    d.jovian?.selectedAuthority !==
+      b.authority ||
+    d.jovian?.rulerRawPerWheel !==
+      b.ruler
+  ){
+    clearBaseline();
+
+    el('driftAlignStatus')
+      .textContent =
+        'BASELINE INVALIDATED · '
+        + 'RUN / AUTHORITY CHANGED';
+
+    el('driftAlignStatus')
+      .className =
+        'statusline warn';
+
+    return;
+  }
+
+  const baseMapped=
+    baselineRat(
+      b,
+      'ghostMapped'
+    );
+
+  const baseMain=
+    baselineRat(
+      b,
+      'mainTotal'
+    );
+
+  const baseResidual=
+    baselineRat(
+      b,
+      'residual'
+    );
+
+  const rawPerDay=
+    baselineRat(
+      b,
+      'rawPerDay'
+    );
+
+  const mapped=
+    ghostMapped(g);
+
+  const rawAdvance=
+    rsub(
+      mapped,
+      baseMapped
+    );
+
+  /*
+   * One natural day =
+   * recoveredRawPerSunReturn RAW.
+   *
+   * One A8 day =
+   * 131072 DAY_PHASE17 states.
+   */
+  const phaseAdvance=
+    rdiv(
+      rmul(
+        rawAdvance,
+        rat(DAY_STATES)
+      ),
+      rawPerDay
+    );
+
+  const shadowTotal=
+    radd(
+      baseMain,
+      phaseAdvance
+    );
+
+  const sc=
+    clockFromTotalPhase(
+      shadowTotal
+    );
+
+  el('shadowDriftClock')
+    .textContent=sc.clock;
+
+  el('shadowDriftDay')
+    .textContent=sc.day;
+
+  const currentResidual=
+    ghostResidual(g);
+
+  const driftRaw=
+    rsub(
+      currentResidual,
+      baseResidual
+    );
+
+  const driftStates=
+    rdiv(
+      rmul(
+        driftRaw,
+        rat(DAY_STATES)
+      ),
+      rawPerDay
+    );
+
+  const dec=
+    rdecimal(
+      driftStates
+    );
+
+  el('driftAccumulator')
+    .textContent =
+      (dec >= 0 ? '+' : '') +
+      dec.toFixed(6) +
+      ' A8 seconds';
+
+  el('driftAccumulatorExact')
+    .textContent =
+      'exact · ' +
+      rstring(
+        driftStates
+      );
+
+  el('driftRaw')
+    .textContent =
+      rstring(
+        driftRaw
+      );
+
+  el('driftRun')
+    .textContent =
+      b.runId;
+
+  if(Math.abs(dec) < 0.000001){
+    el('driftDirection')
+      .textContent='LEVEL';
+  }else if(dec > 0){
+    el('driftDirection')
+      .textContent='SHADOW LEADS';
+  }else{
+    el('driftDirection')
+      .textContent='SHADOW LAGS';
+  }
+
+  el('driftAlignStatus')
+    .textContent =
+      'ALIGNED · FREE-RUNNING FROM C/D';
+
+  el('driftAlignStatus')
+    .className =
+      'statusline good';
+}
+
+
+async function updateMainDriftClock(){
+  try{
+    const d=
+      await getMainClock();
+
+    const c=d.clock || {};
+
+    el('mainDriftClock')
+      .textContent =
+        c.clock?.decimal ||
+        '—:—:—';
+
+    el('mainDriftDay')
+      .textContent =
+        c.dayCount ?? '—';
+
+  }catch{
+    el('mainDriftClock')
+      .textContent =
+        'UNAVAILABLE';
+  }
+}
+
+
+async function update(){
+  try{
+    const d = await getJson();
+
+    const j = d.jovian || {};
+    const p = d.carriers?.primaryAB || {};
+    const g = d.carriers?.ghostCD || {};
+    const a = d.authorityBoundary || {};
+
+    updateDriftFromGovernor(d);
+    updateMainDriftClock();
+
+    el('liveState').textContent =
+      d.status || 'LIVE';
+
+    el('liveState').className =
+      'good';
+
+    el('authority').textContent =
+      j.selectedAuthority || '—';
+
+    el('ruler').textContent =
+      j.rulerRawPerWheel || '—';
+
+    el('normalization').textContent =
+      j.normalization || '—';
+
+    el('governorMode').textContent =
+      d.architecture?.governor || '—';
+
+
+    el('abRaw').textContent =
+      p.currentRaw || '—';
+
+    el('abEpoch').textContent =
+      p.sourceEpoch ?? '—';
+
+    el('abPhase').textContent =
+      p.wheel?.phase9Octal || '—';
+
+    el('abWheels').textContent =
+      p.wheel?.completedWholeWheels || '—';
+
+    el('abStatus').textContent =
+      p.status || '—';
+
+
+    el('cdRaw').textContent =
+      g.currentRaw || '—';
+
+    el('cdRun').textContent =
+      g.runId || '—';
+
+    el('cdPhase').textContent =
+      g.wheel?.phase9Octal || '—';
+
+    el('cdLink').textContent =
+      g.linkStatus || '—';
+
+    el('cdStatus').textContent =
+      g.status || '—';
+
+
+    el('ratio').textContent =
+      g.sealedPrimaryPerGhost?.text || '—';
+
+    el('cdAnchor').textContent =
+      g.alignment?.ghostAnchorRaw || '—';
+
+    el('abAnchor').textContent =
+      g.alignment?.primaryEquivalentMidpointRaw || '—';
+
+
+    const wr =
+      g.comparisonToPrimary
+       ?.shortestWheelPositionDifferenceRawExact;
+
+    const wrDecimal = decimal(wr);
+
+    el('residual').textContent =
+      wrDecimal === null
+        ? '—'
+        : (
+            (wrDecimal >= 0 ? '+' : '') +
+            wrDecimal.toFixed(6) +
+            ' RAW'
+          );
+
+    el('residualExact').textContent =
+      'exact · ' + exactText(wr);
+
+    updateTrend(wrDecimal);
+
+
+    el('absoluteResidual').textContent =
+      exactText(
+        g.comparisonToPrimary
+         ?.absoluteMappedDifferenceRawExact
+      );
+
+    el('comparisonMode').textContent =
+      g.comparisonToPrimary
+       ?.liveComparison || '—';
+
+
+    el('ratchet').textContent =
+      g.ratchet?.recommendation || '—';
+
+    el('wheelAdjustment').textContent =
+      g.ratchet?.wholeWheelAdjustment ?? '—';
+
+    el('quantum').textContent =
+      g.ratchet?.quantumRaw || '—';
+
+    el('phaseInvariant').textContent =
+      yesNo(
+        g.ratchet?.phaseInvariant === true
+      );
+
+
+    el('writeCore').textContent =
+      yesNo(a.writesCore20 === true);
+
+    el('writeClock').textContent =
+      yesNo(a.writesClock === true);
+
+    el('writeCarrier').textContent =
+      yesNo(a.writesCarrier === true);
+
+    el('writeArduino').textContent =
+      yesNo(a.writesArduino === true);
+
+    el('usesUtc').textContent =
+      yesNo(a.usesUTC === true);
+
+  }catch(err){
+    el('liveState').textContent =
+      'FEED UNAVAILABLE';
+
+    el('liveState').className =
+      'warn';
+  }
+}
+
+el('alignDriftButton')
+  .addEventListener(
+    'click',
+    alignDrift
+  );
+
+el('clearDriftButton')
+  .addEventListener(
+    'click',
+    ()=>{
+      clearBaseline();
+
+      el('driftAlignStatus')
+        .textContent =
+          'NOT ALIGNED';
+
+      el('driftAlignStatus')
+        .className =
+          'statusline warn';
+    }
+  );
+
+update();
+
+el('alignUtcLabButton')
+  .addEventListener(
+    'click',
+    alignUtcLab
+  );
+
+el('clearUtcLabButton')
+  .addEventListener(
+    'click',
+    utcClearLab
+  );
+
+renderUtcLab();
+
+/*
+ * Browser timers may be throttled in background tabs.
+ * The due check uses elapsed UTC milliseconds, so a late
+ * wake-up takes one catch-up sample rather than inventing
+ * missing hourly observations.
+ */
+setTimeout(
+  maybeSampleUtcLab,
+  2000
+);
+
+setInterval(
+  maybeSampleUtcLab,
+  60000
+);
+
+updateCdDisciplinePanel();
+
+setInterval(
+  updateCdDisciplinePanel,
+  1000
+);
+
+setTimeout(
+  maybeSampleCdTrimUtc,
+  2500
+);
+
+setInterval(
+  maybeSampleCdTrimUtc,
+  60000
+);
+
+setInterval(update,1000);
+</script>
+
+
+
+<script id="a8-cd-trim-utc-watch-controls-v1">
+/*
+ * A8-CD-TRIM-UTC-WATCH-CONTROLS-V1
+ *
+ * Browser-local operator controls only.
+ *
+ * STOP:
+ *   preserves baseline and history;
+ *   blocks future post-trim UTC samples.
+ *
+ * RESTART:
+ *   resumes same baseline/history;
+ *   if overdue, takes one catch-up observation.
+ *
+ * RESET BASELINE:
+ *   deletes only this browser-local watch
+ *   and seals a fresh H+0 observation.
+ *
+ * No A8 authority path is written.
+ */
+
+const CD_TRIM_WATCH_CONTROL_VERSION = 1;
+
+function cdTrimWatchState(lab){
+
+  if(!lab){
+    return 'NOT_ALIGNED';
+  }
+
+  return (
+    lab.watchState === 'STOPPED'
+      ? 'STOPPED'
+      : 'RUNNING'
+  );
+}
+
+
+function cdTrimEnsureWatchState(){
+
+  const lab=
+    cdTrimLoadLab();
+
+  if(!lab){
+    return null;
+  }
+
+  /*
+   * Legacy post-trim watches existed before explicit
+   * STOP / RESTART controls.
+   *
+   * Preserve them exactly and migrate them STOPPED.
+   * This prevents an overdue browser timer from taking
+   * an observation merely because the upgraded page
+   * was reloaded.
+   */
+  if(!lab.watchState){
+
+    lab.watchState='STOPPED';
+
+    lab.controlVersion=
+      CD_TRIM_WATCH_CONTROL_VERSION;
+
+    lab.controlMigration=
+      'LEGACY_WATCH_PRESERVED_STOPPED';
+
+    lab.stoppedAtUnixMs=
+      Date.now();
+
+    cdTrimSaveLab(lab);
+  }
+
+  return lab;
+}
+
+
+function cdTrimMakeControlButton(
+  id,
+  label
+){
+
+  const button=
+    document.createElement('button');
+
+  button.type='button';
+  button.className='alignbtn';
+  button.id=id;
+  button.textContent=label;
+
+  return button;
+}
+
+
+function cdTrimEnsureWatchControls(){
+
+  ensureCdTrimUtcPanel();
+
+  const panel=
+    el('cdTrimUtcPanel');
+
+  const align=
+    el('alignCdTrimUtcButton');
+
+  if(!panel || !align){
+    return;
+  }
+
+  const bar=
+    align.parentElement;
+
+  if(
+    bar &&
+    !el('stopCdTrimUtcButton')
+  ){
+
+    const stop=
+      cdTrimMakeControlButton(
+        'stopCdTrimUtcButton',
+        'STOP WATCH'
+      );
+
+    const restart=
+      cdTrimMakeControlButton(
+        'restartCdTrimUtcButton',
+        'RESTART WATCH'
+      );
+
+    const reset=
+      cdTrimMakeControlButton(
+        'resetCdTrimUtcButton',
+        'RESET BASELINE'
+      );
+
+    bar.appendChild(stop);
+    bar.appendChild(restart);
+    bar.appendChild(reset);
+
+    stop.addEventListener(
+      'click',
+      cdTrimStopWatch
+    );
+
+    restart.addEventListener(
+      'click',
+      cdTrimRestartWatch
+    );
+
+    reset.addEventListener(
+      'click',
+      cdTrimResetWatch
+    );
+  }
+
+  if(!el('cdTrimWatchState')){
+
+    const rows=
+      panel.querySelector('.rows');
+
+    if(rows){
+
+      const row=
+        document.createElement('div');
+
+      row.className='row';
+
+      const label=
+        document.createElement('span');
+
+      label.textContent='WATCH STATE';
+
+      const value=
+        document.createElement('b');
+
+      value.id='cdTrimWatchState';
+      value.textContent='—';
+
+      row.appendChild(label);
+      row.appendChild(value);
+
+      /*
+       * Put WATCH STATE immediately before AUTHORITY.
+       */
+      const existingRows=
+        Array.from(
+          rows.querySelectorAll('.row')
+        );
+
+      const authorityRow=
+        existingRows.find(
+          x=>
+            x.querySelector('span')
+              ?.textContent
+              ?.trim()
+              === 'AUTHORITY'
+        );
+
+      rows.insertBefore(
+        row,
+        authorityRow || null
+      );
+    }
+  }
+}
+
+
+function cdTrimApplyWatchControlState(){
+
+  cdTrimEnsureWatchControls();
+
+  const lab=
+    cdTrimLoadLab();
+
+  const state=
+    cdTrimWatchState(lab);
+
+  const stateEl=
+    el('cdTrimWatchState');
+
+  if(stateEl){
+    stateEl.textContent=state;
+  }
+
+  const stop=
+    el('stopCdTrimUtcButton');
+
+  const restart=
+    el('restartCdTrimUtcButton');
+
+  const reset=
+    el('resetCdTrimUtcButton');
+
+  if(stop){
+    stop.disabled=
+      state !== 'RUNNING';
+  }
+
+  if(restart){
+    restart.disabled=
+      state !== 'STOPPED';
+  }
+
+  if(reset){
+    reset.disabled=
+      cdTrimUtcBusy;
+  }
+
+  if(
+    state === 'STOPPED'
+  ){
+
+    const next=
+      el('cdTrimNextSample');
+
+    if(next){
+      next.textContent='STOPPED';
+    }
+
+    const status=
+      el('cdTrimUtcStatus');
+
+    if(status){
+
+      status.textContent=
+        'STOPPED · BASELINE + HISTORY PRESERVED';
+
+      status.className=
+        'statusline warn';
+    }
+  }
+}
+
+
+function cdTrimStopWatch(){
+
+  if(cdTrimUtcBusy){
+    return;
+  }
+
+  const lab=
+    cdTrimLoadLab();
+
+  if(!lab){
+
+    el('cdTrimUtcStatus')
+      .textContent=
+        'NOT ALIGNED · NOTHING TO STOP';
+
+    el('cdTrimUtcStatus')
+      .className=
+        'statusline warn';
+
+    cdTrimApplyWatchControlState();
+    return;
+  }
+
+  lab.watchState='STOPPED';
+
+  lab.controlVersion=
+    CD_TRIM_WATCH_CONTROL_VERSION;
+
+  lab.stoppedAtUnixMs=
+    Date.now();
+
+  cdTrimSaveLab(lab);
+
+  renderCdTrimUtcLab();
+  cdTrimApplyWatchControlState();
+}
+
+
+async function cdTrimRestartWatch(){
+
+  if(cdTrimUtcBusy){
+    return;
+  }
+
+  const lab=
+    cdTrimLoadLab();
+
+  if(!lab){
+
+    el('cdTrimUtcStatus')
+      .textContent=
+        'NO BASELINE · RESET BASELINE TO START';
+
+    el('cdTrimUtcStatus')
+      .className=
+        'statusline warn';
+
+    cdTrimApplyWatchControlState();
+    return;
+  }
+
+  lab.watchState='RUNNING';
+
+  lab.controlVersion=
+    CD_TRIM_WATCH_CONTROL_VERSION;
+
+  lab.restartedAtUnixMs=
+    Date.now();
+
+  cdTrimSaveLab(lab);
+
+  renderCdTrimUtcLab();
+  cdTrimApplyWatchControlState();
+
+  const elapsed=
+    Date.now() -
+    Number(
+      lab.lastSampleUnixMs || 0
+    );
+
+  /*
+   * One catch-up observation only.
+   * Never fabricates missing hourly samples.
+   */
+  if(
+    elapsed >=
+    CD_TRIM_UTC_INTERVAL_MS
+  ){
+    await sampleCdTrimUtcLab();
+  }
+
+  renderCdTrimUtcLab();
+  cdTrimApplyWatchControlState();
+}
+
+
+async function cdTrimResetWatch(){
+
+  if(cdTrimUtcBusy){
+    return;
+  }
+
+  const existing=
+    cdTrimLoadLab();
+
+  if(
+    existing &&
+    !window.confirm(
+      'Reset the C/D post-trim UTC watch baseline? '
+      + 'This discards only this browser-local watch '
+      + 'history. It does not change C/D, the Pi trim, '
+      + 'Core20, or either physical carrier.'
+    )
+  ){
+    return;
+  }
+
+  localStorage.removeItem(
+    CD_TRIM_UTC_KEY
+  );
+
+  renderCdTrimUtcLab();
+  cdTrimApplyWatchControlState();
+
+  await alignCdTrimUtcLab();
+
+  const fresh=
+    cdTrimLoadLab();
+
+  if(fresh){
+
+    fresh.watchState='RUNNING';
+
+    fresh.controlVersion=
+      CD_TRIM_WATCH_CONTROL_VERSION;
+
+    fresh.controlResetAtUnixMs=
+      Date.now();
+
+    cdTrimSaveLab(fresh);
+  }
+
+  renderCdTrimUtcLab();
+  cdTrimApplyWatchControlState();
+}
+
+
+/*
+ * Install controls immediately after the original
+ * post-trim watch code has loaded.
+ *
+ * A pre-controls legacy watch is deliberately migrated
+ * to STOPPED before the old 2-second due check can create
+ * an overdue sample.
+ */
+cdTrimEnsureWatchState();
+cdTrimEnsureWatchControls();
+cdTrimApplyWatchControlState();
+
+/*
+ * UI overlay only.
+ * This timer never performs an observation.
+ */
+setInterval(
+  cdTrimApplyWatchControlState,
+  1000
+);
+
+</script>
+
+
+<script id="a8-ab-pi-inspection-cards-v1">
+/*
+ * A8-AB-PI-INSPECTION-CARDS-V1
+ *
+ * Presentation only.
+ *
+ * Reads:
+ *   /api/shadow/ab-pi
+ *
+ * Writes:
+ *   browser-local A/B UTC watch state only.
+ *
+ * Does NOT write:
+ *   A/B Pi discipline
+ *   physical RAW
+ *   Trade cache
+ *   feeder
+ *   Core20
+ *   C/D
+ *   Jovian governor
+ *   Arduino firmware/state
+ */
+
+const AB_TRIM_UTC_KEY =
+  'a8InspectionAbTrimUtcLabV1';
+
+const AB_TRIM_UTC_INTERVAL_MS =
+  60 * 60 * 1000;
+
+const AB_TRIM_UTC_MAX_SAMPLES =
+  49;
+
+let abTrimUtcBusy=false;
+
+
+/* ============================================================
+ * A/B PI · OSCILLATOR COMPENSATION
+ * ============================================================
+ */
+
+function ensureAbDisciplinePanel(){
+
+  if(el('abPiDisciplinePanel')){
+    return;
+  }
+
+  const panel=
+    document.createElement('article');
+
+  panel.id=
+    'abPiDisciplinePanel';
+
+  panel.className=
+    'card wide';
+
+  panel.innerHTML=`
+    <h2>A/B PI · OSCILLATOR COMPENSATION</h2>
+
+    <div
+      class="statusline warn"
+      id="abPiDisciplineStatus">
+      WAITING FOR DISCIPLINED A/B
+    </div>
+
+    <div class="rows">
+
+      <div class="row">
+        <span>PHYSICAL A/B RAW</span>
+        <b id="abPiPhysicalRaw">—</b>
+      </div>
+
+      <div class="row">
+        <span>DISCIPLINED A/B RAW · EXACT</span>
+        <b id="abPiDisciplinedRaw">—</b>
+      </div>
+
+      <div class="row">
+        <span>DISCIPLINED A/B RAW · FLOOR</span>
+        <b id="abPiDisciplinedFloor">—</b>
+      </div>
+
+      <div class="row">
+        <span>OSCILLATOR EXCESS CONSUMED</span>
+        <b id="abPiConsumed">—</b>
+      </div>
+
+      <div class="row">
+        <span>PI COMPENSATION</span>
+        <b id="abPiRatio">—</b>
+      </div>
+
+      <div class="row">
+        <span>PHYSICAL DELTA SINCE TRIM ANCHOR</span>
+        <b id="abPiPhysicalDelta">—</b>
+      </div>
+
+      <div class="row">
+        <span>SEGMENT</span>
+        <b id="abPiSegment">—</b>
+      </div>
+
+      <div class="row">
+        <span>SOURCE EPOCH</span>
+        <b id="abPiEpoch">—</b>
+      </div>
+
+      <div class="row">
+        <span>ROLE</span>
+        <b>OSCILLATOR COMPENSATION ONLY</b>
+      </div>
+
+      <div class="row">
+        <span>AUTHORITY</span>
+        <b>NONE</b>
+      </div>
+
+    </div>
+
+    <div
+      class="exact"
+      id="abPiExact">
+      exact · —
+    </div>
+  `;
+
+  const cd=
+    el('cdPiDisciplinePanel');
+
+  if(
+    cd &&
+    cd.parentNode
+  ){
+    cd.parentNode.insertBefore(
+      panel,
+      cd
+    );
+  }else{
+    const main=
+      document.querySelector('main');
+
+    if(!main){
+      throw new Error(
+        'NO INSPECTION MAIN CONTAINER'
+      );
+    }
+
+    main.appendChild(panel);
+  }
+}
+
+
+function positionAbPanels(){
+
+  const cd=
+    el('cdPiDisciplinePanel');
+
+  const abPi=
+    el('abPiDisciplinePanel');
+
+  const abUtc=
+    el('abTrimUtcPanel');
+
+  if(
+    !cd ||
+    !cd.parentNode
+  ){
+    return;
+  }
+
+  if(abPi){
+    cd.parentNode.insertBefore(
+      abPi,
+      cd
+    );
+  }
+
+  if(abUtc){
+    cd.parentNode.insertBefore(
+      abUtc,
+      cd
+    );
+  }
+}
+
+
+async function getAbPiSnapshot(){
+
+  const r=
+    await fetch(
+      '/api/shadow/ab-pi',
+      {cache:'no-store'}
+    );
+
+  if(!r.ok){
+    throw new Error(
+      'A/B PI HTTP '+r.status
+    );
+  }
+
+  const body=
+    await r.json();
+
+  if(
+    body.schema !==
+      'A8-PHYSICAL-STREAM-SIDECAR-V2' ||
+    body.status !== 'READY'
+  ){
+    throw new Error(
+      'A/B PI SIDECAR NOT READY'
+    );
+  }
+
+  const s=
+    body.source || {};
+
+  const d=
+    s.disciplinedRaw;
+
+  const c=
+    s.carrierDiscipline;
+
+  if(
+    String(s.SOURCE_EPOCH) !== '8' ||
+    s.STATUS !== 'ACTIVE' ||
+    !d ||
+    !c ||
+    d.status !== 'ACTIVE_TRIAL' ||
+    c.status !== 'ACTIVE_TRIAL'
+  ){
+    throw new Error(
+      'DISCIPLINED A/B NOT ACTIVE'
+    );
+  }
+
+  return {
+    source:s,
+    disciplined:d,
+    discipline:c
+  };
+}
+
+
+async function updateAbDisciplinePanel(){
+
+  ensureAbDisciplinePanel();
+  positionAbPanels();
+
+  const status=
+    el('abPiDisciplineStatus');
+
+  try{
+
+    const x=
+      await getAbPiSnapshot();
+
+    const s=x.source;
+    const d=x.disciplined;
+    const c=x.discipline;
+
+    const physical=
+      BigInt(
+        String(s.RAW_COUNT)
+      );
+
+    const exact=
+      rat(
+        BigInt(d.numerator),
+        BigInt(d.denominator)
+      );
+
+    const consumed=
+      rsub(
+        rat(physical),
+        exact
+      );
+
+    el('abPiPhysicalRaw')
+      .textContent=
+        String(physical);
+
+    el('abPiDisciplinedRaw')
+      .textContent=
+        rstring(exact);
+
+    el('abPiDisciplinedFloor')
+      .textContent=
+        String(
+          d.floorRaw ?? '—'
+        );
+
+    el('abPiConsumed')
+      .textContent=
+        rdecimal(consumed)
+          .toFixed(9)
+        + ' RAW';
+
+    el('abPiRatio')
+      .textContent=
+        String(
+          c.ratio?.numerator ?? '—'
+        )
+        + '/'
+        + String(
+          c.ratio?.denominator ?? '—'
+        );
+
+    el('abPiPhysicalDelta')
+      .textContent=
+        String(
+          d.physicalDelta ?? '—'
+        );
+
+    el('abPiSegment')
+      .textContent=
+        String(
+          c.segmentNumber ?? '—'
+        );
+
+    el('abPiEpoch')
+      .textContent=
+        String(
+          c.physicalSourceEpoch ??
+          s.SOURCE_EPOCH ??
+          '—'
+        );
+
+    el('abPiExact')
+      .textContent=
+        'physical exact · '
+        + String(physical)
+        + '\n'
+        + 'disciplined exact · '
+        + rstring(exact)
+        + '\n'
+        + 'consumed exact · '
+        + rstring(consumed)
+        + '\n'
+        + 'anchor physical · '
+        + String(
+            c.physicalAnchorRaw ?? '—'
+          )
+        + '\n'
+        + 'segment · '
+        + String(
+            c.segmentNumber ?? '—'
+          )
+        + '\n'
+        + 'source epoch · '
+        + String(
+            c.physicalSourceEpoch ??
+            s.SOURCE_EPOCH ??
+            '—'
+          );
+
+    status.textContent=
+      'ACTIVE TRIAL · PI SWEEPING OSCILLATOR EXCESS';
+
+    status.className=
+      'statusline good';
+
+  }catch(err){
+
+    status.textContent=
+      'DISCIPLINE DISPLAY UNAVAILABLE · '
+      + err.message;
+
+    status.className=
+      'statusline warn';
+  }
+}
+
+
+/* ============================================================
+ * A/B PI · POST-TRIM UTC WATCH
+ * ============================================================
+ */
+
+function abTrimSaveLab(lab){
+
+  localStorage.setItem(
+    AB_TRIM_UTC_KEY,
+    JSON.stringify(lab)
+  );
+}
+
+
+function abTrimLoadLab(){
+
+  const raw=
+    localStorage.getItem(
+      AB_TRIM_UTC_KEY
+    );
+
+  if(!raw){
+    return null;
+  }
+
+  try{
+    return JSON.parse(raw);
+  }catch(_err){
+    return null;
+  }
+}
+
+
+function ensureAbTrimUtcPanel(){
+
+  if(el('abTrimUtcPanel')){
+    return;
+  }
+
+  ensureAbDisciplinePanel();
+
+  const panel=
+    document.createElement('article');
+
+  panel.id=
+    'abTrimUtcPanel';
+
+  panel.className=
+    'card wide';
+
+  panel.innerHTML=`
+    <h2>A/B PI · POST-TRIM UTC WATCH</h2>
+
+    <div
+      class="statusline warn"
+      id="abTrimUtcStatus">
+      NOT ALIGNED
+    </div>
+
+    <div
+      class="controls"
+      style="margin-top:12px">
+      <button
+        class="alignbtn"
+        type="button"
+        id="alignAbTrimUtcButton">
+        ALIGN POST-TRIM WATCH NOW
+      </button>
+
+      <button
+        class="alignbtn"
+        type="button"
+        id="stopAbTrimUtcButton">
+        STOP WATCH
+      </button>
+
+      <button
+        class="alignbtn"
+        type="button"
+        id="restartAbTrimUtcButton">
+        RESTART WATCH
+      </button>
+
+      <button
+        class="alignbtn"
+        type="button"
+        id="resetAbTrimUtcButton">
+        RESET BASELINE
+      </button>
+    </div>
+
+    <div class="rows">
+
+      <div class="row">
+        <span>PHYSICAL A/B − UTC</span>
+        <b id="abTrimPhysicalUtc">—</b>
+      </div>
+
+      <div class="row">
+        <span>DISCIPLINED A/B − UTC</span>
+        <b id="abTrimDisciplinedUtc">—</b>
+      </div>
+
+      <div class="row">
+        <span>PI TRIM REMOVED</span>
+        <b id="abTrimRemoved">—</b>
+      </div>
+
+      <div class="row">
+        <span>PHYSICAL RATE ERROR</span>
+        <b id="abTrimPhysicalPpm">—</b>
+      </div>
+
+      <div class="row">
+        <span>DISCIPLINED RATE ERROR</span>
+        <b id="abTrimDisciplinedPpm">—</b>
+      </div>
+
+      <div class="row">
+        <span>PHYSICAL PROJECTED DRIFT</span>
+        <b id="abTrimPhysicalPerDay">—</b>
+      </div>
+
+      <div class="row">
+        <span>DISCIPLINED PROJECTED DRIFT</span>
+        <b id="abTrimDisciplinedPerDay">—</b>
+      </div>
+
+      <div class="row">
+        <span>PI COMPENSATION</span>
+        <b id="abTrimFineRatio">—</b>
+      </div>
+
+      <div class="row">
+        <span>SOURCE EPOCH</span>
+        <b id="abTrimEpoch">—</b>
+      </div>
+
+      <div class="row">
+        <span>SEGMENT</span>
+        <b id="abTrimSegment">—</b>
+      </div>
+
+      <div class="row">
+        <span>BASELINE UTC</span>
+        <b id="abTrimBaselineUtc">—</b>
+      </div>
+
+      <div class="row">
+        <span>LAST HOURLY SAMPLE</span>
+        <b id="abTrimLastUtc">—</b>
+      </div>
+
+      <div class="row">
+        <span>NEXT SAMPLE</span>
+        <b id="abTrimNextSample">—</b>
+      </div>
+
+      <div class="row">
+        <span>SAMPLES</span>
+        <b id="abTrimSampleCount">0</b>
+      </div>
+
+      <div class="row">
+        <span>WATCH STATE</span>
+        <b id="abTrimWatchState">NOT_ALIGNED</b>
+      </div>
+
+      <div class="row">
+        <span>AUTHORITY</span>
+        <b>NONE · EXTERNAL COMPARISON ONLY</b>
+      </div>
+
+    </div>
+
+    <div
+      class="exact"
+      id="abTrimUtcExact">
+      exact · —
+    </div>
+
+    <pre
+      id="abTrimUtcHistory"
+      style="overflow:auto;white-space:pre">
+HOURS       PHYSICAL−UTC     DISCIPLINED−UTC   TRIM REMOVED
+    </pre>
+  `;
+
+  const abPi=
+    el('abPiDisciplinePanel');
+
+  if(
+    abPi &&
+    abPi.parentNode
+  ){
+    abPi.insertAdjacentElement(
+      'afterend',
+      panel
+    );
+  }else{
+    document
+      .querySelector('main')
+      ?.appendChild(panel);
+  }
+
+  el('alignAbTrimUtcButton')
+    .addEventListener(
+      'click',
+      alignAbTrimUtcLab
+    );
+
+  el('stopAbTrimUtcButton')
+    .addEventListener(
+      'click',
+      abTrimStopWatch
+    );
+
+  el('restartAbTrimUtcButton')
+    .addEventListener(
+      'click',
+      abTrimRestartWatch
+    );
+
+  el('resetAbTrimUtcButton')
+    .addEventListener(
+      'click',
+      abTrimResetWatch
+    );
+
+  positionAbPanels();
+}
+
+
+async function abTrimTakeSnapshot(){
+
+  const utcBefore=
+    rat(
+      BigInt(Date.now())
+    );
+
+  const x=
+    await getAbPiSnapshot();
+
+  const utcAfter=
+    rat(
+      BigInt(Date.now())
+    );
+
+  const s=x.source;
+  const d=x.disciplined;
+  const c=x.discipline;
+
+  return {
+    sourceEpoch:
+      String(
+        c.physicalSourceEpoch ??
+        s.SOURCE_EPOCH
+      ),
+
+    segmentNumber:
+      String(
+        c.segmentNumber
+      ),
+
+    physical:
+      rat(
+        BigInt(
+          String(s.RAW_COUNT)
+        )
+      ),
+
+    disciplined:
+      rat(
+        BigInt(d.numerator),
+        BigInt(d.denominator)
+      ),
+
+    fineNumerator:
+      String(
+        c.ratio?.numerator
+      ),
+
+    fineDenominator:
+      String(
+        c.ratio?.denominator
+      ),
+
+    anchor:
+      String(
+        c.physicalAnchorRaw
+      ),
+
+    utcMid:
+      rmid(
+        utcBefore,
+        utcAfter
+      )
+  };
+}
+
+
+async function alignAbTrimUtcLab(){
+
+  ensureAbTrimUtcPanel();
+
+  if(abTrimUtcBusy){
+    return;
+  }
+
+  if(abTrimLoadLab()){
+
+    el('abTrimUtcStatus')
+      .textContent=
+        'ALREADY ALIGNED · BASELINE PRESERVED';
+
+    el('abTrimUtcStatus')
+      .className=
+        'statusline good';
+
+    return;
+  }
+
+  abTrimUtcBusy=true;
+
+  el('alignAbTrimUtcButton')
+    .disabled=true;
+
+  try{
+
+    const s=
+      await abTrimTakeSnapshot();
+
+    const zero=
+      rat(0n);
+
+    const lab={
+      version:1,
+
+      role:
+        'A_B_OSCILLATOR_COMPENSATION_VALIDATION',
+
+      authority:
+        'NONE',
+
+      watchState:
+        'RUNNING',
+
+      sourceEpoch:
+        s.sourceEpoch,
+
+      segmentNumber:
+        s.segmentNumber,
+
+      fineNumerator:
+        s.fineNumerator,
+
+      fineDenominator:
+        s.fineDenominator,
+
+      physicalAnchor:
+        s.anchor,
+
+      basePhysical:
+        utcPack(
+          s.physical
+        ),
+
+      baseDisciplined:
+        utcPack(
+          s.disciplined
+        ),
+
+      baseUtcMs:
+        utcPack(
+          s.utcMid
+        ),
+
+      baselineUtcIso:
+        utcIso(
+          s.utcMid
+        ),
+
+      lastSampleUnixMs:
+        Date.now(),
+
+      nextIndex:
+        1,
+
+      samples:[
+        {
+          index:0,
+
+          elapsedHours:0,
+
+          utcIso:
+            utcIso(
+              s.utcMid
+            ),
+
+          physicalUtc:
+            utcPack(zero),
+
+          disciplinedUtc:
+            utcPack(zero),
+
+          removed:
+            utcPack(zero),
+
+          physicalPpm:null,
+          disciplinedPpm:null,
+
+          physicalPerDay:null,
+          disciplinedPerDay:null
+        }
+      ]
+    };
+
+    abTrimSaveLab(lab);
+
+    renderAbTrimUtcLab();
+
+    el('abTrimUtcStatus')
+      .textContent=
+        'ALIGNED · H+0 SEALED · '
+        + 'POST-TRIM HOURLY WATCH ARMED';
+
+    el('abTrimUtcStatus')
+      .className=
+        'statusline good';
+
+  }catch(err){
+
+    el('abTrimUtcStatus')
+      .textContent=
+        'ALIGN FAILED · '
+        + err.message;
+
+    el('abTrimUtcStatus')
+      .className=
+        'statusline warn';
+
+  }finally{
+
+    abTrimUtcBusy=false;
+
+    el('alignAbTrimUtcButton')
+      .disabled=false;
+
+    abTrimApplyControlState();
+  }
+}
+
+
+async function sampleAbTrimUtcLab(){
+
+  if(abTrimUtcBusy){
+    return;
+  }
+
+  const lab=
+    abTrimLoadLab();
+
+  if(!lab){
+    return;
+  }
+
+  if(
+    lab.watchState ===
+      'STOPPED'
+  ){
+    abTrimApplyControlState();
+    return;
+  }
+
+  abTrimUtcBusy=true;
+
+  try{
+
+    const s=
+      await abTrimTakeSnapshot();
+
+    if(
+      s.sourceEpoch !==
+        lab.sourceEpoch ||
+      s.segmentNumber !==
+        lab.segmentNumber ||
+      s.fineNumerator !==
+        lab.fineNumerator ||
+      s.fineDenominator !==
+        lab.fineDenominator ||
+      s.anchor !==
+        lab.physicalAnchor
+    ){
+      el('abTrimUtcStatus')
+        .textContent=
+          'LAB HELD · A/B EPOCH OR '
+          + 'DISCIPLINE CONTRACT CHANGED';
+
+      el('abTrimUtcStatus')
+        .className=
+          'statusline warn';
+
+      return;
+    }
+
+    const basePhysical=
+      utcUnpack(
+        lab.basePhysical
+      );
+
+    const baseDisciplined=
+      utcUnpack(
+        lab.baseDisciplined
+      );
+
+    const baseUtc=
+      utcUnpack(
+        lab.baseUtcMs
+      );
+
+    const elapsedMs=
+      rsub(
+        s.utcMid,
+        baseUtc
+      );
+
+    const elapsedLegacy=
+      rdiv(
+        elapsedMs,
+        rat(1000n)
+      );
+
+    /*
+     * Exact legacy comparison only:
+     *
+     * 1 A8 second =
+     * 675/1024 legacy seconds.
+     */
+    const idealA8=
+      rmul(
+        elapsedLegacy,
+        rat(
+          1024n,
+          675n
+        )
+      );
+
+    /*
+     * A/B is already the primary physical coordinate.
+     *
+     * No C/D 254/255 comparison bridge belongs here.
+     */
+    const physicalA8=
+      rdiv(
+        rmul(
+          rsub(
+            s.physical,
+            basePhysical
+          ),
+          rat(DAY_STATES)
+        ),
+        NATURAL_RAW_PER_SUN_RETURN
+      );
+
+    const disciplinedA8=
+      rdiv(
+        rmul(
+          rsub(
+            s.disciplined,
+            baseDisciplined
+          ),
+          rat(DAY_STATES)
+        ),
+        NATURAL_RAW_PER_SUN_RETURN
+      );
+
+    const physicalUtc=
+      rsub(
+        physicalA8,
+        idealA8
+      );
+
+    const disciplinedUtc=
+      rsub(
+        disciplinedA8,
+        idealA8
+      );
+
+    const removed=
+      rsub(
+        physicalA8,
+        disciplinedA8
+      );
+
+    const elapsedHours=
+      rdecimal(
+        rdiv(
+          elapsedLegacy,
+          rat(3600n)
+        )
+      );
+
+    const sample={
+      index:
+        Number(
+          lab.nextIndex || 1
+        ),
+
+      elapsedHours,
+
+      utcIso:
+        utcIso(
+          s.utcMid
+        ),
+
+      physicalUtc:
+        utcPack(
+          physicalUtc
+        ),
+
+      disciplinedUtc:
+        utcPack(
+          disciplinedUtc
+        ),
+
+      removed:
+        utcPack(
+          removed
+        ),
+
+      physicalPpm:
+        utcPpm(
+          physicalUtc,
+          idealA8
+        ),
+
+      disciplinedPpm:
+        utcPpm(
+          disciplinedUtc,
+          idealA8
+        ),
+
+      physicalPerDay:
+        utcProjectedPerDay(
+          physicalUtc,
+          idealA8
+        ),
+
+      disciplinedPerDay:
+        utcProjectedPerDay(
+          disciplinedUtc,
+          idealA8
+        )
+    };
+
+    lab.samples.push(sample);
+
+    if(
+      lab.samples.length >
+      AB_TRIM_UTC_MAX_SAMPLES
+    ){
+      lab.samples=
+        lab.samples.slice(
+          -AB_TRIM_UTC_MAX_SAMPLES
+        );
+    }
+
+    lab.nextIndex=
+      sample.index + 1;
+
+    lab.lastSampleUnixMs=
+      Date.now();
+
+    abTrimSaveLab(lab);
+
+    renderAbTrimUtcLab();
+
+  }catch(err){
+
+    el('abTrimUtcStatus')
+      .textContent=
+        'SAMPLE FAILED · '
+        + err.message;
+
+    el('abTrimUtcStatus')
+      .className=
+        'statusline warn';
+
+  }finally{
+
+    abTrimUtcBusy=false;
+    abTrimApplyControlState();
+  }
+}
+
+
+function renderAbTrimUtcLab(){
+
+  ensureAbTrimUtcPanel();
+  positionAbPanels();
+
+  const lab=
+    abTrimLoadLab();
+
+  if(!lab){
+
+    el('abTrimUtcStatus')
+      .textContent=
+        'NOT ALIGNED';
+
+    el('abTrimUtcStatus')
+      .className=
+        'statusline warn';
+
+    el('abTrimWatchState')
+      .textContent=
+        'NOT_ALIGNED';
+
+    el('abTrimNextSample')
+      .textContent=
+        '—';
+
+    return;
+  }
+
+  const samples=
+    lab.samples || [];
+
+  const last=
+    samples[
+      samples.length - 1
+    ];
+
+  if(!last){
+    return;
+  }
+
+  const physicalUtc=
+    utcUnpack(
+      last.physicalUtc
+    );
+
+  const disciplinedUtc=
+    utcUnpack(
+      last.disciplinedUtc
+    );
+
+  const removed=
+    utcUnpack(
+      last.removed
+    );
+
+  el('abTrimPhysicalUtc')
+    .textContent=
+      utcSigned(
+        physicalUtc
+      )
+      + ' A8 s';
+
+  el('abTrimDisciplinedUtc')
+    .textContent=
+      utcSigned(
+        disciplinedUtc
+      )
+      + ' A8 s';
+
+  el('abTrimRemoved')
+    .textContent=
+      utcSigned(
+        removed
+      )
+      + ' A8 s';
+
+  el('abTrimPhysicalPpm')
+    .textContent=
+      last.physicalPpm === null
+        ? '—'
+        : (
+            (
+              last.physicalPpm >= 0
+                ? '+'
+                : ''
+            )
+            + last.physicalPpm
+                .toFixed(3)
+            + ' ppm'
+          );
+
+  el('abTrimDisciplinedPpm')
+    .textContent=
+      last.disciplinedPpm === null
+        ? '—'
+        : (
+            (
+              last.disciplinedPpm >= 0
+                ? '+'
+                : ''
+            )
+            + last.disciplinedPpm
+                .toFixed(3)
+            + ' ppm'
+          );
+
+  el('abTrimPhysicalPerDay')
+    .textContent=
+      last.physicalPerDay === null
+        ? '—'
+        : (
+            (
+              last.physicalPerDay >= 0
+                ? '+'
+                : ''
+            )
+            + last.physicalPerDay
+                .toFixed(4)
+            + ' A8 s/day'
+          );
+
+  el('abTrimDisciplinedPerDay')
+    .textContent=
+      last.disciplinedPerDay === null
+        ? '—'
+        : (
+            (
+              last.disciplinedPerDay >= 0
+                ? '+'
+                : ''
+            )
+            + last.disciplinedPerDay
+                .toFixed(4)
+            + ' A8 s/day'
+          );
+
+  el('abTrimFineRatio')
+    .textContent=
+      lab.fineNumerator
+      + '/'
+      + lab.fineDenominator;
+
+  el('abTrimEpoch')
+    .textContent=
+      lab.sourceEpoch;
+
+  el('abTrimSegment')
+    .textContent=
+      lab.segmentNumber;
+
+  el('abTrimBaselineUtc')
+    .textContent=
+      lab.baselineUtcIso ||
+      '—';
+
+  el('abTrimLastUtc')
+    .textContent=
+      last.utcIso ||
+      '—';
+
+  el('abTrimSampleCount')
+    .textContent=
+      String(
+        samples.length
+      );
+
+  el('abTrimWatchState')
+    .textContent=
+      lab.watchState ||
+      'RUNNING';
+
+  if(
+    lab.watchState ===
+      'STOPPED'
+  ){
+    el('abTrimNextSample')
+      .textContent=
+        'STOPPED';
+
+  }else{
+
+    const remaining=
+      Math.max(
+        0,
+        AB_TRIM_UTC_INTERVAL_MS -
+        (
+          Date.now() -
+          Number(
+            lab.lastSampleUnixMs || 0
+          )
+        )
+      );
+
+    el('abTrimNextSample')
+      .textContent=
+        remaining === 0
+          ? 'DUE'
+          : (
+              Math.ceil(
+                remaining / 60000
+              )
+              + ' min'
+            );
+  }
+
+  el('abTrimUtcExact')
+    .textContent=
+      'physical−UTC exact · '
+      + rstring(
+          physicalUtc
+        )
+      + '\n'
+      + 'disciplined−UTC exact · '
+      + rstring(
+          disciplinedUtc
+        )
+      + '\n'
+      + 'trim removed exact · '
+      + rstring(
+          removed
+        );
+
+  const lines=[
+    'HOURS       PHYSICAL−UTC     DISCIPLINED−UTC   TRIM REMOVED'
+  ];
+
+  for(const x of samples){
+
+    const p=
+      utcUnpack(
+        x.physicalUtc
+      );
+
+    const d=
+      utcUnpack(
+        x.disciplinedUtc
+      );
+
+    const r=
+      utcUnpack(
+        x.removed
+      );
+
+    lines.push(
+      String(
+        Number(
+          x.elapsedHours || 0
+        ).toFixed(3)
+      ).padStart(7)
+      + '   '
+      + utcSigned(p)
+          .padStart(14)
+      + '   '
+      + utcSigned(d)
+          .padStart(16)
+      + '   '
+      + utcSigned(r)
+          .padStart(12)
+    );
+  }
+
+  el('abTrimUtcHistory')
+    .textContent=
+      lines.join('\n');
+
+  if(
+    lab.watchState ===
+      'STOPPED'
+  ){
+    el('abTrimUtcStatus')
+      .textContent=
+        'STOPPED · BASELINE + HISTORY PRESERVED';
+
+    el('abTrimUtcStatus')
+      .className=
+        'statusline warn';
+
+  }else{
+
+    el('abTrimUtcStatus')
+      .textContent=
+        'ALIGNED · POST-TRIM HOURLY UTC WATCH';
+
+    el('abTrimUtcStatus')
+      .className=
+        'statusline good';
+  }
+}
+
+
+function abTrimApplyControlState(){
+
+  ensureAbTrimUtcPanel();
+
+  const lab=
+    abTrimLoadLab();
+
+  const state=
+    !lab
+      ? 'NOT_ALIGNED'
+      : (
+          lab.watchState ===
+            'STOPPED'
+            ? 'STOPPED'
+            : 'RUNNING'
+        );
+
+  el('abTrimWatchState')
+    .textContent=
+      state;
+
+  el('alignAbTrimUtcButton')
+    .disabled=
+      abTrimUtcBusy ||
+      !!lab;
+
+  el('stopAbTrimUtcButton')
+    .disabled=
+      abTrimUtcBusy ||
+      state !== 'RUNNING';
+
+  el('restartAbTrimUtcButton')
+    .disabled=
+      abTrimUtcBusy ||
+      state !== 'STOPPED';
+
+  el('resetAbTrimUtcButton')
+    .disabled=
+      abTrimUtcBusy;
+}
+
+
+function abTrimStopWatch(){
+
+  if(abTrimUtcBusy){
+    return;
+  }
+
+  const lab=
+    abTrimLoadLab();
+
+  if(!lab){
+    abTrimApplyControlState();
+    return;
+  }
+
+  lab.watchState=
+    'STOPPED';
+
+  lab.stoppedAtUnixMs=
+    Date.now();
+
+  abTrimSaveLab(lab);
+
+  renderAbTrimUtcLab();
+  abTrimApplyControlState();
+}
+
+
+async function abTrimRestartWatch(){
+
+  if(abTrimUtcBusy){
+    return;
+  }
+
+  const lab=
+    abTrimLoadLab();
+
+  if(!lab){
+    return;
+  }
+
+  lab.watchState=
+    'RUNNING';
+
+  lab.restartedAtUnixMs=
+    Date.now();
+
+  abTrimSaveLab(lab);
+
+  renderAbTrimUtcLab();
+  abTrimApplyControlState();
+
+  const elapsed=
+    Date.now() -
+    Number(
+      lab.lastSampleUnixMs || 0
+    );
+
+  /*
+   * One current catch-up observation only.
+   * Never invent missing hourly samples.
+   */
+  if(
+    elapsed >=
+      AB_TRIM_UTC_INTERVAL_MS
+  ){
+    await sampleAbTrimUtcLab();
+  }
+
+  renderAbTrimUtcLab();
+  abTrimApplyControlState();
+}
+
+
+async function abTrimResetWatch(){
+
+  if(abTrimUtcBusy){
+    return;
+  }
+
+  const existing=
+    abTrimLoadLab();
+
+  if(
+    existing &&
+    !window.confirm(
+      'Reset the A/B post-trim UTC watch baseline? '
+      + 'This discards only this browser-local A/B '
+      + 'watch history. It does not change the A/B Pi '
+      + 'trim, physical RAW, feeder, Core20, C/D, '
+      + 'or either Arduino.'
+    )
+  ){
+    return;
+  }
+
+  localStorage.removeItem(
+    AB_TRIM_UTC_KEY
+  );
+
+  renderAbTrimUtcLab();
+  abTrimApplyControlState();
+
+  await alignAbTrimUtcLab();
+}
+
+
+async function maybeSampleAbTrimUtc(){
+
+  const lab=
+    abTrimLoadLab();
+
+  renderAbTrimUtcLab();
+  abTrimApplyControlState();
+
+  if(
+    !lab ||
+    abTrimUtcBusy ||
+    lab.watchState ===
+      'STOPPED'
+  ){
+    return;
+  }
+
+  const elapsed=
+    Date.now() -
+    Number(
+      lab.lastSampleUnixMs || 0
+    );
+
+  if(
+    elapsed >=
+      AB_TRIM_UTC_INTERVAL_MS
+  ){
+    await sampleAbTrimUtcLab();
+  }
+}
+
+
+/* ============================================================
+ * START PRESENTATION ONLY
+ * ============================================================
+ */
+
+ensureAbDisciplinePanel();
+ensureAbTrimUtcPanel();
+positionAbPanels();
+
+updateAbDisciplinePanel();
+renderAbTrimUtcLab();
+abTrimApplyControlState();
+
+setInterval(
+  updateAbDisciplinePanel,
+  1000
+);
+
+setTimeout(
+  maybeSampleAbTrimUtc,
+  2000
+);
+
+setInterval(
+  maybeSampleAbTrimUtc,
+  60000
+);
+
+setInterval(
+  function(){
+    renderAbTrimUtcLab();
+    abTrimApplyControlState();
+    positionAbPanels();
+  },
+  1000
+);
+
+</script>
+</body>
+</html>

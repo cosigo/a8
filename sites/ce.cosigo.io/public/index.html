@@ -338,12 +338,12 @@ pre{
   <div class="workflow">
     <div class="step">
       <b>1 · AUTO START</b>
-      a8-core20.service starts Core20. No manual START is normally required.
+      a8-core20.service runs Core20 with the qualified Epoch-8 external physical feeder as the current Path-A machine pair. No manual START is normally required.
     </div>
 
     <div class="step">
       <b>2 · PATH A PHYSICAL SOURCE</b>
-      Core20 uses the qualified Epoch-7 external physical RAW source as its
+      Core20 uses the qualified Epoch-8 external physical RAW source as its
       normal pace input.
     </div>
 
@@ -355,8 +355,9 @@ pre{
 
     <div class="step">
       <b>4 · ANNUAL FRAME V1</b>
-      Annual Frame V1 is physically anchored at the Sep-22 Sol crossing:
-      Epoch-7 RAW 13,665,968 = 600₈. Live position advances from physical RAW.
+      Annual Frame V1 retains the sealed Sep-22 Sol crossing witness:
+      Epoch-7 RAW 13,665,968 = 600₈. That Epoch-7 RAW is historical evidence;
+      current replaceable physical transport is SOURCE_EPOCH 8.
       Nature defines the recurrence; CE operates and replaces machinery only.
     </div>
   </div>
@@ -444,6 +445,293 @@ pre{
     A/B/C/D Arduino. They have no switching, assignment or handoff
     handler until the hardware exists and that procedure is established.
   </p>
+</section>
+
+
+<section class="panel" id="a8-ce-carrier-compensation">
+  <div class="kicker">
+    PHYSICAL CARRIERS · OSCILLATOR COMPENSATION
+  </div>
+
+  <h2>CARRIER COMPENSATION · A/B + C/D</h2>
+
+  <p class="note">
+    Europa defines the natural rate. Arduino counters remain physical RAW
+    odometers. Pi-side carrier compensation corrects oscillator error only.
+    It does not change Europa, rewrite physical RAW, tune Arduino firmware,
+    or modify the Jovian governor.
+  </p>
+
+  <div class="statusline">
+    <span id="carrierCompStatus" class="pill">
+      CHECKING…
+    </span>
+
+    <span class="pill">
+      MANUAL · SEALED SEGMENTS · NO CONTINUOUS SERVO
+    </span>
+  </div>
+
+  <div class="grid" style="margin-top:14px">
+
+    <div class="stat">
+      <span class="k">A/B · PRIMARY</span>
+      <span id="carrierAbState" class="v cyan">CHECKING…</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">A/B · PHYSICAL RAW</span>
+      <span id="carrierAbRaw" class="v">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">A/B · SEALED BASE</span>
+      <span id="carrierAbBase" class="v warn-text">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">A/B · FINE NEEDLE</span>
+      <span id="carrierAbFine" class="v">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">A/B · EFFECTIVE</span>
+      <span id="carrierAbEffective" class="v">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">A/B · ACTUATION</span>
+      <span id="carrierAbActuation" class="v warn-text">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">C/D · GHOST</span>
+      <span id="carrierCdState" class="v cyan">CHECKING…</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">C/D · PHYSICAL RAW</span>
+      <span id="carrierCdRaw" class="v">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">C/D · DISCIPLINED RAW · EXACT</span>
+      <span id="carrierCdDisciplined" class="v">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">C/D · CURRENT TRIAL RATIO</span>
+      <span id="carrierCdRatio" class="v">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">C/D · OSCILLATOR EXCESS CONSUMED</span>
+      <span id="carrierCdConsumed" class="v cyan">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">C/D · ACTUATION</span>
+      <span id="carrierCdActuation" class="v">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">C/D · SEGMENT</span>
+      <span id="carrierCdSegment" class="v cyan">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">C/D · SEALED DISCIPLINED ANCHOR</span>
+      <span id="carrierCdAnchor" class="v">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">C/D · STAGED RATIO</span>
+      <span id="carrierCdStagedRatio" class="v">NONE</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">C/D · SEAL STATUS</span>
+      <span id="carrierCdSealStatus" class="v warn-text">LOCKED</span>
+    </div>
+
+  </div>
+
+  
+  <div
+    style="
+      margin-top:18px;
+      padding-top:16px;
+      border-top:1px solid rgba(255,255,255,.14)
+    "
+  >
+    <div class="kicker">
+      A/B · PRIMARY PI DISCIPLINE
+    </div>
+
+    <p class="note">
+      Epoch 8 remains current. A/B physical RAW remains the
+      immutable odometer. C/D Segment 3 is the temporary independent
+      pace reference. This lane is STAGE / REVIEW only; feeder
+      actuation and SEAL remain locked.
+    </p>
+
+    <div class="grid" style="margin-top:12px">
+      <div class="stat">
+        <span class="k">A/B · DISCIPLINE SEGMENT</span>
+        <span id="carrierAbDiscSegment" class="v cyan">CHECKING…</span>
+      </div>
+
+      <div class="stat">
+        <span class="k">A/B · DISCIPLINED RAW · EXACT</span>
+        <span id="carrierAbDiscRaw" class="v">CHECKING…</span>
+      </div>
+
+      <div class="stat">
+        <span class="k">A/B · DISCIPLINE RATIO</span>
+        <span id="carrierAbDiscRatio" class="v">CHECKING…</span>
+      </div>
+
+      <div class="stat">
+        <span class="k">C/D · PACE REFERENCE</span>
+        <span id="carrierAbReference" class="v">CHECKING…</span>
+      </div>
+
+      <div class="stat">
+        <span class="k">A/B · REVIEW STATUS</span>
+        <span id="carrierAbReviewState" class="v warn-text">CHECKING…</span>
+      </div>
+
+      <div class="stat">
+        <span class="k">A/B · SEAL</span>
+        <span id="carrierAbSealState" class="v warn-text">LOCKED</span>
+      </div>
+    </div>
+
+    <div class="controls" style="margin-top:14px;align-items:end">
+      <label>
+        <span class="k">A/B PROPOSED NUMERATOR</span><br>
+        <input
+          id="carrierAbNumerator"
+          inputmode="numeric"
+          value="119153283968038235544634661136"
+          style="width:390px;max-width:100%"
+        >
+      </label>
+
+      <label>
+        <span class="k">A/B PROPOSED DENOMINATOR</span><br>
+        <input
+          id="carrierAbDenominator"
+          inputmode="numeric"
+          value="119158456589332197355815430285"
+          style="width:390px;max-width:100%"
+        >
+      </label>
+    </div>
+
+    <div class="controls" style="margin-top:10px">
+      <button id="carrierAbStageButton">
+        STAGE A/B RATIO
+      </button>
+
+      <button id="carrierAbReviewButton">
+        REVIEW EXACT A/B SEGMENT
+      </button>
+
+      <button
+        id="carrierAbSealButton"
+        disabled
+        title="A/B feeder actuation has not yet been qualified"
+      >
+        SEAL LOCKED · FEEDER NOT QUALIFIED
+      </button>
+    </div>
+
+    <div
+      id="carrierAbControlStatus"
+      class="note"
+      style="margin-top:10px"
+    >
+      No staged A/B operation yet.
+    </div>
+
+    <details style="margin-top:12px">
+      <summary>A/B · STAGED REVIEW</summary>
+      <div class="inside">
+        <pre id="carrierAbReviewJson">—</pre>
+      </div>
+    </details>
+  </div>
+
+<div class="controls" style="margin-top:14px;align-items:end">
+    <label>
+      <span class="k">PROPOSED NUMERATOR</span><br>
+      <input
+        id="carrierCdNumerator"
+        type="number"
+        min="1"
+        step="1"
+        value="16818"
+        style="max-width:180px"
+      >
+    </label>
+
+    <label>
+      <span class="k">PROPOSED DENOMINATOR</span><br>
+      <input
+        id="carrierCdDenominator"
+        type="number"
+        min="1"
+        step="1"
+        value="16819"
+        style="max-width:180px"
+      >
+    </label>
+
+    <button id="carrierCdStageButton">
+      STAGE C/D RATIO
+    </button>
+
+    <button id="carrierCdReviewButton">
+      REVIEW EXACT SEGMENT
+    </button>
+
+    <button
+      id="carrierCdSealButton"
+      disabled
+      title="Requires a fresh C/D staged and reviewed proposal"
+    >
+      SEAL REVIEWED C/D SEGMENT
+    </button>
+  </div>
+
+  <div
+    id="carrierCdControlStatus"
+    class="note"
+    style="margin-top:10px"
+  >
+    No staged operation yet.
+  </div>
+
+  <details style="margin-top:12px">
+    <summary>C/D · STAGED REVIEW</summary>
+    <div class="inside">
+      <pre id="carrierCdReviewJson">—</pre>
+    </div>
+  </details>
+
+  <p class="note" style="margin-top:14px">
+    A/B compensation machinery is reserved here from the beginning but remains
+    locked while C/D is the proving bank. C/D currently reports its existing
+    Pi-side trial; this cabinet does not alter that trial.
+  </p>
+
+  <details style="margin-top:12px">
+    <summary>CARRIER COMPENSATION · RAW STATUS</summary>
+    <div class="inside">
+      <pre id="carrierCompJson">—</pre>
+    </div>
+  </details>
 </section>
 
 <section class="panel">
@@ -672,7 +960,7 @@ pre{
   </div>
 
   <p class="note">
-    Epoch-7 physical chain: Arduino A Timer2/D11 → Arduino B Timer1/D5
+    Epoch-8 physical chain: Arduino A Timer2/D11 → Arduino B Timer1/D5
     → Pi reporter. Core20 maps this physical RAW through the qualified
     Path-A physical-to-Core relationship. Browser polling cadence and
     network arrival time are presentation only and do not pace Core20.
@@ -796,7 +1084,7 @@ pre{
           margin-top:4px;
         "
       >
-        A8 PRIMARY · NATURE → EPOCH-7 PHYSICAL RAW → CORE20
+        A8 PRIMARY · NATURE → EPOCH-8 PHYSICAL RAW → CORE20
       </div>
 
       <pre style="
@@ -812,7 +1100,7 @@ pre{
    Io/Eu/Ga turns    stellar crossing   solar direction
           │                │                │
           │                │                │
-          └──── DIRECT EPOCH-7 PHYSICAL RAW ┘
+          └──── DIRECT EPOCH-8 PHYSICAL RAW ┘
                            │
                      EVIDENCE LAYER
                            │
@@ -863,8 +1151,9 @@ pre{
 
       <p class="note">
         <b>CORE20</b> · common A8 progression.
-        Physical SOURCE_EPOCH 7 and Core20 internal sourceEpoch 3 remain
-        distinct domains.
+        Current physical SOURCE_EPOCH 8 and Core20 internal sourceEpoch 3 remain
+        distinct domains. Epoch-7 references in the evidence layer are sealed
+        historical provenance, not the current physical carrier identity.
       </p>
 
       <p class="note">
@@ -1097,7 +1386,7 @@ pre{
     </div>
 
     <div class="stat">
-      <span class="k">CURRENT LIVE DEVELOPMENT RULER</span>
+      <span class="k">SELECTED NATURAL RECURRENCE</span>
       <span
         id="jovianAuthorityCurrent"
         class="v"
@@ -1152,7 +1441,7 @@ pre{
     style="margin-top:8px"
   >
     Selector changes authority state only.
-    Carrier-rate transition remains separate.
+    Carrier oscillator compensation remains separate from natural-ruler selection.
   </p>
 </section>
 <!-- A8-CE-JOVIAN-AUTHORITY-END -->
@@ -1201,9 +1490,9 @@ pre{
 
   <p class="note">
     STOP performs the normal clean Core20 shutdown and waits until the
-    service is fully offline. START from this CE page is deliberately locked.
-    The existing machine-level fresh-start backend is preserved for inspection
-    but is not authorized here as the physical Path-A restart sequence.
+    service is fully offline. The machine backend now understands the current
+    Core20 + Epoch-8 external physical feeder sequence. Browser START remains
+    deliberately locked until controlled fresh-start qualification is completed.
   </p>
 
   <div class="power-grid">
@@ -1230,6 +1519,65 @@ pre{
 
   </div>
 
+</section>
+
+<section class="panel" id="a8-ce-cd-transport-control">
+  <div class="kicker">
+    C/D · STANDBY TRANSPORT
+  </div>
+
+  <h2>SAFE TRANSPORT SHUTDOWN</h2>
+
+  <p class="note">
+    This control does not stop Core20 and does not switch Shadow Core.
+    A/B remains MAIN. Shadow Core remains on the direct A/B feed.
+    C/D alone is sealed, drained and powered off for physical transport.
+  </p>
+
+  <div class="grid">
+    <div>
+      <span class="label">READINESS</span>
+      <b id="cdTransportReady">CHECKING…</b>
+    </div>
+
+    <div>
+      <span class="label">MAIN CARRIER</span>
+      <b id="cdTransportMain">A/B</b>
+    </div>
+
+    <div>
+      <span class="label">SHADOW CORE</span>
+      <b id="cdTransportShadow">CHECKING…</b>
+    </div>
+
+    <div>
+      <span class="label">C/D ROLE</span>
+      <b id="cdTransportRole">STANDBY</b>
+    </div>
+  </div>
+
+  <pre
+    id="cdTransportDetail"
+    style="margin-top:14px;white-space:pre-wrap"
+  >—</pre>
+
+  <button
+    id="cdTransportShutdownButton"
+    class="danger"
+    type="button"
+    disabled
+    style="margin-top:14px"
+  >
+    CHECKING C/D TRANSPORT READINESS…
+  </button>
+
+  <p
+    id="cdTransportControlStatus"
+    class="note"
+    style="margin-top:10px"
+  >
+    No action has been requested.
+  </p>
 </section>
 
 <section class="panel danger-zone">
@@ -2638,7 +2986,7 @@ pre{
         put(
           'canonicalAnnualAnchor',
           out.physicalRawAnchorSealed
-            ? 'LIVE · EPOCH-7 PHYSICAL RAW ANCHOR SEALED'
+            ? 'SEALED SOL WITNESS · EPOCH-7 HISTORICAL ANCHOR'
             : `STANDBY · EQUINOX · ${out.orientationStatus}`
         );
 
@@ -2731,7 +3079,7 @@ async function refreshJovianAuthority() {
       Number(
         a.selectedPeriodRaw
       ).toLocaleString() +
-      ' RAW · AVERAGE';
+      ' RAW · SELECTED NATURAL RECURRENCE';
 
     document.getElementById(
       'jovianAuthorityWitnesses'
@@ -2894,7 +3242,10 @@ const base = '/api/ce/core20-service';
       [
         `service=${c.core20Service ?? '—'}`,
         `pid=${c.core20MainPID ?? '—'}`,
-        `autorecovery=${c.autorecoveryService ?? '—'}`
+        `physicalFeeder=${c.externalPhysicalFeederService ?? '—'}`,
+        `feederPid=${c.externalPhysicalFeederMainPID ?? '—'}`,
+        `physicalEpoch=${c.externalPhysicalSourceEpoch ?? '—'}`,
+        `legacyAutorecovery=${c.autorecoveryService ?? '—'}`
       ].join(' · ');
 
     if (busy) {
@@ -2906,7 +3257,7 @@ const base = '/api/ce/core20-service';
       button.disabled = true;
       button.className = 'warn';
       button.textContent =
-        'START LOCKED · PATH-A RESTART NOT QUALIFIED';
+        'START LOCKED · EPOCH-8 PATH-A RESTART AWAITS QUALIFICATION';
       return;
     }
 
@@ -2962,7 +3313,7 @@ const base = '/api/ce/core20-service';
         alert(
           'NO ACTION SENT\n\n' +
           'CE MASTER START is locked until the physical ' +
-          'Path-A restart sequence is separately qualified.'
+          'Epoch-8 Path-A restart sequence is deliberately qualified.'
         );
         return;
       }
@@ -3080,6 +3431,918 @@ const base = '/api/ce/core20-service';
   setInterval(
     refreshCanonicalAnnual,
     5000
+  );
+})();
+</script>
+
+
+
+<script id="a8-ce-ab-carrier-discipline-script">
+(() => {
+  'use strict';
+
+  const $ = id =>
+    document.getElementById(id);
+
+  const api = path =>
+    '/api/ce/core20-service/' + path;
+
+  async function request(
+    path,
+    options = {}
+  ) {
+    const r = await fetch(
+      api(path),
+      {
+        cache: 'no-store',
+        headers: {
+          'X-A8-CE-Control': '1',
+          'Content-Type': 'application/json',
+          ...(options.headers || {})
+        },
+        ...options
+      }
+    );
+
+    const data = await r.json();
+
+    if (!r.ok || data.ok !== true) {
+      throw new Error(
+        data.error ||
+        `HTTP ${r.status}`
+      );
+    }
+
+    return data;
+  }
+
+  function exact(r) {
+    if (!r) return '—';
+
+    return (
+      String(r.numerator ?? '—')
+      + '/'
+      + String(r.denominator ?? '—')
+    );
+  }
+
+  async function refreshAB() {
+    try {
+      const data = await request(
+        'ab-carrier-compensation/status'
+      );
+
+      const x =
+        data.abCarrierControl || {};
+
+      const d =
+        x.discipline || {};
+
+      const p =
+        x.physical || {};
+
+      const c =
+        x.control || {};
+
+      const ref =
+        x.reference || {};
+
+      const live =
+        d.liveDisciplinedRaw || {};
+
+      $('carrierAbDiscSegment').textContent =
+        `SEGMENT ${d.segmentNumber ?? '—'} · ${d.status ?? '—'}`;
+
+      $('carrierAbDiscRaw').textContent =
+        live.numerator && live.denominator
+          ? `${live.numerator}/${live.denominator}`
+          : '—';
+
+      $('carrierAbDiscRatio').textContent =
+        exact(d.ratio);
+
+      $('carrierAbReference').textContent =
+        (
+          `C/D SEGMENT ${ref.segmentNumber ?? '—'}`
+          + ` · ${exact(ref.ratio)}`
+        );
+
+      const reviewed =
+        c.reviewedProposal;
+
+      const staged =
+        c.stagedProposal;
+
+      $('carrierAbReviewState').textContent =
+        reviewed
+          ? reviewed.status
+          : staged
+            ? staged.status
+            : 'NOT STAGED';
+
+      $('carrierAbSealState').textContent =
+        c.sealStatus || 'LOCKED';
+
+      $('carrierAbControlStatus').textContent =
+        (
+          `EPOCH ${x.physicalSourceEpoch ?? '—'}`
+          + ` · PHYSICAL RAW ${p.raw ?? '—'}`
+          + ` · SEAL=${c.sealAvailable === true ? 'AVAILABLE' : 'LOCKED'}`
+        );
+
+      $('carrierAbReviewJson').textContent =
+        JSON.stringify(
+          {
+            stagedProposal:
+              staged,
+
+            reviewedProposal:
+              reviewed,
+
+            expectedRatio:
+              x.expectedRatio,
+
+            reference:
+              ref,
+
+            policy:
+              x.policy
+          },
+          null,
+          2
+        );
+
+      $('carrierAbSealButton').disabled =
+        true;
+
+    } catch (err) {
+      $('carrierAbControlStatus').textContent =
+        'A/B CONTROL ERROR · ' + err.message;
+
+      $('carrierAbReviewState').textContent =
+        'ERROR';
+
+      $('carrierAbSealState').textContent =
+        'LOCKED';
+    }
+  }
+
+  $('carrierAbStageButton')
+    .addEventListener(
+      'click',
+      async () => {
+        const button =
+          $('carrierAbStageButton');
+
+        button.disabled = true;
+
+        try {
+          const numerator =
+            $('carrierAbNumerator')
+              .value.trim();
+
+          const denominator =
+            $('carrierAbDenominator')
+              .value.trim();
+
+          const data = await request(
+            'ab-carrier-compensation/stage',
+            {
+              method: 'POST',
+              body: JSON.stringify({
+                numerator,
+                denominator
+              })
+            }
+          );
+
+          $('carrierAbControlStatus')
+            .textContent =
+              (
+                'A/B STAGED · '
+                + exact(data.stage.ratio)
+                + ' · REVIEW REQUIRED'
+              );
+
+        } catch (err) {
+          $('carrierAbControlStatus')
+            .textContent =
+              'A/B STAGE FAILED · '
+              + err.message;
+
+        } finally {
+          button.disabled = false;
+          await refreshAB();
+        }
+      }
+    );
+
+  $('carrierAbReviewButton')
+    .addEventListener(
+      'click',
+      async () => {
+        const button =
+          $('carrierAbReviewButton');
+
+        button.disabled = true;
+
+        try {
+          const data = await request(
+            'ab-carrier-compensation/review',
+            {
+              method: 'POST',
+              body: '{}'
+            }
+          );
+
+          $('carrierAbControlStatus')
+            .textContent =
+              (
+                'A/B REVIEWED · '
+                + exact(data.reviewed.ratio)
+                + ' · SEAL REMAINS LOCKED'
+              );
+
+        } catch (err) {
+          $('carrierAbControlStatus')
+            .textContent =
+              'A/B REVIEW FAILED · '
+              + err.message;
+
+        } finally {
+          button.disabled = false;
+          await refreshAB();
+        }
+      }
+    );
+
+  refreshAB();
+
+  window.setInterval(
+    refreshAB,
+    3000
+  );
+})();
+</script>
+
+<script id="a8-ce-carrier-compensation-script">
+(() => {
+  'use strict';
+
+  const $ = id =>
+    document.getElementById(id);
+
+  const put = (id, value) => {
+    const el = $(id);
+    if (!el) return;
+
+    el.textContent =
+      value === undefined ||
+      value === null ||
+      value === ''
+        ? '—'
+        : String(value);
+  };
+
+  const ratioText = ratio => {
+    if (!ratio) return '—';
+
+    return (
+      `${ratio.numerator ?? '—'}/` +
+      `${ratio.denominator ?? '—'}`
+    );
+  };
+
+  async function refreshCarrierCompensation() {
+    try {
+      const r =
+        await fetch(
+          '/api/ce/core20-service/carrier-compensation/status',
+          {
+            cache: 'no-store',
+            credentials: 'same-origin'
+          }
+        );
+
+      const x = await r.json();
+
+      if (!r.ok || x.ok !== true) {
+        throw new Error(
+          x.error || `HTTP ${r.status}`
+        );
+      }
+
+      const c =
+        x.carrierCompensation || {};
+
+      const banks =
+        c.banks || {};
+
+      const ab =
+        banks.primaryAB || {};
+
+      const cd =
+        banks.ghostCD || {};
+
+      const abc =
+        ab.compensation || {};
+
+      const cdc =
+        cd.compensation || {};
+
+      put(
+        'carrierCompStatus',
+        c.status || 'CHECK'
+      );
+
+      put(
+        'carrierAbState',
+        `${ab.role || 'PRIMARY'} · ` +
+        `EPOCH ${ab.physicalSourceEpoch ?? '—'} · ` +
+        `${abc.status || 'CHECK'}`
+      );
+
+      put(
+        'carrierAbRaw',
+        ab.physicalRaw
+      );
+
+      put(
+        'carrierAbBase',
+        abc.baseCalibration
+      );
+
+      put(
+        'carrierAbFine',
+        `${abc.fineNeedlePpb ?? 0} ppb`
+      );
+
+      put(
+        'carrierAbEffective',
+        ratioText(
+          abc.effectiveRatio
+        )
+      );
+
+      put(
+        'carrierAbActuation',
+        abc.actuation
+      );
+
+      put(
+        'carrierCdState',
+        `${cd.role || 'GHOST'} · ` +
+        `${cd.linkStatus || '—'} · ` +
+        `${cdc.status || 'CHECK'}`
+      );
+
+      put(
+        'carrierCdRaw',
+        cd.physicalRaw
+      );
+
+      const d =
+        cd.disciplinedRaw || {};
+
+      put(
+        'carrierCdDisciplined',
+        d.numerator && d.denominator
+          ? `${d.numerator}/${d.denominator}`
+          : '—'
+      );
+
+      put(
+        'carrierCdRatio',
+        ratioText(
+          cdc.ratio
+        )
+      );
+
+      const consumed =
+        cd.oscillatorExcessConsumed;
+
+      put(
+        'carrierCdConsumed',
+        consumed
+          ? (
+              `${Number(
+                consumed.decimalRaw
+              ).toFixed(9)} RAW · ` +
+              `${consumed.numerator}/` +
+              `${consumed.denominator}`
+            )
+          : '—'
+      );
+
+      put(
+        'carrierCdActuation',
+        cdc.actuation
+      );
+
+      put(
+        'carrierCdSegment',
+        cdc.segmentNumber
+      );
+
+      put(
+        'carrierCdAnchor',
+        ratioText(
+          cdc.disciplinedAnchor
+        )
+      );
+
+      const control =
+        c.control || {};
+
+      const staged =
+        control.stagedProposal || {};
+
+      put(
+        'carrierCdStagedRatio',
+        staged.ratio
+          ? ratioText(staged.ratio)
+          : 'NONE'
+      );
+
+      put(
+        'carrierCdSealStatus',
+        control.sealStatus ||
+        'STAGE_REQUIRED'
+      );
+
+      const sealEl =
+        $('carrierCdSealButton');
+
+      if (sealEl) {
+        sealEl.disabled =
+          control.sealAvailable !== true;
+      }
+
+      $('carrierCompJson').textContent =
+        JSON.stringify(
+          c,
+          null,
+          2
+        );
+
+    } catch (err) {
+      put(
+        'carrierCompStatus',
+        'READ FAIL'
+      );
+
+      put(
+        'carrierAbState',
+        String(err.message || err)
+      );
+
+      put(
+        'carrierCdState',
+        String(err.message || err)
+      );
+    }
+  }
+
+  async function postCarrier(path, payload) {
+    const r = await fetch(
+      path,
+      {
+        method: 'POST',
+        cache: 'no-store',
+        credentials: 'same-origin',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(
+          payload || {}
+        )
+      }
+    );
+
+    const x = await r.json();
+
+    if (!r.ok || x.ok !== true) {
+      throw new Error(
+        x.error || `HTTP ${r.status}`
+      );
+    }
+
+    return x;
+  }
+
+  const stageButton =
+    $('carrierCdStageButton');
+
+  const reviewButton =
+    $('carrierCdReviewButton');
+
+  if (stageButton) {
+    stageButton.addEventListener(
+      'click',
+      async () => {
+        try {
+          stageButton.disabled = true;
+
+          put(
+            'carrierCdControlStatus',
+            'STAGING · local CE proposal only'
+          );
+
+          const numerator =
+            $('carrierCdNumerator').value;
+
+          const denominator =
+            $('carrierCdDenominator').value;
+
+          const x = await postCarrier(
+            '/api/ce/core20-service/' +
+            'carrier-compensation/stage',
+            {
+              numerator,
+              denominator
+            }
+          );
+
+          put(
+            'carrierCdControlStatus',
+            'STAGED · REVIEW REQUIRED · NO GHOST WRITE'
+          );
+
+          $('carrierCdReviewJson').textContent =
+            JSON.stringify(
+              x,
+              null,
+              2
+            );
+
+          await refreshCarrierCompensation();
+
+        } catch (err) {
+          put(
+            'carrierCdControlStatus',
+            'STAGE FAIL · ' +
+            String(err.message || err)
+          );
+
+        } finally {
+          stageButton.disabled = false;
+        }
+      }
+    );
+  }
+
+  if (reviewButton) {
+    reviewButton.addEventListener(
+      'click',
+      async () => {
+        try {
+          reviewButton.disabled = true;
+
+          put(
+            'carrierCdControlStatus',
+            'REVIEWING · remote helper · read only'
+          );
+
+          const x = await postCarrier(
+            '/api/ce/core20-service/' +
+            'carrier-compensation/review',
+            {}
+          );
+
+          const r =
+            x.reviewed || {};
+
+          put(
+            'carrierCdControlStatus',
+            'REVIEWED · SEGMENT ' +
+            `${r.currentSegment ?? '—'} → ` +
+            `${r.nextSegment ?? '—'} · ` +
+            'TOKEN HELD SERVER-SIDE · ' +
+            'SEAL STILL LOCKED'
+          );
+
+          $('carrierCdReviewJson').textContent =
+            JSON.stringify(
+              x,
+              null,
+              2
+            );
+
+          await refreshCarrierCompensation();
+
+        } catch (err) {
+          put(
+            'carrierCdControlStatus',
+            'REVIEW FAIL · ' +
+            String(err.message || err)
+          );
+
+        } finally {
+          reviewButton.disabled = false;
+        }
+      }
+    );
+  }
+
+  const sealButton =
+    $('carrierCdSealButton');
+
+  if (sealButton) {
+    sealButton.addEventListener(
+      'click',
+      async () => {
+        const approved = window.confirm(
+          'Seal the currently reviewed C/D segment? ' +
+          'This changes only the Pi-side carrier compensation segment. ' +
+          'Physical RAW, Arduino, Core20 and the Jovian governor remain untouched.'
+        );
+
+        if (!approved) {
+          return;
+        }
+
+        try {
+          sealButton.disabled = true;
+
+          put(
+            'carrierCdControlStatus',
+            'SEALING · reviewed C/D proposal'
+          );
+
+          const x = await postCarrier(
+            '/api/ce/core20-service/' +
+            'carrier-compensation/seal',
+            {}
+          );
+
+          const result =
+            x.remoteSeal || {};
+
+          put(
+            'carrierCdControlStatus',
+            'SEALED · SEGMENT ' +
+            `${result.segment ?? '—'} · ` +
+            `RATIO ${ratioText(result.ratio)} · ` +
+            (
+              x.shadowVerified
+                ? 'SHADOW VERIFIED'
+                : 'SHADOW PENDING'
+            )
+          );
+
+          $('carrierCdReviewJson').textContent =
+            JSON.stringify(
+              x,
+              null,
+              2
+            );
+
+          await refreshCarrierCompensation();
+
+        } catch (err) {
+          put(
+            'carrierCdControlStatus',
+            'SEAL FAIL · ' +
+            String(err.message || err)
+          );
+
+          await refreshCarrierCompensation();
+        }
+      }
+    );
+  }
+
+  refreshCarrierCompensation();
+
+  setInterval(
+    refreshCarrierCompensation,
+    2000
+  );
+})();
+</script>
+
+<script id="a8-ce-cd-transport-script">
+(() => {
+  'use strict';
+
+  const base =
+    '/api/ce/core20-service/cd-transport';
+
+  const phrase =
+    'SEAL + SHUTDOWN C/D FOR TRANSPORT';
+
+  const $ = id =>
+    document.getElementById(id);
+
+  let current = null;
+  let busy = false;
+
+  async function request(path, options = {}) {
+    const response = await fetch(
+      base + path,
+      {
+        cache: 'no-store',
+        credentials: 'same-origin',
+        ...options,
+        headers: {
+          'X-A8-CE-Control': '1',
+          ...(options.headers || {})
+        }
+      }
+    );
+
+    const payload =
+      await response.json();
+
+    if (!response.ok || payload.ok === false) {
+      throw new Error(
+        payload.error ||
+        `HTTP ${response.status}`
+      );
+    }
+
+    return payload;
+  }
+
+  function paint(t) {
+    current = t || {};
+
+    const checks =
+      current.checks || {};
+
+    $('cdTransportReady').textContent =
+      current.ready
+        ? 'READY'
+        : 'NOT READY';
+
+    $('cdTransportMain').textContent =
+      current.mainCarrier || '—';
+
+    $('cdTransportShadow').textContent =
+      checks.shadowCoreWiredToMainAB &&
+      checks.shadowCoreActive
+        ? 'A/B MAIN · RUNNING'
+        : 'NOT QUALIFIED';
+
+    $('cdTransportRole').textContent =
+      current.cdRole || '—';
+
+    $('cdTransportDetail').textContent =
+      JSON.stringify(
+        current,
+        null,
+        2
+      );
+
+    const button =
+      $('cdTransportShutdownButton');
+
+    if (busy) {
+      button.disabled = true;
+      button.textContent =
+        'C/D TRANSPORT SHUTDOWN IN PROGRESS…';
+      return;
+    }
+
+    button.disabled =
+      current.ready !== true;
+
+    button.textContent =
+      current.ready
+        ? 'SEAL + SAFE SHUTDOWN C/D FOR TRANSPORT'
+        : 'C/D TRANSPORT SHUTDOWN · NOT READY';
+  }
+
+  async function refresh() {
+    if (busy) {
+      return;
+    }
+
+    try {
+      const payload =
+        await request(
+          '/status'
+        );
+
+      paint(
+        payload.transport
+      );
+
+    } catch (err) {
+      $('cdTransportReady').textContent =
+        'READ FAIL';
+
+      $('cdTransportControlStatus').textContent =
+        String(
+          err.message || err
+        );
+
+      $('cdTransportShutdownButton').disabled =
+        true;
+    }
+  }
+
+  const button =
+    $('cdTransportShutdownButton');
+
+  button.addEventListener(
+    'click',
+    async () => {
+      if (
+        !current ||
+        current.ready !== true
+      ) {
+        return;
+      }
+
+      const typed = window.prompt(
+        'C/D WILL BE SEALED AND THE C/D PI WILL POWER OFF.\n\n' +
+        'A/B, Core20 and Shadow Core remain running.\n\n' +
+        'Type exactly:\n' +
+        phrase
+      );
+
+      if (typed !== phrase) {
+        $('cdTransportControlStatus').textContent =
+          'CANCELLED · confirmation phrase did not match';
+        return;
+      }
+
+      const finalCheck =
+        window.confirm(
+          'Final confirmation: seal C/D transport and power off the C/D Pi?'
+        );
+
+      if (!finalCheck) {
+        $('cdTransportControlStatus').textContent =
+          'CANCELLED';
+        return;
+      }
+
+      busy = true;
+      paint(current);
+
+      $('cdTransportControlStatus').textContent =
+        'SEALING C/D · DRAINING SHADOW SENDER · POWER OFF REQUESTED';
+
+      try {
+        const payload =
+          await request(
+            '/shutdown',
+            {
+              method: 'POST',
+              headers: {
+                'Content-Type':
+                  'application/json'
+              },
+              body: JSON.stringify({
+                confirm: phrase
+              })
+            }
+          );
+
+        $('cdTransportControlStatus').textContent =
+          payload.mainPreserved
+            ? (
+                'C/D TRANSPORT SEALED · ' +
+                'POWER OFF REQUESTED · ' +
+                'A/B + CORE20 + SHADOW CORE PRESERVED'
+              )
+            : (
+                'C/D SEALED · ' +
+                'MAIN PRESERVATION CHECK FAILED · INSPECT'
+              );
+
+        $('cdTransportDetail').textContent =
+          JSON.stringify(
+            payload,
+            null,
+            2
+          );
+
+      } catch (err) {
+        $('cdTransportControlStatus').textContent =
+          'C/D SHUTDOWN ERROR · ' +
+          String(
+            err.message || err
+          );
+
+      } finally {
+        busy = false;
+
+        setTimeout(
+          refresh,
+          2000
+        );
+      }
+    }
+  );
+
+  refresh();
+
+  setInterval(
+    refresh,
+    3000
   );
 })();
 </script>

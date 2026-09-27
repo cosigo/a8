@@ -459,6 +459,7 @@ body{
         <a href="https://a8.cosigo.io/">A8 PUBLIC</a>
         <a href="https://about.cosigo.io/">ABOUT</a>
         <a href="https://contestant.cosigo.io/">FUN</a>
+        <a href="https://hangout.cosigo.io/">HANGOUT</a>
         <a href="https://cosigo.io/">COSIGO HOME</a>
         <a href="https://github.com/cosigo/a8">GITHUB</a>
       </div>
@@ -1004,12 +1005,27 @@ function recurrentCoordinateRaw(m, raw){
       turns * orbit;
   }
 
+  /*
+   * The sealed X/Y recording is an orbital track,
+   * not a finite lifetime.
+   *
+   * A body's final stored sample may occur before
+   * anchor + one whole natural orbit.  That remaining
+   * interval is the ordinary closing arc back to the
+   * first sample, not an invalid RAW region.
+   */
+  const coordinateEnd =
+    Math.max(
+      last,
+      first + orbit
+    );
+
   if (
     candidate < first ||
-    candidate > last
+    candidate > coordinateEnd
   ){
     throw new Error(
-      `${m.name}: equivalent natural RAW not in sealed X/Y`
+      `${m.name}: recurrent RAW outside coordinate coverage`
     );
   }
 
@@ -1026,6 +1042,62 @@ function nativeAtRaw(m, raw){
     );
 
   const target=sourceRaw * Q16;
+
+  /*
+   * CIRCULAR ORBIT CLOSURE
+   *
+   * If the recurrent RAW lies after the final stored
+   * coordinate sample but before the first sample plus
+   * one whole natural orbit, interpolate across that
+   * closing arc.
+   *
+   * Period is unchanged.
+   * RAW is unchanged.
+   * Model anchor is unchanged.
+   */
+  const firstSample=samples[0];
+  const lastSample=samples[samples.length-1];
+
+  const firstRaw=
+    Number(firstSample.rawQ16) / Q16;
+
+  const lastRaw=
+    Number(lastSample.rawQ16) / Q16;
+
+  const wrapRaw=
+    firstRaw + naturalOrbitRaw(m);
+
+  if (
+    sourceRaw > lastRaw &&
+    sourceRaw <= wrapRaw
+  ){
+    const span=
+      wrapRaw-lastRaw;
+
+    if (!(span > 0)){
+      throw new Error(
+        `${m.name}: invalid circular coordinate span`
+      );
+    }
+
+    const f=
+      (sourceRaw-lastRaw) / span;
+
+    const ax=Number(lastSample.xQ16);
+    const ay=Number(lastSample.yQ16);
+    const bx=Number(firstSample.xQ16);
+    const by=Number(firstSample.yQ16);
+
+    return {
+      sourceRaw:sourceRaw,
+      x:(ax + f*(bx-ax)) / Q16,
+      y:(ay + f*(by-ay)) / Q16,
+      direction:
+        bx >= ax
+          ? 'LEFT → RIGHT'
+          : 'RIGHT → LEFT'
+    };
+  }
 
   if (
     target < samples[0].rawQ16 ||

@@ -2352,8 +2352,23 @@ shadow.cosigo.io {
 		reverse_proxy 127.0.0.1:18027
 	}
 
+	handle /api/shadow/governor {
+		rewrite * /
+		reverse_proxy 127.0.0.1:18029
+	}
+
+	handle /api/shadow/main-clock {
+		rewrite * /api/core20/clock
+		reverse_proxy 127.0.0.1:18020
+	}
+
 	handle /api/shadow/ghost/ingest {
 		reverse_proxy 127.0.0.1:18027
+	}
+
+	handle /api/shadow/ab-pi {
+		rewrite * /health
+		reverse_proxy 127.0.0.1:28789
 	}
 
 	handle {

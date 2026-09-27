@@ -184,6 +184,20 @@ const server = http.createServer((req, res) => {
         sequence: d.sequence,
         rawCount: d.raw_count,
 
+        // Optional Ghost-Pi oscillator-discipline evidence.
+        // rawCount above remains the untouched physical Arduino-D odometer.
+        disciplinedRaw:
+          d.disciplined_raw &&
+          typeof d.disciplined_raw === 'object'
+            ? d.disciplined_raw
+            : null,
+
+        carrierDiscipline:
+          d.carrier_discipline &&
+          typeof d.carrier_discipline === 'object'
+            ? d.carrier_discipline
+            : null,
+
         powerQualification:
           d.power_qualification || 'COMMISSIONING',
 

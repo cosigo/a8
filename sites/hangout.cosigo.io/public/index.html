@@ -3,504 +3,3317 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>A8 Hangout · Storybook</title>
-<meta name="description" content="A playful A8 storybook about doubling, rulers, water, motion and Nature.">
-<link rel="canonical" href="https://hangout.cosigo.io/">
-
+<title>A8 Hangout · Pieces of Eight · v2</title>
 <style>
-*{box-sizing:border-box}
 :root{
-  --ink:#162238;
+  --sand:#f4e1b3;
   --paper:#fffaf0;
-  --sky:#bfeaff;
-  --grass:#8dd17e;
-  --sun:#ffd84c;
-  --water:#5bc4f5;
-  --soft:#edf8ff;
+  --ink:#13202a;
+  --sea:#d9f3f6;
+  --gold:#d5a210;
+  --gold2:#8e6700;
+  --accent:#bb4b2d;
+  --muted:#6f766f;
+  --teal:#2d7789;
 }
-html,body{margin:0;width:100%;height:100%;overflow:hidden}
+*{box-sizing:border-box}
 body{
-  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  margin:0;
   color:var(--ink);
-  background:var(--paper);
-}
-button{font:inherit}
-.book{width:100%;height:100%}
-.page{
-  position:absolute;
-  inset:0;
-  padding:4.5rem 1rem 5.5rem;
-  display:grid;
-  place-items:center;
-  opacity:0;
-  transform:translateX(8%);
-  pointer-events:none;
-  transition:.35s ease;
-  overflow:auto;
-}
-.page.active{
-  opacity:1;
-  transform:none;
-  pointer-events:auto;
-}
-.page.before{transform:translateX(-8%)}
-.inner{
-  width:min(950px,94vw);
-  margin:auto;
-  text-align:center;
-}
-h1,h2{
-  margin:.2rem 0 .8rem;
-  line-height:.95;
-}
-h1{font-size:clamp(3rem,10vw,7rem)}
-h2{font-size:clamp(2.4rem,8vw,5rem)}
-p{
-  font-size:clamp(1.1rem,3vw,1.55rem);
-  line-height:1.45;
-  max-width:720px;
-  margin:1rem auto;
-}
-.big{
-  font-size:clamp(2rem,7vw,4.5rem);
-  font-weight:1000;
-}
-.small{
-  font-size:.9rem;
-  opacity:.7;
-}
-.sky{
-  background:linear-gradient(var(--sky) 0 68%,var(--grass) 68%);
-}
-.night{
-  color:white;
+  font-family:ui-rounded,"SF Pro Rounded",system-ui,sans-serif;
   background:
-    radial-gradient(circle at 15% 20%,white 0 2px,transparent 3px),
-    radial-gradient(circle at 72% 30%,white 0 1px,transparent 2px),
-    radial-gradient(circle at 35% 70%,white 0 1px,transparent 2px),
-    #10182f;
-  background-size:150px 150px,190px 190px,230px 230px,auto;
+    radial-gradient(circle at 12% 10%, rgba(255,255,255,.75), transparent 25%),
+    linear-gradient(180deg, #d9f2f4 0 28%, #cdeef2 28% 34%, var(--sand) 34% 100%);
 }
-.water-page{background:linear-gradient(#daf4ff,#fff)}
-.warm{background:linear-gradient(#ffe9a8,#fff8e7)}
-.controls{
-  position:fixed;
-  left:0;right:0;bottom:0;
-  z-index:20;
+header{
+  display:flex; justify-content:space-between; align-items:center; gap:10px;
+  padding:14px 16px;
+}
+.brand{font-weight:1000; letter-spacing:.08em; text-align:center}
+.home{color:inherit; text-decoration:none; font-weight:900}
+.coinbar{display:flex; gap:6px; align-items:center; flex-wrap:wrap; justify-content:flex-end}
+.coin{
+  width:25px; height:25px; border-radius:50%;
+  border:2px solid var(--gold2);
+  background:radial-gradient(circle at 35% 30%, #fff0a7, var(--gold) 68%, #986d00);
+  display:grid; place-items:center; font-weight:900; font-size:12px;
+  box-shadow:0 2px 0 #755100;
+}
+.coin.locked{opacity:.22; filter:grayscale(1)}
+main{max-width:980px; margin:0 auto; padding:10px 16px 30px}
+.book{
+  background:rgba(255,250,240,.96);
+  border:3px solid var(--ink);
+  border-radius:26px;
+  box-shadow:12px 12px 0 rgba(19,32,42,.16);
+  min-height:690px;
+  padding:24px;
+  position:relative;
+  overflow:hidden;
+}
+.book:before{
+  content:"";
+  position:absolute; right:-40px; top:-40px; width:160px; height:160px;
+  background:radial-gradient(circle, rgba(255,233,122,.45), transparent 65%);
+}
+.page{display:none; min-height:570px}
+.page.active{display:block}
+.kicker{font-size:.82rem; font-weight:1000; letter-spacing:.13em; color:var(--accent)}
+h1{font-size:clamp(2.2rem,6vw,4.8rem); line-height:.95; margin:.25em 0}
+h2{font-size:clamp(1.8rem,4.5vw,3.1rem); line-height:1.05; margin:.2em 0 .45em}
+p{font-size:1.05rem}
+.big{font-size:clamp(1.4rem,4vw,2.5rem); font-weight:1000}
+.center{text-align:center}
+.note{color:var(--muted); font-weight:700}
+.panel{
+  background:#fff;
+  border:2px solid var(--ink);
+  border-radius:18px;
+  padding:16px;
+  margin:14px 0;
+}
+.mascot{
+  display:flex; gap:12px; align-items:flex-start; padding:12px 14px;
+  background:#fff7d7; border:2px dashed #9d7b16; border-radius:16px; margin:16px 0;
+}
+.mascot .face{font-size:2rem; line-height:1}
+button{
+  appearance:none;
+  border:2px solid var(--ink);
+  background:#fff;
+  color:var(--ink);
+  border-radius:14px;
+  padding:12px 16px;
+  font-weight:1000;
+  font-size:1rem;
+  cursor:pointer;
+  box-shadow:3px 4px 0 var(--ink);
+  margin:5px;
+}
+button:active{transform:translate(2px,2px); box-shadow:1px 2px 0 var(--ink)}
+.treasure{background:#fff0b3}
+.nav{
+  display:flex; justify-content:space-between; align-items:center; margin-top:18px; gap:10px;
+}
+.progress{font-weight:1000}
+.string{
+  height:12px; max-width:720px; margin:32px auto; border-radius:10px;
+  background:#885f30; position:relative;
+}
+.foldmark{position:absolute; top:-12px; width:2px; height:36px; background:var(--accent)}
+.bits{display:flex; justify-content:center; gap:10px; flex-wrap:wrap; margin:20px 0}
+.bit{
+  width:86px; height:96px; border-radius:16px; border:3px solid var(--ink);
+  background:#202325; color:#7a7d80; display:grid; place-items:center; cursor:pointer;
+}
+.bit.on{background:#fff0a0; color:#111; box-shadow:0 0 18px #ffd75a}
+.bit b{display:block; font-size:2rem}
+.bit small{font-size:.8rem}
+.readout{font-size:clamp(2rem,6vw,3.8rem); font-weight:1000; text-align:center}
+.clockface{
+  width:min(360px,85vw); aspect-ratio:1; margin:10px auto 18px;
+  border:4px solid var(--ink); border-radius:50%; background:#fff; position:relative;
+  box-shadow:inset 0 0 0 8px #f3f5f5;
+}
+.tick{position:absolute; left:50%; top:50%; width:2px; height:46%; transform-origin:50% 100%; background:transparent}
+.tick::before{content:""; position:absolute; top:0; left:-1px; width:4px; height:12px; background:#5d6771; border-radius:4px}
+.num{position:absolute; left:50%; top:50%; width:24px; height:24px; margin:-12px; font-weight:1000; color:#1b2a35; display:grid; place-items:center; font-size:.84rem}
+.hand{position:absolute; left:50%; top:14%; width:10px; height:36%; background:var(--accent); border-radius:12px 12px 4px 4px; transform-origin:50% 100%; transform:translateX(-50%) rotate(0deg)}
+.hub{position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:18px; height:18px; background:var(--ink); border-radius:50%}
+.calendarwheel{
+  width:min(360px,86vw); aspect-ratio:1; margin:0 auto; position:relative; border-radius:50%;
+  border:4px solid var(--ink); background:conic-gradient(#f4d473 0 45deg,#f6e6aa 45deg 90deg,#afd6d7 90deg 135deg,#cfe8e9 135deg 180deg,#f2c08a 180deg 225deg,#f7dbc0 225deg 270deg,#a7c77d 270deg 315deg,#d3e7b6 315deg 360deg);
+}
+.calendarwheel:before{
+  content:""; position:absolute; inset:18%; background:#fffaf0; border:3px solid var(--ink); border-radius:50%;
+}
+.seasonmark{position:absolute; font-weight:1000; background:#fffaf0; padding:4px 7px; border:2px solid var(--ink); border-radius:999px}
+.miniweek{display:flex; justify-content:center; gap:8px; flex-wrap:wrap; margin-top:14px}
+.daychip{padding:9px 10px; border:2px solid var(--ink); border-radius:12px; background:white; cursor:pointer; font-weight:1000}
+.mapWrap{
+  background:linear-gradient(180deg,#d8eef8,#cde4f2 50%,#c4dbc8 50%,#bdd3c2);
+  border:2px solid var(--ink); border-radius:20px; padding:10px; overflow:hidden;
+}
+.mapsvg{width:100%; height:auto; display:block}
+.city{fill:#bf4324; stroke:#13202a; stroke-width:2; cursor:pointer}
+.cityLabel{font: bold 16px ui-rounded, system-ui, sans-serif; fill:#13202a}
+.route{stroke:#e44d2e; stroke-width:4; stroke-dasharray:8 7; fill:none; opacity:0}
+.route.show{opacity:1}
+.coords{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:12px}
+.objects{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px}
+.object{min-height:140px}
+.object span{font-size:2.8rem; display:block}
+.soundrow{display:flex; justify-content:center; gap:8px; flex-wrap:wrap}
+.noteBtn{min-width:68px}
+.sky{
+  height:250px; border-radius:18px; background:#101828; position:relative; overflow:hidden; margin:16px 0;
+  box-shadow: inset 0 0 80px rgba(255,255,255,.04);
+}
+.star{position:absolute; width:15px; height:15px; border-radius:50%; background:white; border:none; box-shadow:0 0 12px #fff; padding:0; margin:0}
+.star::after{content:"✦"; position:absolute; left:-5px; top:-8px; color:white; font-size:24px}
+.compass{
+  width:min(350px,82vw); aspect-ratio:1; border:4px solid var(--ink); border-radius:50%; margin:18px auto; position:relative; background:#fff;
+}
+.compass:before,.compass:after{
+  content:""; position:absolute; left:50%; top:7%; bottom:7%; width:2px; background:#c1c9cc;
+}
+.compass:after{transform:rotate(90deg)}
+.dir{position:absolute; font-weight:1000}
+.n{top:9px; left:48%}.e{right:10px; top:47%}.s{bottom:9px; left:46.5%}.w{left:10px; top:47%}
+.needle{
+  position:absolute; left:49.3%; top:16%; width:10px; height:42%; background:var(--accent);
+  transform-origin:50% 100%; border-radius:8px 8px 2px 2px;
+}
+.chest{font-size:7rem; text-align:center}
+.bacon{
+  margin:20px auto; width:280px; height:90px; border-radius:50%;
+  border:18px solid #b94f35; border-top-color:#f1a17f; border-bottom-color:#7e2d22;
+  transform:rotate(-10deg); animation:spin 9s linear infinite;
+}
+.badge{
+  display:inline-block; padding:10px 18px; border:3px solid var(--gold2);
+  background:#ffe489; border-radius:999px; font-weight:1000;
+}
+@keyframes spin{to{transform:rotate(350deg)}}
+@media (max-width:620px){
+  .book{padding:18px; min-height:720px}
+  .bit{width:60px; height:78px}
+  .coin{width:22px; height:22px}
+}
+
+.elementWeek{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:8px;
+  margin:16px 0;
+}
+.elementDay{
+  min-height:110px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+}
+.elementDay span{font-size:2.5rem;line-height:1.1}
+.elementDay b{font-size:.85rem;margin-top:7px}
+.compassMonths{
+  width:min(390px,86vw);
+  aspect-ratio:1;
+  margin:18px auto 24px;
+  position:relative;
+  border:4px solid var(--ink);
+  border-radius:50%;
+  background:
+    radial-gradient(circle at center,#fffaf0 0 28%,transparent 29%),
+    conic-gradient(
+      #f3d477 0 45deg,#d8e5a9 45deg 90deg,
+      #abd6d9 90deg 135deg,#9fc5e1 135deg 180deg,
+      #d8b4d7 180deg 225deg,#e9b3a1 225deg 270deg,
+      #e8c180 270deg 315deg,#bed39b 315deg 360deg
+    );
+}
+.monthCenter{
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:118px;height:118px;border:3px solid var(--ink);border-radius:50%;
+  background:#fffaf0;display:grid;place-items:center;font-size:2.4rem;font-weight:1000;
+  line-height:.8;text-align:center;z-index:3;
+}
+.monthCenter small{font-size:.7rem;letter-spacing:.08em}
+.month{
+  position:absolute;width:62px;height:48px;margin:0;padding:0;z-index:4;
+}
+.m0{left:50%;top:2%;transform:translateX(-50%)}
+.m1{right:9%;top:12%}
+.m2{right:2%;top:50%;transform:translateY(-50%)}
+.m3{right:9%;bottom:12%}
+.m4{left:50%;bottom:2%;transform:translateX(-50%)}
+.m5{left:9%;bottom:12%}
+.m6{left:2%;top:50%;transform:translateY(-50%)}
+.m7{left:9%;top:12%}
+.monthNeedle{
+  position:absolute;left:50%;top:10%;width:8px;height:40%;
+  background:var(--accent);border-radius:8px 8px 2px 2px;
+  transform-origin:50% 100%;transform:translateX(-50%) rotate(0deg);
+  transition:transform .25s ease;z-index:2;
+}
+@media(max-width:620px){
+  .elementWeek{grid-template-columns:repeat(5,1fr);gap:4px}
+  .elementDay{min-height:90px;padding:8px 4px;font-size:.72rem}
+  .elementDay span{font-size:2rem}
+}
+
+
+.daySchedule{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+  margin:16px 0;
+}
+.scheduleCard{
+  min-height:150px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+}
+.scheduleCard span{font-size:2.4rem}
+.scheduleCard b{font-size:.9rem;letter-spacing:.08em;margin-top:5px}
+.scheduleCard strong{font-size:1.6rem;margin:4px 0}
+.scheduleCard small{font-weight:900}
+.school{background:#e2f0ff}
+.play{background:#fff0b8}
+.sleep{background:#e7e1f8}
+@media(max-width:620px){
+  .daySchedule{grid-template-columns:1fr}
+  .scheduleCard{min-height:105px}
+}
+
+
+.nativeCoord{
+  display:inline-block;
+  margin-top:8px;
+  font-size:1.35rem;
+  font-weight:1000;
+  letter-spacing:.03em;
+}
+.legacyCoord{
+  display:inline-block;
+  margin-top:5px;
+  font-size:.72rem;
+  color:var(--muted);
+  font-weight:700;
+}
+
+
+.notationToggle{
+  display:flex;
+  justify-content:center;
+  gap:8px;
+  flex-wrap:wrap;
+  margin:12px 0 6px;
+}
+.activeNotation{
+  background:#fff0a8;
+}
+
+
+.jupiterIcon{
+  position:relative;
+  display:inline-block;
+  width:74px;
+  height:74px;
+  border:3px solid var(--ink);
+  border-radius:50%;
+  background:
+    linear-gradient(180deg,
+      #edd6aa 0 12%,
+      #c79062 12% 22%,
+      #e7cfaa 22% 33%,
+      #b97a56 33% 43%,
+      #efd8b8 43% 54%,
+      #c38b65 54% 66%,
+      #e9d3b2 66% 78%,
+      #b57a56 78% 88%,
+      #ead6b9 88% 100%);
+  box-shadow: inset -10px -8px 0 rgba(0,0,0,.08);
+  vertical-align:middle;
+}
+.jupiterIcon:before{
+  content:"";
+  position:absolute;
+  width:12px;
+  height:9px;
+  border-radius:50%;
+  background:#c4452f;
+  right:14px;
+  bottom:20px;
+  box-shadow:0 0 0 1px rgba(0,0,0,.15);
+}
+.jupiterWithMoons{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+}
+.jupiterMoon{
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:#fff7dc;
+  border:2px solid var(--ink);
+}
+.jupiterLabel{
   display:flex;
   justify-content:center;
   align-items:center;
-  gap:1rem;
-  padding:.8rem 1rem;
-  background:rgba(255,255,255,.92);
-  border-top:1px solid rgba(0,0,0,.08);
+  gap:10px;
+  flex-wrap:wrap;
 }
-.controls button{
-  border:0;
-  border-radius:999px;
-  padding:.75rem 1.25rem;
-  background:var(--ink);
-  color:white;
-  font-weight:900;
-  cursor:pointer;
+
+
+.orionSky{position:relative}
+.constellation{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  pointer-events:none;
 }
-.controls button:disabled{opacity:.25}
-.counter{font-weight:900;min-width:70px;text-align:center}
-.home{
-  position:fixed;
-  top:.7rem;
-  left:.8rem;
-  z-index:30;
-  text-decoration:none;
-  font-weight:900;
-  background:rgba(255,255,255,.9);
-  padding:.55rem .8rem;
-  border-radius:999px;
+.constellation line{
+  stroke:rgba(220,235,255,.35);
+  stroke-width:0.7;
 }
-.rulers{
-  margin:2rem auto;
-  width:min(850px,92vw);
-  display:grid;
-  gap:1rem;
+.orangeStar{
+  background:#ffbd70;
+  box-shadow:0 0 12px #ffbd70, 0 0 24px rgba(255,189,112,.65);
 }
-.ruler{
-  height:60px;
+.orangeStar::after{color:#ffd5a6}
+.blueStar{
+  background:#dff3ff;
+  box-shadow:0 0 12px #dff3ff, 0 0 24px rgba(210,240,255,.6);
+}
+.mintakaStar{
+  background:#fff7d2;
+  box-shadow:0 0 12px #fff7d2, 0 0 26px rgba(255,247,210,.75);
+  border:2px solid #ffd64a;
+}
+
+
+.bodyQuizWrap{
+  text-align:center;
+  padding:8px 0 14px;
+}
+.dummyFigure{
+  position:relative;
+  width:120px;
+  height:220px;
+  margin:6px auto 18px;
+  transform-origin:50% 75%;
+}
+.dummyHead{
+  position:absolute;
+  left:38px;
+  top:4px;
+  width:44px;
+  height:44px;
   border:4px solid var(--ink);
-  border-radius:5px;
-  background:
-    repeating-linear-gradient(
-      90deg,
-      transparent 0 11.5%,
-      var(--ink) 11.5% 12.5%
-    ),
-    #ffe17f;
+  border-radius:50%;
+  background:#fff6dc;
 }
-.r29{width:25%;min-width:130px}
-.r30{width:50%;min-width:210px}
-.r31{width:100%}
-.label{text-align:left;font-weight:1000;margin-bottom:.3rem}
-.ballrow{
+.dummyBody{
+  position:absolute;
+  left:55px;
+  top:50px;
+  width:10px;
+  height:82px;
+  background:var(--ink);
+  border-radius:8px;
+}
+.dummyArm,.dummyLeg{
+  position:absolute;
+  width:9px;
+  background:var(--ink);
+  border-radius:8px;
+  transform-origin:50% 0%;
+}
+.dummyArm{height:70px;top:62px}
+.leftArm{left:53px;transform:rotate(42deg)}
+.rightArm{left:59px;transform:rotate(-42deg)}
+.dummyLeg{height:82px;top:126px}
+.leftLeg{left:55px;transform:rotate(24deg)}
+.rightLeg{left:60px;transform:rotate(-24deg)}
+
+.dummyFigure.dancing{
+  animation:dummyBounce .45s ease-in-out 0s 7 alternate;
+}
+.dummyFigure.dancing .leftArm{
+  animation:leftArmDance .28s ease-in-out 0s 11 alternate;
+}
+.dummyFigure.dancing .rightArm{
+  animation:rightArmDance .28s ease-in-out 0s 11 alternate;
+}
+.dummyFigure.dancing .leftLeg{
+  animation:leftLegDance .28s ease-in-out 0s 11 alternate;
+}
+.dummyFigure.dancing .rightLeg{
+  animation:rightLegDance .28s ease-in-out 0s 11 alternate;
+}
+@keyframes dummyBounce{
+  from{transform:translateY(0) rotate(-5deg)}
+  to{transform:translateY(-14px) rotate(5deg)}
+}
+@keyframes leftArmDance{
+  from{transform:rotate(65deg)}
+  to{transform:rotate(-65deg)}
+}
+@keyframes rightArmDance{
+  from{transform:rotate(-65deg)}
+  to{transform:rotate(65deg)}
+}
+@keyframes leftLegDance{
+  from{transform:rotate(32deg)}
+  to{transform:rotate(-12deg)}
+}
+@keyframes rightLegDance{
+  from{transform:rotate(-32deg)}
+  to{transform:rotate(12deg)}
+}
+.quizChoices{
   display:flex;
   justify-content:center;
+  gap:8px;
   flex-wrap:wrap;
+}
+.correctChoice{background:#dff5c7 !important}
+.wrongChoice{background:#ffd9d2 !important}
+
+
+.speedGameWrap{position:relative}
+.speedGrid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
   gap:12px;
-  margin:2rem auto;
-  min-height:85px;
+  margin:16px 0;
 }
-.ball{
-  width:72px;height:72px;border-radius:50%;
-  border:4px solid white;
-  box-shadow:0 4px 12px #0003;
-  background:conic-gradient(
-    #ff5e62 0 45deg,
-    #ffd84c 45deg 90deg,
-    #57bfff 90deg 135deg,
-    #7edc8b 135deg 180deg,
-    #ff5e62 180deg 225deg,
-    #ffd84c 225deg 270deg,
-    #57bfff 270deg 315deg,
-    #7edc8b 315deg 360deg
-  );
+.speedCard{
+  background:#fff;
+  border:2px solid var(--ink);
+  border-radius:18px;
+  padding:16px;
+  text-align:center;
 }
-.action{
-  border:0;
-  border-radius:999px;
-  padding:1rem 1.5rem;
-  background:var(--ink);
-  color:white;
-  font-size:1.15rem;
-  font-weight:1000;
-  cursor:pointer;
+.speedCard select{
+  margin-top:10px;
+  font-size:1rem;
+  font-weight:900;
+  padding:10px 12px;
+  border:2px solid var(--ink);
+  border-radius:12px;
+  background:#fff;
 }
-.cup{
+.rocketStage{
   position:relative;
-  width:170px;height:190px;
-  margin:2rem auto;
-  border:7px solid var(--ink);
-  border-top:0;
-  border-radius:0 0 32px 32px;
+  height:120px;
   overflow:hidden;
 }
-.cup:after{
+.hiddenRocket{
+  position:absolute;
+  left:-60px;
+  bottom:0;
+  font-size:4rem;
+  transform:rotate(18deg);
+  opacity:0;
+}
+.hiddenRocket.launch{
+  opacity:1;
+  animation:rocketTakeoff 2.4s ease-in forwards;
+}
+@keyframes rocketTakeoff{
+  0%{left:-50px;bottom:0;transform:rotate(18deg) scale(1)}
+  35%{left:18%;bottom:24px;transform:rotate(10deg) scale(1.05)}
+  70%{left:56%;bottom:76px;transform:rotate(-4deg) scale(1.1)}
+  100%{left:102%;bottom:130px;transform:rotate(-10deg) scale(1.15)}
+}
+.goodMatch{background:#e0f7cf !important}
+.badMatch{background:#ffd9d2 !important}
+@media(max-width:620px){
+  .speedGrid{grid-template-columns:1fr}
+}
+
+
+.orionTitle{
+  position:absolute;
+  top:10px;
+  left:50%;
+  transform:translateX(-50%);
+  color:#dfe8ff;
+  font-size:2rem;
+  letter-spacing:.08em;
+  font-weight:700;
+  text-shadow:0 0 8px rgba(255,255,255,.35);
+}
+
+
+.instrumentBand{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+  margin:18px 0;
+}
+.instrumentCard{
+  min-height:165px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  background:#fff;
+}
+.instrumentEmoji{
+  font-size:3.4rem;
+  line-height:1;
+  margin-bottom:8px;
+  filter:drop-shadow(0 4px 2px rgba(0,0,0,.12));
+}
+.instrumentCard b{
+  font-size:.82rem;
+  letter-spacing:.06em;
+}
+.instrumentCard strong{
+  font-size:1.5rem;
+  margin-top:6px;
+}
+@media(max-width:700px){
+  .instrumentBand{grid-template-columns:repeat(2,1fr)}
+}
+
+
+.stringLab{margin-top:16px}
+.tape238{
+  display:flex;justify-content:space-between;align-items:center;
+  max-width:720px;margin:8px auto 0;padding:10px 12px;
+  border:3px solid var(--ink);border-radius:10px;
+  background:repeating-linear-gradient(90deg,#fff 0 9px,#d7d7d7 9px 10px);
+  font-weight:1000;
+}
+.tape238 b{background:#fffaf0;padding:2px 10px;border-radius:999px}
+.stringInventory{
+  display:flex;flex-wrap:wrap;justify-content:center;align-items:flex-end;
+  gap:10px;min-height:115px;margin-top:14px
+}
+.stringPiece{
+  display:flex;align-items:center;justify-content:center;
+  height:18px;min-width:44px;border-radius:999px;
+  background:#895e2f;color:white;font-size:.78rem;font-weight:1000;
+  padding:0 8px;box-shadow:0 2px 0 rgba(0,0,0,.15)
+}
+.startPiece{width:min(100%,640px)}
+.brickReveal{display:none;margin-top:16px}
+.brickBox{
+  position:relative;width:260px;height:130px;margin:20px auto 12px;
+  background:linear-gradient(135deg,#c85b3d 0 49%,#b34b31 50% 100%);
+  border:4px solid #6d2e20;transform:skewY(-4deg);
+  box-shadow:18px 14px 0 #963c29
+}
+.brickDim{
+  position:absolute;background:#fff6cf;border:2px solid var(--ink);
+  border-radius:999px;padding:4px 8px;font-weight:1000;transform:skewY(4deg)
+}
+.brickLength{left:90px;bottom:-18px}
+.brickWidth{right:-40px;top:50px}
+.brickHeight{left:-34px;top:45px}
+
+
+.bulbWrap{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  min-height:96px;
+  margin:6px 0 2px;
+}
+.ideaBulb{
+  position:relative;
+  width:90px;
+  height:90px;
+  opacity:.16;
+  transform:scale(.72);
+  transition:transform .28s ease, opacity .28s ease;
+}
+.bulbGlass{
+  position:relative;
+  z-index:2;
+  font-size:4.5rem;
+  line-height:1;
+  text-align:center;
+  filter:grayscale(1);
+}
+.bulbGlow{
+  position:absolute;
+  inset:8px;
+  border-radius:50%;
+  background:radial-gradient(circle, rgba(255,237,121,.95) 0 30%, rgba(255,219,77,.35) 42%, rgba(255,219,77,0) 72%);
+  opacity:0;
+  transform:scale(.7);
+  transition:opacity .28s ease, transform .28s ease;
+}
+.ideaBulb.on{
+  opacity:1;
+  transform:scale(1);
+}
+.ideaBulb.on .bulbGlass{
+  filter:none;
+}
+.ideaBulb.on .bulbGlow{
+  opacity:1;
+  transform:scale(1.2);
+}
+
+
+.clockMarker{
+  position:absolute;
+  z-index:3;
+  font-size:2rem;
+  line-height:1;
+  text-shadow:0 2px 8px rgba(0,0,0,.12);
+}
+.sunMarker{
+  left:50%;
+  bottom:10px;
+  transform:translateX(-50%);
+}
+.moonMarker{
+  left:50%;
+  top:10px;
+  transform:translateX(-50%);
+}
+
+
+.planetWeeks{
+  display:grid;
+  grid-template-columns:repeat(9,1fr);
+  gap:6px;
+  margin:14px 0 8px;
+}
+.planetWeek{
+  min-height:105px;
+  padding:8px 4px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+}
+.planetWeek span{
+  font-size:2rem;
+  line-height:1;
+}
+.planetWeek b{
+  font-size:1rem;
+  margin-top:5px;
+}
+.planetWeek small{
+  font-size:.67rem;
+  margin-top:3px;
+  font-weight:900;
+}
+.jupiterWeekChip{
+  background:#fff1b8;
+}
+.miniJupiter{
+  width:38px;
+  height:38px;
+  border:2px solid var(--ink);
+  border-radius:50%;
+  display:inline-block;
+  position:relative;
+  background:
+    linear-gradient(180deg,
+      #edd6aa 0 14%,
+      #c79062 14% 25%,
+      #e7cfaa 25% 38%,
+      #b97a56 38% 48%,
+      #efd8b8 48% 62%,
+      #c38b65 62% 74%,
+      #e9d3b2 74% 86%,
+      #b57a56 86% 100%);
+}
+.miniJupiter:after{
   content:"";
   position:absolute;
-  left:0;right:0;bottom:0;
-  height:74%;
-  background:var(--water);
+  width:7px;
+  height:5px;
+  border-radius:50%;
+  background:#c4452f;
+  right:7px;
+  bottom:9px;
 }
-.cup span{
-  position:absolute;inset:0;
-  display:grid;place-items:center;
-  z-index:2;
-  font-weight:1000;
-  font-size:1.3rem;
+@media(max-width:760px){
+  .planetWeeks{grid-template-columns:repeat(3,1fr)}
 }
-.chain{
-  font-size:clamp(1.2rem,4vw,2rem);
-  font-weight:1000;
+
+
+.cityTarget{
+  fill:rgba(255,255,255,0.001);
+  stroke:rgba(255,255,255,0);
+  cursor:pointer;
+}
+.cityButtons{
   display:flex;
-  flex-wrap:wrap;
   justify-content:center;
-  gap:.6rem;
-  margin-top:1.5rem;
+  gap:10px;
+  flex-wrap:wrap;
+  margin:14px 0 6px;
 }
-.chain b{
-  padding:.6rem .8rem;
-  border-radius:16px;
-  background:white;
-  border:2px solid #0001;
+.cityPick{
+  background:#fff8d2;
 }
-.sun{
-  width:110px;height:110px;
-  margin:auto;
-  border-radius:50%;
-  background:var(--sun);
-  box-shadow:0 0 70px #ffd84c99;
-}
-.orbit{
-  position:relative;
-  width:300px;height:300px;
-  max-width:78vw;max-height:78vw;
-  margin:1rem auto;
-  border:2px dashed #ffffff66;
-  border-radius:50%;
-  animation:spin 8s linear infinite;
-}
-.earth{
-  position:absolute;
-  width:48px;height:48px;
-  top:-24px;
-  left:calc(50% - 24px);
-  border-radius:50%;
-  background:
-    radial-gradient(circle at 30% 32%,#70cf78 0 22%,transparent 23%),
-    radial-gradient(circle at 70% 65%,#70cf78 0 18%,transparent 19%),
-    #4ca8ff;
-}
-@keyframes spin{to{transform:rotate(360deg)}}
-.planet-scene{
-  position:relative;
-  height:260px;
-  width:min(700px,90vw);
-  margin:auto;
-}
-.jupiter{
-  position:absolute;
-  width:130px;height:130px;
-  left:50%;top:50%;
-  transform:translate(-50%,-50%);
-  border-radius:50%;
-  background:
-    repeating-linear-gradient(
-      #d7aa74 0 13px,
-      #f5d2a2 13px 24px,
-      #b77c51 24px 33px
-    );
-}
-.moon{
-  position:absolute;
-  width:22px;height:22px;
-  border-radius:50%;
-  background:#eee;
-}
-.m1{left:8%;top:48%}
-.m2{left:25%;top:23%}
-.m3{right:20%;top:65%}
-.m4{right:4%;top:35%}
-.endmark{
-  font-size:clamp(5rem,20vw,11rem);
+
+
+.coordLabel{
+  display:inline-block;
+  margin-top:8px;
+  font-size:.68rem;
+  letter-spacing:.08em;
   font-weight:1000;
-  letter-spacing:-.15em;
+  color:var(--muted);
 }
-@media(max-width:600px){
-  .page{padding-top:4rem}
-  .ruler{height:48px}
-  .ball{width:56px;height:56px}
+.octyLabel{
+  color:#7054a0;
 }
+.octyRoute{
+  display:inline-block;
+  margin-top:4px;
+  font-size:.9rem;
+  font-weight:1000;
+  color:#7054a0;
+}
+
+
+.cupExplorer{margin-top:16px}
+.cupChips{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+  margin:16px 0;
+}
+.cupChips button{
+  min-height:64px;
+  font-size:1.05rem;
+}
+.cupChipDone{
+  background:#e4f6d1 !important;
+}
+.cupProgress{
+  text-align:center;
+  font-size:1rem;
+  font-weight:900;
+  letter-spacing:.05em;
+  margin-top:10px;
+}
+@media(max-width:620px){
+  .cupChips{grid-template-columns:repeat(2,1fr)}
+}
+
+
+.surpriseInstrument{
+  position:relative;
+  overflow:visible;
+}
+.noteBurst{
+  position:absolute;
+  left:50%;
+  top:12px;
+  width:1px;
+  height:1px;
+  pointer-events:none;
+}
+.flyingNote{
+  position:absolute;
+  font-size:1.5rem;
+  opacity:0;
+  animation:noteFly 1.6s ease-out forwards;
+}
+@keyframes noteFly{
+  0%{
+    opacity:0;
+    transform:translate(0,0) scale(.7) rotate(0deg);
+  }
+  12%{opacity:1}
+  100%{
+    opacity:0;
+    transform:translate(var(--dx),var(--dy)) scale(1.25) rotate(var(--rot));
+  }
+}
+
+
+.jacketExplorer{margin-top:16px}
+.coldGear{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+  margin:16px 0;
+}
+.coldGear button{
+  min-height:130px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+}
+.coldGear button span{font-size:2.6rem}
+.coldGear button b{font-size:1.1rem;margin-top:6px}
+.coldGear button small{font-weight:900;margin-top:5px}
+@media(max-width:620px){
+  .coldGear{grid-template-columns:1fr}
+}
+
+
+.dynamicSkyStage{
+  position:relative;
+  width:min(760px,100%);
+  min-height:290px;
+  margin:0 auto;
+  border:3px solid var(--ink);
+  border-radius:24px;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 20% 16%, rgba(255,255,255,.14), transparent 12%),
+    radial-gradient(circle at 74% 20%, rgba(255,255,255,.10), transparent 10%),
+    radial-gradient(circle at 85% 70%, rgba(255,255,255,.09), transparent 8%),
+    radial-gradient(circle at 32% 78%, rgba(255,255,255,.08), transparent 9%),
+    linear-gradient(180deg,#0d1730 0%, #16264b 55%, #11203f 100%);
+}
+.skyHint{
+  position:absolute;
+  left:50%;
+  top:14px;
+  transform:translateX(-50%);
+  color:#eef6ff;
+  font-weight:1000;
+  letter-spacing:.05em;
+  background:rgba(0,0,0,.2);
+  border:2px solid rgba(255,255,255,.18);
+  border-radius:999px;
+  padding:7px 12px;
+  z-index:5;
+}
+.sunSystem,.earthOrbit,.jupiterSystem{
+  position:absolute;
+  border:none;
+  background:transparent;
+  padding:0;
+  margin:0;
+  cursor:pointer;
+}
+.sunSystem{
+  left:76px;
+  top:86px;
+  width:104px;
+  height:104px;
+}
+.sunCore{
+  position:absolute;
+  inset:18px;
+  display:grid;
+  place-items:center;
+  font-size:3.5rem;
+  z-index:3;
+}
+.sunRays{
+  position:absolute;
+  inset:0;
+  border-radius:50%;
+  background:
+    radial-gradient(circle, rgba(255,231,113,.42) 0 28%, rgba(255,231,113,.10) 28% 48%, rgba(255,231,113,0) 48% 100%),
+    repeating-conic-gradient(from 0deg, rgba(255,219,70,.8) 0 8deg, rgba(255,219,70,0) 8deg 22deg);
+  opacity:.7;
+  transform:rotate(0deg) scale(1);
+  transition:transform .28s ease, opacity .28s ease;
+  animation:sunSpin 12s linear infinite;
+}
+.sunSystem.burst .sunRays{
+  transform:scale(1.22);
+  opacity:1;
+}
+@keyframes sunSpin{
+  to{transform:rotate(360deg)}
+}
+.orbitRing{
+  position:absolute;
+  left:168px;
+  top:46px;
+  width:250px;
+  height:190px;
+  border:2px dashed rgba(255,255,255,.28);
+  border-radius:50%;
+}
+.earthOrbit{
+  left:348px;
+  top:62px;
+  width:86px;
+  height:86px;
+  transform:translate(0,0);
+  transition:transform .8s ease;
+}
+.earthPlanet{
+  display:grid;
+  place-items:center;
+  width:100%;
+  height:100%;
+  font-size:3.2rem;
+  filter:drop-shadow(0 6px 10px rgba(0,0,0,.22));
+  transform:rotate(0deg);
+}
+.earthOrbit.advance1{transform:translate(-22px,44px)}
+.earthOrbit.advance2{transform:translate(-68px,92px)}
+.earthOrbit.advance3{transform:translate(-132px,110px)}
+.earthOrbit.spin .earthPlanet{
+  animation:earthSpin .85s linear 1;
+}
+@keyframes earthSpin{
+  from{transform:rotate(0deg)}
+  to{transform:rotate(360deg)}
+}
+.jupiterSystem{
+  right:54px;
+  top:106px;
+  width:170px;
+  height:94px;
+}
+.jupiterMiniWrap{
+  position:relative;
+  width:100%;
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:9px;
+}
+.miniJupiterBig{
+  width:74px;
+  height:74px;
+  border:3px solid var(--ink);
+  border-radius:50%;
+  display:inline-block;
+  position:relative;
+  background:
+    linear-gradient(180deg,
+      #edd6aa 0 12%,
+      #c79062 12% 23%,
+      #e7cfaa 23% 35%,
+      #b97a56 35% 46%,
+      #efd8b8 46% 58%,
+      #c38b65 58% 70%,
+      #e9d3b2 70% 82%,
+      #b57a56 82% 100%);
+  box-shadow: inset -10px -8px 0 rgba(0,0,0,.08);
+}
+.miniJupiterBig:after{
+  content:"";
+  position:absolute;
+  width:12px;
+  height:9px;
+  border-radius:50%;
+  background:#c4452f;
+  right:13px;
+  bottom:17px;
+}
+.jMoon{
+  width:12px;
+  height:12px;
+  border-radius:50%;
+  background:#fff9de;
+  border:2px solid var(--ink);
+  position:relative;
+}
+.jupiterSystem.move .moon1{animation:moonLeft 1.8s ease-in-out 2 alternate}
+.jupiterSystem.move .moon2{animation:moonMid 1.4s ease-in-out 2 alternate}
+.jupiterSystem.move .moon3{animation:moonRight 2.2s ease-in-out 2 alternate}
+@keyframes moonLeft{
+  from{transform:translateX(0)}
+  to{transform:translateX(-18px)}
+}
+@keyframes moonMid{
+  from{transform:translateX(0)}
+  to{transform:translateX(16px)}
+}
+@keyframes moonRight{
+  from{transform:translateX(0)}
+  to{transform:translateX(24px)}
+}
+@media(max-width:700px){
+  .dynamicSkyStage{min-height:360px}
+  .sunSystem{left:16px;top:72px;transform:scale(.88)}
+  .orbitRing{left:112px;top:36px;width:208px;height:172px}
+  .earthOrbit{left:276px;top:48px;transform:scale(.88)}
+  .jupiterSystem{right:12px;top:225px;transform:scale(.9)}
+}
+
+
+.calendarPopup{
+  position:fixed;
+  inset:0;
+  background:rgba(10,16,24,.58);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+  z-index:1200;
+}
+.calendarPopupCard{
+  position:relative;
+  width:min(420px,92vw);
+  background:#fffaf0;
+  border:3px solid var(--ink);
+  border-radius:22px;
+  padding:18px 18px 16px;
+  box-shadow:12px 12px 0 rgba(19,32,42,.20);
+  text-align:center;
+}
+.popupClose{
+  position:absolute;
+  right:10px;
+  top:10px;
+  width:42px;
+  height:42px;
+  padding:0;
+  border-radius:50%;
+  font-size:1.35rem;
+  line-height:1;
+}
+.miniCalendarLink{
+  text-decoration:none;
+  color:inherit;
+}
+.miniCalendar{
+  margin:14px auto 8px;
+  width:min(260px,100%);
+  border:3px solid var(--ink);
+  border-radius:18px;
+  overflow:hidden;
+  background:#fff;
+  box-shadow:6px 8px 0 rgba(19,32,42,.14);
+  transition:transform .18s ease;
+}
+.miniCalendar:hover{
+  transform:translateY(-3px) scale(1.02);
+}
+.miniCalTop{
+  background:#f0cd67;
+  padding:10px 8px;
+  font-weight:1000;
+  letter-spacing:.08em;
+}
+.miniCalMonth{
+  padding:8px;
+  font-size:1.05rem;
+  font-weight:1000;
+  background:#fff8d7;
+  border-top:2px solid var(--ink);
+  border-bottom:2px solid var(--ink);
+}
+.miniCalArt{
+  min-height:142px;
+  position:relative;
+  background:
+    linear-gradient(180deg,#d7eef6 0 54%,#efe0a7 54% 100%);
+}
+.miniSun{
+  position:absolute;
+  right:18px;
+  top:12px;
+  font-size:2rem;
+}
+.miniMoon{
+  position:absolute;
+  left:18px;
+  bottom:16px;
+  font-size:1.8rem;
+}
+.miniCompassRose{
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  font-size:2.5rem;
+}
+.miniCalBottom{
+  padding:10px 8px;
+  font-size:.82rem;
+  font-weight:900;
+  color:var(--muted);
+  border-top:2px solid var(--ink);
+}
+
+
+.monthArtworkCard{
+  margin:14px auto 8px;
+  width:min(320px,100%);
+  border:3px solid var(--ink);
+  border-radius:18px;
+  overflow:hidden;
+  background:#fff;
+  box-shadow:6px 8px 0 rgba(19,32,42,.14);
+  transition:transform .18s ease;
+}
+.monthArtworkCard:hover{
+  transform:translateY(-3px) scale(1.02);
+}
+.monthArtworkImage{
+  display:block;
+  width:100%;
+  height:auto;
+  max-height:330px;
+  object-fit:contain;
+  background:#111;
+}
+
+
+/* v38: keep treasure status visible without pushing the story down */
+.coinbar{display:none}
+.langMini{
+  margin:0;
+  padding:8px 11px;
+  box-shadow:2px 3px 0 var(--ink);
+  white-space:nowrap;
+}
+.coinDock{
+  max-width:980px;
+  margin:0 auto 10px;
+  padding:8px 16px 10px;
+  text-align:center;
+}
+.coinCounter{
+  display:block;
+  font-size:.9rem;
+  font-weight:1000;
+  letter-spacing:.08em;
+  margin-bottom:6px;
+}
+.coinRow{
+  width:100%;
+  display:flex;
+  flex-wrap:nowrap;
+  justify-content:center;
+  align-items:center;
+  gap:clamp(3px,1.4vw,10px);
+  overflow:hidden;
+}
+.coinRow .coin{
+  flex:0 0 auto;
+  width:clamp(22px,4.2vw,31px);
+  height:clamp(22px,4.2vw,31px);
+}
+.kidGuide{
+  position:relative;
+  z-index:8;
+  margin:-6px 0 18px;
+  padding:11px 14px;
+  border:2px dashed #9d7b16;
+  border-radius:14px;
+  background:#fff7d7;
+  font-size:1rem;
+  line-height:1.35;
+}
+.languageChoice{
+  background:#eef8ff;
+}
+.languageButton{
+  min-width:150px;
+}
+@media(max-width:620px){
+  header{padding:9px 10px}
+  .brand{font-size:.8rem}
+  .home{font-size:.78rem}
+  .langMini{font-size:.78rem;padding:7px 8px}
+  .coinDock{padding:4px 10px 8px;margin-bottom:4px}
+  .coinCounter{font-size:.78rem;margin-bottom:4px}
+  .coinRow{gap:3px}
+  .coinRow .coin{width:24px;height:24px;font-size:11px}
+  .kidGuide{margin:-4px 0 12px;padding:9px 10px;font-size:.9rem}
+}
+
+
+.singleBrickDiagram{
+  position:relative;
+  width:min(520px,92%);
+  height:285px;
+  margin:12px auto 18px;
+}
+.brickFace{
+  position:absolute;
+  left:50%;
+  top:52%;
+  width:260px;
+  height:120px;
+  transform:translate(-50%,-50%);
+  background:#c8754d;
+  border:4px solid var(--ink);
+  border-radius:8px;
+  box-shadow:10px 12px 0 rgba(19,32,42,.14);
+}
+.brickTopFace{
+  position:absolute;
+  left:18px;
+  right:-34px;
+  top:-36px;
+  height:34px;
+  background:#dc956d;
+  border:4px solid var(--ink);
+  border-bottom:none;
+  transform:skewX(-42deg);
+  transform-origin:left bottom;
+}
+.brickSideFace{
+  position:absolute;
+  top:-2px;
+  right:-38px;
+  width:34px;
+  height:118px;
+  background:#a95d3c;
+  border:4px solid var(--ink);
+  border-left:none;
+  transform:skewY(-42deg);
+  transform-origin:left top;
+}
+.dimension{
+  position:absolute;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:2px;
+  font-weight:1000;
+}
+.dimension small{font-size:.78rem;font-weight:900}
+.dimArrow{font-size:1.8rem;line-height:1}
+.dimLength{left:50%;bottom:4px;transform:translateX(-50%)}
+.dimWidth{right:18px;top:30px}
+.dimHeight{left:18px;top:92px}
+.brickAnswers{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+  margin:14px 0;
+}
+.brickAnswers button{min-height:58px;font-size:1.05rem}
+@media(max-width:620px){
+  .singleBrickDiagram{height:250px}
+  .brickFace{width:210px;height:100px}
+  .brickSideFace{height:98px}
+  .dimWidth{right:0}
+  .dimHeight{left:0}
+}
+
+
+.cutProgressBox{
+  margin:14px auto 8px;
+  width:min(620px,100%);
+  padding:12px 14px;
+  border:3px solid var(--ink);
+  border-radius:16px;
+  background:#fff7d7;
+}
+.cutTrack{
+  width:100%;
+  height:18px;
+  border:2px solid var(--ink);
+  border-radius:999px;
+  overflow:hidden;
+  background:#fff;
+  margin:8px 0 10px;
+}
+.cutTrackFill{
+  width:0%;
+  height:100%;
+  background:currentColor;
+  transition:width .22s ease;
+}
+.cutInstruction{
+  font-weight:1000;
+  line-height:1.3;
+}
+#foldCutButton.cutAgain{
+  animation:cutPulse .75s ease-in-out infinite alternate;
+}
+@keyframes cutPulse{
+  from{transform:scale(1)}
+  to{transform:scale(1.035)}
+}
+
+
+.clockProgressBox{
+  margin:12px auto 10px;
+  width:min(620px,100%);
+  padding:12px 14px;
+  border:3px solid var(--ink);
+  border-radius:16px;
+  background:#eef8ff;
+}
+.clockTrack{
+  width:100%;
+  height:18px;
+  border:2px solid var(--ink);
+  border-radius:999px;
+  overflow:hidden;
+  background:#fff;
+  margin:8px 0 10px;
+}
+.clockTrackFill{
+  width:0%;
+  height:100%;
+  background:currentColor;
+  transition:width .22s ease;
+}
+.clockInstruction{
+  font-weight:1000;
+  line-height:1.3;
+}
+#clockSpinButton.keepSpinning{
+  animation:clockPulse .75s ease-in-out infinite alternate;
+}
+@keyframes clockPulse{
+  from{transform:scale(1)}
+  to{transform:scale(1.035)}
+}
+
+
+.starCoordLine{
+  display:inline-block;
+  margin-top:5px;
+  padding:6px 9px;
+  border:2px solid var(--ink);
+  border-radius:10px;
+  background:#fff;
+}
+
+
+.miniSpeedScene{
+  position:relative;
+  width:min(640px,100%);
+  height:150px;
+  margin:14px auto 16px;
+  border:3px solid var(--ink);
+  border-radius:18px;
+  overflow:hidden;
+  background:linear-gradient(180deg,#d7effc 0 58%, #8fc36a 58% 72%, #666262 72% 100%);
+}
+.miniSky{
+  position:absolute;
+  inset:0 0 38% 0;
+  background:
+    radial-gradient(circle at 18% 18%, rgba(255,255,255,.88), transparent 11%),
+    radial-gradient(circle at 52% 24%, rgba(255,255,255,.78), transparent 10%),
+    radial-gradient(circle at 78% 16%, rgba(255,255,255,.78), transparent 9%);
+}
+.miniSun{
+  position:absolute;
+  top:8px;
+  right:12px;
+  font-size:1.5rem;
+}
+.miniHighway{
+  position:absolute;
+  left:0; right:0; bottom:0;
+  height:42px;
+  background:#595555;
+}
+.miniStripe{
+  position:absolute;
+  bottom:18px;
+  width:58px;
+  height:6px;
+  background:#fff7c7;
+  border-radius:999px;
+}
+.ms1{left:18%}.ms2{left:43%}.ms3{left:68%}
+.miniRoadSign{
+  position:absolute;
+  left:52px;
+  bottom:44px;
+  width:78px;
+  height:84px;
+}
+.miniRoadSign:after{
+  content:"";
+  position:absolute;
+  left:34px;
+  bottom:-26px;
+  width:8px;
+  height:28px;
+  background:#707070;
+  border:2px solid var(--ink);
+}
+.miniRoadSignInner{
+  position:absolute;
+  inset:0;
+  background:#fffef8;
+  border:3px solid var(--ink);
+  border-radius:12px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  line-height:1.0;
+  box-shadow:4px 5px 0 rgba(19,32,42,.12);
+}
+.miniRoadSignInner small{font-size:.62rem;font-weight:1000}
+.miniRoadSignInner strong{font-size:1.25rem}
+.miniRoadSignInner span{font-size:.7rem;font-weight:1000}
+.miniSpeedCar{
+  position:absolute;
+  right:76px;
+  bottom:28px;
+  width:160px;
+  height:72px;
+}
+.miniCarReadout{
+  position:absolute;
+  left:12px;
+  top:-8px;
+  padding:4px 8px;
+  border:2px solid var(--ink);
+  border-radius:999px;
+  background:#fff9d8;
+  font-size:.8rem;
+  font-weight:1000;
+}
+.miniCarBody{
+  position:absolute;
+  left:14px;
+  right:0;
+  bottom:12px;
+  height:30px;
+  background:#d75442;
+  border:3px solid var(--ink);
+  border-radius:16px 22px 10px 12px;
+}
+.miniCarTop{
+  position:absolute;
+  left:46px;
+  bottom:36px;
+  width:68px;
+  height:24px;
+  background:#efb34d;
+  border:3px solid var(--ink);
+  border-bottom:none;
+  border-radius:16px 18px 0 0;
+}
+.miniWheel{
+  position:absolute;
+  bottom:0;
+  width:26px;
+  height:26px;
+  border-radius:50%;
+  background:#222;
+  border:3px solid #000;
+  box-shadow: inset 0 0 0 4px #cfcfcf;
+}
+.miniWheelLeft{left:32px}
+.miniWheelRight{right:18px}
+@media(max-width:620px){
+  .miniSpeedScene{height:138px}
+  .miniRoadSign{left:12px;transform:scale(.88);transform-origin:left bottom}
+  .miniSpeedCar{right:6px;transform:scale(.88);transform-origin:right bottom}
+}
+
+
+
+
+.finalClueDecor{
+  position:relative;
+  width:min(760px,100%);
+  height:180px;
+  margin:10px auto 10px;
+  border-radius:24px;
+  background:
+    radial-gradient(circle at 18% 20%, rgba(255,255,255,.65), transparent 16%),
+    radial-gradient(circle at 80% 28%, rgba(255,255,255,.55), transparent 15%),
+    linear-gradient(180deg,#fbf3da 0%, #fffaf0 100%);
+  border:3px dashed #d1b878;
+  overflow:hidden;
+}
+.decorDrawingCompass{
+  position:absolute;
+  left:54px;
+  top:16px;
+  width:210px;
+  height:150px;
+  transform:rotate(-8deg);
+}
+.dcHinge{
+  position:absolute;
+  left:50%;
+  top:8px;
+  width:32px;
+  height:24px;
+  transform:translateX(-50%);
+  border:4px solid var(--ink);
+  border-radius:14px;
+  background:#f3c24c;
+  z-index:3;
+  box-shadow:6px 6px 0 rgba(19,32,42,.08);
+}
+.dcArm{
+  position:absolute;
+  top:28px;
+  width:58px;
+  height:10px;
+  border:4px solid var(--ink);
+  border-radius:12px;
+  background:#f0cf71;
+  z-index:2;
+}
+.dcArmLeft{
+  left:49px;
+  transform:rotate(28deg);
+  transform-origin:right center;
+}
+.dcArmRight{
+  right:49px;
+  transform:rotate(-28deg);
+  transform-origin:left center;
+}
+.dcLeg{
+  position:absolute;
+  top:45px;
+  width:10px;
+  height:92px;
+  border:4px solid var(--ink);
+  border-radius:10px;
+  background:#d9dde4;
+  z-index:1;
+}
+.dcLegLeft{
+  left:78px;
+  transform:rotate(19deg);
+  transform-origin:top center;
+}
+.dcLegRight{
+  right:78px;
+  transform:rotate(-19deg);
+  transform-origin:top center;
+}
+.dcPoint{
+  position:absolute;
+  left:71px;
+  bottom:0;
+  width:0;
+  height:0;
+  border-left:8px solid transparent;
+  border-right:8px solid transparent;
+  border-top:18px solid var(--ink);
+}
+.dcPencil{
+  position:absolute;
+  right:66px;
+  bottom:-2px;
+  width:18px;
+  height:22px;
+  background:linear-gradient(180deg,#f4d266 0 70%, #e48a59 70% 100%);
+  border:4px solid var(--ink);
+  border-radius:4px 4px 10px 10px;
+  transform:rotate(-8deg);
+}
+.decorRuler{
+  position:absolute;
+  right:34px;
+  top:62px;
+  width:320px;
+  height:64px;
+  transform:rotate(7deg);
+}
+.rulerBody{
+  position:absolute;
+  inset:0;
+  border:4px solid var(--ink);
+  border-radius:14px;
+  background:linear-gradient(180deg,#ffe890 0%, #f8d66f 100%);
+  box-shadow:7px 7px 0 rgba(19,32,42,.10);
+}
+.rTick{
+  position:absolute;
+  bottom:8px;
+  width:3px;
+  background:#8a6a11;
+  border-radius:2px;
+}
+.rt1{left:18px;height:18px}
+.rt2{left:40px;height:28px}
+.rt3{left:62px;height:18px}
+.rt4{left:84px;height:24px}
+.rt5{left:106px;height:18px}
+.rt6{left:128px;height:28px}
+.rt7{left:150px;height:18px}
+.rt8{left:172px;height:24px}
+.rt9{left:194px;height:18px}
+.rt10{left:216px;height:28px}
+.rt11{left:238px;height:18px}
+.rt12{left:260px;height:24px}
+@media(max-width:620px){
+  .finalClueDecor{height:220px}
+  .decorDrawingCompass{
+    left:10px;
+    top:18px;
+    transform:scale(.86) rotate(-8deg);
+    transform-origin:left top;
+  }
+  .decorRuler{
+    right:10px;
+    top:130px;
+    width:230px;
+    height:50px;
+  }
+  .rTick{bottom:6px}
+  .rt1,.rt3,.rt5,.rt7,.rt9,.rt11{height:13px}
+  .rt2,.rt6,.rt10{height:22px}
+  .rt4,.rt8,.rt12{height:18px}
+}
+
 </style>
 </head>
-
 <body>
+<header>
+  <a class="home" href="https://a8.cosigo.io/">← A8 HOME</a>
+  <div class="brand">HANGOUT · PIECES OF EIGHT</div>
+  <button class="langMini" id="langMini" onclick="toggleLanguage()">ESPAÑOL</button>
+</header>
 
-<a class="home" href="https://a8.cosigo.io/">A8 HOME</a>
-
-<main class="book">
-
-<section class="page active sky">
-<div class="inner">
-  <h1>COME PLAY</h1>
-  <p>Mini-Me found something in the sand.</p>
-  <div class="big">A LITTLE RULER!</div>
-  <p>Turn the page.</p>
+<main>
+<div class="coinDock" aria-live="polite">
+  <div class="coinCounter"><span id="coinLabel">PIECES OF EIGHT</span> · <strong id="coinCount">0</strong>/8</div>
+  <div id="miniCoins" class="coinRow"></div>
 </div>
+
+<div class="book">
+<div id="kidGuide" class="kidGuide">👆 <b>TRY THIS:</b> Pick a language, then press NEXT.</div>
+
+<section class="page active">
+  <div class="kicker">COME PLAY</div>
+  <h1>Mini-Me found something in the sand.</h1>
+  <div class="big">A LITTLE RULER… and maybe treasure.</div>
+  <p>The Storybook has grown. Now there are <b>8 Pieces of Eight</b> hidden through the pages.</p>
+  <div class="panel treasure center">
+    <div style="font-size:5rem">🏴‍☠️ 🪙 🧭 🌍</div>
+    <p class="big">Learn one idea at a time. Earn coins. Find the compass.</p>
+  </div>
+  <div class="panel languageChoice center">
+    <div class="big">CHOOSE YOUR LANGUAGE · ELIGE TU IDIOMA</div>
+    <p>Same storybook. Same buttons. Switch whenever you want.</p>
+    <button class="languageButton" onclick="setLanguage('en')">🇬🇧 ENGLISH</button>
+    <button class="languageButton" onclick="setLanguage('es')">🇲🇽 ESPAÑOL</button>
+  </div>
+  <div class="mascot">
+    <div class="face">🦜</div>
+    <div><b>Captain Mini-Me says:</b> “If you can touch it, fold it, click it, hear it, or point at it, it probably belongs in Hangout.”</div>
+  </div>
 </section>
 
-<section class="page warm">
-<div class="inner">
-  <h2>Mini-Me's ruler</h2>
-  <p>This little ruler is <strong>/29 L</strong>.</p>
-  <div class="rulers">
-    <div>
-      <div class="label">/29 L</div>
-      <div class="ruler r29"></div>
+<section class="page">
+  <div class="kicker">TREASURE 1 · STRING EXPERIMENT</div>
+  <h2>Make A8 measuring strings.</h2>
+
+  <div class="panel">
+    <p><b>You need:</b> a measuring tape, string, and scissors.</p>
+    <p class="big center">Measure about 238 cm of string.</p>
+    <p class="center note">Close enough is fine for this hands-on experiment.</p>
+  </div>
+
+  <div class="stringLab">
+    <div class="tape238">
+      <span>0</span>
+      <b>238 cm</b>
+      <span>238</span>
+    </div>
+
+    <div class="string" id="string"><i class="foldmark" style="left:50%"></i></div>
+
+    <div class="center">
+      <button id="foldCutButton" onclick="cutA8String()">FOLD · MATCH ENDS · CUT</button>
+      <div id="cutProgressBox" class="cutProgressBox">
+        <div id="cutProgressText" class="big">CUT 0 OF 7</div>
+        <div class="cutTrack"><div id="cutTrackFill" class="cutTrackFill"></div></div>
+        <div id="cutInstruction" class="cutInstruction">KEEP CLICKING THE SCISSORS BUTTON · THE BRICK CHALLENGE APPEARS AFTER 7 CUTS</div>
+      </div>
+      <div id="foldText" class="big">Start with one 238 cm string.</div>
+    </div>
+
+    <div class="panel">
+      <div class="big center">YOUR A8 STRING BOX</div>
+      <div id="stringInventory" class="stringInventory">
+        <span class="stringPiece startPiece">238 cm</span>
+      </div>
     </div>
   </div>
-  <p>What happens if we find another one?</p>
-</div>
-</section>
 
-<section class="page sky">
-<div class="inner">
-  <h2>DOUBLE IT!</h2>
-  <p>Two little rulers make one kids' ruler.</p>
-  <div class="rulers">
-    <div>
-      <div class="label">/29 + /29</div>
-      <div class="ruler r29"></div>
-      <div class="ruler r29" style="margin-top:6px"></div>
+  <div id="brickChallenge" class="panel treasure center" style="display:none">
+    <div class="big">BRICK CHALLENGE</div>
+    <p><b>CLICK ONE, TWO, OR THREE.</b></p>
+    <p>How many different measurements do you need to describe one brick?</p>
+
+    <div class="singleBrickDiagram" aria-label="one rectangular brick with length, width, and height dimensions">
+      <div class="brickFace">
+        <div class="brickTopFace"></div>
+        <div class="brickSideFace"></div>
+      </div>
+
+      <div class="dimension dimLength">
+        <span class="dimArrow">↔</span>
+        <b>LENGTH</b>
+        <small>A8/29 L</small>
+      </div>
+
+      <div class="dimension dimWidth">
+        <span class="dimArrow">↗</span>
+        <b>WIDTH</b>
+        <small>A8/28 L</small>
+      </div>
+
+      <div class="dimension dimHeight">
+        <span class="dimArrow">↕</span>
+        <b>HEIGHT</b>
+        <small>A8/27 L</small>
+      </div>
     </div>
-    <div>
-      <div class="label">= /30 L</div>
-      <div class="ruler r30"></div>
+
+    <div class="brickAnswers">
+      <button onclick="brickAnswer(1,this)">ONE</button>
+      <button onclick="brickAnswer(2,this)">TWO</button>
+      <button onclick="brickAnswer(3,this)">THREE</button>
+    </div>
+
+    <div id="brickReadout" class="big" style="margin-top:12px">Choose one.</div>
+
+    <div id="brickReveal" class="brickReveal">
+      <p class="big">THREE — one for each dimension.</p>
+      <p><b>LENGTH · WIDTH · HEIGHT</b></p>
+      <p><b>A8 BRICK DESIGN · /29 × /28 × /27</b></p>
+      <p class="note">One rectangular brick. Smaller string rungs can still measure details, but /26 and below are not being presented as full brick dimensions.</p>
     </div>
   </div>
-  <div class="big">2 × /29 = /30</div>
-</div>
+
+  <div class="mascot">
+    <div class="face">✂️</div>
+    <div><b>No calculator required.</b> Fold the ruler physically, then use the pieces to measure real things.</div>
+  </div>
 </section>
 
-<section class="page warm">
-<div class="inner">
-  <h2>Dad's ruler</h2>
-  <p>Double the kids' ruler one more time.</p>
-  <div class="rulers">
-    <div>
-      <div class="label">Mini-Me · /29</div>
-      <div class="ruler r29"></div>
+<section class="page">
+  <div class="kicker">RULERS</div>
+  <h2>Double the ruler.</h2>
+  <div class="panel center">
+    <div class="big">Mini-Me · /29 L</div>
+    <div>↓ double</div>
+    <div class="big">Kids · /30 L</div>
+    <div>↓ double</div>
+    <div class="big">Big ruler · /31 L</div>
+  </div>
+  <div class="mascot">
+    <div class="face">📏</div>
+    <div>Two little rulers make the next ruler. A8 loves doubling because Nature keeps handing us the same pattern in bigger and smaller forms.</div>
+  </div>
+  <div class="center"><button onclick="earn(1,this)">I FOUND THE RULER PATTERN</button></div>
+</section>
+
+<section class="page">
+  <div class="kicker">TREASURE 3 · BITS</div>
+  <h2>Five switches. Thirty-two states.</h2>
+  <p>Dark is 0. Lit is 1. Can you build numbers by turning on the right bits?</p>
+  <div class="bits" id="bits"></div>
+  <div class="readout"><span id="binary">00000</span> = <span id="decimal">0</span></div>
+  <div class="bulbWrap">
+    <div id="ideaBulb" class="ideaBulb" aria-label="light bulb reward">
+      <div class="bulbGlass">💡</div>
+      <div class="bulbGlow"></div>
     </div>
-    <div>
-      <div class="label">Kids · /30</div>
-      <div class="ruler r30"></div>
+  </div>
+  <p class="center note">Weights: 16 · 8 · 4 · 2 · 1</p>
+  <div class="center">
+    <button onclick="challenge31()">MAKE 31</button>
+    <p id="bitMessage" class="big"></p>
+  </div>
+</section>
+
+<section class="page">
+  <div class="kicker">TREASURE 4 · CLOCK</div>
+  <h2>Imagine your whole day on one 32-hour clock.</h2>
+
+  <div class="clockface" id="clockface">
+    <div class="dayArc schoolArc"></div>
+    <div class="dayArc playArc"></div>
+    <div class="dayArc sleepArc"></div>
+    <div class="clockMarker sunMarker" aria-label="sun above hour 16">🌞</div>
+    <div class="clockMarker moonMarker" aria-label="crescent moon below hour 0">🌙</div>
+    <div class="hand" id="clockHand"></div>
+    <div class="hub"></div>
+  </div>
+
+  <div class="center" style="margin-bottom:14px">
+    <button id="clockSpinButton" onclick="spinClock()">SPIN THROUGH THE DAY</button>
+
+    <div class="clockProgressBox">
+      <div id="clockProgressText" class="big">DAY 0 OF 8</div>
+      <div class="clockTrack"><div id="clockTrackFill" class="clockTrackFill"></div></div>
+      <div id="clockInstruction" class="clockInstruction">
+        KEEP CLICKING · GO ALL THE WAY AROUND THE CLOCK
+      </div>
     </div>
+
+    <div id="clockReadout" class="big">Hour 0</div>
+  </div>
+
+  <div class="daySchedule">
+    <button class="scheduleCard school" onclick="setClockHour(8)">
+      <span>🎒</span>
+      <b>SCHOOL</b>
+      <strong>8 → 18</strong>
+      <small>10 A8 hours</small>
+    </button>
+
+    <button class="scheduleCard play" onclick="setClockHour(18)">
+      <span>⚽</span>
+      <b>PLAY</b>
+      <strong>18 → 29</strong>
+      <small>11 A8 hours</small>
+    </button>
+
+    <button class="scheduleCard sleep" onclick="setClockHour(29)">
+      <span>🌙</span>
+      <b>SLEEP</b>
+      <strong>29 → 8</strong>
+      <small>11 A8 hours</small>
+    </button>
+  </div>
+
+  <div class="panel center">
+    <p class="big">10 + 11 + 11 = 32 A8 hours</p>
+    <p>That is still the <b>same day you have now.</b></p>
+    <p class="big">Why?</p>
+    <p>Because one A8 hour is only <b>45 old-time minutes</b>.</p>
+    <p class="note">32 × 45 minutes = 24 old-time hours. No extra day. The A8 clock simply dances faster.</p>
+  </div>
+
+  <div class="panel center treasure">
+    <p class="big">IT&#39;S A HAPPY CLOCK.</p>
+    <p>An A8 second is shorter than an old-clock second.</p>
+    <div class="soundrow">
+      <button onclick="happySecond()">😊 HEAR 8 A8 TICKS</button>
+      <button onclick="sadSecond()">😴 HEAR 6 OLD TICKS</button>
+    </div>
+    <div id="secondReadout" class="big">tick?</div>
+    <p class="note">A8 second ≈ 0.6592 old seconds.</p>
+  </div>
+
+  <div class="mascot">
+    <div class="face">🕰️</div>
     <div>
-      <div class="label">Big ruler · /31</div>
-      <div class="ruler r31"></div>
+      <b>Try saying it out loud:</b><br>
+      “School from 8 to 18. Play from 18 to 29. Sleep from 29 to 8.”
+      The clock wraps around and the whole thing fits inside one ordinary Earth day.
     </div>
   </div>
-  <div class="big">2 × /30 = /31</div>
-</div>
+
 </section>
 
-<section class="page sky">
-<div class="inner">
-  <h2>Beach-ball math</h2>
-  <p>Don't count harder. Just double.</p>
-  <div id="ballrow" class="ballrow"></div>
-  <button id="double" class="action">DOUBLE IT!</button>
-  <div id="ballcount" class="big" style="margin-top:1rem">1</div>
-  <p>1 → 2 → 4 → 8</p>
-</div>
-</section>
 
-<section class="page water-page">
-<div class="inner">
-  <h2>Water teaches A8</h2>
-  <div class="cup"><span>A8 CUP</span></div>
-  <p>Fill the cup with pure water.</p>
-  <div class="chain">
-    <b>/31 T</b>
-    <b>/31 P</b>
-    <b>/31 V</b>
-    <b>/31 M</b>
+<section class="page">
+  <div class="kicker">TREASURE 5 · CALENDAR</div>
+  <h2>Five days make a week.</h2>
+
+  <div class="panel center">
+    <p class="big">JUPITER WEEK</p>
+    <div class="elementWeek">
+      <button class="elementDay" onmouseenter="showElement('FIRE · 🜂')" onclick="showElement('FIRE · 🜂')">
+        <span>🜂</span><b>FIRE</b>
+      </button>
+      <button class="elementDay" onmouseenter="showElement('WATER · 🜄')" onclick="showElement('WATER · 🜄')">
+        <span>🜄</span><b>WATER</b>
+      </button>
+      <button class="elementDay" onmouseenter="showElement('EARTH · 🜃')" onclick="showElement('EARTH · 🜃')">
+        <span>🜃</span><b>EARTH</b>
+      </button>
+      <button class="elementDay" onmouseenter="showElement('AIR · 🜁')" onclick="showElement('AIR · 🜁')">
+        <span>🜁</span><b>AIR</b>
+      </button>
+      <button class="elementDay" onmouseenter="showElement('AETHER · ✦')" onclick="showElement('AETHER · ✦')">
+        <span>✦</span><b>AETHER</b>
+      </button>
+    </div>
+    <div id="elementReadout" class="big" style="margin-top:12px">Hover over a day.</div>
   </div>
-  <p>Temperature. Pressure. Volume. Mass.<br>One ordinary cup of water connects them.</p>
-  <details>
-    <summary>Grown-up check</summary>
-    <p>A8 cup ≈ 207.4385 mL. Water mass ≈ 206.8572 g.</p>
-  </details>
-</div>
-</section>
 
-<section class="page night">
-<div class="inner">
-  <h2>Your playground is flying</h2>
-  <p>Earth is our spaceship.</p>
-  <div class="orbit">
-    <div class="earth"></div>
-    <div class="sun" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%)"></div>
+  <div class="panel center planetWeekPanel">
+    <div class="big">DID YOU KNOW?</div>
+    <p>Each compass month has <b>9 planet weeks</b>.</p>
+    <p>The planets are the week order.</p>
+
+    <div class="planetWeeks">
+      <button class="planetWeek" onmouseenter="planetWeek(1,'MERCURY')" onclick="planetWeek(1,'MERCURY')"><span>☿</span><b>1</b><small>Mercury</small></button>
+      <button class="planetWeek" onmouseenter="planetWeek(2,'VENUS')" onclick="planetWeek(2,'VENUS')"><span>♀</span><b>2</b><small>Venus</small></button>
+      <button class="planetWeek" onmouseenter="planetWeek(3,'EARTH')" onclick="planetWeek(3,'EARTH')"><span>⊕</span><b>3</b><small>Earth</small></button>
+      <button class="planetWeek" onmouseenter="planetWeek(4,'MARS')" onclick="planetWeek(4,'MARS')"><span>♂</span><b>4</b><small>Mars</small></button>
+      <button class="planetWeek jupiterWeekChip" onmouseenter="planetWeek(5,'JUPITER')" onclick="planetWeek(5,'JUPITER')">
+        <span class="miniJupiter"></span><b>5</b><small>Jupiter</small>
+      </button>
+      <button class="planetWeek" onmouseenter="planetWeek(6,'SATURN')" onclick="planetWeek(6,'SATURN')"><span>♄</span><b>6</b><small>Saturn</small></button>
+      <button class="planetWeek" onmouseenter="planetWeek(7,'URANUS')" onclick="planetWeek(7,'URANUS')"><span>♅</span><b>7</b><small>Uranus</small></button>
+      <button class="planetWeek" onmouseenter="planetWeek(8,'NEPTUNE')" onclick="planetWeek(8,'NEPTUNE')"><span>♆</span><b>8</b><small>Neptune</small></button>
+      <button class="planetWeek" onmouseenter="planetWeek(9,'PLUTO')" onclick="planetWeek(9,'PLUTO')"><span>♇</span><b>9</b><small>Pluto</small></button>
+    </div>
+
+    <div id="planetWeekReadout" class="big" style="margin-top:12px">Mercury → Venus → Earth → Mars → Jupiter → Saturn → Uranus → Neptune → Pluto</div>
+    <p class="note">Nine 5-day weeks = 45 days in one compass month.</p>
   </div>
-  <p>Even when you stand still, Earth keeps moving around Sol.</p>
-</div>
-</section>
 
-<section class="page night">
-<div class="inner">
-  <h2>Nature keeps time</h2>
-  <div class="planet-scene">
-    <div class="jupiter"></div>
-    <div class="moon m1"></div>
-    <div class="moon m2"></div>
-    <div class="moon m3"></div>
-    <div class="moon m4"></div>
+  <h2 style="margin-top:28px">Eight compass months make the year.</h2>
+  <p>Move around the compass. Each stop is one month.</p>
+
+  <div class="compassMonths" id="compassMonths">
+    <div class="monthCenter">8<br><small>MONTHS</small></div>
+    <button class="month m0" onmouseenter="monthHover(0)" onclick="monthHover(0)">N</button>
+    <button class="month m1" onmouseenter="monthHover(1)" onclick="monthHover(1)">NE</button>
+    <button class="month m2" onmouseenter="monthHover(2)" onclick="monthHover(2)">E</button>
+    <button class="month m3" onmouseenter="monthHover(3)" onclick="monthHover(3)">SE</button>
+    <button class="month m4" onmouseenter="monthHover(4)" onclick="monthHover(4)">S</button>
+    <button class="month m5" onmouseenter="monthHover(5)" onclick="monthHover(5)">SW</button>
+    <button class="month m6" onmouseenter="monthHover(6)" onclick="monthHover(6)">W</button>
+    <button class="month m7" onmouseenter="monthHover(7)" onclick="monthHover(7)">NW</button>
+    <div class="monthNeedle" id="monthNeedle"></div>
   </div>
-  <p>Jupiter's moons move in repeating patterns.</p>
-  <div class="big">LOOK · WATCH · REPEAT</div>
-</div>
+
+  <div class="panel center treasure">
+    <div class="big">JUPITER AIR</div>
+    <div class="center" style="margin:10px 0 6px"><span class="jupiterWithMoons" aria-label="Jupiter with moons"><span class="jupiterMoon"></span><span class="jupiterIcon" style="width:56px;height:56px"></span><span class="jupiterMoon"></span></span></div>
+    <p>Jupiter Air happens once in every compass month.</p>
+    <p class="big">8 TIMES A YEAR</p>
+    <p>It becomes a familiar friend that returns month after month.</p>
+    <button onclick="earn(4,this)">I FOUND JUPITER AIR</button>
+  </div>
+
+  <div class="panel center">
+    <div class="jupiterLabel">
+    <span style="font-size:3rem">🧭</span>
+    <span class="jupiterWithMoons" aria-label="Jupiter with moons">
+      <span class="jupiterMoon"></span>
+      <span class="jupiterIcon"></span>
+      <span class="jupiterMoon"></span>
+      <span class="jupiterMoon"></span>
+    </span>
+    <span style="font-size:3rem">🜁</span>
+  </div>
+    <div class="big">NORTH JUPITER AIR</div>
+    <p>Now add the compass month.</p>
+    <p>Jupiter Air visits every month, but it is <b>North Jupiter Air</b> only when that Jupiter Air day occurs in the North compass month.</p>
+    <p class="big">ONCE A YEAR</p>
+    <p class="note">Same Jupiter Air friend · one particular compass month · one annual return.</p>
+  </div>
+
+  <div class="mascot">
+    <div class="face">🧭</div>
+    <div>
+      <b>Something odd happens after the 360 regular days.</b><br>
+      Curious? There is a little extra week hiding at the edge of the year.
+      <a href="https://calendar.cosigo.io/" style="font-weight:1000;color:inherit">Explore Wilson’s Week →</a>
+    </div>
+  </div>
 </section>
 
-<section class="page sky">
-<div class="inner">
-  <h2>You found the pattern</h2>
-  <div class="big">1 → 2 → 4 → 8</div>
-  <p>Measure something. Double something. Look at the sky.</p>
-  <p>Nature has patterns everywhere.</p>
-  <button class="action" id="again">READ IT AGAIN</button>
-</div>
+
+<section class="page">
+  <div class="kicker">TREASURE 6 · EARTH MAP</div>
+  <h2>Cross the sea: Rome to Athens.</h2>
+  <p>Now it is easier: click the city on the map <b>or</b> use the big city buttons below.</p>
+
+  <div class="mapWrap">
+    <svg viewBox="0 0 760 420" class="mapsvg" aria-label="Playful Mediterranean map">
+      <rect x="0" y="0" width="760" height="420" fill="#d9eef8"/>
+
+      <!-- Italy / boot -->
+      <path d="M270 62
+               C292 68, 304 83, 314 100
+               C322 114, 329 128, 343 139
+               C356 150, 365 165, 366 180
+               C366 193, 360 205, 352 213
+               C343 220, 341 230, 348 242
+               C356 254, 362 266, 361 278
+               C359 290, 349 297, 338 296
+               C327 295, 321 285, 313 275
+               C305 264, 293 255, 282 248
+               C272 242, 267 233, 268 224
+               C270 212, 267 200, 257 188
+               C245 174, 240 163, 242 148
+               C245 134, 239 123, 230 114
+               C222 105, 220 94, 223 84
+               C230 72, 247 63, 270 62 Z"
+            fill="#c8d6b8" stroke="#4d6352" stroke-width="3"/>
+      <!-- heel / lower leg -->
+      <path d="M328 244
+               C344 246, 357 254, 364 268
+               C371 281, 372 294, 365 306
+               C355 309, 345 306, 337 298
+               C328 290, 322 280, 319 270
+               C317 260, 320 250, 328 244 Z"
+            fill="#c8d6b8" stroke="#4d6352" stroke-width="3"/>
+      <!-- toe -->
+      <path d="M360 286
+               C377 288, 389 295, 396 307
+               C390 316, 380 320, 369 319
+               C363 309, 360 298, 360 286 Z"
+            fill="#c8d6b8" stroke="#4d6352" stroke-width="3"/>
+      <!-- Sicily -->
+      <path d="M330 322
+               C344 320, 358 322, 367 327
+               C360 335, 348 338, 336 336
+               C331 332, 329 327, 330 322 Z"
+            fill="#c8d6b8" stroke="#4d6352" stroke-width="3"/>
+
+      <!-- Greece / Balkan edge -->
+      <path d="M520 132
+               C544 126, 562 133, 576 146
+               C585 155, 591 168, 596 180
+               C590 193, 578 200, 566 205
+               C552 210, 550 220, 553 234
+               C550 246, 540 250, 529 247
+               C523 236, 517 226, 506 220
+               C494 213, 487 201, 490 188
+               C496 171, 501 156, 510 144
+               C512 140, 516 136, 520 132 Z"
+            fill="#c8d6b8" stroke="#4d6352" stroke-width="3"/>
+
+      <text x="384" y="206" fill="#487487" font-size="24" font-weight="700">Mediterranean Sea</text>
+
+      <!-- easy-click city zones -->
+      <circle class="cityTarget" cx="286" cy="165" r="28" onclick="pickCity('Rome')"/>
+      <circle class="cityTarget" cx="548" cy="225" r="28" onclick="pickCity('Athens')"/>
+
+      <circle class="city" id="romeDot" cx="286" cy="165" r="9" onclick="pickCity('Rome')"/>
+      <text class="cityLabel" x="302" y="163">Rome</text>
+
+      <circle class="city" id="athensDot" cx="548" cy="225" r="9" onclick="pickCity('Athens')"/>
+      <text class="cityLabel" x="564" y="223">Athens</text>
+
+      <line id="routeLine" class="route" x1="286" y1="165" x2="548" y2="225"/>
+    </svg>
+  </div>
+
+  <div class="cityButtons">
+    <button class="cityPick" onclick="pickCity('Rome')">📍 PICK ROME</button>
+    <button class="cityPick" onclick="pickCity('Athens')">📍 PICK ATHENS</button>
+  </div>
+
+  <div class="panel center">
+    <div class="big">ONE A8 POSITION · TWO FRIENDLY WAYS TO READ IT</div>
+    <div class="notationToggle">
+      <button id="decBtn" class="activeNotation" onclick="setMapNotation('decimal')">DECIMAL COMFORT</button>
+      <button id="octBtn" onclick="setMapNotation('octal')">🐙 OCTY · OCTAL</button>
+    </div>
+    <p class="note">Same A8 position. Decimal comfort helps newcomers. Octy shows the native octal form.</p>
+  </div>
+
+  <div class="coords">
+    <div class="panel center">
+      <b class="big">ROME</b><br>
+      <span class="coordLabel">DECIMAL COMFORT</span><br>
+      <span class="nativeCoord">A8 LAT 68 · LON 18</span><br>
+      <span class="coordLabel octyLabel">🐙 OCTY · OCTAL</span><br>
+      <span class="nativeCoord">A8 LAT 104₈ · LON 022₈</span><br>
+      <span class="legacyCoord">legacy: 41.9028° N · 12.4964° E</span>
+    </div>
+
+    <div class="panel center">
+      <b class="big">ATHENS</b><br>
+      <span class="coordLabel">DECIMAL COMFORT</span><br>
+      <span class="nativeCoord">A8 LAT 74 · LON 34</span><br>
+      <span class="coordLabel octyLabel">🐙 OCTY · OCTAL</span><br>
+      <span class="nativeCoord">A8 LAT 112₈ · LON 042₈</span><br>
+      <span class="legacyCoord">legacy: 37.9838° N · 23.7275° E</span>
+    </div>
+  </div>
+
+  <div id="mapReadout" class="panel center big">Pick Rome and Athens.</div>
 </section>
 
+<section class="page">
+  <div class="kicker">TEMPERATURE QUIZ</div>
+  <h2>What is your body temperature?</h2>
+  <p>Pick the A8 temperature that best matches a normal human body.</p>
+
+  <div class="bodyQuizWrap">
+    <div class="dummyFigure" id="dummyFigure" aria-label="simple dancing figure">
+      <div class="dummyHead"></div>
+      <div class="dummyBody"></div>
+      <div class="dummyArm leftArm"></div>
+      <div class="dummyArm rightArm"></div>
+      <div class="dummyLeg leftLeg"></div>
+      <div class="dummyLeg rightLeg"></div>
+    </div>
+
+    <div class="quizChoices">
+      <button onclick="bodyTempAnswer('31.58',this)">A8/31.58 T</button>
+      <button onclick="bodyTempAnswer('32',this)">A8/32 T</button>
+      <button onclick="bodyTempAnswer('30',this)">A8/30 T</button>
+      <button onclick="bodyTempAnswer('27.1',this)">A8/27.1 T</button>
+    </div>
+
+    <div id="bodyTempReadout" class="panel center big">Choose one.</div>
+  </div>
+
+  <div class="mascot">
+    <div class="face">🌡️</div>
+    <div><b>Hint:</b> the human body lives close to the A8 human-temperature region, but not exactly at /31.</div>
+  </div>
+</section>
+
+<section class="page">
+  <div class="kicker">TREASURE 7 · THINGS IN THE KITCHEN</div>
+  <h2>Click things in the kitchen.</h2>
+
+  <div class="objects">
+    <button class="object" onclick="showObj('ice',this)"><span>🧊</span>ICE</button>
+    <button class="object" onclick="showObj('cup',this)"><span>☕</span>CUP</button>
+    <button class="object" onclick="showObj('kettle',this)"><span>🫖</span>KETTLE</button>
+    <button class="object" onclick="showObj('balloon',this)"><span>🎈</span>BALLOON</button>
+    <button class="object" onclick="showObj('jacket',this)"><span>🧥</span>JACKET</button>
+  </div>
+
+  <div id="objectReadout" class="panel center big">Pick something.</div>
+
+  <div id="cupExplorer" class="panel cupExplorer" style="display:none">
+    <div class="center">
+      <div style="font-size:4rem">☕</div>
+      <div class="big">HOW MANY A8 RULERS CAN A CUP OF TEA TOUCH?</div>
+      <p>Pick every one. Some are strongly related. Some are only along for the ride.</p>
+    </div>
+
+    <div class="cupChips">
+      <button onclick="cupMeasure('T',this)">A8/31.99 T</button>
+      <button onclick="cupMeasure('P',this)">A8/31 P</button>
+      <button onclick="cupMeasure('V',this)">A8/31 V</button>
+      <button onclick="cupMeasure('M',this)">A8/31 M</button>
+      <button onclick="cupMeasure('L',this)">A8/31 L</button>
+      <button onclick="cupMeasure('C',this)">A8/31 C</button>
+    </div>
+
+    <div id="cupMeasureReadout" class="panel center">
+      Select a ruler.
+    </div>
+
+    <div class="cupProgress">
+      <b>EXPLORED:</b> <span id="cupCount">0</span> / 6
+    </div>
+
+    <div id="cupComplete" class="treasure panel center" style="display:none">
+      <div class="big">YOU MEASURED THE WHOLE TEA BREAK.</div>
+      <p>Temperature · Pressure · Volume · Mass · Length · Clock</p>
+      <p class="note">Apparently drinking hot / cold tea can be done both ways. Binary tea. 😄</p>
+    </div>
+  </div>
+
+  <div id="jacketExplorer" class="panel jacketExplorer" style="display:none">
+    <div class="center">
+      <div style="font-size:4rem">🥶 🧥</div>
+      <div class="big">OOH… SO CHILLY.</div>
+      <p>What should you put on?</p>
+    </div>
+
+    <div class="coldGear">
+      <button onclick="coldGear('/29',this)">
+        <span>🧥</span>
+        <b>A8/29 T</b>
+        <small>thin windbreaker</small>
+      </button>
+      <button onclick="coldGear('/28',this)">
+        <span>🧥</span>
+        <b>A8/28 T</b>
+        <small>thicker jacket</small>
+      </button>
+      <button onclick="coldGear('/27',this)">
+        <span>🧥🥾</span>
+        <b>A8/27 T</b>
+        <small>thick jacket + boots</small>
+      </button>
+    </div>
+
+    <div id="coldGearReadout" class="panel center big">Pick the weather.</div>
+  </div>
+
+  <p class="center note">Explore all five home objects. The cup and jacket each hide an extra rabbit hole.</p>
+</section>
+
+<section class="page">
+  <div class="kicker">SPEED GAME</div>
+  <h2>Little kids love speed.</h2>
+  <p>Match the A8 speed to the right traveler. When you get all four right, watch carefully…</p>
+
+  <div class="miniSpeedScene" aria-label="cartoon car on highway with A8 speed sign">
+    <div class="miniSky"></div>
+    <div class="miniSun">☀️</div>
+
+    <div class="miniRoadSign">
+      <div class="miniRoadSignInner">
+        <small>A8</small>
+        <strong>/48</strong>
+        <span>NAV</span>
+      </div>
+    </div>
+
+    <div class="miniSpeedCar">
+      <div class="miniCarReadout">A8/47.9 NAV</div>
+      <div class="miniCarBody"></div>
+      <div class="miniCarTop"></div>
+      <div class="miniWheel miniWheelLeft"></div>
+      <div class="miniWheel miniWheelRight"></div>
+    </div>
+
+    <div class="miniHighway"></div>
+    <div class="miniStripe ms1"></div>
+    <div class="miniStripe ms2"></div>
+    <div class="miniStripe ms3"></div>
+  </div>
+
+  <div class="speedGameWrap">
+    <div class="speedGrid">
+      <div class="speedCard">
+        <div class="big">🚲 BICYCLE</div>
+        <select id="speedBike" onchange="checkSpeedGame()">
+          <option value="">pick A8 speed</option>
+          <option value="43">A8/43 S</option>
+          <option value="45">A8/45 S</option>
+          <option value="47">A8/47 S</option>
+          <option value="50">A8/50 S</option>
+        </select>
+      </div>
+
+      <div class="speedCard">
+        <div class="big">🚗 AUTOMOBILE</div>
+        <select id="speedCar" onchange="checkSpeedGame()">
+          <option value="">pick A8 speed</option>
+          <option value="43">A8/43 S</option>
+          <option value="45">A8/45 S</option>
+          <option value="47">A8/47 S</option>
+          <option value="50">A8/50 S</option>
+        </select>
+      </div>
+
+      <div class="speedCard">
+        <div class="big">🚆 TRAIN</div>
+        <select id="speedTrain" onchange="checkSpeedGame()">
+          <option value="">pick A8 speed</option>
+          <option value="43">A8/43 S</option>
+          <option value="45">A8/45 S</option>
+          <option value="47">A8/47 S</option>
+          <option value="48">A8/48 S</option>
+          <option value="50">A8/50 S</option>
+        </select>
+      </div>
+
+      <div class="speedCard">
+        <div class="big">✈️ AIRPLANE</div>
+        <select id="speedPlane" onchange="checkSpeedGame()">
+          <option value="">pick A8 speed</option>
+          <option value="43">A8/43 S</option>
+          <option value="45">A8/45 S</option>
+          <option value="47">A8/47 S</option>
+          <option value="50">A8/50 S</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="rocketStage" id="rocketStage">
+      <div class="hiddenRocket" id="hiddenRocket">🚀</div>
+    </div>
+
+    <div id="speedReadout" class="panel center big">Match all four.</div>
+  </div>
+
+  <div class="mascot">
+    <div class="face">⚡</div>
+    <div><b>Fast clue:</b> higher A8 speed rungs mean faster motion. The car is near /48, the train is a little faster, and the airplane is fastest.</div>
+  </div>
+</section>
+
+<section class="page">
+  <div class="kicker">SOUND ROOM</div>
+  <h2>Double it with your ears.</h2>
+  <p>Same pattern. Different sense. Press the cartoon instruments and hear the note double each time.</p>
+
+  <div class="instrumentBand">
+    <button class="instrumentCard" onclick="tone(220)">
+      <span class="instrumentEmoji">🎸</span>
+      <b>BASSY STRING</b>
+      <strong>220</strong>
+    </button>
+
+    <button class="instrumentCard" onclick="tone(440)">
+      <span class="instrumentEmoji">🎻</span>
+      <b>VIOLIN</b>
+      <strong>440</strong>
+    </button>
+
+    <button class="instrumentCard surpriseInstrument" onclick="tone(880); surpriseNotes(this)">
+      <span class="instrumentEmoji">🎺</span>
+      <b>TRUMPET</b>
+      <strong>880</strong>
+      <span class="noteBurst" aria-hidden="true"></span>
+    </button>
+
+    <button class="instrumentCard" onclick="tone(1760)">
+      <span class="instrumentEmoji">🔔</span>
+      <b>BELL</b>
+      <strong>1760</strong>
+    </button>
+  </div>
+
+  <div class="panel center">
+    <div class="big">220 → 440 → 880 → 1760</div>
+    <p>Each step doubles the frequency.</p>
+    <p class="note">Low notes get a little extra punch so small laptop speakers can still hear them.</p>
+  </div>
+
+  <div class="mascot">
+    <div class="face">🎶</div>
+    <div><b>Same trick again:</b> double the number, hear the pitch jump. The pattern is doing the work.</div>
+  </div>
+</section>
+
+<section class="page">
+  <div class="kicker">SKY ROOM</div>
+  <h2>Can you find Mintaka in Orion?</h2>
+  <p>This mockup follows the familiar Orion shape more closely. Betelgeuse glows orange. Only Mintaka reveals its A8 star coordinates.</p>
+  <div class="sky orionSky">
+    <div class="orionTitle">ORION</div>
+    <svg class="constellation" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+      <line x1="28" y1="36" x2="50" y2="24"/>
+      <line x1="50" y1="24" x2="71" y2="42"/>
+      <line x1="28" y1="36" x2="43" y2="62"/>
+      <line x1="43" y1="62" x2="51" y2="54"/>
+      <line x1="51" y1="54" x2="59" y2="56"/>
+      <line x1="43" y1="62" x2="34" y2="82"/>
+      <line x1="59" y1="56" x2="70" y2="80"/>
+      <line x1="34" y1="82" x2="70" y2="80"/>
+      <line x1="71" y1="42" x2="59" y2="56"/>
+    </svg>
+
+    <button class="star orangeStar" style="left:24%;top:32%" onclick="starName('Betelgeuse','Warm orange shoulder star.')"></button>
+    <button class="star" style="left:47%;top:20%" onclick="starName('Meissa','Head of Orion.')"></button>
+    <button class="star" style="left:68%;top:40%" onclick="starName('Bellatrix','Bright shoulder star.')"></button>
+
+    <button class="star" style="left:41%;top:58%" onclick="starName('Alnitak','Left belt star.')"></button>
+    <button class="star" style="left:49%;top:50%" onclick="starName('Alnilam','Middle belt star.')"></button>
+    <button class="star mintakaStar" style="left:57%;top:52%" onclick="mintakaFound()"></button>
+
+    <button class="star blueStar" style="left:30%;top:78%" onclick="starName('Saiph','Lower left star.')"></button>
+    <button class="star blueStar" style="left:68%;top:76%" onclick="starName('Rigel','Bright blue-white foot star.')"></button>
+  </div>
+  <div id="starReadout" class="panel center big">Try the three belt stars. Can you pick Mintaka?</div>
+</section>
+
+<section class="page">
+  <div class="kicker">LOOK · WATCH · REPEAT</div>
+  <h2>Earth moves. The Sun shines. Jupiter’s moons repeat.</h2>
+
+  <div class="panel center">
+    <div class="dynamicSkyStage">
+      <div class="skyHint">Click Earth · Sun · Jupiter</div>
+
+      <button class="sunSystem" id="sunSystem" onclick="pokeSun()">
+        <div class="sunRays"></div>
+        <div class="sunCore">☀️</div>
+      </button>
+
+      <div class="orbitRing"></div>
+
+      <button class="earthOrbit" id="earthOrbit" onclick="moveEarth()">
+        <div class="earthPlanet">🌍</div>
+      </button>
+
+      <button class="jupiterSystem" id="jupiterSystem" onclick="moveJupiter()">
+        <div class="jupiterMiniWrap">
+          <span class="jMoon moon1"></span>
+          <span class="miniJupiterBig"></span>
+          <span class="jMoon moon2"></span>
+          <span class="jMoon moon3"></span>
+        </div>
+      </button>
+    </div>
+
+    <div id="spaceReadout" class="big" style="margin-top:10px">Touch the little solar system.</div>
+  </div>
+
+  <div class="mascot">
+    <div class="face">🛰️</div>
+    <div><b>Try this:</b> click Earth and it rotates forward, click Sun and the rays brighten, click Jupiter and the three moons start moving.</div>
+  </div>
+
+  <div class="panel center">
+    <p class="big">Dynamic sky, simple story.</p>
+    <p>Earth turns and advances. Sol shines. Jupiter’s moons keep repeating their dance.</p>
+  </div>
+</section>
+
+<section class="page">
+  <div class="kicker">TREASURE 8 · COMPASS</div>
+  <h2>Final clue: find 128.</h2>
+  <p>The treasure map says: <b>turn the compass to 128</b>.</p>
+
+  <div class="finalClueDecor" aria-hidden="true">
+    <div class="decorDrawingCompass">
+      <div class="dcHinge"></div>
+      <div class="dcArm dcArmLeft"></div>
+      <div class="dcArm dcArmRight"></div>
+      <div class="dcLeg dcLegLeft"></div>
+      <div class="dcLeg dcLegRight"></div>
+      <div class="dcPoint"></div>
+      <div class="dcPencil"></div>
+    </div>
+
+    <div class="decorRuler">
+      <div class="rulerBody">
+        <span class="rTick rt1"></span>
+        <span class="rTick rt2"></span>
+        <span class="rTick rt3"></span>
+        <span class="rTick rt4"></span>
+        <span class="rTick rt5"></span>
+        <span class="rTick rt6"></span>
+        <span class="rTick rt7"></span>
+        <span class="rTick rt8"></span>
+        <span class="rTick rt9"></span>
+        <span class="rTick rt10"></span>
+        <span class="rTick rt11"></span>
+        <span class="rTick rt12"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="compass">
+    <span class="dir n">0</span>
+    <span class="dir e">128</span>
+    <span class="dir s">256</span>
+    <span class="dir w">384</span>
+    <div class="needle" id="needle"></div>
+  </div>
+  <div class="center">
+    <button onclick="turnCompass()">TURN 128</button>
+    <p id="compassMsg" class="big"></p>
+    <p id="calendarHint" class="note"></p>
+  </div>
+
+  <div id="calendarPopup" class="calendarPopup" style="display:none">
+    <div class="calendarPopupCard">
+      <button class="popupClose" onclick="closeCalendarPopup()">×</button>
+      <div class="big">BONUS CALENDAR ART</div>
+      <p>Nice! You found 128. Here is a little calendar surprise.</p>
+
+      <a class="miniCalendarLink"
+         href="https://calendar.cosigo.io/image-viewer.html#%2Fassets%2Fausp8_west.png"
+         target="_blank"
+         rel="noopener">
+        <div class="monthArtworkCard">
+          <img
+            src="https://calendar.cosigo.io/assets/ausp8_west.png"
+            alt="A8 current compass-month artwork"
+            class="monthArtworkImage">
+          <div class="miniCalBottom">click the artwork for the full Calendar viewer</div>
+        </div>
+      </a>
+
+      <p class="note">This is the actual A8 month artwork, not a stand-in.</p>
+    </div>
+  </div>
+</section>
+
+<section class="page">
+  <div class="kicker">THE CHEST</div>
+  <h2>You found the Pieces of Eight.</h2>
+  <div id="lockedChest">
+    <div class="chest">🔒</div>
+    <p class="center big">Find all 8 coins to open it.</p>
+  </div>
+  <div id="openChest" style="display:none">
+    <div class="chest">🧰🪙🪙🪙</div>
+    <div class="center"><span class="badge">A8 EXPLORER</span></div>
+    <p class="center big">Secret reward:</p>
+    <div class="bacon"></div>
+    <p class="center big">MÖBIUS BACON</p>
+    <p class="center">Bacon flavor… forever.</p>
+    <p class="center note">One side. One edge. Please do not eat the topology.</p>
+    <div class="center">
+      <a href="https://clock.cosigo.io/"><button>SEE THE CLOCK</button></a>
+      <a href="https://map.cosigo.io/"><button>SEE THE MAP</button></a>
+      <a href="https://calendar.cosigo.io/"><button>SEE THE CALENDAR</button></a>
+    </div>
+  </div>
+</section>
+
+<div class="nav">
+  <button id="prev" onclick="move(-1)">← PREVIOUS</button>
+  <span class="progress"><span id="pnum">1</span> / <span id="ptotal"></span></span>
+  <button id="next" onclick="move(1)">NEXT →</button>
+</div>
+
+</div>
 </main>
 
-<div class="controls">
-  <button id="prev">← PREVIOUS</button>
-  <span class="counter" id="counter">1 / 9</span>
-  <button id="next">NEXT →</button>
-</div>
-
 <script>
-(() => {
-  const pages=[...document.querySelectorAll(".page")];
-  const prev=document.getElementById("prev");
-  const next=document.getElementById("next");
-  const counter=document.getElementById("counter");
-  let current=0;
 
-  function show(n){
-    current=Math.max(0,Math.min(pages.length-1,n));
+let currentLang='en';
+const ES_STATIC={"← A8 HOME": "← INICIO A8", "COME PLAY": "VEN A JUGAR", "Mini-Me found something in the sand.": "El Capitán Chaparro encontró algo en la arena.", "A LITTLE RULER… and maybe treasure.": "UNA REGLITA… y quizá un tesoro.", "The Storybook has grown. Now there are": "El libro de aventuras ha crecido. Ahora hay", "8 Pieces of Eight": "8 Piezas de Ocho", "hidden through the pages.": "escondidas entre las páginas.", "Learn one idea at a time. Earn coins. Find the compass.": "Aprende una idea a la vez. Gana monedas. Encuentra la brújula.", "Captain Mini-Me says:": "El Capitán Chaparro dice:", "“If you can touch it, fold it, click it, hear it, or point at it, it probably belongs in Hangout.”": "“Si puedes tocarlo, doblarlo, hacer clic, escucharlo o señalarlo, probablemente pertenece al Hangout.”", "TREASURE 1 · STRING EXPERIMENT": "TESORO 1 · EXPERIMENTO CON CUERDA", "Make A8 measuring strings.": "Haz cuerdas de medir A8.", "You need:": "Necesitas:", "a measuring tape, string, and scissors.": "una cinta métrica, cuerda y tijeras.", "Measure about 238 cm of string.": "Mide unos 238 cm de cuerda.", "Close enough is fine for this hands-on experiment.": "No tiene que ser perfecto para este experimento práctico.", "FOLD · MATCH ENDS · CUT": "DOBLA · JUNTA LAS PUNTAS · CORTA", "CUT 0 OF 7": "CORTE 0 DE 7", "KEEP CLICKING THE SCISSORS BUTTON · THE BRICK CHALLENGE APPEARS AFTER 7 CUTS": "SIGUE PULSANDO EL BOTÓN DE TIJERAS · EL RETO DEL LADRILLO APARECE DESPUÉS DE 7 CORTES", "Start with one 238 cm string.": "Empieza con una cuerda de 238 cm.", "YOUR A8 STRING BOX": "TU CAJA DE CUERDAS A8", "BRICK CHALLENGE": "RETO DEL LADRILLO", "CLICK ONE, TWO, OR THREE.": "HAZ CLIC EN UNA, DOS O TRES.", "How many different measurements do you need to describe one brick?": "¿Cuántas medidas diferentes necesitas para describir un ladrillo?", "LENGTH": "LARGO", "WIDTH": "ANCHO", "HEIGHT": "ALTURA", "THREE — one for each dimension.": "TRES — una para cada dimensión.", "A8 BRICK DESIGN · /29 × /28 × /27": "DISEÑO DE LADRILLO A8 · /29 × /28 × /27", "One rectangular brick. Smaller string rungs can still measure details, but /26 and below are not being presented as full brick dimensions.": "Un ladrillo rectangular. Los peldaños de cuerda más pequeños aún sirven para medir detalles, pero /26 y menores no se presentan como dimensiones completas de un ladrillo.", "ONE": "UNA", "TWO": "DOS", "THREE": "TRES", "Choose one.": "Elige una.", "A8 BRICK DESIGN": "DISEÑO DE LADRILLO A8", "Use one string for length, one for width, one for height. A8 proportions become something you can hold against a real object.": "Usa una cuerda para el largo, otra para el ancho y otra para la altura. Las proporciones A8 se vuelven algo que puedes comparar con un objeto real.", "No calculator required.": "No necesitas calculadora.", "Fold the ruler physically, then use the pieces to measure real things.": "Dobla físicamente la regla y usa las piezas para medir cosas reales.", "RULERS": "REGLAS", "Double the ruler.": "Duplica la regla.", "↓ double": "↓ duplica", "Kids · /30 L": "Niños · /30 L", "Big ruler · /31 L": "Regla grande · /31 L", "Two little rulers make the next ruler. A8 loves doubling because Nature keeps handing us the same pattern in bigger and smaller forms.": "Dos reglas pequeñas forman la siguiente regla. A8 usa la duplicación porque la Naturaleza repite el mismo patrón en tamaños mayores y menores.", "I FOUND THE RULER PATTERN": "ENCONTRÉ EL PATRÓN DE LA REGLA", "TREASURE 3 · BITS": "TESORO 3 · BITS", "Five switches. Thirty-two states.": "Cinco interruptores. Treinta y dos estados.", "Dark is 0. Lit is 1. Can you build numbers by turning on the right bits?": "Apagado es 0. Encendido es 1. ¿Puedes formar números encendiendo los bits correctos?", "Weights: 16 · 8 · 4 · 2 · 1": "Valores: 16 · 8 · 4 · 2 · 1", "MAKE 31": "HAZ 31", "TREASURE 4 · CLOCK": "TESORO 4 · RELOJ", "Imagine your whole day on one 32-hour clock.": "Imagina todo tu día en un reloj de 32 horas.", "SPIN THROUGH THE DAY": "RECORRE EL DÍA", "DAY 0 OF 8": "VUELTA 0 DE 8", "KEEP CLICKING · GO ALL THE WAY AROUND THE CLOCK": "SIGUE PULSANDO · DA TODA LA VUELTA AL RELOJ", "SCHOOL": "ESCUELA", "PLAY": "JUGAR", "SLEEP": "DORMIR", "10 A8 hours": "10 horas A8", "11 A8 hours": "11 horas A8", "10 + 11 + 11 = 32 A8 hours": "10 + 11 + 11 = 32 horas A8", "That is still the": "Sigue siendo el", "same day you have now.": "mismo día que tienes ahora.", "Why?": "¿Por qué?", "Because one A8 hour is only": "Porque una hora A8 dura sólo", "45 old-time minutes": "45 minutos del reloj antiguo", "32 × 45 minutes = 24 old-time hours. No extra day. The A8 clock simply dances faster.": "32 × 45 minutos = 24 horas del reloj antiguo. No aparece un día extra. El reloj A8 simplemente baila más rápido.", "IT'S A HAPPY CLOCK.": "ES UN RELOJ FELIZ.", "An A8 second is shorter than an old-clock second.": "Un segundo A8 es más corto que un segundo del reloj antiguo.", "😊 HEAR 8 A8 TICKS": "😊 ESCUCHA 8 TICS A8", "😴 HEAR 6 OLD TICKS": "😴 ESCUCHA 6 TICS ANTIGUOS", "tick?": "¿tic?", "A8 second ≈ 0.6592 old seconds.": "Segundo A8 ≈ 0.6592 segundos antiguos.", "Try saying it out loud:": "Prueba decirlo en voz alta:", "“School from 8 to 18. Play from 18 to 29. Sleep from 29 to 8.” The clock wraps around and the whole thing fits inside one ordinary Earth day.": "“Escuela de 8 a 18. Juego de 18 a 29. Duermo de 29 a 8.” El reloj da la vuelta y todo cabe dentro de un día normal de la Tierra.", "TREASURE 5 · CALENDAR": "TESORO 5 · CALENDARIO", "Five days make a week.": "Cinco días forman una semana.", "JUPITER WEEK": "SEMANA DE JÚPITER", "FIRE": "FUEGO", "WATER": "AGUA", "EARTH": "TIERRA", "AIR": "AIRE", "AETHER": "ÉTER", "Hover over a day.": "Pasa el cursor o toca un día.", "DID YOU KNOW?": "¿SABÍAS?", "Each compass month has": "Cada mes de brújula tiene", "9 planet weeks": "9 semanas planetarias", "The planets are the week order.": "Los planetas marcan el orden de las semanas.", "Mercury": "Mercurio", "Venus": "Venus", "Earth": "Tierra", "Mars": "Marte", "Jupiter": "Júpiter", "Saturn": "Saturno", "Uranus": "Urano", "Neptune": "Neptuno", "Pluto": "Plutón", "Mercury → Venus → Earth → Mars → Jupiter → Saturn → Uranus → Neptune → Pluto": "Mercurio → Venus → Tierra → Marte → Júpiter → Saturno → Urano → Neptuno → Plutón", "Nine 5-day weeks = 45 days in one compass month.": "Nueve semanas de 5 días = 45 días en un mes de brújula.", "Eight compass months make the year.": "Ocho meses de brújula forman el año.", "Move around the compass. Each stop is one month.": "Muévete alrededor de la brújula. Cada parada es un mes.", "MONTHS": "MESES", "JUPITER AIR": "JÚPITER AIRE", "Jupiter Air happens once in every compass month.": "Júpiter Aire aparece una vez en cada mes de brújula.", "8 TIMES A YEAR": "8 VECES AL AÑO", "It becomes a familiar friend that returns month after month.": "Se vuelve un amigo conocido que regresa mes tras mes.", "I FOUND JUPITER AIR": "ENCONTRÉ JÚPITER AIRE", "NORTH JUPITER AIR": "JÚPITER AIRE NORTE", "Now add the compass month.": "Ahora añade el mes de brújula.", "Jupiter Air visits every month, but it is": "Júpiter Aire visita cada mes, pero sólo es", "North Jupiter Air": "Júpiter Aire Norte", "only when that Jupiter Air day occurs in the North compass month.": "cuando ese día de Júpiter Aire ocurre durante el mes Norte.", "ONCE A YEAR": "UNA VEZ AL AÑO", "Same Jupiter Air friend · one particular compass month · one annual return.": "El mismo amigo Júpiter Aire · un mes de brújula específico · un regreso anual.", "Something odd happens after the 360 regular days.": "Algo curioso sucede después de los 360 días regulares.", "Curious? There is a little extra week hiding at the edge of the year.": "¿Curiosidad? Hay una pequeña semana extra escondida al borde del año.", "Explore Wilson’s Week →": "Explora la Semana de Wilson →", "TREASURE 6 · EARTH MAP": "TESORO 6 · MAPA DE LA TIERRA", "Cross the sea: Rome to Athens.": "Cruza el mar: Roma a Atenas.", "Now it is easier: click the city on the map": "Ahora es más fácil: haz clic en la ciudad del mapa", "or": "o", "use the big city buttons below.": "usa los botones grandes de ciudades debajo.", "Mediterranean Sea": "Mar Mediterráneo", "Rome": "Roma", "Athens": "Atenas", "📍 PICK ROME": "📍 ELIGE ROMA", "📍 PICK ATHENS": "📍 ELIGE ATENAS", "ONE A8 POSITION · TWO FRIENDLY WAYS TO READ IT": "UNA POSICIÓN A8 · DOS FORMAS AMIGABLES DE LEERLA", "DECIMAL COMFORT": "DECIMAL CÓMODO", "🐙 OCTY · OCTAL": "🐙 OCTY · OCTAL", "Same A8 position. Decimal comfort helps newcomers. Octy shows the native octal form.": "La misma posición A8. El decimal cómodo ayuda a empezar. Octy muestra la forma octal nativa.", "ROME": "ROMA", "ATHENS": "ATENAS", "Pick Rome and Athens.": "Elige Roma y Atenas.", "TEMPERATURE QUIZ": "RETO DE TEMPERATURA", "What is your body temperature?": "¿Cuál es la temperatura de tu cuerpo?", "Pick the A8 temperature that best matches a normal human body.": "Elige la temperatura A8 que mejor corresponde a un cuerpo humano normal.", "Hint:": "Pista:", "the human body lives close to the A8 human-temperature region, but not exactly at /31.": "el cuerpo humano está cerca de la región humana de temperatura A8, pero no exactamente en /31.", "TREASURE 7 · THINGS IN THE KITCHEN": "TESORO 7 · COSAS DE LA COCINA", "Click things in the kitchen.": "Haz clic en las cosas de la cocina.", "ICE": "HIELO", "CUP": "TAZA", "KETTLE": "TETERA", "BALLOON": "GLOBO", "JACKET": "CHAQUETA", "Pick something.": "Elige algo.", "HOW MANY A8 RULERS CAN A CUP OF TEA TOUCH?": "¿CUÁNTAS REGLAS A8 PUEDE TOCAR UNA TAZA DE TÉ?", "Pick every one. Some are strongly related. Some are only along for the ride.": "Elige todas. Algunas están muy relacionadas. Otras sólo vienen de paseo.", "Select a ruler.": "Elige una regla.", "EXPLORED:": "EXPLORADAS:", "YOU MEASURED THE WHOLE TEA BREAK.": "MEDISTE TODA LA PAUSA DEL TÉ.", "Temperature · Pressure · Volume · Mass · Length · Clock": "Temperatura · Presión · Volumen · Masa · Longitud · Reloj", "Apparently drinking hot / cold tea can be done both ways. Binary tea. 😄": "Al parecer el té caliente / frío puede hacerse de las dos maneras. Té binario. 😄", "OOH… SO CHILLY.": "OOH… QUÉ FRÍO.", "What should you put on?": "¿Qué deberías ponerte?", "thin windbreaker": "rompevientos delgado", "thicker jacket": "chaqueta más gruesa", "thick jacket + boots": "chaqueta gruesa + botas", "Pick the weather.": "Elige el clima.", "Explore all five home objects. The cup and jacket each hide an extra rabbit hole.": "Explora los cinco objetos. La taza y la chaqueta esconden cada una una sorpresa extra.", "SPEED GAME": "JUEGO DE VELOCIDAD", "Little kids love speed.": "A los niños pequeños les encanta la velocidad.", "Match the A8 speed to the right traveler. When you get all four right, watch carefully…": "Relaciona la velocidad A8 con el viajero correcto. Cuando aciertes las cuatro, mira con atención…", "🚲 BICYCLE": "🚲 BICICLETA", "pick A8 speed": "elige velocidad A8", "🚗 AUTOMOBILE": "🚗 AUTOMÓVIL", "🚆 TRAIN": "🚆 TREN", "✈️ AIRPLANE": "✈️ AVIÓN", "Match all four.": "Relaciona los cuatro.", "Fast clue:": "Pista rápida:", "higher A8 speed rungs mean faster motion. Start with the bicycle as the slowest and the airplane as the fastest.": "los peldaños A8 más altos significan más velocidad. Empieza con la bicicleta como la más lenta y el avión como el más rápido.", "SOUND ROOM": "SALA DE SONIDO", "Double it with your ears.": "Duplícalo con tus oídos.", "Same pattern. Different sense. Press the cartoon instruments and hear the note double each time.": "Mismo patrón. Otro sentido. Pulsa los instrumentos y escucha cómo la nota se duplica cada vez.", "BASSY STRING": "CUERDA GRAVE", "VIOLIN": "VIOLÍN", "TRUMPET": "TROMPETA", "BELL": "CAMPANA", "Each step doubles the frequency.": "Cada paso duplica la frecuencia.", "Low notes get a little extra punch so small laptop speakers can still hear them.": "Las notas graves reciben un poco más de fuerza para que también se oigan en altavoces pequeños.", "Same trick again:": "El mismo truco otra vez:", "double the number, hear the pitch jump. The pattern is doing the work.": "duplica el número y escucha saltar el tono. El patrón hace el trabajo.", "SKY ROOM": "SALA DEL CIELO", "Can you find Mintaka in Orion?": "¿Puedes encontrar Mintaka en Orión?", "This mockup follows the familiar Orion shape more closely. Betelgeuse glows orange. Only Mintaka reveals its A8 star coordinates.": "Este dibujo sigue mejor la forma conocida de Orión. Betelgeuse brilla naranja. Sólo Mintaka revela sus coordenadas estelares A8.", "ORION": "ORIÓN", "Try the three belt stars. Can you pick Mintaka?": "Prueba las tres estrellas del cinturón. ¿Puedes elegir Mintaka?", "LOOK · WATCH · REPEAT": "MIRA · OBSERVA · REPITE", "Earth moves. The Sun shines. Jupiter’s moons repeat.": "La Tierra se mueve. El Sol brilla. Las lunas de Júpiter repiten.", "Click Earth · Sun · Jupiter": "Haz clic: Tierra · Sol · Júpiter", "Touch the little solar system.": "Toca el pequeño sistema solar.", "Try this:": "Prueba esto:", "click Earth and it rotates forward, click Sun and the rays brighten, click Jupiter and the three moons start moving.": "haz clic en la Tierra y gira hacia adelante; haz clic en el Sol y aumentan los rayos; haz clic en Júpiter y sus tres lunas empiezan a moverse.", "Dynamic sky, simple story.": "Cielo dinámico, historia sencilla.", "Earth turns and advances. Sol shines. Jupiter’s moons keep repeating their dance.": "La Tierra gira y avanza. Sol brilla. Las lunas de Júpiter siguen repitiendo su baile.", "TREASURE 8 · COMPASS": "TESORO 8 · BRÚJULA", "Final clue: find 128.": "Pista final: encuentra 128.", "The treasure map says:": "El mapa del tesoro dice:", "turn the compass to 128": "gira la brújula hasta 128", "TURN 128": "GIRA A 128", "BONUS CALENDAR ART": "ARTE EXTRA DEL CALENDARIO", "Nice! You found 128. Here is a little calendar surprise.": "¡Bien! Encontraste 128. Aquí tienes una pequeña sorpresa del calendario.", "click the artwork for the full Calendar viewer": "haz clic en la imagen para abrir el visor completo del Calendario", "This is the actual A8 month artwork, not a stand-in.": "Esta es la ilustración real del mes A8, no una imagen de ejemplo.", "THE CHEST": "EL COFRE", "You found the Pieces of Eight.": "Encontraste las Piezas de Ocho.", "Find all 8 coins to open it.": "Encuentra las 8 monedas para abrirlo.", "A8 EXPLORER": "EXPLORADOR A8", "Secret reward:": "Recompensa secreta:", "MÖBIUS BACON": "TOCINO DE MÖBIUS", "Bacon flavor… forever.": "Sabor a tocino… para siempre.", "One side. One edge. Please do not eat the topology.": "Un lado. Un borde. Por favor no te comas la topología.", "SEE THE CLOCK": "VER EL RELOJ", "SEE THE MAP": "VER EL MAPA", "SEE THE CALENDAR": "VER EL CALENDARIO", "← PREVIOUS": "← ANTERIOR", "NEXT →": "SIGUIENTE →"};
+const staticTextNodes=[];
 
-    pages.forEach((p,i)=>{
-      p.classList.toggle("active",i===current);
-      p.classList.toggle("before",i<current);
-    });
-
-    counter.textContent=(current+1)+" / "+pages.length;
-    prev.disabled=current===0;
-    next.disabled=current===pages.length-1;
-  }
-
-  prev.onclick=()=>show(current-1);
-  next.onclick=()=>show(current+1);
-
-  document.getElementById("again").onclick=()=>show(0);
-
-  document.addEventListener("keydown",e=>{
-    if(e.key==="ArrowRight") show(current+1);
-    if(e.key==="ArrowLeft") show(current-1);
-  });
-
-  let startX=null;
-
-  document.addEventListener("touchstart",e=>{
-    startX=e.changedTouches[0].clientX;
-  },{passive:true});
-
-  document.addEventListener("touchend",e=>{
-    if(startX===null) return;
-    const dx=e.changedTouches[0].clientX-startX;
-
-    if(dx < -55) show(current+1);
-    if(dx > 55) show(current-1);
-
-    startX=null;
-  },{passive:true});
-
-  const stages=[1,2,4,8];
-  let ballStage=0;
-  const row=document.getElementById("ballrow");
-  const count=document.getElementById("ballcount");
-  const dbl=document.getElementById("double");
-
-  function balls(){
-    const n=stages[ballStage];
-    row.innerHTML="";
-
-    for(let i=0;i<n;i++){
-      const b=document.createElement("div");
-      b.className="ball";
-      row.appendChild(b);
+function captureStaticTextNodes(){
+  const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
+  let node;
+  while((node=walker.nextNode())){
+    if(!node.parentElement || ['SCRIPT','STYLE'].includes(node.parentElement.tagName)) continue;
+    const raw=node.nodeValue;
+    const key=raw.trim();
+    if(!key) continue;
+    if(ES_STATIC[key]){
+      const lead=raw.match(/^\s*/)?.[0]||'';
+      const tail=raw.match(/\s*$/)?.[0]||'';
+      staticTextNodes.push({node,en:key,lead,tail});
     }
+  }
+}
 
-    count.textContent=n;
-    dbl.textContent=n===8 ? "START AGAIN" : "DOUBLE IT!";
+function tr(en,es){ return currentLang==='es' ? es : en; }
+
+function applyLanguage(){
+  document.documentElement.lang=currentLang;
+  staticTextNodes.forEach(x=>{
+    x.node.nodeValue=x.lead+(currentLang==='es'?ES_STATIC[x.en]:x.en)+x.tail;
+  });
+  const mini=document.getElementById('langMini');
+  if(mini) mini.textContent=currentLang==='es'?'ENGLISH':'ESPAÑOL';
+  const label=document.getElementById('coinLabel');
+  if(label) label.textContent=currentLang==='es'?'PIEZAS DE OCHO':'PIECES OF EIGHT';
+  updateKidGuide();
+}
+
+function setLanguage(lang){
+  currentLang=lang==='es'?'es':'en';
+  applyLanguage();
+}
+
+function toggleLanguage(){
+  setLanguage(currentLang==='en'?'es':'en');
+}
+
+const kidHintsEN=[
+ 'Pick ENGLISH or ESPAÑOL, then press NEXT.',
+ 'Press FOLD · MATCH ENDS · CUT until the string set is ready. Then look at ONE brick and click ONE, TWO, or THREE.',
+ 'Look at the three rulers, then press I FOUND THE RULER PATTERN.',
+ 'Turn bits on. Your goal is 31 — all five lights.',
+ 'PRESS SPIN THROUGH THE DAY 8 TIMES. Watch the counter reach 8/8 and the hand return to 0. NEXT unlocks when the full day is complete. Then try School, Play, Sleep and the tick buttons.',
+ 'Tap a day, a planet week, and compass months. Find Jupiter Air.',
+ 'Pick Rome and Athens. Then try Decimal Comfort and Octy.',
+ 'Choose the body temperature you think is right.',
+ 'Tap every kitchen object. Open the cup and jacket surprises.',
+ 'Match a speed to each traveler. Green means you are getting it.',
+ 'Press the instruments from low to high. One instrument has a surprise.',
+ 'Tap Orion’s stars until you find Mintaka.',
+ 'Tap Earth, Sun, and Jupiter. Each one moves differently.',
+ 'Press TURN 128. Watch the compass first — the artwork arrives a moment later.',
+ 'If the chest is locked, the coin row above shows how many treasures are still missing.'
+];
+const kidHintsES=[
+ 'Elige ENGLISH o ESPAÑOL y luego pulsa SIGUIENTE.',
+ 'Pulsa DOBLA · JUNTA LAS PUNTAS · CORTA hasta completar las cuerdas. Después mira UN solo ladrillo y pulsa UNA, DOS o TRES.',
+ 'Mira las tres reglas y luego pulsa ENCONTRÉ EL PATRÓN DE LA REGLA.',
+ 'Enciende los bits. Tu meta es 31: las cinco luces encendidas.',
+ 'PULSA RECORRE EL DÍA 8 VECES. Mira cómo el contador llega a 8/8 y la aguja vuelve a 0. SIGUIENTE se desbloquea al completar el día. Después prueba Escuela, Jugar, Dormir y los tics.',
+ 'Toca un día, una semana planetaria y los meses de brújula. Encuentra Júpiter Aire.',
+ 'Elige Roma y Atenas. Después prueba Decimal Cómodo y Octy.',
+ 'Elige la temperatura corporal que crees correcta.',
+ 'Toca todos los objetos de la cocina. Abre las sorpresas de la taza y la chaqueta.',
+ 'Relaciona una velocidad con cada viajero. Verde significa que vas bien.',
+ 'Pulsa los instrumentos de grave a agudo. Uno tiene una sorpresa.',
+ 'Toca las estrellas de Orión hasta encontrar Mintaka.',
+ 'Toca Tierra, Sol y Júpiter. Cada uno se mueve de forma distinta.',
+ 'Pulsa GIRA A 128. Mira primero la brújula: la imagen aparece un momento después.',
+ 'Si el cofre está cerrado, la fila de monedas de arriba muestra cuántos tesoros faltan.'
+];
+
+function updateKidGuide(){
+  const guide=document.getElementById('kidGuide');
+  if(!guide) return;
+  const hint=(currentLang==='es'?kidHintsES:kidHintsEN)[p] || '';
+  guide.innerHTML='👆 <b>'+tr('TRY THIS:','PRUEBA ESTO:')+'</b> '+hint;
+}
+
+const pages=[...document.querySelectorAll('.page')];
+let p=0, coins=new Set(), folds=0, clockHour=0, clockSpins=0, clockComplete=false, pickedCities=[], objFound=new Set();
+document.getElementById('ptotal').textContent=pages.length;
+
+function drawCoins(){
+  document.getElementById('coinCount').textContent=coins.size;
+  document.getElementById('miniCoins').innerHTML=[...Array(8)].map((_,i)=>`<i class="coin ${coins.has(i)?'':'locked'}">8</i>`).join('');
+  document.getElementById('lockedChest').style.display=coins.size===8?'none':'block';
+  document.getElementById('openChest').style.display=coins.size===8?'block':'none';
+}
+function earn(i,el){
+  if(!coins.has(i)){coins.add(i); drawCoins();}
+  if(el){ el.textContent=tr('🪙 PIECE FOUND!','🪙 ¡PIEZA ENCONTRADA!'); }
+}
+
+function updateNavLock(){
+  const next=document.getElementById('next');
+  if(!next) return;
+
+  if(p===1 && (cutStep<6 || !brickSolved)){
+    next.disabled=true;
+    next.title=tr(
+      'Finish all 7 cuts and choose THREE in the brick challenge.',
+      'Completa los 7 cortes y elige TRES en el reto del ladrillo.'
+    );
+    return;
   }
 
-  dbl.onclick=()=>{
-    ballStage=(ballStage+1)%stages.length;
-    balls();
+  if(p===4 && !clockComplete){
+    next.disabled=true;
+    next.title=tr(
+      'Spin through all 8 steps to complete the full 32-hour day.',
+      'Gira los 8 pasos para completar el día entero de 32 horas.'
+    );
+    return;
+  }
+
+  next.disabled=false;
+  next.title='';
+}
+
+function move(d){
+  if(d>0 && p===1 && (cutStep<6 || !brickSolved)){
+    const guide=document.getElementById('kidGuide');
+    if(guide){
+      guide.innerHTML='✂️ <b>'+tr('KEEP GOING:','SIGUE:')+'</b> '+tr(
+        'Click the scissors until the counter reaches 7/7, then choose THREE.',
+        'Pulsa las tijeras hasta que el contador llegue a 7/7 y luego elige TRES.'
+      );
+    }
+    updateNavLock();
+    return;
+  }
+
+  if(d>0 && p===4 && !clockComplete){
+    const guide=document.getElementById('kidGuide');
+    if(guide){
+      guide.innerHTML='🕰️ <b>'+tr('KEEP GOING:','SIGUE:')+'</b> '+tr(
+        'Press the clock button until the counter reaches 8/8 and the hand returns to 0.',
+        'Pulsa el botón del reloj hasta que el contador llegue a 8/8 y la aguja vuelva a 0.'
+      );
+    }
+    updateNavLock();
+    return;
+  }
+
+  p = (p + d + pages.length) % pages.length;
+  pages.forEach((x,i)=>x.classList.toggle('active',i===p));
+  document.getElementById('pnum').textContent=p+1;
+  document.getElementById('prev').disabled=false;
+  updateKidGuide();
+  updateNavLock();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+const cutRungs = [
+  {label:'/31', cm:119.3},
+  {label:'/30', cm:59.7},
+  {label:'/29', cm:29.8},
+  {label:'/28', cm:14.9},
+  {label:'/27', cm:7.5},
+  {label:'/26', cm:3.7},
+  {label:'/25', cm:1.9}
+];
+let cutStep = -1;
+let brickSolved = false;
+
+function renderStringInventory(){
+  const box=document.getElementById('stringInventory');
+  if(cutStep < 0){
+    box.innerHTML='<span class="stringPiece startPiece">238 cm</span>';
+    return;
+  }
+
+  let pieces=[];
+  if(cutStep===0){
+    pieces=[cutRungs[0],cutRungs[0]];
+  } else {
+    for(let i=0;i<cutStep;i++) pieces.push(cutRungs[i]);
+    pieces.push(cutRungs[cutStep],cutRungs[cutStep]);
+  }
+
+  const max=119.3;
+  box.innerHTML=pieces.map(p=>{
+    const width=Math.max(46,Math.round(500*p.cm/max));
+    return `<span class="stringPiece" style="width:${width}px">${p.label}</span>`;
+  }).join('');
+}
+
+function cutA8String(){
+  if(cutStep >= cutRungs.length-1){
+    return;
+  }
+
+  cutStep++;
+  renderStringInventory();
+
+  const messages=currentLang==='es' ? [
+    'Córtala por la mitad: 2 cuerdas de A8/31.',
+    'Guarda una /31. Dobla la otra: ahora tienes /31 + 2 × /30.',
+    'Guarda una /30. Dobla la otra: ahora tienes /31 + /30 + 2 × /29.',
+    'Otra vez: guarda una /29 y crea 2 × /28.',
+    'Otra vez: guarda una /28 y crea 2 × /27.',
+    'Otra vez: guarda una /27 y crea 2 × /26.',
+    'Una más: guarda una /26 y crea 2 × /25. Ocho cuerdas en total.'
+  ] : [
+    'Cut it in half: 2 strings of A8/31.',
+    'Keep one /31. Fold the other: now you have /31 + 2 × /30.',
+    'Keep one /30. Fold the other: now you have /31 + /30 + 2 × /29.',
+    'Again: keep one /29 and make 2 × /28.',
+    'Again: keep one /28 and make 2 × /27.',
+    'Again: keep one /27 and make 2 × /26.',
+    'One more: keep one /26 and make 2 × /25. Eight strings total.'
+  ];
+
+  document.getElementById('foldText').textContent=messages[cutStep];
+
+  const count=cutStep+1;
+  const remaining=7-count;
+  const progress=document.getElementById('cutProgressText');
+  const fill=document.getElementById('cutTrackFill');
+  const instruction=document.getElementById('cutInstruction');
+  const button=document.getElementById('foldCutButton');
+
+  progress.textContent=currentLang==='es'
+    ? `CORTE ${count} DE 7`
+    : `CUT ${count} OF 7`;
+  fill.style.width=(count/7*100)+'%';
+
+  if(count<7){
+    button.textContent=currentLang==='es'
+      ? `✂️ CORTA OTRA VEZ · ${count}/7`
+      : `✂️ CUT AGAIN · ${count}/7`;
+    button.classList.add('cutAgain');
+    instruction.textContent=currentLang==='es'
+      ? `SIGUE PULSANDO · FALTAN ${remaining} CORTES`
+      : `KEEP CLICKING · ${remaining} CUTS TO GO`;
+  } else {
+    button.textContent=currentLang==='es'
+      ? '✓ 7 CORTES COMPLETOS'
+      : '✓ 7 CUTS COMPLETE';
+    button.classList.remove('cutAgain');
+    button.disabled=true;
+    instruction.textContent=currentLang==='es'
+      ? '¡LISTO! AHORA ELIGE TRES EN EL RETO DEL LADRILLO.'
+      : 'READY! NOW CHOOSE THREE IN THE BRICK CHALLENGE.';
+    document.getElementById('foldText').textContent=tr(
+      'Eight strings. Your A8 measuring set is ready.',
+      'Ocho cuerdas. Tu juego de medición A8 está listo.'
+    );
+    document.getElementById('brickChallenge').style.display='block';
+    earn(0);
+  }
+
+  updateNavLock();
+}
+
+function brickAnswer(n,btn){
+  const readout=document.getElementById('brickReadout');
+  const reveal=document.getElementById('brickReveal');
+
+  if(n===3){
+    readout.textContent=tr('YES · THREE MEASUREMENTS!','SÍ · ¡TRES MEDIDAS!');
+    reveal.style.display='block';
+    btn.classList.add('correctChoice');
+    brickSolved=true;
+    updateNavLock();
+  } else {
+    readout.textContent=tr(
+      'One brick has three dimensions: LENGTH · WIDTH · HEIGHT. Try THREE.',
+      'Un ladrillo tiene tres dimensiones: LARGO · ANCHO · ALTURA. Prueba TRES.'
+    );
+    reveal.style.display='none';
+  }
+}
+
+// bits
+const bitWeights=[16,8,4,2,1], bitState=[0,0,0,0,0];
+const bits=document.getElementById('bits');
+bitWeights.forEach((w,i)=>{
+  const b=document.createElement('div');
+  b.className='bit';
+  b.innerHTML=`<div><b>0</b><small>${w}</small></div>`;
+  b.onclick=()=>{bitState[i]^=1; b.classList.toggle('on',!!bitState[i]); b.querySelector('b').textContent=bitState[i]; updateBits();};
+  bits.appendChild(b);
+});
+function updateBits(){
+  const val=bitState.reduce((s,v,i)=>s+v*bitWeights[i],0);
+  document.getElementById('binary').textContent=bitState.join('');
+  document.getElementById('decimal').textContent=val;
+
+  const bulb=document.getElementById('ideaBulb');
+  if(val===31){
+    document.getElementById('bitMessage').textContent=tr('ALL ON · 31','TODO ENCENDIDO · 31');
+    bulb.classList.add('on');
+    earn(2);
+  } else {
+    bulb.classList.remove('on');
+  }
+}
+function challenge31(){document.getElementById('bitMessage').textContent=tr('Hint: light every bit.','Pista: enciende todos los bits.');}
+
+// clock face
+(function buildClock(){
+  const face=document.getElementById('clockface');
+  for(let i=0;i<32;i++){
+    const t=document.createElement('div');
+    t.className='tick';
+    t.style.transform=`translate(-50%,-100%) rotate(${i*11.25}deg)`;
+    face.appendChild(t);
+  }
+  [0,4,8,12,16,20,24,28].forEach(i=>{
+    const n=document.createElement('div');
+    n.className='num';
+    const ang=(i/32)*Math.PI*2 - Math.PI/2;
+    const r=132;
+    n.style.left=`calc(50% + ${Math.cos(ang)*r}px)`;
+    n.style.top=`calc(50% + ${Math.sin(ang)*r}px)`;
+    n.textContent=i;
+    face.appendChild(n);
+  });
+})();
+function spinClock(){
+  if(clockComplete) return;
+
+  clockSpins++;
+  clockHour=(clockHour+4)%32;
+
+  document.getElementById('clockHand').style.transform=`translateX(-50%) rotate(${clockHour*11.25}deg)`;
+  document.getElementById('clockReadout').textContent=`${tr('Hour','Hora')} ${clockHour}`;
+
+  const progress=document.getElementById('clockProgressText');
+  const fill=document.getElementById('clockTrackFill');
+  const instruction=document.getElementById('clockInstruction');
+  const button=document.getElementById('clockSpinButton');
+
+  progress.textContent=currentLang==='es'
+    ? `VUELTA ${clockSpins} DE 8`
+    : `DAY ${clockSpins} OF 8`;
+  fill.style.width=(clockSpins/8*100)+'%';
+
+  if(clockSpins<8){
+    button.textContent=currentLang==='es'
+      ? `🕰️ SIGUE GIRANDO · ${clockSpins}/8`
+      : `🕰️ KEEP SPINNING · ${clockSpins}/8`;
+    button.classList.add('keepSpinning');
+
+    instruction.textContent=currentLang==='es'
+      ? `SIGUE PULSANDO · FALTAN ${8-clockSpins} PASOS PARA COMPLETAR EL DÍA`
+      : `KEEP CLICKING · ${8-clockSpins} STEPS TO COMPLETE THE DAY`;
+  }else{
+    clockComplete=true;
+    button.textContent=currentLang==='es'
+      ? '✓ DÍA COMPLETO · 8/8'
+      : '✓ FULL DAY COMPLETE · 8/8';
+    button.classList.remove('keepSpinning');
+    button.disabled=true;
+
+    instruction.textContent=currentLang==='es'
+      ? '¡COMPLETO! VOLVISTE A 0 DESPUÉS DE LAS 32 HORAS A8.'
+      : 'COMPLETE! YOU RETURNED TO 0 AFTER ALL 32 A8 HOURS.';
+
+    earn(3);
+  }
+
+  updateNavLock();
+}
+
+
+function setClockHour(h){
+  clockHour=h%32;
+  document.getElementById('clockHand').style.transform=`translateX(-50%) rotate(${clockHour*11.25}deg)`;
+  document.getElementById('clockReadout').textContent=`${tr('Hour','Hora')} ${clockHour}`;
+}
+
+
+function clickTone(duration, freq=740, gain=0.28){
+  const A=window.AudioContext||window.webkitAudioContext;
+  const c=new A();
+  const o=c.createOscillator();
+  const g=c.createGain();
+  o.type='square';
+  o.frequency.value=freq;
+  o.connect(g); g.connect(c.destination);
+  g.gain.setValueAtTime(gain,c.currentTime);
+  g.gain.exponentialRampToValueAtTime(.001,c.currentTime+Math.min(duration,.22));
+  o.start();
+  o.stop(c.currentTime+Math.min(duration,.24));
+  setTimeout(()=>c.close(), Math.ceil(duration*1000)+300);
+}
+function happySecond(){
+  document.getElementById('secondReadout').textContent=tr('8 quick A8 ticks · 0.6592 old seconds apart','8 tics A8 rápidos · separados por 0.6592 segundos antiguos');
+  for(let i=0;i<8;i++){
+    setTimeout(()=>clickTone(.11, 980 + (i%2)*130, .24), Math.round(i*659.1797));
+  }
+}
+function sadSecond(){
+  document.getElementById('secondReadout').textContent=tr('6 LOUD old-clock ticks · 1 second apart','6 tics FUERTES del reloj antiguo · separados por 1 segundo');
+  for(let i=0;i<6;i++){
+    setTimeout(()=>clickTone(.20, 240 - (i%2)*25, .42), i*1000);
+  }
+}
+
+// calendar
+function teachDay(el){
+  document.getElementById('dayChipReadout').textContent=`${el.textContent} · ${tr('a binary day identity used in Wilson’s Week presentation.','una identidad binaria de día usada en la presentación de la Semana de Wilson.')}`;
+}
+
+// map
+function pickCity(name){
+  pickedCities.push(name);
+  if(pickedCities.length>2) pickedCities=[name];
+  const unique=[...new Set(pickedCities)];
+  if(unique.length===1){
+    document.getElementById('mapReadout').textContent=currentLang==='es' ? `${name==='Rome'?'Roma':'Atenas'} elegida. Ahora elige la otra ciudad.` : `${name} selected. Now pick the other city.`;
+  }
+  if(unique.includes('Rome') && unique.includes('Athens')){
+    document.getElementById('routeLine').classList.add('show');
+    document.getElementById('mapReadout').innerHTML=currentLang==='es'
+      ? `ROMA ↔ ATENAS · <b>860 A8 NAV</b><br><span class="octyRoute">🐙 1534₈ A8 NAV</span><br><span class="legacyCoord">comparación heredada: ~1051 km de círculo máximo</span>`
+      : `ROME ↔ ATHENS · <b>860 A8 NAV</b><br><span class="octyRoute">🐙 1534₈ A8 NAV</span><br><span class="legacyCoord">legacy comparison: ~1051 km great-circle</span>`;
+    earn(5);
+  } else {
+    document.getElementById('routeLine').classList.remove('show');
+  }
+}
+
+
+let mapNotation='decimal';
+function setMapNotation(mode){
+  mapNotation=mode;
+  document.getElementById('decBtn').classList.toggle('activeNotation',mode==='decimal');
+  document.getElementById('octBtn').classList.toggle('activeNotation',mode==='octal');
+
+  const labels=document.querySelectorAll('.coordLabel,.octyRoute');
+  labels.forEach(el=>el.style.opacity='0.45');
+
+  if(mode==='decimal'){
+    document.querySelectorAll('.coordLabel:not(.octyLabel)').forEach(el=>el.style.opacity='1');
+  } else {
+    document.querySelectorAll('.octyLabel,.octyRoute').forEach(el=>el.style.opacity='1');
+  }
+}
+
+// water objects
+let cupMeasuresFound=new Set();
+
+function showObj(which, btn){
+  const txt=currentLang==='es' ? {
+    ice:'HIELO · A8 TEMP /26 · el ancla de congelación.',
+    cup:'TAZA A8 · abre abajo el explorador de seis reglas del té.',
+    kettle:'AGUA HIRVIENDO · A8 TEMP /33',
+    balloon:'AIRE A NUESTRO ALREDEDOR · A8 PRESS /31 = 1',
+    jacket:'OOH… QUÉ FRÍO · abre abajo la escalera de ropa para el frío.'
+  } : {
+    ice:'ICE · A8 TEMP /26 · the freeze anchor.',
+    cup:'A8 CUP · open the six-ruler tea explorer below.',
+    kettle:'BOILING WATER · A8 TEMP /33',
+    balloon:'AIR AROUND US · A8 PRESS /31 = 1',
+    jacket:'OOH… SO CHILLY · open the cold-weather gear ladder below.'
   };
 
-  balls();
-  show(0);
-})();
-</script>
+  objFound.add(which);
+  document.getElementById('objectReadout').textContent=txt[which];
 
+  const cup=document.getElementById('cupExplorer');
+  const jacket=document.getElementById('jacketExplorer');
+  if(cup) cup.style.display = which==='cup' ? 'block' : 'none';
+  if(jacket) jacket.style.display = which==='jacket' ? 'block' : 'none';
+
+  if(objFound.size===5){
+    document.getElementById('objectReadout').innerHTML=txt[which] + '<br><span class="note">'+tr('You found every home object.','Encontraste todos los objetos de casa.')+'</span>';
+    if(cupMeasuresFound.size===6) earn(6);
+  }
+}
+
+function cupMeasure(kind,btn){
+  const answers=currentLang==='es' ? {
+    T:`<b>A8/31.99 T · TEMPERATURA</b><br>
+       Excelente elección — muy relacionada.<br>
+       El té caliente vive más cerca de <b>A8/32 T</b>. La temperatura nos dice qué tan caliente está.`,
+    P:`<b>A8/31 P · PRESIÓN</b><br>
+       Buena elección — pero no está muy relacionada con el té mismo.<br>
+       Describe la presión alrededor de la taza y el té.`,
+    V:`<b>A8/31 V · VOLUMEN</b><br>
+       Excelente elección — muy relacionada.<br>
+       El volumen nos dice <b>cuánto té hay en la taza</b>.`,
+    M:`<b>A8/31 M · MASA</b><br>
+       Muy buena elección — relacionada.<br>
+       La masa nos dice qué tan pesado es el té. Una taza A8 de agua pura es aproximadamente <b>206.8572 g</b> en comparación heredada.`,
+    L:`<b>A8/31 L · LONGITUD</b><br>
+       No se relaciona directamente con el té — a menos que midamos el <b>ancho, alto o profundidad</b> de la taza.`,
+    C:`<b>A8/31 C · RELOJ</b><br>
+       No se relaciona mucho con el té mismo — salvo que midamos el tiempo de <b>infusión, enfriamiento o bebida</b>.<br>
+       Al parecer el té se puede medir de las dos maneras. 😄`
+  } : {
+    T:`<b>A8/31.99 T · TEMPERATURE</b><br>
+       Excellent choice — very related.<br>
+       Hot tea lives closer to <b>A8/32 T</b>. Temperature tells us how hot the tea is.`,
+    P:`<b>A8/31 P · PRESSURE</b><br>
+       Nice choice — but not strongly related to the tea itself.<br>
+       It describes the surrounding pressure the cup and tea are sitting in.`,
+    V:`<b>A8/31 V · VOLUME</b><br>
+       Excellent choice — very related.<br>
+       Volume tells us <b>how much tea is in the cup</b>.`,
+    M:`<b>A8/31 M · MASS</b><br>
+       Very good choice — related.<br>
+       Mass tells us how heavy the tea is. One A8 cup of pure water is about <b>206.8572 g</b> in legacy comparison.`,
+    L:`<b>A8/31 L · LENGTH</b><br>
+       Not directly about the tea — unless we measure the cup's <b>width, height, or depth</b>.`,
+    C:`<b>A8/31 C · CLOCK</b><br>
+       Not really about the tea itself — unless we time <b>steeping, cooling, or drinking</b>.<br>
+       Apparently tea can be measured both ways. 😄`
+  };
+
+  cupMeasuresFound.add(kind);
+  btn.classList.add('cupChipDone');
+
+  document.getElementById('cupMeasureReadout').innerHTML=answers[kind];
+  document.getElementById('cupCount').textContent=cupMeasuresFound.size;
+
+  if(cupMeasuresFound.size===6){
+    document.getElementById('cupComplete').style.display='block';
+    if(objFound.size===5) earn(6);
+  }
+}
+
+
+function bodyTempAnswer(value, btn){
+  const readout=document.getElementById('bodyTempReadout');
+  const dummy=document.getElementById('dummyFigure');
+
+  document.querySelectorAll('.quizChoices button').forEach(b=>{
+    b.classList.remove('correctChoice','wrongChoice');
+  });
+
+  if(value==='31.58'){
+    btn.classList.add('correctChoice');
+    readout.innerHTML=tr('YES · A8/31.58 T<br><span class="note">That is the happy human-body answer.</span>','SÍ · A8/31.58 T<br><span class="note">Esa es la respuesta feliz del cuerpo humano.</span>');
+    dummy.classList.remove('dancing');
+    void dummy.offsetWidth;
+    dummy.classList.add('dancing');
+  } else {
+    btn.classList.add('wrongChoice');
+    readout.textContent=tr('Not that one. Try again.','Esa no. Inténtalo otra vez.');
+    dummy.classList.remove('dancing');
+  }
+}
+
+
+function coldGear(rung,btn){
+  const readout=document.getElementById('coldGearReadout');
+  document.querySelectorAll('.coldGear button').forEach(b=>b.classList.remove('correctChoice'));
+
+  const copy=currentLang==='es' ? {
+    '/29':'A8/29 T · fresco. Hora del rompevientos delgado.',
+    '/28':'A8/28 T · más frío. Hora de una chaqueta más gruesa.',
+    '/27':'A8/27 T · brrr. Chaqueta gruesa y botas.'
+  } : {
+    '/29':'A8/29 T · chilly. Thin windbreaker time.',
+    '/28':'A8/28 T · colder. Thicker jacket time.',
+    '/27':'A8/27 T · brrr. Thick jacket and boots.'
+  };
+
+  btn.classList.add('correctChoice');
+  readout.textContent=copy[rung];
+}
+
+// sound
+function tone(freq){
+  const A=window.AudioContext||window.webkitAudioContext;
+  const c=new A();
+  const o=c.createOscillator();
+  const g=c.createGain();
+
+  // Small speakers often bury 220 and soften 440, so give lower notes
+  // a little more level and harmonic content.
+  o.type = freq <= 440 ? 'square' : 'sine';
+  o.frequency.value=freq;
+
+  const level = freq <= 220 ? .42 : (freq <= 440 ? .34 : (freq===880 ? .34 : .24));
+  const duration = freq <= 440 ? .62 : .46;
+
+  o.connect(g);
+  g.connect(c.destination);
+
+  g.gain.setValueAtTime(level,c.currentTime);
+  g.gain.exponentialRampToValueAtTime(.001,c.currentTime+duration);
+
+  o.start();
+  o.stop(c.currentTime+duration+.02);
+  setTimeout(()=>c.close(), Math.ceil((duration+.2)*1000));
+}
+
+// sky
+function star(t){ document.getElementById('starReadout').textContent=t; }
+function starName(name, note){
+  const esNotes={
+    'Warm orange shoulder star.':'Estrella naranja cálida del hombro.',
+    'Head of Orion.':'Cabeza de Orión.',
+    'Bright shoulder star.':'Estrella brillante del hombro.',
+    'Left belt star.':'Estrella izquierda del cinturón.',
+    'Middle belt star.':'Estrella central del cinturón.',
+    'Lower left star.':'Estrella inferior izquierda.',
+    'Bright blue-white foot star.':'Estrella brillante azul-blanca del pie.'
+  };
+  document.getElementById('starReadout').textContent = `${name} · ${currentLang==='es'?(esNotes[note]||note):note}`;
+}
+function mintakaFound(){
+  document.getElementById('starReadout').innerHTML = tr(
+  'MINTAKA · you chose well.<br><span class="starCoordLine"><b>DECIMAL COMFORT</b> · X 180 · Y 78</span><br><span class="starCoordLine"><b>🐙 OCTY · OCTAL</b> · X 264₈ · Y 116₈</span><br><span class="note">Same A8 star position · two friendly ways to read it.</span>',
+  'MINTAKA · elegiste bien.<br><span class="starCoordLine"><b>DECIMAL CÓMODO</b> · X 180 · Y 78</span><br><span class="starCoordLine"><b>🐙 OCTY · OCTAL</b> · X 264₈ · Y 116₈</span><br><span class="note">La misma posición estelar A8 · dos formas amigables de leerla.</span>'
+);
+}
+
+
+let rocketLaunched=false;
+function checkSpeedGame(){
+  const picks = {
+    bike: document.getElementById('speedBike').value,
+    car: document.getElementById('speedCar').value,
+    train: document.getElementById('speedTrain').value,
+    plane: document.getElementById('speedPlane').value
+  };
+
+  const correct = {bike:'43', car:'47', train:'48', plane:'50'};
+  let allChosen = true;
+  let allCorrect = true;
+
+  [['speedBike','bike'],['speedCar','car'],['speedTrain','train'],['speedPlane','plane']].forEach(([id,key])=>{
+    const el = document.getElementById(id);
+    el.classList.remove('goodMatch','badMatch');
+    if(!picks[key]) { allChosen = false; allCorrect = false; return; }
+    if(picks[key] === correct[key]){
+      el.classList.add('goodMatch');
+    } else {
+      el.classList.add('badMatch');
+      allCorrect = false;
+    }
+  });
+
+  const readout = document.getElementById('speedReadout');
+  if(!allChosen){
+    readout.textContent = tr('Keep matching…','Sigue relacionando…');
+    return;
+  }
+  if(allCorrect){
+    readout.innerHTML = tr('YES · bicycle /43 · automobile /47 · train /48 · airplane /50<br><span class="note">Something fast just happened…</span>','SÍ · bicicleta /43 · automóvil /47 · tren /48 · avión /50<br><span class="note">Algo rápido acaba de pasar…</span>');
+    if(!rocketLaunched){
+      rocketLaunched = true;
+      const rocket = document.getElementById('hiddenRocket');
+      rocket.classList.remove('launch');
+      void rocket.offsetWidth;
+      rocket.classList.add('launch');
+      setTimeout(()=>{
+        readout.innerHTML = tr('🚀 WHAT SPEED WAS THAT?<br><span class="note">Rocket ship · A8/53 S</span>','🚀 ¿QUÉ VELOCIDAD FUE ESA?<br><span class="note">Cohete · A8/53 S</span>');
+      }, 2200);
+    }
+  } else {
+    readout.textContent = tr('Some matches are wrong. Try again.','Algunas relaciones no son correctas. Inténtalo otra vez.');
+  }
+}
+
+
+function surpriseNotes(btn){
+  const burst=btn.querySelector('.noteBurst');
+  if(!burst) return;
+
+  const notes=['♪','♫','♩','♬','♪','♫'];
+  const spreads=[
+    ['-70px','-95px','-18deg'],
+    ['-38px','-125px','12deg'],
+    ['0px','-145px','-8deg'],
+    ['34px','-120px','15deg'],
+    ['66px','-92px','22deg'],
+    ['18px','-165px','-14deg']
+  ];
+
+  notes.forEach((n,i)=>{
+    const s=document.createElement('span');
+    s.className='flyingNote';
+    s.textContent=n;
+    s.style.setProperty('--dx',spreads[i][0]);
+    s.style.setProperty('--dy',spreads[i][1]);
+    s.style.setProperty('--rot',spreads[i][2]);
+    s.style.animationDelay=(i*0.06)+'s';
+    burst.appendChild(s);
+    setTimeout(()=>s.remove(),1900);
+  });
+}
+
+
+let earthFrame=0;
+function moveEarth(){
+  const earth=document.getElementById('earthOrbit');
+  const readout=document.getElementById('spaceReadout');
+  if(!earth||!readout) return;
+  earth.classList.remove('advance0','advance1','advance2','advance3','spin');
+  earthFrame=(earthFrame+1)%4;
+  if(earthFrame===0) earthFrame=1;
+  earth.classList.add('advance'+earthFrame);
+  void earth.offsetWidth;
+  earth.classList.add('spin');
+  readout.innerHTML=tr('EARTH · rotating and advancing through space.','TIERRA · girando y avanzando por el espacio.');
+}
+function pokeSun(){
+  const sun=document.getElementById('sunSystem');
+  const readout=document.getElementById('spaceReadout');
+  if(!sun||!readout) return;
+  sun.classList.remove('burst');
+  void sun.offsetWidth;
+  sun.classList.add('burst');
+  setTimeout(()=>sun.classList.remove('burst'),900);
+  readout.innerHTML=tr('SUN · rays amplified. Bright little Sol.','SOL · rayos amplificados. Pequeño Sol brillante.');
+}
+function moveJupiter(){
+  const j=document.getElementById('jupiterSystem');
+  const readout=document.getElementById('spaceReadout');
+  if(!j||!readout) return;
+  j.classList.remove('move');
+  void j.offsetWidth;
+  j.classList.add('move');
+  setTimeout(()=>j.classList.remove('move'),4200);
+  readout.innerHTML=tr('JUPITER · three simple moons started moving.','JÚPITER · tres lunas simples comenzaron a moverse.');
+}
+
+// compass
+let calendarPopupTimer=null;
+function turnCompass(){
+  document.getElementById('needle').style.transform='rotate(90deg)';
+  document.getElementById('compassMsg').textContent=tr('EAST · 128 · TREASURE!','ESTE · 128 · ¡TESORO!');
+  const hint=document.getElementById('calendarHint');
+  if(hint) hint.textContent=tr('Hold that angle… something else is coming.','Mantén ese ángulo… viene otra sorpresa.');
+
+  const popup=document.getElementById('calendarPopup');
+  if(popup) popup.style.display='none';
+
+  if(calendarPopupTimer) clearTimeout(calendarPopupTimer);
+  calendarPopupTimer=setTimeout(()=>{
+    if(hint) hint.textContent='';
+    if(popup) popup.style.display='flex';
+  },2500);
+
+  earn(7);
+}
+function closeCalendarPopup(){
+  const popup=document.getElementById('calendarPopup');
+  if(popup) popup.style.display='none';
+  if(calendarPopupTimer){
+    clearTimeout(calendarPopupTimer);
+    calendarPopupTimer=null;
+  }
+}
+
+
+
+function planetWeek(n,name){
+  const r=document.getElementById('planetWeekReadout');
+  r.textContent=`${tr('WEEK','SEMANA')} ${n} · ${currentLang==='es'?({'MERCURY':'MERCURIO','VENUS':'VENUS','EARTH':'TIERRA','MARS':'MARTE','JUPITER':'JÚPITER','SATURN':'SATURNO','URANUS':'URANO','NEPTUNE':'NEPTUNO','PLUTO':'PLUTÓN'}[name]||name):name}`;
+}
+
+function showElement(txt){
+  const es={'FIRE · 🜂':'FUEGO · 🜂','WATER · 🜄':'AGUA · 🜄','EARTH · 🜃':'TIERRA · 🜃','AIR · 🜁':'AIRE · 🜁','AETHER · ✦':'ÉTER · ✦'};
+  document.getElementById('elementReadout').textContent=currentLang==='es'?(es[txt]||txt):txt;
+}
+function monthHover(i){
+  const labels=currentLang==='es'
+    ? ['MES NORTE','MES NORESTE','MES ESTE','MES SURESTE','MES SUR','MES SUROESTE','MES OESTE','MES NOROESTE']
+    : ['NORTH MONTH','NORTHEAST MONTH','EAST MONTH','SOUTHEAST MONTH','SOUTH MONTH','SOUTHWEST MONTH','WEST MONTH','NORTHWEST MONTH'];
+  document.getElementById('monthNeedle').style.transform=`translateX(-50%) rotate(${i*45}deg)`;
+  const center=document.querySelector('.monthCenter');
+  center.innerHTML=`${i+1}<br><small>${labels[i]}</small>`;
+}
+
+
+captureStaticTextNodes();
+applyLanguage();
+drawCoins(); move(0);
+</script>
 </body>
 </html>

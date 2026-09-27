@@ -3,23 +3,23 @@
   "role": "ONE_TIME_CARRIER_ODOMETER_ALIGNMENT_NOT_RULER",
   "authority": "NONE",
 
-  "jovianRulerRawPerWheel": "18719532",
+  "jovianRulerRawPerWheel": "9344598",
 
   "ghost": {
-    "runId": "bc562a83-8293-4e0c-b6bf-79e9687b7aea",
-    "anchorRaw": "252690"
+    "runId": "8c3e3467-6e6c-4046-9150-f6196892b804",
+    "anchorRaw": "13587492"
   },
 
   "primaryBracketAtGhostAnchor": {
-    "lowRaw": "5729571",
-    "highRaw": "5729581",
-    "midpointRaw": "5729576",
-    "halfWidthRaw": "5"
+    "lowRaw": "19013357",
+    "highRaw": "19013365",
+    "midpointRaw": "19013361",
+    "halfWidthRaw": "4"
   },
 
   "sealedPrimaryPerGhost": {
-    "numerator": "111927983568692",
-    "denominator": "112357430762055"
+    "numerator": "254",
+    "denominator": "255"
   },
 
   "policy": {

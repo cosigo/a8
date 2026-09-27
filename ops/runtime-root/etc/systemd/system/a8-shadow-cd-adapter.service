@@ -1,0 +1,32 @@
+[Unit]
+Description=A8 Shadow C/D Physical Carrier Adapter
+After=network.target a8-shadow-ghost.service
+Requires=a8-shadow-ghost.service
+
+[Service]
+Type=simple
+User=greg
+Group=greg
+
+ExecStart=/usr/bin/python3 /opt/a8-shadow-cd-adapter/server.py
+
+Restart=on-failure
+RestartSec=2
+
+NoNewPrivileges=true
+PrivateTmp=true
+PrivateDevices=true
+ProtectSystem=strict
+ProtectHome=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictSUIDSGID=true
+RestrictNamespaces=true
+LockPersonality=true
+CapabilityBoundingSet=
+AmbientCapabilities=
+RestrictAddressFamilies=AF_UNIX AF_INET
+
+[Install]
+WantedBy=multi-user.target
