@@ -254,7 +254,7 @@ body{
   const filename = raw.split('/').pop();
   const label = titles[filename] || filename;
 
-  image.src = raw;
+  image.src = raw + '?v=terra-viewer-20260929b';
   image.alt = label + ' calendar artwork';
   title.textContent = label;
   original.href = raw;

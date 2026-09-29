@@ -2064,7 +2064,7 @@
         <div class="metric"><span>Business days</span><strong id="businessCount">32</strong></div>
         <div class="metric"><span>Protected days</span><strong id="protectedCount">13</strong></div>
         <div class="metric"><span>Opening week form</span><strong id="openingForm">A · 4/1</strong></div>
-        <a class="button" id="monthArtwork" href="/image-viewer.html#/assets/ausp8_north.png">OPEN MONTH ARTWORK</a>
+        <a class="button" id="monthArtwork" href="/image-viewer.html?v=terra-viewer-20260929b#/assets/ausp8_north.png">OPEN MONTH ARTWORK</a>
         <div class="mini-note"><strong>Important:</strong> month boundaries do not reset the 4/1 → 3/2 alternation. Because each month contains nine weeks, the next month begins with the opposite week form.</div>
       </aside>
     </div>
@@ -2193,10 +2193,10 @@
 
               <div class="notice"><strong>Possible continuous year-end break:</strong> depending on how the ordinary work rhythm meets the year-end boundary, Wilson&rsquo;s Week may join directly to one or two adjacent non-work days. This can produce a continuous year-end break of <strong>6, 7, or 8 days</strong>: five Gold Days plus one or two adjacent non-work days, with the leap-extension Gold Day adding one further day when required. The exact continuous break therefore depends on calendar alignment and leap-year status; Wilson&rsquo;s Week itself remains the defined five-day interval, or six days when the leap correction is present.</div>
 
-              <a class="button" href="/image-viewer.html#/assets/ausp8_year_end.png">OPEN WILSON&rsquo;S WEEK ARTWORK</a>
+              <a class="button" href="/image-viewer.html?v=terra-viewer-20260929b#/assets/ausp8_year_end.png">OPEN WILSON&rsquo;S WEEK ARTWORK</a>
             </article>
 
-            <a class="panel feature-image" href="/image-viewer.html#/assets/ausp8_year_end.png" data-lightbox aria-label="Open Wilson's Week artwork">
+            <a class="panel feature-image" href="/image-viewer.html?v=terra-viewer-20260929b#/assets/ausp8_year_end.png" data-lightbox aria-label="Open Wilson's Week artwork">
               <img src="/assets/thumbs/ausp8_year_end.png?v=terra-art-20260929a" width="360" height="450" loading="lazy" decoding="async" alt="Wilson's Week year-end celebration artwork with Fire, Water, Terra, Air and Aether gold days">
             </a>
           </div>
@@ -2208,7 +2208,7 @@
           <p>The artwork is playful; the rules underneath it are explicit. These plates explain protected days, year structure and the operating rhythm.</p>
 
           <div class="art-grid">
-            <a class="panel art-card" href="/image-viewer.html#/assets/ausp8_example.png" data-lightbox>
+            <a class="panel art-card" href="/image-viewer.html?v=terra-viewer-20260929b#/assets/ausp8_example.png" data-lightbox>
               <figure>
                 <img src="/assets/thumbs/ausp8_example.png?v=terra-art-20260929a" width="360" height="509" loading="lazy" decoding="async" alt="A8 protected days example with Aether highlighted gold and alternating Air highlighted silver">
                 <figcaption>
@@ -2218,7 +2218,7 @@
               </figure>
             </a>
 
-            <a class="panel art-card" href="/image-viewer.html#/assets/ausp8_total.png" data-lightbox>
+            <a class="panel art-card" href="/image-viewer.html?v=terra-viewer-20260929b#/assets/ausp8_total.png" data-lightbox>
               <figure>
                 <img src="/assets/thumbs/ausp8_total.png?v=terra-art-20260929a" width="360" height="450" loading="lazy" decoding="async" alt="Auspicious 8 complete year calendar overview">
                 <figcaption>
@@ -2367,7 +2367,7 @@
   ];
 
   const artworkViewerUrl = art =>
-    '/image-viewer.html#' + encodeURIComponent(art);
+    '/image-viewer.html?v=terra-viewer-20260929b#' + encodeURIComponent(art);
   const planets = ['Mercury','Venus','Earth','Mars','Jupiter','Saturn','Uranus','Neptune','Pluto'];
   const planetGlyph = ['☿','♀','⊕','♂','♃','♄','♅','♆','♇'];
   const liveElementGlyph = ['🜂','🜄','🜃','🜁','✦'];
@@ -5123,7 +5123,7 @@
     const link=e.target.closest('[data-lightbox]');
     if(link){
       const href=link.getAttribute('href')||'';
-      if(href.startsWith('/image-viewer.html#')) return;
+      if(href.startsWith('/image-viewer.html')) return;
       e.preventDefault();
       const img=link.querySelector('img');
       openLightbox(href,img?.alt);
