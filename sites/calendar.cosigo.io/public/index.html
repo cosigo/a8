@@ -195,7 +195,7 @@
     }
 
     .hero{position:relative;overflow:hidden;border-bottom:1px solid rgba(214,170,78,.28)}
-    .hero::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,16,24,.96) 0%,rgba(5,16,24,.82) 42%,rgba(5,16,24,.28) 75%,rgba(5,16,24,.9) 100%),url('/assets/thumbs/ausp8_total.png') center 24%/cover no-repeat;filter:saturate(.85)}
+    .hero::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,16,24,.96) 0%,rgba(5,16,24,.82) 42%,rgba(5,16,24,.28) 75%,rgba(5,16,24,.9) 100%),url('/assets/thumbs/ausp8_total.png?v=terra-art-20260929a') center 24%/cover no-repeat;filter:saturate(.85)}
     .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,#06131d 100%)}
     .hero-inner{position:relative;z-index:1;max-width:var(--max);margin:auto;padding:5.2rem 1.25rem 6rem;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(260px,.55fr);gap:2rem;align-items:center}
     .eyebrow{color:var(--gold2);text-transform:uppercase;letter-spacing:.22em;font-size:.72rem;font-weight:800}
@@ -2197,7 +2197,7 @@
             </article>
 
             <a class="panel feature-image" href="/image-viewer.html#/assets/ausp8_year_end.png" data-lightbox aria-label="Open Wilson's Week artwork">
-              <img src="/assets/thumbs/ausp8_year_end.png" width="360" height="450" loading="lazy" decoding="async" alt="Wilson's Week year-end celebration artwork with Fire, Water, Terra, Air and Aether gold days">
+              <img src="/assets/thumbs/ausp8_year_end.png?v=terra-art-20260929a" width="360" height="450" loading="lazy" decoding="async" alt="Wilson's Week year-end celebration artwork with Fire, Water, Terra, Air and Aether gold days">
             </a>
           </div>
         </div>
@@ -2210,7 +2210,7 @@
           <div class="art-grid">
             <a class="panel art-card" href="/image-viewer.html#/assets/ausp8_example.png" data-lightbox>
               <figure>
-                <img src="/assets/thumbs/ausp8_example.png" width="360" height="509" loading="lazy" decoding="async" alt="A8 protected days example with Aether highlighted gold and alternating Air highlighted silver">
+                <img src="/assets/thumbs/ausp8_example.png?v=terra-art-20260929a" width="360" height="509" loading="lazy" decoding="async" alt="A8 protected days example with Aether highlighted gold and alternating Air highlighted silver">
                 <figcaption>
                   <strong>Protected Days Example</strong>
                   <span>Gold Aether · Silver alternating Air · business-day rhythm.</span>
@@ -2220,7 +2220,7 @@
 
             <a class="panel art-card" href="/image-viewer.html#/assets/ausp8_total.png" data-lightbox>
               <figure>
-                <img src="/assets/thumbs/ausp8_total.png" width="360" height="450" loading="lazy" decoding="async" alt="Auspicious 8 complete year calendar overview">
+                <img src="/assets/thumbs/ausp8_total.png?v=terra-art-20260929a" width="360" height="450" loading="lazy" decoding="async" alt="Auspicious 8 complete year calendar overview">
                 <figcaption>
                   <strong>One-Year Overview</strong>
                   <span>All eight compass months and the year-end interval together.</span>
@@ -5068,7 +5068,7 @@
 
     const a=document.createElement('a');
     a.className='panel art-card'; a.href=artworkViewerUrl(m.art); a.dataset.lightbox='';
-    a.innerHTML=`<figure><img src="${m.art.replace('/assets/','/assets/thumbs/')}" width="360" height="450" loading="lazy" decoding="async" alt="Auspicious 8 ${m.name} compass month calendar artwork"><figcaption><strong>${m.bits} · ${m.oct} · ${m.dir} · ${m.name}</strong><span>${m.anchor} compass anchor · 45 days · 9 planetary weeks</span></figcaption></figure>`;
+    a.innerHTML=`<figure><img src="${m.art.replace('/assets/','/assets/thumbs/')+'?v=terra-art-20260929a'}" width="360" height="450" loading="lazy" decoding="async" alt="Auspicious 8 ${m.name} compass month calendar artwork"><figcaption><strong>${m.bits} · ${m.oct} · ${m.dir} · ${m.name}</strong><span>${m.anchor} compass anchor · 45 days · 9 planetary weeks</span></figcaption></figure>`;
     artGrid.appendChild(a);
   });
 
