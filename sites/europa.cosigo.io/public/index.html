@@ -1,0 +1,1831 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+
+<title>Europa · Core20 Natural Authority · Auspicious 8</title>
+<meta name="description" content="Auspicious 8 Core20 Europa instrument with Earth Meridian 0 A8 time, Europa natural recurrence, sealed Jupiter-relative moon positions, and independent Jovian witness moons.">
+<meta name="keywords" content="Auspicious 8, A8, Europa, Jupiter, Galilean moons, Core20, Jovian clock, natural recurrence, COSIGO Labs">
+<meta name="author" content="COSIGO Labs">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#0c1018">
+<meta name="color-scheme" content="dark">
+<meta name="application-name" content="Auspicious 8 · Europa">
+<meta name="format-detection" content="telephone=no">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="A8 · Europa">
+<meta name="mobile-web-app-capable" content="yes">
+
+<link rel="canonical" href="https://europa.cosigo.io/">
+<!-- COSIGO-CANONICAL-FAVICON-BEGIN -->
+<link rel="icon" href="https://cosigo.io/favicon.ico">
+<link rel="icon" type="image/svg+xml" href="https://cosigo.io/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="https://cosigo.io/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://cosigo.io/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="https://cosigo.io/apple-touch-icon.png">
+<!-- COSIGO-CANONICAL-FAVICON-END -->
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="COSIGO Labs · Auspicious 8">
+<meta property="og:title" content="Europa · Core20 Natural Authority">
+<meta property="og:description" content="Live Core20 Earth Meridian 0 A8 time, Europa natural recurrence, and sealed Jupiter-relative Jovian moon positions.">
+<meta property="og:url" content="https://europa.cosigo.io/">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Europa · Core20 Natural Authority">
+<meta name="twitter:description" content="Live Core20 Earth Meridian 0 A8 time, Europa natural recurrence, and sealed Jovian position.">
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"WebPage",
+  "name":"Europa · Core20 Natural Authority · Auspicious 8",
+  "url":"https://europa.cosigo.io/",
+  "description":"Live Auspicious 8 Core20 Europa instrument with Earth Meridian 0 A8 time, natural recurrence and sealed Jupiter-relative Jovian moon positions.",
+  "isPartOf":{"@type":"WebSite","name":"COSIGO Labs · Auspicious 8","url":"https://cosigo.io/"},
+  "about":[
+    {"@type":"Thing","name":"Europa"},
+    {"@type":"Thing","name":"Jupiter"},
+    {"@type":"Thing","name":"Auspicious 8"}
+  ]
+}
+</script>
+
+<style>
+:root{
+
+  color-scheme:dark;
+
+  --bg:#070a10;
+
+  --panel:rgba(15,20,30,.78);
+
+  --line:rgba(213,225,244,.14);
+
+  --text:#eef3fb;
+
+  --muted:#aeb8c8;
+
+  --accent:#9fc2d5;
+
+  --good:#a8d8b4;
+
+  --shadow:0 22px 60px rgba(0,0,0,.34);
+
+  --radius:22px;
+
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+
+  --sans:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+
+}
+
+*{box-sizing:border-box}
+
+html{background:var(--bg);scroll-behavior:smooth}
+
+body{
+
+  margin:0;min-height:100vh;color:var(--text);font-family:var(--sans);
+
+  background:
+
+    radial-gradient(circle at 14% 18%,rgba(255,255,255,.18) 0 1px,transparent 1.5px),
+
+    radial-gradient(circle at 62% 12%,rgba(255,255,255,.12) 0 1px,transparent 1.5px),
+
+    radial-gradient(circle at 38% 72%,rgba(255,255,255,.12) 0 1px,transparent 1.5px),
+
+    radial-gradient(circle at 84% 74%,rgba(255,255,255,.16) 0 1px,transparent 1.5px),
+
+    linear-gradient(180deg,#080b12 0%,#090e16 45%,#070a10 100%);
+
+  background-size:180px 180px,240px 240px,290px 290px,360px 360px,auto;
+
+  overflow-x:hidden;
+
+}
+
+a{color:inherit}
+
+button{font:inherit}
+
+
+
+.sky-art{position:fixed;inset:0;pointer-events:none;z-index:-1;overflow:hidden}
+
+.europa-sphere{
+  position:absolute;width:min(72vw,980px);aspect-ratio:1;right:-22vw;top:5vh;border-radius:50%;
+  opacity:.36;filter:saturate(.72) contrast(1.04);
+  box-shadow:inset 90px -60px 150px rgba(0,0,0,.62),inset -28px 28px 84px rgba(255,255,255,.10),0 0 170px rgba(150,184,205,.09);
+  background:
+    repeating-linear-gradient(22deg,transparent 0 19px,rgba(112,71,54,.22) 20px 23px,transparent 24px 46px),
+    repeating-linear-gradient(-14deg,transparent 0 31px,rgba(142,91,70,.14) 32px 35px,transparent 36px 63px),
+    radial-gradient(circle at 33% 28%,#edf1ee 0%,#c9d2d1 40%,#8f9a9b 72%,#555f62 100%);
+}
+.europa-sphere:after{
+  content:"";position:absolute;inset:0;border-radius:50%;
+  background:
+    radial-gradient(ellipse at 38% 60%,transparent 0 34%,rgba(116,72,59,.15) 35% 37%,transparent 38%),
+    linear-gradient(112deg,transparent 0 48%,rgba(106,66,54,.20) 49% 50%,transparent 51% 100%);
+  transform:rotate(-9deg);
+}
+
+.witness-moon{position:absolute;border-radius:50%;opacity:.22;box-shadow:inset -10px -8px 18px rgba(0,0,0,.52),0 0 28px rgba(255,255,255,.04)}
+
+.witness-moon.io{width:54px;height:54px;left:7vw;top:22vh;background:radial-gradient(circle at 34% 30%,#f6d789,#b28b43 62%,#5c482e)}
+
+.witness-moon.ganymede{width:68px;height:68px;left:17vw;bottom:12vh;background:repeating-linear-gradient(20deg,rgba(112,114,111,.26) 0 2px,transparent 2px 7px),radial-gradient(circle at 34% 28%,#d6d5ca,#999e98 70%,#555c59)}
+
+.witness-moon.callisto{width:92px;height:92px;left:38vw;top:11vh;background:radial-gradient(circle at 62% 35%,#d3cbc0 0 5%,transparent 5.8%),radial-gradient(circle at 30% 62%,#a79e92 0 8%,transparent 8.8%),radial-gradient(circle at 38% 33%,#78746e,#45484a 76%,#262a2e)}
+
+
+
+.sitebar{position:sticky;top:0;z-index:50;backdrop-filter:blur(18px);background:rgba(7,10,16,.78);border-bottom:1px solid var(--line)}
+
+.sitebar-inner{position:relative;max-width:1440px;margin:auto;min-height:64px;display:flex;align-items:center;gap:18px;padding:10px 22px}
+
+.brand{display:flex;align-items:center;gap:10px;white-space:nowrap;font-size:.78rem;letter-spacing:.12em;font-weight:800;text-decoration:none}
+
+.brand-icon{
+  width:30px;
+  height:30px;
+  flex:0 0 30px;
+  display:block;
+  object-fit:contain;
+}
+
+.menu-button{display:none;margin-left:auto;color:var(--text);background:transparent;border:1px solid var(--line);border-radius:10px;padding:7px 10px}
+
+.nav{margin-left:auto;display:flex;flex-wrap:wrap;justify-content:flex-end;gap:5px 12px}
+
+.nav a{text-decoration:none;color:var(--muted);font-size:.72rem;letter-spacing:.055em;font-weight:700}
+
+.nav a:hover,.nav a[aria-current="page"]{color:#fff}
+
+
+
+main{width:min(1240px,calc(100% - 32px));margin:0 auto;padding:72px 0 90px}
+
+.hero{min-height:60vh;display:grid;align-content:center;max-width:760px;padding:42px 0 56px}
+
+.kicker{color:var(--accent);font-size:.76rem;font-weight:800;letter-spacing:.2em;text-transform:uppercase}
+
+h1{margin:.16em 0 .08em;font-size:clamp(4.2rem,13vw,10rem);line-height:.82;letter-spacing:-.075em;font-weight:850}
+
+.hero-copy{max-width:720px;font-size:clamp(1rem,2vw,1.28rem);color:var(--muted);line-height:1.65}
+
+.pills{display:flex;flex-wrap:wrap;gap:9px;margin-top:22px}
+
+.pill{border:1px solid var(--line);border-radius:999px;padding:7px 11px;background:rgba(8,12,18,.56);color:#d8e0ec;font-size:.72rem;letter-spacing:.06em;font-weight:760}
+
+
+
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+
+.card{grid-column:span 6;background:linear-gradient(180deg,rgba(18,24,34,.82),rgba(10,14,21,.84));border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:24px}
+
+.card.wide{grid-column:1/-1}
+
+.card h2{margin:0 0 18px;font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;color:#cbd5e3}
+
+.clock{font-family:var(--mono);font-size:clamp(2.5rem,7vw,5.4rem);letter-spacing:-.055em;line-height:1;overflow-wrap:anywhere}
+
+.clock-sub{margin-top:7px;color:var(--muted);font-family:var(--mono)}
+
+.stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-top:20px}
+
+.stat{background:rgba(9,13,20,.92);padding:15px;min-height:86px}
+
+.stat-label{color:var(--muted);font-size:.69rem;font-weight:750;letter-spacing:.09em;text-transform:uppercase}
+
+.stat-value{margin-top:7px;font-family:var(--mono);font-weight:700;overflow-wrap:anywhere}
+
+.bigxy{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+
+.xy{border:1px solid var(--line);border-radius:16px;padding:18px;background:rgba(5,8,13,.5)}
+
+.xy .v{font-family:var(--mono);font-size:clamp(1.5rem,4vw,2.7rem);margin-top:5px}
+
+
+
+.position-stage{position:relative;height:330px;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px),radial-gradient(circle at center,rgba(125,156,184,.08),transparent 45%),rgba(3,6,10,.72);background-size:32px 32px,32px 32px,auto,auto}
+
+.axis-x,.axis-y{position:absolute;background:rgba(226,235,245,.14)}
+
+.axis-x{left:4%;right:4%;height:1px;top:50%}
+
+.axis-y{top:6%;bottom:6%;width:1px;left:50%}
+
+.jupiter{position:absolute;left:50%;top:50%;width:58px;height:58px;transform:translate(-50%,-50%);border-radius:50%;background:repeating-linear-gradient(0deg,#b77d54 0 6px,#dbb27f 6px 11px,#8e5c45 11px 16px);box-shadow:inset -10px -7px 16px rgba(0,0,0,.48),0 0 35px rgba(220,164,109,.16)}
+
+.jupiter:after{content:"JUPITER";position:absolute;left:50%;top:70px;transform:translateX(-50%);font-size:.61rem;letter-spacing:.12em;color:var(--muted)}
+
+.live-moon{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);transition:left .7s linear,top .7s linear}
+
+.live-moon .dot{display:block;border-radius:50%;box-shadow:0 0 16px rgba(255,255,255,.12),inset -3px -2px 6px rgba(0,0,0,.4)}
+
+.live-moon .name{position:absolute;left:50%;top:calc(100% + 6px);transform:translateX(-50%);font-size:.61rem;letter-spacing:.08em;white-space:nowrap;color:#dce5f0}
+
+.live-moon.io .dot{width:12px;height:12px;background:#d8ad63}
+
+.live-moon.europa .dot{width:14px;height:14px;background:#ded8c4}
+
+.live-moon.ganymede .dot{width:20px;height:20px;background:#a9ada8}
+
+.live-moon.callisto .dot{width:18px;height:18px;background:#6e6f6b}
+
+.stage-note{margin-top:11px;color:var(--muted);font-size:.76rem;line-height:1.5}
+
+
+
+.witness-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+
+.witness{border:1px solid var(--line);border-radius:16px;padding:16px;background:rgba(7,10,15,.48)}
+
+.witness .name{font-size:.76rem;letter-spacing:.12em;font-weight:850}
+
+.witness .role{color:var(--muted);font-size:.68rem;margin-top:3px}
+
+.witness .coords{margin-top:13px;font-family:var(--mono);font-size:.86rem;line-height:1.65}
+
+.recurrence{color:var(--accent);font-family:var(--mono)}
+
+.architecture{margin:18px 0 0;padding:18px;border-radius:16px;border:1px solid var(--line);color:#d7dfeb;background:rgba(6,9,14,.55);font-family:var(--mono);line-height:1.7;overflow-wrap:anywhere}
+
+
+
+.fact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+
+.fact{min-height:155px;border:1px solid var(--line);border-radius:17px;padding:18px;background:rgba(8,12,18,.56)}
+
+.fact b{display:block;font-size:1.1rem;margin-bottom:9px}
+
+.fact p{color:var(--muted);line-height:1.55;margin:0}
+
+.fact small{display:block;color:#8995a6;margin-top:10px}
+
+
+
+.statusline{display:flex;align-items:center;gap:9px;color:var(--muted);margin-top:18px;font-size:.78rem}
+
+.led{width:9px;height:9px;border-radius:50%;background:#7e8792;box-shadow:0 0 0 4px rgba(126,135,146,.08)}
+
+.led.ok{background:var(--good);box-shadow:0 0 0 4px rgba(168,216,180,.08),0 0 18px rgba(168,216,180,.18)}
+
+.led.bad{background:#d9897f}
+
+
+
+footer{border-top:1px solid var(--line);background:rgba(5,7,11,.72)}
+
+.footer-inner{width:min(1240px,calc(100% - 32px));margin:auto;padding:34px 0 44px;color:#96a2b3;font-size:.76rem;line-height:1.65}
+
+.footer-links{display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:17px}
+
+.footer-links a{color:#c6d0dd;text-decoration:none}
+
+.muted{color:var(--muted)}
+
+.break{overflow-wrap:anywhere}
+
+
+
+@media(max-width:900px){
+  main{padding-top:38px}
+  .hero{min-height:48vh}
+  .europa-sphere{width:110vw;right:-58vw;top:8vh}
+  .card{grid-column:1/-1}
+  .fact-grid,.witness-grid{grid-template-columns:1fr}
+
+  .menu-button{display:block}
+
+  .nav{
+    display:none;
+    position:absolute;
+    top:62px;
+    left:12px;
+    right:12px;
+    margin:0;
+    padding:12px;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:0 12px;
+    max-height:calc(100vh - 82px);
+    overflow-y:auto;
+    overscroll-behavior:contain;
+    -webkit-overflow-scrolling:touch;
+    background:rgba(8,12,18,.98);
+    border:1px solid var(--line);
+    border-radius:16px;
+    box-shadow:var(--shadow);
+  }
+
+  .nav.open{display:grid}
+
+  .nav a{
+    display:block;
+    padding:11px 8px;
+    border-bottom:1px solid rgba(213,225,244,.08);
+  }
+}
+
+@media(max-width:560px){
+  main{width:min(100% - 20px,1240px)}
+  .sitebar-inner{padding-inline:12px}
+  .nav.open{grid-template-columns:1fr}
+  .brand{font-size:.68rem;letter-spacing:.07em}
+  .brand-icon{width:28px;height:28px;flex-basis:28px}
+  .stats,.bigxy{grid-template-columns:1fr}
+  .position-stage{height:280px}
+}
+
+
+/* ===== COSIGO STANDARD TOPSIDE · ABOUT-STYLE NATIVE MENU ===== */
+#a8-topside-coherence-02{
+  position:sticky;top:0;z-index:1000;width:100%;
+  border-bottom:1px solid #2a3a49;background:rgba(7,12,18,.92);
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+}
+#a8-topside-coherence-02 .a8-topline{
+  width:min(1440px,calc(100% - 32px));min-height:64px;margin:0 auto;
+  display:flex;align-items:center;gap:14px;padding:8px 0;
+}
+#a8-topside-coherence-02 .cosigo-global-brand{
+  display:flex;align-items:center;gap:9px;min-width:0;color:#eef3fb;text-decoration:none;
+}
+#a8-topside-coherence-02 .cosigo-global-brand img{
+  width:42px;height:42px;flex:0 0 42px;object-fit:contain;display:block;
+}
+#a8-topside-coherence-02 .cosigo-global-brand span{
+  display:flex;flex-direction:column;line-height:1.02;font-size:.78rem;
+  font-weight:900;letter-spacing:.11em;white-space:nowrap;
+}
+#a8-topside-coherence-02 .cosigo-global-brand small{
+  margin-top:3px;color:#aeb8c8;font-size:.54rem;font-weight:800;letter-spacing:.09em;
+}
+#a8-topside-coherence-02 .a8-menu{position:relative;margin-left:auto}
+#a8-topside-coherence-02 .a8-menu summary{
+  list-style:none;cursor:pointer;padding:8px 11px;border:1px solid #425467;
+  border-radius:8px;background:#111820;color:#e0bd72;font-size:.76rem;
+  font-weight:900;letter-spacing:.07em;user-select:none;
+}
+#a8-topside-coherence-02 .a8-menu summary::-webkit-details-marker{display:none}
+#a8-topside-coherence-02 .a8-menu summary::after{content:" ▾";color:#92a5b8}
+#a8-topside-coherence-02 .a8-menu[open] summary::after{content:" ▴"}
+#a8-topside-coherence-02 .a8-menu-panel{
+  position:absolute;z-index:1100;right:0;top:calc(100% + 7px);min-width:230px;
+  max-width:min(88vw,340px);max-height:min(72vh,620px);overflow-y:auto;
+  overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding:7px;
+  border:1px solid #425467;border-radius:9px;background:#0d141b;
+  box-shadow:0 12px 28px rgba(0,0,0,.38);
+}
+#a8-topside-coherence-02 .a8-menu-panel a{
+  display:block;padding:10px;border-radius:6px;color:#c8ddf5;text-decoration:none;
+  font-size:.78rem;font-weight:800;line-height:1.2;white-space:normal;
+}
+#a8-topside-coherence-02 .a8-menu-panel a:hover,
+#a8-topside-coherence-02 .a8-menu-panel a:focus,
+#a8-topside-coherence-02 .a8-menu-panel a[aria-current="page"]{
+  background:#182431;color:#fff;
+}
+.time-authority-strip{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;
+  margin:0 0 14px;padding:10px 12px;border:1px solid var(--line);border-radius:12px;
+  background:rgba(5,8,13,.48);font-size:.70rem;letter-spacing:.08em;font-weight:800;
+}
+.time-authority-strip span{color:var(--muted)}
+.time-authority-strip b{color:var(--accent);font-weight:850}
+@media(max-width:720px){
+  #a8-topside-coherence-02 .a8-topline{width:calc(100% - 24px);min-height:64px;gap:8px}
+  #a8-topside-coherence-02 .cosigo-global-brand{gap:7px}
+  #a8-topside-coherence-02 .cosigo-global-brand img{width:38px;height:38px;flex-basis:38px}
+  #a8-topside-coherence-02 .cosigo-global-brand span{font-size:.70rem;letter-spacing:.08em}
+  #a8-topside-coherence-02 .cosigo-global-brand small{font-size:.48rem;letter-spacing:.06em}
+  #a8-topside-coherence-02 .a8-menu summary{padding:8px 10px;font-size:.68rem}
+  #a8-topside-coherence-02 .a8-menu-panel{
+    position:fixed;top:72px;right:12px;left:12px;width:auto;min-width:0;
+    max-width:none;max-height:calc(100vh - 90px);padding:8px;
+  }
+  #a8-topside-coherence-02 .a8-menu-panel a{padding:12px 10px;font-size:.82rem}
+}
+@media(max-width:390px){
+  #a8-topside-coherence-02 .cosigo-global-brand span{font-size:.64rem;letter-spacing:.055em}
+  #a8-topside-coherence-02 .cosigo-global-brand small{font-size:.44rem}
+}
+
+/* ===== A8 CINEMATIC HERO ART · OCT 2026 ===== */
+.hero.hero-cosmic{
+  position:relative;
+  isolation:isolate;
+  overflow:hidden;
+  min-height:320px;
+}
+
+.hero.hero-cosmic::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:0;
+  background:
+    linear-gradient(180deg,rgba(5,10,16,.30) 0%,rgba(5,10,16,.48) 26%,rgba(5,10,16,.76) 62%,rgba(5,10,16,.94) 100%),
+    radial-gradient(circle at 82% 18%,rgba(255,255,255,.10) 0 4%,transparent 16%),
+    var(--hero-bg-image) center top / cover no-repeat;
+  opacity:.98;
+  transform:scale(1.01);
+}
+
+.hero.hero-cosmic > *{
+  position:relative;
+  z-index:1;
+}
+
+.hero.hero-cosmic .kicker,
+.hero.hero-cosmic .hero-copy,
+.hero.hero-cosmic .pills,
+.hero.hero-cosmic .statusline{
+  max-width:min(860px,100%);
+}
+
+.hero-title-row{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:18px;
+  flex-wrap:wrap;
+}
+
+.hero-title-copy{
+  min-width:0;
+  flex:1 1 340px;
+}
+
+.hero-title-copy h1{
+  margin:0;
+}
+
+.hero-title-moon{
+  width:122px;
+  height:122px;
+  flex:0 0 122px;
+  border-radius:50%;
+  border:1px solid rgba(255,255,255,.22);
+  box-shadow:
+    0 22px 56px rgba(0,0,0,.40),
+    inset 0 0 0 1px rgba(255,255,255,.07);
+  background-color:rgba(7,10,16,.85);
+  background-repeat:no-repeat;
+  background-size:cover;
+}
+
+.hero-europa-bg{
+  --hero-bg-image:url('/assets/europa-cosmic-hero.png');
+}
+
+.hero-ganymede-bg{
+  --hero-bg-image:url('/assets/ganymede-cosmic-hero.png');
+}
+
+.hero-title-moon.europa{
+  background-image:url('/assets/europa-cosmic-hero.png');
+  background-position:74% 18%;
+}
+
+.hero-title-moon.ganymede{
+  background-image:url('/assets/ganymede-cosmic-hero.png');
+  background-position:66% 22%;
+}
+
+@media(max-width:780px){
+  .hero.hero-cosmic{
+    min-height:290px;
+  }
+
+  .hero-title-row{
+    gap:14px;
+  }
+
+  .hero-title-moon{
+    width:92px;
+    height:92px;
+    flex-basis:92px;
+  }
+}
+
+@media(max-width:560px){
+  .hero.hero-cosmic::before{
+    background:
+      linear-gradient(180deg,rgba(5,10,16,.42) 0%,rgba(5,10,16,.64) 36%,rgba(5,10,16,.84) 72%,rgba(5,10,16,.97) 100%),
+      var(--hero-bg-image) 64% top / cover no-repeat;
+  }
+
+  .hero-title-row{
+    align-items:center;
+  }
+
+  .hero-title-copy{
+    flex:1 1 100%;
+  }
+
+  .hero-title-moon{
+    width:78px;
+    height:78px;
+    flex-basis:78px;
+  }
+}
+
+:root{--a8-approved-page-bg:url('/assets/europa-cosmic-hero.png');}
+
+
+/* ===== A8 APPROVED FULL-PAGE BACKGROUND + GLASS CARDS V1 ===== */
+
+html{
+  background:#04070c;
+}
+
+body{
+  position:relative;
+  min-height:100vh;
+  background:transparent !important;
+  isolation:isolate;
+}
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  background-image:var(--a8-approved-page-bg);
+  background-repeat:no-repeat;
+  background-position:center top;
+  background-size:cover;
+  transform:scale(1.012);
+}
+
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  background:
+    linear-gradient(180deg,
+      rgba(3,6,11,.38) 0%,
+      rgba(3,6,11,.28) 22%,
+      rgba(3,6,11,.42) 52%,
+      rgba(3,6,11,.67) 78%,
+      rgba(3,6,11,.84) 100%);
+}
+
+body > nav,
+body > main,
+body > footer{
+  position:relative;
+  z-index:2;
+}
+
+.sky-art,
+.fullscape-bg,
+.hero-title-moon{
+  display:none !important;
+}
+
+.hero.hero-cosmic::before{
+  display:none !important;
+}
+
+.hero{
+  position:relative;
+  background:
+    linear-gradient(90deg,
+      rgba(5,10,18,.54) 0%,
+      rgba(5,10,18,.42) 38%,
+      rgba(5,10,18,.20) 72%,
+      rgba(5,10,18,.08) 100%) !important;
+  border-color:rgba(226,238,252,.20) !important;
+  box-shadow:
+    0 24px 70px rgba(0,0,0,.27),
+    inset 0 1px 0 rgba(255,255,255,.08) !important;
+  backdrop-filter:blur(7px) saturate(1.04);
+  -webkit-backdrop-filter:blur(7px) saturate(1.04);
+}
+
+.card{
+  background:
+    linear-gradient(145deg,
+      rgba(15,24,36,.47) 0%,
+      rgba(7,14,24,.34) 55%,
+      rgba(7,12,20,.29) 100%) !important;
+  border:1px solid rgba(224,238,255,.20) !important;
+  box-shadow:
+    0 22px 58px rgba(0,0,0,.25),
+    inset 0 1px 0 rgba(255,255,255,.085) !important;
+  backdrop-filter:blur(18px) saturate(1.14);
+  -webkit-backdrop-filter:blur(18px) saturate(1.14);
+}
+
+.stat,
+.xy,
+.witness,
+.fact,
+.architecture,
+.position-stage,
+.time-authority-strip{
+  background:rgba(5,12,21,.34) !important;
+  border-color:rgba(224,238,255,.14) !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.035);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+}
+
+.fact,
+.witness{
+  background:
+    linear-gradient(145deg,
+      rgba(8,17,28,.38),
+      rgba(5,11,19,.27)) !important;
+}
+
+.card h2,
+.hero h1,
+.stat-value,
+.xy .v,
+.witness .name,
+.fact b{
+  text-shadow:0 2px 14px rgba(0,0,0,.72);
+}
+
+footer{
+  background:rgba(4,9,15,.62) !important;
+  border-top-color:rgba(224,238,255,.14) !important;
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+}
+
+@media(max-width:760px){
+  body::before{
+    background-position:50% top;
+    background-size:cover;
+  }
+
+  body::after{
+    background:
+      linear-gradient(180deg,
+        rgba(3,6,11,.48) 0%,
+        rgba(3,6,11,.39) 30%,
+        rgba(3,6,11,.57) 66%,
+        rgba(3,6,11,.86) 100%);
+  }
+
+  .card{
+    background:
+      linear-gradient(145deg,
+        rgba(12,21,33,.54),
+        rgba(6,13,22,.40)) !important;
+    backdrop-filter:blur(15px) saturate(1.10);
+    -webkit-backdrop-filter:blur(15px) saturate(1.10);
+  }
+}
+
+
+/* ===== A8 HERO WIDTH + TRANSPARENCY TUNING V1 ===== */
+
+/* Top hero card:
+   - wider title copy so GANYMEDE does not clip the final E
+   - 100% transparent background as requested
+*/
+.hero{
+  overflow:visible !important;
+  padding-right:clamp(18px,4vw,56px) !important;
+  background:transparent !important;
+  box-shadow:none !important;
+  backdrop-filter:none !important;
+  -webkit-backdrop-filter:none !important;
+}
+
+.hero-title-row{
+  display:block !important;
+}
+
+.hero-title-copy{
+  max-width:min(1120px,100%) !important;
+  width:100% !important;
+}
+
+.hero h1{
+  display:inline-block;
+  max-width:none !important;
+  padding-right:.10em !important;
+  letter-spacing:.040em !important;
+  overflow:visible !important;
+}
+
+/* Also widen supporting copy/pills/status in the top hero area. */
+.hero .kicker,
+.hero .hero-copy,
+.hero .pills,
+.hero .statusline{
+  max-width:min(1040px,100%) !important;
+}
+
+/* Other cards:
+   75% transparent = 25% opaque.
+*/
+.card:not(.hero),
+main .card{
+  background:
+    linear-gradient(145deg,
+      rgba(15,24,36,.25) 0%,
+      rgba(7,14,24,.25) 55%,
+      rgba(7,12,20,.25) 100%) !important;
+  box-shadow:
+    0 18px 44px rgba(0,0,0,.20),
+    inset 0 1px 0 rgba(255,255,255,.055) !important;
+  backdrop-filter:blur(18px) saturate(1.12) !important;
+  -webkit-backdrop-filter:blur(18px) saturate(1.12) !important;
+}
+
+.stat,
+.xy,
+.witness,
+.fact,
+.architecture,
+.position-stage,
+.time-authority-strip{
+  background:rgba(5,12,21,.25) !important;
+  border-color:rgba(224,238,255,.12) !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.028);
+  backdrop-filter:blur(8px) !important;
+  -webkit-backdrop-filter:blur(8px) !important;
+}
+
+.fact,
+.witness{
+  background:
+    linear-gradient(145deg,
+      rgba(8,17,28,.25),
+      rgba(5,11,19,.25)) !important;
+}
+
+@media(max-width:760px){
+  .hero{
+    padding-right:18px !important;
+  }
+
+  .hero-title-copy{
+    max-width:100% !important;
+  }
+
+  .hero h1{
+    padding-right:.12em !important;
+    letter-spacing:.030em !important;
+  }
+
+  .hero .kicker,
+  .hero .hero-copy,
+  .hero .pills,
+  .hero .statusline{
+    max-width:100% !important;
+  }
+
+  .card:not(.hero),
+  main .card{
+    background:
+      linear-gradient(145deg,
+        rgba(12,21,33,.28),
+        rgba(6,13,22,.28)) !important;
+  }
+}
+
+
+/* ===== A8 CARD TRANSPARENCY BOOST V2 ===== */
+
+/* Keep the top hero fully transparent as previously requested. */
+.hero{
+  background:transparent !important;
+  box-shadow:none !important;
+  backdrop-filter:none !important;
+  -webkit-backdrop-filter:none !important;
+}
+
+/* Main cards below the title:
+   target about 75–80% transparent (20–25% opaque).
+   This is intentionally lighter than the prior pass.
+*/
+.card:not(.hero),
+main .card{
+  background:
+    linear-gradient(145deg,
+      rgba(15,24,36,.18) 0%,
+      rgba(7,14,24,.18) 55%,
+      rgba(7,12,20,.18) 100%) !important;
+  box-shadow:
+    0 14px 34px rgba(0,0,0,.16),
+    inset 0 1px 0 rgba(255,255,255,.045) !important;
+  backdrop-filter:blur(16px) saturate(1.08) !important;
+  -webkit-backdrop-filter:blur(16px) saturate(1.08) !important;
+}
+
+/* Inner panels also get lighter so the scenery reads through better. */
+.stat,
+.xy,
+.witness,
+.fact,
+.architecture,
+.position-stage,
+.time-authority-strip{
+  background:rgba(5,12,21,.15) !important;
+  border-color:rgba(224,238,255,.10) !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.02);
+  backdrop-filter:blur(7px) !important;
+  -webkit-backdrop-filter:blur(7px) !important;
+}
+
+.fact,
+.witness{
+  background:
+    linear-gradient(145deg,
+      rgba(8,17,28,.16),
+      rgba(5,11,19,.16)) !important;
+}
+
+/* Mobile keeps slightly more body for readability while still much lighter. */
+@media(max-width:760px){
+  .card:not(.hero),
+  main .card{
+    background:
+      linear-gradient(145deg,
+        rgba(12,21,33,.22),
+        rgba(6,13,22,.22)) !important;
+  }
+
+  .stat,
+  .xy,
+  .witness,
+  .fact,
+  .architecture,
+  .position-stage,
+  .time-authority-strip{
+    background:rgba(5,12,21,.19) !important;
+  }
+}
+
+
+/* ===== A8 OUTER CARD CLEAR GLASS V3 ===== */
+
+/* Title / hero stays fully transparent. */
+.hero{
+  background:transparent !important;
+  box-shadow:none !important;
+  backdrop-filter:none !important;
+  -webkit-backdrop-filter:none !important;
+}
+
+/* ONLY the outer cards below the hero.
+   8–10% opaque = roughly 90% transparent.
+   Inner panels retain the prior transparency settings.
+*/
+.grid > .card{
+  background:rgba(7,14,24,.09) !important;
+  border:1px solid rgba(224,238,255,.11) !important;
+  box-shadow:
+    0 10px 26px rgba(0,0,0,.10),
+    inset 0 1px 0 rgba(255,255,255,.025) !important;
+  backdrop-filter:blur(6px) saturate(1.04) !important;
+  -webkit-backdrop-filter:blur(6px) saturate(1.04) !important;
+}
+
+/* Wide cards use the same nearly-clear outer shell. */
+.grid > .card.wide{
+  background:rgba(7,14,24,.09) !important;
+}
+
+/* Do not re-darken inner panels here; preserve current settings. */
+
+@media(max-width:760px){
+  .grid > .card,
+  .grid > .card.wide{
+    background:rgba(7,14,24,.12) !important;
+    backdrop-filter:blur(5px) saturate(1.03) !important;
+    -webkit-backdrop-filter:blur(5px) saturate(1.03) !important;
+  }
+}
+
+.europa-intro-shade{display:inline-block;background:rgba(55,60,68,.52);padding:12px 16px;border-radius:14px;border:1px solid rgba(255,255,255,.10);box-shadow:0 10px 28px rgba(0,0,0,.24);text-shadow:0 2px 7px rgba(0,0,0,.82);line-height:1.55;}
+</style>
+<style>
+
+/* ===== A8 TRUE 25 PERCENT CARD OPACITY V4 ===== */
+
+/*
+  Root cause of the prior "still opaque" appearance:
+  body::after carried a strong dark scrim over the entire background.
+  Transparent cards were therefore showing a darkened image beneath them.
+
+  This override:
+  - leaves the title/hero fully transparent
+  - reduces the full-page scrim to 6%
+  - makes lower outer cards 25% opaque
+  - removes the heavy blur that made them look milky
+  - makes nested panels lighter too
+*/
+
+/* Full-page image should remain visibly present behind the cards. */
+body::after{
+  background:rgba(3,6,11,.06) !important;
+}
+
+/* Title area remains exactly transparent. */
+.hero{
+  background:transparent !important;
+  background-image:none !important;
+  box-shadow:none !important;
+  backdrop-filter:none !important;
+  -webkit-backdrop-filter:none !important;
+}
+
+/* LOWER OUTER CARDS = 25% OPAQUE / 75% TRANSPARENT */
+.grid > article.card,
+.grid > .card{
+  background:rgba(7,14,24,.25) !important;
+  background-image:none !important;
+  border-color:rgba(224,238,255,.15) !important;
+  box-shadow:
+    0 8px 22px rgba(0,0,0,.10),
+    inset 0 1px 0 rgba(255,255,255,.035) !important;
+  backdrop-filter:none !important;
+  -webkit-backdrop-filter:none !important;
+  opacity:1 !important;
+}
+
+/* Wide outer cards follow the exact same rule. */
+.grid > article.card.wide,
+.grid > .card.wide{
+  background:rgba(7,14,24,.25) !important;
+  background-image:none !important;
+}
+
+/* Nested panels need to be lighter than their outer shell,
+   otherwise stacked alpha makes the whole card look solid again. */
+.grid .stat,
+.grid .xy,
+.grid .witness,
+.grid .fact,
+.grid .architecture,
+.grid .position-stage,
+.grid .time-authority-strip{
+  background:rgba(5,12,21,.12) !important;
+  background-image:none !important;
+  border-color:rgba(224,238,255,.10) !important;
+  box-shadow:none !important;
+  backdrop-filter:none !important;
+  -webkit-backdrop-filter:none !important;
+}
+
+/* The stats grid previously used a line-color background between cells.
+   Make that separator layer nearly clear too. */
+.grid .stats{
+  background:rgba(224,238,255,.045) !important;
+  border-color:rgba(224,238,255,.09) !important;
+}
+
+/* Fact / witness grids get no additional dark sheet. */
+.grid .fact-grid,
+.grid .witness-grid,
+.grid .bigxy{
+  background:transparent !important;
+}
+
+/* Preserve readable text without using an opaque panel. */
+.grid .card h2,
+.grid .stat-value,
+.grid .xy .v,
+.grid .witness .name,
+.grid .fact b,
+.grid .architecture{
+  text-shadow:
+    0 2px 5px rgba(0,0,0,.88),
+    0 0 12px rgba(0,0,0,.45);
+}
+
+@media(max-width:760px){
+  body::after{
+    background:rgba(3,6,11,.10) !important;
+  }
+
+  .grid > article.card,
+  .grid > .card,
+  .grid > article.card.wide,
+  .grid > .card.wide{
+    background:rgba(7,14,24,.28) !important;
+  }
+
+  .grid .stat,
+  .grid .xy,
+  .grid .witness,
+  .grid .fact,
+  .grid .architecture,
+  .grid .position-stage,
+  .grid .time-authority-strip{
+    background:rgba(5,12,21,.16) !important;
+  }
+}
+
+</style>
+<style>
+
+/* ===== A8 EUROPA READABILITY TUNE V5 ===== */
+
+/* Europa has a much brighter icy background than Ganymede.
+   Increase only Europa's lower-card opacity for readability.
+   Title/hero remains fully transparent.
+*/
+
+.hero{
+  background:transparent !important;
+  background-image:none !important;
+  box-shadow:none !important;
+  backdrop-filter:none !important;
+  -webkit-backdrop-filter:none !important;
+}
+
+/* Outer cards: 38% opaque / 62% transparent */
+.grid > article.card,
+.grid > .card,
+.grid > article.card.wide,
+.grid > .card.wide{
+  background:rgba(7,14,24,.38) !important;
+  background-image:none !important;
+  border-color:rgba(224,238,255,.17) !important;
+  box-shadow:
+    0 10px 26px rgba(0,0,0,.16),
+    inset 0 1px 0 rgba(255,255,255,.04) !important;
+  backdrop-filter:none !important;
+  -webkit-backdrop-filter:none !important;
+}
+
+/* Nested panels: 22% opaque */
+.grid .stat,
+.grid .xy,
+.grid .witness,
+.grid .fact,
+.grid .architecture,
+.grid .position-stage,
+.grid .time-authority-strip{
+  background:rgba(5,12,21,.22) !important;
+  background-image:none !important;
+  border-color:rgba(224,238,255,.12) !important;
+  box-shadow:none !important;
+  backdrop-filter:none !important;
+  -webkit-backdrop-filter:none !important;
+}
+
+/* Slightly stronger contrast for white text / white line graphics. */
+.grid .card h2,
+.grid .stat-value,
+.grid .xy .v,
+.grid .witness .name,
+.grid .fact b,
+.grid .architecture,
+.grid svg,
+.grid .position-stage{
+  text-shadow:
+    0 2px 6px rgba(0,0,0,.92),
+    0 0 14px rgba(0,0,0,.50);
+}
+
+/* Keep the global scrim light so the artwork is still visible. */
+body::after{
+  background:rgba(3,6,11,.08) !important;
+}
+
+@media(max-width:760px){
+  .grid > article.card,
+  .grid > .card,
+  .grid > article.card.wide,
+  .grid > .card.wide{
+    background:rgba(7,14,24,.42) !important;
+  }
+
+  .grid .stat,
+  .grid .xy,
+  .grid .witness,
+  .grid .fact,
+  .grid .architecture,
+  .grid .position-stage,
+  .grid .time-authority-strip{
+    background:rgba(5,12,21,.26) !important;
+  }
+}
+
+</style>
+<style>
+
+/* ===== A8 FRONT BACK JUPITER PASS V1 ===== */
+/*
+  ACTUAL-VIEW Europa / Ganymede pages:
+  screen RIGHT → LEFT = EAST → WEST = FRONT · TRANSIT LEG
+  screen LEFT → RIGHT = WEST → EAST = BACK · OCCULTATION LEG
+
+  Moons uses telescope-mirror presentation; do not copy its screen
+  direction literally onto these actual-view cards.
+
+  This changes drawing order only. X/Y still determines whether a moon
+  actually overlaps Jupiter's disk.
+*/
+.position-stage .axis-x,
+.position-stage .axis-y{z-index:1}
+.position-stage .jupiter{z-index:20!important}
+.position-stage .live-moon{z-index:30}
+.position-stage .live-moon.front-pass{z-index:30!important}
+.position-stage .live-moon.back-pass{z-index:10!important}
+.position-stage .live-moon.back-pass .dot{filter:brightness(.84) saturate(.90)}
+.position-stage .live-moon.front-pass .dot{filter:none}
+
+</style>
+<style>
+
+/* ===== A8 ACTUAL SKY EAST WEST LABELS V1 ===== */
+.position-stage .sky-orientation-label{
+  position:absolute;
+  top:12px;
+  z-index:40;
+  font-size:.68rem;
+  font-weight:700;
+  letter-spacing:.15em;
+  color:var(--text);
+  text-shadow:
+    0 2px 5px rgba(0,0,0,.95),
+    0 0 12px rgba(0,0,0,.6);
+  pointer-events:none;
+}
+.position-stage .sky-orientation-label.west{
+  left:14px;
+}
+.position-stage .sky-orientation-label.east{
+  right:14px;
+}
+
+</style>
+</head>
+<body>
+<div class="sky-art" aria-hidden="true">
+  <div class="europa-sphere"></div>
+  <div class="witness-moon io"></div>
+  <div class="witness-moon ganymede"></div>
+  <div class="witness-moon callisto"></div>
+</div>
+
+<nav id="a8-topside-coherence-02" class="cosigo-global-nav" aria-label="Auspicious 8 navigation">
+  <div class="a8-topline">
+    <a class="cosigo-global-brand" href="https://cosigo.io/" aria-label="COSIGO home">
+      <img src="https://a8.cosigo.io/assets/cosigo_master_512.png" alt="COSIGO" width="42" height="42">
+      <span>COSIGO<small>LABS · AUSPICIOUS 8</small></span>
+    </a>
+    <details class="a8-menu">
+      <summary>MENU</summary>
+      <div class="a8-menu-panel">
+        <a href="https://lab.cosigo.io/">LAB HOME</a>
+        <a href="https://clock.cosigo.io/">CLOCK</a>
+        <a href="https://calendar.cosigo.io/">CALENDAR</a>
+        <a href="https://moons.cosigo.io/">MOONS</a>
+        <a href="https://ganymede.cosigo.io/">GANYMEDE</a>
+<a href="https://mintaka.cosigo.io/">MINTAKA</a>
+        <a href="https://sol.cosigo.io/">SOL</a>
+        <a href="https://ship.cosigo.io/">EARTHSHIP</a>
+        <a href="https://map.cosigo.io/">MAP · CLOCK · COMPASS</a>
+        <a href="https://sea.cosigo.io/">NAVIGATION</a>
+        <a href="https://stars.cosigo.io/">CELESTIAL</a>
+        <a href="https://audio.cosigo.io/">AUDIO</a>
+        <a href="https://quartz.cosigo.io/">QUARTZ</a>
+        <a href="https://a8.cosigo.io/">A8 PUBLIC</a>
+        <a href="https://about.cosigo.io/">ABOUT</a>
+        <a href="https://contestant.cosigo.io/">FUN</a>
+        <a href="https://cosigo.io/">COSIGO HOME</a>
+        <a href="https://github.com/cosigo/a8">GITHUB</a>
+      </div>
+    </details>
+  </div>
+</nav>
+
+<main>
+  <section class="hero hero-cosmic hero-europa-bg">
+    <div class="kicker">AUSPICIOUS 8 · CORE20 · JOVIAN NATURAL AUTHORITY</div>
+    <div class="hero-title-row">
+      <div class="hero-title-copy">
+        <h1>EUROPA</h1>
+      </div>
+      <div class="hero-title-moon europa" aria-hidden="true"></div>
+    </div>
+    <div class="hero-copy">
+      <span class="europa-intro-shade">Europa is a moon of Jupiter. Its natural recurrence is the timing ruler for this Earth clock. Physical oscillators carry the count. Core20 keeps Earth Meridian 0 time. This browser is a read-only observer of the already-running Europa instrument.</span>
+    </div>
+    <div class="pills">
+      <span class="pill">AUTHORITY · EUROPA</span>
+      <span class="pill">9,344,598 NATURAL RAW / REVOLUTION</span>
+      <span class="pill">NORMALIZATION · NONE</span>
+      <span class="pill">A/B · REPLACEABLE PHYSICAL CARRIER</span>
+    </div>
+    <div class="statusline">
+      <span class="led" id="liveLed"></span>
+      <span id="liveText">CONNECTING TO CORE20 / EUROPA</span>
+    </div>
+  </section>
+
+  <section class="grid">
+    <article class="card">
+      <h2>CORE20 · EARTH MERIDIAN 0 · LIVE A8 TIME</h2>
+      <div class="time-authority-strip">
+        <span>EARTH · MERIDIAN 0</span>
+        <b>EUROPA · NATURAL TIME AUTHORITY</b>
+      </div>
+      <div class="clock" id="clockDecimal">—:—:—</div>
+      <div class="clock-sub">A8 CLOCK FORMAT · EARTH DAY = 32 HOURS · 64 MIN / HOUR · 64 SEC / MIN</div>
+      <div class="stats">
+        <div class="stat"><div class="stat-label">Day</div><div class="stat-value" id="dayCount">—</div></div>
+        <div class="stat"><div class="stat-label">DAY_PHASE17</div><div class="stat-value" id="dayPhase17">—</div></div>
+        <div class="stat"><div class="stat-label">A/B Source epoch</div><div class="stat-value" id="sourceEpoch">—</div></div>
+        <div class="stat">
+          <div class="stat-label">Core state</div>
+          <div class="stat-value" id="coreState">—</div>
+          <div class="clock-sub" id="clockOctal">octy octal · —:—:—₈</div>
+        </div>
+      </div>
+      <div class="architecture">NATURE → EUROPA → A/B PHYSICAL RAW → CORE20 → EARTH MERIDIAN 0 → DAY_PHASE17 / CLOCK</div>
+    </article>
+
+    <article class="card">
+      <h2>EUROPA · SEALED JUPITER-RELATIVE POSITION</h2>
+      <div class="bigxy">
+        <div class="xy"><div class="stat-label">Native X · east positive</div><div class="v" id="eX">—</div></div>
+        <div class="xy"><div class="stat-label">Native Y</div><div class="v" id="eY">—</div></div>
+      </div>
+      <div class="stats">
+        <div class="stat"><div class="stat-label">Model RAW</div><div class="stat-value break" id="modelRaw">—</div></div>
+        <div class="stat"><div class="stat-label">Native direction</div><div class="stat-value" id="eDirection">—</div></div>
+        <div class="stat"><div class="stat-label">Position role</div><div class="stat-value" id="eRole">—</div></div>
+        <div class="stat"><div class="stat-label">Coordinate origin</div><div class="stat-value">JUPITER</div></div>
+        <div class="stat"><div class="stat-label">Observer-side leg</div><div class="stat-value" id="eObserverLeg">—</div></div>
+      </div>
+    </article>
+
+    <article class="card wide">
+      <h2>JOVIAN POSITION · EUROPA WITH WITNESSES</h2>
+      <div class="position-stage" aria-label="Live sealed Jovian native X/Y positions">
+        <div class="axis-x"></div><div class="axis-y"></div><div class="jupiter"></div>
+        <div class="sky-orientation-label west">WEST</div>
+        <div class="sky-orientation-label east">EAST</div>
+        <div class="live-moon io" data-body="IO"><span class="dot"></span><span class="name">IO</span></div>
+        <div class="live-moon europa" data-body="EUROPA"><span class="dot"></span><span class="name">EUROPA</span></div>
+        <div class="live-moon ganymede" data-body="GANYMEDE"><span class="dot"></span><span class="name">GANYMEDE</span></div>
+        <div class="live-moon callisto" data-body="CALLISTO"><span class="dot"></span><span class="name">CALLISTO</span></div>
+      </div>
+      <div class="stage-note">SEALED NATIVE MODEL · JUPITER ORIGIN · ACTUAL-SKY VIEW · WEST ← JUPITER → EAST · +X EAST.</div>
+      
+      <div style="display:flex;justify-content:center;margin-top:.75rem">
+        <a
+          href="https://moons.cosigo.io/"
+          aria-label="Open Telescope Mirror View"
+          style="
+            display:inline-flex;
+            align-items:center;
+            justify-content:center;
+            min-height:42px;
+            padding:.55rem 1rem;
+            border:1px solid rgba(218,190,125,.62);
+            border-radius:999px;
+            background:rgba(20,34,42,.88);
+            color:#ead39b;
+            text-decoration:none;
+            font-size:.76rem;
+            font-weight:700;
+            letter-spacing:.08em;
+          "
+        >TELESCOPE MIRROR VIEW</a>
+      </div>
+    </article>
+
+    <article class="card wide">
+      <h2>NATURAL FAMILY · WITNESSES DO NOT STEER THE AUTHORITY</h2>
+      <div class="witness-grid">
+        <div class="witness"><div class="name">IO</div><div class="role">WITNESS</div><div class="recurrence">4,650,745 RAW / REV</div><div class="coords">X <span id="ioX">—</span><br>Y <span id="ioY">—</span></div></div>
+        <div class="witness"><div class="name">GANYMEDE</div><div class="role">WITNESS</div><div class="recurrence">18,866,420 RAW / REV</div><div class="coords">X <span id="ganymedeX">—</span><br>Y <span id="ganymedeY">—</span></div></div>
+        <div class="witness"><div class="name">CALLISTO</div><div class="role">WITNESS ONLY</div><div class="recurrence">44,245,909 RAW / REV</div><div class="coords">X <span id="callistoX">—</span><br>Y <span id="callistoY">—</span></div></div>
+      </div>
+      <div class="architecture">IO · WITNESS &nbsp; | &nbsp; EUROPA · AUTHORITY &nbsp; | &nbsp; GANYMEDE · WITNESS &nbsp; | &nbsp; CALLISTO · WITNESS ONLY<br>INDEPENDENT NATURAL RECURRENCES · NORMALIZATION NONE · SILENT RETUNE NONE</div>
+    </article>
+
+    <article class="card wide">
+      <h2>EUROPA · FUN FACTS</h2>
+      <div class="fact-grid">
+        <div class="fact"><b>An ice-covered ocean world</b><p>Strong evidence indicates a global saltwater ocean beneath Europa’s icy shell.</p><small>External astronomy context · NASA</small></div>
+        <div class="fact"><b>About 2,536.9 A8 NAV across</b><p>Europa is about 90% the diameter of Earth’s Moon.</p><small>A8 NAV native · legacy diameter witness · NASA</small></div>
+        <div class="fact"><b>Locked toward Jupiter</b><p>Europa is tidally locked, so the same hemisphere continually faces Jupiter.</p><small>External astronomy context · NASA</small></div>
+        <div class="fact"><b>Galileo saw it in 1610</b><p>Europa was discovered in January 1610 during the first telescopic observations of Jupiter’s large moons.</p><small>External astronomy context · NASA</small></div>
+        <div class="fact"><b>A young, fractured surface</b><p>Europa’s bright water-ice surface is crossed by long cracks, ridges and bands and has relatively few large impact craters.</p><small>External astronomy context · NASA / Galileo</small></div>
+        <div class="fact"><b>The 1 : 2 : 4 family</b><p>Ganymede, Europa and Io participate in the familiar 1 : 2 : 4 orbital resonance. In A8, each body keeps its own natural recurrence.</p><small>A8 native recurrence + external astronomy context</small></div>
+      </div>
+      <div class="architecture">A8 NATIVE RULER · EUROPA = 9,344,598 RAW / REVOLUTION<br>LEGACY ASTRONOMY COMPARISON · EUROPA ORBITS JUPITER IN ABOUT 3.5 EARTH DAYS</div>
+      <p class="muted" style="margin:18px 0 0">
+        Astronomy reference:
+        <a href="https://science.nasa.gov/jupiter/jupiter-moons/europa/europa-facts/" target="_blank" rel="noopener">NASA · Europa Facts</a>.
+        These external facts provide context only; they do not define the A8 live timing authority.
+      </p>
+    </article>
+
+    <article class="card wide">
+      <h2>READ-ONLY INSTRUMENT BOUNDARY</h2>
+      <div class="stats">
+        <div class="stat"><div class="stat-label">Carrier</div><div class="stat-value">ARDUINO A/B · REPLACEABLE</div></div>
+        <div class="stat"><div class="stat-label">Natural ruler</div><div class="stat-value">EUROPA · 9,344,598 RAW / REV</div></div>
+        <div class="stat"><div class="stat-label">Core consumption</div><div class="stat-value">CORE20 · MERIDIAN-0 CIVIL TIME</div></div>
+        <div class="stat"><div class="stat-label">Browser authority</div><div class="stat-value">NONE · OBSERVER ONLY</div></div>
+      </div>
+      <p class="muted">Page load is not a timing event. The browser supplies no pace, phase, UTC correction, moon recurrence, physical RAW, or Jovian authority.</p>
+    </article>
+  </section>
+</main>
+
+<footer>
+
+  <div class="footer-inner">
+
+    <b style="color:#cbd5e1">COSIGO Labs · Auspicious 8 experimental laboratory</b><br>
+
+    Research / engineering notice: A8 pages may contain provisional models, simulations, comparison values, hypotheses and unreplicated experiment designs. Unless a page explicitly states otherwise, material shown here is not a certified metrology standard, accredited measurement result, or final Foundation definition. Legacy / SI values are comparison coordinates where identified, not native A8 authority.
+
+    <br><br>
+
+    COSIGO is primarily an educational and experimental project. Nothing in this laboratory is an investment offering, promise of financial return, or financial, investment, legal or tax advice. See the project-status notice for the current public description.
+
+
+
+    <div class="footer-links">
+
+      <a href="https://cosigo.io/">COSIGO Home</a>
+
+      <a href="https://a8.cosigo.io/">A8 Public Instrument</a>
+
+      <a href="https://lab.cosigo.io/">A8 Engineering Lab</a>
+
+      <a href="https://ce.cosigo.io/">CE</a>
+
+      <a href="https://contact.cosigo.io/">Contact</a>
+
+      <a href="https://docs.cosigo.io/">COSIGO Docs / WP</a>
+
+      <a href="https://github.com/cosigo">COSIGO GitHub</a>
+
+      <a href="https://cosigo.io/project-status/">Educational Purpose / Project Status</a>
+
+    </div>
+
+
+
+    <div style="margin-top:18px">© 2026 COSIGO. COSIGO™ rights and trademark notices remain governed by the official COSIGO site.</div>
+
+  </div>
+
+</footer>
+
+<script src="/assets/a8-core20-clock-observer.js?v=europa-core20-cadence-v1"></script>
+<script>
+'use strict';
+
+const MODEL_URL='/assets/a8-moons-continuous-v2.json';
+const HANDOFF_URL='/assets/a8-moons-active-handoff-v1.json';
+const Q16=65536;
+const NATURAL_RAW=Object.freeze({
+  IO:4650745,
+  EUROPA:9344598,
+  GANYMEDE:18866420,
+  CALLISTO:44245909
+});
+
+const $=id=>document.getElementById(id);
+const mod=(n,m)=>((n % m)+m)%m;
+
+const state={
+  model:null,
+  handoff:null,
+  tracks:{}
+};
+
+function text(v,fallback='—'){
+  if(v===undefined || v===null || v==='') return fallback;
+  return String(v);
+}
+
+async function fetchJSON(url){
+  const r=await fetch(url,{cache:'no-store',headers:{'Accept':'application/json'}});
+  if(!r.ok) throw new Error(`${url} · HTTP ${r.status}`);
+  return r.json();
+}
+
+function prepareTrack(body){
+  const m=state.model?.bodies?.[body];
+  if(!m) throw new Error(`MODEL BODY MISSING · ${body}`);
+
+  const samples=(m.samples||[]).map(s=>({
+    raw:Number(s.rawQ16)/Q16,
+    x:Number(s.xQ16)/Q16,
+    y:Number(s.yQ16)/Q16
+  }));
+
+  if(samples.length<2) throw new Error(`MODEL SAMPLES MISSING · ${body}`);
+
+  samples.sort((a,b)=>a.raw-b.raw);
+
+  state.tracks[body]={
+    body,
+    full:Number(m.fullOrbit || NATURAL_RAW[body]),
+    anchor:Number(m.anchorRaw),
+    role:m.role,
+    samples,
+    first:samples[0].raw,
+    last:samples[samples.length-1].raw
+  };
+}
+
+function interpolateSamples(track, target){
+  const s=track.samples;
+
+  if(target <= s[0].raw){
+    return {x:s[0].x,y:s[0].y,direction:'MODEL X ANCHOR'};
+  }
+
+  if(target >= s[s.length-1].raw){
+    return {x:s[s.length-1].x,y:s[s.length-1].y,direction:'MODEL X ANCHOR'};
+  }
+
+  let lo=0, hi=s.length-1;
+  while(lo+1<hi){
+    const mid=(lo+hi)>>1;
+    if(s[mid].raw<=target) lo=mid;
+    else hi=mid;
+  }
+
+  const a=s[lo], b=s[hi];
+  const span=b.raw-a.raw;
+  const f=span>0 ? (target-a.raw)/span : 0;
+
+  return {
+    x:a.x+f*(b.x-a.x),
+    y:a.y+f*(b.y-a.y),
+    direction:b.x>=a.x ? 'MODEL X INCREASING · EASTWARD' : 'MODEL X DECREASING · WESTWARD'
+  };
+}
+
+function positionAt(body, modelRaw){
+  const t=state.tracks[body];
+  if(!t) throw new Error(`TRACK NOT READY · ${body}`);
+
+  const full=t.full;
+  const first=t.first;
+  const last=t.last;
+
+  // Reduce the live model coordinate onto the first sealed natural revolution.
+  let cycleRaw=first + mod(Number(modelRaw)-first,full);
+
+  // Most bodies have at least one complete sealed revolution in the sample range.
+  if(cycleRaw<=last){
+    const p=interpolateSamples(t,cycleRaw);
+    return {...p,xA8:p.x,yA8:p.y,positionRole:body==='EUROPA'?'NATURAL AUTHORITY · SEALED POSITION':'WITNESS · SEALED POSITION'};
+  }
+
+  // Ganymede's sealed sample span is just short of one full revolution.
+  // Close only that seam by interpolating last sample → first sample + one natural revolution.
+  const a=t.samples[t.samples.length-1];
+  const b={...t.samples[0],raw:t.samples[0].raw+full};
+  const span=b.raw-a.raw;
+  const f=span>0 ? (cycleRaw-a.raw)/span : 0;
+  const x=a.x+f*(b.x-a.x);
+  const y=a.y+f*(b.y-a.y);
+
+  return {
+    x,y,xA8:x,yA8:y,
+    direction:b.x>=a.x ? 'MODEL X INCREASING · EASTWARD' : 'MODEL X DECREASING · WESTWARD',
+    positionRole:body==='EUROPA'?'NATURAL AUTHORITY · SEALED POSITION':'WITNESS · SEALED POSITION'
+  };
+}
+
+function modelRawFromJovian(jov){
+  const h=state.handoff;
+  if(!h) throw new Error('ACTIVE MOON HANDOFF NOT READY');
+
+  const liveEpoch=String(jov?.physical?.sourceEpoch ?? '');
+  const handoffEpoch=String(h?.livePhysical?.sourceEpoch ?? '');
+
+  if(!liveEpoch || liveEpoch!==handoffEpoch){
+    throw new Error(`SOURCE_EPOCH MISMATCH · LIVE ${liveEpoch || '—'} · HANDOFF ${handoffEpoch || '—'}`);
+  }
+
+  const raw=Number(jov?.physical?.currentRaw);
+  const anchorRaw=Number(h.livePhysical.anchorRaw);
+  const modelAnchor=Number(h.modelAnchor.rawEquivalentAtPhysicalAnchor);
+  const num=Number(h.physicalToModelRatio.numerator);
+  const den=Number(h.physicalToModelRatio.denominator);
+
+  if(!Number.isFinite(raw)||!Number.isFinite(anchorRaw)||!Number.isFinite(modelAnchor)||!Number.isFinite(num)||!Number.isFinite(den)||den===0){
+    throw new Error('INVALID PHYSICAL → MODEL HANDOFF');
+  }
+
+  return modelAnchor + (raw-anchorRaw)*num/den;
+}
+
+
+/* ===== A8 OBSERVER LEG FROM SEALED TRACK DIRECTION V1 ===== */
+function a8ApplyObserverLeg(body,leg){
+  const node=document.querySelector(`.live-moon[data-body="${body}"]`);
+  if(!node || !leg) return;
+
+  node.classList.toggle('front-pass',leg.front===true);
+  node.classList.toggle('back-pass',leg.front===false);
+  node.dataset.observerLeg=leg.front ? 'FRONT' : 'BACK';
+  node.title += ` · ${leg.label}`;
+}
+
+
+function a8EuropaObserverLeg(lane){
+  const d=String(lane?.direction || '');
+
+  /*
+    ACTUAL-VIEW PAGE:
+    +X / EAST = screen RIGHT
+    -X / WEST = screen LEFT
+
+    X DECREASING / WESTWARD
+      = screen RIGHT → LEFT
+      = EAST → WEST
+      = FRONT · TRANSIT LEG
+
+    X INCREASING / EASTWARD
+      = screen LEFT → RIGHT
+      = WEST → EAST
+      = BACK · OCCULTATION LEG
+  */
+  if(d.includes('WESTWARD')){
+    return {front:true,label:'FRONT · TRANSIT LEG'};
+  }
+  if(d.includes('EASTWARD')){
+    return {front:false,label:'BACK · OCCULTATION LEG'};
+  }
+  return null;
+}
+
+function setMoonMarker(body,lane){
+  if(!lane) return;
+  const x=Number(lane.xA8);
+  const y=Number(lane.yA8);
+  if(!Number.isFinite(x)||!Number.isFinite(y)) return;
+
+  const left=Math.max(4,Math.min(96,50+(x/256)*45));
+  const top=Math.max(6,Math.min(94,50-(y/128)*42));
+  const node=document.querySelector(`.live-moon[data-body="${body}"]`);
+  if(!node) return;
+
+  node.style.left=left+'%';
+  node.style.top=top+'%';
+  node.title=`${body} · X ${x.toFixed(3)} · Y ${y.toFixed(3)}`;
+}
+
+function renderWitness(idPrefix,lane){
+  $(idPrefix+'X').textContent=Number.isFinite(Number(lane?.xA8)) ? Number(lane.xA8).toFixed(3) : '—';
+  $(idPrefix+'Y').textContent=Number.isFinite(Number(lane?.yA8)) ? Number(lane.yA8).toFixed(3) : '—';
+}
+
+async function initializeModel(){
+  const [model,handoff]=await Promise.all([
+    fetchJSON(MODEL_URL),
+    fetchJSON(HANDOFF_URL)
+  ]);
+
+  if(model?.schema!=='A8-MOONS-CONTINUOUS-COORDINATES-V2'){
+    throw new Error('UNEXPECTED MOON MODEL SCHEMA');
+  }
+  if(handoff?.schema!=='A8-MOONS-PHYSICAL-MODEL-HANDOFF-V1' || handoff?.status!=='QUALIFIED'){
+    throw new Error('ACTIVE MOON HANDOFF NOT QUALIFIED');
+  }
+
+  state.model=model;
+  state.handoff=handoff;
+
+  for(const body of ['IO','EUROPA','GANYMEDE','CALLISTO']){
+    prepareTrack(body);
+  }
+}
+
+
+/*
+ * EUROPA · CANONICAL CORE20 CIVIL PRESENTATION
+ *
+ * Core20 owns the civil coordinate.
+ * Browser performance.now() provides visible continuation only.
+ * It is not pace, phase, authority, UTC, or an A8 timing source.
+ */
+const core20ClockApi =
+  window.A8Core20ClockObserver;
+
+if(
+  !core20ClockApi ||
+  core20ClockApi.schema !==
+    'A8-CORE20-CIVIL-OBSERVER-V1'
+){
+  throw new Error(
+    'canonical A8 Core20 clock observer unavailable'
+  );
+}
+
+const core20ClockObserver =
+  core20ClockApi.create();
+
+window.a8EuropaCore20ClockObserver =
+  core20ClockObserver;
+
+
+function renderCore20ClockFrame(){
+  const observerState =
+    core20ClockObserver.state();
+
+  if(
+    observerState.ready === true &&
+    observerState.running === true
+  ){
+    const total =
+      core20ClockObserver.currentTotal();
+
+    if(Number.isFinite(total)){
+      const whole =
+        Math.floor(total);
+
+      const day =
+        Math.floor(
+          whole /
+          core20ClockApi.DAY_STATES
+        );
+
+      const phase =
+        core20ClockApi.wrapDayPhase(
+          whole
+        );
+
+      const fields =
+        core20ClockApi.fieldsFromPhase(
+          phase
+        );
+
+      const decimal =
+        core20ClockApi.decimalFromPhase(
+          phase
+        );
+
+      const octal =
+        `${fields.hour.toString(8).padStart(2,'0')}:` +
+        `${fields.minute.toString(8).padStart(2,'0')}:` +
+        `${fields.second.toString(8).padStart(2,'0')}₈`;
+
+      $('clockDecimal').textContent =
+        decimal;
+
+      $('clockOctal').textContent =
+        'octy octal · ' +
+        octal;
+
+      $('dayCount').textContent =
+        String(day);
+
+      $('dayPhase17').textContent =
+        String(phase);
+    }
+  }
+
+  requestAnimationFrame(
+    renderCore20ClockFrame
+  );
+}
+
+
+async function update(forceObserver=false){
+  try{
+    if(!state.model || !state.handoff){
+      await initializeModel();
+    }
+
+    const [clockPayload,jov]=await Promise.all([
+      fetchJSON('/api/core20/clock'),
+      fetchJSON('/api/europa/jovian')
+    ]);
+
+    if(!clockPayload?.ok || !clockPayload?.clock){
+      throw new Error('CORE20 CLOCK UNAVAILABLE');
+    }
+
+    const authority=String(jov?.authority?.selectedBody || jov?.qualification?.operationalAuthorityBody || '');
+    const ruler=String(jov?.authority?.selectedPeriodRaw || jov?.qualification?.operationalRulerRaw || '');
+
+    if(authority!=='EUROPA'){
+      throw new Error(`LIVE JOVIAN AUTHORITY IS ${authority || 'UNKNOWN'}, NOT EUROPA`);
+    }
+    if(ruler!=='9344598'){
+      throw new Error(`EUROPA RULER ${ruler || 'UNKNOWN'} ≠ 9344598`);
+    }
+
+    const core=clockPayload.clock;
+    const clock=core.clock || {};
+
+    if(!document.hidden){
+      const accepted=
+        core20ClockObserver.observe(
+          core,
+          {
+            force:
+              Boolean(forceObserver)
+          }
+        );
+
+      if(!accepted){
+        throw new Error(
+          'CORE20 CLOCK OBSERVER NOT RUNNING'
+        );
+      }
+    }
+
+    const modelRaw=modelRawFromJovian(jov);
+
+    const io=positionAt('IO',modelRaw);
+    const europa=positionAt('EUROPA',modelRaw);
+    const ganymede=positionAt('GANYMEDE',modelRaw);
+    const callisto=positionAt('CALLISTO',modelRaw);
+
+    const ioLeg=a8EuropaObserverLeg(io);
+    const europaLeg=a8EuropaObserverLeg(europa);
+    const ganymedeLeg=a8EuropaObserverLeg(ganymede);
+    const callistoLeg=a8EuropaObserverLeg(callisto);
+
+    /*
+     * Civil clock DOM is rendered continuously from the
+     * canonical Core20 observer above.
+     * This update remains authoritative snapshot + Jovian metadata.
+     */
+    $('sourceEpoch').textContent=text(jov?.physical?.sourceEpoch);
+    $('coreState').textContent=text(core.status);
+
+    $('eX').textContent=europa.x.toFixed(3);
+    $('eY').textContent=europa.y.toFixed(3);
+    $('eDirection').textContent=europa.direction;
+    $('eRole').textContent=europa.positionRole;
+    $('modelRaw').textContent=Number(modelRaw).toFixed(3);
+
+    renderWitness('io',io);
+    renderWitness('ganymede',ganymede);
+    renderWitness('callisto',callisto);
+
+    setMoonMarker('IO',io);
+    setMoonMarker('EUROPA',europa);
+    setMoonMarker('GANYMEDE',ganymede);
+    setMoonMarker('CALLISTO',callisto);
+
+    a8ApplyObserverLeg('IO',ioLeg);
+    a8ApplyObserverLeg('EUROPA',europaLeg);
+    a8ApplyObserverLeg('GANYMEDE',ganymedeLeg);
+    a8ApplyObserverLeg('CALLISTO',callistoLeg);
+
+    $('eObserverLeg').textContent=europaLeg ? europaLeg.label : '—';
+
+    $('liveLed').className='led ok';
+    $('liveText').textContent='CORE20 LIVE · EUROPA · 9,344,598 RAW · SEALED SKY POSITION RUNNING';
+  }catch(err){
+    core20ClockObserver.disconnect();
+    $('liveLed').className='led bad';
+    $('liveText').textContent='EUROPA / CORE20 UNAVAILABLE · '+err.message;
+  }
+}
+
+update(true);
+
+setInterval(
+  ()=>update(false),
+  1000
+);
+
+requestAnimationFrame(
+  renderCore20ClockFrame
+);
+
+document.addEventListener(
+  'visibilitychange',
+  ()=>{
+    if(document.hidden){
+      core20ClockObserver.disconnect();
+    }else{
+      update(true);
+    }
+  }
+);
+</script>
+</body>
+</html>
+

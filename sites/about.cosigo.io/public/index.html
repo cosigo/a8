@@ -2956,7 +2956,7 @@
 
       <div class="a8-earth-result">
         <span>MEAN ORBIT SPEED</span>
-        <b>≈ 1.0041 A8/57 / A8 HOUR</b>
+        <b>≈ A8/57.0059 per A8 HOUR</b>
       </div>
 
       <div class="a8-earth-result">
@@ -3267,9 +3267,9 @@
             <button type="button" data-a8-rung="48">A8/48</button>
           </div>
 
-          <div class="a8-scalar-rung-row">
+          <div class="a8-scalar-rung-row" hidden aria-hidden="true">
             <label>
-              <span>NATIVE RUNG</span>
+              <span>INTEGER LANDMARK</span>
               <select id="a8-length-rung">
                 <option value="0">A8/0</option>
                 <option value="10">A8/10</option>
@@ -3287,8 +3287,12 @@
 
           <div class="a8-angle-inputs">
             <label>
-              <span>NATIVE A8 AMOUNT</span>
-              <input id="a8-length-native" type="number" step="any" value="1">
+              <span>NATIVE A8 RUNG · DECIMAL</span>
+              <input id="a8-length-native"
+                     type="number"
+                     step="any"
+                     value="31"
+                     inputmode="decimal">
             </label>
             <div class="a8-angle-swap">⇄</div>
             <label class="a8-legacy-side">
@@ -3298,9 +3302,9 @@
           </div>
 
           <div class="a8-angle-results">
-            <div><small>NATIVE UNIT</small><strong id="a8-length-out-rung">1 A8/31</strong></div>
-            <div><small>EXACT A8/31 FACTOR</small><strong id="a8-length-out-factor">2⁰ = 1</strong></div>
-            <div><small>NATIVE RELATIONSHIP</small><strong id="a8-length-out-native">1 A8/31</strong></div>
+            <div><small>CONTINUOUS A8 RUNG</small><strong id="a8-length-out-rung">A8/31</strong></div>
+            <div><small>A8/31 FACTOR</small><strong id="a8-length-out-factor">2⁰ = 1</strong></div>
+            <div><small>NATIVE RELATIONSHIP</small><strong id="a8-length-out-native">A8/31 = 1 A8/31</strong></div>
             <div class="a8-legacy-side"><small>LEGACY COMPARISON</small><strong id="a8-length-out-legacy">1.193327897829 m</strong></div>
             <div>
               <small>REAL-WORLD SCALE · RECOGNITION ONLY</small>
@@ -3314,7 +3318,7 @@
 
             <div id="a8-length-ruler-principle" hidden>
               <small>RULER PRINCIPLE</small>
-              <strong>FASTER MOTION NATURALLY MOVES TO HIGHER BINARY RUNGS</strong>
+              <strong>FASTER MOTION NATURALLY MOVES HIGHER ON THE SAME BINARY RULER</strong>
             </div>
           </div>
 
@@ -3323,8 +3327,12 @@
           </div>
 
           <div class="a8-angle-note">
-            A8/31 = 1 is the human-scale native rung. The sealed physical realization is the mean-Earth navigation construction;
-            the metre value is comparison only.
+            A8/31 is the human-scale reference point, not the origin of the ruler.
+            The length ladder is Nature-derived through
+            <strong>1 A8 NAV = A8/41 = C(E,mean) / 32,768</strong>,
+            and <strong>A8/31 = A8/41 ÷ 1024</strong>.
+            Decimal rungs are continuous positions on that same binary ladder:
+            c A8/n → A8/(n + log₂ c). The metre value is comparison only.
           </div>
 
           <div class="a8-mini-links">
@@ -3563,6 +3571,7 @@
               <span>NATIVE DISTANCE · A8 NAV</span>
               <input id="a8-nav-distance"
                      type="number"
+                     min="0"
                      step="any"
                      value="1">
             </label>
@@ -3573,6 +3582,7 @@
               <span>LEGACY km · COMPARISON</span>
               <input id="a8-nav-distance-legacy"
                      type="number"
+                     min="0"
                      step="any"
                      value="1.221967767">
             </label>
@@ -3590,8 +3600,8 @@
             </div>
 
             <div>
-              <small>A8/41 IDENTITY</small>
-              <strong id="a8-nav-out-41">1 A8/41</strong>
+              <small>CONTINUOUS A8 RUNG</small>
+              <strong id="a8-nav-out-41">A8/41</strong>
             </div>
 
             <div class="a8-legacy-side">
@@ -3601,7 +3611,8 @@
           </div>
 
           <div class="a8-angle-note">
-            This converter measures distance only: A8 NAV ⇄ legacy kilometres.
+            This converter measures distance only. A8 NAV remains the travel-accounting view;
+            the continuous binary-rung view uses r = 41 + log₂(D NAV).
             Speed requires distance ÷ elapsed time.
             The cards below use one A8 HOUR as the fixed time denominator.
           </div>
@@ -3774,14 +3785,14 @@
                   </p>
 
                   <div class="a8-ruler-rule">
-                    <strong>1 A8/31 := 1 native A8 length</strong>
+                    <strong>A8/31 · HUMAN REFERENCE POINT</strong>
                     <span>
-                      current operational legacy comparison =
-                      1.193327897829 m
+                      A8/31 = A8/41 ÷ 1024 ·
+                      current comparison ≈ 1.193327897829 m
                     </span>
                   </div>
 
-                  <p class="a8-ruler-status">Earth defines the sealed binary length ladder through 1 A8 NAV = 1 A8/41. Quartz remains an independent natural witness and does not resize the ruler.</p>
+                  <p class="a8-ruler-status">Earth defines the sealed binary length ladder through <strong>1 A8 NAV = A8/41 = C(E,mean) / 32,768</strong>. The human reference follows exactly: <strong>A8/31 = A8/41 ÷ 1024</strong>. Quartz remains an independent natural witness and does not resize the ruler.</p>
 
                 </div>
 
@@ -3977,8 +3988,8 @@
                     <br><br>
                     <strong>A8/41 = A8 NAV.</strong>
                     This is one physical length ladder.
-                    SIZE chooses the rung nearest the object's size.
-                    SPEED chooses the rung nearest the distance traveled in
+                    SIZE states the object's position on the continuous ruler.
+                    SPEED states the continuous rung of the distance traveled in
                     one A8 HOUR.
                     NAV counts that same traveled distance on the common
                     A8/41 Earth-navigation rung.
@@ -4045,7 +4056,7 @@
                   <div>
                     <small>EARTH · PER A8 SECOND</small>
                     <strong>
-                      ≈ 1.0041 A8/45 per A8 SECOND
+                      ≈ A8/45.0059 per A8 SECOND
                     </strong>
                   </div>
 
@@ -4059,7 +4070,7 @@
                   <div class="a8-closure-highlight">
                     <small>EARTH · PER A8 HOUR</small>
                     <strong>
-                      ≈ 1.0041 A8/57 per A8 HOUR
+                      ≈ A8/57.0059 per A8 HOUR
                     </strong>
                     <span>
                       same mean orbital motion · different binary rung
@@ -4079,10 +4090,10 @@
                   </div>
 
                   <div class="a8-ruler-principle">
-                    <strong>SEALED EARTH RULER</strong>
+                    <strong>NATURE-DERIVED EARTH RULER</strong>
                     <span>
-                      A8/31 = 1 native length with current operational
-                      comparison 1.193327897829 m.
+                      1 A8 NAV = A8/41 = C(E,mean) / 32,768.
+                      A8/31 = A8/41 ÷ 1024 is the human reference point.
                     </span>
                   </div>
 
@@ -4098,7 +4109,7 @@
                     <strong>ORBIT</strong>
                     <span>
                       Spaceship Earth's mean orbital motion uses the same
-                      binary length ladder: ≈ 1.0041 A8/45 per A8 SECOND.
+                      binary length ladder: ≈ A8/45.0059 per A8 SECOND.
                     </span>
                   </div>
 
@@ -4110,11 +4121,11 @@
                   <small>HOW FAST</small>
                   <strong>
                     Spaceship Earth mean orbital speed =
-                    ≈ 1.0041 A8/45 per A8 SECOND
+                    ≈ A8/45.0059 per A8 SECOND
                   </strong>
                   <span>
                     Same motion on the hour-scale rung:
-                    ≈ 1.0041 A8/57 per A8 HOUR.
+                    ≈ A8/57.0059 per A8 HOUR.
                   </span>
                 </div>
 
@@ -4598,7 +4609,7 @@ mass     = 1.0000 /31 M</div>
 
         <p>
           The domain says what is being measured. The rung gives the
-          scale neighborhood. The coefficient carries precision.
+          continuous scale position. The decimal rung carries precision.
         </p>
       </section>
 
@@ -4635,7 +4646,7 @@ airplane       → /50 S</div>
 
         <p>
           A physically trained AI might recognize the approximate rung first,
-          then refine the coefficient with sensor precision.
+          then refine the decimal rung with sensor precision.
         </p>
       </section>
 
@@ -4756,7 +4767,7 @@ airplane       → /50 S</div>
           <article>
             <small>PER A8 SECOND</small>
             <strong>
-              ≈ 1.0041 A8/45
+              ≈ A8/45.0059
               <br>
               per A8 SECOND
             </strong>
@@ -4774,7 +4785,7 @@ airplane       → /50 S</div>
           <article>
             <small>PER A8 HOUR</small>
             <strong>
-              ≈ 1.0041 A8/57
+              ≈ A8/57.0059
               <br>
               per A8 HOUR
             </strong>
@@ -4796,14 +4807,14 @@ airplane       → /50 S</div>
       </article>
       <article class="a8-awesome-metric">
         <small>AIRCRAFT</small>
-        <strong>≈ 0.9923 A8/50 / A8 HOUR</strong>
-        <span>Nearest-one speed shorthand · <b>A8/50</b> · same motion ≈ <b>508.1009 A8 NAV per A8 HOUR</b>.</span>
+        <strong>≈ A8/49.9888 per A8 HOUR</strong>
+        <span>Continuous measured speed · <b>A8/49.9888</b> · practical design rung <b>A8/50</b> · same motion ≈ <b>508.1009 A8 NAV per A8 HOUR</b>.</span>
         <span class="a8-legacy-note">legacy comparison · 447 kn benchmark.</span>
       </article>
       <article class="a8-awesome-metric">
         <small>SPACESHIP EARTH</small>
-        <strong>≈ 1.0041 A8/57 / A8 HOUR</strong>
-        <span>Same mean motion = ≈ 1.0041 A8/45 per A8 SECOND.</span>
+        <strong>≈ A8/57.0059 per A8 HOUR</strong>
+        <span>Same mean motion = ≈ A8/45.0059 per A8 SECOND.</span>
       </article>
     </div>
 
@@ -4817,7 +4828,7 @@ airplane       → /50 S</div>
   </div>
 
   <h3>
-    PUSH THE RUNG · NOT THE NUMBER
+    THE NUMBER IS THE RUNG
   </h3>
 
   <p>
@@ -4843,7 +4854,7 @@ airplane       → /50 S</div>
     Example:
     <strong>A8/50 = 512 A8 NAV.</strong>
     So a plane moving at
-    <strong>0.9923 A8/50 per A8 HOUR</strong>
+    <strong>A8/49.9888 per A8 HOUR</strong>
     is covering
     <strong>508.1009 A8 NAV per A8 HOUR</strong>.
   </p>
@@ -4891,7 +4902,7 @@ airplane       → /50 S</div>
       <text x="600" y="5"
             fill="currentColor"
             font-size="17">
-        ≈ 1.234 A8/70 per A8 HOUR
+        ≈ A8/70.3031 per A8 HOUR
       </text>
 
       <text x="600" y="32"
@@ -4932,7 +4943,7 @@ airplane       → /50 S</div>
             text-anchor="end"
             fill="currentColor"
             font-size="17">
-        ≈ 1.0041 A8/57 per A8 HOUR
+        ≈ A8/57.0059 per A8 HOUR
       </text>
 
       <text x="460" y="32"
@@ -4968,7 +4979,7 @@ airplane       → /50 S</div>
       <text x="600" y="5"
             fill="currentColor"
             font-size="17">
-        1.1862 A8/53 per A8 HOUR
+        A8/53.2463 per A8 HOUR
       </text>
 
       <text x="600" y="32"
@@ -5007,7 +5018,7 @@ airplane       → /50 S</div>
       <text x="600" y="5"
             fill="currentColor"
             font-size="17">
-        ≈ 1.1030 A8/52 per A8 HOUR
+        ≈ A8/52.1414 per A8 HOUR
       </text>
 
       <text x="600" y="32"
@@ -5043,7 +5054,7 @@ airplane       → /50 S</div>
             text-anchor="end"
             fill="currentColor"
             font-size="17">
-        0.9923 A8/50 per A8 HOUR
+        A8/49.9888 per A8 HOUR
       </text>
 
       <text x="460" y="32"
@@ -5079,7 +5090,7 @@ airplane       → /50 S</div>
       <text x="600" y="5"
             fill="currentColor"
             font-size="17">
-        0.9590 A8/47 per A8 HOUR
+        A8/46.9396 per A8 HOUR
       </text>
 
       <text x="600" y="32"
@@ -5115,7 +5126,7 @@ airplane       → /50 S</div>
             text-anchor="end"
             fill="currentColor"
             font-size="17">
-        0.7104 A8/46 per A8 HOUR
+        A8/45.5067 per A8 HOUR
       </text>
 
       <text x="460" y="32"
@@ -5151,7 +5162,7 @@ airplane       → /50 S</div>
       <text x="600" y="5"
             fill="currentColor"
             font-size="17">
-        0.7672 A8/45 per A8 HOUR
+        A8/44.6177 per A8 HOUR
       </text>
 
       <text x="600" y="32"
@@ -5187,7 +5198,7 @@ airplane       → /50 S</div>
             text-anchor="end"
             fill="currentColor"
             font-size="17">
-        0.7672 A8/43 per A8 HOUR
+        A8/42.6177 per A8 HOUR
       </text>
 
       <text x="460" y="32"
@@ -5228,7 +5239,7 @@ airplane       → /50 S</div>
       <text x="600" y="5"
             fill="currentColor"
             font-size="17">
-        ≈ 0.9482 A8/36 per A8 HOUR
+        ≈ A8/35.9233 per A8 HOUR
       </text>
 
       <text x="600" y="32"
@@ -5259,7 +5270,10 @@ airplane       → /50 S</div>
   <p class="muted">
     Moving-body names are examples, not dedicated units. Earth and Moon use mean orbital velocities; actual orbital speed varies through their elliptical paths.
     The ruler never changes.
-    A faster object simply lands on a larger nearest-one rung.
+    A faster object simply lands higher on the same continuous ruler.
+    Integer rungs remain useful engineering targets when a design can be
+    chosen around them: <strong>measure continuously; align the design to
+    a practical rung when practical.</strong>
   </p>
 
   <p>
@@ -6550,49 +6564,109 @@ document.querySelectorAll('.a8-question-dialog').forEach(dialog => {
 
   setTimeout(showSelected,0);
 
-  // LENGTH
+  // LENGTH · CONTINUOUS DECIMAL RUNG
+  //
+  // Canonical presentation:
+  //
+  //   c A8/n  ->  A8/(n + log2(c))
+  //
+  // Equivalently from the /31 realization:
+  //
+  //   r = 31 + log2(L / L31)
+  //
+  // Integer rungs remain exact landmarks. Decimal rungs are
+  // continuous positions on the same binary ladder.
 
-  const lr = $('a8-length-rung');
-  const ln = $('a8-length-native');
+  const lr = $('a8-length-rung');      // hidden landmark selector
+  const ln = $('a8-length-native');    // visible continuous rung
   const ll = $('a8-length-legacy');
 
-  let lengthSource = 'native';
+  let lengthSource = 'rung';
 
   function updateLength() {
-    const rung = num(lr.value);
-    const exponent = rung - 31;
-    const unitM = A8_31_M * Math.pow(2,exponent);
-    const isNavRung = rung === 41;
+    let rung =
+      finite(ln.value)
+        ? num(ln.value)
+        : NaN;
 
-    let native = finite(ln.value) ? num(ln.value) : 0;
-    let legacy = finite(ll.value) ? num(ll.value) : 0;
+    let legacy =
+      finite(ll.value)
+        ? num(ll.value)
+        : NaN;
 
     if (lengthSource === 'legacy') {
-      native = unitM ? legacy / unitM : 0;
-      ln.value = fmt(native,12);
+      if (legacy > 0) {
+        rung =
+          31 +
+          Math.log2(
+            legacy / A8_31_M
+          );
+
+        ln.value = fmt(rung,4);
+      } else {
+        rung = NaN;
+      }
     } else {
-      legacy = native * unitM;
-      ll.value = fmt(legacy,15);
+      if (Number.isFinite(rung)) {
+        legacy =
+          A8_31_M *
+          Math.pow(
+            2,
+            rung - 31
+          );
+
+        ll.value = fmt(legacy,15);
+      }
     }
 
+    if (!Number.isFinite(rung)) {
+      $('a8-length-out-rung').textContent =
+        'NO FINITE BINARY RUNG';
+
+      $('a8-length-out-factor').textContent =
+        '—';
+
+      $('a8-length-out-native').textContent =
+        'ZERO LENGTH';
+
+      $('a8-length-out-legacy').textContent =
+        finite(legacy)
+          ? legacyLength(legacy)
+          : '—';
+
+      $('a8-length-application').hidden = true;
+      $('a8-length-ruler-principle').hidden = true;
+
+      return;
+    }
+
+    const exponent =
+      rung - 31;
+
+    const factorValue =
+      Math.pow(
+        2,
+        exponent
+      );
+
+    const isNavRung =
+      Math.abs(
+        rung - 41
+      ) < 0.00005;
+
+    const rungText =
+      fmt(rung,4);
+
     $('a8-length-out-rung').textContent =
-      isNavRung
-        ? `${fmt(native)} A8/41 = ${fmt(native)} A8 NAV`
-        : `${fmt(native)} A8/${rung}`;
+      `A8/${rungText}`;
 
-    const factor =
-      exponent >= 0
-      ? `2${sup(exponent)} = ${fmt(Math.pow(2,exponent),0)}`
-      : `2${sup(exponent)} = 1 / ${fmt(Math.pow(2,-exponent),0)}`;
-
-    $('a8-length-out-factor').textContent = factor;
+    $('a8-length-out-factor').textContent =
+      `2^(${fmt(exponent,4)}) = ${fmt(factorValue,12)}`;
 
     $('a8-length-out-native').textContent =
       isNavRung
-        ? `${fmt(native)} A8/41 = ${fmt(native)} A8 NAV = ` +
-          `${fmt(native*Math.pow(2,exponent),12)} A8/31`
-        : `${fmt(native)} A8/${rung} = ` +
-          `${fmt(native*Math.pow(2,exponent),12)} A8/31`;
+        ? `A8/41 = 1 A8 NAV = 1024 A8/31`
+        : `A8/${rungText} = ${fmt(factorValue,12)} A8/31`;
 
     $('a8-length-out-legacy').textContent =
       legacyLength(legacy);
@@ -6605,7 +6679,7 @@ document.querySelectorAll('.a8-question-dialog').forEach(dialog => {
   }
 
   ln.addEventListener('input',() => {
-    lengthSource='native';
+    lengthSource='rung';
     updateLength();
   });
 
@@ -6614,13 +6688,19 @@ document.querySelectorAll('.a8-question-dialog').forEach(dialog => {
     updateLength();
   });
 
-  lr.addEventListener('change',updateLength);
+  // Hidden integer landmark selector remains only for existing
+  // benchmark/helper compatibility during this first cleanup pass.
+  lr.addEventListener('change',() => {
+    ln.value = lr.value;
+    lengthSource='rung';
+    updateLength();
+  });
 
   document.querySelectorAll('[data-a8-rung]')
     .forEach(button => button.addEventListener('click',() => {
       lr.value = button.dataset.a8Rung;
-      ln.value = '1';
-      lengthSource='native';
+      ln.value = button.dataset.a8Rung;
+      lengthSource='rung';
       updateLength();
     }));
 
@@ -6647,8 +6727,15 @@ document.querySelectorAll('.a8-question-dialog').forEach(dialog => {
     $('a8-nav-out-distance').textContent =
       `${fmt(native)} A8 NAV`;
 
+    const continuousRung =
+      native > 0
+        ? 41 + Math.log2(native)
+        : NaN;
+
     $('a8-nav-out-41').textContent =
-      `${fmt(native)} A8/41`;
+      Number.isFinite(continuousRung)
+        ? `A8/${fmt(continuousRung,4)}`
+        : 'NO FINITE BINARY RUNG';
 
     $('a8-nav-out-distance-legacy').textContent =
       `${fmt(legacy,9)} km`;
@@ -6996,7 +7083,7 @@ document.querySelectorAll('.a8-question-dialog').forEach(dialog => {
           </small>
 
           <strong>
-            ≈ 0.9425 A8/62
+            ≈ A8/61.9146
           </strong>
         </div>
 
@@ -7156,7 +7243,7 @@ document.querySelectorAll('.a8-question-dialog').forEach(dialog => {
             <small>NATIVE CROSS-CHECK</small>
             <strong>
               65,806.5639 ÷ 65,536<br>
-              ≈ 1.0041 A8/57 per A8 HOUR
+              ≈ A8/57.0059 per A8 HOUR
             </strong>
           </div>
 
@@ -8431,13 +8518,13 @@ document.querySelectorAll('.a8-question-dialog').forEach(dialog => {
     64;
 
   /*
-    Sealed A8 length-ladder expression for Earth's mean orbital motion.
+    Mean-orbit comparison model expressed on the A8 length ladder.
 
     1 A8/57 = 65,536 A8 NAV.
-    Mean Earth orbital speed ≈ 1.0041 A8/57 / A8 HOUR.
+    Current mean-orbit comparison ≈ A8/57.0059 per A8 HOUR.
 
-    The full-precision comparison below preserves the existing
-    mean-orbit calculator while using the common A8 length ruler.
+    The full-precision comparison bridge below preserves the existing
+    mean-orbit calculator. It does not define or pace the A8 ruler.
   */
   const A8_57_KM =
     80082.87960281226;
@@ -8579,8 +8666,8 @@ document.querySelectorAll('.a8-question-dialog').forEach(dialog => {
       ANGLES_PER_TURN;
 
     /*
-      Mean orbital speed on the sealed A8 length ladder:
-        ≈ 1.0041 A8/57 / A8 HOUR
+      Mean-orbit comparison on the A8 length ladder:
+        ≈ A8/57.0059 per A8 HOUR
     */
     const orbitA8Hours =
       orbitDays *
@@ -8590,6 +8677,11 @@ document.querySelectorAll('.a8-question-dialog').forEach(dialog => {
     const orbitDistanceA857 =
       orbitA8Hours *
       EARTH_MEAN_ORBIT_SPEED_A857_PER_HOUR;
+
+    const orbitDistanceRung =
+      orbitDistanceA857 > 0
+        ? 57 + Math.log2(orbitDistanceA857)
+        : null;
 
     const orbitDistanceKm =
       orbitDistanceA857 *
@@ -8623,7 +8715,9 @@ document.querySelectorAll('.a8-question-dialog').forEach(dialog => {
       `${fmtComma4(orbitA8Hours)} A8 HOUR`;
 
     orbitDistanceOut.textContent =
-      `${fmtComma4(orbitDistanceA857)} A8/57`;
+      orbitDistanceRung === null
+        ? '0 A8 LENGTH'
+        : `A8/${fmt4(orbitDistanceRung)}`;
 
     orbitDistanceKmOut.textContent =
       `${fmtComma4(orbitDistanceKm)} km`;

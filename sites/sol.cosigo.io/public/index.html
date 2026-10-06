@@ -480,6 +480,49 @@ body {
     </div>
 
     <div
+      class="card"
+      id="a8-sol-mean-path-odometer"
+      style="grid-column:1/-1"
+    >
+      <span class="k">
+        EARTH ORBIT ODOMETER · LIVE A8 FRAME · MEAN-PATH COMPARISON
+      </span>
+
+      <span
+        id="a8SolOrbitOdometer"
+        class="v"
+      >—</span>
+
+      <span
+        id="a8SolOrbitOdometerNav"
+        class="muted"
+        style="display:block;margin-top:7px"
+      >—</span>
+
+      <span
+        id="a8SolOrbitOdometerFraction"
+        class="muted"
+        style="display:block;margin-top:3px"
+      >—</span>
+
+      <span
+        id="a8SolOrbitOdometerClosure"
+        class="muted"
+        style="display:block;margin-top:3px"
+      >—</span>
+
+      <p class="muted" style="margin-bottom:0">
+        The Annual Frame position is live A8.
+        The distance shown here is a comparison/model mapping
+        from that live fraction onto the current mean-orbit bridge.
+        It does not define or pace the Annual Frame, and it is not
+        a sealed native A8 orbital distance.
+        A8 NAV shows the same model distance on the native length ruler.
+        Ellipse geometry remains unsealed.
+      </p>
+    </div>
+
+    <div
       id="a8-year-angle-reference"
       class="card"
       style="grid-column:1/-1"
@@ -1540,7 +1583,39 @@ setInterval(refresh,1000);
   const annualSolMarkerBack =
     document.getElementById('a8AnnualSolMarkerBack');
 
+  const orbitOdometer =
+    document.getElementById('a8SolOrbitOdometer');
+
+  const orbitOdometerNav =
+    document.getElementById('a8SolOrbitOdometerNav');
+
+  const orbitOdometerFraction =
+    document.getElementById('a8SolOrbitOdometerFraction');
+
+  const orbitOdometerClosure =
+    document.getElementById('a8SolOrbitOdometerClosure');
+
   const PHYSICAL_WITNESS_ANGLE512 = 384;
+
+  /*
+   * CURRENT MEAN-ORBIT COMPARISON BASIS
+   *
+   * Source:
+   * current canonical about.cosigo.io/index.html
+   *
+   * This basis is a comparison/model bridge.
+   * It does not define or pace the live Annual Frame.
+   *
+   * Public presentation here does NOT expose
+   * coefficient × integer-rung form.
+   */
+  const MEAN_ORBIT_DAYS = 365.25636;
+  const A8_HOURS_PER_DAY = 32;
+
+  const MEAN_ORBIT_SPEED_A857_PER_A8_HOUR =
+    1.0041269983814134;
+
+  const A857_TO_NAV = 65536;
 
   let latest = null;
   let rendering = false;
@@ -1576,6 +1651,111 @@ setInterval(refresh,1000);
     return whole
       .toString(8)
       .padStart(3, '0') + '₈';
+  }
+
+  function fmtComma4(value) {
+    if (!Number.isFinite(value)) return '—';
+
+    return Number(value.toFixed(4))
+      .toLocaleString(
+        'en-US',
+        {
+          minimumFractionDigits:0,
+          maximumFractionDigits:4
+        }
+      );
+  }
+
+  function renderMeanPathOdometer(angle512) {
+    /*
+     * Annual odometer:
+     *
+     * 000₈ seam = zero accumulated path for this annual lap.
+     *
+     * The current Annual Frame supplies the live A8 fraction.
+     * The existing About mean-orbit comparison bridge maps that
+     * fraction onto a model mean-path length.
+     *
+     * This model does not define the Annual Frame and does not
+     * establish sealed native A8 ellipse geometry.
+     *
+     * Public distance:
+     *
+     *   c A8/57 -> A8/(57 + log2(c))
+     *
+     * No detached coefficient is displayed.
+     */
+
+    const phase =
+      norm512(angle512);
+
+    const fullPathA857 =
+      MEAN_ORBIT_DAYS *
+      A8_HOURS_PER_DAY *
+      MEAN_ORBIT_SPEED_A857_PER_A8_HOUR;
+
+    const pathA857 =
+      fullPathA857 *
+      phase /
+      512;
+
+    const fullPathRung =
+      57 +
+      Math.log2(
+        fullPathA857
+      );
+
+    if (pathA857 > 0) {
+      const pathRung =
+        57 +
+        Math.log2(
+          pathA857
+        );
+
+      const pathNav =
+        pathA857 *
+        A857_TO_NAV;
+
+      setText(
+        orbitOdometer,
+        'A8/' +
+        pathRung.toFixed(4)
+      );
+
+      setText(
+        orbitOdometerNav,
+        fmtComma4(pathNav) +
+        ' A8 NAV · MODEL DISTANCE SINCE 000₈'
+      );
+    } else {
+      /*
+       * Zero has no finite logarithmic rung.
+       */
+      setText(
+        orbitOdometer,
+        '0 A8 LENGTH · 000₈ SEAM'
+      );
+
+      setText(
+        orbitOdometerNav,
+        '0 A8 NAV · ANNUAL ODOMETER RESET'
+      );
+    }
+
+    setText(
+      orbitOdometerFraction,
+      'LIVE ANNUAL FRAME · ' +
+      phase.toFixed(4) +
+      ' / 512 · ' +
+      oct3(phase)
+    );
+
+    setText(
+      orbitOdometerClosure,
+      'FULL MEAN-PATH MODEL · A8/' +
+      fullPathRung.toFixed(4) +
+      ' · COMPARISON BASIS · ELLIPSE GEOMETRY NOT YET SEALED'
+    );
   }
 
   function renderAnnualWheel(angle512) {
@@ -1688,6 +1868,12 @@ setInterval(refresh,1000);
         renderAnnualWheel(
           displayedAngle
         );
+
+      renderMeanPathOdometer(
+        Number.isFinite(annualContinuous)
+          ? annualContinuous
+          : wheel.angle
+      );
 
       setText(
         front,

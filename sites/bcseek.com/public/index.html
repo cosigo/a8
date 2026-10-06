@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>BCSEEK — BTC Monolith, Bitcoin Node Survival, and Decentralization Risk</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="BCSEEK is a public news and research channel covering BTC Monolith, Bitcoin Core bootstrap burden, ordinary Bitcoin node survival, AssumeUTXO, UTXO snapshots, bandwidth cost, storage cost, hardware inflation, and decentralization risk.">
+  <meta name="keywords" content="BCSEEK, BTC Monolith, Bitcoin monolith, Bitcoin Core bootstrap, Bitcoin node survival, Bitcoin node slow sync, Bitcoin blockchain too large, Bitcoin Core initial block download, AssumeUTXO, loadtxoutset, dumptxoutset, UTXO snapshot, Bitcoin pruned node, Bitcoin bandwidth cost, Bitcoin node storage cost, Bitcoin hardware inflation, Bitcoin decentralization risk, ordinary Bitcoin node operators, COSIGO Dev Lab">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://bcseek.com/">
+  <meta name="author" content="COSIGO Dev Lab">
+
+  <link rel="icon" href="/assets/cosigo-official-icon.ico">
+  <link rel="apple-touch-icon" href="/assets/cosigo-official-icon.ico">
+  <meta name="theme-color" content="#070a0f">
+  <meta name="application-name" content="BCSEEK">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="BCSEEK">
+  <meta property="og:title" content="BCSEEK — BTC Monolith and Bitcoin Node Survival">
+  <meta property="og:description" content="BCSEEK is a public news and research channel covering BTC Monolith, Bitcoin Core bootstrap burden, ordinary Bitcoin node survival, AssumeUTXO, UTXO snapshots, bandwidth cost, storage cost, hardware inflation, and decentralization risk.">
+  <meta property="og:url" content="https://bcseek.com/">
+  <meta property="og:image" content="https://bcseek.com/assets/btc-monolith-btc.svg">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="BCSEEK — BTC Monolith and Bitcoin Node Survival">
+  <meta name="twitter:description" content="BCSEEK is a public news and research channel covering BTC Monolith, Bitcoin Core bootstrap burden, ordinary Bitcoin node survival, AssumeUTXO, UTXO snapshots, bandwidth cost, storage cost, hardware inflation, and decentralization risk.">
+  <meta name="twitter:image" content="https://bcseek.com/assets/btc-monolith-btc.svg">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "NewsMediaOrganization",
+    "@id": "https://bcseek.com/#organization",
+    "name": "BCSEEK",
+    "alternateName": "BTC Monolith dispatch channel",
+    "url": "https://bcseek.com/",
+    "description": "BCSEEK publishes public research, dispatches, contributor calls, and updates about Bitcoin Core bootstrap burden, ordinary node survival, BTC Monolith, AssumeUTXO, UTXO snapshots, storage cost, bandwidth cost, hardware inflation, and decentralization risk.",
+    "sameAs": [
+      "https://bcnode.io/btc-core-exam.html",
+      "https://contact.cosigo.io/"
+    ],
+    "publisher": {
+      "@type": "Organization",
+      "name": "COSIGO Dev Lab"
+    }
+  }
+  </script>
+  <style>
+    :root {
+      --bg:#070a0f; --panel:#101722; --panel2:#141e2b; --text:#e9eef6;
+      --muted:#aeb9c8; --line:#28364b; --accent:#f7931a; --accent2:#64caff;
+      --danger:#ff6b6b;
+    }
+    * { box-sizing:border-box; }
+    body {
+      margin:0;
+      font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(247,147,26,.20), transparent 34rem),
+        radial-gradient(circle at 90% 3%, rgba(92,200,255,.12), transparent 30rem),
+        linear-gradient(180deg,#070a0f 0%,#0a0f17 45%,#070a0f 100%);
+      color:var(--text);
+      line-height:1.56;
+    }
+    a { color:var(--accent2); text-decoration:none; }
+    a:hover { text-decoration:underline; }
+    .wrap { max-width:1080px; margin:0 auto; padding:2rem 1rem 4rem; }
+    header { padding:3rem 0 2rem; border-bottom:1px solid var(--line); }
+
+    .brand-row {
+      display:flex;
+      align-items:center;
+      gap:.85rem;
+      margin:0 0 1.15rem;
+      flex-wrap:wrap;
+    }
+    .brand-row img {
+      width:58px;
+      height:58px;
+      border-radius:16px;
+      filter:drop-shadow(0 10px 24px rgba(0,0,0,.35));
+      object-fit:contain;
+      background:rgba(255,255,255,.03);
+    }
+    .brand-row .plus {
+      color:var(--muted);
+      font-size:1.4rem;
+      font-weight:900;
+      opacity:.85;
+    }
+    .brand-row .brand-text {
+      color:var(--muted);
+      font-weight:850;
+      letter-spacing:.04em;
+      text-transform:uppercase;
+      font-size:.82rem;
+    }
+
+    .eyebrow { color:var(--accent); font-weight:850; letter-spacing:.09em; text-transform:uppercase; font-size:.82rem; }
+    h1 { font-size:clamp(2.6rem,8vw,6rem); line-height:.9; margin:.55rem 0 1rem; letter-spacing:-.06em; }
+    .lead { max-width:900px; color:var(--muted); font-size:clamp(1.1rem,2vw,1.4rem); }
+    .alert {
+      margin-top:1.25rem; max-width:920px; border:1px solid rgba(255,107,107,.38);
+      border-left:5px solid var(--danger); background:rgba(255,107,107,.07);
+      border-radius:1rem; padding:1rem; color:#ffe1e1; font-weight:650;
+    }
+    .cta { display:flex; flex-wrap:wrap; gap:.75rem; margin-top:1.5rem; }
+    .btn {
+      display:inline-flex; align-items:center; justify-content:center; border:1px solid var(--line);
+      background:var(--panel); color:var(--text); padding:.74rem 1rem; border-radius:.82rem; font-weight:850;
+    }
+    .btn.primary {
+      background:linear-gradient(135deg, rgba(247,147,26,.98), rgba(255,190,90,.94));
+      color:#170d00; border-color:rgba(247,147,26,.7);
+    }
+    .grid { display:grid; grid-template-columns:repeat(12,1fr); gap:1rem; margin-top:1rem; }
+    .card {
+      grid-column:span 12; background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.015)),var(--panel);
+      border:1px solid var(--line); border-radius:1.1rem; padding:1.1rem;
+    }
+    @media (min-width:820px) { .half{grid-column:span 6;} .third{grid-column:span 4;} .twoThird{grid-column:span 8;} }
+    h2 { margin:0 0 .75rem; font-size:1.38rem; }
+    p { margin:.55rem 0; }
+    ul { padding-left:1.2rem; margin:.55rem 0; }
+    li { margin:.32rem 0; }
+    .tag {
+      display:inline-block; margin:.2rem .25rem .2rem 0; padding:.25rem .55rem; border-radius:999px;
+      background:rgba(92,200,255,.09); border:1px solid rgba(92,200,255,.22); color:#d7f3ff; font-size:.86rem;
+    }
+
+    .footer a {
+      color: var(--accent2);
+      font-weight: 750;
+    }
+    .footer strong {
+      color: var(--text);
+    }
+
+    .footer { margin-top:2rem; color:var(--muted); font-size:.95rem; border-top:1px solid var(--line); padding-top:1rem; }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <header>
+      <div class="brand-row" aria-label="BTC Monolith and COSIGO Dev Lab marks">
+        <img src="/assets/btc-monolith-btc.svg" alt="Bitcoin symbol">
+        <span class="plus">×</span>
+        <img src="/assets/cosigo-official-icon.ico" alt="COSIGO icon">
+        <span class="brand-text">BTC Monolith · COSIGO Dev Lab</span>
+      </div>
+      <div class="eyebrow">Bitcoin Core · node survival · decentralization risk</div>
+      <h1>BCSEEK</h1>
+      <p class="lead">
+        BCSEEK is a public news and research channel covering Bitcoin Core bootstrap burden,
+        BTC Monolith, ordinary node survival, AssumeUTXO, UTXO snapshots, bandwidth cost,
+        storage cost, hardware inflation, and practical decentralization risk.
+      </p>
+      <div class="alert">
+        Bitcoin does not die only when code breaks. It also weakens when ordinary people
+        stop running the code.
+      </div>
+      <div class="cta">
+        <a class="btn primary" href="https://bcnode.io/btc-core-exam.html">Read BTC Monolith</a>
+        <a class="btn" href="https://bcnode.io/network.html">View live bcnode</a>
+        <a class="btn" href="https://contact.cosigo.io/">Contact / seed support</a>
+        <a class="btn" href="/contributors.html">Write for BCSEEK</a>
+      </div>
+    </header>
+
+    <section class="grid">
+      <article class="card twoThird">
+        <h2>Purpose</h2>
+        <p>
+          BCSEEK exists to publish warnings, dispatches, operator notes, and research around
+          the practical burden of running Bitcoin infrastructure.
+        </p>
+        <p>
+          The first focus is BTC Monolith: the growing weight of Bitcoin Core initial sync,
+          storage, bandwidth, heat, validation burden, and the risk that local operators
+          quietly disappear.
+        </p>
+      </article>
+
+      <aside class="card third">
+        <h2>Topics</h2>
+        <span class="tag">BTC Monolith</span>
+        <span class="tag">Bitcoin Core</span>
+        <span class="tag">AssumeUTXO</span>
+        <span class="tag">Node survival</span>
+        <span class="tag">UTXO snapshots</span>
+        <span class="tag">Pruned nodes</span>
+        <span class="tag">Bandwidth cost</span>
+        <span class="tag">Decentralization risk</span>
+      </aside>
+
+      <article class="card half">
+        <h2>First campaign</h2>
+        <p>
+          The first BCSEEK campaign supports the BTC Core Exam — COSIGO Dev Lab project
+          hosted at bcnode.io.
+        </p>
+        <p>
+          That project studies verified Bitcoin Core snapshot bootstrap, AssumeUTXO,
+          pruning, mirror verification, bad-file rejection, operator burden, and public
+          proof-of-concept reporting.
+        </p>
+      </article>
+
+      <article class="card half">
+        <h2>Support needed</h2>
+        <p>
+          Serious work requires serious support: hardware, storage, bandwidth, mirrors,
+          independent operators, testing, documentation, security review, and human time.
+        </p>
+        <p>
+          This is not an investment offering, token sale, or profit promise. It is a
+          public-interest infrastructure research effort.
+        </p>
+      </article>
+
+      <article class="card">
+        <h2>Contributor call</h2>
+        <p>
+          BCSEEK is seeking reputable article writers, Bitcoin node operators, technical reviewers,
+          and infrastructure researchers to publish dispatches about BTC Monolith, Bitcoin Core
+          bootstrap burden, ordinary node survival, AssumeUTXO, UTXO snapshots, storage, bandwidth,
+          hardware inflation, and decentralization risk.
+        </p>
+        <p>
+          <a href="/contributors.html">View contributor information and topic requests</a>
+        </p>
+      </article>
+
+    </section>
+
+    <div class="footer">
+      <p>
+        <strong>BCSEEK</strong> is a static public research and dispatch channel connected to
+        <a href="https://bcnode.io/">bcnode.io</a> and the COSIGO Dev Lab. BCSEEK covers
+        BTC Monolith, Bitcoin Core bootstrap burden, ordinary node survival, AssumeUTXO,
+        UTXO snapshots, storage, bandwidth, hardware inflation, and practical decentralization risk.
+      </p>
+
+      <p>
+        <a href="https://bcseek.com/">BCSEEK</a> ·
+        <a href="https://bcnode.io/btc-core-exam.html">BTC Monolith</a> ·
+        <a href="https://bcnode.io/network.html">Live bcnode</a> ·
+        <a href="https://cosigo.io/">COSIGO main</a> ·
+        <a href="https://trade.cosigo.io/">COSIGO trade</a> ·
+        <a href="https://contact.cosigo.io/">Contact</a>
+      </p>
+
+      <p>
+        <strong>COSIGO™ System</strong> — Structure over speculation · Value over price ·
+        Continuity over volatility · Architecture over hype.
+      </p>
+
+      <p>
+        © 2026 COSIGO. All rights reserved. COSIGO™ is a trademark claimed by
+        Wendall Gregory Wilson. U.S. trademark application pending.
+      </p>
+
+      <p>
+        Last updated: 2026-08-08.
+      </p>
+    </div>
+  </main>
+</body>
+</html>

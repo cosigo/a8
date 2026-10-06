@@ -651,6 +651,7 @@ main {
       <a href="https://clock.cosigo.io/">CLOCK</a>
       <a href="https://calendar.cosigo.io/">CALENDAR</a>
       <a href="https://moons.cosigo.io/">MOONS</a>
+      <a href="https://ganymede.cosigo.io/">GANYMEDE</a>
 
       <a href="https://mintaka.cosigo.io/">MINTAKA</a>
       <a href="https://sol.cosigo.io/">SOL</a>
@@ -731,6 +732,7 @@ main {
   <a href="#engineering">13 · Engineering discipline</a>
   <a href="#claims">14 · Claims and limits</a>
   <a href="#derivations">15 · Derivation sheet</a>
+  <a href="#electrical-nature">16 · Electrical Nature</a>
 </nav>
 
 
@@ -741,7 +743,14 @@ main {
   <p>
     Human measurement systems often accumulate unrelated bases,
     conversion factors and special-purpose units. A8 asks whether many
-    of those jobs can instead share one binary architecture.
+    of those jobs can instead share one coherent architecture.
+  </p>
+
+  <p>
+    Nature is observed. A8 expresses what is observed. External
+    measurement systems may be run beside A8 for comparison, checking
+    and communication, but they do not define the native A8 result.
+    Agreement is evidence. Disagreement is also evidence.
   </p>
 
   <p>
@@ -764,7 +773,7 @@ main {
 
     <div class="metric">
       <small>LENGTH</small>
-      <strong>one binary ladder</strong>
+      <strong>one continuous binary ladder</strong>
     </div>
 
     <div class="metric">
@@ -791,10 +800,16 @@ main {
   </div>
 
   <p>
-    This principle is why A8 NAV no longer requires a conversion to
-    A8/41. They are the same physical length. It is also why a separate
-    orbital-distance ruler is unnecessary: Spaceship Earth's motion can
-    already be expressed directly on the ordinary A8 length ladder.
+    This principle is why A8 NAV requires no conversion to A8/41:
+    they are the same physical length. It is also why a separate
+    orbital-distance ruler is unnecessary. Spaceship Earth's motion
+    can be expressed on the ordinary A8 length ladder.
+  </p>
+
+  <p>
+    Integer rungs remain exact binary landmarks. Decimal rungs are
+    continuous positions between those landmarks. No coefficient needs
+    to float in front of an integer rung merely to keep a number near one.
   </p>
 
   <div class="note">
@@ -872,7 +887,7 @@ main {
 
 <section id="time">
   <div class="eyebrow">04 · TIME</div>
-  <h2>The civil day is an exact 32 × 64 × 64 structure.</h2>
+  <h2>The A8 day is an exact 32 × 64 × 64 structure.</h2>
 
   <div class="eq">
     32 A8 HOUR × 64 A8 MINUTE × 64 A8 SECOND
@@ -903,10 +918,10 @@ main {
   </div>
 
   <p>
-    For comparison with legacy civil time, one A8 HOUR corresponds to
-    45 legacy minutes, and one A8 SECOND corresponds to
-    675/1024 legacy second. Those comparisons do not define the native
-    architecture.
+    For outside comparison, one A8 HOUR corresponds to 45 conventional
+    minutes and one A8 SECOND corresponds to 675/1024 conventional
+    second. Those values are comparison coordinates; they do not define
+    or pace the native A8 clock.
   </p>
 
   <p>
@@ -918,37 +933,42 @@ main {
 
 <section id="recovery">
   <div class="eyebrow">05 · NATURAL RECOVERY</div>
-  <h2>The clock architecture separates reference from display.</h2>
+  <h2>The clock architecture separates Nature, carrier and display.</h2>
 
   <p>
-    The operating A8 time architecture does not treat a computer's
-    ordinary wall clock as its foundational authority. The conceptual
-    chain begins with observable Jovian recurrence.
+    The operating A8 timing architecture does not treat a computer's
+    wall clock as its foundational authority. A clock path follows one
+    selected natural Jovian recurrence at a time. The physical carrier
+    transports the count; it does not redefine the recurrence.
   </p>
 
   <div class="eq">
-    JUPITER
-    → IO / EUROPA / GANYMEDE RECURRENCE
-    → RECOVERED ELAPSED-TIME RULER
-    → MINTAKA ROTATION WITNESS
-    → SOL ORBITAL-DIRECTION WITNESS
-    → TERRA SHIP SLIP
-    → RECOVERED SUN-RETURN RECURRENCE
+    NATURE
+    → JUPITER / ONE SELECTED IO · EUROPA · GANYMEDE RECURRENCE
+    → REPLACEABLE PHYSICAL CARRIER
+    → CORE STATE
     → DAY_PHASE17
-    → 32 × 64 × 64 CIVIL CLOCK
+    → 32 × 64 × 64 A8 CLOCK
+  </div>
+
+  <div class="eq">
+    MINTAKA = ROTATION WITNESS
+    <br>
+    SOL = ANNUAL-FRAME / ORBITAL-DIRECTION WITNESS
   </div>
 
   <p>
-    Io, Europa and Ganymede provide the 1:2:4 recurrence structure used
-    by the recovery architecture. Mintaka is a rotation witness rather
-    than a replacement clock. Sol is an orbital-direction witness.
-    Terra Ship Slip relates rotation and orbit.
+    Io, Europa and Ganymede form a natural recurrence family. The active
+    timing path selects one recurrence rather than averaging the moons
+    into a synthetic clock. Other recurrences remain witnesses and
+    independent checks.
   </p>
 
   <p>
-    A fundamental engineering rule is separation of clocks:
-    CPU clock, operating-system clock, counted oscillator and external
-    natural recurrence must not be silently conflated.
+    CPU clock, operating-system clock, physical oscillator, Core state
+    and natural recurrence are separate domains. External time may be
+    compared beside A8 for coordination and residual inspection, but it
+    does not steer the A8 pace.
   </p>
 
   <p>
@@ -960,79 +980,127 @@ main {
 
 <section id="length">
   <div class="eyebrow">06 · LENGTH</div>
-  <h2>One Earth-derived ladder. Every rung differs by ×2.</h2>
+  <h2>One continuous binary ladder.</h2>
 
   <p>
-    A8 length is anchored to mean-Earth geometry. The terrestrial
-    navigation rung is the mean Earth circumference divided by 2¹⁵.
+    A8 length has one ladder. A8/31 is the human-scale reference point,
+    not a lower boundary on useful human measurement. Nearby smaller
+    steps such as A8/28, A8/29 and A8/30 are often more practical for
+    quick everyday measuring. A8/41 is the navigation identity:
+    one A8 NAV. Integer rungs are exact power-of-two landmarks; decimal
+    rungs locate positions continuously between them.
   </p>
 
   <div class="eq">
-    1 A8 NAV = 1 A8/41 = C(E,mean) / 32,768
+    A8/r = A8/31 × 2^(r − 31)
+  </div>
+
+  <div class="eq">
+    r = 31 + log₂(L / A8/31)
+  </div>
+
+  <div class="eq">
+    1 A8 NAV = A8/41 = C(E,mean) / 32,768
+  </div>
+
+  <div class="eq">
+    A8/31 = A8/41 ÷ 1024
   </div>
 
   <p>
-    The mean-Earth construction uses the equatorial and meridional
-    circumferences as the macro geometric reference. Once A8/41 is
-    established, every other length rung is produced by exact powers
-    of two.
+    A8/41 retains the terrestrial navigation identity. A8/31 is the
+    human-scale reference point on that same ladder, not a second ruler
+    and not a lower boundary on practical measurement.
   </p>
 
-  <div class="eq">
-    A8/n = A8/41 × 2^(n − 41)
+  <p>
+    The same physical ruler therefore handles microscopic witnesses,
+    human-scale work, navigation and planetary distances without changing
+    units. The most useful comparison anchor depends on the job.
+  </p>
+
+  <div class="note">
+    <strong>Practical scale neighborhoods:</strong>
+    below the A8/31 reference is <strong>Baby Bear</strong> — including
+    useful everyday steps such as A8/28, A8/29 and A8/30 as well as much
+    smaller scales. A8/31 through A8/41 is <strong>Momma Bear</strong>,
+    the reference-to-navigation neighborhood. A8/41 and upward is
+    <strong>Papi Bear</strong>, the NAV and large-distance side.
+    A8/41 is the shared doorway. The names are informal; the ladder
+    remains one continuous ruler.
   </div>
 
-  <div class="eq">
-    A8/n = C(E,mean) / 2^(56 − n)
-  </div>
+  <p>
+    When a small quantity needs an internal comparison anchor, A8/31 is
+    normally clearer than reaching back to A8/41. That does not mean every
+    practical measurement below A8/31 is microscopic: A8/28, A8/29 and
+    A8/30 are convenient working lengths. For large-distance work,
+    A8/41 = 1 A8 NAV is normally the clearer reference. These are
+    presentation choices, not breaks in the mathematics.
+  </p>
 
   <table>
     <thead>
       <tr>
         <th>Rung</th>
-        <th>Exact ladder relation</th>
+        <th>Useful A8 relation</th>
         <th>Legacy comparison</th>
       </tr>
     </thead>
     <tbody>
       <tr>
         <td>A8/-30</td>
-        <td>A8/41 ÷ 2⁷¹</td>
+        <td>A8/31 ÷ 2⁶¹</td>
         <td>≈ 5.1752 × 10⁻¹⁹ m</td>
       </tr>
       <tr>
         <td>A8/-20</td>
-        <td>A8/41 ÷ 2⁶¹</td>
+        <td>A8/31 ÷ 2⁵¹</td>
         <td>≈ 5.2994 × 10⁻¹⁶ m</td>
       </tr>
       <tr>
         <td>A8/-10</td>
-        <td>A8/41 ÷ 2⁵¹</td>
+        <td>A8/31 ÷ 2⁴¹</td>
         <td>≈ 5.4266 × 10⁻¹³ m</td>
       </tr>
       <tr>
         <td>A8/0</td>
-        <td>A8/41 ÷ 2⁴¹</td>
+        <td>A8/31 ÷ 2³¹</td>
         <td>≈ 0.5556 nm</td>
       </tr>
       <tr>
         <td>A8/10</td>
-        <td>A8/41 ÷ 2³¹</td>
+        <td>A8/31 ÷ 2²¹</td>
         <td>≈ 0.5690 µm</td>
       </tr>
       <tr>
         <td>A8/20</td>
-        <td>A8/41 ÷ 2²¹</td>
+        <td>A8/31 ÷ 2¹¹</td>
         <td>≈ 0.5827 mm</td>
       </tr>
       <tr>
+        <td>A8/28</td>
+        <td>A8/31 ÷ 8</td>
+        <td>≈ 0.1492 m</td>
+      </tr>
+      <tr>
+        <td>A8/29</td>
+        <td>A8/31 ÷ 4</td>
+        <td>≈ 0.2983 m</td>
+      </tr>
+      <tr>
+        <td>A8/30</td>
+        <td>A8/31 ÷ 2</td>
+        <td>≈ 0.5967 m</td>
+      </tr>
+      <tr>
         <td>A8/31</td>
-        <td>A8 NAV ÷ 1024</td>
+        <td>human-scale reference point</td>
         <td>≈ 1.1933 m</td>
       </tr>
       <tr>
         <td>A8/41</td>
-        <td>1 A8 NAV</td>
+        <td>1 A8 NAV = 1024 A8/31</td>
         <td>≈ 1.2220 km</td>
       </tr>
       <tr>
@@ -1048,20 +1116,18 @@ main {
     </tbody>
   </table>
 
-  <div class="eq">
-    … A8/-30 → A8/-20 → A8/-10 → A8/0 → A8/10 → A8/20 → …
-  </div>
-
   <div class="note">
     <strong>Zero is an address, not a floor.</strong>
     A8/0 is not zero length and it is not the smallest A8 length.
-    Moving down one rung halves the length; moving up one rung doubles it.
-    Negative rung numbers continue the same binary ruler below A8/0.
+    Moving one integer rung downward halves the length; moving one
+    integer rung upward doubles it. Negative rung numbers continue the
+    same ruler.
   </div>
 
   <div class="note">
-    Exact native powers of two remain exact. Decimal legacy comparisons
-    are displayed compactly; calculation may retain additional precision.
+    Exact native powers of two remain exact. Decimal rung positions may
+    represent measured or comparison-derived quantities whose source
+    precision is approximate.
   </div>
 </section>
 
@@ -1088,6 +1154,34 @@ main {
   <p>
     With 32 longitudinal hour sectors, each sector spans exactly
     1024 A8 NAV around the Earth reference circumference.
+  </p>
+
+  <h3>Practical A8 time-zone proposal</h3>
+
+  <p>
+    For everyday timekeeping, two adjacent A8-hour longitude sectors may
+    be grouped into one practical time zone. The 32-sector Earth geometry
+    therefore produces 16 sequential A8 time zones, numbered
+    <strong>1 through 16</strong>.
+  </p>
+
+  <div class="eq">
+    32 A8 HOUR SECTORS ÷ 2
+    = 16 A8 TIME ZONES
+  </div>
+
+  <div class="eq">
+    1 A8 TIME ZONE
+    = 2 A8 HOUR
+    = 32 A8 angle
+    = 40₈
+    = 2,048 A8 NAV
+  </div>
+
+  <p>
+    The 16-zone layer is a practical grouping of the underlying
+    32-sector Earth structure. It does not replace or alter the
+    32 A8-hour longitude geometry.
   </p>
 
   <p>
@@ -1119,13 +1213,13 @@ main {
 
 <section id="speed">
   <div class="eyebrow">08 · SPEED</div>
-  <h2>Push the rung. Not the number.</h2>
+  <h2>The number is the rung.</h2>
 
   <p>
     A8 does not need a different speed unit for every class of motion.
-    Choose one elapsed-time denominator, calculate the distance traveled
-    during it, then select the binary length rung that places the
-    coefficient nearest one.
+    Choose an elapsed A8 time denominator, calculate the distance traveled
+    during it, and place that distance directly on the continuous length
+    ladder.
   </p>
 
   <div class="eq">
@@ -1133,158 +1227,179 @@ main {
   </div>
 
   <p>
-    For the standard transport view, the denominator is one A8 HOUR.
+    For these transport examples the denominator is one A8 HOUR.
     Let D be the distance traveled in A8 NAV during that hour.
   </p>
 
   <div class="eq">
-    n = 41 + round(log₂(D))
+    r = 41 + log₂(D)
   </div>
 
   <div class="eq">
-    coefficient = D / 2^(n − 41)
+    SPEED = A8/r per A8 HOUR
   </div>
 
   <p>
-    The physical motion does not change when the rung changes. Only its
-    most convenient binary address changes.
+    No nearest-rung coefficient is required. Integer rungs remain useful
+    landmarks, while the decimal rung is the continuous A8 address of the
+    motion.
   </p>
 
   <table>
     <thead>
       <tr>
         <th>Example</th>
-        <th>Nearest rung</th>
-        <th>A8 speed view</th>
+        <th>Nearby integer landmark</th>
+        <th>Continuous A8 speed</th>
       </tr>
     </thead>
     <tbody>
       <tr>
         <td>Snail</td>
         <td>A8/36</td>
-        <td>≈ 0.9482 A8/36 per A8 HOUR</td>
+        <td>≈ A8/35.9233 per A8 HOUR</td>
       </tr>
       <tr>
         <td>Walking</td>
         <td>A8/43</td>
-        <td>≈ 0.7672 A8/43 per A8 HOUR</td>
+        <td>≈ A8/42.6177 per A8 HOUR</td>
       </tr>
       <tr>
         <td>Bicycle</td>
         <td>A8/45</td>
-        <td>≈ 0.7672 A8/45 per A8 HOUR</td>
+        <td>≈ A8/44.6177 per A8 HOUR</td>
       </tr>
       <tr>
         <td>Ship example</td>
         <td>A8/46</td>
-        <td>≈ 0.7104 A8/46 per A8 HOUR</td>
+        <td>≈ A8/45.5067 per A8 HOUR</td>
       </tr>
       <tr>
         <td>Road example</td>
         <td>A8/47</td>
-        <td>≈ 0.9590 A8/47 per A8 HOUR</td>
+        <td>≈ A8/46.9396 per A8 HOUR</td>
       </tr>
       <tr>
         <td>Aircraft example</td>
         <td>A8/50</td>
-        <td>≈ 0.9923 A8/50 per A8 HOUR</td>
+        <td>≈ A8/49.9888 per A8 HOUR</td>
       </tr>
       <tr>
         <td>Moon local mean orbit</td>
         <td>A8/52</td>
-        <td>≈ 1.1030 A8/52 per A8 HOUR</td>
+        <td>≈ A8/52.1414 per A8 HOUR</td>
       </tr>
       <tr>
         <td>Apollo 17 whole-mission average</td>
         <td>A8/53</td>
-        <td>≈ 1.1862 A8/53 per A8 HOUR</td>
+        <td>≈ A8/53.2463 per A8 HOUR</td>
       </tr>
       <tr>
-        <td>Spaceship Earth mean orbit</td>
+        <td>Spaceship Earth mean-orbit comparison</td>
         <td>A8/57</td>
-        <td>≈ 1.0041 A8/57 per A8 HOUR</td>
+        <td>≈ A8/57.0059 per A8 HOUR</td>
       </tr>
       <tr>
-        <td>Light</td>
+        <td>Light · conventional comparison cross-check</td>
         <td>A8/70</td>
-        <td>≈ 1.234 A8/70 per A8 HOUR</td>
+        <td>≈ A8/70.3031 per A8 HOUR</td>
       </tr>
     </tbody>
   </table>
 
+  <p>
+    The named bodies and machines are examples, not definitions.
+    In particular, the Earth mean-orbit and light figures above are
+    comparison-derived positions on the A8 ladder. They do not define
+    A8 length or A8 time.
+  </p>
+
   <div class="eq">
-    Snail A8/36 → Light A8/70 = 34 binary rungs
+    EXAMPLES SPAN ≈ A8/35.9233 → A8/70.3031
   </div>
 
   <p>
-    The moving-body labels are examples, not ownership claims. A rung
-    belongs to the ladder, not to a snail, bicycle, aircraft, ship,
-    moon, planet or light itself.
+    A rung belongs to the ladder, not to a snail, bicycle, aircraft,
+    ship, moon, planet or light itself.
   </p>
 </section>
 
 
 <section id="orbit">
   <div class="eyebrow">09 · SPACESHIP EARTH</div>
-  <h2>Earth's orbital speed requires no special ruler.</h2>
+  <h2>Earth's orbital motion requires no special ruler.</h2>
 
   <p>
-    Earth mean orbital motion demonstrates why the universal ladder is
-    useful.
+    The current mean-orbit figure is a comparison/model translation onto
+    the ordinary A8 length ladder. It is useful as a cross-check and as a
+    scale example; it is not a native definition of Earth's orbit.
   </p>
 
   <div class="eq">
-    1 A8/45 = 16 A8 NAV
-  </div>
-
-  <div class="eq">
-    Earth mean motion ≈ 1.0041 A8/45 per A8 SECOND
+    CURRENT MEAN-ORBIT COMPARISON
+    ≈ A8/57.0059 per A8 HOUR
   </div>
 
   <p>
-    An A8 HOUR contains exactly 4096 = 2¹² A8 SECOND. A8/57 is exactly
-    twelve binary length rungs above A8/45.
+    One A8 HOUR contains exactly 4096 = 2¹² A8 SECOND. Therefore changing
+    the time denominator from one A8 HOUR to one A8 SECOND moves the
+    distance address exactly twelve binary rungs.
   </p>
 
   <div class="eq">
-    A8/57 = 2¹² × A8/45
+    r(SECOND) = r(HOUR) − 12
   </div>
 
   <div class="eq">
-    1 A8 HOUR = 2¹² × A8 SECOND
-  </div>
-
-  <p>
-    Therefore the coefficient is preserved:
-  </p>
-
-  <div class="eq">
-    ≈ 1.0041 A8/45 per A8 SECOND
+    ≈ A8/45.0059 per A8 SECOND
+    <br>
     =
-    ≈ 1.0041 A8/57 per A8 HOUR
+    <br>
+    ≈ A8/57.0059 per A8 HOUR
+  </div>
+
+  <div class="note">
+    <strong>Scale intuition:</strong>
+    a cargo ship moving near A8/45 per A8 HOUR covers in one A8 HOUR
+    about the same distance that Spaceship Earth covers along its mean
+    orbit in one A8 SECOND: approximately A8/45.0059.
+  </div>
+
+  <div class="eq">
+    CARGO SHIP · ≈ A8/45 IN ONE A8 HOUR
+    <br>
+    SPACESHIP EARTH · ≈ A8/45.0059 IN ONE A8 SECOND
   </div>
 
   <p>
-    This is not a claim that Earth occupies a privileged cosmic position.
-    A8 is an Earth-use measurement architecture, so Earth is a practical
-    reference body. Actual orbital speed varies through the elliptical
-    orbit; A8/57 is the mean orbital-speed neighborhood.
+    The twelve-rung relationship is native and exact. The decimal orbital
+    position is only as authoritative as the mean-orbit comparison model
+    from which it was translated.
   </p>
 
   <p>
-    Working instrument:
-    <a href="https://ship.cosigo.io/">Spaceship Earth</a>.
+    Actual Earth orbital speed varies along the ellipse. Native A8 ellipse
+    geometry has not yet been sealed, so the mean-orbit figure remains
+    explicitly a model/comparison result rather than a native orbital
+    distance definition.
+  </p>
+
+  <p>
+    Working instruments:
+    <a href="https://ship.cosigo.io/">Spaceship Earth</a> and
+    <a href="https://sol.cosigo.io/">Sol</a>.
   </p>
 </section>
 
 
 <section id="calendar">
   <div class="eyebrow">10 · CALENDAR</div>
-  <h2>The civil year is organized without changing astronomy.</h2>
+  <h2>The A8 year separates date structure from astronomical state.</h2>
 
   <p>
-    The A8 calendar separates recurring civil structure from astronomical
-    events.
+    The A8 calendar organizes recurring date structure while the Annual
+    Frame records solar/orbital orientation. The two can be related
+    without pretending that they are the same instrument.
   </p>
 
   <div class="eq">
@@ -1297,19 +1412,31 @@ main {
   </p>
 
   <p>
-    The remaining days form Wilson's Week: five Gold Days in a normal
-    365-day year and six in a leap year.
+    The remaining days form Wilson's Week: five Gold Days in a common
+    year and six in a leap year.
   </p>
 
   <div class="eq">
     CALENDAR = DATE STRUCTURE
     <br>
-    EVENTS = WHAT NATURE IS DOING ON THOSE DATES
+    ANNUAL FRAME = SOLAR / ORBITAL ORIENTATION
+  </div>
+
+  <div class="eq">
+    000₈ = DECEMBER-SOLSTICE / NEW-YEAR SEAM
+    <br>
+    200₈ = MARCH EQUINOX
+    <br>
+    400₈ = JUNE SOLSTICE
+    <br>
+    600₈ = SEPTEMBER EQUINOX
+    <br>
+    1000₈ → 000₈
   </div>
 
   <p>
-    Astronomical-event information therefore belongs to the event
-    register rather than a second calendar engine.
+    Astronomical events remain observations of Nature. The calendar
+    supplies dates; the Annual Frame supplies orientation.
   </p>
 
   <p>
@@ -1379,31 +1506,31 @@ main {
     Alpha quartz remains valuable because its lattice recurrence is a
     reproducible natural material structure. Under the current A8
     architecture, however, quartz is a witness measured against the
-    Earth-defined length ladder rather than a co-defining anchor.
+    established length ladder rather than a co-defining anchor.
   </p>
 
   <p>
     The same discipline applies to biological sizes, astronomical
     distances and other natural examples. An object may land close to
-    an A8 rung without becoming the definition of that rung.
+    an integer A8 rung without becoming the definition of that rung.
   </p>
 
   <h3>Physical neighborhoods on the ladder</h3>
 
   <p>
-    These are witnesses, not standards. At ordinary scales a witness may
-    be an object dimension. At smaller scales it may instead be a measured
-    charge radius, a characteristic wavelength or a theoretical reference
-    scale. The useful question remains the same: which binary rung places
-    the stated physical length near one?
+    The nearby integer rung remains useful as a recognizable landmark.
+    The continuous rung gives the object's more precise A8 position.
+    For microscopic comparisons that need an internal A8 baseline,
+    A8/31 is normally the useful human-scale reference rather than
+    A8/41. The witness address itself does not change.
   </p>
 
   <table>
     <thead>
       <tr>
         <th>Witness</th>
-        <th>Nearby A8 rung</th>
-        <th>A8 view</th>
+        <th>Nearby integer rung</th>
+        <th>Continuous A8 position</th>
         <th>Legacy comparison</th>
       </tr>
     </thead>
@@ -1411,55 +1538,55 @@ main {
       <tr>
         <td>Planck length · theoretical scale</td>
         <td>A8/-85</td>
-        <td>≈ 1.1252 A8/-85</td>
+        <td>≈ A8/-84.8298</td>
         <td>≈ 1.6163 × 10⁻³⁵ m</td>
       </tr>
       <tr>
         <td>Top-quark reduced Compton scale</td>
         <td>A8/-29</td>
-        <td>≈ 1.1051 A8/-29</td>
+        <td>≈ A8/-28.8558</td>
         <td>≈ 1.1438 × 10⁻¹⁸ m</td>
       </tr>
       <tr>
         <td>Proton rms charge radius</td>
         <td>A8/-19</td>
-        <td>≈ 0.7932 A8/-19</td>
+        <td>≈ A8/-19.3342</td>
         <td>≈ 0.8408 fm</td>
       </tr>
       <tr>
         <td>Electron reduced Compton wavelength</td>
         <td>A8/-10</td>
-        <td>≈ 0.7116 A8/-10</td>
+        <td>≈ A8/-10.4909</td>
         <td>≈ 3.8616 × 10⁻¹³ m</td>
       </tr>
       <tr>
         <td>α-quartz c-axis recurrence</td>
         <td>A8/0</td>
-        <td>≈ 0.9727 A8/0</td>
+        <td>≈ A8/-0.0399</td>
         <td>≈ 0.5405 nm</td>
       </tr>
       <tr>
         <td>Small bacterium width</td>
         <td>A8/10</td>
-        <td>≈ 1.0544 A8/10</td>
+        <td>≈ A8/10.0764</td>
         <td>≈ 0.6 µm</td>
       </tr>
       <tr>
         <td>Red blood cell diameter</td>
         <td>A8/14</td>
-        <td>≈ 0.8238 A8/14</td>
+        <td>≈ A8/13.7204</td>
         <td>≈ 7.5 µm</td>
       </tr>
       <tr>
         <td>Human hair diameter</td>
         <td>A8/17</td>
-        <td>≈ 0.9611 A8/17</td>
+        <td>≈ A8/16.9428</td>
         <td>≈ 70 µm</td>
       </tr>
       <tr>
         <td>Coarse sand grain</td>
         <td>A8/20</td>
-        <td>≈ 1.0297 A8/20</td>
+        <td>≈ A8/20.0422</td>
         <td>≈ 0.6 mm</td>
       </tr>
     </tbody>
@@ -1479,8 +1606,8 @@ main {
   </div>
 
   <div class="note">
-    Near-one results are useful observations. They are not automatically
-    hidden laws of Nature.
+    Near-landmark results are useful observations. They are not
+    automatically hidden laws of Nature.
   </div>
 
   <p>
@@ -1492,10 +1619,10 @@ main {
 
 <section id="engineering">
   <div class="eyebrow">13 · ENGINEERING DISCIPLINE</div>
-  <h2>Native first. Translation second.</h2>
+  <h2>Native first. Comparison second.</h2>
 
   <p>
-    A8 separates exact architecture from comparison values.
+    A8 separates native architecture from comparison values.
   </p>
 
   <div class="grid">
@@ -1511,21 +1638,38 @@ main {
 
     <div class="metric">
       <small>EXACT</small>
-      <strong>NAV = A8/41</strong>
+      <strong>A8 NAV = A8/41</strong>
     </div>
 
     <div class="metric">
-      <small>APPROXIMATE</small>
-      <strong>legacy comparison decimals</strong>
+      <small>COMPARISON</small>
+      <strong>external decimal coordinates</strong>
     </div>
   </div>
 
   <p>
-    Public approximate decimal values are normally displayed to no more
-    than four decimal places. That is a presentation rule, not a
-    numerical limitation. Internal calculations may retain whatever
-    precision is required.
+    Public approximate values are normally displayed to no more than four
+    decimal places. That is a presentation rule, not a numerical
+    limitation. Internal calculations may retain whatever precision is
+    required.
   </p>
+
+  <h3>Independent comparison</h3>
+
+  <p>
+    A comparison system may run beside A8 without becoming part of A8.
+    UTC, SI and other conventional coordinates can expose residuals,
+    agreement and disagreement. They do not automatically steer a native
+    A8 clock, length, distance or speed.
+  </p>
+
+  <div class="eq">
+    AGREEMENT = EVIDENCE
+    <br>
+    DISAGREEMENT = EVIDENCE
+    <br>
+    FORCED AGREEMENT = NOT THE EXPERIMENT
+  </div>
 
   <h3>Independent recoverability</h3>
 
@@ -1574,8 +1718,8 @@ main {
       <h3>A8 does claim</h3>
       <p>
         A coherent engineered measurement architecture can share exact
-        binary relationships across angle, civil time, length,
-        navigation and speed.
+        binary relationships across angle, A8 time, length, navigation
+        and speed.
       </p>
     </div>
 
@@ -1583,7 +1727,7 @@ main {
       <h3>A8 does not claim</h3>
       <p>
         That geometry, π, trigonometry or physical law changes when the
-        ruler changes.
+        coordinate changes.
       </p>
     </div>
 
@@ -1607,7 +1751,8 @@ main {
       <h3>A8 does claim</h3>
       <p>
         Binary and octal are useful representations for exact powers of
-        two and machine state.
+        two and machine state, while continuous decimal rungs can express
+        positions between integer landmarks.
       </p>
     </div>
 
@@ -1617,12 +1762,28 @@ main {
         That Nature itself must be binary.
       </p>
     </div>
+
+    <div class="card">
+      <h3>A8 does claim</h3>
+      <p>
+        External systems can test, compare with and challenge A8 without
+        becoming the source of the A8 result.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>A8 does not claim</h3>
+      <p>
+        That agreement with an external system should be forced when the
+        purpose of the comparison is to observe the residual.
+      </p>
+    </div>
   </div>
 
   <p>
     Measurement domains that do not yet have a defensible natural
-    physical anchor should remain open rather than being filled with an
-    invented definition merely for completeness.
+    physical relationship should remain open rather than being filled
+    with an invented definition merely for completeness.
   </p>
 </section>
 
@@ -1637,7 +1798,7 @@ main {
     full turn = 512 A8 angle = 2⁹
   </div>
 
-  <h3>Civil time</h3>
+  <h3>A8 time</h3>
 
   <div class="eq">
     day = 32 × 64 × 64
@@ -1651,30 +1812,56 @@ main {
     = 2¹² A8 SECOND
   </div>
 
-  <h3>Length</h3>
+  <h3>Continuous length</h3>
 
   <div class="eq">
-    A8 NAV = A8/41
+    A8/r = A8/31 × 2^(r − 31)
   </div>
 
   <div class="eq">
-    A8/n = A8/41 × 2^(n − 41)
-  </div>
-
-  <h3>Earth orbital speed</h3>
-
-  <div class="eq">
-    A8/45 = 16 A8 NAV
+    r = 31 + log₂(L / A8/31)
   </div>
 
   <div class="eq">
-    A8/57 = 65,536 A8 NAV
+    A8 NAV = A8/41 = 2¹⁰ × A8/31
+    <br>
+    = C(E,mean) / 32,768
   </div>
 
+  <h3>Scale neighborhoods</h3>
+
   <div class="eq">
-    Earth mean speed
-    ≈ 1.0041 A8/45 per A8 SECOND
-    ≈ 1.0041 A8/57 per A8 HOUR
+    r &lt; 31 · BABY BEAR · BELOW THE /31 REFERENCE
+    <br>
+    31 ≤ r ≤ 41 · MOMMA BEAR · REFERENCE TO NAV
+    <br>
+    r ≥ 41 · PAPI BEAR · NAV AND LARGE DISTANCE
+  </div>
+
+  <h3>Speed</h3>
+
+  <div class="eq">
+    D = A8 NAV traveled per A8 HOUR
+    <br>
+    r = 41 + log₂(D)
+    <br>
+    SPEED = A8/r per A8 HOUR
+  </div>
+
+  <h3>Earth mean-orbit comparison</h3>
+
+  <div class="eq">
+    r(HOUR) ≈ 57.0059
+    <br>
+    r(SECOND) = r(HOUR) − 12
+    <br>
+    r(SECOND) ≈ 45.0059
+  </div>
+
+  <h3>Annual Frame</h3>
+
+  <div class="eq">
+    000₈ → 200₈ → 400₈ → 600₈ → 1000₈ / 000₈
   </div>
 
   <h3>Navigation</h3>
@@ -1688,12 +1875,6 @@ main {
     → ARRIVAL
   </div>
 
-  <h3>Speed-ladder rule</h3>
-
-  <div class="eq">
-    PUSH THE RUNG · NOT THE NUMBER
-  </div>
-
   <h3>A8/PERFECT rule</h3>
 
   <div class="eq">
@@ -1703,11 +1884,279 @@ main {
 
   <div class="closing">
     <strong>ONE WORLD · ONE ARCHITECTURE</strong>
-    <span>PUSH THE RUNG · NOT THE NUMBER</span>
+    <span>THE NUMBER IS THE RUNG</span>
   </div>
 </section>
 
+<section id="electrical-nature">
+  <div class="eyebrow">16 · ELECTRICAL NATURE</div>
+  <h2>The ruler follows the relationship.</h2>
+
+  <div class="note">
+    <strong>Observe first. Choose the ruler second.</strong>
+    The ruler describes the relationship. It does not command it.
+  </div>
+
+  <h3>Three phase without 360</h3>
+
+  <p>
+    Three-phase electricity does not belong to the 360-degree ruler.
+    The physical requirement is an exact one-third separation between
+    phases. A8 can preserve that relationship with an electrical register
+    of the form <strong>3 × 2ⁿ</strong>.
+  </p>
+
+  <p>
+    A <strong>1400₈</strong> electrical cycle provides three exact
+    <strong>400₈</strong> phase intervals. A
+    <strong>3000₈</strong> cycle provides three exact
+    <strong>1000₈</strong> intervals. Neither register is sacred:
+    Nature supplies the third and engineering selects the binary
+    resolution.
+  </p>
+
+  <p>
+    Motors, generators and transformers remain the same physical machines.
+    A8 changes the coordinate used to describe the relationship, not the
+    electricity.
+  </p>
+
+
+  <h3>W remains Watt</h3>
+
+  <p>
+    A8 does not need to rename established units simply because it uses a
+    different measurement architecture. <strong>W remains watt</strong>,
+    and James Watt keeps the credit. Established units remain useful
+    comparison coordinates while native A8 relationships are developed
+    independently.
+  </p>
+
+
+  <h3>Power-of-two relationships</h3>
+
+  <p>
+    Atomic, chemical, electrical and nuclear physics repeatedly contain
+    paired states, opposed states and powers-of-two state spaces.
+    Electrons have two spin projections along a selected axis, an atomic
+    orbital accommodates at most two electrons, electrical charge has
+    opposite signs, magnetic dipoles have opposite poles, and multiple
+    two-state elements naturally produce <strong>2ⁿ</strong> possible
+    combinations.
+  </p>
+
+  <p>
+    A8 does not claim that every physical quantity is binary or that
+    Nature itself is a digital machine. Continuous fields and more complex
+    state structures remain continuous and complex. The narrower point is
+    that binary representation is especially natural wherever Nature
+    presents genuine paired or discrete relationships.
+  </p>
+
+  <div class="note">
+    <strong>Three-state teaser · analog relationship, trinary digital state:</strong>
+    an electromagnetic waveform remains continuous in analog form.
+    Its signed magnitude moves continuously through the polarity reversal:
+    <br><br>
+    <strong>+MAX → … → + → 0 → − → … → −MAX</strong>
+    <br>
+    <strong>−MAX → … → − → 0 → + → … → +MAX</strong>
+    <br><br>
+    The null state is therefore physically traversed every time the signed
+    magnetic-field component or alternating EMF reverses polarity.
+    The analog relationship contains every intermediate magnitude, while
+    its sign relationship visibly passes through
+    <strong>negative · null · positive</strong> —
+    <strong>− · 0 · +</strong>.
+    <br><br>
+    In a digital state description, those three sign conditions can be
+    represented directly as <strong>−1 · 0 · +1</strong>. Binary can encode
+    the same information using more than one bit; balanced trinary maps the
+    signed relationship directly.
+    <br><br>
+    A8 is not claiming that analog electromagnetism has only three possible
+    magnitudes. The analog waveform is continuous. It is observing that
+    when that continuous electromagnetic relationship is reduced to digital
+    polarity state, <strong>null is a real third state rather than an
+    invented exception</strong>. Three-phase rotation is a separate cyclic
+    relationship, and a full A8 trinary architecture remains open for later
+    work.
+  </div>
+
+
+  <h3>One coupled physical machine</h3>
+
+  <p>
+    Chemistry, heat, pressure, rotation, motion, electricity, magnetism
+    and gravity are different physical quantities, but they operate in
+    coupled systems. Electron structure governs chemistry; chemistry can
+    establish electrical potential; current produces heat and magnetic
+    field; heat can drive fluid motion; conducting motion can generate
+    current; rotation carries angular momentum; and electromagnetic fields
+    contain energy and stress.
+  </p>
+
+  <p>
+    General relativity also makes the usual statement that mass alone
+    creates gravity incomplete. Energy, momentum, pressure and stress
+    contribute gravitationally, including electromagnetic field energy
+    and stress. A8 does not declare magnetism to be the origin of all
+    gravity, but neither does it treat electromagnetic state, rotation and
+    gravity as subjects that must never be measured together.
+  </p>
+
+
+  <h3>Rotation and quartz</h3>
+
+  <p>
+    Rotating mass changes the gravitational description through angular
+    momentum and frame dragging. Gravity Probe B measured that relativistic
+    effect using extremely precise spinning fused-quartz gyroscopes.
+    Quartz entered A8 independently as a repeatable material witness.
+    That convergence proves no hidden quartz-gravity mechanism, but it
+    places material structure, rotation, electromagnetic state and gravity
+    in a legitimate common experimental neighborhood.
+  </p>
+
+  <p>
+    An A8 experiment can therefore reverse spin direction, magnetic
+    polarity and electrical polarity while measuring force, apparent
+    weight, torque, precession, vibration, temperature, current and field
+    strength. Three reversible two-state variables give
+    <strong>2³ = 8</strong> principal combinations, with zero states used
+    as controls. The objective is not to announce an effect beforehand;
+    it is to reveal which measured quantities reverse together and whether
+    any reproducible residual survives ordinary mechanical, thermal and
+    electromagnetic accounting.
+  </p>
+
+
+  <h3>Planetary generator · external circuitry</h3>
+
+  <p>
+    <strong>As in Jupiter, so on Earth:</strong> A8 places the planetary
+    generator / dynamo in the deep conducting body and treats the
+    atmosphere as external electrical circuitry.
+  </p>
+
+  <p>
+    On Earth, the conducting outer core sustains a self-generating dynamo.
+    Heat, chemical differentiation, pressure, rotation, conducting fluid
+    motion, electric current and magnetic field participate in that deep
+    planetary machine. On Jupiter, the corresponding dynamo operates in
+    its deep electrically conducting metallic-hydrogen region. The
+    materials differ; the architecture remains recognizable:
+    <strong>deep conducting dynamo inside, atmospheric circuitry
+    outside.</strong>
+  </p>
+
+  <p>
+    The atmosphere therefore is not promoted to the primary generator.
+    It is a conductive external medium surrounding the planetary machine.
+    Clouds are temporary charge structures within that circuitry: small
+    capacitive regions capable of charge separation, storage, conduction
+    and discharge. A cloud may acquire a potential difference relative to
+    another cloud, the surrounding atmosphere or the ground and later
+    participate in redistribution when a conductive path forms.
+  </p>
+
+  <p>
+    Lightning is the conspicuous discharge event. Ionization creates a
+    conductive path through the atmosphere and charge redistributes toward
+    a reduced potential difference. The cloud did not become the planetary
+    power plant merely because the discharge became visible there.
+  </p>
+
+  <p>
+    Jupiter makes the same distinction particularly clear. Its enormous
+    cloud decks contain storms, charge separation and lightning, while its
+    planetary dynamo originates much deeper in conducting material.
+    The clouds are external circuitry of the planet, not the generator.
+  </p>
+
+
+  <h3>Ground to sky</h3>
+
+  <p>
+    A grounded conductor connected to an insulated elevated collector
+    samples the external Earth electrical circuit across altitude. The
+    useful experiment is therefore to measure potential, current, local
+    field, collector geometry, atmospheric conductivity, altitude,
+    humidity, pressure, temperature, magnetic state and weather together
+    rather than assuming beforehand where the available energy must appear.
+  </p>
+
+  <p>
+    Ground, atmosphere and elevated conductor are parts of one measurable
+    electrical arrangement. A8 asks where the potential is established,
+    where current actually flows, how the circuit closes and which
+    terrestrial electrical or magnetic changes accompany the result.
+  </p>
+
+
+  <h3>Scale</h3>
+
+  <p>
+    The scale comparison needs no giant wall of legacy numbers. At present
+    human energy use, one captured-solar year is roughly nine thousand
+    human-energy years. Earth's rotational-energy scale reaches tens of
+    thousands of captured-solar years, its internal-energy scale reaches
+    millions, and its gravitational-energy scale reaches tens of millions.
+    These are physical inventory comparisons rather than promises of
+    extractable electrical power.
+  </p>
+
+  <p>
+    The purpose of the comparison is perspective: human machinery operates
+    inside a planetary machine vastly larger than present human annual
+    energy throughput.
+  </p>
+
+
+  <h3>The A8 engineering rule</h3>
+
+  <p>
+    A8 does not begin by choosing a traditional ruler and forcing the
+    phenomenon into it. Begin with the physical relationship. Identify
+    recurrences, reversals, pairs, thirds and continuous variables.
+    Separate independent quantities from different expressions of the same
+    energy, test the relationship in both directions where possible, and
+    only then choose the coordinate that preserves it cleanly.
+  </p>
+
+  <p>
+    That rule applies to three-phase electricity, atomic pairing, rotating
+    quartz, planetary dynamos, atmospheric discharge and the Earth
+    electrical machine alike.
+    <strong>Observe the relationship first. Choose the ruler second.</strong>
+  </p>
+
+
+  <h3>Reference notes</h3>
+
+  <p>
+    Earth geodynamo reference:
+    <a href="https://www.usgs.gov/faqs/how-does-earths-core-generate-a-magnetic-field"
+       rel="noopener">
+      U.S. Geological Survey · Earth's core and magnetic field
+    </a>.
+    Jupiter dynamo reference:
+    <a href="https://science.nasa.gov/jupiter/jupiter-facts/"
+       rel="noopener">
+      NASA · Jupiter Facts
+    </a>.
+    Gravity Probe B reference:
+    <a href="https://www.nasa.gov/image-article/what-gravity-probe-b/"
+       rel="noopener">
+      NASA · Gravity Probe B
+    </a>.
+    These external sources are evidence and comparison references; they do
+    not define the native A8 rulers.
+  </p>
+</section>
+
 </div>
+
 </main>
 
 <footer>

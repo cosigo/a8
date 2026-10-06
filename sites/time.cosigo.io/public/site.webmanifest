@@ -1,0 +1,15 @@
+{
+  "name": "Auspicious 8 \u00b7 Time",
+  "short_name": "A8 Time",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#07111d",
+  "theme_color": "#081427",
+  "icons": [
+    {
+      "src": "https://cosigo.io/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ]
+}

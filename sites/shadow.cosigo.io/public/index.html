@@ -173,6 +173,19 @@ footer{
   font-style:italic;
 }
 
+.core21-card{
+  border-color:var(--warn);
+  box-shadow:0 0 0 1px rgba(255,200,80,.12);
+}
+
+.core21-card h2{
+  color:var(--warn);
+}
+
+.core21-card .clock{
+  color:var(--warn);
+}
+
 @media(max-width:700px){
   .clocks{grid-template-columns:1fr}
 }
@@ -193,6 +206,7 @@ footer{
         <div>SOURCE EPOCH · <b id="coreEpoch">—</b></div>
         <div>STATE · <b id="coreState">—</b></div>
       </div>
+
     </article>
 
     <article class="card">
@@ -218,6 +232,44 @@ footer{
         <div>AUTHORITY · <b>NONE UNTIL CONTROLLED HANDOFF</b></div>
       </div>
     </article>
+
+    <article class="card core21-card">
+      <h2>CORE21 · GANYMEDE STATE</h2>
+
+      <div class="clock warn" id="core21Clock">—:—:—</div>
+
+      <div class="rows">
+        <div>
+          DAY_PHASE17 ·
+          <b id="core21Phase">—</b>
+        </div>
+
+        <div>
+          DAY COUNT ·
+          <b id="core21Day">—</b>
+        </div>
+
+        <div>
+          AUTHORITY ·
+          <b id="core21Authority">—</b>
+        </div>
+
+        <div>
+          CARRIER ·
+          <b id="core21Carrier">—</b>
+        </div>
+
+        <div>
+          COMPENSATION ·
+          <b id="core21Compensation">—</b>
+        </div>
+
+        <div>
+          STATE ·
+          <b id="core21State">—</b>
+        </div>
+      </div>
+    </article>
   </section>
 
   <section class="card divergence">
@@ -234,19 +286,75 @@ footer{
 </main>
 
 <script>
-async function getJson(url){
-  const r = await fetch(url, { cache:'no-store' });
-  if(!r.ok) throw new Error('HTTP '+r.status);
-  return r.json();
+async function getJson(url, timeoutMs=1200){
+  const controller = new AbortController();
+
+  const timer =
+    setTimeout(
+      () => controller.abort(),
+      timeoutMs
+    );
+
+  try{
+    const r =
+      await fetch(
+        url,
+        {
+          cache:'no-store',
+          signal:controller.signal
+        }
+      );
+
+    if(!r.ok){
+      throw new Error('HTTP '+r.status);
+    }
+
+    return await r.json();
+
+  }catch(err){
+    if(
+      err &&
+      err.name === 'AbortError'
+    ){
+      throw new Error(
+        'TIMEOUT · ' + url
+      );
+    }
+
+    throw err;
+
+  }finally{
+    clearTimeout(timer);
+  }
 }
 
-async function update(){
-  let primaryActive = false;
+let primaryActive = false;
+let core20Online = false;
 
-  /*
-    PRIMARY PHYSICAL
-    Independent of Core20 availability.
-  */
+function updateDivergence(){
+  const el =
+    document.getElementById('divergence');
+
+  if(core20Online){
+    el.textContent =
+      primaryActive
+        ? 'PARALLEL PHYSICAL OBSERVATION · NO CORE20 CONTROL'
+        : 'PRIMARY PHYSICAL FEED UNAVAILABLE';
+
+  }else{
+    el.textContent =
+      primaryActive
+        ? 'PRIMARY PHYSICAL ACTIVE · CORE20 OFFLINE / RECOVERY HOLD'
+        : 'PRIMARY PHYSICAL FEED UNAVAILABLE · CORE20 OFFLINE';
+  }
+}
+
+
+/*
+  PRIMARY PHYSICAL · A/B
+  Independent poll lane.
+*/
+async function updatePrimary(){
   try{
     const d =
       await getJson('/api/shadow/jovian');
@@ -267,6 +375,8 @@ async function update(){
       String(p.status || '') === 'ACTIVE';
 
   }catch(err){
+    primaryActive = false;
+
     document.getElementById('primaryEpoch').textContent =
       '—';
 
@@ -275,19 +385,26 @@ async function update(){
 
     document.getElementById('primaryStatus').textContent =
       'FEED UNAVAILABLE';
-  }
 
-  /*
-    CORE20
-    Comparison-only. Core20 being offline must never make the
-    Primary physical card appear offline.
-  */
+  }finally{
+    updateDivergence();
+  }
+}
+
+
+/*
+  CORE20 · EUROPA
+  Independent comparison lane.
+*/
+async function updateCore20(){
   try{
     const d =
       await getJson('/api/shadow/comparison');
 
     const c =
       d.core20 || {};
+
+    core20Online = true;
 
     document.getElementById('corePhase').textContent =
       c.dayPhase17 ?? '—';
@@ -324,12 +441,9 @@ async function update(){
         '—:—:—';
     }
 
-    document.getElementById('divergence').textContent =
-      primaryActive
-        ? 'PARALLEL PHYSICAL OBSERVATION · NO CORE20 CONTROL'
-        : 'PRIMARY PHYSICAL FEED UNAVAILABLE';
-
   }catch(err){
+    core20Online = false;
+
     document.getElementById('coreClock').textContent =
       'OFFLINE';
 
@@ -342,16 +456,138 @@ async function update(){
     document.getElementById('coreState').textContent =
       'OFFLINE · RECOVERY HOLD';
 
-    document.getElementById('divergence').textContent =
-      primaryActive
-        ? 'PRIMARY PHYSICAL ACTIVE · CORE20 OFFLINE / RECOVERY HOLD'
-        : 'PRIMARY PHYSICAL FEED UNAVAILABLE · CORE20 OFFLINE';
+  }finally{
+    updateDivergence();
   }
+}
 
-  /*
-    REMOTE GHOST
-    Independent third lane.
-  */
+
+/*
+  CORE21 · GANYMEDE
+  Independent C/D civil-clock lane.
+*/
+async function updateCore21(){
+  try{
+    const d =
+      await getJson('/api/shadow/core21');
+
+    const civil =
+      d.civilClock || {};
+
+    const clock =
+      civil.clock || {};
+
+    const carrier =
+      civil.carrier || {};
+
+    const natural =
+      civil.naturalAuthority || {};
+
+    const ratio =
+      carrier.disciplineRatio || {};
+
+    document.getElementById(
+      'core21Clock'
+    ).textContent =
+      clock.decimal ?? '—:—:—';
+
+    document.getElementById(
+      'core21Phase'
+    ).textContent =
+      civil.dayPhase17 ?? '—';
+
+    document.getElementById(
+      'core21Day'
+    ).textContent =
+      civil.dayCount ?? '—';
+
+    const body =
+      natural.body ||
+      d.authority ||
+      '—';
+
+    const recurrence =
+      natural.recurrenceRaw || '';
+
+    document.getElementById(
+      'core21Authority'
+    ).textContent =
+      recurrence
+        ? body + ' · ' + recurrence
+        : body;
+
+    document.getElementById(
+      'core21Carrier'
+    ).textContent =
+      carrier.bank === 'ARDUINO_C_D'
+        ? 'ARDUINO C → D'
+        : (carrier.bank ?? '—');
+
+    const rn =
+      ratio.numerator;
+
+    const rd =
+      ratio.denominator;
+
+    document.getElementById(
+      'core21Compensation'
+    ).textContent =
+      rn && rd
+        ? rn + '/' + rd + ' · ELECTRONICS ONLY'
+        : '—';
+
+    document.getElementById(
+      'core21State'
+    ).textContent =
+      d.status ===
+        'CORE21_GANYMEDE_CLOCK_RUNNING'
+        ? 'ONLINE'
+        : (d.status ?? '—');
+
+  }catch(err){
+    document.getElementById(
+      'core21Clock'
+    ).textContent =
+      'OFFLINE';
+
+    document.getElementById(
+      'core21Phase'
+    ).textContent =
+      '—';
+
+    document.getElementById(
+      'core21Day'
+    ).textContent =
+      '—';
+
+    document.getElementById(
+      'core21Authority'
+    ).textContent =
+      '—';
+
+    document.getElementById(
+      'core21Carrier'
+    ).textContent =
+      '—';
+
+    document.getElementById(
+      'core21Compensation'
+    ).textContent =
+      '—';
+
+    document.getElementById(
+      'core21State'
+    ).textContent =
+      'UNAVAILABLE';
+  }
+}
+
+
+/*
+  REMOTE GHOST · C/D RAW
+  Independent physical-witness lane.
+*/
+async function updateGhost(){
   try{
     const d =
       await getJson('/api/shadow/ghost');
@@ -379,8 +615,42 @@ async function update(){
   }
 }
 
-update();
-setInterval(update,1000);
+
+/*
+  Each lane starts its next request only after its own previous
+  request finishes. One dead lane cannot block another lane.
+*/
+function startLane(fn, intervalMs=1000){
+  const run =
+    async () => {
+      try{
+        await fn();
+
+      }catch(err){
+        console.error(
+          'SHADOW LANE ERROR · ' +
+          fn.name +
+          ' · ' +
+          err.message
+        );
+
+      }finally{
+        setTimeout(
+          run,
+          intervalMs
+        );
+      }
+    };
+
+  run();
+}
+
+updateDivergence();
+
+startLane(updatePrimary);
+startLane(updateCore20);
+startLane(updateCore21);
+startLane(updateGhost);
 </script>
 </body>
 </html>

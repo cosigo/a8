@@ -1,0 +1,455 @@
+/*
+ * DATE.COSIGO.IO · CORE21 / GANYMEDE THEME V1
+ * Presentation only.
+ */
+
+html{
+  background:#030611;
+}
+
+body{
+  background-color:#050817 !important;
+  background-image:
+    linear-gradient(
+      rgba(3,6,17,.86),
+      rgba(7,11,28,.76) 32rem,
+      rgba(4,7,17,.90)
+    ),
+    url('/assets/date-ganymede-cosmic-hero.png') !important;
+  background-position:center top !important;
+  background-size:cover !important;
+  background-attachment:fixed !important;
+}
+
+.date-core21-ribbon{
+  position:relative;
+  z-index:1000;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:.65rem 1.1rem;
+  padding:.62rem 1rem;
+  border-bottom:1px solid rgba(130,210,255,.35);
+  background:
+    linear-gradient(
+      90deg,
+      rgba(22,31,78,.94),
+      rgba(11,61,91,.90),
+      rgba(22,31,78,.94)
+    );
+  box-shadow:
+    0 8px 30px rgba(0,0,0,.32);
+  color:#dff7ff;
+  font-family:system-ui,sans-serif;
+  letter-spacing:.09em;
+  text-align:center;
+}
+
+.date-core21-ribbon strong{
+  color:#9be8ff;
+  font-size:.86rem;
+}
+
+.date-core21-ribbon span{
+  color:#e9e8ff;
+  font-size:.75rem;
+}
+
+header,
+nav{
+  backdrop-filter:
+    blur(8px);
+}
+
+button,
+.button,
+.month-chip{
+  transition:
+    transform .15s ease,
+    box-shadow .15s ease;
+}
+
+button:hover,
+.button:hover,
+.month-chip:hover{
+  box-shadow:
+    0 0 0 1px rgba(132,215,255,.22),
+    0 6px 22px rgba(40,110,190,.16);
+}
+
+
+/* ============================================================
+   DATE · CORE21 · NAVIGATION STACKING FIX V2
+   Dropdown/menu must remain above hero title and artwork.
+   Presentation only.
+   ============================================================ */
+
+.topbar,
+.sitebar,
+header.topbar,
+header.sitebar {
+  position: sticky;
+  top: 0;
+  z-index: 10000 !important;
+  overflow: visible !important;
+  isolation: isolate;
+}
+
+.navwrap,
+.sitebar-inner {
+  position: relative;
+  z-index: 10001 !important;
+  overflow: visible !important;
+}
+
+nav,
+.nav,
+#siteNav {
+  position: relative;
+  z-index: 10002 !important;
+}
+
+.hero {
+  position: relative;
+  z-index: 0 !important;
+}
+
+.hero::before,
+.hero::after {
+  z-index: 0 !important;
+  pointer-events: none;
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 1 !important;
+}
+
+@media (max-width: 900px) {
+  .topbar,
+  .sitebar {
+    overflow: visible !important;
+    z-index: 10000 !important;
+  }
+
+  .navwrap,
+  .sitebar-inner {
+    overflow: visible !important;
+  }
+
+  nav,
+  .nav,
+  #siteNav {
+    z-index: 10005 !important;
+  }
+
+  .nav.open,
+  #siteNav.open {
+    z-index: 10006 !important;
+  }
+}
+
+/* ============================================================
+   DATE · CELESTIAL MONTH ART / TEAR-AWAY CALENDAR V1
+   Static presentation only. Core21 calendar semantics untouched.
+   ============================================================ */
+
+body[data-date-month="0"]{--date-accent:#c7a66d;--date-accent-soft:rgba(199,166,109,.18)}
+body[data-date-month="1"]{--date-accent:#d4a0a8;--date-accent-soft:rgba(212,160,168,.18)}
+body[data-date-month="2"]{--date-accent:#62b7a7;--date-accent-soft:rgba(98,183,167,.18)}
+body[data-date-month="3"]{--date-accent:#d36f4d;--date-accent-soft:rgba(211,111,77,.18)}
+body[data-date-month="4"]{--date-accent:#d3a14c;--date-accent-soft:rgba(211,161,76,.18)}
+body[data-date-month="5"]{--date-accent:#cbb97a;--date-accent-soft:rgba(203,185,122,.18)}
+body[data-date-month="6"]{--date-accent:#75c9d9;--date-accent-soft:rgba(117,201,217,.18)}
+body[data-date-month="7"]{--date-accent:#668fd0;--date-accent-soft:rgba(102,143,208,.18)}
+
+.date-month-poster-frame,
+.date-wilson-poster{
+  margin:0 auto 1rem;
+  max-width:900px;
+  border:1px solid color-mix(in srgb,var(--date-accent,#9be8ff) 55%,transparent);
+  border-radius:18px;
+  overflow:hidden;
+  background:#050713;
+  box-shadow:0 20px 60px rgba(0,0,0,.34);
+}
+
+.date-month-poster-frame img,
+.date-wilson-poster img{
+  display:block;
+  width:100%;
+  height:auto;
+}
+
+.date-month-poster-frame figcaption,
+.date-wilson-poster figcaption{
+  display:flex;
+  justify-content:space-between;
+  gap:.75rem;
+  flex-wrap:wrap;
+  padding:.72rem .9rem;
+  border-top:1px solid rgba(255,255,255,.1);
+  background:linear-gradient(90deg,var(--date-accent-soft,rgba(120,190,255,.15)),rgba(4,7,18,.96));
+  color:#eef7ff;
+  letter-spacing:.05em;
+}
+
+.date-month-poster-frame figcaption span,
+.date-wilson-poster figcaption span{
+  opacity:.78;
+  font-size:.78rem;
+}
+
+/* Tear-away effect: artwork stays clean, authoritative dates live below. */
+.calendar-scroll{
+  position:relative;
+  margin-top:.4rem;
+  border-top:2px dashed color-mix(in srgb,var(--date-accent,#d8b86e) 65%,transparent);
+  background:linear-gradient(180deg,rgba(245,234,205,.98),rgba(225,207,165,.98));
+  box-shadow:0 14px 34px rgba(0,0,0,.24);
+}
+
+.calendar-scroll::before{
+  content:"TEAR-AWAY DATE REGISTER · 9 PLANETARY WEEKS × 5 DAYS";
+  display:block;
+  padding:.48rem .72rem;
+  text-align:center;
+  font:800 .68rem/1.2 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  letter-spacing:.11em;
+  color:#57462a;
+  border-bottom:1px dashed rgba(87,70,42,.35);
+}
+
+#calendarBody tr{
+  border-top:1px dashed rgba(79,63,38,.24);
+}
+
+/* Do not guess silver presentation here. Keep possible silver-class cells neutral. */
+#calendarBody td.air-protected{
+  background:rgba(255,255,255,.18) !important;
+  color:inherit !important;
+  box-shadow:none !important;
+}
+
+/* Every fifth day is visibly Gold, making the five-day week obvious. */
+#calendarBody td.aether{
+  background:linear-gradient(180deg,rgba(240,207,101,.46),rgba(202,154,42,.31)) !important;
+  color:#3d2b08 !important;
+  font-weight:900;
+  box-shadow:inset 0 0 0 1px rgba(160,111,15,.42),inset 0 0 22px rgba(255,225,126,.18) !important;
+}
+
+#calendarBody td.aether::after{
+  content:" ✦";
+  color:#9c6a0b;
+}
+
+.a8-calendar-tools{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:.55rem;
+  padding:.48rem .75rem;
+  position:relative;
+  z-index:9000;
+  background:rgba(5,8,20,.94);
+  border-bottom:1px solid rgba(155,232,255,.18);
+}
+
+.a8-calendar-tools a,
+.a8-calendar-tools button,
+.a8-calendar-footer-escape a,
+.a8-calendar-footer-escape button{
+  appearance:none;
+  border:1px solid rgba(180,215,240,.27);
+  border-radius:999px;
+  background:rgba(15,24,42,.82);
+  color:#e8f6ff;
+  padding:.48rem .72rem;
+  font:800 .69rem/1.1 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  letter-spacing:.07em;
+  text-decoration:none;
+  cursor:pointer;
+}
+
+.a8-calendar-tools a:hover,
+.a8-calendar-tools button:hover,
+.a8-calendar-footer-escape a:hover,
+.a8-calendar-footer-escape button:hover{
+  border-color:var(--date-accent,#9be8ff);
+}
+
+.a8-calendar-footer-escape{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:.45rem;
+  margin-top:1rem;
+  padding:.8rem;
+}
+
+.a8-print-sheet{display:none}
+
+@media(max-width:760px){
+  .date-month-poster-frame,
+  .date-wilson-poster{border-radius:12px}
+  .date-month-poster-frame figcaption,
+  .date-wilson-poster figcaption{display:block}
+  .date-month-poster-frame figcaption span,
+  .date-wilson-poster figcaption span{display:block;margin-top:.35rem}
+}
+
+@media print{
+  @page{size:portrait;margin:9mm 14mm 9mm 9mm}
+
+  body > *:not(#a8PrintSheet){display:none !important}
+  #a8PrintSheet{
+    display:block !important;
+    color:#171717;
+    background:#fff;
+    font-family:Georgia,"Times New Roman",serif;
+  }
+
+  .a8-print-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:end;
+    gap:8mm;
+    margin:0 8mm 3mm 0;
+    padding-bottom:2mm;
+    border-bottom:.3mm solid #8b6d2d;
+  }
+  .a8-print-header strong{font-size:13pt;letter-spacing:.08em}
+  .a8-print-header span{font:700 7pt/1.2 ui-monospace,monospace;letter-spacing:.08em}
+
+  .a8-print-body{margin-right:7mm;text-align:center}
+  .a8-print-body h1{margin:0 0 3mm;font-size:16pt;letter-spacing:.06em}
+  .a8-print-art{display:block;max-width:100%;max-height:150mm;width:auto;height:auto;margin:0 auto 2mm}
+  .a8-print-meta{margin:1mm 0 2mm;font:700 7pt/1.2 ui-monospace,monospace;letter-spacing:.07em}
+  .a8-print-calendar{width:100%;border-collapse:collapse;font-size:7pt}
+  .a8-print-calendar th,.a8-print-calendar td{border:.2mm solid #9c8f73;padding:1.2mm 1mm}
+  .a8-print-calendar td.aether{background:#efd88d !important;color:#352708 !important;font-weight:900}
+  .a8-print-calendar td.air-protected{background:#fff !important;color:#171717 !important}
+
+  .a8-print-wilson-days{display:grid !important;grid-template-columns:repeat(5,1fr);gap:1.5mm;margin-top:3mm}
+  .a8-print-wilson-days > *{border:.2mm solid #9c8f73;padding:2mm}
+
+  .a8-print-footer{
+    margin:3mm 8mm 0 0;
+    padding-top:2mm;
+    border-top:.2mm solid #aaa;
+    text-align:center;
+    font:700 7pt/1.2 ui-monospace,monospace;
+    letter-spacing:.1em;
+  }
+
+  .a8-print-edge{
+    position:fixed;
+    right:1.5mm;
+    top:50%;
+    transform:translateY(-50%);
+    writing-mode:vertical-rl;
+    text-orientation:mixed;
+    color:#333;
+    font:800 7pt/1 ui-monospace,monospace;
+    letter-spacing:.14em;
+    white-space:nowrap;
+  }
+}
+
+
+/* ============================================================
+   DATE · WILSON / PLUTO LAYOUT REPAIR V1
+   Pluto remains artwork; Wilson Compass remains fully visible.
+   Presentation only.
+   ============================================================ */
+
+/*
+ * The ordinary month posters may remain large.
+ * Pluto is the year-end threshold plate, so give it a slightly
+ * smaller presentation footprint above the Wilson instrument.
+ */
+.date-wilson-poster{
+  max-width:680px;
+  margin-bottom:.8rem;
+}
+
+/*
+ * Original Wilson reveal was designed before the Pluto poster
+ * existed and capped the whole active shell at 1800px.
+ * Increase the reveal envelope so the Compass Released panel,
+ * elemental Gold Days and all Wilson controls remain in layout.
+ */
+.wilson-live-shell.active{
+  max-height:4200px !important;
+}
+
+/* Give the live instrument a clean visual separation from Pluto. */
+.date-wilson-poster + .wilson-live-card{
+  margin-top:.25rem;
+}
+
+@media (max-width:760px){
+  .date-wilson-poster{
+    max-width:100%;
+  }
+
+  .wilson-live-shell.active{
+    max-height:5000px !important;
+  }
+}
+
+
+/* ============================================================
+   DATE · TOOLS + CORE21 IDENTITY ROW V1
+   Global COSIGO logo / MENU remain the topmost page chrome.
+   ============================================================ */
+
+.a8-calendar-tools{
+  display:flex !important;
+  align-items:center !important;
+  gap:.55rem !important;
+  flex-wrap:nowrap !important;
+}
+
+.a8-calendar-tools .date-core21-ribbon{
+  position:static !important;
+  inset:auto !important;
+  width:auto !important;
+  max-width:none !important;
+  min-height:0 !important;
+
+  margin:0 0 0 auto !important;
+  padding:0 !important;
+
+  display:flex !important;
+  align-items:center !important;
+  gap:.55rem !important;
+
+  background:none !important;
+  border:0 !important;
+  box-shadow:none !important;
+  transform:none !important;
+
+  white-space:nowrap;
+}
+
+.a8-calendar-tools .date-core21-ribbon strong,
+.a8-calendar-tools .date-core21-ribbon span{
+  margin:0 !important;
+}
+
+@media (max-width:850px){
+  .a8-calendar-tools{
+    flex-wrap:wrap !important;
+  }
+
+  .a8-calendar-tools .date-core21-ribbon{
+    margin-left:0 !important;
+    flex-basis:100%;
+    white-space:normal;
+  }
+}

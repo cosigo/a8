@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Chief Engineer · Core20 | Auspicious 8</title>
+<title>Chief Engineer · Main + Shadow | Auspicious 8</title>
 
 <style>
 :root{
@@ -294,6 +294,221 @@ pre{
   .grid,.workflow{grid-template-columns:1fr}
   nav{margin-left:0;width:100%}
 }
+
+
+/* ==========================================================
+   A8 CE · CONSULT-FIRST CONTROL DESK
+   Front-panel safety only. Existing backend remains authority.
+   ========================================================== */
+
+.ce-safety-console{
+  margin:16px 0;
+  padding:16px;
+  border:2px solid rgba(224,189,114,.72);
+  border-radius:14px;
+  background:rgba(20,14,8,.86);
+  box-shadow:
+    inset 0 0 28px rgba(224,189,114,.07),
+    0 0 18px rgba(224,189,114,.07);
+}
+
+.ce-safety-banner{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  flex-wrap:wrap;
+  padding:12px;
+  border:1px solid rgba(255,138,128,.60);
+  border-radius:10px;
+  background:rgba(55,15,14,.72);
+  font-weight:900;
+  letter-spacing:.05em;
+}
+
+.ce-safety-lamp{
+  width:15px;
+  height:15px;
+  flex:0 0 15px;
+  border-radius:50%;
+  background:var(--bad);
+  box-shadow:
+    0 0 7px var(--bad),
+    0 0 18px rgba(255,138,128,.70);
+  animation:a8-ce-danger-pulse 1.25s ease-in-out infinite;
+}
+
+.ce-safety-bank[data-armed="true"] .ce-safety-lamp{
+  background:var(--good);
+  box-shadow:
+    0 0 7px var(--good),
+    0 0 18px rgba(127,218,160,.65);
+  animation:none;
+}
+
+.ce-safety-bank{
+  margin-top:12px;
+  padding:13px;
+  border:1px solid var(--line);
+  border-radius:10px;
+  background:rgba(9,16,23,.78);
+}
+
+.ce-safety-bank-head{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+  font-weight:900;
+}
+
+.ce-safety-bank input{
+  width:min(760px,100%);
+}
+
+.ce-procedure{
+  margin:10px 0 0 22px;
+  padding:0;
+  line-height:1.55;
+  color:var(--muted);
+  font-size:.82rem;
+}
+
+.ce-procedure b{
+  color:var(--text);
+}
+
+.ce-big-lock{
+  display:inline-flex;
+  align-items:center;
+  gap:9px;
+  padding:9px 12px;
+  border:1px solid rgba(255,138,128,.60);
+  border-radius:9px;
+  background:rgba(55,15,14,.62);
+  color:var(--bad);
+  font-weight:900;
+}
+
+@keyframes a8-ce-danger-pulse{
+  0%,100%{opacity:.55}
+  50%{opacity:1}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .ce-safety-lamp{
+    animation:none;
+  }
+}
+
+
+
+/* ==========================================================
+   A8 CE · CONTROL ROOM COSMETIC FINISH
+   Presentation only.
+   ========================================================== */
+
+.ce-room-legend{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:8px;
+  margin-top:15px;
+}
+
+.ce-room-chip{
+  min-width:0;
+  display:flex;
+  align-items:center;
+  gap:9px;
+  padding:9px 11px;
+  border:1px solid var(--line);
+  border-radius:9px;
+  background:rgba(9,16,23,.82);
+  color:var(--text);
+  text-decoration:none;
+  font-size:.70rem;
+  font-weight:900;
+  letter-spacing:.03em;
+  line-height:1.35;
+}
+
+.ce-room-chip:hover{
+  border-color:#8297a8;
+}
+
+.ce-room-dot{
+  width:10px;
+  height:10px;
+  flex:0 0 10px;
+  border-radius:50%;
+}
+
+.ce-room-main{
+  border-color:rgba(121,183,255,.58);
+}
+
+.ce-room-main .ce-room-dot{
+  background:var(--blue);
+  box-shadow:0 0 12px rgba(121,183,255,.75);
+}
+
+.ce-room-shadow{
+  border-color:rgba(112,229,243,.54);
+}
+
+.ce-room-shadow .ce-room-dot{
+  background:var(--cyan);
+  box-shadow:0 0 12px rgba(112,229,243,.72);
+}
+
+.ce-room-nature{
+  border-color:rgba(224,189,114,.54);
+}
+
+.ce-room-nature .ce-room-dot{
+  background:var(--warn);
+  box-shadow:0 0 12px rgba(224,189,114,.66);
+}
+
+.ce-room-glass{
+  border-color:rgba(143,164,181,.42);
+  color:var(--muted);
+}
+
+.ce-room-glass .ce-room-dot{
+  background:var(--muted);
+  box-shadow:0 0 9px rgba(143,164,181,.45);
+}
+
+#a8-ce-main-ab-zone > .ce-system-title{
+  border-left:5px solid var(--blue);
+  padding-left:12px;
+}
+
+#a8-ce-shadow-cd-zone > .ce-system-title{
+  border-left:5px solid var(--cyan);
+  padding-left:12px;
+}
+
+#a8-ce-natural-orientation-header{
+  border-color:rgba(224,189,114,.48);
+}
+
+#a8-ce-behind-glass-header{
+  opacity:.88;
+}
+
+@media(max-width:1000px){
+  .ce-room-legend{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+}
+
+@media(max-width:580px){
+  .ce-room-legend{
+    grid-template-columns:1fr;
+  }
+}
+
 </style>
 
   <!-- COSIGO-CANONICAL-FAVICON-BEGIN -->
@@ -303,6 +518,39 @@ pre{
   <link rel="icon" type="image/png" sizes="16x16" href="https://cosigo.io/favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="https://cosigo.io/apple-touch-icon.png">
   <!-- COSIGO-CANONICAL-FAVICON-END -->
+
+<style id="a8-ce-mirror-finish-v1">
+#a8-ce-main-ab-zone,
+#a8-ce-shadow-cd-zone{
+  display:flex;
+  flex-direction:column;
+}
+
+#a8-ce-main-ab-zone .ce-bank-subhead,
+#a8-ce-shadow-cd-zone .ce-bank-subhead{
+  margin-top:18px;
+  padding:8px 10px;
+  border:1px solid var(--line);
+  border-radius:8px;
+  background:rgba(9,16,23,.72);
+}
+
+#a8-ce-main-ab-zone .controls,
+#a8-ce-shadow-cd-zone .controls{
+  align-items:end;
+}
+
+#a8-ce-main-ab-zone details,
+#a8-ce-shadow-cd-zone details{
+  margin-top:12px;
+}
+
+#a8-ce-critical-controls #a8-ce-original-fallback{
+  margin:16px 0;
+  background:rgba(43,33,16,.34);
+}
+</style>
+
 </head>
 
 <body>
@@ -311,7 +559,7 @@ pre{
   <div class="header-inner">
     <div class="topline">
       <div>
-        <div class="kicker">AUSPICIOUS 8 · CORE20</div>
+        <div class="kicker">AUSPICIOUS 8 · MAIN + SHADOW CONTROL ROOM</div>
         <h1>CHIEF ENGINEER</h1>
       </div>
 
@@ -324,9 +572,44 @@ pre{
     </div>
 
     <p class="subtitle">
-      Authenticated machine room · operate, diagnose, record and recover.
-      Public visitors do not enter this surface.
+      Authenticated A8 control room · Main, Shadow, Nature and recovery.
+      Consult first. Public visitors do not enter this surface.
     </p>
+
+    <div class="ce-room-legend">
+      <a
+        class="ce-room-chip ce-room-main"
+        href="#a8-ce-main-ab-zone"
+      >
+        <span class="ce-room-dot"></span>
+        MAIN · A/B · EUROPA · CORE20
+      </a>
+
+      <a
+        class="ce-room-chip ce-room-shadow"
+        href="#a8-ce-shadow-cd-zone"
+      >
+        <span class="ce-room-dot"></span>
+        SHADOW · C/D · GANYMEDE · CORE21
+      </a>
+
+      <a
+        class="ce-room-chip ce-room-nature"
+        href="#a8-ce-natural-orientation-header"
+      >
+        <span class="ce-room-dot"></span>
+        NATURE · JOVIAN / MINTAKA / SOL
+      </a>
+
+      <a
+        class="ce-room-chip ce-room-glass"
+        href="#a8-ce-behind-glass-header"
+      >
+        <span class="ce-room-dot"></span>
+        BEHIND GLASS · RECOVERY
+      </a>
+    </div>
+
   </div>
 </header>
 
@@ -395,12 +678,12 @@ pre{
     </div>
 
     <div class="stat">
-      <span class="k">ARDUINO A/B · PRIMARY</span>
+      <span class="k">ARDUINO A/B · MAIN</span>
       <span id="canonicalAB" class="v cyan">CHECKING…</span>
     </div>
 
     <div class="stat">
-      <span class="k">ARDUINO C/D · GHOST</span>
+      <span class="k">ARDUINO C/D · SHADOW</span>
       <span id="canonicalCD" class="v cyan">CHECKING…</span>
     </div>
 
@@ -449,17 +732,80 @@ pre{
 
 
 <section class="panel" id="a8-ce-carrier-compensation">
+
+<style id="a8-ce-system-organization-v1">
+.ce-system-zone{
+  margin-top:18px;
+  padding:16px;
+  border:2px solid var(--line);
+  border-radius:14px;
+  background:rgba(8,14,20,.70);
+}
+
+.ce-main-zone{
+  border-color:rgba(121,183,255,.48);
+  box-shadow:
+    inset 0 0 28px rgba(121,183,255,.035);
+}
+
+.ce-shadow-zone{
+  border-color:rgba(112,229,243,.42);
+  box-shadow:
+    inset 0 0 28px rgba(112,229,243,.035);
+}
+
+.ce-system-title{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+  flex-wrap:wrap;
+  padding-bottom:12px;
+  border-bottom:1px solid var(--line);
+  margin-bottom:14px;
+}
+
+.ce-system-title h2{
+  margin:4px 0 0;
+  font-size:1.22rem;
+}
+
+.ce-bank-subhead{
+  margin:18px 0 10px;
+}
+
+.ce-system-zone > section.panel{
+  margin:14px 0;
+  background:rgba(12,19,26,.72);
+}
+
+.ce-carrier-grid{
+  margin-top:10px;
+}
+
+#a8-ce-main-ab-zone .ce-safety-bank,
+#a8-ce-shadow-cd-zone .ce-safety-bank{
+  margin-top:14px;
+}
+
+@media(max-width:760px){
+  .ce-system-title{
+    align-items:flex-start;
+  }
+}
+</style>
+
   <div class="kicker">
-    PHYSICAL CARRIERS · OSCILLATOR COMPENSATION
+    MAIN + SHADOW · CARRIER GEARBOX
   </div>
 
-  <h2>CARRIER COMPENSATION · A/B + C/D</h2>
+  <h2>CARRIER CONTROL DESK · MAIN + SHADOW</h2>
 
   <p class="note">
-    Europa defines the natural rate. Arduino counters remain physical RAW
-    odometers. Pi-side carrier compensation corrects oscillator error only.
-    It does not change Europa, rewrite physical RAW, tune Arduino firmware,
-    or modify the Jovian governor.
+    A/B follows Europa. C/D follows Ganymede. Arduino counters remain
+    physical RAW odometers. Pi-side carrier compensation corrects oscillator
+    error only. It does not change either natural ruler, rewrite physical RAW,
+    tune Arduino firmware, or modify Jovian authority.
   </p>
 
   <div class="statusline">
@@ -472,92 +818,367 @@ pre{
     </span>
   </div>
 
-  <div class="grid" style="margin-top:14px">
 
-    <div class="stat">
-      <span class="k">A/B · PRIMARY</span>
-      <span id="carrierAbState" class="v cyan">CHECKING…</span>
+  <div class="ce-safety-console">
+    <div class="ce-safety-banner">
+      <span class="ce-safety-lamp"></span>
+      <span>
+        ⚠ CONSULT FIRST · NOTHING MOVES FROM TYPING A NUMBER
+      </span>
     </div>
 
-    <div class="stat">
-      <span class="k">A/B · PHYSICAL RAW</span>
-      <span id="carrierAbRaw" class="v">—</span>
-    </div>
+    <p class="note" style="margin-top:12px">
+      This is the permanent CE gearbox desk. Consultation happens before
+      staging any exact ratio. The browser interlock records that the exact
+      proposal below has been discussed and deliberately armed. The existing
+      backend remains the final authority for STAGE / REVIEW / SEAL readiness.
+      Reloading the page always returns both banks to CONSULT REQUIRED.
+    </p>
 
-    <div class="stat">
-      <span class="k">A/B · SEALED BASE</span>
-      <span id="carrierAbBase" class="v warn-text">—</span>
-    </div>
+    
 
-    <div class="stat">
-      <span class="k">A/B · FINE NEEDLE</span>
-      <span id="carrierAbFine" class="v">—</span>
-    </div>
+    
 
-    <div class="stat">
-      <span class="k">A/B · EFFECTIVE</span>
-      <span id="carrierAbEffective" class="v">—</span>
-    </div>
-
-    <div class="stat">
-      <span class="k">A/B · ACTUATION</span>
-      <span id="carrierAbActuation" class="v warn-text">—</span>
-    </div>
-
-    <div class="stat">
-      <span class="k">C/D · GHOST</span>
-      <span id="carrierCdState" class="v cyan">CHECKING…</span>
-    </div>
-
-    <div class="stat">
-      <span class="k">C/D · PHYSICAL RAW</span>
-      <span id="carrierCdRaw" class="v">—</span>
-    </div>
-
-    <div class="stat">
-      <span class="k">C/D · DISCIPLINED RAW · EXACT</span>
-      <span id="carrierCdDisciplined" class="v">—</span>
-    </div>
-
-    <div class="stat">
-      <span class="k">C/D · CURRENT TRIAL RATIO</span>
-      <span id="carrierCdRatio" class="v">—</span>
-    </div>
-
-    <div class="stat">
-      <span class="k">C/D · OSCILLATOR EXCESS CONSUMED</span>
-      <span id="carrierCdConsumed" class="v cyan">—</span>
-    </div>
-
-    <div class="stat">
-      <span class="k">C/D · ACTUATION</span>
-      <span id="carrierCdActuation" class="v">—</span>
-    </div>
-
-    <div class="stat">
-      <span class="k">C/D · SEGMENT</span>
-      <span id="carrierCdSegment" class="v cyan">—</span>
-    </div>
-
-    <div class="stat">
-      <span class="k">C/D · SEALED DISCIPLINED ANCHOR</span>
-      <span id="carrierCdAnchor" class="v">—</span>
-    </div>
-
-    <div class="stat">
-      <span class="k">C/D · STAGED RATIO</span>
-      <span id="carrierCdStagedRatio" class="v">NONE</span>
-    </div>
-
-    <div class="stat">
-      <span class="k">C/D · SEAL STATUS</span>
-      <span id="carrierCdSealStatus" class="v warn-text">LOCKED</span>
-    </div>
-
+    <details style="margin-top:12px" open>
+      <summary>SAFE RATE-CHANGE PROCEDURE · READ BEFORE TOUCHING CONTROLS</summary>
+      <div class="inside">
+        <ol class="ce-procedure">
+          <li>
+            <b>OBSERVE.</b>
+            Read the live carrier, natural authority, current ratio,
+            segment, disciplined coordinate, and comparison evidence.
+          </li>
+          <li>
+            <b>CONSULT.</b>
+            Decide whether a rate correction is justified. Phase offset
+            alone is not a rate correction.
+          </li>
+          <li>
+            <b>ENTER.</b>
+            Type the exact numerator and denominator produced by the
+            consultation. No stale defaults are supplied by CE.
+          </li>
+          <li>
+            <b>ARM.</b>
+            Enter the decision basis and arm that exact proposal.
+            Editing either number automatically cancels the arm.
+          </li>
+          <li>
+            <b>STAGE.</b>
+            Stage only. STAGE is not permission to SEAL.
+          </li>
+          <li>
+            <b>REVIEW.</b>
+            Confirm bank, run, segment, exact ratio, physical continuity,
+            and expected next segment.
+          </li>
+          <li>
+            <b>SEAL.</b>
+            Seal only when the backend independently reports readiness.
+            A/B remains locked until feeder actuation is qualified.
+          </li>
+          <li>
+            <b>VERIFY.</b>
+            Confirm the live next segment, exact ratio, services, and
+            disciplined-coordinate continuity. Start new comparison windows
+            after the seam; never mix old and new gearbox segments.
+          </li>
+        </ol>
+      </div>
+    </details>
   </div>
 
   
-  <div
+<div
+  class="ce-system-zone ce-main-zone"
+  id="a8-ce-main-ab-zone"
+>
+  <div class="ce-system-title">
+    <div>
+      <div class="kicker">
+        MAIN · A/B · EUROPA · CORE20
+      </div>
+      <h2>A/B MAIN SYSTEM</h2>
+    </div>
+    <span class="pill good">
+      EUROPA RATE · CORE20
+    </span>
+  </div>
+
+  <p class="note">
+    Everything in this cabinet belongs to the A/B Main carrier path.
+    Machine power, Path-A physical source, live carrier state and the
+    A/B gearbox consultation are kept together. A/B SEAL remains locked
+    until feeder actuation is explicitly qualified.
+  </p>
+
+<section class="panel" id="a8-ce-core20-master-power">
+
+  <style>
+    #a8-ce-core20-master-power .power-grid{
+      display:grid;
+      grid-template-columns:minmax(0,1fr) auto;
+      gap:16px;
+      align-items:center;
+    }
+
+    #a8-ce-core20-master-power .power-state{
+      font-weight:900;
+      letter-spacing:.08em;
+    }
+
+    #a8-ce-core20-master-power .power-detail{
+      margin-top:6px;
+      opacity:.8;
+      font-size:.9rem;
+    }
+
+    #a8-ce-core20-master-power button{
+      min-width:270px;
+    }
+
+    @media(max-width:700px){
+      #a8-ce-core20-master-power .power-grid{
+        grid-template-columns:1fr;
+      }
+
+      #a8-ce-core20-master-power button{
+        width:100%;
+      }
+    }
+  </style>
+
+  <div class="kicker">
+    A/B · CORE20 · MAIN POWER
+  </div>
+
+  <h2>CORE20 MAIN POWER · CLEAN STOP / START LOCKED</h2>
+
+  <p class="note">
+    STOP performs the normal clean Core20 shutdown and waits until the
+    service is fully offline. The machine backend now understands the current
+    Core20 + Epoch-8 external physical feeder sequence. Browser START remains
+    deliberately locked until controlled fresh-start qualification is completed.
+  </p>
+
+  <div class="power-grid">
+
+    <div>
+      <div
+        id="core20MachineState"
+        class="power-state"
+      >CHECKING…</div>
+
+      <div
+        id="core20MachineDetail"
+        class="power-detail"
+      >—</div>
+    </div>
+
+    <button
+      id="core20MachinePower"
+      type="button"
+      disabled
+    >
+      CHECKING CORE20…
+    </button>
+
+  </div>
+
+</section>
+
+<section class="panel" id="a8-ce-clock-adjust">
+  <div class="kicker">A/B · CORE20 · CLOCK ADJUST</div>
+  <h2>A/B CLOCK ADJUST · AFTER RATE STABILIZATION</h2>
+
+  <p class="note">
+    Meridian 0 is fixed and already established. RATE is adjusted separately
+    in the Europa gearbox. This control changes only the electronic clock
+    position after rate stabilization. Physical RAW, Europa rate and the
+    historical Meridian-0 correction do not move.
+  </p>
+
+  <div class="grid" style="margin-top:14px">
+    <div class="stat">
+      <span class="k">LIVE CLOCK</span>
+      <span id="clockAdjustLive" class="v cyan">CHECKING…</span>
+    </div>
+    <div class="stat">
+      <span class="k">CLOCK ADJUSTMENT</span>
+      <span id="clockAdjustCurrent" class="v">CHECKING…</span>
+    </div>
+    <div class="stat">
+      <span class="k">REFERENCE ANCHOR</span>
+      <span id="clockAdjustReference" class="v">CHECKING…</span>
+    </div>
+    <div class="stat">
+      <span class="k">EFFECTIVE ANCHOR</span>
+      <span id="clockAdjustEffective" class="v cyan">CHECKING…</span>
+    </div>
+    <div class="stat">
+      <span class="k">MERIDIAN 0</span>
+      <span id="clockAdjustMeridian" class="v">FIXED</span>
+    </div>
+    <div class="stat">
+      <span class="k">RATE q</span>
+      <span id="clockAdjustRate" class="v">CHECKING…</span>
+    </div>
+  </div>
+
+  <div class="controls" style="margin-top:16px;align-items:end">
+    <label>
+      <span class="k">AMOUNT · A8 SECONDS</span><br>
+      <input
+        id="clockAdjustAmount"
+        type="text"
+        inputmode="numeric"
+        pattern="[0-9]+"
+        autocomplete="off"
+        placeholder="EXACT A8 SECOND COUNT"
+        style="max-width:240px"
+      >
+    </label>
+
+    <button id="clockAdjustAdvance" type="button" disabled>
+      ADVANCE CLOCK
+    </button>
+
+    <button id="clockAdjustRetard" type="button" disabled>
+      RETARD CLOCK
+    </button>
+  </div>
+
+  <p id="clockAdjustStatus" class="note" style="margin-top:12px">
+    Reading Core20 clock-adjust state…
+  </p>
+
+  <details style="margin-top:12px">
+    <summary>CLOCK ADJUST · STATE</summary>
+    <div class="inside"><pre id="clockAdjustJson">—</pre></div>
+  </details>
+</section>
+
+<section class="panel" id="physicalPulseBoxConsole">
+  <h2>A/B · PATH A · PHYSICAL SOURCE</h2>
+
+  <div class="statusline">
+    <span id="pulseBoxStatus" class="pill">CONNECTING</span>
+    <span class="pill">QUALIFIED EXTERNAL PHYSICAL SOURCE</span>
+  </div>
+
+  <div class="grid" style="margin-top:12px">
+    <div class="stat">
+      <span class="k">PATH A · PHYSICAL SOURCE EPOCH</span>
+      <span id="pulseBoxEpoch" class="v cyan">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">PHYSICAL RAW COUNT</span>
+      <span id="pulseBoxRaw" class="v cyan">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">REPORT SEQUENCE</span>
+      <span id="pulseBoxSequence" class="v">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">PRESENTATION MOTION CHECK</span>
+      <span id="pulseBoxMotion" class="v">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">REPORTER STATUS</span>
+      <span id="pulseBoxReporterStatus" class="v">—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">PATH A ROLE</span>
+      <span class="v">QUALIFIED PHYSICAL PACE SOURCE</span>
+    </div>
+  </div>
+
+  <p class="note">
+    Epoch-8 physical chain: Arduino A Timer2/D11 → Arduino B Timer1/D5
+    → Pi reporter. Core20 maps this physical RAW through the qualified
+    Path-A physical-to-Core relationship. Browser polling cadence and
+    network arrival time are presentation only and do not pace Core20.
+  </p>
+
+  <details>
+    <summary>PHYSICAL PULSE BOX · RAW JSON</summary>
+    <div class="inside">
+      <pre id="pulseBoxJson">—</pre>
+    </div>
+  </details>
+</section>
+
+<div
+      class="ce-safety-bank"
+      id="carrierAbConsultBank"
+      data-armed="false"
+    >
+      <div class="ce-safety-bank-head">
+        <span class="ce-safety-lamp"></span>
+        <span>A/B · EUROPA · CONSULT INTERLOCK</span>
+        <span
+          id="carrierAbConsultState"
+          class="bad"
+        >
+          CONSULT REQUIRED
+        </span>
+      </div>
+
+      <div class="controls" style="margin-top:10px">
+        <input
+          id="carrierAbConsultNote"
+          type="text"
+          autocomplete="off"
+          placeholder="Decision basis / consultation note"
+        >
+
+        <button
+          id="carrierAbConsultArm"
+          class="warn"
+          disabled
+        >
+          ARM EXACT A/B PROPOSAL · CONSULT COMPLETE
+        </button>
+      </div>
+    </div>
+
+  <div class="kicker ce-bank-subhead">
+    A/B · LIVE CARRIER
+  </div>
+
+<div class="grid ce-carrier-grid">
+<div class="stat">
+      <span class="k">A/B · MAIN</span>
+      <span id="carrierAbState" class="v cyan">CHECKING…</span>
+    </div>
+<div class="stat">
+      <span class="k">A/B · PHYSICAL RAW</span>
+      <span id="carrierAbRaw" class="v">—</span>
+    </div>
+<div class="stat">
+      <span class="k">A/B · SEALED BASE</span>
+      <span id="carrierAbBase" class="v warn-text">—</span>
+    </div>
+<div class="stat">
+      <span class="k">A/B · FINE NEEDLE</span>
+      <span id="carrierAbFine" class="v">—</span>
+    </div>
+<div class="stat">
+      <span class="k">A/B · EFFECTIVE</span>
+      <span id="carrierAbEffective" class="v">—</span>
+    </div>
+<div class="stat">
+      <span class="k">A/B · ACTUATION</span>
+      <span id="carrierAbActuation" class="v warn-text">—</span>
+    </div>
+</div>
+
+<div
     style="
       margin-top:18px;
       padding-top:16px;
@@ -565,14 +1186,14 @@ pre{
     "
   >
     <div class="kicker">
-      A/B · PRIMARY PI DISCIPLINE
+      A/B · RATE CONTROL / DISCIPLINE
     </div>
 
     <p class="note">
-      Epoch 8 remains current. A/B physical RAW remains the
-      immutable odometer. C/D Segment 3 is the temporary independent
-      pace reference. This lane is STAGE / REVIEW only; feeder
-      actuation and SEAL remain locked.
+      Epoch 8 remains current. A/B physical RAW remains the immutable
+      odometer. A/B carrier-rate proposals may be STAGED and REVIEWED here,
+      but feeder actuation and SEAL remain locked until that path is explicitly
+      qualified. No static C/D segment is treated as a permanent pace reference.
     </p>
 
     <div class="grid" style="margin-top:12px">
@@ -592,7 +1213,7 @@ pre{
       </div>
 
       <div class="stat">
-        <span class="k">C/D · PACE REFERENCE</span>
+        <span class="k">A/B · REFERENCE QUALIFICATION</span>
         <span id="carrierAbReference" class="v">CHECKING…</span>
       </div>
 
@@ -612,9 +1233,14 @@ pre{
         <span class="k">A/B PROPOSED NUMERATOR</span><br>
         <input
           id="carrierAbNumerator"
-          inputmode="numeric"
-          value="119153283968038235544634661136"
           style="width:390px;max-width:100%"
+        
+          type="text"
+          inputmode="numeric"
+          pattern="[0-9]+"
+          autocomplete="off"
+          placeholder="CONSULT FIRST · EXACT NUMERATOR"
+          value=""
         >
       </label>
 
@@ -622,19 +1248,24 @@ pre{
         <span class="k">A/B PROPOSED DENOMINATOR</span><br>
         <input
           id="carrierAbDenominator"
-          inputmode="numeric"
-          value="119158456589332197355815430285"
           style="width:390px;max-width:100%"
+        
+          type="text"
+          inputmode="numeric"
+          pattern="[0-9]+"
+          autocomplete="off"
+          placeholder="CONSULT FIRST · EXACT DENOMINATOR"
+          value=""
         >
       </label>
     </div>
 
     <div class="controls" style="margin-top:10px">
-      <button id="carrierAbStageButton">
+      <button id="carrierAbStageButton" disabled>
         STAGE A/B RATIO
       </button>
 
-      <button id="carrierAbReviewButton">
+      <button id="carrierAbReviewButton" disabled>
         REVIEW EXACT A/B SEGMENT
       </button>
 
@@ -663,29 +1294,281 @@ pre{
     </details>
   </div>
 
+
+<section
+  class="panel"
+  id="a8-ce-ab-wan-transport"
+  style="margin-top:16px"
+>
+  <div class="kicker">
+    A/B · EUROPA · WAN / ROUTER
+  </div>
+
+  <h2>REMOTE TRANSPORT RECOVERY</h2>
+
+  <p class="note">
+    This control retires only the validated Trade-side reverse-SSH
+    sessions belonging to A/B. The remote Pi systemd units reconnect
+    themselves. It does not restart ssh.service, the Pi, Core20,
+    the Arduino carrier, Europa discipline, rate, or phase.
+  </p>
+
+  <div class="grid">
+    <div>
+      <span class="label">ROUTER</span>
+      <b id="abWanRouter">ZXHN F670L1FXS</b>
+    </div>
+
+    <div>
+      <span class="label">ROUTER CONTROL</span>
+      <b id="abWanRouterControl">CHECKING…</b>
+    </div>
+
+    <div>
+      <span class="label">MANAGEMENT · 22072</span>
+      <b id="abWanManagement">CHECKING…</b>
+    </div>
+
+    <div>
+      <span class="label">SNAPSHOT · 28788</span>
+      <b id="abWanSnapshot">CHECKING…</b>
+    </div>
+
+    <div>
+      <span class="label">STREAM · 28789</span>
+      <b id="abWanStream">CHECKING…</b>
+    </div>
+  </div>
+
+  <div
+    class="controls"
+    style="margin-top:14px"
+  >
+    <button
+      id="abTransportResetButton"
+      class="warn"
+      type="button"
+      disabled
+    >
+      CHECKING A/B TRANSPORT…
+    </button>
+
+    <button
+      id="abRouterRebootButton"
+      class="danger"
+      type="button"
+      disabled
+      data-router-control-ready="0"
+      title="Checking qualified local A/B router agent"
+    >
+      CHECKING A/B ROUTER CONTROL…
+    </button>
+  </div>
+
+  <p
+    id="abWanStatus"
+    class="note"
+    style="margin-top:10px"
+  >
+    Reading Trade reverse-forward ownership…
+  </p>
+</section>
+
+</div>
+
+
+<div
+  class="ce-system-zone ce-shadow-zone"
+  id="a8-ce-shadow-cd-zone"
+>
+  <div class="ce-system-title">
+    <div>
+      <div class="kicker">
+        SHADOW · C/D · GANYMEDE · CORE21
+      </div>
+      <h2>C/D SHADOW SYSTEM</h2>
+    </div>
+    <span class="pill cyan">
+      GANYMEDE RATE · CORE21
+    </span>
+  </div>
+
+  <p class="note">
+    Everything in this cabinet belongs to the independent C/D Shadow
+    carrier path. Rate consultation, live Segment state and the C/D
+    safe seal / drain / shutdown control remain together.
+  </p>
+
+<section class="panel" id="a8-ce-core21-clock-adjust">
+  <div class="kicker">C/D · CORE21 · CLOCK ADJUST</div>
+  <h2>C/D CLOCK ADJUST · AFTER RATE STABILIZATION</h2>
+
+  <p class="note">
+    Meridian 0 is fixed and already established.
+    Ganymede RATE is adjusted separately in the C/D gearbox.
+    This control changes only the Core21 electronic clock position
+    after the C/D rate has stabilized. C/D physical RAW, run lineage,
+    Ganymede recurrence and the historical Meridian-0 +14 record
+    do not move.
+  </p>
+
+  <div class="grid" style="margin-top:14px">
+    <div class="stat"><span class="k">LIVE CLOCK</span>
+      <span id="core21ClockAdjustLive" class="v cyan">CHECKING…</span></div>
+    <div class="stat"><span class="k">CLOCK ADJUSTMENT</span>
+      <span id="core21ClockAdjustCurrent" class="v">CHECKING…</span></div>
+    <div class="stat"><span class="k">REFERENCE ANCHOR</span>
+      <span id="core21ClockAdjustReference" class="v">CHECKING…</span></div>
+    <div class="stat"><span class="k">EFFECTIVE ANCHOR</span>
+      <span id="core21ClockAdjustEffective" class="v cyan">CHECKING…</span></div>
+    <div class="stat"><span class="k">MERIDIAN 0</span>
+      <span id="core21ClockAdjustMeridian" class="v">FIXED</span></div>
+    <div class="stat"><span class="k">GANYMEDE RATE</span>
+      <span id="core21ClockAdjustRate" class="v">CHECKING…</span></div>
+    <div class="stat"><span class="k">C/D RUN</span>
+      <span id="core21ClockAdjustRun" class="v">CHECKING…</span></div>
+  </div>
+
+  <div class="controls" style="margin-top:16px;align-items:end">
+    <label>
+      <span class="k">AMOUNT · A8 SECONDS</span><br>
+      <input id="core21ClockAdjustAmount" type="text" inputmode="numeric"
+        pattern="[0-9]+" autocomplete="off"
+        placeholder="EXACT A8 SECOND COUNT" style="max-width:240px">
+    </label>
+
+    <button id="core21ClockAdjustAdvance" type="button" disabled>
+      ADVANCE CLOCK
+    </button>
+
+    <button id="core21ClockAdjustRetard" type="button" disabled>
+      RETARD CLOCK
+    </button>
+  </div>
+
+  <p id="core21ClockAdjustStatus" class="note" style="margin-top:12px">
+    Reading Core21 clock-adjust state…
+  </p>
+
+  <details style="margin-top:12px">
+    <summary>C/D · CLOCK ADJUST · STATE</summary>
+    <div class="inside"><pre id="core21ClockAdjustJson">—</pre></div>
+  </details>
+</section>
+
+<div
+      class="ce-safety-bank"
+      id="carrierCdConsultBank"
+      data-armed="false"
+    >
+      <div class="ce-safety-bank-head">
+        <span class="ce-safety-lamp"></span>
+        <span>C/D · GANYMEDE · CONSULT INTERLOCK</span>
+        <span
+          id="carrierCdConsultState"
+          class="bad"
+        >
+          CONSULT REQUIRED
+        </span>
+      </div>
+
+      <div class="controls" style="margin-top:10px">
+        <input
+          id="carrierCdConsultNote"
+          type="text"
+          autocomplete="off"
+          placeholder="Decision basis / consultation note"
+        >
+
+        <button
+          id="carrierCdConsultArm"
+          class="warn"
+        >
+          ARM EXACT C/D PROPOSAL · CONSULT COMPLETE
+        </button>
+      </div>
+    </div>
+
+  <div class="kicker ce-bank-subhead">
+    C/D · LIVE CARRIER
+  </div>
+
+<div class="grid ce-carrier-grid">
+<div class="stat">
+      <span class="k">C/D · SHADOW</span>
+      <span id="carrierCdState" class="v cyan">CHECKING…</span>
+    </div>
+<div class="stat">
+      <span class="k">C/D · PHYSICAL RAW</span>
+      <span id="carrierCdRaw" class="v">—</span>
+    </div>
+<div class="stat">
+      <span class="k">C/D · DISCIPLINED RAW · EXACT</span>
+      <span id="carrierCdDisciplined" class="v">—</span>
+    </div>
+<div class="stat">
+      <span class="k">C/D · CURRENT GEARBOX RATIO</span>
+      <span id="carrierCdRatio" class="v">—</span>
+    </div>
+<div class="stat">
+      <span class="k">C/D · OSCILLATOR EXCESS CONSUMED</span>
+      <span id="carrierCdConsumed" class="v cyan">—</span>
+    </div>
+<div class="stat">
+      <span class="k">C/D · ACTUATION</span>
+      <span id="carrierCdActuation" class="v">—</span>
+    </div>
+<div class="stat">
+      <span class="k">C/D · SEGMENT</span>
+      <span id="carrierCdSegment" class="v cyan">—</span>
+    </div>
+<div class="stat">
+      <span class="k">C/D · SEALED DISCIPLINED ANCHOR</span>
+      <span id="carrierCdAnchor" class="v">—</span>
+    </div>
+<div class="stat">
+      <span class="k">C/D · STAGED RATIO</span>
+      <span id="carrierCdStagedRatio" class="v">NONE</span>
+    </div>
+<div class="stat">
+      <span class="k">C/D · SEAL STATUS</span>
+      <span id="carrierCdSealStatus" class="v warn-text">LOCKED</span>
+    </div>
+</div>
+
+
+  
+  
+
 <div class="controls" style="margin-top:14px;align-items:end">
     <label>
-      <span class="k">PROPOSED NUMERATOR</span><br>
+      <span class="k">C/D PROPOSED NUMERATOR</span><br>
       <input
         id="carrierCdNumerator"
-        type="number"
-        min="1"
-        step="1"
-        value="16818"
         style="max-width:180px"
-      >
+      
+          type="text"
+          inputmode="numeric"
+          pattern="[0-9]+"
+          autocomplete="off"
+          placeholder="CONSULT FIRST · EXACT NUMERATOR"
+          value=""
+        >
     </label>
 
     <label>
-      <span class="k">PROPOSED DENOMINATOR</span><br>
+      <span class="k">C/D PROPOSED DENOMINATOR</span><br>
       <input
         id="carrierCdDenominator"
-        type="number"
-        min="1"
-        step="1"
-        value="16819"
         style="max-width:180px"
-      >
+      
+          type="text"
+          inputmode="numeric"
+          pattern="[0-9]+"
+          autocomplete="off"
+          placeholder="CONSULT FIRST · EXACT DENOMINATOR"
+          value=""
+        >
     </label>
 
     <button id="carrierCdStageButton">
@@ -721,21 +1604,442 @@ pre{
   </details>
 
   <p class="note" style="margin-top:14px">
-    A/B compensation machinery is reserved here from the beginning but remains
-    locked while C/D is the proving bank. C/D currently reports its existing
-    Pi-side trial; this cabinet does not alter that trial.
+    A/B and C/D each have an explicit rate-control lane. A/B remains
+    STAGE / REVIEW only until feeder actuation is qualified. C/D may SEAL only
+    after a fresh exact proposal has been consulted, staged, reviewed, and the
+    backend independently reports the seal ready. Loading this page never
+    changes either carrier.
   </p>
 
-  <details style="margin-top:12px">
-    <summary>CARRIER COMPENSATION · RAW STATUS</summary>
-    <div class="inside">
-      <pre id="carrierCompJson">—</pre>
+  
+<section class="panel" id="a8-ce-cd-transport-control">
+  <div class="kicker">
+    C/D · SHADOW · POWER / TRANSPORT
+  </div>
+
+  <h2>C/D SAFE SHUTDOWN · SEAL / DRAIN / POWER OFF</h2>
+
+  <p class="note">
+    This control does not stop Core20 and does not switch Shadow Core.
+    A/B remains MAIN. Shadow Core remains on the direct A/B feed.
+    C/D alone is sealed, drained and powered off for physical transport.
+  </p>
+
+  <div class="grid">
+    <div>
+      <span class="label">READINESS</span>
+      <b id="cdTransportReady">CHECKING…</b>
     </div>
-  </details>
+
+    <div>
+      <span class="label">MAIN CARRIER</span>
+      <b id="cdTransportMain">A/B</b>
+    </div>
+
+    <div>
+      <span class="label">SHADOW CORE</span>
+      <b id="cdTransportShadow">CHECKING…</b>
+    </div>
+
+    <div>
+      <span class="label">C/D ROLE</span>
+      <b id="cdTransportRole">STANDBY</b>
+    </div>
+  </div>
+
+  <pre
+    id="cdTransportDetail"
+    style="margin-top:14px;white-space:pre-wrap"
+  >—</pre>
+
+  <button
+    id="cdTransportShutdownButton"
+    class="danger"
+    type="button"
+    disabled
+    style="margin-top:14px"
+  >
+    CHECKING C/D TRANSPORT READINESS…
+  </button>
+
+  <p
+    id="cdTransportControlStatus"
+    class="note"
+    style="margin-top:10px"
+  >
+    No action has been requested.
+  </p>
+</section>
+
+
+<section
+  class="panel"
+  id="a8-ce-cd-wan-transport"
+  style="margin-top:16px"
+>
+  <div class="kicker">
+    C/D · GANYMEDE · WAN / ROUTER
+  </div>
+
+  <h2>REMOTE TRANSPORT RECOVERY</h2>
+
+  <p class="note">
+    This control retires only the validated Trade-side reverse-SSH
+    management session belonging to C/D. The remote Pi systemd unit
+    reconnects itself. It does not restart ssh.service, the Pi,
+    the C/D recorder, Core21, Ganymede discipline, rate, or phase.
+  </p>
+
+  <div class="grid">
+    <div>
+      <span class="label">ROUTER</span>
+      <b id="cdWanRouter">BOA ADMIN · MODEL UNQUALIFIED</b>
+    </div>
+
+    <div>
+      <span class="label">MANAGEMENT · 22070</span>
+      <b id="cdWanManagement">CHECKING…</b>
+    </div>
+
+    <div>
+      <span class="label">RESET SCOPE</span>
+      <b>REVERSE SSH ONLY</b>
+    </div>
+
+    <div>
+      <span class="label">ROUTER REBOOT</span>
+      <b id="cdWanRouterRebootState">LOCKED</b>
+    </div>
+  </div>
+
+  <div
+    class="controls"
+    style="margin-top:14px"
+  >
+    <button
+      id="cdTransportResetButton"
+      class="warn"
+      type="button"
+      disabled
+    >
+      CHECKING C/D TRANSPORT…
+    </button>
+
+    <button
+      id="cdRouterRebootButton"
+      class="danger"
+      type="button"
+      disabled
+      title="Router reboot endpoint has not yet been qualified"
+    >
+      REBOOT C/D ROUTER · LOCKED
+    </button>
+  </div>
+
+  <p
+    id="cdWanStatus"
+    class="note"
+    style="margin-top:10px"
+  >
+    Reading Trade reverse-forward ownership…
+  </p>
+</section>
+
+</div><!-- /C/D SHADOW SYSTEM -->
+
+
+</section>
+
+
+<section
+  class="panel"
+  id="a8-ce-natural-orientation-header"
+>
+  <div class="kicker">
+    NATURE · NATURAL OCCURRENCE
+  </div>
+
+  <h2>NATURAL OCCURRENCE</h2>
+
+  <p class="note">
+    Jupiter, Mintaka and Sol are natural occurrences. They are observed,
+    compared and recorded. They are not electronic clock actuators.
+  </p>
+</section>
+
+<section
+  class="panel"
+  id="a8-ce-jovian-authority-selector"
+>
+  <div class="kicker">
+    JOVIAN · NATURAL AUTHORITY
+  </div>
+
+  <h2>SELECT NATURAL RECURRENCE AUTHORITY</h2>
+
+  <p class="note">
+    CE selects one resonant inner moon as authority.
+    The other moons remain witnesses.
+    Callisto is witness-only.
+  </p>
+
+  <div class="grid">
+    <div class="stat">
+      <span class="k">SELECTED AUTHORITY</span>
+      <span
+        id="jovianAuthoritySelected"
+        class="v cyan"
+      >CHECKING…</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">NATURAL RECURRENCE</span>
+      <span
+        id="jovianAuthorityPeriod"
+        class="v"
+      >—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">DISCIPLINE STATE</span>
+      <span
+        id="jovianAuthorityTransition"
+        class="v"
+      >—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">SELECTED NATURAL RECURRENCE</span>
+      <span
+        id="jovianAuthorityCurrent"
+        class="v"
+      >9,344,598 RAW · EUROPA</span>
+    </div>
+  </div>
+
+  <div
+    style="
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:14px
+    "
+  >
+    <button
+      type="button"
+      class="filter"
+      data-a8-jovian-authority="IO"
+    >
+      IO · 4,650,745
+    </button>
+
+    <button
+      type="button"
+      class="filter"
+      data-a8-jovian-authority="EUROPA"
+    >
+      EUROPA · 9,344,598
+    </button>
+
+    <button
+      type="button"
+      class="filter"
+      data-a8-jovian-authority="GANYMEDE"
+    >
+      GANYMEDE · 18,866,420
+    </button>
+  </div>
+
+  <p
+    id="jovianAuthorityWitnesses"
+    class="note"
+    style="margin-top:12px"
+  >
+    WITNESSES · CHECKING…
+  </p>
+
+  <p
+    id="jovianAuthorityControlStatus"
+    class="note"
+    style="margin-top:8px"
+  >
+    Selector changes authority state only.
+    Carrier oscillator compensation remains separate from natural-ruler selection.
+  </p>
+</section>
+<section
+  class="panel"
+  id="a8-ce-natural-electronic-boundary"
+>
+  <div class="kicker">
+    NATURAL ABOVE · ELECTRONICS BELOW
+  </div>
+
+  <h2>NATURAL OCCURRENCE / ELECTRONIC BOUNDARY</h2>
+
+  <p class="note">
+    Nature supplies the occurrences. Electronics begin only after observation.
+    Mintaka is a stellar phase-angle and slip witness. It does not set time,
+    Meridian 0, DAY_PHASE17, Core20 or Core21.
+  </p>
+
+  <div class="grid" style="margin-top:12px">
+
+    <div class="stat">
+      <span class="k">JUPITER</span>
+      <span class="v cyan">NATURAL RECURRENCE</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">MINTAKA</span>
+      <span class="v cyan">NATURAL PHASE ANGLE / SLIP WITNESS</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">SOL</span>
+      <span class="v cyan">NATURAL ANNUAL / ORBITAL ORIENTATION</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">BOUNDARY</span>
+      <span class="v">OBSERVATION / EVIDENCE</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">A/B · C/D</span>
+      <span class="v warn-text">
+        ELECTRONIC CARRIERS · OSCILLATOR COMPENSATION
+      </span>
+    </div>
+
+    <div class="stat">
+      <span class="k">CORE20 · CORE21</span>
+      <span class="v warn-text">
+        FINAL ELECTRONIC TIME STATE · DAY_PHASE17
+      </span>
+    </div>
+
+  </div>
+
+  <p class="note" style="margin-top:14px">
+    Jupiter, Mintaka and Sol remain above the natural/electronic boundary.
+    A/B and C/D are downstream electronic carriers. Core20 and Core21 are
+    last: they produce the electronic A8 time state and DAY_PHASE17.
+    Any future clock-phase adjustment belongs in the Core time domain,
+    never in Mintaka.
+  </p>
+</section>
+
+
+
+<section
+  class="panel"
+  id="a8-ce-core-backup-status"
+>
+  <div class="kicker">
+    RECOVERY · CORE20 / CORE21 · READ ONLY
+  </div>
+
+  <h2>CORE BACKUP STATUS</h2>
+
+  <p class="note">
+    Independent hourly operating checkpoints.
+    Backup health is separate from clock health.
+    STALE means no fresh checkpoint across two hourly cycles.
+  </p>
+
+  <div class="statusline">
+    <span
+      id="core20BackupState"
+      class="pill"
+    >CORE20 · CHECKING…</span>
+
+    <span
+      id="core21BackupState"
+      class="pill"
+    >CORE21 · CHECKING…</span>
+  </div>
+
+  <div
+    class="grid"
+    style="margin-top:14px"
+  >
+    <div class="stat">
+      <span class="k">CORE20 · LATEST</span>
+      <span
+        id="core20BackupLatest"
+        class="v"
+      >—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">CORE21 · LATEST</span>
+      <span
+        id="core21BackupLatest"
+        class="v"
+      >—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">CORE20 · AGE</span>
+      <span
+        id="core20BackupAge"
+        class="v"
+      >—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">CORE21 · AGE</span>
+      <span
+        id="core21BackupAge"
+        class="v"
+      >—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">CORE20 · LAST RUN</span>
+      <span
+        id="core20BackupRun"
+        class="v"
+      >—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">CORE21 · LAST RUN</span>
+      <span
+        id="core21BackupRun"
+        class="v"
+      >—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">CORE20 · NEXT</span>
+      <span
+        id="core20BackupNext"
+        class="v"
+      >—</span>
+    </div>
+
+    <div class="stat">
+      <span class="k">CORE21 · NEXT</span>
+      <span
+        id="core21BackupNext"
+        class="v"
+      >—</span>
+    </div>
+  </div>
+
+  <p
+    id="coreBackupDetail"
+    class="note"
+    style="margin-top:12px"
+  >
+    Checking backup evidence…
+  </p>
 </section>
 
 <section class="panel">
-  <h2>CORE20 OPERATING STATE</h2>
+  <h2>A/B · CORE20 · OPERATING STATE</h2>
 
   <div class="grid">
     <div class="stat">
@@ -919,124 +2223,9 @@ pre{
   </p>
 </section>
 
-<section class="panel" id="physicalPulseBoxConsole">
-  <h2>PATH A · PHYSICAL SOURCE</h2>
 
-  <div class="statusline">
-    <span id="pulseBoxStatus" class="pill">CONNECTING</span>
-    <span class="pill">QUALIFIED EXTERNAL PHYSICAL SOURCE</span>
-  </div>
 
-  <div class="grid" style="margin-top:12px">
-    <div class="stat">
-      <span class="k">PATH A · PHYSICAL SOURCE EPOCH</span>
-      <span id="pulseBoxEpoch" class="v cyan">—</span>
-    </div>
 
-    <div class="stat">
-      <span class="k">PHYSICAL RAW COUNT</span>
-      <span id="pulseBoxRaw" class="v cyan">—</span>
-    </div>
-
-    <div class="stat">
-      <span class="k">REPORT SEQUENCE</span>
-      <span id="pulseBoxSequence" class="v">—</span>
-    </div>
-
-    <div class="stat">
-      <span class="k">PRESENTATION MOTION CHECK</span>
-      <span id="pulseBoxMotion" class="v">—</span>
-    </div>
-
-    <div class="stat">
-      <span class="k">REPORTER STATUS</span>
-      <span id="pulseBoxReporterStatus" class="v">—</span>
-    </div>
-
-    <div class="stat">
-      <span class="k">PATH A ROLE</span>
-      <span class="v">QUALIFIED PHYSICAL PACE SOURCE</span>
-    </div>
-  </div>
-
-  <p class="note">
-    Epoch-8 physical chain: Arduino A Timer2/D11 → Arduino B Timer1/D5
-    → Pi reporter. Core20 maps this physical RAW through the qualified
-    Path-A physical-to-Core relationship. Browser polling cadence and
-    network arrival time are presentation only and do not pace Core20.
-  </p>
-
-  <details>
-    <summary>PHYSICAL PULSE BOX · RAW JSON</summary>
-    <div class="inside">
-      <pre id="pulseBoxJson">—</pre>
-    </div>
-  </details>
-</section>
-
-<section class="panel" id="shipRecoveryPanel">
-  <h2>SHIP PRESENTATION RECOVERY</h2>
-
-  <p class="note">
-    One-shot recovery of the public Terra Ship Slip presentation only.
-    This control does not touch Core20, Caddy, lifetime state or Git history.
-  </p>
-
-  <div class="grid">
-    <div>
-      <div class="kicker">RECOVERY STATUS</div>
-      <div id="shipRecoveryState">CHECKING…</div>
-    </div>
-
-    <div>
-      <div class="kicker">PINNED RECOVERY</div>
-      <div id="shipRecoveryTag">—</div>
-    </div>
-
-    <div>
-      <div class="kicker">PINNED COMMIT</div>
-      <div id="shipRecoveryCommit">—</div>
-    </div>
-
-    <div>
-      <div class="kicker">LIVE SHA-256</div>
-      <div id="shipRecoveryLiveHash"
-           style="overflow-wrap:anywhere">—</div>
-    </div>
-
-    <div>
-      <div class="kicker">PINNED SHA-256</div>
-      <div id="shipRecoveryPinnedHash"
-           style="overflow-wrap:anywhere">—</div>
-    </div>
-
-    <div>
-      <div class="kicker">ONE-SHOT PERMIT</div>
-      <div id="shipRecoveryPermit">NOT ARMED</div>
-    </div>
-  </div>
-
-  <div class="controls" style="margin-top:16px">
-    <button id="shipRecoveryRefresh">
-      REFRESH RECOVERY STATUS
-    </button>
-
-    <button id="shipRecoveryArm" class="warn" disabled>
-      ARM ONE-SHOT SHIP RESTORE
-    </button>
-
-    <button id="shipRecoveryApply" class="danger" disabled>
-      APPLY ARMED SHIP RESTORE
-    </button>
-  </div>
-
-  <details style="margin-top:16px">
-    <summary>SHIP RECOVERY HISTORY</summary>
-    <div class="inside">
-      <pre id="shipRecoveryHistory">—</pre>
-    </div>
-  </details>
-</section>
 
 
 
@@ -1174,7 +2363,167 @@ pre{
       </a>
     </div>
 
-    <details
+    
+
+  </div>
+
+</section>
+
+
+<section
+  class="panel"
+  id="a8-ce-behind-glass-header"
+>
+  <div class="kicker">
+    BEHIND GLASS · RECOVERY / DIAGNOSTIC
+  </div>
+
+  <h2>RECOVERY AND FORENSIC TOOLS</h2>
+
+  <p class="note">
+    These cards are retained for inspection and recovery. They are not
+    part of normal A/B or C/D carrier operation.
+  </p>
+</section>
+
+<section
+  class="panel"
+  id="a8-ce-current-diagnostic-snapshots"
+>
+  <h2>CURRENT RAW DIAGNOSTIC SNAPSHOTS · READ ONLY</h2>
+
+  <p class="note">
+    Read-only snapshots of current Core20 / Calendar state and the
+    preserved Year-Angle comparison feed.
+  </p>
+
+  <details>
+    <summary>RUNTIME / CLOCK</summary>
+    <div class="inside">
+      <pre id="clockJson">—</pre>
+    </div>
+  </details>
+
+  <details>
+    <summary>CALENDAR</summary>
+    <div class="inside">
+      <pre id="calendarJson">—</pre>
+    </div>
+  </details>
+
+  <details>
+    <summary>PRESERVED YEAR ANGLE</summary>
+    <div class="inside">
+      <pre id="yearJson">—</pre>
+    </div>
+  </details>
+
+<details style="margin-top:12px">
+    <summary>CARRIER COMPENSATION · RAW STATUS</summary>
+    <div class="inside">
+      <pre id="carrierCompJson">—</pre>
+    </div>
+  </details>
+</section>
+<section class="panel" id="shipRecoveryPanel">
+  <h2>SHIP PRESENTATION RECOVERY</h2>
+
+  <p class="note">
+    One-shot recovery of the public Terra Ship Slip presentation only.
+    This control does not touch Core20, Caddy, lifetime state or Git history.
+  </p>
+
+  <div class="grid">
+    <div>
+      <div class="kicker">RECOVERY STATUS</div>
+      <div id="shipRecoveryState">CHECKING…</div>
+    </div>
+
+    <div>
+      <div class="kicker">PINNED RECOVERY</div>
+      <div id="shipRecoveryTag">—</div>
+    </div>
+
+    <div>
+      <div class="kicker">PINNED COMMIT</div>
+      <div id="shipRecoveryCommit">—</div>
+    </div>
+
+    <div>
+      <div class="kicker">LIVE SHA-256</div>
+      <div id="shipRecoveryLiveHash"
+           style="overflow-wrap:anywhere">—</div>
+    </div>
+
+    <div>
+      <div class="kicker">PINNED SHA-256</div>
+      <div id="shipRecoveryPinnedHash"
+           style="overflow-wrap:anywhere">—</div>
+    </div>
+
+    <div>
+      <div class="kicker">ONE-SHOT PERMIT</div>
+      <div id="shipRecoveryPermit">NOT ARMED</div>
+    </div>
+  </div>
+
+  <div class="controls" style="margin-top:16px">
+    <button id="shipRecoveryRefresh">
+      REFRESH RECOVERY STATUS
+    </button>
+
+    <button id="shipRecoveryArm" class="warn" disabled>
+      ARM ONE-SHOT SHIP RESTORE
+    </button>
+
+    <button id="shipRecoveryApply" class="danger" disabled>
+      APPLY ARMED SHIP RESTORE
+    </button>
+  </div>
+
+  <details style="margin-top:16px">
+    <summary>SHIP RECOVERY HISTORY</summary>
+    <div class="inside">
+      <pre id="shipRecoveryHistory">—</pre>
+    </div>
+  </details>
+</section>
+
+
+<details class="panel" id="a8-ce-critical-controls">
+  <summary
+    style="
+      cursor:pointer;
+      font-weight:900;
+      letter-spacing:.06em;
+    "
+  >
+    CRITICAL CONTROLS · PATH B / PLANT ACTIONS · CLOSED BY DEFAULT
+  </summary>
+
+  <div class="inside">
+
+    <p class="note">
+      Deliberate operator access only.
+      Opening this cabinet does not execute any action.
+      CLEAN STOP remains available while Core20 is online. CE MASTER START
+      is intentionally locked while Core20 is offline until the physical
+      Path-A fresh-start backend is separately qualified. Diagnostic
+      hold/resume and calendar-anchor controls remain here as deliberate
+      plant-changing actions.
+    </p>
+
+
+<!-- A8-CE-JOVIAN-AUTHORITY-BEGIN -->
+
+<!-- A8-CE-JOVIAN-AUTHORITY-END -->
+
+
+
+
+
+
+<details
       id="a8-ce-original-fallback"
       style="
         border:1px solid rgba(224,189,114,.45);
@@ -1280,305 +2629,6 @@ pre{
 
       </div>
     </details>
-
-  </div>
-
-</section>
-
-<section
-  class="panel"
-  id="a8-ce-current-diagnostic-snapshots"
->
-  <h2>CURRENT RAW DIAGNOSTIC SNAPSHOTS</h2>
-
-  <p class="note">
-    Read-only snapshots of current Core20 / Calendar state and the
-    preserved Year-Angle comparison feed.
-  </p>
-
-  <details>
-    <summary>RUNTIME / CLOCK</summary>
-    <div class="inside">
-      <pre id="clockJson">—</pre>
-    </div>
-  </details>
-
-  <details>
-    <summary>CALENDAR</summary>
-    <div class="inside">
-      <pre id="calendarJson">—</pre>
-    </div>
-  </details>
-
-  <details>
-    <summary>PRESERVED YEAR ANGLE</summary>
-    <div class="inside">
-      <pre id="yearJson">—</pre>
-    </div>
-  </details>
-</section>
-
-
-<details class="panel" id="a8-ce-critical-controls">
-  <summary
-    style="
-      cursor:pointer;
-      font-weight:900;
-      letter-spacing:.06em;
-    "
-  >
-    CRITICAL CONTROLS · CLOSED BY DEFAULT
-  </summary>
-
-  <div class="inside">
-
-    <p class="note">
-      Deliberate operator access only.
-      Opening this cabinet does not execute any action.
-      CLEAN STOP remains available while Core20 is online. CE MASTER START
-      is intentionally locked while Core20 is offline until the physical
-      Path-A fresh-start backend is separately qualified. Diagnostic
-      hold/resume and calendar-anchor controls remain here as deliberate
-      plant-changing actions.
-    </p>
-
-
-<!-- A8-CE-JOVIAN-AUTHORITY-BEGIN -->
-<section
-  class="panel"
-  id="a8-ce-jovian-authority-selector"
->
-  <div class="kicker">
-    JOVIAN AUTHORITY
-  </div>
-
-  <h2>Natural recurrence authority selector</h2>
-
-  <p class="note">
-    CE selects one resonant inner moon as authority.
-    The other moons remain witnesses.
-    Callisto is witness-only.
-  </p>
-
-  <div class="grid">
-    <div class="stat">
-      <span class="k">SELECTED AUTHORITY</span>
-      <span
-        id="jovianAuthoritySelected"
-        class="v cyan"
-      >CHECKING…</span>
-    </div>
-
-    <div class="stat">
-      <span class="k">NATURAL RECURRENCE</span>
-      <span
-        id="jovianAuthorityPeriod"
-        class="v"
-      >—</span>
-    </div>
-
-    <div class="stat">
-      <span class="k">DISCIPLINE STATE</span>
-      <span
-        id="jovianAuthorityTransition"
-        class="v"
-      >—</span>
-    </div>
-
-    <div class="stat">
-      <span class="k">SELECTED NATURAL RECURRENCE</span>
-      <span
-        id="jovianAuthorityCurrent"
-        class="v"
-      >9,344,598 RAW · EUROPA</span>
-    </div>
-  </div>
-
-  <div
-    style="
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      margin-top:14px
-    "
-  >
-    <button
-      type="button"
-      class="filter"
-      data-a8-jovian-authority="IO"
-    >
-      IO · 4,650,745
-    </button>
-
-    <button
-      type="button"
-      class="filter"
-      data-a8-jovian-authority="EUROPA"
-    >
-      EUROPA · 9,344,598
-    </button>
-
-    <button
-      type="button"
-      class="filter"
-      data-a8-jovian-authority="GANYMEDE"
-    >
-      GANYMEDE · 18,866,420
-    </button>
-  </div>
-
-  <p
-    id="jovianAuthorityWitnesses"
-    class="note"
-    style="margin-top:12px"
-  >
-    WITNESSES · CHECKING…
-  </p>
-
-  <p
-    id="jovianAuthorityControlStatus"
-    class="note"
-    style="margin-top:8px"
-  >
-    Selector changes authority state only.
-    Carrier oscillator compensation remains separate from natural-ruler selection.
-  </p>
-</section>
-<!-- A8-CE-JOVIAN-AUTHORITY-END -->
-
-<section class="panel" id="a8-ce-core20-master-power">
-
-  <style>
-    #a8-ce-core20-master-power .power-grid{
-      display:grid;
-      grid-template-columns:minmax(0,1fr) auto;
-      gap:16px;
-      align-items:center;
-    }
-
-    #a8-ce-core20-master-power .power-state{
-      font-weight:900;
-      letter-spacing:.08em;
-    }
-
-    #a8-ce-core20-master-power .power-detail{
-      margin-top:6px;
-      opacity:.8;
-      font-size:.9rem;
-    }
-
-    #a8-ce-core20-master-power button{
-      min-width:270px;
-    }
-
-    @media(max-width:700px){
-      #a8-ce-core20-master-power .power-grid{
-        grid-template-columns:1fr;
-      }
-
-      #a8-ce-core20-master-power button{
-        width:100%;
-      }
-    }
-  </style>
-
-  <div class="kicker">
-    CORE20 · MACHINE POWER
-  </div>
-
-  <h2>MASTER POWER · CLEAN STOP / START LOCKED</h2>
-
-  <p class="note">
-    STOP performs the normal clean Core20 shutdown and waits until the
-    service is fully offline. The machine backend now understands the current
-    Core20 + Epoch-8 external physical feeder sequence. Browser START remains
-    deliberately locked until controlled fresh-start qualification is completed.
-  </p>
-
-  <div class="power-grid">
-
-    <div>
-      <div
-        id="core20MachineState"
-        class="power-state"
-      >CHECKING…</div>
-
-      <div
-        id="core20MachineDetail"
-        class="power-detail"
-      >—</div>
-    </div>
-
-    <button
-      id="core20MachinePower"
-      type="button"
-      disabled
-    >
-      CHECKING CORE20…
-    </button>
-
-  </div>
-
-</section>
-
-<section class="panel" id="a8-ce-cd-transport-control">
-  <div class="kicker">
-    C/D · STANDBY TRANSPORT
-  </div>
-
-  <h2>SAFE TRANSPORT SHUTDOWN</h2>
-
-  <p class="note">
-    This control does not stop Core20 and does not switch Shadow Core.
-    A/B remains MAIN. Shadow Core remains on the direct A/B feed.
-    C/D alone is sealed, drained and powered off for physical transport.
-  </p>
-
-  <div class="grid">
-    <div>
-      <span class="label">READINESS</span>
-      <b id="cdTransportReady">CHECKING…</b>
-    </div>
-
-    <div>
-      <span class="label">MAIN CARRIER</span>
-      <b id="cdTransportMain">A/B</b>
-    </div>
-
-    <div>
-      <span class="label">SHADOW CORE</span>
-      <b id="cdTransportShadow">CHECKING…</b>
-    </div>
-
-    <div>
-      <span class="label">C/D ROLE</span>
-      <b id="cdTransportRole">STANDBY</b>
-    </div>
-  </div>
-
-  <pre
-    id="cdTransportDetail"
-    style="margin-top:14px;white-space:pre-wrap"
-  >—</pre>
-
-  <button
-    id="cdTransportShutdownButton"
-    class="danger"
-    type="button"
-    disabled
-    style="margin-top:14px"
-  >
-    CHECKING C/D TRANSPORT READINESS…
-  </button>
-
-  <p
-    id="cdTransportControlStatus"
-    class="note"
-    style="margin-top:10px"
-  >
-    No action has been requested.
-  </p>
-</section>
 
 <section class="panel danger-zone">
   <h2>DANGER ZONE · PLANT-CHANGING ACTIONS</h2>
@@ -3023,6 +4073,322 @@ pre{
 </script>
 
 
+<script id="a8-ce-clock-adjust-script">
+(() => {
+  'use strict';
+
+  const base = '/api/ce/core20-service/clock-adjust';
+  const $ = id => document.getElementById(id);
+
+  let busy = false;
+  let latest = null;
+
+  async function request(path, options = {}) {
+    const response = await fetch(
+      base + path,
+      {
+        cache: 'no-store',
+        credentials: 'same-origin',
+        ...options,
+        headers: {
+          'X-A8-CE-Control': '1',
+          ...(options.headers || {})
+        }
+      }
+    );
+
+    const payload = await response.json();
+    if (!response.ok || payload.ok !== true) {
+      throw new Error(payload.error || `HTTP ${response.status}`);
+    }
+    return payload;
+  }
+
+  function anchorText(a) {
+    if (!a) return '—';
+    return String(a.dayCount ?? '—') + ' / ' + String(a.dayPhase17 ?? '—');
+  }
+
+  function paint(state) {
+    latest = state || {};
+    const live = latest.live || {};
+    const meridian = latest.meridianHistory || {};
+    const rate = latest.rate || {};
+
+    $('clockAdjustLive').textContent = live.clockOctal || '—';
+
+    const adjustment = Number(latest.adjustmentStates ?? 0);
+    $('clockAdjustCurrent').textContent =
+      (adjustment > 0 ? '+' : '') + String(adjustment) + ' A8 s';
+
+    $('clockAdjustReference').textContent = anchorText(latest.referenceAnchor);
+    $('clockAdjustEffective').textContent = anchorText(latest.effectiveAnchor);
+
+    $('clockAdjustMeridian').textContent =
+      'FIXED · '
+      + String(meridian.baseDayPhase17 ?? '—')
+      + ' + '
+      + String(meridian.correctionStates ?? '—')
+      + ' = '
+      + String(meridian.correctedDayPhase17 ?? '—');
+
+    $('clockAdjustRate').textContent =
+      String(rate.numerator ?? '—') + '/' + String(rate.denominator ?? '—');
+
+    const ready = latest.status === 'READY';
+    $('clockAdjustAdvance').disabled = busy || !ready;
+    $('clockAdjustRetard').disabled = busy || !ready;
+
+    $('clockAdjustStatus').textContent = ready
+      ? 'READY · MERIDIAN 0 FIXED · RATE UNCHANGED · CLOCK POSITION CONTROL'
+      : 'NOT READY · CLOCK ADJUST LOCKED';
+
+    $('clockAdjustJson').textContent = JSON.stringify(latest, null, 2);
+  }
+
+  async function refresh() {
+    if (busy) return;
+    try {
+      const payload = await request('/status');
+      paint(payload.clockAdjust);
+    } catch (err) {
+      $('clockAdjustStatus').textContent = 'CLOCK ADJUST UNAVAILABLE · ' + err.message;
+      $('clockAdjustAdvance').disabled = true;
+      $('clockAdjustRetard').disabled = true;
+    }
+  }
+
+  function amount() {
+    const raw = $('clockAdjustAmount').value.trim();
+    if (!/^[0-9]+$/.test(raw) || BigInt(raw) <= 0n) {
+      throw new Error('ENTER A POSITIVE A8 SECOND COUNT');
+    }
+    return raw;
+  }
+
+  async function act(direction) {
+    if (busy) return;
+
+    let n;
+    try {
+      n = amount();
+    } catch (err) {
+      $('clockAdjustStatus').textContent = err.message;
+      return;
+    }
+
+    const verb = direction === 'advance' ? 'ADVANCE' : 'RETARD';
+
+    if (!window.confirm(
+      `${verb} CLOCK ${n} A8 SECONDS?\n\n`
+      + 'Meridian 0 remains fixed.\n'
+      + 'RATE q remains unchanged.\n'
+      + 'Physical RAW remains unchanged.\n'
+      + 'Core20 will reload the adjusted clock anchor.'
+    )) return;
+
+    busy = true;
+    $('clockAdjustAdvance').disabled = true;
+    $('clockAdjustRetard').disabled = true;
+    $('clockAdjustStatus').textContent = `${verb} CLOCK ${n} · APPLYING…`;
+
+    try {
+      const payload = await request(`/${direction}/${n}`, {method: 'POST'});
+      $('clockAdjustStatus').textContent = `${verb} CLOCK ${n} · PASS`;
+      $('clockAdjustJson').textContent = JSON.stringify(payload.clockAdjust, null, 2);
+      $('clockAdjustAmount').value = '';
+    } catch (err) {
+      $('clockAdjustStatus').textContent = `${verb} CLOCK FAILED · ` + err.message;
+    } finally {
+      busy = false;
+      await refresh();
+    }
+  }
+
+  $('clockAdjustAdvance')?.addEventListener('click', () => act('advance'));
+  $('clockAdjustRetard')?.addEventListener('click', () => act('retard'));
+  $('clockAdjustAmount')?.addEventListener('input', () => latest && paint(latest));
+
+  refresh();
+  setInterval(refresh, 3000);
+})();
+</script>
+
+<script id="a8-ce-core21-clock-adjust-script">
+(() => {
+  'use strict';
+
+  const base='/api/ce/core20-service/core21-clock-adjust';
+  const $=id=>document.getElementById(id);
+  let busy=false;
+  let latest=null;
+
+  async function request(path, options={}) {
+    const response=await fetch(
+      base+path,
+      {
+        cache:'no-store',
+        credentials:'same-origin',
+        ...options,
+        headers:{
+          'X-A8-CE-Control':'1',
+          ...(options.headers||{})
+        }
+      }
+    );
+
+    const payload=await response.json();
+
+    if (!response.ok || payload.ok !== true) {
+      throw new Error(payload.error || `HTTP ${response.status}`);
+    }
+
+    return payload;
+  }
+
+  function anchorText(a) {
+    if (!a) return '—';
+    return String(a.dayCount ?? '—')+' / '+String(a.dayPhase17 ?? '—');
+  }
+
+  function paint(state) {
+    latest=state||{};
+
+    const live=latest.live||{};
+    const meridian=latest.meridianHistory||{};
+    const natural=latest.naturalAuthority||{};
+    const carrier=latest.carrier||{};
+
+    $('core21ClockAdjustLive').textContent=live.clockOctal||'—';
+
+    const adjustment=Number(latest.adjustmentStates ?? 0);
+    $('core21ClockAdjustCurrent').textContent=
+      (adjustment>0?'+':'')+String(adjustment)+' A8 s';
+
+    $('core21ClockAdjustReference').textContent=
+      anchorText(latest.referenceAnchor);
+
+    $('core21ClockAdjustEffective').textContent=
+      anchorText(latest.effectiveAnchor);
+
+    $('core21ClockAdjustMeridian').textContent=
+      'FIXED · '
+      +String(meridian.previousDayPhase17 ?? '—')
+      +' + '
+      +String(meridian.correctionStates ?? '—')
+      +' = '
+      +String(meridian.correctedDayPhase17AtEstablishment ?? '—');
+
+    $('core21ClockAdjustRate').textContent=
+      String(natural.body ?? '—')
+      +' · '
+      +String(natural.recurrenceRaw ?? '—')
+      +' · '
+      +String(natural.normalization ?? '—');
+
+    $('core21ClockAdjustRun').textContent=
+      String(carrier.runId ?? '—');
+
+    const ready=latest.status==='READY';
+
+    $('core21ClockAdjustAdvance').disabled=busy||!ready;
+    $('core21ClockAdjustRetard').disabled=busy||!ready;
+
+    $('core21ClockAdjustStatus').textContent=
+      ready
+      ? 'READY · MERIDIAN 0 FIXED · GANYMEDE RATE UNCHANGED · C/D LINEAGE UNCHANGED · CLOCK POSITION CONTROL'
+      : 'NOT READY · C/D CLOCK ADJUST LOCKED';
+
+    $('core21ClockAdjustJson').textContent=
+      JSON.stringify(latest,null,2);
+  }
+
+  async function refresh() {
+    if (busy) return;
+    try {
+      const payload=await request('/status');
+      paint(payload.clockAdjust);
+    } catch (err) {
+      $('core21ClockAdjustStatus').textContent=
+        'C/D CLOCK ADJUST UNAVAILABLE · '+err.message;
+      $('core21ClockAdjustAdvance').disabled=true;
+      $('core21ClockAdjustRetard').disabled=true;
+    }
+  }
+
+  function amount() {
+    const raw=$('core21ClockAdjustAmount').value.trim();
+    if (!/^[0-9]+$/.test(raw) || BigInt(raw)<=0n) {
+      throw new Error('ENTER A POSITIVE A8 SECOND COUNT');
+    }
+    return raw;
+  }
+
+  async function act(direction) {
+    if (busy) return;
+
+    let n;
+    try { n=amount(); }
+    catch (err) {
+      $('core21ClockAdjustStatus').textContent=err.message;
+      return;
+    }
+
+    const verb=direction==='advance'?'ADVANCE':'RETARD';
+
+    if (!window.confirm(
+      `${verb} C/D CORE21 CLOCK ${n} A8 SECONDS?\n\n`
+      +'Meridian 0 remains fixed.\n'
+      +'Ganymede rate remains unchanged.\n'
+      +'C/D physical RAW and run lineage remain unchanged.\n'
+      +'Core21 will reload the adjusted civil clock anchor.'
+    )) return;
+
+    busy=true;
+    $('core21ClockAdjustAdvance').disabled=true;
+    $('core21ClockAdjustRetard').disabled=true;
+    $('core21ClockAdjustStatus').textContent=
+      `${verb} C/D CLOCK ${n} · APPLYING…`;
+
+    try {
+      const payload=await request(
+        `/${direction}/${n}`,
+        {method:'POST'}
+      );
+      $('core21ClockAdjustStatus').textContent=
+        `${verb} C/D CLOCK ${n} · PASS`;
+      $('core21ClockAdjustJson').textContent=
+        JSON.stringify(payload.clockAdjust,null,2);
+      $('core21ClockAdjustAmount').value='';
+    } catch (err) {
+      $('core21ClockAdjustStatus').textContent=
+        `${verb} C/D CLOCK FAILED · `+err.message;
+    } finally {
+      busy=false;
+      await refresh();
+    }
+  }
+
+  $('core21ClockAdjustAdvance')?.addEventListener(
+    'click',
+    ()=>act('advance')
+  );
+
+  $('core21ClockAdjustRetard')?.addEventListener(
+    'click',
+    ()=>act('retard')
+  );
+
+  $('core21ClockAdjustAmount')?.addEventListener(
+    'input',
+    ()=>{ if (latest) paint(latest); }
+  );
+
+  refresh();
+  setInterval(refresh,3000);
+})();
+</script>
+
 <script id="a8-ce-core20-master-power-script">
 (() => {
   'use strict';
@@ -3507,6 +4873,15 @@ const base = '/api/ce/core20-service';
       const ref =
         x.reference || {};
 
+      const qualification =
+        x.referenceQualification || {};
+
+      const historical =
+        qualification.historicalReference || {};
+
+      const requalRequired =
+        qualification.requalificationRequired === true;
+
       const live =
         d.liveDisciplinedRaw || {};
 
@@ -3522,10 +4897,16 @@ const base = '/api/ce/core20-service';
         exact(d.ratio);
 
       $('carrierAbReference').textContent =
-        (
-          `C/D SEGMENT ${ref.segmentNumber ?? '—'}`
-          + ` · ${exact(ref.ratio)}`
-        );
+        requalRequired
+          ? (
+              `REQUALIFICATION REQUIRED`
+              + ` · CURRENT C/D SEGMENT ${ref.segmentNumber ?? '—'}`
+              + ` · HISTORICAL SEGMENT ${historical.segmentNumber ?? '—'}`
+            )
+          : (
+              `CURRENT C/D SEGMENT ${ref.segmentNumber ?? '—'}`
+              + ` · ${exact(ref.ratio)}`
+            );
 
       const reviewed =
         c.reviewedProposal;
@@ -3534,21 +4915,29 @@ const base = '/api/ce/core20-service';
         c.stagedProposal;
 
       $('carrierAbReviewState').textContent =
-        reviewed
-          ? reviewed.status
-          : staged
-            ? staged.status
-            : 'NOT STAGED';
+        requalRequired
+          ? 'REQUALIFICATION REQUIRED'
+          : reviewed
+            ? reviewed.status
+            : staged
+              ? staged.status
+              : 'NOT STAGED';
 
       $('carrierAbSealState').textContent =
         c.sealStatus || 'LOCKED';
 
       $('carrierAbControlStatus').textContent =
-        (
-          `EPOCH ${x.physicalSourceEpoch ?? '—'}`
-          + ` · PHYSICAL RAW ${p.raw ?? '—'}`
-          + ` · SEAL=${c.sealAvailable === true ? 'AVAILABLE' : 'LOCKED'}`
-        );
+        requalRequired
+          ? (
+              'A/B REQUALIFICATION REQUIRED'
+              + ' · CURRENT C/D REFERENCE CHANGED'
+              + ' · NO STAGE / REVIEW / SEAL ACTUATION'
+            )
+          : (
+              `EPOCH ${x.physicalSourceEpoch ?? '—'}`
+              + ` · PHYSICAL RAW ${p.raw ?? '—'}`
+              + ` · SEAL=${c.sealAvailable === true ? 'AVAILABLE' : 'LOCKED'}`
+            );
 
       $('carrierAbReviewJson').textContent =
         JSON.stringify(
@@ -3572,8 +4961,30 @@ const base = '/api/ce/core20-service';
           2
         );
 
+      $('carrierAbStageButton').disabled =
+        c.stageAvailable !== true;
+
+      $('carrierAbReviewButton').disabled =
+        c.reviewAvailable !== true;
+
       $('carrierAbSealButton').disabled =
         true;
+
+      $('carrierAbConsultArm').disabled =
+        requalRequired;
+
+      $('carrierAbConsultBank').dataset.requalification =
+        requalRequired
+          ? 'true'
+          : 'false';
+
+      if (requalRequired) {
+        $('carrierAbConsultState').textContent =
+          'REQUALIFICATION REQUIRED · CURRENT C/D CHANGED';
+
+        $('carrierAbConsultState').className =
+          'bad';
+      }
 
     } catch (err) {
       $('carrierAbControlStatus').textContent =
@@ -3584,6 +4995,15 @@ const base = '/api/ce/core20-service';
 
       $('carrierAbSealState').textContent =
         'LOCKED';
+
+      $('carrierAbStageButton').disabled =
+        true;
+
+      $('carrierAbReviewButton').disabled =
+        true;
+
+      $('carrierAbConsultArm').disabled =
+        true;
     }
   }
 
@@ -4343,6 +5763,1212 @@ const base = '/api/ce/core20-service';
   setInterval(
     refresh,
     3000
+  );
+})();
+</script>
+
+
+
+<script id="a8-ce-consult-first-interlock-v1">
+(() => {
+  'use strict';
+
+  const $ = id => document.getElementById(id);
+
+  const armed = {
+    ab: false,
+    cd: false,
+  };
+
+  const map = {
+    ab: {
+      bank: 'carrierAbConsultBank',
+      state: 'carrierAbConsultState',
+      note: 'carrierAbConsultNote',
+      arm: 'carrierAbConsultArm',
+      num: 'carrierAbNumerator',
+      den: 'carrierAbDenominator',
+      status: 'carrierAbControlStatus',
+      label: 'A/B · EUROPA',
+    },
+
+    cd: {
+      bank: 'carrierCdConsultBank',
+      state: 'carrierCdConsultState',
+      note: 'carrierCdConsultNote',
+      arm: 'carrierCdConsultArm',
+      num: 'carrierCdNumerator',
+      den: 'carrierCdDenominator',
+      status: 'carrierCdControlStatus',
+      label: 'C/D · GANYMEDE',
+    },
+  };
+
+  const guardedButtons = {
+    carrierAbStageButton: 'ab',
+    carrierAbReviewButton: 'ab',
+    carrierAbSealButton: 'ab',
+
+    carrierCdStageButton: 'cd',
+    carrierCdReviewButton: 'cd',
+    carrierCdSealButton: 'cd',
+  };
+
+  function exactInteger(value) {
+    return /^[1-9][0-9]*$/.test(
+      String(value || '').trim()
+    );
+  }
+
+  function setStatus(bank, message, good) {
+    const cfg = map[bank];
+
+    if ($(cfg.bank)) {
+      $(cfg.bank).dataset.armed =
+        armed[bank] ? 'true' : 'false';
+    }
+
+    if ($(cfg.state)) {
+      $(cfg.state).textContent = message;
+      $(cfg.state).className =
+        good ? 'good' : 'bad';
+    }
+  }
+
+  function disarm(bank, reason) {
+    armed[bank] = false;
+
+    setStatus(
+      bank,
+      reason || 'CONSULT REQUIRED',
+      false
+    );
+  }
+
+  function arm(bank) {
+    const cfg = map[bank];
+
+    if (
+      bank === 'ab'
+      &&
+      $(cfg.bank)?.dataset.requalification === 'true'
+    ) {
+      disarm(
+        bank,
+        'REQUALIFICATION REQUIRED'
+      );
+
+      alert(
+        'A/B · EUROPA\n\n'
+        + 'Current C/D no longer matches the historical '
+        + 'A/B qualification reference. '
+        + 'A fresh A/B qualification must be established first.'
+      );
+
+      return;
+    }
+
+    const note =
+      ($(cfg.note)?.value || '').trim();
+
+    const num =
+      ($(cfg.num)?.value || '').trim();
+
+    const den =
+      ($(cfg.den)?.value || '').trim();
+
+    if (note.length < 8) {
+      disarm(
+        bank,
+        'CONSULT NOTE REQUIRED'
+      );
+
+      alert(
+        `${cfg.label}\n\n` +
+        'Enter the consultation / decision basis first.'
+      );
+
+      return;
+    }
+
+    if (
+      !exactInteger(num)
+      ||
+      !exactInteger(den)
+    ) {
+      disarm(
+        bank,
+        'EXACT RATIO REQUIRED'
+      );
+
+      alert(
+        `${cfg.label}\n\n` +
+        'Enter an exact positive numerator and denominator ' +
+        'before arming.'
+      );
+
+      return;
+    }
+
+    const ok = confirm(
+      `${cfg.label}\n\n` +
+      'ARM EXACT PROPOSAL?\n\n' +
+      `${num}\n` +
+      '/\n' +
+      `${den}\n\n` +
+      'CONSULT NOTE RECORDED\n' +
+      'ARMING DOES NOT CHANGE THE CARRIER'
+    );
+
+    if (!ok) {
+      disarm(
+        bank,
+        'CONSULT REQUIRED'
+      );
+
+      return;
+    }
+
+    armed[bank] = true;
+
+    setStatus(
+      bank,
+      'CONSULT COMPLETE · EXACT PROPOSAL ARMED',
+      true
+    );
+
+    if ($(cfg.status)) {
+      $(cfg.status).textContent =
+        'CONSULT COMPLETE · exact proposal armed. ' +
+        'Proceed to STAGE, then REVIEW. ' +
+        'SEAL only if backend readiness permits.';
+    }
+  }
+
+  for (const bank of ['ab', 'cd']) {
+    const cfg = map[bank];
+
+    $(cfg.arm)?.addEventListener(
+      'click',
+      () => arm(bank)
+    );
+
+    for (const id of [
+      cfg.num,
+      cfg.den,
+      cfg.note,
+    ]) {
+      $(id)?.addEventListener(
+        'input',
+        () => {
+          if (armed[bank]) {
+            disarm(
+              bank,
+              'PROPOSAL CHANGED · RE-CONSULT REQUIRED'
+            );
+          }
+        }
+      );
+    }
+
+    disarm(
+      bank,
+      'CONSULT REQUIRED'
+    );
+  }
+
+  /*
+   * Capture phase intentionally runs before the page's existing
+   * Stage / Review / Seal button handlers.
+   */
+  document.addEventListener(
+    'click',
+    event => {
+      const button =
+        event.target.closest('button');
+
+      if (!button) {
+        return;
+      }
+
+      const bank =
+        guardedButtons[button.id];
+
+      if (!bank) {
+        return;
+      }
+
+      const cfg = map[bank];
+
+      if (!armed[bank]) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+
+        setStatus(
+          bank,
+          'BLOCKED · CONSULT FIRST',
+          false
+        );
+
+        if ($(cfg.status)) {
+          $(cfg.status).textContent =
+            'BLOCKED · no carrier operation sent. ' +
+            'Consult, enter the exact proposal, and arm it first.';
+        }
+
+        return;
+      }
+
+      /*
+       * A seal attempt consumes the local consultation authorization
+       * regardless of remote success. Another attempt requires a fresh
+       * deliberate consultation/arm.
+       */
+      if (
+        button.id === 'carrierAbSealButton'
+        ||
+        button.id === 'carrierCdSealButton'
+      ) {
+        window.setTimeout(
+          () => disarm(
+            bank,
+            'SEAL ATTEMPTED · RE-CONSULT BEFORE ANOTHER CHANGE'
+          ),
+          0
+        );
+      }
+    },
+    true
+  );
+})();
+</script>
+
+
+<script id="a8-ce-wan-transport-script">
+(() => {
+  'use strict';
+
+  const $ = id =>
+    document.getElementById(id);
+
+  let busy = {
+    AB: false,
+    CD: false
+  };
+
+  let current = null;
+
+  const endpoint =
+    '/api/ce/core20-service/wan-transport';
+
+  async function request(
+    suffix,
+    options = {}
+  ) {
+    const r = await fetch(
+      endpoint + suffix,
+      {
+        cache: 'no-store',
+        headers: {
+          'X-A8-CE-Control': '1',
+          'Content-Type': 'application/json',
+          ...(options.headers || {})
+        },
+        ...options
+      }
+    );
+
+    const data = await r.json();
+
+    if (
+      !r.ok
+      ||
+      data.ok !== true
+    ) {
+      throw new Error(
+        data.error
+        ||
+        `HTTP ${r.status}`
+      );
+    }
+
+    return data;
+  }
+
+  function portState(
+    bank,
+    port
+  ) {
+    const x =
+      bank?.ports?.[String(port)];
+
+    if (!x) {
+      return '—';
+    }
+
+    if (
+      x.state === 'LISTENING'
+      &&
+      x.pid
+    ) {
+      return (
+        'LISTENING · PID '
+        + x.pid
+      );
+    }
+
+    return x.state || '—';
+  }
+
+  function paintBank(
+    name,
+    bank
+  ) {
+    const isAB =
+      name === 'AB';
+
+    const prefix =
+      isAB
+        ? 'ab'
+        : 'cd';
+
+    const displayName =
+      isAB
+        ? 'A/B'
+        : 'C/D';
+
+    if (isAB) {
+      $('abWanRouter').textContent =
+        bank?.router?.identity
+        || 'ZXHN F670L1FXS';
+
+      $('abWanManagement').textContent =
+        portState(
+          bank,
+          22072
+        );
+
+      $('abWanSnapshot').textContent =
+        portState(
+          bank,
+          28788
+        );
+
+      $('abWanStream').textContent =
+        portState(
+          bank,
+          28789
+        );
+
+    } else {
+      $('cdWanRouter').textContent =
+        bank?.router?.identity
+        || 'BOA ADMIN · MODEL UNQUALIFIED';
+
+      $('cdWanManagement').textContent =
+        portState(
+          bank,
+          22070
+        );
+
+      $('cdWanRouterRebootState').textContent =
+        bank?.router?.rebootQualified
+          ? 'QUALIFIED'
+          : 'LOCKED';
+    }
+
+    const status =
+      $(
+        prefix
+        + 'WanStatus'
+      );
+
+    const reset =
+      $(
+        prefix
+        + 'TransportResetButton'
+      );
+
+    const reboot =
+      $(
+        prefix
+        + 'RouterRebootButton'
+      );
+
+    if (isAB) {
+      const managementReady =
+        bank?.ports?.['22072']?.state
+        === 'LISTENING';
+
+      const controlReady =
+        reboot.dataset.routerControlReady
+        === '1';
+
+      const rebootReady =
+        (
+          bank?.router?.rebootQualified
+          === true
+          &&
+          managementReady
+          &&
+          controlReady
+          &&
+          busy[name] !== true
+        );
+
+      reboot.disabled =
+        !rebootReady;
+
+      reboot.textContent =
+        rebootReady
+          ? 'REBOOT A/B ROUTER'
+          : 'REBOOT A/B ROUTER · UNAVAILABLE';
+
+      reboot.title =
+        bank?.router?.rebootStatus
+        || 'A/B router control unavailable';
+
+    } else {
+      reboot.disabled = true;
+
+      reboot.textContent =
+        (
+          'REBOOT '
+          + displayName
+          + ' ROUTER · LOCKED'
+        );
+    }
+
+    if (
+      busy[name]
+    ) {
+      reset.disabled = true;
+
+      reset.textContent =
+        (
+          'RESETTING '
+          + name
+          + ' TRANSPORT…'
+        );
+
+      return;
+    }
+
+    reset.disabled =
+      bank?.resetAvailable
+      !== true;
+
+    reset.textContent =
+      bank?.resetAvailable
+        ? (
+            'RESET '
+            + displayName
+            + ' TRANSPORT'
+          )
+        : (
+            displayName
+            + ' TRANSPORT RESET · '
+            + (
+                bank?.state
+                || 'UNAVAILABLE'
+              )
+          );
+
+    status.textContent =
+      (
+        'TRADE REVERSE FORWARDS · '
+        + (
+            bank?.state
+            || 'UNKNOWN'
+          )
+        + ' · SSH MASTER '
+        + (
+            bank?.sshMasterPid
+            ?? '—'
+          )
+        + ' · ROUTER REBOOT '
+        + (
+            bank?.router?.rebootQualified
+              ? 'QUALIFIED'
+              : 'LOCKED / NOT QUALIFIED'
+          )
+      );
+  }
+
+  function paint() {
+    if (!current) {
+      return;
+    }
+
+    paintBank(
+      'AB',
+      current.ab
+    );
+
+    paintBank(
+      'CD',
+      current.cd
+    );
+  }
+
+  async function refresh() {
+    if (
+      busy.AB
+      ||
+      busy.CD
+    ) {
+      return;
+    }
+
+    try {
+      const data =
+        await request(
+          '/status'
+        );
+
+      current =
+        data.transport;
+
+      paint();
+
+    } catch (err) {
+      $('abWanStatus').textContent =
+        (
+          'WAN TRANSPORT READ FAILED · '
+          + err.message
+        );
+
+      $('cdWanStatus').textContent =
+        (
+          'WAN TRANSPORT READ FAILED · '
+          + err.message
+        );
+
+      $('abTransportResetButton').disabled =
+        true;
+
+      $('cdTransportResetButton').disabled =
+        true;
+    }
+  }
+
+  async function resetTransport(
+    name
+  ) {
+    const bank =
+      name === 'AB'
+        ? current?.ab
+        : current?.cd;
+
+    if (
+      !bank
+      ||
+      bank.resetAvailable !== true
+    ) {
+      return;
+    }
+
+    const displayName =
+      name === 'AB'
+        ? 'A/B'
+        : 'C/D';
+
+    const phrase =
+      (
+        'RESET '
+        + displayName
+        + ' TRANSPORT'
+      );
+
+    const ports =
+      name === 'AB'
+        ? '22072 + 28788 + 28789'
+        : '22070';
+
+    const typed =
+      window.prompt(
+        'TYPE EXACTLY:\n'
+        + phrase
+        + '\n\n'
+        + displayName
+        + ' TRANSPORT RESET\n\n'
+        + 'This retires only the validated '
+        + 'Trade-side per-session sshd owner(s) '
+        + 'for '
+        + ports
+        + '.\n\n'
+        + 'It does NOT restart ssh.service, '
+        + 'either Pi, Core20/Core21, Arduino RAW, '
+        + 'rate, phase, or the router.'
+      );
+
+    if (
+      typed !== phrase
+    ) {
+      $(
+        name === 'AB'
+          ? 'abWanStatus'
+          : 'cdWanStatus'
+      ).textContent =
+        'CANCELLED · confirmation phrase did not match';
+
+      return;
+    }
+
+    const finalCheck =
+      window.confirm(
+        'Final confirmation: retire the current '
+        + name
+        + ' reverse-SSH session owner(s) on Trade? '
+        + 'The remote systemd tunnel service will reconnect.'
+      );
+
+    if (!finalCheck) {
+      return;
+    }
+
+    busy[name] = true;
+    paint();
+
+    const status =
+      $(
+        name === 'AB'
+          ? 'abWanStatus'
+          : 'cdWanStatus'
+      );
+
+    status.textContent =
+      (
+        'RESET REQUESTED · '
+        + name
+        + ' · WAITING FOR REMOTE SYSTEMD RECONNECT'
+      );
+
+    try {
+      const data =
+        await request(
+          '/reset',
+          {
+            method: 'POST',
+            body: JSON.stringify({
+              bank: name,
+              confirm: phrase
+            })
+          }
+        );
+
+      const result =
+        data.result || {};
+
+      status.textContent =
+        result.oldOwnersRetired
+          ? (
+              name
+              + ' OLD TRANSPORT OWNER(S) RETIRED'
+              + ' · REMOTE SYSTEMD RECONNECT EXPECTED'
+            )
+          : (
+              name
+              + ' RESET INCOMPLETE · INSPECT'
+            );
+
+    } catch (err) {
+      status.textContent =
+        (
+          name
+          + ' TRANSPORT RESET FAILED · '
+          + err.message
+        );
+
+    } finally {
+      busy[name] = false;
+
+      window.setTimeout(
+        refresh,
+        1500
+      );
+    }
+  }
+
+  $('abTransportResetButton')
+    .addEventListener(
+      'click',
+      () => resetTransport(
+        'AB'
+      )
+    );
+
+  $('cdTransportResetButton')
+    .addEventListener(
+      'click',
+      () => resetTransport(
+        'CD'
+      )
+    );
+
+  refresh();
+
+  window.setInterval(
+    refresh,
+    5000
+  );
+})();
+</script>
+
+
+<script id="a8-ce-ab-router-control-script">
+(() => {
+  'use strict';
+
+  const button =
+    document.getElementById(
+      'abRouterRebootButton'
+    );
+
+  const state =
+    document.getElementById(
+      'abWanRouterControl'
+    );
+
+  const wanStatus =
+    document.getElementById(
+      'abWanStatus'
+    );
+
+  if (
+    !button
+    ||
+    !state
+    ||
+    !wanStatus
+  ) {
+    return;
+  }
+
+  const endpoint =
+    '/api/ce/core20-service/'
+    + 'wan-transport/router-ab';
+
+  async function request(
+    suffix,
+    options = {}
+  ) {
+    const r = await fetch(
+      endpoint + suffix,
+      {
+        cache: 'no-store',
+
+        headers: {
+          'X-A8-CE-Control': '1',
+          'Content-Type':
+            'application/json',
+
+          ...(options.headers || {})
+        },
+
+        ...options
+      }
+    );
+
+    const data =
+      await r.json();
+
+    if (
+      !r.ok
+      ||
+      data.ok !== true
+    ) {
+      throw new Error(
+        data.error
+        ||
+        `HTTP ${r.status}`
+      );
+    }
+
+    return data;
+  }
+
+  async function refreshControl() {
+    try {
+      const data =
+        await request(
+          '/status'
+        );
+
+      const control =
+        data.routerControl;
+
+      if (
+        control?.qualified
+        !== true
+      ) {
+        throw new Error(
+          'LOCAL AGENT NOT QUALIFIED'
+        );
+      }
+
+      button.dataset.routerControlReady =
+        '1';
+
+      state.textContent =
+        (
+          'QUALIFIED'
+          + ' · TIMER '
+          + (
+              control.timer
+              || 'UNKNOWN'
+            )
+          + ' · SERVICE '
+          + (
+              control.service
+              || 'UNKNOWN'
+            )
+        );
+
+      button.title =
+        (
+          'Qualified local A/B router agent'
+          + ' · password remains on A/B Pi'
+        );
+
+    } catch (err) {
+      button.dataset.routerControlReady =
+        '0';
+
+      button.disabled = true;
+
+      state.textContent =
+        (
+          'UNAVAILABLE · '
+          + err.message
+        );
+    }
+  }
+
+  async function rebootRouter() {
+    button.disabled = true;
+
+    wanStatus.textContent =
+      'A/B ROUTER · RUNNING NON-DESTRUCTIVE PRECHECK…';
+
+    try {
+      await request(
+        '/check',
+        {
+          method: 'POST',
+          body: '{}'
+        }
+      );
+
+    } catch (err) {
+      wanStatus.textContent =
+        (
+          'A/B ROUTER PRECHECK FAILED · '
+          + err.message
+        );
+
+      await refreshControl();
+      return;
+    }
+
+    const phrase =
+      'REBOOT A/B ROUTER';
+
+    const typed =
+      window.prompt(
+        'TYPE EXACTLY:\n'
+        + phrase
+        + '\n\n'
+        + 'A/B · EUROPA · ZXHN F670L1FXS\n\n'
+        + 'This schedules the qualified local '
+        + 'A/B Pi router agent to reboot only '
+        + 'the ZXHN router after 10 seconds.\n\n'
+        + 'It does NOT restart Core20, Arduino A/B, '
+        + 'Europa discipline, rate, phase, ssh.service, '
+        + 'or invoke factory reset.'
+      );
+
+    if (
+      typed !== phrase
+    ) {
+      wanStatus.textContent =
+        'CANCELLED · confirmation phrase did not match';
+
+      await refreshControl();
+      return;
+    }
+
+    const finalCheck =
+      window.confirm(
+        'Final confirmation: reboot the A/B ZXHN router?\n\n'
+        + 'The A/B Pi will schedule the local restart, '
+        + 'the WAN will disappear, and its systemd '
+        + 'reverse tunnels will reconnect automatically.'
+      );
+
+    if (!finalCheck) {
+      wanStatus.textContent =
+        'CANCELLED · A/B router reboot not scheduled';
+
+      await refreshControl();
+      return;
+    }
+
+    wanStatus.textContent =
+      'A/B ROUTER REBOOT · SCHEDULING LOCAL 10-SECOND TIMER…';
+
+    try {
+      const data =
+        await request(
+          '/reboot',
+          {
+            method: 'POST',
+
+            body: JSON.stringify({
+              confirm: phrase
+            })
+          }
+        );
+
+      if (
+        data?.result?.scheduled
+        !== true
+      ) {
+        throw new Error(
+          'REBOOT TIMER NOT CONFIRMED'
+        );
+      }
+
+      button.dataset.routerControlReady =
+        '0';
+
+      button.disabled = true;
+
+      state.textContent =
+        'REBOOT SCHEDULED · WAITING FOR WAN RETURN';
+
+      wanStatus.textContent =
+        (
+          'A/B ROUTER REBOOT SCHEDULED'
+          + ' · LOCAL 10-SECOND TIMER'
+          + ' · WAITING FOR WAN / REVERSE-FORWARD RETURN'
+        );
+
+    } catch (err) {
+      wanStatus.textContent =
+        (
+          'A/B ROUTER REBOOT REQUEST FAILED · '
+          + err.message
+        );
+
+      await refreshControl();
+    }
+  }
+
+  button.addEventListener(
+    'click',
+    rebootRouter
+  );
+
+  refreshControl();
+
+  window.setInterval(
+    refreshControl,
+    15000
+  );
+})();
+</script>
+
+
+<script>
+(()=>{
+  'use strict';
+
+  const endpoint =
+    '/api/ce/core20-service/backup-status';
+
+  const put = (id,value)=>{
+    const el =
+      document.getElementById(id);
+
+    if(!el){
+      return;
+    }
+
+    el.textContent =
+      value == null
+        ? '—'
+        : String(value);
+  };
+
+  const ageText = seconds=>{
+    const n = Number(seconds);
+
+    if(!Number.isFinite(n)){
+      return '—';
+    }
+
+    if(n < 120){
+      return Math.round(n) + ' s';
+    }
+
+    if(n < 7200){
+      return (n / 60).toFixed(1) + ' min';
+    }
+
+    if(n < 172800){
+      return (n / 3600).toFixed(1) + ' h';
+    }
+
+    return (n / 86400).toFixed(1) + ' d';
+  };
+
+  const setState = (id,core,status)=>{
+    const el =
+      document.getElementById(id);
+
+    if(!el){
+      return;
+    }
+
+    el.className = 'pill';
+
+    if(status === 'HEALTHY'){
+      el.classList.add('good');
+    }else if(
+      status === 'FAILED' ||
+      status === 'STALE'
+    ){
+      el.classList.add('warn-text');
+    }else if(
+      status === 'IN PROGRESS'
+    ){
+      el.classList.add('cyan');
+    }
+
+    el.textContent =
+      core + ' · ' + (status || 'UNKNOWN');
+  };
+
+  const renderCore = (prefix,core,x)=>{
+    x = x || {};
+
+    setState(
+      prefix + 'BackupState',
+      core,
+      x.status
+    );
+
+    const cp =
+      x.latestCheckpoint || {};
+
+    put(
+      prefix + 'BackupLatest',
+      cp.name || 'NONE'
+    );
+
+    put(
+      prefix + 'BackupAge',
+      ageText(x.ageSeconds)
+    );
+
+    const svc =
+      x.service || {};
+
+    put(
+      prefix + 'BackupRun',
+      (
+        (svc.Result || '—')
+        + ' · '
+        + (
+          svc.ExecMainExitTimestamp
+          || '—'
+        )
+      )
+    );
+
+    const timer =
+      x.timer || {};
+
+    put(
+      prefix + 'BackupNext',
+      (
+        timer.NextElapseUSecRealtime
+        || '—'
+      )
+    );
+  };
+
+  async function refreshBackupStatus(){
+    try{
+      const r =
+        await fetch(
+          endpoint,
+          {
+            cache:'no-store',
+            credentials:'same-origin'
+          }
+        );
+
+      const x =
+        await r.json();
+
+      if(
+        !r.ok ||
+        x.ok !== true ||
+        !x.backup
+      ){
+        throw new Error(
+          x.error ||
+          ('HTTP ' + r.status)
+        );
+      }
+
+      renderCore(
+        'core20',
+        'CORE20',
+        x.backup.core20
+      );
+
+      renderCore(
+        'core21',
+        'CORE21',
+        x.backup.core21
+      );
+
+      put(
+        'coreBackupDetail',
+        'READ ONLY · hourly cadence · '
+        + 'STALE after two missed cycles · '
+        + 'backup health does not alter Core state'
+      );
+
+    }catch(err){
+      setState(
+        'core20BackupState',
+        'CORE20',
+        'UNKNOWN'
+      );
+
+      setState(
+        'core21BackupState',
+        'CORE21',
+        'UNKNOWN'
+      );
+
+      put(
+        'coreBackupDetail',
+        'BACKUP STATUS UNAVAILABLE · '
+        + err.message
+      );
+    }
+  }
+
+  refreshBackupStatus();
+
+  setInterval(
+    refreshBackupStatus,
+    30000
   );
 })();
 </script>

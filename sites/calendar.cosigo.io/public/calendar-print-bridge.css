@@ -1,0 +1,24 @@
+/* CORE20 CALENDAR · COSIGO ESCAPE / PRINT BRIDGE V1 */
+.a8-calendar-tools{
+  display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:.55rem;
+  padding:.48rem .75rem;position:relative;z-index:9000;
+  background:rgba(5,16,24,.96);border-bottom:1px solid rgba(214,170,78,.26)
+}
+.a8-calendar-tools a,.a8-calendar-tools button,.a8-calendar-footer-escape a,.a8-calendar-footer-escape button{
+  appearance:none;border:1px solid rgba(214,170,78,.34);border-radius:999px;background:#102b38;color:#f6e2ae;
+  padding:.48rem .72rem;font:800 .69rem/1.1 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  letter-spacing:.07em;text-decoration:none;cursor:pointer
+}
+.a8-calendar-footer-escape{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:.45rem;margin-top:1rem;padding:.8rem}
+.a8-print-sheet{display:none}
+@media print{
+  @page{size:portrait;margin:9mm 14mm 9mm 9mm}
+  body > *:not(#a8PrintSheet){display:none !important}
+  #a8PrintSheet{display:block !important;color:#171717;background:#fff;font-family:Georgia,"Times New Roman",serif}
+  .a8-print-header{display:flex;justify-content:space-between;align-items:end;gap:8mm;margin:0 8mm 4mm 0;padding-bottom:2mm;border-bottom:.3mm solid #8b6d2d}
+  .a8-print-header strong{font-size:13pt;letter-spacing:.08em}.a8-print-header span{font:700 7pt/1.2 ui-monospace,monospace;letter-spacing:.08em}
+  .a8-print-body{margin-right:7mm;text-align:center}.a8-print-body h1{font-size:16pt;letter-spacing:.06em}
+  .a8-print-calendar{width:100%;border-collapse:collapse;font-size:8pt}.a8-print-calendar th,.a8-print-calendar td{border:.2mm solid #9c8f73;padding:1.6mm 1mm}
+  .a8-print-footer{margin:4mm 8mm 0 0;padding-top:2mm;border-top:.2mm solid #aaa;text-align:center;font:700 7pt/1.2 ui-monospace,monospace;letter-spacing:.1em}
+  .a8-print-edge{position:fixed;right:1.5mm;top:50%;transform:translateY(-50%);writing-mode:vertical-rl;text-orientation:mixed;color:#333;font:800 7pt/1 ui-monospace,monospace;letter-spacing:.14em;white-space:nowrap}
+}

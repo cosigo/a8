@@ -82,6 +82,8 @@
     /* A8 SINGLE DROPDOWN NAV · SITE STANDARD */
     #a8-topside-coherence-02{
       display:block;
+      position:relative;
+      z-index:9100;
       margin:0;
       padding:10px 14px;
       border-bottom:1px solid rgba(255,255,255,.14);
@@ -1748,6 +1750,7 @@
   <link rel="icon" type="image/png" sizes="16x16" href="https://cosigo.io/favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="https://cosigo.io/apple-touch-icon.png">
   <!-- COSIGO-CANONICAL-FAVICON-END -->
+<link rel="stylesheet" href="/assets/calendar-print-bridge.css?v=calendar-bridge-v1">
 </head>
 <body>
 <a class="skip" href="#main">Skip to calendar</a>
@@ -1771,7 +1774,7 @@
       <div class="a8-menu-panel">
         <a href="https://lab.cosigo.io/">LAB HOME</a>
         <a href="https://clock.cosigo.io/">CLOCK</a>
-        <a href="https://calendar.cosigo.io/" aria-current="page">CALENDAR</a>
+        <a href="https://europa.cosigo.io/">EUROPA</a>
         <a href="https://moons.cosigo.io/">MOONS</a>
         <a href="https://mintaka.cosigo.io/">MINTAKA</a>
         <a href="https://sol.cosigo.io/">SOL</a>
@@ -1793,6 +1796,12 @@
 
   </div>
 </nav>
+
+<div class="a8-calendar-tools" aria-label="Calendar escape and print tools">
+  <a class="a8-calendar-home" href="https://cosigo.io/">COSIGO HOME</a>
+  <a href="https://date.cosigo.io/">CORE21 DATE</a>
+  <button type="button" onclick="a8PrintCurrentCalendar()">PRINT</button>
+</div>
 
 <div class="hero">
   <div class="hero-inner">
@@ -2064,7 +2073,7 @@
         <div class="metric"><span>Business days</span><strong id="businessCount">32</strong></div>
         <div class="metric"><span>Protected days</span><strong id="protectedCount">13</strong></div>
         <div class="metric"><span>Opening week form</span><strong id="openingForm">A · 4/1</strong></div>
-        <a class="button" id="monthArtwork" href="/image-viewer.html?v=terra-viewer-20260929b#/assets/ausp8_north.png">OPEN MONTH ARTWORK</a>
+        <a class="button" id="monthArtwork" href="/image-viewer.html#/assets/ausp8_north.png">OPEN MONTH ARTWORK</a>
         <div class="mini-note"><strong>Important:</strong> month boundaries do not reset the 4/1 → 3/2 alternation. Because each month contains nine weeks, the next month begins with the opposite week form.</div>
       </aside>
     </div>
@@ -2193,10 +2202,10 @@
 
               <div class="notice"><strong>Possible continuous year-end break:</strong> depending on how the ordinary work rhythm meets the year-end boundary, Wilson&rsquo;s Week may join directly to one or two adjacent non-work days. This can produce a continuous year-end break of <strong>6, 7, or 8 days</strong>: five Gold Days plus one or two adjacent non-work days, with the leap-extension Gold Day adding one further day when required. The exact continuous break therefore depends on calendar alignment and leap-year status; Wilson&rsquo;s Week itself remains the defined five-day interval, or six days when the leap correction is present.</div>
 
-              <a class="button" href="/image-viewer.html?v=terra-viewer-20260929b#/assets/ausp8_year_end.png">OPEN WILSON&rsquo;S WEEK ARTWORK</a>
+              <a class="button" href="/image-viewer.html#/assets/ausp8_year_end.png">OPEN WILSON&rsquo;S WEEK ARTWORK</a>
             </article>
 
-            <a class="panel feature-image" href="/image-viewer.html?v=terra-viewer-20260929b#/assets/ausp8_year_end.png" data-lightbox aria-label="Open Wilson's Week artwork">
+            <a class="panel feature-image" href="/image-viewer.html#/assets/ausp8_year_end.png" data-lightbox aria-label="Open Wilson's Week artwork">
               <img src="/assets/thumbs/ausp8_year_end.png?v=terra-art-20260929a" width="360" height="450" loading="lazy" decoding="async" alt="Wilson's Week year-end celebration artwork with Fire, Water, Terra, Air and Aether gold days">
             </a>
           </div>
@@ -2208,7 +2217,7 @@
           <p>The artwork is playful; the rules underneath it are explicit. These plates explain protected days, year structure and the operating rhythm.</p>
 
           <div class="art-grid">
-            <a class="panel art-card" href="/image-viewer.html?v=terra-viewer-20260929b#/assets/ausp8_example.png" data-lightbox>
+            <a class="panel art-card" href="/image-viewer.html#/assets/ausp8_example.png" data-lightbox>
               <figure>
                 <img src="/assets/thumbs/ausp8_example.png?v=terra-art-20260929a" width="360" height="509" loading="lazy" decoding="async" alt="A8 protected days example with Aether highlighted gold and alternating Air highlighted silver">
                 <figcaption>
@@ -2218,7 +2227,7 @@
               </figure>
             </a>
 
-            <a class="panel art-card" href="/image-viewer.html?v=terra-viewer-20260929b#/assets/ausp8_total.png" data-lightbox>
+            <a class="panel art-card" href="/image-viewer.html#/assets/ausp8_total.png" data-lightbox>
               <figure>
                 <img src="/assets/thumbs/ausp8_total.png?v=terra-art-20260929a" width="360" height="450" loading="lazy" decoding="async" alt="Auspicious 8 complete year calendar overview">
                 <figcaption>
@@ -2347,6 +2356,14 @@
       title="Choose your own direction"
     >✥</button>
   </div>
+
+  <div class="a8-calendar-footer-escape">
+    <a href="https://cosigo.io/">HTTPS://COSIGO.IO</a>
+    <span>·</span>
+    <a href="https://date.cosigo.io/">CORE21 DATE</a>
+    <span>·</span>
+    <button type="button" onclick="a8PrintCurrentCalendar()">PRINT CALENDAR</button>
+  </div>
 </footer>
 
 <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Calendar artwork viewer"><button type="button" aria-label="Close artwork">×</button><img alt=""></div>
@@ -2367,7 +2384,7 @@
   ];
 
   const artworkViewerUrl = art =>
-    '/image-viewer.html?v=terra-viewer-20260929b#' + encodeURIComponent(art);
+    '/image-viewer.html#' + encodeURIComponent(art);
   const planets = ['Mercury','Venus','Earth','Mars','Jupiter','Saturn','Uranus','Neptune','Pluto'];
   const planetGlyph = ['☿','♀','⊕','♂','♃','♄','♅','♆','♇'];
   const liveElementGlyph = ['🜂','🜄','🜃','🜁','✦'];
@@ -5123,7 +5140,7 @@
     const link=e.target.closest('[data-lightbox]');
     if(link){
       const href=link.getAttribute('href')||'';
-      if(href.startsWith('/image-viewer.html')) return;
+      if(href.startsWith('/image-viewer.html#')) return;
       e.preventDefault();
       const img=link.querySelector('img');
       openLightbox(href,img?.alt);
@@ -5160,5 +5177,36 @@
   </div>
 </div>
 
+
+<section id="a8PrintSheet" class="a8-print-sheet" aria-hidden="true"></section>
+<script id="a8-calendar-print-v1">
+function a8PrintCurrentCalendar(){
+  const sheet=document.getElementById('a8PrintSheet');
+  if(!sheet) return;
+  const header=document.createElement('div');
+  header.className='a8-print-header';
+  header.innerHTML='<strong>COSIGO · AUSPICIOUS 8</strong><span>CALENDAR.COSIGO.IO · CORE20 / EUROPA</span>';
+  const edge=document.createElement('div');
+  edge.className='a8-print-edge';
+  edge.textContent='HTTPS://COSIGO.IO';
+  const footer=document.createElement('div');
+  footer.className='a8-print-footer';
+  footer.textContent='AUSPICIOUS 8 · COSIGO.IO · CALENDAR.COSIGO.IO';
+  const body=document.createElement('div');
+  body.className='a8-print-body';
+  const title=document.createElement('h1');
+  title.textContent=document.getElementById('monthTitle')?.textContent || 'AUSPICIOUS 8 CALENDAR';
+  body.appendChild(title);
+  const table=document.querySelector('.calendar-scroll table.calendar, table.calendar');
+  if(table){
+    const clone=table.cloneNode(true);
+    clone.classList.add('a8-print-calendar');
+    body.appendChild(clone);
+  }
+  sheet.replaceChildren(header,body,footer,edge);
+  sheet.setAttribute('aria-hidden','false');
+  window.print();
+}
+</script>
 </body>
 </html>
