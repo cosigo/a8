@@ -19,7 +19,7 @@
 # These paths are retired landing-page copies.
 # They must remain absent from live /srv/sites and from canonical Git.
 #
-# CE and active Telescope are explicit exceptions and MUST NOT be
+# CE is an explicit exception and MUST NOT be
 # interpreted as ghosts by this manifest.
 
 FORBID_FILE|/srv/sites/a8.cosigo.io/public/about.html
@@ -53,7 +53,6 @@ CANONICAL_FILE|/srv/sites/sol.cosigo.io/public/index.html
 
 PROTECT_FILE|/srv/sites/ce.cosigo.io/public/index.html
 PROTECT_FILE|/srv/sites/ce.cosigo.io/public/chief-engineer.html
-PROTECT_FILE|/srv/apps/a8_time_lab_v5_4_20_postseal_hw/public/telescope.html
 
 TOMBSTONE|a8.cosigo.io|/about.html|https://about.cosigo.io/|308
 TOMBSTONE|a8.cosigo.io|/about-bg-a.html|https://about.cosigo.io/|308

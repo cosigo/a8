@@ -34,3 +34,6 @@ node_modules/
 core20/.git/
 core20/_diagnostics/
 *.pre-native-sol-*
+
+# Telescope public site is live-owned and intentionally outside canonical Git.
+/sites/telescope.cosigo.io/

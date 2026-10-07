@@ -71,16 +71,6 @@ do
     fi
 done
 
-echo
-echo "===== PROTECTED TELESCOPE ====="
-
-if [ -f "$ROOT/protected/telescope/telescope.html" ]; then
-    pass "active Telescope snapshot present"
-else
-    fail "active Telescope snapshot missing"
-fi
-
-echo
 echo "===== WORKING BACKUP CHECK ====="
 
 COUNT="$(

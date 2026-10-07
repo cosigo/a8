@@ -1679,13 +1679,13 @@ contestant.cosigo.io {
 		# Canonical Contestant presentation.
 		handle / {
 			root * /srv/sites/contestant.cosigo.io/public
-			rewrite * /contestants.html
+			rewrite * /index.html
 			file_server
 		}
 
+		# Retired pre-index URL · redirect only.
 		handle /contestants.html {
-			root * /srv/sites/contestant.cosigo.io/public
-			file_server
+			redir https://contestant.cosigo.io/ 308
 		}
 
 		handle /site-shell.css {
@@ -1950,39 +1950,19 @@ quartz.cosigo.io {
 
 telescope.cosigo.io {
 	route {
-		# TELESCOPE · STATIC PRESENTATION
+		# TELESCOPE · LIVE-OWNED STATIC PRESENTATION
+		# Intentionally outside canonical Git site management.
+
 		handle /api/* {
 			respond "NOT FOUND" 404
 		}
 
-		handle / {
-			root * /srv/apps/a8_time_lab_v5_4_20_postseal_hw/public
-			rewrite * /telescope.html
-			file_server
-		}
-
-		handle /telescope.html {
-			root * /srv/apps/a8_time_lab_v5_4_20_postseal_hw/public
-			file_server
-		}
-
-		handle /style.css {
-			root * /srv/apps/a8_time_lab_v5_4_20_postseal_hw/public
-			file_server
-		}
-
-		handle /site-shell.css {
-			root * /srv/apps/a8_time_lab_v5_4_20_postseal_hw/public
-			file_server
-		}
-
-		handle /assets/cosigo_master_512.gif {
-			root * /srv/apps/a8_time_lab_v5_4_20_postseal_hw/public
-			file_server
-		}
+		@a8_telescope_legacy path /telescope.html
+		redir @a8_telescope_legacy / 308
 
 		handle {
-			respond 404
+			root * /srv/sites/telescope.cosigo.io/public
+			file_server
 		}
 	}
 }
@@ -2362,6 +2342,22 @@ shadow.cosigo.io {
 		reverse_proxy 127.0.0.1:18020
 	}
 
+	@shadow_core21_get {
+		method GET
+		path /api/shadow/core21
+	}
+	handle @shadow_core21_get {
+		rewrite * /api/core21/status
+		reverse_proxy 127.0.0.1:18032
+	}
+
+	@shadow_core21_path {
+		path /api/shadow/core21
+	}
+	handle @shadow_core21_path {
+		respond "Method Not Allowed" 405
+	}
+
 	handle /api/shadow/ghost/ingest {
 		reverse_proxy 127.0.0.1:18027
 	}
@@ -2377,8 +2373,208 @@ shadow.cosigo.io {
 	}
 }
 
+
+# A8 CORE21 · GANYMEDE
+ganymede.cosigo.io {
+	handle /api/core21/cd/ingest {
+		reverse_proxy 127.0.0.1:18032
+	}
+
+	handle /api/core21/status {
+		reverse_proxy 127.0.0.1:18032
+	}
+
+	# Core21 authoritative civil-state edge stream · read only
+	@ganymede_core21_edges_get {
+		method GET
+		path /api/core21/edges
+	}
+	handle @ganymede_core21_edges_get {
+		reverse_proxy 127.0.0.1:18032
+	}
+
+	@ganymede_core21_edges_path {
+		path /api/core21/edges
+	}
+	handle @ganymede_core21_edges_path {
+		respond "Method Not Allowed" 405
+	}
+
+	handle {
+		root * /srv/sites/ganymede.cosigo.io/public
+		file_server
+	}
+}
+
 # A8 HANGOUT · STORYBOOK
 hangout.cosigo.io {
 	root * /srv/sites/hangout.cosigo.io/public
 	file_server
+}
+
+# ============================================================
+# EUROPA · CORE20 NATURAL AUTHORITY · READ-ONLY PUBLIC INSTRUMENT
+# ============================================================
+europa.cosigo.io {
+	root * /srv/sites/europa.cosigo.io/public
+	encode zstd gzip
+
+	route {
+		# Core20 Earth Meridian-0 clock · GET only
+		@europa_core20_clock {
+			method GET
+			path /api/core20/clock
+		}
+		handle @europa_core20_clock {
+			reverse_proxy 127.0.0.1:18020
+		}
+
+		# Live Jovian natural-authority state · GET only
+		@europa_jovian {
+			method GET
+			path /api/europa/jovian
+		}
+		handle @europa_jovian {
+			rewrite * /state
+			reverse_proxy 127.0.0.1:18028
+		}
+
+		# Known read paths reject all non-GET methods.
+		@europa_known_api {
+			path /api/core20/clock /api/europa/jovian
+		}
+		handle @europa_known_api {
+			respond "Method Not Allowed" 405
+		}
+
+		# No blanket Core20/Jovian API exposure.
+		handle /api/* {
+			respond "Not Found" 404
+		}
+
+		# Canonical static site and sealed model assets.
+		handle {
+			file_server
+		}
+	}
+}
+
+# ============================================================
+# A8 TIME · CORE21 GANYMEDE EARTH MERIDIAN 0
+# ============================================================
+time.cosigo.io {
+	root * /srv/sites/time.cosigo.io/public
+	encode zstd gzip
+	route {
+		@time_core21_status_get {
+			method GET
+			path /api/core21/status
+		}
+		handle @time_core21_status_get {
+			reverse_proxy 127.0.0.1:18032
+		}
+
+		# Core21 authoritative civil-state edge stream · GET only
+		@time_core21_edges_get {
+			method GET
+			path /api/core21/edges
+		}
+		handle @time_core21_edges_get {
+			reverse_proxy 127.0.0.1:18032
+		}
+
+		@time_calendar_get {
+			method GET
+			path /api/a8-calendar
+		}
+		handle @time_calendar_get {
+			rewrite * /api/core20/calendar
+			reverse_proxy 127.0.0.1:18020
+		}
+
+		@time_known_api_paths {
+			path /api/core21/status /api/core21/edges /api/a8-calendar
+		}
+		handle @time_known_api_paths {
+			respond "Method Not Allowed" 405
+		}
+
+		handle /api/* {
+			respond "Not Found" 404
+		}
+
+		handle {
+			file_server
+		}
+	}
+}
+
+# ============================================================
+# DATE · CORE21 GANYMEDE CALENDAR · READ ONLY
+# ============================================================
+date.cosigo.io {
+	root * /srv/sites/date.cosigo.io/public
+	encode zstd gzip
+
+	route {
+		@date_calendar_get {
+			method GET
+			path /api/core21/calendar
+		}
+		handle @date_calendar_get {
+			rewrite * /calendar
+			reverse_proxy 127.0.0.1:18033
+		}
+
+		@date_runtime_get {
+			method GET
+			path /api/core21/runtime
+		}
+		handle @date_runtime_get {
+			rewrite * /runtime
+			reverse_proxy 127.0.0.1:18033
+		}
+
+		@date_year_angle_get {
+			method GET
+			path /api/core21/year-angle
+		}
+		handle @date_year_angle_get {
+			rewrite * /year-angle
+			reverse_proxy 127.0.0.1:18033
+		}
+
+		@date_core21_status_get {
+			method GET
+			path /api/core21/status
+		}
+		handle @date_core21_status_get {
+			reverse_proxy 127.0.0.1:18032
+		}
+
+		# Shared physical Sol Annual Frame · orientation only.
+		@date_annual_frame_get {
+			method GET
+			path /api/annual-frame
+		}
+		handle @date_annual_frame_get {
+			rewrite * /state
+			reverse_proxy 127.0.0.1:18030
+		}
+
+		@date_known_api {
+			path /api/core21/calendar /api/core21/runtime /api/core21/year-angle /api/core21/status /api/annual-frame
+		}
+		handle @date_known_api {
+			respond "Method Not Allowed" 405
+		}
+
+		handle /api/* {
+			respond "Not Found" 404
+		}
+
+		handle {
+			file_server
+		}
+	}
 }

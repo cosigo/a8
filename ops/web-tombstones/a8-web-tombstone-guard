@@ -213,7 +213,6 @@ def block(host):
     raise SystemExit(f"unterminated host block: {host}")
 
 ce = block("ce.cosigo.io")
-tel = block("telescope.cosigo.io")
 
 if "basic_auth" not in ce:
     raise SystemExit("CE basic_auth missing")
@@ -221,20 +220,10 @@ if "basic_auth" not in ce:
 if "rewrite * /chief-engineer.html" not in ce:
     raise SystemExit("CE landing contract changed")
 
-if (
-    "root * /srv/apps/a8_time_lab_v5_4_20_postseal_hw/public"
-    not in tel
-):
-    raise SystemExit("Telescope active /srv/apps root changed")
-
-if "rewrite * /telescope.html" not in tel:
-    raise SystemExit("Telescope active landing contract changed")
-
 print("CE protected contract present")
-print("Telescope protected contract present")
 PY
 then
-    pass "CE + Telescope protected contracts intact"
+    pass "CE protected contract intact"
 else
     fail "protected architecture changed"
 fi
