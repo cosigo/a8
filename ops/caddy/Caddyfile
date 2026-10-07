@@ -285,6 +285,28 @@ charlie.cosigo.io {
 		respond "ok" 200
 	}
 
+	# COMPOSER MUSIC LAB · READ-ONLY CORE20 CLOCK
+	@a8_charlie_music_clock {
+		method GET
+		path /api/core20/clock
+	}
+	handle @a8_charlie_music_clock {
+		reverse_proxy 127.0.0.1:18020
+	}
+
+	# Same endpoint with any other method is forbidden.
+	@a8_charlie_music_clock_wrong_method {
+		path /api/core20/clock
+	}
+	handle @a8_charlie_music_clock_wrong_method {
+		respond "METHOD NOT ALLOWED" 405
+	}
+
+	# No curator API and no broad Core20 exposure from Charlie.
+	handle /api/* {
+		respond "NOT FOUND" 404
+	}
+
 	handle {
 		root * /srv/sites/charlie.cosigo.io/public
 		file_server
