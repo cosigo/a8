@@ -139,6 +139,8 @@ class Core20ServerOwnedRuntime {
     this.rawPerDayDenominator = null;
     this.alignment = null;
     this.alignmentSeq = 0;
+    // Separate civil correction; never feeds back into natural RAW.
+    this.electronicClockOffsetStates = 0n;
 
     /*
      * Diagnostic state only.
@@ -438,6 +440,28 @@ class Core20ServerOwnedRuntime {
       : 'SELECTED_CORE_RAW';
   }
 
+  // Operator-only, synchronous phase correction. Never emit a physical edge.
+  setElectronicClockOffsetStates(next) {
+    if (this.status !== 'RUNNING' || !this.alignment ||
+        this.alignment.role !== 'QUALIFIED_EXTERNAL_PHYSICAL_PRIMARY') {
+      throw new Error('WHEEL_UNQUALIFIED_CLOCK');
+    }
+    const n = BigInt(next);
+    if (n < -131072n * 3650n || n > 131072n * 3650n) {
+      throw new Error('WHEEL_OFFSET_OUT_OF_RANGE');
+    }
+    const previous = this.electronicClockOffsetStates;
+    this.electronicClockOffsetStates = n;
+    try {
+      const result = this.clockSnapshot();
+      if (result.status !== 'CORE20_CLOCK_RUNNING') throw Error('WHEEL_CLOCK_NOT_RUNNING');
+      return result;
+    } catch (err) {
+      this.electronicClockOffsetStates = previous;
+      throw err;
+    }
+  }
+
   _clockCoordinate() {
     if (this.status !== 'RUNNING') return null;
 
@@ -497,7 +521,8 @@ class Core20ServerOwnedRuntime {
       BigInt(
         this.alignment.targetDayPhase17
       ) +
-      completedStates;
+      completedStates +
+      this.electronicClockOffsetStates;
 
     return {
       sourceEpoch: epoch,
@@ -1241,7 +1266,8 @@ class Core20ServerOwnedRuntime {
       BigInt(
         this.alignment.targetDayPhase17
       ) +
-      completedStates;
+      completedStates +
+      this.electronicClockOffsetStates;
     const dayCount = total / DAY_STATES;
     const phase = total % DAY_STATES;
     const fields = clockFields(phase);
@@ -1298,6 +1324,7 @@ class Core20ServerOwnedRuntime {
         elapsedRaw.toString(),
 
       dayCount: dayCount.toString(),
+      electronicClockOffsetStates: this.electronicClockOffsetStates.toString(),
       dayPhase17: phase.toString(),
       dayPhase17Binary: fields.binary17,
       exactSubstate: {

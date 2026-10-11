@@ -1,0 +1,98 @@
+#!/usr/bin/env python3
+"""CE compatibility control for Core20's electronic wheel. Never restarts services."""
+import json
+import os
+import sys
+import urllib.request
+from pathlib import Path
+
+ENV = Path('/etc/a8-core20/external-physical.env')
+TOKEN = Path('/etc/a8-core20/electronic-wheel-token')
+URL = 'http://127.0.0.1:18020/api/core20/electronic-wheel'
+DAY = 131072
+
+def request(method='GET', payload=None):
+    token = TOKEN.read_text(encoding='utf-8').strip()
+    if len(token) < 32:
+        raise RuntimeError('WHEEL TOKEN UNAVAILABLE')
+    data = None if payload is None else json.dumps(payload, separators=(',', ':')).encode()
+    req = urllib.request.Request(URL, data=data, method=method, headers={
+        'X-A8-Wheel-Token':token, 'Content-Type':'application/json'})
+    with urllib.request.urlopen(req, timeout=8) as result:
+        out = json.load(result)
+    if not out.get('ok') or 'wheel' not in out or 'clock' not in out:
+        raise RuntimeError('ELECTRONIC WHEEL NOT READY')
+    return out
+
+def env_values():
+    rows = {}
+    for line in ENV.read_text(encoding='utf-8').splitlines():
+        if line and not line.lstrip().startswith('#') and '=' in line:
+            k,v=line.split('=',1); rows[k]=v
+    return rows
+
+def render_status(out):
+    c=out['clock']; w=out['wheel']; a=c.get('alignment') or {}
+    env=env_values()
+    if c.get('status')!='CORE20_CLOCK_RUNNING' or a.get('role')!='QUALIFIED_EXTERNAL_PHYSICAL_PRIMARY' or str(a.get('externalPhysicalSourceEpoch'))!='9':
+        raise RuntimeError('CORE20 NOT QUALIFIED FOR ELECTRONIC ADJUST')
+    offset=int(w['offsetStates']); seq=int(w['sequence'])
+    effective_total=int(c['dayCount'])*DAY+int(c['dayPhase17'])
+    ref_total=effective_total-offset
+    if ref_total<0: raise RuntimeError('ELECTRONIC REFERENCE BEFORE DAY ZERO')
+    ref_day,ref_phase=divmod(ref_total,DAY)
+    live={
+      'status':c.get('status'), 'dayCount':c.get('dayCount'),
+      'dayPhase17':c.get('dayPhase17'),
+      'clockOctal':(c.get('clock') or {}).get('octal'),
+      'targetDayCount':a.get('targetDayCount'),
+      'targetDayPhase17':a.get('targetDayPhase17'),
+      'externalPhysicalSourceEpoch':a.get('externalPhysicalSourceEpoch'),
+      'alignmentRole':a.get('role')}
+    return {
+      'schema':'A8-CE-CLOCK-ADJUST-V1','status':'READY',
+      'semantics':{'meridian0':'FIXED_ALREADY_ESTABLISHED','rate':'SEPARATE_UNCHANGED',
+                   'physicalRaw':'UNCHANGED','control':'ELECTRONIC_CLOCK_POSITION_ONLY'},
+      'meridianHistory':{
+        'baseDayPhase17':int(env['A8_CLOCK_PHASE_BASE_DAY_PHASE17']),
+        'correctionStates':int(env['A8_CLOCK_PHASE_CORRECTION_STATES']),
+        'correctedDayPhase17':int(env['A8_CLOCK_PHASE_CORRECTED_DAY_PHASE17'])},
+      'referenceAnchor':{'dayCount':ref_day,'dayPhase17':ref_phase},
+      'adjustmentStates':offset,
+      'effectiveAnchor':{'dayCount':int(c['dayCount']),'dayPhase17':int(c['dayPhase17'])},
+      'rate':{'numerator':env['A8_CORE20_EXTERNAL_RATIO_NUMERATOR'],
+              'denominator':env['A8_CORE20_EXTERNAL_RATIO_DENOMINATOR']},
+      'live':live, 'wheelSequence':seq,
+    }
+
+def main(args):
+    if os.geteuid()!=0: raise RuntimeError('ROOT REQUIRED')
+    if args==['status']:
+        print(json.dumps(render_status(request()),indent=2,sort_keys=True));return
+    if len(args)!=2 or args[0] not in ('advance','retard') or not args[1].isdigit() or int(args[1])<1:
+        raise RuntimeError('USAGE: a8-core20-clock-adjust status | advance N | retard N')
+    amount=int(args[1]);
+    if amount>DAY: raise RuntimeError('AMOUNT EXCEEDS ONE A8 DAY')
+    before=request(); previous=render_status(before)
+    result=request('POST',{'direction':args[0],'amount':str(amount),'expectedSequence':before['wheel']['sequence']})
+    after=render_status(result)
+    if int(result['wheel']['offsetStates'])!=int(before['wheel']['offsetStates'])+(amount if args[0]=='advance' else -amount):
+        raise RuntimeError('ELECTRONIC OFFSET POSTCHECK FAILED')
+    print(json.dumps({
+        'schema':'A8-CE-CLOCK-ADJUST-V1','ok':True,
+        'operation':'ADVANCE_CLOCK' if args[0]=='advance' else 'RETARD_CLOCK',
+        'amountStates':amount,
+        'previousAdjustmentStates':previous['adjustmentStates'],
+        'adjustmentStates':after['adjustmentStates'],
+        'referenceAnchor':after['referenceAnchor'],
+        'effectiveAnchor':after['effectiveAnchor'],
+        'meridianHistoryChanged':False,'rateChanged':False,
+        'physicalRawChangedByControl':False,'backup':'DURABLE_WHEEL_RECORD',
+        'live':after['live'],
+    },indent=2,sort_keys=True))
+
+if __name__=='__main__':
+    try:main(sys.argv[1:])
+    except Exception as err:
+        print('CE ELECTRONIC WHEEL FAILED · '+str(err),file=sys.stderr)
+        sys.exit(1)

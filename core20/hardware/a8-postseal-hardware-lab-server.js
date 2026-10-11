@@ -23,6 +23,9 @@
  */
 
 const fs = require('fs');
+const crypto = require('crypto');
+const { restoreSealedClock } = require('./a8-epoch9-restore-helper');
+const wheelStore = require('./a8-electronic-wheel-store');
 const http = require('http');
 const path = require('path');
 
@@ -3377,6 +3380,33 @@ function createHardwareLabServer({
       }
     };
 
+  // Operator phase rebases are NOT authoritative elapsed-time edges.
+  // Their own SSE event instructs clients to discard prior display phase.
+  const publishCore20PhaseRebase = (reason, before = null) => {
+    const after = core20Runtime.clockSnapshot();
+    const event = {
+      schema: 'A8-CORE20-ELECTRONIC-PHASE-REBASE-V1',
+      reason,
+      naturalElapsedStates: '0',
+      operatorCorrection: true,
+      wheelSequence: wheelRecord ? wheelRecord.sequence : null,
+      offsetStates: wheelRecord ? wheelRecord.offsetStates : '0',
+      previousDayCount: before ? before.dayCount : null,
+      previousDayPhase17: before ? before.dayPhase17 : null,
+      dayCount: after.dayCount,
+      dayPhase17: after.dayPhase17,
+      sourceEpoch: after.sourceEpoch,
+      rawPulse: after.currentSelectedRawPulse,
+      clockRawPulse: after.currentClockRawPulse,
+    };
+    const payload = `event: a8-phase-rebase\ndata: ${JSON.stringify(event)}\n\n`;
+    for (const res of Array.from(core20EdgeClients)) {
+      try { res.write(payload); }
+      catch (_) { core20EdgeClients.delete(res); }
+    }
+    return event;
+  };
+
   const removeCore20EdgeListener =
     core20Runtime.onClockEdge(
       publishCore20Edge
@@ -3547,7 +3577,42 @@ function createHardwareLabServer({
       }
     );
 
+  // Epoch-9 recovery is opt-in. No external API may observe or write
+  // a half-booted clock while the sealed exact-state import is incomplete.
+  const epoch9RestorePath = process.env.A8_CORE20_EPOCH9_RESTORE_CERTIFICATE || '';
+  const epoch9RestoreEnabled = epoch9RestorePath.length > 0;
+  let epoch9StartupState = epoch9RestoreEnabled ? 'PENDING' : 'DISABLED';
+  const wheelPath = process.env.A8_CORE20_WHEEL_STATE_PATH || '';
+  const wheelTokenPath = process.env.A8_CORE20_WHEEL_TOKEN_PATH || '';
+  let wheelRecord = null;
+  const wheelEnabled = epoch9RestoreEnabled && wheelPath && wheelTokenPath;
+
+  const assertEpoch9StartupReady = () => {
+    if (epoch9RestoreEnabled && epoch9StartupState !== 'READY') {
+      throw new Error(`EPOCH9_STARTUP_NOT_READY:${epoch9StartupState}`);
+    }
+  };
+  const restoreEpoch9AtStartup = () => {
+    if (!epoch9RestoreEnabled) return;
+    if (process.env.A8_CORE20_EXTERNAL_PHYSICAL_EPOCH !== '9' ||
+        process.env.A8_CORE20_EXTERNAL_PHYSICAL !== '1') {
+      throw new Error('EPOCH9_STARTUP_ENV_GUARD');
+    }
+    const expected = '1658270fc3b472dc9287ea759ab06979aecd34bd944c0f6d42cace92c5b7c68c';
+    const data = fs.readFileSync(epoch9RestorePath);
+    const actual = crypto.createHash('sha256').update(data).digest('hex');
+    if (actual !== expected) throw new Error('EPOCH9_RESTORE_CERTIFICATE_HASH_MISMATCH');
+    const certificate = JSON.parse(data.toString('utf8'));
+    restoreSealedClock(core20Runtime, certificate);
+    if (wheelEnabled) {
+      wheelRecord = wheelStore.load(wheelPath);
+      core20Runtime.setElectronicClockOffsetStates(wheelRecord.offsetStates);
+    }
+    epoch9StartupState = 'READY';
+  };
+
   const ensureCore20RuntimeRunning = async () => {
+    assertEpoch9StartupReady();
     if (core20Runtime.status !== 'RUNNING') await core20Runtime.start();
     return core20Runtime.snapshot();
   };
@@ -3555,11 +3620,73 @@ function createHardwareLabServer({
   const server =
     http.createServer(
       async (req, res) => {
+        if (epoch9RestoreEnabled && epoch9StartupState !== 'READY') {
+          return sendJson(res, 503, {
+            ok: false,
+            error: 'EPOCH9_STARTUP_NOT_READY',
+            state: epoch9StartupState,
+          });
+        }
         const url =
           new URL(
             req.url,
             `http://${req.headers.host || '127.0.0.1'}`
           );
+
+        // Local-only, bearer-authorized electronic phase wheel. No RAW writes.
+        if (url.pathname === '/api/core20/electronic-wheel') {
+          if (!wheelEnabled || !wheelRecord) return sendJson(res,503,{ok:false,error:'WHEEL_DISABLED'});
+          if (req.socket.remoteAddress !== '127.0.0.1' &&
+              req.socket.remoteAddress !== '::1' &&
+              req.socket.remoteAddress !== '::ffff:127.0.0.1') {
+            return sendJson(res,403,{ok:false,error:'LOCAL_ONLY'});
+          }
+          let expectedToken;
+          try {expectedToken=fs.readFileSync(wheelTokenPath,'utf8').trim();}
+          catch (_) {return sendJson(res,503,{ok:false,error:'WHEEL_TOKEN_UNAVAILABLE'});}
+          const supplied=String(req.headers['x-a8-wheel-token']||'');
+          const aa=Buffer.from(supplied),bb=Buffer.from(expectedToken);
+          if (aa.length===0 || aa.length!==bb.length ||
+              !crypto.timingSafeEqual(aa,bb)) return sendJson(res,403,{ok:false,error:'WHEEL_UNAUTHORIZED'});
+          if (req.method==='GET') return sendJson(res,200,{ok:true,wheel:wheelRecord,clock:core20Runtime.clockSnapshot()});
+          if (req.method!=='POST') return sendJson(res,405,{ok:false});
+          try {
+            const body=await readJsonBody(req);
+            if (!body || Object.keys(body).sort().join(',')!=='amount,direction,expectedSequence' ||
+                !/^[1-9][0-9]*$/.test(String(body.amount)) ||
+                !['advance','retard'].includes(body.direction)) throw Error('WHEEL_REQUEST_INVALID');
+            if (String(body.expectedSequence)!==wheelRecord.sequence) throw Error('WHEEL_STALE_SEQUENCE');
+            const amount=BigInt(body.amount);
+            if (amount>131072n) throw Error('WHEEL_AMOUNT_LIMIT');
+            const delta=body.direction==='advance'?amount:-amount;
+            const next=BigInt(wheelRecord.offsetStates)+delta;
+            // Validate complete snapshot without emitting edges; restore old offset.
+            const previous=wheelRecord.offsetStates;
+            const rawBefore=core20Runtime.clockSnapshot();
+            core20Runtime.setElectronicClockOffsetStates(next);
+            const preview=core20Runtime.clockSnapshot();
+            core20Runtime.setElectronicClockOffsetStates(previous);
+            if (rawBefore.currentSelectedRawPulse!==preview.currentSelectedRawPulse ||
+                rawBefore.currentClockRawPulse!==preview.currentClockRawPulse ||
+                JSON.stringify(rawBefore.exactSubstate)!==JSON.stringify(preview.exactSubstate))
+              throw Error('WHEEL_RAW_OR_FRACTION_CHANGED');
+            const nextRecord=wheelStore.record(next,BigInt(wheelRecord.sequence)+1n);
+            // Commit in-memory state first. If durable save fails, restore
+            // the previous offset before another physical sample is handled.
+            // All operations below are synchronous in the Node event loop.
+            core20Runtime.setElectronicClockOffsetStates(next);
+            try {
+              wheelStore.save(wheelPath,nextRecord);
+            } catch (saveError) {
+              core20Runtime.setElectronicClockOffsetStates(previous);
+              throw saveError;
+            }
+            wheelRecord=nextRecord;
+            // Deliberate phase rebases must never masquerade as natural edges.
+            const rebase = publishCore20PhaseRebase('OPERATOR_ELECTRONIC_WHEEL',rawBefore);
+            return sendJson(res,200,{ok:true,wheel:wheelRecord,clock:core20Runtime.clockSnapshot(),rebase});
+          } catch(err) {return sendJson(res,409,{ok:false,error:String(err.message||err)});}
+        }
 
         /*
          * CHIEF ENGINEER · CORE20 FLIGHT RECORDER
@@ -4774,6 +4901,24 @@ function createHardwareLabServer({
             'data: {"schema":"A8-CORE20-CLOCK-EDGE-STREAM-V1","authority":"CORE20_DAY_PHASE17"}\n\n'
           );
 
+          // New SSE consumers receive an explicit coordinate baseline.
+          // This is a display rebase, not a physical clock edge.
+          if (epoch9StartupState === 'READY' && wheelEnabled && wheelRecord) {
+            const clock = core20Runtime.clockSnapshot();
+            const event = {
+              schema:'A8-CORE20-ELECTRONIC-PHASE-REBASE-V1',
+              reason:'STREAM_SUBSCRIBE_BASELINE',
+              operatorCorrection:false,
+              naturalElapsedStates:'0',
+              wheelSequence:wheelRecord.sequence,
+              offsetStates:wheelRecord.offsetStates,
+              dayCount:clock.dayCount,dayPhase17:clock.dayPhase17,
+              sourceEpoch:clock.sourceEpoch,
+              rawPulse:clock.currentSelectedRawPulse,
+              clockRawPulse:clock.currentClockRawPulse,
+            };
+            res.write(`event: a8-phase-rebase\ndata: ${JSON.stringify(event)}\n\n`);
+          }
           core20EdgeClients.add(
             res
           );
@@ -5887,10 +6032,19 @@ function createHardwareLabServer({
   server.on('listening', () => {
     core20Runtime.start()
       .then(() => {
+        try {
+          restoreEpoch9AtStartup();
+        } catch (err) {
+          epoch9StartupState = 'FAILED';
+          console.error('CORE20 EPOCH9 RESTORE FAIL CLOSED ·', err.message);
+          core20Runtime.stop();
+          return;
+        }
         console.log('CORE20 RUNTIME · NODE OWNS VIRTUAL PULSE GENERATOR');
         console.log('CORE20 CLOCK · AWAITING MOMENTARY CONNECT ALIGNMENT');
       })
       .catch(err => {
+        epoch9StartupState = 'FAILED';
         console.error(
           'CORE20 RUNTIME START FAILED ·',
           err && err.message ? err.message : err

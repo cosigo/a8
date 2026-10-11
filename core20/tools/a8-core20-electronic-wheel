@@ -1,0 +1,32 @@
+#!/usr/bin/env python3
+"""A8 electronic phase control. No Core20 restart; local token required."""
+import json
+import sys
+import urllib.request
+from pathlib import Path
+
+TOKEN = Path('/etc/a8-core20/electronic-wheel-token')
+URL = 'http://127.0.0.1:18020/api/core20/electronic-wheel'
+
+def request(method='GET', payload=None):
+    token = TOKEN.read_text().strip()
+    data = None if payload is None else json.dumps(payload,separators=(',',':')).encode()
+    req=urllib.request.Request(URL, data=data, method=method, headers={
+        'X-A8-Wheel-Token': token,
+        'Content-Type':'application/json',
+    })
+    with urllib.request.urlopen(req,timeout=8) as r:
+        return json.load(r)
+
+def main(args):
+    if args==['status']:
+        print(json.dumps(request(),indent=2))
+        return
+    if len(args)!=2 or args[0] not in ('advance','retard') or not args[1].isdigit() or int(args[1])<1:
+        raise SystemExit('usage: a8-core20-electronic-wheel status | advance STATES | retard STATES')
+    before=request()
+    result=request('POST',{'direction':args[0], 'amount':args[1],
+                           'expectedSequence':before['wheel']['sequence']})
+    print(json.dumps(result,indent=2))
+if __name__=='__main__':
+    main(sys.argv[1:])
