@@ -1486,45 +1486,11 @@ function physicalRawNow(){
   return state.physicalRaw;
 }
 
-function modelDeltaFromPhysical(delta){
-  const h=state.handoff;
 
-  if (!h)
-    throw new Error(
-      'Active physical moon handoff unavailable'
-    );
-
-  return (
-    Number(delta) *
-    Number(h.physicalToModelRatio.numerator) /
-    Number(h.physicalToModelRatio.denominator)
-  );
-}
-
-function modelRawFromPhysical(physicalRaw){
-  const h=state.handoff;
-
-  if (!h)
-    throw new Error(
-      'Active physical moon handoff unavailable'
-    );
-
-  return (
-    Number(
-      h.modelAnchor.rawEquivalentAtPhysicalAnchor
-    ) +
-    modelDeltaFromPhysical(
-      Number(physicalRaw) -
-      Number(h.livePhysical.anchorRaw)
-    )
-  );
-}
 
 function displayRawNow(){
   return state.rate === 1
-    ? modelRawFromPhysical(
-        state.physicalRaw
-      )
+    ? state.naturalRaw
     : state.simRaw;
 }
 
@@ -1551,12 +1517,12 @@ function setModeText(){
 
   $('viewModeDetail').textContent =
     live
-      ? '1× uses the qualified active physical → Epoch-5 model handoff. Any other viewing rate is simulation and is not the current sky.'
-      : 'This display is detached from current sky position. Return to 1× to discard simulation and fetch fresh physical RAW.';
+      ? '1× uses Core20 natural-model coordinates. Physical carrier RAW is diagnostic only. Other viewing rates are simulation.'
+      : 'This display is detached from current sky position. Return to 1× to resume the natural coordinate.';
 
   $('anchorPolicy').textContent =
     live
-      ? 'FRESH PHYSICAL RAW · SKY NOW'
+      ? 'CORE20 NATURAL RAW · SKY NOW'
       : 'SIMULATION DETACHED';
 
   $('a8-native-selected-rate').textContent =
@@ -1566,14 +1532,14 @@ function setModeText(){
 
   $('a8-native-source-epoch').textContent =
     `${state.sourceEpoch} MODEL · ` +
-    `${state.livePhysicalSourceEpoch} LIVE`;
+    `${state.livePhysicalSourceEpoch} CARRIER (DIAGNOSTIC)`;
 
   $('a8-native-base-period').textContent =
     fmt(state.ganymedeFull,3);
 
   $('a8-native-period-equation').textContent =
     live
-      ? '1× uses the live physical RAW progression.'
+      ? '1× uses the continuous Core20 natural-model progression.'
       : `${fmt(state.ganymedeFull,3)} ÷ ${fmt(state.rate,0)} = ` +
         `${fmt(state.ganymedeFull / state.rate,3)} RAW per displayed Ganymede orbit.`;
 
@@ -1591,87 +1557,43 @@ function setModeText(){
 }
 
 async function refreshPhysical(){
-  const p=
-    await fetchJSON(
-      '/api/pulse-box/snapshot'
-    );
-
+  // The existing Core20 natural-model RAW drives all four moon positions.
+  // Arduino RAW and SOURCE_EPOCH are diagnostic, never orbital authority.
+  const response=await fetchJSON('/api/core20/clock');
+  const clock=response.clock || response;
+  const raw=Number(clock.currentClockRawPulse);
+  const domain=String(clock.clockRawDomain || '');
   if (
-    p.STATUS !== 'ACTIVE' ||
-    !Number.isFinite(
-      Number(p.RAW_COUNT)
-    )
-  ){
-    throw new Error(
-      'Physical carrier snapshot invalid'
-    );
-  }
+    clock.status !== 'CORE20_CLOCK_RUNNING' ||
+    domain !== 'EUROPA_NATURAL_MODEL_RAW' ||
+    !Number.isSafeInteger(raw) || raw < 0
+  ) throw new Error('Core20 natural moon coordinate unavailable');
 
-  if (
-    String(p.SOURCE_EPOCH) !==
-    String(state.livePhysicalSourceEpoch)
-  ){
-    throw new Error(
-      `SOURCE_EPOCH changed: expected ${state.livePhysicalSourceEpoch}, ` +
-      `got ${p.SOURCE_EPOCH}`
-    );
-  }
+  const previous=state.naturalRaw;
+  if (previous != null && raw < previous)
+    throw new Error('Core20 natural coordinate moved backward');
 
-  const nextRaw=
-    Number(p.RAW_COUNT);
+  if (state.rate !== 1 && state.simRaw != null && previous != null)
+    state.simRaw += (raw-previous)*state.rate;
+  state.naturalRaw=raw;
 
-  if (
-    state.physicalRaw != null &&
-    nextRaw < state.physicalRaw
-  ){
-    throw new Error(
-      'Physical RAW moved backward'
-    );
-  }
-
-  const previousRaw=
-    state.physicalRaw;
-
-  /*
-   * Simulation receives only measured ΔRAW
-   * multiplied by the selected native rate.
-   */
-  if (
-    state.rate !== 1 &&
-    state.simRaw != null &&
-    previousRaw != null
-  ){
-    state.simRaw +=
-      modelDeltaFromPhysical(
-        nextRaw-previousRaw
-      ) *
-      state.rate;
-  }
-
-  state.physicalRaw=nextRaw;
-
-  state.physicalSequence=
-    Number(p.REPORT_SEQUENCE);
-
-  $('edgeStatus').textContent=
-    p.STATUS;
-
-  $('edgeStatus').className=
-    'v good';
-
-  $('edgeSequence').textContent =
-    Number(
-      p.REPORT_SEQUENCE
-    ).toLocaleString();
-
-  $('edgeRaw').textContent =
-    nextRaw.toLocaleString();
-
-  $('edgeRole').textContent =
-    'READ ONLY';
-
-
-  return p;
+  // Read-only carrier display. Failure here must not hide Jupiter's moons.
+  try {
+    const p=await fetchJSON('/api/pulse-box/snapshot');
+    if (p.STATUS === 'ACTIVE' && Number.isSafeInteger(Number(p.RAW_COUNT))){
+      state.physicalRaw=Number(p.RAW_COUNT);
+      state.physicalSequence=Number(p.REPORT_SEQUENCE);
+      state.livePhysicalSourceEpoch=String(p.SOURCE_EPOCH);
+      $('edgeStatus').textContent=p.STATUS;
+      $('edgeStatus').className='v good';
+      $('edgeSequence').textContent=Number(p.REPORT_SEQUENCE).toLocaleString();
+      $('edgeRaw').textContent=Number(p.RAW_COUNT).toLocaleString();
+      $('edgeRole').textContent='READ ONLY';
+      $('a8-native-source-epoch').textContent=
+        `${state.sourceEpoch} MODEL · ${state.livePhysicalSourceEpoch} CARRIER (DIAGNOSTIC)`;
+    }
+  } catch (e) { console.warn('Physical carrier diagnostic unavailable',e); }
+  return clock;
 }
 
 async function reanchorSkyNow(reason='USER'){
@@ -2211,11 +2133,7 @@ async function bootstrap(){
   $('pageStatus').className =
     'status warn';
 
-  const [cfg,handoff]=
-    await Promise.all([
-      fetchJSON(MODEL_URL),
-      fetchJSON(HANDOFF_URL)
-    ]);
+  const cfg=await fetchJSON(MODEL_URL);
 
   if (
     cfg.schema !==
@@ -2232,58 +2150,10 @@ async function bootstrap(){
   state.sourceEpoch=
     String(cfg.sourceEpoch);
 
-  const handoffLiveEpoch =
-    Number(
-      handoff?.livePhysical?.sourceEpoch
-    );
-
-  const handoffLiveAnchor =
-    Number(
-      handoff?.livePhysical?.anchorRaw
-    );
-
-  const handoffModelAnchor =
-    Number(
-      handoff?.modelAnchor
-        ?.rawEquivalentAtPhysicalAnchor
-    );
-
-  const handoffRatioN =
-    Number(
-      handoff?.physicalToModelRatio
-        ?.numerator
-    );
-
-  const handoffRatioD =
-    Number(
-      handoff?.physicalToModelRatio
-        ?.denominator
-    );
-
-  if (
-    handoff.schema !==
-      'A8-MOONS-PHYSICAL-MODEL-HANDOFF-V1' ||
-    handoff.status !== 'QUALIFIED' ||
-    String(handoff.model.sourceEpoch) !==
-      String(cfg.sourceEpoch) ||
-    !Number.isSafeInteger(handoffLiveEpoch) ||
-    handoffLiveEpoch < 1 ||
-    !Number.isFinite(handoffLiveAnchor) ||
-    !Number.isFinite(handoffModelAnchor) ||
-    handoffRatioN !== 1 ||
-    handoffRatioD !== 1
-  ){
-    throw new Error(
-      'Active physical moon handoff invalid'
-    );
-  }
-
-  state.handoff=handoff;
-
-  state.livePhysicalSourceEpoch=
-    String(
-      handoff.livePhysical.sourceEpoch
-    );
+  // Astronomical geometry is NOT qualified by Arduino SOURCE_EPOCH.
+  // Physical epoch remains a separate transport diagnostic.
+  state.handoff=null;
+  state.livePhysicalSourceEpoch='CARRIER DIAGNOSTIC';
 
   const defs=[
     ['IO','io','Io'],
@@ -2320,9 +2190,7 @@ async function bootstrap(){
   for (const moon of state.moons)
     nativeAtRaw(
       moon,
-      modelRawFromPhysical(
-        state.physicalRaw
-      )
+      state.naturalRaw
     );
 
   state.ready=true;

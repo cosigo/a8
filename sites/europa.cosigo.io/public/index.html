@@ -1396,7 +1396,6 @@ body::after{
 'use strict';
 
 const MODEL_URL='/assets/a8-moons-continuous-v2.json';
-const HANDOFF_URL='/assets/a8-moons-active-handoff-v1.json';
 const Q16=65536;
 const NATURAL_RAW=Object.freeze({
   IO:4650745,
@@ -1410,7 +1409,6 @@ const mod=(n,m)=>((n % m)+m)%m;
 
 const state={
   model:null,
-  handoff:null,
   tracks:{}
 };
 
@@ -1512,31 +1510,18 @@ function positionAt(body, modelRaw){
   };
 }
 
-function modelRawFromJovian(jov){
-  const h=state.handoff;
-  if(!h) throw new Error('ACTIVE MOON HANDOFF NOT READY');
-
-  const liveEpoch=String(jov?.physical?.sourceEpoch ?? '');
-  const handoffEpoch=String(h?.livePhysical?.sourceEpoch ?? '');
-
-  if(!liveEpoch || liveEpoch!==handoffEpoch){
-    throw new Error(`SOURCE_EPOCH MISMATCH · LIVE ${liveEpoch || '—'} · HANDOFF ${handoffEpoch || '—'}`);
-  }
-
-  const raw=Number(jov?.physical?.currentRaw);
-  const anchorRaw=Number(h.livePhysical.anchorRaw);
-  const modelAnchor=Number(h.modelAnchor.rawEquivalentAtPhysicalAnchor);
-  const num=Number(h.physicalToModelRatio.numerator);
-  const den=Number(h.physicalToModelRatio.denominator);
-
-  if(!Number.isFinite(raw)||!Number.isFinite(anchorRaw)||!Number.isFinite(modelAnchor)||!Number.isFinite(num)||!Number.isFinite(den)||den===0){
-    throw new Error('INVALID PHYSICAL → MODEL HANDOFF');
-  }
-
-  return modelAnchor + (raw-anchorRaw)*num/den;
+function modelRawFromCore20(core){
+  // Core20 exposes the existing EUROPA_NATURAL_MODEL_RAW coordinate.
+  // A/B SOURCE_EPOCH belongs to carrier diagnostics, never to moon geometry.
+  const domain=String(core?.clockRawDomain ?? '');
+  const raw=Number(core?.currentClockRawPulse);
+  if (
+    core?.status !== 'CORE20_CLOCK_RUNNING' ||
+    domain !== 'EUROPA_NATURAL_MODEL_RAW' ||
+    !Number.isSafeInteger(raw) || raw < 0
+  ) throw new Error('CORE20 NATURAL MOON COORDINATE UNAVAILABLE');
+  return raw;
 }
-
-
 /* ===== A8 OBSERVER LEG FROM SEALED TRACK DIRECTION V1 ===== */
 function a8ApplyObserverLeg(body,leg){
   const node=document.querySelector(`.live-moon[data-body="${body}"]`);
@@ -1598,20 +1583,13 @@ function renderWitness(idPrefix,lane){
 }
 
 async function initializeModel(){
-  const [model,handoff]=await Promise.all([
-    fetchJSON(MODEL_URL),
-    fetchJSON(HANDOFF_URL)
-  ]);
+  const model=await fetchJSON(MODEL_URL);
 
   if(model?.schema!=='A8-MOONS-CONTINUOUS-COORDINATES-V2'){
     throw new Error('UNEXPECTED MOON MODEL SCHEMA');
   }
-  if(handoff?.schema!=='A8-MOONS-PHYSICAL-MODEL-HANDOFF-V1' || handoff?.status!=='QUALIFIED'){
-    throw new Error('ACTIVE MOON HANDOFF NOT QUALIFIED');
-  }
 
   state.model=model;
-  state.handoff=handoff;
 
   for(const body of ['IO','EUROPA','GANYMEDE','CALLISTO']){
     prepareTrack(body);
@@ -1710,7 +1688,7 @@ function renderCore20ClockFrame(){
 
 async function update(forceObserver=false){
   try{
-    if(!state.model || !state.handoff){
+    if(!state.model){
       await initializeModel();
     }
 
@@ -1753,7 +1731,7 @@ async function update(forceObserver=false){
       }
     }
 
-    const modelRaw=modelRawFromJovian(jov);
+    const modelRaw=modelRawFromCore20(core);
 
     const io=positionAt('IO',modelRaw);
     const europa=positionAt('EUROPA',modelRaw);
