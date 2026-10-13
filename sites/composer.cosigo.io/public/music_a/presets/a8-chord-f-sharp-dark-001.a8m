@@ -1,0 +1,103 @@
+{
+  "format": "A8M-1",
+  "schema": "A8-MUSIC-DRAG-BARS-V1",
+  "title": "A8 CHORD \u00b7 F# \u00b7 A \u00b7 C#",
+  "barLengthA8": "4",
+  "nativeSubdivision": "1/16 A8 second",
+  "nativeSlotsPerBar": 64,
+  "pitchUnit": "cycles / A8 second",
+  "timing": {
+    "restsExplicit": true,
+    "hiddenBrowserIntervals": false,
+    "browserDragDefinesTime": false,
+    "eventOrderDefinesPlacement": true,
+    "jovianRateRelationship": "1:2:4"
+  },
+  "noteReference": {
+    "referenceOctave": "A8 0",
+    "exactCyclesPerA8Second": {
+      "A": "290",
+      "A#": "307",
+      "B": "325",
+      "C": "345",
+      "C#": "365",
+      "D": "387",
+      "D#": "410",
+      "E": "435",
+      "F": "460",
+      "F#": "487",
+      "G": "516",
+      "G#": "548"
+    },
+    "octaveRule": "exact 2:1"
+  },
+  "preset": {
+    "id": "A8-CHORD-F-SHARP-DARK-001",
+    "kind": "chord",
+    "shape": "DARK",
+    "root": "F#",
+    "noteGroup": "F# \u00b7 A \u00b7 C#",
+    "readonlySource": true,
+    "timingPolicy": "A8_NATIVE_ONLY"
+  },
+  "bars": [],
+  "layers": {
+    "C": {
+      "role": "CHORDS",
+      "placement": "BAR_ADDRESS",
+      "events": [
+        {
+          "type": "note",
+          "layer": "C",
+          "bar": 1,
+          "chordId": "A8-CHORD-F-SHARP-DARK-001",
+          "chordLabel": "F# \u00b7 A \u00b7 C#",
+          "label": "F#",
+          "noteName": "F#",
+          "octaveShift": 0,
+          "cyclesPerA8Second": "487",
+          "startA8": "0/16",
+          "durationA8": "4",
+          "endA8": "4",
+          "waveform": "triangle",
+          "motion": "steady",
+          "gain": 0.2
+        },
+        {
+          "type": "note",
+          "layer": "C",
+          "bar": 1,
+          "chordId": "A8-CHORD-F-SHARP-DARK-001",
+          "chordLabel": "F# \u00b7 A \u00b7 C#",
+          "label": "A +1",
+          "noteName": "A",
+          "octaveShift": 1,
+          "cyclesPerA8Second": "580",
+          "startA8": "0/16",
+          "durationA8": "4",
+          "endA8": "4",
+          "waveform": "triangle",
+          "motion": "steady",
+          "gain": 0.2
+        },
+        {
+          "type": "note",
+          "layer": "C",
+          "bar": 1,
+          "chordId": "A8-CHORD-F-SHARP-DARK-001",
+          "chordLabel": "F# \u00b7 A \u00b7 C#",
+          "label": "C# +1",
+          "noteName": "C#",
+          "octaveShift": 1,
+          "cyclesPerA8Second": "730",
+          "startA8": "0/16",
+          "durationA8": "4",
+          "endA8": "4",
+          "waveform": "triangle",
+          "motion": "steady",
+          "gain": 0.2
+        }
+      ]
+    }
+  }
+}

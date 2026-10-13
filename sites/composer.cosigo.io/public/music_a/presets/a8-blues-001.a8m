@@ -1,0 +1,1442 @@
+{
+  "format": "A8M-1",
+  "schema": "A8-MUSIC-DRAG-BARS-V1",
+  "title": "A8 BLUES 001 \u00b7 DRUM PRESET",
+  "barLengthA8": "4",
+  "nativeSubdivision": "1/16 A8 second",
+  "nativeSlotsPerBar": 64,
+  "pitchUnit": "cycles / A8 second",
+  "preset": {
+    "id": "A8-BLUES-001",
+    "kind": "drum",
+    "readonlySource": true,
+    "phraseBars": 8,
+    "nativeSlots": 512,
+    "basis": "long-short native spacing with relaxed backbeat colors",
+    "timingPolicy": "A8_NATIVE_ONLY_NO_EXTERNAL_TEMPO"
+  },
+  "timing": {
+    "restsExplicit": true,
+    "hiddenBrowserIntervals": false,
+    "browserDragDefinesTime": false,
+    "eventOrderDefinesPlacement": true
+  },
+  "bars": [
+    {
+      "bar": 1,
+      "complete": true,
+      "durationA8": "4",
+      "events": [
+        {
+          "type": "note",
+          "label": "BLUES 001 \u00b7 LOW",
+          "startA8": "0/16",
+          "durationA8": "2/16",
+          "endA8": "2/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "96",
+          "waveform": "sine",
+          "motion": "fall",
+          "gain": 0.72
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "2/16",
+          "durationA8": "9/16",
+          "endA8": "11/16"
+        },
+        {
+          "type": "note",
+          "label": "BLUES 001 \u00b7 HIGH",
+          "startA8": "11/16",
+          "durationA8": "1/16",
+          "endA8": "12/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "1536",
+          "waveform": "sawtooth",
+          "motion": "fall",
+          "gain": 0.27
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "12/16",
+          "durationA8": "4/16",
+          "endA8": "16/16"
+        },
+        {
+          "type": "note",
+          "label": "BLUES 001 \u00b7 MID",
+          "startA8": "16/16",
+          "durationA8": "1/16",
+          "endA8": "17/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "384",
+          "waveform": "square",
+          "motion": "fall",
+          "gain": 0.5
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "17/16",
+          "durationA8": "10/16",
+          "endA8": "27/16"
+        },
+        {
+          "type": "note",
+          "label": "BLUES 001 \u00b7 HIGH",
+          "startA8": "27/16",
+          "durationA8": "1/16",
+          "endA8": "28/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "1536",
+          "waveform": "sawtooth",
+          "motion": "fall",
+          "gain": 0.27
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "28/16",
+          "durationA8": "4/16",
+          "endA8": "32/16"
+        },
+        {
+          "type": "note",
+          "label": "BLUES 001 \u00b7 LOW",
+          "startA8": "32/16",
+          "durationA8": "2/16",
+          "endA8": "34/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "96",
+          "waveform": "sine",
+          "motion": "fall",
+          "gain": 0.72
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "34/16",
+          "durationA8": "9/16",
+          "endA8": "43/16"
+        },
+        {
+          "type": "note",
+          "label": "BLUES 001 \u00b7 HIGH",
+          "startA8": "43/16",
+          "durationA8": "1/16",
+          "endA8": "44/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "1536",
+          "waveform": "sawtooth",
+          "motion": "fall",
+          "gain": 0.27
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "44/16",
+          "durationA8": "4/16",
+          "endA8": "48/16"
+        },
+        {
+          "type": "note",
+          "label": "BLUES 001 \u00b7 MID",
+          "startA8": "48/16",
+          "durationA8": "1/16",
+          "endA8": "49/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "384",
+          "waveform": "square",
+          "motion": "fall",
+          "gain": 0.5
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "49/16",
+          "durationA8": "10/16",
+          "endA8": "59/16"
+        },
+        {
+          "type": "note",
+          "label": "BLUES 001 \u00b7 HIGH",
+          "startA8": "59/16",
+          "durationA8": "1/16",
+          "endA8": "60/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "1536",
+          "waveform": "sawtooth",
+          "motion": "fall",
+          "gain": 0.27
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "60/16",
+          "durationA8": "4/16",
+          "endA8": "4"
+        }
+      ]
+    },
+    {
+      "bar": 2,
+      "complete": true,
+      "durationA8": "4",
+      "events": [
+        {
+          "type": "note",
+          "label": "BLUES 001 \u00b7 LOW",
+          "startA8": "0/16",
+          "durationA8": "2/16",
+          "endA8": "2/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "96",
+          "waveform": "sine",
+          "motion": "fall",
+          "gain": 0.72
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "2/16",
+          "durationA8": "9/16",
+          "endA8": "11/16"
+        },
+        {
+          "type": "note",
+          "label": "BLUES 001 \u00b7 HIGH",
+          "startA8": "11/16",
+          "durationA8": "1/16",
+          "endA8": "12/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "1536",
+          "waveform": "sawtooth",
+          "motion": "fall",
+          "gain": 0.27
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "12/16",
+          "durationA8": "4/16",
+          "endA8": "16/16"
+        },
+        {
+          "type": "note",
+          "label": "BLUES 001 \u00b7 MID",
+          "startA8": "16/16",
+          "durationA8": "1/16",
+          "endA8": "17/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "384",
+          "waveform": "square",
+          "motion": "fall",
+          "gain": 0.5
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "17/16",
+          "durationA8": "10/16",
+          "endA8": "27/16"
+        },
+        {
+          "type": "note",
+          "label": "BLUES 001 \u00b7 HIGH",
+          "startA8": "27/16",
+          "durationA8": "1/16",
+          "endA8": "28/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "1536",
+          "waveform": "sawtooth",
+          "motion": "fall",
+          "gain": 0.27
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "28/16",
+          "durationA8": "4/16",
+          "endA8": "32/16"
+        },
+        {
+          "type": "note",
+          "label": "BLUES 001 \u00b7 LOW",
+          "startA8": "32/16",
+          "durationA8": "2/16",
+          "endA8": "34/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "96",
+          "waveform": "sine",
+          "motion": "fall",
+          "gain": 0.72
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "34/16",
+          "durationA8": "9/16",
+          "endA8": "43/16"
+        },
+        {
+          "type": "note",
+          "label": "BLUES 001 \u00b7 HIGH",
+          "startA8": "43/16",
+          "durationA8": "1/16",
+          "endA8": "44/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "1536",
+          "waveform": "sawtooth",
+          "motion": "fall",
+          "gain": 0.27
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "44/16",
+          "durationA8": "4/16",
+          "endA8": "48/16"
+        },
+        {
+          "type": "note",
+          "label": "BLUES 001 \u00b7 MID",
+          "startA8": "48/16",
+          "durationA8": "1/16",
+          "endA8": "49/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "384",
+          "waveform": "square",
+          "motion": "fall",
+          "gain": 0.5
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "49/16",
+          "durationA8": "10/16",
+          "endA8": "59/16"
+        },
+        {
+          "type": "note",
+          "label": "BLUES 001 \u00b7 HIGH",
+          "startA8": "59/16",
+          "durationA8": "1/16",
+          "endA8": "60/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "1536",
+          "waveform": "sawtooth",
+          "motion": "fall",
+          "gain": 0.27
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "60/16",
+          "durationA8": "4/16",
+          "endA8": "4"
+        }
+      ]
+    },
+    {
+      "bar": 3,
+      "complete": true,
+      "durationA8": "4",
+      "events": [
+        {
+          "type": "note",
+          "label": "BLUES 001 \u00b7 LOW",
+          "startA8": "0/16",
+          "durationA8": "2/16",
+          "endA8": "2/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "96",
+          "waveform": "sine",
+          "motion": "fall",
+          "gain": 0.72
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "2/16",
+          "durationA8": "9/16",
+          "endA8": "11/16"
+        },
+        {
+          "type": "note",
+          "label": "BLUES 001 \u00b7 HIGH",
+          "startA8": "11/16",
+          "durationA8": "1/16",
+          "endA8": "12/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "1536",
+          "waveform": "sawtooth",
+          "motion": "fall",
+          "gain": 0.27
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "12/16",
+          "durationA8": "4/16",
+          "endA8": "16/16"
+        },
+        {
+          "type": "note",
+          "label": "BLUES 001 \u00b7 MID",
+          "startA8": "16/16",
+          "durationA8": "1/16",
+          "endA8": "17/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "384",
+          "waveform": "square",
+          "motion": "fall",
+          "gain": 0.5
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "17/16",
+          "durationA8": "10/16",
+          "endA8": "27/16"
+        },
+        {
+          "type": "note",
+          "label": "BLUES 001 \u00b7 HIGH",
+          "startA8": "27/16",
+          "durationA8": "1/16",
+          "endA8": "28/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "1536",
+          "waveform": "sawtooth",
+          "motion": "fall",
+          "gain": 0.27
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "28/16",
+          "durationA8": "4/16",
+          "endA8": "32/16"
+        },
+        {
+          "type": "note",
+          "label": "BLUES 001 \u00b7 LOW",
+          "startA8": "32/16",
+          "durationA8": "2/16",
+          "endA8": "34/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "96",
+          "waveform": "sine",
+          "motion": "fall",
+          "gain": 0.72
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "34/16",
+          "durationA8": "9/16",
+          "endA8": "43/16"
+        },
+        {
+          "type": "note",
+          "label": "BLUES 001 \u00b7 HIGH",
+          "startA8": "43/16",
+          "durationA8": "1/16",
+          "endA8": "44/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "1536",
+          "waveform": "sawtooth",
+          "motion": "fall",
+          "gain": 0.27
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "44/16",
+          "durationA8": "4/16",
+          "endA8": "48/16"
+        },
+        {
+          "type": "note",
+          "label": "BLUES 001 \u00b7 MID",
+          "startA8": "48/16",
+          "durationA8": "1/16",
+          "endA8": "49/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "384",
+          "waveform": "square",
+          "motion": "fall",
+          "gain": 0.5
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "49/16",
+          "durationA8": "10/16",
+          "endA8": "59/16"
+        },
+        {
+          "type": "note",
+          "label": "BLUES 001 \u00b7 HIGH",
+          "startA8": "59/16",
+          "durationA8": "1/16",
+          "endA8": "60/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "1536",
+          "waveform": "sawtooth",
+          "motion": "fall",
+          "gain": 0.27
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "60/16",
+          "durationA8": "4/16",
+          "endA8": "4"
+        }
+      ]
+    },
+    {
+      "bar": 4,
+      "complete": true,
+      "durationA8": "4",
+      "events": [
+        {
+          "type": "note",
+          "label": "BLUES 001 \u00b7 LOW",
+          "startA8": "0/16",
+          "durationA8": "2/16",
+          "endA8": "2/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "96",
+          "waveform": "sine",
+          "motion": "fall",
+          "gain": 0.72
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "2/16",
+          "durationA8": "9/16",
+          "endA8": "11/16"
+        },
+        {
+          "type": "note",
+          "label": "BLUES 001 \u00b7 HIGH",
+          "startA8": "11/16",
+          "durationA8": "1/16",
+          "endA8": "12/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "1536",
+          "waveform": "sawtooth",
+          "motion": "fall",
+          "gain": 0.27
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "12/16",
+          "durationA8": "4/16",
+          "endA8": "16/16"
+        },
+        {
+          "type": "note",
+          "label": "BLUES 001 \u00b7 MID",
+          "startA8": "16/16",
+          "durationA8": "1/16",
+          "endA8": "17/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "384",
+          "waveform": "square",
+          "motion": "fall",
+          "gain": 0.5
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "17/16",
+          "durationA8": "10/16",
+          "endA8": "27/16"
+        },
+        {
+          "type": "note",
+          "label": "BLUES 001 \u00b7 HIGH",
+          "startA8": "27/16",
+          "durationA8": "1/16",
+          "endA8": "28/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "1536",
+          "waveform": "sawtooth",
+          "motion": "fall",
+          "gain": 0.27
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "28/16",
+          "durationA8": "4/16",
+          "endA8": "32/16"
+        },
+        {
+          "type": "note",
+          "label": "BLUES 001 \u00b7 LOW",
+          "startA8": "32/16",
+          "durationA8": "2/16",
+          "endA8": "34/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "96",
+          "waveform": "sine",
+          "motion": "fall",
+          "gain": 0.72
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "34/16",
+          "durationA8": "9/16",
+          "endA8": "43/16"
+        },
+        {
+          "type": "note",
+          "label": "BLUES 001 \u00b7 HIGH",
+          "startA8": "43/16",
+          "durationA8": "1/16",
+          "endA8": "44/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "1536",
+          "waveform": "sawtooth",
+          "motion": "fall",
+          "gain": 0.27
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "44/16",
+          "durationA8": "4/16",
+          "endA8": "48/16"
+        },
+        {
+          "type": "note",
+          "label": "BLUES 001 \u00b7 MID",
+          "startA8": "48/16",
+          "durationA8": "1/16",
+          "endA8": "49/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "384",
+          "waveform": "square",
+          "motion": "fall",
+          "gain": 0.5
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "49/16",
+          "durationA8": "5/16",
+          "endA8": "54/16"
+        },
+        {
+          "type": "note",
+          "label": "BLUES 001 \u00b7 RIM",
+          "startA8": "54/16",
+          "durationA8": "1/16",
+          "endA8": "55/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "768",
+          "waveform": "triangle",
+          "motion": "fall",
+          "gain": 0.38
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "55/16",
+          "durationA8": "4/16",
+          "endA8": "59/16"
+        },
+        {
+          "type": "note",
+          "label": "BLUES 001 \u00b7 HIGH",
+          "startA8": "59/16",
+          "durationA8": "1/16",
+          "endA8": "60/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "1536",
+          "waveform": "sawtooth",
+          "motion": "fall",
+          "gain": 0.27
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "60/16",
+          "durationA8": "2/16",
+          "endA8": "62/16"
+        },
+        {
+          "type": "note",
+          "label": "BLUES 001 \u00b7 RIM",
+          "startA8": "62/16",
+          "durationA8": "1/16",
+          "endA8": "63/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "768",
+          "waveform": "triangle",
+          "motion": "fall",
+          "gain": 0.38
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "63/16",
+          "durationA8": "1/16",
+          "endA8": "4"
+        }
+      ]
+    },
+    {
+      "bar": 5,
+      "complete": true,
+      "durationA8": "4",
+      "events": [
+        {
+          "type": "note",
+          "label": "BLUES 001 \u00b7 LOW",
+          "startA8": "0/16",
+          "durationA8": "2/16",
+          "endA8": "2/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "96",
+          "waveform": "sine",
+          "motion": "fall",
+          "gain": 0.72
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "2/16",
+          "durationA8": "9/16",
+          "endA8": "11/16"
+        },
+        {
+          "type": "note",
+          "label": "BLUES 001 \u00b7 HIGH",
+          "startA8": "11/16",
+          "durationA8": "1/16",
+          "endA8": "12/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "1536",
+          "waveform": "sawtooth",
+          "motion": "fall",
+          "gain": 0.27
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "12/16",
+          "durationA8": "4/16",
+          "endA8": "16/16"
+        },
+        {
+          "type": "note",
+          "label": "BLUES 001 \u00b7 MID",
+          "startA8": "16/16",
+          "durationA8": "1/16",
+          "endA8": "17/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "384",
+          "waveform": "square",
+          "motion": "fall",
+          "gain": 0.5
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "17/16",
+          "durationA8": "10/16",
+          "endA8": "27/16"
+        },
+        {
+          "type": "note",
+          "label": "BLUES 001 \u00b7 HIGH",
+          "startA8": "27/16",
+          "durationA8": "1/16",
+          "endA8": "28/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "1536",
+          "waveform": "sawtooth",
+          "motion": "fall",
+          "gain": 0.27
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "28/16",
+          "durationA8": "4/16",
+          "endA8": "32/16"
+        },
+        {
+          "type": "note",
+          "label": "BLUES 001 \u00b7 LOW",
+          "startA8": "32/16",
+          "durationA8": "2/16",
+          "endA8": "34/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "96",
+          "waveform": "sine",
+          "motion": "fall",
+          "gain": 0.72
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "34/16",
+          "durationA8": "9/16",
+          "endA8": "43/16"
+        },
+        {
+          "type": "note",
+          "label": "BLUES 001 \u00b7 HIGH",
+          "startA8": "43/16",
+          "durationA8": "1/16",
+          "endA8": "44/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "1536",
+          "waveform": "sawtooth",
+          "motion": "fall",
+          "gain": 0.27
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "44/16",
+          "durationA8": "4/16",
+          "endA8": "48/16"
+        },
+        {
+          "type": "note",
+          "label": "BLUES 001 \u00b7 MID",
+          "startA8": "48/16",
+          "durationA8": "1/16",
+          "endA8": "49/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "384",
+          "waveform": "square",
+          "motion": "fall",
+          "gain": 0.5
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "49/16",
+          "durationA8": "10/16",
+          "endA8": "59/16"
+        },
+        {
+          "type": "note",
+          "label": "BLUES 001 \u00b7 HIGH",
+          "startA8": "59/16",
+          "durationA8": "1/16",
+          "endA8": "60/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "1536",
+          "waveform": "sawtooth",
+          "motion": "fall",
+          "gain": 0.27
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "60/16",
+          "durationA8": "4/16",
+          "endA8": "4"
+        }
+      ]
+    },
+    {
+      "bar": 6,
+      "complete": true,
+      "durationA8": "4",
+      "events": [
+        {
+          "type": "note",
+          "label": "BLUES 001 \u00b7 LOW",
+          "startA8": "0/16",
+          "durationA8": "2/16",
+          "endA8": "2/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "96",
+          "waveform": "sine",
+          "motion": "fall",
+          "gain": 0.72
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "2/16",
+          "durationA8": "9/16",
+          "endA8": "11/16"
+        },
+        {
+          "type": "note",
+          "label": "BLUES 001 \u00b7 HIGH",
+          "startA8": "11/16",
+          "durationA8": "1/16",
+          "endA8": "12/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "1536",
+          "waveform": "sawtooth",
+          "motion": "fall",
+          "gain": 0.27
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "12/16",
+          "durationA8": "4/16",
+          "endA8": "16/16"
+        },
+        {
+          "type": "note",
+          "label": "BLUES 001 \u00b7 MID",
+          "startA8": "16/16",
+          "durationA8": "1/16",
+          "endA8": "17/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "384",
+          "waveform": "square",
+          "motion": "fall",
+          "gain": 0.5
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "17/16",
+          "durationA8": "10/16",
+          "endA8": "27/16"
+        },
+        {
+          "type": "note",
+          "label": "BLUES 001 \u00b7 HIGH",
+          "startA8": "27/16",
+          "durationA8": "1/16",
+          "endA8": "28/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "1536",
+          "waveform": "sawtooth",
+          "motion": "fall",
+          "gain": 0.27
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "28/16",
+          "durationA8": "4/16",
+          "endA8": "32/16"
+        },
+        {
+          "type": "note",
+          "label": "BLUES 001 \u00b7 LOW",
+          "startA8": "32/16",
+          "durationA8": "2/16",
+          "endA8": "34/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "96",
+          "waveform": "sine",
+          "motion": "fall",
+          "gain": 0.72
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "34/16",
+          "durationA8": "9/16",
+          "endA8": "43/16"
+        },
+        {
+          "type": "note",
+          "label": "BLUES 001 \u00b7 HIGH",
+          "startA8": "43/16",
+          "durationA8": "1/16",
+          "endA8": "44/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "1536",
+          "waveform": "sawtooth",
+          "motion": "fall",
+          "gain": 0.27
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "44/16",
+          "durationA8": "4/16",
+          "endA8": "48/16"
+        },
+        {
+          "type": "note",
+          "label": "BLUES 001 \u00b7 MID",
+          "startA8": "48/16",
+          "durationA8": "1/16",
+          "endA8": "49/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "384",
+          "waveform": "square",
+          "motion": "fall",
+          "gain": 0.5
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "49/16",
+          "durationA8": "10/16",
+          "endA8": "59/16"
+        },
+        {
+          "type": "note",
+          "label": "BLUES 001 \u00b7 HIGH",
+          "startA8": "59/16",
+          "durationA8": "1/16",
+          "endA8": "60/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "1536",
+          "waveform": "sawtooth",
+          "motion": "fall",
+          "gain": 0.27
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "60/16",
+          "durationA8": "4/16",
+          "endA8": "4"
+        }
+      ]
+    },
+    {
+      "bar": 7,
+      "complete": true,
+      "durationA8": "4",
+      "events": [
+        {
+          "type": "note",
+          "label": "BLUES 001 \u00b7 LOW",
+          "startA8": "0/16",
+          "durationA8": "2/16",
+          "endA8": "2/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "96",
+          "waveform": "sine",
+          "motion": "fall",
+          "gain": 0.72
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "2/16",
+          "durationA8": "9/16",
+          "endA8": "11/16"
+        },
+        {
+          "type": "note",
+          "label": "BLUES 001 \u00b7 HIGH",
+          "startA8": "11/16",
+          "durationA8": "1/16",
+          "endA8": "12/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "1536",
+          "waveform": "sawtooth",
+          "motion": "fall",
+          "gain": 0.27
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "12/16",
+          "durationA8": "4/16",
+          "endA8": "16/16"
+        },
+        {
+          "type": "note",
+          "label": "BLUES 001 \u00b7 MID",
+          "startA8": "16/16",
+          "durationA8": "1/16",
+          "endA8": "17/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "384",
+          "waveform": "square",
+          "motion": "fall",
+          "gain": 0.5
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "17/16",
+          "durationA8": "10/16",
+          "endA8": "27/16"
+        },
+        {
+          "type": "note",
+          "label": "BLUES 001 \u00b7 HIGH",
+          "startA8": "27/16",
+          "durationA8": "1/16",
+          "endA8": "28/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "1536",
+          "waveform": "sawtooth",
+          "motion": "fall",
+          "gain": 0.27
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "28/16",
+          "durationA8": "4/16",
+          "endA8": "32/16"
+        },
+        {
+          "type": "note",
+          "label": "BLUES 001 \u00b7 LOW",
+          "startA8": "32/16",
+          "durationA8": "2/16",
+          "endA8": "34/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "96",
+          "waveform": "sine",
+          "motion": "fall",
+          "gain": 0.72
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "34/16",
+          "durationA8": "9/16",
+          "endA8": "43/16"
+        },
+        {
+          "type": "note",
+          "label": "BLUES 001 \u00b7 HIGH",
+          "startA8": "43/16",
+          "durationA8": "1/16",
+          "endA8": "44/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "1536",
+          "waveform": "sawtooth",
+          "motion": "fall",
+          "gain": 0.27
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "44/16",
+          "durationA8": "4/16",
+          "endA8": "48/16"
+        },
+        {
+          "type": "note",
+          "label": "BLUES 001 \u00b7 MID",
+          "startA8": "48/16",
+          "durationA8": "1/16",
+          "endA8": "49/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "384",
+          "waveform": "square",
+          "motion": "fall",
+          "gain": 0.5
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "49/16",
+          "durationA8": "10/16",
+          "endA8": "59/16"
+        },
+        {
+          "type": "note",
+          "label": "BLUES 001 \u00b7 HIGH",
+          "startA8": "59/16",
+          "durationA8": "1/16",
+          "endA8": "60/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "1536",
+          "waveform": "sawtooth",
+          "motion": "fall",
+          "gain": 0.27
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "60/16",
+          "durationA8": "4/16",
+          "endA8": "4"
+        }
+      ]
+    },
+    {
+      "bar": 8,
+      "complete": true,
+      "durationA8": "4",
+      "events": [
+        {
+          "type": "note",
+          "label": "BLUES 001 \u00b7 LOW",
+          "startA8": "0/16",
+          "durationA8": "2/16",
+          "endA8": "2/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "96",
+          "waveform": "sine",
+          "motion": "fall",
+          "gain": 0.72
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "2/16",
+          "durationA8": "9/16",
+          "endA8": "11/16"
+        },
+        {
+          "type": "note",
+          "label": "BLUES 001 \u00b7 HIGH",
+          "startA8": "11/16",
+          "durationA8": "1/16",
+          "endA8": "12/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "1536",
+          "waveform": "sawtooth",
+          "motion": "fall",
+          "gain": 0.27
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "12/16",
+          "durationA8": "4/16",
+          "endA8": "16/16"
+        },
+        {
+          "type": "note",
+          "label": "BLUES 001 \u00b7 MID",
+          "startA8": "16/16",
+          "durationA8": "1/16",
+          "endA8": "17/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "384",
+          "waveform": "square",
+          "motion": "fall",
+          "gain": 0.5
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "17/16",
+          "durationA8": "10/16",
+          "endA8": "27/16"
+        },
+        {
+          "type": "note",
+          "label": "BLUES 001 \u00b7 HIGH",
+          "startA8": "27/16",
+          "durationA8": "1/16",
+          "endA8": "28/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "1536",
+          "waveform": "sawtooth",
+          "motion": "fall",
+          "gain": 0.27
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "28/16",
+          "durationA8": "4/16",
+          "endA8": "32/16"
+        },
+        {
+          "type": "note",
+          "label": "BLUES 001 \u00b7 LOW",
+          "startA8": "32/16",
+          "durationA8": "2/16",
+          "endA8": "34/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "96",
+          "waveform": "sine",
+          "motion": "fall",
+          "gain": 0.72
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "34/16",
+          "durationA8": "9/16",
+          "endA8": "43/16"
+        },
+        {
+          "type": "note",
+          "label": "BLUES 001 \u00b7 HIGH",
+          "startA8": "43/16",
+          "durationA8": "1/16",
+          "endA8": "44/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "1536",
+          "waveform": "sawtooth",
+          "motion": "fall",
+          "gain": 0.27
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "44/16",
+          "durationA8": "4/16",
+          "endA8": "48/16"
+        },
+        {
+          "type": "note",
+          "label": "BLUES 001 \u00b7 MID",
+          "startA8": "48/16",
+          "durationA8": "1/16",
+          "endA8": "49/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "384",
+          "waveform": "square",
+          "motion": "fall",
+          "gain": 0.5
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "49/16",
+          "durationA8": "5/16",
+          "endA8": "54/16"
+        },
+        {
+          "type": "note",
+          "label": "BLUES 001 \u00b7 RIM",
+          "startA8": "54/16",
+          "durationA8": "1/16",
+          "endA8": "55/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "768",
+          "waveform": "triangle",
+          "motion": "fall",
+          "gain": 0.38
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "55/16",
+          "durationA8": "4/16",
+          "endA8": "59/16"
+        },
+        {
+          "type": "note",
+          "label": "BLUES 001 \u00b7 HIGH",
+          "startA8": "59/16",
+          "durationA8": "1/16",
+          "endA8": "60/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "1536",
+          "waveform": "sawtooth",
+          "motion": "fall",
+          "gain": 0.27
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "60/16",
+          "durationA8": "2/16",
+          "endA8": "62/16"
+        },
+        {
+          "type": "note",
+          "label": "BLUES 001 \u00b7 RIM",
+          "startA8": "62/16",
+          "durationA8": "1/16",
+          "endA8": "63/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "768",
+          "waveform": "triangle",
+          "motion": "fall",
+          "gain": 0.38
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "63/16",
+          "durationA8": "1/16",
+          "endA8": "4"
+        }
+      ]
+    }
+  ]
+}

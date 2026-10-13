@@ -1,0 +1,1083 @@
+{
+  "format": "A8M-1",
+  "schema": "A8-MUSIC-DRAG-BARS-V1",
+  "title": "A8 SALSA 001 \u00b7 DRUM PRESET",
+  "barLengthA8": "4",
+  "nativeSubdivision": "1/16 A8 second",
+  "nativeSlotsPerBar": 64,
+  "pitchUnit": "cycles / A8 second",
+  "preset": {
+    "id": "A8-SALSA-001",
+    "kind": "drum",
+    "readonlySource": true,
+    "phraseBars": 8,
+    "nativeSlots": 512,
+    "basis": "two-bar clave/cascara-inspired percussion relationship",
+    "timingPolicy": "A8_NATIVE_ONLY_NO_EXTERNAL_TEMPO"
+  },
+  "timing": {
+    "restsExplicit": true,
+    "hiddenBrowserIntervals": false,
+    "browserDragDefinesTime": false,
+    "eventOrderDefinesPlacement": true
+  },
+  "bars": [
+    {
+      "bar": 1,
+      "complete": true,
+      "durationA8": "4",
+      "events": [
+        {
+          "type": "note",
+          "label": "SALSA 001 \u00b7 LOW",
+          "startA8": "0/16",
+          "durationA8": "2/16",
+          "endA8": "2/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "96",
+          "waveform": "sine",
+          "motion": "fall",
+          "gain": 0.72
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "2/16",
+          "durationA8": "10/16",
+          "endA8": "12/16"
+        },
+        {
+          "type": "note",
+          "label": "SALSA 001 \u00b7 RIM",
+          "startA8": "12/16",
+          "durationA8": "1/16",
+          "endA8": "13/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "768",
+          "waveform": "triangle",
+          "motion": "fall",
+          "gain": 0.38
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "13/16",
+          "durationA8": "11/16",
+          "endA8": "24/16"
+        },
+        {
+          "type": "note",
+          "label": "SALSA 001 \u00b7 HIGH",
+          "startA8": "24/16",
+          "durationA8": "1/16",
+          "endA8": "25/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "1536",
+          "waveform": "sawtooth",
+          "motion": "fall",
+          "gain": 0.27
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "25/16",
+          "durationA8": "11/16",
+          "endA8": "36/16"
+        },
+        {
+          "type": "note",
+          "label": "SALSA 001 \u00b7 RIM",
+          "startA8": "36/16",
+          "durationA8": "1/16",
+          "endA8": "37/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "768",
+          "waveform": "triangle",
+          "motion": "fall",
+          "gain": 0.38
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "37/16",
+          "durationA8": "11/16",
+          "endA8": "48/16"
+        },
+        {
+          "type": "note",
+          "label": "SALSA 001 \u00b7 HIGH",
+          "startA8": "48/16",
+          "durationA8": "1/16",
+          "endA8": "49/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "1536",
+          "waveform": "sawtooth",
+          "motion": "fall",
+          "gain": 0.27
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "49/16",
+          "durationA8": "7/16",
+          "endA8": "56/16"
+        },
+        {
+          "type": "note",
+          "label": "SALSA 001 \u00b7 RIM",
+          "startA8": "56/16",
+          "durationA8": "1/16",
+          "endA8": "57/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "768",
+          "waveform": "triangle",
+          "motion": "fall",
+          "gain": 0.38
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "57/16",
+          "durationA8": "7/16",
+          "endA8": "4"
+        }
+      ]
+    },
+    {
+      "bar": 2,
+      "complete": true,
+      "durationA8": "4",
+      "events": [
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "0/16",
+          "durationA8": "8/16",
+          "endA8": "8/16"
+        },
+        {
+          "type": "note",
+          "label": "SALSA 001 \u00b7 RIM",
+          "startA8": "8/16",
+          "durationA8": "1/16",
+          "endA8": "9/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "768",
+          "waveform": "triangle",
+          "motion": "fall",
+          "gain": 0.38
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "9/16",
+          "durationA8": "11/16",
+          "endA8": "20/16"
+        },
+        {
+          "type": "note",
+          "label": "SALSA 001 \u00b7 HIGH",
+          "startA8": "20/16",
+          "durationA8": "1/16",
+          "endA8": "21/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "1536",
+          "waveform": "sawtooth",
+          "motion": "fall",
+          "gain": 0.27
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "21/16",
+          "durationA8": "11/16",
+          "endA8": "32/16"
+        },
+        {
+          "type": "note",
+          "label": "SALSA 001 \u00b7 LOW",
+          "startA8": "32/16",
+          "durationA8": "2/16",
+          "endA8": "34/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "96",
+          "waveform": "sine",
+          "motion": "fall",
+          "gain": 0.72
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "34/16",
+          "durationA8": "10/16",
+          "endA8": "44/16"
+        },
+        {
+          "type": "note",
+          "label": "SALSA 001 \u00b7 RIM",
+          "startA8": "44/16",
+          "durationA8": "1/16",
+          "endA8": "45/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "768",
+          "waveform": "triangle",
+          "motion": "fall",
+          "gain": 0.38
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "45/16",
+          "durationA8": "11/16",
+          "endA8": "56/16"
+        },
+        {
+          "type": "note",
+          "label": "SALSA 001 \u00b7 HIGH",
+          "startA8": "56/16",
+          "durationA8": "1/16",
+          "endA8": "57/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "1536",
+          "waveform": "sawtooth",
+          "motion": "fall",
+          "gain": 0.27
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "57/16",
+          "durationA8": "3/16",
+          "endA8": "60/16"
+        },
+        {
+          "type": "note",
+          "label": "SALSA 001 \u00b7 RIM",
+          "startA8": "60/16",
+          "durationA8": "1/16",
+          "endA8": "61/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "768",
+          "waveform": "triangle",
+          "motion": "fall",
+          "gain": 0.38
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "61/16",
+          "durationA8": "3/16",
+          "endA8": "4"
+        }
+      ]
+    },
+    {
+      "bar": 3,
+      "complete": true,
+      "durationA8": "4",
+      "events": [
+        {
+          "type": "note",
+          "label": "SALSA 001 \u00b7 LOW",
+          "startA8": "0/16",
+          "durationA8": "2/16",
+          "endA8": "2/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "96",
+          "waveform": "sine",
+          "motion": "fall",
+          "gain": 0.72
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "2/16",
+          "durationA8": "10/16",
+          "endA8": "12/16"
+        },
+        {
+          "type": "note",
+          "label": "SALSA 001 \u00b7 RIM",
+          "startA8": "12/16",
+          "durationA8": "1/16",
+          "endA8": "13/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "768",
+          "waveform": "triangle",
+          "motion": "fall",
+          "gain": 0.38
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "13/16",
+          "durationA8": "11/16",
+          "endA8": "24/16"
+        },
+        {
+          "type": "note",
+          "label": "SALSA 001 \u00b7 HIGH",
+          "startA8": "24/16",
+          "durationA8": "1/16",
+          "endA8": "25/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "1536",
+          "waveform": "sawtooth",
+          "motion": "fall",
+          "gain": 0.27
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "25/16",
+          "durationA8": "11/16",
+          "endA8": "36/16"
+        },
+        {
+          "type": "note",
+          "label": "SALSA 001 \u00b7 RIM",
+          "startA8": "36/16",
+          "durationA8": "1/16",
+          "endA8": "37/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "768",
+          "waveform": "triangle",
+          "motion": "fall",
+          "gain": 0.38
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "37/16",
+          "durationA8": "11/16",
+          "endA8": "48/16"
+        },
+        {
+          "type": "note",
+          "label": "SALSA 001 \u00b7 HIGH",
+          "startA8": "48/16",
+          "durationA8": "1/16",
+          "endA8": "49/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "1536",
+          "waveform": "sawtooth",
+          "motion": "fall",
+          "gain": 0.27
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "49/16",
+          "durationA8": "7/16",
+          "endA8": "56/16"
+        },
+        {
+          "type": "note",
+          "label": "SALSA 001 \u00b7 RIM",
+          "startA8": "56/16",
+          "durationA8": "1/16",
+          "endA8": "57/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "768",
+          "waveform": "triangle",
+          "motion": "fall",
+          "gain": 0.38
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "57/16",
+          "durationA8": "7/16",
+          "endA8": "4"
+        }
+      ]
+    },
+    {
+      "bar": 4,
+      "complete": true,
+      "durationA8": "4",
+      "events": [
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "0/16",
+          "durationA8": "8/16",
+          "endA8": "8/16"
+        },
+        {
+          "type": "note",
+          "label": "SALSA 001 \u00b7 RIM",
+          "startA8": "8/16",
+          "durationA8": "1/16",
+          "endA8": "9/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "768",
+          "waveform": "triangle",
+          "motion": "fall",
+          "gain": 0.38
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "9/16",
+          "durationA8": "11/16",
+          "endA8": "20/16"
+        },
+        {
+          "type": "note",
+          "label": "SALSA 001 \u00b7 HIGH",
+          "startA8": "20/16",
+          "durationA8": "1/16",
+          "endA8": "21/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "1536",
+          "waveform": "sawtooth",
+          "motion": "fall",
+          "gain": 0.27
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "21/16",
+          "durationA8": "11/16",
+          "endA8": "32/16"
+        },
+        {
+          "type": "note",
+          "label": "SALSA 001 \u00b7 LOW",
+          "startA8": "32/16",
+          "durationA8": "2/16",
+          "endA8": "34/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "96",
+          "waveform": "sine",
+          "motion": "fall",
+          "gain": 0.72
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "34/16",
+          "durationA8": "10/16",
+          "endA8": "44/16"
+        },
+        {
+          "type": "note",
+          "label": "SALSA 001 \u00b7 RIM",
+          "startA8": "44/16",
+          "durationA8": "1/16",
+          "endA8": "45/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "768",
+          "waveform": "triangle",
+          "motion": "fall",
+          "gain": 0.38
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "45/16",
+          "durationA8": "11/16",
+          "endA8": "56/16"
+        },
+        {
+          "type": "note",
+          "label": "SALSA 001 \u00b7 HIGH",
+          "startA8": "56/16",
+          "durationA8": "1/16",
+          "endA8": "57/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "1536",
+          "waveform": "sawtooth",
+          "motion": "fall",
+          "gain": 0.27
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "57/16",
+          "durationA8": "3/16",
+          "endA8": "60/16"
+        },
+        {
+          "type": "note",
+          "label": "SALSA 001 \u00b7 RIM",
+          "startA8": "60/16",
+          "durationA8": "1/16",
+          "endA8": "61/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "768",
+          "waveform": "triangle",
+          "motion": "fall",
+          "gain": 0.38
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "61/16",
+          "durationA8": "3/16",
+          "endA8": "4"
+        }
+      ]
+    },
+    {
+      "bar": 5,
+      "complete": true,
+      "durationA8": "4",
+      "events": [
+        {
+          "type": "note",
+          "label": "SALSA 001 \u00b7 LOW",
+          "startA8": "0/16",
+          "durationA8": "2/16",
+          "endA8": "2/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "96",
+          "waveform": "sine",
+          "motion": "fall",
+          "gain": 0.72
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "2/16",
+          "durationA8": "10/16",
+          "endA8": "12/16"
+        },
+        {
+          "type": "note",
+          "label": "SALSA 001 \u00b7 RIM",
+          "startA8": "12/16",
+          "durationA8": "1/16",
+          "endA8": "13/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "768",
+          "waveform": "triangle",
+          "motion": "fall",
+          "gain": 0.38
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "13/16",
+          "durationA8": "11/16",
+          "endA8": "24/16"
+        },
+        {
+          "type": "note",
+          "label": "SALSA 001 \u00b7 HIGH",
+          "startA8": "24/16",
+          "durationA8": "1/16",
+          "endA8": "25/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "1536",
+          "waveform": "sawtooth",
+          "motion": "fall",
+          "gain": 0.27
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "25/16",
+          "durationA8": "11/16",
+          "endA8": "36/16"
+        },
+        {
+          "type": "note",
+          "label": "SALSA 001 \u00b7 RIM",
+          "startA8": "36/16",
+          "durationA8": "1/16",
+          "endA8": "37/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "768",
+          "waveform": "triangle",
+          "motion": "fall",
+          "gain": 0.38
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "37/16",
+          "durationA8": "11/16",
+          "endA8": "48/16"
+        },
+        {
+          "type": "note",
+          "label": "SALSA 001 \u00b7 HIGH",
+          "startA8": "48/16",
+          "durationA8": "1/16",
+          "endA8": "49/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "1536",
+          "waveform": "sawtooth",
+          "motion": "fall",
+          "gain": 0.27
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "49/16",
+          "durationA8": "7/16",
+          "endA8": "56/16"
+        },
+        {
+          "type": "note",
+          "label": "SALSA 001 \u00b7 RIM",
+          "startA8": "56/16",
+          "durationA8": "1/16",
+          "endA8": "57/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "768",
+          "waveform": "triangle",
+          "motion": "fall",
+          "gain": 0.38
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "57/16",
+          "durationA8": "7/16",
+          "endA8": "4"
+        }
+      ]
+    },
+    {
+      "bar": 6,
+      "complete": true,
+      "durationA8": "4",
+      "events": [
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "0/16",
+          "durationA8": "8/16",
+          "endA8": "8/16"
+        },
+        {
+          "type": "note",
+          "label": "SALSA 001 \u00b7 RIM",
+          "startA8": "8/16",
+          "durationA8": "1/16",
+          "endA8": "9/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "768",
+          "waveform": "triangle",
+          "motion": "fall",
+          "gain": 0.38
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "9/16",
+          "durationA8": "11/16",
+          "endA8": "20/16"
+        },
+        {
+          "type": "note",
+          "label": "SALSA 001 \u00b7 HIGH",
+          "startA8": "20/16",
+          "durationA8": "1/16",
+          "endA8": "21/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "1536",
+          "waveform": "sawtooth",
+          "motion": "fall",
+          "gain": 0.27
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "21/16",
+          "durationA8": "11/16",
+          "endA8": "32/16"
+        },
+        {
+          "type": "note",
+          "label": "SALSA 001 \u00b7 LOW",
+          "startA8": "32/16",
+          "durationA8": "2/16",
+          "endA8": "34/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "96",
+          "waveform": "sine",
+          "motion": "fall",
+          "gain": 0.72
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "34/16",
+          "durationA8": "10/16",
+          "endA8": "44/16"
+        },
+        {
+          "type": "note",
+          "label": "SALSA 001 \u00b7 RIM",
+          "startA8": "44/16",
+          "durationA8": "1/16",
+          "endA8": "45/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "768",
+          "waveform": "triangle",
+          "motion": "fall",
+          "gain": 0.38
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "45/16",
+          "durationA8": "11/16",
+          "endA8": "56/16"
+        },
+        {
+          "type": "note",
+          "label": "SALSA 001 \u00b7 HIGH",
+          "startA8": "56/16",
+          "durationA8": "1/16",
+          "endA8": "57/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "1536",
+          "waveform": "sawtooth",
+          "motion": "fall",
+          "gain": 0.27
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "57/16",
+          "durationA8": "3/16",
+          "endA8": "60/16"
+        },
+        {
+          "type": "note",
+          "label": "SALSA 001 \u00b7 RIM",
+          "startA8": "60/16",
+          "durationA8": "1/16",
+          "endA8": "61/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "768",
+          "waveform": "triangle",
+          "motion": "fall",
+          "gain": 0.38
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "61/16",
+          "durationA8": "3/16",
+          "endA8": "4"
+        }
+      ]
+    },
+    {
+      "bar": 7,
+      "complete": true,
+      "durationA8": "4",
+      "events": [
+        {
+          "type": "note",
+          "label": "SALSA 001 \u00b7 LOW",
+          "startA8": "0/16",
+          "durationA8": "2/16",
+          "endA8": "2/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "96",
+          "waveform": "sine",
+          "motion": "fall",
+          "gain": 0.72
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "2/16",
+          "durationA8": "10/16",
+          "endA8": "12/16"
+        },
+        {
+          "type": "note",
+          "label": "SALSA 001 \u00b7 RIM",
+          "startA8": "12/16",
+          "durationA8": "1/16",
+          "endA8": "13/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "768",
+          "waveform": "triangle",
+          "motion": "fall",
+          "gain": 0.38
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "13/16",
+          "durationA8": "11/16",
+          "endA8": "24/16"
+        },
+        {
+          "type": "note",
+          "label": "SALSA 001 \u00b7 HIGH",
+          "startA8": "24/16",
+          "durationA8": "1/16",
+          "endA8": "25/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "1536",
+          "waveform": "sawtooth",
+          "motion": "fall",
+          "gain": 0.27
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "25/16",
+          "durationA8": "11/16",
+          "endA8": "36/16"
+        },
+        {
+          "type": "note",
+          "label": "SALSA 001 \u00b7 RIM",
+          "startA8": "36/16",
+          "durationA8": "1/16",
+          "endA8": "37/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "768",
+          "waveform": "triangle",
+          "motion": "fall",
+          "gain": 0.38
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "37/16",
+          "durationA8": "11/16",
+          "endA8": "48/16"
+        },
+        {
+          "type": "note",
+          "label": "SALSA 001 \u00b7 HIGH",
+          "startA8": "48/16",
+          "durationA8": "1/16",
+          "endA8": "49/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "1536",
+          "waveform": "sawtooth",
+          "motion": "fall",
+          "gain": 0.27
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "49/16",
+          "durationA8": "7/16",
+          "endA8": "56/16"
+        },
+        {
+          "type": "note",
+          "label": "SALSA 001 \u00b7 RIM",
+          "startA8": "56/16",
+          "durationA8": "1/16",
+          "endA8": "57/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "768",
+          "waveform": "triangle",
+          "motion": "fall",
+          "gain": 0.38
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "57/16",
+          "durationA8": "7/16",
+          "endA8": "4"
+        }
+      ]
+    },
+    {
+      "bar": 8,
+      "complete": true,
+      "durationA8": "4",
+      "events": [
+        {
+          "type": "note",
+          "label": "SALSA 001 \u00b7 LOW",
+          "startA8": "0/16",
+          "durationA8": "2/16",
+          "endA8": "2/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "96",
+          "waveform": "sine",
+          "motion": "fall",
+          "gain": 0.72
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "2/16",
+          "durationA8": "10/16",
+          "endA8": "12/16"
+        },
+        {
+          "type": "note",
+          "label": "SALSA 001 \u00b7 RIM",
+          "startA8": "12/16",
+          "durationA8": "1/16",
+          "endA8": "13/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "768",
+          "waveform": "triangle",
+          "motion": "fall",
+          "gain": 0.38
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "13/16",
+          "durationA8": "11/16",
+          "endA8": "24/16"
+        },
+        {
+          "type": "note",
+          "label": "SALSA 001 \u00b7 HIGH",
+          "startA8": "24/16",
+          "durationA8": "1/16",
+          "endA8": "25/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "1536",
+          "waveform": "sawtooth",
+          "motion": "fall",
+          "gain": 0.27
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "25/16",
+          "durationA8": "11/16",
+          "endA8": "36/16"
+        },
+        {
+          "type": "note",
+          "label": "SALSA 001 \u00b7 RIM",
+          "startA8": "36/16",
+          "durationA8": "1/16",
+          "endA8": "37/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "768",
+          "waveform": "triangle",
+          "motion": "fall",
+          "gain": 0.38
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "37/16",
+          "durationA8": "11/16",
+          "endA8": "48/16"
+        },
+        {
+          "type": "note",
+          "label": "SALSA 001 \u00b7 HIGH",
+          "startA8": "48/16",
+          "durationA8": "1/16",
+          "endA8": "49/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "1536",
+          "waveform": "sawtooth",
+          "motion": "fall",
+          "gain": 0.27
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "49/16",
+          "durationA8": "5/16",
+          "endA8": "54/16"
+        },
+        {
+          "type": "note",
+          "label": "SALSA 001 \u00b7 RIM",
+          "startA8": "54/16",
+          "durationA8": "1/16",
+          "endA8": "55/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "768",
+          "waveform": "triangle",
+          "motion": "fall",
+          "gain": 0.38
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "55/16",
+          "durationA8": "5/16",
+          "endA8": "60/16"
+        },
+        {
+          "type": "note",
+          "label": "SALSA 001 \u00b7 MID",
+          "startA8": "60/16",
+          "durationA8": "1/16",
+          "endA8": "61/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "384",
+          "waveform": "square",
+          "motion": "fall",
+          "gain": 0.5
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "61/16",
+          "durationA8": "3/16",
+          "endA8": "4"
+        }
+      ]
+    }
+  ]
+}

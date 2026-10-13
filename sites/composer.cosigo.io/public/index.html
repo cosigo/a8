@@ -13,6 +13,7 @@
 <title>A8 Composer | Music in A8 Time | Auspicious 8</title>
 <meta name="description" content="Compose, edit, play, save and submit native A8 music using drag-score bars, native durations, cycles per A8 second and the A8 Time ruler.">
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+<meta name="robots" content="noindex,nofollow">
 <link rel="canonical" href="https://composer.cosigo.io/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Auspicious 8">
@@ -30,12 +31,12 @@
 
 <link
   rel="stylesheet"
-  href="/site-shell.css"
+  href="/music_a/site-shell.css"
 >
 
 <link
   rel="stylesheet"
-  href="/a8-composer-v1.css?v=a51eed28a32a1de3"
+  href="/music_a/a8-composer-v1.css?v=673fdd571f162af5"
 >
 
 
@@ -46,6 +47,7 @@
   <link rel="icon" type="image/png" sizes="16x16" href="https://cosigo.io/favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="https://cosigo.io/apple-touch-icon.png">
   <!-- COSIGO-CANONICAL-FAVICON-END -->
+  <link rel="stylesheet" href="/music_a/a8-arranger-v1.css?v=6681e8f85f11c52f">
 </head>
 
 <body>
@@ -64,7 +66,7 @@
     >
 
       <img
-        src="/assets/cosigo_master_512.gif"
+        src="/music/assets/cosigo_master_512.gif"
         alt="COSIGO"
       >
 
@@ -122,14 +124,22 @@
     A8 Music Composer
   </h1>
 
+  <p>
+    <strong>CLICK A BAR · PICK A NOTE / BEAT / CHORD</strong><br>
+    <strong>CLICK IT · ADJUST IT</strong><br>
+    <strong>PLAY</strong>
+  </p>
+
   <p class="sub">
-    Drag a note or rest into the open bar.
-    Click any event to adjust it with one controller.
-    Duration changes the event's actual width across
-    the 64 native A8 slots.
+    First:
+    <strong>CONNECT CORE20</strong>
+    so Jupiter Moon Engine works.
   </p>
 
 </section>
+
+
+
 
 
 <section class="panel">
@@ -575,9 +585,10 @@
       </h2>
 
       <p class="sub">
-        One open bar at a time.
-        Completed bars collapse into numbered cards.
-        Click any bar to reopen it for revision.
+        Each bar opens as A · B · C.
+        A = notes · B = beat · C = chord.
+        Completed bar addresses collapse into numbered cards.
+        Click any bar to reopen all three layers.
       </p>
 
     </div>
@@ -698,7 +709,7 @@
       class="play"
       disabled
     >
-      ▶ PLAY SONG
+      ▶ PLAY
     </button>
 
     <button id="stop">
@@ -732,6 +743,13 @@
       OPEN .A8M
     </button>
 
+    <button
+      id="a8PresetOpen"
+      type="button"
+    >
+      PRESETS
+    </button>
+
     <input
       id="file"
       type="file"
@@ -742,6 +760,474 @@
   </div>
 
 </section>
+
+<dialog
+  id="a8PresetDialog"
+  aria-label="A8 presets"
+  style="
+    position:fixed;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    width:min(92vw,44rem);
+    max-height:80vh;
+    overflow:auto;
+    z-index:1000;
+    padding:1.25rem;
+  "
+>
+
+  <div
+    class="controls"
+    style="
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:1rem;
+    "
+  >
+
+    <strong>
+      A8 PRESETS
+    </strong>
+
+    <button
+      id="a8PresetClose"
+      type="button"
+      aria-label="Close presets"
+    >
+      ×
+    </button>
+
+  </div>
+
+
+  <div class="eyebrow">
+    DRUMS · LAYER B · STARTING PATTERNS
+  </div>
+
+  <div class="controls" style="display:flex;flex-wrap:wrap;gap:.65rem;align-items:end;margin:.75rem 0 1rem">
+    <label for="a8BeatInsertScope">INSERT
+      <select id="a8BeatInsertScope" style="display:block;min-width:9rem">
+        <option value="eight">8 BARS · ORIGINAL</option>
+        <option value="bar">ONE BAR</option>
+        <option value="hit">ONE HIT</option>
+      </select>
+    </label>
+    <label for="a8BeatSourceBar">SOURCE BAR
+      <select id="a8BeatSourceBar" style="display:block" disabled>
+        <option value="0">1</option><option value="1">2</option>
+        <option value="2">3</option><option value="3">4</option>
+        <option value="4">5</option><option value="5">6</option>
+        <option value="6">7</option><option value="7">8</option>
+      </select>
+    </label>
+    <label for="a8BeatSourceHit">HIT IN SOURCE BAR
+      <select id="a8BeatSourceHit" style="display:block" disabled>
+        <option value="0">1</option>
+        <option value="1">2</option>
+        <option value="2">3</option>
+        <option value="3">4</option>
+        <option value="4">5</option>
+        <option value="5">6</option>
+        <option value="6">7</option>
+        <option value="7">8</option>
+        <option value="8">9</option>
+        <option value="9">10</option>
+        <option value="10">11</option>
+        <option value="11">12</option>
+        <option value="12">13</option>
+        <option value="13">14</option>
+        <option value="14">15</option>
+        <option value="15">16</option>
+        <option value="16">17</option>
+        <option value="17">18</option>
+        <option value="18">19</option>
+        <option value="19">20</option>
+        <option value="20">21</option>
+        <option value="21">22</option>
+        <option value="22">23</option>
+        <option value="23">24</option>
+        <option value="24">25</option>
+        <option value="25">26</option>
+        <option value="26">27</option>
+        <option value="27">28</option>
+        <option value="28">29</option>
+        <option value="29">30</option>
+        <option value="30">31</option>
+        <option value="31">32</option>
+      </select>
+    </label>
+  </div>
+  <p class="sub">Choose a size, then click a drum pattern below. ONE HIT uses the selected source hit at the insertion cursor; later B material ripples by its exact duration. SOURCE BAR and HIT are counted from each pattern.</p>
+
+  <p class="sub">
+    Read-only starting pattern · working copy fully editable · mix 35%
+  </p>
+
+  <div
+    class="controls"
+    style="
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(9rem,1fr));
+      gap:.65rem;
+    "
+  >
+
+    <button
+      id="a8PresetRumba001"
+      type="button"
+      draggable="true"
+      data-a8-preset-url="/music_a/presets/a8-rumba-001.a8m"
+    >
+      RUMBA 001
+    </button>
+
+    <button
+      id="a8PresetRock001"
+      type="button"
+      draggable="true"
+      data-a8-preset-url="/music_a/presets/a8-rock-001.a8m"
+    >
+      ROCK 001
+    </button>
+
+    <button
+      id="a8PresetBlues001"
+      type="button"
+      draggable="true"
+      data-a8-preset-url="/music_a/presets/a8-blues-001.a8m"
+    >
+      BLUES 001
+    </button>
+
+    <button
+      id="a8PresetJazz001"
+      type="button"
+      draggable="true"
+      data-a8-preset-url="/music_a/presets/a8-jazz-001.a8m"
+    >
+      JAZZ 001
+    </button>
+
+    <button
+      id="a8PresetCumbia001"
+      type="button"
+      draggable="true"
+      data-a8-preset-url="/music_a/presets/a8-cumbia-001.a8m"
+    >
+      CUMBIA 001
+    </button>
+
+    <button
+      id="a8PresetSalsa001"
+      type="button"
+      draggable="true"
+      data-a8-preset-url="/music_a/presets/a8-salsa-001.a8m"
+    >
+      SALSA 001
+    </button>
+
+    <button
+      id="a8PresetWaltz001"
+      type="button"
+      draggable="true"
+      data-a8-preset-url="/music_a/presets/a8-waltz-001.a8m"
+    >
+      WALTZ 001
+    </button>
+
+    <button
+      id="a8PresetReggae001"
+      type="button"
+      draggable="true"
+      data-a8-preset-url="/music_a/presets/a8-reggae-001.a8m"
+    >
+      REGGAE 001
+    </button>
+
+    <button
+      id="a8PresetFunk001"
+      type="button"
+      draggable="true"
+      data-a8-preset-url="/music_a/presets/a8-funk-001.a8m"
+    >
+      FUNK 001
+    </button>
+
+    <button
+      id="a8PresetMarch001"
+      type="button"
+      draggable="true"
+      data-a8-preset-url="/music_a/presets/a8-march-001.a8m"
+    >
+      MARCH 001
+    </button>
+
+  </div>
+
+
+  <hr>
+
+
+  <div class="eyebrow">
+    CHORDS · LAYER C · STARTING SHAPES
+  </div>
+
+  <p class="sub">
+    Three simultaneous A8 notes · starting duration 4 A8s · working copy fully editable
+  </p>
+
+
+  <strong>
+    BRIGHT
+  </strong>
+
+  <div
+    class="controls"
+    style="
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(9rem,1fr));
+      gap:.65rem;
+      margin-top:.65rem;
+      margin-bottom:1rem;
+    "
+  >
+
+    <button
+      id="a8ChordABright001"
+      type="button"
+      data-a8-chord-preset-url="/music_a/presets/a8-chord-a-bright-001.a8m"
+    >
+      A · C# · E
+    </button>
+
+    <button
+      id="a8ChordASharpBright001"
+      type="button"
+      data-a8-chord-preset-url="/music_a/presets/a8-chord-a-sharp-bright-001.a8m"
+    >
+      A# · D · F
+    </button>
+
+    <button
+      id="a8ChordBBright001"
+      type="button"
+      data-a8-chord-preset-url="/music_a/presets/a8-chord-b-bright-001.a8m"
+    >
+      B · D# · F#
+    </button>
+
+    <button
+      id="a8ChordCBright001"
+      type="button"
+      data-a8-chord-preset-url="/music_a/presets/a8-chord-c-bright-001.a8m"
+    >
+      C · E · G
+    </button>
+
+    <button
+      id="a8ChordCSharpBright001"
+      type="button"
+      data-a8-chord-preset-url="/music_a/presets/a8-chord-c-sharp-bright-001.a8m"
+    >
+      C# · F · G#
+    </button>
+
+    <button
+      id="a8ChordDBright001"
+      type="button"
+      data-a8-chord-preset-url="/music_a/presets/a8-chord-d-bright-001.a8m"
+    >
+      D · F# · A
+    </button>
+
+    <button
+      id="a8ChordDSharpBright001"
+      type="button"
+      data-a8-chord-preset-url="/music_a/presets/a8-chord-d-sharp-bright-001.a8m"
+    >
+      D# · G · A#
+    </button>
+
+    <button
+      id="a8ChordEBright001"
+      type="button"
+      data-a8-chord-preset-url="/music_a/presets/a8-chord-e-bright-001.a8m"
+    >
+      E · G# · B
+    </button>
+
+    <button
+      id="a8ChordFBright001"
+      type="button"
+      data-a8-chord-preset-url="/music_a/presets/a8-chord-f-bright-001.a8m"
+    >
+      F · A · C
+    </button>
+
+    <button
+      id="a8ChordFSharpBright001"
+      type="button"
+      data-a8-chord-preset-url="/music_a/presets/a8-chord-f-sharp-bright-001.a8m"
+    >
+      F# · A# · C#
+    </button>
+
+    <button
+      id="a8ChordGBright001"
+      type="button"
+      data-a8-chord-preset-url="/music_a/presets/a8-chord-g-bright-001.a8m"
+    >
+      G · B · D
+    </button>
+
+    <button
+      id="a8ChordGSharpBright001"
+      type="button"
+      data-a8-chord-preset-url="/music_a/presets/a8-chord-g-sharp-bright-001.a8m"
+    >
+      G# · C · D#
+    </button>
+
+  </div>
+
+
+  <strong>
+    DARK
+  </strong>
+
+  <div
+    class="controls"
+    style="
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(9rem,1fr));
+      gap:.65rem;
+      margin-top:.65rem;
+    "
+  >
+
+    <button
+      id="a8ChordADark001"
+      type="button"
+      data-a8-chord-preset-url="/music_a/presets/a8-chord-a-dark-001.a8m"
+    >
+      A · C · E
+    </button>
+
+    <button
+      id="a8ChordASharpDark001"
+      type="button"
+      data-a8-chord-preset-url="/music_a/presets/a8-chord-a-sharp-dark-001.a8m"
+    >
+      A# · C# · F
+    </button>
+
+    <button
+      id="a8ChordBDark001"
+      type="button"
+      data-a8-chord-preset-url="/music_a/presets/a8-chord-b-dark-001.a8m"
+    >
+      B · D · F#
+    </button>
+
+    <button
+      id="a8ChordCDark001"
+      type="button"
+      data-a8-chord-preset-url="/music_a/presets/a8-chord-c-dark-001.a8m"
+    >
+      C · D# · G
+    </button>
+
+    <button
+      id="a8ChordCSharpDark001"
+      type="button"
+      data-a8-chord-preset-url="/music_a/presets/a8-chord-c-sharp-dark-001.a8m"
+    >
+      C# · E · G#
+    </button>
+
+    <button
+      id="a8ChordDDark001"
+      type="button"
+      data-a8-chord-preset-url="/music_a/presets/a8-chord-d-dark-001.a8m"
+    >
+      D · F · A
+    </button>
+
+    <button
+      id="a8ChordDSharpDark001"
+      type="button"
+      data-a8-chord-preset-url="/music_a/presets/a8-chord-d-sharp-dark-001.a8m"
+    >
+      D# · F# · A#
+    </button>
+
+    <button
+      id="a8ChordEDark001"
+      type="button"
+      data-a8-chord-preset-url="/music_a/presets/a8-chord-e-dark-001.a8m"
+    >
+      E · G · B
+    </button>
+
+    <button
+      id="a8ChordFDark001"
+      type="button"
+      data-a8-chord-preset-url="/music_a/presets/a8-chord-f-dark-001.a8m"
+    >
+      F · G# · C
+    </button>
+
+    <button
+      id="a8ChordFSharpDark001"
+      type="button"
+      data-a8-chord-preset-url="/music_a/presets/a8-chord-f-sharp-dark-001.a8m"
+    >
+      F# · A · C#
+    </button>
+
+    <button
+      id="a8ChordGDark001"
+      type="button"
+      data-a8-chord-preset-url="/music_a/presets/a8-chord-g-dark-001.a8m"
+    >
+      G · A# · D
+    </button>
+
+    <button
+      id="a8ChordGSharpDark001"
+      type="button"
+      data-a8-chord-preset-url="/music_a/presets/a8-chord-g-sharp-dark-001.a8m"
+    >
+      G# · B · D#
+    </button>
+
+  </div>
+
+
+  <div
+    class="controls"
+    style="
+      margin-top:1rem;
+    "
+  >
+
+    <button
+      id="a8ChordClearActiveBar"
+      type="button"
+    >
+      CLEAR CHORD · ACTIVE BAR
+    </button>
+
+  </div>
+
+
+  <p class="status">
+    10 drum presets · 24 chord presets · source files read only
+  </p>
+
+</dialog>
+
 
 
 <section class="panel">
@@ -779,6 +1265,9 @@
 </section>
 
 
+
+
+
 <footer class="cosigo-site-footer">
 
   <strong>
@@ -792,13 +1281,14 @@
 </footer>
 
 
-<script src="/a8-music-player-v1.js"></script>
-<script src="/a8-composer-v1.js?v=7addc865d44fdf4b"></script>
+<script src="/music_a/a8-music-player-v1.js?v=3d9713e1e2ab3b8"></script>
+<script src="/music_a/a8-composer-v1.js?v=f8f4d258eef4e89b"></script>
 
 <script
-  src="/a8-composer-core-observer-v1.js"
+  src="/music_a/a8-composer-core-observer-v1.js?v=4fde1490b4274c4d"
   defer
 ></script>
 
+  <script src="/music_a/a8-arranger-v1.js?v=f02270434e399b2b"></script>
 </body>
 </html>

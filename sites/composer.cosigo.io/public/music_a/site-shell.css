@@ -1,0 +1,36 @@
+/* COSIGO Labs global navigation/footer shell — Static Patch 02 · 2026-08-16 */
+.cosigo-global-nav{
+  position:sticky;top:0;z-index:5000;
+  display:flex;align-items:center;justify-content:space-between;gap:14px;
+  min-height:54px;padding:7px 16px;
+  background:rgba(7,11,15,.96);backdrop-filter:blur(10px);
+  border-bottom:1px solid #303944;
+  box-shadow:0 4px 18px rgba(0,0,0,.22);
+  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+.cosigo-global-nav,.cosigo-global-nav *{box-sizing:border-box}
+.cosigo-global-brand{display:flex;align-items:center;gap:9px;color:#eef5f8;text-decoration:none;white-space:nowrap;font-weight:850;letter-spacing:.05em}
+.cosigo-global-brand img{width:36px;height:36px;object-fit:contain;border-radius:50%;display:block}
+.cosigo-global-brand small{display:block;color:#9eafbc;font-size:10px;font-weight:700;letter-spacing:.12em;line-height:1.1}
+.cosigo-global-links{display:flex;align-items:center;justify-content:flex-end;gap:6px;flex-wrap:wrap}
+.cosigo-global-links a{color:#dce8ef;text-decoration:none;border:1px solid #303944;background:#10161d;border-radius:8px;padding:6px 9px;font-size:12px;font-weight:750;line-height:1.15;white-space:nowrap}
+.cosigo-global-links a:hover,.cosigo-global-brand:hover{filter:brightness(1.16)}
+.cosigo-global-links a.cosigo-exit{border-color:#6a5730;color:#f0d79c}
+.cosigo-site-footer{
+  max-width:1240px;margin:34px auto 0;padding:22px 22px 34px;
+  border-top:1px solid #303944;color:#9eafbc;
+  font:12px/1.55 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  text-align:left;
+}
+.cosigo-site-footer strong{color:#e7edf2}
+.cosigo-site-footer p{margin:7px 0}
+.cosigo-footer-links{display:flex;flex-wrap:wrap;gap:7px;margin:11px 0 8px}
+.cosigo-footer-links a{color:#c9ddf2;text-decoration:none;border-bottom:1px dotted #60758a}
+.cosigo-footer-links a:hover{color:#fff}
+.cosigo-disclaimer{max-width:1050px}
+@media(max-width:760px){
+  .cosigo-global-nav{position:relative;align-items:flex-start;flex-direction:column;padding:9px 12px}
+  .cosigo-global-links{justify-content:flex-start}
+  .cosigo-global-links a{font-size:11px;padding:5px 7px}
+  .cosigo-site-footer{padding:18px 14px 28px}
+}

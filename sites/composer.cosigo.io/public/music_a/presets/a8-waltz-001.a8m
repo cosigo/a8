@@ -1,0 +1,602 @@
+{
+  "format": "A8M-1",
+  "schema": "A8-MUSIC-DRAG-BARS-V1",
+  "title": "A8 WALTZ 001 \u00b7 DRUM PRESET",
+  "barLengthA8": "4",
+  "nativeSubdivision": "1/16 A8 second",
+  "nativeSlotsPerBar": 64,
+  "pitchUnit": "cycles / A8 second",
+  "preset": {
+    "id": "A8-WALTZ-001",
+    "kind": "drum",
+    "readonlySource": true,
+    "phraseBars": 8,
+    "nativeSlots": 512,
+    "basis": "three native pulses distributed across each 64-slot bar",
+    "timingPolicy": "A8_NATIVE_ONLY_NO_EXTERNAL_TEMPO"
+  },
+  "timing": {
+    "restsExplicit": true,
+    "hiddenBrowserIntervals": false,
+    "browserDragDefinesTime": false,
+    "eventOrderDefinesPlacement": true
+  },
+  "bars": [
+    {
+      "bar": 1,
+      "complete": true,
+      "durationA8": "4",
+      "events": [
+        {
+          "type": "note",
+          "label": "WALTZ 001 \u00b7 LOW",
+          "startA8": "0/16",
+          "durationA8": "2/16",
+          "endA8": "2/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "96",
+          "waveform": "sine",
+          "motion": "fall",
+          "gain": 0.72
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "2/16",
+          "durationA8": "19/16",
+          "endA8": "21/16"
+        },
+        {
+          "type": "note",
+          "label": "WALTZ 001 \u00b7 RIM",
+          "startA8": "21/16",
+          "durationA8": "1/16",
+          "endA8": "22/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "768",
+          "waveform": "triangle",
+          "motion": "fall",
+          "gain": 0.38
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "22/16",
+          "durationA8": "20/16",
+          "endA8": "42/16"
+        },
+        {
+          "type": "note",
+          "label": "WALTZ 001 \u00b7 HIGH",
+          "startA8": "42/16",
+          "durationA8": "1/16",
+          "endA8": "43/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "1536",
+          "waveform": "sawtooth",
+          "motion": "fall",
+          "gain": 0.27
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "43/16",
+          "durationA8": "21/16",
+          "endA8": "4"
+        }
+      ]
+    },
+    {
+      "bar": 2,
+      "complete": true,
+      "durationA8": "4",
+      "events": [
+        {
+          "type": "note",
+          "label": "WALTZ 001 \u00b7 LOW",
+          "startA8": "0/16",
+          "durationA8": "2/16",
+          "endA8": "2/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "96",
+          "waveform": "sine",
+          "motion": "fall",
+          "gain": 0.72
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "2/16",
+          "durationA8": "19/16",
+          "endA8": "21/16"
+        },
+        {
+          "type": "note",
+          "label": "WALTZ 001 \u00b7 HIGH",
+          "startA8": "21/16",
+          "durationA8": "1/16",
+          "endA8": "22/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "1536",
+          "waveform": "sawtooth",
+          "motion": "fall",
+          "gain": 0.27
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "22/16",
+          "durationA8": "20/16",
+          "endA8": "42/16"
+        },
+        {
+          "type": "note",
+          "label": "WALTZ 001 \u00b7 RIM",
+          "startA8": "42/16",
+          "durationA8": "1/16",
+          "endA8": "43/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "768",
+          "waveform": "triangle",
+          "motion": "fall",
+          "gain": 0.38
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "43/16",
+          "durationA8": "21/16",
+          "endA8": "4"
+        }
+      ]
+    },
+    {
+      "bar": 3,
+      "complete": true,
+      "durationA8": "4",
+      "events": [
+        {
+          "type": "note",
+          "label": "WALTZ 001 \u00b7 LOW",
+          "startA8": "0/16",
+          "durationA8": "2/16",
+          "endA8": "2/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "96",
+          "waveform": "sine",
+          "motion": "fall",
+          "gain": 0.72
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "2/16",
+          "durationA8": "19/16",
+          "endA8": "21/16"
+        },
+        {
+          "type": "note",
+          "label": "WALTZ 001 \u00b7 RIM",
+          "startA8": "21/16",
+          "durationA8": "1/16",
+          "endA8": "22/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "768",
+          "waveform": "triangle",
+          "motion": "fall",
+          "gain": 0.38
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "22/16",
+          "durationA8": "20/16",
+          "endA8": "42/16"
+        },
+        {
+          "type": "note",
+          "label": "WALTZ 001 \u00b7 HIGH",
+          "startA8": "42/16",
+          "durationA8": "1/16",
+          "endA8": "43/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "1536",
+          "waveform": "sawtooth",
+          "motion": "fall",
+          "gain": 0.27
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "43/16",
+          "durationA8": "21/16",
+          "endA8": "4"
+        }
+      ]
+    },
+    {
+      "bar": 4,
+      "complete": true,
+      "durationA8": "4",
+      "events": [
+        {
+          "type": "note",
+          "label": "WALTZ 001 \u00b7 LOW",
+          "startA8": "0/16",
+          "durationA8": "2/16",
+          "endA8": "2/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "96",
+          "waveform": "sine",
+          "motion": "fall",
+          "gain": 0.72
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "2/16",
+          "durationA8": "19/16",
+          "endA8": "21/16"
+        },
+        {
+          "type": "note",
+          "label": "WALTZ 001 \u00b7 RIM",
+          "startA8": "21/16",
+          "durationA8": "1/16",
+          "endA8": "22/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "768",
+          "waveform": "triangle",
+          "motion": "fall",
+          "gain": 0.38
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "22/16",
+          "durationA8": "20/16",
+          "endA8": "42/16"
+        },
+        {
+          "type": "note",
+          "label": "WALTZ 001 \u00b7 HIGH",
+          "startA8": "42/16",
+          "durationA8": "1/16",
+          "endA8": "43/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "1536",
+          "waveform": "sawtooth",
+          "motion": "fall",
+          "gain": 0.27
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "43/16",
+          "durationA8": "10/16",
+          "endA8": "53/16"
+        },
+        {
+          "type": "note",
+          "label": "WALTZ 001 \u00b7 RIM",
+          "startA8": "53/16",
+          "durationA8": "1/16",
+          "endA8": "54/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "768",
+          "waveform": "triangle",
+          "motion": "fall",
+          "gain": 0.38
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "54/16",
+          "durationA8": "10/16",
+          "endA8": "4"
+        }
+      ]
+    },
+    {
+      "bar": 5,
+      "complete": true,
+      "durationA8": "4",
+      "events": [
+        {
+          "type": "note",
+          "label": "WALTZ 001 \u00b7 LOW",
+          "startA8": "0/16",
+          "durationA8": "2/16",
+          "endA8": "2/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "96",
+          "waveform": "sine",
+          "motion": "fall",
+          "gain": 0.72
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "2/16",
+          "durationA8": "19/16",
+          "endA8": "21/16"
+        },
+        {
+          "type": "note",
+          "label": "WALTZ 001 \u00b7 RIM",
+          "startA8": "21/16",
+          "durationA8": "1/16",
+          "endA8": "22/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "768",
+          "waveform": "triangle",
+          "motion": "fall",
+          "gain": 0.38
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "22/16",
+          "durationA8": "20/16",
+          "endA8": "42/16"
+        },
+        {
+          "type": "note",
+          "label": "WALTZ 001 \u00b7 HIGH",
+          "startA8": "42/16",
+          "durationA8": "1/16",
+          "endA8": "43/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "1536",
+          "waveform": "sawtooth",
+          "motion": "fall",
+          "gain": 0.27
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "43/16",
+          "durationA8": "21/16",
+          "endA8": "4"
+        }
+      ]
+    },
+    {
+      "bar": 6,
+      "complete": true,
+      "durationA8": "4",
+      "events": [
+        {
+          "type": "note",
+          "label": "WALTZ 001 \u00b7 LOW",
+          "startA8": "0/16",
+          "durationA8": "2/16",
+          "endA8": "2/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "96",
+          "waveform": "sine",
+          "motion": "fall",
+          "gain": 0.72
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "2/16",
+          "durationA8": "19/16",
+          "endA8": "21/16"
+        },
+        {
+          "type": "note",
+          "label": "WALTZ 001 \u00b7 HIGH",
+          "startA8": "21/16",
+          "durationA8": "1/16",
+          "endA8": "22/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "1536",
+          "waveform": "sawtooth",
+          "motion": "fall",
+          "gain": 0.27
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "22/16",
+          "durationA8": "20/16",
+          "endA8": "42/16"
+        },
+        {
+          "type": "note",
+          "label": "WALTZ 001 \u00b7 RIM",
+          "startA8": "42/16",
+          "durationA8": "1/16",
+          "endA8": "43/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "768",
+          "waveform": "triangle",
+          "motion": "fall",
+          "gain": 0.38
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "43/16",
+          "durationA8": "21/16",
+          "endA8": "4"
+        }
+      ]
+    },
+    {
+      "bar": 7,
+      "complete": true,
+      "durationA8": "4",
+      "events": [
+        {
+          "type": "note",
+          "label": "WALTZ 001 \u00b7 LOW",
+          "startA8": "0/16",
+          "durationA8": "2/16",
+          "endA8": "2/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "96",
+          "waveform": "sine",
+          "motion": "fall",
+          "gain": 0.72
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "2/16",
+          "durationA8": "19/16",
+          "endA8": "21/16"
+        },
+        {
+          "type": "note",
+          "label": "WALTZ 001 \u00b7 RIM",
+          "startA8": "21/16",
+          "durationA8": "1/16",
+          "endA8": "22/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "768",
+          "waveform": "triangle",
+          "motion": "fall",
+          "gain": 0.38
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "22/16",
+          "durationA8": "20/16",
+          "endA8": "42/16"
+        },
+        {
+          "type": "note",
+          "label": "WALTZ 001 \u00b7 HIGH",
+          "startA8": "42/16",
+          "durationA8": "1/16",
+          "endA8": "43/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "1536",
+          "waveform": "sawtooth",
+          "motion": "fall",
+          "gain": 0.27
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "43/16",
+          "durationA8": "21/16",
+          "endA8": "4"
+        }
+      ]
+    },
+    {
+      "bar": 8,
+      "complete": true,
+      "durationA8": "4",
+      "events": [
+        {
+          "type": "note",
+          "label": "WALTZ 001 \u00b7 LOW",
+          "startA8": "0/16",
+          "durationA8": "2/16",
+          "endA8": "2/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "96",
+          "waveform": "sine",
+          "motion": "fall",
+          "gain": 0.72
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "2/16",
+          "durationA8": "19/16",
+          "endA8": "21/16"
+        },
+        {
+          "type": "note",
+          "label": "WALTZ 001 \u00b7 RIM",
+          "startA8": "21/16",
+          "durationA8": "1/16",
+          "endA8": "22/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "768",
+          "waveform": "triangle",
+          "motion": "fall",
+          "gain": 0.38
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "22/16",
+          "durationA8": "20/16",
+          "endA8": "42/16"
+        },
+        {
+          "type": "note",
+          "label": "WALTZ 001 \u00b7 HIGH",
+          "startA8": "42/16",
+          "durationA8": "1/16",
+          "endA8": "43/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "1536",
+          "waveform": "sawtooth",
+          "motion": "fall",
+          "gain": 0.27
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "43/16",
+          "durationA8": "10/16",
+          "endA8": "53/16"
+        },
+        {
+          "type": "note",
+          "label": "WALTZ 001 \u00b7 RIM",
+          "startA8": "53/16",
+          "durationA8": "1/16",
+          "endA8": "54/16",
+          "noteName": null,
+          "octaveShift": null,
+          "cyclesPerA8Second": "768",
+          "waveform": "triangle",
+          "motion": "fall",
+          "gain": 0.38
+        },
+        {
+          "type": "rest",
+          "label": "Rest",
+          "startA8": "54/16",
+          "durationA8": "10/16",
+          "endA8": "4"
+        }
+      ]
+    }
+  ]
+}

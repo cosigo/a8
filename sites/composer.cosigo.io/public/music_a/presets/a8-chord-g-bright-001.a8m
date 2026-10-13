@@ -1,0 +1,103 @@
+{
+  "format": "A8M-1",
+  "schema": "A8-MUSIC-DRAG-BARS-V1",
+  "title": "A8 CHORD \u00b7 G \u00b7 B \u00b7 D",
+  "barLengthA8": "4",
+  "nativeSubdivision": "1/16 A8 second",
+  "nativeSlotsPerBar": 64,
+  "pitchUnit": "cycles / A8 second",
+  "timing": {
+    "restsExplicit": true,
+    "hiddenBrowserIntervals": false,
+    "browserDragDefinesTime": false,
+    "eventOrderDefinesPlacement": true,
+    "jovianRateRelationship": "1:2:4"
+  },
+  "noteReference": {
+    "referenceOctave": "A8 0",
+    "exactCyclesPerA8Second": {
+      "A": "290",
+      "A#": "307",
+      "B": "325",
+      "C": "345",
+      "C#": "365",
+      "D": "387",
+      "D#": "410",
+      "E": "435",
+      "F": "460",
+      "F#": "487",
+      "G": "516",
+      "G#": "548"
+    },
+    "octaveRule": "exact 2:1"
+  },
+  "preset": {
+    "id": "A8-CHORD-G-BRIGHT-001",
+    "kind": "chord",
+    "shape": "BRIGHT",
+    "root": "G",
+    "noteGroup": "G \u00b7 B \u00b7 D",
+    "readonlySource": true,
+    "timingPolicy": "A8_NATIVE_ONLY"
+  },
+  "bars": [],
+  "layers": {
+    "C": {
+      "role": "CHORDS",
+      "placement": "BAR_ADDRESS",
+      "events": [
+        {
+          "type": "note",
+          "layer": "C",
+          "bar": 1,
+          "chordId": "A8-CHORD-G-BRIGHT-001",
+          "chordLabel": "G \u00b7 B \u00b7 D",
+          "label": "G",
+          "noteName": "G",
+          "octaveShift": 0,
+          "cyclesPerA8Second": "516",
+          "startA8": "0/16",
+          "durationA8": "4",
+          "endA8": "4",
+          "waveform": "triangle",
+          "motion": "steady",
+          "gain": 0.2
+        },
+        {
+          "type": "note",
+          "layer": "C",
+          "bar": 1,
+          "chordId": "A8-CHORD-G-BRIGHT-001",
+          "chordLabel": "G \u00b7 B \u00b7 D",
+          "label": "B +1",
+          "noteName": "B",
+          "octaveShift": 1,
+          "cyclesPerA8Second": "650",
+          "startA8": "0/16",
+          "durationA8": "4",
+          "endA8": "4",
+          "waveform": "triangle",
+          "motion": "steady",
+          "gain": 0.2
+        },
+        {
+          "type": "note",
+          "layer": "C",
+          "bar": 1,
+          "chordId": "A8-CHORD-G-BRIGHT-001",
+          "chordLabel": "G \u00b7 B \u00b7 D",
+          "label": "D +1",
+          "noteName": "D",
+          "octaveShift": 1,
+          "cyclesPerA8Second": "774",
+          "startA8": "0/16",
+          "durationA8": "4",
+          "endA8": "4",
+          "waveform": "triangle",
+          "motion": "steady",
+          "gain": 0.2
+        }
+      ]
+    }
+  }
+}

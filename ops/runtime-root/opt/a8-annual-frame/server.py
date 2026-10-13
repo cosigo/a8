@@ -340,7 +340,11 @@ def state():
         )
 
         progression_status = (
-            "PHYSICAL_RAW_PREDICTION_ACTIVE"
+            "PHYSICAL_RAW_HOLDOVER_ACTIVE"
+            if active_carrier.get(
+                "absoluteSolPhaseQualified"
+            ) is False
+            else "PHYSICAL_RAW_PREDICTION_ACTIVE"
         )
 
         LAST_LIVE_ANNUAL = {
@@ -533,6 +537,16 @@ def state():
                         "origin"
                     ),
 
+                "absoluteSolPhaseQualified":
+                    active_carrier.get(
+                        "absoluteSolPhaseQualified"
+                    ),
+
+                "continuationMode":
+                    active_carrier.get(
+                        "continuationMode"
+                    ),
+
                 "crossEpochRawContinuity":
                     bool(
                         active_carrier.get(
@@ -547,6 +561,35 @@ def state():
                         )
                     ),
             },
+
+            "absoluteSolPhaseQualified":
+                active_carrier.get(
+                    "absoluteSolPhaseQualified"
+                ),
+
+            "annualCoordinateQualification":
+                (
+                    "UNQUALIFIED_EPOCH9_HOLDOVER"
+                    if active_carrier.get(
+                        "absoluteSolPhaseQualified"
+                    ) is False
+                    else "HISTORICAL_CARRIER_QUALIFICATION"
+                ),
+
+            "continuationMode":
+                active_carrier.get(
+                    "continuationMode"
+                ),
+
+            "unobservedInterval":
+                bool(
+                    active_carrier.get(
+                        "continuation", {}
+                    ).get(
+                        "unobservedInterval",
+                        False
+                    )
+                ),
 
             "natureAnnualAngle512":
                 nature_angle_512,

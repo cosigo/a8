@@ -1,0 +1,430 @@
+/*
+ * A8 CHARLIE ARRANGER V1B
+ *
+ * Cellphone-first:
+ *   blank bar -> octave -> note
+ *   existing note -> edit
+ */
+
+.a8-arranger-v1[hidden] {
+  display: none !important;
+}
+
+.a8-arranger-v1 {
+  position: fixed;
+  inset: 0;
+  z-index: 100000;
+  pointer-events: none;
+}
+
+.a8-arranger-backdrop {
+  position: absolute;
+  inset: 0;
+
+  background:
+    rgba(0,0,0,.48);
+
+  pointer-events: auto;
+}
+
+.a8-arranger-sheet {
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  max-height: 72vh;
+  overflow: auto;
+
+  padding:
+    12px
+    14px
+    calc(
+      16px +
+      env(safe-area-inset-bottom)
+    );
+
+  border-top:
+    1px solid
+    rgba(255,255,255,.2);
+
+  border-radius:
+    18px 18px 0 0;
+
+  background:
+    rgba(9,14,22,.985);
+
+  color:
+    #eef5ff;
+
+  box-shadow:
+    0 -12px 36px
+    rgba(0,0,0,.48);
+
+  pointer-events: auto;
+}
+
+.a8-arranger-head {
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  margin-bottom: 12px;
+}
+
+.a8-arranger-title {
+  flex: 1;
+  min-width: 0;
+}
+
+.a8-arranger-title strong {
+  display: block;
+
+  font-size: 16px;
+}
+
+.a8-arranger-title small {
+  display: block;
+
+  margin-top: 2px;
+
+  color: #aebfd3;
+
+  overflow-wrap: anywhere;
+}
+
+.a8-arranger-button,
+.a8-arranger-choice {
+  min-height: 48px;
+  min-width: 48px;
+
+  border:
+    1px solid
+    rgba(255,255,255,.2);
+
+  border-radius: 10px;
+
+  background:
+    rgba(255,255,255,.07);
+
+  color: inherit;
+
+  font: inherit;
+
+  padding: 9px 12px;
+
+  touch-action: manipulation;
+}
+
+.a8-arranger-button:active,
+.a8-arranger-choice:active {
+  transform:
+    translateY(1px);
+}
+
+.a8-arranger-button.is-selected,
+.a8-arranger-choice.is-selected {
+  border-color:
+    #8fc7ff;
+
+  background:
+    rgba(143,199,255,.18);
+}
+
+.a8-arranger-close {
+  font-size: 22px;
+  line-height: 1;
+}
+
+.a8-arranger-view[hidden] {
+  display: none !important;
+}
+
+.a8-arranger-menu {
+  display: grid;
+
+  grid-template-columns:
+    1fr;
+
+  gap: 8px;
+}
+
+.a8-arranger-menu > button {
+  width: 100%;
+
+  text-align: left;
+}
+
+.a8-arranger-adjust {
+  display: grid;
+
+  grid-template-columns:
+    minmax(48px,72px)
+    1fr
+    minmax(48px,72px);
+
+  gap: 8px;
+
+  align-items: center;
+}
+
+.a8-arranger-value {
+  min-width: 0;
+
+  text-align: center;
+
+  font-variant-numeric:
+    tabular-nums;
+
+  overflow-wrap: anywhere;
+}
+
+.a8-arranger-section {
+  margin-top: 16px;
+}
+
+.a8-arranger-section:first-child {
+  margin-top: 0;
+}
+
+.a8-arranger-section > h3 {
+  margin:
+    0 0 8px;
+
+  font-size: 12px;
+
+  letter-spacing: .12em;
+
+  color: #aebfd3;
+}
+
+.a8-arranger-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      2,
+      minmax(0,1fr)
+    );
+
+  gap: 8px;
+}
+
+.a8-arranger-grid.a8-arranger-octaves {
+  grid-template-columns:
+    repeat(
+      5,
+      minmax(0,1fr)
+    );
+}
+
+.a8-arranger-grid.a8-arranger-timing {
+  grid-template-columns:
+    repeat(
+      4,
+      minmax(0,1fr)
+    );
+}
+
+.a8-arranger-notes {
+  grid-template-columns:
+    repeat(
+      4,
+      minmax(0,1fr)
+    );
+}
+
+.a8-arranger-danger {
+  margin-top: 18px;
+
+  width: 100%;
+}
+
+.a8-arranger-status {
+  min-height: 20px;
+
+  margin-top: 10px;
+
+  color: #aebfd3;
+
+  font-size: 13px;
+}
+
+.a8-arranger-status.is-error {
+  color: #ffaaaa;
+}
+
+
+/*
+ * Charlie phone experiment:
+ *
+ * The giant drag palette and sticky old inspector
+ * get out of the way. The score becomes the working
+ * surface.
+ *
+ * Desktop retains both as an escape hatch during
+ * V1B qualification.
+ */
+@media (max-width: 679px) {
+
+  html.a8-arranger-v1b
+  #palettePanel,
+
+  html.a8-arranger-v1b
+  #inspector {
+    display: none !important;
+  }
+
+}
+
+
+/*
+ * Desktop still gets the same click/tap interaction,
+ * but the sheet becomes a centered lower panel.
+ */
+@media (min-width: 680px) {
+
+  .a8-arranger-sheet {
+    left: 50%;
+    right: auto;
+
+    width:
+      min(
+        560px,
+        calc(100% - 32px)
+      );
+
+    transform:
+      translateX(-50%);
+  }
+
+  .a8-arranger-grid {
+    grid-template-columns:
+      repeat(
+        3,
+        minmax(0,1fr)
+      );
+  }
+
+  .a8-arranger-grid.a8-arranger-octaves {
+    grid-template-columns:
+      repeat(
+        5,
+        minmax(0,1fr)
+      );
+  }
+
+}
+
+
+@media (hover:hover) and (pointer:fine) {
+
+  .a8-arranger-button:hover,
+  .a8-arranger-choice:hover {
+    border-color:
+      rgba(143,199,255,.75);
+  }
+
+}
+
+/* CHARLIE V9: ONE CENTERED EDITOR · DISPLAY ONLY
+   The original Single Event Controller is relocated into the Arranger
+   popup: preserve native controls, binding IDs, and source handlers. */
+.a8-arranger-v1 .a8-arranger-backdrop {
+  background: rgba(0, 0, 0, 0);
+}
+.a8-arranger-v1 .a8-arranger-sheet {
+  position: absolute;
+  left: 50%; right: auto; top: 50%; bottom: auto;
+  transform: translate(-50%, -50%);
+  width: min(820px, calc(100vw - 28px));
+  max-height: min(86dvh, 820px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  border: 1px solid rgba(170, 203, 238, .34);
+  border-radius: 18px;
+  background: rgba(9, 17, 29, .335);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  box-shadow: 0 0 0 1px rgba(170,203,238,.12);
+}
+/* Override V8's independent fixed floating inspector, including :has. */
+body .a8-arranger-v1 #inspector.a8-v9-embedded-inspector,
+body:has(#inspectorBody:not([hidden])) .a8-arranger-v1 #inspector.a8-v9-embedded-inspector {
+  position: static !important;
+  inset: auto !important;
+  width: 100% !important;
+  max-height: none !important;
+  overflow: visible !important;
+  background: rgba(18, 31, 45, .335) !important;
+  box-shadow: none !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  margin: 14px 0 0 !important;
+  padding: 10px !important;
+}
+/* Arranger owns normal editing. Embed only unique exact pitch and
+   explicit rest controls for A; don't show two sets of time/voice/delete. */
+.a8-arranger-v1 #inspector .inspector-head,
+.a8-arranger-v1 #inspector #inspectorEmpty,
+.a8-arranger-v1 #inspector .inspector-grid > .inspector-box:first-child,
+.a8-arranger-v1 #inspector .inspector-grid > .inspector-box:nth-child(3) {
+  display: none !important;
+}
+.a8-arranger-v1[data-v9-layer="B"] #inspector,
+.a8-arranger-v1[data-v9-layer="C"] #inspector,
+.a8-arranger-v1 #inspectorBody[hidden] { display: none !important; }
+.a8-arranger-v1 #inspector .inspector-grid { display:block; }
+.a8-arranger-v1 #inspector .inspector-box { min-width:0; }
+@media(max-width:600px) {
+  .a8-arranger-v1 .a8-arranger-sheet {
+    width: calc(100vw - 16px);
+    max-height: calc(100dvh - 20px);
+    padding: 10px 10px calc(12px + env(safe-area-inset-bottom));
+    border-radius: 14px;
+  }
+  .a8-arranger-v1 .a8-arranger-choice,
+  .a8-arranger-v1 .a8-arranger-button { min-height:44px; }
+}
+/* END CHARLIE V9 */
+
+/* V10 · near-clear glass: keep the bar visible beneath the editor. */
+.a8-arranger-v1 .a8-arranger-sheet .a8-arranger-section { background: transparent; }
+/* END V10 */
+
+/* V11 · readable glass / 70% viewport panel with clear upper score view. */
+.a8-arranger-v1 .a8-arranger-sheet {
+  top: auto;
+  bottom: max(8px, env(safe-area-inset-bottom));
+  left: 50%;
+  right: auto;
+  transform: translateX(-50%);
+  max-height: 70vh;
+  max-height: 70dvh;
+  background: rgba(9, 17, 29, .335);
+}
+body .a8-arranger-v1 #inspector.a8-v9-embedded-inspector,
+body:has(#inspectorBody:not([hidden])) .a8-arranger-v1 #inspector.a8-v9-embedded-inspector {
+  background: rgba(18, 31, 45, .335) !important;
+}
+@media (max-width: 600px) {
+  .a8-arranger-v1 .a8-arranger-sheet {
+    width: calc(100vw - 16px);
+    max-height: 70vh;
+    max-height: 70dvh;
+  }
+}
+/* END V11 */
+
+/* V12 · legible glass: V11 position and 70dvh height unchanged.
+   Darken only the surfaces; no event control or layout edits. */
+.a8-arranger-v1 .a8-arranger-sheet {
+  background: rgba(9, 17, 29, .76);
+}
+body .a8-arranger-v1 #inspector.a8-v9-embedded-inspector,
+body:has(#inspectorBody:not([hidden])) .a8-arranger-v1 #inspector.a8-v9-embedded-inspector {
+  background: rgba(18, 31, 45, .82) !important;
+}
+/* END V12 */
