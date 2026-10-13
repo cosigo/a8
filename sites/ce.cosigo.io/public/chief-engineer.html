@@ -987,6 +987,50 @@ pre{
 
 </section>
 
+
+<section class="panel" id="a8-ce-ab-recovery">
+  <div class="kicker">A/B · CORE20 · INDEPENDENT RECOVERY</div>
+  <h2>A/B RECOVERY WORKBENCH</h2>
+  <p class="note">
+    EUROPA · Independent clock, calendar, Jovian-coordinate
+    and carrier-continuity recovery evidence.
+    The other core is an independent witness, not this bank's controller.
+  </p>
+  <div class="grid">
+    <div class="stat">
+      <span class="k">LIVE BANK STATE</span>
+      <span class="v cyan" id="abRecoveryState">CHECKING…</span>
+    </div>
+    <div class="stat">
+      <span class="k">CALENDAR</span>
+      <span class="v" id="abRecoveryCalendar">CHECKING…</span>
+    </div>
+    <div class="stat">
+      <span class="k">RECOVERY TRANSACTION</span>
+      <span class="v" id="abRecoveryCommit">LOCKED</span>
+    </div>
+  </div>
+  <p class="note" id="abRecoveryNote">
+    Loading independent recovery evidence…
+  </p>
+  <button type="button" id="abRecoveryRefresh">
+    REFRESH A/B RECOVERY
+  </button>
+  <button type="button" id="abRecoveryPreview">
+    PREVIEW A/B RECOVERY EVIDENCE
+  </button>
+  <button type="button" disabled>
+    COMMIT A/B RECOVERY · LOCKED
+  </button>
+  <pre id="abRecoveryEvidence"
+       style="white-space:pre-wrap;overflow-wrap:anywhere"></pre>
+  <p class="note">
+    <a href="#a8-ce-recovery-desk">
+      OPEN SHARED CROSS-CORE WITNESS
+    </a>
+  </p>
+</section>
+
 <section class="panel" id="a8-ce-clock-adjust">
   <div class="kicker">A/B · CORE20 · CLOCK ADJUST</div>
   <h2>A/B CLOCK ADJUST · AFTER RATE STABILIZATION</h2>
@@ -1059,6 +1103,8 @@ pre{
 </section>
 
 <section class="panel" id="physicalPulseBoxConsole">
+
+
   <h2>A/B · PATH A · PHYSICAL SOURCE</h2>
 
   <div class="statusline">
@@ -1399,7 +1445,53 @@ pre{
     safe seal / drain / shutdown control remain together.
   </p>
 
+
+<section class="panel" id="a8-ce-cd-recovery">
+  <div class="kicker">C/D · CORE21 · INDEPENDENT RECOVERY</div>
+  <h2>C/D RECOVERY WORKBENCH</h2>
+  <p class="note">
+    GANYMEDE · Independent clock, calendar, Jovian-coordinate
+    and carrier-continuity recovery evidence.
+    The other core is an independent witness, not this bank's controller.
+  </p>
+  <div class="grid">
+    <div class="stat">
+      <span class="k">LIVE BANK STATE</span>
+      <span class="v cyan" id="cdRecoveryState">CHECKING…</span>
+    </div>
+    <div class="stat">
+      <span class="k">CALENDAR</span>
+      <span class="v" id="cdRecoveryCalendar">CHECKING…</span>
+    </div>
+    <div class="stat">
+      <span class="k">RECOVERY TRANSACTION</span>
+      <span class="v" id="cdRecoveryCommit">LOCKED</span>
+    </div>
+  </div>
+  <p class="note" id="cdRecoveryNote">
+    Loading independent recovery evidence…
+  </p>
+  <button type="button" id="cdRecoveryRefresh">
+    REFRESH C/D RECOVERY
+  </button>
+  <button type="button" id="cdRecoveryPreview">
+    PREVIEW C/D RECOVERY EVIDENCE
+  </button>
+  <button type="button" disabled>
+    COMMIT C/D RECOVERY · LOCKED
+  </button>
+  <pre id="cdRecoveryEvidence"
+       style="white-space:pre-wrap;overflow-wrap:anywhere"></pre>
+  <p class="note">
+    <a href="#a8-ce-recovery-desk">
+      OPEN SHARED CROSS-CORE WITNESS
+    </a>
+  </p>
+</section>
+
 <section class="panel" id="a8-ce-core21-clock-adjust">
+
+
   <div class="kicker">C/D · CORE21 · CLOCK ADJUST</div>
   <h2>C/D CLOCK ADJUST · AFTER RATE STABILIZATION</h2>
 
@@ -2367,6 +2459,29 @@ pre{
 
   </div>
 
+</section>
+
+
+<section class="panel" id="a8-ce-recovery-desk">
+  <div class="kicker">A/B + C/D · UNIFIED RECOVERY</div>
+  <h2>CE RECOVERY DESK · BOTH PHYSICAL CARRIERS</h2>
+  <p class="note">Live native state, sky coordinate, calendar and independent checkpoints.
+  Preview, evidence seal, and restricted offline restore-input bundle. Commit remains locked; no clock, carrier or calendar writes.</p>
+  <div class="grid" style="margin-top:14px">
+    <div class="stat"><span class="k">A/B · CORE20</span><span class="v cyan" id="recoveryDeskAB">CHECKING…</span></div>
+    <div class="stat"><span class="k">C/D · CORE21</span><span class="v cyan" id="recoveryDeskCD">CHECKING…</span></div>
+    <div class="stat"><span class="k">CLOCK AGREEMENT</span><span class="v" id="recoveryDeskPhase">CHECKING…</span></div>
+    <div class="stat"><span class="k">CALENDAR AGREEMENT</span><span class="v" id="recoveryDeskCalendar">CHECKING…</span></div>
+    <div class="stat"><span class="k">JOVIAN COORDINATE SEPARATION</span><span class="v" id="recoveryDeskSky">CHECKING…</span></div>
+    <div class="stat"><span class="k">NATIVE CHECKPOINT TIMERS</span><span class="v" id="recoveryDeskCheckpoints">CHECKING…</span></div>
+  </div>
+  <p class="note" id="recoveryDeskStatus">FETCHING · no change to either core</p>
+  <button type="button" id="recoveryDeskRefresh">REFRESH BOTH CORES</button>
+  <button type="button" id="recoveryDeskPreview">PREVIEW RECOVERY EVIDENCE</button>
+  <button type="button" id="recoveryDeskSeal">SEAL BOTH CORES · EVIDENCE ONLY</button>
+  <button type="button" id="recoveryDeskBundle">SEAL RECOVERY FILE BUNDLE</button>
+  <pre id="recoveryDeskEvidence" style="white-space:pre-wrap;overflow-wrap:anywhere"></pre>
+  <button type="button" disabled title="Requires independently qualified handoff and restart/rollback procedure">COMMIT RECOVERY · LOCKED</button>
 </section>
 
 
@@ -6970,6 +7085,127 @@ const base = '/api/ce/core20-service';
     refreshBackupStatus,
     30000
   );
+})();
+</script>
+
+<script id="a8-ce-unified-recovery-desk-v1">
+(() => {
+  const $ = id => document.getElementById(id);
+  const show = (id, value) => { $(id).textContent = value ?? 'UNAVAILABLE'; };
+  async function refresh() {
+    try {
+      const r = await fetch('/api/ce/core20-service/recovery-desk/status', {cache:'no-store'});
+      const p = await r.json();
+      if (!r.ok || !p.ok) throw new Error(p.error || 'Recovery desk unavailable');
+      const d=p.desk, a=d.aB, c=d.cD, w=d.crossWitness;
+      show('recoveryDeskAB', `${a.service} · EPOCH ${a.physicalEpoch ?? '—'} · RAW ${a.physicalRaw ?? '—'} · WHEEL ${a.wheelOffset ?? '—'}`);
+      show('recoveryDeskCD', `${c.service} · HANDOFF ${c.handoff} · ABSOLUTE SKY ${c.absoluteMoonPhaseQualified===true?'QUALIFIED':'NOT QUALIFIED'}`);
+      show('recoveryDeskPhase', w.phaseDifferenceStates==null?'UNKNOWN':`${w.phaseDifferenceStates} A8 states · DAY ${a.dayCount}/${c.dayCount}`);
+      show('recoveryDeskCalendar', w.calendarDifferenceDays==null?'UNKNOWN':`${a.calendarOctal ?? a.calendarYearDay} / ${c.calendarOctal ?? c.calendarYearDay} · Δ ${w.calendarDifferenceDays} days`);
+      show('recoveryDeskSky', w.skyModelRawSeparationApprox==null?'UNKNOWN':`${w.skyModelRawSeparationApprox.toFixed(3)} RAW · diagnostic only`);
+      show('recoveryDeskCheckpoints', `A/B ${d.checkpoints.abTimer} · C/D ${d.checkpoints.cdTimer}`);
+      show('recoveryDeskStatus', 'OBSERVATION ONLY · transaction commit locked · native continuity must be independently qualified');
+    } catch(err) { show('recoveryDeskStatus', 'UNAVAILABLE · '+err.message); }
+  }
+  async function action(kind) {
+    const output=$('recoveryDeskEvidence');
+    const isSeal=kind==='seal';
+    if (isSeal && !confirm('Seal an A/B + C/D recovery evidence file on Trade? No clock or service changes.'))return;
+    $('recoveryDeskSeal').disabled=true;
+    $('recoveryDeskPreview').disabled=true;
+    output.textContent='REQUESTING '+kind.toUpperCase()+'…';
+    try {
+      const r=await fetch('/api/ce/core20-service/recovery-desk/'+kind,{
+        method:isSeal?'POST':'GET',cache:'no-store',headers:{'Accept':'application/json'}
+      });
+      const p=await r.json();
+      if(!r.ok||!p.ok)throw new Error(p.error||'Evidence operation unavailable');
+      output.textContent=JSON.stringify(isSeal?p.seal:p.preview,null,2);
+    }catch(err){output.textContent='BLOCKED · '+err.message;}
+    finally{$('recoveryDeskSeal').disabled=false;$('recoveryDeskPreview').disabled=false;}
+  }
+  $('recoveryDeskBundle').addEventListener('click',async()=>{
+    if(!confirm('Create a restricted offline recovery input bundle on Trade? No live changes.'))return;
+    const el=$('recoveryDeskEvidence');el.textContent='SEALING RECOVERY FILE BUNDLE…';
+    $('recoveryDeskBundle').disabled=true;
+    try {
+      const r=await fetch('/api/ce/core20-service/recovery-desk/bundle',{
+        method:'POST',cache:'no-store',headers:{'Accept':'application/json'}});
+      const p=await r.json();if(!r.ok||!p.ok)throw new Error(p.error||'Bundle failed');
+      el.textContent=JSON.stringify(p.bundle,null,2);
+    }catch(err){el.textContent='BUNDLE BLOCKED · '+err.message;}
+    finally{$('recoveryDeskBundle').disabled=false;}
+  });
+  $('recoveryDeskPreview').addEventListener('click',()=>action('preview'));
+  $('recoveryDeskSeal').addEventListener('click',()=>action('seal'));
+  $('recoveryDeskRefresh').addEventListener('click',refresh);
+  refresh(); setInterval(refresh,30000);
+})();
+</script>
+
+<script id="a8-ce-independent-recovery-workbenches-v1">
+(() => {
+  'use strict';
+  const $ = id => document.getElementById(id);
+
+  for (const cfg of [
+    {prefix:'ab', key:'aB', bank:'A/B'},
+    {prefix:'cd', key:'cD', bank:'C/D'}
+  ]) {
+    const put = (field, value) => {
+      $(cfg.prefix + field).textContent = String(value ?? 'UNAVAILABLE');
+    };
+
+    async function request(kind) {
+      const url = '/api/ce/core20-service/recovery-desk/' + kind;
+      const r = await fetch(url, {cache:'no-store'});
+      const p = await r.json();
+      if (!r.ok || p.ok === false)
+        throw Error(p.error || 'RECOVERY EVIDENCE UNAVAILABLE');
+      return p;
+    }
+
+    async function refresh() {
+      try {
+        const p = await request('status');
+        const d = p.desk || p;
+        const bank = d[cfg.key];
+        if (!bank) throw Error('BANK NOT PRESENT IN RECOVERY DESK');
+        put('RecoveryState', bank.service + ' · DAY ' + bank.dayCount);
+        put('RecoveryCalendar', bank.calendarOctal ?? bank.calendarYearDay);
+        put('RecoveryCommit', 'LOCKED · NOT QUALIFIED');
+        put('RecoveryNote',
+            'OBSERVATION ONLY · ' + cfg.bank
+            + ' restart/rollback transaction not yet qualified');
+      } catch (err) {
+        put('RecoveryNote', 'UNAVAILABLE · ' + err.message);
+      }
+    }
+
+    async function preview() {
+      put('RecoveryEvidence', 'READING ' + cfg.bank + ' EVIDENCE…');
+      try {
+        const p = await request('preview');
+        const result = p.preview || p;
+        const bank = result.desk?.[cfg.key];
+        if (!bank) throw Error('BANK EVIDENCE MISSING');
+        put('RecoveryEvidence', JSON.stringify({
+          bank: cfg.bank,
+          recoveryTarget: result.recoveryTargets?.[cfg.prefix],
+          operatingEvidence: bank,
+          commitEnabled: false,
+          sharedBlockers: result.commitBlockers || []
+        }, null, 2));
+      } catch (err) {
+        put('RecoveryEvidence', 'BLOCKED · ' + err.message);
+      }
+    }
+
+    $(cfg.prefix+'RecoveryRefresh').addEventListener('click', refresh);
+    $(cfg.prefix+'RecoveryPreview').addEventListener('click', preview);
+    refresh();
+    setInterval(refresh, 30000);
+  }
 })();
 </script>
 

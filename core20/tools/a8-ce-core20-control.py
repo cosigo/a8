@@ -2692,6 +2692,215 @@ def carrier_compensation_status():
     }
 
 
+# A8 CE V2 cross-core coordinated recovery evidence.
+# Seal writes a diagnostic evidence bundle ONLY. No clock, feeder, env or service writes.
+def recovery_desk_plan():
+    d = recovery_desk_status()
+    a, b, w = d['aB'], d['cD'], d['crossWitness']
+    reasons = []
+    if a['service'] != 'active' or a['feeder'] != 'active':
+        reasons.append('AB_CORE_OR_FEEDER_NOT_ACTIVE')
+    if b['service'] != 'active' or b['handoff'] != 'active':
+        reasons.append('CD_CORE_OR_HANDOFF_NOT_ACTIVE')
+    if a['physicalEpoch'] is None or a['physicalRaw'] is None:
+        reasons.append('AB_PHYSICAL_WITNESS_MISSING')
+    if a['dayCount'] is None or a['dayPhase17'] is None or a['modelRaw'] is None:
+        reasons.append('AB_NATIVE_COORDINATE_MISSING')
+    if b['dayCount'] is None or b['dayPhase17'] is None or b['modelRaw'] is None:
+        reasons.append('CD_NATIVE_COORDINATE_MISSING')
+    if a['calendarYearDay'] is None or b['calendarYearDay'] is None:
+        reasons.append('CALENDAR_COORDINATE_MISSING')
+    if a['wheelOffset'] is None:
+        reasons.append('AB_WHEEL_UNAVAILABLE')
+    if w['dayCountAgreement'] is not True:
+        reasons.append('EARTH_DAY_COUNT_NOT_AGREED')
+    # This is a witness collection, NOT proof that the absolute moon phase is qualified.
+    return {
+        'schema':'A8-CE-CROSS-CORE-RECOVERY-PREVIEW-V2',
+        'mode':'PREVIEW_NO_AUTHORITY_CHANGE',
+        'desk':d,
+        'evidenceComplete':not reasons,
+        'missingEvidence':reasons,
+        'recoveryTargets':{
+            'ab':'CORE20_EUROPA', 'cd':'CORE21_GANYMEDE',
+            'calendarDifferenceDays':w['calendarDifferenceDays'],
+            'skyModelRawSeparationApprox':w['skyModelRawSeparationApprox'],
+        },
+        'commitEnabled':False,
+        'commitBlockers':['NO_QUALIFIED_AB_RESTART_ROLLBACK_TRANSACTION',
+                          'NO_QUALIFIED_CD_RESTART_ROLLBACK_TRANSACTION',
+                          'SKY_ABSOLUTE_PHASE_NOT_QUALIFIED_FOR_AUTOMATIC_TRANSFER'],
+        'policy':{'noHostElapsedInference':True,'noRawEpochSplice':True,
+                  'noClockWrites':True,'noCalendarWrites':True,
+                  'noWheelWrites':True,'noServiceActions':True},
+    }
+
+
+def recovery_desk_seal():
+    import hashlib as _hashlib
+    import tempfile as _tempfile
+    from pathlib import Path as _Path
+    plan = recovery_desk_plan()
+    if not plan['evidenceComplete']:
+        raise RuntimeError('RECOVERY_SEAL_INCOMPLETE: '+','.join(plan['missingEvidence']))
+    root = _Path('/home/greg/a8-backups/ce-cross-core')
+    root.mkdir(mode=0o700,parents=True,exist_ok=True)
+    record = dict(plan)
+    record['schema']='A8-CE-CROSS-CORE-RECOVERY-SEAL-V2'
+    record['sealedAtHostUtcForFilingOnly']=datetime.now(timezone.utc).isoformat()
+    # Host timestamp is a filename and audit label ONLY, never A8 elapsed or pacing.
+    stamp=datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')
+    data=(json.dumps(record,indent=2,sort_keys=True)+'\n').encode()
+    digest=_hashlib.sha256(data).hexdigest()
+    fd,tmp=_tempfile.mkstemp(prefix='.pending-',dir=str(root))
+    try:
+        with os.fdopen(fd,'wb') as f:
+            os.fchmod(f.fileno(),0o600)
+            f.write(data);f.flush();os.fsync(f.fileno())
+        final=root / ('recovery-seal-'+stamp+'-'+digest[:12]+'.json')
+        os.replace(tmp,str(final))
+    finally:
+        if os.path.exists(tmp):os.unlink(tmp)
+    return {'path':str(final),'sha256':digest,'mode':'SEALED_EVIDENCE_ONLY',
+            'commitEnabled':False,'evidenceComplete':True}
+
+
+# A8 CE V3: sealed recoverable-file bundle, NO activation or writes to live A8.
+# The bundle records live state and copies an explicit allowlist of actual restore inputs.
+def recovery_desk_bundle():
+    import hashlib, tempfile, pathlib, shutil
+    plan = recovery_desk_plan()
+    if not plan['evidenceComplete']:
+        raise RuntimeError('RECOVERY_BUNDLE_INCOMPLETE: '+','.join(plan['missingEvidence']))
+    root = pathlib.Path('/home/greg/a8-backups/ce-cross-core')
+    root.mkdir(mode=0o700, parents=True, exist_ok=True)
+    stamp = datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')
+    # Explicit allowlist. Do not sweep entire /etc or /var/lib directories.
+    required = {
+        'ab-external-physical.env': '/etc/a8-core20/external-physical.env',
+        'ab-epoch9-certificate.json': '/etc/a8-core20/epoch9-restore-certificate.json',
+        'ab-wheel.json': '/var/lib/a8-core20/electronic-wheel/wheel.json',
+        'ab-calendar-checkpoint.json': '/var/lib/a8-core20/calendar-checkpoint.json',
+        'cd-sky-handoff.json': '/var/lib/a8-core21/jovian-sky-handoff.json',
+        'moon-model.json': '/srv/sites/europa.cosigo.io/public/assets/a8-moons-continuous-v2.json',
+        'moon-handoff.json': '/srv/sites/moons.cosigo.io/public/assets/a8-moons-active-handoff-v1.json',
+    }
+    # Checkpoints on both sides may have different locations; record evidence
+    # but do not guess source paths or silently claim to package them.
+    work = pathlib.Path(tempfile.mkdtemp(prefix='.recovery-bundle-pending-', dir=str(root)))
+    try:
+        os.chmod(work,0o700)
+        files = {}
+        for label, origin in required.items():
+            source = pathlib.Path(origin)
+            if not source.is_file() or source.is_symlink():
+                raise RuntimeError('REQUIRED_RESTORE_INPUT_UNAVAILABLE: '+label)
+            before=source.stat()
+            if before.st_size > 16*1024*1024:
+                raise RuntimeError('RESTORE_INPUT_SIZE_GUARD: '+label)
+            target=work/label
+            with source.open('rb') as f, target.open('xb') as g:
+                while True:
+                    block=f.read(65536)
+                    if not block:break
+                    g.write(block)
+                g.flush();os.fsync(g.fileno())
+            after=source.stat()
+            if (before.st_size,before.st_mtime_ns,before.st_ino)!=(after.st_size,after.st_mtime_ns,after.st_ino):
+                raise RuntimeError('RESTORE_INPUT_CHANGED_DURING_CAPTURE: '+label)
+            os.chmod(target,0o600)
+            payload=target.read_bytes()
+            files[label]={'originalPath':origin,'sha256':hashlib.sha256(payload).hexdigest(),
+                          'bytes':len(payload),'restoreMode':'MANUAL_REVIEW_ONLY'}
+        record={'schema':'A8-CE-RECOVERY-FILE-BUNDLE-V3',
+                'mode':'OFFLINE_RESTORE_INPUTS_NO_COMMIT',
+                'hostTimestampForFilingOnly':datetime.now(timezone.utc).isoformat(),
+                'preview':plan,'files':files,
+                'limits':['CROSS_CORE_SNAPSHOTS_NOT_SIMULTANEOUS',
+                          'NO_QUALIFIED_AUTOMATIC_A_B_OR_C_D_RESTART',
+                          'CORE21_ABSOLUTE_JOVIAN_PHASE_UNQUALIFIED',
+                          'HOURLY_CHECKPOINT_CONTENT_NOT_INCLUDED_UNTIL_PATHS_VERIFIED'],
+                'commitEnabled':False,'noHostTimePacing':True,'noEpochSplice':True}
+        manifest=work/'manifest.json'
+        with manifest.open('x') as f:
+            json.dump(record,f,indent=2,sort_keys=True);f.write('\n');f.flush();os.fsync(f.fileno())
+        os.chmod(manifest,0o600)
+        # Atomic publish of complete evidence directory. No path is a live destination.
+        final=root/('recovery-bundle-'+stamp+'-'+hashlib.sha256(manifest.read_bytes()).hexdigest()[:12])
+        if final.exists():raise RuntimeError('RECOVERY_BUNDLE_COLLISION')
+        work.rename(final)
+        return {'path':str(final),'manifestSha256':hashlib.sha256((final/'manifest.json').read_bytes()).hexdigest(),
+                'fileCount':len(files),'mode':'OFFLINE_RESTORE_INPUTS_NO_COMMIT','commitEnabled':False}
+    finally:
+        if work.exists():shutil.rmtree(work)
+
+
+# A8 CE unified recovery desk — evidence-only V1.
+# Deliberately no config writes, clock commands, or service actions.
+def recovery_desk_status():
+    core20_payload = get_json('/api/core20/clock') or {}
+    calendar20_payload = get_json('/api/core20/calendar') or {}
+    core21_payload = get_json_url('http://127.0.0.1:18032/api/core21/status') or {}
+    calendar21_payload = get_json_url('http://127.0.0.1:18033/calendar') or {}
+    physical = get_json_url('http://127.0.0.1:28790/snapshot') or {}
+
+    a = core20_payload.get('clock') or {}
+    b = core21_payload.get('civilClock') or {}
+    sky = (core21_payload.get('jovianFamily') or {}).get('skyPosition') or {}
+    cal_a = calendar20_payload.get('calendar') or calendar20_payload
+    cal_b = calendar21_payload.get('calendar') or calendar21_payload
+
+    def integer(x):
+        try: return int(x)
+        except (ValueError, TypeError): return None
+
+    a_day, b_day = integer(a.get('dayCount')), integer(b.get('dayCount'))
+    a_phase, b_phase = integer(a.get('dayPhase17')), integer(b.get('dayPhase17'))
+    a_cal, b_cal = integer(cal_a.get('yearDay')), integer(cal_b.get('yearDay'))
+    a_raw = integer(a.get('currentClockRawPulse'))
+    b_raw = sky.get('modelRawDecimal')
+    try: separation = float(b_raw) - a_raw if a_raw is not None else None
+    except (TypeError, ValueError): separation = None
+
+    return {
+        'schema': 'A8-CE-AB-CD-RECOVERY-DESK-V1',
+        'mode': 'EVIDENCE_ONLY_NO_COMMIT',
+        'aB': {
+            'core': 'CORE20', 'service': active(CORE),
+            'feeder': active(FEED), 'physicalEpoch': physical.get('SOURCE_EPOCH'),
+            'physicalRaw': physical.get('RAW_COUNT'),
+            'dayCount': a_day, 'dayPhase17': a_phase,
+            'modelRaw': a_raw, 'wheelOffset': a.get('electronicClockOffsetStates'),
+            'calendarYearDay': a_cal, 'calendarOctal': cal_a.get('yearDayOctal'),
+        },
+        'cD': {
+            'core': 'CORE21', 'service': active('a8-core21.service'),
+            'handoff': active('a8-core21-cd-auto-handoff.service'),
+            'dayCount': b_day, 'dayPhase17': b_phase,
+            'modelRaw': b_raw,
+            'absoluteMoonPhaseQualified': sky.get('absoluteMoonPhaseQualified'),
+            'calendarYearDay': b_cal, 'calendarOctal': cal_b.get('yearDayOctal'),
+        },
+        'crossWitness': {
+            'dayCountAgreement': a_day == b_day if a_day is not None and b_day is not None else None,
+            'phaseDifferenceStates': (b_phase - a_phase) if a_phase is not None and b_phase is not None and a_day == b_day else None,
+            'calendarDifferenceDays': (b_cal - a_cal) if a_cal is not None and b_cal is not None else None,
+            'skyModelRawSeparationApprox': separation,
+        },
+        'checkpoints': {
+            'abTimer': active('a8-core20-checkpoint.timer'),
+            'cdTimer': active('a8-core21-checkpoint.timer'),
+        },
+        'interlocks': {
+            'commitEnabled': False,
+            'startUnlocked': False,
+            'reason': 'QUALIFIED_CROSS_CORE_HANDOFF_AND_ATOMIC_RESTART_NOT_YET_IMPLEMENTED',
+            'noUtcElapsedInference': True,
+            'noPhysicalRawSplice': True,
+        },
+    }
+
+
 def snapshot():
     core_state = active(CORE)
     feed_state = active(FEED)
@@ -5613,6 +5822,17 @@ class Handler(BaseHTTPRequestHandler):
         )
 
     def do_GET(self):
+        if self.path == '/api/ce/core20-service/recovery-desk/preview':
+            if not self.authorized():return self.respond(403,{'ok':False,'error':'forbidden'})
+            try:return self.respond(200,{'ok':True,'preview':recovery_desk_plan()})
+            except Exception as exc:return self.respond(503,{'ok':False,'error':str(exc)})
+        if self.path == '/api/ce/core20-service/recovery-desk/status':
+            if not self.authorized():
+                return self.respond(403, {'ok': False, 'error': 'forbidden'})
+            try:
+                return self.respond(200, {'ok': True, 'desk': recovery_desk_status()})
+            except Exception as exc:
+                return self.respond(503, {'ok': False, 'error': str(exc)})
         if (
             self.path ==
             "/api/ce/core20-service/"
@@ -5920,6 +6140,19 @@ class Handler(BaseHTTPRequestHandler):
         )
 
     def do_POST(self):
+        if self.path == '/api/ce/core20-service/recovery-desk/bundle':
+            if not self.authorized():return self.respond(403,{'ok':False,'error':'forbidden'})
+            try:
+                with operation_lock:result=recovery_desk_bundle()
+                return self.respond(200,{'ok':True,'bundle':result})
+            except Exception as exc:return self.respond(409,{'ok':False,'error':str(exc)})
+        if self.path == '/api/ce/core20-service/recovery-desk/seal':
+            if not self.authorized():return self.respond(403,{'ok':False,'error':'forbidden'})
+            try:
+                with operation_lock:
+                    result=recovery_desk_seal()
+                return self.respond(200,{'ok':True,'seal':result})
+            except Exception as exc:return self.respond(409,{'ok':False,'error':str(exc)})
         core21_clock_prefix = (
             "/api/ce/core20-service/"
             "core21-clock-adjust/"

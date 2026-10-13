@@ -3,8 +3,11 @@
 import json
 import math
 import os
+import re
+import signal
 import subprocess
 import time
+from datetime import datetime, timezone
 import urllib.request
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from threading import Lock
@@ -21,6 +24,7 @@ AUTO = "a8-core20-autorecover.service"
 
 operation_lock = Lock()
 carrier_operation_lock = Lock()
+transport_operation_lock = Lock()
 
 CARRIER_STAGE_FILE = (
     "/etc/a8-core20/carrier-compensation-stage.json"
@@ -112,6 +116,76 @@ def prop(unit, name):
     return p.stdout.strip()
 
 
+# ============================================================
+# A8 CE CLOCK ADJUST V1
+# Meridian 0 fixed. Rate separate. Electronic clock position only.
+# ============================================================
+
+CLOCK_ADJUST_HELPER = (
+    "/usr/local/sbin/"
+    "a8-core20-clock-adjust"
+)
+
+
+def clock_adjust_call(*args, timeout=430):
+    p = run(
+        CLOCK_ADJUST_HELPER,
+        *args,
+        timeout=timeout,
+    )
+
+    if p.returncode != 0:
+        raise RuntimeError(
+            "CLOCK ADJUST HELPER FAILED · "
+            + (
+                p.stderr.strip()
+                or p.stdout.strip()
+                or str(p.returncode)
+            )
+        )
+
+    try:
+        return json.loads(p.stdout)
+    except Exception as exc:
+        raise RuntimeError(
+            "CLOCK ADJUST HELPER RETURNED INVALID JSON"
+        ) from exc
+
+
+
+# ============================================================
+# A8 CE C/D · CORE21 CLOCK ADJUST V1
+# ============================================================
+
+CORE21_CLOCK_ADJUST_HELPER = (
+    "/usr/local/sbin/"
+    "a8-core21-clock-adjust"
+)
+
+def core21_clock_adjust_call(*args, timeout=180):
+    p = run(
+        CORE21_CLOCK_ADJUST_HELPER,
+        *args,
+        timeout=timeout,
+    )
+
+    if p.returncode != 0:
+        raise RuntimeError(
+            "CORE21 CLOCK ADJUST HELPER FAILED · "
+            + (
+                p.stderr.strip()
+                or p.stdout.strip()
+                or str(p.returncode)
+            )
+        )
+
+    try:
+        return json.loads(p.stdout)
+    except Exception as exc:
+        raise RuntimeError(
+            "CORE21 CLOCK ADJUST HELPER RETURNED INVALID JSON"
+        ) from exc
+
 def get_json(path, timeout=2):
     try:
         with urllib.request.urlopen(
@@ -133,6 +207,1138 @@ def get_json_url(url, timeout=2):
     except Exception:
         return None
 
+
+
+
+SSH_SERVICE = "ssh.service"
+
+AB_ROUTER_SSH = "/usr/bin/ssh"
+
+AB_ROUTER_SSH_CONFIG = (
+    "/etc/a8-ce/router-ab-control/ssh_config"
+)
+
+AB_ROUTER_SSH_HOST = (
+    "a8-router-ab-control"
+)
+
+AB_ROUTER_REBOOT_CONFIRM = (
+    "REBOOT A/B ROUTER"
+)
+
+
+WAN_TRANSPORT_BANKS = {
+    "AB": {
+        "label":
+            "A/B · EUROPA",
+
+        "ports": {
+            22072: "MANAGEMENT",
+            28788: "SNAPSHOT",
+            28789: "STREAM",
+        },
+
+        "router": {
+            "address":
+                "192.168.1.254",
+
+            "identity":
+                "ZXHN F670L1FXS",
+
+            "rebootQualified":
+                True,
+
+            "rebootStatus":
+                "QUALIFIED · LOCAL A/B ROUTER AGENT",
+
+            "rebootConfirm":
+                AB_ROUTER_REBOOT_CONFIRM,
+        },
+
+        "confirm":
+            "RESET A/B TRANSPORT",
+    },
+
+    "CD": {
+        "label":
+            "C/D · GANYMEDE",
+
+        "ports": {
+            22070: "MANAGEMENT",
+        },
+
+        "router": {
+            "address":
+                "192.168.1.254",
+
+            "identity":
+                "BOA ADMIN · MODEL UNQUALIFIED",
+
+            "rebootQualified":
+                False,
+
+            "rebootStatus":
+                "LOCKED · REBOOT ENDPOINT NOT QUALIFIED",
+        },
+
+        "confirm":
+            "RESET C/D TRANSPORT",
+    },
+}
+
+
+
+def _ab_router_remote_command(
+    command,
+    timeout=20,
+):
+    command = str(
+        command
+    ).strip()
+
+    allowed = {
+        "status",
+        "check",
+        "schedule-reboot",
+    }
+
+    if command not in allowed:
+        raise ValueError(
+            "A/B ROUTER COMMAND NOT ALLOWED"
+        )
+
+    proc = run(
+        AB_ROUTER_SSH,
+        "-F",
+        AB_ROUTER_SSH_CONFIG,
+        AB_ROUTER_SSH_HOST,
+        "router-ab " + command,
+        timeout=timeout,
+    )
+
+    if proc.returncode != 0:
+        detail = (
+            proc.stderr.strip()
+            or
+            proc.stdout.strip()
+            or
+            str(proc.returncode)
+        )
+
+        raise RuntimeError(
+            "A/B ROUTER CONTROL FAILED · "
+            + detail
+        )
+
+    return (
+        proc.stdout
+        or ""
+    ).strip()
+
+
+def ab_router_remote_status():
+    output = (
+        _ab_router_remote_command(
+            "status",
+            timeout=15,
+        )
+    )
+
+    fields = {}
+    state_lines = []
+    in_state = False
+
+    for line in output.splitlines():
+        if line == "STATE_BEGIN":
+            in_state = True
+            continue
+
+        if line == "STATE_END":
+            in_state = False
+            continue
+
+        if in_state:
+            state_lines.append(
+                line
+            )
+            continue
+
+        if "=" in line:
+            key, value = (
+                line.split(
+                    "=",
+                    1,
+                )
+            )
+
+            fields[
+                key.strip()
+            ] = value.strip()
+
+    if (
+        fields.get("ROUTER")
+        != "ZXHN F670L1FXS"
+    ):
+        raise RuntimeError(
+            "A/B ROUTER IDENTITY MISMATCH"
+        )
+
+    if (
+        fields.get("ROLE")
+        != "A/B"
+    ):
+        raise RuntimeError(
+            "A/B ROUTER ROLE MISMATCH"
+        )
+
+    state = None
+
+    if state_lines:
+        state = json.loads(
+            "\n".join(
+                state_lines
+            )
+        )
+
+    return {
+        "qualified":
+            True,
+
+        "router":
+            fields.get(
+                "ROUTER"
+            ),
+
+        "role":
+            fields.get(
+                "ROLE"
+            ),
+
+        "timer":
+            fields.get(
+                "TIMER"
+            ),
+
+        "service":
+            fields.get(
+                "SERVICE"
+            ),
+
+        "state":
+            state,
+
+        "controlPath":
+            (
+                "TRADE_ROOT_KEY"
+                "_TO_FORCED_COMMAND"
+                "_TO_LOCAL_AGENT"
+            ),
+
+        "routerPasswordOnTrade":
+            False,
+    }
+
+
+def ab_router_remote_check():
+    output = (
+        _ab_router_remote_command(
+            "check",
+            timeout=25,
+        )
+    )
+
+    required = (
+        "PASS · ZXHN AUTHENTICATION",
+        "PASS · LIVE RESTART CONTRACT",
+        "PASS · SESSION SECURITY MATERIAL",
+        "NO REBOOT REQUEST SENT",
+    )
+
+    missing = [
+        item
+        for item in required
+        if item not in output
+    ]
+
+    if missing:
+        raise RuntimeError(
+            "A/B ROUTER CHECK INCOMPLETE · "
+            + " | ".join(
+                missing
+            )
+        )
+
+    return {
+        "qualified":
+            True,
+
+        "authentication":
+            True,
+
+        "restartContract":
+            True,
+
+        "securityMaterial":
+            True,
+
+        "rebootSent":
+            False,
+
+        "output":
+            output.splitlines(),
+    }
+
+
+def schedule_ab_router_reboot(
+    confirmation,
+):
+    if (
+        confirmation
+        != AB_ROUTER_REBOOT_CONFIRM
+    ):
+        raise ValueError(
+            "EXACT A/B ROUTER REBOOT CONFIRMATION REQUIRED"
+        )
+
+    output = (
+        _ab_router_remote_command(
+            "schedule-reboot",
+            timeout=35,
+        )
+    )
+
+    if (
+        "PASS · A/B ROUTER REBOOT SCHEDULED"
+        not in output
+    ):
+        raise RuntimeError(
+            "A/B ROUTER REBOOT TIMER WAS NOT CONFIRMED"
+        )
+
+    if (
+        "DELAY=10_SECONDS"
+        not in output
+    ):
+        raise RuntimeError(
+            "A/B ROUTER REBOOT DELAY WITNESS MISSING"
+        )
+
+    return {
+        "scheduled":
+            True,
+
+        "delaySeconds":
+            10,
+
+        "router":
+            "ZXHN F670L1FXS",
+
+        "action":
+            "Restart",
+
+        "factoryResetAction":
+            "NONE",
+
+        "transportResetAction":
+            "NONE",
+
+        "core20Action":
+            "NONE",
+
+        "arduinoAction":
+            "NONE",
+
+        "rateAction":
+            "NONE",
+
+        "phaseAction":
+            "NONE",
+
+        "output":
+            output.splitlines(),
+    }
+
+
+def _proc_text(
+    pid,
+    name,
+    binary=False,
+):
+    path = (
+        f"/proc/{int(pid)}/{name}"
+    )
+
+    if binary:
+        with open(
+            path,
+            "rb",
+        ) as f:
+            return (
+                f.read()
+                .replace(
+                    b"\0",
+                    b" ",
+                )
+                .decode(
+                    "utf-8",
+                    errors="replace",
+                )
+                .strip()
+            )
+
+    with open(
+        path,
+        "r",
+        encoding="utf-8",
+        errors="replace",
+    ) as f:
+        return f.read().strip()
+
+
+def _proc_ppid(pid):
+    status = _proc_text(
+        pid,
+        "status",
+    )
+
+    match = re.search(
+        r"^PPid:\s+(\d+)",
+        status,
+        re.MULTILINE,
+    )
+
+    if not match:
+        raise RuntimeError(
+            f"PPID UNAVAILABLE FOR PID {pid}"
+        )
+
+    return int(
+        match.group(1)
+    )
+
+
+def _ssh_master_pid():
+    raw = prop(
+        SSH_SERVICE,
+        "MainPID",
+    ).strip()
+
+    if (
+        not raw.isdigit()
+        or int(raw) <= 0
+    ):
+        raise RuntimeError(
+            "SSH MASTER PID UNAVAILABLE"
+        )
+
+    return int(raw)
+
+
+def _trade_reverse_listeners():
+    proc = run(
+        "ss",
+        "-ltnpH",
+        timeout=5,
+    )
+
+    if proc.returncode != 0:
+        raise RuntimeError(
+            "SS LISTENER INSPECTION FAILED · "
+            + (
+                proc.stderr.strip()
+                or
+                str(proc.returncode)
+            )
+        )
+
+    wanted = {
+        22070,
+        22072,
+        28788,
+        28789,
+    }
+
+    listeners = {}
+
+    for line in (
+        proc.stdout
+        or ""
+    ).splitlines():
+
+        fields = line.split()
+
+        if len(fields) < 4:
+            continue
+
+        local = fields[3]
+
+        if not local.startswith(
+            "127.0.0.1:"
+        ):
+            continue
+
+        try:
+            port = int(
+                local.rsplit(
+                    ":",
+                    1,
+                )[1]
+            )
+
+        except Exception:
+            continue
+
+        if port not in wanted:
+            continue
+
+        pids = [
+            int(x)
+            for x in re.findall(
+                r"pid=(\d+)",
+                line,
+            )
+        ]
+
+        if len(set(pids)) != 1:
+            listeners[port] = {
+                "port":
+                    port,
+
+                "pid":
+                    None,
+
+                "line":
+                    line,
+
+                "parseStatus":
+                    "OWNER_AMBIGUOUS",
+            }
+
+            continue
+
+        listeners[port] = {
+            "port":
+                port,
+
+            "pid":
+                pids[0],
+
+            "line":
+                line,
+
+            "parseStatus":
+                "OK",
+        }
+
+    return listeners
+
+
+def _validate_reverse_owner(
+    pid,
+    ssh_master,
+):
+    result = {
+        "pid":
+            int(pid),
+
+        "safe":
+            False,
+
+        "reasons":
+            [],
+    }
+
+    if int(pid) == int(
+        ssh_master
+    ):
+        result["reasons"].append(
+            "PID_IS_SSH_MASTER"
+        )
+
+    try:
+        comm = _proc_text(
+            pid,
+            "comm",
+        )
+
+    except Exception as exc:
+        result["reasons"].append(
+            "COMM_UNAVAILABLE · "
+            + str(exc)
+        )
+
+        return result
+
+    result["comm"] = comm
+
+    if comm != "sshd":
+        result["reasons"].append(
+            "OWNER_NOT_SSHD"
+        )
+
+    try:
+        cmdline = _proc_text(
+            pid,
+            "cmdline",
+            binary=True,
+        )
+
+    except Exception as exc:
+        result["reasons"].append(
+            "CMDLINE_UNAVAILABLE · "
+            + str(exc)
+        )
+
+        return result
+
+    result["cmdline"] = cmdline
+
+    if (
+        "sshd: greg"
+        not in cmdline
+    ):
+        result["reasons"].append(
+            "OWNER_NOT_GREG_SSH_SESSION"
+        )
+
+    try:
+        ppid = _proc_ppid(
+            pid
+        )
+
+        result["ppid"] = ppid
+
+    except Exception as exc:
+        result["reasons"].append(
+            "PPID_UNAVAILABLE · "
+            + str(exc)
+        )
+
+        return result
+
+    if ppid == int(
+        ssh_master
+    ):
+        result["reasons"].append(
+            "OWNER_IS_DIRECT_SSH_MASTER_CHILD"
+        )
+
+    try:
+        parent_comm = _proc_text(
+            ppid,
+            "comm",
+        )
+
+        result["parentComm"] = (
+            parent_comm
+        )
+
+        if parent_comm != "sshd":
+            result["reasons"].append(
+                "PARENT_NOT_SSHD"
+            )
+
+    except Exception as exc:
+        result["reasons"].append(
+            "PARENT_UNAVAILABLE · "
+            + str(exc)
+        )
+
+    result["safe"] = (
+        len(
+            result["reasons"]
+        )
+        == 0
+    )
+
+    return result
+
+
+def wan_transport_bank_status(
+    bank,
+):
+    bank = str(
+        bank
+    ).strip().upper()
+
+    if bank not in WAN_TRANSPORT_BANKS:
+        raise ValueError(
+            "TRANSPORT BANK MUST BE AB OR CD"
+        )
+
+    cfg = (
+        WAN_TRANSPORT_BANKS[
+            bank
+        ]
+    )
+
+    ssh_master = (
+        _ssh_master_pid()
+    )
+
+    listeners = (
+        _trade_reverse_listeners()
+    )
+
+    port_state = {}
+
+    owner_pids = set()
+
+    unsafe = []
+
+    for port, role in (
+        cfg["ports"].items()
+    ):
+        listener = (
+            listeners.get(
+                port
+            )
+        )
+
+        if listener is None:
+            port_state[
+                str(port)
+            ] = {
+                "role":
+                    role,
+
+                "state":
+                    "ABSENT",
+
+                "pid":
+                    None,
+
+                "safeOwner":
+                    None,
+            }
+
+            continue
+
+        pid = listener.get(
+            "pid"
+        )
+
+        if pid is None:
+            port_state[
+                str(port)
+            ] = {
+                "role":
+                    role,
+
+                "state":
+                    "OWNER AMBIGUOUS",
+
+                "pid":
+                    None,
+
+                "safeOwner":
+                    False,
+
+                "line":
+                    listener.get(
+                        "line"
+                    ),
+            }
+
+            unsafe.append(
+                {
+                    "port":
+                        port,
+
+                    "reason":
+                        "OWNER_AMBIGUOUS",
+                }
+            )
+
+            continue
+
+        validation = (
+            _validate_reverse_owner(
+                pid,
+                ssh_master,
+            )
+        )
+
+        port_state[
+            str(port)
+        ] = {
+            "role":
+                role,
+
+            "state":
+                (
+                    "LISTENING"
+                    if validation[
+                        "safe"
+                    ]
+                    else
+                    "UNSAFE OWNER"
+                ),
+
+            "pid":
+                pid,
+
+            "safeOwner":
+                validation[
+                    "safe"
+                ],
+
+            "owner":
+                validation,
+        }
+
+        owner_pids.add(
+            int(pid)
+        )
+
+        if not validation[
+            "safe"
+        ]:
+            unsafe.append(
+                {
+                    "port":
+                        port,
+
+                    "pid":
+                        pid,
+
+                    "reasons":
+                        validation[
+                            "reasons"
+                        ],
+                }
+            )
+
+    complete = all(
+        port_state[
+            str(port)
+        ]["state"]
+        == "LISTENING"
+
+        for port in cfg["ports"]
+    )
+
+    reset_available = (
+        bool(
+            owner_pids
+        )
+        and
+        not unsafe
+    )
+
+    if complete:
+        state = "LISTENING"
+
+    elif owner_pids:
+        state = "DEGRADED"
+
+    else:
+        state = "OFFLINE"
+
+    return {
+        "bank":
+            bank,
+
+        "label":
+            cfg["label"],
+
+        "state":
+            state,
+
+        "complete":
+            complete,
+
+        "resetAvailable":
+            reset_available,
+
+        "sshMasterPid":
+            ssh_master,
+
+        "ownerPids":
+            sorted(
+                owner_pids
+            ),
+
+        "unsafeOwners":
+            unsafe,
+
+        "ports":
+            port_state,
+
+        "router":
+            dict(
+                cfg["router"]
+            ),
+
+        "policy": {
+            "action":
+                "TRADE_SIDE_REVERSE_FORWARD_SESSION_RETIREMENT_ONLY",
+
+            "sshServiceRestart":
+                False,
+
+            "sshMasterAction":
+                "NONE",
+
+            "remotePiRestart":
+                False,
+
+            "arduinoAction":
+                "NONE",
+
+            "core20Action":
+                "NONE",
+
+            "core21Action":
+                "NONE",
+
+            "carrierRateAction":
+                "NONE",
+
+            "phaseAction":
+                "NONE",
+
+            "routerReboot":
+                (
+                    "QUALIFIED_LOCAL_AGENT"
+                    if bank == "AB"
+                    else
+                    "LOCKED_NOT_QUALIFIED"
+                ),
+        },
+    }
+
+
+def wan_transport_status():
+    return {
+        "schema":
+            "A8-CE-WAN-TRANSPORT-V1",
+
+        "ab":
+            wan_transport_bank_status(
+                "AB"
+            ),
+
+        "cd":
+            wan_transport_bank_status(
+                "CD"
+            ),
+    }
+
+
+def reset_wan_transport(
+    bank,
+):
+    bank = str(
+        bank
+    ).strip().upper()
+
+    if bank not in WAN_TRANSPORT_BANKS:
+        raise ValueError(
+            "TRANSPORT BANK MUST BE AB OR CD"
+        )
+
+    before = (
+        wan_transport_bank_status(
+            bank
+        )
+    )
+
+    if before[
+        "unsafeOwners"
+    ]:
+        raise RuntimeError(
+            "RESET REFUSED · UNSAFE OR AMBIGUOUS LISTENER OWNER"
+        )
+
+    targets = list(
+        before[
+            "ownerPids"
+        ]
+    )
+
+    if not targets:
+        return {
+            "bank":
+                bank,
+
+            "before":
+                before,
+
+            "signal":
+                "NONE",
+
+            "targetPids":
+                [],
+
+            "alreadyAbsent":
+                True,
+
+            "oldOwnersRetired":
+                True,
+
+            "after":
+                wan_transport_bank_status(
+                    bank
+                ),
+
+            "sshServiceAction":
+                "NONE",
+
+            "sshMasterAction":
+                "NONE",
+
+            "core20Action":
+                "NONE",
+
+            "core21Action":
+                "NONE",
+
+            "arduinoAction":
+                "NONE",
+
+            "routerAction":
+                "NONE",
+        }
+
+    master = before[
+        "sshMasterPid"
+    ]
+
+    for pid in targets:
+        if int(pid) == int(master):
+            raise RuntimeError(
+                "RESET REFUSED · SSH MASTER WOULD BE TARGETED"
+            )
+
+        validation = (
+            _validate_reverse_owner(
+                pid,
+                master,
+            )
+        )
+
+        if not validation[
+            "safe"
+        ]:
+            raise RuntimeError(
+                "RESET REFUSED · OWNER CHANGED BEFORE SIGNAL"
+            )
+
+    for pid in targets:
+        os.kill(
+            int(pid),
+            signal.SIGTERM,
+        )
+
+    deadline = (
+        time.monotonic()
+        + 3.0
+    )
+
+    after = None
+
+    while (
+        time.monotonic()
+        < deadline
+    ):
+        time.sleep(
+            0.20
+        )
+
+        after = (
+            wan_transport_bank_status(
+                bank
+            )
+        )
+
+        still_old = {
+            int(x)
+            for x in (
+                after[
+                    "ownerPids"
+                ]
+            )
+        }.intersection(
+            {
+                int(x)
+                for x in targets
+            }
+        )
+
+        if not still_old:
+            break
+
+    if after is None:
+        after = (
+            wan_transport_bank_status(
+                bank
+            )
+        )
+
+    still_old = sorted(
+        {
+            int(x)
+            for x in (
+                after[
+                    "ownerPids"
+                ]
+            )
+        }.intersection(
+            {
+                int(x)
+                for x in targets
+            }
+        )
+    )
+
+    return {
+        "bank":
+            bank,
+
+        "before":
+            before,
+
+        "signal":
+            "SIGTERM",
+
+        "targetPids":
+            targets,
+
+        "oldOwnersStillListening":
+            still_old,
+
+        "oldOwnersRetired":
+            not bool(
+                still_old
+            ),
+
+        "after":
+            after,
+
+        "expectedReconnect":
+            (
+                "REMOTE SYSTEMD RETRY"
+            ),
+
+        "sshServiceAction":
+            "NONE",
+
+        "sshMasterAction":
+            "NONE",
+
+        "core20Action":
+            "NONE",
+
+        "core21Action":
+            "NONE",
+
+        "arduinoAction":
+            "NONE",
+
+        "routerAction":
+            "NONE",
+    }
 
 
 AUTHORITY_STATE_FILE = "/etc/a8-core20/jovian-authority.json"
@@ -1486,6 +2692,215 @@ def carrier_compensation_status():
     }
 
 
+# A8 CE V2 cross-core coordinated recovery evidence.
+# Seal writes a diagnostic evidence bundle ONLY. No clock, feeder, env or service writes.
+def recovery_desk_plan():
+    d = recovery_desk_status()
+    a, b, w = d['aB'], d['cD'], d['crossWitness']
+    reasons = []
+    if a['service'] != 'active' or a['feeder'] != 'active':
+        reasons.append('AB_CORE_OR_FEEDER_NOT_ACTIVE')
+    if b['service'] != 'active' or b['handoff'] != 'active':
+        reasons.append('CD_CORE_OR_HANDOFF_NOT_ACTIVE')
+    if a['physicalEpoch'] is None or a['physicalRaw'] is None:
+        reasons.append('AB_PHYSICAL_WITNESS_MISSING')
+    if a['dayCount'] is None or a['dayPhase17'] is None or a['modelRaw'] is None:
+        reasons.append('AB_NATIVE_COORDINATE_MISSING')
+    if b['dayCount'] is None or b['dayPhase17'] is None or b['modelRaw'] is None:
+        reasons.append('CD_NATIVE_COORDINATE_MISSING')
+    if a['calendarYearDay'] is None or b['calendarYearDay'] is None:
+        reasons.append('CALENDAR_COORDINATE_MISSING')
+    if a['wheelOffset'] is None:
+        reasons.append('AB_WHEEL_UNAVAILABLE')
+    if w['dayCountAgreement'] is not True:
+        reasons.append('EARTH_DAY_COUNT_NOT_AGREED')
+    # This is a witness collection, NOT proof that the absolute moon phase is qualified.
+    return {
+        'schema':'A8-CE-CROSS-CORE-RECOVERY-PREVIEW-V2',
+        'mode':'PREVIEW_NO_AUTHORITY_CHANGE',
+        'desk':d,
+        'evidenceComplete':not reasons,
+        'missingEvidence':reasons,
+        'recoveryTargets':{
+            'ab':'CORE20_EUROPA', 'cd':'CORE21_GANYMEDE',
+            'calendarDifferenceDays':w['calendarDifferenceDays'],
+            'skyModelRawSeparationApprox':w['skyModelRawSeparationApprox'],
+        },
+        'commitEnabled':False,
+        'commitBlockers':['NO_QUALIFIED_AB_RESTART_ROLLBACK_TRANSACTION',
+                          'NO_QUALIFIED_CD_RESTART_ROLLBACK_TRANSACTION',
+                          'SKY_ABSOLUTE_PHASE_NOT_QUALIFIED_FOR_AUTOMATIC_TRANSFER'],
+        'policy':{'noHostElapsedInference':True,'noRawEpochSplice':True,
+                  'noClockWrites':True,'noCalendarWrites':True,
+                  'noWheelWrites':True,'noServiceActions':True},
+    }
+
+
+def recovery_desk_seal():
+    import hashlib as _hashlib
+    import tempfile as _tempfile
+    from pathlib import Path as _Path
+    plan = recovery_desk_plan()
+    if not plan['evidenceComplete']:
+        raise RuntimeError('RECOVERY_SEAL_INCOMPLETE: '+','.join(plan['missingEvidence']))
+    root = _Path('/home/greg/a8-backups/ce-cross-core')
+    root.mkdir(mode=0o700,parents=True,exist_ok=True)
+    record = dict(plan)
+    record['schema']='A8-CE-CROSS-CORE-RECOVERY-SEAL-V2'
+    record['sealedAtHostUtcForFilingOnly']=datetime.now(timezone.utc).isoformat()
+    # Host timestamp is a filename and audit label ONLY, never A8 elapsed or pacing.
+    stamp=datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')
+    data=(json.dumps(record,indent=2,sort_keys=True)+'\n').encode()
+    digest=_hashlib.sha256(data).hexdigest()
+    fd,tmp=_tempfile.mkstemp(prefix='.pending-',dir=str(root))
+    try:
+        with os.fdopen(fd,'wb') as f:
+            os.fchmod(f.fileno(),0o600)
+            f.write(data);f.flush();os.fsync(f.fileno())
+        final=root / ('recovery-seal-'+stamp+'-'+digest[:12]+'.json')
+        os.replace(tmp,str(final))
+    finally:
+        if os.path.exists(tmp):os.unlink(tmp)
+    return {'path':str(final),'sha256':digest,'mode':'SEALED_EVIDENCE_ONLY',
+            'commitEnabled':False,'evidenceComplete':True}
+
+
+# A8 CE V3: sealed recoverable-file bundle, NO activation or writes to live A8.
+# The bundle records live state and copies an explicit allowlist of actual restore inputs.
+def recovery_desk_bundle():
+    import hashlib, tempfile, pathlib, shutil
+    plan = recovery_desk_plan()
+    if not plan['evidenceComplete']:
+        raise RuntimeError('RECOVERY_BUNDLE_INCOMPLETE: '+','.join(plan['missingEvidence']))
+    root = pathlib.Path('/home/greg/a8-backups/ce-cross-core')
+    root.mkdir(mode=0o700, parents=True, exist_ok=True)
+    stamp = datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')
+    # Explicit allowlist. Do not sweep entire /etc or /var/lib directories.
+    required = {
+        'ab-external-physical.env': '/etc/a8-core20/external-physical.env',
+        'ab-epoch9-certificate.json': '/etc/a8-core20/epoch9-restore-certificate.json',
+        'ab-wheel.json': '/var/lib/a8-core20/electronic-wheel/wheel.json',
+        'ab-calendar-checkpoint.json': '/var/lib/a8-core20/calendar-checkpoint.json',
+        'cd-sky-handoff.json': '/var/lib/a8-core21/jovian-sky-handoff.json',
+        'moon-model.json': '/srv/sites/europa.cosigo.io/public/assets/a8-moons-continuous-v2.json',
+        'moon-handoff.json': '/srv/sites/moons.cosigo.io/public/assets/a8-moons-active-handoff-v1.json',
+    }
+    # Checkpoints on both sides may have different locations; record evidence
+    # but do not guess source paths or silently claim to package them.
+    work = pathlib.Path(tempfile.mkdtemp(prefix='.recovery-bundle-pending-', dir=str(root)))
+    try:
+        os.chmod(work,0o700)
+        files = {}
+        for label, origin in required.items():
+            source = pathlib.Path(origin)
+            if not source.is_file() or source.is_symlink():
+                raise RuntimeError('REQUIRED_RESTORE_INPUT_UNAVAILABLE: '+label)
+            before=source.stat()
+            if before.st_size > 16*1024*1024:
+                raise RuntimeError('RESTORE_INPUT_SIZE_GUARD: '+label)
+            target=work/label
+            with source.open('rb') as f, target.open('xb') as g:
+                while True:
+                    block=f.read(65536)
+                    if not block:break
+                    g.write(block)
+                g.flush();os.fsync(g.fileno())
+            after=source.stat()
+            if (before.st_size,before.st_mtime_ns,before.st_ino)!=(after.st_size,after.st_mtime_ns,after.st_ino):
+                raise RuntimeError('RESTORE_INPUT_CHANGED_DURING_CAPTURE: '+label)
+            os.chmod(target,0o600)
+            payload=target.read_bytes()
+            files[label]={'originalPath':origin,'sha256':hashlib.sha256(payload).hexdigest(),
+                          'bytes':len(payload),'restoreMode':'MANUAL_REVIEW_ONLY'}
+        record={'schema':'A8-CE-RECOVERY-FILE-BUNDLE-V3',
+                'mode':'OFFLINE_RESTORE_INPUTS_NO_COMMIT',
+                'hostTimestampForFilingOnly':datetime.now(timezone.utc).isoformat(),
+                'preview':plan,'files':files,
+                'limits':['CROSS_CORE_SNAPSHOTS_NOT_SIMULTANEOUS',
+                          'NO_QUALIFIED_AUTOMATIC_A_B_OR_C_D_RESTART',
+                          'CORE21_ABSOLUTE_JOVIAN_PHASE_UNQUALIFIED',
+                          'HOURLY_CHECKPOINT_CONTENT_NOT_INCLUDED_UNTIL_PATHS_VERIFIED'],
+                'commitEnabled':False,'noHostTimePacing':True,'noEpochSplice':True}
+        manifest=work/'manifest.json'
+        with manifest.open('x') as f:
+            json.dump(record,f,indent=2,sort_keys=True);f.write('\n');f.flush();os.fsync(f.fileno())
+        os.chmod(manifest,0o600)
+        # Atomic publish of complete evidence directory. No path is a live destination.
+        final=root/('recovery-bundle-'+stamp+'-'+hashlib.sha256(manifest.read_bytes()).hexdigest()[:12])
+        if final.exists():raise RuntimeError('RECOVERY_BUNDLE_COLLISION')
+        work.rename(final)
+        return {'path':str(final),'manifestSha256':hashlib.sha256((final/'manifest.json').read_bytes()).hexdigest(),
+                'fileCount':len(files),'mode':'OFFLINE_RESTORE_INPUTS_NO_COMMIT','commitEnabled':False}
+    finally:
+        if work.exists():shutil.rmtree(work)
+
+
+# A8 CE unified recovery desk — evidence-only V1.
+# Deliberately no config writes, clock commands, or service actions.
+def recovery_desk_status():
+    core20_payload = get_json('/api/core20/clock') or {}
+    calendar20_payload = get_json('/api/core20/calendar') or {}
+    core21_payload = get_json_url('http://127.0.0.1:18032/api/core21/status') or {}
+    calendar21_payload = get_json_url('http://127.0.0.1:18033/calendar') or {}
+    physical = get_json_url('http://127.0.0.1:28790/snapshot') or {}
+
+    a = core20_payload.get('clock') or {}
+    b = core21_payload.get('civilClock') or {}
+    sky = (core21_payload.get('jovianFamily') or {}).get('skyPosition') or {}
+    cal_a = calendar20_payload.get('calendar') or calendar20_payload
+    cal_b = calendar21_payload.get('calendar') or calendar21_payload
+
+    def integer(x):
+        try: return int(x)
+        except (ValueError, TypeError): return None
+
+    a_day, b_day = integer(a.get('dayCount')), integer(b.get('dayCount'))
+    a_phase, b_phase = integer(a.get('dayPhase17')), integer(b.get('dayPhase17'))
+    a_cal, b_cal = integer(cal_a.get('yearDay')), integer(cal_b.get('yearDay'))
+    a_raw = integer(a.get('currentClockRawPulse'))
+    b_raw = sky.get('modelRawDecimal')
+    try: separation = float(b_raw) - a_raw if a_raw is not None else None
+    except (TypeError, ValueError): separation = None
+
+    return {
+        'schema': 'A8-CE-AB-CD-RECOVERY-DESK-V1',
+        'mode': 'EVIDENCE_ONLY_NO_COMMIT',
+        'aB': {
+            'core': 'CORE20', 'service': active(CORE),
+            'feeder': active(FEED), 'physicalEpoch': physical.get('SOURCE_EPOCH'),
+            'physicalRaw': physical.get('RAW_COUNT'),
+            'dayCount': a_day, 'dayPhase17': a_phase,
+            'modelRaw': a_raw, 'wheelOffset': a.get('electronicClockOffsetStates'),
+            'calendarYearDay': a_cal, 'calendarOctal': cal_a.get('yearDayOctal'),
+        },
+        'cD': {
+            'core': 'CORE21', 'service': active('a8-core21.service'),
+            'handoff': active('a8-core21-cd-auto-handoff.service'),
+            'dayCount': b_day, 'dayPhase17': b_phase,
+            'modelRaw': b_raw,
+            'absoluteMoonPhaseQualified': sky.get('absoluteMoonPhaseQualified'),
+            'calendarYearDay': b_cal, 'calendarOctal': cal_b.get('yearDayOctal'),
+        },
+        'crossWitness': {
+            'dayCountAgreement': a_day == b_day if a_day is not None and b_day is not None else None,
+            'phaseDifferenceStates': (b_phase - a_phase) if a_phase is not None and b_phase is not None and a_day == b_day else None,
+            'calendarDifferenceDays': (b_cal - a_cal) if a_cal is not None and b_cal is not None else None,
+            'skyModelRawSeparationApprox': separation,
+        },
+        'checkpoints': {
+            'abTimer': active('a8-core20-checkpoint.timer'),
+            'cdTimer': active('a8-core21-checkpoint.timer'),
+        },
+        'interlocks': {
+            'commitEnabled': False,
+            'startUnlocked': False,
+            'reason': 'QUALIFIED_CROSS_CORE_HANDOFF_AND_ATOMIC_RESTART_NOT_YET_IMPLEMENTED',
+            'noUtcElapsedInference': True,
+            'noPhysicalRawSplice': True,
+        },
+    }
+
+
 def snapshot():
     core_state = active(CORE)
     feed_state = active(FEED)
@@ -1815,24 +3230,14 @@ def ab_reference_ghost():
             "C/D REFERENCE DISCIPLINE NOT ACTIVE"
         )
 
-    if (
-        int(d.get("segmentNumber"))
-        != 3
-    ):
-        raise ValueError(
-            "C/D REFERENCE SEGMENT CHANGED"
-        )
-
-    if (
-        d.get("ratio")
-        != {
-            "numerator":"16818",
-            "denominator":"16819",
-        }
-    ):
-        raise ValueError(
-            "C/D REFERENCE RATIO CHANGED"
-        )
+    # Segment / ratio are intentionally not hard-coded here.
+    #
+    # This function validates the CURRENT C/D witness only.
+    # Qualification against the historical A/B reference is
+    # performed separately by ab_reference_qualification().
+    #
+    # A changed C/D run / segment / ratio therefore becomes
+    # REQUALIFICATION_REQUIRED instead of a transport error.
 
     for key in (
         "writesArduino",
@@ -1957,6 +3362,117 @@ def ab_expected_ratio():
     }
 
 
+def ab_reference_qualification():
+    live=ab_foundation_status()
+
+    current=ab_reference_ghost()
+
+    foundation_reference=(
+        live["discipline"]
+        .get("reference")
+        or {}
+    )
+
+    historical_ratio=dict(
+        foundation_reference.get("ratio")
+        or {}
+    )
+
+    historical_segment=(
+        foundation_reference.get(
+            "segmentNumber"
+        )
+    )
+
+    try:
+        historical_segment_int=(
+            int(historical_segment)
+        )
+
+    except (
+        TypeError,
+        ValueError,
+    ):
+        historical_segment_int=None
+
+    historical={
+        "carrier":
+            foundation_reference.get(
+                "carrier"
+            ),
+
+        "runId":
+            foundation_reference.get(
+                "runId"
+            ),
+
+        "segmentNumber":
+            historical_segment_int,
+
+        "ratio":
+            historical_ratio,
+
+        "proposedFirstABRatio":
+            foundation_reference.get(
+                "proposedFirstABRatio"
+            ),
+    }
+
+    same_reference=(
+        current.get("runId")
+        == historical.get("runId")
+
+        and
+
+        current.get("segmentNumber")
+        == historical.get("segmentNumber")
+
+        and
+
+        current.get("ratio")
+        == historical.get("ratio")
+    )
+
+    return {
+        "schema":
+            "A8-CE-AB-REFERENCE-QUALIFICATION-V1",
+
+        "status":
+            (
+                "CURRENT_REFERENCE_MATCHES_"
+                "HISTORICAL_QUALIFICATION"
+
+                if same_reference
+
+                else
+
+                "REQUALIFICATION_REQUIRED_"
+                "CURRENT_C_D_REFERENCE_CHANGED"
+            ),
+
+        "requalificationRequired":
+            not same_reference,
+
+        "currentReference":
+            current,
+
+        "historicalReference":
+            historical,
+
+        "actuation":
+            "NONE",
+
+        "physicalRawAction":
+            "NONE",
+
+        "core20Action":
+            "NONE",
+
+        "jovianAction":
+            "NONE",
+    }
+
+
 def ab_stage_state():
     return ab_control_read_json(
         AB_STAGE_FILE
@@ -1973,6 +3489,18 @@ def ab_write_stage(
     numerator,
     denominator,
 ):
+    qualification=(
+        ab_reference_qualification()
+    )
+
+    if qualification[
+        "requalificationRequired"
+    ]:
+        raise ValueError(
+            "A/B REQUALIFICATION REQUIRED · "
+            "CURRENT C/D REFERENCE CHANGED"
+        )
+
     expected=ab_expected_ratio()
 
     n=str(numerator or "")
@@ -2069,6 +3597,18 @@ def ab_write_stage(
 
 
 def ab_review_stage():
+    qualification=(
+        ab_reference_qualification()
+    )
+
+    if qualification[
+        "requalificationRequired"
+    ]:
+        raise ValueError(
+            "A/B REQUALIFICATION REQUIRED · "
+            "CURRENT C/D REFERENCE CHANGED"
+        )
+
     stage=ab_stage_state()
 
     if stage is None:
@@ -2233,12 +3773,26 @@ def ab_review_stage():
 def ab_control_status():
     live=ab_foundation_status()
 
+    qualification=(
+        ab_reference_qualification()
+    )
+
     return {
         "schema":
             "A8-CE-AB-CARRIER-CONTROL-V1",
 
         "status":
-            "STAGE_REVIEW_ONLY",
+            (
+                "REQUALIFICATION_REQUIRED"
+
+                if qualification[
+                    "requalificationRequired"
+                ]
+
+                else
+
+                "STAGE_REVIEW_ONLY"
+            ),
 
         "bank":
             "A/B",
@@ -2256,25 +3810,75 @@ def ab_control_status():
             live["physical"],
 
         "reference":
-            ab_reference_ghost(),
+            qualification[
+                "currentReference"
+            ],
+
+        "referenceQualification":
+            qualification,
+
+        "historicalReference":
+            qualification[
+                "historicalReference"
+            ],
 
         "expectedRatio":
-            ab_expected_ratio(),
+            (
+                None
+
+                if qualification[
+                    "requalificationRequired"
+                ]
+
+                else
+
+                ab_expected_ratio()
+            ),
+
+        "historicalExpectedRatio":
+            (
+                live["discipline"]
+                .get("reference")
+                or {}
+            ).get(
+                "proposedFirstABRatio"
+            ),
 
         "control":{
             "stageAvailable":
-                True,
+                not qualification[
+                    "requalificationRequired"
+                ],
 
             "reviewAvailable":
-                ab_stage_state()
-                is not None,
+                (
+                    not qualification[
+                        "requalificationRequired"
+                    ]
+
+                    and
+
+                    ab_stage_state()
+                    is not None
+                ),
 
             "sealAvailable":
                 False,
 
             "sealStatus":
-                "LOCKED_PENDING_FEEDER_"
-                "ACTUATION_QUALIFICATION",
+                (
+                    "LOCKED_PENDING_"
+                    "A_B_REQUALIFICATION"
+
+                    if qualification[
+                        "requalificationRequired"
+                    ]
+
+                    else
+
+                    "LOCKED_PENDING_FEEDER_"
+                    "ACTUATION_QUALIFICATION"
+                ),
 
             "stagedProposal":
                 ab_stage_state(),
@@ -2303,6 +3907,1884 @@ def ab_control_status():
                 False,
         },
     }
+
+
+
+# ============================================================
+# CORE20 / CORE21 HOURLY BACKUP STATUS · READ ONLY
+# ============================================================
+
+BACKUP_CADENCE_SECONDS = 3600
+
+# Two missed hourly cycles before STALE.
+BACKUP_STALE_AFTER_SECONDS = 7200
+
+BACKUP_SPECS = {
+    "core20": {
+        "service":
+            "a8-core20-checkpoint.service",
+
+        "timer":
+            "a8-core20-checkpoint.timer",
+
+        "root":
+            "/home/greg/a8-backups/automatic-core20",
+
+        "prefix":
+            "core20-checkpoint-",
+
+        "statusFile":
+            "CHECKPOINT_STATUS",
+    },
+
+    "core21": {
+        "service":
+            "a8-core21-checkpoint.service",
+
+        "timer":
+            "a8-core21-checkpoint.timer",
+
+        "root":
+            "/home/greg/a8-backups/automatic-core21",
+
+        "prefix":
+            "core21-checkpoint-",
+
+        "statusFile":
+            None,
+    },
+}
+
+
+def backup_systemd_state(unit):
+    props = (
+        "ActiveState",
+        "SubState",
+        "Result",
+        "ExecMainStatus",
+        "ExecMainStartTimestamp",
+        "ExecMainExitTimestamp",
+        "UnitFileState",
+        "LastTriggerUSec",
+        "NextElapseUSecRealtime",
+    )
+
+    args = [
+        "systemctl",
+        "show",
+        unit,
+    ]
+
+    for prop in props:
+        args.extend(
+            [
+                "-p",
+                prop,
+            ]
+        )
+
+    proc = run(
+        *args,
+        timeout=5,
+    )
+
+    if proc.returncode != 0:
+        return {
+            "available": False,
+            "error": proc.stderr.strip(),
+        }
+
+    result = {
+        "available": True,
+    }
+
+    for raw in proc.stdout.splitlines():
+        if "=" not in raw:
+            continue
+
+        key, value = raw.split(
+            "=",
+            1,
+        )
+
+        result[key] = value
+
+    return result
+
+
+def backup_checkpoint_epoch(name, prefix):
+    if not name.startswith(prefix):
+        return None
+
+    stamp = name[len(prefix):]
+
+    try:
+        dt = datetime.strptime(
+            stamp,
+            "%Y%m%dT%H%M%SZ",
+        ).replace(
+            tzinfo=timezone.utc,
+        )
+
+    except ValueError:
+        return None
+
+    return dt.timestamp()
+
+
+def backup_latest_artifact(spec):
+    root = spec["root"]
+    prefix = spec["prefix"]
+
+    if not os.path.isdir(root):
+        return None
+
+    candidates = []
+
+    try:
+        names = os.listdir(root)
+
+    except OSError:
+        return None
+
+    for name in names:
+        if not name.startswith(prefix):
+            continue
+
+        path = os.path.join(
+            root,
+            name,
+        )
+
+        if not os.path.isdir(path):
+            continue
+
+        epoch = backup_checkpoint_epoch(
+            name,
+            prefix,
+        )
+
+        if epoch is None:
+            continue
+
+        candidates.append(
+            (
+                epoch,
+                name,
+                path,
+            )
+        )
+
+    if not candidates:
+        return None
+
+    epoch, name, path = max(
+        candidates,
+        key=lambda item: item[0],
+    )
+
+    checkpoint_status = None
+
+    status_file = spec.get(
+        "statusFile"
+    )
+
+    if status_file:
+        status_path = os.path.join(
+            path,
+            status_file,
+        )
+
+        if os.path.isfile(status_path):
+            try:
+                with open(
+                    status_path,
+                    encoding="utf-8",
+                ) as f:
+                    checkpoint_status = (
+                        f.read().strip()
+                    )
+
+            except OSError:
+                checkpoint_status = None
+
+    return {
+        "name":
+            name,
+
+        "timestampUtc":
+            datetime.fromtimestamp(
+                epoch,
+                tz=timezone.utc,
+            ).isoformat(),
+
+        "epoch":
+            epoch,
+
+        "checkpointStatus":
+            checkpoint_status,
+    }
+
+
+def backup_one(name):
+    spec = BACKUP_SPECS[name]
+
+    service = backup_systemd_state(
+        spec["service"]
+    )
+
+    timer = backup_systemd_state(
+        spec["timer"]
+    )
+
+    artifact = backup_latest_artifact(
+        spec
+    )
+
+    now = time.time()
+
+    age = None
+
+    if artifact is not None:
+        age = max(
+            0,
+            int(
+                now
+                - artifact["epoch"]
+            ),
+        )
+
+    state = "UNKNOWN"
+    reason = "INSUFFICIENT_EVIDENCE"
+
+    service_active = (
+        service.get("ActiveState")
+        if service.get("available")
+        else None
+    )
+
+    if service_active in (
+        "activating",
+        "active",
+    ):
+        state = "IN PROGRESS"
+        reason = (
+            "CHECKPOINT_SERVICE_RUNNING"
+        )
+
+    elif (
+        service.get("available")
+        and
+        (
+            service.get("Result")
+            not in (
+                "",
+                "success",
+            )
+            or
+            service.get("ExecMainStatus")
+            not in (
+                "",
+                "0",
+            )
+        )
+    ):
+        state = "FAILED"
+        reason = (
+            "LATEST_CHECKPOINT_RUN_FAILED"
+        )
+
+    elif (
+        artifact is not None
+        and
+        artifact.get("checkpointStatus")
+        not in (
+            None,
+            "",
+            "PASS",
+        )
+    ):
+        state = "FAILED"
+        reason = (
+            "CHECKPOINT_ARTIFACT_NOT_PASS"
+        )
+
+    elif (
+        not timer.get("available")
+        or
+        timer.get("ActiveState")
+        != "active"
+        or
+        timer.get("SubState")
+        != "waiting"
+    ):
+        state = "FAILED"
+        reason = (
+            "HOURLY_TIMER_NOT_ARMED"
+        )
+
+    elif artifact is None:
+        state = "UNKNOWN"
+        reason = (
+            "NO_CHECKPOINT_ARTIFACT"
+        )
+
+    elif (
+        age is not None
+        and
+        age >
+        BACKUP_STALE_AFTER_SECONDS
+    ):
+        state = "STALE"
+        reason = (
+            "ARTIFACT_OLDER_THAN_TWO_"
+            "HOURLY_CYCLES"
+        )
+
+    else:
+        state = "HEALTHY"
+        reason = (
+            "TIMER_RUN_AND_ARTIFACT_CURRENT"
+        )
+
+    return {
+        "core":
+            name.upper(),
+
+        "status":
+            state,
+
+        "reason":
+            reason,
+
+        "cadenceSeconds":
+            BACKUP_CADENCE_SECONDS,
+
+        "staleAfterSeconds":
+            BACKUP_STALE_AFTER_SECONDS,
+
+        "ageSeconds":
+            age,
+
+        "latestCheckpoint":
+            artifact,
+
+        "service":
+            service,
+
+        "timer":
+            timer,
+    }
+
+
+def core_backup_status():
+    return {
+        "schema":
+            "A8-CE-CORE-BACKUP-STATUS-V1",
+
+        "readOnly":
+            True,
+
+        "writesTimingState":
+            False,
+
+        "generatedUtcEvidenceOnly":
+            datetime.now(
+                timezone.utc
+            ).isoformat(),
+
+        "core20":
+            backup_one("core20"),
+
+        "core21":
+            backup_one("core21"),
+    }
+
+
+# ============================================================
+# A8 CE A/B PI GEARBOX RATCHET V2
+#
+# Adjustable q exists on the A/B Pi only.
+#
+# Pi disciplined coordinate:
+#   D = D0 + (P - P0) * q
+#
+# Core20 feeder:
+#   F = F0 + (D - D0)
+#
+# Therefore disciplined carrier → feeder slope = 1/1.
+# ============================================================
+
+AB_GEARBOX_SSH = "/usr/bin/ssh"
+AB_GEARBOX_SSH_PORT = "22072"
+AB_GEARBOX_SSH_USER = "pi@127.0.0.1"
+
+AB_GEARBOX_SSH_KEY = (
+    "/etc/a8-ce/ab-gearbox/"
+    "id_ed25519"
+)
+
+AB_GEARBOX_KNOWN_HOSTS = (
+    "/home/greg/.ssh/"
+    "known_hosts"
+)
+
+AB_GEARBOX_LIVE_URL = (
+    "http://127.0.0.1:28789/health"
+)
+
+AB_FEEDER_ACTUATION_STATE = (
+    "/etc/a8-core20/"
+    "ab-feeder-actuation.json"
+)
+
+
+def _ab_v2_remote_json(*parts, timeout=15):
+    import shlex
+
+    command = (
+        "gearbox-ab "
+        +
+        " ".join(
+            shlex.quote(str(x))
+            for x in parts
+        )
+    )
+
+    p = run(
+        AB_GEARBOX_SSH,
+
+        "-p",
+        AB_GEARBOX_SSH_PORT,
+
+        "-i",
+        AB_GEARBOX_SSH_KEY,
+
+        "-o",
+        "BatchMode=yes",
+
+        "-o",
+        "IdentitiesOnly=yes",
+
+        "-o",
+        "StrictHostKeyChecking=yes",
+
+        "-o",
+        (
+            "UserKnownHostsFile="
+            + AB_GEARBOX_KNOWN_HOSTS
+        ),
+
+        AB_GEARBOX_SSH_USER,
+
+        command,
+
+        timeout=timeout,
+    )
+
+    if p.returncode != 0:
+        raise RuntimeError(
+            "A/B REMOTE GEARBOX FAILED · "
+            + (
+                p.stderr.strip()
+                or p.stdout.strip()
+                or str(p.returncode)
+            )
+        )
+
+    try:
+        result = json.loads(
+            p.stdout
+        )
+    except Exception as exc:
+        raise RuntimeError(
+            "A/B REMOTE INVALID JSON · "
+            + str(exc)
+        )
+
+    if result.get("ok") is not True:
+        raise RuntimeError(
+            "A/B REMOTE REJECTED · "
+            + str(
+                result.get(
+                    "error",
+                    "UNKNOWN"
+                )
+            )
+        )
+
+    return result
+
+
+def _ab_v2_live():
+    x = get_json_url(
+        AB_GEARBOX_LIVE_URL,
+        timeout=3,
+    )
+
+    if not isinstance(x, dict):
+        raise RuntimeError(
+            "A/B LIVE GEARBOX UNAVAILABLE"
+        )
+
+    if x.get("status") != "READY":
+        raise RuntimeError(
+            "A/B LIVE GEARBOX NOT READY"
+        )
+
+    source = (
+        x.get("source")
+        or {}
+    )
+
+    if str(
+        source.get("SOURCE_EPOCH")
+    ) != "8":
+        raise RuntimeError(
+            "A/B SOURCE EPOCH CHANGED"
+        )
+
+    if source.get("STATUS") != "ACTIVE":
+        raise RuntimeError(
+            "A/B PHYSICAL SOURCE NOT ACTIVE"
+        )
+
+    disciplined = (
+        source.get("disciplinedRaw")
+        or {}
+    )
+
+    carrier = (
+        source.get("carrierDiscipline")
+        or {}
+    )
+
+    if (
+        disciplined.get("status")
+        != "ACTIVE_TRIAL"
+    ):
+        raise RuntimeError(
+            "A/B DISCIPLINED RAW NOT ACTIVE"
+        )
+
+    if (
+        carrier.get("schema")
+        != "A8-AB-CARRIER-DISCIPLINE-V1"
+    ):
+        raise RuntimeError(
+            "A/B DISCIPLINE SCHEMA CHANGED"
+        )
+
+    if (
+        carrier.get("status")
+        != "ACTIVE_TRIAL"
+    ):
+        raise RuntimeError(
+            "A/B DISCIPLINE NOT ACTIVE"
+        )
+
+    if (
+        carrier.get("role")
+        != "OSCILLATOR_COMPENSATION_ONLY"
+    ):
+        raise RuntimeError(
+            "A/B DISCIPLINE ROLE CHANGED"
+        )
+
+    if carrier.get("authority") != "NONE":
+        raise RuntimeError(
+            "A/B DISCIPLINE CLAIMS AUTHORITY"
+        )
+
+    if (
+        carrier.get("automaticReanchor")
+        is not False
+    ):
+        raise RuntimeError(
+            "A/B AUTOMATIC REANCHOR ENABLED"
+        )
+
+    safety = (
+        carrier.get("safety")
+        or {}
+    )
+
+    for key in (
+        "usesUTC",
+        "usesHostTimeForPace",
+        "writesArduino",
+        "writesCore20",
+        "writesReporter",
+        "changesSourceEpoch",
+    ):
+        if safety.get(key) is not False:
+            raise RuntimeError(
+                "A/B SAFETY FLAG CHANGED · "
+                + key
+            )
+
+    ratio = (
+        carrier.get("ratio")
+        or {}
+    )
+
+    normalized = normalize_carrier_ratio(
+        ratio.get("numerator"),
+        ratio.get("denominator"),
+    )
+
+    if normalized != ratio:
+        raise RuntimeError(
+            "A/B LIVE RATIO NOT NORMALIZED"
+        )
+
+    return (
+        source,
+        carrier,
+        disciplined,
+    )
+
+
+def _ab_v2_feeder():
+    if active(FEED) != "active":
+        raise RuntimeError(
+            "CORE20 FEEDER NOT ACTIVE"
+        )
+
+    with open(
+        AB_FEEDER_ACTUATION_STATE,
+        "r",
+        encoding="utf-8",
+    ) as f:
+        x = json.load(f)
+
+    if (
+        x.get("schema")
+        != "A8-AB-FEEDER-ACTUATION-V1"
+    ):
+        raise RuntimeError(
+            "A/B FEEDER STATE SCHEMA CHANGED"
+        )
+
+    if x.get("status") != "ACTIVE":
+        raise RuntimeError(
+            "A/B FEEDER ACTUATION NOT ACTIVE"
+        )
+
+    if str(
+        x.get("physicalSourceEpoch")
+    ) != "8":
+        raise RuntimeError(
+            "A/B FEEDER EPOCH CHANGED"
+        )
+
+    if x.get("phaseJump") is not False:
+        raise RuntimeError(
+            "A/B FEEDER PHASE JUMP FLAG"
+        )
+
+    if x.get("rawRewrite") is not False:
+        raise RuntimeError(
+            "A/B FEEDER RAW REWRITE FLAG"
+        )
+
+    return x
+
+
+def _ab_v2_remote_status():
+    x = _ab_v2_remote_json(
+        "status",
+        timeout=10,
+    )
+
+    if x.get("mode") != "STATUS":
+        raise RuntimeError(
+            "A/B REMOTE STATUS MODE CHANGED"
+        )
+
+    if x.get("bank") != "A/B":
+        raise RuntimeError(
+            "A/B REMOTE STATUS BANK CHANGED"
+        )
+
+    x["segment"] = int(
+        x["segment"]
+    )
+
+    x["ratio"] = normalize_carrier_ratio(
+        x["ratio"]["numerator"],
+        x["ratio"]["denominator"],
+    )
+
+    if x.get("writesState") is not False:
+        raise RuntimeError(
+            "A/B STATUS CLAIMS STATE WRITE"
+        )
+
+    digest = str(
+        x.get(
+            "stateSha256",
+            ""
+        )
+    )
+
+    if not re.fullmatch(
+        r"[0-9a-f]{64}",
+        digest,
+    ):
+        raise RuntimeError(
+            "A/B REMOTE STATE HASH INVALID"
+        )
+
+    return x
+
+
+def ab_stage_state():
+    x = ab_control_read_json(
+        AB_STAGE_FILE
+    )
+
+    if not isinstance(x, dict):
+        return None
+
+    if (
+        x.get("schema")
+        != "A8-CE-AB-CARRIER-STAGE-V2"
+    ):
+        return None
+
+    return x
+
+
+def ab_review_state():
+    x = ab_control_read_json(
+        AB_REVIEW_FILE
+    )
+
+    if not isinstance(x, dict):
+        return None
+
+    if (
+        x.get("schema")
+        != "A8-CE-AB-CARRIER-REVIEW-V2"
+    ):
+        return None
+
+    return x
+
+
+def ab_review_public_state():
+    x = ab_review_state()
+
+    if not isinstance(x, dict):
+        return x
+
+    result = dict(x)
+
+    token = result.pop(
+        "reviewToken",
+        None,
+    )
+
+    result[
+        "reviewTokenHeldServerSide"
+    ] = bool(token)
+
+    return result
+
+
+def ab_write_stage(
+    numerator,
+    denominator,
+):
+    proposed = normalize_carrier_ratio(
+        numerator,
+        denominator,
+    )
+
+    _ab_v2_feeder()
+
+    (
+        source,
+        carrier,
+        disciplined,
+    ) = _ab_v2_live()
+
+    remote = _ab_v2_remote_status()
+
+    segment = int(
+        carrier["segmentNumber"]
+    )
+
+    if segment != remote["segment"]:
+        raise RuntimeError(
+            "A/B LIVE / REMOTE SEGMENT MISMATCH"
+        )
+
+    if (
+        carrier.get("ratio")
+        != remote.get("ratio")
+    ):
+        raise RuntimeError(
+            "A/B LIVE / REMOTE RATIO MISMATCH"
+        )
+
+    stage = {
+        "schema":
+            "A8-CE-AB-CARRIER-STAGE-V2",
+
+        "status":
+            "STAGED_REVIEW_REQUIRED",
+
+        "bank":
+            "A/B",
+
+        "physicalSourceEpoch":
+            "8",
+
+        "currentSegment":
+            segment,
+
+        "nextSegment":
+            segment + 1,
+
+        "currentRatio":
+            dict(
+                remote["ratio"]
+            ),
+
+        "ratio":
+            proposed,
+
+        "baseStateSha256":
+            str(
+                remote["stateSha256"]
+            ),
+
+        "physicalRawAtStage":
+            str(
+                source["RAW_COUNT"]
+            ),
+
+        "disciplinedRawAtStage": {
+            "numerator":
+                str(
+                    disciplined[
+                        "numerator"
+                    ]
+                ),
+
+            "denominator":
+                str(
+                    disciplined[
+                        "denominator"
+                    ]
+                ),
+        },
+
+        "naturalRuler":
+            "EUROPA",
+
+        "authority":
+            "NONE",
+
+        "writesState":
+            False,
+
+        "writesFeeder":
+            False,
+
+        "writesCore20":
+            False,
+
+        "writesArduino":
+            False,
+
+        "epochChange":
+            False,
+
+        "sealAvailable":
+            False,
+    }
+
+    ab_control_clear(
+        AB_REVIEW_FILE
+    )
+
+    ab_control_write_json(
+        AB_STAGE_FILE,
+        stage,
+    )
+
+    return stage
+
+
+def ab_review_stage():
+    stage = ab_stage_state()
+
+    if not isinstance(stage, dict):
+        raise ValueError(
+            "A/B STAGE REQUIRED"
+        )
+
+    if (
+        stage.get("status")
+        != "STAGED_REVIEW_REQUIRED"
+    ):
+        raise ValueError(
+            "A/B VALID STAGE REQUIRED"
+        )
+
+    _ab_v2_feeder()
+
+    remote = _ab_v2_remote_status()
+
+    if (
+        str(
+            remote["stateSha256"]
+        )
+        != str(
+            stage["baseStateSha256"]
+        )
+    ):
+        raise ValueError(
+            "A/B STATE CHANGED SINCE STAGE"
+        )
+
+    if (
+        remote["segment"]
+        != int(stage["currentSegment"])
+    ):
+        raise ValueError(
+            "A/B SEGMENT CHANGED SINCE STAGE"
+        )
+
+    if (
+        remote.get("ratio")
+        != stage.get("currentRatio")
+    ):
+        raise ValueError(
+            "A/B RATIO CHANGED SINCE STAGE"
+        )
+
+    proposed = (
+        stage.get("ratio")
+        or {}
+    )
+
+    result = _ab_v2_remote_json(
+        "review",
+
+        proposed["numerator"],
+        proposed["denominator"],
+
+        timeout=12,
+    )
+
+    if result.get("mode") != "REVIEW_ONLY":
+        raise RuntimeError(
+            "A/B REVIEW MODE CHANGED"
+        )
+
+    if result.get("bank") != "A/B":
+        raise RuntimeError(
+            "A/B REVIEW BANK CHANGED"
+        )
+
+    if (
+        int(
+            result["currentSegment"]
+        )
+        !=
+        int(
+            stage["currentSegment"]
+        )
+    ):
+        raise RuntimeError(
+            "A/B REVIEW CURRENT SEGMENT CHANGED"
+        )
+
+    if (
+        int(
+            result["nextSegment"]
+        )
+        !=
+        int(
+            stage["nextSegment"]
+        )
+    ):
+        raise RuntimeError(
+            "A/B REVIEW NEXT SEGMENT CHANGED"
+        )
+
+    if (
+        result.get("currentRatio")
+        != stage.get("currentRatio")
+    ):
+        raise RuntimeError(
+            "A/B REVIEW CURRENT RATIO CHANGED"
+        )
+
+    if (
+        result.get("proposedRatio")
+        != stage.get("ratio")
+    ):
+        raise RuntimeError(
+            "A/B REVIEW PROPOSED RATIO CHANGED"
+        )
+
+    if (
+        str(
+            result.get("stateSha256")
+        )
+        !=
+        str(
+            stage["baseStateSha256"]
+        )
+    ):
+        raise RuntimeError(
+            "A/B REVIEW STATE HASH CHANGED"
+        )
+
+    for key in (
+        "writesState",
+        "signalsSender",
+        "writesArduino",
+        "writesCore20",
+        "writesReporter",
+    ):
+        if result.get(key) is not False:
+            raise RuntimeError(
+                "A/B REVIEW SAFETY CHANGED · "
+                + key
+            )
+
+    rule = (
+        result.get("futureSealRule")
+        or {}
+    )
+
+    if (
+        rule.get(
+            "freshPhysicalSeam"
+        )
+        is not True
+    ):
+        raise RuntimeError(
+            "A/B FRESH SEAM RULE MISSING"
+        )
+
+    if (
+        rule.get(
+            "exactDisciplinedContinuity"
+        )
+        is not True
+    ):
+        raise RuntimeError(
+            "A/B CONTINUITY RULE MISSING"
+        )
+
+    for key in (
+        "phaseJump",
+        "physicalRawRewrite",
+        "serviceRestart",
+    ):
+        if rule.get(key) is not False:
+            raise RuntimeError(
+                "A/B UNSAFE REVIEW RULE · "
+                + key
+            )
+
+    token = str(
+        result.get(
+            "reviewToken",
+            ""
+        )
+    )
+
+    if not re.fullmatch(
+        r"[0-9a-f]{64}",
+        token,
+    ):
+        raise RuntimeError(
+            "A/B REVIEW TOKEN INVALID"
+        )
+
+    review = {
+        "schema":
+            "A8-CE-AB-CARRIER-REVIEW-V2",
+
+        "status":
+            "REVIEWED_READY_TO_SEAL",
+
+        "bank":
+            "A/B",
+
+        "physicalSourceEpoch":
+            "8",
+
+        "currentSegment":
+            int(
+                result[
+                    "currentSegment"
+                ]
+            ),
+
+        "nextSegment":
+            int(
+                result[
+                    "nextSegment"
+                ]
+            ),
+
+        "currentRatio":
+            dict(
+                result[
+                    "currentRatio"
+                ]
+            ),
+
+        "proposedRatio":
+            dict(
+                result[
+                    "proposedRatio"
+                ]
+            ),
+
+        "baseStateSha256":
+            str(
+                result[
+                    "stateSha256"
+                ]
+            ),
+
+        "physicalRawAtReview":
+            str(
+                result[
+                    "physicalRaw"
+                ]
+            ),
+
+        "exactCurrentDisciplined":
+            dict(
+                result[
+                    "exactCurrentDisciplined"
+                ]
+            ),
+
+        "futureSealRule":
+            dict(
+                result[
+                    "futureSealRule"
+                ]
+            ),
+
+        "reviewToken":
+            token,
+
+        "authority":
+            "NONE",
+
+        "writesState":
+            False,
+
+        "writesFeeder":
+            False,
+
+        "writesCore20":
+            False,
+
+        "writesArduino":
+            False,
+
+        "sealAvailable":
+            True,
+    }
+
+    ab_control_write_json(
+        AB_REVIEW_FILE,
+        review,
+    )
+
+    return ab_review_public_state()
+
+
+def ab_seal_readiness():
+    stage = ab_stage_state()
+    review = ab_review_state()
+
+    if not isinstance(stage, dict):
+        return False, "STAGE_REQUIRED"
+
+    if not isinstance(review, dict):
+        return False, "REVIEW_REQUIRED"
+
+    if (
+        review.get("status")
+        != "REVIEWED_READY_TO_SEAL"
+    ):
+        return (
+            False,
+            "FRESH_REVIEW_REQUIRED",
+        )
+
+    if (
+        stage.get("ratio")
+        !=
+        review.get("proposedRatio")
+    ):
+        return (
+            False,
+            "STAGE_REVIEW_RATIO_MISMATCH",
+        )
+
+    if (
+        int(stage["currentSegment"])
+        !=
+        int(review["currentSegment"])
+    ):
+        return (
+            False,
+            "STAGE_REVIEW_SEGMENT_MISMATCH",
+        )
+
+    if not review.get("reviewToken"):
+        return (
+            False,
+            "PRIVATE_REVIEW_TOKEN_MISSING",
+        )
+
+    try:
+        _ab_v2_feeder()
+
+        (
+            source,
+            carrier,
+            disciplined,
+        ) = _ab_v2_live()
+
+    except Exception as exc:
+        return (
+            False,
+            "LIVE_GATE_FAIL · "
+            + str(exc),
+        )
+
+    if (
+        int(
+            carrier["segmentNumber"]
+        )
+        !=
+        int(
+            review["currentSegment"]
+        )
+    ):
+        return (
+            False,
+            "LIVE_SEGMENT_CHANGED",
+        )
+
+    if (
+        carrier.get("ratio")
+        !=
+        review.get("currentRatio")
+    ):
+        return (
+            False,
+            "LIVE_RATIO_CHANGED",
+        )
+
+    return (
+        True,
+        "REVIEWED_READY_TO_SEAL",
+    )
+
+
+def _ab_v2_remote_seal(review):
+    proposed = (
+        review.get("proposedRatio")
+        or {}
+    )
+
+    token = str(
+        review.get(
+            "reviewToken",
+            ""
+        )
+    )
+
+    result = _ab_v2_remote_json(
+        "seal",
+
+        proposed["numerator"],
+        proposed["denominator"],
+
+        "--review-token",
+        token,
+
+        timeout=18,
+    )
+
+    if result.get("mode") != "SEALED":
+        raise RuntimeError(
+            "A/B REMOTE DID NOT REPORT SEALED"
+        )
+
+    if (
+        int(
+            result["segment"]
+        )
+        !=
+        int(
+            review["nextSegment"]
+        )
+    ):
+        raise RuntimeError(
+            "A/B SEALED WRONG SEGMENT"
+        )
+
+    if (
+        result.get("ratio")
+        != proposed
+    ):
+        raise RuntimeError(
+            "A/B SEALED WRONG RATIO"
+        )
+
+    if (
+        result.get(
+            "phaseContinuity"
+        )
+        != "EXACT"
+    ):
+        raise RuntimeError(
+            "A/B CONTINUITY NOT EXACT"
+        )
+
+    if (
+        result.get(
+            "physicalRawRewrite"
+        )
+        is not False
+    ):
+        raise RuntimeError(
+            "A/B PHYSICAL RAW REWRITE"
+        )
+
+    if (
+        result.get(
+            "serviceRestart"
+        )
+        is not False
+    ):
+        raise RuntimeError(
+            "A/B SERVICE RESTART REPORTED"
+        )
+
+    return result
+
+
+def wait_for_ab_segment(
+    expected_segment,
+    expected_ratio,
+    timeout=8,
+):
+    deadline = (
+        time.monotonic()
+        + timeout
+    )
+
+    while (
+        time.monotonic()
+        <
+        deadline
+    ):
+        try:
+            (
+                source,
+                carrier,
+                disciplined,
+            ) = _ab_v2_live()
+
+            if (
+                int(
+                    carrier[
+                        "segmentNumber"
+                    ]
+                )
+                ==
+                int(expected_segment)
+                and
+                carrier.get("ratio")
+                ==
+                expected_ratio
+            ):
+                return {
+                    "source":
+                        source,
+
+                    "carrierDiscipline":
+                        carrier,
+
+                    "disciplinedRaw":
+                        disciplined,
+                }
+
+        except Exception:
+            pass
+
+        time.sleep(0.25)
+
+    return None
+
+
+def ab_seal_reviewed():
+    ready, status = (
+        ab_seal_readiness()
+    )
+
+    if not ready:
+        raise ValueError(
+            "A/B SEAL NOT READY · "
+            + status
+        )
+
+    review = ab_review_state()
+
+    expected_segment = int(
+        review["nextSegment"]
+    )
+
+    expected_ratio = dict(
+        review["proposedRatio"]
+    )
+
+    remote = _ab_v2_remote_seal(
+        review
+    )
+
+    #
+    # Remote state changed. Local authorization is consumed
+    # immediately even if live verification is still arriving.
+    #
+    ab_control_clear(
+        AB_REVIEW_FILE
+    )
+
+    ab_control_clear(
+        AB_STAGE_FILE
+    )
+
+    live = wait_for_ab_segment(
+        expected_segment,
+        expected_ratio,
+        timeout=8,
+    )
+
+    return {
+        "remoteSeal":
+            remote,
+
+        "authorizationConsumed":
+            True,
+
+        "liveVerified":
+            live is not None,
+
+        "liveAB":
+            live,
+    }
+
+
+def ab_control_status():
+    (
+        source,
+        carrier,
+        disciplined,
+    ) = _ab_v2_live()
+
+    feeder = _ab_v2_feeder()
+
+    ready, seal_status = (
+        ab_seal_readiness()
+    )
+
+    stage = ab_stage_state()
+    review = (
+        ab_review_public_state()
+    )
+
+    discipline = dict(
+        carrier
+    )
+
+    discipline[
+        "liveDisciplinedRaw"
+    ] = {
+        "numerator":
+            str(
+                disciplined[
+                    "numerator"
+                ]
+            ),
+
+        "denominator":
+            str(
+                disciplined[
+                    "denominator"
+                ]
+            ),
+
+        "floor":
+            str(
+                disciplined.get(
+                    "floorRaw",
+                    ""
+                )
+            ),
+    }
+
+    discipline[
+        "actuation"
+    ] = (
+        "ACTIVE_PI_SIDE_GEARBOX"
+        "_TO_CORE20_FEEDER"
+    )
+
+    discipline[
+        "feederSlope"
+    ] = {
+        "numerator": "1",
+        "denominator": "1",
+        "status":
+            "SEAM_PRESERVED_DELTA",
+    }
+
+    discipline[
+        "coreCarrierTrim"
+    ] = {
+        "numerator": "1",
+        "denominator": "1",
+        "status": "FIXED",
+    }
+
+    return {
+        "schema":
+            "A8-CE-AB-CARRIER-CONTROL-V2",
+
+        "status":
+            "ACTIVE_RATCHET",
+
+        "bank":
+            "A/B",
+
+        "physicalSourceEpoch":
+            "8",
+
+        "naturalRuler":
+            "EUROPA",
+
+        "discipline":
+            discipline,
+
+        "physical": {
+            "raw":
+                str(
+                    source[
+                        "RAW_COUNT"
+                    ]
+                ),
+
+            "reportSequence":
+                source.get(
+                    "REPORT_SEQUENCE"
+                ),
+
+            "sourceEpoch":
+                str(
+                    source[
+                        "SOURCE_EPOCH"
+                    ]
+                ),
+
+            "status":
+                source[
+                    "STATUS"
+                ],
+        },
+
+        "reference": {
+            "body":
+                "EUROPA",
+
+            "role":
+                "NATURAL_RATE_RULER",
+
+            "crossCarrierReferenceRequired":
+                False,
+        },
+
+        "referenceQualification": {
+            "status":
+                "NOT_REQUIRED",
+
+            "requalificationRequired":
+                False,
+        },
+
+        "expectedRatio":
+            None,
+
+        "historicalExpectedRatio":
+            None,
+
+        "feeder": {
+            "service":
+                active(FEED),
+
+            "status":
+                feeder.get(
+                    "status"
+                ),
+
+            "coordinate":
+                feeder.get(
+                    "coordinate"
+                ),
+
+            "carrierTrim": {
+                "numerator": "1",
+                "denominator": "1",
+                "status": "FIXED",
+            },
+
+            "phaseJump":
+                feeder.get(
+                    "phaseJump"
+                ),
+
+            "rawRewrite":
+                feeder.get(
+                    "rawRewrite"
+                ),
+        },
+
+        "policy": {
+            "physicalRawPreserved":
+                True,
+
+            "manualSealedSegments":
+                True,
+
+            "automaticServo":
+                False,
+
+            "phaseJumpAllowed":
+                False,
+
+            "crossCarrierReferenceRequired":
+                False,
+
+            "coreCarrierTrim": {
+                "numerator": "1",
+                "denominator": "1",
+                "status": "FIXED",
+            },
+        },
+
+        "control": {
+            "stageAvailable":
+                True,
+
+            "reviewAvailable":
+                stage is not None,
+
+            "sealAvailable":
+                ready,
+
+            "sealStatus":
+                seal_status,
+
+            "stagedProposal":
+                stage,
+
+            "reviewedProposal":
+                review,
+        },
+    }
+
+
+#
+# Preserve C/D's existing cabinet implementation.
+# Replace only its obsolete A/B presentation.
+#
+_carrier_compensation_status_pre_ab_v2 = (
+    carrier_compensation_status
+)
+
+
+def carrier_compensation_status():
+    state = (
+        _carrier_compensation_status_pre_ab_v2()
+    )
+
+    banks = (
+        state.get("banks")
+        or {}
+    )
+
+    ab_bank = (
+        banks.get("primaryAB")
+        or {}
+    )
+
+    try:
+        ab = ab_control_status()
+
+        d = (
+            ab.get("discipline")
+            or {}
+        )
+
+        p = (
+            ab.get("physical")
+            or {}
+        )
+
+        ab_bank[
+            "physicalSourceEpoch"
+        ] = ab.get(
+            "physicalSourceEpoch"
+        )
+
+        ab_bank[
+            "physicalRaw"
+        ] = p.get("raw")
+
+        ab_bank[
+            "physicalStatus"
+        ] = p.get("status")
+
+        ab_bank[
+            "disciplinedRaw"
+        ] = d.get(
+            "liveDisciplinedRaw"
+        )
+
+        ab_bank[
+            "carrierDiscipline"
+        ] = d
+
+        ab_bank[
+            "compensation"
+        ] = {
+            "status":
+                d.get("status"),
+
+            "baseCalibration":
+                (
+                    "SEGMENT "
+                    +
+                    str(
+                        d.get(
+                            "segmentNumber",
+                            "—"
+                        )
+                    )
+                ),
+
+            "fineNeedlePpb":
+                0,
+
+            "coreCarrierTrim":
+                "1/1 · FIXED",
+
+            "effectiveRatio":
+                d.get("ratio"),
+
+            "actuation":
+                (
+                    "ACTIVE · PI-SIDE RATCHET"
+                    " · CORE20 1/1"
+                ),
+
+            "segmentNumber":
+                d.get(
+                    "segmentNumber"
+                ),
+
+            "writesCore20":
+                False,
+
+            "writesArduino":
+                False,
+
+            "writesJovianGovernor":
+                False,
+        }
+
+    except Exception as exc:
+        ab_bank[
+            "compensation"
+        ] = {
+            "status":
+                "UNAVAILABLE",
+
+            "coreCarrierTrim":
+                "1/1 · FIXED",
+
+            "actuation":
+                str(exc),
+
+            "writesCore20":
+                False,
+
+            "writesArduino":
+                False,
+
+            "writesJovianGovernor":
+                False,
+        }
+
+    cd_bank = (
+        banks.get("ghostCD")
+        or {}
+    )
+
+    cd_comp = (
+        cd_bank.get(
+            "compensation"
+        )
+        or {}
+    )
+
+    cd_comp[
+        "coreCarrierTrim"
+    ] = "1/1 · FIXED"
+
+    cd_bank[
+        "compensation"
+    ] = cd_comp
+
+    banks["primaryAB"] = ab_bank
+    banks["ghostCD"] = cd_bank
+
+    state["banks"] = banks
+
+    state[
+        "carrierTrimPolicy"
+    ] = {
+        "A/B":
+            "CORE20 · 1/1 · FIXED",
+
+        "C/D":
+            "CORE21 · 1/1 · FIXED",
+
+        "coreTrimAdjustable":
+            False,
+    }
+
+    return state
 
 
 class Handler(BaseHTTPRequestHandler):
@@ -2340,6 +5822,175 @@ class Handler(BaseHTTPRequestHandler):
         )
 
     def do_GET(self):
+        if self.path == '/api/ce/core20-service/recovery-desk/preview':
+            if not self.authorized():return self.respond(403,{'ok':False,'error':'forbidden'})
+            try:return self.respond(200,{'ok':True,'preview':recovery_desk_plan()})
+            except Exception as exc:return self.respond(503,{'ok':False,'error':str(exc)})
+        if self.path == '/api/ce/core20-service/recovery-desk/status':
+            if not self.authorized():
+                return self.respond(403, {'ok': False, 'error': 'forbidden'})
+            try:
+                return self.respond(200, {'ok': True, 'desk': recovery_desk_status()})
+            except Exception as exc:
+                return self.respond(503, {'ok': False, 'error': str(exc)})
+        if (
+            self.path ==
+            "/api/ce/core20-service/"
+            "clock-adjust/status"
+        ):
+            if not self.authorized():
+                return self.respond(
+                    403,
+                    {
+                        "ok": False,
+                        "error": "forbidden",
+                    },
+                )
+
+            try:
+                status = clock_adjust_call(
+                    "status",
+                    timeout=30,
+                )
+            except Exception as exc:
+                return self.respond(
+                    409,
+                    {
+                        "ok": False,
+                        "operation": "CLOCK_ADJUST_STATUS",
+                        "error": str(exc),
+                    },
+                )
+
+            return self.respond(
+                200,
+                {
+                    "ok": True,
+                    "clockAdjust": status,
+                },
+            )
+
+        if (
+            self.path
+            ==
+            "/api/ce/core20-service/"
+            "core21-clock-adjust/status"
+        ):
+            if not self.authorized():
+                return self.respond(
+                    403,
+                    {"ok": False, "error": "forbidden"},
+                )
+
+            try:
+                status = core21_clock_adjust_call(
+                    "status",
+                    timeout=30,
+                )
+            except Exception as exc:
+                return self.respond(
+                    409,
+                    {
+                        "ok": False,
+                        "operation": "CORE21_CLOCK_ADJUST_STATUS",
+                        "error": str(exc),
+                    },
+                )
+
+            return self.respond(
+                200,
+                {
+                    "ok": True,
+                    "clockAdjust": status,
+                },
+            )
+
+        if (
+            self.path ==
+            "/api/ce/core20-service/"
+            "wan-transport/router-ab/status"
+        ):
+            if not self.authorized():
+                return self.respond(
+                    403,
+                    {
+                        "ok": False,
+                        "error": "forbidden",
+                    },
+                )
+
+            try:
+                status = (
+                    ab_router_remote_status()
+                )
+
+            except Exception as exc:
+                return self.respond(
+                    409,
+                    {
+                        "ok": False,
+
+                        "operation":
+                            "AB_ROUTER_STATUS",
+
+                        "error":
+                            str(exc),
+                    },
+                )
+
+            return self.respond(
+                200,
+                {
+                    "ok": True,
+
+                    "operation":
+                        "AB_ROUTER_STATUS",
+
+                    "routerControl":
+                        status,
+                },
+            )
+
+        if (
+            self.path ==
+            "/api/ce/core20-service/wan-transport/status"
+        ):
+            if not self.authorized():
+                return self.respond(
+                    403,
+                    {
+                        "ok": False,
+                        "error": "forbidden",
+                    },
+                )
+
+            try:
+                status = (
+                    wan_transport_status()
+                )
+
+            except Exception as exc:
+                return self.respond(
+                    409,
+                    {
+                        "ok": False,
+                        "operation":
+                            "WAN_TRANSPORT_STATUS",
+
+                        "error":
+                            str(exc),
+                    },
+                )
+
+            return self.respond(
+                200,
+                {
+                    "ok": True,
+                    "transport":
+                        status,
+                },
+            )
+
         if (
             self.path ==
             "/api/ce/core20-service/cd-transport/status"
@@ -2359,6 +6010,28 @@ class Handler(BaseHTTPRequestHandler):
                     "ok": True,
                     "transport":
                         cd_transport_readiness(),
+                },
+            )
+
+        if (
+            self.path ==
+            "/api/ce/core20-service/backup-status"
+        ):
+            if not self.authorized():
+                return self.respond(
+                    403,
+                    {
+                        "ok": False,
+                        "error": "forbidden",
+                    },
+                )
+
+            return self.respond(
+                200,
+                {
+                    "ok": True,
+                    "backup":
+                        core_backup_status(),
                 },
             )
 
@@ -2467,6 +6140,597 @@ class Handler(BaseHTTPRequestHandler):
         )
 
     def do_POST(self):
+        if self.path == '/api/ce/core20-service/recovery-desk/bundle':
+            if not self.authorized():return self.respond(403,{'ok':False,'error':'forbidden'})
+            try:
+                with operation_lock:result=recovery_desk_bundle()
+                return self.respond(200,{'ok':True,'bundle':result})
+            except Exception as exc:return self.respond(409,{'ok':False,'error':str(exc)})
+        if self.path == '/api/ce/core20-service/recovery-desk/seal':
+            if not self.authorized():return self.respond(403,{'ok':False,'error':'forbidden'})
+            try:
+                with operation_lock:
+                    result=recovery_desk_seal()
+                return self.respond(200,{'ok':True,'seal':result})
+            except Exception as exc:return self.respond(409,{'ok':False,'error':str(exc)})
+        core21_clock_prefix = (
+            "/api/ce/core20-service/"
+            "core21-clock-adjust/"
+        )
+
+        if self.path.startswith(core21_clock_prefix):
+            if not self.authorized():
+                return self.respond(
+                    403,
+                    {"ok": False, "error": "forbidden"},
+                )
+
+            tail = self.path[len(core21_clock_prefix):]
+            parts = tail.split("/")
+
+            if len(parts) != 2:
+                return self.respond(
+                    400,
+                    {
+                        "ok": False,
+                        "error": "CORE21 CLOCK ADJUST PATH MUST BE action/amount",
+                    },
+                )
+
+            action, amount = parts
+
+            if action not in ("advance", "retard"):
+                return self.respond(
+                    400,
+                    {
+                        "ok": False,
+                        "error": "CORE21 CLOCK ADJUST ACTION MUST BE advance OR retard",
+                    },
+                )
+
+            if not amount.isdigit() or int(amount) <= 0:
+                return self.respond(
+                    400,
+                    {
+                        "ok": False,
+                        "error": "CORE21 CLOCK ADJUST AMOUNT MUST BE A POSITIVE A8 STATE COUNT",
+                    },
+                )
+
+            try:
+                with operation_lock:
+                    result = core21_clock_adjust_call(
+                        action,
+                        amount,
+                        timeout=180,
+                    )
+            except Exception as exc:
+                return self.respond(
+                    409,
+                    {
+                        "ok": False,
+                        "operation": "CORE21_CLOCK_ADJUST",
+                        "error": str(exc),
+                    },
+                )
+
+            return self.respond(
+                200,
+                {
+                    "ok": True,
+                    "operation": "CORE21_CLOCK_ADJUST",
+                    "clockAdjust": result,
+                },
+            )
+
+        clock_prefix = (
+            "/api/ce/core20-service/"
+            "clock-adjust/"
+        )
+
+        if self.path.startswith(clock_prefix):
+            if not self.authorized():
+                return self.respond(
+                    403,
+                    {
+                        "ok": False,
+                        "error": "forbidden",
+                    },
+                )
+
+            tail = self.path[len(clock_prefix):]
+            parts = tail.split("/")
+
+            if len(parts) != 2:
+                return self.respond(
+                    400,
+                    {
+                        "ok": False,
+                        "error": "CLOCK ADJUST PATH MUST BE action/amount",
+                    },
+                )
+
+            action, amount = parts
+
+            if action not in ("advance", "retard"):
+                return self.respond(
+                    400,
+                    {
+                        "ok": False,
+                        "error": "CLOCK ADJUST ACTION MUST BE advance OR retard",
+                    },
+                )
+
+            if not amount.isdigit() or int(amount) <= 0:
+                return self.respond(
+                    400,
+                    {
+                        "ok": False,
+                        "error": "CLOCK ADJUST AMOUNT MUST BE A POSITIVE A8 STATE COUNT",
+                    },
+                )
+
+            try:
+                with operation_lock:
+                    result = clock_adjust_call(
+                        action,
+                        amount,
+                        timeout=430,
+                    )
+            except Exception as exc:
+                return self.respond(
+                    409,
+                    {
+                        "ok": False,
+                        "operation": "CLOCK_ADJUST",
+                        "error": str(exc),
+                    },
+                )
+
+            return self.respond(
+                200,
+                {
+                    "ok": True,
+                    "operation": "CLOCK_ADJUST",
+                    "clockAdjust": result,
+                },
+            )
+
+        # ====================================================
+        # A/B PI GEARBOX RATCHET V2 · EARLY INTERCEPT
+        #
+        # These returns intentionally make the older
+        # stage/review-only A/B route block unreachable.
+        # ====================================================
+
+        if (
+            self.path ==
+            "/api/ce/core20-service/"
+            "ab-carrier-compensation/stage"
+        ):
+            if not self.authorized():
+                return self.respond(
+                    403,
+                    {
+                        "ok": False,
+                        "error": "forbidden",
+                    },
+                )
+
+            try:
+                length = int(
+                    self.headers.get(
+                        "Content-Length",
+                        "0",
+                    )
+                    or "0"
+                )
+
+                raw = (
+                    self.rfile.read(length)
+                    if length > 0
+                    else b"{}"
+                )
+
+                payload = json.loads(
+                    raw.decode("utf-8")
+                )
+
+                with carrier_operation_lock:
+                    stage = ab_write_stage(
+                        payload.get(
+                            "numerator"
+                        ),
+                        payload.get(
+                            "denominator"
+                        ),
+                    )
+
+            except Exception as exc:
+                return self.respond(
+                    400,
+                    {
+                        "ok": False,
+                        "operation":
+                            "STAGE_A_B_CARRIER_RATIO",
+                        "error":
+                            str(exc),
+                    },
+                )
+
+            return self.respond(
+                200,
+                {
+                    "ok": True,
+                    "operation":
+                        "STAGE_A_B_CARRIER_RATIO",
+                    "stage":
+                        stage,
+                    "sealAvailable":
+                        False,
+                    "sealStatus":
+                        "REVIEW_REQUIRED",
+                },
+            )
+
+        if (
+            self.path ==
+            "/api/ce/core20-service/"
+            "ab-carrier-compensation/review"
+        ):
+            if not self.authorized():
+                return self.respond(
+                    403,
+                    {
+                        "ok": False,
+                        "error": "forbidden",
+                    },
+                )
+
+            try:
+                with carrier_operation_lock:
+                    reviewed = (
+                        ab_review_stage()
+                    )
+
+                    (
+                        seal_available,
+                        seal_status,
+                    ) = (
+                        ab_seal_readiness()
+                    )
+
+            except Exception as exc:
+                return self.respond(
+                    400,
+                    {
+                        "ok": False,
+                        "operation":
+                            "REVIEW_A_B_CARRIER_RATIO",
+                        "error":
+                            str(exc),
+                    },
+                )
+
+            return self.respond(
+                200,
+                {
+                    "ok": True,
+                    "operation":
+                        "REVIEW_A_B_CARRIER_RATIO",
+                    "reviewed":
+                        reviewed,
+                    "sealAvailable":
+                        seal_available,
+                    "sealStatus":
+                        seal_status,
+                },
+            )
+
+        if (
+            self.path ==
+            "/api/ce/core20-service/"
+            "ab-carrier-compensation/seal"
+        ):
+            if not self.authorized():
+                return self.respond(
+                    403,
+                    {
+                        "ok": False,
+                        "error": "forbidden",
+                    },
+                )
+
+            try:
+                with carrier_operation_lock:
+                    result = (
+                        ab_seal_reviewed()
+                    )
+
+            except Exception as exc:
+                return self.respond(
+                    400,
+                    {
+                        "ok": False,
+                        "operation":
+                            "SEAL_A_B_CARRIER_SEGMENT",
+                        "error":
+                            str(exc),
+                    },
+                )
+
+            return self.respond(
+                200,
+                {
+                    "ok": True,
+                    "operation":
+                        "SEAL_A_B_CARRIER_SEGMENT",
+                    "remoteSeal":
+                        result[
+                            "remoteSeal"
+                        ],
+                    "authorizationConsumed":
+                        result[
+                            "authorizationConsumed"
+                        ],
+                    "liveVerified":
+                        result[
+                            "liveVerified"
+                        ],
+                    "liveAB":
+                        result[
+                            "liveAB"
+                        ],
+                    "control":
+                        ab_control_status()[
+                            "control"
+                        ],
+                },
+            )
+        if (
+            self.path
+            == "/api/ce/core20-service/"
+               "wan-transport/router-ab/check"
+        ):
+            if not self.authorized():
+                return self.respond(
+                    403,
+                    {
+                        "ok": False,
+                        "error": "forbidden",
+                    },
+                )
+
+            try:
+                with (
+                    transport_operation_lock
+                ):
+                    result = (
+                        ab_router_remote_check()
+                    )
+
+            except Exception as exc:
+                return self.respond(
+                    400,
+                    {
+                        "ok": False,
+
+                        "operation":
+                            "AB_ROUTER_CHECK",
+
+                        "error":
+                            str(exc),
+                    },
+                )
+
+            return self.respond(
+                200,
+                {
+                    "ok": True,
+
+                    "operation":
+                        "AB_ROUTER_CHECK",
+
+                    "result":
+                        result,
+                },
+            )
+
+        if (
+            self.path
+            == "/api/ce/core20-service/"
+               "wan-transport/router-ab/reboot"
+        ):
+            if not self.authorized():
+                return self.respond(
+                    403,
+                    {
+                        "ok": False,
+                        "error": "forbidden",
+                    },
+                )
+
+            try:
+                length = int(
+                    self.headers.get(
+                        "Content-Length",
+                        "0",
+                    )
+                    or "0"
+                )
+
+                raw = (
+                    self.rfile.read(
+                        length
+                    )
+                    if length > 0
+                    else b"{}"
+                )
+
+                payload = json.loads(
+                    raw.decode(
+                        "utf-8"
+                    )
+                )
+
+                confirmation = (
+                    payload.get(
+                        "confirm"
+                    )
+                )
+
+                with (
+                    transport_operation_lock
+                ):
+                    result = (
+                        schedule_ab_router_reboot(
+                            confirmation
+                        )
+                    )
+
+            except Exception as exc:
+                return self.respond(
+                    400,
+                    {
+                        "ok": False,
+
+                        "operation":
+                            "AB_ROUTER_REBOOT",
+
+                        "error":
+                            str(exc),
+                    },
+                )
+
+            return self.respond(
+                200,
+                {
+                    "ok": True,
+
+                    "operation":
+                        "AB_ROUTER_REBOOT",
+
+                    "result":
+                        result,
+                },
+            )
+
+        if (
+            self.path
+            == "/api/ce/core20-service/"
+               "wan-transport/reset"
+        ):
+            if not self.authorized():
+                return self.respond(
+                    403,
+                    {
+                        "ok": False,
+                        "error": "forbidden",
+                    },
+                )
+
+            try:
+                length = int(
+                    self.headers.get(
+                        "Content-Length",
+                        "0",
+                    )
+                    or "0"
+                )
+
+                raw = (
+                    self.rfile.read(
+                        length
+                    )
+                    if length > 0
+                    else b"{}"
+                )
+
+                payload = json.loads(
+                    raw.decode(
+                        "utf-8"
+                    )
+                )
+
+                bank = str(
+                    payload.get(
+                        "bank",
+                        "",
+                    )
+                ).strip().upper()
+
+                if (
+                    bank
+                    not in
+                    WAN_TRANSPORT_BANKS
+                ):
+                    raise ValueError(
+                        "BANK MUST BE AB OR CD"
+                    )
+
+                expected = (
+                    WAN_TRANSPORT_BANKS[
+                        bank
+                    ][
+                        "confirm"
+                    ]
+                )
+
+                if (
+                    payload.get(
+                        "confirm"
+                    )
+                    != expected
+                ):
+                    raise ValueError(
+                        "EXACT CONFIRMATION PHRASE REQUIRED"
+                    )
+
+                with (
+                    transport_operation_lock
+                ):
+                    result = (
+                        reset_wan_transport(
+                            bank
+                        )
+                    )
+
+            except Exception as exc:
+                return self.respond(
+                    400,
+                    {
+                        "ok": False,
+                        "operation":
+                            "RESET_WAN_TRANSPORT",
+
+                        "error":
+                            str(exc),
+                    },
+                )
+
+            ok = bool(
+                result.get(
+                    "oldOwnersRetired"
+                )
+            )
+
+            return self.respond(
+                200 if ok else 500,
+                {
+                    "ok":
+                        ok,
+
+                    "operation":
+                        "RESET_WAN_TRANSPORT",
+
+                    "bank":
+                        bank,
+
+                    "result":
+                        result,
+                },
+            )
+
         if (
             self.path
             == "/api/ce/core20-service/"
