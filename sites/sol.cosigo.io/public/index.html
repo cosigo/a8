@@ -1337,100 +1337,9 @@ setInterval(refresh,1000);
           : '—';
 
 
-      byId('absoluteSolAngle').textContent =
-        year.phase9Octal
-          ? (
-              year.phase9Octal +
-              ' · LIVE'
-            )
-          : (
-              year.status ||
-              'AWAITING A8 YEAR ORIENTATION'
-            );
-
-
-      byId('absoluteSolDecimal').textContent =
-        year.phase27 != null
-          ? (
-              decimalRational(
-                BigInt(year.phase27),
-                1n << 18n,
-                9
-              ) +
-              ' A8 · SAME NATIVE ANGLE · DECIMAL NOTATION'
-            )
-          : '—';
-
-
-      if (year.phase27 != null) {
-
-        const phase27 =
-          BigInt(year.phase27);
-
-        const fineMask =
-          (1n << 18n) - 1n;
-
-        const fine =
-          phase27 & fineMask;
-
-        const coarse =
-          phase27 >> 18n;
-
-        const coarseOctal =
-          coarse
-            .toString(8)
-            .padStart(3,'0');
-
-        const fineOctal =
-          fine
-            .toString(8)
-            .padStart(6,'0');
-
-
-        byId('livePhase27').textContent =
-          coarseOctal +
-          ' | ' +
-          fineOctal +
-          '₈';
-
-
-        byId('yearFineFraction').textContent =
-          'FINE · ' +
-          fineOctal +
-          '₈ / 1000000₈';
-
-
-        byId('yearFineDecimal').textContent =
-          '= ' +
-          decimalRational(
-            fine,
-            1n << 18n,
-            9
-          ) +
-          ' OF CURRENT A8 YEAR-ANGLE UNIT';
-
-      } else {
-
-        byId('livePhase27').textContent =
-          'AWAITING A8 YEAR ORIENTATION';
-
-        byId('yearFineFraction').textContent =
-          '—';
-
-        byId('yearFineDecimal').textContent =
-          '—';
-      }
-
-
-      byId('liveSolStatus').textContent =
-        year.status ||
-        scale.status ||
-        '—';
-
-
     } catch (err) {
 
-      byId('liveSolStatus').textContent =
+      byId('liveSolAngle').textContent =
         `DISCONNECTED · ${err.message}`;
     }
   }
@@ -1452,87 +1361,6 @@ setInterval(refresh,1000);
 </script>
 
 
-<script id="a8-year-angle-presentation-adapter">
-(() => {
-  'use strict';
-
-  /*
-   * PRESENTATION BOUNDARY ONLY.
-   *
-   * Do not alter Core20, /api/core20/year-angle, JPL fallback
-   * machinery, recovery state, or stored backend semantics here.
-   *
-   * Old backend emergency/fallback status names are preserved
-   * behind glass while the primary Sol instrument uses current
-   * A8 public semantics.
-   */
-
-  const front =
-    document.getElementById('absoluteSolAngle');
-
-  const mappingStatus =
-    document.getElementById('liveSolStatus');
-
-  const phase27 =
-    document.getElementById('livePhase27');
-
-  const fallback =
-    document.getElementById('a8ExternalOrientationRawStatus');
-
-  if (!front || !mappingStatus || !phase27 || !fallback) return;
-
-  const legacyOrientationStates = new Set([
-    'YEAR_ANGLE_AWAITING_ONE_SHOT_JPL_ALIGN',
-    'AWAITING ONE-SHOT YEAR ORIENTATION'
-  ]);
-
-  let adapting = false;
-
-  function translate(el) {
-    if (!el) return null;
-
-    const raw = String(el.textContent || '').trim();
-
-    if (!legacyOrientationStates.has(raw)) {
-      return null;
-    }
-
-    el.textContent = 'AWAITING A8 YEAR ORIENTATION';
-    return raw;
-  }
-
-  function adapt() {
-    if (adapting) return;
-
-    adapting = true;
-
-    const rawStates = [
-      translate(front),
-      translate(phase27),
-      translate(mappingStatus)
-    ].filter(Boolean);
-
-    if (rawStates.length) {
-      fallback.textContent =
-        'BACKEND STATUS · ' + rawStates[0];
-    }
-
-    adapting = false;
-  }
-
-  const observer = new MutationObserver(adapt);
-
-  for (const el of [front, phase27, mappingStatus]) {
-    observer.observe(el, {
-      childList: true,
-      characterData: true,
-      subtree: true
-    });
-  }
-
-  adapt();
-})();
-</script>
 
 
 <script id="a8-annual-frame-v1-presentation" data-patch="a8-annual-return-wheel-v2">
@@ -1857,6 +1685,15 @@ setInterval(refresh,1000);
           )
         );
 
+      const annualIsAdvancing =
+        hasLiveNatureAngle &&
+        (
+          annual.progressionStatus ===
+            'PHYSICAL_RAW_PREDICTION_ACTIVE' ||
+          annual.progressionStatus ===
+            'PHYSICAL_RAW_HOLDOVER_ACTIVE'
+        );
+
       const displayedAngle =
         hasLiveNatureAngle
           ? norm512(
@@ -1879,9 +1716,11 @@ setInterval(refresh,1000);
         front,
         wheel.angleOctal +
         (
-          hasLiveNatureAngle
+          annualIsAdvancing
             ? ' · LIVE'
-            : ' · PHYSICAL WITNESS'
+            : hasLiveNatureAngle
+              ? ' · HELD'
+              : ' · PHYSICAL WITNESS'
         )
       );
 
@@ -1907,7 +1746,9 @@ setInterval(refresh,1000);
         hasLiveNatureAngle
           ? (
               'ZERO · A8 NEW YEAR · ' +
-              'RUNNING FROM SEALED PHYSICAL ANCHOR'
+              (annualIsAdvancing
+                ? 'RUNNING FROM SEALED PHYSICAL ANCHOR'
+                : 'LAST ACCEPTED POSITION · PROGRESSION HELD')
             )
           : (
               'ZERO · A8 NEW YEAR · ' +
@@ -1934,16 +1775,16 @@ setInterval(refresh,1000);
 
       setText(
         mappingStatus,
-        hasLiveNatureAngle
-          ? (
-              'ANNUAL FRAME V1 · ' +
-              'LIVE FROM PHYSICAL ANCHOR'
-            )
-          : (
-              'ANNUAL FRAME V1 · ' +
-              'PHYSICAL 600₈ WITNESS SEALED · ' +
-              'LIVE ADVANCE PENDING'
-            )
+        annualIsAdvancing
+          ? 'ANNUAL FRAME V1 · LIVE PHYSICAL PROGRESSION'
+          : hasLiveNatureAngle
+            ? (
+                'ANNUAL FRAME V1 · HELD · ' +
+                (annual.progressionStatus || 'NO ACTIVE PROGRESSION') +
+                ' · ' +
+                (annual.progressionError || 'PROGRESSION UNAVAILABLE')
+              )
+            : 'ANNUAL FRAME V1 · PHYSICAL WITNESS · ADVANCE PENDING'
       );
 
       const legacyText =
