@@ -374,7 +374,43 @@
   <div class="formula">full turn = 512 states = 1000₈ rollover → 000₈</div>
   <p>Quarter, half and eighth turns fall on exact binary boundaries. The three-octal-digit range 000₈–777₈ maps directly to the nine-bit range 000000000₂–111111111₂.</p>
 
-  <h2>5 · Why this public page is simpler</h2>
+  
+  <!-- A8-ONE-BINARY-POWER-LADDER-V1 -->
+  <h3>One ruler · from everyday electricity to Sol</h3>
+
+  <p>
+    A8 needs no new unit name when a quantity becomes larger
+    or smaller. Every whole rung doubles or halves the
+    measurement. One physical quantity. One continuous ruler.
+  </p>
+
+  <div class="formula">
+    SELECTED POWER REFERENCE · A₈P 31 = 512 W exactly
+    <br>
+    A₈P 22 = 1 W · A₈P 30 = 256 W · A₈P 32 = 1,024 W
+  </div>
+
+  <p>
+    Everyday appliances, industrial machinery and solar
+    luminosity occupy different positions on the same
+    power ladder. Mechanical, electrical and thermal
+    power share the same physical scale.
+  </p>
+
+  <p>
+    The A8 mass, length and time references suggest a native mechanical
+    power near 1.028 W using mass × length² / time³ (preliminary, subject to
+    verification). For a clean and reproducible binary ruler, the published
+    power calibration deliberately selects A₈P 22 = 1 W exactly, giving
+    A₈P 31 = 512 W exactly. The small difference is disclosed rather than
+    presented as a naturally exact result. Every upward rung doubles power.
+    Zero power is not a logarithmic rung.
+    <a href="https://a8.cosigo.io/whitepaper.html#electrical-nature">
+      Engineering derivation and conversion equations
+    </a>.
+  </p>
+
+<h2>5 · Why this public page is simpler</h2>
   <p>The public instrument intentionally hides recovery epochs, calibration controls, replay modes, diagnostic tolerances and fault injection used by the engineering laboratory. Its clock samples the visitor’s local wall clock once when the page loads or when the visitor explicitly resynchronizes it, then free-runs from the browser’s monotonic timer. That local wall-clock sample is a presentation alignment only; it is not claimed as the physical definition of A8 time.</p>
   <p>The Jovian display on the public page is likewise a visualization of the architecture, not a live telescope feed or recovery authority. Its motion is deliberately accelerated and the page displays the selected plant-step rate plus an approximate ×N natural Ganymede-rate reference so the animation cannot be mistaken for natural orbital speed.</p>
 
@@ -389,6 +425,32 @@
   <p>This publication is not a patent claim, scientific certification or assertion that natural phenomena themselves belong to COSIGO Labs. It is a dated public presentation of an ongoing research architecture and its authored implementation.</p>
 
   <div class="foot">© 2026 COSIGO Labs. All rights reserved. COSIGO™ · CIGO™ · Auspicious 8™. COSIGO™ is presented on the official COSIGO site as a claimed trademark with a U.S. trademark application pending. Contact: https://contact.cosigo.io/</div>
+
+
+<section id="a8-public-display-precision" aria-labelledby="a8-display-precision-title">
+  <h2 id="a8-display-precision-title">A8 Public Display Precision</h2>
+  <p>
+    COSIGO public instruments display numerical measurements using a
+    maximum of four digits after the decimal point. Unnecessary trailing
+    zeros are omitted. Values are rounded for presentation, never
+    truncated or rounded before calculation.
+  </p>
+  <p>
+    This display rule does not modify native A8 definitions, reference
+    anchors, exact binary relationships, physical calibrations,
+    astronomical calculations, or internal computational precision.
+    Researchers can calculate additional precision from the published
+    equations and reference data.
+  </p>
+  <p>
+    Exact integers, fractions, octal states, timestamps, source identifiers,
+    machine-readable data, and engineering evidence retain their required
+    precision. Very small nonzero measurements must not be represented
+    misleadingly as zero; use an appropriate native rung, scientific
+    notation, or an explicit display threshold.
+  </p>
+</section>
+
 </main>
 <footer class="cosigo-site-footer">
   <strong>COSIGO Labs · Auspicious 8 experimental laboratory</strong>

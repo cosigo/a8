@@ -619,6 +619,180 @@ main {
   <link rel="icon" type="image/png" sizes="16x16" href="https://cosigo.io/favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="https://cosigo.io/apple-touch-icon.png">
   <!-- COSIGO-CANONICAL-FAVICON-END -->
+<style>
+
+/* A8-FLOATING-REFERENCE-V1 */
+#a8ref-open {
+  position: fixed;
+  left: max(16px, env(safe-area-inset-left));
+  bottom: max(16px, env(safe-area-inset-bottom));
+  z-index: 9000;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 12px 17px;
+  border: 1px solid rgba(160,190,220,.6);
+  border-radius: 999px;
+  background: #14243a;
+  color: #fff;
+  font: 700 13px/1.3 system-ui, sans-serif;
+  letter-spacing: .035em;
+  cursor: pointer;
+  box-shadow: 0 8px 28px rgba(0,0,0,.35);
+}
+
+#a8ref-open:hover,
+#a8ref-open:focus-visible {
+  background: #245078;
+}
+
+#a8ref-panel[hidden] { display: none !important; }
+
+#a8ref-panel {
+  position: fixed;
+  inset: 0;
+  z-index: 9100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(0,0,0,.72);
+}
+
+#a8ref-dialog {
+  display: flex;
+  flex-direction: column;
+  width: min(1400px, 100%);
+  max-height: min(86vh, 900px);
+  overflow: hidden;
+  border: 1px solid rgba(160,190,220,.35);
+  border-radius: 16px;
+  background: #111e30;
+  color: #f2f5fb;
+  box-shadow: 0 20px 65px rgba(0,0,0,.55);
+  font-family: system-ui, sans-serif;
+}
+
+#a8ref-header {
+  padding: 18px 20px 12px;
+  border-bottom: 1px solid rgba(160,190,220,.2);
+}
+
+#a8ref-topline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+#a8ref-heading {
+  margin: 0;
+  color: #f2f5fb;
+  font: 700 21px/1.3 system-ui, sans-serif;
+}
+
+#a8ref-close {
+  flex: none;
+  min-width: 38px;
+  min-height: 38px;
+  border: 1px solid rgba(160,190,220,.4);
+  border-radius: 9px;
+  background: #243751;
+  color: white;
+  cursor: pointer;
+  font-size: 24px;
+}
+
+#a8ref-search {
+  box-sizing: border-box;
+  width: 100%;
+  margin-top: 12px;
+  padding: 11px 13px;
+  border: 1px solid #6b87a4;
+  border-radius: 8px;
+  background: #0c1726;
+  color: white;
+  font-size: 16px;
+}
+
+#a8ref-content {
+  overflow: auto;
+  padding: 0 20px 24px;
+  overscroll-behavior: contain;
+}
+
+#a8ref-content #a8-recommended-notation-v1 {
+  max-width: none !important;
+  margin: 0 !important;
+  border: none !important;
+  padding: 12px 0 !important;
+}
+
+/* A8-REFERENCE-TABLE-LAYOUT-V2 */
+#a8ref-content table {
+  width: 100%;
+  min-width: 1150px;
+  table-layout: fixed;
+}
+
+#a8ref-content th,
+#a8ref-content td {
+  overflow-wrap: normal;
+  word-break: normal;
+  vertical-align: top;
+}
+
+/* Family */
+#a8ref-content th:nth-child(1),
+#a8ref-content td:nth-child(1) {
+  width: 14%;
+  white-space: nowrap;
+}
+
+/* A8 type */
+#a8ref-content th:nth-child(2),
+#a8ref-content td:nth-child(2) {
+  width: 12%;
+  white-space: nowrap;
+}
+
+/* Meaning */
+#a8ref-content th:nth-child(3),
+#a8ref-content td:nth-child(3) {
+  width: 23%;
+  white-space: nowrap;
+}
+
+/* Native relationship */
+#a8ref-content th:nth-child(4),
+#a8ref-content td:nth-child(4) {
+  width: 36%;
+  overflow-wrap: break-word;
+}
+
+/* Status */
+#a8ref-content th:nth-child(5),
+#a8ref-content td:nth-child(5) {
+  width: 15%;
+  overflow-wrap: break-word;
+}
+#a8ref-content pre { overflow-x: auto; max-width: 100%; }
+
+body.a8ref-opened { overflow: hidden; }
+
+@media (max-width: 650px) {
+  #a8ref-panel { padding: 8px; align-items: flex-end; }
+  #a8ref-dialog {
+    max-height: 91dvh;
+    border-radius: 14px 14px 0 0;
+  }
+  #a8ref-header { padding: 13px 14px; }
+  #a8ref-content { padding: 0 12px 18px; }
+  #a8ref-heading { font-size: 18px; }
+  #a8ref-open { padding: 10px 13px; font-size: 12px; }
+}
+
+</style>
 </head>
 
 <body>
@@ -800,7 +974,7 @@ main {
   </div>
 
   <p>
-    This principle is why A8 NAV requires no conversion to A8/41:
+    This principle is why A8 NAV requires no conversion to A8L 41:
     they are the same physical length. It is also why a separate
     orbital-distance ruler is unnecessary. Spaceship Earth's motion
     can be expressed on the ordinary A8 length ladder.
@@ -983,32 +1157,32 @@ main {
   <h2>One continuous binary ladder.</h2>
 
   <p>
-    A8 length has one ladder. A8/31 is the human-scale reference point,
+    A8 length has one ladder. A8L 31 is the human-scale reference point,
     not a lower boundary on useful human measurement. Nearby smaller
-    steps such as A8/28, A8/29 and A8/30 are often more practical for
-    quick everyday measuring. A8/41 is the navigation identity:
+    steps such as A8L 28, A8L 29 and A8L 30 are often more practical for
+    quick everyday measuring. A8L 41 is the navigation identity:
     one A8 NAV. Integer rungs are exact power-of-two landmarks; decimal
     rungs locate positions continuously between them.
   </p>
 
   <div class="eq">
-    A8/r = A8/31 × 2^(r − 31)
+    A8L r = A8L 31 × 2^(r − 31)
   </div>
 
   <div class="eq">
-    r = 31 + log₂(L / A8/31)
+    r = 31 + log₂(L / A8L 31)
   </div>
 
   <div class="eq">
-    1 A8 NAV = A8/41 = C(E,mean) / 32,768
+    1 A8 NAV = A8L 41 = C(E,mean) / 32,768
   </div>
 
   <div class="eq">
-    A8/31 = A8/41 ÷ 1024
+    A8L 31 = A8L 41 ÷ 1024
   </div>
 
   <p>
-    A8/41 retains the terrestrial navigation identity. A8/31 is the
+    A8L 41 retains the terrestrial navigation identity. A8L 31 is the
     human-scale reference point on that same ladder, not a second ruler
     and not a lower boundary on practical measurement.
   </p>
@@ -1021,21 +1195,21 @@ main {
 
   <div class="note">
     <strong>Practical scale neighborhoods:</strong>
-    below the A8/31 reference is <strong>Baby Bear</strong> — including
-    useful everyday steps such as A8/28, A8/29 and A8/30 as well as much
-    smaller scales. A8/31 through A8/41 is <strong>Momma Bear</strong>,
-    the reference-to-navigation neighborhood. A8/41 and upward is
+    below the A8L 31 reference is <strong>Baby Bear</strong> — including
+    useful everyday steps such as A8L 28, A8L 29 and A8L 30 as well as much
+    smaller scales. A8L 31 through A8L 41 is <strong>Momma Bear</strong>,
+    the reference-to-navigation neighborhood. A8L 41 and upward is
     <strong>Papi Bear</strong>, the NAV and large-distance side.
-    A8/41 is the shared doorway. The names are informal; the ladder
+    A8L 41 is the shared doorway. The names are informal; the ladder
     remains one continuous ruler.
   </div>
 
   <p>
-    When a small quantity needs an internal comparison anchor, A8/31 is
-    normally clearer than reaching back to A8/41. That does not mean every
-    practical measurement below A8/31 is microscopic: A8/28, A8/29 and
-    A8/30 are convenient working lengths. For large-distance work,
-    A8/41 = 1 A8 NAV is normally the clearer reference. These are
+    When a small quantity needs an internal comparison anchor, A8L 31 is
+    normally clearer than reaching back to A8L 41. That does not mean every
+    practical measurement below A8L 31 is microscopic: A8L 28, A8L 29 and
+    A8L 30 are convenient working lengths. For large-distance work,
+    A8L 41 = 1 A8 NAV is normally the clearer reference. These are
     presentation choices, not breaks in the mathematics.
   </p>
 
@@ -1049,67 +1223,67 @@ main {
     </thead>
     <tbody>
       <tr>
-        <td>A8/-30</td>
-        <td>A8/31 ÷ 2⁶¹</td>
+        <td>A8L -30</td>
+        <td>A8L 31 ÷ 2⁶¹</td>
         <td>≈ 5.1752 × 10⁻¹⁹ m</td>
       </tr>
       <tr>
-        <td>A8/-20</td>
-        <td>A8/31 ÷ 2⁵¹</td>
+        <td>A8L -20</td>
+        <td>A8L 31 ÷ 2⁵¹</td>
         <td>≈ 5.2994 × 10⁻¹⁶ m</td>
       </tr>
       <tr>
-        <td>A8/-10</td>
-        <td>A8/31 ÷ 2⁴¹</td>
+        <td>A8L -10</td>
+        <td>A8L 31 ÷ 2⁴¹</td>
         <td>≈ 5.4266 × 10⁻¹³ m</td>
       </tr>
       <tr>
-        <td>A8/0</td>
-        <td>A8/31 ÷ 2³¹</td>
+        <td>A8L 0</td>
+        <td>A8L 31 ÷ 2³¹</td>
         <td>≈ 0.5556 nm</td>
       </tr>
       <tr>
-        <td>A8/10</td>
-        <td>A8/31 ÷ 2²¹</td>
+        <td>A8L 10</td>
+        <td>A8L 31 ÷ 2²¹</td>
         <td>≈ 0.5690 µm</td>
       </tr>
       <tr>
-        <td>A8/20</td>
-        <td>A8/31 ÷ 2¹¹</td>
+        <td>A8L 20</td>
+        <td>A8L 31 ÷ 2¹¹</td>
         <td>≈ 0.5827 mm</td>
       </tr>
       <tr>
-        <td>A8/28</td>
-        <td>A8/31 ÷ 8</td>
+        <td>A8L 28</td>
+        <td>A8L 31 ÷ 8</td>
         <td>≈ 0.1492 m</td>
       </tr>
       <tr>
-        <td>A8/29</td>
-        <td>A8/31 ÷ 4</td>
+        <td>A8L 29</td>
+        <td>A8L 31 ÷ 4</td>
         <td>≈ 0.2983 m</td>
       </tr>
       <tr>
-        <td>A8/30</td>
-        <td>A8/31 ÷ 2</td>
+        <td>A8L 30</td>
+        <td>A8L 31 ÷ 2</td>
         <td>≈ 0.5967 m</td>
       </tr>
       <tr>
-        <td>A8/31</td>
+        <td>A8L 31</td>
         <td>human-scale reference point</td>
         <td>≈ 1.1933 m</td>
       </tr>
       <tr>
-        <td>A8/41</td>
-        <td>1 A8 NAV = 1024 A8/31</td>
+        <td>A8L 41</td>
+        <td>1 A8 NAV = 1024 A8L 31</td>
         <td>≈ 1.2220 km</td>
       </tr>
       <tr>
-        <td>A8/45</td>
+        <td>A8L 45</td>
         <td>16 A8 NAV</td>
         <td>≈ 19.5515 km</td>
       </tr>
       <tr>
-        <td>A8/57</td>
+        <td>A8L 57</td>
         <td>65,536 A8 NAV</td>
         <td>≈ 80,082.8796 km</td>
       </tr>
@@ -1118,7 +1292,7 @@ main {
 
   <div class="note">
     <strong>Zero is an address, not a floor.</strong>
-    A8/0 is not zero length and it is not the smallest A8 length.
+    A8L 0 is not zero length and it is not the smallest A8 length.
     Moving one integer rung downward halves the length; moving one
     integer rung upward doubles it. Negative rung numbers continue the
     same ruler.
@@ -1137,11 +1311,11 @@ main {
   <h2>A8 NAV is not another ruler.</h2>
 
   <div class="eq">
-    A8 NAV = A8/41
+    A8 NAV = A8L 41
   </div>
 
   <p>
-    These two names are exactly interchangeable. A8/41 is the address on
+    These two names are exactly interchangeable. A8L 41 is the address on
     the universal length ladder. A8 NAV is the application name when
     that same physical length is used for Earth navigation on land or
     water.
@@ -1236,7 +1410,7 @@ main {
   </div>
 
   <div class="eq">
-    SPEED = A8/r per A8 HOUR
+    SPEED = A8S r
   </div>
 
   <p>
@@ -1256,53 +1430,53 @@ main {
     <tbody>
       <tr>
         <td>Snail</td>
-        <td>A8/36</td>
-        <td>≈ A8/35.9233 per A8 HOUR</td>
+        <td>A8S 36</td>
+        <td>≈ A8S 35.9233 per A8 HOUR</td>
       </tr>
       <tr>
         <td>Walking</td>
-        <td>A8/43</td>
-        <td>≈ A8/42.6177 per A8 HOUR</td>
+        <td>A8S 43</td>
+        <td>≈ A8S 42.6177 per A8 HOUR</td>
       </tr>
       <tr>
         <td>Bicycle</td>
-        <td>A8/45</td>
-        <td>≈ A8/44.6177 per A8 HOUR</td>
+        <td>A8S 45</td>
+        <td>≈ A8S 44.6177 per A8 HOUR</td>
       </tr>
       <tr>
         <td>Ship example</td>
-        <td>A8/46</td>
-        <td>≈ A8/45.5067 per A8 HOUR</td>
+        <td>A8S 46</td>
+        <td>≈ A8S 45.5067 per A8 HOUR</td>
       </tr>
       <tr>
         <td>Road example</td>
-        <td>A8/47</td>
-        <td>≈ A8/46.9396 per A8 HOUR</td>
+        <td>A8S 47</td>
+        <td>≈ A8S 46.9396 per A8 HOUR</td>
       </tr>
       <tr>
         <td>Aircraft example</td>
-        <td>A8/50</td>
-        <td>≈ A8/49.9888 per A8 HOUR</td>
+        <td>A8S 50</td>
+        <td>≈ A8S 49.9888 per A8 HOUR</td>
       </tr>
       <tr>
         <td>Moon local mean orbit</td>
-        <td>A8/52</td>
-        <td>≈ A8/52.1414 per A8 HOUR</td>
+        <td>A8S 52</td>
+        <td>≈ A8S 52.1414 per A8 HOUR</td>
       </tr>
       <tr>
         <td>Apollo 17 whole-mission average</td>
-        <td>A8/53</td>
-        <td>≈ A8/53.2463 per A8 HOUR</td>
+        <td>A8S 53</td>
+        <td>≈ A8S 53.2463 per A8 HOUR</td>
       </tr>
       <tr>
         <td>Spaceship Earth mean-orbit comparison</td>
-        <td>A8/57</td>
-        <td>≈ A8/57.0059 per A8 HOUR</td>
+        <td>A8S 57</td>
+        <td>≈ A8S 57.0059 per A8 HOUR</td>
       </tr>
       <tr>
         <td>Light · conventional comparison cross-check</td>
-        <td>A8/70</td>
-        <td>≈ A8/70.3031 per A8 HOUR</td>
+        <td>A8S 70</td>
+        <td>≈ A8S 70.3031 per A8 HOUR</td>
       </tr>
     </tbody>
   </table>
@@ -1315,7 +1489,7 @@ main {
   </p>
 
   <div class="eq">
-    EXAMPLES SPAN ≈ A8/35.9233 → A8/70.3031
+    EXAMPLES SPAN ≈ A8S 35.9233 → A8S 70.3031
   </div>
 
   <p>
@@ -1337,7 +1511,7 @@ main {
 
   <div class="eq">
     CURRENT MEAN-ORBIT COMPARISON
-    ≈ A8/57.0059 per A8 HOUR
+    ≈ A8S 57.0059
   </div>
 
   <p>
@@ -1351,24 +1525,24 @@ main {
   </div>
 
   <div class="eq">
-    ≈ A8/45.0059 per A8 SECOND
+    DISTANCE IN ONE A8 SECOND · ≈ A8L 45.0059
     <br>
-    =
+    SAME MODELED MOTION
     <br>
-    ≈ A8/57.0059 per A8 HOUR
+    SPEED · ≈ A8S 57.0059
   </div>
 
   <div class="note">
     <strong>Scale intuition:</strong>
-    a cargo ship moving near A8/45 per A8 HOUR covers in one A8 HOUR
+    a cargo ship moving near A8S 45 covers in one A8 HOUR
     about the same distance that Spaceship Earth covers along its mean
-    orbit in one A8 SECOND: approximately A8/45.0059.
+    orbit in one A8 SECOND: approximately A8L 45.0059.
   </div>
 
   <div class="eq">
-    CARGO SHIP · ≈ A8/45 IN ONE A8 HOUR
+    CARGO SHIP SPEED · ≈ A8S 45
     <br>
-    SPACESHIP EARTH · ≈ A8/45.0059 IN ONE A8 SECOND
+    SPACESHIP EARTH DISTANCE · ≈ A8L 45.0059 IN ONE A8 SECOND
   </div>
 
   <p>
@@ -1408,7 +1582,7 @@ main {
 
   <p>
     Each 45-day month contains nine five-day elemental weeks:
-    Fire, Water, Earth, Air and Aether.
+    Fire, Water, Terra, Air and Aether.
   </p>
 
   <p>
@@ -1521,8 +1695,8 @@ main {
     The nearby integer rung remains useful as a recognizable landmark.
     The continuous rung gives the object's more precise A8 position.
     For microscopic comparisons that need an internal A8 baseline,
-    A8/31 is normally the useful human-scale reference rather than
-    A8/41. The witness address itself does not change.
+    A8L 31 is normally the useful human-scale reference rather than
+    A8L 41. The witness address itself does not change.
   </p>
 
   <table>
@@ -1537,56 +1711,56 @@ main {
     <tbody>
       <tr>
         <td>Planck length · theoretical scale</td>
-        <td>A8/-85</td>
-        <td>≈ A8/-84.8298</td>
+        <td>A8L -85</td>
+        <td>≈ A8L -84.8298</td>
         <td>≈ 1.6163 × 10⁻³⁵ m</td>
       </tr>
       <tr>
         <td>Top-quark reduced Compton scale</td>
-        <td>A8/-29</td>
-        <td>≈ A8/-28.8558</td>
+        <td>A8L -29</td>
+        <td>≈ A8L -28.8558</td>
         <td>≈ 1.1438 × 10⁻¹⁸ m</td>
       </tr>
       <tr>
         <td>Proton rms charge radius</td>
-        <td>A8/-19</td>
-        <td>≈ A8/-19.3342</td>
+        <td>A8L -19</td>
+        <td>≈ A8L -19.3342</td>
         <td>≈ 0.8408 fm</td>
       </tr>
       <tr>
         <td>Electron reduced Compton wavelength</td>
-        <td>A8/-10</td>
-        <td>≈ A8/-10.4909</td>
+        <td>A8L -10</td>
+        <td>≈ A8L -10.4909</td>
         <td>≈ 3.8616 × 10⁻¹³ m</td>
       </tr>
       <tr>
         <td>α-quartz c-axis recurrence</td>
-        <td>A8/0</td>
-        <td>≈ A8/-0.0399</td>
+        <td>A8L 0</td>
+        <td>≈ A8L -0.0399</td>
         <td>≈ 0.5405 nm</td>
       </tr>
       <tr>
         <td>Small bacterium width</td>
-        <td>A8/10</td>
-        <td>≈ A8/10.0764</td>
+        <td>A8L 10</td>
+        <td>≈ A8L 10.0764</td>
         <td>≈ 0.6 µm</td>
       </tr>
       <tr>
         <td>Red blood cell diameter</td>
-        <td>A8/14</td>
-        <td>≈ A8/13.7204</td>
+        <td>A8L 14</td>
+        <td>≈ A8L 13.7204</td>
         <td>≈ 7.5 µm</td>
       </tr>
       <tr>
         <td>Human hair diameter</td>
-        <td>A8/17</td>
-        <td>≈ A8/16.9428</td>
+        <td>A8L 17</td>
+        <td>≈ A8L 16.9428</td>
         <td>≈ 70 µm</td>
       </tr>
       <tr>
         <td>Coarse sand grain</td>
-        <td>A8/20</td>
-        <td>≈ A8/20.0422</td>
+        <td>A8L 20</td>
+        <td>≈ A8L 20.0422</td>
         <td>≈ 0.6 mm</td>
       </tr>
     </tbody>
@@ -1599,8 +1773,8 @@ main {
   </div>
 
   <div class="note">
-    Planck length happens to lie near A8/-85. A8 does not declare
-    A8/-85 a fundamental endpoint. The mathematical ladder may continue
+    Planck length happens to lie near A8L -85. A8 does not declare
+    A8L -85 a fundamental endpoint. The mathematical ladder may continue
     downward; physics determines whether a particular scale has physical
     meaning.
   </div>
@@ -1638,7 +1812,7 @@ main {
 
     <div class="metric">
       <small>EXACT</small>
-      <strong>A8 NAV = A8/41</strong>
+      <strong>A8 NAV = A8L 41</strong>
     </div>
 
     <div class="metric">
@@ -1815,15 +1989,15 @@ main {
   <h3>Continuous length</h3>
 
   <div class="eq">
-    A8/r = A8/31 × 2^(r − 31)
+    A8L r = A8L 31 × 2^(r − 31)
   </div>
 
   <div class="eq">
-    r = 31 + log₂(L / A8/31)
+    r = 31 + log₂(L / A8L 31)
   </div>
 
   <div class="eq">
-    A8 NAV = A8/41 = 2¹⁰ × A8/31
+    A8 NAV = A8L 41 = 2¹⁰ × A8L 31
     <br>
     = C(E,mean) / 32,768
   </div>
@@ -1845,7 +2019,7 @@ main {
     <br>
     r = 41 + log₂(D)
     <br>
-    SPEED = A8/r per A8 HOUR
+    SPEED = A8L r per A8 HOUR
   </div>
 
   <h3>Earth mean-orbit comparison</h3>
@@ -1932,6 +2106,165 @@ main {
     independently.
   </p>
 
+
+  
+  <!-- A8-ELECTRICAL-NATIVE-NOTATION-V1 -->
+  <h3>One energy ruler · one power ruler</h3>
+
+  <p>
+    Mechanical work, electrical energy and transferred heat are
+    measured on one common energy scale. Power is the rate of
+    energy transfer. A8 does not require separate energy or
+    power rulers for different physical applications.
+  </p>
+
+  <div class="eq">
+    MECHANICAL · E = F × L
+    <br>
+    ELECTRICAL · E = V × Q
+    <br>
+    THERMAL · E = HEAT TRANSFERRED
+    <br>
+    POWER · P = E / t
+  </div>
+
+  <p>
+    The working native electrical designations are
+    <strong>A₈V</strong> for voltage,
+    <strong>A₈I</strong> for current,
+    <strong>A₈R</strong> for resistance,
+    <strong>A₈P</strong> for power and
+    <strong>A₈E</strong> for energy, work and heat.
+    These names distinguish electrical quantities from
+    existing A8 physical types.
+  </p>
+
+  <div class="eq">
+    V = I × R
+    <br>
+    I = V / R
+    <br>
+    R = V / I
+    <br>
+    P = V × I = I² × R
+    <br>
+    E = P × t
+  </div>
+
+  <p>
+    These equations operate on physical quantities.
+    Binary rung coordinates express logarithmic ratios;
+    their calculations must account for reference offsets.
+    Rung numbers are not multiplied as though they were
+    ordinary physical quantities.
+  </p>
+
+  <div class="note">
+    <strong>Power reference calibration selected · A₈P 22 = 1 W exactly.</strong>
+    Consequently A₈P 31 = 512 W exactly. This is a disclosed engineering
+    normalization selected near a preliminary A8-native mechanical construction;
+    it is not a claim that the native construction equals exactly one watt.
+    Voltage, current, resistance, charge and energy rung origins require their
+    own dimensional/reference specifications. A8P remains pressure; A₈P is power.
+  </div>
+
+  <div class="note">
+    <strong>Important distinction:</strong>
+    A8P is established absolute pressure.
+    A₈P designates power.
+    ΔA8P denotes a pressure difference;
+    ΔA8T denotes a temperature difference.
+    Elapsed time uses A8;CH, A8;CM or A8;CS.
+  </div>
+
+  
+  <!-- A8-ONE-BINARY-POWER-LADDER-V1 -->
+  <h3>One power ladder · no magnitude prefixes</h3>
+
+  <p>
+    A8 expresses small and large power magnitudes through one
+    continuous binary rung coordinate. Every whole rung doubles
+    the preceding physical power; every downward rung halves
+    the preceding physical power. New unit names and magnitude
+    prefixes are unnecessary inside the native notation.
+  </p>
+
+  <div class="eq">
+    EXACT BINARY RATIO · P(r) / P(31) = 2^(r - 31)
+    <br>
+    SELECTED POWER CALIBRATION · A₈P 22 = 1 W · A₈P 31 = 512 W
+    <br>
+    FORWARD READING · r = 22 + log₂(P / 1 W) · P &gt; 0
+    <br>
+    INVERSE COMPARISON · P(r) = 2^(r - 22) W
+  </div>
+
+  <!-- A8-NATIVE-POWER-DERIVATION-AND-CALIBRATION-V1 -->
+  <h3>Native derivation · published normalization</h3>
+  <p>
+    Physical power has dimensions mass × length² / elapsed time³. Using
+    existing A8 reference magnitudes, a candidate A8-native construction is:
+  </p>
+  <div class="eq">
+    P_native = (M₁₈ × L₃₁²) / T_A8s³
+    <br>
+    M₁₈ = physical mass represented by A8M 18
+    <br>
+    L₃₁ = physical length represented by A8L 31
+    <br>
+    T_A8s = duration represented by A8;CS 1
+  </div>
+  <p>
+    Previous rounded reference inputs gave approximately 1.028 W for this
+    construction, not exactly 1 W. That estimate requires verification from
+    the unrounded A8 length, water-mass reference conditions and time constants.
+    A8 deliberately selects the neighboring exact power calibration
+    A₈P 22 = 1 W; the approximate 2.8% adjustment is a declared standardization
+    choice, not a new physical law or a measurement of universal average demand.
+    The native construction motivates the human-scale neighborhood; the selected
+    watt calibration defines the published absolute power ladder.
+  </p>
+  <p>
+    Native outputs are rung coordinates. For any measured positive power P,
+    first compute r = 22 + log₂(P / 1 W), then display A₈P r.
+    The reverse equation is an external comparison, not an additional power scale.
+    Each increase by one rung doubles power; no upper or lower positive rung limit
+    is imposed. Physical zero is represented separately from any logarithmic rung.
+  </p>
+
+  <p>
+    The following examples use the selected exact power calibration.
+    Conventional watt magnitudes are stated explicitly because they define this
+    chosen calibration; other A8 physical rulers retain their own references.
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Native rung</th>
+        <th>External power comparison</th>
+        <th>Scale example</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>A₈P 12</td><td>≈ 0.9766 mW</td><td>Small electronics</td></tr>
+      <tr><td>A₈P 22</td><td>1 W (exact)</td><td>Electrical experiment</td></tr>
+      <tr><td>A₈P 31</td><td>512 W (exact)</td><td>Everyday power</td></tr>
+      <tr><td>A₈P 32</td><td>1,024 W (exact)</td><td>Household appliance</td></tr>
+      <tr><td>A₈P 42</td><td>≈ 1.049 MW</td><td>Industrial power</td></tr>
+      <tr><td>A₈P 52</td><td>≈ 1.074 GW</td><td>Generating station</td></tr>
+      <tr><td>A₈P 110.31</td><td>≈ 3.83 × 10²⁶ W</td><td>Sol luminosity comparison</td></tr>
+    </tbody>
+  </table>
+
+  <div class="note">
+    <strong>Calibration status:</strong> A₈P 22 = 1 W is the selected exact
+    power normalization; binary rung ratios are exact. The motivating native
+    1.028 W construction is preliminary until underlying constants are audited.
+    Negative and fractional coordinates extend the same positive-power ladder.
+    Physical zero is separate from rung zero. Energy, charge, current, voltage
+    and resistance remain distinct physical quantities with separate rung origins.
+  </div>
 
   <h3>Power-of-two relationships</h3>
 
@@ -2157,6 +2490,163 @@ main {
 
 </div>
 
+
+<!-- A8-NATIVE-MATHEMATICS-GEOMETRY-MATTER-MOTION-V1 -->
+<!-- A8-NATIVE-REFERENCE-EQUATIONS-V2 -->
+<section id="native-mathematics-v1">
+  <h2>A8 Native Mathematics · Geometry, Matter and Motion</h2>
+
+  <p>
+    These calculations express physical measurements as native A8
+    quantities. Conventional measurements may be used to check a
+    result but do not replace the established A8 reference rulers.
+    Rung indices are ordinary numeric coordinates. Each whole
+    rung changes a positive magnitude by a factor of two.
+  </p>
+
+  <h3>A8L · Length</h3>
+  <div class="eq">
+    rL = 31 + log2(L / L31)
+    <br>
+    L = L31 × 2^(rL - 31)
+  </div>
+  <p>
+    L31 is the established physical A8L 31 length reference.
+    L and L31 must use the same physical dimension and scale.
+    Positive lengths occupy the binary ladder.
+    Zero length is a separate physical state.
+  </p>
+
+  <h3>A8A · Area</h3>
+  <div class="eq">
+    A31 = L31 × L31
+    <br>
+    rA = rL1 + rL2 - 31
+    <br>
+    A = A31 × 2^(rA - 31)
+  </div>
+  <p>
+    A8A 31 represents the square of A8L 31.
+    For rectangular area, the two A8L coordinates combine
+    through addition with the reference offset.
+    The physical lengths multiply; their rung numbers do not.
+  </p>
+
+  <h3>A8V · Volume</h3>
+  <div class="eq">
+    V31 = L31 × L31 × L31
+    <br>
+    rV = rL1 + rL2 + rL3 - 62
+    <br>
+    V = V31 × 2^(rV - 31)
+  </div>
+  <p>
+    A8V 31 represents the cube of A8L 31.
+    Other positive volumes follow the same binary ladder.
+    The formula shown combines three perpendicular lengths
+    for a rectangular solid.
+  </p>
+
+  <h3>A8M · Mass</h3>
+  <div class="eq">
+    M31 = mass of reference water occupying A8V 31
+    <br>
+    Reference conditions: A8T 31 and A8P 31
+    <br>
+    rM = 31 + log2(M / M31)
+    <br>
+    M = M31 × 2^(rM - 31)
+  </div>
+  <p>
+    The reference mass is defined by the existing A8
+    water-volume construction under the specified
+    temperature and pressure conditions.
+    The water reference must be reproducible before
+    numerical external conversions are certified.
+  </p>
+
+  <h3>A8D · Density</h3>
+  <div class="eq">
+    Mwater = reference-water mass for the same volume
+    <br>
+    rD = log2(Mobject / Mwater)
+    <br>
+    Mobject / Mwater = 2^rD
+    <br>
+    Reference-water density: A8D 0
+  </div>
+  <p>
+    Density compares mass against an equal volume of
+    reference water. A8D 0 represents the reference
+    density, not zero physical density.
+    Positive rung coordinates indicate greater density;
+    negative coordinates indicate lower density.
+    The comparison requires the stated water reference
+    conditions.
+  </p>
+
+  <h3>A8S · Speed and A8 duration</h3>
+  <div class="eq">
+    1 A8;CH = 64 A8;CM = 4096 A8;CS
+    <br>
+    tH = elapsed time in A8 hours
+    <br>
+    rS = rL − log2(tH)
+    <br>
+    rL = rS + log2(tH)
+    <br>
+    tH = 2^(rL − rS)
+    <br>
+    A8S 41 = 1 A8 NAV per A8 hour
+  </div>
+  <p>
+    Ordinary A8 speed uses A8;CH as its elapsed-time
+    denominator. The equation determines native distance
+    and motion without changing the existing A8S reference
+    placement. Directed motion remains A8SD.
+    Acceleration A8! uses change in directed motion per
+    elapsed A8 hour by default.
+  </p>
+
+  <div class="note">
+    <strong>Reference integrity:</strong>
+    The definitions above use the established A8L, A8V,
+    A8M, A8D and A8 time relationships.
+    No new temperature, pressure, force or electrical
+    calibration is established by this section.
+    A8E elevation retains mean sea level as its default
+    zero datum. A8P denotes pressure; A₈P denotes power.
+    Any future revised reference calibration must be
+    identified explicitly rather than silently substituted.
+  </div>
+</section>
+
+
+
+<section id="a8-public-display-precision" aria-labelledby="a8-display-precision-title">
+  <h2 id="a8-display-precision-title">A8 Public Display Precision</h2>
+  <p>
+    COSIGO public instruments display numerical measurements using a
+    maximum of four digits after the decimal point. Unnecessary trailing
+    zeros are omitted. Values are rounded for presentation, never
+    truncated or rounded before calculation.
+  </p>
+  <p>
+    This display rule does not modify native A8 definitions, reference
+    anchors, exact binary relationships, physical calibrations,
+    astronomical calculations, or internal computational precision.
+    Researchers can calculate additional precision from the published
+    equations and reference data.
+  </p>
+  <p>
+    Exact integers, fractions, octal states, timestamps, source identifiers,
+    machine-readable data, and engineering evidence retain their required
+    precision. Very small nonzero measurements must not be represented
+    misleadingly as zero; use an appropriate native rung, scientific
+    notation, or an explicit display threshold.
+  </p>
+</section>
+
 </main>
 
 <footer>
@@ -2196,5 +2686,552 @@ main {
   </div>
   <p>© 2026 COSIGO. COSIGO™ rights and trademark notices remain governed by the official COSIGO site.</p>
 </footer>
+
+
+
+
+<!-- A8-FLOATING-REFERENCE-V1 -->
+<button id="a8ref-open" type="button"
+  aria-haspopup="dialog" aria-controls="a8ref-panel"
+  aria-expanded="false">
+  <span aria-hidden="true">☷</span> A8 REFERENCE
+</button>
+
+<div id="a8ref-panel" hidden>
+  <div id="a8ref-dialog" role="dialog" aria-modal="true"
+    aria-labelledby="a8ref-heading">
+    <div id="a8ref-header">
+      <div id="a8ref-topline">
+        <h2 id="a8ref-heading">A8 · Measurement Reference</h2>
+        <button id="a8ref-close" type="button"
+          aria-label="Close A8 reference">×</button>
+      </div>
+      <input id="a8ref-search" type="search"
+        autocomplete="off"
+        placeholder="Search symbol, quantity, or status…"
+        aria-label="Search A8 measurement definitions">
+    </div>
+    <div id="a8ref-content">
+<!-- A8-RECOMMENDED-NOTATION-ALIGNMENT-V1 -->
+<!-- A8-MASTER-PHYSICAL-TYPES-V2 -->
+<section
+  id="a8-recommended-notation-v1"
+  style="
+    max-width:1100px;
+    margin:2rem auto;
+    padding:1.25rem;
+    border:1px solid rgba(128,128,128,.35);
+    border-radius:14px;
+  ">
+
+  <h2>
+    Master A8 physical types
+  </h2>
+
+  <p>
+    This table is the working map of A8 physical notation.
+    Full A8 names are preferred when a quantity is first introduced.
+    Compact notation is recommended afterward for cards,
+    calculations, instruments and technical writing.
+  </p>
+
+  <p>
+    The status column deliberately distinguishes established rulers
+    from relationships that are derived from them and newer compact
+    notation whose detailed ladder wording is still being sealed.
+  </p>
+
+  <div style="overflow-x:auto">
+    <table>
+      <thead>
+        <tr>
+          <th>Family</th>
+          <th>A8 type</th>
+          <th>Meaning</th>
+          <th>Native relationship</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        <tr>
+          <td>Geometry</td>
+          <td><strong>A8L</strong></td>
+          <td>Length · object height</td>
+          <td>Continuous binary length ladder
+            <div style='margin-top:8px'><strong>Native equations</strong><br>rL = 31 + log2(L / L31)<br>L = L31 × 2^(rL − 31)</div>
+          </td>
+          <td>ESTABLISHED</td>
+        </tr>
+
+        <tr>
+          <td>Geometry</td>
+          <td><strong>A8A</strong></td>
+          <td>Area</td>
+          <td>
+            A8L × A8L.
+            With A8A 31 = A8L 31 × A8L 31,
+            r<sub>A</sub> =
+            r<sub>L1</sub> +
+            r<sub>L2</sub> − 31.
+          
+            <div style='margin-top:8px'><strong>Native equations</strong><br>rA = rL1 + rL2 − 31<br>A = A31 × 2^(rA − 31)</div>
+          </td>
+          <td>DERIVED</td>
+        </tr>
+
+        <tr>
+          <td>Geometry</td>
+          <td><strong>A8V</strong></td>
+          <td>Volume</td>
+          <td>
+            A8L × A8L × A8L.
+            A8V 31 is the cube of A8L 31.
+          
+            <div style='margin-top:8px'><strong>Native equations</strong><br>rV = rL1 + rL2 + rL3 − 62<br>V = V31 × 2^(rV − 31)</div>
+          </td>
+          <td>DERIVED</td>
+        </tr>
+
+        <tr>
+          <td>Matter</td>
+          <td><strong>A8M</strong></td>
+          <td>Mass</td>
+          <td>
+            A8M 31 = reference water occupying A8V 31
+            at A8T 31 and A8P 31.
+          
+            <div style='margin-top:8px'><strong>Native equations</strong><br>rM = 31 + log2(M / M31)<br>M = M31 × 2^(rM − 31)</div>
+          </td>
+          <td>ESTABLISHED</td>
+        </tr>
+
+        <tr>
+          <td>Matter</td>
+          <td><strong>A8D</strong></td>
+          <td>Density</td>
+          <td>
+            A8M(object) −
+            A8M(displaced reference water).
+            Reference water = A8D 0.
+          
+            <div style='margin-top:8px'><strong>Native equations</strong><br>rD = rM(object) − rM(equal-volume water)<br>density ratio = 2^rD</div>
+          </td>
+          <td>ESTABLISHED</td>
+        </tr>
+
+        <tr>
+          <td>Environment</td>
+          <td><strong>A8T</strong></td>
+          <td>Temperature</td>
+          <td>
+            Native temperature ladder with physical
+            freeze / human / boil anchors.
+          
+<div style="margin-top:8px">
+<strong>Established A8T equations</strong><br>
+d = rT − 26<br>
+q = sign(d) × (2^|d| − 1)<br>
+C = (100/127) × q<br>
+rT = 26 + sign(C) × log2(1 + 127|C|/100)<br>
+A8T 26 = freeze · A8T 31 = comfort · A8T 33 = boil<br>
+Physical floor: rT ≈ 17.5575 at absolute zero.
+C is the disclosed external temperature comparison,
+not a separate A8 authority.
+</div>
+</td>
+          <td>ESTABLISHED</td>
+        </tr>
+
+        <tr>
+          <td>Environment</td>
+          <td><strong>A8P</strong></td>
+          <td>Absolute pressure</td>
+          <td>
+            A8P 31 = reference atmosphere.
+            Each rung doubles or halves pressure.
+          
+<div style="margin-top:8px">
+<strong>Established A8P equations</strong><br>
+p = p31 × 2^(rP − 31)<br>
+rP = 31 + log2(p/p31)<br>
+p31 = reference atmosphere.<br>
+External comparison: p31 = 101325 Pa.<br>
+These equations describe positive absolute pressure.
+Perfect vacuum is a physical zero, not a finite rung.
+</div>
+</td>
+          <td>ESTABLISHED</td>
+        </tr>
+
+        <tr>
+          <td>Position</td>
+          <td>
+            <strong>A8XY</strong><br>
+            <strong>A8Z</strong><br>
+            <strong>A8XYZ</strong>
+          </td>
+          <td>
+            2D position<br>
+            third-axis coordinate<br>
+            complete 3D position
+          </td>
+          <td>Spatial coordinates</td>
+          <td>ESTABLISHED</td>
+        </tr>
+
+        <tr>
+          <td>Position</td>
+          <td><strong>A8E</strong></td>
+          <td>Elevation</td>
+          <td>
+            <strong>A8E 0 = mean sea-level elevation datum.</strong>
+            Positive elevation is above sea level; negative elevation
+            is below sea level. Nonzero elevation magnitudes use
+            the established A8L binary length ruler.
+            <br>
+            h = z − z(MSL)
+            <br>
+            rL = 31 + log2(|h| / L31), for h ≠ 0.
+            <br>
+            Precision surveying identifies the applicable
+            mean-sea-level reference surface or geoid.
+            Zero elevation is distinct from A8L 0.
+          </td>
+          <td>DERIVED · SEA-LEVEL DATUM</td>
+        </tr>
+
+        <tr>
+          <td>Clock</td>
+          <td>
+            <strong>A8:CH</strong><br>
+            <strong>A8:CM</strong><br>
+            <strong>A8:CS</strong>
+          </td>
+          <td>Clock position</td>
+          <td>
+            : means position.
+            H / M / S selects clock scope.
+          </td>
+          <td>ESTABLISHED</td>
+        </tr>
+
+        <tr>
+          <td>Duration</td>
+          <td>
+            <strong>A8;CH</strong><br>
+            <strong>A8;CM</strong><br>
+            <strong>A8;CS</strong>
+          </td>
+          <td>Elapsed interval</td>
+          <td>
+            The semicolon (;) marks elapsed A8 time.
+            The colon (:) marks clock position.
+            Δ is reserved for differences in physical quantities.
+          </td>
+          <td>ESTABLISHED</td>
+        </tr>
+
+        <tr>
+          <td>Motion</td>
+          <td><strong>A8S</strong></td>
+          <td>Speed</td>
+          <td>
+            A8 length traveled during A8;CH 1.
+            One A8 hour is the ordinary denominator.
+          
+            <div style='margin-top:8px'><strong>Native equations</strong><br>rS = rL − log2(tH)<br>rL = rS + log2(tH)<br>tH = 2^(rL − rS)<br>tH = elapsed A8 hours</div>
+          </td>
+          <td>NOTATION SET</td>
+        </tr>
+
+        <tr>
+          <td>Motion</td>
+          <td><strong>A8SD</strong></td>
+          <td>Speed + direction</td>
+          <td>
+            A8S magnitude together with direction.
+            This is the directed-motion / velocity concept.
+          </td>
+          <td>NOTATION SET</td>
+        </tr>
+
+        <tr>
+          <td>Motion</td>
+          <td>
+            <strong>A8!</strong><br>
+            <strong>A8!+</strong><br>
+            <strong>A8!-</strong><br>
+            <strong>A8!=</strong>
+          </td>
+          <td>
+            Acceleration<br>
+            speed increasing<br>
+            speed decreasing<br>
+            speed magnitude unchanged
+          </td>
+          <td>
+            Change in A8SD per A8;CH 1 by default.
+            A8!= may still include directional acceleration.
+          </td>
+          <td>NOTATION SET</td>
+        </tr>
+
+        <tr>
+          <td>Dynamics</td>
+          <td><strong>A8F</strong></td>
+          <td>Force</td>
+          <td>
+            A8M × A8!.
+          </td>
+          <td>ANCHOR TO SEAL</td>
+        </tr>
+
+        <tr>
+          <td>Frequency</td>
+          <td><strong>A8~</strong></td>
+          <td>Frequency</td>
+          <td>
+            Cycles per A8;CS 1.
+            The A8-second denominator is implicit in ordinary A8~
+            notation.
+          
+<div style="margin-top:8px">
+<strong>Native frequency equations</strong><br>
+fA8 = N / tA8<br>
+tA8 = N / fA8<br>
+N = counted cycles; tA8 = elapsed A8 seconds.<br>
+A8~ 512 means 512 cycles per A8 second.<br>
+External audio-output comparison only:
+Hz = fA8 × 1024/675.
+A8~ is a direct frequency quantity, not a logarithmic rung.
+</div>
+</td>
+          <td>NOTATION SET</td>
+        </tr>
+
+        <tr>
+          <td>Music</td>
+          <td><strong>.a8m</strong></td>
+          <td>A8 music format</td>
+          <td>
+            File / score designation.
+            Lowercase .a8m remains distinct from uppercase A8M mass.
+          </td>
+          <td>ESTABLISHED</td>
+        </tr>
+
+      
+        <tr>
+          <td>Energy / electrical</td>
+          <td><strong>A₈V</strong></td>
+          <td>Voltage</td>
+          <td>Electric potential difference; V = I × R.</td>
+          <td>NOTATION SET · RUNG CALIBRATION PENDING</td>
+        </tr>
+        <tr>
+          <td>Energy / electrical</td>
+          <td><strong>A₈I</strong></td>
+          <td>Current</td>
+          <td>Electric charge flow per elapsed time; I = V / R.</td>
+          <td>NOTATION SET · RUNG CALIBRATION PENDING</td>
+        </tr>
+        <tr>
+          <td>Energy / electrical</td>
+          <td><strong>A₈R</strong></td>
+          <td>Resistance</td>
+          <td>Ratio of voltage to current; R = V / I.</td>
+          <td>NOTATION SET · RUNG CALIBRATION PENDING</td>
+        </tr>
+        <tr>
+          <td>Energy / electrical</td>
+          <td><strong>A₈P</strong></td>
+          <td>Power</td>
+          <td>Unified mechanical, electrical and thermal power. Native rung: r = 22 + log₂(P / 1 W); inverse: P = 2^(r − 22) W. A₈P 22 = 1 W exact (disclosed calibration).</td>
+          <td>POWER CALIBRATION SELECTED · NATIVE MECHANICAL CROSS-CHECK PENDING</td>
+        </tr>
+        <tr>
+          <td>Energy / electrical</td>
+          <td><strong>A₈E</strong></td>
+          <td>Energy / work / heat</td>
+          <td>One shared energy ruler; E = P × t = V × Q for electrical transfer.</td>
+          <td>NOTATION SET · RUNG CALIBRATION PENDING</td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note">
+    <strong>Height, Z and elevation are not synonyms.</strong>
+    An object's height is an A8L measurement.
+    A8Z is a third-axis coordinate.
+    A8E is a vertical position relative to a named reference.
+  </div>
+
+  <div class="note">
+    <strong>Ordinary motion uses the A8 hour.</strong>
+    A8S and A8! use A8;CH 1 as their familiar working denominator.
+    Rapid or ballistic work may translate the same motion into an
+    A8-second view. Frequency is the deliberate exception:
+    A8~ is intrinsically referenced to A8;CS 1.
+  </div>
+
+  <h3>
+    Clock examples
+  </h3>
+
+  <pre>A8:CH 18 45 45   clock position · HH MM SS
+A8:CM 45 45      clock position · MM SS
+A8:CS 45         clock position · SS
+
+A8;CH 8          elapsed A8 clock-hours
+A8;CM 45         elapsed A8 clock-minutes
+A8;CS 32000      elapsed A8 clock-seconds
+
+</pre>
+
+  <h3>
+    Current A8 mass construction
+  </h3>
+
+  <p>
+    <strong>A8M 31</strong>
+    is the mass of reference water occupying one full
+    <strong>A8V 31</strong>, where A8V 31 is the cube of
+    <strong>A8L 31</strong>, at
+    <strong>A8T 31</strong> and
+    <strong>A8P 31</strong>.
+  </p>
+
+  <p>
+    The familiar A8 cup of reference water lands at
+    <strong>A8M 18</strong> exactly:
+    A8M 18 = A8M 31 ÷ 8192.
+  </p>
+
+  <h3>
+    A8 density by reference-water displacement
+  </h3>
+
+  <p>
+    Reference water is
+    <strong>A8D 0</strong>.
+    A measured density coordinate is obtained from two mass
+    coordinates:
+  </p>
+
+  <pre>A8D =
+A8M(object)
+− A8M(displaced reference water)</pre>
+
+  <p>
+    Therefore the density ratio to reference water is
+    2<sup>A8D</sup>.
+  </p>
+
+  <p>
+    Equal-mass teaching example:
+  </p>
+
+  <pre>GOLD
+A8M 15.2625
+displaced water · A8M 10.9919
+A8D 4.2705
+
+SILVER
+A8M 15.2625
+displaced water · A8M 11.8715
+A8D 3.3909</pre>
+
+  <p>
+    The gold and silver figures above are comparison expectations
+    for the displacement demonstration. Physical A8 density is
+    obtained from the measured displaced-water A8M coordinate;
+    the comparison figures do not define A8D.
+  </p>
+
+</section>
+    </div>
+  </div>
+</div>
+
+<script>
+/* A8-FLOATING-REFERENCE-V1 */
+(() => {
+  "use strict";
+
+  const trigger = document.getElementById("a8ref-open");
+  const panel = document.getElementById("a8ref-panel");
+  const dialog = document.getElementById("a8ref-dialog");
+  const close = document.getElementById("a8ref-close");
+  const search = document.getElementById("a8ref-search");
+  const rows = Array.from(
+    panel.querySelectorAll("#a8ref-content tbody tr")
+  );
+
+  let priorFocus = null;
+
+  function show() {
+    priorFocus = document.activeElement;
+    panel.hidden = false;
+    trigger.setAttribute("aria-expanded", "true");
+    document.body.classList.add("a8ref-opened");
+    search.focus();
+  }
+
+  function hide() {
+    panel.hidden = true;
+    trigger.setAttribute("aria-expanded", "false");
+    document.body.classList.remove("a8ref-opened");
+    if (priorFocus && typeof priorFocus.focus === "function") {
+      priorFocus.focus();
+    } else {
+      trigger.focus();
+    }
+  }
+
+  trigger.addEventListener("click", show);
+  close.addEventListener("click", hide);
+
+  panel.addEventListener("click", (event) => {
+    if (event.target === panel) hide();
+  });
+
+  search.addEventListener("input", () => {
+    const query = search.value.trim().toLocaleLowerCase();
+    for (const row of rows) {
+      row.hidden = !row.textContent.toLocaleLowerCase()
+        .includes(query);
+    }
+  });
+
+  panel.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      event.preventDefault();
+      hide();
+      return;
+    }
+    if (event.key !== "Tab") return;
+    const candidates = Array.from(dialog.querySelectorAll(
+      'button:not([disabled]), input:not([disabled]), ' +
+      'a[href], [tabindex]:not([tabindex="-1"])'
+    )).filter(el => el.getClientRects().length > 0);
+    if (!candidates.length) return;
+    const first = candidates[0];
+    const last = candidates[candidates.length - 1];
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey &&
+               document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
+  });
+})();
+</script>
+
 </body>
 </html>
