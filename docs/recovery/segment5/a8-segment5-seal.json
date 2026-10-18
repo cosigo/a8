@@ -1,0 +1,16 @@
+{
+  "schema": "A8-AB-PHYSICAL-SEGMENT5-SEAL-V1",
+  "sourceEpoch": 9,
+  "segment": 5,
+  "physicalAnchorRaw": 337001,
+  "anchorSequence": 11471286,
+  "oldPhysicalRaw": 18399059,
+  "oldSequence": 11264085,
+  "core22RawAtSeam": 436773,
+  "oldCacheSha256": "3aaf9bf8ab80882428268fb8255df4749c587ef10065dd8d5f6d527e3251d849",
+  "core22CheckpointSha256": "a0a53e60e2b806cfc132c5dffd36afa3fb4b0700940213b2c8cbcea31d58c592",
+  "mode": "OBSERVED_RESET_GENERATION_NO_OUTAGE_ELAPSED_INFERENCE",
+  "physicalSourceIsReplaceable": true,
+  "changesNaturalCoordinates": false,
+  "changesCore21": false
+}

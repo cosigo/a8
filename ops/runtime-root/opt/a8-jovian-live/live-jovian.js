@@ -852,12 +852,24 @@ async function poll() {
         p.SOURCE_EPOCH
       );
 
-    const raw =
-      BigInt(
-        String(
-          p.RAW_COUNT
-        )
-      );
+    const observedPhysicalRaw =
+      BigInt(String(p.RAW_COUNT));
+
+    // Replaceable A/B carrier: manual segment-5 seam.
+    // Keep the established model baseline and all moon periods.
+    const seam = JSON.parse(fs.readFileSync(
+      '/var/lib/a8-primary-stream-cache/segment5-seal.json', 'utf8'));
+    if (seam.schema !== 'A8-AB-PHYSICAL-SEGMENT5-SEAL-V1' ||
+        seam.sourceEpoch !== 9 || seam.segment !== 5 ||
+        seam.oldPhysicalRaw !== 18399059) {
+      throw new Error('SEGMENT5_SEAL_MISMATCH');
+    }
+    const a = BigInt(seam.physicalAnchorRaw);
+    if (observedPhysicalRaw < a ||
+        BigInt(p.REPORT_SEQUENCE) < BigInt(seam.anchorSequence)) {
+      throw new Error('PHYSICAL_BEFORE_SEGMENT5_SEAM');
+    }
+    const raw = 18399059n + observedPhysicalRaw - a;
 
     if (
       !Number.isSafeInteger(epoch) ||
