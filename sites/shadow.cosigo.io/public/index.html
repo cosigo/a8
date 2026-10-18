@@ -186,12 +186,39 @@ footer{
   color:var(--warn);
 }
 
+.core22-card{
+  border-color:#66b6d5;
+  box-shadow:0 0 0 1px rgba(102,182,213,.14);
+}
+.core22-card h2{
+  color:#84d1ec;
+}
+.core22-card .core22-status{
+  color:#84d1ec;
+  font-weight:700;
+  font-size:1.1rem;
+  margin:12px 0;
+}
+.core22-card a{
+  display:inline-block;
+  margin-top:14px;
+  padding:10px 14px;
+  border:1px solid #66b6d5;
+  border-radius:8px;
+  color:#a5e4f5;
+  text-decoration:none;
+  font-weight:700;
+}
+.core22-card a:hover,
+.core22-card a:focus-visible{
+  background:rgba(102,182,213,.15);
+}
 @media(max-width:700px){
   .clocks{grid-template-columns:1fr}
 }
 </style>
 </head>
-<body>
+<body data-core22-endpoint="/api/shadow/core22">
 <main>
   <div class="kicker">AUSPICIOUS 8 · PHYSICAL WITNESS SYSTEM</div>
   <h1>SHADOW · PHYSICAL WITNESSES</h1>
@@ -269,6 +296,34 @@ footer{
           <b id="core21State">—</b>
         </div>
       </div>
+    </article>
+
+    <!-- CORE22 reference only; independent runtime not yet installed. -->
+    <article class="card core22-card" aria-label="Core22 construction reference">
+      <h2>CORE22 · EUROPA SUCCESSOR</h2>
+      <div class="core22-status" id="a8Core22Banner">CONNECTING TO CORE22…</div>
+<div id="a8Core22Live"
+     role="status"
+     aria-live="off"
+     style="margin-top:14px;padding:12px;border:1px solid #54798a;
+            border-radius:9px;white-space:pre-wrap;
+            font-family:monospace;line-height:1.7;
+            overflow-wrap:anywhere">
+  CONNECTING TO CORE22…
+</div>
+
+      <div class="rows">
+        <div>NATURAL AUTHORITY · <b>EUROPA</b></div>
+        <div>NATURAL RECURRENCE · <b>9,344,598 RAW / REVOLUTION</b></div>
+        <div>PHYSICAL SOURCE · <b>A/B · SHARED OBSERVATION</b></div>
+        <div>PROCESSING · <b>INDEPENDENT FROM CORE20</b></div>
+        <div>DAY_COUNT / DAY_PHASE17 · <b>NOT AVAILABLE</b></div>
+        <div>EUROPA CLOCK · <b>NOT INITIALIZED</b></div>
+        <div>CONTROL AUTHORITY · <b>NONE ON SHADOW</b></div>
+      </div>
+      <a href="/core22.html" target="_blank" rel="noopener noreferrer">
+        OPEN CORE22 WINDOW ↗
+      </a>
     </article>
   </section>
 
@@ -357,10 +412,10 @@ function updateDivergence(){
 async function updatePrimary(){
   try{
     const d =
-      await getJson('/api/shadow/jovian');
+      await getJson('/api/shadow/comparison');
 
     const p =
-      d.physical || {};
+      d.physical555 || {};
 
     document.getElementById('primaryEpoch').textContent =
       p.sourceEpoch ?? '—';
@@ -652,5 +707,106 @@ startLane(updateCore20);
 startLane(updateCore21);
 startLane(updateGhost);
 </script>
+
+<script id="a8-core22-readonly-observer-v1">
+(() => {
+  "use strict";
+
+  const endpoint = document.body.dataset.core22Endpoint;
+  const output = document.getElementById("a8Core22Live");
+  const banner = document.getElementById("a8Core22Banner");
+
+  if (!endpoint || !output || !banner) return;
+
+  let previousSequence = null;
+  let previousEpoch = null;
+
+  const show = (message, headline) => {
+    output.textContent = message;
+    banner.textContent = headline;
+  };
+
+  async function poll() {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 4000);
+
+    try {
+      const response = await fetch(endpoint, {
+        method: "GET",
+        cache: "no-store",
+        signal: controller.signal
+      });
+
+      if (!response.ok) throw new Error("HTTP " + response.status);
+
+      const d = await response.json();
+
+      if (
+        d.schema !== "A8-CORE22-STATUS-V1" ||
+        d.core !== "CORE22" ||
+        d.controls !== "LOCKED"
+      ) {
+        throw new Error("UNEXPECTED STATUS CONTRACT");
+      }
+
+      const epoch = Number(d.physicalSourceEpoch);
+      const seq = BigInt(d.reportSequence);
+      const raw = BigInt(d.core22Raw);
+      const physical = BigInt(d.physicalRaw);
+      const birth = BigInt(d.birthPhysicalRaw);
+
+      if (!Number.isSafeInteger(epoch) ||
+          raw < 0n || physical - birth !== raw) {
+        throw new Error("INVALID RAW RELATIONSHIP");
+      }
+
+      if (previousEpoch !== null &&
+          (epoch !== previousEpoch || seq < previousSequence)) {
+        throw new Error("SOURCE CONTINUITY CHANGED");
+      }
+
+      previousEpoch = epoch;
+      previousSequence = seq;
+
+      const observing =
+        d.intakeServiceActive === true &&
+        d.intakeStatus === "OBSERVING" &&
+        d.continuity === "OBSERVING";
+
+      const lines = [
+        "INTAKE · " + (observing ? "OBSERVING" : "HOLD / NOT OBSERVING"),
+        "CORE22 RAW · " + raw.toString(),
+        "A/B PHYSICAL RAW · " + physical.toString(),
+        "SOURCE EPOCH · " + epoch,
+        "REPORT SEQUENCE · " + seq.toString(),
+        "EUROPA CLOCK · " + String(d.clockStatus),
+        "DAY_COUNT / DAY_PHASE17 · NOT INITIALIZED",
+        "CE CONTROLS · LOCKED"
+      ];
+
+      show(
+        lines.join("\n"),
+        observing
+          ? "PHYSICAL INTAKE ACTIVE · CLOCK NOT INITIALIZED"
+          : "PHYSICAL INTAKE HOLD · CLOCK NOT INITIALIZED"
+      );
+
+    } catch (error) {
+      show(
+        "CORE22 STATUS UNAVAILABLE\n" +
+        "LAST VALID VALUES WITHHELD\n" +
+        String(error.message || error),
+        "CORE22 OBSERVER UNAVAILABLE"
+      );
+    } finally {
+      clearTimeout(timer);
+    }
+  }
+
+  poll();
+  setInterval(poll, 1000);
+})();
+</script>
+
 </body>
 </html>
