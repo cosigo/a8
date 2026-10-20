@@ -193,6 +193,29 @@ footer{
 .core22-card h2{
   color:#84d1ec;
 }
+.a8-core22-commissioning-side{
+  border:1px solid #54798a;
+  border-radius:10px;
+  padding:12px 14px;
+  margin:12px 0;
+  background:#0c1820;
+}
+.a8-core22-commissioning-side .clock{
+  color:#84d1ec;
+  font-size:clamp(2rem,4vw,3.2rem);
+  font-variant-numeric:tabular-nums;
+  margin:8px 0;
+}
+.a8-core22-commissioning-label{
+  color:#a5e4f5;
+  font-size:.79rem;
+  letter-spacing:.06em;
+}
+.a8-core22-commissioning-meta{
+  font-size:.84rem;
+  line-height:1.8;
+  overflow-wrap:anywhere;
+}
 .core22-card .core22-status{
   color:#84d1ec;
   font-weight:700;
@@ -301,6 +324,15 @@ footer{
     <!-- CORE22 reference only; independent runtime not yet installed. -->
     <article class="card core22-card" aria-label="Core22 construction reference">
       <h2>CORE22 · EUROPA SUCCESSOR</h2>
+      <div class="a8-core22-commissioning-side" aria-label="Provisional Core22 Europa clock">
+        <div class="a8-core22-commissioning-label">EUROPA · COMMISSIONING CLOCK</div>
+        <div class="clock" id="a8Core22CommissioningClock">—:—:—</div>
+        <div class="a8-core22-commissioning-meta">
+          DAY COUNT · <b id="a8Core22CommissioningDay">—</b><br>
+          DAY_PHASE17 · <b id="a8Core22CommissioningPhase">—</b>
+        </div>
+        <div class="a8-core22-commissioning-label" id="a8Core22CommissioningState">PROVISIONAL · AWAITING DATA</div>
+      </div>
       <div class="core22-status" id="a8Core22Banner">CONNECTING TO CORE22…</div>
 <div id="a8Core22Live"
      role="status"
@@ -715,8 +747,20 @@ startLane(updateGhost);
   const endpoint = document.body.dataset.core22Endpoint;
   const output = document.getElementById("a8Core22Live");
   const banner = document.getElementById("a8Core22Banner");
+  const clock = document.getElementById("a8Core22CommissioningClock");
+  const clockDay = document.getElementById("a8Core22CommissioningDay");
+  const clockPhase = document.getElementById("a8Core22CommissioningPhase");
+  const clockState = document.getElementById("a8Core22CommissioningState");
 
-  if (!endpoint || !output || !banner) return;
+  if (!endpoint || !output || !banner || !clock || !clockDay || !clockPhase || !clockState) return;
+
+  function clearClock(message) {
+    clock.textContent = "—:—:—";
+    clockDay.textContent = "—";
+    clockPhase.textContent = "—";
+    clockState.textContent = message;
+  }
+
 
   let previousSequence = null;
   let previousEpoch = null;
@@ -773,6 +817,26 @@ startLane(updateGhost);
         d.intakeStatus === "OBSERVING" &&
         d.continuity === "OBSERVING";
 
+      const cc = d.commissioningClock;
+      if (observing && cc &&
+          cc.schema === "A8-CORE22-COMMISSIONING-CLOCK-V1" &&
+          cc.status === "PROJECTING" &&
+          cc.clockAuthority === "NONE" &&
+          cc.consumerAuthority === "NONE" &&
+          cc.qualification === "PROVISIONAL_NOT_QUALIFIED" &&
+          cc.core22Raw === raw.toString() &&
+          /^[0-3][0-7]:[0-7]{2}:[0-7]{2}₈$/.test(cc.nativeTime) &&
+          /^(?:[0-2][0-9]|3[01]):(?:[0-5][0-9]|6[0-3]):(?:[0-5][0-9]|6[0-3])$/.test(cc.decimalTime) &&
+          /^\d+$/.test(cc.dayCount) && /^\d+$/.test(cc.dayPhase17) &&
+          Number(cc.dayPhase17) < 131072) {
+        clock.textContent = cc.decimalTime;
+        clockDay.textContent = cc.dayCount;
+        clockPhase.textContent = cc.dayPhase17;
+        clockState.textContent = "PROVISIONAL · NO CONSUMER AUTHORITY";
+      } else {
+        clearClock(cc && cc.reason ? "HOLD · " + String(cc.reason) : "COMMISSIONING HOLD");
+      }
+
       const lines = [
         "INTAKE · " + (observing ? "OBSERVING" : "HOLD / NOT OBSERVING"),
         "CORE22 RAW · " + raw.toString(),
@@ -792,6 +856,7 @@ startLane(updateGhost);
       );
 
     } catch (error) {
+      clearClock("CORE22 OBSERVER UNAVAILABLE");
       show(
         "CORE22 STATUS UNAVAILABLE\n" +
         "LAST VALID VALUES WITHHELD\n" +
@@ -807,6 +872,7 @@ startLane(updateGhost);
   setInterval(poll, 1000);
 })();
 </script>
+
 
 </body>
 </html>

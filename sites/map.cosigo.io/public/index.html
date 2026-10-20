@@ -1519,7 +1519,7 @@ function octFixed(x, places=6, minWhole=3) {
 function formatPhase(x, completed=false) {
   if (mode === 'decimal') {
     if (completed || Math.abs(x-512)<1e-9) return '512 / 0';
-    return Number(x.toFixed(6)).toString();
+    return Number(x.toFixed(4)).toString();
   }
   if (completed || Math.abs(x-512)<1e-9) return '1000₈ / 000₈';
   return octFixed(x, 4, 3) + '₈';

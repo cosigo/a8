@@ -2685,6 +2685,315 @@
 }
 </style>
 
+
+<style id="a8-about-mass-scale-style-v1">
+
+.a8-mass-scale-open-row{
+  margin-top:14px;
+  display:flex;
+  justify-content:flex-start;
+}
+
+.a8-mass-scale-launch{
+  border:1px solid rgba(255,255,255,.24);
+  border-radius:9px;
+  background:rgba(255,255,255,.06);
+  color:#fff;
+  padding:10px 13px;
+  font-weight:900;
+  font-size:.76rem;
+  letter-spacing:.055em;
+  cursor:pointer;
+}
+
+.a8-mass-scale-launch:hover,
+.a8-mass-scale-launch:focus{
+  background:rgba(255,255,255,.11);
+  border-color:rgba(255,255,255,.42);
+}
+
+#a8-mass-scale-dialog{
+  width:min(1000px,calc(100vw - 28px));
+}
+
+#a8-mass-scale-dialog .a8-dialog-inner{
+  max-height:86vh;
+  overflow:auto;
+}
+
+.a8-mass-scale-close{
+  position:absolute;
+  right:14px;
+  top:12px;
+  border:0;
+  background:transparent;
+  color:#fff;
+  font-size:1.8rem;
+  cursor:pointer;
+}
+
+.a8-mass-scale-rule{
+  margin:14px 0 18px;
+  padding:12px 14px;
+  border:1px solid rgba(255,255,255,.13);
+  border-radius:10px;
+  background:rgba(255,255,255,.035);
+  font-size:.86rem;
+  line-height:1.55;
+}
+
+.a8-mass-scale-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:9px;
+}
+
+.a8-mass-scale-card{
+  min-width:0;
+  text-align:left;
+  border:1px solid rgba(255,255,255,.15);
+  border-radius:11px;
+  padding:13px 14px;
+  background:rgba(255,255,255,.035);
+  color:#eef5f7;
+  cursor:pointer;
+}
+
+.a8-mass-scale-card:hover,
+.a8-mass-scale-card:focus{
+  background:rgba(255,255,255,.08);
+  border-color:rgba(255,255,255,.34);
+}
+
+.a8-mass-scale-card small,
+.a8-mass-scale-card strong,
+.a8-mass-scale-card span,
+.a8-mass-scale-card em{
+  display:block;
+}
+
+.a8-mass-scale-card small{
+  font-size:.65rem;
+  font-weight:900;
+  letter-spacing:.065em;
+  opacity:.68;
+}
+
+.a8-mass-scale-card strong{
+  margin:.35rem 0;
+  font-size:1.1rem;
+}
+
+.a8-mass-scale-card span{
+  margin-top:.28rem;
+  font-size:.78rem;
+  line-height:1.4;
+  opacity:.76;
+}
+
+.a8-mass-scale-card em{
+  margin-top:.65rem;
+  font-size:.63rem;
+  font-style:normal;
+  font-weight:900;
+  letter-spacing:.055em;
+  opacity:.58;
+}
+
+.a8-mass-scale-card[data-exact="1"]{
+  border-width:2px;
+}
+
+.a8-mass-scale-foot{
+  margin-top:18px;
+  padding-top:14px;
+  border-top:1px solid rgba(255,255,255,.13);
+  font-size:.8rem;
+  line-height:1.55;
+  opacity:.72;
+}
+
+@media(max-width:760px){
+  .a8-mass-scale-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+}
+
+@media(max-width:520px){
+  .a8-mass-scale-grid{
+    grid-template-columns:1fr;
+  }
+}
+
+</style>
+
+
+<style id="a8-density-lab-style-v2">
+
+.a8-notation-legend{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+  margin:14px 0 18px;
+}
+
+.a8-notation-legend span{
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  padding:6px 8px;
+  border:1px solid rgba(255,255,255,.16);
+  border-radius:999px;
+  background:rgba(255,255,255,.04);
+  font-size:.68rem;
+  line-height:1;
+}
+
+.a8-notation-legend b{
+  color:var(--gold);
+  letter-spacing:.035em;
+}
+
+.a8-mass-scale-open-row{
+  gap:8px;
+  flex-wrap:wrap;
+}
+
+.a8-density-launch{
+  border:1px solid rgba(255,255,255,.24);
+  border-radius:9px;
+  background:rgba(255,255,255,.06);
+  color:#fff;
+  padding:10px 13px;
+  font-weight:900;
+  font-size:.76rem;
+  letter-spacing:.055em;
+  cursor:pointer;
+}
+
+.a8-density-launch:hover,
+.a8-density-launch:focus{
+  background:rgba(255,255,255,.11);
+  border-color:rgba(255,255,255,.42);
+}
+
+#a8-density-lab-dialog{
+  width:min(920px,calc(100vw - 28px));
+}
+
+#a8-density-lab-dialog .a8-dialog-inner{
+  max-height:86vh;
+  overflow:auto;
+}
+
+.a8-density-equation{
+  margin:16px 0;
+  padding:14px 16px;
+  border-left:4px solid var(--gold);
+  border-radius:8px;
+  background:rgba(255,255,255,.055);
+  font-weight:900;
+  letter-spacing:.025em;
+}
+
+.a8-density-chain{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:7px;
+  margin:16px 0 20px;
+}
+
+.a8-density-chain span{
+  padding:7px 9px;
+  border:1px solid rgba(255,255,255,.15);
+  border-radius:8px;
+  background:rgba(7,11,16,.22);
+  font-size:.72rem;
+  font-weight:850;
+}
+
+.a8-density-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin:18px 0;
+}
+
+.a8-density-card{
+  border:1px solid rgba(255,255,255,.17);
+  border-radius:13px;
+  padding:16px;
+  background:rgba(7,11,16,.25);
+}
+
+.a8-density-card h3{
+  margin:.1rem 0 1rem;
+  color:var(--gold);
+}
+
+.a8-density-readout{
+  display:grid;
+  gap:9px;
+}
+
+.a8-density-readout div{
+  display:flex;
+  justify-content:space-between;
+  gap:14px;
+  align-items:baseline;
+  border-top:1px solid rgba(255,255,255,.10);
+  padding-top:8px;
+}
+
+.a8-density-readout small{
+  opacity:.66;
+}
+
+.a8-density-readout strong{
+  text-align:right;
+}
+
+.a8-density-primary{
+  color:var(--gold);
+  font-size:1.18rem;
+}
+
+.a8-density-crosscheck{
+  margin-top:13px;
+  opacity:.68;
+  font-size:.76rem;
+  line-height:1.45;
+}
+
+.a8-density-reference{
+  margin:18px 0;
+  padding:13px 15px;
+  border:1px solid rgba(255,255,255,.15);
+  border-radius:10px;
+  background:rgba(255,255,255,.035);
+  line-height:1.55;
+}
+
+@media(max-width:720px){
+
+  .a8-density-grid{
+    grid-template-columns:1fr;
+  }
+
+  .a8-density-readout div{
+    display:block;
+  }
+
+  .a8-density-readout strong{
+    display:block;
+    margin-top:4px;
+    text-align:left;
+  }
+}
+
+</style>
+
 </head>
 <body>
 <div class="shell">
@@ -2796,6 +3105,7 @@
             <option value="length">LENGTH / DISTANCE</option>
             <option value="temperature">TEMPERATURE</option>
             <option value="pressure">PRESSURE</option>
+            <option value="mass">MASS</option>
             <option value="nav">A8 NAV · DISTANCE + SPEED</option>
             <option value="pitch">PITCH / FREQUENCY</option>
             <option value="rhythm">RHYTHM / TIMING</option>
@@ -2844,8 +3154,8 @@
             </div>
 
             <div>
-              <small>WRAPPED PHASE</small>
-              <strong id="a8-angle-out-phase">128 · 200₈</strong>
+              <small>ANGULAR POSITION · A8∠</small>
+              <strong id="a8-angle-out-phase">A8∠ 128 · 200₈</strong>
             </div>
 
             <div>
@@ -2956,7 +3266,7 @@
 
       <div class="a8-earth-result">
         <span>MEAN ORBIT SPEED</span>
-        <b>≈ A8/57.0059 per A8 HOUR</b>
+        <b>≈ A8S 57.0059</b>
       </div>
 
       <div class="a8-earth-result">
@@ -3121,7 +3431,7 @@
 
             <div class="a8-angle-inputs">
               <label>
-                <span>NATIVE CYCLES / A8 SECOND</span>
+                <span>NATIVE FREQUENCY · A8~ · CYCLES / A8 SECOND</span>
                 <input id="a8-music-a8freq"
                        type="number"
                        step="any"
@@ -3143,12 +3453,12 @@
 
               <div>
                 <small>NATIVE FREQUENCY</small>
-                <strong id="a8-music-out-a8freq">512 cyc/A8s</strong>
+                <strong id="a8-music-out-a8freq">A8~ 512</strong>
               </div>
 
               <div class="a8-legacy-side">
                 <small>LEGACY FREQUENCY · COMPARISON</small>
-                <strong id="a8-music-out-hz">776.722963 Hz</strong>
+                <strong id="a8-music-out-hz">776.723 Hz</strong>
               </div>
 
               <div>
@@ -3258,29 +3568,29 @@
 
         <div class="a8-scalar-check" id="a8-length-check" hidden>
           <div class="a8-angle-benchmarks">
-            <button type="button" data-a8-rung="0">A8/0</button>
-            <button type="button" data-a8-rung="10">A8/10</button>
-            <button type="button" data-a8-rung="20">A8/20</button>
-            <button type="button" data-a8-rung="31">A8/31 = 1</button>
-            <button type="button" data-a8-rung="41">A8/41</button>
-            <button type="button" data-a8-rung="45">A8/45</button>
-            <button type="button" data-a8-rung="48">A8/48</button>
+            <button type="button" data-a8-rung="0">A8L 0</button>
+            <button type="button" data-a8-rung="10">A8L 10</button>
+            <button type="button" data-a8-rung="20">A8L 20</button>
+            <button type="button" data-a8-rung="31">A8L 31 = 1</button>
+            <button type="button" data-a8-rung="41">A8L 41</button>
+            <button type="button" data-a8-rung="45">A8L 45</button>
+            <button type="button" data-a8-rung="48">A8L 48</button>
           </div>
 
           <div class="a8-scalar-rung-row" hidden aria-hidden="true">
             <label>
               <span>INTEGER LANDMARK</span>
               <select id="a8-length-rung">
-                <option value="0">A8/0</option>
-                <option value="10">A8/10</option>
-                <option value="20">A8/20</option>
-                <option value="31" selected>A8/31</option>
-                <option value="32">A8/32</option>
-                <option value="33">A8/33</option>
-                <option value="34">A8/34</option>
-                <option value="41">A8/41</option>
-                <option value="45">A8/45</option>
-                <option value="48">A8/48</option>
+                <option value="0">A8L 0</option>
+                <option value="10">A8L 10</option>
+                <option value="20">A8L 20</option>
+                <option value="31" selected>A8L 31</option>
+                <option value="32">A8L 32</option>
+                <option value="33">A8L 33</option>
+                <option value="34">A8L 34</option>
+                <option value="41">A8L 41</option>
+                <option value="45">A8L 45</option>
+                <option value="48">A8L 48</option>
               </select>
             </label>
           </div>
@@ -3302,13 +3612,13 @@
           </div>
 
           <div class="a8-angle-results">
-            <div><small>CONTINUOUS A8 RUNG</small><strong id="a8-length-out-rung">A8/31</strong></div>
-            <div><small>A8/31 FACTOR</small><strong id="a8-length-out-factor">2⁰ = 1</strong></div>
-            <div><small>NATIVE RELATIONSHIP</small><strong id="a8-length-out-native">A8/31 = 1 A8/31</strong></div>
-            <div class="a8-legacy-side"><small>LEGACY COMPARISON</small><strong id="a8-length-out-legacy">1.193327897829 m</strong></div>
+            <div><small>CONTINUOUS A8 RUNG</small><strong id="a8-length-out-rung">A8L 31</strong></div>
+            <div><small>A8L 31 FACTOR</small><strong id="a8-length-out-factor">2⁰ = 1</strong></div>
+            <div><small>NATIVE RELATIONSHIP</small><strong id="a8-length-out-native">A8L 31 = 1 A8L 31</strong></div>
+            <div class="a8-legacy-side"><small>LEGACY COMPARISON</small><strong id="a8-length-out-legacy">1.1933 m</strong></div>
             <div>
               <small>REAL-WORLD SCALE · RECOGNITION ONLY</small>
-              <strong id="a8-length-scale-example">HUMAN SCALE · ≈ 1.1933 m · A8/31 ruler · everyday human reach</strong>
+              <strong id="a8-length-scale-example">HUMAN SCALE · ≈ 1.1933 m · A8L 31 ruler · everyday human reach</strong>
             </div>
 
             <div id="a8-length-application" hidden>
@@ -3327,10 +3637,10 @@
           </div>
 
           <div class="a8-angle-note">
-            A8/31 is the human-scale reference point, not the origin of the ruler.
+            A8L 31 is the human-scale reference point, not the origin of the ruler.
             The length ladder is Nature-derived through
-            <strong>1 A8 NAV = A8/41 = C(E,mean) / 32,768</strong>,
-            and <strong>A8/31 = A8/41 ÷ 1024</strong>.
+            <strong>1 A8 NAV = A8L 41 = C(E,mean) / 32,768</strong>,
+            and <strong>A8L 31 = A8L 41 ÷ 1024</strong>.
             Decimal rungs are continuous positions on that same binary ladder:
             c A8/n → A8/(n + log₂ c). The metre value is comparison only.
           </div>
@@ -3395,7 +3705,7 @@
 
             <div>
               <small>A8 TEMP</small>
-              <strong id="a8-temp-out-rung">A8 TEMP /31</strong>
+              <strong id="a8-temp-out-rung">A8T 31</strong>
             </div>
 
             <div>
@@ -3425,7 +3735,7 @@
           </div>
 
           <div class="a8-angle-note">
-            A8 TEMP /26 is the freeze pivot. Moving away from freeze,
+            A8T 26 is the freeze pivot. Moving away from freeze,
             each successive interval doubles. The same binary construction
             runs colder below /26 and hotter above /26.
           </div>
@@ -3457,7 +3767,7 @@
             <p>
               On this practical freeze-pivot ruler, absolute zero
               (−273.15 °C · 0 K) falls at approximately
-              <strong>A8 TEMP /17.5575</strong>.
+              <strong>A8T 17.5575</strong>.
               Temperatures below that boundary are physically invalid.
             </p>
           </details>
@@ -3471,11 +3781,11 @@
 
           <div class="a8-angle-benchmarks">
             <button type="button" data-a8-pressure-vacuum="1">0 A8 PRESS · PERFECT VACUUM</button>
-            <button type="button" data-a8-pressure-rung="0">1 A8 PRESS /0 · TINY PRESSURE</button>
-            <button type="button" data-a8-pressure-rung="30">A8 PRESS /30</button>
-            <button type="button" data-a8-pressure-rung="31">A8 PRESS /31 = 1</button>
-            <button type="button" data-a8-pressure-rung="32">A8 PRESS /32</button>
-            <button type="button" data-a8-pressure-rung="33">A8 PRESS /33</button>
+            <button type="button" data-a8-pressure-rung="0">1 A8P 0 · TINY PRESSURE</button>
+            <button type="button" data-a8-pressure-rung="30">A8P 30</button>
+            <button type="button" data-a8-pressure-rung="31">A8P 31 = 1</button>
+            <button type="button" data-a8-pressure-rung="32">A8P 32</button>
+            <button type="button" data-a8-pressure-rung="33">A8P 33</button>
           </div>
 
           <div class="a8-pressure-rung-row">
@@ -3525,7 +3835,7 @@
           <div class="a8-angle-results">
             <div>
               <small>NATIVE PRESSURE</small>
-              <strong id="a8-pressure-out-native">1 A8 PRESS /31</strong>
+              <strong id="a8-pressure-out-native">1 A8P 31</strong>
             </div>
 
             <div>
@@ -3535,7 +3845,7 @@
 
             <div>
               <small>NEAREST-ONE VIEW</small>
-              <strong id="a8-pressure-out-nearest">1 A8 PRESS /31</strong>
+              <strong id="a8-pressure-out-nearest">1 A8P 31</strong>
             </div>
 
             <div class="a8-legacy-side">
@@ -3554,10 +3864,164 @@
           </div>
 
           <div class="a8-angle-note">
-            A8 PRESS /31 = 1 is the human atmospheric reference.
+            A8P 31 = 1 is the human atmospheric reference.
             0 A8 PRESS is perfect vacuum and has no binary rung.
-            1 A8 PRESS /0 is a tiny but positive pressure — it is NOT vacuum.
+            1 A8P 0 is a tiny but positive pressure — it is NOT vacuum.
             Signed rungs below /0 continue the same positive binary ladder.
+          </div>
+
+        </div>
+
+
+        <!-- A8 ABOUT MASS CHECK v1 -->
+        <div class="a8-scalar-check" id="a8-mass-check" hidden>
+
+          <div class="eyebrow">
+            A8 MASS · CONTINUOUS BINARY MASS RULER
+          </div>
+
+          <div class="a8-angle-benchmarks">
+            <button type="button" data-a8-mass-rung="-80">/−80</button>
+            <button type="button" data-a8-mass-rung="-70">/−70</button>
+            <button type="button" data-a8-mass-rung="-60">/−60</button>
+            <button type="button" data-a8-mass-rung="0">/0</button>
+            <button type="button"
+                    data-a8-mass-reference="troy-ounce">
+              1 TROY OZ
+            </button>
+            <button type="button" data-a8-mass-rung="18">/18 · CUP</button>
+            <button type="button" data-a8-mass-rung="31">/31 · WATER CUBE</button>
+            <button type="button" data-a8-mass-rung="100">/100</button>
+            <button type="button" data-a8-mass-rung="110">/110</button>
+            <button type="button" data-a8-mass-rung="121">/121</button>
+          </div>
+
+          <div class="a8-angle-inputs">
+
+            <label>
+              <span>NATIVE A8 MASS RUNG</span>
+              <input id="a8-mass-rung"
+                     type="number"
+                     step="0.0001"
+                     value="18">
+            </label>
+
+            <div class="a8-angle-swap">⇄</div>
+
+            <label class="a8-legacy-side">
+              <span>LEGACY MASS · COMPARISON</span>
+
+              <div class="a8-pressure-legacy-grid">
+                <input id="a8-mass-legacy"
+                       type="number"
+                       min="0"
+                       step="any"
+                       value="207.438535474881">
+
+                <select id="a8-mass-unit"
+                        aria-label="Legacy mass comparison unit">
+                  <option value="kg">kg</option>
+                  <option value="g" selected>g</option>
+                  <option value="mg">mg</option>
+                  <option value="ug">µg</option>
+                  <option value="ng">ng</option>
+                  <option value="pg">pg</option>
+                  <option value="fg">fg</option>
+                  <option value="t">tonne</option>
+                  <option value="ozt">troy ounce</option>
+                  <option value="Da">Da · atomic mass unit</option>
+                  <option value="Earth">Earth mass</option>
+                  <option value="Jupiter">Jupiter mass</option>
+                  <option value="Sol">Sol mass</option>
+                </select>
+              </div>
+            </label>
+
+          </div>
+
+          <div class="a8-angle-results">
+
+            <div>
+              <small>CONTINUOUS A8 MASS RUNG</small>
+              <strong id="a8-mass-out-rung">
+                A8M 18
+              </strong>
+            </div>
+
+            <div>
+              <small>REFERENCE /31 CUBE</small>
+              <strong id="a8-mass-out-reference">
+                A8L 31 CUBE · REFERENCE WATER
+              </strong>
+            </div>
+
+            <div class="a8-legacy-side">
+              <small>LEGACY COMPARISON</small>
+              <strong id="a8-mass-out-legacy">
+                ≈ 207.4385 g
+              </strong>
+            </div>
+
+            <div>
+              <small>BINARY RELATION TO A8M 31</small>
+              <strong id="a8-mass-out-factor">
+                /31 ÷ 8192 · EXACT
+              </strong>
+            </div>
+
+            <div>
+              <small>SCALE LANDMARK / REALM</small>
+              <strong id="a8-mass-out-landmark">
+                REFERENCE A8 CUP · A8M 18 EXACT
+              </strong>
+            </div>
+
+            <div>
+              <small>PLANET / STELLAR A8 COORDINATES</small>
+              <strong id="a8-mass-out-celestial">
+                EARTH · A8M 102.5738 ·
+                JUPITER · A8M 110.8859 ·
+                SOL · A8M 120.9187
+              </strong>
+            </div>
+
+          </div>
+
+          <div class="a8-angle-verdict" id="a8-mass-verdict">
+            ✓ A8M 31 GEOMETRIC WATER-CUBE ANCHOR · EACH MASS RUNG ×2
+          </div>
+
+          <div class="a8-angle-note">
+            A8 MASS has its own binary rung scale.
+            A physical mass is written as one continuous A8 rung
+            coordinate; there is no separate native amount or
+            coefficient. The rung itself carries the magnitude.
+            A8M 31 is the mass of reference water filling
+            the cube formed by A8L 31 at A8T 31
+            and A8P 31.
+            Therefore A8M 18 = A8M 31 ÷ 8192 exactly.
+            The familiar A8 cup lands at A8M 18 exactly.
+            Decimal rungs are valid for measured masses and
+            materials between exact binary rungs.
+            The current reference-water comparison uses density
+            factor 1; material density refinements remain a
+            separate comparison layer.
+          </div>
+
+          <div class="a8-mass-scale-open-row">
+            <button
+              type="button"
+              id="a8-mass-scale-launch"
+              class="a8-mass-scale-launch">
+              OPEN MASS SCALE · ELECTRON → SOL
+            </button>
+
+            <button
+              type="button"
+              id="a8-density-lab-launch"
+              class="a8-density-launch">
+              OPEN DENSITY LAB · GOLD ↔ SILVER
+            </button>
           </div>
 
         </div>
@@ -3601,12 +4065,12 @@
 
             <div>
               <small>CONTINUOUS A8 RUNG</small>
-              <strong id="a8-nav-out-41">A8/41</strong>
+              <strong id="a8-nav-out-41">A8L 41</strong>
             </div>
 
             <div class="a8-legacy-side">
               <small>LEGACY DISTANCE · COMPARISON</small>
-              <strong id="a8-nav-out-distance-legacy">1.221967767 km</strong>
+              <strong id="a8-nav-out-distance-legacy">1.222 km</strong>
             </div>
           </div>
 
@@ -3689,7 +4153,7 @@
                 = 0.879746413 kn
               </strong>
               <span>
-                1 A8 NAV ≈ 1.221967767 legacy km ·
+                1 A8 NAV ≈ 1.222 legacy km ·
                 1 A8 HOUR = 0.75 legacy hour.
                 Every other card is the same NAV ruler scaled by a binary factor.
               </span>
@@ -3785,14 +4249,14 @@
                   </p>
 
                   <div class="a8-ruler-rule">
-                    <strong>A8/31 · HUMAN REFERENCE POINT</strong>
+                    <strong>A8L 31 · HUMAN REFERENCE POINT</strong>
                     <span>
-                      A8/31 = A8/41 ÷ 1024 ·
-                      current comparison ≈ 1.193327897829 m
+                      A8L 31 = A8L 41 ÷ 1024 ·
+                      current comparison ≈ 1.1933 m
                     </span>
                   </div>
 
-                  <p class="a8-ruler-status">Earth defines the sealed binary length ladder through <strong>1 A8 NAV = A8/41 = C(E,mean) / 32,768</strong>. The human reference follows exactly: <strong>A8/31 = A8/41 ÷ 1024</strong>. Quartz remains an independent natural witness and does not resize the ruler.</p>
+                  <p class="a8-ruler-status">Earth defines the sealed binary length ladder through <strong>1 A8 NAV = A8L 41 = C(E,mean) / 32,768</strong>. The human reference follows exactly: <strong>A8L 31 = A8L 41 ÷ 1024</strong>. Quartz remains an independent natural witness and does not resize the ruler.</p>
 
                 </div>
 
@@ -3849,12 +4313,12 @@
                           stroke-linecap="round"/>
 
 
-                    <!-- A8/48 -->
+                    <!-- A8L 48 -->
                     <g transform="translate(0 120)">
                       <circle cx="455" cy="0" r="11"/>
                       <line x1="455" y1="0" x2="500" y2="0"/>
                       <text x="520" y="-8" class="a8-svg-rung">
-                        A8/48
+                        A8L 48
                       </text>
                       <text x="520" y="18" class="a8-svg-native">
                         131,072 native A8 lengths
@@ -3865,14 +4329,14 @@
                     </g>
 
 
-                    <!-- A8/45 -->
+                    <!-- A8L 45 -->
                     <g transform="translate(0 190)">
                       <circle cx="455" cy="0" r="10"/>
                       <line x1="410" y1="0" x2="455" y2="0"/>
                       <text x="390" y="-8"
                             text-anchor="end"
                             class="a8-svg-rung">
-                        A8/45
+                        A8L 45
                       </text>
                       <text x="390" y="18"
                             text-anchor="end"
@@ -3887,12 +4351,12 @@
                     </g>
 
 
-                    <!-- A8/41 -->
+                    <!-- A8L 41 -->
                     <g transform="translate(0 260)">
                       <circle cx="455" cy="0" r="10"/>
                       <line x1="455" y1="0" x2="500" y2="0"/>
                       <text x="520" y="-8" class="a8-svg-rung">
-                        A8/41
+                        A8L 41
                       </text>
                       <text x="520" y="18" class="a8-svg-native">
                         1,024 native A8 lengths
@@ -3903,7 +4367,7 @@
                     </g>
 
 
-                    <!-- A8/31 -->
+                    <!-- A8L 31 -->
                     <g transform="translate(0 350)">
                       <circle cx="455" cy="0" r="16"
                               class="a8-human-node"/>
@@ -3911,7 +4375,7 @@
                       <text x="370" y="-12"
                             text-anchor="end"
                             class="a8-svg-rung a8-svg-human">
-                        A8/31
+                        A8L 31
                       </text>
                       <text x="370" y="16"
                             text-anchor="end"
@@ -3926,12 +4390,12 @@
                     </g>
 
 
-                    <!-- A8/20 -->
+                    <!-- A8L 20 -->
                     <g transform="translate(0 435)">
                       <circle cx="455" cy="0" r="9"/>
                       <line x1="455" y1="0" x2="500" y2="0"/>
                       <text x="520" y="-8" class="a8-svg-rung">
-                        A8/20
+                        A8L 20
                       </text>
                       <text x="520" y="18" class="a8-svg-native">
                         1 / 2,048 native A8 length
@@ -3942,14 +4406,14 @@
                     </g>
 
 
-                    <!-- A8/10 -->
+                    <!-- A8L 10 -->
                     <g transform="translate(0 505)">
                       <circle cx="455" cy="0" r="9"/>
                       <line x1="410" y1="0" x2="455" y2="0"/>
                       <text x="390" y="-8"
                             text-anchor="end"
                             class="a8-svg-rung">
-                        A8/10
+                        A8L 10
                       </text>
                       <text x="390" y="18"
                             text-anchor="end"
@@ -3964,12 +4428,12 @@
                     </g>
 
 
-                    <!-- A8/0 -->
+                    <!-- A8L 0 -->
                     <g transform="translate(0 575)">
                       <circle cx="455" cy="0" r="9"/>
                       <line x1="455" y1="0" x2="500" y2="0"/>
                       <text x="520" y="-8" class="a8-svg-rung">
-                        A8/0
+                        A8L 0
                       </text>
                       <text x="520" y="18" class="a8-svg-native">
                         1 / 2,147,483,648 native A8 length
@@ -3984,15 +4448,15 @@
                   <figcaption>
                     Native value first. Legacy comparison second.
                     Every displayed rung follows from the same realized
-                    A8/31 length by exact powers of two.
+                    A8L 31 length by exact powers of two.
                     <br><br>
-                    <strong>A8/41 = A8 NAV.</strong>
+                    <strong>A8L 41 = A8 NAV.</strong>
                     This is one physical length ladder.
                     SIZE states the object's position on the continuous ruler.
                     SPEED states the continuous rung of the distance traveled in
                     one A8 HOUR.
                     NAV counts that same traveled distance on the common
-                    A8/41 Earth-navigation rung.
+                    A8L 41 Earth-navigation rung.
                   </figcaption>
                 </figure>
 
@@ -4003,7 +4467,7 @@
                   <div class="a8-macro-card">
                     <small>EARTH SURFACE</small>
                     <strong>A8 NAV</strong>
-                    <b>1 A8 NAV = 1 A8/41</b>
+                    <b>1 A8 NAV = 1 A8L 41</b>
 
                     <span>
                       <small>CONSTRUCTION</small><br>
@@ -4018,15 +4482,15 @@
 
                   <div class="a8-macro-arrow">
                     <small>EXACT BINARY LADDER</small>
-                    <span>A8/41 → A8/45</span>
+                    <span>A8L 41 → A8L 45</span>
                     <span>+4 rungs · ×16</span>
-                    <span>1 A8/45 = 16 A8 NAV</span>
+                    <span>1 A8L 45 = 16 A8 NAV</span>
                   </div>
 
                   <div class="a8-macro-card">
                     <small>EARTH ORBIT DISTANCE RUNG</small>
-                    <strong>A8/45</strong>
-                    <b>1 A8/45</b>
+                    <strong>A8L 45</strong>
+                    <b>1 A8L 45</b>
 
                     <span>
                       <small>LADDER VIEW</small><br>
@@ -4049,28 +4513,28 @@
                   <div>
                     <small>DISTANCE RUNG</small>
                     <strong>
-                      1 A8/45 = 16 A8 NAV
+                      1 A8L 45 = 16 A8 NAV
                     </strong>
                   </div>
 
                   <div>
                     <small>EARTH · PER A8 SECOND</small>
                     <strong>
-                      ≈ A8/45.0059 per A8 SECOND
+                      ≈ A8L 45.0059 per A8 SECOND
                     </strong>
                   </div>
 
                   <div>
                     <small>HOUR-SCALE RUNG</small>
                     <strong>
-                      1 A8/57 = 65,536 A8 NAV
+                      1 A8L 57 = 65,536 A8 NAV
                     </strong>
                   </div>
 
                   <div class="a8-closure-highlight">
                     <small>EARTH · PER A8 HOUR</small>
                     <strong>
-                      ≈ A8/57.0059 per A8 HOUR
+                      ≈ A8S 57.0059
                     </strong>
                     <span>
                       same mean orbital motion · different binary rung
@@ -4092,8 +4556,8 @@
                   <div class="a8-ruler-principle">
                     <strong>NATURE-DERIVED EARTH RULER</strong>
                     <span>
-                      1 A8 NAV = A8/41 = C(E,mean) / 32,768.
-                      A8/31 = A8/41 ÷ 1024 is the human reference point.
+                      1 A8 NAV = A8L 41 = C(E,mean) / 32,768.
+                      A8L 31 = A8L 41 ÷ 1024 is the human reference point.
                     </span>
                   </div>
 
@@ -4109,7 +4573,7 @@
                     <strong>ORBIT</strong>
                     <span>
                       Spaceship Earth's mean orbital motion uses the same
-                      binary length ladder: ≈ A8/45.0059 per A8 SECOND.
+                      binary length ladder: ≈ A8L 45.0059 per A8 SECOND.
                     </span>
                   </div>
 
@@ -4120,12 +4584,12 @@
                 <div class="a8-earth-orbit-teaser">
                   <small>HOW FAST</small>
                   <strong>
-                    Spaceship Earth mean orbital speed =
-                    ≈ A8/45.0059 per A8 SECOND
+                    Spaceship Earth mean distance traveled per A8 SECOND =
+                    ≈ A8L 45.0059 per A8 SECOND
                   </strong>
                   <span>
                     Same motion on the hour-scale rung:
-                    ≈ A8/57.0059 per A8 HOUR.
+                    ≈ A8S 57.0059.
                   </span>
                 </div>
 
@@ -4320,7 +4784,7 @@
 
       <article class="a8-future-card">
         <small>LENGTH</small>
-        <strong>A8/31 = 1</strong>
+        <strong>A8L 31 = 1</strong>
         <span>A spatial ladder whose neighboring rungs differ by exactly ×2.</span>
       </article>
 
@@ -4332,7 +4796,7 @@
 
       <article class="a8-future-card">
         <small>ORBIT</small>
-        <strong>A8/45 · A8/57</strong>
+        <strong>A8L 45 · A8S 57</strong>
         <span>Earth mean orbital speed expressed on the same binary length ladder.</span>
       </article>
 
@@ -4395,43 +4859,46 @@
       <article class="a8-future-card a8-future-open">
         <small>SET · TEMPERATURE</small>
         <strong>A8 TEMP</strong>
-        <span>A8 TEMP /26 = FREEZE · /31 = HUMAN REALM · /33 = BOIL · /34 = OVEN. /26 is the practical freeze pivot; binary intervals mirror colder and hotter and double with each rung away from freeze. Legacy comparison only: /25 ≈ −0.7874 °C · /31 ≈ 24.4094 °C · /33 = 100.0000 °C · /34 ≈ 200.7874 °C.</span>
+        <span>A8T 26 = FREEZE · /31 = HUMAN REALM · /33 = BOIL · /34 = OVEN. /26 is the practical freeze pivot; binary intervals mirror colder and hotter and double with each rung away from freeze. Legacy comparison only: /25 ≈ −0.7874 °C · /31 ≈ 24.4094 °C · /33 = 100.0000 °C · /34 ≈ 200.7874 °C.</span>
       </article>
 
       <article class="a8-future-card a8-future-open">
         <small>SET · PRESSURE</small>
         <strong>A8 PRESS</strong>
-        <span>A8 PRESS /31 = 1 human atmosphere · absolute pressure. 0 A8 PRESS = PERFECT VACUUM · NOT A8 PRESS /0. Zero has no rung. Every higher rung doubles pressure and every lower rung halves it. Signed scientific rungs continue below /0 for extremely low nonzero pressure. At A8 PRESS /31 = 1, pure water boils at A8 TEMP /33. Legacy comparison only: 101.3250 kPa · 1.0133 bar · 14.6959 psi.</span>
+        <span>A8P 31 = 1 human atmosphere · absolute pressure. 0 A8 PRESS = PERFECT VACUUM · NOT A8P 0. Zero has no rung. Every higher rung doubles pressure and every lower rung halves it. Signed scientific rungs continue below /0 for extremely low nonzero pressure. At A8P 31 = 1, pure water boils at A8T 33. Legacy comparison only: 101.3250 kPa · 1.0133 bar · 14.6959 psi.</span>
       </article>
 
       <article class="a8-future-card a8-future-open">
         <small>SET · MASS</small>
         <strong>A8 MASS</strong>
-        <span>A8/31 = 1 · mass of one A8 cup of pure water at A8 TEMP /31 and A8 PRESS /31. One A8 cup = A8 VOLUME /31 ÷ 8192. Legacy comparison only: ≈207.4385 mL water · ≈206.8572 g.</span>
+        <span>A8M 31 = mass of reference water filling the cube formed by A8L 31 at A8T 31 and A8P 31. Every mass rung doubles upward and halves downward. A8M 18 = A8M 31 ÷ 8192 exactly, so the familiar A8 cup of reference water lands at /18. With the current reference-water density factor 1, legacy comparison only: A8M 31 ≈1699.336482610228 kg · A8M 18 ≈207.438535474881 g. Mass has its own rung scale; rung numbers are not required to match the everyday scale of length, temperature, pressure or volume.</span>
       </article>
 
       <article class="a8-future-card a8-future-open">
         <small>SET · VOLUME</small>
         <strong>A8 VOLUME</strong>
-        <span>A8/31 = 1³ native volume. Build the cube directly from the A8/31 length ruler. One length rung up or down changes cubic volume by exactly ×8 or ÷8. No separate volume ruler is required.</span>
+        <span>A8L 31 = 1³ native volume. Build the cube directly from the A8L 31 length ruler. One length rung up or down changes cubic volume by exactly ×8 or ÷8. No separate volume ruler is required.</span>
       </article>
 
       <article class="a8-future-card a8-future-open">
         <small>OPEN · ENERGY</small>
         <strong>A8 ENERGY</strong>
-        <span>Downstream of the native physical rulers that feed it. No placeholder number.</span>
+        <span>Physical energy relationships are addressed in the A8 Whitepaper. Native A8 energy calculator coming soon, including joule and BTU comparisons.</span>
+        <a href="https://whitepaper.cosigo.io/" style="display:inline-block;margin-top:10px;font-weight:700;text-decoration:underline;text-underline-offset:3px">OPEN WHITEPAPER ↗</a>
       </article>
 
       <article class="a8-future-card a8-future-open">
         <small>OPEN · ELECTRICITY</small>
         <strong>A8 ELECTRIC</strong>
-        <span>Physical relationships first; native representation second; legacy comparison last.</span>
+        <span>Electrical relationships are addressed in the A8 Whitepaper. Native A8 electrical calculators coming soon.</span>
+        <a href="https://whitepaper.cosigo.io/" style="display:inline-block;margin-top:10px;font-weight:700;text-decoration:underline;text-underline-offset:3px">OPEN WHITEPAPER ↗</a>
       </article>
 
       <article class="a8-future-card a8-future-open">
         <small>OPEN · MAGNETISM</small>
         <strong>A8 MAGNETIC</strong>
-        <span>Field, polarity, reversal and null-state relationships remain future experimental territory.</span>
+        <span>Magnetic-field relationships are addressed in the A8 Whitepaper. Native A8 magnetic calculators coming soon.</span>
+        <a href="https://whitepaper.cosigo.io/" style="display:inline-block;margin-top:10px;font-weight:700;text-decoration:underline;text-underline-offset:3px">OPEN WHITEPAPER ↗</a>
       </article>
     </div>
 
@@ -4639,7 +5106,7 @@ distance + temperature   ✗ DOMAIN MISMATCH</div>
       <section class="a8-whatif-panel">
         <small>A8 POSSIBILITY</small>
 
-        <div class="a8-whatif-code">cup water      → /31 M
+        <div class="a8-whatif-code">cup water      → /18 M
 child ruler    → /30 L
 adult ruler    → /31 L
 airplane       → /50 S</div>
@@ -4673,6 +5140,306 @@ airplane       → /50 S</div>
 
 </div>
 
+
+
+<!-- A8 ABOUT MASS SCALE REALIZATION v1 -->
+<dialog id="a8-mass-scale-dialog" class="a8-question-dialog">
+  <div class="a8-dialog-inner">
+
+    <button
+      id="a8-mass-scale-close"
+      class="a8-mass-scale-close"
+      type="button"
+      aria-label="Close">
+      ×
+    </button>
+
+    <div class="eyebrow">
+      A8 MASS · REALIZATION
+    </div>
+
+    <h2>
+      One binary ladder. Electron to Sol.
+    </h2>
+
+    <p>
+      Exact A8 landmarks remain exact.
+      Familiar physical objects are rough recognition anchors:
+      their estimated mass is converted directly onto the same
+      continuous A8 MASS ladder and shown as one A8 rung coordinate,
+      to no more than four decimal places.
+    </p>
+
+    <div class="a8-mass-scale-rule">
+      <strong>
+        M(r) = M31 × 2^(r − 31)
+      </strong>
+      <br>
+      Click any landmark to load its continuous rung back into
+      the MASS calculator.
+    </div>
+
+    <div
+      class="a8-notation-legend"
+      aria-label="A8 notation legend">
+
+      <span><b>A8L</b> length</span>
+      <span><b>A8M</b> mass</span>
+      <span><b>A8V</b> volume</span>
+      <span><b>A8T</b> temperature</span>
+      <span><b>A8P</b> pressure</span>
+      <span><b>A8D</b> density</span>
+      <span><b>A8∠</b> angular position</span>
+      <span><b>A8Δ∠</b> angular change / separation</span>
+
+      <span><b>A8XY</b> 2D coordinate</span>
+      <span><b>A8Z</b> vertical coordinate</span>
+      <span><b>A8XYZ</b> 3D coordinate</span>
+
+      <span><b>A8:CH</b> position · HH MM SS</span>
+      <span><b>A8:CM</b> position · MM SS</span>
+      <span><b>A8:CS</b> position · SS</span>
+
+      <span><b>A8;CH</b> continuation · hours</span>
+      <span><b>A8;CM</b> continuation · minutes</span>
+      <span><b>A8;CS</b> continuation · seconds</span>
+
+      
+      <span><b>A8~</b> frequency · cycles / A8 second</span>
+      <span><b>.a8m</b> music</span>
+
+      <span><b>:</b> clock position</span>
+      <span><b>;</b> clock continuation / duration</span>
+      <span><b>C</b> clock namespace</span>
+      <span><b>H · M · S</b> scope / continuation unit</span>
+
+      <span><b>RECOMMENDED</b> compact notation</span>
+      <span><b>FULL NAMES</b> remain valid</span>
+
+    </div>
+
+    <div
+      id="a8-mass-scale-grid"
+      class="a8-mass-scale-grid"
+      aria-label="A8 mass scale landmarks">
+    </div>
+
+    <div class="a8-mass-scale-foot">
+      Atomic comparison values use 2022 CODATA.
+      Large objects, structures, water bodies and atmosphere are
+      deliberately approximate recognition landmarks, not defining
+      A8 constants. Earth, Jupiter and Sol are comparison coordinates.
+    </div>
+
+  </div>
+</dialog>
+
+
+<dialog
+  id="a8-density-lab-dialog"
+  class="a8-question-dialog">
+
+  <div class="a8-dialog-inner">
+
+    <button
+      id="a8-density-lab-close"
+      class="a8-dialog-close"
+      type="button"
+      aria-label="Close">
+      ×
+    </button>
+
+    <div class="eyebrow">
+      A8 DENSITY · WATER DISPLACEMENT
+    </div>
+
+    <h2>
+      Same A8M. Different displaced water.
+    </h2>
+
+    <div
+      class="a8-notation-legend"
+      aria-label="A8 notation legend">
+
+      <span><b>A8L</b> length</span>
+      <span><b>A8M</b> mass</span>
+      <span><b>A8V</b> volume</span>
+      <span><b>A8T</b> temperature</span>
+      <span><b>A8P</b> pressure</span>
+      <span><b>A8D</b> density</span>
+      <span><b>A8∠</b> angular position</span>
+      <span><b>A8Δ∠</b> angular change / separation</span>
+
+      <span><b>A8XY</b> 2D coordinate</span>
+      <span><b>A8Z</b> vertical coordinate</span>
+      <span><b>A8XYZ</b> 3D coordinate</span>
+
+      <span><b>A8:CH</b> position · HH MM SS</span>
+      <span><b>A8:CM</b> position · MM SS</span>
+      <span><b>A8:CS</b> position · SS</span>
+
+      <span><b>A8;CH</b> continuation · hours</span>
+      <span><b>A8;CM</b> continuation · minutes</span>
+      <span><b>A8;CS</b> continuation · seconds</span>
+
+      
+      <span><b>A8~</b> frequency · cycles / A8 second</span>
+      <span><b>.a8m</b> music</span>
+
+      <span><b>:</b> clock position</span>
+      <span><b>;</b> clock continuation / duration</span>
+      <span><b>C</b> clock namespace</span>
+      <span><b>H · M · S</b> scope / continuation unit</span>
+
+      <span><b>RECOMMENDED</b> compact notation</span>
+      <span><b>FULL NAMES</b> remain valid</span>
+
+    </div>
+
+    <div class="a8-density-reference">
+
+      <strong>
+        REFERENCE WATER ·
+        A8T 31 ·
+        A8P 31 ·
+        A8D 0
+      </strong>
+
+      <br>
+
+      Measure the object mass.
+      Immerse it completely.
+      Collect only the displaced reference water.
+      Measure that water as A8M.
+
+    </div>
+
+    <div class="a8-density-equation">
+      A8D =
+      A8M(object)
+      −
+      A8M(displaced water)
+    </div>
+
+    <div class="a8-density-chain">
+      <span>A8M OBJECT</span>
+      <b>→</b>
+      <span>IMMERSE</span>
+      <b>→</b>
+      <span>COLLECT WATER</span>
+      <b>→</b>
+      <span>A8M WATER</span>
+      <b>→</b>
+      <span>SUBTRACT</span>
+      <b>→</b>
+      <span>A8D</span>
+    </div>
+
+    <div class="a8-density-grid">
+
+      <article class="a8-density-card">
+
+        <h3>
+          GOLD · 1 TROY OUNCE
+        </h3>
+
+        <div class="a8-density-readout">
+
+          <div>
+            <small>OBJECT</small>
+            <strong id="a8-density-gold-object">
+              A8M —
+            </strong>
+          </div>
+
+          <div>
+            <small>DISPLACED WATER</small>
+            <strong id="a8-density-gold-water">
+              A8M —
+            </strong>
+          </div>
+
+          <div>
+            <small>DENSITY</small>
+            <strong
+              id="a8-density-gold-density"
+              class="a8-density-primary">
+              A8D —
+            </strong>
+          </div>
+
+        </div>
+
+        <div
+          id="a8-density-gold-crosscheck"
+          class="a8-density-crosscheck">
+          —
+        </div>
+
+      </article>
+
+
+      <article class="a8-density-card">
+
+        <h3>
+          SILVER · 1 TROY OUNCE
+        </h3>
+
+        <div class="a8-density-readout">
+
+          <div>
+            <small>OBJECT</small>
+            <strong id="a8-density-silver-object">
+              A8M —
+            </strong>
+          </div>
+
+          <div>
+            <small>DISPLACED WATER</small>
+            <strong id="a8-density-silver-water">
+              A8M —
+            </strong>
+          </div>
+
+          <div>
+            <small>DENSITY</small>
+            <strong
+              id="a8-density-silver-density"
+              class="a8-density-primary">
+              A8D —
+            </strong>
+          </div>
+
+        </div>
+
+        <div
+          id="a8-density-silver-crosscheck"
+          class="a8-density-crosscheck">
+          —
+        </div>
+
+      </article>
+
+    </div>
+
+    <div class="a8-angle-note">
+
+      Both samples begin at the same mass coordinate:
+      <strong>A8M 15.2625</strong>.
+
+      Gold displaces less reference water than silver,
+      so its displaced-water A8M coordinate is lower
+      and its A8D coordinate is higher.
+
+      The comparison values shown here are planning
+      expectations only. A physical A8 measurement
+      obtains the displaced-water A8M directly.
+
+    </div>
+
+  </div>
+
+</dialog>
 
 <!-- a8-about-native-first-v3 -->
 <!-- A8 ABOUT AWESOME EXPLORE DIALOGS v3 · NATIVE FIRST -->
@@ -4767,7 +5534,7 @@ airplane       → /50 S</div>
           <article>
             <small>PER A8 SECOND</small>
             <strong>
-              ≈ A8/45.0059
+              ≈ A8L 45.0059
               <br>
               per A8 SECOND
             </strong>
@@ -4776,7 +5543,7 @@ airplane       → /50 S</div>
           <article>
             <small>RUNG IDENTITY</small>
             <strong>
-              1 A8/45
+              1 A8L 45
               <br>
               = 16 A8 NAV
             </strong>
@@ -4785,7 +5552,7 @@ airplane       → /50 S</div>
           <article>
             <small>PER A8 HOUR</small>
             <strong>
-              ≈ A8/57.0059
+              ≈ A8S 57.0059
               <br>
               per A8 HOUR
             </strong>
@@ -4807,14 +5574,14 @@ airplane       → /50 S</div>
       </article>
       <article class="a8-awesome-metric">
         <small>AIRCRAFT</small>
-        <strong>≈ A8/49.9888 per A8 HOUR</strong>
-        <span>Continuous measured speed · <b>A8/49.9888</b> · practical design rung <b>A8/50</b> · same motion ≈ <b>508.1009 A8 NAV per A8 HOUR</b>.</span>
+        <strong>≈ A8S 49.9888</strong>
+        <span>Continuous measured speed · <b>A8S 49.9888</b> · practical design rung <b>A8S 50</b> · same motion ≈ <b>508.1009 A8 NAV per A8 HOUR</b>.</span>
         <span class="a8-legacy-note">legacy comparison · 447 kn benchmark.</span>
       </article>
       <article class="a8-awesome-metric">
         <small>SPACESHIP EARTH</small>
-        <strong>≈ A8/57.0059 per A8 HOUR</strong>
-        <span>Same mean motion = ≈ A8/45.0059 per A8 SECOND.</span>
+        <strong>≈ A8S 57.0059</strong>
+        <span>Same mean motion = ≈ A8L 45.0059 per A8 SECOND.</span>
       </article>
     </div>
 
@@ -4844,17 +5611,17 @@ airplane       → /50 S</div>
     = nearest-one A8 length rung per A8 HOUR
 
     NAV VIEW
-    = the same motion counted in A8/41 NAV
+    = the same motion counted in A8 NAV per A8 HOUR
 
-    A8/n
-    = 2^(n−41) A8 NAV
+    A8S n
+    = 2^(n−41) A8 NAV / A8 HOUR
   </div>
 
   <p>
     Example:
-    <strong>A8/50 = 512 A8 NAV.</strong>
+    <strong>A8S 50 = 512 A8 NAV / A8 HOUR.</strong>
     So a plane moving at
-    <strong>A8/49.9888 per A8 HOUR</strong>
+    <strong>A8S 49.9888</strong>
     is covering
     <strong>508.1009 A8 NAV per A8 HOUR</strong>.
   </p>
@@ -4896,13 +5663,13 @@ airplane       → /50 S</div>
             fill="currentColor"
             font-size="23"
             font-weight="700">
-        A8/70 SPEED · LIGHT
+        A8S 70 SPEED · LIGHT
       </text>
 
       <text x="600" y="5"
             fill="currentColor"
             font-size="17">
-        ≈ A8/70.3031 per A8 HOUR
+        ≈ A8S 70.3031
       </text>
 
       <text x="600" y="32"
@@ -4915,7 +5682,7 @@ airplane       → /50 S</div>
             fill="currentColor"
             font-size="14"
             opacity=".72">
-        A8/70 = 536,870,912 A8 NAV
+        A8S 70 = 536,870,912 A8 NAV per A8 HOUR
       </text>
     </g>
 
@@ -4936,14 +5703,14 @@ airplane       → /50 S</div>
             fill="currentColor"
             font-size="23"
             font-weight="700">
-        SPACESHIP EARTH · A8/57 SPEED
+        SPACESHIP EARTH · A8S 57 SPEED
       </text>
 
       <text x="460" y="5"
             text-anchor="end"
             fill="currentColor"
             font-size="17">
-        ≈ A8/57.0059 per A8 HOUR
+        ≈ A8S 57.0059
       </text>
 
       <text x="460" y="32"
@@ -4958,7 +5725,7 @@ airplane       → /50 S</div>
             fill="currentColor"
             font-size="14"
             opacity=".72">
-        A8/57 = 65,536 A8 NAV · mean orbit around Sol
+        A8S 57 = 65,536 A8 NAV per A8 HOUR · mean orbit around Sol
       </text>
     </g>
 
@@ -4973,13 +5740,13 @@ airplane       → /50 S</div>
             fill="currentColor"
             font-size="23"
             font-weight="700">
-        A8/53 SPEED · APOLLO 17
+        A8S 53 SPEED · APOLLO 17
       </text>
 
       <text x="600" y="5"
             fill="currentColor"
             font-size="17">
-        A8/53.2463 per A8 HOUR
+        A8S 53.2463
       </text>
 
       <text x="600" y="32"
@@ -4992,7 +5759,7 @@ airplane       → /50 S</div>
             fill="currentColor"
             font-size="14"
             opacity=".72">
-        A8/53 = 4,096 A8 NAV
+        A8S 53 = 4,096 A8 NAV per A8 HOUR
       </text>
     </g>
 
@@ -5012,13 +5779,13 @@ airplane       → /50 S</div>
             fill="currentColor"
             font-size="23"
             font-weight="700">
-        A8/52 SPEED · MOON
+        A8S 52 SPEED · MOON
       </text>
 
       <text x="600" y="5"
             fill="currentColor"
             font-size="17">
-        ≈ A8/52.1414 per A8 HOUR
+        ≈ A8S 52.1414
       </text>
 
       <text x="600" y="32"
@@ -5031,7 +5798,7 @@ airplane       → /50 S</div>
             fill="currentColor"
             font-size="14"
             opacity=".72">
-        A8/52 = 2,048 A8 NAV · mean orbit around Earth
+        A8S 52 = 2,048 A8 NAV per A8 HOUR · mean orbit around Earth
       </text>
     </g>
 
@@ -5047,14 +5814,14 @@ airplane       → /50 S</div>
             fill="currentColor"
             font-size="23"
             font-weight="700">
-        AIRCRAFT · A8/50 SPEED
+        AIRCRAFT · A8S 50 SPEED
       </text>
 
       <text x="460" y="5"
             text-anchor="end"
             fill="currentColor"
             font-size="17">
-        A8/49.9888 per A8 HOUR
+        A8S 49.9888
       </text>
 
       <text x="460" y="32"
@@ -5069,7 +5836,7 @@ airplane       → /50 S</div>
             fill="currentColor"
             font-size="14"
             opacity=".72">
-        A8/50 = 512 A8 NAV
+        A8S 50 = 512 A8 NAV per A8 HOUR
       </text>
     </g>
 
@@ -5084,13 +5851,13 @@ airplane       → /50 S</div>
             fill="currentColor"
             font-size="23"
             font-weight="700">
-        A8/47 SPEED · ROAD EXAMPLE
+        A8S 47 SPEED · ROAD EXAMPLE
       </text>
 
       <text x="600" y="5"
             fill="currentColor"
             font-size="17">
-        A8/46.9396 per A8 HOUR
+        A8S 46.9396
       </text>
 
       <text x="600" y="32"
@@ -5103,7 +5870,7 @@ airplane       → /50 S</div>
             fill="currentColor"
             font-size="14"
             opacity=".72">
-        A8/47 = 64 A8 NAV
+        A8S 47 = 64 A8 NAV per A8 HOUR
       </text>
     </g>
 
@@ -5119,14 +5886,14 @@ airplane       → /50 S</div>
             fill="currentColor"
             font-size="23"
             font-weight="700">
-        20-KNOT SHIP · A8/46 SPEED
+        20-KNOT SHIP · A8S 46 SPEED
       </text>
 
       <text x="460" y="5"
             text-anchor="end"
             fill="currentColor"
             font-size="17">
-        A8/45.5067 per A8 HOUR
+        A8S 45.5067
       </text>
 
       <text x="460" y="32"
@@ -5141,7 +5908,7 @@ airplane       → /50 S</div>
             fill="currentColor"
             font-size="14"
             opacity=".72">
-        A8/46 = 32 A8 NAV
+        A8S 46 = 32 A8 NAV per A8 HOUR
       </text>
     </g>
 
@@ -5156,13 +5923,13 @@ airplane       → /50 S</div>
             fill="currentColor"
             font-size="23"
             font-weight="700">
-        A8/45 SPEED · BICYCLE EXAMPLE
+        A8S 45 SPEED · BICYCLE EXAMPLE
       </text>
 
       <text x="600" y="5"
             fill="currentColor"
             font-size="17">
-        A8/44.6177 per A8 HOUR
+        A8S 44.6177
       </text>
 
       <text x="600" y="32"
@@ -5175,7 +5942,7 @@ airplane       → /50 S</div>
             fill="currentColor"
             font-size="14"
             opacity=".72">
-        A8/45 = 16 A8 NAV
+        A8S 45 = 16 A8 NAV per A8 HOUR
       </text>
     </g>
 
@@ -5191,14 +5958,14 @@ airplane       → /50 S</div>
             fill="currentColor"
             font-size="23"
             font-weight="700">
-        WALKING · A8/43 SPEED
+        WALKING · A8S 43 SPEED
       </text>
 
       <text x="460" y="5"
             text-anchor="end"
             fill="currentColor"
             font-size="17">
-        A8/42.6177 per A8 HOUR
+        A8S 42.6177
       </text>
 
       <text x="460" y="32"
@@ -5213,7 +5980,7 @@ airplane       → /50 S</div>
             fill="currentColor"
             font-size="14"
             opacity=".72">
-        A8/43 = 4 A8 NAV
+        A8S 43 = 4 A8 NAV per A8 HOUR
       </text>
     </g>
 
@@ -5233,13 +6000,13 @@ airplane       → /50 S</div>
             fill="currentColor"
             font-size="23"
             font-weight="700">
-        A8/36 SPEED · SNAIL
+        A8S 36 SPEED · SNAIL
       </text>
 
       <text x="600" y="5"
             fill="currentColor"
             font-size="17">
-        ≈ A8/35.9233 per A8 HOUR
+        ≈ A8S 35.9233
       </text>
 
       <text x="600" y="32"
@@ -5252,7 +6019,7 @@ airplane       → /50 S</div>
             fill="currentColor"
             font-size="14"
             opacity=".72">
-        A8/36 = 1/32 A8 NAV · illustrative 0.03 legacy mph
+        A8S 36 = 1/32 A8 NAV · illustrative 0.03 legacy mph
       </text>
     </g>
 
@@ -5316,7 +6083,7 @@ airplane       → /50 S</div>
       <article class="a8-awesome-metric">
         <small>DISTANCE</small>
         <strong>1 A8 NAV = C<sub>E,mean</sub> / 2¹⁵</strong>
-        <span>Earth-derived surface ruler · 1 A8 NAV = 1 A8/41 · land or water.</span>
+        <span>Earth-derived surface ruler · 1 A8 NAV = 1 A8L 41 · land or water.</span>
       </article>
     </div>
     <div class="a8-dialog-links">
@@ -5750,8 +6517,8 @@ airplane       → /50 S</div>
         <span class="a8-status canonical">CANONICAL</span>
         <h3>Angular ruler</h3>
         <div class="a8-equation">1 turn = 2⁹ = 512</div>
-        <div class="a8-equation">quarter turn = 128</div>
-        <p>Native full-turn phase uses 512 states.</p>
+        <div class="a8-equation">quarter turn = A8∠ 128</div>
+        <p>Native full-turn phase uses 512 states. Angular position is A8∠ 0 through A8∠ 511; a full turn returns to A8∠ 0. A8Δ∠ describes angular change or separation.</p>
         <div class="a8-mini-links">
           <a href="https://angle.cosigo.io/">ANGLE</a>
           <a href="https://map.cosigo.io/">MAP</a>
@@ -5801,14 +6568,14 @@ airplane       → /50 S</div>
         <div class="a8-equation">L(n+1) = 2 L(n)</div>
         <div class="a8-equation">q = (a + c) / 2</div>
         <div class="a8-equation">Q↑ = 2³¹q</div>
-        <div class="a8-equation">1 A8/31 = C<sub>E,mean</sub> / 2²⁵</div>
-        <div class="a8-equation">1 A8 NAV = 1 A8/41</div>
-        <div class="a8-equation">1 A8/31 = A8 NAV / 2¹⁰</div>
+        <div class="a8-equation">1 A8L 31 = C<sub>E,mean</sub> / 2²⁵</div>
+        <div class="a8-equation">1 A8 NAV = 1 A8L 41</div>
+        <div class="a8-equation">1 A8L 31 = A8 NAV / 2¹⁰</div>
         <p>
           The binary ladder is exact. The mean-Earth navigation construction is the sealed realization. Quartz is an independent natural witness.
           Independent physical qualification and non-SI traceability remain open metrology work.
         </p>
-        <p class="a8-legacy-note">legacy comparison · current realization coordinate ≈ 1.193327897829 m.</p>
+        <p class="a8-legacy-note">legacy comparison · current realization coordinate ≈ 1.1933 m.</p>
         <div class="a8-mini-links">
           <a href="https://quartz.cosigo.io/">QUARTZ</a>
           <a href="https://data.cosigo.io/">DATA</a>
@@ -6056,7 +6823,7 @@ document.querySelectorAll('.a8-question-dialog').forEach(dialog => {
     outNative.textContent = clean(a8);
     outOctal.textContent = octalNumber(a8);
     outPhase.textContent =
-      `${clean(phase)} · ${octalNumber(phase)}`;
+      `A8∠ ${clean(phase)} · ${octalNumber(phase)}`;
     outFraction.textContent = fractionOfTurn(a8);
     outDegrees.textContent = `${clean(degrees)}°`;
 
@@ -6255,16 +7022,30 @@ document.querySelectorAll('.a8-question-dialog').forEach(dialog => {
     return Number(n.toFixed(9)).toString();
   }
 
+  // Display-only formatter. Exact numeric values remain unrounded.
+  function display4(value){
+    if (!Number.isFinite(value)) return '—';
+    if (value === 0) return '0';
+    const a = Math.abs(value);
+    if (a < 0.00005 || a >= 1e12)
+      return value.toExponential(4).replace('e+', 'e');
+    return Number(value.toFixed(4)).toString();
+  }
+
   function renderFrequency(nativeFreq){
-    if (!(nativeFreq > 0)) return;
+    if (!(nativeFreq > 0) || !Number.isFinite(nativeFreq)) return;
 
     const legacyHz = nativeFreq / A8_TO_LEGACY;
     const periodA8 = 1 / nativeFreq;
 
-    outHz.textContent = `${clean(legacyHz)} Hz`;
-    outA8.textContent = `${clean(nativeFreq)} cyc/A8s`;
-    outPeriod.textContent = `${clean(periodA8)} A8 s`;
-    outMinute.textContent = `${clean(nativeFreq * 64)} cycles`;
+    outHz.textContent = `${display4(legacyHz)} Hz`;
+    outA8.textContent = `A8~ ${display4(nativeFreq)}`;
+    outPeriod.textContent = `${display4(periodA8)} A8 s`;
+    outMinute.textContent = `${display4(nativeFreq * 64)} cycles`;
+
+    // The auxiliary display consumes the original native value,
+    // never the rounded text displayed to visitors.
+    outA8.dataset.nativeFrequency = String(nativeFreq);
   }
 
   function fromHz(){
@@ -6422,9 +7203,9 @@ document.querySelectorAll('.a8-question-dialog').forEach(dialog => {
       });
     });
 
-  // Complete the two currently blank pitch metrics from the native frequency
-  // already computed by the live Cross-Check module. This consumes displayed
-  // state only; it does not introduce a timing authority.
+  // Supplementary pitch metrics use the full-precision native frequency
+  // exported by the existing renderer, never its rounded visible text.
+  // Presentation only; no additional clock or timing authority.
   function metricValue(label){
     const lab=leafByText(label);
     if(!lab || !lab.parentElement) return null;
@@ -6435,19 +7216,26 @@ document.querySelectorAll('.a8-question-dialog').forEach(dialog => {
     return leaves.find(x => normalize(x.textContent) !== '') || null;
   }
 
+  function pitchDisplay4(value){
+    if(!Number.isFinite(value)) return '—';
+    if(value === 0) return '0';
+    const a=Math.abs(value);
+    if(a < 0.00005 || a >= 1e12)
+      return value.toExponential(4).replace('e+','e');
+    return Number(value.toFixed(4)).toString();
+  }
+
   function refreshPitchDerived(){
-    const native=metricValue('NATIVE FREQUENCY');
+    const native=document.getElementById('a8-music-out-a8freq');
     const period=metricValue('A8 PERIOD');
     const minute=metricValue('CYCLES / A8 MINUTE');
     if(!native || !period || !minute) return;
-    const m=normalize(native.textContent).match(/[0-9]+(?:\.[0-9]+)?/);
-    if(!m) return;
-    const f=Number(m[0]);
-    if(!(f>0)) return;
-    const periodValue=(1/f).toFixed(12).replace(/0+$/,'').replace(/\.$/,'');
-    const minuteValue=(f*64).toFixed(9).replace(/0+$/,'').replace(/\.$/,'');
-    period.textContent=`${periodValue} A8 s`;
-    minute.textContent=`${minuteValue} cycles`;
+
+    const f=Number(native.dataset.nativeFrequency);
+    if(!(f>0) || !Number.isFinite(f)) return;
+
+    period.textContent=`${pitchDisplay4(1/f)} A8 s`;
+    minute.textContent=`${pitchDisplay4(f*64)} cycles`;
   }
 
   // ABOUT hierarchy: native A8 leads. Existing explicit LEGACY COMPARISON
@@ -6459,12 +7247,13 @@ document.querySelectorAll('.a8-question-dialog').forEach(dialog => {
   });
 
   refreshPitchDerived();
-  const native=metricValue('NATIVE FREQUENCY');
+  const native=document.getElementById('a8-music-out-a8freq');
   if(native){
-    new MutationObserver(refreshPitchDerived).observe(native,{childList:true,characterData:true,subtree:true});
+    new MutationObserver(refreshPitchDerived).observe(native,{
+      attributes:true,
+      attributeFilter:['data-native-frequency']
+    });
   }
-  document.addEventListener('input',() => setTimeout(refreshPitchDerived,0),true);
-  document.addEventListener('change',() => setTimeout(refreshPitchDerived,0),true);
 })();
 </script>
 
@@ -6479,6 +7268,58 @@ document.querySelectorAll('.a8-question-dialog').forEach(dialog => {
   if (!selector) return;
 
   const A8_31_M = 1.193327897829;
+
+  /*
+    A8 MASS REFERENCE
+
+    A8M 31 :=
+      mass of reference water occupying
+      (A8L 31)^3
+
+    Current reference-water comparison uses density factor 1:
+      1 m^3 → 1000 kg
+
+    A8M 18 is therefore EXACTLY:
+      A8M 31 / 2^13
+      A8M 31 / 8192
+  */
+  const A8_MASS_31_KG =
+    Math.pow(A8_31_M,3) * 1000;
+
+  /*
+    Legacy comparison coordinates only.
+    They do not define the native A8 mass ladder.
+  */
+  const LEGACY_EARTH_MASS_KG = 5.9722e24;
+  const LEGACY_JUPITER_MASS_KG = 1.89813e27;
+  const LEGACY_SOL_MASS_KG = 1.98847e30;
+  // 2022 CODATA · comparison coordinates only
+  const LEGACY_DALTON_KG = 1.66053906892e-27;
+  const LEGACY_ELECTRON_MASS_KG = 9.1093837139e-31;
+  const LEGACY_PROTON_MASS_KG = 1.67262192595e-27;
+
+  // Troy ounce comparison reference.
+  // 1 oz t = 31.1034768 g.
+  const LEGACY_TROY_OUNCE_KG = 31.1034768e-3;
+
+  /*
+    DENSITY DEMONSTRATION COMPARISONS ONLY.
+
+    A8D is not defined by these values.
+
+    Physical construction:
+
+      A8D =
+        A8M(object)
+        -
+        A8M(displaced reference water)
+
+    Reference water = A8D 0.
+  */
+
+  const COMPARE_GOLD_RELATIVE_WATER = 19.3;
+  const COMPARE_SILVER_RELATIVE_WATER = 10.49;
+
   const NAV_KM = 1.221967767;
   const NAV_TO_A8_41 = 1;
   const A8_SECOND_LEGACY_S = 675 / 1024;
@@ -6531,6 +7372,7 @@ document.querySelectorAll('.a8-question-dialog').forEach(dialog => {
     length: $('a8-length-check'),
     temperature: $('a8-temp-check'),
     pressure: $('a8-pressure-check'),
+    mass: $('a8-mass-check'),
     nav: $('a8-nav-check'),
     pitch: $('a8-music-check'),
     rhythm: $('a8-music-check')
@@ -6658,15 +7500,15 @@ document.querySelectorAll('.a8-question-dialog').forEach(dialog => {
       fmt(rung,4);
 
     $('a8-length-out-rung').textContent =
-      `A8/${rungText}`;
+      `A8L ${rungText}`;
 
     $('a8-length-out-factor').textContent =
       `2^(${fmt(exponent,4)}) = ${fmt(factorValue,12)}`;
 
     $('a8-length-out-native').textContent =
       isNavRung
-        ? `A8/41 = 1 A8 NAV = 1024 A8/31`
-        : `A8/${rungText} = ${fmt(factorValue,12)} A8/31`;
+        ? `A8L 41 = 1 A8 NAV = 1024 A8L 31`
+        : `A8L ${rungText} = ${fmt(factorValue,12)} A8L 31`;
 
     $('a8-length-out-legacy').textContent =
       legacyLength(legacy);
@@ -6706,6 +7548,1160 @@ document.querySelectorAll('.a8-question-dialog').forEach(dialog => {
 
   updateLength();
 
+
+  // MASS
+  //
+  // CANONICAL A8 PRESENTATION
+  //
+  // One physical mass -> one continuous rung coordinate.
+  //
+  //   M(r) = M31 × 2^(r-31)
+  //
+  //   r = 31 + log2(M / M31)
+  //
+  // There is no separate native coefficient / amount.
+  //
+  // Example:
+  //
+  //   1.5 × A8M 31
+  //
+  // normalizes to:
+  //
+  //   MASS /(31 + log2(1.5))
+  //   A8M 31.5850
+  //
+  // Display precision is presently capped at four
+  // decimal places.
+  //
+  // Exact native landmarks remain exact:
+  //
+  //   A8M 18 = A8M 31 / 8192
+  //   A8M 31 = reference-water cube anchor
+
+  const mr = $('a8-mass-rung');
+  const ml = $('a8-mass-legacy');
+  const mu = $('a8-mass-unit');
+
+  let massSource = 'native';
+
+  const massUnitKg = {
+    kg: 1,
+    g: 1e-3,
+    mg: 1e-6,
+    ug: 1e-9,
+    ng: 1e-12,
+    pg: 1e-15,
+    fg: 1e-18,
+    t: 1000,
+    ozt: LEGACY_TROY_OUNCE_KG,
+    Da: LEGACY_DALTON_KG,
+    Earth: LEGACY_EARTH_MASS_KG,
+    Jupiter: LEGACY_JUPITER_MASS_KG,
+    Sol: LEGACY_SOL_MASS_KG
+  };
+
+  function cleanRung(r) {
+
+    if (!Number.isFinite(r))
+      return '—';
+
+    if (
+      Math.abs(
+        r - Math.round(r)
+      ) < 1e-10
+    ) {
+      return String(
+        Math.round(r)
+      );
+    }
+
+    return Number(
+      r.toFixed(4)
+    ).toString();
+  }
+
+  function massRungFromKg(kg) {
+
+    if (!(kg > 0))
+      return NaN;
+
+    return (
+      31 +
+      Math.log2(
+        kg /
+        A8_MASS_31_KG
+      )
+    );
+  }
+
+  const EARTH_MASS_RUNG =
+    massRungFromKg(
+      LEGACY_EARTH_MASS_KG
+    );
+
+  const JUPITER_MASS_RUNG =
+    massRungFromKg(
+      LEGACY_JUPITER_MASS_KG
+    );
+
+  const SOL_MASS_RUNG =
+    massRungFromKg(
+      LEGACY_SOL_MASS_KG
+    );
+
+  /*
+    MASS RECOGNITION REALMS
+
+    These coordinates are derived from the same rough
+    comparison masses already used by the realization
+    cards. They are teaching / recognition landmarks,
+    not defining A8 constants.
+
+    Realm boundaries are mathematical midpoints between
+    neighboring recognition coordinates.
+  */
+
+  const MASS_RECOGNITION_RUNG = {
+
+    waterCube:31,
+
+    blueWhale:
+      massRungFromKg(
+        1.5e5
+      ),
+
+    eiffelTower:
+      massRungFromKg(
+        1.01e7
+      ),
+
+    aircraftCarrier:
+      massRungFromKg(
+        8.8e7
+      ),
+
+    greatPyramid:
+      massRungFromKg(
+        6.0e9
+      ),
+
+    lakeSuperior:
+      massRungFromKg(
+        1.21e16
+      ),
+
+    atmosphere:
+      massRungFromKg(
+        5.15e18
+      ),
+
+    pacific:
+      massRungFromKg(
+        6.6e20
+      ),
+
+    moon:
+      massRungFromKg(
+        7.342e22
+      ),
+
+    scale100:100
+  };
+
+  const massRealmMid =
+    (a,b) =>
+      (a+b)/2;
+
+  function legacyMass(kg) {
+
+    const a =
+      Math.abs(kg);
+
+    if (!Number.isFinite(kg))
+      return '—';
+
+    if (a === 0)
+      return '0 kg';
+
+    if (a >= 1e24)
+      return `${kg.toExponential(8)} kg`;
+
+    if (a >= 1000)
+      return `${fmt(kg/1000,12)} t`;
+
+    if (a >= 1)
+      return `${fmt(kg,12)} kg`;
+
+    if (a >= 1e-3)
+      return `${fmt(kg*1e3,12)} g`;
+
+    if (a >= 1e-6)
+      return `${fmt(kg*1e6,12)} mg`;
+
+    if (a >= 1e-9)
+      return `${fmt(kg*1e9,12)} µg`;
+
+    if (a >= 1e-12)
+      return `${fmt(kg*1e12,12)} ng`;
+
+    if (a >= 1e-15)
+      return `${fmt(kg*1e15,12)} pg`;
+
+    if (a >= 1e-18)
+      return `${fmt(kg*1e18,12)} fg`;
+
+    return `${kg.toExponential(8)} kg`;
+  }
+
+  function massLandmark(r) {
+
+    if (!Number.isFinite(r))
+      return '—';
+
+    if (
+      Math.abs(r - 18) <
+      0.00005
+    ) {
+      return (
+        'REFERENCE A8 CUP · ' +
+        '/18 EXACT'
+      );
+    }
+
+    if (
+      Math.abs(r - 31) <
+      0.00005
+    ) {
+      return (
+        'REFERENCE WATER CUBE · ' +
+        '/31 EXACT'
+      );
+    }
+
+    if (r < -75)
+      return 'SUBATOMIC MASS REALM';
+
+    if (r < -58)
+      return 'ATOMIC MASS REALM';
+
+    if (r < 10)
+      return 'VERY SMALL RECORDABLE MASS';
+
+    if (r < 18)
+      return 'SMALL MATERIAL MASS';
+
+    if (
+      r <
+      massRealmMid(
+        MASS_RECOGNITION_RUNG.waterCube,
+        MASS_RECOGNITION_RUNG.blueWhale
+      )
+    )
+      return (
+        'HUMAN / OBJECT MASS REALM · ' +
+        'A8M 31 WATER-CUBE ANCHOR'
+      );
+
+    if (
+      r <
+      massRealmMid(
+        MASS_RECOGNITION_RUNG.blueWhale,
+        MASS_RECOGNITION_RUNG.eiffelTower
+      )
+    )
+      return (
+        'BLUE WHALE REALM · A8M ' +
+        cleanRung(
+          MASS_RECOGNITION_RUNG.blueWhale
+        )
+      );
+
+    if (
+      r <
+      massRealmMid(
+        MASS_RECOGNITION_RUNG.eiffelTower,
+        MASS_RECOGNITION_RUNG.aircraftCarrier
+      )
+    )
+      return (
+        'EIFFEL TOWER REALM · A8M ' +
+        cleanRung(
+          MASS_RECOGNITION_RUNG.eiffelTower
+        )
+      );
+
+    if (
+      r <
+      massRealmMid(
+        MASS_RECOGNITION_RUNG.aircraftCarrier,
+        MASS_RECOGNITION_RUNG.greatPyramid
+      )
+    )
+      return (
+        'AIRCRAFT CARRIER REALM · A8M ' +
+        cleanRung(
+          MASS_RECOGNITION_RUNG.aircraftCarrier
+        )
+      );
+
+    if (
+      r <
+      massRealmMid(
+        MASS_RECOGNITION_RUNG.greatPyramid,
+        MASS_RECOGNITION_RUNG.lakeSuperior
+      )
+    )
+      return (
+        'GREAT PYRAMID REALM · A8M ' +
+        cleanRung(
+          MASS_RECOGNITION_RUNG.greatPyramid
+        )
+      );
+
+    if (
+      r <
+      massRealmMid(
+        MASS_RECOGNITION_RUNG.lakeSuperior,
+        MASS_RECOGNITION_RUNG.atmosphere
+      )
+    )
+      return (
+        'LAKE SUPERIOR REALM · A8M ' +
+        cleanRung(
+          MASS_RECOGNITION_RUNG.lakeSuperior
+        )
+      );
+
+    if (
+      r <
+      massRealmMid(
+        MASS_RECOGNITION_RUNG.atmosphere,
+        MASS_RECOGNITION_RUNG.pacific
+      )
+    )
+      return (
+        "EARTH'S ATMOSPHERE REALM · A8M " +
+        cleanRung(
+          MASS_RECOGNITION_RUNG.atmosphere
+        )
+      );
+
+    if (
+      r <
+      massRealmMid(
+        MASS_RECOGNITION_RUNG.pacific,
+        MASS_RECOGNITION_RUNG.moon
+      )
+    )
+      return (
+        'PACIFIC OCEAN REALM · A8M ' +
+        cleanRung(
+          MASS_RECOGNITION_RUNG.pacific
+        )
+      );
+
+    if (
+      r <
+      massRealmMid(
+        MASS_RECOGNITION_RUNG.moon,
+        MASS_RECOGNITION_RUNG.scale100
+      )
+    )
+      return (
+        'MOON MASS REALM · A8M ' +
+        cleanRung(
+          MASS_RECOGNITION_RUNG.moon
+        )
+      );
+
+    if (
+      Math.abs(
+        r -
+        MASS_RECOGNITION_RUNG.scale100
+      ) < 0.00005
+    )
+      return (
+        'A8M 100 · EXACT SCALE LANDMARK'
+      );
+
+    if (r < 100)
+      return (
+        'A8M 100 APPROACH · ' +
+        'PLANETARY TRANSITION'
+      );
+
+    if (r < 108)
+      return 'PLANETARY MASS REALM';
+
+    if (r < 116)
+      return 'GIANT-PLANET MASS REALM';
+
+    return 'STELLAR MASS REALM';
+  }
+
+  function updateMass() {
+
+    const nativeValid =
+      mr.value.trim() !== '' &&
+      finite(mr.value);
+
+    const legacyValid =
+      ml.value.trim() !== '' &&
+      finite(ml.value);
+
+    let rung =
+      nativeValid
+        ? num(mr.value)
+        : 18;
+
+    let totalKg = NaN;
+
+    if (massSource === 'legacy') {
+
+      const legacyEntered =
+        legacyValid
+          ? num(ml.value)
+          : 0;
+
+      const factor =
+        massUnitKg[mu.value] || 1;
+
+      totalKg =
+        legacyEntered *
+        factor;
+
+      if (totalKg > 0) {
+
+        rung =
+          massRungFromKg(
+            totalKg
+          );
+
+        mr.value =
+          cleanRung(rung);
+      }
+
+    } else {
+
+      if (Number.isFinite(rung)) {
+
+        totalKg =
+          A8_MASS_31_KG *
+          Math.pow(
+            2,
+            rung - 31
+          );
+
+        const factor =
+          massUnitKg[mu.value] || 1;
+
+        ml.value =
+          fmt(
+            totalKg /
+            factor,
+            15
+          );
+      }
+    }
+
+    if (!(totalKg > 0)) {
+
+      $('a8-mass-out-rung').textContent =
+        'ZERO MASS · NO LOGARITHMIC RUNG';
+
+      $('a8-mass-out-legacy').textContent =
+        '0 kg';
+
+      $('a8-mass-out-factor').textContent =
+        '—';
+
+      $('a8-mass-out-landmark').textContent =
+        'ZERO';
+
+      $('a8-mass-out-celestial').textContent =
+        'EARTH · A8M ' +
+        cleanRung(EARTH_MASS_RUNG) +
+        ' · JUPITER · A8M ' +
+        cleanRung(JUPITER_MASS_RUNG) +
+        ' · SOL · A8M ' +
+        cleanRung(SOL_MASS_RUNG);
+
+      return;
+    }
+
+    const continuousRung =
+      massRungFromKg(
+        totalKg
+      );
+
+    $('a8-mass-out-rung').textContent =
+      `A8M ${cleanRung(continuousRung)}`;
+
+    $('a8-mass-out-reference').textContent =
+      `A8M 31 = (${fmt(A8_31_M,12)} m)^3 ` +
+      `REFERENCE WATER`;
+
+    if (
+      Math.abs(
+        continuousRung - 18
+      ) < 0.00005
+    ) {
+
+      $('a8-mass-out-factor').textContent =
+        'A8M 31 ÷ 8192 · 2⁻¹³ · EXACT';
+
+    } else {
+
+      const d =
+        continuousRung - 31;
+
+      $('a8-mass-out-factor').textContent =
+        `2^(${cleanRung(d)}) FROM A8M 31`;
+    }
+
+    $('a8-mass-out-legacy').textContent =
+      legacyMass(totalKg);
+
+    $('a8-mass-out-landmark').textContent =
+      massLandmark(
+        continuousRung
+      );
+
+    $('a8-mass-out-celestial').textContent =
+      'EARTH · A8M ' +
+      cleanRung(EARTH_MASS_RUNG) +
+      ' · JUPITER · A8M ' +
+      cleanRung(JUPITER_MASS_RUNG) +
+      ' · SOL · A8M ' +
+      cleanRung(SOL_MASS_RUNG);
+
+    $('a8-mass-verdict').textContent =
+      '✓ ONE PHYSICAL MASS = ONE A8 RUNG · ' +
+      'A8M 18 + A8M 31 EXACT · ' +
+      'CONTINUOUS RUNGS TO 4 DECIMALS';
+  }
+
+  mr.addEventListener(
+    'input',
+    () => {
+
+      massSource='native';
+
+      updateMass();
+    }
+  );
+
+  mr.addEventListener(
+    'change',
+    () => {
+
+      if (
+        mr.value.trim() !== '' &&
+        finite(mr.value)
+      ) {
+        mr.value =
+          cleanRung(
+            num(mr.value)
+          );
+      }
+
+      massSource='native';
+
+      updateMass();
+    }
+  );
+
+  ml.addEventListener(
+    'input',
+    () => {
+
+      massSource='legacy';
+
+      updateMass();
+    }
+  );
+
+  mu.addEventListener(
+    'change',
+    () => {
+      updateMass();
+    }
+  );
+
+  document.querySelectorAll(
+    '[data-a8-mass-rung]'
+  ).forEach(button => {
+
+    button.addEventListener(
+      'click',
+      () => {
+
+        mr.value =
+          button.dataset.a8MassRung;
+
+        massSource='native';
+
+        updateMass();
+      }
+    );
+  });
+
+  const troyOunceButton =
+    document.querySelector(
+      '[data-a8-mass-reference="troy-ounce"]'
+    );
+
+  if (troyOunceButton) {
+
+    troyOunceButton.addEventListener(
+      'click',
+      () => {
+
+        mu.value='ozt';
+        ml.value='1';
+
+        massSource='legacy';
+
+        updateMass();
+      }
+    );
+  }
+
+  updateMass();
+
+
+  // MASS SCALE REALIZATION POPUP
+  //
+  // Real-world masses are comparison landmarks only.
+  // Their continuous A8 rungs are calculated HERE from
+  // the same A8_MASS_31_KG used by the converter.
+  //
+  // Exact native landmarks:
+  //   A8M 0
+  //   A8M 18
+  //   A8M 31
+  //
+  // are entered as exact rungs rather than estimated kg.
+
+  const massScaleLaunch =
+    $('a8-mass-scale-launch');
+
+  const massScaleDialog =
+    $('a8-mass-scale-dialog');
+
+  const massScaleClose =
+    $('a8-mass-scale-close');
+
+  const massScaleGrid =
+    $('a8-mass-scale-grid');
+
+  const massScaleLandmarks = [
+
+    {
+      name:'ELECTRON',
+      kg:LEGACY_ELECTRON_MASS_KG,
+      note:'2022 CODATA comparison'
+    },
+
+    {
+      name:'PROTON',
+      kg:LEGACY_PROTON_MASS_KG,
+      note:'2022 CODATA comparison'
+    },
+
+    {
+      name:'CARBON-12 ATOM',
+      kg:12 * LEGACY_DALTON_KG,
+      note:'12 atomic mass units'
+    },
+
+    {
+      name:'A8M 0',
+      exactRung:0,
+      note:'exact native landmark'
+    },
+
+    {
+      name:'GOLD · 1 TROY OUNCE',
+      kg:LEGACY_TROY_OUNCE_KG,
+      legacyUnit:'ozt',
+      legacyValue:1,
+      note:'same mass as one troy ounce of silver'
+    },
+
+    {
+      name:'SILVER · 1 TROY OUNCE',
+      kg:LEGACY_TROY_OUNCE_KG,
+      legacyUnit:'ozt',
+      legacyValue:1,
+      note:'same mass as one troy ounce of gold'
+    },
+
+    {
+      name:'A8 CUP',
+      exactRung:18,
+      note:'exact native landmark'
+    },
+
+    {
+      name:'A8M 31 WATER CUBE',
+      exactRung:31,
+      note:'exact geometric mass anchor'
+    },
+
+    {
+      name:'BLUE WHALE',
+      kg:1.5e5,
+      note:'rough recognition mass'
+    },
+
+    {
+      name:'EIFFEL TOWER',
+      kg:1.01e7,
+      note:'rough recognition mass'
+    },
+
+    {
+      name:'AIRCRAFT CARRIER',
+      kg:8.8e7,
+      note:'rough full-load neighborhood'
+    },
+
+    {
+      name:'GREAT PYRAMID OF GIZA',
+      kg:6.0e9,
+      note:'rough recognition mass'
+    },
+
+    {
+      name:'LAKE SUPERIOR',
+      kg:1.21e16,
+      note:'water-mass neighborhood'
+    },
+
+    {
+      name:"EARTH'S ATMOSPHERE",
+      kg:5.15e18,
+      note:'rough recognition mass'
+    },
+
+    {
+      name:'PACIFIC OCEAN',
+      kg:6.6e20,
+      note:'water-mass neighborhood'
+    },
+
+    {
+      name:'MOON',
+      kg:7.342e22,
+      note:'comparison coordinate'
+    },
+
+    {
+      name:'A8M 100',
+      exactRung:100,
+      note:'exact scale landmark'
+    },
+
+    {
+      name:'EARTH',
+      kg:LEGACY_EARTH_MASS_KG,
+      note:'comparison coordinate'
+    },
+
+    {
+      name:'JUPITER',
+      kg:LEGACY_JUPITER_MASS_KG,
+      note:'comparison coordinate'
+    },
+
+    {
+      name:'SOL',
+      kg:LEGACY_SOL_MASS_KG,
+      note:'comparison coordinate'
+    }
+
+  ];
+
+  function massScaleKg(item) {
+
+    if (
+      Number.isFinite(
+        Number(item.exactRung)
+      )
+    ) {
+      return (
+        A8_MASS_31_KG *
+        Math.pow(
+          2,
+          Number(item.exactRung) - 31
+        )
+      );
+    }
+
+    return Number(item.kg);
+  }
+
+  function massScaleRung(item) {
+
+    if (
+      Number.isFinite(
+        Number(item.exactRung)
+      )
+    ) {
+      return Number(item.exactRung);
+    }
+
+    const kg =
+      massScaleKg(item);
+
+    return (
+      31 +
+      Math.log2(
+        kg /
+        A8_MASS_31_KG
+      )
+    );
+  }
+
+  function massScaleComparison(kg) {
+
+    if (!(kg > 0))
+      return '—';
+
+    if (kg >= 1e9)
+      return `${kg.toExponential(4)} kg comparison`;
+
+    return `${legacyMass(kg)} comparison`;
+  }
+
+  function renderMassScale() {
+
+    if (!massScaleGrid)
+      return;
+
+    massScaleGrid.textContent='';
+
+    massScaleLandmarks.forEach(
+      item => {
+
+        const kg =
+          massScaleKg(item);
+
+        const rung =
+          massScaleRung(item);
+
+        const exact =
+          Number.isFinite(
+            Number(item.exactRung)
+          );
+
+        const card =
+          document.createElement('button');
+
+        card.type='button';
+
+        card.className =
+          'a8-mass-scale-card';
+
+        card.dataset.exact =
+          exact ? '1' : '0';
+
+        card.innerHTML =
+          `<small>${item.name}</small>` +
+          `<strong>A8M ${cleanRung(rung)}</strong>` +
+          `<span>${
+            exact
+              ? `EXACT NATIVE LANDMARK`
+              : `APPROXIMATE PHYSICAL LANDMARK`
+          }</span>` +
+          `<span>${massScaleComparison(kg)}</span>` +
+          `<span>${item.note}</span>` +
+          `<em>LOAD INTO CALCULATOR</em>`;
+
+        card.addEventListener(
+          'click',
+          () => {
+
+            if (
+              item.legacyUnit &&
+              Number.isFinite(
+                Number(item.legacyValue)
+              )
+            ) {
+
+              mu.value =
+                item.legacyUnit;
+
+              ml.value =
+                String(
+                  item.legacyValue
+                );
+
+              massSource='legacy';
+
+            } else {
+
+              mr.value =
+                cleanRung(rung);
+
+              massSource='native';
+            }
+
+            updateMass();
+
+            if (
+              massScaleDialog &&
+              massScaleDialog.open
+            ) {
+              massScaleDialog.close();
+            }
+
+            const panel =
+              $('a8-mass-check');
+
+            if (panel) {
+              panel.scrollIntoView({
+                behavior:'smooth',
+                block:'start'
+              });
+            }
+          }
+        );
+
+        massScaleGrid.appendChild(card);
+      }
+    );
+  }
+
+  if (
+    massScaleLaunch &&
+    massScaleDialog
+  ) {
+
+    massScaleLaunch.addEventListener(
+      'click',
+      () => {
+
+        renderMassScale();
+
+        if (!massScaleDialog.open)
+          massScaleDialog.showModal();
+      }
+    );
+  }
+
+  if (
+    massScaleClose &&
+    massScaleDialog
+  ) {
+
+    massScaleClose.addEventListener(
+      'click',
+      () => {
+        if (massScaleDialog.open)
+          massScaleDialog.close();
+      }
+    );
+  }
+
+  if (massScaleDialog) {
+
+    massScaleDialog.addEventListener(
+      'click',
+      event => {
+
+        if (
+          event.target ===
+          massScaleDialog
+        ) {
+          massScaleDialog.close();
+        }
+      }
+    );
+  }
+
+  renderMassScale();
+
+
+
+  // A8 DENSITY · DISPLACEMENT LAB V2
+  //
+  // Physical construction:
+  //
+  //   A8D =
+  //     A8M(object)
+  //     -
+  //     A8M(displaced reference water)
+  //
+  // Reference water:
+  //
+  //   A8D 0
+  //
+  // Density ratio to reference water:
+  //
+  //   2^A8D
+  //
+  // Gold / silver ratios are comparison expectations
+  // for this demonstration only.
+
+  const densityLabDialog =
+    $('a8-density-lab-dialog');
+
+  const densityLabLaunch =
+    $('a8-density-lab-launch');
+
+  const densityLabClose =
+    $('a8-density-lab-close');
+
+  function densityReading(
+    comparisonRatio
+  ) {
+
+    const objectKg =
+      LEGACY_TROY_OUNCE_KG;
+
+    const displacedWaterKg =
+      objectKg /
+      comparisonRatio;
+
+    const objectRung =
+      massRungFromKg(
+        objectKg
+      );
+
+    const waterRung =
+      massRungFromKg(
+        displacedWaterKg
+      );
+
+    const densityCoordinate =
+      objectRung -
+      waterRung;
+
+    return {
+      objectKg,
+      displacedWaterKg,
+      objectRung,
+      waterRung,
+      densityCoordinate
+    };
+  }
+
+  function renderDensityLab() {
+
+    const gold =
+      densityReading(
+        COMPARE_GOLD_RELATIVE_WATER
+      );
+
+    const silver =
+      densityReading(
+        COMPARE_SILVER_RELATIVE_WATER
+      );
+
+
+    $('a8-density-gold-object').textContent =
+      `A8M ${cleanRung(gold.objectRung)}`;
+
+    $('a8-density-gold-water').textContent =
+      `A8M ${cleanRung(gold.waterRung)}`;
+
+    $('a8-density-gold-density').textContent =
+      `A8D ${cleanRung(
+        gold.densityCoordinate
+      )}`;
+
+    $('a8-density-gold-crosscheck').textContent =
+      `comparison expectation · ` +
+      `${fmt(
+        gold.displacedWaterKg * 1000,
+        6
+      )} g displaced water · ` +
+      `2^(${cleanRung(
+        gold.densityCoordinate
+      )}) ≈ ` +
+      `${fmt(
+        COMPARE_GOLD_RELATIVE_WATER,
+        4
+      )} × reference water`;
+
+
+    $('a8-density-silver-object').textContent =
+      `A8M ${cleanRung(silver.objectRung)}`;
+
+    $('a8-density-silver-water').textContent =
+      `A8M ${cleanRung(silver.waterRung)}`;
+
+    $('a8-density-silver-density').textContent =
+      `A8D ${cleanRung(
+        silver.densityCoordinate
+      )}`;
+
+    $('a8-density-silver-crosscheck').textContent =
+      `comparison expectation · ` +
+      `${fmt(
+        silver.displacedWaterKg * 1000,
+        6
+      )} g displaced water · ` +
+      `2^(${cleanRung(
+        silver.densityCoordinate
+      )}) ≈ ` +
+      `${fmt(
+        COMPARE_SILVER_RELATIVE_WATER,
+        4
+      )} × reference water`;
+  }
+
+
+  if (
+    densityLabLaunch &&
+    densityLabDialog
+  ) {
+
+    densityLabLaunch.addEventListener(
+      'click',
+      () => {
+
+        renderDensityLab();
+
+        densityLabDialog.showModal();
+      }
+    );
+  }
+
+
+  if (
+    densityLabClose &&
+    densityLabDialog
+  ) {
+
+    densityLabClose.addEventListener(
+      'click',
+      () => {
+        densityLabDialog.close();
+      }
+    );
+  }
+
+
+  if (densityLabDialog) {
+
+    densityLabDialog.addEventListener(
+      'click',
+      event => {
+
+        if (
+          event.target ===
+          densityLabDialog
+        ) {
+          densityLabDialog.close();
+        }
+      }
+    );
+  }
+
+
   // NAV DISTANCE
 
   const nd = $('a8-nav-distance');
@@ -6734,7 +8730,7 @@ document.querySelectorAll('.a8-question-dialog').forEach(dialog => {
 
     $('a8-nav-out-41').textContent =
       Number.isFinite(continuousRung)
-        ? `A8/${fmt(continuousRung,4)}`
+        ? `A8L ${fmt(continuousRung,4)}`
         : 'NO FINITE BINARY RUNG';
 
     $('a8-nav-out-distance-legacy').textContent =
@@ -6982,7 +8978,7 @@ document.querySelectorAll('.a8-question-dialog').forEach(dialog => {
       </div>
 
       <h3>
-        MOON ORBIT · A8/62
+        MOON ORBIT · A8L 62
       </h3>
 
       <p>
@@ -6996,17 +8992,17 @@ document.querySelectorAll('.a8-question-dialog').forEach(dialog => {
 
       <p>
         Express the result in
-        <strong>A8/62</strong>.
+        <strong>A8L 62</strong>.
       </p>
 
       <div class="a8-moon-whole-rule">
-        ENTER THE CLOSEST WHOLE A8/62
+        ENTER THE CLOSEST WHOLE A8L 62
       </div>
 
       <div class="a8-moon-two-entry">
 
         <label>
-          <span>WHOLE A8/62</span>
+          <span>WHOLE A8L 62</span>
 
           <input
             id="a8-moon-answer-two"
@@ -7048,7 +9044,7 @@ document.querySelectorAll('.a8-question-dialog').forEach(dialog => {
       </div>
 
       <h3>
-        1 A8/62
+        1 A8L 62
       </h3>
 
       <p>
@@ -7069,7 +9065,7 @@ document.querySelectorAll('.a8-question-dialog').forEach(dialog => {
 
         <div>
           <small>
-            ONE A8/62
+            ONE A8L 62
           </small>
 
           <strong>
@@ -7083,7 +9079,7 @@ document.querySelectorAll('.a8-question-dialog').forEach(dialog => {
           </small>
 
           <strong>
-            ≈ A8/61.9146
+            ≈ A8L 61.9146
           </strong>
         </div>
 
@@ -7192,11 +9188,11 @@ document.querySelectorAll('.a8-question-dialog').forEach(dialog => {
         </p>
 
         <p>
-          <strong>A8/57 = 65,536 A8 NAV</strong>
+          <strong>A8S 57 = 65,536 A8 NAV / A8 HOUR</strong>
         </p>
 
         <div class="a8-round3-question">
-          CLOSEST WHOLE A8/57 SPEED NUMBER?
+          HOW MANY A8S 57 REFERENCE SPEED UNITS? ENTER THE CLOSEST WHOLE NUMBER.
         </div>
 
         <div class="a8-round3-input-row">
@@ -7235,7 +9231,7 @@ document.querySelectorAll('.a8-question-dialog').forEach(dialog => {
           <div class="a8-round3-proof-card">
             <small>RUNG IDENTITY</small>
             <strong>
-              A8/57 = 65,536 A8 NAV
+              A8S 57 = 65,536 A8 NAV / A8 HOUR
             </strong>
           </div>
 
@@ -7243,7 +9239,7 @@ document.querySelectorAll('.a8-question-dialog').forEach(dialog => {
             <small>NATIVE CROSS-CHECK</small>
             <strong>
               65,806.5639 ÷ 65,536<br>
-              ≈ A8/57.0059 per A8 HOUR
+              ≈ A8S 57.0059
             </strong>
           </div>
 
@@ -7251,7 +9247,7 @@ document.querySelectorAll('.a8-question-dialog').forEach(dialog => {
             <small>LEGACY COMPARISON</small>
             <strong>
               ≈ 80,413.5 legacy km traveled in one A8 HOUR<br>
-              ÷ ≈ 80,082.8796 legacy km per A8/57<br>
+              ÷ ≈ 80,082.8796 legacy km per A8L 57 reference distance<br>
               ≈ 1.0041
             </strong>
           </div>
@@ -7262,7 +9258,7 @@ document.querySelectorAll('.a8-question-dialog').forEach(dialog => {
 
           <p>
             Spaceship Earth occupies the
-            <strong>A8/57 orbital-speed neighborhood.</strong>
+            <strong>A8S 57 orbital-speed neighborhood.</strong>
             Its actual orbital speed varies through the year.
           </p>
 
@@ -7513,7 +9509,7 @@ document.querySelectorAll('.a8-question-dialog').forEach(dialog => {
     }
 
     f2.textContent =
-      'TRY AGAIN · closest whole A8/62.';
+      'TRY AGAIN · closest whole A8L 62.';
   };
 
   launch.addEventListener('click', open);
@@ -7682,7 +9678,7 @@ document.querySelectorAll('.a8-question-dialog').forEach(dialog => {
       return labels[nearest];
     }
 
-    return `A8 TEMP /${fmt(r)} · DECIMAL POSITION`;
+    return `A8T ${fmt(r)} · DECIMAL POSITION`;
   }
 
   function render(r,c){
@@ -7691,7 +9687,7 @@ document.querySelectorAll('.a8-question-dialog').forEach(dialog => {
     const k = c + 273.15;
 
     $('a8-temp-out-rung').textContent =
-      `A8 TEMP /${fmt(r)}`;
+      `A8T ${fmt(r)}`;
 
     $('a8-temp-out-landmark').textContent =
       landmark(c,r);
@@ -7920,7 +9916,7 @@ document.querySelectorAll('.a8-question-dialog').forEach(dialog => {
         'PERFECT VACUUM';
 
       verdict.textContent =
-        '✓ 0 A8 PRESS = PERFECT VACUUM · A8 PRESS /0 REMAINS POSITIVE';
+        '✓ 0 A8 PRESS = PERFECT VACUUM · A8P 0 REMAINS POSITIVE';
 
       return;
     }
@@ -7934,13 +9930,13 @@ document.querySelectorAll('.a8-question-dialog').forEach(dialog => {
       atm / Math.pow(2, nearestRung - 31);
 
     $('a8-pressure-out-native').textContent =
-      `${fmt(amount)} A8 PRESS /${r}`;
+      `${fmt(amount)} A8P ${r}`;
 
     $('a8-pressure-out-factor').textContent =
       `2${sup(r - 31)}`;
 
     $('a8-pressure-out-nearest').textContent =
-      `${fmt(nearestAmount)} A8 PRESS /${nearestRung}`;
+      `${fmt(nearestAmount)} A8P ${nearestRung}`;
 
     $('a8-pressure-out-legacy').textContent =
       legacySummary(pa);
@@ -8090,7 +10086,7 @@ document.querySelectorAll('.a8-question-dialog').forEach(dialog => {
       "GRAIN SCALE · ≈ 0.5827 mm · fine sand / pencil-lead neighborhood",
 
     "31":
-      "HUMAN SCALE · ≈ 1.1933 m · A8/31 ruler · everyday human reach",
+      "HUMAN SCALE · ≈ 1.1933 m · A8L 31 ruler · everyday human reach",
 
     "32":
       "ROOM SCALE · ≈ 2.3867 m · doorway / ceiling-height neighborhood",
@@ -8112,14 +10108,14 @@ document.querySelectorAll('.a8-question-dialog').forEach(dialog => {
   };
 
   function updateScaleExample() {
-    const match = rungOut.textContent.match(/A8\/(-?\d+)/);
+    const match = rungOut.textContent.match(/A8L\s+(-?\d+)/);
     if (!match) return;
 
     const rung = match[1];
 
     scaleOut.textContent =
       examples[rung] ||
-      `A8/${rung} · exact binary rung · choose a nearby physical example for scale recognition`;
+      `A8L ${rung} · exact binary rung · choose a nearby physical example for scale recognition`;
   }
 
   new MutationObserver(updateScaleExample).observe(
@@ -8520,8 +10516,8 @@ document.querySelectorAll('.a8-question-dialog').forEach(dialog => {
   /*
     Mean-orbit comparison model expressed on the A8 length ladder.
 
-    1 A8/57 = 65,536 A8 NAV.
-    Current mean-orbit comparison ≈ A8/57.0059 per A8 HOUR.
+    1 A8L 57 = 65,536 A8 NAV.
+    Current mean-orbit comparison ≈ A8S 57.0059.
 
     The full-precision comparison bridge below preserves the existing
     mean-orbit calculator. It does not define or pace the A8 ruler.
@@ -8667,7 +10663,7 @@ document.querySelectorAll('.a8-question-dialog').forEach(dialog => {
 
     /*
       Mean-orbit comparison on the A8 length ladder:
-        ≈ A8/57.0059 per A8 HOUR
+        ≈ A8S 57.0059
     */
     const orbitA8Hours =
       orbitDays *
@@ -8717,7 +10713,7 @@ document.querySelectorAll('.a8-question-dialog').forEach(dialog => {
     orbitDistanceOut.textContent =
       orbitDistanceRung === null
         ? '0 A8 LENGTH'
-        : `A8/${fmt4(orbitDistanceRung)}`;
+        : `A8L ${fmt4(orbitDistanceRung)}`;
 
     orbitDistanceKmOut.textContent =
       `${fmtComma4(orbitDistanceKm)} km`;

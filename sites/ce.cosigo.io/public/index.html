@@ -553,7 +553,7 @@ pre{
 
 </head>
 
-<body>
+<body data-core22-endpoint="/api/ce/core22/status">
 
 <header>
   <div class="header-inner">
@@ -591,6 +591,14 @@ pre{
       >
         <span class="ce-room-dot"></span>
         SHADOW · C/D · GANYMEDE · CORE21
+      </a>
+
+      <a
+        class="ce-room-chip ce-room-main"
+        href="#a8-ce-core22-zone"
+      >
+        <span class="ce-room-dot"></span>
+        CORE22 · A/B · EUROPA · CONSTRUCTION
       </a>
 
       <a
@@ -889,6 +897,91 @@ pre{
   </div>
 
   
+<!-- CORE22 CE construction cabinet.
+     Read-only presentation; no API commands or active interlocks. -->
+<section class="panel" id="a8-ce-core22-zone"
+         aria-label="Core22 independent construction cabinet">
+  <div class="kicker">CORE22 · A/B · EUROPA · CLEAN SUCCESSOR</div>
+  <h2>CORE22 · CONSTRUCTION AND OPERATIONS</h2>
+  <p class="note">
+    Independent physical intake installed and observing when live
+    status confirms it; Europa clock not yet initialized or qualified.
+    Core22 observes the same A/B physical events independently
+    of Core20. The new Core22 internal RAW odometer begins at
+    reference zero, without resetting Europa's continuous coordinates,
+    Meridian 000 or the annual New Year 000₈ reference.
+  </p>
+
+  <div class="grid" style="margin-top:14px">
+    <div class="stat">
+      <span class="k">CORE22 STATUS</span>
+      <span class="v" id="a8Core22Banner">CONNECTING TO CORE22…</span>
+    </div>
+    <div class="stat">
+      <span class="k">NATURAL AUTHORITY</span>
+      <span class="v">EUROPA</span>
+    </div>
+    <div class="stat">
+      <span class="k">NATURAL RECURRENCE</span>
+      <span class="v">9,344,598 RAW / REVOLUTION</span>
+    </div>
+    <div class="stat">
+      <span class="k">PHYSICAL OBSERVATION</span>
+      <span class="v">A/B · INDEPENDENT FAN-OUT PENDING</span>
+    </div>
+    <div class="stat">
+      <span class="k">CORE22 ODOMETER</span>
+      <span class="v">BIRTH REFERENCE 0 · PENDING</span>
+    </div>
+    <div class="stat">
+      <span class="k">DAY_COUNT / DAY_PHASE17</span>
+      <span class="v">NOT AVAILABLE</span>
+    </div>
+    <div class="stat">
+      <span class="k">MERIDIAN / ANNUAL REFERENCE</span>
+      <span class="v">000 / 000₈ · ESTABLISHED</span>
+    </div>
+    <div class="stat">
+      <span class="k">CHECKPOINT / RECOVERY</span>
+      <span class="v">INDEPENDENT IMPLEMENTATION PENDING</span>
+    </div>
+  </div>
+
+
+<div id="a8Core22Live"
+     role="status"
+     aria-live="off"
+     style="margin-top:14px;padding:12px;border:1px solid #54798a;
+            border-radius:9px;white-space:pre-wrap;
+            font-family:monospace;line-height:1.7;
+            overflow-wrap:anywhere">
+  CONNECTING TO CORE22…
+</div>
+
+  <p class="note">
+    Controls are reserved for Core22's own authenticated backend.
+    Core20 and Core21 controls are not inherited or called.
+    Rate, clock position and astronomical coordinates remain
+    separate quantities.
+  </p>
+
+  <div class="controls" style="margin-top:14px">
+    <button type="button" disabled>CORE22 START · LOCKED</button>
+    <button type="button" disabled>CORE22 STOP · LOCKED</button>
+    <button type="button" disabled>ADVANCE CLOCK · LOCKED</button>
+    <button type="button" disabled>RETARD CLOCK · LOCKED</button>
+    <button type="button" disabled>RATE CONTROL · LOCKED</button>
+    <button type="button" disabled>RECOVERY COMMIT · LOCKED</button>
+  </div>
+
+  <p class="note">
+    <a href="https://shadow.cosigo.io/core22.html"
+       target="_blank" rel="noopener noreferrer">
+      OPEN CORE22 REFERENCE WINDOW ↗
+    </a>
+  </p>
+</section>
+
 <div
   class="ce-system-zone ce-main-zone"
   id="a8-ce-main-ab-zone"
@@ -1103,7 +1196,7 @@ pre{
 </section>
 
 <section class="panel" id="physicalPulseBoxConsole">
-
+  
 
   <h2>A/B · PATH A · PHYSICAL SOURCE</h2>
 
@@ -1490,7 +1583,7 @@ pre{
 </section>
 
 <section class="panel" id="a8-ce-core21-clock-adjust">
-
+  
 
   <div class="kicker">C/D · CORE21 · CLOCK ADJUST</div>
   <h2>C/D CLOCK ADJUST · AFTER RATE STABILIZATION</h2>
@@ -7206,6 +7299,107 @@ const base = '/api/ce/core20-service';
     refresh();
     setInterval(refresh, 30000);
   }
+})();
+</script>
+
+
+<script id="a8-core22-readonly-observer-v1">
+(() => {
+  "use strict";
+
+  const endpoint = document.body.dataset.core22Endpoint;
+  const output = document.getElementById("a8Core22Live");
+  const banner = document.getElementById("a8Core22Banner");
+
+  if (!endpoint || !output || !banner) return;
+
+  let previousSequence = null;
+  let previousEpoch = null;
+
+  const show = (message, headline) => {
+    output.textContent = message;
+    banner.textContent = headline;
+  };
+
+  async function poll() {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 4000);
+
+    try {
+      const response = await fetch(endpoint, {
+        method: "GET",
+        cache: "no-store",
+        signal: controller.signal
+      });
+
+      if (!response.ok) throw new Error("HTTP " + response.status);
+
+      const d = await response.json();
+
+      if (
+        d.schema !== "A8-CORE22-STATUS-V1" ||
+        d.core !== "CORE22" ||
+        d.controls !== "LOCKED"
+      ) {
+        throw new Error("UNEXPECTED STATUS CONTRACT");
+      }
+
+      const epoch = Number(d.physicalSourceEpoch);
+      const seq = BigInt(d.reportSequence);
+      const raw = BigInt(d.core22Raw);
+      const physical = BigInt(d.physicalRaw);
+      const birth = BigInt(d.birthPhysicalRaw);
+
+      if (!Number.isSafeInteger(epoch) ||
+          raw < 0n || physical - birth !== raw) {
+        throw new Error("INVALID RAW RELATIONSHIP");
+      }
+
+      if (previousEpoch !== null &&
+          (epoch !== previousEpoch || seq < previousSequence)) {
+        throw new Error("SOURCE CONTINUITY CHANGED");
+      }
+
+      previousEpoch = epoch;
+      previousSequence = seq;
+
+      const observing =
+        d.intakeServiceActive === true &&
+        d.intakeStatus === "OBSERVING" &&
+        d.continuity === "OBSERVING";
+
+      const lines = [
+        "INTAKE · " + (observing ? "OBSERVING" : "HOLD / NOT OBSERVING"),
+        "CORE22 RAW · " + raw.toString(),
+        "A/B PHYSICAL RAW · " + physical.toString(),
+        "SOURCE EPOCH · " + epoch,
+        "REPORT SEQUENCE · " + seq.toString(),
+        "EUROPA CLOCK · " + String(d.clockStatus),
+        "DAY_COUNT / DAY_PHASE17 · NOT INITIALIZED",
+        "CE CONTROLS · LOCKED"
+      ];
+
+      show(
+        lines.join("\n"),
+        observing
+          ? "PHYSICAL INTAKE ACTIVE · CLOCK NOT INITIALIZED"
+          : "PHYSICAL INTAKE HOLD · CLOCK NOT INITIALIZED"
+      );
+
+    } catch (error) {
+      show(
+        "CORE22 STATUS UNAVAILABLE\n" +
+        "LAST VALID VALUES WITHHELD\n" +
+        String(error.message || error),
+        "CORE22 OBSERVER UNAVAILABLE"
+      );
+    } finally {
+      clearTimeout(timer);
+    }
+  }
+
+  poll();
+  setInterval(poll, 1000);
 })();
 </script>
 

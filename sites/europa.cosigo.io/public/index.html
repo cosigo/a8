@@ -1510,11 +1510,15 @@ function positionAt(body, modelRaw){
   };
 }
 
+// A8 SKY POSITION LOOKUP ONLY · NOT EARTH CLOCK PHASE
+// Forward whole-RAW coordinate calibration; reversible.
+const SKY_WHEEL_ADVANCE_RAW=336439;
+
 function modelRawFromCore20(core){
   // Core20 exposes the existing EUROPA_NATURAL_MODEL_RAW coordinate.
   // A/B SOURCE_EPOCH belongs to carrier diagnostics, never to moon geometry.
   const domain=String(core?.clockRawDomain ?? '');
-  const raw=Number(core?.currentClockRawPulse);
+  const raw=Number(core?.currentClockRawPulse)+SKY_WHEEL_ADVANCE_RAW;
   if (
     core?.status !== 'CORE20_CLOCK_RUNNING' ||
     domain !== 'EUROPA_NATURAL_MODEL_RAW' ||

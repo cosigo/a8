@@ -1556,12 +1556,16 @@ function setModeText(){
   }
 }
 
+// A8 SKY POSITION LOOKUP ONLY · NOT EARTH CLOCK PHASE
+// Forward whole-RAW coordinate calibration; reversible.
+const SKY_WHEEL_ADVANCE_RAW=336439;
+
 async function refreshPhysical(){
   // The existing Core20 natural-model RAW drives all four moon positions.
   // Arduino RAW and SOURCE_EPOCH are diagnostic, never orbital authority.
   const response=await fetchJSON('/api/core20/clock');
   const clock=response.clock || response;
-  const raw=Number(clock.currentClockRawPulse);
+  const raw=Number(clock.currentClockRawPulse)+SKY_WHEEL_ADVANCE_RAW;
   const domain=String(clock.clockRawDomain || '');
   if (
     clock.status !== 'CORE20_CLOCK_RUNNING' ||

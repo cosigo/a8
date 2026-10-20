@@ -1190,7 +1190,7 @@ function renderLocalAnalog(localPhase) {
   const localHand = (id, degrees) => {
     const el = $(id);
 
-    if (el) {
+    if (el && !a8VisualObserverReady) {
       el.style.transform =
         `rotate(${degrees}deg)`;
     }
@@ -1301,9 +1301,11 @@ function renderClock() {
   if ($('phase')) $('phase').textContent = phase;
   if ($('day')) $('day').textContent = day;
 
-  hand('ss', s / 64 * 360);
-  hand('mm', (m + s / 64) / 64 * 360);
-  hand('hh', (h + m / 64 + s / 4096) / 32 * 360);
+  if (!a8VisualObserverReady) {
+    hand('ss', s / 64 * 360);
+    hand('mm', (m + s / 64) / 64 * 360);
+    hand('hh', (h + m / 64 + s / 4096) / 32 * 360);
+  }
 
   const labels = face === 'dec' ? ['0', '8', '16', '24'] : ['00', '10', '20', '30'];
   ['t0','t1','t2','t3'].forEach((id, i) => { if ($(id)) $(id).textContent = labels[i]; });
@@ -2532,19 +2534,99 @@ function applyClockPayload(payload, forceObserverSync = false) {
   }
 }
 
+/*
+ * CORE20 CONTINUOUS VISUAL OBSERVER
+ *
+ * Visual-only monotonic coordinate, independent of
+ * ordinary SSE packet arrival.
+ *
+ * Core20 alone owns integer native state and audio.
+ */
+let a8VisualObserverReady = false;
+let a8VisualAnchorTotal = 0;
+let a8VisualAnchorPerf = 0;
+let a8VisualEpoch = null;
+
 function observerFrame() {
-  /*
-   * Rendering loop only.
-   *
-   * Integer A8 civil state changes are delivered exclusively
-   * by processAuthoritativeCoreEdge().
-   *
-   * No performance.now() extrapolation may cross an A8-second
-   * boundary.
-   */
-  requestAnimationFrame(
-    observerFrame
-  );
+  if (document.hidden || !observerRunning) {
+    a8VisualObserverReady = false;
+  }
+
+  if (
+    clockLoaded &&
+    observerReady &&
+    observerRunning &&
+    !document.hidden
+  ) {
+    const now = performance.now();
+
+    if (
+      !a8VisualObserverReady ||
+      a8VisualEpoch !== observerEpoch
+    ) {
+      a8VisualAnchorTotal =
+        observerAnchorTotal;
+      a8VisualAnchorPerf = now;
+      a8VisualEpoch = observerEpoch;
+      a8VisualObserverReady = true;
+    }
+
+    /*
+     * No reanchor on ordinary Core20 edge arrival.
+     * Elapsed browser time drives presentation only.
+     */
+    const continuousTotal =
+      a8VisualAnchorTotal +
+      Math.max(0, now - a8VisualAnchorPerf) /
+        A8_STATE_MS;
+
+    const visualPhase =
+      ((continuousTotal % DAY) + DAY) % DAY;
+
+    hand(
+      'ss',
+      (visualPhase % 64) / 64 * 360
+    );
+    hand(
+      'mm',
+      (visualPhase % 4096) / 4096 * 360
+    );
+    hand(
+      'hh',
+      visualPhase / DAY * 360
+    );
+
+    const offsetStates =
+      -new Date().getTimezoneOffset() *
+      DAY / 1440;
+
+    const localPhase =
+      ((visualPhase + offsetStates) % DAY +
+        DAY) % DAY;
+
+    const localHand = (id, degrees) => {
+      const el = $(id);
+      if (el) {
+        el.style.transform =
+          `rotate(${degrees}deg)`;
+      }
+    };
+
+    localHand(
+      'localSecondHand',
+      (localPhase % 64) / 64 * 360
+    );
+    localHand(
+      'localMinuteHand',
+      (localPhase % 4096) / 4096 * 360
+    );
+    localHand(
+      'localHourHand',
+      localPhase / DAY * 360
+    );
+  }
+
+  requestAnimationFrame(observerFrame);
 }
 
 async function requestJson(path, options = {}) {

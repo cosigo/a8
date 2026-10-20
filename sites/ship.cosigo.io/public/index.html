@@ -2627,16 +2627,30 @@ setInterval(refresh,1000);
         );
 
       if (ui.year) {
+        const progression =
+          a.progressionStatus || 'ANNUAL FRAME UNAVAILABLE';
+
+        const qualification =
+          a.absoluteSolPhaseQualified;
+
+        const annualLabel =
+          progression === 'PHYSICAL_RAW_HOLDOVER_ACTIVE' ||
+          qualification === false
+            ? 'HOLDOVER ACTIVE · ABSOLUTE PHASE UNQUALIFIED'
+            : progression === 'PHYSICAL_TRANSPORT_HOLD'
+              ? 'HELD · PHYSICAL TRANSPORT'
+              : progression === 'PHYSICAL_RAW_PREDICTION_ACTIVE' &&
+                qualification === true
+                ? 'ALIGNED · LIVE'
+                : progression;
+
         ui.year.textContent =
           Number.isFinite(solAngle)
             ? (
                 `SOL / SHIP ${a.natureAnnualAngleOctal || '—'} · ` +
-                `${solAngle.toFixed(4)} A8 · ALIGNED`
+                `${solAngle.toFixed(4)} A8 · ${annualLabel}`
               )
-            : (
-                a.progressionStatus ||
-                'ANNUAL FRAME UNAVAILABLE'
-              );
+            : progression;
       }
 
       liveOrbitDegrees =
@@ -4264,9 +4278,9 @@ setInterval(refresh,1000);
 
       if (progress) {
         progress.textContent =
-          `LIVE V2 · ${side} · ${register} · ` +
-          `+${decimalA8} A8 FROM 600₈ BIRTH · ` +
-          direction;
+          `ANNUAL POSITION · ${side} · ${register} · ${direction} | ` +
+          `SHIP SLIP · ${slipParts.n < 0n ? '-' : '+'}${decimalA8} A8 · ` +
+          `${v2.currentLeader} · SINCE 600₈ BIRTH`;
       }
 
       document

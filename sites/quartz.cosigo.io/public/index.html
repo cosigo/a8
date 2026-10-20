@@ -1553,9 +1553,9 @@ function calc(){
   const speedA831=speedLegacyM/A8_31_LEGACY_M;
   document.getElementById('calcOut').textContent =
     `2^${n} = ${N.toLocaleString('en-US',{maximumFractionDigits:0})} qₐ`+
-    `  |  comparison length ≈ ${legacyM.toPrecision(10)} legacy m`+
-    `  |  λ×f = ${speedQa.toExponential(8)} qₐ / A8 second`+
-    `  |  Earth-defined comparison ≈ ${speedA831.toExponential(8)} A8/31 / A8 second`;
+    `  |  comparison length ≈ ${legacyM.toExponential(4)} legacy m`+
+    `  |  λ×f = ${speedQa.toExponential(4)} qₐ / A8 second`+
+    `  |  Earth-defined comparison ≈ ${speedA831.toExponential(4)} A8/31 / A8 second`;
 }
 for(const id of ['expN','qaNm','lambdaQ','freqA8']) document.getElementById(id).addEventListener('input',calc);
 calc();

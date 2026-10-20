@@ -152,17 +152,91 @@ button:active{transform:translate(2px,2px); box-shadow:1px 2px 0 var(--ink)}
 .star{position:absolute; width:15px; height:15px; border-radius:50%; background:white; border:none; box-shadow:0 0 12px #fff; padding:0; margin:0}
 .star::after{content:"✦"; position:absolute; left:-5px; top:-8px; color:white; font-size:24px}
 .compass{
-  width:min(350px,82vw); aspect-ratio:1; border:4px solid var(--ink); border-radius:50%; margin:18px auto; position:relative; background:#fff;
+  width:min(350px,82vw);
+  aspect-ratio:1;
+  border:4px solid var(--ink);
+  border-radius:50%;
+  margin:18px auto;
+  position:relative;
+  background:#fff;
+  cursor:crosshair;
+  touch-action:none;
 }
 .compass:before,.compass:after{
-  content:""; position:absolute; left:50%; top:7%; bottom:7%; width:2px; background:#c1c9cc;
+  content:"";
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:2px;
+  height:86%;
+  background:#c1c9cc;
+  transform:translate(-50%,-50%);
+  transform-origin:50% 50%;
 }
-.compass:after{transform:rotate(90deg)}
-.dir{position:absolute; font-weight:1000}
+.compass:after{
+  transform:translate(-50%,-50%) rotate(90deg);
+}
+.dir{position:absolute; font-weight:1000; z-index:3}
 .n{top:9px; left:48%}.e{right:10px; top:47%}.s{bottom:9px; left:46.5%}.w{left:10px; top:47%}
 .needle{
-  position:absolute; left:49.3%; top:16%; width:10px; height:42%; background:var(--accent);
-  transform-origin:50% 100%; border-radius:8px 8px 2px 2px;
+  position:absolute;
+  left:50%;
+  bottom:50%;
+  width:10px;
+  height:42%;
+  background:var(--accent);
+  transform:translateX(-50%) rotate(0deg);
+  transform-origin:50% 100%;
+  border-radius:8px 8px 2px 2px;
+  z-index:2;
+}
+.needle:after{
+  content:"";
+  position:absolute;
+  left:50%;
+  bottom:-9px;
+  width:18px;
+  height:18px;
+  transform:translateX(-50%);
+  background:var(--ink);
+  border-radius:50%;
+}
+
+.compassHoverBubble{
+  display:none;
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  width:min(220px,72%);
+  padding:12px 10px;
+  border:3px solid var(--ink);
+  border-radius:18px;
+  background:#fff0a8;
+  box-shadow:5px 6px 0 rgba(19,32,42,.16);
+  text-align:center;
+  font-weight:1000;
+  line-height:1.15;
+  z-index:6;
+  pointer-events:none;
+}
+.compassHoverBubble b{
+  display:block;
+  font-size:2.4rem;
+  margin:3px 0;
+}
+.compassHoverBubble small{
+  font-size:.82rem;
+}
+.compassClockHoverBonus{
+  margin-top:18px;
+}
+.compassClockHoverReadout{
+  min-height:72px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
 }
 .chest{font-size:7rem; text-align:center}
 .bacon{
@@ -1774,19 +1848,19 @@ button:active{transform:translate(2px,2px); box-shadow:1px 2px 0 var(--ink)}
       <div class="dimension dimLength">
         <span class="dimArrow">↔</span>
         <b>LENGTH</b>
-        <small>A8/29 L</small>
+        <small>A8L 29</small>
       </div>
 
       <div class="dimension dimWidth">
         <span class="dimArrow">↗</span>
         <b>WIDTH</b>
-        <small>A8/28 L</small>
+        <small>A8L 28</small>
       </div>
 
       <div class="dimension dimHeight">
         <span class="dimArrow">↕</span>
         <b>HEIGHT</b>
-        <small>A8/27 L</small>
+        <small>A8L 27</small>
       </div>
     </div>
 
@@ -1799,10 +1873,10 @@ button:active{transform:translate(2px,2px); box-shadow:1px 2px 0 var(--ink)}
     <div id="brickReadout" class="big" style="margin-top:12px">Choose one.</div>
 
     <div id="brickReveal" class="brickReveal">
-      <p class="big">THREE — one for each dimension.</p>
+      <p class="big">THREE — one for each dimension. Together, the three A8L measurements describe its A8V. A8L × A8L × A8L → A8V.</p>
       <p><b>LENGTH · WIDTH · HEIGHT</b></p>
-      <p><b>A8 BRICK DESIGN · /29 × /28 × /27</b></p>
-      <p class="note">One rectangular brick. Smaller string rungs can still measure details, but /26 and below are not being presented as full brick dimensions.</p>
+      <p><b>A8 BRICK DESIGN · A8L 29 × A8L 28 × A8L 27</b></p>
+      <p class="note">One rectangular brick. Smaller A8L positions can still measure details, but A8L 26 and below are not being presented as full brick dimensions.</p>
     </div>
   </div>
 
@@ -1816,11 +1890,21 @@ button:active{transform:translate(2px,2px); box-shadow:1px 2px 0 var(--ink)}
   <div class="kicker">RULERS</div>
   <h2>Double the ruler.</h2>
   <div class="panel center">
-    <div class="big">Mini-Me · /29 L</div>
+    <div class="big">Mini-Me · A8L 29</div>
+    <div class="note">YOU KNOW THIS ONE · ABOUT A 12-INCH SCHOOL RULER</div>
     <div>↓ double</div>
-    <div class="big">Kids · /30 L</div>
+    <div class="big">Kids · A8L 30</div>
     <div>↓ double</div>
-    <div class="big">Big ruler · /31 L</div>
+    <div class="big">Big ruler · A8L 31</div>
+    <div class="note">BIG NOW · ABOUT THE SIZE OF A 7-YEAR-OLD</div>
+  </div>
+
+  <div class="panel center">
+    <div class="big">DID YOU KNOW? 🌍</div>
+    <p>You live on Earth — and the A8 ruler comes from Earth’s size.</p>
+    <p>About 33 million 7-year-olds, lying head-to-toe, could circle Earth once.</p>
+    <p class="big">You are one measurable piece of the Earth ruler.</p>
+    <div class="big">BIG RULER? YES. BIGGEST RULER? NOT EVEN CLOSE. 😄</div>
   </div>
   <div class="mascot">
     <div class="face">📏</div>
@@ -2116,30 +2200,30 @@ button:active{transform:translate(2px,2px); box-shadow:1px 2px 0 var(--ink)}
   </div>
 
   <div class="panel center">
-    <div class="big">ONE A8 POSITION · TWO FRIENDLY WAYS TO READ IT</div>
+    <div class="big">ONE A8XY POSITION · TWO FRIENDLY WAYS TO READ IT</div>
     <div class="notationToggle">
       <button id="decBtn" class="activeNotation" onclick="setMapNotation('decimal')">DECIMAL COMFORT</button>
       <button id="octBtn" onclick="setMapNotation('octal')">🐙 OCTY · OCTAL</button>
     </div>
-    <p class="note">Same A8 position. Decimal comfort helps newcomers. Octy shows the native octal form.</p>
+    <p class="note">A8XY means one 2D A8 position: latitude + longitude. Decimal comfort and Octy show the same position two ways.</p>
   </div>
 
   <div class="coords">
     <div class="panel center">
       <b class="big">ROME</b><br>
       <span class="coordLabel">DECIMAL COMFORT</span><br>
-      <span class="nativeCoord">A8 LAT 68 · LON 18</span><br>
+      <span class="nativeCoord">A8XY · LAT 68 · LON 18</span><br>
       <span class="coordLabel octyLabel">🐙 OCTY · OCTAL</span><br>
-      <span class="nativeCoord">A8 LAT 104₈ · LON 022₈</span><br>
+      <span class="nativeCoord">A8XY · LAT 104₈ · LON 022₈</span><br>
       <span class="legacyCoord">legacy: 41.9028° N · 12.4964° E</span>
     </div>
 
     <div class="panel center">
       <b class="big">ATHENS</b><br>
       <span class="coordLabel">DECIMAL COMFORT</span><br>
-      <span class="nativeCoord">A8 LAT 74 · LON 34</span><br>
+      <span class="nativeCoord">A8XY · LAT 74 · LON 34</span><br>
       <span class="coordLabel octyLabel">🐙 OCTY · OCTAL</span><br>
-      <span class="nativeCoord">A8 LAT 112₈ · LON 042₈</span><br>
+      <span class="nativeCoord">A8XY · LAT 112₈ · LON 042₈</span><br>
       <span class="legacyCoord">legacy: 37.9838° N · 23.7275° E</span>
     </div>
   </div>
@@ -2148,11 +2232,52 @@ button:active{transform:translate(2px,2px); box-shadow:1px 2px 0 var(--ink)}
 </section>
 
 <section class="page">
-  <div class="kicker">TEMPERATURE QUIZ</div>
-  <h2>What is your body temperature?</h2>
-  <p>Pick the A8 temperature that best matches a normal human body.</p>
+  <div class="kicker">HUMAN SCALE QUIZ</div>
+  <h2>How tall and how warm are we?</h2>
+  <p>Pick both A8 measurements that best match a typical adult human.</p>
 
   <div class="bodyQuizWrap">
+
+    
+
+    <div class="panel">
+      <div class="big">PART 1 · HEIGHT</div>
+
+      <p>
+        Which A8L position best matches a typical adult human height?
+      </p>
+
+      <div class="quizChoices heightChoices">
+        <button onclick="bodyHeightAnswer('30.75',this)">A8L 30.75</button>
+        <button onclick="bodyHeightAnswer('31',this)">A8L 31</button>
+        <button onclick="bodyHeightAnswer('31.51',this)">A8L 31.51</button>
+        <button onclick="bodyHeightAnswer('32',this)">A8L 32</button>
+      </div>
+
+      <div id="bodyHeightReadout" class="panel center big">
+        Choose one.
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="big">PART 2 · TEMPERATURE</div>
+
+      <p>
+        Which A8T position best matches normal human body temperature?
+      </p>
+
+      <div class="quizChoices tempChoices">
+        <button onclick="bodyTempAnswer('31.58',this)">A8T 31.58</button>
+        <button onclick="bodyTempAnswer('32',this)">A8T 32</button>
+        <button onclick="bodyTempAnswer('30',this)">A8T 30</button>
+        <button onclick="bodyTempAnswer('27.1',this)">A8T 27.1</button>
+      </div>
+
+      <div id="bodyTempReadout" class="panel center big">
+        Choose one.
+      </div>
+    </div>
+
     <div class="dummyFigure" id="dummyFigure" aria-label="simple dancing figure">
       <div class="dummyHead"></div>
       <div class="dummyBody"></div>
@@ -2162,19 +2287,48 @@ button:active{transform:translate(2px,2px); box-shadow:1px 2px 0 var(--ink)}
       <div class="dummyLeg rightLeg"></div>
     </div>
 
-    <div class="quizChoices">
-      <button onclick="bodyTempAnswer('31.58',this)">A8/31.58 T</button>
-      <button onclick="bodyTempAnswer('32',this)">A8/32 T</button>
-      <button onclick="bodyTempAnswer('30',this)">A8/30 T</button>
-      <button onclick="bodyTempAnswer('27.1',this)">A8/27.1 T</button>
+<div
+      id="humanQuizComplete"
+      class="panel treasure center big"
+      style="display:none"
+    >
+      HUMAN SCALE FOUND · A8L + A8T
     </div>
 
-    <div id="bodyTempReadout" class="panel center big">Choose one.</div>
+<div
+      id="bodyChildBonus"
+      class="panel treasure"
+      style="display:none"
+    >
+      <div class="big">BONUS · HOW OLD?</div>
+
+      <p>
+        About how old is a child when typical height reaches A8L 31?
+      </p>
+
+      <div class="quizChoices childHeightChoices">
+        <button onclick="bodyChildHeightAnswer('5',this)">5 YEARS</button>
+        <button onclick="bodyChildHeightAnswer('6',this)">6 YEARS</button>
+        <button onclick="bodyChildHeightAnswer('7',this)">7 YEARS</button>
+        <button onclick="bodyChildHeightAnswer('8',this)">8 YEARS</button>
+      </div>
+
+      <div id="bodyChildReadout" class="panel center big">
+        Choose one.
+      </div>
+    </div>
+
+    
+
   </div>
 
   <div class="mascot">
-    <div class="face">🌡️</div>
-    <div><b>Hint:</b> the human body lives close to the A8 human-temperature region, but not exactly at /31.</div>
+    <div class="face">📏🌡️</div>
+    <div>
+      <b>Hint:</b>
+      People vary. These are friendly human-scale landmarks,
+      not exact values for every person.
+    </div>
   </div>
 </section>
 
@@ -2195,21 +2349,21 @@ button:active{transform:translate(2px,2px); box-shadow:1px 2px 0 var(--ink)}
   <div id="cupExplorer" class="panel cupExplorer" style="display:none">
     <div class="center">
       <div style="font-size:4rem">☕</div>
-      <div class="big">HOW MANY A8 RULERS CAN A CUP OF TEA TOUCH?</div>
+      <div class="big">HOW MANY A8 WAYS CAN WE MEASURE A CUP OF TEA?</div>
       <p>Pick every one. Some are strongly related. Some are only along for the ride.</p>
     </div>
 
     <div class="cupChips">
-      <button onclick="cupMeasure('T',this)">A8/31.99 T</button>
-      <button onclick="cupMeasure('P',this)">A8/31 P</button>
-      <button onclick="cupMeasure('V',this)">A8/31 V</button>
-      <button onclick="cupMeasure('M',this)">A8/31 M</button>
-      <button onclick="cupMeasure('L',this)">A8/31 L</button>
-      <button onclick="cupMeasure('C',this)">A8 C</button>
+      <button onclick="cupMeasure('T',this)">A8T 31.99</button>
+      <button onclick="cupMeasure('P',this)">A8P 31</button>
+      <button onclick="cupMeasure('V',this)">A8V 18</button>
+      <button onclick="cupMeasure('M',this)">A8M 18</button>
+      <button onclick="cupMeasure('L',this)">A8L</button>
+      <button onclick="cupMeasure('D',this)">A8;CM</button>
     </div>
 
     <div id="cupMeasureReadout" class="panel center">
-      Select a ruler.
+      Select a measure.
     </div>
 
     <div class="cupProgress">
@@ -2218,7 +2372,7 @@ button:active{transform:translate(2px,2px); box-shadow:1px 2px 0 var(--ink)}
 
     <div id="cupComplete" class="treasure panel center" style="display:none">
       <div class="big">YOU MEASURED THE WHOLE TEA BREAK.</div>
-      <p>Temperature · Pressure · Volume · Mass · Length · Clock</p>
+      <p>A8T · A8P · A8V · A8M · A8L · A8;CM</p>
     </div>
   </div>
 
@@ -2230,19 +2384,19 @@ button:active{transform:translate(2px,2px); box-shadow:1px 2px 0 var(--ink)}
     </div>
 
     <div class="coldGear">
-      <button onclick="coldGear('/29',this)">
+      <button onclick="coldGear('29',this)">
         <span>🧥</span>
-        <b>A8/29 T</b>
+        <b>A8T 29</b>
         <small>thin windbreaker</small>
       </button>
-      <button onclick="coldGear('/28',this)">
+      <button onclick="coldGear('28',this)">
         <span>🧥</span>
-        <b>A8/28 T</b>
+        <b>A8T 28</b>
         <small>thicker jacket</small>
       </button>
-      <button onclick="coldGear('/27',this)">
+      <button onclick="coldGear('27',this)">
         <span>🧥🥾</span>
-        <b>A8/27 T</b>
+        <b>A8T 27</b>
         <small>thick jacket + boots</small>
       </button>
     </div>
@@ -2264,14 +2418,14 @@ button:active{transform:translate(2px,2px); box-shadow:1px 2px 0 var(--ink)}
 
     <div class="miniRoadSign">
       <div class="miniRoadSignInner">
-        <small>A8</small>
-        <strong>/48</strong>
-        <span>NAV</span>
+        <small>A8S</small>
+        <strong>47</strong>
+        <span>SPEED LIMIT</span>
       </div>
     </div>
 
     <div class="miniSpeedCar">
-      <div class="miniCarReadout">A8/47.9 NAV</div>
+      <div class="miniCarReadout">A8S 46.9</div>
       <div class="miniCarBody"></div>
       <div class="miniCarTop"></div>
       <div class="miniWheel miniWheelLeft"></div>
@@ -2290,10 +2444,11 @@ button:active{transform:translate(2px,2px); box-shadow:1px 2px 0 var(--ink)}
         <div class="big">🚲 BICYCLE</div>
         <select id="speedBike" onchange="checkSpeedGame()">
           <option value="">pick A8 speed</option>
-          <option value="43">A8/43 S</option>
-          <option value="45">A8/45 S</option>
-          <option value="47">A8/47 S</option>
-          <option value="50">A8/50 S</option>
+          <option value="43">A8S 43</option>
+          <option value="44">A8S 44</option>
+          <option value="45">A8S 45</option>
+          <option value="47">A8S 47</option>
+          <option value="50">A8S 50</option>
         </select>
       </div>
 
@@ -2301,10 +2456,10 @@ button:active{transform:translate(2px,2px); box-shadow:1px 2px 0 var(--ink)}
         <div class="big">🚗 AUTOMOBILE</div>
         <select id="speedCar" onchange="checkSpeedGame()">
           <option value="">pick A8 speed</option>
-          <option value="43">A8/43 S</option>
-          <option value="45">A8/45 S</option>
-          <option value="47">A8/47 S</option>
-          <option value="50">A8/50 S</option>
+          <option value="43">A8S 43</option>
+          <option value="45">A8S 45</option>
+          <option value="47">A8S 47</option>
+          <option value="50">A8S 50</option>
         </select>
       </div>
 
@@ -2312,11 +2467,11 @@ button:active{transform:translate(2px,2px); box-shadow:1px 2px 0 var(--ink)}
         <div class="big">🚆 TRAIN</div>
         <select id="speedTrain" onchange="checkSpeedGame()">
           <option value="">pick A8 speed</option>
-          <option value="43">A8/43 S</option>
-          <option value="45">A8/45 S</option>
-          <option value="47">A8/47 S</option>
-          <option value="48">A8/48 S</option>
-          <option value="50">A8/50 S</option>
+          <option value="43">A8S 43</option>
+          <option value="45">A8S 45</option>
+          <option value="47">A8S 47</option>
+          <option value="48">A8S 48</option>
+          <option value="50">A8S 50</option>
         </select>
       </div>
 
@@ -2324,10 +2479,10 @@ button:active{transform:translate(2px,2px); box-shadow:1px 2px 0 var(--ink)}
         <div class="big">✈️ AIRPLANE</div>
         <select id="speedPlane" onchange="checkSpeedGame()">
           <option value="">pick A8 speed</option>
-          <option value="43">A8/43 S</option>
-          <option value="45">A8/45 S</option>
-          <option value="47">A8/47 S</option>
-          <option value="50">A8/50 S</option>
+          <option value="43">A8S 43</option>
+          <option value="45">A8S 45</option>
+          <option value="47">A8S 47</option>
+          <option value="50">A8S 50</option>
         </select>
       </div>
     </div>
@@ -2341,7 +2496,7 @@ button:active{transform:translate(2px,2px); box-shadow:1px 2px 0 var(--ink)}
 
   <div class="mascot">
     <div class="face">⚡</div>
-    <div><b>Fast clue:</b> higher A8 speed rungs mean faster motion. The car is near /48, the train is a little faster, and the airplane is fastest.</div>
+    <div><b>Fast clue:</b> higher A8S positions mean faster motion. The highway car is traveling at A8S 46.9, just under the A8S 47 speed limit. The train is faster at A8S 48, and the airplane is faster still.</div>
   </div>
 </section>
 
@@ -2466,8 +2621,8 @@ button:active{transform:translate(2px,2px); box-shadow:1px 2px 0 var(--ink)}
 
 <section class="page">
   <div class="kicker">TREASURE 8 · COMPASS</div>
-  <h2>Final clue: find 128.</h2>
-  <p>The treasure map says: <b>turn the compass to 128</b>.</p>
+  <h2>Final clue: find A8∠ 128.</h2>
+  <p>The treasure map says: <b>turn the compass to A8∠ 128</b>.</p>
 
   <div class="finalClueDecor" aria-hidden="true">
     <div class="decorDrawingCompass">
@@ -2498,17 +2653,47 @@ button:active{transform:translate(2px,2px); box-shadow:1px 2px 0 var(--ink)}
     </div>
   </div>
 
-  <div class="compass">
+  <div class="compass" id="finalCompass">
     <span class="dir n">0</span>
     <span class="dir e">128</span>
     <span class="dir s">256</span>
     <span class="dir w">384</span>
     <div class="needle" id="needle"></div>
+
+    <div
+      id="compassHoverBubble"
+      class="compassHoverBubble"
+      aria-live="polite"
+    ></div>
   </div>
   <div class="center">
-    <button onclick="turnCompass()">TURN 128</button>
+    <button onclick="turnCompass()">TURN A8∠ 128</button>
     <p id="compassMsg" class="big"></p>
     <p id="calendarHint" class="note"></p>
+  </div>
+
+  <div class="panel treasure center compassClockHoverBonus">
+    <div class="big">BONUS · CLOCK + COMPASS</div>
+
+    <p class="big">
+      If the A8 clock says 28:00:00, where would that be on the compass?
+    </p>
+
+    <p>
+      Hover around the compass — or drag a finger around it — and find it.
+    </p>
+
+    <div
+      id="compassClockHoverReadout"
+      class="panel center big compassClockHoverReadout"
+      aria-live="polite"
+    >
+      MOVE AROUND THE COMPASS
+    </div>
+
+    <p id="compassClockHoverNote" class="note">
+      32 A8 clock hours fit around 512 compass positions.
+    </p>
   </div>
 
   <div id="calendarPopup" class="calendarPopup" style="display:none">
@@ -2570,7 +2755,7 @@ button:active{transform:translate(2px,2px); box-shadow:1px 2px 0 var(--ink)}
 <script>
 
 let currentLang='en';
-const ES_STATIC={"← A8 HOME": "← INICIO A8", "COME PLAY": "VEN A JUGAR", "Mini-Me found something in the sand.": "El Capitán Chaparro encontró algo en la arena.", "A LITTLE RULER… and maybe treasure.": "UNA REGLITA… y quizá un tesoro.", "The Storybook has grown. Now there are": "El libro de aventuras ha crecido. Ahora hay", "8 Pieces of Eight": "8 Piezas de Ocho", "hidden through the pages.": "escondidas entre las páginas.", "Learn one idea at a time. Earn coins. Find the compass.": "Aprende una idea a la vez. Gana monedas. Encuentra la brújula.", "Captain Mini-Me says:": "El Capitán Chaparro dice:", "“If you can touch it, fold it, click it, hear it, or point at it, it probably belongs in Hangout.”": "“Si puedes tocarlo, doblarlo, hacer clic, escucharlo o señalarlo, probablemente pertenece al Hangout.”", "TREASURE 1 · STRING EXPERIMENT": "TESORO 1 · EXPERIMENTO CON CUERDA", "Make A8 measuring strings.": "Haz cuerdas de medir A8.", "You need:": "Necesitas:", "a measuring tape, string, and scissors.": "una cinta métrica, cuerda y tijeras.", "Measure about 238 cm of string.": "Mide unos 238 cm de cuerda.", "Close enough is fine for this hands-on experiment.": "No tiene que ser perfecto para este experimento práctico.", "FOLD · MATCH ENDS · CUT": "DOBLA · JUNTA LAS PUNTAS · CORTA", "CUT 0 OF 7": "CORTE 0 DE 7", "KEEP CLICKING THE SCISSORS BUTTON · THE BRICK CHALLENGE APPEARS AFTER 7 CUTS": "SIGUE PULSANDO EL BOTÓN DE TIJERAS · EL RETO DEL LADRILLO APARECE DESPUÉS DE 7 CORTES", "Start with one 238 cm string.": "Empieza con una cuerda de 238 cm.", "YOUR A8 STRING BOX": "TU CAJA DE CUERDAS A8", "BRICK CHALLENGE": "RETO DEL LADRILLO", "CLICK ONE, TWO, OR THREE.": "HAZ CLIC EN UNA, DOS O TRES.", "How many different measurements do you need to describe one brick?": "¿Cuántas medidas diferentes necesitas para describir un ladrillo?", "LENGTH": "LARGO", "WIDTH": "ANCHO", "HEIGHT": "ALTURA", "THREE — one for each dimension.": "TRES — una para cada dimensión.", "A8 BRICK DESIGN · /29 × /28 × /27": "DISEÑO DE LADRILLO A8 · /29 × /28 × /27", "One rectangular brick. Smaller string rungs can still measure details, but /26 and below are not being presented as full brick dimensions.": "Un ladrillo rectangular. Los peldaños de cuerda más pequeños aún sirven para medir detalles, pero /26 y menores no se presentan como dimensiones completas de un ladrillo.", "ONE": "UNA", "TWO": "DOS", "THREE": "TRES", "Choose one.": "Elige una.", "A8 BRICK DESIGN": "DISEÑO DE LADRILLO A8", "Use one string for length, one for width, one for height. A8 proportions become something you can hold against a real object.": "Usa una cuerda para el largo, otra para el ancho y otra para la altura. Las proporciones A8 se vuelven algo que puedes comparar con un objeto real.", "No calculator required.": "No necesitas calculadora.", "Fold the ruler physically, then use the pieces to measure real things.": "Dobla físicamente la regla y usa las piezas para medir cosas reales.", "RULERS": "REGLAS", "Double the ruler.": "Duplica la regla.", "↓ double": "↓ duplica", "Kids · /30 L": "Niños · /30 L", "Big ruler · /31 L": "Regla grande · /31 L", "Two little rulers make the next ruler. A8 loves doubling because Nature keeps handing us the same pattern in bigger and smaller forms.": "Dos reglas pequeñas forman la siguiente regla. A8 usa la duplicación porque la Naturaleza repite el mismo patrón en tamaños mayores y menores.", "I FOUND THE RULER PATTERN": "ENCONTRÉ EL PATRÓN DE LA REGLA", "TREASURE 3 · BITS": "TESORO 3 · BITS", "Five switches. Thirty-two states.": "Cinco interruptores. Treinta y dos estados.", "Dark is 0. Lit is 1. Can you build numbers by turning on the right bits?": "Apagado es 0. Encendido es 1. ¿Puedes formar números encendiendo los bits correctos?", "Weights: 16 · 8 · 4 · 2 · 1": "Valores: 16 · 8 · 4 · 2 · 1", "MAKE 31": "HAZ 31", "TREASURE 4 · CLOCK": "TESORO 4 · RELOJ", "Imagine your whole day on one 32-hour clock.": "Imagina todo tu día en un reloj de 32 horas.", "SPIN THROUGH THE DAY": "RECORRE EL DÍA", "DAY 0 OF 8": "VUELTA 0 DE 8", "KEEP CLICKING · GO ALL THE WAY AROUND THE CLOCK": "SIGUE PULSANDO · DA TODA LA VUELTA AL RELOJ", "SCHOOL": "ESCUELA", "PLAY": "JUGAR", "SLEEP": "DORMIR", "10 A8 hours": "10 horas A8", "11 A8 hours": "11 horas A8", "10 + 11 + 11 = 32 A8 hours": "10 + 11 + 11 = 32 horas A8", "That is still the": "Sigue siendo el", "same day you have now.": "mismo día que tienes ahora.", "Why?": "¿Por qué?", "Because one A8 hour is only": "Porque una hora A8 dura sólo", "45 old-time minutes": "45 minutos del reloj antiguo", "32 × 45 minutes = 24 old-time hours. No extra day. The A8 clock simply dances faster.": "32 × 45 minutos = 24 horas del reloj antiguo. No aparece un día extra. El reloj A8 simplemente baila más rápido.", "IT'S A HAPPY CLOCK.": "ES UN RELOJ FELIZ.", "An A8 second is shorter than an old-clock second.": "Un segundo A8 es más corto que un segundo del reloj antiguo.", "😊 HEAR 8 A8 TICKS": "😊 ESCUCHA 8 TICS A8", "😴 HEAR 6 OLD TICKS": "😴 ESCUCHA 6 TICS ANTIGUOS", "tick?": "¿tic?", "A8 second ≈ 0.6592 old seconds.": "Segundo A8 ≈ 0.6592 segundos antiguos.", "Try saying it out loud:": "Prueba decirlo en voz alta:", "“School from 8 to 18. Play from 18 to 29. Sleep from 29 to 8.” The clock wraps around and the whole thing fits inside one ordinary Earth day.": "“Escuela de 8 a 18. Juego de 18 a 29. Duermo de 29 a 8.” El reloj da la vuelta y todo cabe dentro de un día normal de la Tierra.", "TREASURE 5 · CALENDAR": "TESORO 5 · CALENDARIO", "Five days make a week.": "Cinco días forman una semana.", "JUPITER WEEK": "SEMANA DE JÚPITER", "FIRE": "FUEGO", "WATER": "AGUA", "EARTH": "TIERRA", "TERRA": "TERRA", "AIR": "AIRE", "AETHER": "ÉTER", "Hover over a day.": "Pasa el cursor o toca un día.", "DID YOU KNOW?": "¿SABÍAS?", "Each compass month has": "Cada mes de brújula tiene", "9 planet weeks": "9 semanas planetarias", "The planets are the week order.": "Los planetas marcan el orden de las semanas.", "Mercury": "Mercurio", "Venus": "Venus", "Earth": "Tierra", "Mars": "Marte", "Jupiter": "Júpiter", "Saturn": "Saturno", "Uranus": "Urano", "Neptune": "Neptuno", "Pluto": "Plutón", "Mercury → Venus → Earth → Mars → Jupiter → Saturn → Uranus → Neptune → Pluto": "Mercurio → Venus → Tierra → Marte → Júpiter → Saturno → Urano → Neptuno → Plutón", "Nine 5-day weeks = 45 days in one compass month.": "Nueve semanas de 5 días = 45 días en un mes de brújula.", "Eight compass months make the year.": "Ocho meses de brújula forman el año.", "Move around the compass. Each stop is one month.": "Muévete alrededor de la brújula. Cada parada es un mes.", "MONTHS": "MESES", "JUPITER AIR": "JÚPITER AIRE", "Jupiter Air happens once in every compass month.": "Júpiter Aire aparece una vez en cada mes de brújula.", "8 TIMES A YEAR": "8 VECES AL AÑO", "It becomes a familiar friend that returns month after month.": "Se vuelve un amigo conocido que regresa mes tras mes.", "I FOUND JUPITER AIR": "ENCONTRÉ JÚPITER AIRE", "NORTH JUPITER AIR": "JÚPITER AIRE NORTE", "Now add the compass month.": "Ahora añade el mes de brújula.", "Jupiter Air visits every month, but it is": "Júpiter Aire visita cada mes, pero sólo es", "North Jupiter Air": "Júpiter Aire Norte", "only when that Jupiter Air day occurs in the North compass month.": "cuando ese día de Júpiter Aire ocurre durante el mes Norte.", "ONCE A YEAR": "UNA VEZ AL AÑO", "Same Jupiter Air friend · one particular compass month · one annual return.": "El mismo amigo Júpiter Aire · un mes de brújula específico · un regreso anual.", "Something odd happens after the 360 regular days.": "Algo curioso sucede después de los 360 días regulares.", "Curious? There is a little extra week hiding at the edge of the year.": "¿Curiosidad? Hay una pequeña semana extra escondida al borde del año.", "Explore Wilson’s Week →": "Explora la Semana de Wilson →", "TREASURE 6 · EARTH MAP": "TESORO 6 · MAPA DE LA TIERRA", "Cross the sea: Rome to Athens.": "Cruza el mar: Roma a Atenas.", "Now it is easier: click the city on the map": "Ahora es más fácil: haz clic en la ciudad del mapa", "or": "o", "use the big city buttons below.": "usa los botones grandes de ciudades debajo.", "Mediterranean Sea": "Mar Mediterráneo", "Rome": "Roma", "Athens": "Atenas", "📍 PICK ROME": "📍 ELIGE ROMA", "📍 PICK ATHENS": "📍 ELIGE ATENAS", "ONE A8 POSITION · TWO FRIENDLY WAYS TO READ IT": "UNA POSICIÓN A8 · DOS FORMAS AMIGABLES DE LEERLA", "DECIMAL COMFORT": "DECIMAL CÓMODO", "🐙 OCTY · OCTAL": "🐙 OCTY · OCTAL", "Same A8 position. Decimal comfort helps newcomers. Octy shows the native octal form.": "La misma posición A8. El decimal cómodo ayuda a empezar. Octy muestra la forma octal nativa.", "ROME": "ROMA", "ATHENS": "ATENAS", "Pick Rome and Athens.": "Elige Roma y Atenas.", "TEMPERATURE QUIZ": "RETO DE TEMPERATURA", "What is your body temperature?": "¿Cuál es la temperatura de tu cuerpo?", "Pick the A8 temperature that best matches a normal human body.": "Elige la temperatura A8 que mejor corresponde a un cuerpo humano normal.", "Hint:": "Pista:", "the human body lives close to the A8 human-temperature region, but not exactly at /31.": "el cuerpo humano está cerca de la región humana de temperatura A8, pero no exactamente en /31.", "TREASURE 7 · THINGS IN THE KITCHEN": "TESORO 7 · COSAS DE LA COCINA", "Click things in the kitchen.": "Haz clic en las cosas de la cocina.", "ICE": "HIELO", "CUP": "TAZA", "KETTLE": "TETERA", "BALLOON": "GLOBO", "JACKET": "CHAQUETA", "Pick something.": "Elige algo.", "HOW MANY A8 RULERS CAN A CUP OF TEA TOUCH?": "¿CUÁNTAS REGLAS A8 PUEDE TOCAR UNA TAZA DE TÉ?", "Pick every one. Some are strongly related. Some are only along for the ride.": "Elige todas. Algunas están muy relacionadas. Otras sólo vienen de paseo.", "Select a ruler.": "Elige una regla.", "EXPLORED:": "EXPLORADAS:", "YOU MEASURED THE WHOLE TEA BREAK.": "MEDISTE TODA LA PAUSA DEL TÉ.", "Temperature · Pressure · Volume · Mass · Length · Clock": "Temperatura · Presión · Volumen · Masa · Longitud · Reloj", "Apparently drinking hot / cold tea can be done both ways. Binary tea. 😄": "Al parecer el té caliente / frío puede hacerse de las dos maneras. Té binario. 😄", "OOH… SO CHILLY.": "OOH… QUÉ FRÍO.", "What should you put on?": "¿Qué deberías ponerte?", "thin windbreaker": "rompevientos delgado", "thicker jacket": "chaqueta más gruesa", "thick jacket + boots": "chaqueta gruesa + botas", "Pick the weather.": "Elige el clima.", "Explore all five home objects. The cup and jacket each hide an extra rabbit hole.": "Explora los cinco objetos. La taza y la chaqueta esconden cada una una sorpresa extra.", "SPEED GAME": "JUEGO DE VELOCIDAD", "Little kids love speed.": "A los niños pequeños les encanta la velocidad.", "Match the A8 speed to the right traveler. When you get all four right, watch carefully…": "Relaciona la velocidad A8 con el viajero correcto. Cuando aciertes las cuatro, mira con atención…", "🚲 BICYCLE": "🚲 BICICLETA", "pick A8 speed": "elige velocidad A8", "🚗 AUTOMOBILE": "🚗 AUTOMÓVIL", "🚆 TRAIN": "🚆 TREN", "✈️ AIRPLANE": "✈️ AVIÓN", "Match all four.": "Relaciona los cuatro.", "Fast clue:": "Pista rápida:", "higher A8 speed rungs mean faster motion. Start with the bicycle as the slowest and the airplane as the fastest.": "los peldaños A8 más altos significan más velocidad. Empieza con la bicicleta como la más lenta y el avión como el más rápido.", "SOUND ROOM": "SALA DE SONIDO", "Double it with your ears.": "Duplícalo con tus oídos.", "Same pattern. Different sense. Press the cartoon instruments and hear the note double each time.": "Mismo patrón. Otro sentido. Pulsa los instrumentos y escucha cómo la nota se duplica cada vez.", "BASSY STRING": "CUERDA GRAVE", "VIOLIN": "VIOLÍN", "TRUMPET": "TROMPETA", "BELL": "CAMPANA", "Each step doubles the frequency.": "Cada paso duplica la frecuencia.", "Low notes get a little extra punch so small laptop speakers can still hear them.": "Las notas graves reciben un poco más de fuerza para que también se oigan en altavoces pequeños.", "Same trick again:": "El mismo truco otra vez:", "double the number, hear the pitch jump. The pattern is doing the work.": "duplica el número y escucha saltar el tono. El patrón hace el trabajo.", "SKY ROOM": "SALA DEL CIELO", "Can you find Mintaka in Orion?": "¿Puedes encontrar Mintaka en Orión?", "This mockup follows the familiar Orion shape more closely. Betelgeuse glows orange. Only Mintaka reveals its A8 star coordinates.": "Este dibujo sigue mejor la forma conocida de Orión. Betelgeuse brilla naranja. Sólo Mintaka revela sus coordenadas estelares A8.", "ORION": "ORIÓN", "Try the three belt stars. Can you pick Mintaka?": "Prueba las tres estrellas del cinturón. ¿Puedes elegir Mintaka?", "LOOK · WATCH · REPEAT": "MIRA · OBSERVA · REPITE", "Earth moves. The Sun shines. Jupiter’s moons repeat.": "La Tierra se mueve. El Sol brilla. Las lunas de Júpiter repiten.", "Click Earth · Sun · Jupiter": "Haz clic: Tierra · Sol · Júpiter", "Touch the little solar system.": "Toca el pequeño sistema solar.", "Try this:": "Prueba esto:", "click Earth and it rotates forward, click Sun and the rays brighten, click Jupiter and the three moons start moving.": "haz clic en la Tierra y gira hacia adelante; haz clic en el Sol y aumentan los rayos; haz clic en Júpiter y sus tres lunas empiezan a moverse.", "Dynamic sky, simple story.": "Cielo dinámico, historia sencilla.", "Earth turns and advances. Sol shines. Jupiter’s moons keep repeating their dance.": "La Tierra gira y avanza. Sol brilla. Las lunas de Júpiter siguen repitiendo su baile.", "TREASURE 8 · COMPASS": "TESORO 8 · BRÚJULA", "Final clue: find 128.": "Pista final: encuentra 128.", "The treasure map says:": "El mapa del tesoro dice:", "turn the compass to 128": "gira la brújula hasta 128", "TURN 128": "GIRA A 128", "BONUS CALENDAR ART": "ARTE EXTRA DEL CALENDARIO", "Nice! You found 128. Here is a little calendar surprise.": "¡Bien! Encontraste 128. Aquí tienes una pequeña sorpresa del calendario.", "click the artwork for the full Calendar viewer": "haz clic en la imagen para abrir el visor completo del Calendario", "This is the actual A8 month artwork, not a stand-in.": "Esta es la ilustración real del mes A8, no una imagen de ejemplo.", "THE CHEST": "EL COFRE", "You found the Pieces of Eight.": "Encontraste las Piezas de Ocho.", "Find all 8 coins to open it.": "Encuentra las 8 monedas para abrirlo.", "A8 EXPLORER": "EXPLORADOR A8", "Secret reward:": "Recompensa secreta:", "MÖBIUS BACON": "TOCINO DE MÖBIUS", "Bacon flavor… forever.": "Sabor a tocino… para siempre.", "One side. One edge. Please do not eat the topology.": "Un lado. Un borde. Por favor no te comas la topología.", "SEE THE CLOCK": "VER EL RELOJ", "SEE THE MAP": "VER EL MAPA", "SEE THE CALENDAR": "VER EL CALENDARIO", "← PREVIOUS": "← ANTERIOR", "NEXT →": "SIGUIENTE →"};
+const ES_STATIC={"← A8 HOME": "← INICIO A8", "COME PLAY": "VEN A JUGAR", "Mini-Me found something in the sand.": "El Capitán Chaparro encontró algo en la arena.", "A LITTLE RULER… and maybe treasure.": "UNA REGLITA… y quizá un tesoro.", "The Storybook has grown. Now there are": "El libro de aventuras ha crecido. Ahora hay", "8 Pieces of Eight": "8 Piezas de Ocho", "hidden through the pages.": "escondidas entre las páginas.", "Learn one idea at a time. Earn coins. Find the compass.": "Aprende una idea a la vez. Gana monedas. Encuentra la brújula.", "Captain Mini-Me says:": "El Capitán Chaparro dice:", "“If you can touch it, fold it, click it, hear it, or point at it, it probably belongs in Hangout.”": "“Si puedes tocarlo, doblarlo, hacer clic, escucharlo o señalarlo, probablemente pertenece al Hangout.”", "TREASURE 1 · STRING EXPERIMENT": "TESORO 1 · EXPERIMENTO CON CUERDA", "Make A8 measuring strings.": "Haz cuerdas de medir A8.", "You need:": "Necesitas:", "a measuring tape, string, and scissors.": "una cinta métrica, cuerda y tijeras.", "Measure about 238 cm of string.": "Mide unos 238 cm de cuerda.", "Close enough is fine for this hands-on experiment.": "No tiene que ser perfecto para este experimento práctico.", "FOLD · MATCH ENDS · CUT": "DOBLA · JUNTA LAS PUNTAS · CORTA", "CUT 0 OF 7": "CORTE 0 DE 7", "KEEP CLICKING THE SCISSORS BUTTON · THE BRICK CHALLENGE APPEARS AFTER 7 CUTS": "SIGUE PULSANDO EL BOTÓN DE TIJERAS · EL RETO DEL LADRILLO APARECE DESPUÉS DE 7 CORTES", "Start with one 238 cm string.": "Empieza con una cuerda de 238 cm.", "YOUR A8 STRING BOX": "TU CAJA DE CUERDAS A8", "BRICK CHALLENGE": "RETO DEL LADRILLO", "CLICK ONE, TWO, OR THREE.": "HAZ CLIC EN UNA, DOS O TRES.", "How many different measurements do you need to describe one brick?": "¿Cuántas medidas diferentes necesitas para describir un ladrillo?", "LENGTH": "LARGO", "WIDTH": "ANCHO", "HEIGHT": "ALTURA", "THREE — one for each dimension. Together, the three A8L measurements describe its A8V. A8L × A8L × A8L → A8V.": "TRES — una para cada dimensión. Juntas, las tres medidas A8L describen su A8V. A8L × A8L × A8L → A8V.", "A8 BRICK DESIGN · A8L 29 × A8L 28 × A8L 27": "DISEÑO DE LADRILLO A8 · A8L 29 × A8L 28 × A8L 27", "One rectangular brick. Smaller A8L positions can still measure details, but A8L 26 and below are not being presented as full brick dimensions.": "Un ladrillo rectangular. Las posiciones A8L más pequeñas aún sirven para medir detalles, pero A8L 26 y menores no se presentan como dimensiones completas de un ladrillo.", "ONE": "UNA", "TWO": "DOS", "THREE": "TRES", "Choose one.": "Elige una.", "A8 BRICK DESIGN": "DISEÑO DE LADRILLO A8", "Use one string for length, one for width, one for height. A8 proportions become something you can hold against a real object.": "Usa una cuerda para el largo, otra para el ancho y otra para la altura. Las proporciones A8 se vuelven algo que puedes comparar con un objeto real.", "No calculator required.": "No necesitas calculadora.", "Fold the ruler physically, then use the pieces to measure real things.": "Dobla físicamente la regla y usa las piezas para medir cosas reales.", "RULERS": "REGLAS", "Double the ruler.": "Duplica la regla.", "↓ double": "↓ duplica", "YOU KNOW THIS ONE · ABOUT A 12-INCH SCHOOL RULER": "YA CONOCES ESTA · CASI COMO UNA REGLA ESCOLAR DE 12 PULGADAS", "BIG NOW · ABOUT THE SIZE OF A 7-YEAR-OLD": "YA ERES GRANDE · APROXIMADAMENTE DEL TAMAÑO DE UN NIÑO DE 7 AÑOS", "Kids · A8L 30": "Niños · A8L 30", "Big ruler · A8L 31": "Regla grande · A8L 31", "DID YOU KNOW? 🌍": "¿SABÍAS ESTO? 🌍", "You live on Earth — and the A8 ruler comes from Earth’s size.": "Vives en la Tierra — y la regla A8 nace del tamaño de la Tierra.", "About 33 million 7-year-olds, lying head-to-toe, could circle Earth once.": "Unos 33 millones de niños de 7 años, acostados de cabeza a pies, podrían dar una vuelta completa a la Tierra.", "You are one measurable piece of the Earth ruler.": "Eres una pieza medible de la regla de la Tierra.", "BIG RULER? YES. BIGGEST RULER? NOT EVEN CLOSE. 😄": "¿REGLA GRANDE? SÍ. ¿LA MÁS GRANDE? NI DE CERCA. 😄", "Two little rulers make the next ruler. A8 loves doubling because Nature keeps handing us the same pattern in bigger and smaller forms.": "Dos reglas pequeñas forman la siguiente regla. A8 usa la duplicación porque la Naturaleza repite el mismo patrón en tamaños mayores y menores.", "I FOUND THE RULER PATTERN": "ENCONTRÉ EL PATRÓN DE LA REGLA", "TREASURE 3 · BITS": "TESORO 3 · BITS", "Five switches. Thirty-two states.": "Cinco interruptores. Treinta y dos estados.", "Dark is 0. Lit is 1. Can you build numbers by turning on the right bits?": "Apagado es 0. Encendido es 1. ¿Puedes formar números encendiendo los bits correctos?", "Weights: 16 · 8 · 4 · 2 · 1": "Valores: 16 · 8 · 4 · 2 · 1", "MAKE 31": "HAZ 31", "TREASURE 4 · CLOCK": "TESORO 4 · RELOJ", "Imagine your whole day on one 32-hour clock.": "Imagina todo tu día en un reloj de 32 horas.", "SPIN THROUGH THE DAY": "RECORRE EL DÍA", "DAY 0 OF 8": "VUELTA 0 DE 8", "KEEP CLICKING · GO ALL THE WAY AROUND THE CLOCK": "SIGUE PULSANDO · DA TODA LA VUELTA AL RELOJ", "SCHOOL": "ESCUELA", "PLAY": "JUGAR", "SLEEP": "DORMIR", "10 A8 hours": "10 horas A8", "11 A8 hours": "11 horas A8", "10 + 11 + 11 = 32 A8 hours": "10 + 11 + 11 = 32 horas A8", "That is still the": "Sigue siendo el", "same day you have now.": "mismo día que tienes ahora.", "Why?": "¿Por qué?", "Because one A8 hour is only": "Porque una hora A8 dura sólo", "45 old-time minutes": "45 minutos del reloj antiguo", "32 × 45 minutes = 24 old-time hours. No extra day. The A8 clock simply dances faster.": "32 × 45 minutos = 24 horas del reloj antiguo. No aparece un día extra. El reloj A8 simplemente baila más rápido.", "IT'S A HAPPY CLOCK.": "ES UN RELOJ FELIZ.", "An A8 second is shorter than an old-clock second.": "Un segundo A8 es más corto que un segundo del reloj antiguo.", "😊 HEAR 8 A8 TICKS": "😊 ESCUCHA 8 TICS A8", "😴 HEAR 6 OLD TICKS": "😴 ESCUCHA 6 TICS ANTIGUOS", "tick?": "¿tic?", "A8 second ≈ 0.6592 old seconds.": "Segundo A8 ≈ 0.6592 segundos antiguos.", "Try saying it out loud:": "Prueba decirlo en voz alta:", "“School from 8 to 18. Play from 18 to 29. Sleep from 29 to 8.” The clock wraps around and the whole thing fits inside one ordinary Earth day.": "“Escuela de 8 a 18. Juego de 18 a 29. Duermo de 29 a 8.” El reloj da la vuelta y todo cabe dentro de un día normal de la Tierra.", "TREASURE 5 · CALENDAR": "TESORO 5 · CALENDARIO", "Five days make a week.": "Cinco días forman una semana.", "JUPITER WEEK": "SEMANA DE JÚPITER", "FIRE": "FUEGO", "WATER": "AGUA", "EARTH": "TIERRA", "TERRA": "TERRA", "AIR": "AIRE", "AETHER": "ÉTER", "Hover over a day.": "Pasa el cursor o toca un día.", "DID YOU KNOW?": "¿SABÍAS?", "Each compass month has": "Cada mes de brújula tiene", "9 planet weeks": "9 semanas planetarias", "The planets are the week order.": "Los planetas marcan el orden de las semanas.", "Mercury": "Mercurio", "Venus": "Venus", "Earth": "Tierra", "Mars": "Marte", "Jupiter": "Júpiter", "Saturn": "Saturno", "Uranus": "Urano", "Neptune": "Neptuno", "Pluto": "Plutón", "Mercury → Venus → Earth → Mars → Jupiter → Saturn → Uranus → Neptune → Pluto": "Mercurio → Venus → Tierra → Marte → Júpiter → Saturno → Urano → Neptuno → Plutón", "Nine 5-day weeks = 45 days in one compass month.": "Nueve semanas de 5 días = 45 días en un mes de brújula.", "Eight compass months make the year.": "Ocho meses de brújula forman el año.", "Move around the compass. Each stop is one month.": "Muévete alrededor de la brújula. Cada parada es un mes.", "MONTHS": "MESES", "JUPITER AIR": "JÚPITER AIRE", "Jupiter Air happens once in every compass month.": "Júpiter Aire aparece una vez en cada mes de brújula.", "8 TIMES A YEAR": "8 VECES AL AÑO", "It becomes a familiar friend that returns month after month.": "Se vuelve un amigo conocido que regresa mes tras mes.", "I FOUND JUPITER AIR": "ENCONTRÉ JÚPITER AIRE", "NORTH JUPITER AIR": "JÚPITER AIRE NORTE", "Now add the compass month.": "Ahora añade el mes de brújula.", "Jupiter Air visits every month, but it is": "Júpiter Aire visita cada mes, pero sólo es", "North Jupiter Air": "Júpiter Aire Norte", "only when that Jupiter Air day occurs in the North compass month.": "cuando ese día de Júpiter Aire ocurre durante el mes Norte.", "ONCE A YEAR": "UNA VEZ AL AÑO", "Same Jupiter Air friend · one particular compass month · one annual return.": "El mismo amigo Júpiter Aire · un mes de brújula específico · un regreso anual.", "Something odd happens after the 360 regular days.": "Algo curioso sucede después de los 360 días regulares.", "Curious? There is a little extra week hiding at the edge of the year.": "¿Curiosidad? Hay una pequeña semana extra escondida al borde del año.", "Explore Wilson’s Week →": "Explora la Semana de Wilson →", "TREASURE 6 · EARTH MAP": "TESORO 6 · MAPA DE LA TIERRA", "Cross the sea: Rome to Athens.": "Cruza el mar: Roma a Atenas.", "Now it is easier: click the city on the map": "Ahora es más fácil: haz clic en la ciudad del mapa", "or": "o", "use the big city buttons below.": "usa los botones grandes de ciudades debajo.", "Mediterranean Sea": "Mar Mediterráneo", "Rome": "Roma", "Athens": "Atenas", "📍 PICK ROME": "📍 ELIGE ROMA", "📍 PICK ATHENS": "📍 ELIGE ATENAS", "ONE A8XY POSITION · TWO FRIENDLY WAYS TO READ IT": "UNA POSICIÓN A8XY · DOS FORMAS AMIGABLES DE LEERLA", "DECIMAL COMFORT": "DECIMAL CÓMODO", "🐙 OCTY · OCTAL": "🐙 OCTY · OCTAL", "A8XY means one 2D A8 position: latitude + longitude. Decimal comfort and Octy show the same position two ways.": "A8XY significa una posición A8 de dos dimensiones: latitud + longitud. Decimal cómodo y Octy muestran la misma posición de dos maneras.", "ROME": "ROMA", "ATHENS": "ATENAS", "Pick Rome and Athens.": "Elige Roma y Atenas.", "HUMAN SCALE QUIZ": "RETO DE ESCALA HUMANA", "How tall and how warm are we?": "¿Cuánto medimos y qué temperatura tenemos?", "Pick both A8 measurements that best match a typical adult human.": "Elige las dos medidas A8 que mejor correspondan a un adulto típico.", "PART 1 · HEIGHT": "PARTE 1 · ALTURA", "Which A8L position best matches a typical adult human height?": "¿Qué posición A8L corresponde mejor a la altura típica de un adulto?", "BONUS · HOW OLD?": "BONUS · ¿QUÉ EDAD?", "About how old is a child when typical height reaches A8L 31?": "¿Qué edad tiene aproximadamente un niño cuando su altura típica llega a A8L 31?", "5 YEARS": "5 AÑOS", "6 YEARS": "6 AÑOS", "7 YEARS": "7 AÑOS", "8 YEARS": "8 AÑOS", "PART 2 · TEMPERATURE": "PARTE 2 · TEMPERATURA", "Which A8T position best matches normal human body temperature?": "¿Qué posición A8T corresponde mejor a la temperatura corporal normal?", "HUMAN SCALE FOUND · A8L + A8T": "ESCALA HUMANA ENCONTRADA · A8L + A8T", "People vary. These are friendly human-scale landmarks, not exact values for every person.": "Las personas varían. Estas son referencias amigables de escala humana, no valores exactos para cada persona.", "Hint:": "Pista:", "TREASURE 7 · THINGS IN THE KITCHEN": "TESORO 7 · COSAS DE LA COCINA", "Click things in the kitchen.": "Haz clic en las cosas de la cocina.", "ICE": "HIELO", "CUP": "TAZA", "KETTLE": "TETERA", "BALLOON": "GLOBO", "JACKET": "CHAQUETA", "Pick something.": "Elige algo.", "HOW MANY A8 WAYS CAN WE MEASURE A CUP OF TEA?": "¿DE CUÁNTAS FORMAS A8 PODEMOS MEDIR UNA TAZA DE TÉ?", "Pick every one. Some are strongly related. Some are only along for the ride.": "Elige todas. Algunas están muy relacionadas. Otras sólo vienen de paseo.", "Select a measure.": "Elige una medida.", "EXPLORED:": "EXPLORADAS:", "YOU MEASURED THE WHOLE TEA BREAK.": "MEDISTE TODA LA PAUSA DEL TÉ.", "A8T · A8P · A8V · A8M · A8L · A8;CM": "A8T · A8P · A8V · A8M · A8L · A8;CM", "Apparently drinking hot / cold tea can be done both ways. Binary tea. 😄": "Al parecer el té caliente / frío puede hacerse de las dos maneras. Té binario. 😄", "OOH… SO CHILLY.": "OOH… QUÉ FRÍO.", "What should you put on?": "¿Qué deberías ponerte?", "thin windbreaker": "rompevientos delgado", "thicker jacket": "chaqueta más gruesa", "thick jacket + boots": "chaqueta gruesa + botas", "Pick the weather.": "Elige el clima.", "Explore all five home objects. The cup and jacket each hide an extra rabbit hole.": "Explora los cinco objetos. La taza y la chaqueta esconden cada una una sorpresa extra.", "SPEED GAME": "JUEGO DE VELOCIDAD", "Little kids love speed.": "A los niños pequeños les encanta la velocidad.", "Match the A8 speed to the right traveler. When you get all four right, watch carefully…": "Relaciona la velocidad A8 con el viajero correcto. Cuando aciertes las cuatro, mira con atención…", "🚲 BICYCLE": "🚲 BICICLETA", "pick A8 speed": "elige velocidad A8", "🚗 AUTOMOBILE": "🚗 AUTOMÓVIL", "🚆 TRAIN": "🚆 TREN", "✈️ AIRPLANE": "✈️ AVIÓN", "Match all four.": "Relaciona los cuatro.", "Fast clue:": "Pista rápida:", "SPEED LIMIT": "LÍMITE DE VELOCIDAD", "higher A8S positions mean faster motion. The highway car is traveling at A8S 46.9, just under the A8S 47 speed limit. The train is faster at A8S 48, and the airplane is faster still.": "las posiciones A8S más altas significan más velocidad. El automóvil de la carretera va a A8S 46.9, justo por debajo del límite A8S 47. El tren va más rápido a A8S 48 y el avión es aún más rápido.", "SOUND ROOM": "SALA DE SONIDO", "Double it with your ears.": "Duplícalo con tus oídos.", "Same pattern. Different sense. Press the cartoon instruments and hear the note double each time.": "Mismo patrón. Otro sentido. Pulsa los instrumentos y escucha cómo la nota se duplica cada vez.", "BASSY STRING": "CUERDA GRAVE", "VIOLIN": "VIOLÍN", "TRUMPET": "TROMPETA", "BELL": "CAMPANA", "Each step doubles the frequency.": "Cada paso duplica la frecuencia.", "Low notes get a little extra punch so small laptop speakers can still hear them.": "Las notas graves reciben un poco más de fuerza para que también se oigan en altavoces pequeños.", "Same trick again:": "El mismo truco otra vez:", "double the number, hear the pitch jump. The pattern is doing the work.": "duplica el número y escucha saltar el tono. El patrón hace el trabajo.", "SKY ROOM": "SALA DEL CIELO", "Can you find Mintaka in Orion?": "¿Puedes encontrar Mintaka en Orión?", "This mockup follows the familiar Orion shape more closely. Betelgeuse glows orange. Only Mintaka reveals its A8 star coordinates.": "Este dibujo sigue mejor la forma conocida de Orión. Betelgeuse brilla naranja. Sólo Mintaka revela sus coordenadas estelares A8.", "ORION": "ORIÓN", "Try the three belt stars. Can you pick Mintaka?": "Prueba las tres estrellas del cinturón. ¿Puedes elegir Mintaka?", "LOOK · WATCH · REPEAT": "MIRA · OBSERVA · REPITE", "Earth moves. The Sun shines. Jupiter’s moons repeat.": "La Tierra se mueve. El Sol brilla. Las lunas de Júpiter repiten.", "Click Earth · Sun · Jupiter": "Haz clic: Tierra · Sol · Júpiter", "Touch the little solar system.": "Toca el pequeño sistema solar.", "Try this:": "Prueba esto:", "click Earth and it rotates forward, click Sun and the rays brighten, click Jupiter and the three moons start moving.": "haz clic en la Tierra y gira hacia adelante; haz clic en el Sol y aumentan los rayos; haz clic en Júpiter y sus tres lunas empiezan a moverse.", "Dynamic sky, simple story.": "Cielo dinámico, historia sencilla.", "Earth turns and advances. Sol shines. Jupiter’s moons keep repeating their dance.": "La Tierra gira y avanza. Sol brilla. Las lunas de Júpiter siguen repitiendo su baile.", "TREASURE 8 · COMPASS": "TESORO 8 · BRÚJULA", "Final clue: find A8∠ 128.": "Pista final: encuentra A8∠ 128.", "The treasure map says:": "El mapa del tesoro dice:", "turn the compass to A8∠ 128": "gira la brújula hasta A8∠ 128", "TURN A8∠ 128": "GIRA A8∠ 128", "BONUS · CLOCK + COMPASS": "BONUS · RELOJ + BRÚJULA", "If the A8 clock says 28:00:00, where would that be on the compass?": "Si el reloj A8 marca 28:00:00, ¿dónde estaría eso en la brújula?", "Hover around the compass — or drag a finger around it — and find it.": "Pasa el cursor por la brújula — o arrastra un dedo alrededor — y encuéntralo.", "MOVE AROUND THE COMPASS": "MUÉVETE POR LA BRÚJULA", "32 A8 clock hours fit around 512 compass positions.": "32 horas A8 caben alrededor de 512 posiciones de brújula.", "BONUS CALENDAR ART": "ARTE EXTRA DEL CALENDARIO", "Nice! You found 128. Here is a little calendar surprise.": "¡Bien! Encontraste 128. Aquí tienes una pequeña sorpresa del calendario.", "click the artwork for the full Calendar viewer": "haz clic en la imagen para abrir el visor completo del Calendario", "This is the actual A8 month artwork, not a stand-in.": "Esta es la ilustración real del mes A8, no una imagen de ejemplo.", "THE CHEST": "EL COFRE", "You found the Pieces of Eight.": "Encontraste las Piezas de Ocho.", "Find all 8 coins to open it.": "Encuentra las 8 monedas para abrirlo.", "A8 EXPLORER": "EXPLORADOR A8", "Secret reward:": "Recompensa secreta:", "MÖBIUS BACON": "TOCINO DE MÖBIUS", "Bacon flavor… forever.": "Sabor a tocino… para siempre.", "One side. One edge. Please do not eat the topology.": "Un lado. Un borde. Por favor no te comas la topología.", "SEE THE CLOCK": "VER EL RELOJ", "SEE THE MAP": "VER EL MAPA", "SEE THE CALENDAR": "VER EL CALENDARIO", "← PREVIOUS": "← ANTERIOR", "NEXT →": "SIGUIENTE →"};
 const staticTextNodes=[];
 
 function captureStaticTextNodes(){
@@ -2620,13 +2805,13 @@ const kidHintsEN=[
  'PRESS SPIN THROUGH THE DAY 8 TIMES. Watch the counter reach 8/8 and the hand return to 0. NEXT unlocks when the full day is complete. Then try School, Play, Sleep and the tick buttons.',
  'Tap a day, a planet week, and compass months. Find Jupiter Air.',
  'Pick Rome and Athens. Then try Decimal Comfort and Octy.',
- 'Choose the body temperature you think is right.',
+ 'Pick the typical adult height, then choose normal body temperature. When the human dances, try the A8L 31 child bonus.',
  'Tap every kitchen object. Open the cup and jacket surprises.',
  'Match a speed to each traveler. Green means you are getting it.',
  'Press the instruments from low to high. One instrument has a surprise.',
  'Tap Orion’s stars until you find Mintaka.',
  'Tap Earth, Sun, and Jupiter. Each one moves differently.',
- 'Press TURN 128. Watch the compass first — the artwork arrives a moment later.',
+ 'Press TURN A8∠ 128. Watch the compass first — the artwork arrives a moment later. Then hover around the compass and hunt for 28:00:00.',
  'If the chest is locked, the coin row above shows how many treasures are still missing.'
 ];
 const kidHintsES=[
@@ -2637,13 +2822,13 @@ const kidHintsES=[
  'PULSA RECORRE EL DÍA 8 VECES. Mira cómo el contador llega a 8/8 y la aguja vuelve a 0. SIGUIENTE se desbloquea al completar el día. Después prueba Escuela, Jugar, Dormir y los tics.',
  'Toca un día, una semana planetaria y los meses de brújula. Encuentra Júpiter Aire.',
  'Elige Roma y Atenas. Después prueba Decimal Cómodo y Octy.',
- 'Elige la temperatura corporal que crees correcta.',
+ 'Elige la altura típica de un adulto y después la temperatura corporal normal. Cuando baile la figura, prueba el bonus infantil A8L 31.',
  'Toca todos los objetos de la cocina. Abre las sorpresas de la taza y la chaqueta.',
  'Relaciona una velocidad con cada viajero. Verde significa que vas bien.',
  'Pulsa los instrumentos de grave a agudo. Uno tiene una sorpresa.',
  'Toca las estrellas de Orión hasta encontrar Mintaka.',
  'Toca Tierra, Sol y Júpiter. Cada uno se mueve de forma distinta.',
- 'Pulsa GIRA A 128. Mira primero la brújula: la imagen aparece un momento después.',
+ 'Pulsa GIRA A8∠ 128. Mira primero la brújula: la imagen aparece un momento después. Después recorre la brújula y busca 28:00:00.',
  'Si el cofre está cerrado, la fila de monedas de arriba muestra cuántos tesoros faltan.'
 ];
 
@@ -2729,13 +2914,13 @@ function move(d){
   window.scrollTo({top:0,behavior:'smooth'});
 }
 const cutRungs = [
-  {label:'/31', cm:119.3},
-  {label:'/30', cm:59.7},
-  {label:'/29', cm:29.8},
-  {label:'/28', cm:14.9},
-  {label:'/27', cm:7.5},
-  {label:'/26', cm:3.7},
-  {label:'/25', cm:1.9}
+  {label:'A8L 31', cm:119.3},
+  {label:'A8L 30', cm:59.7},
+  {label:'A8L 29', cm:29.8},
+  {label:'A8L 28', cm:14.9},
+  {label:'A8L 27', cm:7.5},
+  {label:'A8L 26', cm:3.7},
+  {label:'A8L 25', cm:1.9}
 ];
 let cutStep = -1;
 let brickSolved = false;
@@ -2771,21 +2956,21 @@ function cutA8String(){
   renderStringInventory();
 
   const messages=currentLang==='es' ? [
-    'Córtala por la mitad: 2 cuerdas de A8/31.',
-    'Guarda una /31. Dobla la otra: ahora tienes /31 + 2 × /30.',
-    'Guarda una /30. Dobla la otra: ahora tienes /31 + /30 + 2 × /29.',
-    'Otra vez: guarda una /29 y crea 2 × /28.',
-    'Otra vez: guarda una /28 y crea 2 × /27.',
-    'Otra vez: guarda una /27 y crea 2 × /26.',
-    'Una más: guarda una /26 y crea 2 × /25. Ocho cuerdas en total.'
+    'Córtala por la mitad: 2 cuerdas A8L 31.',
+    'Guarda una A8L 31. Dobla la otra: ahora tienes A8L 31 + 2 × A8L 30.',
+    'Guarda una A8L 30. Dobla la otra: ahora tienes A8L 31 + A8L 30 + 2 × A8L 29.',
+    'Otra vez: guarda una A8L 29 y crea 2 × A8L 28.',
+    'Otra vez: guarda una A8L 28 y crea 2 × A8L 27.',
+    'Otra vez: guarda una A8L 27 y crea 2 × A8L 26.',
+    'Una más: guarda una A8L 26 y crea 2 × A8L 25. Ocho cuerdas en total.'
   ] : [
-    'Cut it in half: 2 strings of A8/31.',
-    'Keep one /31. Fold the other: now you have /31 + 2 × /30.',
-    'Keep one /30. Fold the other: now you have /31 + /30 + 2 × /29.',
-    'Again: keep one /29 and make 2 × /28.',
-    'Again: keep one /28 and make 2 × /27.',
-    'Again: keep one /27 and make 2 × /26.',
-    'One more: keep one /26 and make 2 × /25. Eight strings total.'
+    'Cut it in half: 2 strings at A8L 31.',
+    'Keep one A8L 31. Fold the other: now you have A8L 31 + 2 × A8L 30.',
+    'Keep one A8L 30. Fold the other: now you have A8L 31 + A8L 30 + 2 × A8L 29.',
+    'Again: keep one A8L 29 and make 2 × A8L 28.',
+    'Again: keep one A8L 28 and make 2 × A8L 27.',
+    'Again: keep one A8L 27 and make 2 × A8L 26.',
+    'One more: keep one A8L 26 and make 2 × A8L 25. Eight strings total.'
   ];
 
   document.getElementById('foldText').textContent=messages[cutStep];
@@ -3022,16 +3207,16 @@ let cupMeasuresFound=new Set();
 
 function showObj(which, btn){
   const txt=currentLang==='es' ? {
-    ice:'HIELO · A8 TEMP /26 · el ancla de congelación.',
-    cup:'TAZA A8 · abre abajo el explorador de seis reglas del té.',
-    kettle:'AGUA HIRVIENDO · A8 TEMP /33',
-    balloon:'AIRE A NUESTRO ALREDEDOR · A8 PRESS /31 = 1',
+    ice:'HIELO · A8T 26 · el ancla de congelación.',
+    cup:'TAZA A8 · abre abajo el explorador de seis formas de medir el té.',
+    kettle:'AGUA HIRVIENDO · A8T 33',
+    balloon:'AIRE A NUESTRO ALREDEDOR · A8P 31 = 1',
     jacket:'OOH… QUÉ FRÍO · abre abajo la escalera de ropa para el frío.'
   } : {
-    ice:'ICE · A8 TEMP /26 · the freeze anchor.',
-    cup:'A8 CUP · open the six-ruler tea explorer below.',
-    kettle:'BOILING WATER · A8 TEMP /33',
-    balloon:'AIR AROUND US · A8 PRESS /31 = 1',
+    ice:'ICE · A8T 26 · the freeze anchor.',
+    cup:'A8 CUP · open the six-way tea explorer below.',
+    kettle:'BOILING WATER · A8T 33',
+    balloon:'AIR AROUND US · A8P 31 = 1',
     jacket:'OOH… SO CHILLY · open the cold-weather gear ladder below.'
   };
 
@@ -3051,41 +3236,69 @@ function showObj(which, btn){
 
 function cupMeasure(kind,btn){
   const answers=currentLang==='es' ? {
-    T:`<b>A8/31.99 T · TEMPERATURA</b><br>
+    T:`<b>A8T 31.99 · TEMPERATURA</b><br>
        Excelente elección — muy relacionada.<br>
-       El té caliente vive más cerca de <b>A8/32 T</b>. La temperatura nos dice qué tan caliente está.`,
-    P:`<b>A8/31 P · PRESIÓN</b><br>
-       Buena elección — pero no está muy relacionada con el té mismo.<br>
-       Describe la presión alrededor de la taza y el té.`,
-    V:`<b>A8/31 V · VOLUMEN</b><br>
+       Este ejemplo de té caliente usa <b>A8T 31.99</b>, muy cerca de A8T 32.
+       A8T nos dice qué tan caliente está el té.`,
+
+    P:`<b>A8P 31 · PRESIÓN</b><br>
+       Relacionada con el entorno de la taza.<br>
+       <b>A8P 31</b> es la presión de referencia alrededor de la taza y el té
+       en este ejemplo.`,
+
+    V:`<b>A8V 18 · VOLUMEN</b><br>
        Excelente elección — muy relacionada.<br>
-       El volumen nos dice <b>cuánto té hay en la taza</b>.`,
-    M:`<b>A8/31 M · MASA</b><br>
-       Muy buena elección — relacionada.<br>
-       La masa nos dice qué tan pesado es el té. Una taza A8 de agua pura es aproximadamente <b>206.8572 g</b> en comparación heredada.`,
-    L:`<b>A8/31 L · LONGITUD</b><br>
-       No se relaciona directamente con el té — a menos que midamos el <b>ancho, alto o profundidad</b> de la taza.`,
-    C:`<b>A8 C · RELOJ</b><br>
-       No se relaciona mucho con el té mismo — salvo que midamos el tiempo de <b>infusión, enfriamiento o bebida</b>.<br>
-       Al parecer el té se puede medir de las dos maneras. 😄`
+       Una taza A8 ocupa <b>A8V 18</b>.
+       Llénala con agua de referencia y esa misma taza tiene
+       una masa de <b>A8M 18 exactamente</b>.`,
+
+    M:`<b>A8M 18 · MASA</b><br>
+       Excelente elección — muy relacionada.<br>
+       Una taza A8 de agua de referencia llega a
+       <b>A8M 18 exactamente</b>.
+       El té real puede variar un poco según lo que tenga disuelto.`,
+
+    L:`<b>A8L · LONGITUD</b><br>
+       A8L puede medir el <b>ancho, alto o profundidad</b> de la taza.
+       Una sola posición A8L no representa las tres dimensiones.`,
+
+    D:`<b>A8;CM · DURACIÓN</b><br>
+       El punto y coma significa <b>continuar durante un intervalo</b>
+       desde un estado inicial del reloj.
+       A8;CM sirve para medir infusión, enfriamiento o bebida
+       con alcance de minutos A8.`
   } : {
-    T:`<b>A8/31.99 T · TEMPERATURE</b><br>
+    T:`<b>A8T 31.99 · TEMPERATURE</b><br>
        Excellent choice — very related.<br>
-       Hot tea lives closer to <b>A8/32 T</b>. Temperature tells us how hot the tea is.`,
-    P:`<b>A8/31 P · PRESSURE</b><br>
-       Nice choice — but not strongly related to the tea itself.<br>
-       It describes the surrounding pressure the cup and tea are sitting in.`,
-    V:`<b>A8/31 V · VOLUME</b><br>
+       This hot-tea example uses <b>A8T 31.99</b>, very close to A8T 32.
+       A8T tells us how hot the tea is.`,
+
+    P:`<b>A8P 31 · PRESSURE</b><br>
+       Related to the cup's surroundings.<br>
+       <b>A8P 31</b> is the reference pressure around the cup and tea
+       in this example.`,
+
+    V:`<b>A8V 18 · VOLUME</b><br>
        Excellent choice — very related.<br>
-       Volume tells us <b>how much tea is in the cup</b>.`,
-    M:`<b>A8/31 M · MASS</b><br>
-       Very good choice — related.<br>
-       Mass tells us how heavy the tea is. One A8 cup of pure water is about <b>206.8572 g</b> in legacy comparison.`,
-    L:`<b>A8/31 L · LENGTH</b><br>
-       Not directly about the tea — unless we measure the cup's <b>width, height, or depth</b>.`,
-    C:`<b>A8 C · CLOCK</b><br>
-       Not really about the tea itself — unless we time <b>steeping, cooling, or drinking</b>.<br>
-       Apparently tea can be measured both ways. 😄`
+       One A8 cup occupies <b>A8V 18</b>.
+       Fill it with reference water and that same cup has
+       a mass of <b>A8M 18 exactly</b>.`,
+
+    M:`<b>A8M 18 · MASS</b><br>
+       Excellent choice — very related.<br>
+       One A8 cup of reference water lands at
+       <b>A8M 18 exactly</b>.
+       Real tea may vary slightly depending on what is dissolved in it.`,
+
+    L:`<b>A8L · LENGTH</b><br>
+       A8L can measure the cup's <b>width, height, or depth</b>.
+       One A8L position cannot stand for all three dimensions.`,
+
+    D:`<b>A8;CM · DURATION</b><br>
+       The semicolon means <b>continue for an interval</b>
+       from an established clock state.
+       A8;CM can measure steeping, cooling, or drinking
+       at A8-minute scope.`
   };
 
   cupMeasuresFound.add(kind);
@@ -3101,45 +3314,163 @@ function cupMeasure(kind,btn){
 }
 
 
-function bodyTempAnswer(value, btn){
-  const readout=document.getElementById('bodyTempReadout');
+let bodyHeightSolved=false;
+let bodyTempSolved=false;
+let bodyChildBonusSolved=false;
+
+function updateHumanQuizComplete(){
+  const complete=document.getElementById('humanQuizComplete');
   const dummy=document.getElementById('dummyFigure');
 
-  document.querySelectorAll('.quizChoices button').forEach(b=>{
+  if(bodyHeightSolved && bodyTempSolved){
+    complete.style.display='block';
+
+    complete.textContent=tr(
+      'HUMAN SCALE FOUND · A8L + A8T',
+      'ESCALA HUMANA ENCONTRADA · A8L + A8T'
+    );
+
+    dummy.classList.remove('dancing');
+    void dummy.offsetWidth;
+    dummy.classList.add('dancing');
+  } else {
+    complete.style.display='none';
+    dummy.classList.remove('dancing');
+  }
+}
+
+function resetBodyChildBonus(){
+  const bonus=document.getElementById('bodyChildBonus');
+  const readout=document.getElementById('bodyChildReadout');
+
+  bodyChildBonusSolved=false;
+
+  bonus.style.display='none';
+
+  document.querySelectorAll('.childHeightChoices button').forEach(b=>{
+    b.classList.remove('correctChoice','wrongChoice');
+  });
+
+  readout.textContent=tr(
+    'Choose one.',
+    'Elige una.'
+  );
+}
+
+function bodyHeightAnswer(value, btn){
+  const readout=document.getElementById('bodyHeightReadout');
+  const bonus=document.getElementById('bodyChildBonus');
+
+  document.querySelectorAll('.heightChoices button').forEach(b=>{
+    b.classList.remove('correctChoice','wrongChoice');
+  });
+
+  if(value==='31.51'){
+    btn.classList.add('correctChoice');
+
+    readout.innerHTML=tr(
+      'YES · A8L 31.51<br><span class="note">A friendly typical-adult height landmark.</span>',
+      'SÍ · A8L 31.51<br><span class="note">Una referencia amigable para la altura típica de un adulto.</span>'
+    );
+
+    bodyHeightSolved=true;
+
+    bonus.style.display='block';
+  } else {
+    btn.classList.add('wrongChoice');
+
+    readout.textContent=tr(
+      'Not that one. Try again.',
+      'Esa no. Inténtalo otra vez.'
+    );
+
+    bodyHeightSolved=false;
+    resetBodyChildBonus();
+  }
+
+  updateHumanQuizComplete();
+}
+
+function bodyChildHeightAnswer(value, btn){
+  const readout=document.getElementById('bodyChildReadout');
+
+  document.querySelectorAll('.childHeightChoices button').forEach(b=>{
+    b.classList.remove('correctChoice','wrongChoice');
+  });
+
+  if(value==='7'){
+    btn.classList.add('correctChoice');
+
+    readout.innerHTML=tr(
+      'YES · ABOUT 7 YEARS OLD<br><span class="note">A8L 31 is a friendly child-height landmark.</span>',
+      'SÍ · CERCA DE 7 AÑOS<br><span class="note">A8L 31 es una referencia amigable para la altura de un niño.</span>'
+    );
+
+    bodyChildBonusSolved=true;
+  } else {
+    btn.classList.add('wrongChoice');
+
+    readout.textContent=tr(
+      'Not that one. Try again.',
+      'Esa no. Inténtalo otra vez.'
+    );
+
+    bodyChildBonusSolved=false;
+  }
+}
+
+function bodyTempAnswer(value, btn){
+  const readout=document.getElementById('bodyTempReadout');
+
+  document.querySelectorAll('.tempChoices button').forEach(b=>{
     b.classList.remove('correctChoice','wrongChoice');
   });
 
   if(value==='31.58'){
     btn.classList.add('correctChoice');
-    readout.innerHTML=tr('YES · A8/31.58 T<br><span class="note">That is the happy human-body answer.</span>','SÍ · A8/31.58 T<br><span class="note">Esa es la respuesta feliz del cuerpo humano.</span>');
-    dummy.classList.remove('dancing');
-    void dummy.offsetWidth;
-    dummy.classList.add('dancing');
+
+    readout.innerHTML=tr(
+      'YES · A8T 31.58<br><span class="note">A friendly normal-body-temperature landmark.</span>',
+      'SÍ · A8T 31.58<br><span class="note">Una referencia amigable para la temperatura corporal normal.</span>'
+    );
+
+    bodyTempSolved=true;
   } else {
     btn.classList.add('wrongChoice');
-    readout.textContent=tr('Not that one. Try again.','Esa no. Inténtalo otra vez.');
-    dummy.classList.remove('dancing');
+
+    readout.textContent=tr(
+      'Not that one. Try again.',
+      'Esa no. Inténtalo otra vez.'
+    );
+
+    bodyTempSolved=false;
   }
+
+  updateHumanQuizComplete();
 }
 
 
 function coldGear(rung,btn){
   const readout=document.getElementById('coldGearReadout');
-  document.querySelectorAll('.coldGear button').forEach(b=>b.classList.remove('correctChoice'));
+
+  document.querySelectorAll('.coldGear button').forEach(b=>{
+    b.classList.remove('correctChoice');
+  });
 
   const copy=currentLang==='es' ? {
-    '/29':'A8/29 T · fresco. Hora del rompevientos delgado.',
-    '/28':'A8/28 T · más frío. Hora de una chaqueta más gruesa.',
-    '/27':'A8/27 T · brrr. Chaqueta gruesa y botas.'
+    '29':'A8T 29 · fresco. Hora del rompevientos delgado.',
+    '28':'A8T 28 · más frío. Hora de una chaqueta más gruesa.',
+    '27':'A8T 27 · brrr. Chaqueta gruesa y botas.'
   } : {
-    '/29':'A8/29 T · chilly. Thin windbreaker time.',
-    '/28':'A8/28 T · colder. Thicker jacket time.',
-    '/27':'A8/27 T · brrr. Thick jacket and boots.'
+    '29':'A8T 29 · chilly. Thin windbreaker time.',
+    '28':'A8T 28 · colder. Thicker jacket time.',
+    '27':'A8T 27 · brrr. Thick jacket and boots.'
   };
 
   btn.classList.add('correctChoice');
   readout.textContent=copy[rung];
 }
+
 
 // sound
 function tone(freq){
@@ -3198,7 +3529,7 @@ function checkSpeedGame(){
     plane: document.getElementById('speedPlane').value
   };
 
-  const correct = {bike:'43', car:'47', train:'48', plane:'50'};
+  const correct = {bike:'45', car:'47', train:'48', plane:'50'};
   let allChosen = true;
   let allCorrect = true;
 
@@ -3220,7 +3551,7 @@ function checkSpeedGame(){
     return;
   }
   if(allCorrect){
-    readout.innerHTML = tr('YES · bicycle /43 · automobile /47 · train /48 · airplane /50<br><span class="note">Something fast just happened…</span>','SÍ · bicicleta /43 · automóvil /47 · tren /48 · avión /50<br><span class="note">Algo rápido acaba de pasar…</span>');
+    readout.innerHTML = tr('YES · bicycle A8S 45 · automobile A8S 47 · train A8S 48 · airplane A8S 50<br><span class="note">Something fast just happened…</span>','SÍ · bicicleta A8S 45 · automóvil A8S 47 · tren A8S 48 · avión A8S 50<br><span class="note">Algo rápido acaba de pasar…</span>');
     if(!rocketLaunched){
       rocketLaunched = true;
       const rocket = document.getElementById('hiddenRocket');
@@ -3228,7 +3559,7 @@ function checkSpeedGame(){
       void rocket.offsetWidth;
       rocket.classList.add('launch');
       setTimeout(()=>{
-        readout.innerHTML = tr('🚀 WHAT SPEED WAS THAT?<br><span class="note">Rocket ship · A8/53 S</span>','🚀 ¿QUÉ VELOCIDAD FUE ESA?<br><span class="note">Cohete · A8/53 S</span>');
+        readout.innerHTML = tr('🚀 WHAT SPEED WAS THAT?<br><span class="note">Rocket ship · A8S 53</span>','🚀 ¿QUÉ VELOCIDAD FUE ESA?<br><span class="note">Cohete · A8S 53</span>');
       }, 2200);
     }
   } else {
@@ -3299,11 +3630,144 @@ function moveJupiter(){
   readout.innerHTML=tr('JUPITER · three simple moons started moving.','JÚPITER · tres lunas simples comenzaron a moverse.');
 }
 
+// clock + compass hover instrument
+let compassClockFound=false;
+
+function compassClockHover(ev){
+  const compass=ev.currentTarget;
+  const rect=compass.getBoundingClientRect();
+
+  const cx=rect.left + rect.width/2;
+  const cy=rect.top + rect.height/2;
+
+  const dx=ev.clientX - cx;
+  const dy=ev.clientY - cy;
+
+  const radius=Math.hypot(dx,dy);
+
+  const readout=document.getElementById('compassClockHoverReadout');
+  const note=document.getElementById('compassClockHoverNote');
+  const bubble=document.getElementById('compassHoverBubble');
+
+  if(radius < rect.width * 0.10){
+    bubble.style.display='none';
+
+    if(!compassClockFound){
+      readout.textContent=tr(
+        'MOVE TOWARD THE EDGE',
+        'MUÉVETE HACIA EL BORDE'
+      );
+    }
+
+    return;
+  }
+
+  let angle=Math.atan2(dx,-dy);
+
+  if(angle < 0){
+    angle += Math.PI * 2;
+  }
+
+  const position=Math.round(
+    angle / (Math.PI * 2) * 512
+  ) % 512;
+
+  const octy=position
+    .toString(8)
+    .padStart(3,'0') + '₈';
+
+  const target=448;
+
+  let distance=Math.abs(position-target);
+  distance=Math.min(distance,512-distance);
+
+  if(distance <= 8){
+    compassClockFound=true;
+
+    bubble.style.display='block';
+
+    bubble.innerHTML=tr(
+      '28:00:00<br><b>A8∠ 448</b><small>700₈ · NORTHWEST</small>',
+      '28:00:00<br><b>A8∠ 448</b><small>700₈ · NOROESTE</small>'
+    );
+
+    readout.innerHTML=tr(
+      '28:00:00 → A8∠ 448<br><span class="note">700₈ · NORTHWEST</span>',
+      '28:00:00 → A8∠ 448<br><span class="note">700₈ · NOROESTE</span>'
+    );
+
+    note.textContent=tr(
+      'YOU FOUND THE SAME TURN TWO WAYS · 28 × 16 = 448',
+      'ENCONTRASTE LA MISMA VUELTA DE DOS MANERAS · 28 × 16 = 448'
+    );
+
+  } else {
+    bubble.style.display='none';
+
+    readout.innerHTML=
+      'A8∠ '
+      + position
+      + ' · '
+      + octy;
+
+    note.textContent=tr(
+      'Keep hunting for the clock position 28:00:00.',
+      'Sigue buscando la posición del reloj 28:00:00.'
+    );
+  }
+}
+
+function compassClockHoverLeave(){
+  const bubble=document.getElementById('compassHoverBubble');
+  const readout=document.getElementById('compassClockHoverReadout');
+  const note=document.getElementById('compassClockHoverNote');
+
+  bubble.style.display='none';
+
+  if(compassClockFound){
+    readout.innerHTML=tr(
+      '28:00:00 → A8∠ 448<br><span class="note">700₈ · NORTHWEST</span>',
+      '28:00:00 → A8∠ 448<br><span class="note">700₈ · NOROESTE</span>'
+    );
+
+    note.textContent=tr(
+      '32 clock hours · 512 compass positions · 16 positions per hour',
+      '32 horas del reloj · 512 posiciones de brújula · 16 posiciones por hora'
+    );
+
+  } else {
+    readout.textContent=tr(
+      'MOVE AROUND THE COMPASS',
+      'MUÉVETE POR LA BRÚJULA'
+    );
+
+    note.textContent=tr(
+      '32 A8 clock hours fit around 512 compass positions.',
+      '32 horas A8 caben alrededor de 512 posiciones de brújula.'
+    );
+  }
+}
+
+const finalCompass=document.getElementById('finalCompass');
+
+if(finalCompass){
+  finalCompass.addEventListener(
+    'pointermove',
+    compassClockHover
+  );
+
+  finalCompass.addEventListener(
+    'pointerleave',
+    compassClockHoverLeave
+  );
+}
+
+
 // compass
 let calendarPopupTimer=null;
 function turnCompass(){
-  document.getElementById('needle').style.transform='rotate(90deg)';
-  document.getElementById('compassMsg').textContent=tr('EAST · 128 · TREASURE!','ESTE · 128 · ¡TESORO!');
+  document.getElementById('needle').style.transform='translateX(-50%) rotate(90deg)';
+  document.getElementById('compassMsg').textContent=tr('EAST · A8∠ 128 · TREASURE!','ESTE · A8∠ 128 · ¡TESORO!');
   const hint=document.getElementById('calendarHint');
   if(hint) hint.textContent=tr('Hold that angle… something else is coming.','Mantén ese ángulo… viene otra sorpresa.');
 
@@ -3352,5 +3816,560 @@ captureStaticTextNodes();
 applyLanguage();
 drawCoins(); move(0);
 </script>
+
+<!-- A8-RECOMMENDED-NOTATION-ALIGNMENT-V1 -->
+<!-- A8-HANGOUT-TOOLBOX-V2 -->
+
+<style id="a8-hangout-toolbox-style-v2">
+
+#a8-hangout-recommended-notation-v1{
+  max-width:1000px;
+  margin:24px auto 36px;
+  padding:20px;
+  border:3px solid var(--ink);
+  border-radius:26px;
+  background:
+    radial-gradient(circle at 10% 0%,#fff4b8 0,transparent 28%),
+    radial-gradient(circle at 90% 10%,#d9eef8 0,transparent 30%),
+    #fffaf0;
+  box-shadow:10px 10px 0 rgba(19,32,42,.14);
+}
+
+.a8-toolbox-head{
+  text-align:center;
+  margin-bottom:18px;
+}
+
+.a8-toolbox-head .a8-toolbox-icon{
+  font-size:3.8rem;
+  line-height:1;
+}
+
+.a8-toolbox-head h2{
+  margin:.3rem 0;
+}
+
+.a8-toolbox-sub{
+  max-width:720px;
+  margin:.5rem auto;
+  font-weight:800;
+}
+
+.a8-tool-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:14px;
+}
+
+.a8-tool-card{
+  position:relative;
+  overflow:hidden;
+  background:#fff;
+  border:2px solid var(--ink);
+  border-radius:20px;
+  padding:16px;
+  box-shadow:4px 5px 0 rgba(19,32,42,.12);
+}
+
+.a8-tool-card:nth-child(3n+1){
+  background:#fff7d7;
+}
+
+.a8-tool-card:nth-child(3n+2){
+  background:#eef8ff;
+}
+
+.a8-tool-card:nth-child(3n){
+  background:#f5efff;
+}
+
+.a8-tool-card-icon{
+  font-size:2.4rem;
+  line-height:1;
+  margin-bottom:7px;
+}
+
+.a8-tool-card h3{
+  margin:.15rem 0 .65rem;
+  font-size:1.15rem;
+}
+
+.a8-tool-card h3 small{
+  display:block;
+  margin-top:3px;
+  color:var(--muted);
+  font-size:.72rem;
+  letter-spacing:.06em;
+}
+
+.a8-tool-chip-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+  margin:9px 0;
+}
+
+.a8-tool-chip{
+  display:inline-block;
+  padding:6px 9px;
+  border:2px solid var(--ink);
+  border-radius:999px;
+  background:#fff;
+  font-weight:1000;
+  white-space:nowrap;
+}
+
+.a8-tool-question{
+  margin:.5rem 0 0;
+  font-weight:900;
+}
+
+.a8-tool-es{
+  margin:.3rem 0 0;
+  color:var(--muted);
+  font-size:.92rem;
+  font-weight:700;
+}
+
+.a8-bacon-note{
+  margin-top:18px;
+  padding:14px;
+  border:2px dashed #9d7b16;
+  border-radius:18px;
+  background:#fff0b3;
+  text-align:center;
+}
+
+.a8-bacon-note .bacon-title{
+  font-size:1.25rem;
+  font-weight:1000;
+}
+
+.a8-toolbox-mascot{
+  display:flex;
+  align-items:flex-start;
+  gap:12px;
+  margin-top:16px;
+  padding:13px 15px;
+  border:2px dashed #9d7b16;
+  border-radius:16px;
+  background:#fff7d7;
+}
+
+.a8-toolbox-mascot .face{
+  font-size:2.2rem;
+  line-height:1;
+}
+
+@media (max-width:680px){
+  .a8-tool-grid{
+    grid-template-columns:1fr;
+  }
+
+  #a8-hangout-recommended-notation-v1{
+    margin:16px 10px 28px;
+    padding:15px;
+  }
+}
+
+</style>
+
+<section
+  id="a8-hangout-recommended-notation-v1"
+  aria-label="A8 toolbox">
+
+  <div class="a8-toolbox-head">
+
+    <div
+      class="a8-toolbox-icon"
+      aria-hidden="true">
+      🧰
+    </div>
+
+    <div class="kicker">
+      KEEP EXPLORING · SIGUE EXPLORANDO
+    </div>
+
+    <h2>
+      YOUR A8 TOOLBOX
+    </h2>
+
+    <p class="a8-toolbox-sub">
+      Learn the full name first.
+      Use the short tool label when you are ready.
+    </p>
+
+    <p class="a8-tool-es">
+      Aprende primero el nombre completo.
+      Usa la etiqueta corta cuando estés listo.
+    </p>
+
+  </div>
+
+
+  <div class="a8-tool-grid">
+
+    <article class="a8-tool-card">
+
+      <div class="a8-tool-card-icon">
+        📏 ◻️ 📦
+      </div>
+
+      <h3>
+        MEASURE IT
+        <small>MÍDELO</small>
+      </h3>
+
+      <div class="a8-tool-chip-row">
+        <span class="a8-tool-chip">A8L</span>
+        <span class="a8-tool-chip">A8A</span>
+        <span class="a8-tool-chip">A8V</span>
+      </div>
+
+      <p>
+        <b>A8L</b> length or height ·
+        <b>A8A</b> area ·
+        <b>A8V</b> volume.
+      </p>
+
+      <p class="a8-tool-question">
+        How long? How much surface? How much space?
+      </p>
+
+      <p class="a8-tool-es">
+        ¿Qué tan largo? ¿Cuánta superficie?
+        ¿Cuánto espacio?
+      </p>
+
+    </article>
+
+<article id="a8-angle-tool-card" class="a8-tool-card">
+  <div style="font-size:2.35rem">📐 🧭</div>
+
+  <h3>
+    ANGLE<br>
+    <small>ÁNGULO</small>
+  </h3>
+
+  <div style="
+    display:flex;
+    flex-wrap:wrap;
+    gap:7px;
+    justify-content:center;
+    margin:10px 0 12px;
+  ">
+    <strong>A8∠</strong>
+    <strong>A8∠ 128</strong>
+    <strong>A8∠ 256</strong>
+    <strong>A8∠ 448</strong>
+  </div>
+
+  <p>
+    <strong>A8∠</strong>
+    means angular position.
+  </p>
+
+  <p>
+    One full turn = <b>512</b> positions.<br>
+    Quarter turn = <b>A8∠ 128</b>.<br>
+    Half turn = <b>A8∠ 256</b>.
+  </p>
+
+  <p>
+    <strong>A8Δ∠</strong>
+    means angular change.
+  </p>
+
+  <p>
+    <b>Where around the turn?</b><br>
+    <b>¿Dónde en la vuelta?</b>
+  </p>
+</article>
+
+
+    <article class="a8-tool-card">
+
+      <div class="a8-tool-card-icon">
+        ⚖️ 💧
+      </div>
+
+      <h3>
+        WEIGH IT
+        <small>PÉSALO</small>
+      </h3>
+
+      <div class="a8-tool-chip-row">
+        <span class="a8-tool-chip">A8M</span>
+        <span class="a8-tool-chip">A8D</span>
+      </div>
+
+      <p>
+        <b>A8M</b> mass ·
+        <b>A8D</b> density.
+      </p>
+
+      <p class="a8-tool-question">
+        Same mass? Different stuff?
+      </p>
+
+      <p class="a8-tool-es">
+        ¿La misma masa? ¿Material diferente?
+      </p>
+
+    </article>
+
+
+    <article class="a8-tool-card">
+
+      <div class="a8-tool-card-icon">
+        🌡️ 🎈
+      </div>
+
+      <h3>
+        FEEL THE WORLD
+        <small>SIENTE EL MUNDO</small>
+      </h3>
+
+      <div class="a8-tool-chip-row">
+        <span class="a8-tool-chip">A8T</span>
+        <span class="a8-tool-chip">A8P</span>
+      </div>
+
+      <p>
+        <b>A8T</b> temperature ·
+        <b>A8P</b> pressure.
+      </p>
+
+      <p class="a8-tool-question">
+        Hot or cold? Squished a lot or a little?
+      </p>
+
+      <p class="a8-tool-es">
+        ¿Caliente o frío?
+        ¿Mucha o poca presión?
+      </p>
+
+    </article>
+
+
+    <article class="a8-tool-card">
+
+      <div class="a8-tool-card-icon">
+        🧭 📍 ⛰️
+      </div>
+
+      <h3>
+        FIND IT
+        <small>ENCUÉNTRALO</small>
+      </h3>
+
+      <div class="a8-tool-chip-row">
+        <span class="a8-tool-chip">A8XY</span>
+        <span class="a8-tool-chip">A8Z</span>
+        <span class="a8-tool-chip">A8XYZ</span>
+        <span class="a8-tool-chip">A8E</span>
+      </div>
+
+      <p>
+        Position in 2D or 3D.
+        <b>A8Z</b> is the third axis.
+        <b>A8E</b> is elevation from a reference.
+      </p>
+
+      <p class="a8-tool-question">
+        Where is it? How high is it?
+      </p>
+
+      <p class="a8-tool-es">
+        ¿Dónde está? ¿A qué elevación está?
+      </p>
+
+    </article>
+
+
+    <article class="a8-tool-card">
+
+      <div class="a8-tool-card-icon">
+        🚲 🚗 ✈️
+      </div>
+
+      <h3>
+        MOVE IT
+        <small>MUÉVELO</small>
+      </h3>
+
+      <div class="a8-tool-chip-row">
+        <span class="a8-tool-chip">A8S</span>
+        <span class="a8-tool-chip">A8SD</span>
+      </div>
+
+      <p>
+        <b>A8S</b> speed ·
+        <b>A8SD</b> speed + direction.
+      </p>
+
+      <p class="a8-tool-question">
+        How fast? Which way?
+      </p>
+
+      <p class="a8-tool-es">
+        ¿Qué tan rápido? ¿En qué dirección?
+      </p>
+
+    </article>
+
+
+    <article class="a8-tool-card">
+
+      <div class="a8-tool-card-icon">
+        🚀 ⚡
+      </div>
+
+      <h3>
+        CHANGE THE MOTION
+        <small>CAMBIA EL MOVIMIENTO</small>
+      </h3>
+
+      <div class="a8-tool-chip-row">
+        <span class="a8-tool-chip">A8!</span>
+        <span class="a8-tool-chip">A8!+</span>
+        <span class="a8-tool-chip">A8!-</span>
+        <span class="a8-tool-chip">A8!=</span>
+        <span class="a8-tool-chip">A8F</span>
+      </div>
+
+      <p>
+        <b>A8!</b> acceleration ·
+        <b>+</b> faster ·
+        <b>-</b> slower ·
+        <b>=</b> same speed magnitude ·
+        <b>A8F</b> force.
+      </p>
+
+      <p class="a8-tool-question">
+        What changed the motion?
+      </p>
+
+      <p class="a8-tool-es">
+        ¿Qué cambió el movimiento?
+      </p>
+
+    </article>
+
+
+    <article class="a8-tool-card">
+  <div style="font-size:2.35rem">🕰️ ⏳</div>
+
+  <h3>
+    CLOCK IT<br>
+    <small>MÍDELO CON EL RELOJ</small>
+  </h3>
+
+  <div style="
+    display:flex;
+    flex-wrap:wrap;
+    gap:7px;
+    justify-content:center;
+    margin:10px 0 12px;
+  ">
+    <strong>A8:CH</strong>
+    <strong>A8:CM</strong>
+    <strong>A8:CS</strong>
+    <strong>A8;CH</strong>
+    <strong>A8;CM</strong>
+    <strong>A8;CS</strong>
+  </div>
+
+  <p>
+    <strong>:</strong> means clock position.<br>
+    <strong>;</strong> means continuation / duration.
+  </p>
+
+  <p>
+    <strong>:</strong> significa posición del reloj.<br>
+    <strong>;</strong> significa continuación / duración.
+  </p>
+
+  <p>
+    <b>What time? How long?</b><br>
+    <b>¿Qué hora? ¿Cuánto tiempo?</b>
+  </p>
+</article>
+
+
+    <article class="a8-tool-card">
+
+      <div class="a8-tool-card-icon">
+        🌊 🎵
+      </div>
+
+      <h3>
+        HEAR IT REPEAT
+        <small>ESCUCHA LA REPETICIÓN</small>
+      </h3>
+
+      <div class="a8-tool-chip-row">
+        <span class="a8-tool-chip">A8~</span>
+        <span class="a8-tool-chip">.a8m</span>
+      </div>
+
+      <p>
+        <b>A8~</b> frequency ·
+        <b>.a8m</b> music.
+      </p>
+
+      <p class="a8-tool-question">
+        How many repeats in one A8 second?
+      </p>
+
+      <p class="a8-tool-es">
+        ¿Cuántas repeticiones en un segundo A8?
+      </p>
+
+    </article>
+
+  </div>
+
+
+  <div class="a8-bacon-note">
+
+    <div aria-hidden="true" style="font-size:2.3rem">
+      🥓 ∞
+    </div>
+
+    <div class="bacon-title">
+      BALLISTIC BACON · MÖBIUS STYLE
+    </div>
+
+    <p>
+      Frequency is the ballistic one:
+      plain <b>A8~</b> already means
+      cycles per one A8 second.
+    </p>
+
+    <p class="a8-tool-es">
+      La frecuencia es la versión balística:
+      A8~ ya usa un segundo A8.
+    </p>
+
+  </div>
+
+
+  <div class="a8-toolbox-mascot">
+
+    <div class="face">
+      🦜
+    </div>
+
+    <div>
+      <b>Captain Mini-Me says:</b>
+      “Use the big name while you learn it.
+      Use the little A8 label when your brain already knows the tool.”
+    </div>
+
+  </div>
+
+</section>
+
 </body>
 </html>
