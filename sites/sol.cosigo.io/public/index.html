@@ -1509,7 +1509,7 @@ setInterval(refresh,1000);
      *
      * Public distance:
      *
-     *   c A8/57 -> A8/(57 + log2(c))
+     *   c A8L 57 -> A8L (57 + log2(c))
      *
      * No detached coefficient is displayed.
      */
@@ -1546,7 +1546,7 @@ setInterval(refresh,1000);
 
       setText(
         orbitOdometer,
-        'A8/' +
+        'A8L ' +
         pathRung.toFixed(4)
       );
 
@@ -1580,7 +1580,7 @@ setInterval(refresh,1000);
 
     setText(
       orbitOdometerClosure,
-      'FULL MEAN-PATH MODEL · A8/' +
+      'FULL MEAN-PATH MODEL · A8L ' +
       fullPathRung.toFixed(4) +
       ' · COMPARISON BASIS · ELLIPSE GEOMETRY NOT YET SEALED'
     );

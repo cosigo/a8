@@ -466,7 +466,7 @@ SS = 00…77₈</div>
         <th>Legacy geometry check</th>
       </tr>
     </table>
-    <p class="route-small"><strong>Navigation distance display:</strong> this atlas now uses the provisional rung <strong>2<sup>40</sup>q<sub>a</sub></strong> because it gives human-scale route numbers. In Decimal mode the rung is labeled <strong>A8/40</strong>; in hard Octal the same exponent is <strong>A8/50₈</strong> because 40₁₀ = 50₈. The rung changes the display scale, not the physical distance.</p>
+    <p class="route-small"><strong>Navigation distance display:</strong> this atlas now uses the provisional rung <strong>2<sup>40</sup>q<sub>a</sub></strong> because it gives human-scale route numbers. In Decimal mode the rung is labeled <strong>A8L 40</strong>; in hard Octal the same exponent is <strong>A8L 50₈</strong> because 40₁₀ = 50₈. The rung changes the display scale, not the physical distance.</p>
     <p class="route-small"><strong>A8 elapsed time is shown first.</strong> 1 A8 hour = 45 legacy minutes, so legacy elapsed hours × 4/3 = A8 hours. A day remains the same physical full-day interval: 24 legacy hours = 32 A8 hours. Local clock changes and date-line changes do <strong>not</strong> alter elapsed travel time.</p>
   </section>
 </div>
@@ -699,11 +699,11 @@ function formatSector(sec) {
 function navigationRungLabel() {
   // Same exponent, written in the active numeral system:
   // 40 decimal = 50 octal.
-  return mode === 'decimal' ? 'A8/40' : 'A8/50₈';
+  return mode === 'decimal' ? 'A8L 40' : 'A8L 50₈';
 }
 
 function formatA8Distance(a8_31_count) {
-  // A8/40 = 2^9 × A8/31 = 512 × A8/31.
+  // A8L 40 = 2^9 × A8L 31 = 512 × A8L 31.
   const navCount = a8_31_count / 512;
   if (mode === 'decimal') {
     return navCount.toLocaleString(undefined,{maximumFractionDigits:1}) + ' ' + navigationRungLabel();

@@ -1017,7 +1017,7 @@ body{
 
   <p class="route-small">
     Select a general reference speed.
-    The A8/NAV distance does not change when the travel method changes.
+    The A8 NAV distance does not change when the travel method changes.
   </p>
 
 <div class="route-small"
@@ -1029,7 +1029,7 @@ body{
   — 16 A8 HOURS — use half the moving speed as the
   effective whole-day journey rate.
   For CAR 48, enter <strong>CUSTOM 24</strong>.
-  48 × 16/32 = 24 A8/NAV per A8 HOUR.
+  48 × 16/32 = 24 A8 NAV per A8 HOUR.
 </div>
 
   <div class="a8-travel-modes">
@@ -1089,7 +1089,7 @@ body{
         type="text"
         inputmode="decimal"
         autocomplete="off"
-        placeholder="A8/NAV per A8 HOUR">
+        placeholder="A8 NAV per A8 HOUR">
     </label>
   </div>
 
@@ -1109,7 +1109,7 @@ body{
   Longitude <strong>0 / 512 is one meridian</strong>,
   so the route crosses that wrap whenever doing so is shorter.
   Shortest surface angle is always 0 → 256 A8 states;
-  shortest surface distance is always 0 → 16384 A8/NAV.
+  shortest surface distance is always 0 → 16384 A8 NAV.
   At exactly 256 the points are antipodal and multiple
   equal shortest great-circle routes exist.
 </p>
@@ -1120,7 +1120,7 @@ body{
   Travel modes use generalized average speeds for user-friendly comparison.
   They do not model actual roads, rail lines, shipping lanes, air routes,
   stops, weather, borders, currents, or operating schedules.
-  The underlying A8 coordinate, angular, rhumb-line, and A8/NAV calculations
+  The underlying A8 coordinate, angular, rhumb-line, and A8 NAV calculations
   retain their mathematical precision. The averaged travel methods affect
   only the hypothetical elapsed-time estimate.
   A8 is demonstrated here as a complete measurement framework capable of
@@ -1133,10 +1133,10 @@ LAT 0 → 256
 LON 0 → 512 → 0 recurrence
 
 RHUMB-LINE SURFACE DISTANCE
-A8/NAV = A8 RHUMB ANGLE × 64
+A8 NAV = A8 RHUMB ANGLE × 64
 
 GENERAL TRAVEL TIME
-A8 HOUR = A8/NAV distance ÷ A8/NAV per A8 HOUR
+A8 HOUR = A8 NAV distance ÷ A8 NAV per A8 HOUR
 
 DISTANCE IS GEOMETRY.
 TRAVEL MODE CHANGES TIME ONLY.
@@ -1338,7 +1338,7 @@ SS = 00…77₈</div>
 
 
 <h2>9. City & Route Atlas</h2>
-<div class="rule" style="margin-bottom:14px"><strong>Earth travel ruler:</strong> route distance is expressed in A8/NAV, which is exactly the A8/41 binary length rung. NAV is the Earth-navigation name for that same unit on land or water.</div>
+<div class="rule" style="margin-bottom:14px"><strong>Earth travel ruler:</strong> route distance is expressed in A8 NAV, which is exactly the A8L 41 binary length rung. NAV is the Earth-navigation name for that same unit on land or water.</div>
 <div class="card hero">
   <p><strong>Quick reference:</strong> six familiar cities show how the same Earth can be expressed in A8 hour sectors and A8 coordinates. This is a reproducible geometry demonstration, not an operational travel or navigation service.</p>
   <div class="atlas-note">This atlas stays inside the same discipline: same Earth, same cities, same geometry, A8 ruler throughout. <strong>A8 values are shown first.</strong> Operating-time examples are published only when a source or explicit calculation is identified; otherwise the route remains a geometric distance reference.</div>
@@ -1372,12 +1372,12 @@ SS = 00…77₈</div>
     <table id="atlasRouteTable">
       <tr>
         <th>Route</th>
-        <th id="atlasRouteHeading">A8/NAV distance</th>
+        <th id="atlasRouteHeading">A8 NAV distance</th>
         <th>Elapsed travel reference</th>
         <th>Legacy geometry check</th>
       </tr>
     </table>
-    <p class="route-small" data-a8-nav-length-crosscheck="secondary"><strong>Length identity:</strong> 1 A8/NAV = <strong>1 A8/41</strong>. /41 is the binary ladder address; NAV is the Earth-navigation name for the same distance across land or water.</p>
+    <p class="route-small" data-a8-nav-length-crosscheck="secondary"><strong>Length identity:</strong> 1 A8 NAV = <strong>1 A8L 41</strong>. /41 is the binary ladder address; NAV is the Earth-navigation name for the same distance across land or water.</p>
     <p class="route-small"><strong>A8 elapsed time is shown first.</strong> 1 A8 hour = 45 legacy minutes, so legacy elapsed hours × 4/3 = A8 hours. A day remains the same physical full-day interval: 24 legacy hours = 32 A8 hours. Local clock changes and date-line changes do <strong>not</strong> alter elapsed travel time.</p>
   </section>
 </div>
@@ -2322,9 +2322,9 @@ function workbenchGreatCircleMetrics(a, b) {
     / Math.PI;
 
   /*
-   * Earth circumference = 32768 A8/NAV.
+   * Earth circumference = 32768 A8 NAV.
    *
-   * 32768 / 512 = 64 A8/NAV
+   * 32768 / 512 = 64 A8 NAV
    * per A8 angular state.
    */
   const a8Nav =
@@ -2756,7 +2756,7 @@ function renderWorkbenchDistance() {
         distance.a8Nav,
         2
       )
-    + ' A8/NAV'
+    + ' A8 NAV'
     + '</div>'
 
     + '<div class="a8-route-angle">'
@@ -2887,7 +2887,7 @@ function renderTravelPresetLabels() {
 
     el.textContent =
       workbenchFormatA8(speed, 0)
-      + ' A8/NAV / A8 HOUR';
+      + ' A8 NAV / A8 HOUR';
   }
 
   const custom =
@@ -2960,7 +2960,7 @@ function renderTravelResult(distance=null) {
         selectedTravelSpeed,
         1
       )
-    + ' A8/NAV per A8 HOUR'
+    + ' A8 NAV per A8 HOUR'
     + '</div>'
     + '<div class="route-small">'
     + 'legacy speed comparison · ≈ '
@@ -3375,11 +3375,11 @@ function formatSector(sec) {
 function navigationRungLabel() {
   // Same exponent, written in the active numeral system:
   // 40 decimal = 50 octal.
-  return mode === 'decimal' ? 'A8/40' : 'A8/50₈';
+  return mode === 'decimal' ? 'A8L 40' : 'A8L 50₈';
 }
 
 function formatA8Distance(a8_31_count) {
-  // A8/40 = 2^9 × A8/31 = 512 × A8/31.
+  // A8L 40 = 2^9 × A8L 31 = 512 × A8L 31.
   const navCount = a8_31_count / 512;
   if (mode === 'decimal') {
     return navCount.toLocaleString(undefined,{maximumFractionDigits:1}) + ' ' + navigationRungLabel();
@@ -3417,7 +3417,7 @@ function updateAtlas() {
     mode === 'decimal' ? 'A8 decimal coordinates' : 'A8 octal coordinates';
   /* A8-MAP-NAV-RULER-PRIORITY-v1 */
   document.getElementById('atlasRouteHeading').textContent =
-    'A8/NAV distance';
+    'A8 NAV distance';
 
   // Six-city quick reference. Independent of the larger city shelf.
   const atlasCities = [
@@ -3463,7 +3463,7 @@ function updateAtlas() {
     }).join('');
 
   routeTable.innerHTML =
-    '<tr><th>Route</th><th>A8/NAV distance</th>' +
+    '<tr><th>Route</th><th>A8 NAV distance</th>' +
     '<th>Elapsed travel reference</th><th>Legacy geometry check</th></tr>' +
     ROUTE_DATA.map(r => {
       const legacy = r.km.toLocaleString(undefined,{maximumFractionDigits:0}) + ' km · ' +
@@ -3486,7 +3486,7 @@ function updateAtlas() {
              (r.km / A8_NAV_KM_COMPARISON).toLocaleString(
                undefined,
                {maximumFractionDigits:2}
-             ) + ' A8/NAV' +
+             ) + ' A8 NAV' +
              '</td><td>' + note +
              '</td><td>' + legacy + '</td></tr>';
     }).join('');
